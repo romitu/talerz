@@ -6,9 +6,8 @@ import { Ekran } from '@/components/ekran';
 import { Karta } from '@/components/karta';
 import { ThemedText } from '@/components/themed-text';
 import { Colors, Spacing } from '@/constants/theme';
+import { useColorScheme } from '@/hooks/use-color-scheme';
 import { PRZEPISY } from '@/data/przepisy';
-
-import { useColorScheme } from 'react-native';
 
 export default function EkranPrzepisow() {
   const schemat = useColorScheme();

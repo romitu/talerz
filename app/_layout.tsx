@@ -1,12 +1,15 @@
 import { Ionicons } from '@expo/vector-icons';
-import { DarkTheme, DefaultTheme, ThemeProvider, Tabs } from 'expo-router';
-import { useColorScheme } from 'react-native';
+import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
+import { Tabs } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
+import 'react-native-reanimated';
 
 import { Colors } from '@/constants/theme';
+import { useColorScheme } from '@/hooks/use-color-scheme';
 
 /**
  * Główny układ aplikacji. Definiuje cztery zakładki na dole ekranu.
- * Nazwa każdej zakładki (`name`) musi odpowiadać nazwie pliku w katalogu src/app.
+ * Wartość `name` musi odpowiadać nazwie pliku w katalogu app.
  */
 export default function UkladGlowny() {
   const schemat = useColorScheme();
@@ -58,6 +61,7 @@ export default function UkladGlowny() {
           }}
         />
       </Tabs>
+      <StatusBar style="auto" />
     </ThemeProvider>
   );
 }

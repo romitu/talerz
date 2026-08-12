@@ -5,8 +5,6 @@
  * zgodnie z ustawieniem systemowym telefonu lub przeglądarki.
  */
 
-import '@/global.css';
-
 import { Platform } from 'react-native';
 
 export const Colors = {
@@ -46,10 +44,10 @@ export const Fonts = Platform.select({
     mono: 'monospace',
   },
   web: {
-    sans: 'var(--font-display)',
-    serif: 'var(--font-serif)',
-    rounded: 'var(--font-rounded)',
-    mono: 'var(--font-mono)',
+    sans: "system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif",
+    serif: "Georgia, 'Times New Roman', serif",
+    rounded: "system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif",
+    mono: "ui-monospace, 'Cascadia Code', Consolas, monospace",
   },
 });
 

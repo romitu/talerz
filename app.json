@@ -7,10 +7,10 @@
     "icon": "./assets/images/icon.png",
     "scheme": "talerz",
     "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
     "ios": {
       "bundleIdentifier": "com.romitu.talerz",
-      "supportsTablet": true,
-      "icon": "./assets/expo.icon"
+      "supportsTablet": true
     },
     "android": {
       "package": "com.romitu.talerz",
@@ -20,6 +20,7 @@
         "backgroundImage": "./assets/images/android-icon-background.png",
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
+      "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false
     },
     "web": {
@@ -31,9 +32,13 @@
       [
         "expo-splash-screen",
         {
-          "backgroundColor": "#FBF7F0",
           "image": "./assets/images/splash-icon.png",
-          "imageWidth": 76
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#FBF7F0",
+          "dark": {
+            "backgroundColor": "#16130F"
+          }
         }
       ]
     ],

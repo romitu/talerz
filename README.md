@@ -3,18 +3,20 @@
 Aplikacja do planowania posiłków — jeden kod źródłowy, trzy platformy:
 Android, iPhone i przeglądarka.
 
+Zbudowana na **Expo SDK 54** — tej wersji wymaga Expo Go zainstalowane
+na telefonie.
+
 ---
 
-## Pierwsze uruchomienie
+## Uruchomienie
 
-Otwórz PowerShell w tym folderze. Najprościej: kliknij prawym przyciskiem na
-pusty obszar w folderze `talerz` w Eksploratorze plików i wybierz
-**„Otwórz w terminalu"**.
+Otwórz PowerShell w tym folderze: kliknij prawym przyciskiem na puste miejsce
+w folderze `talerz` w Eksploratorze plików i wybierz **„Otwórz w terminalu"**.
 
 ### Krok 1 — pobierz biblioteki (tylko za pierwszym razem)
 
 ```
-npm install
+npm.cmd install
 ```
 
 Potrwa 2–5 minut i utworzy folder `node_modules` (kilkaset megabajtów).
@@ -24,10 +26,8 @@ bibliotek.
 ### Krok 2 — uruchom aplikację
 
 ```
-npx expo start
+npx.cmd expo start
 ```
-
-W terminalu pojawi się kod QR i lista skrótów.
 
 | Chcesz zobaczyć | Zrób |
 |---|---|
@@ -37,8 +37,11 @@ W terminalu pojawi się kod QR i lista skrótów.
 
 Telefon i komputer muszą być w tej samej sieci Wi-Fi.
 
-Po zapisaniu zmiany w kodzie aplikacja przeładowuje się sama — nie trzeba
-niczego restartować.
+Po zapisaniu zmiany w kodzie aplikacja przeładowuje się sama.
+
+> Końcówki `.cmd` omijają blokadę skryptów w PowerShellu. Jeśli wykonasz
+> `Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned`,
+> wystarczy pisać `npm` i `npx`.
 
 ---
 
@@ -46,23 +49,28 @@ niczego restartować.
 
 ```
 talerz/
-├─ src/
-│  ├─ app/              ← ekrany; nazwa pliku = adres w aplikacji
-│  │  ├─ _layout.tsx       układ główny i cztery zakładki na dole
-│  │  ├─ index.tsx         zakładka „Plan"
-│  │  ├─ przepisy.tsx      zakładka „Przepisy"
-│  │  ├─ spolecznosc.tsx   zakładka „Społeczność"
-│  │  └─ profil.tsx        zakładka „Profil"
-│  ├─ components/       ← klocki używane na wielu ekranach (karta, nagłówek)
-│  ├─ constants/        ← kolory i odstępy w jednym miejscu
-│  └─ data/             ← dane posiłków i przepisów (na razie wpisane na stałe)
-├─ assets/              ← ikony i grafiki
-├─ app.json             ← nazwa aplikacji, ikona, identyfikatory dla sklepów
-└─ package.json         ← lista używanych bibliotek
+├─ app/                 ← ekrany; nazwa pliku = adres w aplikacji
+│  ├─ _layout.tsx          układ główny i cztery zakładki na dole
+│  ├─ index.tsx            zakładka „Plan"
+│  ├─ przepisy.tsx         zakładka „Przepisy"
+│  ├─ spolecznosc.tsx      zakładka „Społeczność"
+│  └─ profil.tsx           zakładka „Profil"
+├─ components/         ← klocki używane na wielu ekranach
+│  ├─ ekran.tsx           wspólny układ ekranu (tło, nagłówek, przewijanie)
+│  ├─ karta.tsx           prostokąt z zaokrąglonymi rogami
+│  └─ makro.tsx           liczba z podpisem, np. „142 g / białko"
+├─ constants/theme.ts  ← kolory i odstępy w jednym miejscu
+├─ data/               ← posiłki i przepisy (na razie wpisane na stałe)
+├─ hooks/              ← funkcje pomocnicze (jasny/ciemny motyw)
+├─ assets/             ← ikony i grafiki
+├─ app.json            ← nazwa aplikacji, ikona, identyfikatory dla sklepów
+└─ package.json        ← lista używanych bibliotek
 ```
 
-**Zasada expo-router:** każdy plik w `src/app` staje się osobnym ekranem
+**Zasada expo-router:** każdy plik w `app/` staje się osobnym ekranem
 automatycznie. Nowy plik `zakupy.tsx` = nowy ekran pod adresem `/zakupy`.
+
+Chcesz zmienić posiłki? `data/plan.ts` — to najprostszy plik na początek.
 
 ---
 
@@ -70,9 +78,9 @@ automatycznie. Nowy plik `zakupy.tsx` = nowy ekran pod adresem `/zakupy`.
 
 | Komenda | Co robi |
 |---|---|
-| `npx expo start` | uruchamia aplikację do podglądu |
-| `npm run typecheck` | sprawdza kod pod kątem błędów, bez uruchamiania |
-| `npm run lint` | sprawdza styl i typowe pomyłki |
+| `npx.cmd expo start` | uruchamia aplikację do podglądu |
+| `npx.cmd expo start --clear` | to samo, ale czyści pamięć podręczną |
+| `npm.cmd run typecheck` | sprawdza kod pod kątem błędów, bez uruchamiania |
 | `git log --oneline` | pokazuje historię zmian |
 | `git diff` | pokazuje, co zmieniło się od ostatniego zapisu |
 
@@ -85,7 +93,7 @@ automatycznie. Nowy plik `zakupy.tsx` = nowy ekran pod adresem `/zakupy`.
 - Szkielet działający na Androidzie, iPhonie i w przeglądarce
 - Cztery zakładki
 - Ekran „Plan dnia" z makroskładnikami (2290 kcal, 142 g białka)
-- Ekran „Przepisy" z serduszkami (na razie działają tylko do zamknięcia aplikacji)
+- Ekran „Przepisy" z serduszkami (działają tylko do zamknięcia aplikacji)
 
 **Następne kroki**
 
@@ -100,12 +108,9 @@ automatycznie. Nowy plik `zakupy.tsx` = nowy ekran pod adresem `/zakupy`.
 
 ## Gdy coś nie działa
 
-Usuń folder `node_modules` i zainstaluj ponownie:
-
 ```
-npm install
-npx expo start --clear
+npx.cmd expo start --clear
 ```
 
-`--clear` czyści pamięć podręczną — rozwiązuje większość dziwnych błędów
-po zmianach w plikach konfiguracyjnych.
+Gdy to nie pomoże — usuń folder `node_modules` i wykonaj `npm.cmd install`
+ponownie.
