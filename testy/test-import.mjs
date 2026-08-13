@@ -111,6 +111,65 @@ sprawdz('miód: cukry wolne równe cukrom ogółem', reguła({ cukry_wolne: 'wsz
 sprawdz('dorsz: cukry wolne zerowe', reguła({}, 0), 0);
 sprawdz('jabłko: cukry z owocu nie są wolne', reguła({}, 10.39), 0);
 
+
+// ---------------------------------------------------------------------------
+//  Warianty zapisu energii — powód, dla którego migdały wcześniej wypadały
+// ---------------------------------------------------------------------------
+
+// Nowszy wpis: brak numeru 208, jest tylko energia Atwatera (957).
+const migdaly = {
+  fdcId: 2346393,
+  description: 'Almonds',
+  dataType: 'Foundation',
+  foodNutrients: [
+    { nutrientNumber: '957', nutrientName: 'Energy (Atwater General Factors)', unitName: 'KCAL', value: 601 },
+    { nutrientNumber: '203', nutrientName: 'Protein', unitName: 'G', value: 21.2 },
+    { nutrientNumber: '204', nutrientName: 'Total lipid (fat)', unitName: 'G', value: 50.6 },
+    { nutrientNumber: '205', nutrientName: 'Carbohydrate', unitName: 'G', value: 21.6 },
+    { nutrientNumber: '269', nutrientName: 'Sugars, total', unitName: 'G', value: 4.35 },
+  ],
+};
+
+sprawdz('energia odczytana z numeru 957 (migdały)', odczytajSkladniki(migdaly).kcal, 601);
+sprawdz('migdały: białko odczytane', odczytajSkladniki(migdaly).bialko, 21.2);
+
+// Wpis z energią właściwą dla produktu (958).
+const zEnergia958 = {
+  foodNutrients: [
+    { nutrientNumber: '958', nutrientName: 'Energy (Atwater Specific Factors)', unitName: 'KCAL', value: 579 },
+    { nutrientNumber: '203', unitName: 'G', value: 20 },
+  ],
+};
+sprawdz('energia odczytana z numeru 958', odczytajSkladniki(zEnergia958).kcal, 579);
+
+// Kilodżule to nie kilokalorie — takiej wartości nie wolno wziąć.
+const tylkoKilodzule = {
+  foodNutrients: [
+    { nutrientNumber: '268', nutrientName: 'Energy', unitName: 'KJ', value: 2515 },
+    { nutrientNumber: '203', unitName: 'G', value: 21.2 },
+  ],
+};
+sprawdz('kilodżule nie są brane za kilokalorie', odczytajSkladniki(tylkoKilodzule).kcal, null);
+
+// Gdy numeru brak, ratuje nas dopasowanie po nazwie i jednostce.
+const bezNumeru = {
+  foodNutrients: [
+    { nutrientName: 'Energy', unitName: 'KCAL', value: 250 },
+    { nutrientNumber: '203', unitName: 'G', value: 10 },
+  ],
+};
+sprawdz('energia rozpoznana po nazwie, gdy brak numeru', odczytajSkladniki(bezNumeru).kcal, 250);
+
+// Gdy obecne są oba zapisy, pierwszeństwo ma numer 208.
+const obaZapisy = {
+  foodNutrients: [
+    { nutrientNumber: '957', unitName: 'KCAL', value: 601 },
+    { nutrientNumber: '208', unitName: 'KCAL', value: 579 },
+    { nutrientNumber: '203', unitName: 'G', value: 21 },
+  ],
+};
+sprawdz('przy dwóch zapisach energii wygrywa numer 208', odczytajSkladniki(obaZapisy).kcal, 579);
+
 console.log('=== PRZESZŁO ===');
 przeszlo.forEach((x) => console.log('  +', x));
 

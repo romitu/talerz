@@ -73,24 +73,62 @@ function sprawdzUstawienia(env) {
 //  Odczyt wartości odżywczych z odpowiedzi USDA
 // ---------------------------------------------------------------------------
 
-/** Numery składników odżywczych w bazie USDA. */
+/**
+ * Numery składników odżywczych w bazie USDA.
+ *
+ * Energia bywa zapisana na trzy sposoby, zależnie od tego, kiedy powstał wpis:
+ *   208 — starsze rekordy (SR Legacy)
+ *   957 — energia wyliczona ogólnymi współczynnikami Atwatera
+ *   958 — energia wyliczona współczynnikami właściwymi dla produktu
+ * Część nowszych wpisów podaje wyłącznie 957 albo 958. Szukamy więc po kolei.
+ *
+ * Uwaga: numer 268 to energia w kilodżulach — celowo go nie używamy.
+ */
 const NUMERY = {
-  kcal: '208',
-  bialko: '203',
-  tluszcz: '204',
-  wegle: '205',
-  cukry: '269',
+  kcal: ['208', '957', '958'],
+  bialko: ['203'],
+  tluszcz: ['204'],
+  wegle: ['205', '205.2'],
+  cukry: ['269', '269.3'],
 };
 
+/** Wyciąga wartość i jednostkę niezależnie od kształtu odpowiedzi USDA. */
+function odczytajPole(n) {
+  return {
+    numer: String(n.nutrientNumber ?? n.nutrient?.number ?? ''),
+    nazwa: String(n.nutrientName ?? n.nutrient?.name ?? ''),
+    jednostka: String(n.unitName ?? n.nutrient?.unitName ?? '').toUpperCase(),
+    wartosc: n.value ?? n.amount,
+  };
+}
+
 export function odczytajSkladniki(pozycja) {
+  const pola = (pozycja.foodNutrients ?? []).map(odczytajPole);
   const wartosci = {};
-  for (const [nazwa, numer] of Object.entries(NUMERY)) {
-    const znaleziony = (pozycja.foodNutrients ?? []).find(
-      (n) => String(n.nutrientNumber ?? n.nutrient?.number) === numer
-    );
-    const surowa = znaleziony?.value ?? znaleziony?.amount;
-    wartosci[nazwa] = typeof surowa === 'number' ? Math.round(surowa * 100) / 100 : null;
+
+  for (const [nazwa, numery] of Object.entries(NUMERY)) {
+    let znaleziona = null;
+
+    for (const numer of numery) {
+      const trafienie = pola.find((p) => p.numer === numer && typeof p.wartosc === 'number');
+      // Energia musi być w kilokaloriach — kilodżule odrzucamy.
+      if (trafienie && (nazwa !== 'kcal' || trafienie.jednostka !== 'KJ')) {
+        znaleziona = trafienie.wartosc;
+        break;
+      }
+    }
+
+    // Ostatnia deska ratunku dla energii: dopasowanie po nazwie i jednostce.
+    if (znaleziona === null && nazwa === 'kcal') {
+      const trafienie = pola.find(
+        (p) => /^Energy/i.test(p.nazwa) && p.jednostka === 'KCAL' && typeof p.wartosc === 'number'
+      );
+      if (trafienie) znaleziona = trafienie.wartosc;
+    }
+
+    wartosci[nazwa] = znaleziona === null ? null : Math.round(znaleziona * 100) / 100;
   }
+
   return wartosci;
 }
 
@@ -103,6 +141,15 @@ export function wybierzNajlepszy(wyniki) {
     if (trafiony) return trafiony;
   }
   return wyniki[0];
+}
+
+/** Pobiera pełny rekord produktu — wyniki wyszukiwania bywają skrócone. */
+async function pobierzPelny(fdcId, kluczUsda) {
+  const adres = new URL(`https://api.nal.usda.gov/fdc/v1/food/${fdcId}`);
+  adres.searchParams.set('api_key', kluczUsda);
+  const odpowiedz = await fetch(adres);
+  if (!odpowiedz.ok) return null;
+  return odpowiedz.json();
 }
 
 async function szukajWUsda(zapytanie, kluczUsda) {
@@ -158,9 +205,18 @@ async function main() {
         continue;
       }
 
-      const w = odczytajSkladniki(trafienie);
+      let w = odczytajSkladniki(trafienie);
+
+      // Wyniki wyszukiwania bywają skrócone — wtedy sięgamy po pełny rekord.
       if (w.kcal === null || w.bialko === null) {
-        pominiete.push(`${pozycja.nazwa} — niekompletne dane w USDA`);
+        const pelny = await pobierzPelny(trafienie.fdcId, env.USDA_API_KEY);
+        if (pelny) w = odczytajSkladniki(pelny);
+      }
+
+      if (w.kcal === null || w.bialko === null) {
+        pominiete.push(
+          `${pozycja.nazwa} — brak energii lub białka w rekordzie USDA (fdcId ${trafienie.fdcId})`
+        );
         console.log(`${numer}. ${pozycja.nazwa}: NIEKOMPLETNE DANE`);
         continue;
       }
