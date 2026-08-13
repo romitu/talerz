@@ -1,0 +1,40 @@
+/**
+ * Połączenie z bazą danych Supabase.
+ *
+ * Adres i klucz pochodzą z pliku .env w głównym katalogu projektu.
+ * Przedrostek EXPO_PUBLIC_ oznacza, że wartość trafia do aplikacji na telefonie —
+ * i tak ma być. Klucz `anon` jest publiczny z założenia, a bezpieczeństwo
+ * zapewniają reguły dostępu po stronie bazy, nie ukrywanie klucza.
+ *
+ * Klucz `service_role` NIGDY nie trafia do tego pliku ani nigdzie w kodzie
+ * aplikacji — omija wszystkie reguły dostępu.
+ */
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { createClient } from '@supabase/supabase-js';
+import { Platform } from 'react-native';
+import 'react-native-url-polyfill/auto';
+
+const adres = process.env.EXPO_PUBLIC_SUPABASE_URL;
+const klucz = process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY;
+
+/** Czy aplikacja ma komplet danych do połączenia z bazą. */
+export const baza_skonfigurowana = Boolean(adres && klucz);
+
+if (!baza_skonfigurowana) {
+  console.warn(
+    'Brak danych połączenia z bazą. Utwórz plik .env według wzoru z .env.example ' +
+      'i uruchom ponownie: npx.cmd expo start --clear'
+  );
+}
+
+export const supabase = createClient(adres ?? 'https://brak.supabase.co', klucz ?? 'brak', {
+  auth: {
+    // Na telefonie sesję trzymamy w pamięci urządzenia, w przeglądarce robi to sama przeglądarka.
+    storage: Platform.OS === 'web' ? undefined : AsyncStorage,
+    autoRefreshToken: true,
+    persistSession: true,
+    // Wykrywanie sesji z adresu URL ma sens tylko w przeglądarce.
+    detectSessionInUrl: Platform.OS === 'web',
+  },
+});

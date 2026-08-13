@@ -30,6 +30,9 @@ export const Colors = {
 
 export type ThemeColor = keyof typeof Colors.light & keyof typeof Colors.dark;
 
+/** Zestaw kolorów jednego motywu — jasnego albo ciemnego. */
+export type Paleta = { [K in ThemeColor]: string };
+
 export const Fonts = Platform.select({
   ios: {
     sans: 'system-ui',

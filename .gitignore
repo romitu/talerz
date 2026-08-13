@@ -44,3 +44,6 @@ app-example
 
 # baza testowa tworzona przez testy schematu
 supabase/testy/__pycache__/
+
+# dane połączenia z bazą — każdy ma własne
+.env
