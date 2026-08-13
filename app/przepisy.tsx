@@ -1,98 +1,208 @@
 import { Ionicons } from '@expo/vector-icons';
-import { useState } from 'react';
+import { router, useFocusEffect } from 'expo-router';
+import { useCallback, useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 
 import { Ekran } from '@/components/ekran';
 import { Karta } from '@/components/karta';
+import { Makro } from '@/components/makro';
+import { Przycisk } from '@/components/przycisk';
 import { ThemedText } from '@/components/themed-text';
-import { Colors, Spacing } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
-import { PRZEPISY } from '@/data/przepisy';
+import { Spacing } from '@/constants/theme';
+import { useTheme } from '@/hooks/use-theme';
+import {
+  OPIS_KUCHNI,
+  OPIS_PORY,
+  opisTrwalosci,
+  pobierzPrzepisy,
+  przelaczPolubienie,
+  type PrzepisZMakro,
+} from '@/lib/przepisy';
+import { useSesja } from '@/lib/sesja';
+import { supabase } from '@/lib/supabase';
 
 export default function EkranPrzepisow() {
-  const schemat = useColorScheme();
-  const kolory = Colors[schemat === 'dark' ? 'dark' : 'light'];
+  const { sesja } = useSesja();
+  const motyw = useTheme();
 
-  // Zbiór identyfikatorów polubionych przepisów.
-  // Na razie żyje tylko w pamięci — po zamknięciu aplikacji znika.
-  // Po podłączeniu Supabase polubienia trafią do bazy i będą widoczne dla wszystkich.
-  const [polubione, setPolubione] = useState<Set<string>>(new Set());
+  const [przepisy, setPrzepisy] = useState<PrzepisZMakro[]>([]);
+  const [rola, setRola] = useState<string | null>(null);
+  const [wczytywanie, setWczytywanie] = useState(true);
+  const [blad, setBlad] = useState<string | null>(null);
 
-  function przelaczPolubienie(id: string) {
-    setPolubione((poprzednie) => {
-      const nowe = new Set(poprzednie);
-      if (nowe.has(id)) {
-        nowe.delete(id);
-      } else {
-        nowe.add(id);
-      }
-      return nowe;
-    });
+  const pobierz = useCallback(async () => {
+    setWczytywanie(true);
+    setBlad(null);
+    try {
+      const [lista, konto] = await Promise.all([
+        pobierzPrzepisy(sesja?.user.id),
+        supabase.from('konta').select('rola').single(),
+      ]);
+      setPrzepisy(lista);
+      if (!konto.error) setRola(konto.data.rola);
+    } catch (e) {
+      setBlad(e instanceof Error ? e.message : String(e));
+    } finally {
+      setWczytywanie(false);
+    }
+  }, [sesja?.user.id]);
+
+  useFocusEffect(
+    useCallback(() => {
+      pobierz();
+    }, [pobierz])
+  );
+
+  async function lajk(p: PrzepisZMakro) {
+    if (!sesja) return;
+
+    // Zmiana widoczna od razu, zanim baza potwierdzi — inaczej serce reaguje z opóźnieniem.
+    setPrzepisy((poprzednie) =>
+      poprzednie.map((x) =>
+        x.id === p.id
+          ? { ...x, polubiony: !x.polubiony, polubienia: x.polubienia + (x.polubiony ? -1 : 1) }
+          : x
+      )
+    );
+
+    try {
+      await przelaczPolubienie(p.id, sesja.user.id, p.polubiony);
+    } catch {
+      pobierz(); // nie udało się — wracamy do stanu z bazy
+    }
   }
 
+  const mozeDodawac = rola === 'moderator' || rola === 'administrator';
+
   return (
-    <Ekran tytul="Przepisy" podtytul={`${PRZEPISY.length} przepisy w bazie`}>
-      {PRZEPISY.map((przepis) => {
-        const czyPolubiony = polubione.has(przepis.id);
+    <Ekran
+      tytul="Przepisy"
+      podtytul={wczytywanie ? 'wczytywanie…' : `${przepisy.length} w bazie`}>
+      {blad && (
+        <Karta>
+          <ThemedText type="small" themeColor="accent">
+            Nie udało się wczytać: {blad}
+          </ThemedText>
+        </Karta>
+      )}
 
-        return (
-          <Karta key={przepis.id}>
-            <ThemedText type="default">{przepis.nazwa}</ThemedText>
-            <ThemedText type="small" themeColor="textSecondary">
-              {przepis.opis}
+      {!wczytywanie && przepisy.length === 0 && (
+        <Karta>
+          <ThemedText type="default">Baza przepisów jest pusta</ThemedText>
+          <ThemedText type="small" themeColor="textSecondary">
+            Składniki są już wczytane, więc makro policzy się samo — wystarczy podać, ile
+            czego wchodzi w skład dania.
+          </ThemedText>
+        </Karta>
+      )}
+
+      {przepisy.map((p) => (
+        <Karta key={p.id}>
+          <View style={styles.naglowek}>
+            <ThemedText type="default" style={styles.nazwa}>
+              {p.nazwa}
             </ThemedText>
-
-            <View style={styles.stopkaKarty}>
+            {p.widocznosc !== 'publiczna' && (
               <ThemedText type="small" themeColor="textSecondary">
-                {przepis.kcal} kcal · {przepis.bialko} g białka · {przepis.czasMinut} min
+                {p.widocznosc === 'prywatna' ? 'prywatny' : 'zgłoszony'}
               </ThemedText>
+            )}
+          </View>
 
-              <Pressable
-                onPress={() => przelaczPolubienie(przepis.id)}
-                accessibilityRole="button"
-                accessibilityLabel={czyPolubiony ? 'Cofnij polubienie' : 'Polub przepis'}
-                style={({ pressed }) => [styles.przyciskLajk, pressed && styles.wcisniety]}>
-                <Ionicons
-                  name={czyPolubiony ? 'heart' : 'heart-outline'}
-                  size={20}
-                  color={czyPolubiony ? kolory.accent : kolory.textSecondary}
-                />
-                <ThemedText type="small" themeColor={czyPolubiony ? 'accent' : 'textSecondary'}>
-                  {przepis.polubienia + (czyPolubiony ? 1 : 0)}
-                </ThemedText>
-              </Pressable>
+          {p.opis && (
+            <ThemedText type="small" themeColor="textSecondary">
+              {p.opis}
+            </ThemedText>
+          )}
+
+          <ThemedText type="small" themeColor="textSecondary">
+            {p.pory.map((x) => OPIS_PORY[x]).join(', ') || 'bez pory'}
+            {' · '}
+            {p.kuchnie.map((x) => OPIS_KUCHNI[x]).join(', ')}
+            {p.czas_minut ? ` · ${p.czas_minut} min` : ''}
+            {' · '}
+            {opisTrwalosci(p.trwalosc_dni)}
+          </ThemedText>
+
+          {p.kcal !== null ? (
+            <View style={styles.wiersz}>
+              <Makro etykieta="kcal" wartosc={p.kcal} jednostka="" />
+              <Makro etykieta="białko" wartosc={p.bialko_g ?? 0} jednostka=" g" />
+              <Makro etykieta="tłuszcz" wartosc={p.tluszcz_g ?? 0} jednostka=" g" />
+              <Makro etykieta="węglow." wartosc={p.wegle_g ?? 0} jednostka=" g" />
             </View>
-          </Karta>
-        );
-      })}
+          ) : (
+            <ThemedText type="small" themeColor="accent">
+              Brak składników — nie ma z czego policzyć makro.
+            </ThemedText>
+          )}
 
-      <ThemedText type="small" themeColor="textSecondary" style={styles.stopka}>
-        Serduszka działają tylko w tej sesji. Trwałe polubienia i przepisy od innych
-        użytkowników pojawią się po podłączeniu bazy danych.
-      </ThemedText>
+          <View style={styles.stopka}>
+            {p.cukry_wolne_g !== null && p.cukry_wolne_g > 0 && (
+              <ThemedText type="small" themeColor="textSecondary">
+                cukry wolne: {p.cukry_wolne_g} g
+              </ThemedText>
+            )}
+
+            <Pressable
+              onPress={() => lajk(p)}
+              accessibilityRole="button"
+              accessibilityLabel={p.polubiony ? 'Cofnij polubienie' : 'Polub przepis'}
+              style={({ pressed }) => [styles.lajk, pressed && styles.wcisniety]}>
+              <Ionicons
+                name={p.polubiony ? 'heart' : 'heart-outline'}
+                size={20}
+                color={p.polubiony ? motyw.accent : motyw.textSecondary}
+              />
+              <ThemedText type="small" themeColor={p.polubiony ? 'accent' : 'textSecondary'}>
+                {p.polubienia}
+              </ThemedText>
+            </Pressable>
+          </View>
+        </Karta>
+      ))}
+
+      {mozeDodawac && (
+        <Przycisk tytul="Dodaj przepis" onPress={() => router.push('/przepis-formularz')} />
+      )}
+
+      {!mozeDodawac && !wczytywanie && (
+        <ThemedText type="small" themeColor="textSecondary">
+          Dodawanie przepisów wymaga uprawnień moderatora.
+        </ThemedText>
+      )}
     </Ekran>
   );
 }
 
 const styles = StyleSheet.create({
-  stopkaKarty: {
+  naglowek: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
+    gap: Spacing.two,
+  },
+  nazwa: { flex: 1 },
+  wiersz: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: Spacing.two,
+    paddingTop: Spacing.half,
+  },
+  stopka: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     gap: Spacing.two,
     paddingTop: Spacing.one,
   },
-  przyciskLajk: {
+  lajk: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: Spacing.one,
     paddingVertical: Spacing.one,
     paddingHorizontal: Spacing.two,
+    marginLeft: 'auto',
   },
-  wcisniety: {
-    opacity: 0.6,
-  },
-  stopka: {
-    paddingTop: Spacing.two,
-  },
+  wcisniety: { opacity: 0.6 },
 });
