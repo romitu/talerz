@@ -42,9 +42,44 @@ Najpierw bez zapisywania czegokolwiek:
 node narzedzia/import-usda.mjs --podglad
 ```
 
-Zobaczysz, co skrypt znalazł dla każdej pozycji. Jeśli któryś składnik ma
-wartości odbiegające od oczekiwań, popraw zapytanie w polu `usda` w pliku
-`skladniki-lista.json`.
+Przy każdej pozycji zobaczysz **nazwę produktu, który USDA faktycznie dopasowało**:
+
+```
+34. Dynia, surowa: 26 kcal, 1 g białka  ← Squash, winter, pumpkin, raw
+```
+
+To najważniejsza informacja w całym wydruku — po niej od razu widać pomyłkę.
+
+### Próg rozsądku
+
+Wyszukiwarka USDA przy nietrafionym zapytaniu zwraca cokolwiek podobnego:
+dla „pumpkin, raw" potrafi podać pestki dyni (555 kcal zamiast 26), dla „oats"
+— olej (884 kcal zamiast 389).
+
+Dlatego każda pozycja ma pole `kcal_okolo` z wartością orientacyjną. Wynik
+odbiegający o **ponad 30%** jest odrzucany i nie trafia do bazy:
+
+```
+34. Dynia, surowa: ODRZUCONE — dopasowano „Seeds, pumpkin seed kernels", 555 kcal zamiast ~26
+```
+
+Wtedy: popraw pole `usda` na dokładniejsze zapytanie albo wpisz `fdcId`
+właściwego produktu (znajdziesz go na [fdc.nal.usda.gov](https://fdc.nal.usda.gov)
+w adresie strony produktu). Podany `fdcId` pomija wyszukiwanie.
+
+```json
+{
+  "nazwa": "Dynia, surowa",
+  "usda": "squash, winter, pumpkin, raw",
+  "fdcId": 168448,
+  "kcal_okolo": 26,
+  "tagi": ["warzywo"],
+  "nova": 1
+}
+```
+
+Lepiej odrzucić dziesięć pozycji do ręcznego sprawdzenia niż wpuścić do bazy
+jedną, przez którą aplikacja policzy komuś makro czterokrotnie za wysoko.
 
 ### Krok 4 — import
 

@@ -132,6 +132,25 @@ export function odczytajSkladniki(pozycja) {
   return wartosci;
 }
 
+/** O ile procent wynik może odbiegać od wartości orientacyjnej, zanim go odrzucimy. */
+export const DOPUSZCZALNE_ODCHYLENIE = 0.3;
+
+/**
+ * Sprawdza, czy dopasowanie jest wiarygodne.
+ *
+ * Wyszukiwarka USDA przy nietrafionym zapytaniu zwraca cokolwiek podobnego —
+ * dla „pumpkin, raw” potrafi podać pestki dyni, dla „oats” olej. Różnica
+ * kaloryczności wyłapuje takie pomyłki, zanim trafią do bazy.
+ */
+export function wiarygodne(kcalOtrzymane, kcalOczekiwane) {
+  if (!kcalOczekiwane) return { ok: true };
+  const odchylenie = Math.abs(kcalOtrzymane - kcalOczekiwane) / kcalOczekiwane;
+  return {
+    ok: odchylenie <= DOPUSZCZALNE_ODCHYLENIE,
+    odchylenie: Math.round(odchylenie * 100),
+  };
+}
+
 /** Wybiera najlepsze dopasowanie: dane opracowane mają pierwszeństwo nad markowymi. */
 export function wybierzNajlepszy(wyniki) {
   if (!wyniki || wyniki.length === 0) return null;
@@ -198,7 +217,9 @@ async function main() {
   for (const [i, pozycja] of lista.entries()) {
     const numer = String(i + 1).padStart(3, ' ');
     try {
-      const trafienie = await szukajWUsda(pozycja.usda, env.USDA_API_KEY);
+      const trafienie = pozycja.fdcId
+        ? await pobierzPelny(pozycja.fdcId, env.USDA_API_KEY)
+        : await szukajWUsda(pozycja.usda, env.USDA_API_KEY);
       if (!trafienie) {
         pominiete.push(`${pozycja.nazwa} — brak wyników dla „${pozycja.usda}”`);
         console.log(`${numer}. ${pozycja.nazwa}: BRAK WYNIKÓW`);
@@ -221,6 +242,22 @@ async function main() {
         continue;
       }
 
+      const opisUsda = trafienie.description ?? '(bez nazwy)';
+      const ocena = wiarygodne(w.kcal, pozycja.kcal_okolo);
+
+      if (!ocena.ok) {
+        pominiete.push(
+          `${pozycja.nazwa} — dopasowano „${opisUsda}” (fdcId ${trafienie.fdcId}), ` +
+            `${w.kcal} kcal zamiast oczekiwanych około ${pozycja.kcal_okolo} ` +
+            `(różnica ${ocena.odchylenie}%)`
+        );
+        console.log(
+          `${numer}. ${pozycja.nazwa}: ODRZUCONE — dopasowano „${opisUsda}”, ` +
+            `${w.kcal} kcal zamiast ~${pozycja.kcal_okolo}`
+        );
+        continue;
+      }
+
       const cukryOgolem = w.cukry ?? 0;
       const cukryWolne = pozycja.cukry_wolne === 'wszystkie' ? cukryOgolem : 0;
 
@@ -240,7 +277,8 @@ async function main() {
 
       console.log(
         `${numer}. ${pozycja.nazwa}: ${w.kcal} kcal, ${w.bialko} g białka` +
-          (cukryWolne > 0 ? `, ${cukryWolne} g cukrów wolnych` : '')
+          (cukryWolne > 0 ? `, ${cukryWolne} g cukrów wolnych` : '') +
+          `  ← ${opisUsda}`
       );
     } catch (e) {
       pominiete.push(`${pozycja.nazwa} — ${e.message}`);
@@ -274,8 +312,12 @@ async function main() {
   }
 
   if (pominiete.length > 0) {
-    console.log('\nWymagają ręcznego uzupełnienia:');
+    console.log('\nWymagają poprawki w narzedzia/skladniki-lista.json:');
     pominiete.forEach((p) => console.log('  -', p));
+    console.log(
+      '\nPopraw pole „usda” albo wpisz „fdcId” właściwego produktu, ' +
+        'a potem uruchom import ponownie.'
+    );
   }
 }
 

@@ -7,7 +7,7 @@
  * na przygotowanych przykładach o kształcie takim, jaki zwraca USDA.
  */
 
-import { odczytajSkladniki, wybierzNajlepszy } from '../narzedzia/import-usda.mjs';
+import { odczytajSkladniki, wiarygodne, wybierzNajlepszy } from '../narzedzia/import-usda.mjs';
 
 const przeszlo = [];
 const nieprzeszlo = [];
@@ -169,6 +169,25 @@ const obaZapisy = {
   ],
 };
 sprawdz('przy dwóch zapisach energii wygrywa numer 208', odczytajSkladniki(obaZapisy).kcal, 579);
+
+
+// ---------------------------------------------------------------------------
+//  Próg rozsądku — wyłapywanie trafień w niewłaściwy produkt
+// ---------------------------------------------------------------------------
+
+sprawdz('dynia: pestki (555 kcal) odrzucone wobec oczekiwanych 26', wiarygodne(555, 26).ok, false);
+sprawdz('płatki owsiane: olej (884 kcal) odrzucony wobec oczekiwanych 389', wiarygodne(884, 389).ok, false);
+sprawdz('oliwki: pomidor (18 kcal) odrzucony wobec oczekiwanych 145', wiarygodne(18, 145).ok, false);
+sprawdz('cytryna: ogórek (15,9 kcal) odrzucony wobec oczekiwanych 29', wiarygodne(15.9, 29).ok, false);
+sprawdz('komosa: figi (249 kcal) odrzucone wobec oczekiwanych 368', wiarygodne(249, 368).ok, false);
+
+sprawdz('migdały 626 wobec oczekiwanych 579: przyjęte', wiarygodne(626, 579).ok, true);
+sprawdz('dorsz 66 wobec oczekiwanych 82: przyjęty', wiarygodne(66, 82).ok, true);
+sprawdz('parmezan 421 wobec oczekiwanych 420: przyjęty', wiarygodne(421, 420).ok, true);
+sprawdz('miód 304 wobec oczekiwanych 304: przyjęty', wiarygodne(304, 304).ok, true);
+
+sprawdz('brak wartości orientacyjnej wyłącza sprawdzenie', wiarygodne(999, undefined).ok, true);
+sprawdz('odchylenie podawane w procentach', wiarygodne(555, 26).odchylenie, 2035);
 
 console.log('=== PRZESZŁO ===');
 przeszlo.forEach((x) => console.log('  +', x));
