@@ -92,6 +92,10 @@ function Zakladki({ kolory }: { kolory: Paleta }) {
           tabBarIcon: ({ color, size }) => <Ionicons name="person" size={size} color={color} />,
         }}
       />
+
+      {/* Ekrany otwierane z innych miejsc — nie pokazują się na pasku zakładek. */}
+      <Tabs.Screen name="profil-formularz" options={{ href: null }} />
+      <Tabs.Screen name="cele-formularz" options={{ href: null }} />
     </Tabs>
   );
 }

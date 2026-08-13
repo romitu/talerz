@@ -46,5 +46,4 @@ app-example
 supabase/testy/__pycache__/
 
 # dane połączenia z bazą — każdy ma własne
-.env*
-!.env.example
+.env

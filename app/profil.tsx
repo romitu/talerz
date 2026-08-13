@@ -1,71 +1,65 @@
-import { useCallback, useEffect, useState } from 'react';
+import { router, useFocusEffect } from 'expo-router';
+import { useCallback, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import { Ekran } from '@/components/ekran';
 import { Karta } from '@/components/karta';
+import { Makro } from '@/components/makro';
 import { Przycisk } from '@/components/przycisk';
 import { ThemedText } from '@/components/themed-text';
 import { Spacing } from '@/constants/theme';
-import { CEL_DNIA } from '@/data/plan';
 import { useSesja } from '@/lib/sesja';
 import { supabase } from '@/lib/supabase';
+import { progBialkaNaPosilek, wiekZDaty } from '@/lib/zywienie';
+
+type Cel = {
+  kcal: number;
+  bialko_g: number;
+  tluszcz_g: number;
+  wegle_g: number;
+};
 
 type Profil = {
   id: string;
   imie: string;
-  plec: string;
   data_urodzenia: string;
   wzrost_cm: number;
+  cele: Cel[];
 };
-
-type Konto = {
-  rola: string;
-};
-
-/** Wiek w pełnych latach na podstawie daty urodzenia. */
-function wiek(dataUrodzenia: string): number {
-  const urodziny = new Date(dataUrodzenia);
-  const dzis = new Date();
-  let lata = dzis.getFullYear() - urodziny.getFullYear();
-  const miesiac = dzis.getMonth() - urodziny.getMonth();
-  if (miesiac < 0 || (miesiac === 0 && dzis.getDate() < urodziny.getDate())) {
-    lata -= 1;
-  }
-  return lata;
-}
 
 export default function EkranProfilu() {
   const { sesja } = useSesja();
   const [profile, setProfile] = useState<Profil[]>([]);
-  const [konto, setKonto] = useState<Konto | null>(null);
-  const [ladowanie, setLadowanie] = useState(true);
+  const [rola, setRola] = useState<string | null>(null);
+  const [wczytywanie, setWczytywanie] = useState(true);
   const [blad, setBlad] = useState<string | null>(null);
 
   const pobierz = useCallback(async () => {
-    setLadowanie(true);
+    setWczytywanie(true);
     setBlad(null);
 
     const [wynikProfili, wynikKonta] = await Promise.all([
-      supabase.from('profile').select('id, imie, plec, data_urodzenia, wzrost_cm').order('kolejnosc'),
+      supabase
+        .from('profile')
+        .select('id, imie, data_urodzenia, wzrost_cm, cele (kcal, bialko_g, tluszcz_g, wegle_g)')
+        .order('kolejnosc'),
       supabase.from('konta').select('rola').single(),
     ]);
 
-    if (wynikProfili.error) {
-      setBlad(wynikProfili.error.message);
-    } else {
-      setProfile(wynikProfili.data ?? []);
-    }
+    if (wynikProfili.error) setBlad(wynikProfili.error.message);
+    else setProfile((wynikProfili.data ?? []) as Profil[]);
 
-    if (!wynikKonta.error) {
-      setKonto(wynikKonta.data);
-    }
+    if (!wynikKonta.error) setRola(wynikKonta.data.rola);
 
-    setLadowanie(false);
+    setWczytywanie(false);
   }, []);
 
-  useEffect(() => {
-    pobierz();
-  }, [pobierz]);
+  // Odświeżenie po powrocie z formularza — inaczej lista byłaby nieaktualna.
+  useFocusEffect(
+    useCallback(() => {
+      pobierz();
+    }, [pobierz])
+  );
 
   return (
     <Ekran tytul="Profil" podtytul={sesja?.user.email ?? undefined}>
@@ -74,55 +68,72 @@ export default function EkranProfilu() {
           KONTO
         </ThemedText>
         <ThemedText type="small">Adres: {sesja?.user.email}</ThemedText>
-        <ThemedText type="small">Rola: {konto?.rola ?? 'wczytywanie…'}</ThemedText>
+        <ThemedText type="small">Rola: {rola ?? 'wczytywanie…'}</ThemedText>
       </Karta>
 
-      <Karta>
-        <ThemedText type="smallBold" themeColor="textSecondary">
-          PROFILE ({profile.length} z 3)
+      {wczytywanie && (
+        <ThemedText type="small" themeColor="textSecondary">
+          Wczytywanie z bazy…
         </ThemedText>
+      )}
 
-        {ladowanie && (
-          <ThemedText type="small" themeColor="textSecondary">
-            Wczytywanie z bazy…
-          </ThemedText>
-        )}
-
-        {blad && (
+      {blad && (
+        <Karta>
           <ThemedText type="small" themeColor="accent">
             Nie udało się wczytać: {blad}
           </ThemedText>
-        )}
+        </Karta>
+      )}
 
-        {!ladowanie && !blad && profile.length === 0 && (
+      {!wczytywanie && profile.length === 0 && (
+        <Karta>
+          <ThemedText type="default">Nie masz jeszcze profilu</ThemedText>
           <ThemedText type="small" themeColor="textSecondary">
-            Nie masz jeszcze żadnego profilu. Dodawanie profili powstanie w następnym kroku.
+            Profil zawiera dane potrzebne do wyliczenia zapotrzebowania: wiek, wzrost, wagę
+            i poziom aktywności. Bez niego plan dnia nie ma do czego się odnieść.
           </ThemedText>
-        )}
+        </Karta>
+      )}
 
-        {profile.map((p) => (
-          <View key={p.id} style={styles.wiersz}>
-            <ThemedText type="small">
-              {p.imie} — {wiek(p.data_urodzenia)} lat, {p.wzrost_cm} cm
+      {profile.map((p) => {
+        const cel = p.cele?.[0];
+        return (
+          <Karta key={p.id}>
+            <ThemedText type="default">{p.imie}</ThemedText>
+            <ThemedText type="small" themeColor="textSecondary">
+              {wiekZDaty(p.data_urodzenia)} lat · {p.wzrost_cm} cm
             </ThemedText>
-          </View>
-        ))}
 
-        <Przycisk tytul="Odśwież" wariant="poboczny" onPress={pobierz} zajety={ladowanie} />
-      </Karta>
+            {cel ? (
+              <>
+                <View style={styles.wiersz}>
+                  <Makro etykieta="kalorie" wartosc={cel.kcal} jednostka="" />
+                  <Makro etykieta="białko" wartosc={cel.bialko_g} jednostka=" g" />
+                  <Makro etykieta="tłuszcz" wartosc={cel.tluszcz_g} jednostka=" g" />
+                  <Makro etykieta="węglow." wartosc={cel.wegle_g} jednostka=" g" />
+                </View>
+                <ThemedText type="small" themeColor="textSecondary">
+                  Próg białka na posiłek: {progBialkaNaPosilek(cel.bialko_g)} g
+                </ThemedText>
+              </>
+            ) : (
+              <ThemedText type="small" themeColor="accent">
+                Brak ustalonych celów dziennych.
+              </ThemedText>
+            )}
 
-      <Karta>
-        <ThemedText type="smallBold" themeColor="textSecondary">
-          CELE DZIENNE
-        </ThemedText>
-        <ThemedText type="small">Kalorie: {CEL_DNIA.kcal} kcal</ThemedText>
-        <ThemedText type="small">Białko: {CEL_DNIA.bialko} g</ThemedText>
-        <ThemedText type="small">Tłuszcz: {CEL_DNIA.tluszcz} g</ThemedText>
-        <ThemedText type="small">Węglowodany: {CEL_DNIA.wegle} g</ThemedText>
-        <ThemedText type="small" themeColor="textSecondary">
-          Na razie wartości stałe. Wyliczanie z wieku, wzrostu i aktywności — następny krok.
-        </ThemedText>
-      </Karta>
+            <Przycisk
+              tytul={cel ? 'Zmień cele' : 'Ustal cele'}
+              wariant="poboczny"
+              onPress={() => router.push({ pathname: '/cele-formularz', params: { profil: p.id } })}
+            />
+          </Karta>
+        );
+      })}
+
+      {profile.length < 3 && (
+        <Przycisk tytul="Dodaj profil" onPress={() => router.push('/profil-formularz')} />
+      )}
 
       <Przycisk
         tytul="Wyloguj się"
@@ -136,9 +147,12 @@ export default function EkranProfilu() {
 
 const styles = StyleSheet.create({
   wiersz: {
-    paddingVertical: Spacing.half,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: Spacing.two,
+    paddingTop: Spacing.half,
   },
   wyloguj: {
-    marginTop: Spacing.two,
+    marginTop: Spacing.four,
   },
 });

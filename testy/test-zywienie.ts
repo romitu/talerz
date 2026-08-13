@@ -1,0 +1,115 @@
+/**
+ * Testy wyliczeń żywieniowych.
+ *
+ *     node --experimental-strip-types testy/test-zywienie.ts
+ *
+ * Sprawdzają wzory na znanych przypadkach oraz to, czy blokady bezpieczeństwa
+ * zadziałają tam, gdzie powinny — i NIE zadziałają tam, gdzie nie powinny.
+ */
+
+import {
+  kcalZMakro,
+  oceniaCele,
+  progBialkaNaPosilek,
+  przemianaPodstawowa,
+  udzialyProcentowe,
+  wiekZDaty,
+  zapotrzebowanie,
+} from '../lib/zywienie.ts';
+
+const przeszlo: string[] = [];
+const nieprzeszlo: string[] = [];
+
+function sprawdz(nazwa: string, otrzymano: unknown, oczekiwano: unknown) {
+  const a = JSON.stringify(otrzymano);
+  const b = JSON.stringify(oczekiwano);
+  if (a === b) przeszlo.push(`${nazwa} = ${a}`);
+  else nieprzeszlo.push(`${nazwa}: otrzymano ${a}, oczekiwano ${b}`);
+}
+
+// --- przemiana podstawowa ---
+// Roman: mężczyzna, 90 kg, 189 cm, 59 lat
+// 10*90 + 6,25*189 - 5*59 + 5 = 900 + 1181,25 - 295 + 5 = 1791,25
+sprawdz('przemiana podstawowa (M, 90 kg, 189 cm, 59 lat)',
+  przemianaPodstawowa('M', 90, 189, 59), 1791);
+
+// Kobieta: 60 kg, 165 cm, 30 lat
+// 600 + 1031,25 - 150 - 161 = 1320,25
+sprawdz('przemiana podstawowa (K, 60 kg, 165 cm, 30 lat)',
+  przemianaPodstawowa('K', 60, 165, 30), 1320);
+
+// --- zapotrzebowanie z aktywnością ---
+sprawdz('zapotrzebowanie przy umiarkowanej aktywności (1791 x 1,55)',
+  zapotrzebowanie('M', 90, 189, 59, 'umiarkowany'), 2776);
+
+sprawdz('zapotrzebowanie przy pracy siedzącej (1791 x 1,2)',
+  zapotrzebowanie('M', 90, 189, 59, 'siedzacy'), 2150);
+
+// --- kalorie z makro ---
+// 142 g białka x4 + 82 g tłuszczu x9 + 246 g węglowodanów x4 = 568 + 738 + 984
+sprawdz('kalorie z makroskładników (142 / 82 / 246)',
+  kcalZMakro(142, 82, 246), 2290);
+
+// --- udziały procentowe ---
+sprawdz('udziały procentowe planu Romana',
+  udzialyProcentowe({ kcal: 2290, bialko: 142, tluszcz: 82, wegle: 246 }),
+  { bialko: 24.8, tluszcz: 32.2, wegle: 43 });
+
+// --- wiek ---
+sprawdz('wiek z daty urodzenia (urodziny już minęły)',
+  wiekZDaty('1967-01-01', new Date('2026-08-13')), 59);
+sprawdz('wiek z daty urodzenia (urodziny jeszcze przed nami)',
+  wiekZDaty('1967-12-31', new Date('2026-08-13')), 58);
+
+// --- próg białka na posiłek ---
+sprawdz('próg białka na posiłek (142 / 3)', progBialkaNaPosilek(142), 47);
+
+// =============================================================
+//  Ocena celów
+// =============================================================
+
+// Plan Romana: bezpieczny, ale węglowodany poniżej AMDR.
+// Ma przejść bez blokady i z dokładnie jednym ostrzeżeniem.
+const romanOcena = oceniaCele(
+  { kcal: 2290, bialko: 142, tluszcz: 82, wegle: 246 }, 1791, 2776);
+sprawdz('plan Romana: brak blokad', romanOcena.blokady.length, 0);
+sprawdz('plan Romana: jedno ostrzeżenie (węglowodany poniżej AMDR)',
+  romanOcena.ostrzezenia.length, 1);
+sprawdz('plan Romana: ostrzeżenie dotyczy węglowodanów',
+  romanOcena.ostrzezenia[0].startsWith('Węglowodany'), true);
+
+// Cel poniżej przemiany podstawowej — blokada.
+const zaMalo = oceniaCele({ kcal: 0, bialko: 80, tluszcz: 40, wegle: 100 }, 1791, 2776);
+sprawdz('cel poniżej przemiany podstawowej: zablokowany',
+  zaMalo.blokady.some((b) => b.includes('przemiany podstawowej')), true);
+
+// Zbyt duży deficyt — blokada.
+const duzyDeficyt = oceniaCele({ kcal: 0, bialko: 90, tluszcz: 45, wegle: 130 }, 1200, 2900);
+sprawdz('deficyt ponad 1000 kcal: zablokowany',
+  duzyDeficyt.blokady.some((b) => b.includes('Deficyt')), true);
+
+// Białko powyżej 35% energii — blokada.
+const zaDuzoBialka = oceniaCele({ kcal: 0, bialko: 200, tluszcz: 50, wegle: 100 }, 1500, 2500);
+sprawdz('białko powyżej 35% energii: zablokowane',
+  zaDuzoBialka.blokady.some((b) => b.includes('Białko')), true);
+
+// Plan mieszczący się w całości w AMDR — zero uwag.
+// 100 g białka (400 kcal), 60 g tłuszczu (540 kcal), 250 g węglowodanów (1000 kcal) = 1940 kcal
+// udziały: 20,6% / 27,8% / 51,5%
+const wzorcowy = oceniaCele({ kcal: 1940, bialko: 100, tluszcz: 60, wegle: 250 }, 1500, 2000);
+sprawdz('plan mieszczący się w AMDR: brak blokad', wzorcowy.blokady.length, 0);
+sprawdz('plan mieszczący się w AMDR: brak ostrzeżeń', wzorcowy.ostrzezenia.length, 0);
+
+// =============================================================
+
+console.log('=== PRZESZŁO ===');
+przeszlo.forEach((x) => console.log('  +', x));
+
+if (nieprzeszlo.length > 0) {
+  console.log('\n=== NIE PRZESZŁO ===');
+  nieprzeszlo.forEach((x) => console.log('  -', x));
+  console.log(`\nNIEPOWODZENIE: ${nieprzeszlo.length} z ${przeszlo.length + nieprzeszlo.length}.`);
+  process.exit(1);
+}
+
+console.log(`\nWszystkie ${przeszlo.length} kontroli zakończone powodzeniem.`);
