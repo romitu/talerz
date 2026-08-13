@@ -132,6 +132,22 @@ export function odczytajSkladniki(pozycja) {
   return wartosci;
 }
 
+
+/**
+ * Czy tekst zawiera dane słowo — dopasowanie od początku wyrazu, nie fragmentu.
+ *
+ * To rozróżnienie jest krytyczne. Zwykłe szukanie fragmentu sprawiało, że
+ * wykluczenie „cooked" odrzucało „Quinoa, UNCOOKED", a „sweetened" odrzucało
+ * „Cocoa, UNSWEETENED" — czyli dokładnie te produkty, o które chodziło.
+ *
+ * Dopasowanie od początku wyrazu zachowuje przy tym możliwość podawania
+ * rdzeni: „anchov" nadal trafia w „anchovies".
+ */
+export function zawieraSlowo(tekst, slowo) {
+  const bezpieczne = String(slowo).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return new RegExp(`\\b${bezpieczne}`, 'i').test(String(tekst));
+}
+
 /** O ile procent wynik może odbiegać od wartości orientacyjnej, zanim go odrzucimy. */
 export const DOPUSZCZALNE_ODCHYLENIE = 0.3;
 
@@ -168,9 +184,9 @@ export function wybierzNajlepszy(wyniki, opcje = {}) {
   const { slowa = [], wyklucz = [], kcalOkolo } = opcje;
 
   const pasuje = (w) => {
-    const opis = String(w.description ?? '').toLowerCase();
-    if (slowa.length > 0 && !slowa.every((s) => opis.includes(s.toLowerCase()))) return false;
-    if (wyklucz.some((s) => opis.includes(s.toLowerCase()))) return false;
+    const opis = String(w.description ?? '');
+    if (slowa.length > 0 && !slowa.every((s) => zawieraSlowo(opis, s))) return false;
+    if (wyklucz.some((s) => zawieraSlowo(opis, s))) return false;
     return true;
   };
 
@@ -245,6 +261,23 @@ async function main() {
   sprawdzUstawienia(env);
 
   const lista = JSON.parse(readFileSync(join(KATALOG, 'skladniki-lista.json'), 'utf8')).skladniki;
+
+  // Słowo wykluczone nie może występować w samym zapytaniu — to sprzeczność,
+  // przez którą właściwy produkt zostałby odrzucony.
+  const sprzecznosci = [];
+  for (const pozycja of lista) {
+    for (const slowo of pozycja.wyklucz ?? []) {
+      if (zawieraSlowo(pozycja.usda, slowo)) {
+        sprzecznosci.push(`${pozycja.nazwa}: wykluczone „${slowo}” występuje w zapytaniu „${pozycja.usda}”`);
+      }
+    }
+  }
+  if (sprzecznosci.length > 0) {
+    console.log('Sprzeczności w liście — te pozycje na pewno się nie znajdą:');
+    sprzecznosci.forEach((x) => console.log('  !', x));
+    console.log('');
+  }
+
   console.log(`Do zaimportowania: ${lista.length} składników\n`);
 
   const supabase = createClient(env.EXPO_PUBLIC_SUPABASE_URL, env.EXPO_PUBLIC_SUPABASE_ANON_KEY);

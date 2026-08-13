@@ -178,7 +178,9 @@
         "cooked",
         "roasted",
         "deli",
-        "smoked"
+        "smoked",
+        "solution",
+        "skin"
       ],
       "tagi": [
         "mieso",
@@ -778,11 +780,11 @@
       ],
       "wyklucz": [
         "juice",
-        "peel",
         "lemonade",
         "cucumber",
         "dried",
-        "meringue"
+        "meringue",
+        "pie"
       ],
       "tagi": [
         "owoc"
@@ -920,7 +922,8 @@
         "quinoa"
       ],
       "wyklucz": [
-        "cooked"
+        "cooked",
+        "flour"
       ],
       "tagi": [
         "zboze"
@@ -966,14 +969,19 @@
     },
     {
       "nazwa": "Makaron pełnoziarnisty, suchy",
-      "usda": "pasta, whole-wheat, dry",
+      "usda": "spaghetti, whole-wheat, dry",
       "kcal_okolo": 348,
       "slowa": [
         "whole-wheat"
       ],
       "wyklucz": [
         "cooked",
-        "fresh"
+        "fresh",
+        "cracker",
+        "matzo",
+        "bread",
+        "flour",
+        "bulgur"
       ],
       "tagi": [
         "zboze",
@@ -1251,7 +1259,10 @@
         "sweetened",
         "mix",
         "butter",
-        "hot"
+        "hot",
+        "hi-fat",
+        "alkali",
+        "breakfast"
       ],
       "tagi": [
         "kakao"

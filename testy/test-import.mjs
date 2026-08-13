@@ -12,6 +12,7 @@ import {
   opiszKandydatow,
   wiarygodne,
   wybierzNajlepszy,
+  zawieraSlowo,
 } from '../narzedzia/import-usda.mjs';
 
 const przeszlo = [];
@@ -287,6 +288,52 @@ sprawdz(
   'zestawienie kandydatów zawiera fdcId, nazwę i kalorie',
   opiszKandydatow([produkt(70, 'Pumpkin, raw', 26)], 1)[0].trim(),
   'fdcId 70 — Pumpkin, raw (26 kcal)'
+);
+
+
+// ---------------------------------------------------------------------------
+//  Dopasowanie słów od początku wyrazu, nie fragmentu tekstu
+// ---------------------------------------------------------------------------
+//  Szukanie fragmentu sprawiało, że wykluczenie „cooked" odrzucało
+//  „Quinoa, uncooked", a „sweetened" odrzucało „Cocoa, unsweetened".
+
+sprawdz('„cooked” nie pasuje do „uncooked”', zawieraSlowo('Quinoa, uncooked', 'cooked'), false);
+sprawdz('„sweetened” nie pasuje do „unsweetened”',
+  zawieraSlowo('Cocoa, dry powder, unsweetened', 'sweetened'), false);
+sprawdz('„sweetened” pasuje, gdy stoi samodzielnie',
+  zawieraSlowo('Cocoa, sweetened, with milk', 'sweetened'), true);
+sprawdz('rdzeń „anchov” trafia w „anchovies”',
+  zawieraSlowo('Anchovies, canned in olive oil', 'anchov'), true);
+sprawdz('„peel” trafia w „without peel”',
+  zawieraSlowo('Lemons, raw, without peel', 'peel'), true);
+sprawdz('„cracker” trafia w „Crackers”',
+  zawieraSlowo('Crackers, matzo, whole-wheat', 'cracker'), true);
+sprawdz('„fat” trafia w „low-fat” (myślnik kończy wyraz)',
+  zawieraSlowo('Cheese, low-fat', 'fat'), true);
+
+// Skutek dla całego doboru: właściwa komosa nie może zostać odrzucona.
+const komosa = [
+  produkt(80, 'Flour, quinoa', 385),
+  produkt(81, 'Quinoa, uncooked', 368),
+];
+sprawdz(
+  'komosa: mąka odrzucona, ziarno wybrane mimo wykluczenia „cooked”',
+  wybierzNajlepszy(komosa, { slowa: ['quinoa'], wyklucz: ['cooked', 'flour'], kcalOkolo: 368 })?.fdcId,
+  81
+);
+
+const kakao = [
+  produkt(90, 'Cocoa, dry powder, hi-fat or breakfast, processed with alkali', 479),
+  produkt(91, 'Cocoa, dry powder, unsweetened', 228),
+];
+sprawdz(
+  'kakao: wersja alkalizowana odrzucona, niesłodzona wybrana',
+  wybierzNajlepszy(kakao, {
+    slowa: ['cocoa'],
+    wyklucz: ['sweetened', 'alkali', 'hi-fat'],
+    kcalOkolo: 228,
+  })?.fdcId,
+  91
 );
 
 console.log('=== PRZESZŁO ===');
