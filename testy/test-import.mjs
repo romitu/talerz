@@ -7,7 +7,12 @@
  * na przygotowanych przykładach o kształcie takim, jaki zwraca USDA.
  */
 
-import { odczytajSkladniki, wiarygodne, wybierzNajlepszy } from '../narzedzia/import-usda.mjs';
+import {
+  odczytajSkladniki,
+  opiszKandydatow,
+  wiarygodne,
+  wybierzNajlepszy,
+} from '../narzedzia/import-usda.mjs';
 
 const przeszlo = [];
 const nieprzeszlo = [];
@@ -84,9 +89,9 @@ sprawdz('pozycja bez listy składników nie wywraca odczytu', odczytajSkladniki(
 sprawdz(
   'dane opracowane (Foundation) mają pierwszeństwo',
   wybierzNajlepszy([
-    { fdcId: 1, dataType: 'Branded' },
-    { fdcId: 2, dataType: 'SR Legacy' },
-    { fdcId: 3, dataType: 'Foundation' },
+    { fdcId: 1, dataType: 'Branded', description: 'a' },
+    { fdcId: 2, dataType: 'SR Legacy', description: 'b' },
+    { fdcId: 3, dataType: 'Foundation', description: 'c' },
   ])?.fdcId,
   3
 );
@@ -94,8 +99,8 @@ sprawdz(
 sprawdz(
   'gdy brak Foundation, wybieramy SR Legacy',
   wybierzNajlepszy([
-    { fdcId: 1, dataType: 'Branded' },
-    { fdcId: 2, dataType: 'SR Legacy' },
+    { fdcId: 1, dataType: 'Branded', description: 'a' },
+    { fdcId: 2, dataType: 'SR Legacy', description: 'b' },
   ])?.fdcId,
   2
 );
@@ -188,6 +193,101 @@ sprawdz('miód 304 wobec oczekiwanych 304: przyjęty', wiarygodne(304, 304).ok, 
 
 sprawdz('brak wartości orientacyjnej wyłącza sprawdzenie', wiarygodne(999, undefined).ok, true);
 sprawdz('odchylenie podawane w procentach', wiarygodne(555, 26).odchylenie, 2035);
+
+
+// ---------------------------------------------------------------------------
+//  Dobór po słowach kluczowych — ciche pomyłki z pierwszego importu
+// ---------------------------------------------------------------------------
+
+function produkt(fdcId, opis, kcal, typ = 'Foundation') {
+  return {
+    fdcId,
+    description: opis,
+    dataType: typ,
+    foodNutrients: [
+      { nutrientNumber: '208', unitName: 'KCAL', value: kcal },
+      { nutrientNumber: '203', unitName: 'G', value: 10 },
+    ],
+  };
+}
+
+// Anchois mają niemal tyle samo kalorii co sardynki — rozróżnia je tylko nazwa.
+const rybyWPuszce = [
+  produkt(1, 'Anchovies, canned in olive oil, with salt, drained', 210),
+  produkt(2, 'Sardines, Atlantic, canned in oil, drained', 208),
+];
+sprawdz(
+  'sardynki: anchois odrzucone mimo zgodnej kaloryczności',
+  wybierzNajlepszy(rybyWPuszce, { slowa: ['sardine'], wyklucz: ['anchov'], kcalOkolo: 208 })?.fdcId,
+  2
+);
+
+// Bataty mają tyle samo kalorii co ziemniaki.
+const bulwy = [
+  produkt(10, 'Sweet potatoes, orange flesh, without skin, raw', 79),
+  produkt(11, 'Potatoes, flesh and skin, raw', 77),
+];
+sprawdz(
+  'ziemniaki: bataty odrzucone mimo zgodnej kaloryczności',
+  wybierzNajlepszy(bulwy, { slowa: ['potato', 'raw'], wyklucz: ['sweet'], kcalOkolo: 77 })?.fdcId,
+  11
+);
+
+// Marchewki mini zamiast zwykłej marchwi.
+const marchew = [
+  produkt(20, 'Carrots, baby, raw', 40.8),
+  produkt(21, 'Carrots, raw', 41),
+];
+sprawdz(
+  'marchew: odmiana mini odrzucona',
+  wybierzNajlepszy(marchew, { slowa: ['carrot', 'raw'], wyklucz: ['baby'], kcalOkolo: 41 })?.fdcId,
+  21
+);
+
+// Cytryna kontra ogórek — wcześniej wygrywał ogórek.
+const cytrusy = [
+  produkt(30, 'Cucumber, with peel, raw', 15.9),
+  produkt(31, 'Lemons, raw, without peel', 29),
+];
+sprawdz(
+  'cytryna: ogórek odrzucony',
+  wybierzNajlepszy(cytrusy, { slowa: ['lemon'], wyklucz: ['cucumber', 'juice'], kcalOkolo: 29 })?.fdcId,
+  31
+);
+
+// Spośród pasujących wybieramy najbliższy kalorycznie.
+const dynie = [
+  produkt(40, 'Squash, winter, acorn, raw', 48.6),
+  produkt(41, 'Pumpkin, raw', 26),
+];
+sprawdz(
+  'dynia: wybrany najbliższy kalorycznie spośród pasujących',
+  wybierzNajlepszy(dynie, { slowa: ['pumpkin'], wyklucz: ['seed'], kcalOkolo: 26 })?.fdcId,
+  41
+);
+
+sprawdz(
+  'gdy nic nie spełnia warunków, zwracamy null',
+  wybierzNajlepszy([produkt(50, 'Grapefruit juice, white, canned', 37)], {
+    slowa: ['olive'],
+    wyklucz: ['oil'],
+    kcalOkolo: 145,
+  }),
+  null
+);
+
+sprawdz(
+  'bez warunków zachowane pierwszeństwo danych opracowanych',
+  wybierzNajlepszy([produkt(60, 'Cokolwiek', 100, 'Branded'), produkt(61, 'Co innego', 100, 'Foundation')])
+    ?.fdcId,
+  61
+);
+
+sprawdz(
+  'zestawienie kandydatów zawiera fdcId, nazwę i kalorie',
+  opiszKandydatow([produkt(70, 'Pumpkin, raw', 26)], 1)[0].trim(),
+  'fdcId 70 — Pumpkin, raw (26 kcal)'
+);
 
 console.log('=== PRZESZŁO ===');
 przeszlo.forEach((x) => console.log('  +', x));

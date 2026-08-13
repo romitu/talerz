@@ -151,15 +151,65 @@ export function wiarygodne(kcalOtrzymane, kcalOczekiwane) {
   };
 }
 
-/** Wybiera najlepsze dopasowanie: dane opracowane mają pierwszeństwo nad markowymi. */
-export function wybierzNajlepszy(wyniki) {
+/**
+ * Wybiera najlepsze dopasowanie spośród wyników wyszukiwania.
+ *
+ * Sama zgodność kaloryczności nie wystarcza — „Anchovies” mają tyle samo kalorii
+ * co sardynki, a „Sweet potatoes” tyle samo co ziemniaki. Dlatego najpierw
+ * odsiewamy po słowach, które w nazwie muszą (albo nie mogą) wystąpić,
+ * a dopiero potem wybieramy najbliższy kalorycznie.
+ *
+ * @param wyniki  lista z USDA
+ * @param opcje   { slowa, wyklucz, kcalOkolo }
+ */
+export function wybierzNajlepszy(wyniki, opcje = {}) {
   if (!wyniki || wyniki.length === 0) return null;
-  const kolejnosc = ['Foundation', 'SR Legacy', 'Survey (FNDDS)'];
-  for (const typ of kolejnosc) {
-    const trafiony = wyniki.find((w) => w.dataType === typ);
-    if (trafiony) return trafiony;
+
+  const { slowa = [], wyklucz = [], kcalOkolo } = opcje;
+
+  const pasuje = (w) => {
+    const opis = String(w.description ?? '').toLowerCase();
+    if (slowa.length > 0 && !slowa.every((s) => opis.includes(s.toLowerCase()))) return false;
+    if (wyklucz.some((s) => opis.includes(s.toLowerCase()))) return false;
+    return true;
+  };
+
+  const kandydaci = wyniki.filter(pasuje);
+  if (kandydaci.length === 0) return null;
+
+  // Bez wartości orientacyjnej trzymamy się kolejności: dane opracowane przed resztą.
+  if (!kcalOkolo) {
+    const kolejnosc = ['Foundation', 'SR Legacy', 'Survey (FNDDS)'];
+    for (const typ of kolejnosc) {
+      const trafiony = kandydaci.find((w) => w.dataType === typ);
+      if (trafiony) return trafiony;
+    }
+    return kandydaci[0];
   }
-  return wyniki[0];
+
+  // Z wartością orientacyjną wybieramy najbliższy kalorycznie.
+  let najlepszy = null;
+  let najmniejszaRoznica = Infinity;
+
+  for (const kandydat of kandydaci) {
+    const kcal = odczytajSkladniki(kandydat).kcal;
+    if (kcal === null) continue;
+    const roznica = Math.abs(kcal - kcalOkolo) / kcalOkolo;
+    if (roznica < najmniejszaRoznica) {
+      najmniejszaRoznica = roznica;
+      najlepszy = kandydat;
+    }
+  }
+
+  return najlepszy ?? kandydaci[0];
+}
+
+/** Krótkie zestawienie kandydatów — pomaga wybrać właściwy fdcId po odrzuceniu. */
+export function opiszKandydatow(wyniki, ile = 5) {
+  return (wyniki ?? []).slice(0, ile).map((w) => {
+    const kcal = odczytajSkladniki(w).kcal;
+    return `      fdcId ${w.fdcId} — ${w.description} (${kcal ?? '?'} kcal)`;
+  });
 }
 
 /** Pobiera pełny rekord produktu — wyniki wyszukiwania bywają skrócone. */
@@ -176,14 +226,14 @@ async function szukajWUsda(zapytanie, kluczUsda) {
   adres.searchParams.set('api_key', kluczUsda);
   adres.searchParams.set('query', zapytanie);
   adres.searchParams.set('dataType', 'Foundation,SR Legacy');
-  adres.searchParams.set('pageSize', '5');
+  adres.searchParams.set('pageSize', '25');
 
   const odpowiedz = await fetch(adres);
   if (!odpowiedz.ok) {
     throw new Error(`USDA odpowiedziało kodem ${odpowiedz.status}`);
   }
   const dane = await odpowiedz.json();
-  return wybierzNajlepszy(dane.foods);
+  return dane.foods ?? [];
 }
 
 // ---------------------------------------------------------------------------
@@ -217,12 +267,26 @@ async function main() {
   for (const [i, pozycja] of lista.entries()) {
     const numer = String(i + 1).padStart(3, ' ');
     try {
-      const trafienie = pozycja.fdcId
-        ? await pobierzPelny(pozycja.fdcId, env.USDA_API_KEY)
-        : await szukajWUsda(pozycja.usda, env.USDA_API_KEY);
+      let trafienie = null;
+      let wszystkie = [];
+
+      if (pozycja.fdcId) {
+        trafienie = await pobierzPelny(pozycja.fdcId, env.USDA_API_KEY);
+      } else {
+        wszystkie = await szukajWUsda(pozycja.usda, env.USDA_API_KEY);
+        trafienie = wybierzNajlepszy(wszystkie, {
+          slowa: pozycja.slowa,
+          wyklucz: pozycja.wyklucz,
+          kcalOkolo: pozycja.kcal_okolo,
+        });
+      }
+
       if (!trafienie) {
-        pominiete.push(`${pozycja.nazwa} — brak wyników dla „${pozycja.usda}”`);
-        console.log(`${numer}. ${pozycja.nazwa}: BRAK WYNIKÓW`);
+        pominiete.push(
+          `${pozycja.nazwa} — żaden wynik nie spełnia warunków\n` +
+            opiszKandydatow(wszystkie).join('\n')
+        );
+        console.log(`${numer}. ${pozycja.nazwa}: BRAK PASUJĄCYCH WYNIKÓW`);
         continue;
       }
 
@@ -246,10 +310,12 @@ async function main() {
       const ocena = wiarygodne(w.kcal, pozycja.kcal_okolo);
 
       if (!ocena.ok) {
+        const kandydaci = opiszKandydatow(wszystkie);
         pominiete.push(
           `${pozycja.nazwa} — dopasowano „${opisUsda}” (fdcId ${trafienie.fdcId}), ` +
             `${w.kcal} kcal zamiast oczekiwanych około ${pozycja.kcal_okolo} ` +
-            `(różnica ${ocena.odchylenie}%)`
+            `(różnica ${ocena.odchylenie}%)` +
+            (kandydaci.length > 0 ? `\n    inne wyniki:\n${kandydaci.join('\n')}` : '')
         );
         console.log(
           `${numer}. ${pozycja.nazwa}: ODRZUCONE — dopasowano „${opisUsda}”, ` +

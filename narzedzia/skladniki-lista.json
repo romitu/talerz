@@ -4,22 +4,36 @@
     "",
     "  nazwa        — nazwa polska, trafia do bazy (musi być niepowtarzalna)",
     "  usda         — czego szukać w bazie USDA (po angielsku)",
-    "  fdcId        — nieobowiązkowy; podany, pomija wyszukiwanie i bierze dokładnie ten produkt",
-    "  kcal_okolo   — orientacyjna wartość na 100 g; skrypt odrzuca dopasowania",
-    "                 odbiegające o ponad 30%, bo to zwykle trafienie w inny produkt",
+    "  kcal_okolo   — orientacyjna wartość na 100 g; spośród wyników wybierany jest",
+    "                 najbliższy tej liczbie, a odchylenie ponad 30% oznacza odrzucenie",
+    "  slowa        — słowa, które MUSZĄ wystąpić w angielskiej nazwie produktu",
+    "  wyklucz      — słowa, które NIE MOGĄ w niej wystąpić",
+    "  fdcId        — nieobowiązkowy; podany, pomija wyszukiwanie i bierze wprost ten produkt",
     "  tagi         — etykiety do PREFERENCJI żywieniowych; to NIE jest filtr alergenów",
     "  nova         — 1 surowe, 2 składniki kuchenne, 3 przetworzone, 4 wysoko przetworzone",
     "  cukry_wolne  — 0 albo \"wszystkie\"; USDA podaje wyłącznie cukry ogółem,",
     "                 a rozróżnienie na wolne jest naszą decyzją (patrz plan, sekcja 3.3)",
     "",
-    "Gdy skrypt odrzuci pozycję: sprawdź, jaki produkt dopasował (wypisuje nazwę",
-    "i fdcId), a potem popraw zapytanie albo wpisz fdcId właściwego produktu."
+    "Pola `slowa` i `wyklucz` są ważniejsze niż kaloryczność: anchois mają tyle samo",
+    "kalorii co sardynki, a bataty tyle samo co ziemniaki. Sama liczba tego nie rozróżni.",
+    "",
+    "Gdy skrypt odrzuci pozycję, wypisze kandydatów wraz z ich fdcId — wystarczy",
+    "wybrać właściwy i wpisać go w pole `fdcId`."
   ],
   "skladniki": [
     {
       "nazwa": "Dorsz atlantycki, surowy",
       "usda": "cod, atlantic, raw",
       "kcal_okolo": 82,
+      "slowa": [
+        "cod"
+      ],
+      "wyklucz": [
+        "cooked",
+        "dried",
+        "canned",
+        "salted"
+      ],
       "tagi": [
         "ryba"
       ],
@@ -27,8 +41,18 @@
     },
     {
       "nazwa": "Łosoś dziki, surowy",
-      "usda": "fish, salmon, atlantic, wild, raw",
+      "usda": "salmon, atlantic, wild, raw",
       "kcal_okolo": 142,
+      "slowa": [
+        "salmon",
+        "wild"
+      ],
+      "wyklucz": [
+        "farm",
+        "canned",
+        "smoked",
+        "cooked"
+      ],
       "tagi": [
         "ryba"
       ],
@@ -36,8 +60,14 @@
     },
     {
       "nazwa": "Sardynki w oliwie, odsączone",
-      "usda": "sardines, atlantic, canned in oil, drained",
+      "usda": "sardines, canned in oil, drained",
       "kcal_okolo": 208,
+      "slowa": [
+        "sardine"
+      ],
+      "wyklucz": [
+        "anchov"
+      ],
       "tagi": [
         "ryba"
       ],
@@ -47,6 +77,14 @@
       "nazwa": "Tuńczyk w wodzie, odsączony",
       "usda": "tuna, light, canned in water, drained",
       "kcal_okolo": 116,
+      "slowa": [
+        "tuna"
+      ],
+      "wyklucz": [
+        "oil",
+        "fresh",
+        "cooked"
+      ],
       "tagi": [
         "ryba"
       ],
@@ -56,6 +94,15 @@
       "nazwa": "Makrela atlantycka, surowa",
       "usda": "mackerel, atlantic, raw",
       "kcal_okolo": 205,
+      "slowa": [
+        "mackerel"
+      ],
+      "wyklucz": [
+        "cooked",
+        "canned",
+        "smoked",
+        "salted"
+      ],
       "tagi": [
         "ryba"
       ],
@@ -65,6 +112,15 @@
       "nazwa": "Krewetki, surowe",
       "usda": "crustaceans, shrimp, raw",
       "kcal_okolo": 85,
+      "slowa": [
+        "shrimp"
+      ],
+      "wyklucz": [
+        "cooked",
+        "breaded",
+        "canned",
+        "imitation"
+      ],
       "tagi": [
         "owoce morza"
       ],
@@ -74,6 +130,16 @@
       "nazwa": "Pierś z kurczaka, surowa",
       "usda": "chicken, breast, boneless, skinless, raw",
       "kcal_okolo": 120,
+      "slowa": [
+        "chicken",
+        "breast"
+      ],
+      "wyklucz": [
+        "cooked",
+        "roasted",
+        "fried",
+        "with skin"
+      ],
       "tagi": [
         "mieso",
         "drob"
@@ -84,6 +150,16 @@
       "nazwa": "Udo z kurczaka bez skóry, surowe",
       "usda": "chicken, thigh, boneless, skinless, raw",
       "kcal_okolo": 119,
+      "slowa": [
+        "chicken",
+        "thigh"
+      ],
+      "wyklucz": [
+        "cooked",
+        "roasted",
+        "fried",
+        "with skin"
+      ],
       "tagi": [
         "mieso",
         "drob"
@@ -92,8 +168,18 @@
     },
     {
       "nazwa": "Pierś z indyka, surowa",
-      "usda": "turkey, breast, raw",
+      "usda": "turkey, breast, meat only, raw",
       "kcal_okolo": 111,
+      "slowa": [
+        "turkey",
+        "breast"
+      ],
+      "wyklucz": [
+        "cooked",
+        "roasted",
+        "deli",
+        "smoked"
+      ],
       "tagi": [
         "mieso",
         "drob"
@@ -104,6 +190,15 @@
       "nazwa": "Wołowina mielona 5% tłuszczu, surowa",
       "usda": "beef, ground, 95% lean, raw",
       "kcal_okolo": 137,
+      "slowa": [
+        "ground",
+        "95%"
+      ],
+      "wyklucz": [
+        "cooked",
+        "patty",
+        "crumbles"
+      ],
       "tagi": [
         "mieso"
       ],
@@ -113,6 +208,19 @@
       "nazwa": "Jaja kurze, całe, surowe",
       "usda": "egg, whole, raw, fresh",
       "kcal_okolo": 143,
+      "slowa": [
+        "egg",
+        "whole",
+        "raw"
+      ],
+      "wyklucz": [
+        "cooked",
+        "boiled",
+        "fried",
+        "dried",
+        "white only",
+        "yolk only"
+      ],
       "tagi": [
         "jaja"
       ],
@@ -122,6 +230,17 @@
       "nazwa": "Jogurt grecki naturalny 2%",
       "usda": "yogurt, greek, plain, lowfat",
       "kcal_okolo": 73,
+      "slowa": [
+        "yogurt",
+        "greek",
+        "plain"
+      ],
+      "wyklucz": [
+        "nonfat",
+        "fruit",
+        "flavored",
+        "vanilla"
+      ],
       "tagi": [
         "nabial"
       ],
@@ -131,6 +250,14 @@
       "nazwa": "Twaróg półtłusty",
       "usda": "cheese, cottage, lowfat, 2% milkfat",
       "kcal_okolo": 86,
+      "slowa": [
+        "cottage"
+      ],
+      "wyklucz": [
+        "creamed",
+        "with fruit",
+        "nonfat"
+      ],
       "tagi": [
         "nabial"
       ],
@@ -140,6 +267,13 @@
       "nazwa": "Ser feta",
       "usda": "cheese, feta",
       "kcal_okolo": 264,
+      "slowa": [
+        "feta"
+      ],
+      "wyklucz": [
+        "reduced fat",
+        "fat free"
+      ],
       "tagi": [
         "nabial"
       ],
@@ -149,6 +283,14 @@
       "nazwa": "Ser mozzarella",
       "usda": "cheese, mozzarella, low moisture, part-skim",
       "kcal_okolo": 302,
+      "slowa": [
+        "mozzarella"
+      ],
+      "wyklucz": [
+        "fresh",
+        "whole milk",
+        "nonfat"
+      ],
       "tagi": [
         "nabial"
       ],
@@ -158,6 +300,13 @@
       "nazwa": "Parmezan",
       "usda": "cheese, parmesan, grated",
       "kcal_okolo": 420,
+      "slowa": [
+        "parmesan"
+      ],
+      "wyklucz": [
+        "low sodium",
+        "reduced"
+      ],
       "tagi": [
         "nabial"
       ],
@@ -167,6 +316,16 @@
       "nazwa": "Mleko 2%",
       "usda": "milk, reduced fat, fluid, 2% milkfat",
       "kcal_okolo": 50,
+      "slowa": [
+        "milk",
+        "2%"
+      ],
+      "wyklucz": [
+        "chocolate",
+        "dry",
+        "evaporated",
+        "lactose"
+      ],
       "tagi": [
         "nabial"
       ],
@@ -176,6 +335,20 @@
       "nazwa": "Pomidory, surowe",
       "usda": "tomatoes, red, ripe, raw",
       "kcal_okolo": 18,
+      "slowa": [
+        "tomato",
+        "raw"
+      ],
+      "wyklucz": [
+        "canned",
+        "juice",
+        "paste",
+        "puree",
+        "dried",
+        "sauce",
+        "cooked",
+        "green"
+      ],
       "tagi": [
         "warzywo"
       ],
@@ -183,8 +356,19 @@
     },
     {
       "nazwa": "Pomidory krojone z puszki",
-      "usda": "tomatoes, red, ripe, canned, packed in tomato juice",
-      "kcal_okolo": 32,
+      "usda": "tomatoes, canned, red, ripe, diced",
+      "kcal_okolo": 18,
+      "slowa": [
+        "tomato",
+        "canned"
+      ],
+      "wyklucz": [
+        "paste",
+        "puree",
+        "sauce",
+        "juice",
+        "soup"
+      ],
       "tagi": [
         "warzywo"
       ],
@@ -194,6 +378,15 @@
       "nazwa": "Passata pomidorowa",
       "usda": "tomato puree, canned",
       "kcal_okolo": 38,
+      "slowa": [
+        "tomato",
+        "puree"
+      ],
+      "wyklucz": [
+        "paste",
+        "sauce",
+        "soup"
+      ],
       "tagi": [
         "warzywo"
       ],
@@ -203,6 +396,19 @@
       "nazwa": "Papryka czerwona, surowa",
       "usda": "peppers, sweet, red, raw",
       "kcal_okolo": 31,
+      "slowa": [
+        "pepper",
+        "red",
+        "raw"
+      ],
+      "wyklucz": [
+        "cooked",
+        "dried",
+        "canned",
+        "chili",
+        "hot",
+        "sauce"
+      ],
       "tagi": [
         "warzywo"
       ],
@@ -212,6 +418,15 @@
       "nazwa": "Bakłażan, surowy",
       "usda": "eggplant, raw",
       "kcal_okolo": 25,
+      "slowa": [
+        "eggplant",
+        "raw"
+      ],
+      "wyklucz": [
+        "cooked",
+        "pickled",
+        "fried"
+      ],
       "tagi": [
         "warzywo"
       ],
@@ -221,6 +436,20 @@
       "nazwa": "Cebula, surowa",
       "usda": "onions, raw",
       "kcal_okolo": 40,
+      "slowa": [
+        "onion",
+        "raw"
+      ],
+      "wyklucz": [
+        "red",
+        "spring",
+        "green",
+        "dehydrated",
+        "cooked",
+        "fried",
+        "powder",
+        "welsh"
+      ],
       "tagi": [
         "warzywo"
       ],
@@ -230,6 +459,16 @@
       "nazwa": "Czosnek, surowy",
       "usda": "garlic, raw",
       "kcal_okolo": 149,
+      "slowa": [
+        "garlic",
+        "raw"
+      ],
+      "wyklucz": [
+        "powder",
+        "salt",
+        "oil",
+        "cooked"
+      ],
       "tagi": [
         "warzywo"
       ],
@@ -239,6 +478,15 @@
       "nazwa": "Szpinak, surowy",
       "usda": "spinach, raw",
       "kcal_okolo": 23,
+      "slowa": [
+        "spinach"
+      ],
+      "wyklucz": [
+        "cooked",
+        "canned",
+        "frozen",
+        "creamed"
+      ],
       "tagi": [
         "warzywo"
       ],
@@ -248,6 +496,17 @@
       "nazwa": "Brokuł, surowy",
       "usda": "broccoli, raw",
       "kcal_okolo": 34,
+      "slowa": [
+        "broccoli",
+        "raw"
+      ],
+      "wyklucz": [
+        "cooked",
+        "frozen",
+        "chinese",
+        "raab",
+        "sprouts"
+      ],
       "tagi": [
         "warzywo"
       ],
@@ -257,6 +516,16 @@
       "nazwa": "Kalafior, surowy",
       "usda": "cauliflower, raw",
       "kcal_okolo": 25,
+      "slowa": [
+        "cauliflower",
+        "raw"
+      ],
+      "wyklucz": [
+        "cooked",
+        "frozen",
+        "pickled",
+        "green"
+      ],
       "tagi": [
         "warzywo"
       ],
@@ -266,6 +535,18 @@
       "nazwa": "Marchew, surowa",
       "usda": "carrots, raw",
       "kcal_okolo": 41,
+      "slowa": [
+        "carrot",
+        "raw"
+      ],
+      "wyklucz": [
+        "baby",
+        "cooked",
+        "canned",
+        "frozen",
+        "juice",
+        "dehydrated"
+      ],
       "tagi": [
         "warzywo"
       ],
@@ -275,6 +556,15 @@
       "nazwa": "Fasolka szparagowa, surowa",
       "usda": "beans, snap, green, raw",
       "kcal_okolo": 31,
+      "slowa": [
+        "snap",
+        "raw"
+      ],
+      "wyklucz": [
+        "cooked",
+        "canned",
+        "frozen"
+      ],
       "tagi": [
         "warzywo"
       ],
@@ -284,6 +574,14 @@
       "nazwa": "Ogórek, surowy",
       "usda": "cucumber, with peel, raw",
       "kcal_okolo": 15,
+      "slowa": [
+        "cucumber"
+      ],
+      "wyklucz": [
+        "pickle",
+        "peeled",
+        "cooked"
+      ],
       "tagi": [
         "warzywo"
       ],
@@ -293,6 +591,13 @@
       "nazwa": "Sałata rzymska",
       "usda": "lettuce, cos or romaine, raw",
       "kcal_okolo": 17,
+      "slowa": [
+        "lettuce",
+        "romaine"
+      ],
+      "wyklucz": [
+        "cooked"
+      ],
       "tagi": [
         "warzywo"
       ],
@@ -302,6 +607,21 @@
       "nazwa": "Ziemniaki, surowe",
       "usda": "potatoes, flesh and skin, raw",
       "kcal_okolo": 77,
+      "slowa": [
+        "potato",
+        "raw"
+      ],
+      "wyklucz": [
+        "sweet",
+        "puffs",
+        "chips",
+        "fried",
+        "frozen",
+        "cooked",
+        "canned",
+        "mashed",
+        "baked"
+      ],
       "tagi": [
         "warzywo"
       ],
@@ -311,6 +631,19 @@
       "nazwa": "Batat, surowy",
       "usda": "sweet potato, raw, unprepared",
       "kcal_okolo": 86,
+      "slowa": [
+        "sweet potato",
+        "raw"
+      ],
+      "wyklucz": [
+        "puffs",
+        "frozen",
+        "canned",
+        "fried",
+        "baked",
+        "cooked",
+        "leaves"
+      ],
       "tagi": [
         "warzywo"
       ],
@@ -318,8 +651,20 @@
     },
     {
       "nazwa": "Dynia, surowa",
-      "usda": "squash, winter, pumpkin, raw",
+      "usda": "pumpkin, raw",
       "kcal_okolo": 26,
+      "slowa": [
+        "pumpkin",
+        "raw"
+      ],
+      "wyklucz": [
+        "seed",
+        "pie",
+        "canned",
+        "cooked",
+        "flower",
+        "leaves"
+      ],
       "tagi": [
         "warzywo"
       ],
@@ -329,6 +674,18 @@
       "nazwa": "Buraki, surowe",
       "usda": "beets, raw",
       "kcal_okolo": 43,
+      "slowa": [
+        "beet",
+        "raw"
+      ],
+      "wyklucz": [
+        "cooked",
+        "canned",
+        "greens",
+        "sugar",
+        "juice",
+        "pickled"
+      ],
       "tagi": [
         "warzywo"
       ],
@@ -338,6 +695,17 @@
       "nazwa": "Jabłko ze skórką",
       "usda": "apples, raw, with skin",
       "kcal_okolo": 52,
+      "slowa": [
+        "apple",
+        "raw"
+      ],
+      "wyklucz": [
+        "dried",
+        "juice",
+        "sauce",
+        "canned",
+        "cooked"
+      ],
       "tagi": [
         "owoc"
       ],
@@ -347,6 +715,17 @@
       "nazwa": "Borówki amerykańskie",
       "usda": "blueberries, raw",
       "kcal_okolo": 57,
+      "slowa": [
+        "blueberr",
+        "raw"
+      ],
+      "wyklucz": [
+        "dried",
+        "frozen",
+        "canned",
+        "wild",
+        "juice"
+      ],
       "tagi": [
         "owoc"
       ],
@@ -356,6 +735,16 @@
       "nazwa": "Truskawki",
       "usda": "strawberries, raw",
       "kcal_okolo": 32,
+      "slowa": [
+        "strawberr",
+        "raw"
+      ],
+      "wyklucz": [
+        "frozen",
+        "canned",
+        "dried",
+        "juice"
+      ],
       "tagi": [
         "owoc"
       ],
@@ -363,8 +752,18 @@
     },
     {
       "nazwa": "Pomarańcza",
-      "usda": "oranges, raw, all commercial varieties",
+      "usda": "oranges, raw",
       "kcal_okolo": 47,
+      "slowa": [
+        "orange",
+        "raw"
+      ],
+      "wyklucz": [
+        "juice",
+        "peel",
+        "dried",
+        "mandarin"
+      ],
       "tagi": [
         "owoc"
       ],
@@ -374,6 +773,17 @@
       "nazwa": "Cytryna",
       "usda": "lemons, raw, without peel",
       "kcal_okolo": 29,
+      "slowa": [
+        "lemon"
+      ],
+      "wyklucz": [
+        "juice",
+        "peel",
+        "lemonade",
+        "cucumber",
+        "dried",
+        "meringue"
+      ],
       "tagi": [
         "owoc"
       ],
@@ -383,6 +793,17 @@
       "nazwa": "Banan",
       "usda": "bananas, raw",
       "kcal_okolo": 89,
+      "slowa": [
+        "banana",
+        "raw"
+      ],
+      "wyklucz": [
+        "overripe",
+        "dried",
+        "dehydrated",
+        "chips",
+        "underripe"
+      ],
       "tagi": [
         "owoc"
       ],
@@ -392,6 +813,13 @@
       "nazwa": "Daktyle suszone",
       "usda": "dates, deglet noor",
       "kcal_okolo": 282,
+      "slowa": [
+        "date"
+      ],
+      "wyklucz": [
+        "medjool",
+        "juice"
+      ],
       "tagi": [
         "owoc",
         "suszone"
@@ -402,6 +830,14 @@
       "nazwa": "Figi suszone",
       "usda": "figs, dried, uncooked",
       "kcal_okolo": 249,
+      "slowa": [
+        "fig",
+        "dried"
+      ],
+      "wyklucz": [
+        "canned",
+        "raw"
+      ],
       "tagi": [
         "owoc",
         "suszone"
@@ -410,8 +846,16 @@
     },
     {
       "nazwa": "Rodzynki",
-      "usda": "raisins, dark, seedless",
+      "usda": "raisins, seedless",
       "kcal_okolo": 299,
+      "slowa": [
+        "raisin"
+      ],
+      "wyklucz": [
+        "golden",
+        "cooked",
+        "juice"
+      ],
       "tagi": [
         "owoc",
         "suszone"
@@ -422,6 +866,14 @@
       "nazwa": "Oliwki zielone",
       "usda": "olives, pickled, canned or bottled, green",
       "kcal_okolo": 145,
+      "slowa": [
+        "olive"
+      ],
+      "wyklucz": [
+        "oil",
+        "juice",
+        "grapefruit"
+      ],
       "tagi": [
         "owoc"
       ],
@@ -431,6 +883,13 @@
       "nazwa": "Kasza gryczana, sucha",
       "usda": "buckwheat groats, roasted, dry",
       "kcal_okolo": 343,
+      "slowa": [
+        "buckwheat"
+      ],
+      "wyklucz": [
+        "cooked",
+        "flour"
+      ],
       "tagi": [
         "zboze",
         "gluten"
@@ -441,6 +900,12 @@
       "nazwa": "Kasza bulgur, sucha",
       "usda": "bulgur, dry",
       "kcal_okolo": 342,
+      "slowa": [
+        "bulgur"
+      ],
+      "wyklucz": [
+        "cooked"
+      ],
       "tagi": [
         "zboze",
         "gluten"
@@ -449,8 +914,14 @@
     },
     {
       "nazwa": "Komosa ryżowa, sucha",
-      "usda": "quinoa, uncooked, dry",
+      "usda": "quinoa, uncooked",
       "kcal_okolo": 368,
+      "slowa": [
+        "quinoa"
+      ],
+      "wyklucz": [
+        "cooked"
+      ],
       "tagi": [
         "zboze"
       ],
@@ -460,6 +931,15 @@
       "nazwa": "Ryż brązowy, suchy",
       "usda": "rice, brown, long-grain, raw",
       "kcal_okolo": 370,
+      "slowa": [
+        "rice",
+        "brown"
+      ],
+      "wyklucz": [
+        "cooked",
+        "instant",
+        "flour"
+      ],
       "tagi": [
         "zboze"
       ],
@@ -469,6 +949,15 @@
       "nazwa": "Płatki owsiane",
       "usda": "cereals, oats, regular and quick, not fortified, dry",
       "kcal_okolo": 389,
+      "slowa": [
+        "oats"
+      ],
+      "wyklucz": [
+        "cooked",
+        "instant",
+        "flour",
+        "bran"
+      ],
       "tagi": [
         "zboze",
         "gluten"
@@ -477,8 +966,15 @@
     },
     {
       "nazwa": "Makaron pełnoziarnisty, suchy",
-      "usda": "spaghetti, whole-wheat, dry",
+      "usda": "pasta, whole-wheat, dry",
       "kcal_okolo": 348,
+      "slowa": [
+        "whole-wheat"
+      ],
+      "wyklucz": [
+        "cooked",
+        "fresh"
+      ],
       "tagi": [
         "zboze",
         "gluten"
@@ -489,6 +985,17 @@
       "nazwa": "Chleb żytni razowy",
       "usda": "bread, rye",
       "kcal_okolo": 259,
+      "slowa": [
+        "bread",
+        "rye"
+      ],
+      "wyklucz": [
+        "flour",
+        "cracker",
+        "toasted",
+        "pumpernickel",
+        "reduced"
+      ],
       "tagi": [
         "zboze",
         "gluten"
@@ -497,8 +1004,17 @@
     },
     {
       "nazwa": "Ciecierzyca, sucha",
-      "usda": "chickpeas, garbanzo beans, mature seeds, raw",
+      "usda": "chickpeas, mature seeds, raw",
       "kcal_okolo": 378,
+      "slowa": [
+        "chickpea"
+      ],
+      "wyklucz": [
+        "cooked",
+        "canned",
+        "flour",
+        "roasted"
+      ],
       "tagi": [
         "straczki"
       ],
@@ -508,6 +1024,14 @@
       "nazwa": "Soczewica czerwona, sucha",
       "usda": "lentils, raw",
       "kcal_okolo": 352,
+      "slowa": [
+        "lentil"
+      ],
+      "wyklucz": [
+        "cooked",
+        "canned",
+        "sprouted"
+      ],
       "tagi": [
         "straczki"
       ],
@@ -517,6 +1041,14 @@
       "nazwa": "Fasola biała, sucha",
       "usda": "beans, white, mature seeds, raw",
       "kcal_okolo": 333,
+      "slowa": [
+        "beans",
+        "white"
+      ],
+      "wyklucz": [
+        "cooked",
+        "canned"
+      ],
       "tagi": [
         "straczki"
       ],
@@ -526,6 +1058,14 @@
       "nazwa": "Orzechy włoskie",
       "usda": "nuts, walnuts, english",
       "kcal_okolo": 654,
+      "slowa": [
+        "walnut"
+      ],
+      "wyklucz": [
+        "black",
+        "oil",
+        "cooked"
+      ],
       "tagi": [
         "orzechy"
       ],
@@ -535,6 +1075,19 @@
       "nazwa": "Migdały",
       "usda": "nuts, almonds",
       "kcal_okolo": 579,
+      "slowa": [
+        "almond"
+      ],
+      "wyklucz": [
+        "butter",
+        "milk",
+        "oil",
+        "flour",
+        "paste",
+        "roasted",
+        "blanched",
+        "salted"
+      ],
       "tagi": [
         "orzechy"
       ],
@@ -544,6 +1097,16 @@
       "nazwa": "Orzechy laskowe",
       "usda": "nuts, hazelnuts or filberts",
       "kcal_okolo": 628,
+      "slowa": [
+        "hazelnut",
+        "filbert"
+      ],
+      "wyklucz": [
+        "butter",
+        "oil",
+        "roasted",
+        "blanched"
+      ],
       "tagi": [
         "orzechy"
       ],
@@ -553,6 +1116,15 @@
       "nazwa": "Pestki dyni",
       "usda": "seeds, pumpkin and squash seed kernels, dried",
       "kcal_okolo": 559,
+      "slowa": [
+        "pumpkin",
+        "seed"
+      ],
+      "wyklucz": [
+        "roasted",
+        "salted",
+        "whole, roasted"
+      ],
       "tagi": [
         "nasiona"
       ],
@@ -562,6 +1134,12 @@
       "nazwa": "Siemię lniane",
       "usda": "seeds, flaxseed",
       "kcal_okolo": 534,
+      "slowa": [
+        "flax"
+      ],
+      "wyklucz": [
+        "oil"
+      ],
       "tagi": [
         "nasiona"
       ],
@@ -571,6 +1149,16 @@
       "nazwa": "Sezam",
       "usda": "seeds, sesame seeds, whole, dried",
       "kcal_okolo": 573,
+      "slowa": [
+        "sesame"
+      ],
+      "wyklucz": [
+        "oil",
+        "butter",
+        "tahini",
+        "toasted",
+        "paste"
+      ],
       "tagi": [
         "nasiona"
       ],
@@ -580,6 +1168,14 @@
       "nazwa": "Oliwa z oliwek",
       "usda": "oil, olive, salad or cooking",
       "kcal_okolo": 884,
+      "slowa": [
+        "oil",
+        "olive"
+      ],
+      "wyklucz": [
+        "pomace",
+        "spray"
+      ],
       "tagi": [
         "tluszcz"
       ],
@@ -589,6 +1185,18 @@
       "nazwa": "Masło",
       "usda": "butter, without salt",
       "kcal_okolo": 717,
+      "slowa": [
+        "butter"
+      ],
+      "wyklucz": [
+        "peanut",
+        "almond",
+        "whipped",
+        "light",
+        "oil",
+        "cocoa",
+        "apple"
+      ],
       "tagi": [
         "tluszcz",
         "nabial"
@@ -599,6 +1207,15 @@
       "nazwa": "Mleko kokosowe z puszki",
       "usda": "nuts, coconut milk, canned",
       "kcal_okolo": 197,
+      "slowa": [
+        "coconut milk"
+      ],
+      "wyklucz": [
+        "cream",
+        "sweetened",
+        "beverage",
+        "frozen"
+      ],
       "tagi": [
         "tluszcz"
       ],
@@ -608,6 +1225,15 @@
       "nazwa": "Miód",
       "usda": "honey",
       "kcal_okolo": 304,
+      "slowa": [
+        "honey"
+      ],
+      "wyklucz": [
+        "mustard",
+        "roasted",
+        "cereal",
+        "graham"
+      ],
       "tagi": [
         "slodzik"
       ],
@@ -618,6 +1244,15 @@
       "nazwa": "Kakao bez cukru, proszek",
       "usda": "cocoa, dry powder, unsweetened",
       "kcal_okolo": 228,
+      "slowa": [
+        "cocoa"
+      ],
+      "wyklucz": [
+        "sweetened",
+        "mix",
+        "butter",
+        "hot"
+      ],
       "tagi": [
         "kakao"
       ],
@@ -627,6 +1262,13 @@
       "nazwa": "Bazylia świeża",
       "usda": "basil, fresh",
       "kcal_okolo": 23,
+      "slowa": [
+        "basil"
+      ],
+      "wyklucz": [
+        "dried",
+        "ground"
+      ],
       "tagi": [
         "ziola"
       ],
@@ -636,6 +1278,13 @@
       "nazwa": "Pietruszka natka",
       "usda": "parsley, fresh",
       "kcal_okolo": 36,
+      "slowa": [
+        "parsley"
+      ],
+      "wyklucz": [
+        "dried",
+        "root"
+      ],
       "tagi": [
         "ziola"
       ],
@@ -645,6 +1294,13 @@
       "nazwa": "Oregano suszone",
       "usda": "spices, oregano, dried",
       "kcal_okolo": 265,
+      "slowa": [
+        "oregano"
+      ],
+      "wyklucz": [
+        "fresh",
+        "oil"
+      ],
       "tagi": [
         "ziola"
       ],
@@ -654,6 +1310,13 @@
       "nazwa": "Papryka słodka mielona",
       "usda": "spices, paprika",
       "kcal_okolo": 282,
+      "slowa": [
+        "paprika"
+      ],
+      "wyklucz": [
+        "smoked",
+        "hot"
+      ],
       "tagi": [
         "przyprawa"
       ],

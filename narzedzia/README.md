@@ -50,22 +50,48 @@ Przy każdej pozycji zobaczysz **nazwę produktu, który USDA faktycznie dopasow
 
 To najważniejsza informacja w całym wydruku — po niej od razu widać pomyłkę.
 
-### Próg rozsądku
+### Dobór właściwego produktu
+
+Wyszukiwarka USDA jest kapryśna. Dlatego każda pozycja ma trzy zabezpieczenia,
+w tej kolejności:
+
+**1. Słowa wymagane i wykluczone** — najważniejsze, bo kaloryczność nie
+rozróżni produktów podobnych energetycznie:
+
+```json
+"slowa": ["sardine"],
+"wyklucz": ["anchov"]
+```
+
+Anchois mają 210 kcal, sardynki 208 — sama liczba ich nie odróżni. Podobnie
+bataty (79 kcal) i ziemniaki (77 kcal).
+
+**2. Wybór najbliższy kalorycznie** spośród tych, które przeszły sito słów.
+
+**3. Próg rozsądku
 
 Wyszukiwarka USDA przy nietrafionym zapytaniu zwraca cokolwiek podobnego:
 dla „pumpkin, raw" potrafi podać pestki dyni (555 kcal zamiast 26), dla „oats"
 — olej (884 kcal zamiast 389).
 
-Dlatego każda pozycja ma pole `kcal_okolo` z wartością orientacyjną. Wynik
-odbiegający o **ponad 30%** jest odrzucany i nie trafia do bazy:
+** — wynik odbiegający od `kcal_okolo` o ponad 30% jest
+odrzucany i nie trafia do bazy:
 
 ```
 34. Dynia, surowa: ODRZUCONE — dopasowano „Seeds, pumpkin seed kernels", 555 kcal zamiast ~26
 ```
 
-Wtedy: popraw pole `usda` na dokładniejsze zapytanie albo wpisz `fdcId`
-właściwego produktu (znajdziesz go na [fdc.nal.usda.gov](https://fdc.nal.usda.gov)
-w adresie strony produktu). Podany `fdcId` pomija wyszukiwanie.
+Przy odrzuceniu skrypt wypisuje **kandydatów z ich identyfikatorami**:
+
+```
+- Dynia, surowa — dopasowano „Squash, winter, acorn, raw", 48.6 kcal zamiast ~26
+    inne wyniki:
+      fdcId 168448 — Pumpkin, raw (26 kcal)
+      fdcId 170492 — Squash, winter, acorn, raw (48.6 kcal)
+```
+
+Wystarczy wybrać właściwy i wpisać jego numer w pole `fdcId` — wtedy skrypt
+pomija wyszukiwanie i bierze dokładnie ten produkt.
 
 ```json
 {
