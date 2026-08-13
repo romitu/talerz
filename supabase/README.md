@@ -60,15 +60,29 @@ where id = (select id from auth.users where email = 'romitu@gmail.com');
 
 ### Krok 5 — klucze do aplikacji
 
-**Project Settings → API**. Potrzebne będą dwie wartości:
+Najprościej: przycisk **Connect** na górze strony projektu, zakładka
+**App Frameworks** — pokazuje gotowe zmienne do skopiowania.
 
-| Nazwa | Do czego |
+> **Kopiuj tylko to, co po znaku równości.** Nazwy po lewej stronie muszą
+> zostać nasze, zaczynające się od `EXPO_PUBLIC_`. Supabase pokazuje nazwy
+> dla innych narzędzi (`NEXT_PUBLIC_...`) i podmiana ich w komplecie sprawia,
+> że aplikacja nie znajdzie danych połączenia.
+
+Albo wprost: **Settings → API Keys**.
+
+| Potrzebne | Gdzie |
 |---|---|
-| Project URL | adres bazy |
-| `anon` `public` key | klucz publiczny dla aplikacji |
+| Project URL | `https://coś.supabase.co` |
+| klucz publiczny | **Publishable key** (`sb_publishable_...`) — a w starszym układzie panelu zakładka **Legacy API Keys** → **anon public** (`eyJhbGci...`) |
 
-> **Klucz `service_role` nigdy nie trafia do aplikacji.** Omija wszystkie reguły
-> dostępu. Zostaje w panelu Supabase i nigdzie indziej.
+Oba rodzaje klucza działają tak samo i oba są przeznaczone do umieszczenia
+w aplikacji. Chronią je reguły dostępu w bazie, nie ukrywanie klucza.
+
+> **Klucza `Secret` ani `service_role` nie wpisuj nigdzie w kodzie.** Omija
+> wszystkie reguły dostępu. Zostaje w panelu Supabase i nigdzie indziej.
+
+Wpisz obie wartości do pliku `.env` w głównym katalogu projektu — wzór
+znajdziesz w `.env.example`.
 
 ---
 
@@ -98,7 +112,7 @@ ze składników i ich gramatur.
 ## Testy schematu
 
 `testy/test_schematu.py` uruchamia prawdziwy PostgreSQL, wykonuje migrację
-i sprawdza 17 zachowań: wyzwalacze, ograniczenia, wyliczanie makro i szczelność
+i sprawdza 21 zachowań: wyzwalacze, ograniczenia, wyliczanie makro i szczelność
 reguł dostępu między kontami.
 
 ```
