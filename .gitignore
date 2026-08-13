@@ -41,3 +41,6 @@ app-example
 # generated native folders
 /ios
 /android
+
+# baza testowa tworzona przez testy schematu
+supabase/testy/__pycache__/
