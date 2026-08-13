@@ -47,3 +47,6 @@ supabase/testy/__pycache__/
 
 # dane połączenia z bazą — każdy ma własne
 .env
+
+# klucze do skryptów pomocniczych
+.env.local

@@ -1,0 +1,232 @@
+/**
+ * Import składników z USDA FoodData Central do bazy Talerza.
+ *
+ *     node narzedzia/import-usda.mjs            # import
+ *     node narzedzia/import-usda.mjs --podglad  # tylko pokaż, nic nie zapisuj
+ *
+ * Dane USDA są w domenie publicznej (CC0) — nie wnoszą żadnych zobowiązań
+ * licencyjnych. Skrypt loguje się na Twoje konto administratora, więc nie
+ * potrzebuje klucza `service_role`; wystarczają uprawnienia z reguł dostępu.
+ *
+ * Czego USDA NIE poda, a nasza baza tego wymaga:
+ *   * cukry wolne — podaje wyłącznie cukry ogółem; rozróżnienie jest naszą
+ *     decyzją i pochodzi z pliku skladniki-lista.json (patrz plan, sekcja 3.3)
+ *   * grupa NOVA — również z listy
+ *   * gramatura opakowania — zależy od polskiego producenta, uzupełniamy ręcznie
+ */
+
+import { readFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+import { createClient } from '@supabase/supabase-js';
+
+const KATALOG = dirname(fileURLToPath(import.meta.url));
+const KORZEN = join(KATALOG, '..');
+
+// ---------------------------------------------------------------------------
+//  Ustawienia z pliku .env
+// ---------------------------------------------------------------------------
+
+function wczytajEnv() {
+  const wynik = {};
+  for (const nazwa of ['.env', '.env.local']) {
+    try {
+      const tresc = readFileSync(join(KORZEN, nazwa), 'utf8');
+      for (const linia of tresc.split('\n')) {
+        const m = linia.match(/^\s*([A-Z0-9_]+)\s*=\s*(.*)\s*$/);
+        if (m) wynik[m[1]] = m[2].replace(/^["']|["']$/g, '');
+      }
+    } catch {
+      // brak pliku to nie błąd — część zmiennych może przyjść ze środowiska
+    }
+  }
+  return { ...wynik, ...process.env };
+}
+
+const PODGLAD = process.argv.includes('--podglad');
+
+const WYMAGANE = {
+  EXPO_PUBLIC_SUPABASE_URL: 'adres projektu Supabase',
+  EXPO_PUBLIC_SUPABASE_ANON_KEY: 'klucz publiczny Supabase',
+  USDA_API_KEY: 'klucz z fdc.nal.usda.gov/api-key-signup',
+  TALERZ_EMAIL: 'adres e-mail Twojego konta administratora',
+  TALERZ_HASLO: 'hasło do tego konta',
+};
+
+/**
+ * Sprawdzenie ustawień celowo NIE dzieje się przy wczytaniu pliku, tylko przy
+ * uruchomieniu importu. Dzięki temu testy mogą korzystać z funkcji odczytu
+ * bez posiadania kluczy.
+ */
+function sprawdzUstawienia(env) {
+  const brakujace = Object.keys(WYMAGANE).filter((k) => !env[k]);
+  if (brakujace.length === 0) return;
+
+  console.error('Brak wymaganych ustawień w pliku .env.local:\n');
+  for (const k of brakujace) console.error(`  ${k}  — ${WYMAGANE[k]}`);
+  console.error('\nWzór znajdziesz w narzedzia/README.md');
+  process.exit(1);
+}
+
+// ---------------------------------------------------------------------------
+//  Odczyt wartości odżywczych z odpowiedzi USDA
+// ---------------------------------------------------------------------------
+
+/** Numery składników odżywczych w bazie USDA. */
+const NUMERY = {
+  kcal: '208',
+  bialko: '203',
+  tluszcz: '204',
+  wegle: '205',
+  cukry: '269',
+};
+
+export function odczytajSkladniki(pozycja) {
+  const wartosci = {};
+  for (const [nazwa, numer] of Object.entries(NUMERY)) {
+    const znaleziony = (pozycja.foodNutrients ?? []).find(
+      (n) => String(n.nutrientNumber ?? n.nutrient?.number) === numer
+    );
+    const surowa = znaleziony?.value ?? znaleziony?.amount;
+    wartosci[nazwa] = typeof surowa === 'number' ? Math.round(surowa * 100) / 100 : null;
+  }
+  return wartosci;
+}
+
+/** Wybiera najlepsze dopasowanie: dane opracowane mają pierwszeństwo nad markowymi. */
+export function wybierzNajlepszy(wyniki) {
+  if (!wyniki || wyniki.length === 0) return null;
+  const kolejnosc = ['Foundation', 'SR Legacy', 'Survey (FNDDS)'];
+  for (const typ of kolejnosc) {
+    const trafiony = wyniki.find((w) => w.dataType === typ);
+    if (trafiony) return trafiony;
+  }
+  return wyniki[0];
+}
+
+async function szukajWUsda(zapytanie, kluczUsda) {
+  const adres = new URL('https://api.nal.usda.gov/fdc/v1/foods/search');
+  adres.searchParams.set('api_key', kluczUsda);
+  adres.searchParams.set('query', zapytanie);
+  adres.searchParams.set('dataType', 'Foundation,SR Legacy');
+  adres.searchParams.set('pageSize', '5');
+
+  const odpowiedz = await fetch(adres);
+  if (!odpowiedz.ok) {
+    throw new Error(`USDA odpowiedziało kodem ${odpowiedz.status}`);
+  }
+  const dane = await odpowiedz.json();
+  return wybierzNajlepszy(dane.foods);
+}
+
+// ---------------------------------------------------------------------------
+//  Główna część
+// ---------------------------------------------------------------------------
+
+async function main() {
+  const env = wczytajEnv();
+  sprawdzUstawienia(env);
+
+  const lista = JSON.parse(readFileSync(join(KATALOG, 'skladniki-lista.json'), 'utf8')).skladniki;
+  console.log(`Do zaimportowania: ${lista.length} składników\n`);
+
+  const supabase = createClient(env.EXPO_PUBLIC_SUPABASE_URL, env.EXPO_PUBLIC_SUPABASE_ANON_KEY);
+
+  if (!PODGLAD) {
+    const { error } = await supabase.auth.signInWithPassword({
+      email: env.TALERZ_EMAIL,
+      password: env.TALERZ_HASLO,
+    });
+    if (error) {
+      console.error('Nie udało się zalogować:', error.message);
+      process.exit(1);
+    }
+    console.log(`Zalogowano jako ${env.TALERZ_EMAIL}\n`);
+  }
+
+  const gotowe = [];
+  const pominiete = [];
+
+  for (const [i, pozycja] of lista.entries()) {
+    const numer = String(i + 1).padStart(3, ' ');
+    try {
+      const trafienie = await szukajWUsda(pozycja.usda, env.USDA_API_KEY);
+      if (!trafienie) {
+        pominiete.push(`${pozycja.nazwa} — brak wyników dla „${pozycja.usda}”`);
+        console.log(`${numer}. ${pozycja.nazwa}: BRAK WYNIKÓW`);
+        continue;
+      }
+
+      const w = odczytajSkladniki(trafienie);
+      if (w.kcal === null || w.bialko === null) {
+        pominiete.push(`${pozycja.nazwa} — niekompletne dane w USDA`);
+        console.log(`${numer}. ${pozycja.nazwa}: NIEKOMPLETNE DANE`);
+        continue;
+      }
+
+      const cukryOgolem = w.cukry ?? 0;
+      const cukryWolne = pozycja.cukry_wolne === 'wszystkie' ? cukryOgolem : 0;
+
+      gotowe.push({
+        nazwa: pozycja.nazwa,
+        zrodlo: 'usda',
+        zewnetrzny_id: String(trafienie.fdcId),
+        kcal_100g: w.kcal,
+        bialko_100g: w.bialko,
+        tluszcz_100g: w.tluszcz ?? 0,
+        wegle_100g: w.wegle ?? 0,
+        cukry_ogolem_100g: cukryOgolem,
+        cukry_wolne_100g: cukryWolne,
+        nova: pozycja.nova ?? null,
+        tagi: pozycja.tagi ?? [],
+      });
+
+      console.log(
+        `${numer}. ${pozycja.nazwa}: ${w.kcal} kcal, ${w.bialko} g białka` +
+          (cukryWolne > 0 ? `, ${cukryWolne} g cukrów wolnych` : '')
+      );
+    } catch (e) {
+      pominiete.push(`${pozycja.nazwa} — ${e.message}`);
+      console.log(`${numer}. ${pozycja.nazwa}: BŁĄD (${e.message})`);
+    }
+
+    // USDA ogranicza liczbę zapytań na godzinę — mała przerwa między nimi.
+    await new Promise((r) => setTimeout(r, 250));
+  }
+
+  console.log(`\nPobrano: ${gotowe.length}, pominięto: ${pominiete.length}`);
+
+  if (PODGLAD) {
+    console.log('\nTryb podglądu — nic nie zapisano.');
+    return;
+  }
+
+  if (gotowe.length > 0) {
+    const { error } = await supabase.from('skladniki').upsert(gotowe, { onConflict: 'nazwa' });
+    if (error) {
+      console.error('\nZapis do bazy nie powiódł się:', error.message);
+      if (error.message.includes('row-level security')) {
+        console.error(
+          'Prawdopodobna przyczyna: konto nie ma roli moderatora ani administratora.\n' +
+            'Nadaj ją w SQL Editor — polecenie znajdziesz w supabase/README.md, krok 4.'
+        );
+      }
+      process.exit(1);
+    }
+    console.log(`Zapisano w bazie: ${gotowe.length} składników.`);
+  }
+
+  if (pominiete.length > 0) {
+    console.log('\nWymagają ręcznego uzupełnienia:');
+    pominiete.forEach((p) => console.log('  -', p));
+  }
+}
+
+// Uruchamiamy tylko przy bezpośrednim wywołaniu — żeby testy mogły importować funkcje.
+if (process.argv[1] && process.argv[1].endsWith('import-usda.mjs')) {
+  main().catch((e) => {
+    console.error('Nieoczekiwany błąd:', e);
+    process.exit(1);
+  });
+}
