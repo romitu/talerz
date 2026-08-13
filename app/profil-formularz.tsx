@@ -2,6 +2,7 @@ import { router } from 'expo-router';
 import { useState } from 'react';
 import { StyleSheet } from 'react-native';
 
+import { komunikatBledu } from '@/lib/blad';
 import { Ekran } from '@/components/ekran';
 import { Karta } from '@/components/karta';
 import { Pole } from '@/components/pole';
@@ -117,7 +118,7 @@ export default function FormularzProfilu() {
 
       router.back();
     } catch (e) {
-      const tresc = e instanceof Error ? e.message : String(e);
+      const tresc = komunikatBledu(e);
       setBlad(
         tresc.includes('najwyżej 3 profile')
           ? 'Konto może mieć najwyżej 3 profile.'

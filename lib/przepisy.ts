@@ -56,20 +56,31 @@ export function opisTrwalosci(dni: number): string {
  * Reguły dostępu w bazie same decydują, co pokazać — tutaj nie ma filtrowania.
  */
 export async function pobierzPrzepisy(kontoId: string | undefined) {
-  const { data, error } = await supabase
-    .from('przepisy')
-    .select(
-      `id, nazwa, opis, pory, kuchnie, trwalosc_dni, czas_minut, widocznosc, autor_id,
-       przepis_makro (kcal, bialko_g, tluszcz_g, wegle_g, cukry_wolne_g, nova_max),
-       polubienia (konto_id)`
-    )
-    .order('nazwa');
+  // Dwa zapytania zamiast jednego, bo `przepis_makro` jest WIDOKIEM.
+  // Widok nie ma klucza obcego, więc Supabase nie potrafi go dołączyć
+  // do przepisów automatycznie — łączymy je po stronie aplikacji.
+  const [wynikPrzepisow, wynikMakro] = await Promise.all([
+    supabase
+      .from('przepisy')
+      .select(
+        `id, nazwa, opis, pory, kuchnie, trwalosc_dni, czas_minut, widocznosc, autor_id,
+         polubienia (konto_id)`
+      )
+      .order('nazwa'),
+    supabase
+      .from('przepis_makro')
+      .select('przepis_id, kcal, bialko_g, tluszcz_g, wegle_g, cukry_wolne_g, nova_max'),
+  ]);
 
-  if (error) throw error;
+  if (wynikPrzepisow.error) throw wynikPrzepisow.error;
+  if (wynikMakro.error) throw wynikMakro.error;
 
-  return (data ?? []).map((p): PrzepisZMakro => {
-    // Widok jest powiązany jeden do jednego, ale przychodzi jako lista.
-    const makro = Array.isArray(p.przepis_makro) ? p.przepis_makro[0] : p.przepis_makro;
+  const makroWedlugPrzepisu = new Map(
+    (wynikMakro.data ?? []).map((m) => [m.przepis_id as string, m])
+  );
+
+  return (wynikPrzepisow.data ?? []).map((p): PrzepisZMakro => {
+    const makro = makroWedlugPrzepisu.get(p.id);
     const polubienia = (p.polubienia ?? []) as { konto_id: string }[];
 
     return {

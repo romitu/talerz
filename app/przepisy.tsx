@@ -3,6 +3,7 @@ import { router, useFocusEffect } from 'expo-router';
 import { useCallback, useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 
+import { komunikatBledu } from '@/lib/blad';
 import { Ekran } from '@/components/ekran';
 import { Karta } from '@/components/karta';
 import { Makro } from '@/components/makro';
@@ -33,15 +34,21 @@ export default function EkranPrzepisow() {
   const pobierz = useCallback(async () => {
     setWczytywanie(true);
     setBlad(null);
+
+    // Rola pobierana niezależnie od przepisów. Gdyby lista się nie wczytała,
+    // przycisk dodawania i tak ma się pojawić — inaczej jeden błąd ukrywa drugą rzecz.
+    supabase
+      .from('konta')
+      .select('rola')
+      .single()
+      .then(({ data, error }) => {
+        if (!error && data) setRola(data.rola);
+      });
+
     try {
-      const [lista, konto] = await Promise.all([
-        pobierzPrzepisy(sesja?.user.id),
-        supabase.from('konta').select('rola').single(),
-      ]);
-      setPrzepisy(lista);
-      if (!konto.error) setRola(konto.data.rola);
+      setPrzepisy(await pobierzPrzepisy(sesja?.user.id));
     } catch (e) {
-      setBlad(e instanceof Error ? e.message : String(e));
+      setBlad(komunikatBledu(e));
     } finally {
       setWczytywanie(false);
     }

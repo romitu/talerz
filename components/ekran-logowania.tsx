@@ -8,6 +8,7 @@ import { Przycisk } from './przycisk';
 import { ThemedText } from './themed-text';
 import { ThemedView } from './themed-view';
 
+import { komunikatBledu } from '@/lib/blad';
 import { MaxContentWidth, Spacing } from '@/constants/theme';
 import { baza_skonfigurowana, supabase } from '@/lib/supabase';
 
@@ -66,7 +67,7 @@ export function EkranLogowania() {
         if (error) throw error;
       }
     } catch (e) {
-      setBlad(komunikat(e instanceof Error ? e.message : String(e)));
+      setBlad(komunikat(komunikatBledu(e)));
     } finally {
       setZajety(false);
     }

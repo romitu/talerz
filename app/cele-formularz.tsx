@@ -2,6 +2,7 @@ import { router, useLocalSearchParams } from 'expo-router';
 import { useCallback, useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 
+import { komunikatBledu } from '@/lib/blad';
 import { Ekran } from '@/components/ekran';
 import { Karta } from '@/components/karta';
 import { Makro } from '@/components/makro';
@@ -148,7 +149,7 @@ export default function FormularzCelow() {
       if (error) throw error;
       router.back();
     } catch (e) {
-      setBlad(e instanceof Error ? e.message : String(e));
+      setBlad(komunikatBledu(e));
     } finally {
       setZajety(false);
     }

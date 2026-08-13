@@ -3,6 +3,7 @@ import { router } from 'expo-router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 
+import { komunikatBledu } from '@/lib/blad';
 import { Ekran } from '@/components/ekran';
 import { Karta } from '@/components/karta';
 import { Makro } from '@/components/makro';
@@ -182,7 +183,7 @@ export default function FormularzPrzepisu() {
 
       router.back();
     } catch (e) {
-      setBlad(e instanceof Error ? e.message : String(e));
+      setBlad(komunikatBledu(e));
     } finally {
       setZajety(false);
     }
