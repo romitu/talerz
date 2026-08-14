@@ -173,12 +173,15 @@ export default function FormularzPrzepisu() {
     setProbDodania((n) => n + 1);
     setWybrane((poprzednie) => {
       const juz = poprzednie.some((w) => w.skladnik.id === s.id);
-      const wynik = juz
-        ? poprzednie.filter((w) => w.skladnik.id !== s.id)
-        : [
-            ...poprzednie,
-            { skladnik: s, gramy: '', jednostka: 'g', stan: '', zamiennik: '', opisPotoczny: '' },
-          ];
+      const nowy: WybranySkladnik = {
+        skladnik: s,
+        gramy: '',
+        jednostka: 'g',
+        stan: '',
+        zamiennik: '',
+        opisPotoczny: '',
+      };
+      const wynik = juz ? poprzednie.filter((w) => w.skladnik.id !== s.id) : [...poprzednie, nowy];
       console.log('[Talerz] zapis stanu: przed', poprzednie.length, '→ po', wynik.length);
       return wynik;
     });
