@@ -6,7 +6,6 @@ import { Pressable, StyleSheet, TextInput, View } from 'react-native';
 import { komunikatBledu } from '@/lib/blad';
 import { Ekran } from '@/components/ekran';
 import { Karta } from '@/components/karta';
-import { Kolumny } from '@/components/kolumny';
 import { Makro } from '@/components/makro';
 import { Pole } from '@/components/pole';
 import { Przycisk } from '@/components/przycisk';
@@ -279,438 +278,430 @@ export default function FormularzPrzepisu() {
 
   return (
     <Ekran pelnaSzerokosc tytul="Nowy przepis" podtytul="Makro policzy się ze składników">
-      <Kolumny
-        lewa={
-          <>
-          <Karta style={styles.grupa}>
-            <Pole etykieta="Nazwa" value={nazwa} onChangeText={setNazwa} placeholder="Dorsz z kaszą gryczaną" />
-            <Pole
-              etykieta="Krótki opis"
-              value={opis}
-              onChangeText={setOpis}
-              placeholder="Pieczony w piekarniku, warzywa na jednej blasze"
-              multiline
-            />
-            <ThemedText type="smallBold" themeColor="textSecondary">
-              METRYCZKA
-            </ThemedText>
+      <Karta style={styles.grupa}>
+        <Pole etykieta="Nazwa" value={nazwa} onChangeText={setNazwa} placeholder="Dorsz z kaszą gryczaną" />
+        <Pole
+          etykieta="Krótki opis"
+          value={opis}
+          onChangeText={setOpis}
+          placeholder="Pieczony w piekarniku, warzywa na jednej blasze"
+          multiline
+        />
+        <ThemedText type="smallBold" themeColor="textSecondary">
+          METRYCZKA
+        </ThemedText>
 
-            {[
-              {
-                etykieta: 'Liczba porcji',
-                wartosc: porcje,
-                ustaw: setPorcje,
-                jednostka: 'porcji',
-                podpowiedz: '6',
-              },
-              {
-                etykieta: 'Czas przygotowania',
-                wartosc: czasPrzygotowania,
-                ustaw: setCzasPrzygotowania,
-                jednostka: 'min',
-                podpowiedz: '20',
-              },
-              {
-                etykieta: 'Czas obróbki',
-                wartosc: czasObrobki,
-                ustaw: setCzasObrobki,
-                jednostka: 'min',
-                podpowiedz: '77',
-              },
-            ].map((w) => (
-              <View key={w.etykieta} style={[styles.wierszMetryczki, { borderColor: motyw.border }]}>
-                <ThemedText type="small" style={styles.etykietaMetryczki}>
-                  {w.etykieta}
-                </ThemedText>
-                <TextInput
-                  value={w.wartosc}
-                  onChangeText={w.ustaw}
+        {[
+          {
+            etykieta: 'Liczba porcji',
+            wartosc: porcje,
+            ustaw: setPorcje,
+            jednostka: 'porcji',
+            podpowiedz: '6',
+          },
+          {
+            etykieta: 'Czas przygotowania',
+            wartosc: czasPrzygotowania,
+            ustaw: setCzasPrzygotowania,
+            jednostka: 'min',
+            podpowiedz: '20',
+          },
+          {
+            etykieta: 'Czas obróbki',
+            wartosc: czasObrobki,
+            ustaw: setCzasObrobki,
+            jednostka: 'min',
+            podpowiedz: '77',
+          },
+        ].map((w) => (
+          <View key={w.etykieta} style={[styles.wierszMetryczki, { borderColor: motyw.border }]}>
+            <ThemedText type="small" style={styles.etykietaMetryczki}>
+              {w.etykieta}
+            </ThemedText>
+            <TextInput
+              value={w.wartosc}
+              onChangeText={w.ustaw}
+              inputMode="numeric"
+              placeholder={w.podpowiedz}
+              placeholderTextColor={motyw.textSecondary}
+              style={[
+                styles.poleMetryczki,
+                { color: motyw.text, borderColor: motyw.border, backgroundColor: motyw.backgroundElement },
+              ]}
+            />
+            <ThemedText type="small" themeColor="textSecondary" style={styles.jednostkaMetryczki}>
+              {w.jednostka}
+            </ThemedText>
+          </View>
+        ))}
+
+        <ThemedText type="small" themeColor="textSecondary">
+          Od liczby porcji zależy makro jednej porcji. Garnek zupy na sześć osób to nie
+          jest posiłek o wartości całego garnka.
+        </ThemedText>
+
+      </Karta>
+      <Karta style={styles.grupa}>
+        <WyborWielo
+          etykieta="Pora posiłku"
+          wybrane={pory}
+          onZmiana={setPory}
+          opcje={(Object.keys(OPIS_PORY) as PoraPosilku[]).map((k) => ({
+            wartosc: k,
+            etykieta: OPIS_PORY[k],
+          }))}
+        />
+        <WyborWielo
+          etykieta="Kuchnia"
+          wybrane={kuchnie}
+          onZmiana={setKuchnie}
+          opcje={(Object.keys(OPIS_KUCHNI) as Kuchnia[]).map((k) => ({
+            wartosc: k,
+            etykieta: OPIS_KUCHNI[k],
+          }))}
+        />
+        <Wybor
+          etykieta="Ile dni wytrzyma w lodówce"
+          wybrana={trwalosc}
+          onZmiana={setTrwalosc}
+          opcje={[
+            { wartosc: '0', etykieta: opisTrwalosci(0), opis: 'jajecznica, sałatki, dania z grilla' },
+            { wartosc: '1', etykieta: opisTrwalosci(1), opis: 'dania delikatne, z dużą ilością nabiału' },
+            { wartosc: '2', etykieta: opisTrwalosci(2), opis: 'dania rybne, zupy lekkie' },
+            { wartosc: '3', etykieta: opisTrwalosci(3), opis: 'zupy, gulasze, kasze i strączki' },
+          ]}
+        />
+      </Karta>
+
+      <Karta style={styles.grupa}>
+        <ThemedText type="smallBold" themeColor="textSecondary">
+          SKŁADNIKI ({wybrane.length})
+        </ThemedText>
+        <ThemedText type="small" themeColor="textSecondary">
+          Odfiltruj listę i dotknij wiersza albo znaku plus. Wiersz rozwinie się
+          i poprosi o ilość.
+        </ThemedText>
+
+        <TabelaWyboru
+          dane={dostepne}
+          klucz={(s) => s.id}
+          tekstDoFiltra={(s) => `${s.nazwa} ${s.tagi.join(' ')}`}
+          etykietaFiltra="Filtruj składniki po nazwie lub etykiecie"
+          placeholderFiltra="dorsz, ryba, warzywo…"
+          wybrane={new Set(wybrane.map((w) => w.skladnik.id))}
+          onPrzelacz={(s) => {
+            const juz = wybrane.find((w) => w.skladnik.id === s.id);
+            if (juz) setWybrane((p) => p.filter((w) => w.skladnik.id !== s.id));
+            else dodajSkladnik(s);
+          }}
+          kolumny={[
+            { tytul: 'Nazwa', elastyczna: true, wartosc: (s) => s.nazwa },
+            { tytul: 'kcal', szerokosc: 56, liczba: true, wartosc: (s) => String(s.kcal_100g) },
+            { tytul: 'B', szerokosc: 48, liczba: true, wartosc: (s) => String(s.bialko_100g) },
+            { tytul: 'T', szerokosc: 48, liczba: true, wartosc: (s) => String(s.tluszcz_100g) },
+            { tytul: 'W', szerokosc: 48, liczba: true, wartosc: (s) => String(s.wegle_100g) },
+            { tytul: 'błonnik', szerokosc: 60, liczba: true, wartosc: (s) => String(s.blonnik_100g) },
+          ]}
+          szczegoly={(s) => {
+            const w = wybrane.find((x) => x.skladnik.id === s.id);
+            if (!w) return null;
+            return (
+              <>
+                <Pole
+                  etykieta={`Ile (${w.jednostka})`}
+                  value={w.gramy}
+                  onChangeText={(t) => zmienSkladnik(s.id, { gramy: t })}
                   inputMode="numeric"
-                  placeholder={w.podpowiedz}
-                  placeholderTextColor={motyw.textSecondary}
-                  style={[
-                    styles.poleMetryczki,
-                    { color: motyw.text, borderColor: motyw.border, backgroundColor: motyw.backgroundElement },
+                  placeholder="200"
+                />
+                <Wybor
+                  etykieta="Jednostka"
+                  wybrana={w.jednostka}
+                  onZmiana={(j) => zmienSkladnik(s.id, { jednostka: j })}
+                  opcje={[
+                    { wartosc: 'g', etykieta: 'gramy' },
+                    { wartosc: 'ml', etykieta: 'mililitry' },
                   ]}
                 />
-                <ThemedText type="small" themeColor="textSecondary" style={styles.jednostkaMetryczki}>
-                  {w.jednostka}
+                <Pole
+                  etykieta="Stan składnika"
+                  value={w.stan}
+                  onChangeText={(t) => zmienSkladnik(s.id, { stan: t })}
+                  placeholder="obrana i starta na grubych oczkach"
+                />
+                <Pole
+                  etykieta="Zamiennik (nieobowiązkowy)"
+                  value={w.zamiennik}
+                  onChangeText={(t) => zmienSkladnik(s.id, { zamiennik: t })}
+                  placeholder="lub korpus z kurczaka"
+                />
+              </>
+            );
+          }}
+          stopka={(fraza) =>
+            dodawanieSkladnika ? (
+              <View style={styles.okienko}>
+                <ThemedText type="small" themeColor="textSecondary">
+                  Przepis pozostaje wpisany — po zapisaniu składnik od razu do niego wejdzie.
                 </ThemedText>
+                <FormularzSkladnika
+                  nazwaPoczatkowa={fraza}
+                  onZapisano={(nowy) => {
+                    setDostepne((p) => [...p, nowy].sort((a, b) => a.nazwa.localeCompare(b.nazwa, 'pl')));
+                    dodajSkladnik(nowy);
+                    setDodawanieSkladnika(false);
+                  }}
+                  onAnuluj={() => setDodawanieSkladnika(false)}
+                />
               </View>
-            ))}
+            ) : (
+              <Przycisk
+                tytul={fraza ? `Nie ma „${fraza}”? Dodaj do bazy` : 'Brakuje składnika? Dodaj go'}
+                wariant="poboczny"
+                onPress={() => setDodawanieSkladnika(true)}
+              />
+            )
+          }
+        />
+      </Karta>
+      {wybrane.length > 0 && (
+        <Karta>
+          <ThemedText type="smallBold" themeColor="textSecondary">
+            NA JEDNĄ PORCJĘ ({Math.round(makroPorcji.gramy)} g z {liczbaPorcji})
+          </ThemedText>
+          <View style={styles.wiersz}>
+            <Makro etykieta="kcal" wartosc={Math.round(makroPorcji.kcal)} jednostka="" />
+            <Makro etykieta="białko" wartosc={Math.round(makroPorcji.bialko * 10) / 10} jednostka=" g" />
+            <Makro etykieta="tłuszcz" wartosc={Math.round(makroPorcji.tluszcz * 10) / 10} jednostka=" g" />
+            <Makro etykieta="węglow." wartosc={Math.round(makroPorcji.wegle * 10) / 10} jednostka=" g" />
+          </View>
 
+          {liczbaPorcji > 1 && (
             <ThemedText type="small" themeColor="textSecondary">
-              Od liczby porcji zależy makro jednej porcji. Garnek zupy na sześć osób to nie
-              jest posiłek o wartości całego garnka.
+              Cały garnek: {Math.round(makro.kcal)} kcal, {Math.round(makro.bialko * 10) / 10} g białka
             </ThemedText>
+          )}
 
-          </Karta>
-          <Karta style={styles.grupa}>
-            <WyborWielo
-              etykieta="Pora posiłku"
-              wybrane={pory}
-              onZmiana={setPory}
-              opcje={(Object.keys(OPIS_PORY) as PoraPosilku[]).map((k) => ({
-                wartosc: k,
-                etykieta: OPIS_PORY[k],
-              }))}
-            />
-            <WyborWielo
-              etykieta="Kuchnia"
-              wybrane={kuchnie}
-              onZmiana={setKuchnie}
-              opcje={(Object.keys(OPIS_KUCHNI) as Kuchnia[]).map((k) => ({
-                wartosc: k,
-                etykieta: OPIS_KUCHNI[k],
-              }))}
-            />
-            <Wybor
-              etykieta="Ile dni wytrzyma w lodówce"
-              wybrana={trwalosc}
-              onZmiana={setTrwalosc}
-              opcje={[
-                { wartosc: '0', etykieta: opisTrwalosci(0), opis: 'jajecznica, sałatki, dania z grilla' },
-                { wartosc: '1', etykieta: opisTrwalosci(1), opis: 'dania delikatne, z dużą ilością nabiału' },
-                { wartosc: '2', etykieta: opisTrwalosci(2), opis: 'dania rybne, zupy lekkie' },
-                { wartosc: '3', etykieta: opisTrwalosci(3), opis: 'zupy, gulasze, kasze i strączki' },
-              ]}
-            />
-          </Karta>
-          <Karta style={styles.grupa}>
-            <ThemedText type="smallBold" themeColor="textSecondary">
-              ETAPY PRZYGOTOWANIA
-            </ThemedText>
+          {makroPorcji.cukryWolne > 0 && (
             <ThemedText type="small" themeColor="textSecondary">
-              Każdy etap ma nazwę, czas i własne kroki — na przykład „Gotowanie wywaru, 45 minut”.
-              Krok można oznaczyć jako uwagę, gdy ostrzega przed pomyłką.
+              Cukry wolne w porcji: {Math.round(makroPorcji.cukryWolne * 10) / 10} g
             </ThemedText>
+          )}
+          {makro.nova >= 4 && (
+            <ThemedText type="small" themeColor="accent">
+              Przepis zawiera składnik wysoko przetworzony (NOVA 4). Talerz takich nie promuje.
+            </ThemedText>
+          )}
+        </Karta>
+      )}
+      <Karta style={styles.grupa}>
+        <ThemedText type="smallBold" themeColor="textSecondary">
+          POTRZEBNY SPRZĘT ({sprzet.length})
+        </ThemedText>
+        <ThemedText type="small" themeColor="textSecondary">
+          Zapobiega szukaniu blendera w połowie gotowania.
+        </ThemedText>
 
-            {etapy.map((etap, i) => (
-              <View key={i} style={[styles.etap, { borderColor: motyw.border }]}>
-                <View style={styles.naglowekEtapu}>
-                  <ThemedText type="smallBold" themeColor="accent">
-                    ETAP {i + 1}
+        <TabelaWyboru
+          dane={katalogSprzetu}
+          klucz={(x) => x.id}
+          tekstDoFiltra={(x) => `${x.nazwa} ${x.rodzaj}`}
+          etykietaFiltra="Filtruj sprzęt"
+          placeholderFiltra="garnek, tarka, piekarnik…"
+          wysokosc={220}
+          wybrane={new Set(katalogSprzetu.filter((x) => sprzet.includes(x.nazwa)).map((x) => x.id))}
+          onPrzelacz={(x) =>
+            setSprzet((p) => (p.includes(x.nazwa) ? p.filter((n) => n !== x.nazwa) : [...p, x.nazwa]))
+          }
+          kolumny={[
+            { tytul: 'Nazwa', elastyczna: true, wartosc: (x) => x.nazwa },
+            { tytul: 'Rodzaj', szerokosc: 120, wartosc: (x) => x.rodzaj },
+          ]}
+          stopka={(fraza) => (
+            <View style={styles.dopisywanieSprzetu}>
+              <Pole
+                etykieta="Nie ma na liście? Dopisz do katalogu"
+                value={nowySprzet || fraza}
+                onChangeText={setNowySprzet}
+                placeholder="szybkowar 6 l"
+              />
+              <Przycisk
+                tytul="Dopisz sprzęt"
+                wariant="poboczny"
+                onPress={async () => {
+                  const nazwa = (nowySprzet || fraza).trim();
+                  if (!nazwa) return;
+                  const { data, error } = await supabase
+                    .from('sprzet')
+                    .insert({ nazwa })
+                    .select('id, nazwa, rodzaj')
+                    .single();
+                  if (error) {
+                    setBlad(komunikatBledu(error));
+                    return;
+                  }
+                  setKatalogSprzetu((p) => [...p, data].sort((a, b) => a.nazwa.localeCompare(b.nazwa, 'pl')));
+                  setSprzet((p) => [...p, data.nazwa]);
+                  setNowySprzet('');
+                }}
+              />
+            </View>
+          )}
+        />
+      </Karta>
+
+      <Karta style={styles.grupa}>
+        <ThemedText type="smallBold" themeColor="textSecondary">
+          ETAPY PRZYGOTOWANIA
+        </ThemedText>
+        <ThemedText type="small" themeColor="textSecondary">
+          Każdy etap ma nazwę, czas i własne kroki — na przykład „Gotowanie wywaru, 45 minut”.
+          Krok można oznaczyć jako uwagę, gdy ostrzega przed pomyłką.
+        </ThemedText>
+
+        {etapy.map((etap, i) => (
+          <View key={i} style={[styles.etap, { borderColor: motyw.border }]}>
+            <View style={styles.naglowekEtapu}>
+              <ThemedText type="smallBold" themeColor="accent">
+                ETAP {i + 1}
+              </ThemedText>
+
+              <View style={styles.przyciskiEtapu}>
+                <Pressable
+                  onPress={() => przesunEtap(i, -1)}
+                  disabled={i === 0}
+                  hitSlop={6}
+                  accessibilityLabel="Przesuń etap wyżej">
+                  <Ionicons
+                    name="arrow-up"
+                    size={18}
+                    color={i === 0 ? motyw.border : motyw.textSecondary}
+                  />
+                </Pressable>
+                <Pressable
+                  onPress={() => przesunEtap(i, 1)}
+                  disabled={i === etapy.length - 1}
+                  hitSlop={6}
+                  accessibilityLabel="Przesuń etap niżej">
+                  <Ionicons
+                    name="arrow-down"
+                    size={18}
+                    color={i === etapy.length - 1 ? motyw.border : motyw.textSecondary}
+                  />
+                </Pressable>
+                <Pressable onPress={() => usunEtap(i)} hitSlop={6} accessibilityLabel="Usuń etap">
+                  <Ionicons name="trash-outline" size={18} color={motyw.textSecondary} />
+                </Pressable>
+              </View>
+            </View>
+
+            <Pole
+              etykieta="Nazwa etapu"
+              value={etap.nazwa}
+              onChangeText={(t) => zmienEtap(i, 'nazwa', t)}
+              placeholder="Gotowanie wywaru"
+            />
+            <Pole
+              etykieta="Czas etapu (min)"
+              value={etap.minuty}
+              onChangeText={(t) => zmienEtap(i, 'minuty', t)}
+              inputMode="numeric"
+              placeholder="45"
+            />
+
+            {etap.kroki.map((krok, j) => (
+              <View key={j} style={styles.krok}>
+                <View style={styles.naglowekKroku}>
+                  <ThemedText type="small" themeColor="textSecondary">
+                    Krok {j + 1}
                   </ThemedText>
 
-                  <View style={styles.przyciskiEtapu}>
-                    <Pressable
-                      onPress={() => przesunEtap(i, -1)}
-                      disabled={i === 0}
-                      hitSlop={6}
-                      accessibilityLabel="Przesuń etap wyżej">
-                      <Ionicons
-                        name="arrow-up"
-                        size={18}
-                        color={i === 0 ? motyw.border : motyw.textSecondary}
-                      />
-                    </Pressable>
-                    <Pressable
-                      onPress={() => przesunEtap(i, 1)}
-                      disabled={i === etapy.length - 1}
-                      hitSlop={6}
-                      accessibilityLabel="Przesuń etap niżej">
-                      <Ionicons
-                        name="arrow-down"
-                        size={18}
-                        color={i === etapy.length - 1 ? motyw.border : motyw.textSecondary}
-                      />
-                    </Pressable>
-                    <Pressable onPress={() => usunEtap(i)} hitSlop={6} accessibilityLabel="Usuń etap">
-                      <Ionicons name="trash-outline" size={18} color={motyw.textSecondary} />
-                    </Pressable>
-                  </View>
+                  <Pressable
+                    onPress={() => zmienKrok(i, j, { uwaga: !krok.uwaga })}
+                    hitSlop={6}
+                    accessibilityRole="checkbox"
+                    accessibilityState={{ checked: krok.uwaga }}
+                    style={styles.przelacznikUwagi}>
+                    <Ionicons
+                      name={krok.uwaga ? 'warning' : 'warning-outline'}
+                      size={16}
+                      color={krok.uwaga ? motyw.accent : motyw.textSecondary}
+                    />
+                    <ThemedText type="small" themeColor={krok.uwaga ? 'accent' : 'textSecondary'}>
+                      uwaga
+                    </ThemedText>
+                  </Pressable>
+
+                  <Pressable onPress={() => usunKrok(i, j)} hitSlop={6} accessibilityLabel="Usuń krok">
+                    <Ionicons name="close" size={16} color={motyw.textSecondary} />
+                  </Pressable>
                 </View>
 
                 <Pole
-                  etykieta="Nazwa etapu"
-                  value={etap.nazwa}
-                  onChangeText={(t) => zmienEtap(i, 'nazwa', t)}
-                  placeholder="Gotowanie wywaru"
+                  etykieta=""
+                  value={krok.tresc}
+                  onChangeText={(t) => zmienKrok(i, j, { tresc: t })}
+                  placeholder="Doprowadź do wrzenia i zbierz szumowiny"
+                  multiline
                 />
                 <Pole
-                  etykieta="Czas etapu (min)"
-                  value={etap.minuty}
-                  onChangeText={(t) => zmienEtap(i, 'minuty', t)}
-                  inputMode="numeric"
-                  placeholder="45"
+                  etykieta="Po czym poznać, że gotowe (nieobowiązkowe)"
+                  value={krok.sygnal}
+                  onChangeText={(t) => zmienKrok(i, j, { sygnal: t })}
+                  placeholder="aż ziemniaki będą miękkie"
                 />
-
-                {etap.kroki.map((krok, j) => (
-                  <View key={j} style={styles.krok}>
-                    <View style={styles.naglowekKroku}>
-                      <ThemedText type="small" themeColor="textSecondary">
-                        Krok {j + 1}
-                      </ThemedText>
-
-                      <Pressable
-                        onPress={() => zmienKrok(i, j, { uwaga: !krok.uwaga })}
-                        hitSlop={6}
-                        accessibilityRole="checkbox"
-                        accessibilityState={{ checked: krok.uwaga }}
-                        style={styles.przelacznikUwagi}>
-                        <Ionicons
-                          name={krok.uwaga ? 'warning' : 'warning-outline'}
-                          size={16}
-                          color={krok.uwaga ? motyw.accent : motyw.textSecondary}
-                        />
-                        <ThemedText type="small" themeColor={krok.uwaga ? 'accent' : 'textSecondary'}>
-                          uwaga
-                        </ThemedText>
-                      </Pressable>
-
-                      <Pressable onPress={() => usunKrok(i, j)} hitSlop={6} accessibilityLabel="Usuń krok">
-                        <Ionicons name="close" size={16} color={motyw.textSecondary} />
-                      </Pressable>
-                    </View>
-
-                    <Pole
-                      etykieta=""
-                      value={krok.tresc}
-                      onChangeText={(t) => zmienKrok(i, j, { tresc: t })}
-                      placeholder="Doprowadź do wrzenia i zbierz szumowiny"
-                      multiline
-                    />
-                    <Pole
-                      etykieta="Po czym poznać, że gotowe (nieobowiązkowe)"
-                      value={krok.sygnal}
-                      onChangeText={(t) => zmienKrok(i, j, { sygnal: t })}
-                      placeholder="aż ziemniaki będą miękkie"
-                    />
-                  </View>
-                ))}
-
-                <Przycisk tytul="Dodaj krok" wariant="poboczny" onPress={() => dodajKrok(i)} />
               </View>
             ))}
 
-            <Przycisk
-              tytul={etapy.length === 0 ? 'Dodaj pierwszy etap' : 'Dodaj kolejny etap'}
-              wariant="poboczny"
-              onPress={dodajEtap}
-            />
+            <Przycisk tytul="Dodaj krok" wariant="poboczny" onPress={() => dodajKrok(i)} />
+          </View>
+        ))}
 
-            {czasRazem > 0 && (
-              <ThemedText type="small" themeColor="textSecondary">
-                Czas wszystkich etapów: {czasRazem} min. Jeśli etapy się nakładają („w międzyczasie”),
-                faktyczny czas będzie krótszy.
-              </ThemedText>
-            )}
-          </Karta>
-          <Karta style={styles.grupa}>
-            <ThemedText type="smallBold" themeColor="textSecondary">
-              PRZECHOWYWANIE I WSKAZÓWKI
-            </ThemedText>
+        <Przycisk
+          tytul={etapy.length === 0 ? 'Dodaj pierwszy etap' : 'Dodaj kolejny etap'}
+          wariant="poboczny"
+          onPress={dodajEtap}
+        />
 
-            <Pole
-              etykieta="Jak przechowywać"
-              value={przechowywanie}
-              onChangeText={setPrzechowywanie}
-              placeholder="W lodówce w zamkniętym pojemniku, odgrzewać pod przykryciem"
-              multiline
-            />
+        {czasRazem > 0 && (
+          <ThemedText type="small" themeColor="textSecondary">
+            Czas wszystkich etapów: {czasRazem} min. Jeśli etapy się nakładają („w międzyczasie”),
+            faktyczny czas będzie krótszy.
+          </ThemedText>
+        )}
+      </Karta>
+      <Karta style={styles.grupa}>
+        <ThemedText type="smallBold" themeColor="textSecondary">
+          PRZECHOWYWANIE I WSKAZÓWKI
+        </ThemedText>
 
-            <Wybor
-              etykieta="Czy nadaje się do mrożenia"
-              wybrana={moznaMrozic}
-              onZmiana={setMoznaMrozic}
-              opcje={[
-                { wartosc: 'tak', etykieta: 'Tak' },
-                { wartosc: 'nie', etykieta: 'Nie' },
-                { wartosc: 'nie wiem', etykieta: 'Nie wiem' },
-              ]}
-            />
+        <Pole
+          etykieta="Jak przechowywać"
+          value={przechowywanie}
+          onChangeText={setPrzechowywanie}
+          placeholder="W lodówce w zamkniętym pojemniku, odgrzewać pod przykryciem"
+          multiline
+        />
 
-            <Pole
-              etykieta="Jak uratować danie w razie wpadki"
-              value={ratunek}
-              onChangeText={setRatunek}
-              placeholder="Za kwaśne — dodaj ziemniaka i pogotuj. Za słone — dolej wody i śmietany."
-              multiline
-            />
-          </Karta>
-          </>
-        }
-        prawa={
-          <>
-          <Karta style={styles.grupa}>
-            <ThemedText type="smallBold" themeColor="textSecondary">
-              SKŁADNIKI ({wybrane.length})
-            </ThemedText>
-            <ThemedText type="small" themeColor="textSecondary">
-              Odfiltruj listę i dotknij wiersza albo znaku plus. Wiersz rozwinie się
-              i poprosi o ilość.
-            </ThemedText>
+        <Wybor
+          etykieta="Czy nadaje się do mrożenia"
+          wybrana={moznaMrozic}
+          onZmiana={setMoznaMrozic}
+          opcje={[
+            { wartosc: 'tak', etykieta: 'Tak' },
+            { wartosc: 'nie', etykieta: 'Nie' },
+            { wartosc: 'nie wiem', etykieta: 'Nie wiem' },
+          ]}
+        />
 
-            <TabelaWyboru
-              dane={dostepne}
-              klucz={(s) => s.id}
-              tekstDoFiltra={(s) => `${s.nazwa} ${s.tagi.join(' ')}`}
-              etykietaFiltra="Filtruj składniki po nazwie lub etykiecie"
-              placeholderFiltra="dorsz, ryba, warzywo…"
-              wybrane={new Set(wybrane.map((w) => w.skladnik.id))}
-              onPrzelacz={(s) => {
-                const juz = wybrane.find((w) => w.skladnik.id === s.id);
-                if (juz) setWybrane((p) => p.filter((w) => w.skladnik.id !== s.id));
-                else dodajSkladnik(s);
-              }}
-              kolumny={[
-                { tytul: 'Nazwa', elastyczna: true, wartosc: (s) => s.nazwa },
-                { tytul: 'kcal', szerokosc: 56, liczba: true, wartosc: (s) => String(s.kcal_100g) },
-                { tytul: 'B', szerokosc: 48, liczba: true, wartosc: (s) => String(s.bialko_100g) },
-                { tytul: 'T', szerokosc: 48, liczba: true, wartosc: (s) => String(s.tluszcz_100g) },
-                { tytul: 'W', szerokosc: 48, liczba: true, wartosc: (s) => String(s.wegle_100g) },
-                { tytul: 'błonnik', szerokosc: 60, liczba: true, wartosc: (s) => String(s.blonnik_100g) },
-              ]}
-              szczegoly={(s) => {
-                const w = wybrane.find((x) => x.skladnik.id === s.id);
-                if (!w) return null;
-                return (
-                  <>
-                    <Pole
-                      etykieta={`Ile (${w.jednostka})`}
-                      value={w.gramy}
-                      onChangeText={(t) => zmienSkladnik(s.id, { gramy: t })}
-                      inputMode="numeric"
-                      placeholder="200"
-                    />
-                    <Wybor
-                      etykieta="Jednostka"
-                      wybrana={w.jednostka}
-                      onZmiana={(j) => zmienSkladnik(s.id, { jednostka: j })}
-                      opcje={[
-                        { wartosc: 'g', etykieta: 'gramy' },
-                        { wartosc: 'ml', etykieta: 'mililitry' },
-                      ]}
-                    />
-                    <Pole
-                      etykieta="Stan składnika"
-                      value={w.stan}
-                      onChangeText={(t) => zmienSkladnik(s.id, { stan: t })}
-                      placeholder="obrana i starta na grubych oczkach"
-                    />
-                    <Pole
-                      etykieta="Zamiennik (nieobowiązkowy)"
-                      value={w.zamiennik}
-                      onChangeText={(t) => zmienSkladnik(s.id, { zamiennik: t })}
-                      placeholder="lub korpus z kurczaka"
-                    />
-                  </>
-                );
-              }}
-              stopka={(fraza) =>
-                dodawanieSkladnika ? (
-                  <View style={styles.okienko}>
-                    <ThemedText type="small" themeColor="textSecondary">
-                      Przepis pozostaje wpisany — po zapisaniu składnik od razu do niego wejdzie.
-                    </ThemedText>
-                    <FormularzSkladnika
-                      nazwaPoczatkowa={fraza}
-                      onZapisano={(nowy) => {
-                        setDostepne((p) => [...p, nowy].sort((a, b) => a.nazwa.localeCompare(b.nazwa, 'pl')));
-                        dodajSkladnik(nowy);
-                        setDodawanieSkladnika(false);
-                      }}
-                      onAnuluj={() => setDodawanieSkladnika(false)}
-                    />
-                  </View>
-                ) : (
-                  <Przycisk
-                    tytul={fraza ? `Nie ma „${fraza}”? Dodaj do bazy` : 'Brakuje składnika? Dodaj go'}
-                    wariant="poboczny"
-                    onPress={() => setDodawanieSkladnika(true)}
-                  />
-                )
-              }
-            />
-          </Karta>
-          {wybrane.length > 0 && (
-            <Karta>
-              <ThemedText type="smallBold" themeColor="textSecondary">
-                NA JEDNĄ PORCJĘ ({Math.round(makroPorcji.gramy)} g z {liczbaPorcji})
-              </ThemedText>
-              <View style={styles.wiersz}>
-                <Makro etykieta="kcal" wartosc={Math.round(makroPorcji.kcal)} jednostka="" />
-                <Makro etykieta="białko" wartosc={Math.round(makroPorcji.bialko * 10) / 10} jednostka=" g" />
-                <Makro etykieta="tłuszcz" wartosc={Math.round(makroPorcji.tluszcz * 10) / 10} jednostka=" g" />
-                <Makro etykieta="węglow." wartosc={Math.round(makroPorcji.wegle * 10) / 10} jednostka=" g" />
-              </View>
-
-              {liczbaPorcji > 1 && (
-                <ThemedText type="small" themeColor="textSecondary">
-                  Cały garnek: {Math.round(makro.kcal)} kcal, {Math.round(makro.bialko * 10) / 10} g białka
-                </ThemedText>
-              )}
-
-              {makroPorcji.cukryWolne > 0 && (
-                <ThemedText type="small" themeColor="textSecondary">
-                  Cukry wolne w porcji: {Math.round(makroPorcji.cukryWolne * 10) / 10} g
-                </ThemedText>
-              )}
-              {makro.nova >= 4 && (
-                <ThemedText type="small" themeColor="accent">
-                  Przepis zawiera składnik wysoko przetworzony (NOVA 4). Talerz takich nie promuje.
-                </ThemedText>
-              )}
-            </Karta>
-          )}
-          <Karta style={styles.grupa}>
-            <ThemedText type="smallBold" themeColor="textSecondary">
-              POTRZEBNY SPRZĘT ({sprzet.length})
-            </ThemedText>
-            <ThemedText type="small" themeColor="textSecondary">
-              Zapobiega szukaniu blendera w połowie gotowania.
-            </ThemedText>
-
-            <TabelaWyboru
-              dane={katalogSprzetu}
-              klucz={(x) => x.id}
-              tekstDoFiltra={(x) => `${x.nazwa} ${x.rodzaj}`}
-              etykietaFiltra="Filtruj sprzęt"
-              placeholderFiltra="garnek, tarka, piekarnik…"
-              wysokosc={220}
-              wybrane={new Set(katalogSprzetu.filter((x) => sprzet.includes(x.nazwa)).map((x) => x.id))}
-              onPrzelacz={(x) =>
-                setSprzet((p) => (p.includes(x.nazwa) ? p.filter((n) => n !== x.nazwa) : [...p, x.nazwa]))
-              }
-              kolumny={[
-                { tytul: 'Nazwa', elastyczna: true, wartosc: (x) => x.nazwa },
-                { tytul: 'Rodzaj', szerokosc: 120, wartosc: (x) => x.rodzaj },
-              ]}
-              stopka={(fraza) => (
-                <View style={styles.dopisywanieSprzetu}>
-                  <Pole
-                    etykieta="Nie ma na liście? Dopisz do katalogu"
-                    value={nowySprzet || fraza}
-                    onChangeText={setNowySprzet}
-                    placeholder="szybkowar 6 l"
-                  />
-                  <Przycisk
-                    tytul="Dopisz sprzęt"
-                    wariant="poboczny"
-                    onPress={async () => {
-                      const nazwa = (nowySprzet || fraza).trim();
-                      if (!nazwa) return;
-                      const { data, error } = await supabase
-                        .from('sprzet')
-                        .insert({ nazwa })
-                        .select('id, nazwa, rodzaj')
-                        .single();
-                      if (error) {
-                        setBlad(komunikatBledu(error));
-                        return;
-                      }
-                      setKatalogSprzetu((p) => [...p, data].sort((a, b) => a.nazwa.localeCompare(b.nazwa, 'pl')));
-                      setSprzet((p) => [...p, data.nazwa]);
-                      setNowySprzet('');
-                    }}
-                  />
-                </View>
-              )}
-            />
-          </Karta>
-          </>
-        }
-      />
+        <Pole
+          etykieta="Jak uratować danie w razie wpadki"
+          value={ratunek}
+          onChangeText={setRatunek}
+          placeholder="Za kwaśne — dodaj ziemniaka i pogotuj. Za słone — dolej wody i śmietany."
+          multiline
+        />
+      </Karta>
 
 
       {blad && (
