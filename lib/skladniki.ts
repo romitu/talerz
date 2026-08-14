@@ -126,3 +126,48 @@ export function ostrzezenieOKaloriach(dane: Partial<DaneSkladnika>): string | nu
     `a wpisano ${kcal}. Sprawdź, czy nie ma pomyłki.`
   );
 }
+
+/** W jakich przepisach i w jakiej ilości użyto poszczególnych składników. */
+export type UzycieWPrzepisie = {
+  nazwa: string;
+  gramy: number;
+};
+
+export type UzycieSkladnika = {
+  przepisy: UzycieWPrzepisie[];
+};
+
+/**
+ * Zwraca mapę: identyfikator składnika -> przepisy, w których go użyto.
+ *
+ * Jedno zapytanie zamiast pytania osobno o każdy składnik. Widoczność
+ * przepisów ograniczają reguły dostępu w bazie, więc zwykły użytkownik
+ * zobaczy tylko te, do których ma prawo.
+ */
+export async function pobierzUzycia(): Promise<Map<string, UzycieSkladnika>> {
+  const { data, error } = await supabase
+    .from('przepis_skladniki')
+    .select('skladnik_id, gramy, przepisy (nazwa)');
+
+  if (error) throw error;
+
+  const mapa = new Map<string, UzycieSkladnika>();
+
+  for (const wiersz of data ?? []) {
+    const id = wiersz.skladnik_id as string;
+    const przepis = wiersz.przepisy as { nazwa: string } | { nazwa: string }[] | null;
+    const nazwa = Array.isArray(przepis) ? przepis[0]?.nazwa : przepis?.nazwa;
+    if (!nazwa) continue;
+
+    const wpis = mapa.get(id) ?? { przepisy: [] };
+    wpis.przepisy.push({ nazwa, gramy: Number(wiersz.gramy) });
+    mapa.set(id, wpis);
+  }
+
+  // Alfabetycznie, żeby kolejność nie zmieniała się przy każdym odświeżeniu.
+  for (const wpis of mapa.values()) {
+    wpis.przepisy.sort((a, b) => a.nazwa.localeCompare(b.nazwa, 'pl'));
+  }
+
+  return mapa;
+}
