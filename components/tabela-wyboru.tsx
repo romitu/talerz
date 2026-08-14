@@ -76,6 +76,12 @@ export function TabelaWyboru<T>({
    */
   const miesciSie = szerokoscOkna >= szerokoscMinimalna + 64;
 
+  function przelacz(element: T, id: string) {
+    setDotkniec((n) => n + 1);
+    setOstatnie(kolumny[0]?.wartosc(element) ?? id);
+    onPrzelacz(element);
+  }
+
   const stylKolumny = (k: KolumnaWyboru<T>) =>
     miesciSie && k.elastyczna
       ? { flex: 1, minWidth: MIN_ELASTYCZNEJ }
@@ -130,15 +136,15 @@ export function TabelaWyboru<T>({
 
               return (
                 <View key={id}>
-                  <Pressable
-                    onPress={() => {
-                      setDotkniec((n) => n + 1);
-                      setOstatnie(kolumny[0]?.wartosc(element) ?? id);
-                      onPrzelacz(element);
-                    }}
-                    accessibilityRole="button"
-                    accessibilityState={{ selected: zaznaczony }}
-                    style={({ pressed }) => [
+                  {/*
+                    Wiersz jest zwykłym pojemnikiem, a klikalne są dwa
+                    osobne obszary OBOK siebie: znak plus i część z danymi.
+                    Zagnieżdżenie przycisku w przycisku daje nieprawidłowy
+                    dokument HTML — przeglądarka przebudowuje wtedy stronę
+                    po swojemu i dotknięcia przestają działać przewidywalnie.
+                  */}
+                  <View
+                    style={[
                       styles.wiersz,
                       {
                         borderColor: motyw.border,
@@ -148,32 +154,37 @@ export function TabelaWyboru<T>({
                             ? motyw.backgroundElement
                             : motyw.background,
                       },
-                      pressed && styles.wcisniety,
                     ]}>
                     <Pressable
-                      onPress={() => onPrzelacz(element)}
-                      hitSlop={8}
+                      onPress={() => przelacz(element, id)}
+                      hitSlop={6}
                       accessibilityRole="button"
-                      accessibilityLabel={zaznaczony ? 'Usuń z przepisu' : 'Dodaj do przepisu'}
-                      style={styles.komorkaZnaku}>
+                      accessibilityLabel={zaznaczony ? 'Usuń z wyboru' : 'Dodaj do wyboru'}
+                      style={({ pressed }) => [styles.komorkaZnaku, pressed && styles.wcisniety]}>
                       <Ionicons
                         name={zaznaczony ? 'checkmark-circle' : 'add-circle-outline'}
                         size={22}
-                        color={zaznaczony ? motyw.accent : motyw.accent}
+                        color={motyw.accent}
                       />
                     </Pressable>
 
-                    {kolumny.map((k) => (
-                      <View key={k.tytul} style={[styles.komorka, stylKolumny(k)]}>
-                        <ThemedText
-                          type={zaznaczony ? 'smallBold' : 'small'}
-                          style={k.liczba ? styles.doPrawej : undefined}
-                          numberOfLines={2}>
-                          {k.wartosc(element)}
-                        </ThemedText>
-                      </View>
-                    ))}
-                  </Pressable>
+                    <Pressable
+                      onPress={() => przelacz(element, id)}
+                      accessibilityRole="button"
+                      accessibilityState={{ selected: zaznaczony }}
+                      style={({ pressed }) => [styles.komorki, pressed && styles.wcisniety]}>
+                      {kolumny.map((k) => (
+                        <View key={k.tytul} style={[styles.komorka, stylKolumny(k)]}>
+                          <ThemedText
+                            type={zaznaczony ? 'smallBold' : 'small'}
+                            style={k.liczba ? styles.doPrawej : undefined}
+                            numberOfLines={2}>
+                            {k.wartosc(element)}
+                          </ThemedText>
+                        </View>
+                      ))}
+                    </Pressable>
+                  </View>
 
                   {zaznaczony && szczegoly && (
                     <View
@@ -231,6 +242,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.one,
     paddingVertical: Spacing.one,
     justifyContent: 'center',
+  },
+  komorki: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flex: 1,
+    alignSelf: 'stretch',
   },
   komorkaZnaku: {
     width: 40,
