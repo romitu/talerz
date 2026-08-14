@@ -17,6 +17,7 @@ type Cel = {
   bialko_g: number;
   tluszcz_g: number;
   wegle_g: number;
+  blonnik_g: number | null;
 };
 
 type Profil = {
@@ -41,7 +42,7 @@ export default function EkranProfilu() {
     const [wynikProfili, wynikKonta] = await Promise.all([
       supabase
         .from('profile')
-        .select('id, imie, data_urodzenia, wzrost_cm, cele (kcal, bialko_g, tluszcz_g, wegle_g)')
+        .select('id, imie, data_urodzenia, wzrost_cm, cele (kcal, bialko_g, tluszcz_g, wegle_g, blonnik_g)')
         .order('kolejnosc'),
       supabase.from('konta').select('rola').single(),
     ]);
@@ -114,6 +115,7 @@ export default function EkranProfilu() {
                 </View>
                 <ThemedText type="small" themeColor="textSecondary">
                   Próg białka na posiłek: {progBialkaNaPosilek(cel.bialko_g)} g
+                  {cel.blonnik_g ? ` · błonnik: ${cel.blonnik_g} g dziennie` : ''}
                 </ThemedText>
               </>
             ) : (

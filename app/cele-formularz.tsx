@@ -12,12 +12,15 @@ import { ThemedText } from '@/components/themed-text';
 import { Spacing } from '@/constants/theme';
 import { supabase } from '@/lib/supabase';
 import {
+  BLONNIK,
   kcalZMakro,
   oceniaCele,
   progBialkaNaPosilek,
+  podpowiedzBlonnika,
   przemianaPodstawowa,
   udzialyProcentowe,
   wiekZDaty,
+  wskazowkaWodna,
   zapotrzebowanie,
   type Plec,
   type PoziomAktywnosci,
@@ -47,6 +50,7 @@ export default function FormularzCelow() {
   const [bialko, setBialko] = useState('');
   const [tluszcz, setTluszcz] = useState('');
   const [wegle, setWegle] = useState('');
+  const [blonnik, setBlonnik] = useState('');
 
   const [zajety, setZajety] = useState(false);
   const [blad, setBlad] = useState<string | null>(null);
@@ -129,6 +133,7 @@ export default function FormularzCelow() {
     setBialko(String(bialkoG));
     setTluszcz(String(tluszczG));
     setWegle(String(wegleG));
+    setBlonnik(String(podpowiedzBlonnika(cel)));
   }
 
   async function zapisz() {
@@ -143,6 +148,7 @@ export default function FormularzCelow() {
           bialko_g: Math.round(b),
           tluszcz_g: Math.round(t),
           wegle_g: Math.round(w),
+          blonnik_g: liczba(blonnik) ? Math.round(liczba(blonnik)) : null,
         },
         { onConflict: 'profil_id,obowiazuje_od' }
       );
@@ -177,6 +183,19 @@ export default function FormularzCelow() {
         <Pole etykieta="Białko (g)" value={bialko} onChangeText={setBialko} inputMode="numeric" placeholder="142" />
         <Pole etykieta="Tłuszcz (g)" value={tluszcz} onChangeText={setTluszcz} inputMode="numeric" placeholder="82" />
         <Pole etykieta="Węglowodany (g)" value={wegle} onChangeText={setWegle} inputMode="numeric" placeholder="246" />
+        <Pole
+          etykieta="Błonnik (g)"
+          value={blonnik}
+          onChangeText={setBlonnik}
+          inputMode="numeric"
+          placeholder={String(podpowiedzBlonnika(kcal || zapotrzeb))}
+        />
+        <ThemedText type="small" themeColor="textSecondary">
+          Podpowiedź: {podpowiedzBlonnika(kcal || zapotrzeb)} g — czyli {BLONNIK.naTysiacKcal} g
+          na każde 1000 kcal. EFSA podaje {BLONNIK.efsaDorosli} g dla dorosłych
+          (u osób starszych dopuszcza {BLONNIK.efsaStarsi} g), WHO {BLONNIK.whoOd}–
+          {BLONNIK.whoDo} g. Źródła się różnią, więc wartość ustawiasz sam.
+        </ThemedText>
 
         <Przycisk tytul="Podpowiedz wartości" wariant="poboczny" onPress={zaproponuj} />
       </Karta>
@@ -195,6 +214,13 @@ export default function FormularzCelow() {
           <ThemedText type="small" themeColor="textSecondary">
             Próg białka na posiłek: {progBialkaNaPosilek(b)} g
           </ThemedText>
+          {waga !== null && (
+            <ThemedText type="small" themeColor="textSecondary">
+              Płyny: około {(wskazowkaWodna(waga) / 1000).toFixed(1).replace('.', ',')} l dziennie
+              (30 ml na kilogram). To wskazówka, nie cel — aplikacja nie liczy wypitej wody.
+              Przy chorobach nerek i serca ilość płynów ustala lekarz.
+            </ThemedText>
+          )}
         </Karta>
       )}
 

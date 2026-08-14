@@ -9,11 +9,14 @@
 
 import {
   kcalZMakro,
+  ocenaBlonnika,
+  podpowiedzBlonnika,
   oceniaCele,
   progBialkaNaPosilek,
   przemianaPodstawowa,
   udzialyProcentowe,
   wiekZDaty,
+  wskazowkaWodna,
   zapotrzebowanie,
 } from '../lib/zywienie.ts';
 
@@ -99,6 +102,24 @@ sprawdz('białko powyżej 35% energii: zablokowane',
 const wzorcowy = oceniaCele({ kcal: 1940, bialko: 100, tluszcz: 60, wegle: 250 }, 1500, 2000);
 sprawdz('plan mieszczący się w AMDR: brak blokad', wzorcowy.blokady.length, 0);
 sprawdz('plan mieszczący się w AMDR: brak ostrzeżeń', wzorcowy.ostrzezenia.length, 0);
+
+// =============================================================
+//  Błonnik i woda
+// =============================================================
+
+// 14 g na 1000 kcal
+sprawdz('podpowiedź błonnika przy 2290 kcal', podpowiedzBlonnika(2290), 32);
+sprawdz('podpowiedź błonnika przy 1600 kcal', podpowiedzBlonnika(1600), 22);
+sprawdz('podpowiedź błonnika przy 2800 kcal', podpowiedzBlonnika(2800), 39);
+
+sprawdz('brak celu błonnikowego nie daje uwagi', ocenaBlonnika(20, null), null);
+sprawdz('cel osiągnięty nie daje uwagi', ocenaBlonnika(35, 32), null);
+sprawdz('niedobór błonnika opisany',
+  ocenaBlonnika(20, 32)?.startsWith('Do celu błonnikowego brakuje 12 g'), true);
+
+// 30 ml na kilogram, zaokrąglone do pełnych 100 ml
+sprawdz('wskazówka wodna przy 90 kg', wskazowkaWodna(90), 2700);
+sprawdz('wskazówka wodna przy 65 kg', wskazowkaWodna(65), 2000);
 
 // =============================================================
 

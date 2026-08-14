@@ -25,6 +25,43 @@ export type Makro = {
   wegle: number;
 };
 
+/** Zalecenia dotyczące błonnika — różnią się między źródłami, więc podajemy wszystkie. */
+export const BLONNIK = {
+  /** Gramy na każde 1000 kcal — podstawa podpowiedzi. */
+  naTysiacKcal: 14,
+  /** EFSA: wartość wystarczająca dla dorosłych. */
+  efsaDorosli: 25,
+  /** EFSA: dopuszczalne obniżenie u osób starszych. */
+  efsaStarsi: 20,
+  /** WHO. */
+  whoOd: 27,
+  whoDo: 40,
+} as const;
+
+/**
+ * Podpowiadany cel błonnikowy: 14 g na każde 1000 kcal.
+ *
+ * Skaluje się z zapotrzebowaniem, więc osoba jedząca 1600 kcal i osoba jedząca
+ * 2800 kcal nie dostaną tej samej liczby. Wartość jest podpowiedzią —
+ * użytkownik może ją nadpisać.
+ */
+export function podpowiedzBlonnika(kcal: number): number {
+  return Math.round((kcal / 1000) * BLONNIK.naTysiacKcal);
+}
+
+/**
+ * Orientacyjne dzienne zapotrzebowanie na płyny, w mililitrach.
+ *
+ * Przyjmujemy 30 ml na kilogram masy ciała. To WSKAZÓWKA, nie cel —
+ * aplikacja nie liczy wypitej wody, bo nie pochodzi ona z przepisów.
+ *
+ * Zapotrzebowanie rośnie przy wysiłku i upale, a przy chorobach nerek i serca
+ * bywa ograniczane przez lekarza. Dlatego pokazujemy je z zastrzeżeniem.
+ */
+export function wskazowkaWodna(wagaKg: number): number {
+  return Math.round((wagaKg * 30) / 100) * 100;
+}
+
 /** Ile kalorii daje gram każdego składnika. */
 export const KCAL_NA_GRAM = { bialko: 4, tluszcz: 9, wegle: 4 } as const;
 
@@ -180,6 +217,16 @@ export function oceniaCele(makro: Makro, przemiana: number, zapotrzebowanieDzien
   }
 
   return { blokady, ostrzezenia };
+}
+
+/** Ocena spożycia błonnika względem celu — informacja, nigdy blokada. */
+export function ocenaBlonnika(zjedzone: number, cel: number | null): string | null {
+  if (!cel || cel <= 0) return null;
+
+  const brakuje = cel - zjedzone;
+  if (brakuje <= 0) return null;
+
+  return `Do celu błonnikowego brakuje ${Math.round(brakuje)} g. Strączki, kasze i warzywa uzupełnią go najszybciej.`;
 }
 
 /** Próg białka na jeden posiłek: cel dzienny podzielony na trzy posiłki. */
