@@ -68,6 +68,8 @@ export default function FormularzPrzepisu() {
   const [ratunek, setRatunek] = useState('');
   const [etapy, setEtapy] = useState<Etap[]>([]);
 
+  // Diagnostyka: ile razy wywołano dodanie składnika do przepisu.
+  const [probDodania, setProbDodania] = useState(0);
   const [dodawanieSkladnika, setDodawanieSkladnika] = useState(false);
   const [zajety, setZajety] = useState(false);
   const [blad, setBlad] = useState<string | null>(null);
@@ -139,6 +141,7 @@ export default function FormularzPrzepisu() {
     nazwa.trim().length >= 3 && wybrane.length > 0 && wybrane.every((w) => liczba(w.gramy) > 0);
 
   function dodajSkladnik(s: Skladnik) {
+    setProbDodania((n) => n + 1);
     setWybrane((p) => [
       ...p,
       { skladnik: s, gramy: '', jednostka: 'g', stan: '', zamiennik: '', opisPotoczny: '' },
@@ -443,7 +446,8 @@ export default function FormularzPrzepisu() {
           </ThemedText>
         ) : (
           <ThemedText type="small" themeColor="textSecondary">
-            Do wyboru: {dostepne.length} składników w bazie.
+            Do wyboru: {dostepne.length} składników w bazie. Prób dodania: {probDodania},
+            w przepisie: {wybrane.length}.
           </ThemedText>
         )}
 
