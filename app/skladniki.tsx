@@ -28,7 +28,7 @@ import {
 const SZEROKOSC_ROZWIJANIA = 36;
 
 const KOLUMNY = [
-  { klucz: 'nazwa', tytul: 'Nazwa', szerokosc: 220, liczba: false },
+  { klucz: 'nazwa', tytul: 'Nazwa', szerokosc: 280, liczba: false },
   { klucz: 'kcal_100g', tytul: 'kcal', szerokosc: 64, liczba: true },
   { klucz: 'bialko_100g', tytul: 'B', szerokosc: 56, liczba: true },
   { klucz: 'tluszcz_100g', tytul: 'T', szerokosc: 56, liczba: true },
@@ -59,6 +59,20 @@ export default function EkranSkladnikow() {
   const [rozwiniete, setRozwiniete] = useState<Set<string>>(new Set());
   const [trybEdycji, setTrybEdycji] = useState(false);
   const [zapisywany, setZapisywany] = useState<string | null>(null);
+
+  /** Wiersz dopisywany na dole tabeli — jak pusty wiersz w arkuszu. */
+  const PUSTY_WIERSZ: Record<string, string> = {
+    nazwa: '',
+    kcal_100g: '',
+    bialko_100g: '',
+    tluszcz_100g: '',
+    wegle_100g: '',
+    cukry_wolne_100g: '',
+    nova: '',
+    gramatura_opakowania_g: '',
+  };
+  const [nowyWiersz, setNowyWiersz] = useState<Record<string, string>>(PUSTY_WIERSZ);
+  const [dopisywanie, setDopisywanie] = useState(false);
 
   const [wczytywanie, setWczytywanie] = useState(true);
   const [blad, setBlad] = useState<string | null>(null);
@@ -180,6 +194,53 @@ export default function EkranSkladnikow() {
     }
   }
 
+  /** Zamienia tekst z komórki na liczbę; puste pole daje wartość domyślną. */
+  function zKomorki(tekst: string, domyslna: number | null): number | null {
+    const t = (tekst ?? '').replace(',', '.').trim();
+    if (!t) return domyslna;
+    const n = Number(t);
+    return Number.isFinite(n) ? n : domyslna;
+  }
+
+  async function dopiszWiersz() {
+    setBlad(null);
+
+    const dane: DaneSkladnika = {
+      nazwa: (nowyWiersz.nazwa ?? '').trim(),
+      zrodlo: 'wlasne',
+      kcal_100g: zKomorki(nowyWiersz.kcal_100g, NaN) as number,
+      bialko_100g: zKomorki(nowyWiersz.bialko_100g, NaN) as number,
+      tluszcz_100g: zKomorki(nowyWiersz.tluszcz_100g, NaN) as number,
+      wegle_100g: zKomorki(nowyWiersz.wegle_100g, NaN) as number,
+      cukry_ogolem_100g: zKomorki(nowyWiersz.cukry_wolne_100g, 0) as number,
+      cukry_wolne_100g: zKomorki(nowyWiersz.cukry_wolne_100g, 0) as number,
+      nova: zKomorki(nowyWiersz.nova, null),
+      gramatura_opakowania_g: zKomorki(nowyWiersz.gramatura_opakowania_g, null),
+      tagi: [],
+    };
+
+    const problemy = sprawdzSkladnik(dane);
+    if (problemy.length > 0) {
+      setBlad(problemy[0]);
+      return;
+    }
+
+    setDopisywanie(true);
+    try {
+      const zapisany = await zapiszSkladnik(dane);
+      setSkladniki((p) => [...p, zapisany]);
+      setNowyWiersz(PUSTY_WIERSZ);
+    } catch (e) {
+      setBlad(komunikatBledu(e));
+    } finally {
+      setDopisywanie(false);
+    }
+  }
+
+  const nowyWierszWypelniony = Boolean(
+    (nowyWiersz.nazwa ?? '').trim() && (nowyWiersz.kcal_100g ?? '').trim()
+  );
+
   async function usun(s: Skladnik) {
     setBlad(null);
     try {
@@ -224,6 +285,7 @@ export default function EkranSkladnikow() {
 
   return (
     <Ekran
+      pelnaSzerokosc
       tytul="Składniki"
       podtytul={
         wczytywanie
@@ -426,8 +488,57 @@ export default function EkranSkladnikow() {
               </View>
             );
           })}
+
+          {/* Pusty wiersz na dole — dopisywanie bez opuszczania tabeli. */}
+          {trybEdycji && (
+            <View
+              style={[
+                styles.wiersz,
+                styles.wierszNowy,
+                { borderColor: motyw.accent, backgroundColor: motyw.background },
+              ]}>
+              <View style={styles.komorkaRozwijania}>
+                <Ionicons name="add" size={16} color={motyw.accent} />
+              </View>
+
+              <View style={styles.komorki}>
+                {KOLUMNY.map((k) => (
+                  <KomorkaEdytowalna
+                    key={k.klucz}
+                    wartosc={k.klucz === 'uzycia' ? '' : (nowyWiersz[k.klucz] ?? '')}
+                    szerokosc={k.szerokosc}
+                    liczba={k.liczba}
+                    edytowalna={k.klucz !== 'uzycia'}
+                    onZapisz={(nowa) =>
+                      setNowyWiersz((p) => ({ ...p, [k.klucz]: nowa }))
+                    }
+                  />
+                ))}
+              </View>
+
+              <Pressable
+                onPress={dopiszWiersz}
+                disabled={!nowyWierszWypelniony || dopisywanie}
+                hitSlop={8}
+                accessibilityLabel="Dopisz składnik"
+                style={styles.komorkaKosza}>
+                <Ionicons
+                  name={dopisywanie ? 'sync' : 'checkmark-circle'}
+                  size={20}
+                  color={nowyWierszWypelniony ? motyw.accent : motyw.border}
+                />
+              </Pressable>
+            </View>
+          )}
         </View>
       </ScrollView>
+
+      {trybEdycji && (
+        <ThemedText type="small" themeColor="textSecondary">
+          Ostatni wiersz z ramką służy do dopisywania. Wypełnij co najmniej nazwę
+          i kalorie, potem dotknij znaku po prawej stronie wiersza.
+        </ThemedText>
+      )}
 
       {!wczytywanie && widoczne.length === 0 && (
         <ThemedText type="small" themeColor="textSecondary">
@@ -467,6 +578,11 @@ const styles = StyleSheet.create({
   },
   naglowek: {
     borderBottomWidth: 2,
+  },
+  wierszNowy: {
+    borderWidth: 1,
+    borderRadius: Spacing.one,
+    marginTop: Spacing.two,
   },
   komorka: {
     paddingHorizontal: Spacing.one,

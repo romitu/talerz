@@ -113,6 +113,18 @@ export function sprawdzSkladnik(dane: Partial<DaneSkladnika>): string[] {
  */
 export function ostrzezenieOKaloriach(dane: Partial<DaneSkladnika>): string | null {
   const kcal = dane.kcal_100g ?? 0;
+
+  // Same zera oznaczają zwykle niewypełniony formularz, a nie produkt bez wartości.
+  const wszystkoZero =
+    kcal === 0 &&
+    (dane.bialko_100g ?? 0) === 0 &&
+    (dane.tluszcz_100g ?? 0) === 0 &&
+    (dane.wegle_100g ?? 0) === 0;
+
+  if (wszystkoZero) {
+    return 'Wszystkie wartości są zerowe. Uzupełnij dane z etykiety, inaczej każde danie z tym składnikiem policzy się źle.';
+  }
+
   if (kcal <= 0) return null;
 
   const zMakro =
