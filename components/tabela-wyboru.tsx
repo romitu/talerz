@@ -61,6 +61,9 @@ export function TabelaWyboru<T>({
 }: TabelaWyboruProps<T>) {
   const motyw = useTheme();
   const [fraza, setFraza] = useState('');
+  // Diagnostyka: ile razy dotknięcie wiersza doszło do skutku.
+  const [dotkniec, setDotkniec] = useState(0);
+  const [ostatnie, setOstatnie] = useState<string | null>(null);
   const { width: szerokoscOkna } = useWindowDimensions();
 
   const szerokoscMinimalna =
@@ -128,7 +131,11 @@ export function TabelaWyboru<T>({
               return (
                 <View key={id}>
                   <Pressable
-                    onPress={() => onPrzelacz(element)}
+                    onPress={() => {
+                      setDotkniec((n) => n + 1);
+                      setOstatnie(kolumny[0]?.wartosc(element) ?? id);
+                      onPrzelacz(element);
+                    }}
                     accessibilityRole="button"
                     accessibilityState={{ selected: zaznaczony }}
                     style={({ pressed }) => [
@@ -143,13 +150,18 @@ export function TabelaWyboru<T>({
                       },
                       pressed && styles.wcisniety,
                     ]}>
-                    <View style={styles.komorkaZnaku}>
+                    <Pressable
+                      onPress={() => onPrzelacz(element)}
+                      hitSlop={8}
+                      accessibilityRole="button"
+                      accessibilityLabel={zaznaczony ? 'Usuń z przepisu' : 'Dodaj do przepisu'}
+                      style={styles.komorkaZnaku}>
                       <Ionicons
                         name={zaznaczony ? 'checkmark-circle' : 'add-circle-outline'}
-                        size={20}
-                        color={zaznaczony ? motyw.accent : motyw.textSecondary}
+                        size={22}
+                        color={zaznaczony ? motyw.accent : motyw.accent}
                       />
-                    </View>
+                    </Pressable>
 
                     {kolumny.map((k) => (
                       <View key={k.tytul} style={[styles.komorka, stylKolumny(k)]}>
@@ -184,6 +196,12 @@ export function TabelaWyboru<T>({
           </ScrollView>
         </View>
       </Poziomo>
+
+      {dotkniec > 0 && (
+        <ThemedText type="small" themeColor="textSecondary">
+          Diagnostyka: dotknięć {dotkniec}, ostatnie „{ostatnie}”, wybranych {wybrane.size}.
+        </ThemedText>
+      )}
 
       {stopka?.(fraza.trim())}
     </View>
