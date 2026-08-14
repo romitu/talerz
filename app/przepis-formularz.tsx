@@ -51,6 +51,7 @@ export default function FormularzPrzepisu() {
   const [nowyKrok, setNowyKrok] = useState('');
   const [etapKroku, setEtapKroku] = useState<'przygotowanie' | 'wykonanie'>('przygotowanie');
 
+  const [pokazWszystkie, setPokazWszystkie] = useState(false);
   const [dodawanieSkladnika, setDodawanieSkladnika] = useState(false);
   const [zajety, setZajety] = useState(false);
   const [blad, setBlad] = useState<string | null>(null);
@@ -69,12 +70,21 @@ export default function FormularzPrzepisu() {
 
   const podpowiedzi = useMemo(() => {
     const fraza = szukaj.trim().toLowerCase();
-    if (fraza.length < 2) return [];
     const juzWybrane = new Set(wybrane.map((w) => w.skladnik.id));
-    return dostepne
-      .filter((s) => !juzWybrane.has(s.id) && s.nazwa.toLowerCase().includes(fraza))
-      .slice(0, 6);
-  }, [szukaj, dostepne, wybrane]);
+    const wolne = dostepne.filter((s) => !juzWybrane.has(s.id));
+
+    // Puste pole i włączony podgląd — pokazujemy całą bazę, żeby dało się
+    // przewinąć i wybrać, gdy nie pamięta się nazwy.
+    if (!fraza) return pokazWszystkie ? wolne : [];
+
+    return wolne
+      .filter(
+        (s) =>
+          s.nazwa.toLowerCase().includes(fraza) ||
+          s.tagi.some((t) => t.toLowerCase().includes(fraza))
+      )
+      .slice(0, 12);
+  }, [szukaj, dostepne, wybrane, pokazWszystkie]);
 
   // Makro liczone na żywo, tak samo jak potem policzy je baza.
   const makro = useMemo(() => {
@@ -231,32 +241,61 @@ export default function FormularzPrzepisu() {
           SKŁADNIKI
         </ThemedText>
 
+        <ThemedText type="small" themeColor="textSecondary">
+          Krok 1: znajdź składnik i dotknij go, żeby dodać. Krok 2: wpisz, ile gramów
+          wchodzi w skład dania.
+        </ThemedText>
+
         <Pole
-          etykieta="Szukaj w bazie"
+          etykieta="Wyszukaj składnik"
           value={szukaj}
-          onChangeText={setSzukaj}
-          placeholder="dorsz, kasza, oliwa…"
+          onChangeText={(t) => {
+            setSzukaj(t);
+            if (t) setPokazWszystkie(false);
+          }}
+          placeholder="dorsz, kasza, ryba, warzywo…"
         />
 
-        {podpowiedzi.map((s) => (
-          <Pressable
-            key={s.id}
-            onPress={() => dodajSkladnik(s)}
-            style={({ pressed }) => [
-              styles.podpowiedz,
-              { borderColor: motyw.border, backgroundColor: motyw.background },
-              pressed && styles.wcisniety,
-            ]}>
-            <ThemedText type="small">{s.nazwa}</ThemedText>
-            <ThemedText type="small" themeColor="textSecondary">
-              {s.kcal_100g} kcal / 100 g
-            </ThemedText>
-          </Pressable>
-        ))}
+        {!szukaj.trim() && (
+          <Przycisk
+            tytul={
+              pokazWszystkie
+                ? 'Ukryj listę'
+                : `Nie pamiętasz nazwy? Pokaż wszystkie (${dostepne.length})`
+            }
+            wariant="poboczny"
+            onPress={() => setPokazWszystkie((p) => !p)}
+          />
+        )}
 
-        {szukaj.trim().length >= 2 && podpowiedzi.length === 0 && !dodawanieSkladnika && (
+        {podpowiedzi.length > 0 && (
+          <View style={[styles.lista, { borderColor: motyw.border }]}>
+            {podpowiedzi.map((s) => (
+              <Pressable
+                key={s.id}
+                onPress={() => dodajSkladnik(s)}
+                accessibilityRole="button"
+                accessibilityLabel={`Dodaj ${s.nazwa} do przepisu`}
+                style={({ pressed }) => [
+                  styles.podpowiedz,
+                  { borderColor: motyw.border },
+                  pressed && styles.wcisniety,
+                ]}>
+                <Ionicons name="add-circle-outline" size={20} color={motyw.accent} />
+                <View style={styles.trescPodpowiedzi}>
+                  <ThemedText type="small">{s.nazwa}</ThemedText>
+                  <ThemedText type="small" themeColor="textSecondary">
+                    {s.kcal_100g} kcal · {s.bialko_100g} g białka / 100 g
+                  </ThemedText>
+                </View>
+              </Pressable>
+            ))}
+          </View>
+        )}
+
+        {szukaj.trim() && podpowiedzi.length === 0 && !dodawanieSkladnika && (
           <ThemedText type="small" themeColor="textSecondary">
-            Nic nie znaleziono w bazie.
+            Nic takiego nie ma w bazie — możesz dodać poniżej.
           </ThemedText>
         )}
 
@@ -292,9 +331,9 @@ export default function FormularzPrzepisu() {
           </View>
         )}
 
-        {wybrane.length === 0 && (
-          <ThemedText type="small" themeColor="textSecondary">
-            Bez składników nie ma z czego policzyć makro.
+        {wybrane.length > 0 && (
+          <ThemedText type="smallBold" themeColor="textSecondary">
+            W TYM DANIU ({wybrane.length})
           </ThemedText>
         )}
 
@@ -408,12 +447,19 @@ export default function FormularzPrzepisu() {
 
 const styles = StyleSheet.create({
   grupa: { gap: Spacing.three },
-  podpowiedz: {
+  lista: {
     borderWidth: 1,
     borderRadius: Spacing.two,
-    padding: Spacing.two,
-    gap: 2,
+    overflow: 'hidden',
   },
+  podpowiedz: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.two,
+    padding: Spacing.two,
+    borderBottomWidth: 1,
+  },
+  trescPodpowiedzi: { flex: 1, gap: 2 },
   wcisniety: { opacity: 0.7 },
   skladnik: {
     borderWidth: 1,
