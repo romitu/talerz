@@ -37,6 +37,23 @@ Zakładanie trwa 2–3 minuty.
 
 Powinno pojawić się `Success. No rows returned`.
 
+### Sprawdzenie, czego brakuje
+
+Po każdej zmianie w projekcie mogą dojść nowe migracje. Zamiast pamiętać,
+które już wgrałeś, uruchom w SQL Editor plik **`sprawdz-migracje.sql`**.
+Dostaniesz tabelę:
+
+```
+0001_schemat_poczatkowy       TAK
+0002_etapy_przepisu           TAK
+0007_porcjowanie              BRAKUJE — wgraj ten plik
+```
+
+Brakujące wgrywaj po kolei, od najniższego numeru.
+
+Objaw niewgranej migracji to komunikat w aplikacji w rodzaju
+`column przepisy.porcjowanie does not exist`.
+
 ### Krok 3 — sprawdzenie
 
 W panelu **Table Editor** powinno być widocznych 19 tabel: `cele`, `czasy_sprzet`,
