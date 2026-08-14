@@ -68,8 +68,6 @@ export default function FormularzPrzepisu() {
   const [ratunek, setRatunek] = useState('');
   const [etapy, setEtapy] = useState<Etap[]>([]);
 
-  // Diagnostyka: ile razy wywołano dodanie składnika do przepisu.
-  const [probDodania, setProbDodania] = useState(0);
   const [dodawanieSkladnika, setDodawanieSkladnika] = useState(false);
   const [zajety, setZajety] = useState(false);
   const [blad, setBlad] = useState<string | null>(null);
@@ -120,8 +118,6 @@ export default function FormularzPrzepisu() {
 
   const wybraneId = useMemo(() => new Set(wybrane.map((w) => w.skladnik.id)), [wybrane]);
 
-  console.log('[Talerz] przerysowanie formularza, w przepisie:', wybrane.length);
-
   const sprzetId = useMemo(
     () => new Set(katalogSprzetu.filter((x) => sprzet.includes(x.nazwa)).map((x) => x.id)),
     [katalogSprzetu, sprzet]
@@ -154,7 +150,6 @@ export default function FormularzPrzepisu() {
     nazwa.trim().length >= 3 && wybrane.length > 0 && wybrane.every((w) => liczba(w.gramy) > 0);
 
   const dodajSkladnik = useCallback((s: Skladnik) => {
-    setProbDodania((n) => n + 1);
     setWybrane((p) => [
       ...p,
       { skladnik: s, gramy: '', jednostka: 'g', stan: '', zamiennik: '', opisPotoczny: '' },
@@ -169,8 +164,6 @@ export default function FormularzPrzepisu() {
    * bieżący stan, więc dodawanie i usuwanie nie rozjeżdża się z ekranem.
    */
   const przelaczSkladnik = useCallback((s: Skladnik) => {
-    console.log('[Talerz] dotknięto:', s.nazwa, s.id);
-    setProbDodania((n) => n + 1);
     setWybrane((poprzednie) => {
       const juz = poprzednie.some((w) => w.skladnik.id === s.id);
       const nowy: WybranySkladnik = {
@@ -182,7 +175,6 @@ export default function FormularzPrzepisu() {
         opisPotoczny: '',
       };
       const wynik = juz ? poprzednie.filter((w) => w.skladnik.id !== s.id) : [...poprzednie, nowy];
-      console.log('[Talerz] zapis stanu: przed', poprzednie.length, '→ po', wynik.length);
       return wynik;
     });
   }, []);
@@ -485,8 +477,7 @@ export default function FormularzPrzepisu() {
           </ThemedText>
         ) : (
           <ThemedText type="small" themeColor="textSecondary">
-            Do wyboru: {dostepne.length} składników w bazie. Prób dodania: {probDodania},
-            w przepisie: {wybrane.length}.
+            Do wyboru: {dostepne.length} składników w bazie. W przepisie: {wybrane.length}.
           </ThemedText>
         )}
 

@@ -61,9 +61,6 @@ export function TabelaWyboru<T>({
 }: TabelaWyboruProps<T>) {
   const motyw = useTheme();
   const [fraza, setFraza] = useState('');
-  // Diagnostyka: ile razy dotknięcie wiersza doszło do skutku.
-  const [dotkniec, setDotkniec] = useState(0);
-  const [ostatnie, setOstatnie] = useState<string | null>(null);
   const { width: szerokoscOkna } = useWindowDimensions();
 
   const szerokoscMinimalna =
@@ -76,9 +73,7 @@ export function TabelaWyboru<T>({
    */
   const miesciSie = szerokoscOkna >= szerokoscMinimalna + 64;
 
-  function przelacz(element: T, id: string) {
-    setDotkniec((n) => n + 1);
-    setOstatnie(kolumny[0]?.wartosc(element) ?? id);
+  function przelacz(element: T) {
     onPrzelacz(element);
   }
 
@@ -88,6 +83,12 @@ export function TabelaWyboru<T>({
       : { width: k.elastyczna ? MIN_ELASTYCZNEJ : (k.szerokosc ?? 80) };
 
   const szerokoscTabeli = miesciSie ? ('100%' as const) : szerokoscMinimalna;
+
+  // Wybrane w kolejności, w jakiej występują w danych — nie zmienia się przy filtrowaniu.
+  const wybraneElementy = useMemo(
+    () => dane.filter((x) => wybrane.has(klucz(x))),
+    [dane, wybrane, klucz]
+  );
 
   const widoczne = useMemo(() => {
     const f = fraza.trim().toLowerCase();
@@ -156,7 +157,7 @@ export function TabelaWyboru<T>({
                       },
                     ]}>
                     <Pressable
-                      onPress={() => przelacz(element, id)}
+                      onPress={() => przelacz(element)}
                       hitSlop={6}
                       accessibilityRole="button"
                       accessibilityLabel={zaznaczony ? 'Usuń z wyboru' : 'Dodaj do wyboru'}
@@ -169,7 +170,7 @@ export function TabelaWyboru<T>({
                     </Pressable>
 
                     <Pressable
-                      onPress={() => przelacz(element, id)}
+                      onPress={() => przelacz(element)}
                       accessibilityRole="button"
                       accessibilityState={{ selected: zaznaczony }}
                       style={({ pressed }) => [styles.komorki, pressed && styles.wcisniety]}>
@@ -186,15 +187,6 @@ export function TabelaWyboru<T>({
                     </Pressable>
                   </View>
 
-                  {zaznaczony && szczegoly && (
-                    <View
-                      style={[
-                        styles.szczegoly,
-                        { borderColor: motyw.accent, backgroundColor: motyw.background },
-                      ]}>
-                      {szczegoly(element)}
-                    </View>
-                  )}
                 </View>
               );
             })}
@@ -208,11 +200,33 @@ export function TabelaWyboru<T>({
         </View>
       </Poziomo>
 
-      {dotkniec > 0 && (
-        <ThemedText type="small" themeColor="textSecondary">
-          Diagnostyka: dotknięć {dotkniec}, ostatnie „{ostatnie}”, wybranych {wybrane.size}.
-        </ThemedText>
-      )}
+      {/*
+        Pola do uzupełnienia stoją POD tabelą, a nie w jej środku.
+        Wewnątrz przewijanego okienka wypadały poniżej krawędzi i wyglądało to,
+        jakby dotknięcie nic nie dało — a drugie kliknięcie kasowało wybór.
+      */}
+      {szczegoly &&
+        wybraneElementy.map((element) => (
+          <View
+            key={klucz(element)}
+            style={[
+              styles.wybrany,
+              { borderColor: motyw.accent, backgroundColor: motyw.backgroundElement },
+            ]}>
+            <View style={styles.naglowekWybranego}>
+              <ThemedText type="smallBold" style={styles.nazwaWybranego}>
+                {kolumny[0]?.wartosc(element)}
+              </ThemedText>
+              <Pressable
+                onPress={() => przelacz(element)}
+                hitSlop={8}
+                accessibilityLabel="Usuń z wyboru">
+                <Ionicons name="close" size={18} color={motyw.textSecondary} />
+              </Pressable>
+            </View>
+            {szczegoly(element)}
+          </View>
+        ))}
 
       {stopka?.(fraza.trim())}
     </View>
@@ -257,12 +271,18 @@ const styles = StyleSheet.create({
   },
   doPrawej: { textAlign: 'right' },
   wcisniety: { opacity: 0.7 },
-  szczegoly: {
-    borderLeftWidth: 3,
-    borderBottomWidth: 1,
-    paddingVertical: Spacing.two,
-    paddingHorizontal: Spacing.three,
+  wybrany: {
+    borderWidth: 1,
+    borderRadius: Spacing.two,
+    padding: Spacing.three,
     gap: Spacing.two,
   },
+  naglowekWybranego: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    gap: Spacing.two,
+  },
+  nazwaWybranego: { flex: 1 },
   pusto: { padding: Spacing.three },
 });
