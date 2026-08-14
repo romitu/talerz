@@ -8,7 +8,23 @@ na telefonie.
 
 ---
 
-## Uruchomienie
+## Uruchomienie — najprościej
+
+**Kliknij dwukrotnie `Uruchom Talerz.cmd`.**
+
+Plik sam sprawdzi, czy wszystko jest na miejscu, w razie potrzeby pobierze
+biblioteki i otworzy aplikację w przeglądarce. Kod QR dla telefonu pojawi się
+w oknie konsoli.
+
+Gdy coś zacznie się dziwnie zachowywać — `Napraw i uruchom.cmd`. Czyści pamięć
+podręczną, a w razie potrzeby pobiera biblioteki od nowa.
+
+**Skrót na pulpicie:** kliknij prawym przyciskiem na `Uruchom Talerz.cmd` →
+Pokaż więcej opcji → Wyślij do → Pulpit (utwórz skrót).
+
+---
+
+## Uruchomienie z terminala
 
 Otwórz PowerShell w tym folderze: kliknij prawym przyciskiem na puste miejsce
 w folderze `talerz` w Eksploratorze plików i wybierz **„Otwórz w terminalu"**.
