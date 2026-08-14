@@ -26,7 +26,13 @@ type WybranySkladnik = {
   opisPotoczny: string;
 };
 
-type Krok = { etap: 'przygotowanie' | 'wykonanie'; tresc: string };
+type Krok = { tresc: string; uwaga: boolean };
+
+type Etap = {
+  nazwa: string;
+  minuty: string;
+  kroki: Krok[];
+};
 
 function liczba(tekst: string): number {
   const n = Number(String(tekst).replace(',', '.').trim());
@@ -47,9 +53,7 @@ export default function FormularzPrzepisu() {
   const [kuchnie, setKuchnie] = useState<Kuchnia[]>(['srodziemnomorska']);
   const [trwalosc, setTrwalosc] = useState<'0' | '1' | '2' | '3'>('0');
   const [czas, setCzas] = useState('');
-  const [kroki, setKroki] = useState<Krok[]>([]);
-  const [nowyKrok, setNowyKrok] = useState('');
-  const [etapKroku, setEtapKroku] = useState<'przygotowanie' | 'wykonanie'>('przygotowanie');
+  const [etapy, setEtapy] = useState<Etap[]>([]);
 
   const [pokazWszystkie, setPokazWszystkie] = useState(false);
   const [dodawanieSkladnika, setDodawanieSkladnika] = useState(false);
@@ -124,11 +128,54 @@ export default function FormularzPrzepisu() {
     setWybrane((p) => p.filter((w) => w.skladnik.id !== id));
   }
 
-  function dodajKrok() {
-    if (!nowyKrok.trim()) return;
-    setKroki((p) => [...p, { etap: etapKroku, tresc: nowyKrok.trim() }]);
-    setNowyKrok('');
+  function dodajEtap() {
+    setEtapy((p) => [...p, { nazwa: '', minuty: '', kroki: [] }]);
   }
+
+  function zmienEtap(indeks: number, pole: 'nazwa' | 'minuty', wartosc: string) {
+    setEtapy((p) => p.map((e, i) => (i === indeks ? { ...e, [pole]: wartosc } : e)));
+  }
+
+  function usunEtap(indeks: number) {
+    setEtapy((p) => p.filter((_, i) => i !== indeks));
+  }
+
+  function przesunEtap(indeks: number, oIle: number) {
+    setEtapy((p) => {
+      const cel = indeks + oIle;
+      if (cel < 0 || cel >= p.length) return p;
+      const nowe = [...p];
+      [nowe[indeks], nowe[cel]] = [nowe[cel], nowe[indeks]];
+      return nowe;
+    });
+  }
+
+  function dodajKrok(indeksEtapu: number) {
+    setEtapy((p) =>
+      p.map((e, i) => (i === indeksEtapu ? { ...e, kroki: [...e.kroki, { tresc: '', uwaga: false }] } : e))
+    );
+  }
+
+  function zmienKrok(indeksEtapu: number, indeksKroku: number, zmiana: Partial<Krok>) {
+    setEtapy((p) =>
+      p.map((e, i) =>
+        i === indeksEtapu
+          ? { ...e, kroki: e.kroki.map((k, j) => (j === indeksKroku ? { ...k, ...zmiana } : k)) }
+          : e
+      )
+    );
+  }
+
+  function usunKrok(indeksEtapu: number, indeksKroku: number) {
+    setEtapy((p) =>
+      p.map((e, i) =>
+        i === indeksEtapu ? { ...e, kroki: e.kroki.filter((_, j) => j !== indeksKroku) } : e
+      )
+    );
+  }
+
+  /** Suma czasów etapów — górne oszacowanie, bo etapy potrafią się nakładać. */
+  const czasRazem = etapy.reduce((suma, e) => suma + liczba(e.minuty), 0);
 
   async function zapisz() {
     setBlad(null);
@@ -166,20 +213,43 @@ export default function FormularzPrzepisu() {
       );
       if (bladSkladnikow) throw bladSkladnikow;
 
-      if (kroki.length > 0) {
-        const numeracja = { przygotowanie: 0, wykonanie: 0 };
-        const { error: bladKrokow } = await supabase.from('kroki').insert(
-          kroki.map((k) => {
-            numeracja[k.etap] += 1;
-            return {
+      // Etapy zapisujemy razem, żeby poznać ich identyfikatory,
+      // a dopiero potem kroki przypisane do każdego z nich.
+      const doZapisu = etapy.filter((e) => e.nazwa.trim());
+
+      if (doZapisu.length > 0) {
+        const { data: zapisaneEtapy, error: bladEtapow } = await supabase
+          .from('etapy')
+          .insert(
+            doZapisu.map((e, i) => ({
               przepis_id: przepis.id,
-              etap: k.etap,
-              kolejnosc: numeracja[k.etap],
-              tresc: k.tresc,
-            };
-          })
+              kolejnosc: i + 1,
+              nazwa: e.nazwa.trim(),
+              minuty: liczba(e.minuty) || null,
+            }))
+          )
+          .select('id, kolejnosc');
+        if (bladEtapow) throw bladEtapow;
+
+        const wedlugKolejnosci = new Map(
+          (zapisaneEtapy ?? []).map((e) => [e.kolejnosc as number, e.id as string])
         );
-        if (bladKrokow) throw bladKrokow;
+
+        const krokiDoZapisu = doZapisu.flatMap((e, i) =>
+          e.kroki
+            .filter((k) => k.tresc.trim())
+            .map((k, j) => ({
+              etap_id: wedlugKolejnosci.get(i + 1)!,
+              kolejnosc: j + 1,
+              tresc: k.tresc.trim(),
+              uwaga: k.uwaga,
+            }))
+        );
+
+        if (krokiDoZapisu.length > 0) {
+          const { error: bladKrokow } = await supabase.from('kroki').insert(krokiDoZapisu);
+          if (bladKrokow) throw bladKrokow;
+        }
       }
 
       router.back();
@@ -394,39 +464,117 @@ export default function FormularzPrzepisu() {
 
       <Karta style={styles.grupa}>
         <ThemedText type="smallBold" themeColor="textSecondary">
-          KROKI
+          ETAPY PRZYGOTOWANIA
         </ThemedText>
         <ThemedText type="small" themeColor="textSecondary">
-          Najpierw wszystko przygotuj, potem gotuj — to układ, który odróżnia Talerz od
-          przepisów z internetu.
+          Każdy etap ma nazwę, czas i własne kroki — na przykład „Gotowanie wywaru, 45 minut”.
+          Krok można oznaczyć jako uwagę, gdy ostrzega przed pomyłką.
         </ThemedText>
 
-        {kroki.map((k, i) => (
-          <View key={`${k.etap}-${i}`} style={styles.krok}>
-            <ThemedText type="small" themeColor={k.etap === 'przygotowanie' ? 'accent' : 'text'}>
-              {k.etap === 'przygotowanie' ? 'PRZYGOTOWANIE' : 'WYKONANIE'}
-            </ThemedText>
-            <ThemedText type="small">{k.tresc}</ThemedText>
+        {etapy.map((etap, i) => (
+          <View key={i} style={[styles.etap, { borderColor: motyw.border }]}>
+            <View style={styles.naglowekEtapu}>
+              <ThemedText type="smallBold" themeColor="accent">
+                ETAP {i + 1}
+              </ThemedText>
+
+              <View style={styles.przyciskiEtapu}>
+                <Pressable
+                  onPress={() => przesunEtap(i, -1)}
+                  disabled={i === 0}
+                  hitSlop={6}
+                  accessibilityLabel="Przesuń etap wyżej">
+                  <Ionicons
+                    name="arrow-up"
+                    size={18}
+                    color={i === 0 ? motyw.border : motyw.textSecondary}
+                  />
+                </Pressable>
+                <Pressable
+                  onPress={() => przesunEtap(i, 1)}
+                  disabled={i === etapy.length - 1}
+                  hitSlop={6}
+                  accessibilityLabel="Przesuń etap niżej">
+                  <Ionicons
+                    name="arrow-down"
+                    size={18}
+                    color={i === etapy.length - 1 ? motyw.border : motyw.textSecondary}
+                  />
+                </Pressable>
+                <Pressable onPress={() => usunEtap(i)} hitSlop={6} accessibilityLabel="Usuń etap">
+                  <Ionicons name="trash-outline" size={18} color={motyw.textSecondary} />
+                </Pressable>
+              </View>
+            </View>
+
+            <Pole
+              etykieta="Nazwa etapu"
+              value={etap.nazwa}
+              onChangeText={(t) => zmienEtap(i, 'nazwa', t)}
+              placeholder="Gotowanie wywaru"
+            />
+            <Pole
+              etykieta="Czas etapu (min)"
+              value={etap.minuty}
+              onChangeText={(t) => zmienEtap(i, 'minuty', t)}
+              inputMode="numeric"
+              placeholder="45"
+            />
+
+            {etap.kroki.map((krok, j) => (
+              <View key={j} style={styles.krok}>
+                <View style={styles.naglowekKroku}>
+                  <ThemedText type="small" themeColor="textSecondary">
+                    Krok {j + 1}
+                  </ThemedText>
+
+                  <Pressable
+                    onPress={() => zmienKrok(i, j, { uwaga: !krok.uwaga })}
+                    hitSlop={6}
+                    accessibilityRole="checkbox"
+                    accessibilityState={{ checked: krok.uwaga }}
+                    style={styles.przelacznikUwagi}>
+                    <Ionicons
+                      name={krok.uwaga ? 'warning' : 'warning-outline'}
+                      size={16}
+                      color={krok.uwaga ? motyw.accent : motyw.textSecondary}
+                    />
+                    <ThemedText type="small" themeColor={krok.uwaga ? 'accent' : 'textSecondary'}>
+                      uwaga
+                    </ThemedText>
+                  </Pressable>
+
+                  <Pressable onPress={() => usunKrok(i, j)} hitSlop={6} accessibilityLabel="Usuń krok">
+                    <Ionicons name="close" size={16} color={motyw.textSecondary} />
+                  </Pressable>
+                </View>
+
+                <Pole
+                  etykieta=""
+                  value={krok.tresc}
+                  onChangeText={(t) => zmienKrok(i, j, { tresc: t })}
+                  placeholder="Doprowadź do wrzenia i zbierz szumowiny"
+                  multiline
+                />
+              </View>
+            ))}
+
+            <Przycisk tytul="Dodaj krok" wariant="poboczny" onPress={() => dodajKrok(i)} />
           </View>
         ))}
 
-        <Wybor
-          etykieta="Etap"
-          wybrana={etapKroku}
-          onZmiana={setEtapKroku}
-          opcje={[
-            { wartosc: 'przygotowanie', etykieta: 'Przygotowanie' },
-            { wartosc: 'wykonanie', etykieta: 'Wykonanie' },
-          ]}
+        <Przycisk
+          tytul={etapy.length === 0 ? 'Dodaj pierwszy etap' : 'Dodaj kolejny etap'}
+          wariant="poboczny"
+          onPress={dodajEtap}
         />
-        <Pole
-          etykieta="Treść kroku"
-          value={nowyKrok}
-          onChangeText={setNowyKrok}
-          placeholder="Rozgrzej piekarnik do 200 stopni"
-          multiline
-        />
-        <Przycisk tytul="Dodaj krok" wariant="poboczny" onPress={dodajKrok} />
+
+        {czasRazem > 0 && (
+          <ThemedText type="small" themeColor="textSecondary">
+            Czas wszystkich etapów: {czasRazem} min. Jeśli etapy się nakładają („w międzyczasie”),
+            faktyczny czas będzie krótszy.
+          </ThemedText>
+        )}
       </Karta>
 
       {blad && (
@@ -480,9 +628,37 @@ const styles = StyleSheet.create({
     gap: Spacing.two,
     paddingTop: Spacing.half,
   },
+  etap: {
+    borderWidth: 1,
+    borderRadius: Spacing.two,
+    padding: Spacing.two,
+    gap: Spacing.two,
+  },
+  naglowekEtapu: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  przyciskiEtapu: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.three,
+  },
   krok: {
-    gap: 2,
-    paddingVertical: Spacing.one,
+    gap: Spacing.one,
+    paddingTop: Spacing.one,
+  },
+  naglowekKroku: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    gap: Spacing.two,
+  },
+  przelacznikUwagi: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.one,
+    marginLeft: 'auto',
   },
   okienko: {
     gap: Spacing.two,
