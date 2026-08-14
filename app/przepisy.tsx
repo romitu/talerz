@@ -170,7 +170,14 @@ export default function EkranPrzepisow() {
       ))}
 
       {mozeDodawac && (
-        <Przycisk tytul="Dodaj przepis" onPress={() => router.push('/przepis-formularz')} />
+        <>
+          <Przycisk tytul="Dodaj przepis" onPress={() => router.push('/przepis-formularz')} />
+          <Przycisk
+            tytul="Składniki"
+            wariant="poboczny"
+            onPress={() => router.push('/skladniki')}
+          />
+        </>
       )}
 
       {!mozeDodawac && !wczytywanie && (

@@ -97,6 +97,7 @@ function Zakladki({ kolory }: { kolory: Paleta }) {
       <Tabs.Screen name="profil-formularz" options={{ href: null }} />
       <Tabs.Screen name="cele-formularz" options={{ href: null }} />
       <Tabs.Screen name="przepis-formularz" options={{ href: null }} />
+      <Tabs.Screen name="skladniki" options={{ href: null }} />
     </Tabs>
   );
 }

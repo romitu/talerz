@@ -10,24 +10,15 @@ import { Makro } from '@/components/makro';
 import { Pole } from '@/components/pole';
 import { Przycisk } from '@/components/przycisk';
 import { ThemedText } from '@/components/themed-text';
+import { FormularzSkladnika } from '@/components/formularz-skladnika';
 import { Wybor } from '@/components/wybor';
 import { WyborWielo } from '@/components/wybor-wielo';
 import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import { OPIS_KUCHNI, OPIS_PORY, opisTrwalosci, type Kuchnia, type PoraPosilku } from '@/lib/przepisy';
+import { pobierzSkladniki, type Skladnik } from '@/lib/skladniki';
 import { useSesja } from '@/lib/sesja';
 import { supabase } from '@/lib/supabase';
-
-type Skladnik = {
-  id: string;
-  nazwa: string;
-  kcal_100g: number;
-  bialko_100g: number;
-  tluszcz_100g: number;
-  wegle_100g: number;
-  cukry_wolne_100g: number;
-  nova: number | null;
-};
 
 type WybranySkladnik = {
   skladnik: Skladnik;
@@ -60,21 +51,21 @@ export default function FormularzPrzepisu() {
   const [nowyKrok, setNowyKrok] = useState('');
   const [etapKroku, setEtapKroku] = useState<'przygotowanie' | 'wykonanie'>('przygotowanie');
 
+  const [dodawanieSkladnika, setDodawanieSkladnika] = useState(false);
   const [zajety, setZajety] = useState(false);
   const [blad, setBlad] = useState<string | null>(null);
 
-  const pobierzSkladniki = useCallback(async () => {
-    const { data, error } = await supabase
-      .from('skladniki')
-      .select('id, nazwa, kcal_100g, bialko_100g, tluszcz_100g, wegle_100g, cukry_wolne_100g, nova')
-      .order('nazwa');
-    if (error) setBlad(error.message);
-    else setDostepne((data ?? []) as Skladnik[]);
+  const wczytajSkladniki = useCallback(async () => {
+    try {
+      setDostepne(await pobierzSkladniki());
+    } catch (e) {
+      setBlad(komunikatBledu(e));
+    }
   }, []);
 
   useEffect(() => {
-    pobierzSkladniki();
-  }, [pobierzSkladniki]);
+    wczytajSkladniki();
+  }, [wczytajSkladniki]);
 
   const podpowiedzi = useMemo(() => {
     const fraza = szukaj.trim().toLowerCase();
@@ -263,10 +254,42 @@ export default function FormularzPrzepisu() {
           </Pressable>
         ))}
 
-        {szukaj.trim().length >= 2 && podpowiedzi.length === 0 && (
+        {szukaj.trim().length >= 2 && podpowiedzi.length === 0 && !dodawanieSkladnika && (
           <ThemedText type="small" themeColor="textSecondary">
-            Nic nie znaleziono. Składnik trzeba najpierw dodać do bazy.
+            Nic nie znaleziono w bazie.
           </ThemedText>
+        )}
+
+        {/*
+          Dodawanie składnika odbywa się TUTAJ, bez opuszczania ekranu.
+          Przejście na inny ekran wyczyściłoby wszystko, co już wpisano
+          w przepisie — nazwę, pozostałe składniki i kroki.
+        */}
+        {!dodawanieSkladnika && (
+          <Przycisk
+            tytul={szukaj.trim() ? `Dodaj „${szukaj.trim()}” do bazy` : 'Brakuje składnika? Dodaj go'}
+            wariant="poboczny"
+            onPress={() => setDodawanieSkladnika(true)}
+          />
+        )}
+
+        {dodawanieSkladnika && (
+          <View style={styles.okienko}>
+            <ThemedText type="small" themeColor="textSecondary">
+              Przepis pozostaje wpisany — po zapisaniu składnik od razu do niego wejdzie.
+            </ThemedText>
+
+            <FormularzSkladnika
+              nazwaPoczatkowa={szukaj.trim()}
+              onZapisano={(nowy) => {
+                setDostepne((p) => [...p, nowy].sort((a, b) => a.nazwa.localeCompare(b.nazwa, 'pl')));
+                setWybrane((p) => [...p, { skladnik: nowy, gramy: '', opisPotoczny: '' }]);
+                setDodawanieSkladnika(false);
+                setSzukaj('');
+              }}
+              onAnuluj={() => setDodawanieSkladnika(false)}
+            />
+          </View>
         )}
 
         {wybrane.length === 0 && (
@@ -414,5 +437,9 @@ const styles = StyleSheet.create({
   krok: {
     gap: 2,
     paddingVertical: Spacing.one,
+  },
+  okienko: {
+    gap: Spacing.two,
+    paddingTop: Spacing.two,
   },
 });
