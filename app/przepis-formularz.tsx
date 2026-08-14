@@ -23,10 +23,13 @@ import { supabase } from '@/lib/supabase';
 type WybranySkladnik = {
   skladnik: Skladnik;
   gramy: string;
+  jednostka: 'g' | 'ml';
+  stan: string;
+  zamiennik: string;
   opisPotoczny: string;
 };
 
-type Krok = { tresc: string; uwaga: boolean };
+type Krok = { tresc: string; sygnal: string; uwaga: boolean };
 
 type Etap = {
   nazwa: string;
@@ -52,7 +55,13 @@ export default function FormularzPrzepisu() {
   const [pory, setPory] = useState<PoraPosilku[]>([]);
   const [kuchnie, setKuchnie] = useState<Kuchnia[]>(['srodziemnomorska']);
   const [trwalosc, setTrwalosc] = useState<'0' | '1' | '2' | '3'>('0');
-  const [czas, setCzas] = useState('');
+  const [porcje, setPorcje] = useState('4');
+  const [czasPrzygotowania, setCzasPrzygotowania] = useState('');
+  const [czasObrobki, setCzasObrobki] = useState('');
+  const [sprzet, setSprzet] = useState('');
+  const [przechowywanie, setPrzechowywanie] = useState('');
+  const [moznaMrozic, setMoznaMrozic] = useState<'tak' | 'nie' | 'nie wiem'>('nie wiem');
+  const [ratunek, setRatunek] = useState('');
   const [etapy, setEtapy] = useState<Etap[]>([]);
 
   const [pokazWszystkie, setPokazWszystkie] = useState(false);
@@ -108,20 +117,30 @@ export default function FormularzPrzepisu() {
     );
   }, [wybrane]);
 
+  const liczbaPorcji = Math.max(1, Math.round(liczba(porcje)) || 1);
+
+  const makroPorcji = {
+    kcal: makro.kcal / liczbaPorcji,
+    bialko: makro.bialko / liczbaPorcji,
+    tluszcz: makro.tluszcz / liczbaPorcji,
+    wegle: makro.wegle / liczbaPorcji,
+    cukryWolne: makro.cukryWolne / liczbaPorcji,
+    gramy: wybrane.reduce((s, w) => s + liczba(w.gramy), 0) / liczbaPorcji,
+  };
+
   const komplet =
     nazwa.trim().length >= 3 && wybrane.length > 0 && wybrane.every((w) => liczba(w.gramy) > 0);
 
   function dodajSkladnik(s: Skladnik) {
-    setWybrane((p) => [...p, { skladnik: s, gramy: '', opisPotoczny: '' }]);
+    setWybrane((p) => [
+      ...p,
+      { skladnik: s, gramy: '', jednostka: 'g', stan: '', zamiennik: '', opisPotoczny: '' },
+    ]);
     setSzukaj('');
   }
 
-  function zmienGramy(id: string, wartosc: string) {
-    setWybrane((p) => p.map((w) => (w.skladnik.id === id ? { ...w, gramy: wartosc } : w)));
-  }
-
-  function zmienOpis(id: string, wartosc: string) {
-    setWybrane((p) => p.map((w) => (w.skladnik.id === id ? { ...w, opisPotoczny: wartosc } : w)));
+  function zmienSkladnik(id: string, zmiana: Partial<WybranySkladnik>) {
+    setWybrane((p) => p.map((w) => (w.skladnik.id === id ? { ...w, ...zmiana } : w)));
   }
 
   function usunSkladnik(id: string) {
@@ -152,7 +171,7 @@ export default function FormularzPrzepisu() {
 
   function dodajKrok(indeksEtapu: number) {
     setEtapy((p) =>
-      p.map((e, i) => (i === indeksEtapu ? { ...e, kroki: [...e.kroki, { tresc: '', uwaga: false }] } : e))
+      p.map((e, i) => (i === indeksEtapu ? { ...e, kroki: [...e.kroki, { tresc: '', sygnal: '', uwaga: false }] } : e))
     );
   }
 
@@ -194,7 +213,16 @@ export default function FormularzPrzepisu() {
           pory,
           kuchnie,
           trwalosc_dni: Number(trwalosc),
-          czas_minut: liczba(czas) || null,
+          porcje: liczbaPorcji,
+          czas_przygotowania_min: liczba(czasPrzygotowania) || null,
+          czas_obrobki_min: liczba(czasObrobki) || null,
+          sprzet: sprzet
+            .split(',')
+            .map((x) => x.trim())
+            .filter(Boolean),
+          przechowywanie: przechowywanie.trim() || null,
+          mozna_mrozic: moznaMrozic === 'nie wiem' ? null : moznaMrozic === 'tak',
+          ratunek: ratunek.trim() || null,
           autor_id: sesja.user.id,
           widocznosc: 'prywatna',
         })
@@ -207,6 +235,9 @@ export default function FormularzPrzepisu() {
           przepis_id: przepis.id,
           skladnik_id: w.skladnik.id,
           gramy: liczba(w.gramy),
+          jednostka: w.jednostka,
+          stan: w.stan.trim() || null,
+          zamiennik: w.zamiennik.trim() || null,
           opis_potoczny: w.opisPotoczny.trim() || null,
           kolejnosc: i + 1,
         }))
@@ -242,6 +273,7 @@ export default function FormularzPrzepisu() {
               etap_id: wedlugKolejnosci.get(i + 1)!,
               kolejnosc: j + 1,
               tresc: k.tresc.trim(),
+              sygnal: k.sygnal.trim() || null,
               uwaga: k.uwaga,
             }))
         );
@@ -271,7 +303,38 @@ export default function FormularzPrzepisu() {
           placeholder="Pieczony w piekarniku, warzywa na jednej blasze"
           multiline
         />
-        <Pole etykieta="Czas przygotowania (min)" value={czas} onChangeText={setCzas} inputMode="numeric" placeholder="35" />
+        <Pole
+          etykieta="Ile porcji wychodzi z całego przepisu"
+          value={porcje}
+          onChangeText={setPorcje}
+          inputMode="numeric"
+          placeholder="6"
+        />
+        <ThemedText type="small" themeColor="textSecondary">
+          Od tej liczby zależy makro jednej porcji. Garnek zupy na sześć osób to nie jest
+          posiłek o wartości całego garnka.
+        </ThemedText>
+
+        <Pole
+          etykieta="Czas przygotowania (min) — krojenie, tarcie"
+          value={czasPrzygotowania}
+          onChangeText={setCzasPrzygotowania}
+          inputMode="numeric"
+          placeholder="20"
+        />
+        <Pole
+          etykieta="Czas obróbki (min) — gotowanie, pieczenie"
+          value={czasObrobki}
+          onChangeText={setCzasObrobki}
+          inputMode="numeric"
+          placeholder="77"
+        />
+        <Pole
+          etykieta="Potrzebny sprzęt, oddzielony przecinkami"
+          value={sprzet}
+          onChangeText={setSprzet}
+          placeholder="garnek 3 l, tarka o grubych oczkach, patelnia"
+        />
       </Karta>
 
       <Karta style={styles.grupa}>
@@ -392,7 +455,10 @@ export default function FormularzPrzepisu() {
               nazwaPoczatkowa={szukaj.trim()}
               onZapisano={(nowy) => {
                 setDostepne((p) => [...p, nowy].sort((a, b) => a.nazwa.localeCompare(b.nazwa, 'pl')));
-                setWybrane((p) => [...p, { skladnik: nowy, gramy: '', opisPotoczny: '' }]);
+                setWybrane((p) => [
+                  ...p,
+                  { skladnik: nowy, gramy: '', jednostka: 'g', stan: '', zamiennik: '', opisPotoczny: '' },
+                ]);
                 setDodawanieSkladnika(false);
                 setSzukaj('');
               }}
@@ -422,16 +488,39 @@ export default function FormularzPrzepisu() {
             </View>
 
             <Pole
-              etykieta="Gramy"
+              etykieta={`Ile (${w.jednostka})`}
               value={w.gramy}
-              onChangeText={(t) => zmienGramy(w.skladnik.id, t)}
+              onChangeText={(t) => zmienSkladnik(w.skladnik.id, { gramy: t })}
               inputMode="numeric"
               placeholder="200"
+            />
+
+            <Wybor
+              etykieta="Jednostka"
+              wybrana={w.jednostka}
+              onZmiana={(j) => zmienSkladnik(w.skladnik.id, { jednostka: j })}
+              opcje={[
+                { wartosc: 'g', etykieta: 'gramy' },
+                { wartosc: 'ml', etykieta: 'mililitry' },
+              ]}
+            />
+
+            <Pole
+              etykieta="Stan składnika"
+              value={w.stan}
+              onChangeText={(t) => zmienSkladnik(w.skladnik.id, { stan: t })}
+              placeholder="obrana i starta na grubych oczkach"
+            />
+            <Pole
+              etykieta="Zamiennik (nieobowiązkowy)"
+              value={w.zamiennik}
+              onChangeText={(t) => zmienSkladnik(w.skladnik.id, { zamiennik: t })}
+              placeholder="lub korpus z kurczaka"
             />
             <Pole
               etykieta="Zapis dla człowieka (nieobowiązkowy)"
               value={w.opisPotoczny}
-              onChangeText={(t) => zmienOpis(w.skladnik.id, t)}
+              onChangeText={(t) => zmienSkladnik(w.skladnik.id, { opisPotoczny: t })}
               placeholder="1 marchewka (ok. 70 g)"
             />
           </View>
@@ -441,17 +530,24 @@ export default function FormularzPrzepisu() {
       {wybrane.length > 0 && (
         <Karta>
           <ThemedText type="smallBold" themeColor="textSecondary">
-            MAKRO CAŁEGO DANIA
+            NA JEDNĄ PORCJĘ ({Math.round(makroPorcji.gramy)} g z {liczbaPorcji})
           </ThemedText>
           <View style={styles.wiersz}>
-            <Makro etykieta="kcal" wartosc={Math.round(makro.kcal)} jednostka="" />
-            <Makro etykieta="białko" wartosc={Math.round(makro.bialko * 10) / 10} jednostka=" g" />
-            <Makro etykieta="tłuszcz" wartosc={Math.round(makro.tluszcz * 10) / 10} jednostka=" g" />
-            <Makro etykieta="węglow." wartosc={Math.round(makro.wegle * 10) / 10} jednostka=" g" />
+            <Makro etykieta="kcal" wartosc={Math.round(makroPorcji.kcal)} jednostka="" />
+            <Makro etykieta="białko" wartosc={Math.round(makroPorcji.bialko * 10) / 10} jednostka=" g" />
+            <Makro etykieta="tłuszcz" wartosc={Math.round(makroPorcji.tluszcz * 10) / 10} jednostka=" g" />
+            <Makro etykieta="węglow." wartosc={Math.round(makroPorcji.wegle * 10) / 10} jednostka=" g" />
           </View>
-          {makro.cukryWolne > 0 && (
+
+          {liczbaPorcji > 1 && (
             <ThemedText type="small" themeColor="textSecondary">
-              Cukry wolne: {Math.round(makro.cukryWolne * 10) / 10} g
+              Cały garnek: {Math.round(makro.kcal)} kcal, {Math.round(makro.bialko * 10) / 10} g białka
+            </ThemedText>
+          )}
+
+          {makroPorcji.cukryWolne > 0 && (
+            <ThemedText type="small" themeColor="textSecondary">
+              Cukry wolne w porcji: {Math.round(makroPorcji.cukryWolne * 10) / 10} g
             </ThemedText>
           )}
           {makro.nova >= 4 && (
@@ -556,6 +652,12 @@ export default function FormularzPrzepisu() {
                   placeholder="Doprowadź do wrzenia i zbierz szumowiny"
                   multiline
                 />
+                <Pole
+                  etykieta="Po czym poznać, że gotowe (nieobowiązkowe)"
+                  value={krok.sygnal}
+                  onChangeText={(t) => zmienKrok(i, j, { sygnal: t })}
+                  placeholder="aż ziemniaki będą miękkie"
+                />
               </View>
             ))}
 
@@ -575,6 +677,39 @@ export default function FormularzPrzepisu() {
             faktyczny czas będzie krótszy.
           </ThemedText>
         )}
+      </Karta>
+
+      <Karta style={styles.grupa}>
+        <ThemedText type="smallBold" themeColor="textSecondary">
+          PRZECHOWYWANIE I WSKAZÓWKI
+        </ThemedText>
+
+        <Pole
+          etykieta="Jak przechowywać"
+          value={przechowywanie}
+          onChangeText={setPrzechowywanie}
+          placeholder="W lodówce w zamkniętym pojemniku, odgrzewać pod przykryciem"
+          multiline
+        />
+
+        <Wybor
+          etykieta="Czy nadaje się do mrożenia"
+          wybrana={moznaMrozic}
+          onZmiana={setMoznaMrozic}
+          opcje={[
+            { wartosc: 'tak', etykieta: 'Tak' },
+            { wartosc: 'nie', etykieta: 'Nie' },
+            { wartosc: 'nie wiem', etykieta: 'Nie wiem' },
+          ]}
+        />
+
+        <Pole
+          etykieta="Jak uratować danie w razie wpadki"
+          value={ratunek}
+          onChangeText={setRatunek}
+          placeholder="Za kwaśne — dodaj ziemniaka i pogotuj. Za słone — dolej wody i śmietany."
+          multiline
+        />
       </Karta>
 
       {blad && (

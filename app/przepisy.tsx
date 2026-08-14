@@ -12,6 +12,7 @@ import { ThemedText } from '@/components/themed-text';
 import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import {
+  czasRazem,
   OPIS_KUCHNI,
   OPIS_PORY,
   opisTrwalosci,
@@ -126,18 +127,34 @@ export default function EkranPrzepisow() {
             {p.pory.map((x) => OPIS_PORY[x]).join(', ') || 'bez pory'}
             {' · '}
             {p.kuchnie.map((x) => OPIS_KUCHNI[x]).join(', ')}
-            {p.czas_minut ? ` · ${p.czas_minut} min` : ''}
+            {(() => {
+              const razem = czasRazem(p.czas_przygotowania_min, p.czas_obrobki_min);
+              return razem ? ` · ${razem} min` : '';
+            })()}
             {' · '}
             {opisTrwalosci(p.trwalosc_dni)}
+            {p.mozna_mrozic ? ' · można mrozić' : ''}
           </ThemedText>
 
           {p.kcal !== null ? (
-            <View style={styles.wiersz}>
-              <Makro etykieta="kcal" wartosc={p.kcal} jednostka="" />
-              <Makro etykieta="białko" wartosc={p.bialko_g ?? 0} jednostka=" g" />
-              <Makro etykieta="tłuszcz" wartosc={p.tluszcz_g ?? 0} jednostka=" g" />
-              <Makro etykieta="węglow." wartosc={p.wegle_g ?? 0} jednostka=" g" />
-            </View>
+            <>
+              <ThemedText type="smallBold" themeColor="textSecondary">
+                NA PORCJĘ
+                {p.gramy_porcji ? ` (${p.gramy_porcji} g)` : ''}
+                {p.porcje > 1 ? ` · z ${p.porcje} porcji` : ''}
+              </ThemedText>
+              <View style={styles.wiersz}>
+                <Makro etykieta="kcal" wartosc={p.kcal} jednostka="" />
+                <Makro etykieta="białko" wartosc={p.bialko_g ?? 0} jednostka=" g" />
+                <Makro etykieta="tłuszcz" wartosc={p.tluszcz_g ?? 0} jednostka=" g" />
+                <Makro etykieta="węglow." wartosc={p.wegle_g ?? 0} jednostka=" g" />
+              </View>
+              {p.porcje > 1 && p.kcal_calosc !== null && (
+                <ThemedText type="small" themeColor="textSecondary">
+                  Cały garnek: {p.kcal_calosc} kcal, {p.bialko_g_calosc} g białka
+                </ThemedText>
+              )}
+            </>
           ) : (
             <ThemedText type="small" themeColor="accent">
               Brak składników — nie ma z czego policzyć makro.

@@ -18,14 +18,25 @@ export type PrzepisZMakro = {
   pory: PoraPosilku[];
   kuchnie: Kuchnia[];
   trwalosc_dni: number;
-  czas_minut: number | null;
+  porcje: number;
+  czas_przygotowania_min: number | null;
+  czas_obrobki_min: number | null;
+  sprzet: string[];
+  przechowywanie: string | null;
+  mozna_mrozic: boolean | null;
+  ratunek: string | null;
   widocznosc: Widocznosc;
   autor_id: string | null;
+  /** Wartości NA JEDNĄ PORCJĘ — bo to ona trafia na talerz. */
   kcal: number | null;
   bialko_g: number | null;
   tluszcz_g: number | null;
   wegle_g: number | null;
   cukry_wolne_g: number | null;
+  /** Wartości całego garnka. */
+  kcal_calosc: number | null;
+  bialko_g_calosc: number | null;
+  gramy_porcji: number | null;
   nova_max: number | null;
   polubienia: number;
   polubiony: boolean;
@@ -43,6 +54,12 @@ export const OPIS_KUCHNI: Record<Kuchnia, string> = {
   polska: 'polska',
   inna: 'inna',
 };
+
+/** Łączny czas: przygotowanie plus obróbka termiczna. */
+export function czasRazem(przygotowanie: number | null, obrobka: number | null): number | null {
+  if (przygotowanie === null && obrobka === null) return null;
+  return (przygotowanie ?? 0) + (obrobka ?? 0);
+}
 
 /** Opis trwałości dania w zrozumiałej formie. */
 export function opisTrwalosci(dni: number): string {
@@ -63,13 +80,16 @@ export async function pobierzPrzepisy(kontoId: string | undefined) {
     supabase
       .from('przepisy')
       .select(
-        `id, nazwa, opis, pory, kuchnie, trwalosc_dni, czas_minut, widocznosc, autor_id,
+        `id, nazwa, opis, pory, kuchnie, trwalosc_dni, porcje, czas_przygotowania_min,
+         czas_obrobki_min, sprzet, przechowywanie, mozna_mrozic, ratunek, widocznosc, autor_id,
          polubienia (konto_id)`
       )
       .order('nazwa'),
     supabase
       .from('przepis_makro')
-      .select('przepis_id, kcal, bialko_g, tluszcz_g, wegle_g, cukry_wolne_g, nova_max'),
+      .select(
+        'przepis_id, kcal, bialko_g, tluszcz_g, wegle_g, cukry_wolne_g, kcal_calosc, bialko_g_calosc, gramy_porcji, nova_max'
+      ),
   ]);
 
   if (wynikPrzepisow.error) throw wynikPrzepisow.error;
@@ -90,7 +110,13 @@ export async function pobierzPrzepisy(kontoId: string | undefined) {
       pory: p.pory ?? [],
       kuchnie: p.kuchnie ?? [],
       trwalosc_dni: p.trwalosc_dni,
-      czas_minut: p.czas_minut,
+      porcje: p.porcje,
+      czas_przygotowania_min: p.czas_przygotowania_min,
+      czas_obrobki_min: p.czas_obrobki_min,
+      sprzet: p.sprzet ?? [],
+      przechowywanie: p.przechowywanie,
+      mozna_mrozic: p.mozna_mrozic,
+      ratunek: p.ratunek,
       widocznosc: p.widocznosc,
       autor_id: p.autor_id,
       kcal: makro?.kcal ?? null,
@@ -98,6 +124,9 @@ export async function pobierzPrzepisy(kontoId: string | undefined) {
       tluszcz_g: makro?.tluszcz_g ?? null,
       wegle_g: makro?.wegle_g ?? null,
       cukry_wolne_g: makro?.cukry_wolne_g ?? null,
+      kcal_calosc: makro?.kcal_calosc ?? null,
+      bialko_g_calosc: makro?.bialko_g_calosc ?? null,
+      gramy_porcji: makro?.gramy_porcji ?? null,
       nova_max: makro?.nova_max ?? null,
       polubienia: polubienia.length,
       polubiony: kontoId ? polubienia.some((x) => x.konto_id === kontoId) : false,
