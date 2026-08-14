@@ -5,6 +5,7 @@ import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 
 import { Ekran } from '@/components/ekran';
 import { FormularzSkladnika } from '@/components/formularz-skladnika';
+import { KomorkaEdytowalna } from '@/components/komorka-edytowalna';
 import { Karta } from '@/components/karta';
 import { Pole } from '@/components/pole';
 import { Przycisk } from '@/components/przycisk';
@@ -15,7 +16,10 @@ import { komunikatBledu } from '@/lib/blad';
 import {
   pobierzSkladniki,
   pobierzUzycia,
+  sprawdzSkladnik,
   usunSkladnik,
+  zapiszSkladnik,
+  type DaneSkladnika,
   type Skladnik,
   type UzycieSkladnika,
 } from '@/lib/skladniki';
@@ -53,6 +57,8 @@ export default function EkranSkladnikow() {
   const [dodawanie, setDodawanie] = useState(false);
   const [doUsuniecia, setDoUsuniecia] = useState<Skladnik | null>(null);
   const [rozwiniete, setRozwiniete] = useState<Set<string>>(new Set());
+  const [trybEdycji, setTrybEdycji] = useState(false);
+  const [zapisywany, setZapisywany] = useState<string | null>(null);
 
   const [wczytywanie, setWczytywanie] = useState(true);
   const [blad, setBlad] = useState<string | null>(null);
@@ -123,6 +129,57 @@ export default function EkranSkladnikow() {
     }
   }
 
+  /**
+   * Zapis pojedynczej komórki.
+   *
+   * Zmiana trafia najpierw na ekran, żeby nie było migotania, a dopiero potem
+   * do bazy. Gdy baza odmówi, wracamy do poprzedniej wartości i pokazujemy powód.
+   */
+  async function zapiszKomorke(skladnik: Skladnik, pole: keyof Skladnik, tekst: string) {
+    const poprzednie = skladniki;
+    setBlad(null);
+
+    const liczbowe = pole !== 'nazwa';
+    let wartosc: string | number | null;
+
+    if (liczbowe) {
+      const t = tekst.replace(',', '.').trim();
+      if (t === '' || t === '—') {
+        wartosc = pole === 'nova' || pole === 'gramatura_opakowania_g' ? null : 0;
+      } else {
+        const n = Number(t);
+        if (!Number.isFinite(n)) {
+          setBlad(`„${tekst}” nie jest liczbą.`);
+          return;
+        }
+        wartosc = n;
+      }
+    } else {
+      wartosc = tekst.trim();
+    }
+
+    const zmieniony = { ...skladnik, [pole]: wartosc } as Skladnik;
+
+    const problemy = sprawdzSkladnik(zmieniony);
+    if (problemy.length > 0) {
+      setBlad(problemy[0]);
+      return;
+    }
+
+    setSkladniki((p) => p.map((x) => (x.id === skladnik.id ? zmieniony : x)));
+    setZapisywany(skladnik.id);
+
+    try {
+      const { id, ...dane } = zmieniony;
+      await zapiszSkladnik(dane as DaneSkladnika, id);
+    } catch (e) {
+      setSkladniki(poprzednie);
+      setBlad(komunikatBledu(e));
+    } finally {
+      setZapisywany(null);
+    }
+  }
+
   async function usun(s: Skladnik) {
     setBlad(null);
     try {
@@ -138,10 +195,11 @@ export default function EkranSkladnikow() {
     if (klucz === 'nazwa') return s.nazwa;
     if (klucz === 'uzycia') {
       const n = liczbaUzyc(s.id);
-      return n === 0 ? '—' : String(n);
+      return n === 0 ? (trybEdycji ? '' : '—') : String(n);
     }
     const w = s[klucz] as number | null;
-    return w === null || w === undefined ? '—' : String(w);
+    if (w === null || w === undefined) return trybEdycji ? '' : '—';
+    return String(w);
   }
 
   // --- ekran edycji zamiast tabeli ---
@@ -181,8 +239,27 @@ export default function EkranSkladnikow() {
 
       <View style={styles.paskiNarzedzi}>
         <Przycisk tytul="Dodaj składnik" onPress={() => setDodawanie(true)} style={styles.przyciskPaska} />
-        <Przycisk tytul="Odśwież" wariant="poboczny" onPress={pobierz} zajety={wczytywanie} style={styles.przyciskPaska} />
+        <Przycisk
+          tytul={trybEdycji ? 'Zakończ edycję' : 'Edytuj w tabeli'}
+          wariant={trybEdycji ? 'glowny' : 'poboczny'}
+          onPress={() => setTrybEdycji((p) => !p)}
+          style={styles.przyciskPaska}
+        />
       </View>
+
+      {trybEdycji && (
+        <Karta>
+          <ThemedText type="smallBold" themeColor="accent">
+            Tryb edycji w tabeli
+          </ThemedText>
+          <ThemedText type="small" themeColor="textSecondary">
+            Dotknij komórki i wpisz wartość. Zapis następuje po opuszczeniu pola albo
+            po naciśnięciu Enter. Nazwy etykiet i grupy NOVA edytujesz tak samo.
+            Pełny formularz — z etykietami i źródłem danych — otworzysz po wyłączeniu
+            tego trybu.
+          </ThemedText>
+        </Karta>
+      )}
 
       {blad && (
         <Karta>
@@ -280,32 +357,54 @@ export default function EkranSkladnikow() {
                     )}
                   </Pressable>
 
-                  <Pressable
-                    onPress={() => setEdytowany(s)}
-                    style={({ pressed }) => [styles.komorki, pressed && styles.wcisniety]}>
-                    {KOLUMNY.map((k) => (
-                      <View key={k.klucz} style={[styles.komorka, { width: k.szerokosc }]}>
-                        <ThemedText
-                          type="small"
-                          style={k.liczba ? styles.doPrawej : undefined}
-                          numberOfLines={2}>
-                          {wartoscKomorki(s, k.klucz)}
-                        </ThemedText>
-                      </View>
-                    ))}
-                  </Pressable>
+                  {trybEdycji ? (
+                    <View style={styles.komorki}>
+                      {KOLUMNY.map((k) => (
+                        <KomorkaEdytowalna
+                          key={k.klucz}
+                          wartosc={wartoscKomorki(s, k.klucz)}
+                          szerokosc={k.szerokosc}
+                          liczba={k.liczba}
+                          /* Kolumna „w daniach” jest wyliczana, więc nie da się jej wpisać. */
+                          edytowalna={k.klucz !== 'uzycia'}
+                          onZapisz={(nowa) => zapiszKomorke(s, k.klucz as keyof Skladnik, nowa)}
+                        />
+                      ))}
+                    </View>
+                  ) : (
+                    <Pressable
+                      onPress={() => setEdytowany(s)}
+                      style={({ pressed }) => [styles.komorki, pressed && styles.wcisniety]}>
+                      {KOLUMNY.map((k) => (
+                        <View key={k.klucz} style={[styles.komorka, { width: k.szerokosc }]}>
+                          <ThemedText
+                            type="small"
+                            style={k.liczba ? styles.doPrawej : undefined}
+                            numberOfLines={2}>
+                            {wartoscKomorki(s, k.klucz)}
+                          </ThemedText>
+                        </View>
+                      ))}
+                    </Pressable>
+                  )}
 
-                  <Pressable
-                    onPress={() => setDoUsuniecia(s)}
-                    hitSlop={8}
-                    accessibilityLabel={`Usuń ${s.nazwa}`}
-                    style={styles.komorkaKosza}>
-                    <Ionicons
-                      name="trash-outline"
-                      size={16}
-                      color={uzyty ? motyw.border : motyw.textSecondary}
-                    />
-                  </Pressable>
+                  {zapisywany === s.id ? (
+                    <View style={styles.komorkaKosza}>
+                      <Ionicons name="sync" size={16} color={motyw.accent} />
+                    </View>
+                  ) : (
+                    <Pressable
+                      onPress={() => setDoUsuniecia(s)}
+                      hitSlop={8}
+                      accessibilityLabel={`Usuń ${s.nazwa}`}
+                      style={styles.komorkaKosza}>
+                      <Ionicons
+                        name="trash-outline"
+                        size={16}
+                        color={uzyty ? motyw.border : motyw.textSecondary}
+                      />
+                    </Pressable>
+                  )}
                 </View>
 
                 {otwarty && (
@@ -337,9 +436,12 @@ export default function EkranSkladnikow() {
       )}
 
       <ThemedText type="small" themeColor="textSecondary">
-        Wszystkie wartości na 100 g. Dotknij nagłówka, aby posortować; wiersza — aby
-        edytować; znaku plus — aby zobaczyć dania, w których składnik występuje.
-        B — białko, T — tłuszcz, W — węglowodany.
+        Wszystkie wartości na 100 g. Dotknij nagłówka, aby posortować; znaku plus — aby
+        zobaczyć dania, w których składnik występuje.
+        {trybEdycji
+          ? ' Komórki są teraz polami do wpisywania.'
+          : ' Dotknij wiersza, aby otworzyć pełny formularz.'}
+        {' '}B — białko, T — tłuszcz, W — węglowodany.
       </ThemedText>
 
       <Przycisk tytul="Wróć" wariant="poboczny" onPress={() => router.back()} />
