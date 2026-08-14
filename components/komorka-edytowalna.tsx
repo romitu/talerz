@@ -9,6 +9,8 @@ import { useTheme } from '@/hooks/use-theme';
 type KomorkaProps = {
   wartosc: string;
   szerokosc: number;
+  /** Zamiast stałej szerokości kolumna zabiera wolne miejsce. */
+  elastycznaSzerokosc?: boolean;
   edytowalna: boolean;
   liczba?: boolean;
   /** Wywoływane po opuszczeniu komórki, tylko gdy wartość faktycznie się zmieniła. */
@@ -25,11 +27,13 @@ type KomorkaProps = {
 export function KomorkaEdytowalna({
   wartosc,
   szerokosc,
+  elastycznaSzerokosc = false,
   edytowalna,
   liczba = false,
   onZapisz,
 }: KomorkaProps) {
   const motyw = useTheme();
+  const wymiar = elastycznaSzerokosc ? { flex: 1, minWidth: 200 } : { width: szerokosc };
   const [tekst, setTekst] = useState(wartosc);
   const [aktywna, setAktywna] = useState(false);
 
@@ -40,7 +44,7 @@ export function KomorkaEdytowalna({
 
   if (!edytowalna) {
     return (
-      <View style={[styles.komorka, { width: szerokosc }]}>
+      <View style={[styles.komorka, wymiar]}>
         <ThemedText type="small" style={liczba ? styles.doPrawej : undefined} numberOfLines={2}>
           {wartosc}
         </ThemedText>
@@ -54,7 +58,7 @@ export function KomorkaEdytowalna({
   }
 
   return (
-    <View style={[styles.komorka, { width: szerokosc }]}>
+    <View style={[styles.komorka, wymiar]}>
       <TextInput
         value={tekst}
         onChangeText={setTekst}

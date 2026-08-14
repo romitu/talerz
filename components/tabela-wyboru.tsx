@@ -1,6 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useMemo, useState, type ReactNode } from 'react';
-import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, useWindowDimensions, View } from 'react-native';
 
 import { Pole } from './pole';
 import { ThemedText } from './themed-text';
@@ -10,10 +10,16 @@ import { useTheme } from '@/hooks/use-theme';
 
 export type KolumnaWyboru<T> = {
   tytul: string;
-  szerokosc: number;
+  /** Stała szerokość w pikselach. Pomijana, gdy kolumna jest elastyczna. */
+  szerokosc?: number;
+  /** Kolumna zabiera całe wolne miejsce — zwykle nazwa. */
+  elastyczna?: boolean;
   liczba?: boolean;
   wartosc: (element: T) => string;
 };
+
+/** Poniżej tej szerokości kolumna elastyczna przestaje być czytelna. */
+const MIN_ELASTYCZNEJ = 160;
 
 type TabelaWyboruProps<T> = {
   dane: T[];
@@ -55,8 +61,24 @@ export function TabelaWyboru<T>({
 }: TabelaWyboruProps<T>) {
   const motyw = useTheme();
   const [fraza, setFraza] = useState('');
+  const { width: szerokoscOkna } = useWindowDimensions();
 
-  const szerokosc = kolumny.reduce((s, k) => s + k.szerokosc, 0) + 40;
+  const szerokoscMinimalna =
+    kolumny.reduce((s, k) => s + (k.elastyczna ? MIN_ELASTYCZNEJ : (k.szerokosc ?? 0)), 0) + 40;
+
+  /**
+   * Gdy tabela mieści się na ekranie, rezygnujemy z przewijania w bok
+   * i pozwalamy kolumnie elastycznej zabrać całe wolne miejsce.
+   * Na wąskim ekranie wracamy do przewijania ze stałymi szerokościami.
+   */
+  const miesciSie = szerokoscOkna >= szerokoscMinimalna + 64;
+
+  const stylKolumny = (k: KolumnaWyboru<T>) =>
+    miesciSie && k.elastyczna
+      ? { flex: 1, minWidth: MIN_ELASTYCZNEJ }
+      : { width: k.elastyczna ? MIN_ELASTYCZNEJ : (k.szerokosc ?? 80) };
+
+  const szerokoscTabeli = miesciSie ? ('100%' as const) : szerokoscMinimalna;
 
   const widoczne = useMemo(() => {
     const f = fraza.trim().toLowerCase();
@@ -81,12 +103,12 @@ export function TabelaWyboru<T>({
         placeholder={placeholderFiltra}
       />
 
-      <ScrollView horizontal showsHorizontalScrollIndicator>
-        <View style={{ width: szerokosc }}>
+      <Poziomo wlaczone={!miesciSie}>
+        <View style={{ width: szerokoscTabeli }}>
           <View style={[styles.wiersz, styles.naglowek, { borderColor: motyw.border }]}>
             <View style={styles.komorkaZnaku} />
             {kolumny.map((k) => (
-              <View key={k.tytul} style={[styles.komorka, { width: k.szerokosc }]}>
+              <View key={k.tytul} style={[styles.komorka, stylKolumny(k)]}>
                 <ThemedText
                   type="smallBold"
                   themeColor="textSecondary"
@@ -130,7 +152,7 @@ export function TabelaWyboru<T>({
                     </View>
 
                     {kolumny.map((k) => (
-                      <View key={k.tytul} style={[styles.komorka, { width: k.szerokosc }]}>
+                      <View key={k.tytul} style={[styles.komorka, stylKolumny(k)]}>
                         <ThemedText
                           type={zaznaczony ? 'smallBold' : 'small'}
                           style={k.liczba ? styles.doPrawej : undefined}
@@ -161,10 +183,20 @@ export function TabelaWyboru<T>({
             )}
           </ScrollView>
         </View>
-      </ScrollView>
+      </Poziomo>
 
       {stopka?.(fraza.trim())}
     </View>
+  );
+}
+
+/** Owija zawartość w przewijanie poziome tylko wtedy, gdy jest potrzebne. */
+function Poziomo({ wlaczone, children }: { wlaczone: boolean; children: ReactNode }) {
+  if (!wlaczone) return <>{children}</>;
+  return (
+    <ScrollView horizontal showsHorizontalScrollIndicator>
+      {children}
+    </ScrollView>
   );
 }
 

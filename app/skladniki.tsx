@@ -1,7 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, useWindowDimensions, View } from 'react-native';
 
 import { Ekran } from '@/components/ekran';
 import { FormularzSkladnika } from '@/components/formularz-skladnika';
@@ -45,8 +45,20 @@ type KluczKolumny = (typeof KOLUMNY)[number]['klucz'];
 const SZEROKOSC_TABELI =
   KOLUMNY.reduce((s, k) => s + k.szerokosc, 0) + SZEROKOSC_ROZWIJANIA + 40; /* rozwijanie + kosz */
 
+/** Kolumna nazwy nie schodzi poniżej tej szerokości, gdy się rozciąga. */
+const MIN_NAZWY = 200;
+
 export default function EkranSkladnikow() {
   const motyw = useTheme();
+  const { width: szerokoscOkna } = useWindowDimensions();
+
+  /* Gdy tabela mieści się na ekranie, kolumna nazwy zabiera wolne miejsce
+     zamiast zostawiać pustą przestrzeń po prawej. */
+  const miesciSie = szerokoscOkna >= SZEROKOSC_TABELI + 64;
+  const stylKolumny = (k: (typeof KOLUMNY)[number]) =>
+    miesciSie && k.klucz === 'nazwa'
+      ? { flex: 1, minWidth: MIN_NAZWY }
+      : { width: k.szerokosc };
 
   const [skladniki, setSkladniki] = useState<Skladnik[]>([]);
   const [uzycia, setUzycia] = useState<Map<string, UzycieSkladnika>>(new Map());
@@ -371,8 +383,11 @@ export default function EkranSkladnikow() {
       )}
 
       {/* Tabela — przewijana w poziomie, żeby zmieściła się na telefonie. */}
-      <ScrollView horizontal showsHorizontalScrollIndicator style={styles.przewijanie}>
-        <View style={{ width: SZEROKOSC_TABELI }}>
+      <ScrollView
+        horizontal={!miesciSie}
+        showsHorizontalScrollIndicator={!miesciSie}
+        style={styles.przewijanie}>
+        <View style={{ width: miesciSie ? '100%' : SZEROKOSC_TABELI }}>
           <View style={[styles.wiersz, styles.naglowek, { borderColor: motyw.border }]}>
             <View style={styles.komorkaRozwijania} />
             {KOLUMNY.map((k) => {
@@ -381,7 +396,7 @@ export default function EkranSkladnikow() {
                 <Pressable
                   key={k.klucz}
                   onPress={() => przelaczSortowanie(k.klucz)}
-                  style={[styles.komorka, { width: k.szerokosc }]}>
+                  style={[styles.komorka, stylKolumny(k)]}>
                   <ThemedText
                     type="smallBold"
                     themeColor={aktywna ? 'accent' : 'textSecondary'}
@@ -429,6 +444,7 @@ export default function EkranSkladnikow() {
                           key={k.klucz}
                           wartosc={wartoscKomorki(s, k.klucz)}
                           szerokosc={k.szerokosc}
+                          elastycznaSzerokosc={miesciSie && k.klucz === 'nazwa'}
                           liczba={k.liczba}
                           /* Kolumna „w daniach” jest wyliczana, więc nie da się jej wpisać. */
                           edytowalna={k.klucz !== 'uzycia'}
@@ -441,7 +457,7 @@ export default function EkranSkladnikow() {
                       onPress={() => setEdytowany(s)}
                       style={({ pressed }) => [styles.komorki, pressed && styles.wcisniety]}>
                       {KOLUMNY.map((k) => (
-                        <View key={k.klucz} style={[styles.komorka, { width: k.szerokosc }]}>
+                        <View key={k.klucz} style={[styles.komorka, stylKolumny(k)]}>
                           <ThemedText
                             type="small"
                             style={k.liczba ? styles.doPrawej : undefined}
@@ -510,6 +526,7 @@ export default function EkranSkladnikow() {
                     key={k.klucz}
                     wartosc={k.klucz === 'uzycia' ? '' : (nowyWiersz[k.klucz] ?? '')}
                     szerokosc={k.szerokosc}
+                    elastycznaSzerokosc={miesciSie && k.klucz === 'nazwa'}
                     liczba={k.liczba}
                     edytowalna={k.klucz !== 'uzycia'}
                     onZapisz={(nowa) =>
