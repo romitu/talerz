@@ -1,6 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import { router, useFocusEffect } from 'expo-router';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { Pressable, StyleSheet, TextInput, View } from 'react-native';
 
 import { komunikatBledu } from '@/lib/blad';
@@ -118,6 +118,17 @@ export default function FormularzPrzepisu() {
 
   const masaCalosci = wybrane.reduce((s, w) => s + liczba(w.gramy), 0);
 
+  const wybraneId = useMemo(() => new Set(wybrane.map((w) => w.skladnik.id)), [wybrane]);
+
+  const sprzetId = useMemo(
+    () => new Set(katalogSprzetu.filter((x) => sprzet.includes(x.nazwa)).map((x) => x.id)),
+    [katalogSprzetu, sprzet]
+  );
+
+  const przelaczSprzet = useCallback((x: { nazwa: string }) => {
+    setSprzet((p) => (p.includes(x.nazwa) ? p.filter((n) => n !== x.nazwa) : [...p, x.nazwa]));
+  }, []);
+
   /**
    * Liczba porcji zależy od sposobu porcjowania.
    * Przy wadze dzielimy masę garnka przez wielkość chochli; przy sztukach
@@ -140,17 +151,36 @@ export default function FormularzPrzepisu() {
   const komplet =
     nazwa.trim().length >= 3 && wybrane.length > 0 && wybrane.every((w) => liczba(w.gramy) > 0);
 
-  function dodajSkladnik(s: Skladnik) {
+  const dodajSkladnik = useCallback((s: Skladnik) => {
     setProbDodania((n) => n + 1);
     setWybrane((p) => [
       ...p,
       { skladnik: s, gramy: '', jednostka: 'g', stan: '', zamiennik: '', opisPotoczny: '' },
     ]);
-  }
+  }, []);
 
-  function zmienSkladnik(id: string, zmiana: Partial<WybranySkladnik>) {
+  /**
+   * Przełączenie składnika liczone z aktualnego stanu, a nie z domknięcia.
+   *
+   * Odczyt `wybrane` wewnątrz funkcji przekazywanej do komponentu potomnego
+   * potrafi zwrócić wartość sprzed zmiany. Zapis funkcyjny widzi zawsze
+   * bieżący stan, więc dodawanie i usuwanie nie rozjeżdża się z ekranem.
+   */
+  const przelaczSkladnik = useCallback((s: Skladnik) => {
+    setProbDodania((n) => n + 1);
+    setWybrane((poprzednie) => {
+      const juz = poprzednie.some((w) => w.skladnik.id === s.id);
+      if (juz) return poprzednie.filter((w) => w.skladnik.id !== s.id);
+      return [
+        ...poprzednie,
+        { skladnik: s, gramy: '', jednostka: 'g', stan: '', zamiennik: '', opisPotoczny: '' },
+      ];
+    });
+  }, []);
+
+  const zmienSkladnik = useCallback((id: string, zmiana: Partial<WybranySkladnik>) => {
     setWybrane((p) => p.map((w) => (w.skladnik.id === id ? { ...w, ...zmiana } : w)));
-  }
+  }, []);
 
 
   function dodajEtap() {
@@ -463,12 +493,8 @@ export default function FormularzPrzepisu() {
           tekstDoFiltra={(s) => `${s.nazwa} ${s.tagi.join(' ')}`}
           etykietaFiltra="Filtruj składniki po nazwie lub etykiecie"
           placeholderFiltra="dorsz, ryba, warzywo…"
-          wybrane={new Set(wybrane.map((w) => w.skladnik.id))}
-          onPrzelacz={(s) => {
-            const juz = wybrane.find((w) => w.skladnik.id === s.id);
-            if (juz) setWybrane((p) => p.filter((w) => w.skladnik.id !== s.id));
-            else dodajSkladnik(s);
-          }}
+          wybrane={wybraneId}
+          onPrzelacz={przelaczSkladnik}
           kolumny={[
             { tytul: 'Nazwa', elastyczna: true, wartosc: (s) => s.nazwa },
             { tytul: 'kcal', szerokosc: 56, liczba: true, wartosc: (s) => String(s.kcal_100g) },
@@ -583,10 +609,8 @@ export default function FormularzPrzepisu() {
           etykietaFiltra="Filtruj sprzęt"
           placeholderFiltra="garnek, tarka, piekarnik…"
           wysokosc={220}
-          wybrane={new Set(katalogSprzetu.filter((x) => sprzet.includes(x.nazwa)).map((x) => x.id))}
-          onPrzelacz={(x) =>
-            setSprzet((p) => (p.includes(x.nazwa) ? p.filter((n) => n !== x.nazwa) : [...p, x.nazwa]))
-          }
+          wybrane={sprzetId}
+          onPrzelacz={przelaczSprzet}
           kolumny={[
             { tytul: 'Nazwa', elastyczna: true, wartosc: (x) => x.nazwa },
             { tytul: 'Rodzaj', szerokosc: 120, wartosc: (x) => x.rodzaj },
