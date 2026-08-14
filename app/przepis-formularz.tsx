@@ -1,5 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
-import { router } from 'expo-router';
+import { router, useFocusEffect } from 'expo-router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Pressable, StyleSheet, TextInput, View } from 'react-native';
 
@@ -86,10 +86,14 @@ export default function FormularzPrzepisu() {
     else setKatalogSprzetu(data ?? []);
   }, []);
 
-  useEffect(() => {
-    wczytajSkladniki();
-    wczytajSprzet();
-  }, [wczytajSkladniki, wczytajSprzet]);
+  // Odświeżenie po każdym powrocie na ekran — składniki mogły zostać dodane
+  // gdzie indziej, a lista wczytana raz przy wejściu byłaby nieaktualna.
+  useFocusEffect(
+    useCallback(() => {
+      wczytajSkladniki();
+      wczytajSprzet();
+    }, [wczytajSkladniki, wczytajSprzet])
+  );
 
 
   // Makro liczone na żywo, tak samo jak potem policzy je baza.
@@ -424,12 +428,30 @@ export default function FormularzPrzepisu() {
 
       <Karta style={styles.grupa}>
         <ThemedText type="smallBold" themeColor="textSecondary">
-          SKŁADNIKI ({wybrane.length})
+          SKŁADNIKI W PRZEPISIE ({wybrane.length})
         </ThemedText>
         <ThemedText type="small" themeColor="textSecondary">
           Odfiltruj listę i dotknij wiersza albo znaku plus. Wiersz rozwinie się
           i poprosi o ilość.
         </ThemedText>
+
+        {dostepne.length === 0 ? (
+          <ThemedText type="small" themeColor="accent">
+            Baza składników jest pusta albo nie udało się jej wczytać. Sprawdź, czy
+            wszystkie migracje z katalogu supabase/migrations zostały wykonane —
+            zwłaszcza 0004_blonnik.sql, bez którego odczyt składników zwraca błąd.
+          </ThemedText>
+        ) : (
+          <ThemedText type="small" themeColor="textSecondary">
+            Do wyboru: {dostepne.length} składników w bazie.
+          </ThemedText>
+        )}
+
+        <Przycisk
+          tytul="Odśwież listę składników"
+          wariant="poboczny"
+          onPress={wczytajSkladniki}
+        />
 
         <TabelaWyboru
           dane={dostepne}
