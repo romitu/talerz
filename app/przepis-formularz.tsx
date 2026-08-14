@@ -55,7 +55,9 @@ export default function FormularzPrzepisu() {
   const [pory, setPory] = useState<PoraPosilku[]>([]);
   const [kuchnie, setKuchnie] = useState<Kuchnia[]>(['srodziemnomorska']);
   const [trwalosc, setTrwalosc] = useState<'0' | '1' | '2' | '3'>('0');
+  const [porcjowanie, setPorcjowanie] = useState<'waga' | 'sztuki'>('sztuki');
   const [porcje, setPorcje] = useState('4');
+  const [porcjaG, setPorcjaG] = useState('350');
   const [czasPrzygotowania, setCzasPrzygotowania] = useState('');
   const [czasObrobki, setCzasObrobki] = useState('');
   const [sprzet, setSprzet] = useState<string[]>([]);
@@ -108,7 +110,17 @@ export default function FormularzPrzepisu() {
     );
   }, [wybrane]);
 
-  const liczbaPorcji = Math.max(1, Math.round(liczba(porcje)) || 1);
+  const masaCalosci = wybrane.reduce((s, w) => s + liczba(w.gramy), 0);
+
+  /**
+   * Liczba porcji zależy od sposobu porcjowania.
+   * Przy wadze dzielimy masę garnka przez wielkość chochli; przy sztukach
+   * bierzemy podaną liczbę. Dokładnie tak, jak liczy to widok w bazie.
+   */
+  const liczbaPorcji =
+    porcjowanie === 'waga'
+      ? Math.max(masaCalosci / Math.max(liczba(porcjaG), 1), 0.1)
+      : Math.max(1, Math.round(liczba(porcje)) || 1);
 
   const makroPorcji = {
     kcal: makro.kcal / liczbaPorcji,
@@ -116,7 +128,7 @@ export default function FormularzPrzepisu() {
     tluszcz: makro.tluszcz / liczbaPorcji,
     wegle: makro.wegle / liczbaPorcji,
     cukryWolne: makro.cukryWolne / liczbaPorcji,
-    gramy: wybrane.reduce((s, w) => s + liczba(w.gramy), 0) / liczbaPorcji,
+    gramy: masaCalosci / liczbaPorcji,
   };
 
   const komplet =
@@ -200,7 +212,9 @@ export default function FormularzPrzepisu() {
           pory,
           kuchnie,
           trwalosc_dni: Number(trwalosc),
-          porcje: liczbaPorcji,
+          porcjowanie,
+          porcje: porcjowanie === 'sztuki' ? Math.round(liczbaPorcji) : 1,
+          porcja_g: porcjowanie === 'waga' ? Math.round(liczba(porcjaG)) : null,
           czas_przygotowania_min: liczba(czasPrzygotowania) || null,
           czas_obrobki_min: liczba(czasObrobki) || null,
           sprzet,
@@ -291,14 +305,40 @@ export default function FormularzPrzepisu() {
           METRYCZKA
         </ThemedText>
 
+        <Wybor
+          etykieta="Jak dzielimy danie na porcje"
+          wybrana={porcjowanie}
+          onZmiana={setPorcjowanie}
+          opcje={[
+            {
+              wartosc: 'sztuki',
+              etykieta: 'Na sztuki',
+              opis: 'kotlety, naleśniki, muffiny — podajesz liczbę',
+            },
+            {
+              wartosc: 'waga',
+              etykieta: 'Na wagę',
+              opis: 'zupy, gulasze, sosy — podajesz wagę jednej porcji',
+            },
+          ]}
+        />
+
         {[
-          {
-            etykieta: 'Liczba porcji',
-            wartosc: porcje,
-            ustaw: setPorcje,
-            jednostka: 'porcji',
-            podpowiedz: '6',
-          },
+          porcjowanie === 'sztuki'
+            ? {
+                etykieta: 'Liczba porcji',
+                wartosc: porcje,
+                ustaw: setPorcje,
+                jednostka: 'sztuk',
+                podpowiedz: '4',
+              }
+            : {
+                etykieta: 'Waga jednej porcji',
+                wartosc: porcjaG,
+                ustaw: setPorcjaG,
+                jednostka: 'g',
+                podpowiedz: '350',
+              },
           {
             etykieta: 'Czas przygotowania',
             wartosc: czasPrzygotowania,
@@ -335,9 +375,18 @@ export default function FormularzPrzepisu() {
           </View>
         ))}
 
+        {wybrane.length > 0 && (
+          <ThemedText type="small" themeColor="textSecondary">
+            {porcjowanie === 'waga'
+              ? `Z ${Math.round(masaCalosci)} g wychodzi około ${liczbaPorcji.toFixed(1).replace('.', ',')} porcji po ${porcjaG || '?'} g.`
+              : `Z ${Math.round(masaCalosci)} g wychodzi ${liczbaPorcji} porcji po około ${Math.round(masaCalosci / liczbaPorcji)} g.`}
+          </ThemedText>
+        )}
+
         <ThemedText type="small" themeColor="textSecondary">
-          Od liczby porcji zależy makro jednej porcji. Garnek zupy na sześć osób to nie
-          jest posiłek o wartości całego garnka.
+          „Na ile porcji” nie jest cechą przepisu — garnek ma stałą zawartość, zmienna
+          jest wielkość chochli. Dlatego przy daniach dzielonych podajesz wagę porcji,
+          a liczba wychodzi z rachunku.
         </ThemedText>
 
       </Karta>
@@ -467,7 +516,7 @@ export default function FormularzPrzepisu() {
       {wybrane.length > 0 && (
         <Karta>
           <ThemedText type="smallBold" themeColor="textSecondary">
-            NA JEDNĄ PORCJĘ ({Math.round(makroPorcji.gramy)} g z {liczbaPorcji})
+            NA JEDNĄ PORCJĘ ({Math.round(makroPorcji.gramy)} g)
           </ThemedText>
           <View style={styles.wiersz}>
             <Makro etykieta="kcal" wartosc={Math.round(makroPorcji.kcal)} jednostka="" />
@@ -476,11 +525,10 @@ export default function FormularzPrzepisu() {
             <Makro etykieta="węglow." wartosc={Math.round(makroPorcji.wegle * 10) / 10} jednostka=" g" />
           </View>
 
-          {liczbaPorcji > 1 && (
-            <ThemedText type="small" themeColor="textSecondary">
-              Cały garnek: {Math.round(makro.kcal)} kcal, {Math.round(makro.bialko * 10) / 10} g białka
-            </ThemedText>
-          )}
+          <ThemedText type="small" themeColor="textSecondary">
+            Cała potrawa: {Math.round(masaCalosci)} g, {Math.round(makro.kcal)} kcal,{' '}
+            {Math.round(makro.bialko * 10) / 10} g białka
+          </ThemedText>
 
           {makroPorcji.cukryWolne > 0 && (
             <ThemedText type="small" themeColor="textSecondary">

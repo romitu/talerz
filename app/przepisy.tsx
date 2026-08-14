@@ -141,7 +141,7 @@ export default function EkranPrzepisow() {
               <ThemedText type="smallBold" themeColor="textSecondary">
                 NA PORCJĘ
                 {p.gramy_porcji ? ` (${p.gramy_porcji} g)` : ''}
-                {p.porcje > 1 ? ` · z ${p.porcje} porcji` : ''}
+                {p.porcje_wyliczone ? ` · z ${p.porcje_wyliczone} porcji` : ''}
               </ThemedText>
               <View style={styles.wiersz}>
                 <Makro etykieta="kcal" wartosc={p.kcal} jednostka="" />
@@ -149,9 +149,10 @@ export default function EkranPrzepisow() {
                 <Makro etykieta="tłuszcz" wartosc={p.tluszcz_g ?? 0} jednostka=" g" />
                 <Makro etykieta="węglow." wartosc={p.wegle_g ?? 0} jednostka=" g" />
               </View>
-              {p.porcje > 1 && p.kcal_calosc !== null && (
+              {p.kcal_calosc !== null && (
                 <ThemedText type="small" themeColor="textSecondary">
-                  Cały garnek: {p.kcal_calosc} kcal, {p.bialko_g_calosc} g białka
+                  Cała potrawa: {p.gramy_calosc ? `${p.gramy_calosc} g, ` : ''}
+                  {p.kcal_calosc} kcal, {p.bialko_g_calosc} g białka
                 </ThemedText>
               )}
             </>

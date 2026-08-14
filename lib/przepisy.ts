@@ -18,7 +18,10 @@ export type PrzepisZMakro = {
   pory: PoraPosilku[];
   kuchnie: Kuchnia[];
   trwalosc_dni: number;
-  porcje: number;
+  porcjowanie: 'waga' | 'sztuki';
+  /** Ile porcji wychodzi — wyliczone przez bazę zgodnie ze sposobem porcjowania. */
+  porcje_wyliczone: number | null;
+  gramy_calosc: number | null;
   czas_przygotowania_min: number | null;
   czas_obrobki_min: number | null;
   sprzet: string[];
@@ -82,14 +85,15 @@ export async function pobierzPrzepisy(kontoId: string | undefined) {
       .from('przepisy')
       .select(
         `id, nazwa, opis, pory, kuchnie, trwalosc_dni, porcje, czas_przygotowania_min,
-         czas_obrobki_min, sprzet, przechowywanie, mozna_mrozic, ratunek, widocznosc, autor_id,
+         czas_obrobki_min, sprzet, przechowywanie, mozna_mrozic, ratunek, porcjowanie,
+         widocznosc, autor_id,
          polubienia (konto_id)`
       )
       .order('nazwa'),
     supabase
       .from('przepis_makro')
       .select(
-        'przepis_id, kcal, bialko_g, tluszcz_g, wegle_g, blonnik_g, cukry_wolne_g, kcal_calosc, bialko_g_calosc, gramy_porcji, nova_max'
+        'przepis_id, porcje_wyliczone, gramy_porcji, gramy_calosc, kcal, bialko_g, tluszcz_g, wegle_g, blonnik_g, cukry_wolne_g, kcal_calosc, bialko_g_calosc, nova_max'
       ),
   ]);
 
@@ -111,7 +115,7 @@ export async function pobierzPrzepisy(kontoId: string | undefined) {
       pory: p.pory ?? [],
       kuchnie: p.kuchnie ?? [],
       trwalosc_dni: p.trwalosc_dni,
-      porcje: p.porcje,
+      porcjowanie: p.porcjowanie,
       czas_przygotowania_min: p.czas_przygotowania_min,
       czas_obrobki_min: p.czas_obrobki_min,
       sprzet: p.sprzet ?? [],
@@ -129,6 +133,8 @@ export async function pobierzPrzepisy(kontoId: string | undefined) {
       kcal_calosc: makro?.kcal_calosc ?? null,
       bialko_g_calosc: makro?.bialko_g_calosc ?? null,
       gramy_porcji: makro?.gramy_porcji ?? null,
+      porcje_wyliczone: makro?.porcje_wyliczone ?? null,
+      gramy_calosc: makro?.gramy_calosc ?? null,
       nova_max: makro?.nova_max ?? null,
       polubienia: polubienia.length,
       polubiony: kontoId ? polubienia.some((x) => x.konto_id === kontoId) : false,
