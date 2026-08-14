@@ -1,7 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { Pressable, StyleSheet, View } from 'react-native';
+import { Pressable, StyleSheet, TextInput, View } from 'react-native';
 
 import { komunikatBledu } from '@/lib/blad';
 import { Ekran } from '@/components/ekran';
@@ -11,6 +11,7 @@ import { Pole } from '@/components/pole';
 import { Przycisk } from '@/components/przycisk';
 import { ThemedText } from '@/components/themed-text';
 import { FormularzSkladnika } from '@/components/formularz-skladnika';
+import { TabelaWyboru } from '@/components/tabela-wyboru';
 import { Wybor } from '@/components/wybor';
 import { WyborWielo } from '@/components/wybor-wielo';
 import { Spacing } from '@/constants/theme';
@@ -47,7 +48,6 @@ export default function FormularzPrzepisu() {
   const motyw = useTheme();
 
   const [dostepne, setDostepne] = useState<Skladnik[]>([]);
-  const [szukaj, setSzukaj] = useState('');
   const [wybrane, setWybrane] = useState<WybranySkladnik[]>([]);
 
   const [nazwa, setNazwa] = useState('');
@@ -58,13 +58,14 @@ export default function FormularzPrzepisu() {
   const [porcje, setPorcje] = useState('4');
   const [czasPrzygotowania, setCzasPrzygotowania] = useState('');
   const [czasObrobki, setCzasObrobki] = useState('');
-  const [sprzet, setSprzet] = useState('');
+  const [sprzet, setSprzet] = useState<string[]>([]);
+  const [katalogSprzetu, setKatalogSprzetu] = useState<{ id: string; nazwa: string; rodzaj: string }[]>([]);
+  const [nowySprzet, setNowySprzet] = useState('');
   const [przechowywanie, setPrzechowywanie] = useState('');
   const [moznaMrozic, setMoznaMrozic] = useState<'tak' | 'nie' | 'nie wiem'>('nie wiem');
   const [ratunek, setRatunek] = useState('');
   const [etapy, setEtapy] = useState<Etap[]>([]);
 
-  const [pokazWszystkie, setPokazWszystkie] = useState(false);
   const [dodawanieSkladnika, setDodawanieSkladnika] = useState(false);
   const [zajety, setZajety] = useState(false);
   const [blad, setBlad] = useState<string | null>(null);
@@ -77,27 +78,17 @@ export default function FormularzPrzepisu() {
     }
   }, []);
 
+  const wczytajSprzet = useCallback(async () => {
+    const { data, error } = await supabase.from('sprzet').select('id, nazwa, rodzaj').order('nazwa');
+    if (error) setBlad(komunikatBledu(error));
+    else setKatalogSprzetu(data ?? []);
+  }, []);
+
   useEffect(() => {
     wczytajSkladniki();
-  }, [wczytajSkladniki]);
+    wczytajSprzet();
+  }, [wczytajSkladniki, wczytajSprzet]);
 
-  const podpowiedzi = useMemo(() => {
-    const fraza = szukaj.trim().toLowerCase();
-    const juzWybrane = new Set(wybrane.map((w) => w.skladnik.id));
-    const wolne = dostepne.filter((s) => !juzWybrane.has(s.id));
-
-    // Puste pole i włączony podgląd — pokazujemy całą bazę, żeby dało się
-    // przewinąć i wybrać, gdy nie pamięta się nazwy.
-    if (!fraza) return pokazWszystkie ? wolne : [];
-
-    return wolne
-      .filter(
-        (s) =>
-          s.nazwa.toLowerCase().includes(fraza) ||
-          s.tagi.some((t) => t.toLowerCase().includes(fraza))
-      )
-      .slice(0, 12);
-  }, [szukaj, dostepne, wybrane, pokazWszystkie]);
 
   // Makro liczone na żywo, tak samo jak potem policzy je baza.
   const makro = useMemo(() => {
@@ -136,16 +127,12 @@ export default function FormularzPrzepisu() {
       ...p,
       { skladnik: s, gramy: '', jednostka: 'g', stan: '', zamiennik: '', opisPotoczny: '' },
     ]);
-    setSzukaj('');
   }
 
   function zmienSkladnik(id: string, zmiana: Partial<WybranySkladnik>) {
     setWybrane((p) => p.map((w) => (w.skladnik.id === id ? { ...w, ...zmiana } : w)));
   }
 
-  function usunSkladnik(id: string) {
-    setWybrane((p) => p.filter((w) => w.skladnik.id !== id));
-  }
 
   function dodajEtap() {
     setEtapy((p) => [...p, { nazwa: '', minuty: '', kroki: [] }]);
@@ -216,10 +203,7 @@ export default function FormularzPrzepisu() {
           porcje: liczbaPorcji,
           czas_przygotowania_min: liczba(czasPrzygotowania) || null,
           czas_obrobki_min: liczba(czasObrobki) || null,
-          sprzet: sprzet
-            .split(',')
-            .map((x) => x.trim())
-            .filter(Boolean),
+          sprzet,
           przechowywanie: przechowywanie.trim() || null,
           mozna_mrozic: moznaMrozic === 'nie wiem' ? null : moznaMrozic === 'tak',
           ratunek: ratunek.trim() || null,
@@ -303,38 +287,59 @@ export default function FormularzPrzepisu() {
           placeholder="Pieczony w piekarniku, warzywa na jednej blasze"
           multiline
         />
-        <Pole
-          etykieta="Ile porcji wychodzi z całego przepisu"
-          value={porcje}
-          onChangeText={setPorcje}
-          inputMode="numeric"
-          placeholder="6"
-        />
-        <ThemedText type="small" themeColor="textSecondary">
-          Od tej liczby zależy makro jednej porcji. Garnek zupy na sześć osób to nie jest
-          posiłek o wartości całego garnka.
+        <ThemedText type="smallBold" themeColor="textSecondary">
+          METRYCZKA
         </ThemedText>
 
-        <Pole
-          etykieta="Czas przygotowania (min) — krojenie, tarcie"
-          value={czasPrzygotowania}
-          onChangeText={setCzasPrzygotowania}
-          inputMode="numeric"
-          placeholder="20"
-        />
-        <Pole
-          etykieta="Czas obróbki (min) — gotowanie, pieczenie"
-          value={czasObrobki}
-          onChangeText={setCzasObrobki}
-          inputMode="numeric"
-          placeholder="77"
-        />
-        <Pole
-          etykieta="Potrzebny sprzęt, oddzielony przecinkami"
-          value={sprzet}
-          onChangeText={setSprzet}
-          placeholder="garnek 3 l, tarka o grubych oczkach, patelnia"
-        />
+        {[
+          {
+            etykieta: 'Liczba porcji',
+            wartosc: porcje,
+            ustaw: setPorcje,
+            jednostka: 'porcji',
+            podpowiedz: '6',
+          },
+          {
+            etykieta: 'Czas przygotowania',
+            wartosc: czasPrzygotowania,
+            ustaw: setCzasPrzygotowania,
+            jednostka: 'min',
+            podpowiedz: '20',
+          },
+          {
+            etykieta: 'Czas obróbki',
+            wartosc: czasObrobki,
+            ustaw: setCzasObrobki,
+            jednostka: 'min',
+            podpowiedz: '77',
+          },
+        ].map((w) => (
+          <View key={w.etykieta} style={[styles.wierszMetryczki, { borderColor: motyw.border }]}>
+            <ThemedText type="small" style={styles.etykietaMetryczki}>
+              {w.etykieta}
+            </ThemedText>
+            <TextInput
+              value={w.wartosc}
+              onChangeText={w.ustaw}
+              inputMode="numeric"
+              placeholder={w.podpowiedz}
+              placeholderTextColor={motyw.textSecondary}
+              style={[
+                styles.poleMetryczki,
+                { color: motyw.text, borderColor: motyw.border, backgroundColor: motyw.backgroundElement },
+              ]}
+            />
+            <ThemedText type="small" themeColor="textSecondary" style={styles.jednostkaMetryczki}>
+              {w.jednostka}
+            </ThemedText>
+          </View>
+        ))}
+
+        <ThemedText type="small" themeColor="textSecondary">
+          Od liczby porcji zależy makro jednej porcji. Garnek zupy na sześć osób to nie
+          jest posiłek o wartości całego garnka.
+        </ThemedText>
+
       </Karta>
 
       <Karta style={styles.grupa}>
@@ -371,160 +376,94 @@ export default function FormularzPrzepisu() {
 
       <Karta style={styles.grupa}>
         <ThemedText type="smallBold" themeColor="textSecondary">
-          SKŁADNIKI
+          SKŁADNIKI ({wybrane.length})
         </ThemedText>
-
         <ThemedText type="small" themeColor="textSecondary">
-          Krok 1: znajdź składnik i dotknij go, żeby dodać. Krok 2: wpisz, ile gramów
-          wchodzi w skład dania.
+          Odfiltruj listę i dotknij wiersza albo znaku plus. Wiersz rozwinie się
+          i poprosi o ilość.
         </ThemedText>
 
-        <Pole
-          etykieta="Wyszukaj składnik"
-          value={szukaj}
-          onChangeText={(t) => {
-            setSzukaj(t);
-            if (t) setPokazWszystkie(false);
+        <TabelaWyboru
+          dane={dostepne}
+          klucz={(s) => s.id}
+          tekstDoFiltra={(s) => `${s.nazwa} ${s.tagi.join(' ')}`}
+          etykietaFiltra="Filtruj składniki po nazwie lub etykiecie"
+          placeholderFiltra="dorsz, ryba, warzywo…"
+          wybrane={new Set(wybrane.map((w) => w.skladnik.id))}
+          onPrzelacz={(s) => {
+            const juz = wybrane.find((w) => w.skladnik.id === s.id);
+            if (juz) setWybrane((p) => p.filter((w) => w.skladnik.id !== s.id));
+            else dodajSkladnik(s);
           }}
-          placeholder="dorsz, kasza, ryba, warzywo…"
+          kolumny={[
+            { tytul: 'Nazwa', szerokosc: 230, wartosc: (s) => s.nazwa },
+            { tytul: 'kcal', szerokosc: 56, liczba: true, wartosc: (s) => String(s.kcal_100g) },
+            { tytul: 'B', szerokosc: 48, liczba: true, wartosc: (s) => String(s.bialko_100g) },
+            { tytul: 'T', szerokosc: 48, liczba: true, wartosc: (s) => String(s.tluszcz_100g) },
+            { tytul: 'W', szerokosc: 48, liczba: true, wartosc: (s) => String(s.wegle_100g) },
+            { tytul: 'błonnik', szerokosc: 60, liczba: true, wartosc: (s) => String(s.blonnik_100g) },
+          ]}
+          szczegoly={(s) => {
+            const w = wybrane.find((x) => x.skladnik.id === s.id);
+            if (!w) return null;
+            return (
+              <>
+                <Pole
+                  etykieta={`Ile (${w.jednostka})`}
+                  value={w.gramy}
+                  onChangeText={(t) => zmienSkladnik(s.id, { gramy: t })}
+                  inputMode="numeric"
+                  placeholder="200"
+                />
+                <Wybor
+                  etykieta="Jednostka"
+                  wybrana={w.jednostka}
+                  onZmiana={(j) => zmienSkladnik(s.id, { jednostka: j })}
+                  opcje={[
+                    { wartosc: 'g', etykieta: 'gramy' },
+                    { wartosc: 'ml', etykieta: 'mililitry' },
+                  ]}
+                />
+                <Pole
+                  etykieta="Stan składnika"
+                  value={w.stan}
+                  onChangeText={(t) => zmienSkladnik(s.id, { stan: t })}
+                  placeholder="obrana i starta na grubych oczkach"
+                />
+                <Pole
+                  etykieta="Zamiennik (nieobowiązkowy)"
+                  value={w.zamiennik}
+                  onChangeText={(t) => zmienSkladnik(s.id, { zamiennik: t })}
+                  placeholder="lub korpus z kurczaka"
+                />
+              </>
+            );
+          }}
+          stopka={(fraza) =>
+            dodawanieSkladnika ? (
+              <View style={styles.okienko}>
+                <ThemedText type="small" themeColor="textSecondary">
+                  Przepis pozostaje wpisany — po zapisaniu składnik od razu do niego wejdzie.
+                </ThemedText>
+                <FormularzSkladnika
+                  nazwaPoczatkowa={fraza}
+                  onZapisano={(nowy) => {
+                    setDostepne((p) => [...p, nowy].sort((a, b) => a.nazwa.localeCompare(b.nazwa, 'pl')));
+                    dodajSkladnik(nowy);
+                    setDodawanieSkladnika(false);
+                  }}
+                  onAnuluj={() => setDodawanieSkladnika(false)}
+                />
+              </View>
+            ) : (
+              <Przycisk
+                tytul={fraza ? `Nie ma „${fraza}”? Dodaj do bazy` : 'Brakuje składnika? Dodaj go'}
+                wariant="poboczny"
+                onPress={() => setDodawanieSkladnika(true)}
+              />
+            )
+          }
         />
-
-        {!szukaj.trim() && (
-          <Przycisk
-            tytul={
-              pokazWszystkie
-                ? 'Ukryj listę'
-                : `Nie pamiętasz nazwy? Pokaż wszystkie (${dostepne.length})`
-            }
-            wariant="poboczny"
-            onPress={() => setPokazWszystkie((p) => !p)}
-          />
-        )}
-
-        {podpowiedzi.length > 0 && (
-          <View style={[styles.lista, { borderColor: motyw.border }]}>
-            {podpowiedzi.map((s) => (
-              <Pressable
-                key={s.id}
-                onPress={() => dodajSkladnik(s)}
-                accessibilityRole="button"
-                accessibilityLabel={`Dodaj ${s.nazwa} do przepisu`}
-                style={({ pressed }) => [
-                  styles.podpowiedz,
-                  { borderColor: motyw.border },
-                  pressed && styles.wcisniety,
-                ]}>
-                <Ionicons name="add-circle-outline" size={20} color={motyw.accent} />
-                <View style={styles.trescPodpowiedzi}>
-                  <ThemedText type="small">{s.nazwa}</ThemedText>
-                  <ThemedText type="small" themeColor="textSecondary">
-                    {s.kcal_100g} kcal · {s.bialko_100g} g białka / 100 g
-                  </ThemedText>
-                </View>
-              </Pressable>
-            ))}
-          </View>
-        )}
-
-        {szukaj.trim() && podpowiedzi.length === 0 && !dodawanieSkladnika && (
-          <ThemedText type="small" themeColor="textSecondary">
-            Nic takiego nie ma w bazie — możesz dodać poniżej.
-          </ThemedText>
-        )}
-
-        {/*
-          Dodawanie składnika odbywa się TUTAJ, bez opuszczania ekranu.
-          Przejście na inny ekran wyczyściłoby wszystko, co już wpisano
-          w przepisie — nazwę, pozostałe składniki i kroki.
-        */}
-        {!dodawanieSkladnika && (
-          <Przycisk
-            tytul={szukaj.trim() ? `Dodaj „${szukaj.trim()}” do bazy` : 'Brakuje składnika? Dodaj go'}
-            wariant="poboczny"
-            onPress={() => setDodawanieSkladnika(true)}
-          />
-        )}
-
-        {dodawanieSkladnika && (
-          <View style={styles.okienko}>
-            <ThemedText type="small" themeColor="textSecondary">
-              Przepis pozostaje wpisany — po zapisaniu składnik od razu do niego wejdzie.
-            </ThemedText>
-
-            <FormularzSkladnika
-              nazwaPoczatkowa={szukaj.trim()}
-              onZapisano={(nowy) => {
-                setDostepne((p) => [...p, nowy].sort((a, b) => a.nazwa.localeCompare(b.nazwa, 'pl')));
-                setWybrane((p) => [
-                  ...p,
-                  { skladnik: nowy, gramy: '', jednostka: 'g', stan: '', zamiennik: '', opisPotoczny: '' },
-                ]);
-                setDodawanieSkladnika(false);
-                setSzukaj('');
-              }}
-              onAnuluj={() => setDodawanieSkladnika(false)}
-            />
-          </View>
-        )}
-
-        {wybrane.length > 0 && (
-          <ThemedText type="smallBold" themeColor="textSecondary">
-            W TYM DANIU ({wybrane.length})
-          </ThemedText>
-        )}
-
-        {wybrane.map((w) => (
-          <View key={w.skladnik.id} style={[styles.skladnik, { borderColor: motyw.border }]}>
-            <View style={styles.naglowekSkladnika}>
-              <ThemedText type="small" style={styles.nazwaSkladnika}>
-                {w.skladnik.nazwa}
-              </ThemedText>
-              <Pressable
-                onPress={() => usunSkladnik(w.skladnik.id)}
-                accessibilityLabel={`Usuń ${w.skladnik.nazwa}`}
-                hitSlop={8}>
-                <Ionicons name="close" size={18} color={motyw.textSecondary} />
-              </Pressable>
-            </View>
-
-            <Pole
-              etykieta={`Ile (${w.jednostka})`}
-              value={w.gramy}
-              onChangeText={(t) => zmienSkladnik(w.skladnik.id, { gramy: t })}
-              inputMode="numeric"
-              placeholder="200"
-            />
-
-            <Wybor
-              etykieta="Jednostka"
-              wybrana={w.jednostka}
-              onZmiana={(j) => zmienSkladnik(w.skladnik.id, { jednostka: j })}
-              opcje={[
-                { wartosc: 'g', etykieta: 'gramy' },
-                { wartosc: 'ml', etykieta: 'mililitry' },
-              ]}
-            />
-
-            <Pole
-              etykieta="Stan składnika"
-              value={w.stan}
-              onChangeText={(t) => zmienSkladnik(w.skladnik.id, { stan: t })}
-              placeholder="obrana i starta na grubych oczkach"
-            />
-            <Pole
-              etykieta="Zamiennik (nieobowiązkowy)"
-              value={w.zamiennik}
-              onChangeText={(t) => zmienSkladnik(w.skladnik.id, { zamiennik: t })}
-              placeholder="lub korpus z kurczaka"
-            />
-            <Pole
-              etykieta="Zapis dla człowieka (nieobowiązkowy)"
-              value={w.opisPotoczny}
-              onChangeText={(t) => zmienSkladnik(w.skladnik.id, { opisPotoczny: t })}
-              placeholder="1 marchewka (ok. 70 g)"
-            />
-          </View>
-        ))}
       </Karta>
 
       {wybrane.length > 0 && (
@@ -557,6 +496,62 @@ export default function FormularzPrzepisu() {
           )}
         </Karta>
       )}
+
+      <Karta style={styles.grupa}>
+        <ThemedText type="smallBold" themeColor="textSecondary">
+          POTRZEBNY SPRZĘT ({sprzet.length})
+        </ThemedText>
+        <ThemedText type="small" themeColor="textSecondary">
+          Zapobiega szukaniu blendera w połowie gotowania.
+        </ThemedText>
+
+        <TabelaWyboru
+          dane={katalogSprzetu}
+          klucz={(x) => x.id}
+          tekstDoFiltra={(x) => `${x.nazwa} ${x.rodzaj}`}
+          etykietaFiltra="Filtruj sprzęt"
+          placeholderFiltra="garnek, tarka, piekarnik…"
+          wysokosc={220}
+          wybrane={new Set(katalogSprzetu.filter((x) => sprzet.includes(x.nazwa)).map((x) => x.id))}
+          onPrzelacz={(x) =>
+            setSprzet((p) => (p.includes(x.nazwa) ? p.filter((n) => n !== x.nazwa) : [...p, x.nazwa]))
+          }
+          kolumny={[
+            { tytul: 'Nazwa', szerokosc: 260, wartosc: (x) => x.nazwa },
+            { tytul: 'Rodzaj', szerokosc: 120, wartosc: (x) => x.rodzaj },
+          ]}
+          stopka={(fraza) => (
+            <View style={styles.dopisywanieSprzetu}>
+              <Pole
+                etykieta="Nie ma na liście? Dopisz do katalogu"
+                value={nowySprzet || fraza}
+                onChangeText={setNowySprzet}
+                placeholder="szybkowar 6 l"
+              />
+              <Przycisk
+                tytul="Dopisz sprzęt"
+                wariant="poboczny"
+                onPress={async () => {
+                  const nazwa = (nowySprzet || fraza).trim();
+                  if (!nazwa) return;
+                  const { data, error } = await supabase
+                    .from('sprzet')
+                    .insert({ nazwa })
+                    .select('id, nazwa, rodzaj')
+                    .single();
+                  if (error) {
+                    setBlad(komunikatBledu(error));
+                    return;
+                  }
+                  setKatalogSprzetu((p) => [...p, data].sort((a, b) => a.nazwa.localeCompare(b.nazwa, 'pl')));
+                  setSprzet((p) => [...p, data.nazwa]);
+                  setNowySprzet('');
+                }}
+              />
+            </View>
+          )}
+        />
+      </Karta>
 
       <Karta style={styles.grupa}>
         <ThemedText type="smallBold" themeColor="textSecondary">
@@ -795,6 +790,26 @@ const styles = StyleSheet.create({
     gap: Spacing.one,
     marginLeft: 'auto',
   },
+  wierszMetryczki: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.two,
+    borderBottomWidth: 1,
+    paddingVertical: Spacing.one,
+  },
+  etykietaMetryczki: { flex: 1 },
+  poleMetryczki: {
+    width: 90,
+    borderWidth: 1,
+    borderRadius: Spacing.one,
+    paddingHorizontal: Spacing.two,
+    paddingVertical: 4,
+    fontSize: 15,
+    textAlign: 'right',
+    minHeight: 34,
+  },
+  jednostkaMetryczki: { width: 48 },
+  dopisywanieSprzetu: { gap: Spacing.two, paddingTop: Spacing.two },
   okienko: {
     gap: Spacing.two,
     paddingTop: Spacing.two,
