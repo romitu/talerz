@@ -44,6 +44,7 @@ sprawdz('odczyt wartości dorsza', odczytajSkladniki(dorsz), {
   bialko: 17.81,
   tluszcz: 0.67,
   wegle: 0,
+  blonnik: null,
   cukry: 0,
 });
 
@@ -66,6 +67,7 @@ sprawdz('odczyt wartości miodu (inny kształt odpowiedzi)', odczytajSkladniki(m
   bialko: 0.3,
   tluszcz: 0,
   wegle: 82.4,
+  blonnik: null,
   cukry: 82.12,
 });
 
@@ -75,6 +77,7 @@ sprawdz('brak wartości daje null', odczytajSkladniki({ foodNutrients: [] }), {
   bialko: null,
   tluszcz: null,
   wegle: null,
+  blonnik: null,
   cukry: null,
 });
 
@@ -83,8 +86,24 @@ sprawdz('pozycja bez listy składników nie wywraca odczytu', odczytajSkladniki(
   bialko: null,
   tluszcz: null,
   wegle: null,
+  blonnik: null,
   cukry: null,
 });
+
+// Błonnik pod numerem 291 — dochodzi do importu wraz z migracją 0004.
+const kaszaGryczana = {
+  fdcId: 170286,
+  description: 'Buckwheat',
+  dataType: 'SR Legacy',
+  foodNutrients: [
+    { nutrientNumber: '208', unitName: 'KCAL', value: 343 },
+    { nutrientNumber: '203', unitName: 'G', value: 13.25 },
+    { nutrientNumber: '205', unitName: 'G', value: 71.5 },
+    { nutrientNumber: '291', nutrientName: 'Fiber, total dietary', unitName: 'G', value: 10 },
+  ],
+};
+sprawdz('błonnik odczytany z numeru 291', odczytajSkladniki(kaszaGryczana).blonnik, 10);
+sprawdz('brak błonnika daje null', odczytajSkladniki(dorsz).blonnik, null);
 
 // Wybór najlepszego dopasowania
 sprawdz(
