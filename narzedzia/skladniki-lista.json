@@ -1332,6 +1332,190 @@
         "przyprawa"
       ],
       "nova": 2
+    },
+    {
+      "nazwa": "Żeberka wieprzowe, surowe",
+      "usda": "pork, fresh, spareribs, raw",
+      "kcal_okolo": 277,
+      "slowa": [
+        "spareribs"
+      ],
+      "wyklucz": [
+        "cooked",
+        "braised",
+        "smoked"
+      ],
+      "tagi": [
+        "mieso"
+      ],
+      "nova": 1
+    },
+    {
+      "nazwa": "Korpus z kurczaka, surowy",
+      "usda": "chicken, broilers or fryers, back, meat and skin, raw",
+      "kcal_okolo": 220,
+      "slowa": [
+        "chicken",
+        "back"
+      ],
+      "wyklucz": [
+        "cooked",
+        "fried",
+        "roasted"
+      ],
+      "tagi": [
+        "mieso",
+        "drob"
+      ],
+      "nova": 1
+    },
+    {
+      "nazwa": "Seler korzeniowy, surowy",
+      "usda": "celeriac, raw",
+      "kcal_okolo": 42,
+      "slowa": [
+        "celeriac"
+      ],
+      "wyklucz": [
+        "cooked"
+      ],
+      "tagi": [
+        "warzywo"
+      ],
+      "nova": 1
+    },
+    {
+      "nazwa": "Pietruszka korzeń, surowa",
+      "usda": "parsnips, raw",
+      "kcal_okolo": 75,
+      "slowa": [
+        "parsnip"
+      ],
+      "wyklucz": [
+        "cooked"
+      ],
+      "tagi": [
+        "warzywo"
+      ],
+      "nova": 1
+    },
+    {
+      "nazwa": "Ogórki kiszone",
+      "usda": "pickles, cucumber, dill",
+      "kcal_okolo": 12,
+      "slowa": [
+        "pickle",
+        "dill"
+      ],
+      "wyklucz": [
+        "sweet",
+        "relish",
+        "bread"
+      ],
+      "tagi": [
+        "warzywo",
+        "kiszonka"
+      ],
+      "nova": 3
+    },
+    {
+      "nazwa": "Śmietana 18%",
+      "usda": "cream, sour, cultured",
+      "kcal_okolo": 198,
+      "slowa": [
+        "sour"
+      ],
+      "wyklucz": [
+        "reduced",
+        "fat free",
+        "imitation",
+        "light"
+      ],
+      "tagi": [
+        "nabial"
+      ],
+      "nova": 3
+    },
+    {
+      "nazwa": "Koperek świeży",
+      "usda": "dill weed, fresh",
+      "kcal_okolo": 43,
+      "slowa": [
+        "dill weed"
+      ],
+      "wyklucz": [
+        "dried",
+        "seed"
+      ],
+      "tagi": [
+        "ziola"
+      ],
+      "nova": 1
+    },
+    {
+      "nazwa": "Liść laurowy",
+      "usda": "spices, bay leaf",
+      "kcal_okolo": 313,
+      "slowa": [
+        "bay leaf"
+      ],
+      "wyklucz": [
+        "fresh"
+      ],
+      "tagi": [
+        "przyprawa"
+      ],
+      "nova": 2
+    },
+    {
+      "nazwa": "Ziele angielskie mielone",
+      "usda": "spices, allspice, ground",
+      "kcal_okolo": 263,
+      "slowa": [
+        "allspice"
+      ],
+      "wyklucz": [
+        "fresh"
+      ],
+      "tagi": [
+        "przyprawa"
+      ],
+      "nova": 2
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "usda": "salt, table",
+      "kcal_okolo": 0,
+      "slowa": [
+        "salt",
+        "table"
+      ],
+      "wyklucz": [
+        "substitute",
+        "seasoned",
+        "garlic",
+        "celery"
+      ],
+      "tagi": [
+        "przyprawa"
+      ],
+      "nova": 2
+    },
+    {
+      "nazwa": "Olej rzepakowy",
+      "usda": "oil, canola",
+      "kcal_okolo": 884,
+      "slowa": [
+        "canola"
+      ],
+      "wyklucz": [
+        "spray",
+        "blend"
+      ],
+      "tagi": [
+        "tluszcz"
+      ],
+      "nova": 2
     }
   ]
 }
