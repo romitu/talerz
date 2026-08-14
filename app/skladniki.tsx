@@ -28,15 +28,16 @@ import {
 const SZEROKOSC_ROZWIJANIA = 36;
 
 const KOLUMNY = [
-  { klucz: 'nazwa', tytul: 'Nazwa', szerokosc: 280, liczba: false },
-  { klucz: 'kcal_100g', tytul: 'kcal', szerokosc: 64, liczba: true },
-  { klucz: 'bialko_100g', tytul: 'B', szerokosc: 56, liczba: true },
-  { klucz: 'tluszcz_100g', tytul: 'T', szerokosc: 56, liczba: true },
-  { klucz: 'wegle_100g', tytul: 'W', szerokosc: 56, liczba: true },
-  { klucz: 'cukry_wolne_100g', tytul: 'c. wolne', szerokosc: 76, liczba: true },
-  { klucz: 'nova', tytul: 'NOVA', szerokosc: 60, liczba: true },
-  { klucz: 'gramatura_opakowania_g', tytul: 'opak.', szerokosc: 64, liczba: true },
-  { klucz: 'uzycia', tytul: 'w daniach', szerokosc: 84, liczba: true },
+  { klucz: 'nazwa', tytul: 'Nazwa', szerokosc: 240, liczba: false },
+  { klucz: 'kcal_100g', tytul: 'kcal', szerokosc: 58, liczba: true },
+  { klucz: 'bialko_100g', tytul: 'B', szerokosc: 50, liczba: true },
+  { klucz: 'tluszcz_100g', tytul: 'T', szerokosc: 50, liczba: true },
+  { klucz: 'wegle_100g', tytul: 'W', szerokosc: 50, liczba: true },
+  { klucz: 'blonnik_100g', tytul: 'błonnik', szerokosc: 62, liczba: true },
+  { klucz: 'cukry_wolne_100g', tytul: 'c. wolne', szerokosc: 66, liczba: true },
+  { klucz: 'nova', tytul: 'NOVA', szerokosc: 54, liczba: true },
+  { klucz: 'gramatura_opakowania_g', tytul: 'opak.', szerokosc: 58, liczba: true },
+  { klucz: 'uzycia', tytul: 'w daniach', szerokosc: 72, liczba: true },
 ] as const;
 
 type KluczKolumny = (typeof KOLUMNY)[number]['klucz'];
@@ -67,6 +68,7 @@ export default function EkranSkladnikow() {
     bialko_100g: '',
     tluszcz_100g: '',
     wegle_100g: '',
+    blonnik_100g: '',
     cukry_wolne_100g: '',
     nova: '',
     gramatura_opakowania_g: '',
@@ -212,6 +214,7 @@ export default function EkranSkladnikow() {
       bialko_100g: zKomorki(nowyWiersz.bialko_100g, NaN) as number,
       tluszcz_100g: zKomorki(nowyWiersz.tluszcz_100g, NaN) as number,
       wegle_100g: zKomorki(nowyWiersz.wegle_100g, NaN) as number,
+      blonnik_100g: zKomorki(nowyWiersz.blonnik_100g, 0) as number,
       cukry_ogolem_100g: zKomorki(nowyWiersz.cukry_wolne_100g, 0) as number,
       cukry_wolne_100g: zKomorki(nowyWiersz.cukry_wolne_100g, 0) as number,
       nova: zKomorki(nowyWiersz.nova, null),

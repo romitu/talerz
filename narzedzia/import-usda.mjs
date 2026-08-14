@@ -89,6 +89,7 @@ const NUMERY = {
   bialko: ['203'],
   tluszcz: ['204'],
   wegle: ['205', '205.2'],
+  blonnik: ['291'],
   cukry: ['269', '269.3'],
 };
 
@@ -368,6 +369,8 @@ async function main() {
         bialko_100g: w.bialko,
         tluszcz_100g: w.tluszcz ?? 0,
         wegle_100g: w.wegle ?? 0,
+        // Błonnik zawiera się w węglowodanach — baza tego pilnuje, więc przycinamy.
+        blonnik_100g: Math.min(w.blonnik ?? 0, w.wegle ?? 0),
         cukry_ogolem_100g: cukryOgolem,
         cukry_wolne_100g: cukryWolne,
         nova: pozycja.nova ?? null,

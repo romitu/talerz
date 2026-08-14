@@ -52,6 +52,7 @@ export function FormularzSkladnika({
   const [bialko, setBialko] = useState(naTekst(skladnik?.bialko_100g));
   const [tluszcz, setTluszcz] = useState(naTekst(skladnik?.tluszcz_100g));
   const [wegle, setWegle] = useState(naTekst(skladnik?.wegle_100g));
+  const [blonnik, setBlonnik] = useState(naTekst(skladnik?.blonnik_100g));
   const [cukryOgolem, setCukryOgolem] = useState(naTekst(skladnik?.cukry_ogolem_100g));
   const [cukryWolne, setCukryWolne] = useState(naTekst(skladnik?.cukry_wolne_100g));
   const [nova, setNova] = useState(naTekst(skladnik?.nova));
@@ -68,6 +69,7 @@ export function FormularzSkladnika({
     bialko_100g: naLiczbe(bialko),
     tluszcz_100g: naLiczbe(tluszcz),
     wegle_100g: naLiczbe(wegle),
+    blonnik_100g: blonnik.trim() ? naLiczbe(blonnik) : 0,
     cukry_ogolem_100g: cukryOgolem.trim() ? naLiczbe(cukryOgolem) : 0,
     cukry_wolne_100g: cukryWolne.trim() ? naLiczbe(cukryWolne) : 0,
     nova: nova.trim() ? naLiczbe(nova) : null,
@@ -115,6 +117,11 @@ export function FormularzSkladnika({
         <Pole etykieta="Białko (g / 100 g)" value={bialko} onChangeText={setBialko} inputMode="decimal" placeholder="11" />
         <Pole etykieta="Tłuszcz (g / 100 g)" value={tluszcz} onChangeText={setTluszcz} inputMode="decimal" placeholder="4.2" />
         <Pole etykieta="Węglowodany (g / 100 g)" value={wegle} onChangeText={setWegle} inputMode="decimal" placeholder="71" />
+        <Pole etykieta="Błonnik (g / 100 g)" value={blonnik} onChangeText={setBlonnik} inputMode="decimal" placeholder="10" />
+        <ThemedText type="small" themeColor="textSecondary">
+          Błonnik zawiera się w węglowodanach, więc nie może ich przekraczać. Na etykiecie
+          bywa podany osobno, pod pozycją „w tym błonnik”.
+        </ThemedText>
       </Karta>
 
       <Karta style={styles.grupa}>

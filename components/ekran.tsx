@@ -34,7 +34,7 @@ export function Ekran({ tytul, podtytul, pelnaSzerokosc = false, children }: Ekr
           style={styles.przewijanie}
           contentContainerStyle={[
             styles.zawartosc,
-            pelnaSzerokosc && styles.zawartoscPelna,
+            pelnaSzerokosc ? styles.bezOgraniczenia : styles.zOgraniczeniem,
           ]}
           showsVerticalScrollIndicator={false}>
           <View style={styles.naglowek}>
@@ -67,11 +67,15 @@ const styles = StyleSheet.create({
     paddingBottom: Spacing.six,
     gap: Spacing.three,
     width: '100%',
-    maxWidth: MaxContentWidth,
     alignSelf: 'center',
   },
-  zawartoscPelna: {
-    maxWidth: undefined,
+  /* Ograniczenie szerokości nakładamy osobnym stylem zamiast nadpisywać —
+     wartość pusta w nadpisaniu bywa ignorowana i tabela dalej się przewijała. */
+  zOgraniczeniem: {
+    maxWidth: MaxContentWidth,
+  },
+  bezOgraniczenia: {
+    maxWidth: '100%',
   },
   naglowek: {
     paddingTop: Spacing.three,

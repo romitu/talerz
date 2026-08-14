@@ -32,6 +32,7 @@ export type PrzepisZMakro = {
   bialko_g: number | null;
   tluszcz_g: number | null;
   wegle_g: number | null;
+  blonnik_g: number | null;
   cukry_wolne_g: number | null;
   /** Wartości całego garnka. */
   kcal_calosc: number | null;
@@ -88,7 +89,7 @@ export async function pobierzPrzepisy(kontoId: string | undefined) {
     supabase
       .from('przepis_makro')
       .select(
-        'przepis_id, kcal, bialko_g, tluszcz_g, wegle_g, cukry_wolne_g, kcal_calosc, bialko_g_calosc, gramy_porcji, nova_max'
+        'przepis_id, kcal, bialko_g, tluszcz_g, wegle_g, blonnik_g, cukry_wolne_g, kcal_calosc, bialko_g_calosc, gramy_porcji, nova_max'
       ),
   ]);
 
@@ -123,6 +124,7 @@ export async function pobierzPrzepisy(kontoId: string | undefined) {
       bialko_g: makro?.bialko_g ?? null,
       tluszcz_g: makro?.tluszcz_g ?? null,
       wegle_g: makro?.wegle_g ?? null,
+      blonnik_g: makro?.blonnik_g ?? null,
       cukry_wolne_g: makro?.cukry_wolne_g ?? null,
       kcal_calosc: makro?.kcal_calosc ?? null,
       bialko_g_calosc: makro?.bialko_g_calosc ?? null,
