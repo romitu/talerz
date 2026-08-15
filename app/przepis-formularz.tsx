@@ -94,12 +94,13 @@ export default function FormularzPrzepisu() {
   const [czasObrobki, setCzasObrobki] = useState('');
   const [sprzet, setSprzet] = useState<string[]>([]);
   const [katalogSprzetu, setKatalogSprzetu] = useState<
-    { id: string; nazwa: string; rodzaj: string; w_przepisach: number }[]
+    { id: string; nazwa: string; rodzaj: string; w_przepisach: number; przepisy: string[] }[]
   >([]);
   const [sprzetDoUsuniecia, setSprzetDoUsuniecia] = useState<{
     id: string;
     nazwa: string;
     w_przepisach: number;
+    przepisy: string[];
   } | null>(null);
   const [nowySprzet, setNowySprzet] = useState('');
   const [przechowywanie, setPrzechowywanie] = useState('');
@@ -124,7 +125,7 @@ export default function FormularzPrzepisu() {
     // Bez niej nie da się bezpiecznie zaproponować usunięcia.
     const { data, error } = await supabase
       .from('sprzet_uzycie')
-      .select('id, nazwa, rodzaj, w_przepisach')
+      .select('id, nazwa, rodzaj, w_przepisach, przepisy')
       .order('nazwa');
     if (error) setBlad(komunikatBledu(error));
     else setKatalogSprzetu(data ?? []);
@@ -837,15 +838,60 @@ export default function FormularzPrzepisu() {
             {sprzetDoUsuniecia.w_przepisach > 0 ? (
               <>
                 <ThemedText type="smallBold" themeColor="accent">
-                  Nie można usunąć: „{sprzetDoUsuniecia.nazwa}”
+                  „{sprzetDoUsuniecia.nazwa}” jest używany
                 </ThemedText>
                 <ThemedText type="small" themeColor="textSecondary">
-                  Sprzęt występuje w {sprzetDoUsuniecia.w_przepisach}{' '}
-                  {sprzetDoUsuniecia.w_przepisach === 1 ? 'przepisie' : 'przepisach'}.
-                  Najpierw usuń go stamtąd.
+                  Występuje w {sprzetDoUsuniecia.w_przepisach}{' '}
+                  {sprzetDoUsuniecia.w_przepisach === 1 ? 'przepisie' : 'przepisach'}:
                 </ThemedText>
+                {sprzetDoUsuniecia.przepisy.map((n) => (
+                  <ThemedText key={n} type="small">
+                    • {n}
+                  </ThemedText>
+                ))}
+
+                {/*
+                  Sama informacja „usuń go stamtąd” nie wystarcza — trzeba by
+                  otwierać każdy przepis po kolei. Robimy to jednym ruchem.
+                */}
                 <Przycisk
-                  tytul="Rozumiem"
+                  tytul="Usuń z tych przepisów i skasuj"
+                  onPress={async () => {
+                    setBlad(null);
+                    try {
+                      const { data: uzywajace, error: bladOdczytu } = await supabase
+                        .from('przepisy')
+                        .select('id, sprzet')
+                        .contains('sprzet', [sprzetDoUsuniecia.nazwa]);
+                      if (bladOdczytu) throw bladOdczytu;
+
+                      for (const przepis of uzywajace ?? []) {
+                        const bez = (przepis.sprzet as string[]).filter(
+                          (x) => x !== sprzetDoUsuniecia.nazwa
+                        );
+                        const { error } = await supabase
+                          .from('przepisy')
+                          .update({ sprzet: bez })
+                          .eq('id', przepis.id);
+                        if (error) throw error;
+                      }
+
+                      const { error: bladUsuniecia } = await supabase
+                        .from('sprzet')
+                        .delete()
+                        .eq('id', sprzetDoUsuniecia.id);
+                      if (bladUsuniecia) throw bladUsuniecia;
+
+                      setSprzet((p) => p.filter((n) => n !== sprzetDoUsuniecia.nazwa));
+                      setSprzetDoUsuniecia(null);
+                      wczytajSprzet();
+                    } catch (e) {
+                      setBlad(komunikatBledu(e));
+                    }
+                  }}
+                />
+                <Przycisk
+                  tytul="Zostaw"
                   wariant="poboczny"
                   onPress={() => setSprzetDoUsuniecia(null)}
                 />
@@ -913,7 +959,7 @@ export default function FormularzPrzepisu() {
               <Ionicons
                 name="trash-outline"
                 size={16}
-                color={x.w_przepisach === 0 ? motyw.textSecondary : motyw.border}
+                color={x.w_przepisach === 0 ? motyw.textSecondary : motyw.accent}
               />
             </Pressable>
           )}
@@ -956,7 +1002,7 @@ export default function FormularzPrzepisu() {
                     return;
                   }
                   setKatalogSprzetu((p) =>
-                    [...p, { ...data, w_przepisach: 0 }].sort((a, b) =>
+                    [...p, { ...data, w_przepisach: 0, przepisy: [] }].sort((a, b) =>
                       a.nazwa.localeCompare(b.nazwa, 'pl')
                     )
                   );
