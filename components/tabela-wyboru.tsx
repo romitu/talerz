@@ -25,13 +25,13 @@ type TabelaWyboruProps<T> = {
   dane: T[];
   klucz: (element: T) => string;
   kolumny: KolumnaWyboru<T>[];
-  /** Identyfikatory elementów już wybranych. */
-  wybrane: Set<string>;
+  /** Identyfikatory wybranych, W KOLEJNOŚCI ZAZNACZANIA. */
+  wybrane: string[];
   onPrzelacz: (element: T) => void;
   /** Do przeszukiwania — z czego składa się tekst brany pod uwagę przy filtrze. */
   tekstDoFiltra: (element: T) => string;
-  /** Pola uzupełniane po dodaniu, rozwijane pod wierszem. */
-  szczegoly?: (element: T) => ReactNode;
+  /** Treść pokazywana pod tabelą — np. tabela wybranych pozycji. */
+  poWyborze?: ReactNode;
   etykietaFiltra?: string;
   placeholderFiltra?: string;
   /** Pokazywane pod tabelą, np. przycisk dopisania nowej pozycji. */
@@ -53,7 +53,7 @@ export function TabelaWyboru<T>({
   wybrane,
   onPrzelacz,
   tekstDoFiltra,
-  szczegoly,
+  poWyborze,
   etykietaFiltra = 'Filtruj',
   placeholderFiltra,
   stopka,
@@ -61,6 +61,11 @@ export function TabelaWyboru<T>({
 }: TabelaWyboruProps<T>) {
   const motyw = useTheme();
   const [fraza, setFraza] = useState('');
+  const [sortujPo, setSortujPo] = useState<string | null>(null);
+  const [malejaco, setMalejaco] = useState(false);
+
+  /** Pozycja każdego wybranego elementu — decyduje o kolejności na górze listy. */
+  const kolejnosc = useMemo(() => new Map(wybrane.map((id, i) => [id, i])), [wybrane]);
   const { width: szerokoscOkna } = useWindowDimensions();
 
   const szerokoscMinimalna =
@@ -84,25 +89,35 @@ export function TabelaWyboru<T>({
 
   const szerokoscTabeli = miesciSie ? ('100%' as const) : szerokoscMinimalna;
 
-  // Wybrane w kolejności, w jakiej występują w danych — nie zmienia się przy filtrowaniu.
-  const wybraneElementy = useMemo(
-    () => dane.filter((x) => wybrane.has(klucz(x))),
-    [dane, wybrane, klucz]
-  );
-
   const widoczne = useMemo(() => {
     const f = fraza.trim().toLowerCase();
-    const pasujace = f
-      ? dane.filter((x) => tekstDoFiltra(x).toLowerCase().includes(f))
-      : dane;
+    const pasujace = f ? dane.filter((x) => tekstDoFiltra(x).toLowerCase().includes(f)) : [...dane];
 
-    // Wybrane na górze — inaczej po odfiltrowaniu znikają z oczu.
-    return [...pasujace].sort((a, b) => {
-      const wa = wybrane.has(klucz(a)) ? 0 : 1;
-      const wb = wybrane.has(klucz(b)) ? 0 : 1;
-      return wa - wb;
+    // Sortowanie kolumną ma pierwszeństwo — użytkownik świadomie o nie poprosił.
+    if (sortujPo) {
+      const kolumna = kolumny.find((k) => k.tytul === sortujPo);
+      if (kolumna) {
+        return pasujace.sort((a, b) => {
+          const wa = kolumna.wartosc(a);
+          const wb = kolumna.wartosc(b);
+          const wynik = kolumna.liczba
+            ? (Number(wa) || 0) - (Number(wb) || 0)
+            : wa.localeCompare(wb, 'pl');
+          return malejaco ? -wynik : wynik;
+        });
+      }
+    }
+
+    // Domyślnie: wybrane na górze, w kolejności zaznaczania.
+    return pasujace.sort((a, b) => {
+      const ia = kolejnosc.get(klucz(a));
+      const ib = kolejnosc.get(klucz(b));
+      if (ia !== undefined && ib !== undefined) return ia - ib;
+      if (ia !== undefined) return -1;
+      if (ib !== undefined) return 1;
+      return 0;
     });
-  }, [dane, fraza, wybrane, klucz, tekstDoFiltra]);
+  }, [dane, fraza, kolejnosc, klucz, tekstDoFiltra, sortujPo, malejaco, kolumny]);
 
   return (
     <View style={styles.calosc}>
@@ -117,23 +132,41 @@ export function TabelaWyboru<T>({
         <View style={{ width: szerokoscTabeli }}>
           <View style={[styles.wiersz, styles.naglowek, { borderColor: motyw.border }]}>
             <View style={styles.komorkaZnaku} />
-            {kolumny.map((k) => (
-              <View key={k.tytul} style={[styles.komorka, stylKolumny(k)]}>
-                <ThemedText
-                  type="smallBold"
-                  themeColor="textSecondary"
-                  style={k.liczba ? styles.doPrawej : undefined}
-                  numberOfLines={1}>
-                  {k.tytul}
-                </ThemedText>
-              </View>
-            ))}
+            {kolumny.map((k) => {
+              const aktywna = k.tytul === sortujPo;
+              return (
+                <Pressable
+                  key={k.tytul}
+                  onPress={() => {
+                    // Trzy stany: rosnąco, malejąco, powrót do kolejności zaznaczania.
+                    if (aktywna && malejaco) {
+                      setSortujPo(null);
+                      setMalejaco(false);
+                    } else if (aktywna) {
+                      setMalejaco(true);
+                    } else {
+                      setSortujPo(k.tytul);
+                      setMalejaco(false);
+                    }
+                  }}
+                  style={[styles.komorka, stylKolumny(k)]}>
+                  <ThemedText
+                    type="smallBold"
+                    themeColor={aktywna ? 'accent' : 'textSecondary'}
+                    style={k.liczba ? styles.doPrawej : undefined}
+                    numberOfLines={1}>
+                    {k.tytul}
+                    {aktywna ? (malejaco ? ' ↓' : ' ↑') : ''}
+                  </ThemedText>
+                </Pressable>
+              );
+            })}
           </View>
 
           <ScrollView style={{ maxHeight: wysokosc }} nestedScrollEnabled>
             {widoczne.map((element, i) => {
               const id = klucz(element);
-              const zaznaczony = wybrane.has(id);
+              const zaznaczony = kolejnosc.has(id);
 
               return (
                 <View key={id}>
@@ -200,33 +233,14 @@ export function TabelaWyboru<T>({
         </View>
       </Poziomo>
 
-      {/*
-        Pola do uzupełnienia stoją POD tabelą, a nie w jej środku.
-        Wewnątrz przewijanego okienka wypadały poniżej krawędzi i wyglądało to,
-        jakby dotknięcie nic nie dało — a drugie kliknięcie kasowało wybór.
-      */}
-      {szczegoly &&
-        wybraneElementy.map((element) => (
-          <View
-            key={klucz(element)}
-            style={[
-              styles.wybrany,
-              { borderColor: motyw.accent, backgroundColor: motyw.backgroundElement },
-            ]}>
-            <View style={styles.naglowekWybranego}>
-              <ThemedText type="smallBold" style={styles.nazwaWybranego}>
-                {kolumny[0]?.wartosc(element)}
-              </ThemedText>
-              <Pressable
-                onPress={() => przelacz(element)}
-                hitSlop={8}
-                accessibilityLabel="Usuń z wyboru">
-                <Ionicons name="close" size={18} color={motyw.textSecondary} />
-              </Pressable>
-            </View>
-            {szczegoly(element)}
-          </View>
-        ))}
+      {poWyborze}
+
+      {sortujPo && (
+        <ThemedText type="small" themeColor="textSecondary">
+          Sortowanie kolumną „{sortujPo}”. Dotknij nagłówka jeszcze raz, aby odwrócić,
+          i trzeci raz, aby wrócić do kolejności zaznaczania.
+        </ThemedText>
+      )}
 
       {stopka?.(fraza.trim())}
     </View>
@@ -271,18 +285,5 @@ const styles = StyleSheet.create({
   },
   doPrawej: { textAlign: 'right' },
   wcisniety: { opacity: 0.7 },
-  wybrany: {
-    borderWidth: 1,
-    borderRadius: Spacing.two,
-    padding: Spacing.three,
-    gap: Spacing.two,
-  },
-  naglowekWybranego: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    gap: Spacing.two,
-  },
-  nazwaWybranego: { flex: 1 },
   pusto: { padding: Spacing.three },
 });

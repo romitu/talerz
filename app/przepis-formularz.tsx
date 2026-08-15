@@ -21,14 +21,36 @@ import { pobierzSkladniki, type Skladnik } from '@/lib/skladniki';
 import { useSesja } from '@/lib/sesja';
 import { supabase } from '@/lib/supabase';
 
+type Jednostka = 'g' | 'ml' | 'szt';
+
 type WybranySkladnik = {
   skladnik: Skladnik;
-  gramy: string;
-  jednostka: 'g' | 'ml';
+  /** Ilość w jednostce widocznej dla użytkownika. */
+  ilosc: string;
+  jednostka: Jednostka;
   stan: string;
   zamiennik: string;
   opisPotoczny: string;
 };
+
+/**
+ * Masa w gramach — podstawa wszystkich wyliczeń.
+ *
+ * Przy sztukach mnożymy liczbę przez masę jednej sztuki zapisaną przy składniku.
+ * Mililitry traktujemy jak gramy: przy zupach, mleku i śmietanie gęstość jest
+ * na tyle bliska wodzie, że różnica ginie w zaokrągleniach.
+ */
+function gramyZe(w: WybranySkladnik): number {
+  const n = Number(String(w.ilosc).replace(',', '.').trim());
+  if (!Number.isFinite(n) || n <= 0) return 0;
+  if (w.jednostka === 'szt') return n * (w.skladnik.masa_sztuki_g ?? 0);
+  return n;
+}
+
+/** Jednostki dostępne dla danego składnika. */
+function jednostkiDla(s: Skladnik): Jednostka[] {
+  return s.masa_sztuki_g ? ['g', 'ml', 'szt'] : ['g', 'ml'];
+}
 
 type Krok = { tresc: string; sygnal: string; uwaga: boolean };
 
@@ -100,7 +122,7 @@ export default function FormularzPrzepisu() {
   const makro = useMemo(() => {
     return wybrane.reduce(
       (suma, w) => {
-        const g = liczba(w.gramy) / 100;
+        const g = gramyZe(w) / 100;
         return {
           kcal: suma.kcal + w.skladnik.kcal_100g * g,
           bialko: suma.bialko + w.skladnik.bialko_100g * g,
@@ -114,12 +136,12 @@ export default function FormularzPrzepisu() {
     );
   }, [wybrane]);
 
-  const masaCalosci = wybrane.reduce((s, w) => s + liczba(w.gramy), 0);
+  const masaCalosci = wybrane.reduce((s, w) => s + gramyZe(w), 0);
 
-  const wybraneId = useMemo(() => new Set(wybrane.map((w) => w.skladnik.id)), [wybrane]);
+  const wybraneId = useMemo(() => wybrane.map((w) => w.skladnik.id), [wybrane]);
 
   const sprzetId = useMemo(
-    () => new Set(katalogSprzetu.filter((x) => sprzet.includes(x.nazwa)).map((x) => x.id)),
+    () => katalogSprzetu.filter((x) => sprzet.includes(x.nazwa)).map((x) => x.id),
     [katalogSprzetu, sprzet]
   );
 
@@ -147,12 +169,12 @@ export default function FormularzPrzepisu() {
   };
 
   const komplet =
-    nazwa.trim().length >= 3 && wybrane.length > 0 && wybrane.every((w) => liczba(w.gramy) > 0);
+    nazwa.trim().length >= 3 && wybrane.length > 0 && wybrane.every((w) => gramyZe(w) > 0);
 
   const dodajSkladnik = useCallback((s: Skladnik) => {
     setWybrane((p) => [
       ...p,
-      { skladnik: s, gramy: '', jednostka: 'g', stan: '', zamiennik: '', opisPotoczny: '' },
+      { skladnik: s, ilosc: '', jednostka: 'g', stan: '', zamiennik: '', opisPotoczny: '' },
     ]);
   }, []);
 
@@ -168,7 +190,7 @@ export default function FormularzPrzepisu() {
       const juz = poprzednie.some((w) => w.skladnik.id === s.id);
       const nowy: WybranySkladnik = {
         skladnik: s,
-        gramy: '',
+        ilosc: '',
         jednostka: 'g',
         stan: '',
         zamiennik: '',
@@ -270,7 +292,8 @@ export default function FormularzPrzepisu() {
         wybrane.map((w, i) => ({
           przepis_id: przepis.id,
           skladnik_id: w.skladnik.id,
-          gramy: liczba(w.gramy),
+          gramy: gramyZe(w),
+          ilosc: liczba(w.ilosc),
           jednostka: w.jednostka,
           stan: w.stan.trim() || null,
           zamiennik: w.zamiennik.trim() || null,
@@ -503,42 +526,117 @@ export default function FormularzPrzepisu() {
             { tytul: 'W', szerokosc: 48, liczba: true, wartosc: (s) => String(s.wegle_100g) },
             { tytul: 'błonnik', szerokosc: 60, liczba: true, wartosc: (s) => String(s.blonnik_100g) },
           ]}
-          szczegoly={(s) => {
-            const w = wybrane.find((x) => x.skladnik.id === s.id);
-            if (!w) return null;
-            return (
-              <>
-                <Pole
-                  etykieta={`Ile (${w.jednostka})`}
-                  value={w.gramy}
-                  onChangeText={(t) => zmienSkladnik(s.id, { gramy: t })}
-                  inputMode="numeric"
-                  placeholder="200"
-                />
-                <Wybor
-                  etykieta="Jednostka"
-                  wybrana={w.jednostka}
-                  onZmiana={(j) => zmienSkladnik(s.id, { jednostka: j })}
-                  opcje={[
-                    { wartosc: 'g', etykieta: 'gramy' },
-                    { wartosc: 'ml', etykieta: 'mililitry' },
-                  ]}
-                />
-                <Pole
-                  etykieta="Stan składnika"
-                  value={w.stan}
-                  onChangeText={(t) => zmienSkladnik(s.id, { stan: t })}
-                  placeholder="obrana i starta na grubych oczkach"
-                />
-                <Pole
-                  etykieta="Zamiennik (nieobowiązkowy)"
-                  value={w.zamiennik}
-                  onChangeText={(t) => zmienSkladnik(s.id, { zamiennik: t })}
-                  placeholder="lub korpus z kurczaka"
-                />
-              </>
-            );
-          }}
+          poWyborze={
+            wybrane.length > 0 ? (
+              <View style={[styles.tabelaWybranych, { borderColor: motyw.border }]}>
+                <View style={[styles.wierszWybranego, styles.naglowekWybranych, { borderColor: motyw.border }]}>
+                  <ThemedText type="smallBold" themeColor="textSecondary" style={styles.kolNazwa}>
+                    Składnik
+                  </ThemedText>
+                  <ThemedText type="smallBold" themeColor="textSecondary" style={styles.kolIlosc}>
+                    Ilość
+                  </ThemedText>
+                  <ThemedText type="smallBold" themeColor="textSecondary" style={styles.kolJednostka}>
+                    Jedn.
+                  </ThemedText>
+                  <ThemedText type="smallBold" themeColor="textSecondary" style={styles.kolGramy}>
+                    = gramy
+                  </ThemedText>
+                  <ThemedText type="smallBold" themeColor="textSecondary" style={styles.kolStan}>
+                    Stan
+                  </ThemedText>
+                  <ThemedText type="smallBold" themeColor="textSecondary" style={styles.kolStan}>
+                    Zamiennik
+                  </ThemedText>
+                  <View style={styles.kolUsun} />
+                </View>
+
+                {wybrane.map((w, i) => {
+                  const dostepneJedn = jednostkiDla(w.skladnik);
+                  return (
+                    <View
+                      key={w.skladnik.id}
+                      style={[
+                        styles.wierszWybranego,
+                        {
+                          borderColor: motyw.border,
+                          backgroundColor: i % 2 === 0 ? motyw.backgroundElement : motyw.background,
+                        },
+                      ]}>
+                      <ThemedText type="small" style={styles.kolNazwa} numberOfLines={2}>
+                        {i + 1}. {w.skladnik.nazwa}
+                      </ThemedText>
+
+                      <View style={styles.kolIlosc}>
+                        <TextInput
+                          value={w.ilosc}
+                          onChangeText={(t) => zmienSkladnik(w.skladnik.id, { ilosc: t })}
+                          inputMode="decimal"
+                          placeholder="0"
+                          placeholderTextColor={motyw.textSecondary}
+                          style={[
+                            styles.polePozycji,
+                            { color: motyw.text, borderColor: motyw.border },
+                          ]}
+                        />
+                      </View>
+
+                      {/* Jednostka przełączana dotknięciem — sztuki tylko tam, gdzie znamy masę jednej. */}
+                      <Pressable
+                        onPress={() => {
+                          const next =
+                            dostepneJedn[(dostepneJedn.indexOf(w.jednostka) + 1) % dostepneJedn.length];
+                          zmienSkladnik(w.skladnik.id, { jednostka: next });
+                        }}
+                        style={styles.kolJednostka}>
+                        <ThemedText type="smallBold" themeColor="accent">
+                          {w.jednostka}
+                        </ThemedText>
+                      </Pressable>
+
+                      <ThemedText type="small" themeColor="textSecondary" style={styles.kolGramy}>
+                        {gramyZe(w) ? `${Math.round(gramyZe(w) * 10) / 10} g` : '—'}
+                      </ThemedText>
+
+                      <View style={styles.kolStan}>
+                        <TextInput
+                          value={w.stan}
+                          onChangeText={(t) => zmienSkladnik(w.skladnik.id, { stan: t })}
+                          placeholder="obrana, starta"
+                          placeholderTextColor={motyw.textSecondary}
+                          style={[
+                            styles.polePozycji,
+                            { color: motyw.text, borderColor: motyw.border, textAlign: 'left' },
+                          ]}
+                        />
+                      </View>
+
+                      <View style={styles.kolStan}>
+                        <TextInput
+                          value={w.zamiennik}
+                          onChangeText={(t) => zmienSkladnik(w.skladnik.id, { zamiennik: t })}
+                          placeholder="lub…"
+                          placeholderTextColor={motyw.textSecondary}
+                          style={[
+                            styles.polePozycji,
+                            { color: motyw.text, borderColor: motyw.border, textAlign: 'left' },
+                          ]}
+                        />
+                      </View>
+
+                      <Pressable
+                        onPress={() => przelaczSkladnik(w.skladnik)}
+                        hitSlop={8}
+                        accessibilityLabel={`Usuń ${w.skladnik.nazwa}`}
+                        style={styles.kolUsun}>
+                        <Ionicons name="close" size={16} color={motyw.textSecondary} />
+                      </Pressable>
+                    </View>
+                  );
+                })}
+              </View>
+            ) : null
+          }
           stopka={(fraza) =>
             dodawanieSkladnika ? (
               <View style={styles.okienko}>
@@ -905,6 +1003,36 @@ const styles = StyleSheet.create({
   },
   jednostkaMetryczki: { width: 48 },
   dopisywanieSprzetu: { gap: Spacing.two, paddingTop: Spacing.two },
+  tabelaWybranych: {
+    borderWidth: 1,
+    borderRadius: Spacing.two,
+    overflow: 'hidden',
+  },
+  wierszWybranego: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderBottomWidth: 1,
+    paddingHorizontal: Spacing.one,
+    paddingVertical: Spacing.one,
+    gap: Spacing.one,
+    minHeight: 42,
+  },
+  naglowekWybranych: { borderBottomWidth: 2 },
+  kolNazwa: { flex: 3, paddingHorizontal: Spacing.one },
+  kolIlosc: { width: 70 },
+  kolJednostka: { width: 44, alignItems: 'center', justifyContent: 'center' },
+  kolGramy: { width: 72, textAlign: 'right' },
+  kolStan: { flex: 2 },
+  kolUsun: { width: 32, alignItems: 'center', justifyContent: 'center' },
+  polePozycji: {
+    borderWidth: 1,
+    borderRadius: Spacing.one,
+    paddingHorizontal: Spacing.one,
+    paddingVertical: 2,
+    fontSize: 14,
+    minHeight: 30,
+    textAlign: 'right',
+  },
   okienko: {
     gap: Spacing.two,
     paddingTop: Spacing.two,

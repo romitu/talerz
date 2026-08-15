@@ -37,6 +37,7 @@ const KOLUMNY = [
   { klucz: 'cukry_wolne_100g', tytul: 'c. wolne', szerokosc: 66, liczba: true },
   { klucz: 'nova', tytul: 'NOVA', szerokosc: 54, liczba: true },
   { klucz: 'gramatura_opakowania_g', tytul: 'opak.', szerokosc: 58, liczba: true },
+  { klucz: 'masa_sztuki_g', tytul: 'szt. waży', szerokosc: 66, liczba: true },
   { klucz: 'uzycia', tytul: 'w daniach', szerokosc: 72, liczba: true },
 ] as const;
 
@@ -84,6 +85,7 @@ export default function EkranSkladnikow() {
     cukry_wolne_100g: '',
     nova: '',
     gramatura_opakowania_g: '',
+    masa_sztuki_g: '',
   };
   const [nowyWiersz, setNowyWiersz] = useState<Record<string, string>>(PUSTY_WIERSZ);
   const [dopisywanie, setDopisywanie] = useState(false);
@@ -231,6 +233,7 @@ export default function EkranSkladnikow() {
       cukry_wolne_100g: zKomorki(nowyWiersz.cukry_wolne_100g, 0) as number,
       nova: zKomorki(nowyWiersz.nova, null),
       gramatura_opakowania_g: zKomorki(nowyWiersz.gramatura_opakowania_g, null),
+      masa_sztuki_g: zKomorki(nowyWiersz.masa_sztuki_g, null),
       tagi: [],
     };
 

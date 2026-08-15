@@ -21,6 +21,8 @@ export type Skladnik = {
   cukry_wolne_100g: number;
   nova: number | null;
   gramatura_opakowania_g: number | null;
+  /** Ile waży jedna sztuka. Puste = składnik odmierzany wyłącznie wagowo. */
+  masa_sztuki_g: number | null;
   tagi: string[];
 };
 
@@ -31,7 +33,7 @@ export type DaneSkladnika = Omit<Skladnik, 'id'>;
  * odczytuje z niej typy w czasie sprawdzania kodu i potrzebuje stałego tekstu.
  */
 const POLA =
-  'id, nazwa, zrodlo, kcal_100g, bialko_100g, tluszcz_100g, wegle_100g, blonnik_100g, cukry_ogolem_100g, cukry_wolne_100g, nova, gramatura_opakowania_g, tagi';
+  'id, nazwa, zrodlo, kcal_100g, bialko_100g, tluszcz_100g, wegle_100g, blonnik_100g, cukry_ogolem_100g, cukry_wolne_100g, nova, gramatura_opakowania_g, masa_sztuki_g, tagi';
 
 export async function pobierzSkladniki(): Promise<Skladnik[]> {
   const { data, error } = await supabase.from('skladniki').select(POLA).order('nazwa');

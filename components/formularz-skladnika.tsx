@@ -57,6 +57,7 @@ export function FormularzSkladnika({
   const [cukryWolne, setCukryWolne] = useState(naTekst(skladnik?.cukry_wolne_100g));
   const [nova, setNova] = useState(naTekst(skladnik?.nova));
   const [opakowanie, setOpakowanie] = useState(naTekst(skladnik?.gramatura_opakowania_g));
+  const [masaSztuki, setMasaSztuki] = useState(naTekst(skladnik?.masa_sztuki_g));
   const [tagi, setTagi] = useState((skladnik?.tagi ?? []).join(', '));
 
   const [zajety, setZajety] = useState(false);
@@ -74,6 +75,7 @@ export function FormularzSkladnika({
     cukry_wolne_100g: cukryWolne.trim() ? naLiczbe(cukryWolne) : 0,
     nova: nova.trim() ? naLiczbe(nova) : null,
     gramatura_opakowania_g: opakowanie.trim() ? Math.round(naLiczbe(opakowanie)) : null,
+    masa_sztuki_g: masaSztuki.trim() ? naLiczbe(masaSztuki) : null,
     tagi: tagi
       .split(',')
       .map((t) => t.trim())
@@ -162,6 +164,19 @@ export function FormularzSkladnika({
           inputMode="numeric"
           placeholder="400"
         />
+        <Pole
+          etykieta="Ile waży jedna sztuka (g, nieobowiązkowe)"
+          value={masaSztuki}
+          onChangeText={setMasaSztuki}
+          inputMode="decimal"
+          placeholder="55"
+        />
+        <ThemedText type="small" themeColor="textSecondary">
+          Wypełnij, jeśli składnik odmierza się w sztukach: jajko 55 g, liść laurowy 0,2 g,
+          ząbek czosnku 5 g. Wtedy w przepisie można podać „2 szt”, a aplikacja przeliczy
+          to na gramy.
+        </ThemedText>
+
         <Pole
           etykieta="Etykiety, oddzielone przecinkami"
           value={tagi}
