@@ -1,5 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
-import { useFocusEffect } from 'expo-router';
+import { router, useFocusEffect } from 'expo-router';
 import { useCallback, useMemo, useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 
@@ -203,6 +203,10 @@ export default function EkranPlanu() {
             Ustawisz je w zakładce Profil.
           </ThemedText>
         </Karta>
+      )}
+
+      {plan && pozycje.length > 0 && (
+        <Przycisk tytul="Lista zakupów" onPress={() => router.push('/zakupy')} />
       )}
 
       {plan &&
