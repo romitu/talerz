@@ -12,7 +12,7 @@ import {
   ocenaBlonnika,
   podpowiedzBlonnika,
   oceniaCele,
-  progBialkaNaPosilek,
+  podpowiedzProguBialka,
   przemianaPodstawowa,
   udzialyProcentowe,
   wiekZDaty,
@@ -65,7 +65,9 @@ sprawdz('wiek z daty urodzenia (urodziny jeszcze przed nami)',
   wiekZDaty('1967-12-31', new Date('2026-08-13')), 58);
 
 // --- próg białka na posiłek ---
-sprawdz('próg białka na posiłek (142 / 3)', progBialkaNaPosilek(142), 47);
+// Próg posiłkowy zależy od masy ciała, a NIE od celu dziennego podzielonego przez trzy.
+sprawdz('podpowiedź progu białka przy 90 kg', podpowiedzProguBialka(90), 36);
+sprawdz('podpowiedź progu białka przy 60 kg', podpowiedzProguBialka(60), 24);
 
 // =============================================================
 //  Ocena celów

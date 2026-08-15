@@ -33,7 +33,6 @@ import {
 import { OPIS_PORY, pobierzPrzepisy, type PoraPosilku, type PrzepisZMakro } from '@/lib/przepisy';
 import { useSesja } from '@/lib/sesja';
 import { supabase } from '@/lib/supabase';
-import { progBialkaNaPosilek } from '@/lib/zywienie';
 
 type Cel = {
   kcal: number;
@@ -41,6 +40,7 @@ type Cel = {
   tluszcz_g: number;
   wegle_g: number;
   blonnik_g: number | null;
+  prog_bialka_posilek: number | null;
 };
 
 /** Miejsce w planie, do którego wybieramy przepis. */
@@ -67,7 +67,7 @@ export default function EkranPlanu() {
         pobierzPrzepisy(sesja?.user.id),
         supabase
           .from('cele')
-          .select('kcal, bialko_g, tluszcz_g, wegle_g, blonnik_g')
+          .select('kcal, bialko_g, tluszcz_g, wegle_g, blonnik_g, prog_bialka_posilek')
           .order('obowiazuje_od', { ascending: false })
           .limit(1)
           .maybeSingle(),
@@ -176,7 +176,9 @@ export default function EkranPlanu() {
     );
   }
 
-  const progBialka = cel ? progBialkaNaPosilek(cel.bialko_g) : null;
+  // Próg posiłkowy pochodzi z celów, a nie z dzielenia celu dziennego przez trzy.
+  // Puste pole oznacza świadomą rezygnację z ostrzeżeń przy pojedynczych posiłkach.
+  const progBialka = cel?.prog_bialka_posilek ?? null;
 
   return (
     <Ekran
@@ -306,9 +308,9 @@ export default function EkranPlanu() {
 
                     {zaMalo && (
                       <ThemedText type="small" themeColor="accent">
-                        Cały {OPIS_PORY[pora].toLowerCase()} ma{' '}
-                        {Math.round(bialko * 10) / 10} g białka wobec {progBialka} g.
-                        Dołóż drugie danie — mięso, rybę, jajka albo strączki.
+                        {OPIS_PORY[pora]}: {Math.round(bialko * 10) / 10} g białka,
+                        próg {progBialka} g. Lekki posiłek — jeśli reszta dnia to nadrobi,
+                        nic się nie dzieje.
                       </ThemedText>
                     )}
                   </View>
@@ -330,6 +332,26 @@ export default function EkranPlanu() {
                       cel={cel?.blonnik_g ?? undefined}
                     />
                   </View>
+
+                  {/*
+                    Najbardziej użyteczna liczba w całym ekranie: ile brakuje do celu
+                    dziennego. Ostrzeżenia przy pojedynczych posiłkach mówią, że coś
+                    jest lekkie; dopiero to mówi, czy dzień się domyka.
+                  */}
+                  {cel && suma.bialko < cel.bialko_g && (
+                    <ThemedText type="small" themeColor="accent">
+                      Do celu dziennego brakuje {Math.round(cel.bialko_g - suma.bialko)} g białka
+                      {suma.kcal < cel.kcal
+                        ? ` i ${Math.round(cel.kcal - suma.kcal)} kcal.`
+                        : '.'}
+                    </ThemedText>
+                  )}
+
+                  {cel && suma.bialko >= cel.bialko_g && (
+                    <ThemedText type="small" themeColor="textSecondary">
+                      Cel białkowy osiągnięty.
+                    </ThemedText>
+                  )}
 
                   {/*
                     Zapisywanie przez wyjątek: jedno dotknięcie zamyka cały dzień.

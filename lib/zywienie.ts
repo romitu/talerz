@@ -229,7 +229,18 @@ export function ocenaBlonnika(zjedzone: number, cel: number | null): string | nu
   return `Do celu błonnikowego brakuje ${Math.round(brakuje)} g. Strączki, kasze i warzywa uzupełnią go najszybciej.`;
 }
 
-/** Próg białka na jeden posiłek: cel dzienny podzielony na trzy posiłki. */
-export function progBialkaNaPosilek(bialkoDzienne: number): number {
-  return Math.round(bialkoDzienne / 3);
+/**
+ * Podpowiadany próg białka na posiłek: około 0,4 g na kilogram masy ciała.
+ *
+ * To NIE jest cel dzienny podzielony przez trzy. Dzielenie zakłada, że każdy
+ * posiłek wnosi tyle samo, a tak się nie je — śniadanie bywa lżejsze, obiad
+ * cięższy. Chodzi o coś innego: o wartość, poniżej której posiłek przestaje
+ * pobudzać syntezę białek. Po pięćdziesiątce ma to większe znaczenie niż
+ * u młodszych.
+ *
+ * Wartość wymaga potwierdzenia w Normach żywienia dla populacji Polski (2024)
+ * przed uznaniem jej za wiążącą.
+ */
+export function podpowiedzProguBialka(wagaKg: number): number {
+  return Math.round(wagaKg * 0.4);
 }

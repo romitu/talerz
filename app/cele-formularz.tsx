@@ -15,7 +15,7 @@ import {
   BLONNIK,
   kcalZMakro,
   oceniaCele,
-  progBialkaNaPosilek,
+  podpowiedzProguBialka,
   podpowiedzBlonnika,
   przemianaPodstawowa,
   udzialyProcentowe,
@@ -51,6 +51,7 @@ export default function FormularzCelow() {
   const [tluszcz, setTluszcz] = useState('');
   const [wegle, setWegle] = useState('');
   const [blonnik, setBlonnik] = useState('');
+  const [progBialka, setProgBialka] = useState('');
 
   const [zajety, setZajety] = useState(false);
   const [blad, setBlad] = useState<string | null>(null);
@@ -134,6 +135,7 @@ export default function FormularzCelow() {
     setTluszcz(String(tluszczG));
     setWegle(String(wegleG));
     setBlonnik(String(podpowiedzBlonnika(cel)));
+    setProgBialka(String(podpowiedzProguBialka(waga!)));
   }
 
   async function zapisz() {
@@ -149,6 +151,9 @@ export default function FormularzCelow() {
           tluszcz_g: Math.round(t),
           wegle_g: Math.round(w),
           blonnik_g: liczba(blonnik) ? Math.round(liczba(blonnik)) : null,
+          prog_bialka_posilek: liczba(progBialka)
+            ? Math.round(liczba(progBialka))
+            : podpowiedzProguBialka(waga!),
         },
         { onConflict: 'profil_id,obowiazuje_od' }
       );
@@ -197,6 +202,21 @@ export default function FormularzCelow() {
           {BLONNIK.whoDo} g. Źródła się różnią, więc wartość ustawiasz sam.
         </ThemedText>
 
+        <Pole
+          etykieta="Próg białka na jeden posiłek (g)"
+          value={progBialka}
+          onChangeText={setProgBialka}
+          inputMode="numeric"
+          placeholder={String(podpowiedzProguBialka(waga))}
+        />
+        <ThemedText type="small" themeColor="textSecondary">
+          Podpowiedź: {podpowiedzProguBialka(waga)} g — około 0,4 g na kilogram masy ciała.
+          To NIE jest cel dzienny podzielony przez trzy. Chodzi o wartość, poniżej której
+          posiłek przestaje pobudzać syntezę białek; cel dzienny realizuje się sumą,
+          a nie równym podziałem na posiłki. Zostaw puste, jeśli nie chcesz ostrzeżeń
+          przy pojedynczych posiłkach.
+        </ThemedText>
+
         <Przycisk tytul="Podpowiedz wartości" wariant="poboczny" onPress={zaproponuj} />
       </Karta>
 
@@ -212,7 +232,7 @@ export default function FormularzCelow() {
             <Makro etykieta="węglow." wartosc={udzialy.wegle} jednostka="%" />
           </View>
           <ThemedText type="small" themeColor="textSecondary">
-            Próg białka na posiłek: {progBialkaNaPosilek(b)} g
+            Próg białka na posiłek: {progBialka || podpowiedzProguBialka(waga)} g
           </ThemedText>
           {waga !== null && (
             <ThemedText type="small" themeColor="textSecondary">

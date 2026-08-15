@@ -10,7 +10,7 @@ import { ThemedText } from '@/components/themed-text';
 import { Spacing } from '@/constants/theme';
 import { useSesja } from '@/lib/sesja';
 import { supabase } from '@/lib/supabase';
-import { progBialkaNaPosilek, wiekZDaty } from '@/lib/zywienie';
+import { wiekZDaty } from '@/lib/zywienie';
 
 type Cel = {
   kcal: number;
@@ -18,6 +18,7 @@ type Cel = {
   tluszcz_g: number;
   wegle_g: number;
   blonnik_g: number | null;
+  prog_bialka_posilek: number | null;
 };
 
 type Profil = {
@@ -42,7 +43,7 @@ export default function EkranProfilu() {
     const [wynikProfili, wynikKonta] = await Promise.all([
       supabase
         .from('profile')
-        .select('id, imie, data_urodzenia, wzrost_cm, cele (kcal, bialko_g, tluszcz_g, wegle_g, blonnik_g)')
+        .select('id, imie, data_urodzenia, wzrost_cm, cele (kcal, bialko_g, tluszcz_g, wegle_g, blonnik_g, prog_bialka_posilek)')
         .order('kolejnosc'),
       supabase.from('konta').select('rola').single(),
     ]);
@@ -114,7 +115,9 @@ export default function EkranProfilu() {
                   <Makro etykieta="węglow." wartosc={cel.wegle_g} jednostka=" g" />
                 </View>
                 <ThemedText type="small" themeColor="textSecondary">
-                  Próg białka na posiłek: {progBialkaNaPosilek(cel.bialko_g)} g
+                  {cel.prog_bialka_posilek
+                    ? `Próg białka na posiłek: ${cel.prog_bialka_posilek} g`
+                    : 'Bez progu posiłkowego'}
                   {cel.blonnik_g ? ` · błonnik: ${cel.blonnik_g} g dziennie` : ''}
                 </ThemedText>
               </>
