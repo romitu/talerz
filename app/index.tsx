@@ -21,7 +21,8 @@ import {
   pobierzPlan,
   pobierzPozycje,
   PORY,
-  przypiszPosilek,
+  bialkoPosilku,
+  dodajDoPosilku,
   sumujDzien,
   usunPosilek,
   utworzPlan,
@@ -147,7 +148,11 @@ export default function EkranPlanu() {
             wybrane={[]}
             onPrzelacz={(p) =>
               zDbem(async () => {
-                if (plan) await przypiszPosilek(plan.id, wybierany.data, wybierany.pora, p.id);
+                if (!plan) return;
+                const juz = pozycje.filter(
+                  (x) => x.data === wybierany.data && x.pora === wybierany.pora
+                ).length;
+                await dodajDoPosilku(plan.id, wybierany.data, wybierany.pora, p.id, juz + 1);
                 setWybierany(null);
               })
             }
@@ -222,12 +227,65 @@ export default function EkranPlanu() {
               </View>
 
               {PORY.map((pora) => {
-                const pozycja = dzien.find((p) => p.pora === pora);
+                const dania = dzien
+                  .filter((p) => p.pora === pora)
+                  .sort((a, b) => a.kolejnosc - b.kolejnosc);
 
-                if (!pozycja) {
-                  return (
+                // Próg białka dotyczy CAŁEGO posiłku, nie pojedynczego dania.
+                // Porcja zupy nigdy go nie dobije — i nie musi, bo je się ją z czymś.
+                const bialko = bialkoPosilku(dania);
+                const zaMalo = progBialka !== null && dania.length > 0 && bialko < progBialka;
+
+                return (
+                  <View key={pora} style={styles.posilek}>
+                    {dania.map((pozycja) => (
+                      <View key={pozycja.id} style={[styles.pozycja, { borderColor: motyw.border }]}>
+                        <View style={styles.naglowekPozycji}>
+                          <ThemedText type="small" themeColor="accent">
+                            {OPIS_PORY[pora].toUpperCase()}
+                            {dania.length > 1 ? ` · danie ${pozycja.kolejnosc}` : ''}
+                          </ThemedText>
+                          <Pressable
+                            onPress={() => zDbem(() => usunPosilek(pozycja.id))}
+                            hitSlop={8}
+                            accessibilityLabel="Usuń danie">
+                            <Ionicons name="close" size={16} color={motyw.textSecondary} />
+                          </Pressable>
+                        </View>
+
+                        <ThemedText type="small">{pozycja.nazwa}</ThemedText>
+
+                        <View style={styles.wierszPozycji}>
+                          <Pressable
+                            onPress={() =>
+                              zDbem(() => zmienPorcje(pozycja.id, Math.max(1, pozycja.porcje - 1)))
+                            }
+                            hitSlop={6}>
+                            <Ionicons name="remove-circle-outline" size={20} color={motyw.accent} />
+                          </Pressable>
+
+                          <ThemedText type="smallBold">{pozycja.porcje} porcji</ThemedText>
+
+                          <Pressable
+                            onPress={() =>
+                              zDbem(() => zmienPorcje(pozycja.id, Math.min(5, pozycja.porcje + 1)))
+                            }
+                            hitSlop={6}>
+                            <Ionicons name="add-circle-outline" size={20} color={motyw.accent} />
+                          </Pressable>
+
+                          <ThemedText
+                            type="small"
+                            themeColor="textSecondary"
+                            style={styles.makroPozycji}>
+                            {Math.round(pozycja.kcal * pozycja.porcje)} kcal{' · '}
+                            {Math.round(pozycja.bialko_g * pozycja.porcje * 10) / 10} g białka
+                          </ThemedText>
+                        </View>
+                      </View>
+                    ))}
+
                     <Pressable
-                      key={pora}
                       onPress={() => setWybierany({ data, pora })}
                       style={({ pressed }) => [
                         styles.puste,
@@ -236,64 +294,23 @@ export default function EkranPlanu() {
                       ]}>
                       <Ionicons name="add-circle-outline" size={18} color={motyw.textSecondary} />
                       <ThemedText type="small" themeColor="textSecondary">
-                        {OPIS_PORY[pora]} — wybierz przepis
+                        {dania.length === 0
+                          ? `${OPIS_PORY[pora]} — wybierz danie`
+                          : `Dołóż danie do ${OPIS_PORY[pora].toLowerCase()}`}
                       </ThemedText>
                     </Pressable>
-                  );
-                }
 
-                const zaMaloBialka =
-                  progBialka !== null && pozycja.bialko_g * pozycja.porcje < progBialka;
-
-                return (
-                  <View key={pora} style={[styles.pozycja, { borderColor: motyw.border }]}>
-                    <View style={styles.naglowekPozycji}>
+                    {zaMalo && (
                       <ThemedText type="small" themeColor="accent">
-                        {OPIS_PORY[pora].toUpperCase()}
-                      </ThemedText>
-                      <Pressable
-                        onPress={() => zDbem(() => usunPosilek(pozycja.id))}
-                        hitSlop={8}
-                        accessibilityLabel="Usuń posiłek">
-                        <Ionicons name="close" size={16} color={motyw.textSecondary} />
-                      </Pressable>
-                    </View>
-
-                    <ThemedText type="small">{pozycja.nazwa}</ThemedText>
-
-                    <View style={styles.wierszPozycji}>
-                      <Pressable
-                        onPress={() =>
-                          zDbem(() => zmienPorcje(pozycja.id, Math.max(1, pozycja.porcje - 1)))
-                        }
-                        hitSlop={6}>
-                        <Ionicons name="remove-circle-outline" size={20} color={motyw.accent} />
-                      </Pressable>
-
-                      <ThemedText type="smallBold">{pozycja.porcje} porcji</ThemedText>
-
-                      <Pressable
-                        onPress={() =>
-                          zDbem(() => zmienPorcje(pozycja.id, Math.min(5, pozycja.porcje + 1)))
-                        }
-                        hitSlop={6}>
-                        <Ionicons name="add-circle-outline" size={20} color={motyw.accent} />
-                      </Pressable>
-
-                      <ThemedText type="small" themeColor="textSecondary" style={styles.makroPozycji}>
-                        {Math.round(pozycja.kcal * pozycja.porcje)} kcal ·{' '}
-                        {Math.round(pozycja.bialko_g * pozycja.porcje * 10) / 10} g białka
-                      </ThemedText>
-                    </View>
-
-                    {zaMaloBialka && (
-                      <ThemedText type="small" themeColor="accent">
-                        Poniżej {progBialka} g białka — warto dołożyć porcję mięsa, ryby lub strączków.
+                        Cały {OPIS_PORY[pora].toLowerCase()} ma{' '}
+                        {Math.round(bialko * 10) / 10} g białka wobec {progBialka} g.
+                        Dołóż drugie danie — mięso, rybę, jajka albo strączki.
                       </ThemedText>
                     )}
                   </View>
                 );
               })}
+
 
               {dzien.length > 0 && (
                 <>
@@ -337,6 +354,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     gap: Spacing.two,
+  },
+  posilek: {
+    gap: Spacing.one,
+    paddingBottom: Spacing.two,
   },
   puste: {
     flexDirection: 'row',

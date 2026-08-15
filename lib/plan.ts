@@ -24,6 +24,7 @@ export type PozycjaPlanu = {
   przepis_id: string;
   nazwa: string;
   porcje: number;
+  kolejnosc: number;
   zjedzone: boolean;
   /** Wartości jednej porcji przepisu. */
   kcal: number;
@@ -102,9 +103,10 @@ export async function utworzPlan(kontoId: string, dataStart: string, dni = 7): P
 export async function pobierzPozycje(planId: string): Promise<PozycjaPlanu[]> {
   const { data: pozycje, error } = await supabase
     .from('plan_pozycje')
-    .select('id, data, pora, przepis_id, porcje, zjedzone, przepisy (nazwa)')
+    .select('id, data, pora, przepis_id, porcje, kolejnosc, zjedzone, przepisy (nazwa)')
     .eq('plan_id', planId)
-    .order('data');
+    .order('data')
+    .order('kolejnosc');
 
   if (error) throw error;
   if (!pozycje || pozycje.length === 0) return [];
@@ -131,6 +133,7 @@ export async function pobierzPozycje(planId: string): Promise<PozycjaPlanu[]> {
       przepis_id: p.przepis_id,
       nazwa: (Array.isArray(przepis) ? przepis[0]?.nazwa : przepis?.nazwa) ?? '(bez nazwy)',
       porcje: p.porcje,
+      kolejnosc: p.kolejnosc,
       zjedzone: p.zjedzone,
       kcal: Number(m?.kcal ?? 0),
       bialko_g: Number(m?.bialko_g ?? 0),
@@ -139,6 +142,11 @@ export async function pobierzPozycje(planId: string): Promise<PozycjaPlanu[]> {
       blonnik_g: Number(m?.blonnik_g ?? 0),
     };
   });
+}
+
+/** Ocena białka w posiłku — liczona dla WSZYSTKICH dań tej pory razem. */
+export function bialkoPosilku(dania: PozycjaPlanu[]): number {
+  return dania.reduce((s, p) => s + p.bialko_g * p.porcje, 0);
 }
 
 /** Suma makro z podanych pozycji, z uwzględnieniem liczby porcji. */
@@ -155,19 +163,23 @@ export function sumujDzien(pozycje: PozycjaPlanu[]): Makro {
   );
 }
 
-export async function przypiszPosilek(
+/**
+ * Dokłada danie do posiłku.
+ *
+ * Posiłek może składać się z kilku dań — zupa i drugie danie, owsianka i jajko.
+ * Kolejność wynika z tego, ile dań już jest w tej porze.
+ */
+export async function dodajDoPosilku(
   planId: string,
   data: string,
   pora: PoraPosilku,
   przepisId: string,
+  kolejnosc: number,
   porcje = 1
 ) {
   const { error } = await supabase
     .from('plan_pozycje')
-    .upsert(
-      { plan_id: planId, data, pora, przepis_id: przepisId, porcje },
-      { onConflict: 'plan_id,data,pora' }
-    );
+    .insert({ plan_id: planId, data, pora, przepis_id: przepisId, porcje, kolejnosc });
   if (error) throw error;
 }
 
