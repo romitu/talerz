@@ -93,7 +93,14 @@ export default function FormularzPrzepisu() {
   const [czasPrzygotowania, setCzasPrzygotowania] = useState('');
   const [czasObrobki, setCzasObrobki] = useState('');
   const [sprzet, setSprzet] = useState<string[]>([]);
-  const [katalogSprzetu, setKatalogSprzetu] = useState<{ id: string; nazwa: string; rodzaj: string }[]>([]);
+  const [katalogSprzetu, setKatalogSprzetu] = useState<
+    { id: string; nazwa: string; rodzaj: string; w_przepisach: number }[]
+  >([]);
+  const [sprzetDoUsuniecia, setSprzetDoUsuniecia] = useState<{
+    id: string;
+    nazwa: string;
+    w_przepisach: number;
+  } | null>(null);
   const [nowySprzet, setNowySprzet] = useState('');
   const [przechowywanie, setPrzechowywanie] = useState('');
   const [moznaMrozic, setMoznaMrozic] = useState<'tak' | 'nie' | 'nie wiem'>('nie wiem');
@@ -113,7 +120,12 @@ export default function FormularzPrzepisu() {
   }, []);
 
   const wczytajSprzet = useCallback(async () => {
-    const { data, error } = await supabase.from('sprzet').select('id, nazwa, rodzaj').order('nazwa');
+    // Widok sprzet_uzycie dokłada informację, w ilu przepisach sprzęt występuje.
+    // Bez niej nie da się bezpiecznie zaproponować usunięcia.
+    const { data, error } = await supabase
+      .from('sprzet_uzycie')
+      .select('id, nazwa, rodzaj, w_przepisach')
+      .order('nazwa');
     if (error) setBlad(komunikatBledu(error));
     else setKatalogSprzetu(data ?? []);
   }, []);
@@ -820,6 +832,59 @@ export default function FormularzPrzepisu() {
           Zapobiega szukaniu blendera w połowie gotowania.
         </ThemedText>
 
+        {sprzetDoUsuniecia && (
+          <Karta>
+            {sprzetDoUsuniecia.w_przepisach > 0 ? (
+              <>
+                <ThemedText type="smallBold" themeColor="accent">
+                  Nie można usunąć: „{sprzetDoUsuniecia.nazwa}”
+                </ThemedText>
+                <ThemedText type="small" themeColor="textSecondary">
+                  Sprzęt występuje w {sprzetDoUsuniecia.w_przepisach}{' '}
+                  {sprzetDoUsuniecia.w_przepisach === 1 ? 'przepisie' : 'przepisach'}.
+                  Najpierw usuń go stamtąd.
+                </ThemedText>
+                <Przycisk
+                  tytul="Rozumiem"
+                  wariant="poboczny"
+                  onPress={() => setSprzetDoUsuniecia(null)}
+                />
+              </>
+            ) : (
+              <>
+                <ThemedText type="smallBold">
+                  Usunąć „{sprzetDoUsuniecia.nazwa}” z katalogu?
+                </ThemedText>
+                <ThemedText type="small" themeColor="textSecondary">
+                  Nie występuje w żadnym przepisie. Tej operacji nie da się cofnąć.
+                </ThemedText>
+                <Przycisk
+                  tytul="Usuń"
+                  onPress={async () => {
+                    const { error } = await supabase
+                      .from('sprzet')
+                      .delete()
+                      .eq('id', sprzetDoUsuniecia.id);
+                    if (error) {
+                      setBlad(komunikatBledu(error));
+                      return;
+                    }
+                    // Gdyby był zaznaczony w tym przepisie, znika też z wyboru.
+                    setSprzet((p) => p.filter((n) => n !== sprzetDoUsuniecia.nazwa));
+                    setSprzetDoUsuniecia(null);
+                    wczytajSprzet();
+                  }}
+                />
+                <Przycisk
+                  tytul="Anuluj"
+                  wariant="poboczny"
+                  onPress={() => setSprzetDoUsuniecia(null)}
+                />
+              </>
+            )}
+          </Karta>
+        )}
+
         <TabelaWyboru
           dane={katalogSprzetu}
           klucz={(x) => x.id}
@@ -831,8 +896,27 @@ export default function FormularzPrzepisu() {
           onPrzelacz={przelaczSprzet}
           kolumny={[
             { tytul: 'Nazwa', elastyczna: true, wartosc: (x) => x.nazwa },
-            { tytul: 'Rodzaj', szerokosc: 120, wartosc: (x) => x.rodzaj },
+            { tytul: 'Rodzaj', szerokosc: 110, wartosc: (x) => x.rodzaj },
+            {
+              tytul: 'w przepisach',
+              szerokosc: 90,
+              liczba: true,
+              wartosc: (x) => (x.w_przepisach === 0 ? '—' : String(x.w_przepisach)),
+            },
           ]}
+          akcjaWiersza={(x) => (
+            <Pressable
+              onPress={() => setSprzetDoUsuniecia(x)}
+              hitSlop={8}
+              accessibilityLabel={`Usuń ${x.nazwa} z katalogu`}
+              style={styles.usunSprzet}>
+              <Ionicons
+                name="trash-outline"
+                size={16}
+                color={x.w_przepisach === 0 ? motyw.textSecondary : motyw.border}
+              />
+            </Pressable>
+          )}
           stopka={(fraza) => (
             <View style={styles.dopisywanieSprzetu}>
               <Pole
@@ -871,7 +955,11 @@ export default function FormularzPrzepisu() {
                     setBlad(komunikatBledu(error));
                     return;
                   }
-                  setKatalogSprzetu((p) => [...p, data].sort((a, b) => a.nazwa.localeCompare(b.nazwa, 'pl')));
+                  setKatalogSprzetu((p) =>
+                    [...p, { ...data, w_przepisach: 0 }].sort((a, b) =>
+                      a.nazwa.localeCompare(b.nazwa, 'pl')
+                    )
+                  );
                   setSprzet((p) => [...p, data.nazwa]);
                   setNowySprzet('');
                 }}
@@ -1183,6 +1271,12 @@ const styles = StyleSheet.create({
   },
   jednostkaMetryczki: { width: 48 },
   dopisywanieSprzetu: { gap: Spacing.two, paddingTop: Spacing.two },
+  usunSprzet: {
+    width: 34,
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'stretch',
+  },
   tabelaWybranych: {
     borderWidth: 1,
     borderRadius: Spacing.two,

@@ -32,6 +32,8 @@ type TabelaWyboruProps<T> = {
   tekstDoFiltra: (element: T) => string;
   /** Treść pokazywana pod tabelą — np. tabela wybranych pozycji. */
   poWyborze?: ReactNode;
+  /** Dodatkowa zawartość na końcu każdego wiersza, np. przycisk usuwania. */
+  akcjaWiersza?: (element: T) => ReactNode;
   etykietaFiltra?: string;
   placeholderFiltra?: string;
   /** Pokazywane pod tabelą, np. przycisk dopisania nowej pozycji. */
@@ -54,6 +56,7 @@ export function TabelaWyboru<T>({
   onPrzelacz,
   tekstDoFiltra,
   poWyborze,
+  akcjaWiersza,
   etykietaFiltra = 'Filtruj',
   placeholderFiltra,
   stopka,
@@ -218,6 +221,8 @@ export function TabelaWyboru<T>({
                         </View>
                       ))}
                     </Pressable>
+
+                    {akcjaWiersza?.(element)}
                   </View>
 
                 </View>
