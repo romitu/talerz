@@ -22,11 +22,12 @@ import {
   pobierzPozycje,
   PORY,
   bialkoPosilku,
-  dodajDoPosilku,
+  dodajPartie,
   sumujDzien,
   usunPosilek,
   utworzPlan,
-  zmienPorcje,
+  usunPartie,
+  zmienDatePlanu,
   type Plan,
   type PozycjaPlanu,
 } from '@/lib/plan';
@@ -54,6 +55,7 @@ export default function EkranPlanu() {
   const [pozycje, setPozycje] = useState<PozycjaPlanu[]>([]);
   const [przepisy, setPrzepisy] = useState<PrzepisZMakro[]>([]);
   const [cel, setCel] = useState<Cel | null>(null);
+  const [osoby, setOsoby] = useState(1);
   const [wybierany, setWybierany] = useState<Wolne>(null);
   const [wczytywanie, setWczytywanie] = useState(true);
   const [blad, setBlad] = useState<string | null>(null);
@@ -62,7 +64,7 @@ export default function EkranPlanu() {
     setWczytywanie(true);
     setBlad(null);
     try {
-      const [p, lista, wynikCelu] = await Promise.all([
+      const [p, lista, wynikCelu, wynikProfili] = await Promise.all([
         pobierzPlan(),
         pobierzPrzepisy(sesja?.user.id),
         supabase
@@ -71,7 +73,11 @@ export default function EkranPlanu() {
           .order('obowiazuje_od', { ascending: false })
           .limit(1)
           .maybeSingle(),
+        // Liczba jedzących bierze się z profili — tyle porcji dziennie zejdzie z garnka.
+        supabase.from('profile').select('id'),
       ]);
+
+      setOsoby(Math.max(1, wynikProfili.data?.length ?? 1));
 
       setPlan(p);
       setPrzepisy(lista);
@@ -89,6 +95,16 @@ export default function EkranPlanu() {
       pobierz();
     }, [pobierz])
   );
+
+  /** Dni do wyboru jako początek planu: od dzisiaj przez dwa tygodnie. */
+  const mozliweDaty = useMemo(() => {
+    const dzis = new Date();
+    return Array.from({ length: 14 }, (_, i) => {
+      const d = new Date(dzis);
+      d.setDate(dzis.getDate() + i);
+      return naDate(d);
+    });
+  }, []);
 
   const wedlugDnia = useMemo(() => {
     const mapa = new Map<string, PozycjaPlanu[]>();
@@ -148,11 +164,21 @@ export default function EkranPlanu() {
             wybrane={[]}
             onPrzelacz={(p) =>
               zDbem(async () => {
-                if (!plan) return;
+                if (!plan || !sesja) return;
                 const juz = pozycje.filter(
                   (x) => x.data === wybierany.data && x.pora === wybierany.pora
                 ).length;
-                await dodajDoPosilku(plan.id, wybierany.data, wybierany.pora, p.id, juz + 1);
+                await dodajPartie({
+                  kontoId: sesja.user.id,
+                  planId: plan.id,
+                  odData: wybierany.data,
+                  pora: wybierany.pora,
+                  przepisId: p.id,
+                  kolejnosc: juz + 1,
+                  osoby,
+                  trwaloscDni: p.trwalosc_dni,
+                  dostepneDni: dniPlanu(plan),
+                });
                 setWybierany(null);
               })
             }
@@ -183,7 +209,11 @@ export default function EkranPlanu() {
   return (
     <Ekran
       tytul="Plan dnia"
-      podtytul={plan ? `${plan.dni} dni od ${opisDnia(plan.data_start)}` : undefined}>
+      podtytul={
+        plan
+          ? `${plan.dni} dni · ${osoby} ${osoby === 1 ? 'osoba' : 'osoby'}`
+          : undefined
+      }>
       {blad && (
         <Karta>
           <ThemedText type="small" themeColor="accent">
@@ -204,6 +234,41 @@ export default function EkranPlanu() {
             Nie masz ustalonych celów dziennych — nie będzie do czego porównywać sum.
             Ustawisz je w zakładce Profil.
           </ThemedText>
+        </Karta>
+      )}
+
+      {plan && (
+        <Karta>
+          <ThemedText type="smallBold" themeColor="textSecondary">
+            PIERWSZY DZIEŃ PLANU
+          </ThemedText>
+          <ThemedText type="small" themeColor="textSecondary">
+            Pozostałe dni ułożą się od niego. Posiłki zostają przy swoich datach.
+          </ThemedText>
+
+          <View style={styles.wyborDaty}>
+            {mozliweDaty.map((d) => {
+              const wybrana = d === plan.data_start;
+              return (
+                <Pressable
+                  key={d}
+                  onPress={() => zDbem(() => zmienDatePlanu(plan.id, d))}
+                  style={({ pressed }) => [
+                    styles.data,
+                    {
+                      borderColor: wybrana ? motyw.accent : motyw.border,
+                      backgroundColor: wybrana ? motyw.backgroundSelected : motyw.backgroundElement,
+                    },
+                    pressed && styles.wcisniete,
+                  ]}>
+                  <ThemedText type={wybrana ? 'smallBold' : 'small'}>
+                    {opisDnia(d)}
+                    {czyDzisiaj(d) ? ' · dzisiaj' : ''}
+                  </ThemedText>
+                </Pressable>
+              );
+            })}
+          </View>
         </Karta>
       )}
 
@@ -252,9 +317,17 @@ export default function EkranPlanu() {
                             {dania.length > 1 ? ` · danie ${pozycja.kolejnosc}` : ''}
                           </ThemedText>
                           <Pressable
-                            onPress={() => zDbem(() => usunPosilek(pozycja.id))}
+                            onPress={() =>
+                              zDbem(() =>
+                                pozycja.partia_id
+                                  ? usunPartie(pozycja.partia_id)
+                                  : usunPosilek(pozycja.id)
+                              )
+                            }
                             hitSlop={8}
-                            accessibilityLabel="Usuń danie">
+                            accessibilityLabel={
+                              pozycja.partia_id ? 'Usuń całą partię' : 'Usuń danie'
+                            }>
                             <Ionicons name="close" size={16} color={motyw.textSecondary} />
                           </Pressable>
                         </View>
@@ -262,23 +335,21 @@ export default function EkranPlanu() {
                         <ThemedText type="small">{pozycja.nazwa}</ThemedText>
 
                         <View style={styles.wierszPozycji}>
-                          <Pressable
-                            onPress={() =>
-                              zDbem(() => zmienPorcje(pozycja.id, Math.max(1, pozycja.porcje - 1)))
-                            }
-                            hitSlop={6}>
-                            <Ionicons name="remove-circle-outline" size={20} color={motyw.accent} />
-                          </Pressable>
+                          {/*
+                            Liczba porcji nie jest edytowalna z osobna — wynika z liczby
+                            jedzących i rozkłada się na tyle dni, ile danie wytrzyma.
+                            Zmiana pojedynczego dnia rozjechałaby się z garnkiem.
+                          */}
+                          <ThemedText type="smallBold">
+                            {pozycja.porcje}{' '}
+                            {pozycja.porcje === 1 ? 'porcja' : 'porcje'}
+                          </ThemedText>
 
-                          <ThemedText type="smallBold">{pozycja.porcje} porcji</ThemedText>
-
-                          <Pressable
-                            onPress={() =>
-                              zDbem(() => zmienPorcje(pozycja.id, Math.min(5, pozycja.porcje + 1)))
-                            }
-                            hitSlop={6}>
-                            <Ionicons name="add-circle-outline" size={20} color={motyw.accent} />
-                          </Pressable>
+                          {pozycja.gramy_porcji > 0 && (
+                            <ThemedText type="small" themeColor="textSecondary">
+                              {Math.round(pozycja.gramy_porcji * pozycja.porcje)} g
+                            </ThemedText>
+                          )}
 
                           <ThemedText
                             type="small"
@@ -412,6 +483,18 @@ const styles = StyleSheet.create({
     gap: Spacing.two,
   },
   makroPozycji: { marginLeft: 'auto' },
+  wyborDaty: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: Spacing.two,
+    paddingTop: Spacing.one,
+  },
+  data: {
+    borderWidth: 1,
+    borderRadius: Spacing.four,
+    paddingHorizontal: Spacing.three,
+    paddingVertical: Spacing.one,
+  },
   wierszMakro: {
     flexDirection: 'row',
     flexWrap: 'wrap',

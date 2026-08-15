@@ -26,6 +26,10 @@ export type PozycjaPlanu = {
   porcje: number;
   kolejnosc: number;
   zjedzone: boolean;
+  /** Wspólny identyfikator dań ugotowanych jednym garnkiem. */
+  partia_id: string | null;
+  /** Waga jednej porcji przepisu w gramach. */
+  gramy_porcji: number;
   /** Wartości jednej porcji przepisu. */
   kcal: number;
   bialko_g: number;
@@ -83,6 +87,12 @@ export async function pobierzPlan(): Promise<Plan | null> {
   return data;
 }
 
+/** Przesuwa datę początku istniejącego planu. */
+export async function zmienDatePlanu(planId: string, dataStart: string) {
+  const { error } = await supabase.from('plany').update({ data_start: dataStart }).eq('id', planId);
+  if (error) throw error;
+}
+
 export async function utworzPlan(kontoId: string, dataStart: string, dni = 7): Promise<Plan> {
   const { data, error } = await supabase
     .from('plany')
@@ -103,7 +113,7 @@ export async function utworzPlan(kontoId: string, dataStart: string, dni = 7): P
 export async function pobierzPozycje(planId: string): Promise<PozycjaPlanu[]> {
   const { data: pozycje, error } = await supabase
     .from('plan_pozycje')
-    .select('id, data, pora, przepis_id, porcje, kolejnosc, zjedzone, przepisy (nazwa)')
+    .select('id, data, pora, przepis_id, porcje, kolejnosc, zjedzone, partia_id, przepisy (nazwa)')
     .eq('plan_id', planId)
     .order('data')
     .order('kolejnosc');
@@ -115,7 +125,7 @@ export async function pobierzPozycje(planId: string): Promise<PozycjaPlanu[]> {
 
   const { data: makro, error: bladMakro } = await supabase
     .from('przepis_makro')
-    .select('przepis_id, kcal, bialko_g, tluszcz_g, wegle_g, blonnik_g')
+    .select('przepis_id, kcal, bialko_g, tluszcz_g, wegle_g, blonnik_g, gramy_porcji')
     .in('przepis_id', idPrzepisow);
 
   if (bladMakro) throw bladMakro;
@@ -135,6 +145,8 @@ export async function pobierzPozycje(planId: string): Promise<PozycjaPlanu[]> {
       porcje: p.porcje,
       kolejnosc: p.kolejnosc,
       zjedzone: p.zjedzone,
+      partia_id: p.partia_id,
+      gramy_porcji: Number(m?.gramy_porcji ?? 0),
       kcal: Number(m?.kcal ?? 0),
       bialko_g: Number(m?.bialko_g ?? 0),
       tluszcz_g: Number(m?.tluszcz_g ?? 0),
@@ -164,32 +176,76 @@ export function sumujDzien(pozycje: PozycjaPlanu[]): Makro {
 }
 
 /**
- * Dokłada danie do posiłku.
+ * Dokłada danie do posiłku — razem z całą partią.
  *
- * Posiłek może składać się z kilku dań — zupa i drugie danie, owsianka i jajko.
- * Kolejność wynika z tego, ile dań już jest w tej porze.
+ * Gotujesz raz, jesz kilka dni. Danie trafia więc nie na jeden dzień, tylko
+ * na tyle kolejnych, ile pozwala jego trwałość — i tyle porcji dziennie,
+ * ile osób je je. Wszystkie pozycje dostają wspólny identyfikator partii,
+ * dzięki czemu usunięcie jednej usuwa cały garnek.
+ *
+ * @returns na ile dni rozłożono danie
  */
-export async function dodajDoPosilku(
-  planId: string,
-  data: string,
-  pora: PoraPosilku,
-  przepisId: string,
-  kolejnosc: number,
-  porcje = 1
-) {
-  const { error } = await supabase
-    .from('plan_pozycje')
-    .insert({ plan_id: planId, data, pora, przepis_id: przepisId, porcje, kolejnosc });
+export async function dodajPartie(opcje: {
+  kontoId: string;
+  planId: string;
+  odData: string;
+  pora: PoraPosilku;
+  przepisId: string;
+  kolejnosc: number;
+  /** Ile osób je ten posiłek. */
+  osoby: number;
+  /** Ile dni wytrzyma danie: 0 oznacza „tylko świeże”, czyli jeden dzień. */
+  trwaloscDni: number;
+  /** Dni planu od dnia dodania włącznie — dalej nie sięgamy. */
+  dostepneDni: string[];
+}): Promise<number> {
+  const { kontoId, planId, odData, pora, przepisId, kolejnosc, osoby, trwaloscDni, dostepneDni } =
+    opcje;
+
+  const dni = dostepneDni
+    .filter((d) => d >= odData)
+    .slice(0, Math.max(1, trwaloscDni));
+
+  const porcjiRazem = dni.length * Math.max(1, osoby);
+
+  const { data: partia, error: bladPartii } = await supabase
+    .from('partie')
+    .insert({
+      konto_id: kontoId,
+      przepis_id: przepisId,
+      data_ugotowania: odData,
+      porcji_razem: porcjiRazem,
+      porcji_zostalo: porcjiRazem,
+      wazne_do: odData, // wyzwalacz w bazie policzy właściwą datę z trwałości przepisu
+    })
+    .select('id')
+    .single();
+  if (bladPartii) throw bladPartii;
+
+  const { error } = await supabase.from('plan_pozycje').insert(
+    dni.map((d) => ({
+      plan_id: planId,
+      data: d,
+      pora,
+      przepis_id: przepisId,
+      porcje: Math.max(1, osoby),
+      kolejnosc,
+      partia_id: partia.id,
+    }))
+  );
+  if (error) throw error;
+
+  return dni.length;
+}
+
+/** Usuwa całą partię — wszystkie dni, na które rozłożono jedno gotowanie. */
+export async function usunPartie(partiaId: string) {
+  const { error } = await supabase.from('partie').delete().eq('id', partiaId);
   if (error) throw error;
 }
 
 export async function usunPosilek(id: string) {
   const { error } = await supabase.from('plan_pozycje').delete().eq('id', id);
-  if (error) throw error;
-}
-
-export async function zmienPorcje(id: string, porcje: number) {
-  const { error } = await supabase.from('plan_pozycje').update({ porcje }).eq('id', id);
   if (error) throw error;
 }
 
