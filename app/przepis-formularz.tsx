@@ -725,8 +725,23 @@ export default function FormularzPrzepisu() {
                 tytul="Dopisz sprzęt"
                 wariant="poboczny"
                 onPress={async () => {
-                  const nazwa = (nowySprzet || fraza).trim();
+                  const nazwa = (nowySprzet || fraza).trim().replace(/\s+/g, ' ');
                   if (!nazwa) return;
+
+                  // Jeśli taka pozycja już jest — tylko ją zaznaczamy.
+                  // Katalog rozróżniał wielkość liter, więc „Deska” i „deska”
+                  // tworzyły dwa wpisy tego samego narzędzia.
+                  const istniejacy = katalogSprzetu.find(
+                    (x) => x.nazwa.toLowerCase() === nazwa.toLowerCase()
+                  );
+                  if (istniejacy) {
+                    setSprzet((p) =>
+                      p.includes(istniejacy.nazwa) ? p : [...p, istniejacy.nazwa]
+                    );
+                    setNowySprzet('');
+                    return;
+                  }
+
                   const { data, error } = await supabase
                     .from('sprzet')
                     .insert({ nazwa })
