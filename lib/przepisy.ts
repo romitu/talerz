@@ -158,3 +158,103 @@ export async function przelaczPolubienie(przepisId: string, kontoId: string, pol
     if (error) throw error;
   }
 }
+
+/**
+ * Pełna treść przepisu do edycji.
+ *
+ * Pobierana osobno od listy, bo lista potrzebuje tylko podsumowania,
+ * a formularz — wszystkiego.
+ */
+export type PelnyPrzepis = {
+  id: string;
+  nazwa: string;
+  opis: string | null;
+  pory: PoraPosilku[];
+  kuchnie: Kuchnia[];
+  trwalosc_dni: number;
+  porcjowanie: 'waga' | 'sztuki';
+  porcje: number;
+  porcja_g: number | null;
+  czas_przygotowania_min: number | null;
+  czas_obrobki_min: number | null;
+  sprzet: string[];
+  przechowywanie: string | null;
+  mozna_mrozic: boolean | null;
+  ratunek: string | null;
+  widocznosc: Widocznosc;
+  skladniki: {
+    skladnik_id: string;
+    ilosc: number;
+    jednostka: 'g' | 'ml' | 'szt';
+    stan: string | null;
+    zamiennik: string | null;
+    opis_potoczny: string | null;
+    kolejnosc: number;
+  }[];
+  etapy: {
+    nazwa: string;
+    minuty: number | null;
+    kroki: { tresc: string; sygnal: string | null; uwaga: boolean }[];
+  }[];
+};
+
+export async function pobierzPelnyPrzepis(id: string): Promise<PelnyPrzepis> {
+  const [wynikPrzepisu, wynikSkladnikow, wynikEtapow] = await Promise.all([
+    supabase
+      .from('przepisy')
+      .select(
+        `id, nazwa, opis, pory, kuchnie, trwalosc_dni, porcjowanie, porcje, porcja_g,
+         czas_przygotowania_min, czas_obrobki_min, sprzet, przechowywanie, mozna_mrozic,
+         ratunek, widocznosc`
+      )
+      .eq('id', id)
+      .single(),
+    supabase
+      .from('przepis_skladniki')
+      .select('skladnik_id, ilosc, jednostka, stan, zamiennik, opis_potoczny, kolejnosc')
+      .eq('przepis_id', id)
+      .order('kolejnosc'),
+    supabase
+      .from('etapy')
+      .select('id, nazwa, minuty, kolejnosc, kroki (tresc, sygnal, uwaga, kolejnosc)')
+      .eq('przepis_id', id)
+      .order('kolejnosc'),
+  ]);
+
+  if (wynikPrzepisu.error) throw wynikPrzepisu.error;
+  if (wynikSkladnikow.error) throw wynikSkladnikow.error;
+  if (wynikEtapow.error) throw wynikEtapow.error;
+
+  const etapy = (wynikEtapow.data ?? []).map((e) => ({
+    nazwa: e.nazwa as string,
+    minuty: e.minuty as number | null,
+    kroki: ((e.kroki ?? []) as { tresc: string; sygnal: string | null; uwaga: boolean; kolejnosc: number }[])
+      .slice()
+      .sort((a, b) => a.kolejnosc - b.kolejnosc)
+      .map((k) => ({ tresc: k.tresc, sygnal: k.sygnal, uwaga: k.uwaga })),
+  }));
+
+  return {
+    ...(wynikPrzepisu.data as Omit<PelnyPrzepis, 'skladniki' | 'etapy'>),
+    skladniki: (wynikSkladnikow.data ?? []) as PelnyPrzepis['skladniki'],
+    etapy,
+  };
+}
+
+/**
+ * Usuwa składniki, etapy i kroki przepisu.
+ *
+ * Przy zapisie zmian wstawiamy je od nowa zamiast dopasowywać po jednym.
+ * Przy kilkunastu pozycjach jest to prostsze i pewniejsze niż porównywanie
+ * różnic, a usunięcie etapu kasuje jego kroki samo.
+ */
+export async function wyczyscTrescPrzepisu(id: string) {
+  const { error: bladSkladnikow } = await supabase
+    .from('przepis_skladniki')
+    .delete()
+    .eq('przepis_id', id);
+  if (bladSkladnikow) throw bladSkladnikow;
+
+  const { error: bladEtapow } = await supabase.from('etapy').delete().eq('przepis_id', id);
+  if (bladEtapow) throw bladEtapow;
+}

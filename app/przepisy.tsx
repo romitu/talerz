@@ -169,6 +169,16 @@ export default function EkranPrzepisow() {
               </ThemedText>
             )}
 
+            {(mozeDodawac || (p.autor_id === sesja?.user.id && p.widocznosc === 'prywatna')) && (
+              <Pressable
+                onPress={() => router.push({ pathname: '/przepis-formularz', params: { id: p.id } })}
+                hitSlop={8}
+                accessibilityLabel={`Edytuj ${p.nazwa}`}
+                style={styles.edytuj}>
+                <Ionicons name="create-outline" size={18} color={motyw.textSecondary} />
+              </Pressable>
+            )}
+
             <Pressable
               onPress={() => lajk(p)}
               accessibilityRole="button"
@@ -228,13 +238,17 @@ const styles = StyleSheet.create({
     gap: Spacing.two,
     paddingTop: Spacing.one,
   },
+  edytuj: {
+    paddingVertical: Spacing.one,
+    paddingHorizontal: Spacing.two,
+    marginLeft: 'auto',
+  },
   lajk: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: Spacing.one,
     paddingVertical: Spacing.one,
     paddingHorizontal: Spacing.two,
-    marginLeft: 'auto',
   },
   wcisniety: { opacity: 0.6 },
 });

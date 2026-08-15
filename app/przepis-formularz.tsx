@@ -1,6 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
-import { router, useFocusEffect } from 'expo-router';
-import { useCallback, useMemo, useState } from 'react';
+import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Pressable, StyleSheet, TextInput, View } from 'react-native';
 
 import { komunikatBledu } from '@/lib/blad';
@@ -16,7 +16,15 @@ import { Wybor } from '@/components/wybor';
 import { WyborWielo } from '@/components/wybor-wielo';
 import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
-import { OPIS_KUCHNI, OPIS_PORY, opisTrwalosci, type Kuchnia, type PoraPosilku } from '@/lib/przepisy';
+import {
+  OPIS_KUCHNI,
+  OPIS_PORY,
+  opisTrwalosci,
+  pobierzPelnyPrzepis,
+  wyczyscTrescPrzepisu,
+  type Kuchnia,
+  type PoraPosilku,
+} from '@/lib/przepisy';
 import { pobierzSkladniki, type Skladnik } from '@/lib/skladniki';
 import { useSesja } from '@/lib/sesja';
 import { supabase } from '@/lib/supabase';
@@ -66,6 +74,8 @@ function liczba(tekst: string): number {
 }
 
 export default function FormularzPrzepisu() {
+  const { id: edytowanyId } = useLocalSearchParams<{ id?: string }>();
+  const tryb = edytowanyId ? 'edycja' : 'nowy';
   const { sesja } = useSesja();
   const motyw = useTheme();
 
@@ -116,6 +126,67 @@ export default function FormularzPrzepisu() {
       wczytajSprzet();
     }, [wczytajSkladniki, wczytajSprzet])
   );
+
+  // Wczytanie edytowanego przepisu — dopiero gdy baza składników jest gotowa,
+  // bo pozycje przepisu odwołują się do niej po identyfikatorze.
+  const [wczytanyId, setWczytanyId] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!edytowanyId || dostepne.length === 0 || wczytanyId === edytowanyId) return;
+
+    (async () => {
+      try {
+        const p = await pobierzPelnyPrzepis(edytowanyId);
+        setNazwa(p.nazwa);
+        setOpis(p.opis ?? '');
+        setPory(p.pory);
+        setKuchnie(p.kuchnie);
+        setTrwalosc(String(p.trwalosc_dni) as '0' | '1' | '2' | '3');
+        setPorcjowanie(p.porcjowanie);
+        setPorcje(String(p.porcje));
+        setPorcjaG(p.porcja_g ? String(p.porcja_g) : '800');
+        setCzasPrzygotowania(p.czas_przygotowania_min ? String(p.czas_przygotowania_min) : '');
+        setCzasObrobki(p.czas_obrobki_min ? String(p.czas_obrobki_min) : '');
+        setSprzet(p.sprzet ?? []);
+        setPrzechowywanie(p.przechowywanie ?? '');
+        setMoznaMrozic(p.mozna_mrozic === null ? 'nie wiem' : p.mozna_mrozic ? 'tak' : 'nie');
+        setRatunek(p.ratunek ?? '');
+
+        setWybrane(
+          p.skladniki
+            .map((x) => {
+              const skladnik = dostepne.find((d) => d.id === x.skladnik_id);
+              if (!skladnik) return null;
+              return {
+                skladnik,
+                ilosc: String(x.ilosc),
+                jednostka: x.jednostka,
+                stan: x.stan ?? '',
+                zamiennik: x.zamiennik ?? '',
+                opisPotoczny: x.opis_potoczny ?? '',
+              } as WybranySkladnik;
+            })
+            .filter((x): x is WybranySkladnik => x !== null)
+        );
+
+        setEtapy(
+          p.etapy.map((e) => ({
+            nazwa: e.nazwa,
+            minuty: e.minuty ? String(e.minuty) : '',
+            kroki: e.kroki.map((k) => ({
+              tresc: k.tresc,
+              sygnal: k.sygnal ?? '',
+              uwaga: k.uwaga,
+            })),
+          }))
+        );
+
+        setWczytanyId(edytowanyId);
+      } catch (e) {
+        setBlad(komunikatBledu(e));
+      }
+    })();
+  }, [edytowanyId, dostepne, wczytanyId]);
 
 
   // Makro liczone na żywo, tak samo jak potem policzy je baza.
@@ -206,8 +277,15 @@ export default function FormularzPrzepisu() {
   }, []);
 
 
-  function dodajEtap() {
-    setEtapy((p) => [...p, { nazwa: '', minuty: '', kroki: [] }]);
+  /** Wstawia etap na wskazanej pozycji. Bez argumentu — na końcu. */
+  function wstawEtap(poIndeksie?: number) {
+    const pusty: Etap = { nazwa: '', minuty: '', kroki: [] };
+    setEtapy((p) => {
+      if (poIndeksie === undefined) return [...p, pusty];
+      const nowe = [...p];
+      nowe.splice(poIndeksie + 1, 0, pusty);
+      return nowe;
+    });
   }
 
   function zmienEtap(indeks: number, pole: 'nazwa' | 'minuty', wartosc: string) {
@@ -228,9 +306,35 @@ export default function FormularzPrzepisu() {
     });
   }
 
-  function dodajKrok(indeksEtapu: number) {
+  /**
+   * Wstawia krok na wskazanej pozycji. Bez drugiego argumentu — na końcu etapu.
+   *
+   * Dopisywanie wyłącznie na końcu zmuszało do przepisywania całej instrukcji,
+   * gdy okazało się, że czegoś brakuje w środku.
+   */
+  function wstawKrok(indeksEtapu: number, poIndeksie?: number) {
+    const pusty: Krok = { tresc: '', sygnal: '', uwaga: false };
     setEtapy((p) =>
-      p.map((e, i) => (i === indeksEtapu ? { ...e, kroki: [...e.kroki, { tresc: '', sygnal: '', uwaga: false }] } : e))
+      p.map((e, i) => {
+        if (i !== indeksEtapu) return e;
+        if (poIndeksie === undefined) return { ...e, kroki: [...e.kroki, pusty] };
+        const kroki = [...e.kroki];
+        kroki.splice(poIndeksie + 1, 0, pusty);
+        return { ...e, kroki };
+      })
+    );
+  }
+
+  function przesunKrok(indeksEtapu: number, indeksKroku: number, oIle: number) {
+    setEtapy((p) =>
+      p.map((e, i) => {
+        if (i !== indeksEtapu) return e;
+        const cel = indeksKroku + oIle;
+        if (cel < 0 || cel >= e.kroki.length) return e;
+        const kroki = [...e.kroki];
+        [kroki[indeksKroku], kroki[cel]] = [kroki[cel], kroki[indeksKroku]];
+        return { ...e, kroki };
+      })
     );
   }
 
@@ -264,9 +368,7 @@ export default function FormularzPrzepisu() {
 
     setZajety(true);
     try {
-      const { data: przepis, error: bladPrzepisu } = await supabase
-        .from('przepisy')
-        .insert({
+      const dane = {
           nazwa: nazwa.trim(),
           opis: opis.trim() || null,
           pory,
@@ -281,12 +383,27 @@ export default function FormularzPrzepisu() {
           przechowywanie: przechowywanie.trim() || null,
           mozna_mrozic: moznaMrozic === 'nie wiem' ? null : moznaMrozic === 'tak',
           ratunek: ratunek.trim() || null,
-          autor_id: sesja.user.id,
-          widocznosc: 'prywatna',
-        })
-        .select('id')
-        .single();
-      if (bladPrzepisu) throw bladPrzepisu;
+      };
+
+      let przepisId: string;
+
+      if (edytowanyId) {
+        // Edycja: aktualizujemy nagłówek, a treść wstawiamy od nowa.
+        const { error } = await supabase.from('przepisy').update(dane).eq('id', edytowanyId);
+        if (error) throw error;
+        await wyczyscTrescPrzepisu(edytowanyId);
+        przepisId = edytowanyId;
+      } else {
+        const { data, error } = await supabase
+          .from('przepisy')
+          .insert({ ...dane, autor_id: sesja.user.id, widocznosc: 'prywatna' })
+          .select('id')
+          .single();
+        if (error) throw error;
+        przepisId = data.id;
+      }
+
+      const przepis = { id: przepisId };
 
       const { error: bladSkladnikow } = await supabase.from('przepis_skladniki').insert(
         wybrane.map((w, i) => ({
@@ -352,7 +469,10 @@ export default function FormularzPrzepisu() {
   }
 
   return (
-    <Ekran pelnaSzerokosc tytul="Nowy przepis" podtytul="Makro policzy się ze składników">
+    <Ekran
+      pelnaSzerokosc
+      tytul={tryb === 'edycja' ? 'Edycja przepisu' : 'Nowy przepis'}
+      podtytul={tryb === 'edycja' ? nazwa || undefined : 'Makro policzy się ze składników'}>
       <Karta style={styles.grupa}>
         <Pole etykieta="Nazwa" value={nazwa} onChangeText={setNazwa} placeholder="Dorsz z kaszą gryczaną" />
         <Pole
@@ -800,6 +920,13 @@ export default function FormularzPrzepisu() {
                     color={i === etapy.length - 1 ? motyw.border : motyw.textSecondary}
                   />
                 </Pressable>
+                <Pressable
+                  onPress={() => wstawEtap(i)}
+                  hitSlop={6}
+                  accessibilityLabel="Wstaw etap poniżej">
+                  <Ionicons name="add-circle-outline" size={18} color={motyw.accent} />
+                </Pressable>
+
                 <Pressable onPress={() => usunEtap(i)} hitSlop={6} accessibilityLabel="Usuń etap">
                   <Ionicons name="trash-outline" size={18} color={motyw.textSecondary} />
                 </Pressable>
@@ -826,6 +953,37 @@ export default function FormularzPrzepisu() {
                   <ThemedText type="small" themeColor="textSecondary">
                     Krok {j + 1}
                   </ThemedText>
+
+                  <Pressable
+                    onPress={() => przesunKrok(i, j, -1)}
+                    disabled={j === 0}
+                    hitSlop={6}
+                    accessibilityLabel="Przesuń krok wyżej">
+                    <Ionicons
+                      name="arrow-up"
+                      size={15}
+                      color={j === 0 ? motyw.border : motyw.textSecondary}
+                    />
+                  </Pressable>
+
+                  <Pressable
+                    onPress={() => przesunKrok(i, j, 1)}
+                    disabled={j === etap.kroki.length - 1}
+                    hitSlop={6}
+                    accessibilityLabel="Przesuń krok niżej">
+                    <Ionicons
+                      name="arrow-down"
+                      size={15}
+                      color={j === etap.kroki.length - 1 ? motyw.border : motyw.textSecondary}
+                    />
+                  </Pressable>
+
+                  <Pressable
+                    onPress={() => wstawKrok(i, j)}
+                    hitSlop={6}
+                    accessibilityLabel="Wstaw krok poniżej">
+                    <Ionicons name="add-circle-outline" size={16} color={motyw.accent} />
+                  </Pressable>
 
                   <Pressable
                     onPress={() => zmienKrok(i, j, { uwaga: !krok.uwaga })}
@@ -864,14 +1022,14 @@ export default function FormularzPrzepisu() {
               </View>
             ))}
 
-            <Przycisk tytul="Dodaj krok" wariant="poboczny" onPress={() => dodajKrok(i)} />
+            <Przycisk tytul="Dodaj krok na końcu" wariant="poboczny" onPress={() => wstawKrok(i)} />
           </View>
         ))}
 
         <Przycisk
-          tytul={etapy.length === 0 ? 'Dodaj pierwszy etap' : 'Dodaj kolejny etap'}
+          tytul={etapy.length === 0 ? 'Dodaj pierwszy etap' : 'Dodaj etap na końcu'}
           wariant="poboczny"
-          onPress={dodajEtap}
+          onPress={() => wstawEtap()}
         />
 
         {czasRazem > 0 && (
@@ -922,10 +1080,17 @@ export default function FormularzPrzepisu() {
       )}
 
       <ThemedText type="small" themeColor="textSecondary">
-        Przepis zapisze się jako prywatny. Publikacja wymaga zgłoszenia i zatwierdzenia.
+        {tryb === 'edycja'
+          ? 'Zmiany nadpiszą dotychczasową treść przepisu.'
+          : 'Przepis zapisze się jako prywatny.'} Publikacja wymaga zgłoszenia i zatwierdzenia.
       </ThemedText>
 
-      <Przycisk tytul="Zapisz przepis" onPress={zapisz} zajety={zajety} wylaczony={!komplet} />
+      <Przycisk
+        tytul={tryb === 'edycja' ? 'Zapisz zmiany' : 'Zapisz przepis'}
+        onPress={zapisz}
+        zajety={zajety}
+        wylaczony={!komplet}
+      />
       <Przycisk tytul="Anuluj" wariant="poboczny" onPress={() => router.back()} />
     </Ekran>
   );
