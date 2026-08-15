@@ -88,8 +88,8 @@ export default function FormularzPrzepisu() {
   const [kuchnie, setKuchnie] = useState<Kuchnia[]>(['srodziemnomorska']);
   const [trwalosc, setTrwalosc] = useState<'0' | '1' | '2' | '3'>('0');
   const [porcjowanie, setPorcjowanie] = useState<'waga' | 'sztuki'>('sztuki');
-  const [porcje, setPorcje] = useState('4');
-  const [porcjaG, setPorcjaG] = useState('350');
+  const [porcje, setPorcje] = useState('');
+  const [porcjaG, setPorcjaG] = useState('');
   const [czasPrzygotowania, setCzasPrzygotowania] = useState('');
   const [czasObrobki, setCzasObrobki] = useState('');
   const [sprzet, setSprzet] = useState<string[]>([]);
@@ -143,6 +143,40 @@ export default function FormularzPrzepisu() {
   // Wczytanie edytowanego przepisu — dopiero gdy baza składników jest gotowa,
   // bo pozycje przepisu odwołują się do niej po identyfikatorze.
   const [wczytanyId, setWczytanyId] = useState<string | null>(null);
+
+  /**
+   * Przywraca formularz do stanu wyjściowego.
+   *
+   * Ekran nie znika z pamięci po powrocie, więc bez wyczyszczenia „Dodaj przepis”
+   * otwierałby się z treścią ostatnio edytowanego dania.
+   */
+  const wyczyscFormularz = useCallback(() => {
+    setNazwa('');
+    setOpis('');
+    setPory([]);
+    setKuchnie(['srodziemnomorska']);
+    setTrwalosc('0');
+    setPorcjowanie('sztuki');
+    setPorcje('');
+    setPorcjaG('');
+    setCzasPrzygotowania('');
+    setCzasObrobki('');
+    setSprzet([]);
+    setPrzechowywanie('');
+    setMoznaMrozic('nie wiem');
+    setRatunek('');
+    setWybrane([]);
+    setEtapy([]);
+    setNowySprzet('');
+    setDodawanieSkladnika(false);
+    setBlad(null);
+    setWczytanyId(null);
+  }, []);
+
+  // Wejście w tryb tworzenia po wcześniejszej edycji — zaczynamy od czystej karty.
+  useEffect(() => {
+    if (!edytowanyId && wczytanyId !== null) wyczyscFormularz();
+  }, [edytowanyId, wczytanyId, wyczyscFormularz]);
 
   useEffect(() => {
     if (!edytowanyId || dostepne.length === 0 || wczytanyId === edytowanyId) return;
@@ -243,6 +277,10 @@ export default function FormularzPrzepisu() {
       ? Math.max(masaCalosci / Math.max(liczba(porcjaG), 1), 0.1)
       : Math.max(1, Math.round(liczba(porcje)) || 1);
 
+  /** Czy podano wartość odpowiadającą wybranemu sposobowi porcjowania. */
+  const podanoPorcjowanie = porcjowanie === 'waga' ? liczba(porcjaG) > 0 : liczba(porcje) > 0;
+
+
   const makroPorcji = {
     kcal: makro.kcal / liczbaPorcji,
     bialko: makro.bialko / liczbaPorcji,
@@ -253,7 +291,10 @@ export default function FormularzPrzepisu() {
   };
 
   const komplet =
-    nazwa.trim().length >= 3 && wybrane.length > 0 && wybrane.every((w) => gramyZe(w) > 0);
+    nazwa.trim().length >= 3 &&
+    podanoPorcjowanie &&
+    wybrane.length > 0 &&
+    wybrane.every((w) => gramyZe(w) > 0);
 
   const dodajSkladnik = useCallback((s: Skladnik) => {
     setWybrane((p) => [
@@ -473,6 +514,7 @@ export default function FormularzPrzepisu() {
         }
       }
 
+      wyczyscFormularz();
       router.back();
     } catch (e) {
       setBlad(komunikatBledu(e));
@@ -524,28 +566,28 @@ export default function FormularzPrzepisu() {
                 wartosc: porcje,
                 ustaw: setPorcje,
                 jednostka: 'sztuk',
-                podpowiedz: '4',
+                podpowiedz: 'np. 4',
               }
             : {
                 etykieta: 'Waga jednej porcji',
                 wartosc: porcjaG,
                 ustaw: setPorcjaG,
                 jednostka: 'g',
-                podpowiedz: '350',
+                podpowiedz: 'np. 800',
               },
           {
             etykieta: 'Czas przygotowania',
             wartosc: czasPrzygotowania,
             ustaw: setCzasPrzygotowania,
             jednostka: 'min',
-            podpowiedz: '20',
+            podpowiedz: 'np. 20',
           },
           {
             etykieta: 'Czas obróbki',
             wartosc: czasObrobki,
             ustaw: setCzasObrobki,
             jednostka: 'min',
-            podpowiedz: '77',
+            podpowiedz: 'np. 50',
           },
         ].map((w) => (
           <View key={w.etykieta} style={[styles.wierszMetryczki, { borderColor: motyw.border }]}>
@@ -569,7 +611,7 @@ export default function FormularzPrzepisu() {
           </View>
         ))}
 
-        {wybrane.length > 0 && (
+        {wybrane.length > 0 && podanoPorcjowanie && (
           <ThemedText type="small" themeColor="textSecondary">
             {porcjowanie === 'waga'
               ? `Z ${Math.round(masaCalosci)} g wychodzi około ${liczbaPorcji.toFixed(1).replace('.', ',')} porcji po ${porcjaG || '?'} g.`
