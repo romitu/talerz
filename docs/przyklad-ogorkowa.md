@@ -197,14 +197,27 @@ Na końcu **Zapisz przepis**.
 
 ## Czego się spodziewać
 
-Masa garnka wyjdzie około **3800 g**, a przy porcji 350 g da to **około 11 porcji**
-po mniej więcej 190 kcal.
+Przeliczyłem to na Twoich wartościach:
 
-To znacznie więcej niż Twoje „4–6". Nie ma tu błędu — w Twoim rachunku porcja
-miała 600–900 ml, czyli głęboki talerz z dokładką. Jeśli tak właśnie jadasz,
-zmień wagę porcji na **650 g**: wyjdzie sześć porcji po około 350 kcal.
+```
+Masa garnka:     3900 g
+Kalorie razem:   2227 kcal
+```
 
-Liczba porcji przelicza się natychmiast po zmianie tej jednej wartości.
+| Waga porcji | Liczba porcji | Kalorie na porcję |
+|---|---|---|
+| 350 g | 11,1 | 200 kcal |
+| **650 g** | **6,0** | **371 kcal** |
+
+Twoje „4–6 porcji" odpowiada więc porcji **około 650 g** — i to jest wartość,
+którą polecam wpisać. Dostaniesz sześć porcji po 371 kcal, czyli dokładnie to,
+co miałeś na myśli, tylko wyrażone tak, żeby dało się z tego zbudować plan dnia.
+
+Suma 2227 kcal jest bliska Twoich 2054 — różnica bierze się z tego, że USDA
+podaje dla żeberek 277 kcal na 100 g, a tabele polskie nieco mniej.
+
+Liczba porcji przelicza się natychmiast po zmianie tej jednej wartości, więc
+możesz to sprawdzić obiema wartościami i zostawić tę, która pasuje do Twojej miski.
 
 ---
 
