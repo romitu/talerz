@@ -14,6 +14,20 @@ import { baza_skonfigurowana, supabase } from '@/lib/supabase';
 
 type Tryb = 'logowanie' | 'rejestracja';
 
+/**
+ * Czy pokazywać zakładanie konta.
+ *
+ * W Supabase rejestracja jest WYŁĄCZONA (Authentication → Sign In / Providers →
+ * „Allow new users to sign up”), bo Talerz jest aplikacją na zaproszenie —
+ * konta zakłada się z panelu. Przycisk „Nie mam jeszcze konta” prowadziłby więc
+ * do formularza, który zawsze kończy się błędem, a to gorsze niż brak przycisku:
+ * użytkownik zakłada, że coś jest zepsute.
+ *
+ * Gdyby rejestracja kiedyś miała zostać otwarta, zmienia się tę jedną stałą
+ * TU I W PANELU SUPABASE. Sam kod rejestracji zostaje na miejscu, bo działa.
+ */
+const REJESTRACJA_OTWARTA = false;
+
 /** Tłumaczy komunikaty Supabase na zrozumiały polski. */
 function komunikat(tresc: string): string {
   const t = tresc.toLowerCase();
@@ -144,15 +158,22 @@ export function EkranLogowania() {
                 wylaczony={!baza_skonfigurowana}
               />
 
-              <Przycisk
-                tytul={rejestracja ? 'Mam już konto' : 'Nie mam jeszcze konta'}
-                wariant="poboczny"
-                onPress={() => {
-                  setTryb(rejestracja ? 'logowanie' : 'rejestracja');
-                  setBlad(null);
-                  setInformacja(null);
-                }}
-              />
+              {REJESTRACJA_OTWARTA ? (
+                <Przycisk
+                  tytul={rejestracja ? 'Mam już konto' : 'Nie mam jeszcze konta'}
+                  wariant="poboczny"
+                  onPress={() => {
+                    setTryb(rejestracja ? 'logowanie' : 'rejestracja');
+                    setBlad(null);
+                    setInformacja(null);
+                  }}
+                />
+              ) : (
+                <ThemedText type="small" themeColor="textSecondary">
+                  Konta zakłada administrator. Jeśli masz dostać dostęp, poproś o założenie
+                  konta na swój adres.
+                </ThemedText>
+              )}
             </Karta>
 
             <ThemedText type="small" themeColor="textSecondary" style={styles.stopka}>
