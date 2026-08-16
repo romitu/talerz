@@ -45,7 +45,7 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": false,
-      "baseUrl": "/talerz"
+      "baseUrl": "/Talerz"
     }
   }
 }

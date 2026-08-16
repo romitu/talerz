@@ -49,6 +49,30 @@ jobs:
       - name: Instalacja zależności
         run: npm ci
 
+      # Brak sekretu wychodził dotąd dopiero w środku budowania, jako
+      # „supabaseUrl is required” ze stosu wywołań Metro — komunikat, po którym
+      # nie widać, że chodzi o ustawienia repozytorium. Sprawdzamy więc na wejściu.
+      - name: Sprawdzenie sekretów
+        env:
+          ADRES: ${{ secrets.EXPO_PUBLIC_SUPABASE_URL }}
+          KLUCZ: ${{ secrets.EXPO_PUBLIC_SUPABASE_ANON_KEY }}
+        run: |
+          brak=0
+          if [ -z "$ADRES" ]; then
+            echo "BRAK sekretu EXPO_PUBLIC_SUPABASE_URL"; brak=1
+          fi
+          if [ -z "$KLUCZ" ]; then
+            echo "BRAK sekretu EXPO_PUBLIC_SUPABASE_ANON_KEY"; brak=1
+          fi
+          if [ "$brak" = "1" ]; then
+            echo
+            echo "Dodaj je w: Settings -> Secrets and variables -> Actions,"
+            echo "w sekcji Repository secrets (nie Environment secrets)."
+            echo "Wartosci sa w pliku .env na Twoim komputerze."
+            exit 1
+          fi
+          echo "Oba sekrety na miejscu."
+
       - name: Sprawdzenie typów
         run: npx tsc --noEmit
 
