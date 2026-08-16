@@ -15,8 +15,23 @@ cztery zakładki i przykładowy plan dnia na danych wpisanych na stałe.
 > stoi w lodówce, nie każe wpisywać każdego posiłku i planuje zakupy tak,
 > żeby nic się nie zmarnowało.
 
-Kuchnia śródziemnomorska, trzy posiłki dziennie, wysokie białko, gotowanie
-na zapas. Android, iPhone i przeglądarka z jednego kodu.
+Kuchnia domowa, trzy posiłki dziennie, wysokie białko, gotowanie na zapas.
+Android, iPhone i przeglądarka z jednego kodu.
+
+**O kuchni — zmiana z sierpnia 2026.** Pierwotnie aplikacja miała być
+śródziemnomorska. Baza startowa pochodzi jednak z planera, który autor
+gotował przez rok, a tam obok sałatki greckiej stoi barszcz ukraiński,
+krupnik i tom kha gai. Z trzydziestu dań śródziemnomorskich jest osiem.
+
+Można było albo odrzucić dwie trzecie sprawdzonych przepisów, albo opisać
+aplikację tak, jak jest. Wybieramy drugie. **Zasady żywieniowe zostają bez
+zmian** — to one, a nie region kuchni, decydują o tym, czym Talerz jest:
+mało cukrów wolnych, przewaga produktów nieprzetworzonych, oliwa i olej
+rzepakowy zamiast tłuszczów utwardzonych, warzywa w każdym posiłku, ryby.
+
+Kuchnia śródziemnomorska zostaje jako **wzorzec żywieniowy** i punkt
+odniesienia w materiałach edukacyjnych (G1), a nie jako granica tego,
+co wolno wpisać do bazy.
 
 ---
 
@@ -303,8 +318,9 @@ danie azjatyckie też jest obiadem:
 - **pora:** śniadanie / obiad / kolacja
 - **kuchnia:** śródziemnomorska / azjatycka / polska / inna
 
-Tożsamość aplikacji pozostaje śródziemnomorska; kuchnia azjatycka jest
-dopuszczonym marginesem, nie osobnym działem.
+Żadna z kuchni nie jest marginesem — filtr traktuje je równorzędnie
+(patrz sekcja 1, „O kuchni"). Etykieta służy do wyszukiwania, nie do
+oceniania, czy danie „pasuje do aplikacji".
 
 **Cukier (C6).** Dwie rzeczy działają równolegle. Na wejściu do bazy obowiązują
 zasady z sekcji 3.3 — bez soków, bez cukrów dodanych, bez słodzików. Natomiast
@@ -468,7 +484,7 @@ gdzie i tak niczego nie sortujemy. Nie na start.
 
 | # | Funkcja | Uwagi |
 |---|---|---|
-| G1 | Strona o kuchni śródziemnomorskiej — dlaczego ta | pkt 2, 26 |
+| G1 | Strona o wzorcu śródziemnomorskim jako punkcie odniesienia — co z niego bierzemy i czego nie | pkt 2, 26; patrz sekcja 1 „O kuchni" |
 | G2 | Strona o przyjętych normach: NIZP-PZH, AMDR, WHO | pkt 26, **po korekcie źródeł** |
 | G3 | Zastrzeżenie o braku porad medycznych | ciąża, cukrzyca, choroby nerek, zaburzenia odżywiania → lekarz |
 | G5 | Zastrzeżenie o braku obsługi alergenów | „Talerz nie filtruje alergenów. Przy alergii sprawdź skład przepisu i etykiety produktów" |
@@ -666,7 +682,7 @@ utknie. Dlatego kolejność jest odwrotna do intuicyjnej:
 
 > **Najpierw 300–400 składników. Dopiero potem przepisy.**
 
-Tyle wystarczy na kuchnię śródziemnomorską.
+Tyle wystarczy na kuchnię domową w zakresie, jaki obejmuje aplikacja.
 
 ### 10.2. Źródła danych o składnikach
 

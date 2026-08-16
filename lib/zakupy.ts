@@ -33,6 +33,15 @@ export const DZIALY: { nazwa: string; tagi: string[] }[] = [
   { nazwa: 'Pozostałe', tagi: [] },
 ];
 
+/**
+ * Dział produktów dopisywanych ręcznie.
+ *
+ * Celowo POZA tablicą DZIAŁÓW i celowo na końcu listy. Po pierwsze odpowiada
+ * to trasie po sklepie — chemia leży przy kasach. Po drugie oddziela wzrokowo
+ * to, co wyliczyło się z planu, od tego, co dopisałeś sam.
+ */
+export const DZIAL_RECZNY = 'Dom i chemia';
+
 export function dzialDla(tagi: string[]): string {
   for (const dzial of DZIALY) {
     if (dzial.tagi.some((t) => tagi.includes(t))) return dzial.nazwa;
@@ -129,4 +138,137 @@ export async function pobierzListeZakupow(
   }
 
   return [...zebrane.values()].sort((a, b) => a.nazwa.localeCompare(b.nazwa, 'pl'));
+}
+
+// =============================================================================
+//  PRODUKTY DOPISYWANE RĘCZNIE
+// =============================================================================
+
+export type ProduktReczny = {
+  id: string;
+  nazwa: string;
+  /** Dowolny tekst: „2 rolki”, „1 opak.”. Może być pusty. */
+  ilosc: string | null;
+};
+
+/** Produkty czekające na kupienie. Kupione tu nie wracają — zostają w historii. */
+export async function pobierzReczne(kontoId: string): Promise<ProduktReczny[]> {
+  const { data, error } = await supabase
+    .from('zakupy_reczne')
+    .select('id, nazwa, ilosc')
+    .eq('konto_id', kontoId)
+    .eq('kupione', false)
+    .order('utworzono');
+
+  if (error) throw error;
+  return data ?? [];
+}
+
+/**
+ * Dopisuje produkt do listy.
+ *
+ * Gdy taka rzecz już na liście wisi, baza odrzuci wstawienie przez indeks
+ * `zakupy_reczne_jedna_otwarta`. Zamieniamy to na zrozumiałe zdanie zamiast
+ * pokazywać nazwę indeksu — użytkownik nie ma pojęcia, co to znaczy.
+ */
+export async function dodajReczny(kontoId: string, nazwa: string, ilosc: string) {
+  const czysta = nazwa.trim().replace(/\s+/g, ' ');
+  if (!czysta) throw new Error('Podaj nazwę produktu.');
+  if (czysta.length > 60) throw new Error('Nazwa może mieć najwyżej 60 znaków.');
+
+  const { error } = await supabase.from('zakupy_reczne').insert({
+    konto_id: kontoId,
+    nazwa: czysta,
+    ilosc: ilosc.trim() || null,
+  });
+
+  if (error) {
+    if (error.code === '23505') throw new Error(`„${czysta}” już jest na liście.`);
+    throw error;
+  }
+}
+
+/**
+ * Odhacza produkt — schodzi z listy, zostaje w historii.
+ *
+ * Datę zakupu wpisuje wyzwalacz w bazie, nie my. Inaczej każde kolejne
+ * miejsce zmieniające `kupione` musiałoby o niej pamiętać.
+ */
+export async function kupionoReczny(id: string, kupione = true) {
+  const { error } = await supabase.from('zakupy_reczne').update({ kupione }).eq('id', id);
+  if (error) throw error;
+}
+
+/** Kasuje pozycję razem z historią — dla pomyłek przy wpisywaniu. */
+export async function usunReczny(id: string) {
+  const { error } = await supabase.from('zakupy_reczne').delete().eq('id', id);
+  if (error) throw error;
+}
+
+/**
+ * Podpowiedzi z historii — zamiast katalogu produktów, który trzeba utrzymywać.
+ *
+ * Katalog buduje się sam z użycia: dopisujesz „Worki na śmieci” raz, a za
+ * miesiąc wpisujesz „wor” i pozycja jest gotowa. Nazwy powtórzone zwijamy
+ * do jednej, zachowując tę najświeższą.
+ */
+export async function podpowiedziZHistorii(kontoId: string, ile = 40): Promise<string[]> {
+  const { data, error } = await supabase
+    .from('zakupy_reczne')
+    .select('nazwa, kupiono_kiedy')
+    .eq('konto_id', kontoId)
+    .eq('kupione', true)
+    .order('kupiono_kiedy', { ascending: false })
+    .limit(ile * 3);
+
+  if (error) throw error;
+
+  const widziane = new Set<string>();
+  const wynik: string[] = [];
+  for (const w of data ?? []) {
+    const klucz = w.nazwa.toLowerCase();
+    if (widziane.has(klucz)) continue;
+    widziane.add(klucz);
+    wynik.push(w.nazwa);
+    if (wynik.length >= ile) break;
+  }
+  return wynik;
+}
+
+// =============================================================================
+//  ODHACZENIA POZYCJI Z PLANU
+// =============================================================================
+
+/** Identyfikatory składników już wrzuconych do koszyka. */
+export async function pobierzOdhaczone(kontoId: string): Promise<Set<string>> {
+  const { data, error } = await supabase
+    .from('zakupy_odhaczone')
+    .select('skladnik_id')
+    .eq('konto_id', kontoId);
+
+  if (error) throw error;
+  return new Set((data ?? []).map((x) => x.skladnik_id as string));
+}
+
+export async function ustawOdhaczenie(kontoId: string, skladnikId: string, odhaczony: boolean) {
+  if (odhaczony) {
+    const { error } = await supabase
+      .from('zakupy_odhaczone')
+      .upsert({ konto_id: kontoId, skladnik_id: skladnikId });
+    if (error) throw error;
+    return;
+  }
+
+  const { error } = await supabase
+    .from('zakupy_odhaczone')
+    .delete()
+    .eq('konto_id', kontoId)
+    .eq('skladnik_id', skladnikId);
+  if (error) throw error;
+}
+
+/** Czyści wszystkie ptaszki — początek nowych zakupów. */
+export async function wyczyscOdhaczenia(kontoId: string) {
+  const { error } = await supabase.from('zakupy_odhaczone').delete().eq('konto_id', kontoId);
+  if (error) throw error;
 }

@@ -1,17 +1,36 @@
 import { Ionicons } from '@expo/vector-icons';
-import { router, useLocalSearchParams } from 'expo-router';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useFocusEffect, useLocalSearchParams } from 'expo-router';
+import { useCallback, useMemo, useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 
+import { DopiszProdukt } from '@/components/dopisz-produkt';
 import { Ekran } from '@/components/ekran';
+import { ListaRozwijana } from '@/components/lista-rozwijana';
 import { Karta } from '@/components/karta';
 import { Przycisk } from '@/components/przycisk';
 import { ThemedText } from '@/components/themed-text';
 import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import { komunikatBledu } from '@/lib/blad';
-import { dniPlanu, opisDnia, pobierzPlan, type Plan } from '@/lib/plan';
-import { dzialDla, DZIALY, pobierzListeZakupow, type PozycjaZakupow } from '@/lib/zakupy';
+import { wroc } from '@/lib/nawigacja';
+import { dniPlanu, opisDnia, pobierzPlany, type Plan } from '@/lib/plan';
+import { useSesja } from '@/lib/sesja';
+import {
+  dodajReczny,
+  dzialDla,
+  DZIAL_RECZNY,
+  DZIALY,
+  kupionoReczny,
+  pobierzListeZakupow,
+  pobierzOdhaczone,
+  pobierzReczne,
+  podpowiedziZHistorii,
+  ustawOdhaczenie,
+  usunReczny,
+  wyczyscOdhaczenia,
+  type PozycjaZakupow,
+  type ProduktReczny,
+} from '@/lib/zakupy';
 
 /** Zaokrąglenie do wygodnej postaci: 1250 g → „1,25 kg”. */
 function opisIlosci(gramy: number): string {
@@ -20,40 +39,98 @@ function opisIlosci(gramy: number): string {
 }
 
 export default function EkranZakupow() {
-  const { dni } = useLocalSearchParams<{ dni?: string }>();
+  const { dni, powrot } = useLocalSearchParams<{ dni?: string; powrot?: string }>();
   const motyw = useTheme();
+  const { sesja } = useSesja();
+  const kontoId = sesja?.user.id;
 
   const [plan, setPlan] = useState<Plan | null>(null);
   const [pozycje, setPozycje] = useState<PozycjaZakupow[]>([]);
+  const [reczne, setReczne] = useState<ProduktReczny[]>([]);
+  const [historia, setHistoria] = useState<string[]>([]);
   const [kupione, setKupione] = useState<Set<string>>(new Set());
   const [zakres, setZakres] = useState(Number(dni) || 7);
   const [wczytywanie, setWczytywanie] = useState(true);
   const [blad, setBlad] = useState<string | null>(null);
 
+  /** Tygodnie do wyboru — lista zakupów ma pokazywać ten sam, co ekran planu. */
+  const [plany, setPlany] = useState<Plan[]>([]);
+  const [wybranyPlanId, setWybranyPlanId] = useState<string | null>(null);
+
+  /** Kłopot poboczny, który nie może wywrócić całej listy. */
+  const [ostrzezenie, setOstrzezenie] = useState<string | null>(null);
+
   const pobierz = useCallback(async () => {
     setWczytywanie(true);
     setBlad(null);
+    setOstrzezenie(null);
+
+    /*
+      Produkty dopisane ręcznie pobieramy W OSOBNYM bloku i z własną obsługą
+      błędu — NIE razem z listą z planu.
+
+      Powód jest konkretny i już raz kosztował pustą listę: gdy tabel
+      `zakupy_reczne` i `zakupy_odhaczone` jeszcze nie ma w bazie (migracja 0019
+      niewykonana), zapytanie o nie kończy się błędem. Wspólny `try` przerywał
+      wtedy CAŁĄ funkcję, zanim doszła do listy z planu — i zakupy wyglądały
+      na puste, choć plan był pełny.
+
+      Ta sama zasada obowiązuje w ekranie przepisów przy pobieraniu roli:
+      jedna nieudana rzecz nie może ukrywać drugiej, niezależnej.
+    */
+    if (kontoId) {
+      try {
+        const [lista, hist, odhaczone] = await Promise.all([
+          pobierzReczne(kontoId),
+          podpowiedziZHistorii(kontoId),
+          pobierzOdhaczone(kontoId),
+        ]);
+        setReczne(lista);
+        setHistoria(hist);
+        setKupione(odhaczone);
+      } catch (e) {
+        setReczne([]);
+        setHistoria([]);
+        setKupione(new Set());
+        setOstrzezenie(
+          'Dopisywanie produktów i zapamiętywanie odhaczeń nie działa — wygląda na to, ' +
+            'że migracja 0019_zakupy_reczne.sql nie została jeszcze wykonana w Supabase. ' +
+            `Lista z planu działa normalnie. (${komunikatBledu(e)})`
+        );
+      }
+    }
+
     try {
-      const p = await pobierzPlan();
+      // Tydzień wskazany ręcznie albo najnowszy — tak samo jak na ekranie planu.
+      const wszystkie = await pobierzPlany();
+      setPlany(wszystkie);
+      const p = wszystkie.find((x) => x.id === wybranyPlanId) ?? wszystkie[0] ?? null;
       setPlan(p);
+
       if (!p) {
         setPozycje([]);
         return;
       }
       const dniListy = dniPlanu(p).slice(0, zakres);
-      setPozycje(
-        await pobierzListeZakupow(p.id, dniListy[0], dniListy[dniListy.length - 1])
-      );
+      setPozycje(await pobierzListeZakupow(p.id, dniListy[0], dniListy[dniListy.length - 1]));
     } catch (e) {
       setBlad(komunikatBledu(e));
     } finally {
       setWczytywanie(false);
     }
-  }, [zakres]);
+  }, [zakres, kontoId, wybranyPlanId]);
 
-  useEffect(() => {
-    pobierz();
-  }, [pobierz]);
+  // Odświeżenie przy KAŻDYM wejściu na zakładkę, nie tylko przy pierwszym.
+  //
+  // `useEffect` uruchamia się raz, przy zamontowaniu ekranu. Odkąd zakupy są
+  // zakładką na dolnej wstążce, ekran zostaje w pamięci — więc po usunięciu
+  // dania z planu lista dalej pokazywała stary stan. Wyglądało to jak błąd
+  // w wyliczaniu, a było zwykłym nieodświeżeniem.
+  useFocusEffect(
+    useCallback(() => {
+      pobierz();
+    }, [pobierz])
+  );
 
   const wedlugDzialow = useMemo(() => {
     const mapa = new Map<string, PozycjaZakupow[]>();
@@ -64,17 +141,58 @@ export default function EkranZakupow() {
     return mapa;
   }, [pozycje]);
 
-  const doKupienia = pozycje.filter((p) => !kupione.has(p.skladnik_id)).length;
+  const doKupienia = pozycje.filter((p) => !kupione.has(p.skladnik_id)).length + reczne.length;
   const resztyRazem = pozycje.reduce((s, p) => s + (p.reszta_g ?? 0), 0);
 
-  function przelacz(id: string) {
+  /**
+   * Odhaczenie widoczne od razu, zapis w tle.
+   *
+   * W sklepie liczy się to, żeby ptaszek pojawił się pod palcem, a nie po
+   * powrocie odpowiedzi z serwera. Gdy zapis padnie, wracamy do stanu z bazy
+   * i mówimy o tym — cicha rozbieżność byłaby gorsza od komunikatu.
+   */
+  async function przelacz(id: string) {
+    if (!kontoId) return;
+    const bedzieOdhaczony = !kupione.has(id);
+
     setKupione((p) => {
       const n = new Set(p);
-      if (n.has(id)) n.delete(id);
-      else n.add(id);
+      if (bedzieOdhaczony) n.add(id);
+      else n.delete(id);
       return n;
     });
+
+    try {
+      await ustawOdhaczenie(kontoId, id, bedzieOdhaczony);
+    } catch (e) {
+      setBlad(komunikatBledu(e));
+      pobierz();
+    }
   }
+
+  /** Kupiony produkt ręczny schodzi z listy, ale zostaje w historii podpowiedzi. */
+  async function odhaczReczny(p: ProduktReczny) {
+    setReczne((lista) => lista.filter((x) => x.id !== p.id));
+    setHistoria((h) => (h.includes(p.nazwa) ? h : [p.nazwa, ...h]));
+    try {
+      await kupionoReczny(p.id);
+    } catch (e) {
+      setBlad(komunikatBledu(e));
+      pobierz();
+    }
+  }
+
+  async function skasujReczny(p: ProduktReczny) {
+    setReczne((lista) => lista.filter((x) => x.id !== p.id));
+    try {
+      await usunReczny(p.id);
+    } catch (e) {
+      setBlad(komunikatBledu(e));
+      pobierz();
+    }
+  }
+
+  const cosOdhaczone = kupione.size > 0;
 
   return (
     <Ekran
@@ -84,13 +202,36 @@ export default function EkranZakupow() {
           ? 'wczytywanie…'
           : plan
             ? `${zakres} dni od ${opisDnia(plan.data_start)} · zostało ${doKupienia} pozycji`
-            : undefined
+            : `zostało ${doKupienia} pozycji`
       }>
       {blad && (
         <Karta>
           <ThemedText type="small" themeColor="accent">
             {blad}
           </ThemedText>
+        </Karta>
+      )}
+
+      {ostrzezenie && (
+        <Karta>
+          <ThemedText type="small" themeColor="accent">
+            {ostrzezenie}
+          </ThemedText>
+        </Karta>
+      )}
+
+      {plany.length > 1 && (
+        <Karta>
+          <ListaRozwijana
+            etykieta="TYDZIEŃ"
+            wybrana={plan?.id ?? plany[0].id}
+            onZmiana={(id) => setWybranyPlanId(id)}
+            opcje={plany.map((p) => ({
+              wartosc: p.id,
+              etykieta: `od ${opisDnia(p.data_start)}`,
+              opis: p.id === plany[0].id ? 'najnowszy' : undefined,
+            }))}
+          />
         </Karta>
       )}
 
@@ -106,12 +247,12 @@ export default function EkranZakupow() {
         ))}
       </View>
 
-      {!wczytywanie && pozycje.length === 0 && (
+      {!wczytywanie && pozycje.length === 0 && reczne.length === 0 && (
         <Karta>
           <ThemedText type="default">Nie ma czego kupować</ThemedText>
           <ThemedText type="small" themeColor="textSecondary">
-            Lista powstaje z posiłków wpisanych do planu. Przypisz przepisy do dni,
-            a składniki zbiorą się tutaj same.
+            Jedzenie zbiera się tu samo z posiłków wpisanych do planu. Rzeczy spoza
+            kuchni — worki, papier, chemię — dopisujesz na dole tej listy.
           </ThemedText>
         </Karta>
       )}
@@ -170,6 +311,63 @@ export default function EkranZakupow() {
         );
       })}
 
+      {/*
+        Dział ręczny zawsze na końcu — i wtedy, gdy jest pusty, bo to jedyne
+        miejsce, w którym da się cokolwiek dopisać.
+      */}
+      <Karta>
+        <ThemedText type="smallBold" themeColor="textSecondary">
+          {DZIAL_RECZNY.toUpperCase()}
+        </ThemedText>
+
+        {reczne.length === 0 ? (
+          <ThemedText type="small" themeColor="textSecondary">
+            Rzeczy spoza kuchni: worki na śmieci, papier śniadaniowy, gąbki. Nie wynikają
+            z planu, więc czekają tu, aż je kupisz — niezależnie od tego, czy patrzysz
+            na 3 czy 7 dni.
+          </ThemedText>
+        ) : (
+          reczne.map((p) => (
+            <View key={p.id} style={[styles.pozycja, { borderColor: motyw.border }]}>
+              <Pressable
+                onPress={() => odhaczReczny(p)}
+                hitSlop={6}
+                accessibilityRole="checkbox"
+                accessibilityState={{ checked: false }}
+                accessibilityLabel={`Kupione: ${p.nazwa}`}>
+                <Ionicons name="square-outline" size={20} color={motyw.textSecondary} />
+              </Pressable>
+
+              <Pressable style={styles.trescPozycji} onPress={() => odhaczReczny(p)}>
+                <ThemedText type="smallBold">
+                  {p.nazwa}
+                  {p.ilosc ? ` — ${p.ilosc}` : ''}
+                </ThemedText>
+              </Pressable>
+
+              <Pressable
+                onPress={() => skasujReczny(p)}
+                hitSlop={8}
+                accessibilityRole="button"
+                accessibilityLabel={`Usuń ${p.nazwa} z listy`}>
+                <Ionicons name="close" size={18} color={motyw.textSecondary} />
+              </Pressable>
+            </View>
+          ))
+        )}
+
+        {kontoId && (
+          <DopiszProdukt
+            historia={historia}
+            juzNaLiscie={reczne.map((p) => p.nazwa)}
+            onDodaj={async (nazwa, ilosc) => {
+              await dodajReczny(kontoId, nazwa, ilosc);
+              setReczne(await pobierzReczne(kontoId));
+            }}
+          />
+        )}
+      </Karta>
+
       {resztyRazem > 0 && (
         <Karta>
           <ThemedText type="smallBold" themeColor="textSecondary">
@@ -182,12 +380,30 @@ export default function EkranZakupow() {
         </Karta>
       )}
 
+      {cosOdhaczone && (
+        <Przycisk
+          tytul={`Zacznij nowe zakupy (odznacz ${kupione.size})`}
+          wariant="poboczny"
+          onPress={async () => {
+            if (!kontoId) return;
+            setKupione(new Set());
+            try {
+              await wyczyscOdhaczenia(kontoId);
+            } catch (e) {
+              setBlad(komunikatBledu(e));
+              pobierz();
+            }
+          }}
+        />
+      )}
+
       <ThemedText type="small" themeColor="textSecondary">
-        Odhaczenia działają tylko w tej sesji — lista wynika z planu, więc po zmianie
-        posiłków przeliczy się od nowa.
+        Ptaszki są zapamiętane — możesz wyjść z aplikacji w połowie zakupów i wrócić
+        do tego samego miejsca. Same ilości jedzenia przeliczają się z planu, więc po
+        zmianie posiłków mogą się zmienić.
       </ThemedText>
 
-      <Przycisk tytul="Wróć do planu" wariant="poboczny" onPress={() => router.back()} />
+      <Przycisk tytul="Wróć do planu" wariant="poboczny" onPress={() => wroc(powrot, '/')} />
     </Ekran>
   );
 }

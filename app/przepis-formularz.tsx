@@ -1,12 +1,13 @@
 import { Ionicons } from '@expo/vector-icons';
-import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
+import { useFocusEffect, useLocalSearchParams } from 'expo-router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Pressable, StyleSheet, TextInput, View } from 'react-native';
 
 import { komunikatBledu } from '@/lib/blad';
+import { wroc } from '@/lib/nawigacja';
 import { Ekran } from '@/components/ekran';
 import { Karta } from '@/components/karta';
-import { Makro } from '@/components/makro';
+import { WierszMakro } from '@/components/wiersz-makro';
 import { Pole } from '@/components/pole';
 import { Przycisk } from '@/components/przycisk';
 import { ThemedText } from '@/components/themed-text';
@@ -14,16 +15,21 @@ import { FormularzSkladnika } from '@/components/formularz-skladnika';
 import { TabelaWyboru } from '@/components/tabela-wyboru';
 import { Wybor } from '@/components/wybor';
 import { WyborWielo } from '@/components/wybor-wielo';
+import { ZdjeciePrzepisu } from '@/components/zdjecie-przepisu';
 import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import {
+  KATEGORIE,
   OPIS_KUCHNI,
   OPIS_PORY,
   opisTrwalosci,
   pobierzPelnyPrzepis,
   wyczyscTrescPrzepisu,
+  wycofajZgloszenie,
+  zglosDoPublikacji,
   type Kuchnia,
   type PoraPosilku,
+  type Widocznosc,
 } from '@/lib/przepisy';
 import { pobierzSkladniki, type Skladnik } from '@/lib/skladniki';
 import { useSesja } from '@/lib/sesja';
@@ -74,7 +80,7 @@ function liczba(tekst: string): number {
 }
 
 export default function FormularzPrzepisu() {
-  const { id: edytowanyId } = useLocalSearchParams<{ id?: string }>();
+  const { id: edytowanyId, powrot } = useLocalSearchParams<{ id?: string; powrot?: string }>();
   const tryb = edytowanyId ? 'edycja' : 'nowy';
   const { sesja } = useSesja();
   const motyw = useTheme();
@@ -106,6 +112,13 @@ export default function FormularzPrzepisu() {
   const [przechowywanie, setPrzechowywanie] = useState('');
   const [moznaMrozic, setMoznaMrozic] = useState<'tak' | 'nie' | 'nie wiem'>('nie wiem');
   const [ratunek, setRatunek] = useState('');
+  const [zdjecie, setZdjecie] = useState<string | null>(null);
+
+  /** Zgoda autora na upublicznienie. Sam stan w bazie zmienia dopiero zapis. */
+  const [doPublikacji, setDoPublikacji] = useState(false);
+  /** Stan przepisu w bazie w chwili wczytania — do rozpoznania, co się zmieniło. */
+  const [widocznosc, setWidocznosc] = useState<Widocznosc>('prywatna');
+  const [powodOdrzucenia, setPowodOdrzucenia] = useState<string | null>(null);
   const [etapy, setEtapy] = useState<Etap[]>([]);
 
   const [dodawanieSkladnika, setDodawanieSkladnika] = useState(false);
@@ -165,6 +178,10 @@ export default function FormularzPrzepisu() {
     setPrzechowywanie('');
     setMoznaMrozic('nie wiem');
     setRatunek('');
+    setZdjecie(null);
+    setDoPublikacji(false);
+    setWidocznosc('prywatna');
+    setPowodOdrzucenia(null);
     setWybrane([]);
     setEtapy([]);
     setNowySprzet('');
@@ -198,6 +215,10 @@ export default function FormularzPrzepisu() {
         setPrzechowywanie(p.przechowywanie ?? '');
         setMoznaMrozic(p.mozna_mrozic === null ? 'nie wiem' : p.mozna_mrozic ? 'tak' : 'nie');
         setRatunek(p.ratunek ?? '');
+        setZdjecie(p.zdjecie ?? null);
+        setWidocznosc(p.widocznosc);
+        setDoPublikacji(p.widocznosc !== 'prywatna');
+        setPowodOdrzucenia(p.powod_odrzucenia ?? null);
 
         setWybrane(
           p.skladniki
@@ -437,6 +458,7 @@ export default function FormularzPrzepisu() {
           przechowywanie: przechowywanie.trim() || null,
           mozna_mrozic: moznaMrozic === 'nie wiem' ? null : moznaMrozic === 'tak',
           ratunek: ratunek.trim() || null,
+          zdjecie,
       };
 
       let przepisId: string;
@@ -514,8 +536,25 @@ export default function FormularzPrzepisu() {
         }
       }
 
+      /*
+        Zgłoszenie ustawiamy OSOBNYM zapytaniem, po zapisaniu treści.
+
+        Nie da się inaczej: przy nowym przepisie identyfikator powstaje dopiero
+        przy wstawieniu, a wyzwalacz w bazie przepuszcza wyłącznie przejścia
+        prywatna ↔ zgloszona — więc wstawienie od razu jako „zgłoszony”
+        zostałoby odrzucone.
+
+        Kolejność też nie jest przypadkowa: najpierw treść, potem zgłoszenie.
+        Moderator ma zobaczyć to, co autor faktycznie zapisał.
+      */
+      if (doPublikacji && widocznosc === 'prywatna') {
+        await zglosDoPublikacji(przepisId);
+      } else if (!doPublikacji && widocznosc === 'zgloszona') {
+        await wycofajZgloszenie(przepisId);
+      }
+
       wyczyscFormularz();
-      router.back();
+      wroc(powrot, '/przepisy');
     } catch (e) {
       setBlad(komunikatBledu(e));
     } finally {
@@ -537,6 +576,9 @@ export default function FormularzPrzepisu() {
           placeholder="Pieczony w piekarniku, warzywa na jednej blasze"
           multiline
         />
+
+        <ZdjeciePrzepisu nazwaPrzepisu={nazwa} zdjecie={zdjecie} onZmiana={setZdjecie} />
+
         <ThemedText type="smallBold" themeColor="textSecondary">
           METRYCZKA
         </ThemedText>
@@ -628,14 +670,19 @@ export default function FormularzPrzepisu() {
       </Karta>
       <Karta style={styles.grupa}>
         <WyborWielo
-          etykieta="Pora posiłku"
+          etykieta="Kategoria"
           wybrane={pory}
           onZmiana={setPory}
-          opcje={(Object.keys(OPIS_PORY) as PoraPosilku[]).map((k) => ({
+          opcje={KATEGORIE.map((k) => ({
             wartosc: k,
             etykieta: OPIS_PORY[k],
           }))}
         />
+        <ThemedText type="small" themeColor="textSecondary">
+          Można zaznaczyć kilka — zupa bywa i obiadem, i kolacją. „Dodatek” to coś,
+          co dokładasz do posiłku: grillowana pierś, surówka, sałatka z ciecierzycy.
+          Dodatki pojawiają się przy wyborze dania do każdego posiłku.
+        </ThemedText>
         <WyborWielo
           etykieta="Kuchnia"
           wybrane={kuchnie}
@@ -843,12 +890,14 @@ export default function FormularzPrzepisu() {
           <ThemedText type="smallBold" themeColor="textSecondary">
             NA JEDNĄ PORCJĘ ({Math.round(makroPorcji.gramy)} g)
           </ThemedText>
-          <View style={styles.wiersz}>
-            <Makro etykieta="kcal" wartosc={Math.round(makroPorcji.kcal)} jednostka="" />
-            <Makro etykieta="białko" wartosc={Math.round(makroPorcji.bialko * 10) / 10} jednostka=" g" />
-            <Makro etykieta="tłuszcz" wartosc={Math.round(makroPorcji.tluszcz * 10) / 10} jednostka=" g" />
-            <Makro etykieta="węglow." wartosc={Math.round(makroPorcji.wegle * 10) / 10} jednostka=" g" />
-          </View>
+          <WierszMakro
+            pozycje={[
+              { etykieta: 'kcal', wartosc: Math.round(makroPorcji.kcal), jednostka: '' },
+              { etykieta: 'białko', wartosc: Math.round(makroPorcji.bialko * 10) / 10, jednostka: ' g' },
+              { etykieta: 'tłuszcz', wartosc: Math.round(makroPorcji.tluszcz * 10) / 10, jednostka: ' g' },
+              { etykieta: 'węgle', wartosc: Math.round(makroPorcji.wegle * 10) / 10, jednostka: ' g' },
+            ]}
+          />
 
           <ThemedText type="small" themeColor="textSecondary">
             Cała potrawa: {Math.round(masaCalosci)} g, {Math.round(makro.kcal)} kcal,{' '}
@@ -1255,6 +1304,69 @@ export default function FormularzPrzepisu() {
         </ThemedText>
       )}
 
+      {/*
+        Zgoda na publikację jest ŚWIADOMYM ptaszkiem, nie domyślnym ustawieniem.
+        Przepis to własna praca autora — nikt nie powinien odkryć po fakcie,
+        że jego danie stoi w otwartym katalogu.
+      */}
+      {widocznosc !== 'publiczna' && (
+        <Karta style={styles.grupa}>
+          <ThemedText type="smallBold" themeColor="textSecondary">
+            PUBLIKACJA
+          </ThemedText>
+
+          {powodOdrzucenia && (
+            <View style={[styles.uwagaModeratora, { borderLeftColor: motyw.accent }]}>
+              <ThemedText type="smallBold" themeColor="accent">
+                Moderator odesłał przepis do poprawki
+              </ThemedText>
+              <ThemedText type="small">{powodOdrzucenia}</ThemedText>
+            </View>
+          )}
+
+          <Pressable
+            onPress={() => setDoPublikacji((x) => !x)}
+            accessibilityRole="checkbox"
+            accessibilityState={{ checked: doPublikacji }}
+            style={({ pressed }) => [
+              styles.zgoda,
+              { borderColor: doPublikacji ? motyw.accent : motyw.border },
+              pressed && styles.wcisniety,
+            ]}>
+            <Ionicons
+              name={doPublikacji ? 'checkbox' : 'square-outline'}
+              size={22}
+              color={doPublikacji ? motyw.accent : motyw.textSecondary}
+            />
+            <View style={styles.trescZgody}>
+              <ThemedText type="default" themeColor={doPublikacji ? 'accent' : 'text'}>
+                Zgadzam się na upublicznienie tego przepisu
+              </ThemedText>
+              <ThemedText type="small" themeColor="textSecondary">
+                Po zapisaniu trafi do moderatora. Zatwierdzony stanie się widoczny dla
+                wszystkich i od tej chwili zmieni go już tylko moderator. Do tego czasu
+                możesz wycofać zgłoszenie, odznaczając to pole.
+              </ThemedText>
+            </View>
+          </Pressable>
+
+          {widocznosc === 'zgloszona' && (
+            <ThemedText type="small" themeColor="textSecondary">
+              Przepis czeka na rozpatrzenie.
+            </ThemedText>
+          )}
+        </Karta>
+      )}
+
+      {widocznosc === 'publiczna' && (
+        <Karta>
+          <ThemedText type="small" themeColor="textSecondary">
+            Przepis jest publiczny — widzą go wszyscy. Zmiany w opublikowanym przepisie
+            wprowadza moderator.
+          </ThemedText>
+        </Karta>
+      )}
+
       <ThemedText type="small" themeColor="textSecondary">
         {tryb === 'edycja'
           ? 'Zmiany nadpiszą dotychczasową treść przepisu.'
@@ -1267,13 +1379,28 @@ export default function FormularzPrzepisu() {
         zajety={zajety}
         wylaczony={!komplet}
       />
-      <Przycisk tytul="Anuluj" wariant="poboczny" onPress={() => router.back()} />
+      <Przycisk tytul="Anuluj" wariant="poboczny" onPress={() => wroc(powrot, '/przepisy')} />
     </Ekran>
   );
 }
 
 const styles = StyleSheet.create({
   grupa: { gap: Spacing.three },
+  zgoda: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    gap: Spacing.two,
+    borderWidth: 1,
+    borderRadius: Spacing.two,
+    padding: Spacing.two,
+  },
+  trescZgody: { flex: 1, gap: Spacing.one },
+  uwagaModeratora: {
+    borderLeftWidth: 3,
+    paddingLeft: Spacing.two,
+    paddingVertical: Spacing.one,
+    gap: Spacing.one,
+  },
   lista: {
     borderWidth: 1,
     borderRadius: Spacing.two,

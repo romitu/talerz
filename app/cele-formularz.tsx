@@ -1,11 +1,12 @@
-import { router, useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams } from 'expo-router';
 import { useCallback, useEffect, useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import { komunikatBledu } from '@/lib/blad';
+import { wroc } from '@/lib/nawigacja';
 import { Ekran } from '@/components/ekran';
 import { Karta } from '@/components/karta';
-import { Makro } from '@/components/makro';
+import { WierszMakro } from '@/components/wiersz-makro';
 import { Pole } from '@/components/pole';
 import { Przycisk } from '@/components/przycisk';
 import { ThemedText } from '@/components/themed-text';
@@ -41,7 +42,7 @@ function liczba(tekst: string): number {
 }
 
 export default function FormularzCelow() {
-  const { profil: profilId } = useLocalSearchParams<{ profil: string }>();
+  const { profil: profilId, powrot } = useLocalSearchParams<{ profil: string; powrot?: string }>();
 
   const [profil, setProfil] = useState<Profil | null>(null);
   const [waga, setWaga] = useState<number | null>(null);
@@ -106,7 +107,7 @@ export default function FormularzCelow() {
             {!profil ? 'Nie znaleziono profilu.' : 'Brak zapisanej wagi — bez niej nie da się policzyć zapotrzebowania.'}
           </ThemedText>
         </Karta>
-        <Przycisk tytul="Wróć" wariant="poboczny" onPress={() => router.back()} />
+        <Przycisk tytul="Wróć" wariant="poboczny" onPress={() => wroc(powrot, '/profil')} />
       </Ekran>
     );
   }
@@ -158,7 +159,7 @@ export default function FormularzCelow() {
         { onConflict: 'profil_id,obowiazuje_od' }
       );
       if (error) throw error;
-      router.back();
+      wroc(powrot, '/profil');
     } catch (e) {
       setBlad(komunikatBledu(e));
     } finally {
@@ -225,12 +226,14 @@ export default function FormularzCelow() {
           <ThemedText type="smallBold" themeColor="textSecondary">
             WYNIK
           </ThemedText>
-          <View style={styles.wiersz}>
-            <Makro etykieta="kalorie" wartosc={kcal} jednostka="" cel={zapotrzeb} />
-            <Makro etykieta="białko" wartosc={udzialy.bialko} jednostka="%" />
-            <Makro etykieta="tłuszcz" wartosc={udzialy.tluszcz} jednostka="%" />
-            <Makro etykieta="węglow." wartosc={udzialy.wegle} jednostka="%" />
-          </View>
+          <WierszMakro
+            pozycje={[
+              { etykieta: 'kcal', wartosc: kcal, jednostka: '', cel: zapotrzeb },
+              { etykieta: 'białko', wartosc: udzialy.bialko, jednostka: '%' },
+              { etykieta: 'tłuszcz', wartosc: udzialy.tluszcz, jednostka: '%' },
+              { etykieta: 'węgle', wartosc: udzialy.wegle, jednostka: '%' },
+            ]}
+          />
           <ThemedText type="small" themeColor="textSecondary">
             Próg białka na posiłek: {progBialka || podpowiedzProguBialka(waga)} g
           </ThemedText>
@@ -280,17 +283,11 @@ export default function FormularzCelow() {
       )}
 
       <Przycisk tytul="Zapisz cele" onPress={zapisz} zajety={zajety} wylaczony={!wolnoZapisac} />
-      <Przycisk tytul="Anuluj" wariant="poboczny" onPress={() => router.back()} />
+      <Przycisk tytul="Anuluj" wariant="poboczny" onPress={() => wroc(powrot, '/profil')} />
     </Ekran>
   );
 }
 
 const styles = StyleSheet.create({
   formularz: { gap: Spacing.three },
-  wiersz: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: Spacing.two,
-    paddingTop: Spacing.half,
-  },
 });

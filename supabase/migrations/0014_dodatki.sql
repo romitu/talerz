@@ -1,0 +1,29 @@
+-- =============================================================================
+--  TALERZ — dodatki jako czwarta kategoria przepisu
+-- =============================================================================
+--  Problem
+--  -------
+--  Przepis mógł być śniadaniem, obiadem albo kolacją. Nie było gdzie zapisać
+--  rzeczy, które nie są posiłkiem, tylko czymś do posiłku: grillowanej piersi
+--  do sałatki, ciecierzycy do zupy, surówki do drugiego dania.
+--
+--  Takie dodatki trzeba było oznaczać wszystkimi trzema porami naraz albo żadną.
+--  W obu przypadkach lista przepisów kłamała.
+--
+--  Rozwiązanie
+--  -----------
+--  Czwarta wartość w kategorii: `dodatek`.
+--
+--  Nie jest to pora posiłku i nigdy nie będzie osobnym miejscem w planie dnia —
+--  dzień ma trzy posiłki i to się nie zmienia (plan, sekcja 2). Dodatek
+--  dokładasz do dowolnego z nich, dlatego przy wyborze dania do śniadania,
+--  obiadu czy kolacji pojawia się zawsze.
+--
+--  Pilnuje tego migracja 0015. Musi być osobno, bo PostgreSQL nie pozwala użyć
+--  świeżo dodanej wartości typu wyliczeniowego w tej samej transakcji,
+--  w której ją dodano.
+--
+--  Wykonanie: SQL Editor w panelu Supabase. Uruchom jako pierwszą z tej pary.
+-- =============================================================================
+
+alter type pora_posilku add value if not exists 'dodatek';

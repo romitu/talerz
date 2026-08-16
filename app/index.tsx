@@ -5,33 +5,44 @@ import { Pressable, StyleSheet, View } from 'react-native';
 
 import { Ekran } from '@/components/ekran';
 import { Karta } from '@/components/karta';
-import { Makro } from '@/components/makro';
+import { ListaRozwijana } from '@/components/lista-rozwijana';
+import { WierszMakro } from '@/components/wiersz-makro';
 import { Przycisk } from '@/components/przycisk';
 import { TabelaWyboru } from '@/components/tabela-wyboru';
 import { ThemedText } from '@/components/themed-text';
 import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import { komunikatBledu } from '@/lib/blad';
+import { powtorzTydzien, zaplanuj, type Wstawienie } from '@/lib/automat';
 import {
   czyDzisiaj,
   dniPlanu,
   naDate,
-  oznaczDzien,
   opisDnia,
-  pobierzPlan,
+  pobierzPlany,
+  pobierzPoprzedniPlan,
+  posprzatajStarePlany,
   pobierzPozycje,
   PORY,
   bialkoPosilku,
   dodajPartie,
   sumujDzien,
   usunPosilek,
+  TYGODNI_HISTORII,
   utworzPlan,
   usunPartie,
+  wyczyscPlan,
   zmienDatePlanu,
   type Plan,
   type PozycjaPlanu,
 } from '@/lib/plan';
-import { OPIS_PORY, pobierzPrzepisy, type PoraPosilku, type PrzepisZMakro } from '@/lib/przepisy';
+import {
+  OPIS_PORY,
+  pasujeDoPory,
+  pobierzPrzepisy,
+  type PoraPosilku,
+  type PrzepisZMakro,
+} from '@/lib/przepisy';
 import { useSesja } from '@/lib/sesja';
 import { supabase } from '@/lib/supabase';
 
@@ -47,6 +58,29 @@ type Cel = {
 /** Miejsce w planie, do którego wybieramy przepis. */
 type Wolne = { data: string; pora: PoraPosilku } | null;
 
+/**
+ * Jak daleko dzień jest od celu — zawsze liczbą, w obie strony.
+ *
+ * „Cel osiągnięty” nie mówi nic, czego nie widać po samych sumach. Liczba
+ * mówi, ile jeszcze zostało miejsca albo o ile dzień wyszedł ponad plan,
+ * a to jest odpowiedź na pytanie, które faktycznie się zadaje przy układaniu.
+ */
+function opisBilansu(
+  suma: { bialko: number; kcal: number },
+  cel: { bialko_g: number; kcal: number }
+): string {
+  const b = Math.round(suma.bialko - cel.bialko_g);
+  const k = Math.round(suma.kcal - cel.kcal);
+
+  const bialko =
+    b === 0 ? 'Białko w punkt' : b < 0 ? `Brakuje ${-b} g białka` : `${b} g białka ponad cel`;
+
+  const kalorie =
+    k === 0 ? 'kalorie w punkt' : k < 0 ? `brakuje ${-k} kcal` : `${k} kcal ponad cel`;
+
+  return `${bialko} · ${kalorie}`;
+}
+
 export default function EkranPlanu() {
   const { sesja } = useSesja();
   const motyw = useTheme();
@@ -60,12 +94,20 @@ export default function EkranPlanu() {
   const [wczytywanie, setWczytywanie] = useState(true);
   const [blad, setBlad] = useState<string | null>(null);
 
+  /** Wszystkie tygodnie konta — do przełączania i do powtarzania układu. */
+  const [plany, setPlany] = useState<Plan[]>([]);
+  /** `null` oznacza „pokaż najnowszy”. */
+  const [wybranyPlanId, setWybranyPlanId] = useState<string | null>(null);
+  const [pracuje, setPracuje] = useState(false);
+  const [czyscic, setCzyscic] = useState(false);
+  const [komunikat, setKomunikat] = useState<string | null>(null);
+
   const pobierz = useCallback(async () => {
     setWczytywanie(true);
     setBlad(null);
     try {
-      const [p, lista, wynikCelu, wynikProfili] = await Promise.all([
-        pobierzPlan(),
+      const [wszystkie, lista, wynikCelu, wynikProfili] = await Promise.all([
+        pobierzPlany(),
         pobierzPrzepisy(sesja?.user.id),
         supabase
           .from('cele')
@@ -79,6 +121,11 @@ export default function EkranPlanu() {
 
       setOsoby(Math.max(1, wynikProfili.data?.length ?? 1));
 
+      // Oglądany tydzień: wskazany ręcznie albo najnowszy. Gdy wskazany zniknął
+      // (skasowany gdzie indziej), spadamy na najnowszy zamiast pokazywać pustkę.
+      const p = wszystkie.find((x) => x.id === wybranyPlanId) ?? wszystkie[0] ?? null;
+
+      setPlany(wszystkie);
       setPlan(p);
       setPrzepisy(lista);
       if (!wynikCelu.error) setCel(wynikCelu.data);
@@ -88,7 +135,7 @@ export default function EkranPlanu() {
     } finally {
       setWczytywanie(false);
     }
-  }, [sesja?.user.id]);
+  }, [sesja?.user.id, wybranyPlanId]);
 
   useFocusEffect(
     useCallback(() => {
@@ -124,6 +171,134 @@ export default function EkranPlanu() {
     }
   }
 
+  /**
+   * Zapisuje wynik automatu do bazy.
+   *
+   * Każde wstawienie to jedno GOTOWANIE, nie jeden posiłek — `dodajPartie`
+   * rozkłada garnek na przekazane dni. Dlatego przekazujemy dokładnie te dni,
+   * które automat wyliczył jako wolne i kolejne; bez tego funkcja policzyłaby
+   * je sama z trwałości przepisu i weszłaby na miejsca zajęte ręcznie.
+   *
+   * Kolejność wstawiania ma znaczenie: idziemy po kolei, bo `kolejnosc` musi
+   * rosnąć w obrębie posiłku.
+   */
+  async function zapiszWstawienia(cel: Plan, lista: Wstawienie[]) {
+    if (!sesja) return;
+    for (const w of lista) {
+      await dodajPartie({
+        kontoId: sesja.user.id,
+        planId: cel.id,
+        odData: w.odData,
+        pora: w.pora,
+        przepisId: w.przepisId,
+        kolejnosc: 1,
+        osoby,
+        trwaloscDni: w.dni.length,
+        dostepneDni: w.dni,
+      });
+    }
+  }
+
+  /** Zajęte miejsca i to, co już stoi w każdym dniu — wejście dla automatu. */
+  function stanPlanu(dni: string[]) {
+    const zajete = pozycje.map((p) => ({ data: p.data, pora: p.pora }));
+    const makroDni = new Map(
+      dni.map((d) => {
+        const s = sumujDzien(pozycje.filter((p) => p.data === d));
+        return [d, { kcal: s.kcal, bialko: s.bialko }];
+      })
+    );
+    return { zajete, makroDni };
+  }
+
+  async function wypelnijAutomatem() {
+    if (!plan) return;
+    setKomunikat(null);
+    setPracuje(true);
+    try {
+      const dni = dniPlanu(plan);
+      const { zajete, makroDni } = stanPlanu(dni);
+
+      const { wstawienia, bezObsady } = zaplanuj({
+        dni,
+        zajete,
+        makroDni,
+        przepisy,
+        celKcal: cel?.kcal ?? null,
+        celBialko: cel?.bialko_g ?? null,
+      });
+
+      if (wstawienia.length === 0) {
+        setKomunikat(
+          bezObsady.length > 0
+            ? 'Nie ma przepisów pasujących do pustych miejsc. Sprawdź, czy przepisy mają ustawioną kategorię.'
+            : 'Wszystkie miejsca są już zajęte.'
+        );
+        return;
+      }
+
+      await zapiszWstawienia(plan, wstawienia);
+      await pobierz();
+
+      const posilkow = wstawienia.reduce((s, w) => s + w.dni.length, 0);
+      setKomunikat(
+        `Dołożono ${posilkow} posiłków z ${wstawienia.length} gotowań.` +
+          (bezObsady.length > 0 ? ` Bez obsady zostało ${bezObsady.length} miejsc.` : '')
+      );
+    } catch (e) {
+      setBlad(komunikatBledu(e));
+    } finally {
+      setPracuje(false);
+    }
+  }
+
+  async function powtorzPoprzedni() {
+    if (!plan) return;
+    setKomunikat(null);
+    setPracuje(true);
+    try {
+      const poprzedni = await pobierzPoprzedniPlan(plan.id);
+      if (!poprzedni) {
+        setKomunikat(
+          'Nie ma wcześniejszego tygodnia do powtórzenia. Powstanie, gdy założysz kolejny.'
+        );
+        return;
+      }
+
+      const zrodlo = await pobierzPozycje(poprzedni.id);
+      if (zrodlo.length === 0) {
+        setKomunikat('Poprzedni tydzień był pusty — nie ma czego powtarzać.');
+        return;
+      }
+
+      const dni = dniPlanu(plan);
+      const { wstawienia, bezObsady } = powtorzTydzien({
+        zrodlo,
+        odDaty: poprzedni.data_start,
+        dni,
+        zajete: pozycje.map((p) => ({ data: p.data, pora: p.pora })),
+      });
+
+      if (wstawienia.length === 0) {
+        setKomunikat('Wszystkie miejsca z poprzedniego tygodnia są już zajęte.');
+        return;
+      }
+
+      await zapiszWstawienia(plan, wstawienia);
+      await pobierz();
+
+      const posilkow = wstawienia.reduce((s, w) => s + w.dni.length, 0);
+      setKomunikat(
+        `Przeniesiono ${posilkow} posiłków z tygodnia od ${opisDnia(poprzedni.data_start)}.` +
+          (bezObsady.length > 0 ? ` Pominięto ${bezObsady.length} zajętych miejsc.` : '')
+      );
+    } catch (e) {
+      setBlad(komunikatBledu(e));
+    } finally {
+      setPracuje(false);
+    }
+  }
+
   // --- brak planu ---
   if (!wczytywanie && !plan) {
     return (
@@ -156,7 +331,7 @@ export default function EkranPlanu() {
         podtytul={opisDnia(wybierany.data)}>
         <Karta>
           <TabelaWyboru
-            dane={przepisy.filter((p) => p.pory.length === 0 || p.pory.includes(wybierany.pora))}
+            dane={przepisy.filter((p) => pasujeDoPory(p.pory, wybierany.pora))}
             klucz={(p) => p.id}
             tekstDoFiltra={(p) => p.nazwa}
             etykietaFiltra="Filtruj przepisy"
@@ -239,41 +414,129 @@ export default function EkranPlanu() {
 
       {plan && (
         <Karta>
-          <ThemedText type="smallBold" themeColor="textSecondary">
-            PIERWSZY DZIEŃ PLANU
-          </ThemedText>
+          <ListaRozwijana
+            etykieta="PIERWSZY DZIEŃ PLANU"
+            wybrana={plan.data_start}
+            onZmiana={(d) => zDbem(() => zmienDatePlanu(plan.id, d))}
+            opcje={mozliweDaty.map((d) => ({
+              wartosc: d,
+              etykieta: opisDnia(d),
+              opis: czyDzisiaj(d) ? 'dzisiaj' : undefined,
+            }))}
+          />
           <ThemedText type="small" themeColor="textSecondary">
             Pozostałe dni ułożą się od niego. Posiłki zostają przy swoich datach.
           </ThemedText>
 
-          <View style={styles.wyborDaty}>
-            {mozliweDaty.map((d) => {
-              const wybrana = d === plan.data_start;
-              return (
-                <Pressable
-                  key={d}
-                  onPress={() => zDbem(() => zmienDatePlanu(plan.id, d))}
-                  style={({ pressed }) => [
-                    styles.data,
-                    {
-                      borderColor: wybrana ? motyw.accent : motyw.border,
-                      backgroundColor: wybrana ? motyw.backgroundSelected : motyw.backgroundElement,
-                    },
-                    pressed && styles.wcisniete,
-                  ]}>
-                  <ThemedText type={wybrana ? 'smallBold' : 'small'}>
-                    {opisDnia(d)}
-                    {czyDzisiaj(d) ? ' · dzisiaj' : ''}
-                  </ThemedText>
-                </Pressable>
-              );
-            })}
-          </View>
+          {/*
+            Przełącznik tygodni pokazuje się dopiero, gdy jest co przełączać.
+            Przy pierwszym tygodniu byłby polem z jedną pozycją.
+          */}
+          {plany.length > 1 && (
+            <ListaRozwijana
+              etykieta="OGLĄDANY TYDZIEŃ"
+              wybrana={plan.id}
+              onZmiana={(id) => setWybranyPlanId(id)}
+              opcje={plany.map((p) => ({
+                wartosc: p.id,
+                etykieta: `od ${opisDnia(p.data_start)}`,
+                opis: p.id === plany[0].id ? 'najnowszy' : undefined,
+              }))}
+            />
+          )}
         </Karta>
       )}
 
-      {plan && pozycje.length > 0 && (
-        <Przycisk tytul="Lista zakupów" onPress={() => router.push('/zakupy')} />
+      {plan && (
+        <Karta style={styles.narzedzia}>
+          <ThemedText type="smallBold" themeColor="textSecondary">
+            UKŁADANIE TYGODNIA
+          </ThemedText>
+
+          <Przycisk
+            tytul={pracuje ? 'Układam…' : 'Wypełnij wolne miejsca'}
+            onPress={wypelnijAutomatem}
+            zajety={pracuje}
+            wylaczony={pracuje || przepisy.length === 0}
+          />
+          <ThemedText type="small" themeColor="textSecondary">
+            Dobiera z ulubionych tak, żeby domknąć dzienne białko i kalorie. Tego, co
+            już wybrałeś, nie rusza — od zera służy czyszczenie poniżej.
+          </ThemedText>
+
+          <Przycisk
+            tytul="Powtórz poprzedni tydzień"
+            wariant="poboczny"
+            onPress={powtorzPoprzedni}
+            zajety={pracuje}
+            wylaczony={pracuje}
+          />
+
+          <Przycisk
+            tytul="Zacznij nowy tydzień od dzisiaj"
+            wariant="poboczny"
+            onPress={() =>
+              zDbem(async () => {
+                if (!sesja) return;
+                const nowy = await utworzPlan(sesja.user.id, naDate(new Date()));
+                setWybranyPlanId(nowy.id);
+
+                // Sprzątamy przy zakładaniu nowego tygodnia, a nie przy każdym
+                // wejściu na ekran. To jedyny moment, w którym historia rośnie,
+                // więc jedyny, w którym trzeba coś przyciąć.
+                const usunietych = await posprzatajStarePlany();
+                if (usunietych > 0) {
+                  setKomunikat(
+                    `Trzymamy ${TYGODNI_HISTORII} ostatnich tygodni — starsze ` +
+                      `${usunietych === 1 ? 'zniknął' : 'zniknęły'} (${usunietych}).`
+                  );
+                }
+              })
+            }
+            zajety={pracuje}
+          />
+          <ThemedText type="small" themeColor="textSecondary">
+            Zakłada kolejny tydzień od dzisiaj. Poprzedni zostaje — to z niego bierze
+            się „powtórz poprzedni tydzień”.
+          </ThemedText>
+
+          {/*
+            Czyszczenie kasuje nieodwracalnie i cały tydzień naraz, więc wymaga
+            drugiego dotknięcia. Okienko systemowe odpada: na przeglądarce
+            wygląda jak komunikat o błędzie, a na telefonie bywa blokowane.
+          */}
+          {czyscic ? (
+            <>
+              <ThemedText type="small" themeColor="accent">
+                Skasować wszystkie {pozycje.length} posiłków tego tygodnia razem
+                z zaplanowanymi gotowaniami? Tego nie da się cofnąć.
+              </ThemedText>
+              <Przycisk
+                tytul="Tak, wyczyść tydzień"
+                onPress={() =>
+                  zDbem(async () => {
+                    await wyczyscPlan(plan.id);
+                    setCzyscic(false);
+                  })
+                }
+              />
+              <Przycisk tytul="Zostaw" wariant="poboczny" onPress={() => setCzyscic(false)} />
+            </>
+          ) : (
+            <Przycisk
+              tytul="Wyczyść wszystko"
+              wariant="poboczny"
+              onPress={() => setCzyscic(true)}
+              wylaczony={pozycje.length === 0 || pracuje}
+            />
+          )}
+
+          {komunikat && (
+            <ThemedText type="small" themeColor="textSecondary">
+              {komunikat}
+            </ThemedText>
+          )}
+        </Karta>
       )}
 
       {plan &&
@@ -281,20 +544,63 @@ export default function EkranPlanu() {
           const dzien = wedlugDnia.get(data) ?? [];
           const suma = sumujDzien(dzien);
           const dzisiaj = czyDzisiaj(data);
-          const wszystkoZjedzone = dzien.length > 0 && dzien.every((p) => p.zjedzone);
+
+          // Licznik obsadzonych posiłków. Liczymy PORY, nie dania — obiad
+          // złożony z zupy i drugiego dania to dalej jeden posiłek.
+          const obsadzone = PORY.filter((p) => dzien.some((x) => x.pora === p)).length;
+          const komplet = obsadzone === PORY.length;
 
           return (
-            <Karta key={data} style={dzisiaj ? { borderWidth: 2, borderColor: motyw.accent } : undefined}>
-              <View style={styles.naglowekDnia}>
+            <Karta
+              key={data}
+              style={
+                dzisiaj
+                  ? { marginTop: Spacing.three, borderWidth: 2, borderColor: motyw.accent }
+                  : { marginTop: Spacing.three }
+              }>
+              {/*
+                Pasek nagłówka rozciąga się na całą szerokość karty — stąd ujemne
+                marginesy, które znoszą jej wewnętrzny odstęp. To on oddziela
+                dni od siebie podczas przewijania; wcześniej nagłówek był zwykłym
+                wierszem tekstu i granica dnia dawała się rozpoznać dopiero po
+                przeczytaniu daty.
+              */}
+              <View
+                style={[
+                  styles.pasekDnia,
+                  {
+                    backgroundColor: komplet ? motyw.backgroundSelected : motyw.background,
+                    borderBottomColor: motyw.border,
+                  },
+                ]}>
                 <ThemedText type="smallBold" themeColor={dzisiaj ? 'accent' : 'text'}>
                   {opisDnia(data)}
                   {dzisiaj ? ' · dzisiaj' : ''}
                 </ThemedText>
-                {dzien.length > 0 && (
-                  <ThemedText type="small" themeColor="textSecondary">
-                    {Math.round(suma.kcal)} kcal
-                  </ThemedText>
-                )}
+
+                <View style={styles.stanDnia}>
+                  {/*
+                    Licznik świeci akcentem, dopóki czegoś brakuje — to jest ta
+                    informacja, na którą można zareagować. Dzień pełny gaśnie
+                    do koloru pobocznego i dostaje ptaszka.
+                  */}
+                  <View style={styles.licznikPosilkow}>
+                    {komplet && (
+                      <Ionicons name="checkmark-circle" size={14} color={motyw.textSecondary} />
+                    )}
+                    <ThemedText
+                      type="smallBold"
+                      themeColor={komplet ? 'textSecondary' : 'accent'}>
+                      {obsadzone}/{PORY.length}
+                    </ThemedText>
+                  </View>
+
+                  {dzien.length > 0 && (
+                    <ThemedText type="small" themeColor="textSecondary">
+                      {Math.round(suma.kcal)} kcal
+                    </ThemedText>
+                  )}
+                </View>
               </View>
 
               {PORY.map((pora) => {
@@ -332,7 +638,26 @@ export default function EkranPlanu() {
                           </Pressable>
                         </View>
 
-                        <ThemedText type="small">{pozycja.nazwa}</ThemedText>
+                        {/*
+                          Nazwa dania otwiera przepis do gotowania. To jest droga,
+                          którą chodzi się najczęściej: stoisz w kuchni, patrzysz
+                          w plan i chcesz zobaczyć, co i jak zrobić.
+                        */}
+                        <Pressable
+                          onPress={() =>
+                            router.push({
+                              pathname: '/przepis',
+                              params: { id: pozycja.przepis_id, powrot: '/' },
+                            })
+                          }
+                          accessibilityRole="link"
+                          accessibilityLabel={`Otwórz przepis: ${pozycja.nazwa}`}
+                          style={({ pressed }) => [styles.otworzPrzepis, pressed && styles.wcisniete]}>
+                          <ThemedText type="small" style={styles.nazwaDania}>
+                            {pozycja.nazwa}
+                          </ThemedText>
+                          <Ionicons name="chevron-forward" size={16} color={motyw.textSecondary} />
+                        </Pressable>
 
                         <View style={styles.wierszPozycji}>
                           {/*
@@ -391,66 +716,97 @@ export default function EkranPlanu() {
 
               {dzien.length > 0 && (
                 <>
-                  <View style={styles.wierszMakro}>
-                    <Makro etykieta="kalorie" wartosc={Math.round(suma.kcal)} jednostka="" cel={cel?.kcal} />
-                    <Makro etykieta="białko" wartosc={Math.round(suma.bialko)} jednostka=" g" cel={cel?.bialko_g} />
-                    <Makro etykieta="tłuszcz" wartosc={Math.round(suma.tluszcz)} jednostka=" g" cel={cel?.tluszcz_g} />
-                    <Makro etykieta="węglow." wartosc={Math.round(suma.wegle)} jednostka=" g" cel={cel?.wegle_g} />
-                    <Makro
-                      etykieta="błonnik"
-                      wartosc={Math.round(suma.blonnik)}
-                      jednostka=" g"
-                      cel={cel?.blonnik_g ?? undefined}
-                    />
-                  </View>
-
-                  {/*
-                    Najbardziej użyteczna liczba w całym ekranie: ile brakuje do celu
-                    dziennego. Ostrzeżenia przy pojedynczych posiłkach mówią, że coś
-                    jest lekkie; dopiero to mówi, czy dzień się domyka.
-                  */}
-                  {cel && suma.bialko < cel.bialko_g && (
-                    <ThemedText type="small" themeColor="accent">
-                      Do celu dziennego brakuje {Math.round(cel.bialko_g - suma.bialko)} g białka
-                      {suma.kcal < cel.kcal
-                        ? ` i ${Math.round(cel.kcal - suma.kcal)} kcal.`
-                        : '.'}
-                    </ThemedText>
-                  )}
-
-                  {cel && suma.bialko >= cel.bialko_g && (
-                    <ThemedText type="small" themeColor="textSecondary">
-                      Cel białkowy osiągnięty.
-                    </ThemedText>
-                  )}
-
-                  {/*
-                    Zapisywanie przez wyjątek: jedno dotknięcie zamyka cały dzień.
-                    Wpisywanie każdego posiłku osobno jest głównym powodem,
-                    dla którego ludzie porzucają takie aplikacje.
-                  */}
-                  <Przycisk
-                    tytul={wszystkoZjedzone ? 'Dzień potwierdzony — cofnij' : 'Poszło zgodnie z planem'}
-                    wariant={wszystkoZjedzone ? 'poboczny' : 'glowny'}
-                    onPress={() =>
-                      zDbem(() => oznaczDzien(plan.id, data, !wszystkoZjedzone))
-                    }
+                  <WierszMakro
+                    pozycje={[
+                      { etykieta: 'kcal', wartosc: Math.round(suma.kcal), jednostka: '', cel: cel?.kcal },
+                      { etykieta: 'białko', wartosc: Math.round(suma.bialko), jednostka: ' g', cel: cel?.bialko_g },
+                      { etykieta: 'tłuszcz', wartosc: Math.round(suma.tluszcz), jednostka: ' g', cel: cel?.tluszcz_g },
+                      { etykieta: 'węgle', wartosc: Math.round(suma.wegle), jednostka: ' g', cel: cel?.wegle_g },
+                      { etykieta: 'błonnik', wartosc: Math.round(suma.blonnik), jednostka: ' g', cel: cel?.blonnik_g ?? undefined },
+                    ]}
                   />
+
+                  {/*
+                    Najbardziej użyteczna liczba w całym ekranie: jak daleko dzień
+                    jest od celu. ZAWSZE liczba, w obie strony.
+
+                    Wcześniej przy niedoborze pisaliśmy ile brakuje, a przy nadwyżce
+                    tylko „cel białkowy osiągnięty” — czyli po jednej stronie
+                    informacja, po drugiej komunikat bez treści. Teraz „brakuje 23 g”
+                    i „23 g ponad cel” to to samo zdanie z inną liczbą.
+                  */}
+                  {cel && (
+                    <View
+                      style={[
+                        styles.bilans,
+                        {
+                          borderLeftColor:
+                            suma.bialko < cel.bialko_g ? motyw.accent : motyw.border,
+                          backgroundColor: motyw.background,
+                        },
+                      ]}>
+                      <ThemedText
+                        type="smallBold"
+                        themeColor={suma.bialko < cel.bialko_g ? 'accent' : 'text'}>
+                        {opisBilansu(suma, cel)}
+                      </ThemedText>
+                    </View>
+                  )}
+
                 </>
               )}
             </Karta>
           );
         })}
+
+      {/*
+        Przycisku „Lista zakupów” tu nie ma celowo — zakupy mają własną zakładkę
+        na dolnej wstążce. Jedno wejście zamiast dwóch: mniej do zapamiętania
+        i widać je także wtedy, gdy plan jest pusty.
+      */}
     </Ekran>
   );
 }
 
 const styles = StyleSheet.create({
-  naglowekDnia: {
+  narzedzia: { gap: Spacing.two },
+
+  /*
+    Pasek nagłówka dnia. Ujemne marginesy znoszą wewnętrzny odstęp karty,
+    żeby tło paska sięgało jej krawędzi — inaczej byłby prostokątem
+    pływającym w środku i nie czytałby się jako granica dnia.
+  */
+  pasekDnia: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     gap: Spacing.two,
+    marginTop: -Spacing.three,
+    marginHorizontal: -Spacing.three,
+    marginBottom: Spacing.one,
+    paddingHorizontal: Spacing.three,
+    paddingVertical: Spacing.two,
+    borderTopLeftRadius: Spacing.three,
+    borderTopRightRadius: Spacing.three,
+    borderBottomWidth: 1,
+  },
+  stanDnia: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.two,
+  },
+  licznikPosilkow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.one,
+  },
+
+  /* Bilans dnia — pasek z lewą krawędzią, żeby odciąć go od zwykłych zdań. */
+  bilans: {
+    borderLeftWidth: 3,
+    paddingLeft: Spacing.two,
+    paddingVertical: Spacing.one,
+    borderRadius: 0,
   },
   posilek: {
     gap: Spacing.one,
@@ -483,22 +839,11 @@ const styles = StyleSheet.create({
     gap: Spacing.two,
   },
   makroPozycji: { marginLeft: 'auto' },
-  wyborDaty: {
+  otworzPrzepis: {
     flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: Spacing.two,
-    paddingTop: Spacing.one,
+    alignItems: 'center',
+    gap: Spacing.one,
+    paddingVertical: Spacing.half,
   },
-  data: {
-    borderWidth: 1,
-    borderRadius: Spacing.four,
-    paddingHorizontal: Spacing.three,
-    paddingVertical: Spacing.one,
-  },
-  wierszMakro: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: Spacing.two,
-    paddingTop: Spacing.two,
-  },
+  nazwaDania: { flex: 1 },
 });

@@ -7,9 +7,10 @@ import 'react-native-reanimated';
 
 import { EkranLogowania } from '@/components/ekran-logowania';
 import { ThemedView } from '@/components/themed-view';
-import { Colors, type Paleta } from '@/constants/theme';
+import { PALETY, type Paleta } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { DostawcaSesji, useSesja } from '@/lib/sesja';
+import { DostawcaWygladu, useStyl } from '@/lib/wyglad';
 
 /**
  * Układ główny. Najpierw sprawdza, kto jest zalogowany:
@@ -22,18 +23,23 @@ export default function UkladGlowny() {
   const tryb = schemat === 'dark' ? 'dark' : 'light';
 
   return (
-    <ThemeProvider value={tryb === 'dark' ? DarkTheme : DefaultTheme}>
-      <DostawcaSesji>
-        <BramkaSesji tryb={tryb} />
-      </DostawcaSesji>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    // Dostawca wyglądu obejmuje wszystko — także ekran logowania, bo wybrany
+    // styl ma działać od pierwszej sekundy, jeszcze przed zalogowaniem.
+    <DostawcaWygladu>
+      <ThemeProvider value={tryb === 'dark' ? DarkTheme : DefaultTheme}>
+        <DostawcaSesji>
+          <BramkaSesji tryb={tryb} />
+        </DostawcaSesji>
+        <StatusBar style="auto" />
+      </ThemeProvider>
+    </DostawcaWygladu>
   );
 }
 
 function BramkaSesji({ tryb }: { tryb: 'light' | 'dark' }) {
   const { sesja, ladowanie } = useSesja();
-  const kolory = Colors[tryb];
+  const { styl } = useStyl();
+  const kolory = PALETY[styl][tryb];
 
   if (ladowanie) {
     return (
@@ -55,6 +61,18 @@ function BramkaSesji({ tryb }: { tryb: 'light' | 'dark' }) {
 function Zakladki({ kolory }: { kolory: Paleta }) {
   return (
     <Tabs
+      /*
+        Powrót ma wracać tam, skąd przyszedłeś.
+
+        Domyślnie („firstRoute”) każde cofnięcie skacze na PIERWSZĄ zakładkę,
+        czyli na Plan dnia. Dlatego po zapisaniu przepisu ekran lądował na
+        planie zamiast na liście przepisów — a to samo dotyczyło składników,
+        celów i podglądu przepisu w kuchni.
+
+        „history” pilnuje kolejności odwiedzin: z formularza wracasz na listę,
+        z listy tam, gdzie byłeś przed nią.
+      */
+      backBehavior="history"
       screenOptions={{
         headerShown: false,
         tabBarActiveTintColor: kolory.accent,
@@ -69,6 +87,13 @@ function Zakladki({ kolory }: { kolory: Paleta }) {
         options={{
           title: 'Plan',
           tabBarIcon: ({ color, size }) => <Ionicons name="today" size={size} color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="zakupy"
+        options={{
+          title: 'Zakupy',
+          tabBarIcon: ({ color, size }) => <Ionicons name="cart" size={size} color={color} />,
         }}
       />
       <Tabs.Screen
@@ -98,7 +123,7 @@ function Zakladki({ kolory }: { kolory: Paleta }) {
       <Tabs.Screen name="cele-formularz" options={{ href: null }} />
       <Tabs.Screen name="przepis-formularz" options={{ href: null }} />
       <Tabs.Screen name="skladniki" options={{ href: null }} />
-      <Tabs.Screen name="zakupy" options={{ href: null }} />
+      <Tabs.Screen name="przepis" options={{ href: null }} />
     </Tabs>
   );
 }

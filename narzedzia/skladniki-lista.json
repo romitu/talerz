@@ -1516,6 +1516,813 @@
         "tluszcz"
       ],
       "nova": 2
+    },
+    {
+      "nazwa": "Por, surowy",
+      "usda": "leeks, bulb and lower leaf portion, raw",
+      "kcal_okolo": 61,
+      "slowa": [
+        "leek"
+      ],
+      "wyklucz": [
+        "freeze-dried",
+        "dried",
+        "cooked",
+        "boiled"
+      ],
+      "tagi": [
+        "warzywo"
+      ],
+      "nova": 1
+    },
+    {
+      "nazwa": "Ryż basmati, suchy",
+      "usda": "rice, white, long-grain, regular, raw, unenriched",
+      "kcal_okolo": 365,
+      "slowa": [
+        "rice",
+        "white",
+        "long-grain"
+      ],
+      "wyklucz": [
+        "cooked",
+        "brown",
+        "instant",
+        "wild",
+        "parboiled"
+      ],
+      "tagi": [
+        "zboze"
+      ],
+      "nova": 1
+    },
+    {
+      "nazwa": "Imbir korzeń, surowy",
+      "usda": "ginger root, raw",
+      "kcal_okolo": 80,
+      "slowa": [
+        "ginger"
+      ],
+      "wyklucz": [
+        "ground",
+        "pickled",
+        "crystallized",
+        "dried",
+        "ale"
+      ],
+      "tagi": [
+        "przyprawa"
+      ],
+      "nova": 1
+    },
+    {
+      "nazwa": "Mleko kokosowe light z puszki",
+      "usda": "coconut milk, canned, light",
+      "kcal_okolo": 73,
+      "slowa": [
+        "coconut",
+        "milk"
+      ],
+      "wyklucz": [
+        "sweetened",
+        "cream",
+        "water",
+        "frozen",
+        "raw"
+      ],
+      "tagi": [
+        "roslinne"
+      ],
+      "nova": 3,
+      "recznie": true
+    },
+    {
+      "nazwa": "Pasta curry czerwona",
+      "usda": "sauce, curry paste",
+      "kcal_okolo": 100,
+      "slowa": [
+        "curry"
+      ],
+      "wyklucz": [
+        "powder",
+        "chicken",
+        "rice"
+      ],
+      "tagi": [
+        "przyprawa"
+      ],
+      "nova": 4,
+      "recznie": true
+    },
+    {
+      "nazwa": "Sos sojowy",
+      "usda": "soy sauce made from soy and wheat (shoyu)",
+      "kcal_okolo": 53,
+      "slowa": [
+        "soy sauce"
+      ],
+      "wyklucz": [
+        "low sodium",
+        "tamari"
+      ],
+      "tagi": [
+        "przyprawa"
+      ],
+      "nova": 3
+    },
+    {
+      "nazwa": "Fasolka szparagowa mrożona",
+      "usda": "beans, snap, green, frozen, unprepared",
+      "kcal_okolo": 33,
+      "slowa": [
+        "snap",
+        "green",
+        "frozen"
+      ],
+      "wyklucz": [
+        "cooked",
+        "canned",
+        "boiled",
+        "microwaved"
+      ],
+      "tagi": [
+        "warzywo"
+      ],
+      "nova": 1
+    },
+    {
+      "nazwa": "Rzodkiewka, surowa",
+      "usda": "radishes, raw",
+      "kcal_okolo": 16,
+      "slowa": [
+        "radish"
+      ],
+      "wyklucz": [
+        "oriental",
+        "white icicle",
+        "sprouts",
+        "daikon"
+      ],
+      "tagi": [
+        "warzywo"
+      ],
+      "nova": 1
+    },
+    {
+      "nazwa": "Szczypiorek świeży",
+      "usda": "chives, raw",
+      "kcal_okolo": 30,
+      "slowa": [
+        "chives"
+      ],
+      "wyklucz": [
+        "dried",
+        "freeze-dried"
+      ],
+      "tagi": [
+        "warzywo",
+        "przyprawa"
+      ],
+      "nova": 1
+    },
+    {
+      "nazwa": "Schab wieprzowy, surowy",
+      "usda": "pork, loin, center rib, boneless, separable lean only, raw",
+      "kcal_okolo": 143,
+      "slowa": [
+        "pork",
+        "loin"
+      ],
+      "wyklucz": [
+        "cooked",
+        "roasted",
+        "cured",
+        "ground",
+        "braised"
+      ],
+      "tagi": [
+        "mieso"
+      ],
+      "nova": 1
+    },
+    {
+      "nazwa": "Polędwiczka wieprzowa, surowa",
+      "usda": "pork, fresh, loin, tenderloin, separable lean only, raw",
+      "kcal_okolo": 109,
+      "slowa": [
+        "tenderloin",
+        "pork"
+      ],
+      "wyklucz": [
+        "cooked",
+        "roasted",
+        "broiled"
+      ],
+      "tagi": [
+        "mieso"
+      ],
+      "nova": 1
+    },
+    {
+      "nazwa": "Szynka wieprzowa chuda, surowa",
+      "usda": "pork, fresh, leg (ham), whole, separable lean only, raw",
+      "kcal_okolo": 136,
+      "slowa": [
+        "pork",
+        "leg"
+      ],
+      "wyklucz": [
+        "cooked",
+        "roasted",
+        "cured",
+        "smoked"
+      ],
+      "tagi": [
+        "mieso"
+      ],
+      "nova": 1
+    },
+    {
+      "nazwa": "Łopatka wieprzowa gulaszowa, surowa",
+      "usda": "pork, fresh, shoulder, blade, boston, separable lean only, raw",
+      "kcal_okolo": 151,
+      "slowa": [
+        "pork",
+        "shoulder"
+      ],
+      "wyklucz": [
+        "cooked",
+        "roasted",
+        "cured",
+        "smoked",
+        "ground"
+      ],
+      "tagi": [
+        "mieso"
+      ],
+      "nova": 1
+    },
+    {
+      "nazwa": "Wołowina na plastry (udziec), surowa",
+      "usda": "beef, round, top round roast, separable lean only, raw",
+      "kcal_okolo": 133,
+      "slowa": [
+        "beef",
+        "round"
+      ],
+      "wyklucz": [
+        "cooked",
+        "roasted",
+        "ground",
+        "grilled"
+      ],
+      "tagi": [
+        "mieso"
+      ],
+      "nova": 1
+    },
+    {
+      "nazwa": "Mięso mielone wołowo-wieprzowe, surowe",
+      "usda": "beef, ground, 15% fat, raw",
+      "kcal_okolo": 215,
+      "slowa": [
+        "ground",
+        "beef"
+      ],
+      "wyklucz": [
+        "cooked",
+        "patty",
+        "crumbles"
+      ],
+      "tagi": [
+        "mieso"
+      ],
+      "nova": 1
+    },
+    {
+      "nazwa": "Filet z indyka, surowy",
+      "usda": "turkey, breast, meat only, raw",
+      "kcal_okolo": 114,
+      "slowa": [
+        "turkey",
+        "breast"
+      ],
+      "wyklucz": [
+        "cooked",
+        "roasted",
+        "smoked",
+        "skin"
+      ],
+      "tagi": [
+        "mieso",
+        "drob"
+      ],
+      "nova": 1
+    },
+    {
+      "nazwa": "Mintaj, surowy",
+      "usda": "fish, pollock, alaska, raw",
+      "kcal_okolo": 81,
+      "slowa": [
+        "pollock"
+      ],
+      "wyklucz": [
+        "cooked",
+        "breaded",
+        "atlantic"
+      ],
+      "tagi": [
+        "ryba"
+      ],
+      "nova": 1
+    },
+    {
+      "nazwa": "Pieczarki, surowe",
+      "usda": "mushrooms, white, raw",
+      "kcal_okolo": 22,
+      "slowa": [
+        "mushrooms",
+        "white"
+      ],
+      "wyklucz": [
+        "cooked",
+        "canned",
+        "dried",
+        "portabella",
+        "shiitake"
+      ],
+      "tagi": [
+        "warzywo"
+      ],
+      "nova": 1
+    },
+    {
+      "nazwa": "Boczniaki, surowe",
+      "usda": "mushrooms, oyster, raw",
+      "kcal_okolo": 33,
+      "slowa": [
+        "mushrooms",
+        "oyster"
+      ],
+      "wyklucz": [
+        "cooked",
+        "dried",
+        "canned"
+      ],
+      "tagi": [
+        "warzywo"
+      ],
+      "nova": 1
+    },
+    {
+      "nazwa": "Awokado",
+      "usda": "avocados, raw, all commercial varieties",
+      "kcal_okolo": 160,
+      "slowa": [
+        "avocado"
+      ],
+      "wyklucz": [
+        "oil",
+        "dip",
+        "guacamole"
+      ],
+      "tagi": [
+        "owoc",
+        "tluszcz"
+      ],
+      "nova": 1
+    },
+    {
+      "nazwa": "Rukola",
+      "usda": "arugula, raw",
+      "kcal_okolo": 25,
+      "slowa": [
+        "arugula"
+      ],
+      "wyklucz": [
+        "cooked"
+      ],
+      "tagi": [
+        "warzywo"
+      ],
+      "nova": 1
+    },
+    {
+      "nazwa": "Cebula czerwona, surowa",
+      "usda": "onions, red, raw",
+      "kcal_okolo": 40,
+      "slowa": [
+        "onions",
+        "red"
+      ],
+      "wyklucz": [
+        "cooked",
+        "dehydrated",
+        "powder",
+        "rings"
+      ],
+      "tagi": [
+        "warzywo"
+      ],
+      "nova": 1
+    },
+    {
+      "nazwa": "Kapusta biała, surowa",
+      "usda": "cabbage, raw",
+      "kcal_okolo": 25,
+      "slowa": [
+        "cabbage"
+      ],
+      "wyklucz": [
+        "cooked",
+        "red",
+        "chinese",
+        "savoy",
+        "napa",
+        "kimchi"
+      ],
+      "tagi": [
+        "warzywo"
+      ],
+      "nova": 1
+    },
+    {
+      "nazwa": "Kapusta kiszona",
+      "usda": "sauerkraut, canned, solids and liquids",
+      "kcal_okolo": 19,
+      "slowa": [
+        "sauerkraut"
+      ],
+      "wyklucz": [
+        "cooked"
+      ],
+      "tagi": [
+        "warzywo",
+        "kiszone"
+      ],
+      "nova": 3
+    },
+    {
+      "nazwa": "Kasza jęczmienna, sucha",
+      "usda": "barley, pearled, raw",
+      "kcal_okolo": 352,
+      "slowa": [
+        "barley",
+        "pearled"
+      ],
+      "wyklucz": [
+        "cooked",
+        "flour",
+        "malt"
+      ],
+      "tagi": [
+        "zboze",
+        "gluten"
+      ],
+      "nova": 1
+    },
+    {
+      "nazwa": "Otręby owsiane",
+      "usda": "cereals, oat bran, raw",
+      "kcal_okolo": 246,
+      "slowa": [
+        "oat bran"
+      ],
+      "wyklucz": [
+        "cooked",
+        "muffin",
+        "bread"
+      ],
+      "tagi": [
+        "zboze",
+        "gluten"
+      ],
+      "nova": 1
+    },
+    {
+      "nazwa": "Nasiona chia",
+      "usda": "seeds, chia seeds, dried",
+      "kcal_okolo": 486,
+      "slowa": [
+        "chia"
+      ],
+      "wyklucz": [
+        "beverage",
+        "drink"
+      ],
+      "tagi": [
+        "nasiona"
+      ],
+      "nova": 1
+    },
+    {
+      "nazwa": "Bułka tarta",
+      "usda": "bread crumbs, dry, grated, plain",
+      "kcal_okolo": 395,
+      "slowa": [
+        "bread crumbs"
+      ],
+      "wyklucz": [
+        "seasoned",
+        "panko"
+      ],
+      "tagi": [
+        "zboze",
+        "gluten"
+      ],
+      "nova": 3
+    },
+    {
+      "nazwa": "Masło orzechowe bez cukru",
+      "usda": "peanut butter, smooth style, without salt",
+      "kcal_okolo": 598,
+      "slowa": [
+        "peanut butter"
+      ],
+      "wyklucz": [
+        "reduced fat",
+        "chocolate",
+        "jelly"
+      ],
+      "tagi": [
+        "orzechy"
+      ],
+      "nova": 3
+    },
+    {
+      "nazwa": "Bulion warzywny gotowy",
+      "usda": "soup, vegetable broth, ready to serve",
+      "kcal_okolo": 5,
+      "slowa": [
+        "broth"
+      ],
+      "wyklucz": [
+        "beef",
+        "chicken",
+        "condensed",
+        "bouillon"
+      ],
+      "tagi": [
+        "przyprawa"
+      ],
+      "nova": 4
+    },
+    {
+      "nazwa": "Chrzan tarty",
+      "usda": "horseradish, prepared",
+      "kcal_okolo": 48,
+      "slowa": [
+        "horseradish"
+      ],
+      "wyklucz": [
+        "sauce",
+        "tree"
+      ],
+      "tagi": [
+        "przyprawa"
+      ],
+      "nova": 3
+    },
+    {
+      "nazwa": "Oliwki czarne",
+      "usda": "olives, ripe, canned (small-extra large)",
+      "kcal_okolo": 115,
+      "slowa": [
+        "olives",
+        "ripe"
+      ],
+      "wyklucz": [
+        "green",
+        "stuffed",
+        "pickled"
+      ],
+      "tagi": [
+        "owoc",
+        "tluszcz"
+      ],
+      "nova": 3
+    },
+    {
+      "nazwa": "Pomidory suszone w oleju",
+      "usda": "tomatoes, sun-dried, packed in oil, drained",
+      "kcal_okolo": 213,
+      "slowa": [
+        "sun-dried",
+        "oil"
+      ],
+      "wyklucz": [
+        "without oil"
+      ],
+      "tagi": [
+        "warzywo"
+      ],
+      "nova": 3
+    },
+    {
+      "nazwa": "Fasola biała z puszki, odsączona",
+      "usda": "beans, white, mature seeds, canned",
+      "kcal_okolo": 114,
+      "slowa": [
+        "beans",
+        "white",
+        "canned"
+      ],
+      "wyklucz": [
+        "dry",
+        "raw",
+        "baked",
+        "soup"
+      ],
+      "tagi": [
+        "straczki"
+      ],
+      "nova": 3
+    },
+    {
+      "nazwa": "Fasola czerwona z puszki, odsączona",
+      "usda": "beans, kidney, red, mature seeds, canned, drained solids",
+      "kcal_okolo": 124,
+      "slowa": [
+        "kidney",
+        "canned"
+      ],
+      "wyklucz": [
+        "dry",
+        "raw",
+        "baked",
+        "chili"
+      ],
+      "tagi": [
+        "straczki"
+      ],
+      "nova": 3
+    },
+    {
+      "nazwa": "Sos rybny",
+      "usda": "fish sauce, ready-to-serve",
+      "kcal_okolo": 35,
+      "slowa": [
+        "fish sauce"
+      ],
+      "wyklucz": [
+        "oyster"
+      ],
+      "tagi": [
+        "przyprawa"
+      ],
+      "nova": 4
+    },
+    {
+      "nazwa": "Szpinak mrożony",
+      "usda": "spinach, frozen, chopped or leaf, unprepared",
+      "kcal_okolo": 29,
+      "slowa": [
+        "spinach",
+        "frozen"
+      ],
+      "wyklucz": [
+        "cooked",
+        "boiled",
+        "creamed"
+      ],
+      "tagi": [
+        "warzywo"
+      ],
+      "nova": 1
+    },
+    {
+      "nazwa": "Groszek zielony mrożony",
+      "usda": "peas, green, frozen, unprepared",
+      "kcal_okolo": 77,
+      "slowa": [
+        "peas",
+        "green",
+        "frozen"
+      ],
+      "wyklucz": [
+        "cooked",
+        "boiled",
+        "canned",
+        "split"
+      ],
+      "tagi": [
+        "warzywo"
+      ],
+      "nova": 1
+    },
+    {
+      "nazwa": "Majeranek suszony",
+      "usda": "spices, marjoram, dried",
+      "kcal_okolo": 271,
+      "slowa": [
+        "marjoram"
+      ],
+      "wyklucz": [
+        "fresh"
+      ],
+      "tagi": [
+        "przyprawa"
+      ],
+      "nova": 2
+    },
+    {
+      "nazwa": "Tymianek suszony",
+      "usda": "spices, thyme, dried",
+      "kcal_okolo": 276,
+      "slowa": [
+        "thyme",
+        "dried"
+      ],
+      "wyklucz": [
+        "fresh"
+      ],
+      "tagi": [
+        "przyprawa"
+      ],
+      "nova": 2
+    },
+    {
+      "nazwa": "Rozmaryn suszony",
+      "usda": "spices, rosemary, dried",
+      "kcal_okolo": 331,
+      "slowa": [
+        "rosemary",
+        "dried"
+      ],
+      "wyklucz": [
+        "fresh"
+      ],
+      "tagi": [
+        "przyprawa"
+      ],
+      "nova": 2
+    },
+    {
+      "nazwa": "Cynamon mielony",
+      "usda": "spices, cinnamon, ground",
+      "kcal_okolo": 247,
+      "slowa": [
+        "cinnamon"
+      ],
+      "wyklucz": [
+        "fresh",
+        "stick"
+      ],
+      "tagi": [
+        "przyprawa"
+      ],
+      "nova": 2
+    },
+    {
+      "nazwa": "Kmin rzymski mielony",
+      "usda": "spices, cumin seed",
+      "kcal_okolo": 375,
+      "slowa": [
+        "cumin"
+      ],
+      "wyklucz": [
+        "black",
+        "fresh"
+      ],
+      "tagi": [
+        "przyprawa"
+      ],
+      "nova": 2
+    },
+    {
+      "nazwa": "Papryka ostra mielona",
+      "usda": "spices, pepper, red or cayenne",
+      "kcal_okolo": 318,
+      "slowa": [
+        "cayenne"
+      ],
+      "wyklucz": [
+        "fresh",
+        "sauce"
+      ],
+      "tagi": [
+        "przyprawa"
+      ],
+      "nova": 2
+    },
+    {
+      "nazwa": "Pieprz biały mielony",
+      "usda": "spices, pepper, white",
+      "kcal_okolo": 296,
+      "slowa": [
+        "pepper",
+        "white"
+      ],
+      "wyklucz": [
+        "fresh",
+        "black",
+        "red",
+        "sauce"
+      ],
+      "tagi": [
+        "przyprawa"
+      ],
+      "nova": 2
     }
   ]
 }

@@ -3,6 +3,11 @@
  *
  *     node narzedzia/import-usda.mjs            # import
  *     node narzedzia/import-usda.mjs --podglad  # tylko pokaż, nic nie zapisuj
+ *     node narzedzia/import-usda.mjs --tylko=por,imbir   # tylko wskazane pozycje
+ *
+ * `--tylko` porównuje fragment nazwy polskiej, bez względu na wielkość liter.
+ * Przydaje się przy dopisywaniu kilku składników, żeby nie odpytywać USDA
+ * o wszystkie osiemdziesiąt i nie wyczerpać dziennego limitu zapytań.
  *
  * Dane USDA są w domenie publicznej (CC0) — nie wnoszą żadnych zobowiązań
  * licencyjnych. Skrypt loguje się na Twoje konto administratora, więc nie
@@ -45,6 +50,26 @@ function wczytajEnv() {
 }
 
 const PODGLAD = process.argv.includes('--podglad');
+
+/** Fragmenty nazw z `--tylko=...`; pusta tablica oznacza „bierz wszystko”. */
+export function fragmentyZArgumentow(argumenty) {
+  const arg = argumenty.find((a) => a.startsWith('--tylko='));
+  if (!arg) return [];
+  return arg
+    .slice('--tylko='.length)
+    .split(',')
+    .map((x) => x.trim().toLowerCase())
+    .filter(Boolean);
+}
+
+/** Zostawia pozycje, których nazwa zawiera którykolwiek z fragmentów. */
+export function zawezLise(lista, fragmenty) {
+  if (fragmenty.length === 0) return lista;
+  return lista.filter((p) => {
+    const nazwa = String(p.nazwa).toLowerCase();
+    return fragmenty.some((f) => nazwa.includes(f));
+  });
+}
 
 const WYMAGANE = {
   EXPO_PUBLIC_SUPABASE_URL: 'adres projektu Supabase',
@@ -261,7 +286,19 @@ async function main() {
   const env = wczytajEnv();
   sprawdzUstawienia(env);
 
-  const lista = JSON.parse(readFileSync(join(KATALOG, 'skladniki-lista.json'), 'utf8')).skladniki;
+  const wszystkie = JSON.parse(readFileSync(join(KATALOG, 'skladniki-lista.json'), 'utf8')).skladniki;
+
+  const fragmenty = fragmentyZArgumentow(process.argv);
+  const lista = zawezLise(wszystkie, fragmenty);
+
+  if (fragmenty.length > 0) {
+    console.log(`Zawężono do „${fragmenty.join(', ')}” — ${lista.length} z ${wszystkie.length} pozycji.`);
+    if (lista.length === 0) {
+      console.error('Żadna nazwa nie pasuje. Sprawdź pisownię.');
+      process.exit(1);
+    }
+    console.log('');
+  }
 
   // Słowo wykluczone nie może występować w samym zapytaniu — to sprzeczność,
   // przez którą właściwy produkt zostałby odrzucony.

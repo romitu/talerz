@@ -1,12 +1,13 @@
 import { router, useFocusEffect } from 'expo-router';
 import { useCallback, useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import { Ekran } from '@/components/ekran';
 import { Karta } from '@/components/karta';
-import { Makro } from '@/components/makro';
+import { WierszMakro } from '@/components/wiersz-makro';
 import { Przycisk } from '@/components/przycisk';
 import { ThemedText } from '@/components/themed-text';
+import { WyborStylu } from '@/components/wybor-stylu';
 import { Spacing } from '@/constants/theme';
 import { useSesja } from '@/lib/sesja';
 import { supabase } from '@/lib/supabase';
@@ -108,12 +109,14 @@ export default function EkranProfilu() {
 
             {cel ? (
               <>
-                <View style={styles.wiersz}>
-                  <Makro etykieta="kalorie" wartosc={cel.kcal} jednostka="" />
-                  <Makro etykieta="białko" wartosc={cel.bialko_g} jednostka=" g" />
-                  <Makro etykieta="tłuszcz" wartosc={cel.tluszcz_g} jednostka=" g" />
-                  <Makro etykieta="węglow." wartosc={cel.wegle_g} jednostka=" g" />
-                </View>
+                <WierszMakro
+                  pozycje={[
+                    { etykieta: 'kcal', wartosc: cel.kcal, jednostka: '' },
+                    { etykieta: 'białko', wartosc: cel.bialko_g, jednostka: ' g' },
+                    { etykieta: 'tłuszcz', wartosc: cel.tluszcz_g, jednostka: ' g' },
+                    { etykieta: 'węgle', wartosc: cel.wegle_g, jednostka: ' g' },
+                  ]}
+                />
                 <ThemedText type="small" themeColor="textSecondary">
                   {cel.prog_bialka_posilek
                     ? `Próg białka na posiłek: ${cel.prog_bialka_posilek} g`
@@ -130,15 +133,19 @@ export default function EkranProfilu() {
             <Przycisk
               tytul={cel ? 'Zmień cele' : 'Ustal cele'}
               wariant="poboczny"
-              onPress={() => router.push({ pathname: '/cele-formularz', params: { profil: p.id } })}
+              onPress={() => router.push({ pathname: '/cele-formularz', params: { profil: p.id, powrot: '/profil' } })}
             />
           </Karta>
         );
       })}
 
       {profile.length < 3 && (
-        <Przycisk tytul="Dodaj profil" onPress={() => router.push('/profil-formularz')} />
+        <Przycisk tytul="Dodaj profil" onPress={() => router.push({ pathname: '/profil-formularz', params: { powrot: '/profil' } })} />
       )}
+
+      <Karta>
+        <WyborStylu />
+      </Karta>
 
       <Przycisk
         tytul="Wyloguj się"
@@ -151,12 +158,6 @@ export default function EkranProfilu() {
 }
 
 const styles = StyleSheet.create({
-  wiersz: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: Spacing.two,
-    paddingTop: Spacing.half,
-  },
   wyloguj: {
     marginTop: Spacing.four,
   },

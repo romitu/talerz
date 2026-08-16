@@ -87,6 +87,138 @@ export async function pobierzPlan(): Promise<Plan | null> {
   return data;
 }
 
+/**
+ * Ile tygodni wstecz trzymamy.
+ *
+ * Nie chodzi o miejsce w bazie. Sprawdzone na prawdziwym PostgreSQL: pełny rok
+ * planowania — 52 plany, 1092 pozycje, 364 partie — zajmuje z indeksami około
+ * 576 kB. Przy pięciuset megabajtach darmowego Supabase starczyłoby na kilkaset
+ * lat, więc argument „baza urośnie” po prostu nie jest prawdziwy.
+ *
+ * Powód jest inny i dotyczy ekranu: lista wyboru tygodnia po roku miałaby
+ * pięćdziesiąt dwie pozycje i przestałaby być użyteczna. Kwartał to sensowny
+ * kompromis — mieści „powtórz poprzedni tydzień”, pozwala zajrzeć miesiąc czy
+ * dwa wstecz, a lista zostaje krótka.
+ *
+ * Zmiana tej liczby to jedyne, co trzeba zrobić, żeby trzymać dłużej lub krócej.
+ */
+export const TYGODNI_HISTORII = 12;
+
+/**
+ * Wszystkie tygodnie konta, od najnowszego.
+ *
+ * Każdy tydzień to osobny wiersz w `plany`. Stare zostają — z nich bierze się
+ * „powtórz poprzedni tydzień”, a kiedyś wszystko, co da się o sobie policzyć.
+ */
+export async function pobierzPlany(ile = 12): Promise<Plan[]> {
+  const { data, error } = await supabase
+    .from('plany')
+    .select('id, data_start, dni')
+    .order('data_start', { ascending: false })
+    .limit(ile);
+
+  if (error) throw error;
+  return data ?? [];
+}
+
+/** Tydzień poprzedzający wskazany — po dacie startu, nie po kolejności dodania. */
+export async function pobierzPoprzedniPlan(planId: string): Promise<Plan | null> {
+  const { data: biezacy, error: bladBiezacego } = await supabase
+    .from('plany')
+    .select('data_start')
+    .eq('id', planId)
+    .single();
+  if (bladBiezacego) throw bladBiezacego;
+
+  const { data, error } = await supabase
+    .from('plany')
+    .select('id, data_start, dni')
+    .lt('data_start', biezacy.data_start)
+    .order('data_start', { ascending: false })
+    .limit(1)
+    .maybeSingle();
+
+  if (error) throw error;
+  return data;
+}
+
+/**
+ * Kasuje całą zawartość tygodnia: posiłki i gotowania, z których wynikały.
+ *
+ * Kolejność jak w `usunPartie` i z tego samego powodu: `plan_pozycje.partia_id`
+ * ma `on delete set null`, więc skasowanie partii jako pierwszej zostawiłoby
+ * posiłki w planie bez powiązania. Najpierw posiłki, potem partie.
+ *
+ * Partie kasujemy po identyfikatorach zebranych z pozycji, a nie po planie —
+ * `partie` nie ma kolumny `plan_id`, bo garnek jest bytem niezależnym od planu.
+ */
+export async function wyczyscPlan(planId: string) {
+  const { data: pozycje, error: bladOdczytu } = await supabase
+    .from('plan_pozycje')
+    .select('partia_id')
+    .eq('plan_id', planId);
+  if (bladOdczytu) throw bladOdczytu;
+
+  const partie = [
+    ...new Set((pozycje ?? []).map((p) => p.partia_id as string | null).filter(Boolean)),
+  ] as string[];
+
+  const { error } = await supabase.from('plan_pozycje').delete().eq('plan_id', planId);
+  if (error) throw error;
+
+  if (partie.length > 0) {
+    const { error: bladPartii } = await supabase.from('partie').delete().in('id', partie);
+    if (bladPartii) throw bladPartii;
+  }
+}
+
+/**
+ * Kasuje tygodnie starsze niż `TYGODNI_HISTORII` ostatnich.
+ *
+ * Liczymy TYGODNIE, nie dni. Odmierzanie datą myliłoby się przy przerwach:
+ * ktoś nie planuje przez miesiąc, wraca — i traci wszystko, choć zebrał
+ * dopiero trzy tygodnie. Reguła „trzymaj dwanaście ostatnich” jest odporna
+ * na dziury w planowaniu.
+ *
+ * Partie trzeba skasować OSOBNO. Usunięcie planu kasuje jego pozycje
+ * kaskadowo, ale `plan_pozycje.partia_id` ma `on delete set null` w drugą
+ * stronę — więc gotowania zostałyby w bazie jako sieroty, których nic już
+ * nie pokazuje ani nie kasuje. Dlatego najpierw zbieramy ich identyfikatory,
+ * a dopiero potem usuwamy plany.
+ *
+ * @returns ile tygodni usunięto
+ */
+export async function posprzatajStarePlany(ile = TYGODNI_HISTORII): Promise<number> {
+  const { data: wszystkie, error } = await supabase
+    .from('plany')
+    .select('id')
+    .order('data_start', { ascending: false });
+  if (error) throw error;
+
+  const doUsuniecia = (wszystkie ?? []).slice(ile).map((p) => p.id as string);
+  if (doUsuniecia.length === 0) return 0;
+
+  const { data: pozycje, error: bladPozycji } = await supabase
+    .from('plan_pozycje')
+    .select('partia_id')
+    .in('plan_id', doUsuniecia);
+  if (bladPozycji) throw bladPozycji;
+
+  const partie = [
+    ...new Set((pozycje ?? []).map((p) => p.partia_id as string | null).filter(Boolean)),
+  ] as string[];
+
+  const { error: bladPlanow } = await supabase.from('plany').delete().in('id', doUsuniecia);
+  if (bladPlanow) throw bladPlanow;
+
+  if (partie.length > 0) {
+    const { error: bladPartii } = await supabase.from('partie').delete().in('id', partie);
+    if (bladPartii) throw bladPartii;
+  }
+
+  return doUsuniecia.length;
+}
+
 /** Przesuwa datę początku istniejącego planu. */
 export async function zmienDatePlanu(planId: string, dataStart: string) {
   const { error } = await supabase.from('plany').update({ data_start: dataStart }).eq('id', planId);
@@ -239,7 +371,26 @@ export async function dodajPartie(opcje: {
 }
 
 /** Usuwa całą partię — wszystkie dni, na które rozłożono jedno gotowanie. */
+/**
+ * Usuwa partię wraz ze wszystkimi posiłkami, które z niej wynikały.
+ *
+ * Kolejność ma znaczenie i nie jest oczywista. Klucz obcy `plan_pozycje.partia_id`
+ * ma `on delete set null`, więc samo skasowanie partii NIE usuwa posiłków —
+ * one zostają w planie, tylko tracą powiązanie z gotowaniem.
+ *
+ * Objawiało się to tak: „Usuń całą partię” sprzątało wpis o gotowaniu, dania
+ * nadal stały w planie, a lista zakupów dalej ich potrzebowała. Wyglądało to
+ * na błąd listy zakupów, a było tutaj.
+ *
+ * Najpierw więc posiłki, potem partia.
+ */
 export async function usunPartie(partiaId: string) {
+  const { error: bladPozycji } = await supabase
+    .from('plan_pozycje')
+    .delete()
+    .eq('partia_id', partiaId);
+  if (bladPozycji) throw bladPozycji;
+
   const { error } = await supabase.from('partie').delete().eq('id', partiaId);
   if (error) throw error;
 }
@@ -256,8 +407,17 @@ export async function przeniesPosilek(id: string, data: string, pora: PoraPosilk
 }
 
 /**
- * Potwierdzenie całego dnia — podstawa zapisywania przez wyjątek.
- * Jedno dotknięcie zamiast trzech osobnych wpisów.
+ * Potwierdzenie całego dnia — oznacza wszystkie posiłki jako zjedzone.
+ *
+ * NIEUŻYWANE. Przycisk „Poszło zgodnie z planem” został usunięty z ekranu
+ * planu, bo pola `zjedzone` nikt nie czytał: nie było historii, statystyki
+ * ani żadnego wniosku wyciąganego z potwierdzenia. Przycisk zmieniał własny
+ * napis i tyle.
+ *
+ * Funkcja i kolumna zostają, bo mają jeden sensowny przyszły odbiorca:
+ * potwierdzenie posiłku mogłoby zdejmować porcję ze stanu `partie`
+ * (`porcji_zostalo`) — i wtedy „ile zostało barszczu” byłoby prawdą,
+ * a nie deklaracją sprzed trzech dni. Do tego czasu nic tego nie wywołuje.
  */
 export async function oznaczDzien(planId: string, data: string, zjedzone: boolean) {
   const { error } = await supabase

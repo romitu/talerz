@@ -1,8 +1,9 @@
-import { router } from 'expo-router';
+import { useLocalSearchParams } from 'expo-router';
 import { useState } from 'react';
 import { StyleSheet } from 'react-native';
 
 import { komunikatBledu } from '@/lib/blad';
+import { wroc } from '@/lib/nawigacja';
 import { Ekran } from '@/components/ekran';
 import { Karta } from '@/components/karta';
 import { Pole } from '@/components/pole';
@@ -37,6 +38,7 @@ function poprawnaData(tekst: string): boolean {
 }
 
 export default function FormularzProfilu() {
+  const { powrot } = useLocalSearchParams<{ powrot?: string }>();
   const { sesja } = useSesja();
 
   const [imie, setImie] = useState('');
@@ -116,7 +118,7 @@ export default function FormularzProfilu() {
       const { error: bladPomiaru } = await supabase.from('pomiary').insert(pomiary);
       if (bladPomiaru) throw bladPomiaru;
 
-      router.back();
+      wroc(powrot, '/profil');
     } catch (e) {
       const tresc = komunikatBledu(e);
       setBlad(
@@ -217,7 +219,7 @@ export default function FormularzProfilu() {
       )}
 
       <Przycisk tytul="Zapisz profil" onPress={zapisz} zajety={zajety} wylaczony={!komplet} />
-      <Przycisk tytul="Anuluj" wariant="poboczny" onPress={() => router.back()} />
+      <Przycisk tytul="Anuluj" wariant="poboczny" onPress={() => wroc(powrot, '/profil')} />
     </Ekran>
   );
 }

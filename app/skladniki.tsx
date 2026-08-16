@@ -1,5 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
-import { router } from 'expo-router';
+import { useLocalSearchParams } from 'expo-router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, useWindowDimensions, View } from 'react-native';
 
@@ -13,6 +13,7 @@ import { ThemedText } from '@/components/themed-text';
 import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import { komunikatBledu } from '@/lib/blad';
+import { wroc } from '@/lib/nawigacja';
 import {
   pobierzSkladniki,
   pobierzUzycia,
@@ -50,6 +51,7 @@ const SZEROKOSC_TABELI =
 const MIN_NAZWY = 200;
 
 export default function EkranSkladnikow() {
+  const { powrot } = useLocalSearchParams<{ powrot?: string }>();
   const motyw = useTheme();
   const { width: szerokoscOkna } = useWindowDimensions();
 
@@ -578,7 +580,7 @@ export default function EkranSkladnikow() {
         {' '}B — białko, T — tłuszcz, W — węglowodany.
       </ThemedText>
 
-      <Przycisk tytul="Wróć" wariant="poboczny" onPress={() => router.back()} />
+      <Przycisk tytul="Wróć" wariant="poboczny" onPress={() => wroc(powrot, '/przepisy')} />
     </Ekran>
   );
 }

@@ -1,0 +1,1035 @@
+{
+  "_opis": [
+    "Jak przełożyć dania ze starego planera na przepisy Talerza.",
+    "",
+    "Plik jest ręczny i taki ma zostać. Automat nie odgadnie, że „Filet z dorsza",
+    "(lub mintaj)” to w bazie „Dorsz atlantycki, surowy”, ani że zupa potrzebuje",
+    "półtora litra wody, o której przepis nie wspomina.",
+    "",
+    "SKŁADNIKI — pola:",
+    "  baza       nazwa w tabeli składników; musi zgadzać się co do znaku",
+    "  doSmaku_g  ile gramów wpisać, gdy planer podaje „do smaku” bez ilości",
+    "  stan       opcjonalny opis stanu, np. „obrana, starta na grubych oczkach”",
+    "  uwaga      notatka dla człowieka; nie trafia do bazy",
+    "",
+    "DANIA — pola:",
+    "  pory, kuchnie, trwalosc_dni   etykiety, których planer nie miał",
+    "  krotnosc      na ile porcji przeliczamy przepis; dla dań garnkowych",
+    "                bierzemy wielkość garnka, bo tak się naprawdę gotuje —",
+    "                inaczej w składnikach wychodzi „0,6667 cebuli”",
+    "  porcja_g      waga jednej porcji; policzona z sumy składników,",
+    "                zaokrąglona i sprawdzona ręcznie",
+    "  zamiany       podmiana składnika TYLKO w tym daniu; mapowanie działa",
+    "                globalnie, a to punktowo — barszcz na prędze, gulasz",
+    "                na łopatce, choć planer nazywa oba „mięsem gulaszowym”",
+    "  dolej         składniki, których planer nie wymienia, a bez których",
+    "                przepisu nie da się wykonać — przede wszystkim woda",
+    "  przechowywanie, mozna_mrozic, ratunek, sprzet   pola Talerza,",
+    "                których planer nie ma; uzupełniane ręcznie",
+    "",
+    "Wskazówka z planera („tip”) trafia do opisu przepisu, o ile nie została",
+    "rozdzielona ręcznie na przechowywanie i ratunek."
+  ],
+  "skladniki": {
+    "Udka z kurczaka": {
+      "baza": "Udo z kurczaka bez skóry, surowe",
+      "uwaga": "Planer liczy udka ze skórą i kością. W bazie jest samo mięso, więc kalorii wyjdzie mniej."
+    },
+    "Pierś z kurczaka": {
+      "baza": "Pierś z kurczaka, surowa"
+    },
+    "Marchew": {
+      "baza": "Marchew, surowa"
+    },
+    "Pietruszka korzeń": {
+      "baza": "Pietruszka korzeń"
+    },
+    "Seler": {
+      "baza": "Seler korzeń"
+    },
+    "Por": {
+      "baza": "Por, surowy",
+      "stan": "część biała i jasnozielona, w plastrach"
+    },
+    "Cebula": {
+      "baza": "Cebula, surowa"
+    },
+    "Czosnek": {
+      "baza": "Czosnek, surowy"
+    },
+    "Imbir świeży": {
+      "baza": "Imbir korzeń, surowy",
+      "stan": "obrany, starty"
+    },
+    "Papryka": {
+      "baza": "Papryka czerwona, surowa"
+    },
+    "Cytryna": {
+      "baza": "Cytryna",
+      "stan": "sok"
+    },
+    "Ogórek": {
+      "baza": "Ogórek, surowy"
+    },
+    "Rzodkiewki": {
+      "baza": "Rzodkiewka, surowa"
+    },
+    "Passata pomidorowa": {
+      "baza": "Passata pomidorowa"
+    },
+    "Mleko kokosowe light": {
+      "baza": "Mleko kokosowe light z puszki"
+    },
+    "Pasta curry": {
+      "baza": "Pasta curry czerwona"
+    },
+    "Sos sojowy": {
+      "baza": "Sos sojowy"
+    },
+    "Fasolka szparagowa mrożona": {
+      "baza": "Fasolka szparagowa mrożona"
+    },
+    "Ryż basmati": {
+      "baza": "Ryż basmati, suchy",
+      "stan": "suchy, ugotowany osobno"
+    },
+    "Jogurt grecki": {
+      "baza": "Jogurt grecki naturalny 2%"
+    },
+    "Twaróg półtłusty": {
+      "baza": "Twaróg półtłusty"
+    },
+    "Chleb razowy": {
+      "baza": "Chleb żytni razowy"
+    },
+    "Oliwa rafinowana": {
+      "baza": "Oliwa z oliwek",
+      "uwaga": "Baza nie rozróżnia rafinowanej od extra virgin — wartości odżywcze są takie same, różnią się punktem dymienia."
+    },
+    "Natka": {
+      "baza": "Pietruszka natka",
+      "doSmaku_g": 10,
+      "stan": "posiekana"
+    },
+    "Natka lub kolendra": {
+      "baza": "Pietruszka natka",
+      "doSmaku_g": 10,
+      "stan": "posiekana"
+    },
+    "Szczypiorek": {
+      "baza": "Szczypiorek świeży",
+      "doSmaku_g": 8,
+      "stan": "posiekany"
+    },
+    "Woda": {
+      "baza": "woda"
+    },
+    "Natka pietruszki": {
+      "baza": "Pietruszka natka",
+      "doSmaku_g": 10,
+      "stan": "posiekana"
+    },
+    "Mięso gulaszowe (wieprz. lub wołowe)": {
+      "baza": "Gulasz wieprzowy, surowy",
+      "stan": "w kostce 3 cm",
+      "uwaga": "Gotowy gulasz wieprzowy z tacki — tak nazywa się na etykiecie w Lidlu. Barszcz ma osobną podmianę na pręgę wołową."
+    },
+    "Mięso mielone wołowo-wieprzowe": {
+      "baza": "Mięso mielone wołowo-wieprzowe, surowe"
+    },
+    "Szynka wieprzowa (chuda)": {
+      "baza": "Szynka wieprzowa chuda, surowa"
+    },
+    "Polędwiczka wieprzowa": {
+      "baza": "Polędwiczka wieprzowa, surowa"
+    },
+    "Schab wieprzowy": {
+      "baza": "Schab wieprzowy, surowy"
+    },
+    "Wołowina (udziec lub rostbef)": {
+      "baza": "Wołowina na plastry (udziec), surowa",
+      "stan": "w cienkich paskach w poprzek włókien"
+    },
+    "Pierś z indyka": {
+      "baza": "Filet z indyka, surowy"
+    },
+    "Filet z indyka": {
+      "baza": "Filet z indyka, surowy"
+    },
+    "Filet z dorsza (lub mintaj)": {
+      "baza": "Dorsz atlantycki, surowy",
+      "uwaga": "Mintaj jest w bazie osobno — jeśli kupujesz mintaja, podmień w przepisie."
+    },
+    "Tuńczyk w wodzie": {
+      "baza": "Tuńczyk w wodzie, odsączony"
+    },
+    "Ziemniaki": {
+      "baza": "Ziemniaki, surowe",
+      "stan": "obrane"
+    },
+    "Pomidor": {
+      "baza": "Pomidory, surowe"
+    },
+    "Cebula czerwona": {
+      "baza": "Cebula czerwona, surowa",
+      "stan": "w cienkich piórkach"
+    },
+    "Pieczarki": {
+      "baza": "Pieczarki, surowe",
+      "stan": "w plastrach"
+    },
+    "Boczniaki": {
+      "baza": "Boczniaki, surowe",
+      "stan": "porwane na paski"
+    },
+    "Awokado": {
+      "baza": "Awokado",
+      "stan": "obrane, bez pestki"
+    },
+    "Rukola": {
+      "baza": "Rukola"
+    },
+    "Buraki": {
+      "baza": "Buraki, surowe",
+      "stan": "obrane, starte na grubych oczkach"
+    },
+    "Kapusta biała": {
+      "baza": "Kapusta biała, surowa",
+      "stan": "poszatkowana"
+    },
+    "Kapusta kiszona": {
+      "baza": "Kapusta kiszona",
+      "stan": "odciśnięta"
+    },
+    "Ogórek kiszony": {
+      "baza": "ogórki kiszone bio"
+    },
+    "Brokuł": {
+      "baza": "Brokuł, surowy",
+      "stan": "podzielony na różyczki"
+    },
+    "Koperek": {
+      "baza": "koperek świeży",
+      "doSmaku_g": 8,
+      "stan": "posiekany"
+    },
+    "Bazylia świeża": {
+      "baza": "Bazylia świeża",
+      "doSmaku_g": 5,
+      "stan": "świeże listki"
+    },
+    "Jajka": {
+      "baza": "Jaja kurze, całe, surowe"
+    },
+    "Mleko 2%": {
+      "baza": "Mleko 2%"
+    },
+    "Mozzarella": {
+      "baza": "Ser mozzarella",
+      "stan": "w plastrach"
+    },
+    "Ser feta": {
+      "baza": "Ser feta",
+      "stan": "pokruszona"
+    },
+    "Halloumi": {
+      "baza": "Halloumi",
+      "stan": "w plastrach 1 cm"
+    },
+    "Płatki owsiane górskie": {
+      "baza": "Płatki owsiane"
+    },
+    "Otręby owsiane": {
+      "baza": "Otręby owsiane"
+    },
+    "Siemię lniane mielone": {
+      "baza": "Siemię lniane",
+      "stan": "mielone"
+    },
+    "Nasiona chia": {
+      "baza": "Nasiona chia"
+    },
+    "Orzechy mieszane niesolone": {
+      "baza": "Orzechy włoskie",
+      "uwaga": "Baza nie ma mieszanki; orzechy włoskie są jej najbliższe kalorycznie."
+    },
+    "Kasza gryczana": {
+      "baza": "Kasza gryczana, sucha",
+      "stan": "sucha, ugotowana osobno"
+    },
+    "Kasza jęczmienna": {
+      "baza": "Kasza jęczmienna, sucha",
+      "stan": "sucha, przepłukana"
+    },
+    "Bułka tarta": {
+      "baza": "Bułka tarta"
+    },
+    "Masło orzechowe bez cukru": {
+      "baza": "Masło orzechowe bez cukru"
+    },
+    "Bulion warzywny": {
+      "baza": "Bulion warzywny gotowy"
+    },
+    "Chrzan tarty": {
+      "baza": "Chrzan tarty"
+    },
+    "Oliwki czarne": {
+      "baza": "Oliwki czarne",
+      "stan": "bez pestek"
+    },
+    "Pomidory suszone w oleju": {
+      "baza": "Pomidory suszone w oleju",
+      "stan": "odsączone, posiekane"
+    },
+    "Fasola biała": {
+      "baza": "Fasola biała z puszki, odsączona",
+      "stan": "odsączona i przepłukana"
+    },
+    "Fasola czerwona": {
+      "baza": "Fasola czerwona z puszki, odsączona",
+      "stan": "odsączona i przepłukana"
+    },
+    "Pasta tom kha": {
+      "baza": "Pasta tom kha"
+    },
+    "Sos rybny": {
+      "baza": "Sos rybny"
+    },
+    "Szpinak mrożony": {
+      "baza": "Szpinak mrożony"
+    },
+    "Groszek zielony mrożony": {
+      "baza": "Groszek zielony mrożony"
+    },
+    "Oliwa": {
+      "baza": "Oliwa z oliwek"
+    },
+    "Oliwa extra virgin": {
+      "baza": "Oliwa z oliwek"
+    },
+    "Olej rzepakowy": {
+      "baza": "Olej rzepakowy"
+    },
+    "Papryka słodka": {
+      "baza": "Papryka słodka mielona",
+      "doSmaku_g": 3
+    },
+    "Papryka ostra": {
+      "baza": "Papryka ostra mielona",
+      "doSmaku_g": 1
+    },
+    "Liść laurowy": {
+      "baza": "liść laurowy",
+      "doSmaku_g": 1
+    },
+    "Ziele angielskie": {
+      "baza": "ziele angielskie",
+      "doSmaku_g": 1
+    },
+    "Majeranek": {
+      "baza": "Majeranek suszony",
+      "doSmaku_g": 2
+    },
+    "Tymianek": {
+      "baza": "Tymianek suszony",
+      "doSmaku_g": 2
+    },
+    "Oregano": {
+      "baza": "Oregano suszone",
+      "doSmaku_g": 2
+    },
+    "Cynamon": {
+      "baza": "Cynamon mielony",
+      "doSmaku_g": 2
+    },
+    "Kmin rzymski": {
+      "baza": "Kmin rzymski mielony",
+      "doSmaku_g": 2
+    },
+    "Pieprz biały": {
+      "baza": "Pieprz biały mielony",
+      "doSmaku_g": 1
+    },
+    "Sezam": {
+      "baza": "Sezam",
+      "doSmaku_g": 5
+    }
+  },
+  "dania": {
+    "Owsianka": {
+      "pory": [
+        "sniadanie"
+      ],
+      "kuchnie": [
+        "inna"
+      ],
+      "trwalosc_dni": 1,
+      "krotnosc": 1,
+      "porcja_g": 434,
+      "dolej": [],
+      "sprzet": [
+        "Garnek 2 l",
+        "Miska"
+      ],
+      "przechowywanie": "Owsiankę jedz świeżą. Żel z chia zrób na cały tydzień — trzyma się 5 dni w zamkniętym słoiku.",
+      "mozna_mrozic": false,
+      "ratunek": "Za gęsta — dolej mleka albo wody. Za rzadka — pogotuj chwilę dłużej, ale pamiętaj, że chia jeszcze zgęstnieje."
+    },
+    "Tosty z jajkiem sadzonym": {
+      "pory": [
+        "sniadanie"
+      ],
+      "kuchnie": [
+        "inna"
+      ],
+      "trwalosc_dni": 1,
+      "krotnosc": 1,
+      "porcja_g": 425,
+      "dolej": [],
+      "sprzet": [
+        "Patelnia 24 cm",
+        "Nóż szefa kuchni",
+        "Deska do krojenia"
+      ],
+      "przechowywanie": "Jedz od razu. Awokado po rozgnieceniu ciemnieje w godzinę.",
+      "mozna_mrozic": false,
+      "ratunek": "Awokado ściemniało — skrop cytryną. Żółtko się rozlało — zrób z tego jajecznicę i nie tłumacz się nikomu."
+    },
+    "Twaróg z warzywami": {
+      "pory": [
+        "sniadanie"
+      ],
+      "kuchnie": [
+        "polska"
+      ],
+      "trwalosc_dni": 1,
+      "krotnosc": 1,
+      "porcja_g": 510,
+      "dolej": [],
+      "sprzet": [
+        "Miska",
+        "Widelec",
+        "Nóż szefa kuchni",
+        "Deska do krojenia"
+      ],
+      "przechowywanie": "Pasta w lodówce do 2 dni, warzywa krój na świeżo. Kanapki rób bezpośrednio przed jedzeniem — pieczywo rozmięknie.",
+      "mozna_mrozic": false,
+      "ratunek": "Pasta za sucha — dołóż łyżkę jogurtu. Za rzadka — odsącz twaróg na sitku."
+    },
+    "Jajecznica ze szpinakiem": {
+      "pory": [
+        "sniadanie"
+      ],
+      "kuchnie": [
+        "polska"
+      ],
+      "trwalosc_dni": 1,
+      "krotnosc": 1,
+      "porcja_g": 503,
+      "dolej": [],
+      "sprzet": [
+        "Patelnia 24 cm",
+        "Nóż szefa kuchni",
+        "Deska do krojenia"
+      ],
+      "przechowywanie": "Jedz od razu. Odgrzewana jajecznica robi się gumowata.",
+      "mozna_mrozic": false,
+      "ratunek": "Wyszła wodnista — to znak, że szpinak nie odparował. Odlej płyn i dosmaż na większym ogniu."
+    },
+    "Szakszuka z mozzarellą": {
+      "pory": [
+        "sniadanie"
+      ],
+      "kuchnie": [
+        "srodziemnomorska"
+      ],
+      "trwalosc_dni": 2,
+      "krotnosc": 1,
+      "porcja_g": 674,
+      "dolej": [],
+      "sprzet": [
+        "Patelnia 28 cm",
+        "Nóż szefa kuchni",
+        "Deska do krojenia"
+      ],
+      "przechowywanie": "Sam sos w lodówce do 3 dni. Jajka wbijaj dopiero przy podaniu — odgrzewane robią się gumowate.",
+      "mozna_mrozic": false,
+      "ratunek": "Sos za rzadki — duś dłużej bez przykrycia. Jajka się rozlały — nie mieszaj po wbiciu, tylko przykryj."
+    },
+    "Jajka w koszulkach z pastą twarogową": {
+      "pory": [
+        "sniadanie"
+      ],
+      "kuchnie": [
+        "polska"
+      ],
+      "trwalosc_dni": 1,
+      "krotnosc": 1,
+      "porcja_g": 441,
+      "dolej": [],
+      "sprzet": [
+        "Garnek 2 l",
+        "Miska",
+        "Sitko"
+      ],
+      "przechowywanie": "Pasta twarogowa w lodówce do 2 dni. Jajka rób na świeżo.",
+      "mozna_mrozic": false,
+      "ratunek": "Białko się rozeszło po wodzie — jajko było za stare albo woda za mocno wrzała. Ma ledwo drgać, nie bulgotać."
+    },
+    "Pasta jajeczna z awokado": {
+      "pory": [
+        "sniadanie"
+      ],
+      "kuchnie": [
+        "inna"
+      ],
+      "trwalosc_dni": 1,
+      "krotnosc": 1,
+      "porcja_g": 453,
+      "dolej": [],
+      "sprzet": [
+        "Garnek 2 l",
+        "Miska",
+        "Widelec"
+      ],
+      "przechowywanie": "W lodówce do 2 dni, w szczelnym pojemniku. Skrop cytryną, żeby awokado nie ściemniało.",
+      "mozna_mrozic": false,
+      "ratunek": "Pasta ściemniała — wierzchnia warstwa utleniła się, zbierz ją łyżką. Za sucha — łyżka jogurtu."
+    },
+    "Kanapki z pastą z tuńczyka": {
+      "pory": [
+        "sniadanie"
+      ],
+      "kuchnie": [
+        "inna"
+      ],
+      "trwalosc_dni": 2,
+      "krotnosc": 1,
+      "porcja_g": 546,
+      "dolej": [],
+      "sprzet": [
+        "Miska",
+        "Widelec",
+        "Nóż szefa kuchni",
+        "Deska do krojenia"
+      ],
+      "przechowywanie": "Pasta w lodówce do 2 dni. Kanapki składaj przed jedzeniem.",
+      "mozna_mrozic": false,
+      "ratunek": "Za sucha — łyżka jogurtu. Za słona — dołóż twarogu, nie soli."
+    },
+    "Gulasz z kaszą gryczaną": {
+      "pory": [
+        "obiad"
+      ],
+      "kuchnie": [
+        "polska"
+      ],
+      "trwalosc_dni": 3,
+      "krotnosc": 3,
+      "porcja_g": 802,
+      "dolej": [
+        {
+          "skladnik": "Woda",
+          "gramy": 200,
+          "stan": "na wywar — po odparowaniu"
+        }
+      ],
+      "sprzet": [
+        "Garnek 4 l",
+        "Nóż szefa kuchni",
+        "Deska do krojenia"
+      ],
+      "przechowywanie": "W lodówce do 3 dni, z dnia na dzień smakuje lepiej. Kaszę trzymaj osobno.",
+      "mozna_mrozic": true,
+      "ratunek": "Mięso twarde — duś dalej, wołowina potrzebuje nawet dwóch godzin. Sos za rzadki — odparuj bez przykrycia."
+    },
+    "Barszcz ukraiński z fasolą": {
+      "pory": [
+        "obiad"
+      ],
+      "kuchnie": [
+        "polska"
+      ],
+      "trwalosc_dni": 3,
+      "krotnosc": 3,
+      "porcja_g": 1231,
+      "dolej": [
+        {
+          "skladnik": "Woda",
+          "gramy": 1100,
+          "stan": "na wywar — po odparowaniu"
+        }
+      ],
+      "zamiany": {
+        "Mięso gulaszowe (wieprz. lub wołowe)": {
+          "baza": "Pręga wołowa bez kości, surowa",
+          "stan": "w kawałkach 3 cm",
+          "uwaga": "Decyzja Romana: barszcz na prędze. Kolagen daje wywarowi ciało. UWAGA — pręga potrzebuje 2–2,5 h gotowania, a przepis podaje 90 minut."
+        }
+      },
+      "sprzet": [
+        "Garnek 4 l",
+        "Tarka o grubych oczkach",
+        "Nóż szefa kuchni",
+        "Deska do krojenia"
+      ],
+      "przechowywanie": "W lodówce do 3 dni, z dnia na dzień smakuje lepiej. Chleb osobno.",
+      "mozna_mrozic": true,
+      "ratunek": "Stracił kolor — buraki nie lubią długiego gotowania; dodaj sok z cytryny, kolor wróci. Za mdły — więcej cytryny, nie soli."
+    },
+    "Wieprzowina w sosie chrzanowym": {
+      "pory": [
+        "obiad"
+      ],
+      "kuchnie": [
+        "polska"
+      ],
+      "trwalosc_dni": 3,
+      "krotnosc": 2,
+      "porcja_g": 1005,
+      "dolej": [],
+      "sprzet": [
+        "Garnek 3 l",
+        "Patelnia 24 cm",
+        "Tłuczek do ziemniaków",
+        "Nóż szefa kuchni",
+        "Deska do krojenia"
+      ],
+      "przechowywanie": "W lodówce do 3 dni. Puree i fasolka w osobnych pojemnikach.",
+      "mozna_mrozic": false,
+      "ratunek": "Sos się zwarzył — jogurt trafił do wrzątku. Zblenduj i wmieszaj łyżkę zimnego jogurtu. Chrzan stracił ostrość — dodaj świeżego po zdjęciu z ognia."
+    },
+    "Polędwiczka z pieczarkami i boczniakami": {
+      "pory": [
+        "obiad"
+      ],
+      "kuchnie": [
+        "polska"
+      ],
+      "trwalosc_dni": 3,
+      "krotnosc": 2,
+      "porcja_g": 846,
+      "dolej": [],
+      "sprzet": [
+        "Patelnia 28 cm",
+        "Nóż szefa kuchni",
+        "Deska do krojenia"
+      ],
+      "przechowywanie": "W lodówce do 3 dni. Kasza osobno.",
+      "mozna_mrozic": false,
+      "ratunek": "Mięso wyszło suche — przesmażone; następnym razem 2–3 minuty z każdej strony i koniec. Sos się zwarzył — zdejmij z ognia przed jogurtem."
+    },
+    "Kurczak po tajsku": {
+      "pory": [
+        "obiad"
+      ],
+      "kuchnie": [
+        "azjatycka"
+      ],
+      "trwalosc_dni": 3,
+      "krotnosc": 2,
+      "porcja_g": 575,
+      "dolej": [],
+      "sprzet": [
+        "Patelnia 28 cm",
+        "Garnek 2 l",
+        "Nóż szefa kuchni",
+        "Deska do krojenia",
+        "Tarka o drobnych oczkach"
+      ],
+      "przechowywanie": "W lodówce do 3 dni. Ryż w osobnym pojemniku. Z garnka wychodzą trzy porcje po 575 g — na trzy obiady.",
+      "mozna_mrozic": false,
+      "ratunek": "Sos się rozwarstwił — zdejmij z ognia i wmieszaj łyżkę zimnego mleka kokosowego. Za ostre — dodaj mleka kokosowego, nie wody. Za mdłe — sok z cytryny, nie sól."
+    },
+    "Dorsz po grecku": {
+      "pory": [
+        "obiad"
+      ],
+      "kuchnie": [
+        "srodziemnomorska"
+      ],
+      "trwalosc_dni": 3,
+      "krotnosc": 2,
+      "porcja_g": 1062,
+      "dolej": [],
+      "sprzet": [
+        "Piekarnik",
+        "Patelnia 28 cm",
+        "Tarka o grubych oczkach",
+        "Nóż szefa kuchni",
+        "Deska do krojenia"
+      ],
+      "przechowywanie": "W lodówce do 3 dni. Z dnia na dzień smakuje lepiej — dobrze też na zimno.",
+      "mozna_mrozic": false,
+      "ratunek": "Ryba się rozpadła — to nie problem, wymieszaj z warzywami. Warzywa za suche — dolej passaty i pogotuj."
+    },
+    "Klopsiki w sosie pomidorowym": {
+      "pory": [
+        "obiad"
+      ],
+      "kuchnie": [
+        "polska"
+      ],
+      "trwalosc_dni": 3,
+      "krotnosc": 3,
+      "porcja_g": 837,
+      "dolej": [],
+      "sprzet": [
+        "Patelnia 28 cm",
+        "Garnek 2 l",
+        "Tłuczek do ziemniaków",
+        "Miska",
+        "Nóż szefa kuchni",
+        "Deska do krojenia"
+      ],
+      "przechowywanie": "W lodówce do 3 dni. Świetnie się mrożą — porcję na trzeci dzień odłóż od razu do zamrażarki.",
+      "mozna_mrozic": true,
+      "ratunek": "Klopsiki się rozpadają — za mało bułki tartej albo za mokre mięso. Sos za kwaśny — szczypta słodkiej papryki i pogotuj."
+    },
+    "Fasolka po bretońsku z indykiem": {
+      "pory": [
+        "obiad"
+      ],
+      "kuchnie": [
+        "polska"
+      ],
+      "trwalosc_dni": 3,
+      "krotnosc": 3,
+      "porcja_g": 720,
+      "dolej": [],
+      "sprzet": [
+        "Garnek 3 l",
+        "Nóż szefa kuchni",
+        "Deska do krojenia"
+      ],
+      "przechowywanie": "W lodówce do 3 dni. Chleb osobno.",
+      "mozna_mrozic": true,
+      "ratunek": "Za gęsta — dolej wody. Mętna — fasola nieprzepłukana po odsączeniu."
+    },
+    "Pieczony schab z warzywami korzeniowymi": {
+      "pory": [
+        "obiad"
+      ],
+      "kuchnie": [
+        "polska"
+      ],
+      "trwalosc_dni": 3,
+      "krotnosc": 3,
+      "porcja_g": 751,
+      "dolej": [],
+      "sprzet": [
+        "Piekarnik",
+        "Nóż szefa kuchni",
+        "Deska do krojenia"
+      ],
+      "przechowywanie": "W lodówce do 3 dni. Zimny schab następnego dnia jest świetny na kanapki.",
+      "mozna_mrozic": true,
+      "ratunek": "Schab wyszedł suchy — piekłeś za długo. Termometr: 65–68°C w środku i wyjmować. Ratunek: pokrój cienko i polej sosem z brytfanny."
+    },
+    "Wołowina z brokułami po chińsku": {
+      "pory": [
+        "obiad"
+      ],
+      "kuchnie": [
+        "azjatycka"
+      ],
+      "trwalosc_dni": 3,
+      "krotnosc": 2,
+      "porcja_g": 642,
+      "dolej": [],
+      "sprzet": [
+        "Patelnia 28 cm",
+        "Garnek 2 l",
+        "Nóż szefa kuchni",
+        "Deska do krojenia"
+      ],
+      "przechowywanie": "W lodówce do 3 dni. Ryż osobno. Brokuł traci chrupkość — to normalne.",
+      "mozna_mrozic": false,
+      "ratunek": "Mięso twarde — pokrojone wzdłuż włókien zamiast w poprzek. Wyszło wodniste — patelnia była za zimna albo mięso smażone naraz."
+    },
+    "Smażony ryż z kurczakiem i jajkiem": {
+      "pory": [
+        "obiad"
+      ],
+      "kuchnie": [
+        "azjatycka"
+      ],
+      "trwalosc_dni": 2,
+      "krotnosc": 2,
+      "porcja_g": 544,
+      "dolej": [],
+      "sprzet": [
+        "Patelnia 28 cm",
+        "Garnek 2 l",
+        "Nóż szefa kuchni",
+        "Deska do krojenia"
+      ],
+      "przechowywanie": "W lodówce do 2 dni. To danie z resztek, więc nie rób z niego kolejnych resztek.",
+      "mozna_mrozic": false,
+      "ratunek": "Ryż się klei — był ciepły. Musi być z lodówki, najlepiej wczorajszy."
+    },
+    "Tom kha gai — kokosowa zupa z kurczakiem": {
+      "pory": [
+        "obiad",
+        "kolacja"
+      ],
+      "kuchnie": [
+        "azjatycka"
+      ],
+      "trwalosc_dni": 3,
+      "krotnosc": 3,
+      "porcja_g": 838,
+      "dolej": [],
+      "sprzet": [
+        "Garnek 3 l",
+        "Garnek 2 l",
+        "Nóż szefa kuchni",
+        "Deska do krojenia"
+      ],
+      "przechowywanie": "W lodówce do 3 dni. Ryż osobno. Odgrzewaj łagodnie — mleko kokosowe nie lubi wrzenia.",
+      "mozna_mrozic": false,
+      "ratunek": "Zupa się rozwarstwiła — cytryna trafiła do wrzącego mleka. Zblenduj chwilę, wróci. Za ostra — dolej mleka kokosowego."
+    },
+    "Wieprzowina w sosie sojowo-imbirowym": {
+      "pory": [
+        "obiad"
+      ],
+      "kuchnie": [
+        "azjatycka"
+      ],
+      "trwalosc_dni": 3,
+      "krotnosc": 2,
+      "porcja_g": 684,
+      "dolej": [],
+      "sprzet": [
+        "Patelnia 28 cm",
+        "Garnek 2 l",
+        "Nóż szefa kuchni",
+        "Deska do krojenia",
+        "Tarka o drobnych oczkach"
+      ],
+      "przechowywanie": "W lodówce do 3 dni. Ryż osobno.",
+      "mozna_mrozic": false,
+      "ratunek": "Za słone — sos sojowy jest bardzo słony, nie dosalaj. Ratunek: dorzuć więcej warzyw i ryżu. Warzywa miękkie — smażone za długo."
+    },
+    "Indyk w sosie orzechowym (satay)": {
+      "pory": [
+        "obiad"
+      ],
+      "kuchnie": [
+        "azjatycka"
+      ],
+      "trwalosc_dni": 3,
+      "krotnosc": 2,
+      "porcja_g": 648,
+      "dolej": [],
+      "sprzet": [
+        "Patelnia 28 cm",
+        "Garnek 2 l",
+        "Nóż szefa kuchni",
+        "Deska do krojenia"
+      ],
+      "przechowywanie": "W lodówce do 3 dni. Ryż osobno. Sos gęstnieje po schłodzeniu — dolej wody przy odgrzewaniu.",
+      "mozna_mrozic": false,
+      "ratunek": "Sos się zważył — wmieszaj łyżkę ciepłej wody poza ogniem. Za gęsty — mleko kokosowe. Za mdły — sok z cytryny."
+    },
+    "Zupa pomidorowa z ryżem": {
+      "pory": [
+        "kolacja"
+      ],
+      "kuchnie": [
+        "polska"
+      ],
+      "trwalosc_dni": 3,
+      "krotnosc": 3,
+      "porcja_g": 900,
+      "dolej": [
+        {
+          "skladnik": "Woda",
+          "gramy": 1250,
+          "stan": "zimna, na wywar — do garnka wlej około 1,6 l, przez 40 minut gotowania odparuje jakieś 350 ml",
+          "po": "Udka z kurczaka"
+        }
+      ],
+      "sprzet": [
+        "Garnek 3 l",
+        "Nóż szefa kuchni",
+        "Deska do krojenia",
+        "Sitko"
+      ],
+      "przechowywanie": "Po wystudzeniu w lodówce, pod przykryciem, do 3 dni. Ryż trzymaj osobno — w zupie rozmięknie i wypije wywar.",
+      "mozna_mrozic": true,
+      "ratunek": "Za kwaśna od passaty — dodaj startą marchewkę i pogotuj 10 minut. Za rzadka — odparuj bez przykrycia. Za mało wyrazista — dosól i dodaj łyżkę passaty, nie kostkę rosołową."
+    },
+    "Krem marchewkowy z ryżem": {
+      "pory": [
+        "kolacja"
+      ],
+      "kuchnie": [
+        "polska"
+      ],
+      "trwalosc_dni": 3,
+      "krotnosc": 3,
+      "porcja_g": 835,
+      "dolej": [],
+      "sprzet": [
+        "Garnek 3 l",
+        "Blender",
+        "Nóż szefa kuchni",
+        "Deska do krojenia"
+      ],
+      "przechowywanie": "W lodówce do 3 dni. Po zblendowaniu gęstnieje — przy odgrzewaniu dolej ciepłej wody.",
+      "mozna_mrozic": true,
+      "ratunek": "Za gęsty — dolej ciepłej wody i zamieszaj. Za rzadki — pogotuj bez przykrycia. Mdły — łyżeczka oliwy na wierzch i biały pieprz."
+    },
+    "Omlet z pieczarkami": {
+      "pory": [
+        "kolacja"
+      ],
+      "kuchnie": [
+        "inna"
+      ],
+      "trwalosc_dni": 1,
+      "krotnosc": 1,
+      "porcja_g": 476,
+      "dolej": [],
+      "sprzet": [
+        "Patelnia 24 cm",
+        "Nóż szefa kuchni",
+        "Deska do krojenia"
+      ],
+      "przechowywanie": "Jedz od razu. Odgrzewany omlet jest gumowaty.",
+      "mozna_mrozic": false,
+      "ratunek": "Nie chce się złożyć — patelnia za mała albo masa za rzadka. Podaj jako jajecznicę, smakuje tak samo."
+    },
+    "Sałatka z tuńczykiem i jajkiem": {
+      "pory": [
+        "kolacja"
+      ],
+      "kuchnie": [
+        "srodziemnomorska"
+      ],
+      "trwalosc_dni": 2,
+      "krotnosc": 1,
+      "porcja_g": 828,
+      "dolej": [],
+      "sprzet": [
+        "Garnek 2 l",
+        "Miska",
+        "Nóż szefa kuchni",
+        "Deska do krojenia"
+      ],
+      "przechowywanie": "Bez dressingu w lodówce do 2 dni. Oliwę i cytrynę dodawaj przy podaniu, inaczej warzywa puszczą wodę.",
+      "mozna_mrozic": false,
+      "ratunek": "Puściła wodę — odlej i dopraw na nowo. Za kwaśna — łyżka oliwy zbalansuje."
+    },
+    "Grillowany indyk z halloumi": {
+      "pory": [
+        "kolacja"
+      ],
+      "kuchnie": [
+        "srodziemnomorska"
+      ],
+      "trwalosc_dni": 2,
+      "krotnosc": 1,
+      "porcja_g": 490,
+      "dolej": [],
+      "sprzet": [
+        "Grillownica kontaktowa",
+        "Nóż szefa kuchni",
+        "Deska do krojenia"
+      ],
+      "przechowywanie": "W lodówce do 2 dni. Halloumi po wystudzeniu twardnieje — odgrzej na patelni.",
+      "mozna_mrozic": false,
+      "ratunek": "Indyk suchy — grillowany za długo. Termometr: 74°C. Halloumi za słone — namocz następnym razem 20 minut w wodzie."
+    },
+    "Grillowany kurczak caprese": {
+      "pory": [
+        "kolacja"
+      ],
+      "kuchnie": [
+        "srodziemnomorska"
+      ],
+      "trwalosc_dni": 2,
+      "krotnosc": 1,
+      "porcja_g": 472,
+      "dolej": [],
+      "sprzet": [
+        "Grillownica kontaktowa",
+        "Nóż szefa kuchni",
+        "Deska do krojenia"
+      ],
+      "przechowywanie": "W lodówce do 2 dni. Mozzarellę i pomidora dokładaj przy podaniu.",
+      "mozna_mrozic": false,
+      "ratunek": "Pierś sucha — przekrój ją wzdłuż na dwa cieńsze płaty, grilluje się o połowę krócej."
+    },
+    "Grillowany kurczak z ogórkiem kiszonym": {
+      "pory": [
+        "kolacja"
+      ],
+      "kuchnie": [
+        "polska"
+      ],
+      "trwalosc_dni": 2,
+      "krotnosc": 1,
+      "porcja_g": 562,
+      "dolej": [],
+      "sprzet": [
+        "Grillownica kontaktowa",
+        "Nóż szefa kuchni",
+        "Deska do krojenia"
+      ],
+      "przechowywanie": "W lodówce do 2 dni.",
+      "mozna_mrozic": false,
+      "ratunek": "Pierś sucha — grillowana za długo. Ogórek za słony — przepłucz przed pokrojeniem."
+    },
+    "Krupnik z kaszą jęczmienną": {
+      "pory": [
+        "kolacja"
+      ],
+      "kuchnie": [
+        "polska"
+      ],
+      "trwalosc_dni": 3,
+      "krotnosc": 3,
+      "porcja_g": 900,
+      "dolej": [
+        {
+          "skladnik": "Woda",
+          "gramy": 1200,
+          "stan": "na wywar — po odparowaniu"
+        }
+      ],
+      "sprzet": [
+        "Garnek 4 l",
+        "Nóż szefa kuchni",
+        "Deska do krojenia",
+        "Sitko"
+      ],
+      "przechowywanie": "W lodówce do 3 dni. Kasza pęcznieje jeszcze w lodówce — następnego dnia dolej wody przy odgrzewaniu.",
+      "mozna_mrozic": true,
+      "ratunek": "Za gęsty — dolej wody, to normalne po nocy. Mdły — dosól i dodaj świeżego koperku, nie kostki rosołowej."
+    },
+    "Sałatka grecka z grillowanym kurczakiem": {
+      "pory": [
+        "kolacja"
+      ],
+      "kuchnie": [
+        "srodziemnomorska"
+      ],
+      "trwalosc_dni": 2,
+      "krotnosc": 1,
+      "porcja_g": 747,
+      "dolej": [],
+      "sprzet": [
+        "Grillownica kontaktowa",
+        "Miska",
+        "Nóż szefa kuchni",
+        "Deska do krojenia"
+      ],
+      "przechowywanie": "Bez dressingu w lodówce do 2 dni. Oliwę i cytrynę dodawaj przy podaniu.",
+      "mozna_mrozic": false,
+      "ratunek": "Za słona — feta jest słona, nie dosalaj. Przepłucz ser zimną wodą przed pokruszeniem. Puściła wodę — odlej i dopraw na nowo."
+    }
+  }
+}
