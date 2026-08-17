@@ -34,7 +34,19 @@ import { useTheme } from '@/hooks/use-theme';
 export function EkranPowitalny({ onDalej }: { onDalej: () => void }) {
   const motyw = useTheme();
 
-  const grafika = require('@/assets/images/logo-talerz.png');
+  /*
+    Ścieżka WZGLĘDNA, nie skrót `@/`.
+
+    Skrót `@/` jest ustawiony w `tsconfig.json` i działa dla modułów, ale to
+    był pierwszy obrazek wczytywany w tym projekcie przez `require` — reszta
+    grafik podawana jest w `app.json` ścieżką względną. TypeScript tego nie
+    sprawdza, bo `require` zwraca `any` i nie rozwiązuje ścieżki, więc
+    `tsc` przechodził niezależnie od tego, czy skrót zadziała.
+
+    Ścieżka względna nie zależy od żadnej konfiguracji i rozwiązuje się tak
+    samo przy uruchomieniu lokalnym i przy budowaniu na serwer.
+  */
+  const grafika = require('../assets/images/logo-talerz.png');
 
   return (
     <ThemedView style={styles.tlo}>
