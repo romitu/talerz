@@ -41,9 +41,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Node 22, nie 20 — i to nie jest kwestia gustu.
+      #
+      # `@supabase/supabase-js` tworzy klienta czasu rzeczywistego, a ten
+      # potrzebuje wbudowanego WebSocketa. Node dostał go dopiero w wersji 22.
+      # Na dwudziestce budowanie wywracało się w środku, komunikatem
+      # „Node.js detected but native WebSocket not found”.
+      #
+      # Nie dało się tego zobaczyć na komputerze: tam Node jest nowszy, więc
+      # budowanie przechodziło bez mrugnięcia. Wersję trzeba więc podać wprost,
+      # a nie liczyć na to, co akurat stoi na maszynie.
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
 
       - name: Instalacja zależności
@@ -72,6 +82,25 @@ jobs:
             exit 1
           fi
           echo "Oba sekrety na miejscu."
+
+      # Adres strony bierzemy z PRAWDZIWEJ nazwy repozytorium, zamiast wpisywać
+      # go na stałe w app.json.
+      #
+      # GitHub serwuje projekt pod adresem zawierającym nazwę repozytorium,
+      # z zachowaniem wielkości liter. Wpisana ręcznie wartość rozjechała się
+      # z nią dwa razy — raz przez wielką literę, raz przy zmianie nazwy.
+      # Skoro GitHub zna tę nazwę, niech ją sam poda.
+      - name: Dopasowanie adresu do nazwy repozytorium
+        env:
+          REPOZYTORIUM: ${{ github.event.repository.name }}
+        run: |
+          node -e "
+            const fs = require('fs');
+            const d = JSON.parse(fs.readFileSync('app.json', 'utf8'));
+            d.expo.experiments.baseUrl = '/' + process.env.REPOZYTORIUM;
+            fs.writeFileSync('app.json', JSON.stringify(d, null, 2) + '\n');
+            console.log('baseUrl =', d.expo.experiments.baseUrl);
+          "
 
       - name: Sprawdzenie typów
         run: npx tsc --noEmit
