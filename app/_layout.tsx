@@ -2,14 +2,21 @@ import { Ionicons } from '@expo/vector-icons';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { Tabs } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
+import { useCallback, useEffect, useState } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import 'react-native-reanimated';
 
 import { EkranLogowania } from '@/components/ekran-logowania';
+import { EkranPowitalny } from '@/components/ekran-powitalny';
+import { Karta } from '@/components/karta';
+import { Przycisk } from '@/components/przycisk';
+import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { PALETY, type Paleta } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { DostawcaSesji, useSesja } from '@/lib/sesja';
+import { supabase } from '@/lib/supabase';
+import { czyMojeKontoCzynne } from '@/lib/uzytkownicy';
 import { DostawcaWygladu, useStyl } from '@/lib/wyglad';
 
 /**
@@ -41,6 +48,51 @@ function BramkaSesji({ tryb }: { tryb: 'light' | 'dark' }) {
   const { styl } = useStyl();
   const kolory = PALETY[styl][tryb];
 
+  /*
+    Powitanie pokazujemy po KAŻDYM zalogowaniu.
+
+    Stan trzymamy tutaj, a nie w pamięci urządzenia, i to jest cała sztuczka:
+    komponent żyje tak długo jak otwarta aplikacja, więc odhaczone powitanie
+    zostaje odhaczone do końca pracy, a wraca przy następnym uruchomieniu
+    albo po wylogowaniu. Zapisywanie tego gdziekolwiek dałoby dokładnie
+    odwrotny skutek do zamierzonego.
+  */
+  const [powitanie, setPowitanie] = useState(true);
+
+  /*
+    Konto mogło zostać wyłączone już PO zalogowaniu.
+
+    Sesja trzyma się tygodniami, więc bez tego sprawdzenia wyłączony użytkownik
+    chodziłby po aplikacji, w której wszystko jest puste — plan bez dni, zakupy
+    bez pozycji, profil bez profilu — i nie miałby jak się domyślić dlaczego.
+    Reguły dostępu w bazie już go blokują; tu chodzi wyłącznie o to, żeby
+    powiedzieć mu, co się stało.
+
+    `null` znaczy „nie wiem” i wtedy NIE wylogowujemy. Zerwane połączenie nie
+    może wyglądać jak odebrany dostęp.
+  */
+  const [wylaczone, setWylaczone] = useState(false);
+  const kontoId = sesja?.user.id;
+
+  useEffect(() => {
+    if (!kontoId) {
+      setWylaczone(false);
+      return;
+    }
+    let aktualne = true;
+    czyMojeKontoCzynne(kontoId).then((czynne) => {
+      if (aktualne && czynne === false) setWylaczone(true);
+    });
+    return () => {
+      aktualne = false;
+    };
+  }, [kontoId]);
+
+  const wyloguj = useCallback(() => {
+    setWylaczone(false);
+    supabase.auth.signOut();
+  }, []);
+
   if (ladowanie) {
     return (
       <ThemedView style={{ flex: 1 }}>
@@ -53,6 +105,32 @@ function BramkaSesji({ tryb }: { tryb: 'light' | 'dark' }) {
 
   if (!sesja) {
     return <EkranLogowania />;
+  }
+
+  if (wylaczone) {
+    return (
+      <ThemedView style={{ flex: 1, justifyContent: 'center', padding: 24 }}>
+        <Karta>
+          <ThemedText type="subtitle" themeColor="accent">
+            To konto zostało wyłączone
+          </ThemedText>
+          <ThemedText type="default">
+            Dostęp do Talerza został wstrzymany przez administratora. Twoje dane —
+            plany, przepisy i listy zakupów — są nietknięte i wrócą, gdy konto
+            zostanie włączone z powrotem.
+          </ThemedText>
+          <ThemedText type="small" themeColor="textSecondary">
+            Hasło jest poprawne, więc nie ma potrzeby go zmieniać ani zakładać nowego
+            konta. Skontaktuj się z administratorem.
+          </ThemedText>
+          <Przycisk tytul="Wyloguj się" onPress={wyloguj} />
+        </Karta>
+      </ThemedView>
+    );
+  }
+
+  if (powitanie) {
+    return <EkranPowitalny onDalej={() => setPowitanie(false)} />;
   }
 
   return <Zakladki kolory={kolory} />;
@@ -124,6 +202,7 @@ function Zakladki({ kolory }: { kolory: Paleta }) {
       <Tabs.Screen name="przepis-formularz" options={{ href: null }} />
       <Tabs.Screen name="skladniki" options={{ href: null }} />
       <Tabs.Screen name="przepis" options={{ href: null }} />
+      <Tabs.Screen name="uzytkownicy" options={{ href: null }} />
     </Tabs>
   );
 }

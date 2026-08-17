@@ -30,6 +30,7 @@ srv = pgserver.get_server(str(B))
 
 NAPASTNIK = "11111111-1111-1111-1111-111111111111"
 ROMAN = "22222222-2222-2222-2222-222222222222"
+DRUGI_ADMIN = "44444444-4444-4444-4444-444444444444"
 
 
 def sql(q):
@@ -133,13 +134,41 @@ sprawdz("zgody na własnym koncie dalej da się zapisać", not blad, out[:200] i
 sprawdz("i zapisały się naprawdę",
         w(f"select zgoda_regulamin from konta where id = '{NAPASTNIK}'") == "true")
 
-# --- 4. role nadaje się WYŁĄCZNIE z panelu ------------------------------------
-# Reguła `konta_zapis_wlasne` pozwala zmieniać tylko własny wiersz, więc nawet
-# administrator nie zmieni cudzej roli PRZEZ APLIKACJĘ. To zamierzone: aplikacja
-# nie ma ekranu do nadawania uprawnień, a im mniej dróg do tej kolumny, tym
-# mniej jest do pilnowania. Nadawanie ról odbywa się w SQL Editorze.
-jako(ROMAN, f"update konta set rola = 'moderator' where id = '{NAPASTNIK}';")
-sprawdz("nawet administrator nie zmienia cudzej roli z aplikacji",
+# --- 4. granice nadawania ról (migracja 0024) --------------------------------
+# Administrator mianuje moderatorów z aplikacji, bo bez tego nie ma kto
+# zatwierdzać przepisów, a ręczne zapytania z przepisywanym identyfikatorem
+# proszą się o pomyłkę. Rola administratora zostaje poza zasięgiem aplikacji.
+out, blad = jako(ROMAN, f"update konta set rola = 'moderator' where id = '{NAPASTNIK}';")
+sprawdz("administrator mianuje moderatora z aplikacji",
+        not blad and w(f"select rola from konta where id = '{NAPASTNIK}'") == "moderator",
+        out[:200] if blad else "")
+
+out, blad = jako(ROMAN, f"update konta set rola = 'uzytkownik' where id = '{NAPASTNIK}';")
+sprawdz("i odbiera tę rolę z powrotem",
+        not blad and w(f"select rola from konta where id = '{NAPASTNIK}'") == "uzytkownik",
+        out[:200] if blad else "")
+
+# SEDNO: administratora nie da się zrobić z aplikacji, nawet będąc nim.
+out, blad = jako(ROMAN, f"update konta set rola = 'administrator' where id = '{NAPASTNIK}';")
+sprawdz("administrator NIE zrobi drugiego administratora z aplikacji",
+        w(f"select rola from konta where id = '{NAPASTNIK}'") == "uzytkownik")
+sprawdz("i dostaje o tym błąd", blad, out[:160])
+
+# Ani odebrać roli administratora komuś innemu.
+sql(f"insert into auth.users (id, email) values ('{DRUGI_ADMIN}', 'drugi@t.pl');")
+sql(f"update konta set rola = 'administrator' where id = '{DRUGI_ADMIN}';")
+jako(ROMAN, f"update konta set rola = 'uzytkownik' where id = '{DRUGI_ADMIN}';")
+sprawdz("administrator nie odbierze roli innemu administratorowi",
+        w(f"select rola from konta where id = '{DRUGI_ADMIN}'") == "administrator")
+
+# Własnej roli nie zmienia nikt — jedyny administrator odebrałby sobie klucze.
+jako(ROMAN, f"update konta set rola = 'uzytkownik' where id = '{ROMAN}';")
+sprawdz("administrator nie odbierze roli sam sobie",
+        w(f"select rola from konta where id = '{ROMAN}'") == "administrator")
+
+# Zwykły użytkownik dalej nie rusza niczego.
+jako(NAPASTNIK, f"update konta set rola = 'moderator' where id = '{NAPASTNIK}';")
+sprawdz("zwykły użytkownik nie mianuje sam siebie moderatorem",
         w(f"select rola from konta where id = '{NAPASTNIK}'") == "uzytkownik")
 
 out, blad = sql(f"update konta set rola = 'moderator' where id = '{NAPASTNIK}';")

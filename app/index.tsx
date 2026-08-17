@@ -1,7 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { router, useFocusEffect } from 'expo-router';
-import { useCallback, useMemo, useState } from 'react';
-import { Pressable, StyleSheet, View } from 'react-native';
+import { useCallback, useMemo, useRef, useState } from 'react';
+import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 
 import { Ekran } from '@/components/ekran';
 import { Karta } from '@/components/karta';
@@ -101,6 +101,20 @@ export default function EkranPlanu() {
   const [pracuje, setPracuje] = useState(false);
   const [czyscic, setCzyscic] = useState(false);
   const [komunikat, setKomunikat] = useState<string | null>(null);
+
+  /*
+    Powrót na to samo miejsce po wybraniu dania.
+
+    Wybór przepisu podmienia CAŁĄ treść ekranu, więc po powrocie lista buduje
+    się od nowa i zaczyna od góry. Przy dodawaniu obiadu w siódmym dniu
+    oznaczało to przewijanie w dół za każdym razem.
+
+    Trzy referencje zamiast stanu, bo żadna z nich nie ma prawa wywołać
+    ponownego rysowania — to tylko notatki o tym, gdzie byliśmy.
+  */
+  const przewijanie = useRef<ScrollView>(null);
+  const pozycja = useRef(0);
+  const doPrzywrocenia = useRef(false);
 
   const pobierz = useCallback(async () => {
     setWczytywanie(true);
@@ -354,6 +368,7 @@ export default function EkranPlanu() {
                   trwaloscDni: p.trwalosc_dni,
                   dostepneDni: dniPlanu(plan),
                 });
+                doPrzywrocenia.current = true;
                 setWybierany(null);
               })
             }
@@ -372,7 +387,14 @@ export default function EkranPlanu() {
           </ThemedText>
         )}
 
-        <Przycisk tytul="Anuluj" wariant="poboczny" onPress={() => setWybierany(null)} />
+        <Przycisk
+          tytul="Anuluj"
+          wariant="poboczny"
+          onPress={() => {
+            doPrzywrocenia.current = true;
+            setWybierany(null);
+          }}
+        />
       </Ekran>
     );
   }
@@ -383,6 +405,21 @@ export default function EkranPlanu() {
 
   return (
     <Ekran
+      refPrzewijania={przewijanie}
+      onScroll={(e) => {
+        pozycja.current = e.nativeEvent.contentOffset.y;
+      }}
+      /*
+        Przywracamy dopiero, gdy treść ma już swoją wysokość. Wcześniejsza próba
+        nie ma dokąd przewinąć — lista jest jeszcze pusta i przewijanie kończy
+        się na zerze, czyli dokładnie tam, skąd chcieliśmy uciec.
+      */
+      onContentSizeChange={(_, wysokosc) => {
+        if (!doPrzywrocenia.current) return;
+        if (wysokosc <= pozycja.current) return;
+        doPrzywrocenia.current = false;
+        przewijanie.current?.scrollTo({ y: pozycja.current, animated: false });
+      }}
       tytul="Plan dnia"
       podtytul={
         plan

@@ -1,5 +1,5 @@
-import type { ReactNode } from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import type { ReactNode, RefObject } from 'react';
+import { ScrollView, StyleSheet, View, type ScrollViewProps } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ThemedText } from './themed-text';
@@ -18,6 +18,20 @@ type EkranProps = {
    * miejsca na ekranie.
    */
   pelnaSzerokosc?: boolean;
+
+  /**
+   * Dostęp do przewijanego obszaru — potrzebny tam, gdzie ekran musi wrócić
+   * na to samo miejsce, na którym był.
+   *
+   * Bez tego ekran planu po dodaniu dania wracał na samą górę: wybór przepisu
+   * podmienia CAŁĄ treść, więc po powrocie lista buduje się od nowa i zaczyna
+   * od zera. Przy siódmym dniu tygodnia oznaczało to przewijanie w dół
+   * za każdym razem.
+   */
+  refPrzewijania?: RefObject<ScrollView | null>;
+  onScroll?: ScrollViewProps['onScroll'];
+  onContentSizeChange?: ScrollViewProps['onContentSizeChange'];
+
   children: ReactNode;
 };
 
@@ -26,11 +40,25 @@ type EkranProps = {
  * się pod wycięciem aparatu), przewijanie i nagłówek. Dzięki temu wszystkie
  * ekrany wyglądają tak samo i nie powtarzamy tego kodu cztery razy.
  */
-export function Ekran({ tytul, podtytul, pelnaSzerokosc = false, children }: EkranProps) {
+export function Ekran({
+  tytul,
+  podtytul,
+  pelnaSzerokosc = false,
+  refPrzewijania,
+  onScroll,
+  onContentSizeChange,
+  children,
+}: EkranProps) {
   return (
     <ThemedView style={styles.tlo}>
       <SafeAreaView edges={['top']} style={styles.obszarBezpieczny}>
         <ScrollView
+          ref={refPrzewijania}
+          onScroll={onScroll}
+          onContentSizeChange={onContentSizeChange}
+          // Bez tego zdarzenie przewijania przychodzi raz na sekundę i
+          // zapamiętana pozycja jest nieaktualna.
+          scrollEventThrottle={16}
           style={styles.przewijanie}
           contentContainerStyle={[
             styles.zawartosc,

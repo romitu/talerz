@@ -147,6 +147,29 @@ export default function EkranProfilu() {
         <WyborStylu />
       </Karta>
 
+      {/*
+        Zarządzanie kontami widzi tylko administrator. Ukrycie przycisku nie
+        jest zabezpieczeniem — tym są reguły dostępu w bazie — ale przycisk
+        prowadzący do ekranu, na którym i tak nic nie widać, tylko myli.
+      */}
+      {rola === 'administrator' && (
+        <Karta>
+          <ThemedText type="smallBold" themeColor="textSecondary">
+            ADMINISTRACJA
+          </ThemedText>
+          <ThemedText type="small" themeColor="textSecondary">
+            Wyłączanie i przywracanie dostępu. Konta zakłada się w panelu Supabase.
+          </ThemedText>
+          <Przycisk
+            tytul="Użytkownicy"
+            wariant="poboczny"
+            onPress={() =>
+              router.push({ pathname: '/uzytkownicy', params: { powrot: '/profil' } })
+            }
+          />
+        </Karta>
+      )}
+
       <Przycisk
         tytul="Wyloguj się"
         wariant="poboczny"
