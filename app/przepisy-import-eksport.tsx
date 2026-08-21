@@ -19,6 +19,15 @@ import {
   type BladImportu,
   type PozycjaImportu,
 } from '@/lib/import-eksport-przepisow';
+import {
+  eksportujSkladniki,
+  sklasyfikujSkladniki,
+  wczytajPlikSkladnikow,
+  zaimportujSkladniki,
+  type BladImportuSkladnika,
+  type PozycjaImportuSkladnika,
+} from '@/lib/import-eksport-skladnikow';
+import { bezPrefiksuDataUrl } from '@/lib/import-eksport-wspolne';
 import { wroc } from '@/lib/nawigacja';
 import { pobierzWszystkiePelnePrzepisy } from '@/lib/przepisy';
 import { useSesja } from '@/lib/sesja';
@@ -39,9 +48,35 @@ import { supabase } from '@/lib/supabase';
 
 const TYP_PLIKU_XLSX = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
 
-function nazwaPlikuEksportu(): string {
+function nazwaPlikuEksportu(prefiks: string): string {
   const dzis = new Date().toISOString().slice(0, 10);
-  return `talerz-przepisy-${dzis}.xlsx`;
+  return `talerz-${prefiks}-${dzis}.xlsx`;
+}
+
+/** Pobranie/udostępnienie już zbudowanego pliku .xlsx — identyczne dla przepisów i składników. */
+async function zapiszPlikXlsx(base64: string, nazwa: string, poZapisie: (komunikat: string) => void) {
+  if (Platform.OS === 'web') {
+    // Na webie nie ma katalogu plików ani udostępniania — zwykłe pobranie
+    // przez tymczasowy link załatwia sprawę.
+    const a = document.createElement('a');
+    a.href = `data:${TYP_PLIKU_XLSX};base64,${base64}`;
+    a.download = nazwa;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    poZapisie(`Pobrano plik ${nazwa}.`);
+  } else {
+    const uri = FileSystem.cacheDirectory + nazwa;
+    await FileSystem.writeAsStringAsync(uri, base64, {
+      encoding: FileSystem.EncodingType.Base64,
+    });
+
+    if (await Sharing.isAvailableAsync()) {
+      await Sharing.shareAsync(uri, { mimeType: TYP_PLIKU_XLSX, dialogTitle: 'Zapisz plik' });
+    } else {
+      poZapisie(`Plik zapisany: ${uri}`);
+    }
+  }
 }
 
 export default function EkranImportEksportPrzepisow() {
@@ -60,6 +95,20 @@ export default function EkranImportEksportPrzepisow() {
   const [bledyZapisu, setBledyZapisu] = useState<BladImportu[]>([]);
   const [zaimportowano, setZaimportowano] = useState<number | null>(null);
 
+  const [eksportZajetySkladniki, setEksportZajetySkladniki] = useState(false);
+  const [importZajetySkladniki, setImportZajetySkladniki] = useState(false);
+  const [bladSkladniki, setBladSkladniki] = useState<string | null>(null);
+  const [komunikatSkladniki, setKomunikatSkladniki] = useState<string | null>(null);
+
+  const [nazwaPlikuSkladnikow, setNazwaPlikuSkladnikow] = useState<string | null>(null);
+  const [bledyParsowaniaSkladnikow, setBledyParsowaniaSkladnikow] = useState<BladImportuSkladnika[]>([]);
+  const [pozycjeSkladnikow, setPozycjeSkladnikow] = useState<PozycjaImportuSkladnika[] | null>(null);
+  const [postepSkladnikow, setPostepSkladnikow] = useState<{ zrobione: number; razem: number } | null>(
+    null
+  );
+  const [bledyZapisuSkladnikow, setBledyZapisuSkladnikow] = useState<BladImportuSkladnika[]>([]);
+  const [zaimportowanoSkladnikow, setZaimportowanoSkladnikow] = useState<number | null>(null);
+
   async function eksportuj() {
     setBlad(null);
     setKomunikat(null);
@@ -72,30 +121,7 @@ export default function EkranImportEksportPrzepisow() {
       }
 
       const base64 = await eksportujPrzepisy(przepisy);
-      const nazwa = nazwaPlikuEksportu();
-
-      if (Platform.OS === 'web') {
-        // Na webie nie ma katalogu plików ani udostępniania — zwykłe pobranie
-        // przez tymczasowy link załatwia sprawę.
-        const a = document.createElement('a');
-        a.href = `data:${TYP_PLIKU_XLSX};base64,${base64}`;
-        a.download = nazwa;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        setKomunikat(`Pobrano plik ${nazwa}.`);
-      } else {
-        const uri = FileSystem.cacheDirectory + nazwa;
-        await FileSystem.writeAsStringAsync(uri, base64, {
-          encoding: FileSystem.EncodingType.Base64,
-        });
-
-        if (await Sharing.isAvailableAsync()) {
-          await Sharing.shareAsync(uri, { mimeType: TYP_PLIKU_XLSX, dialogTitle: 'Zapisz przepisy' });
-        } else {
-          setKomunikat(`Plik zapisany: ${uri}`);
-        }
-      }
+      await zapiszPlikXlsx(base64, nazwaPlikuEksportu('przepisy'), setKomunikat);
     } catch (e) {
       setBlad(komunikatBledu(e));
     } finally {
@@ -121,6 +147,7 @@ export default function EkranImportEksportPrzepisow() {
       const wynik = await DocumentPicker.getDocumentAsync({
         type: [TYP_PLIKU_XLSX, 'application/vnd.ms-excel'],
         copyToCacheDirectory: true,
+        base64: true,
       });
       if (wynik.canceled || wynik.assets.length === 0) return;
 
@@ -129,7 +156,7 @@ export default function EkranImportEksportPrzepisow() {
 
       const base64 =
         Platform.OS === 'web'
-          ? (zasob.base64 ?? '')
+          ? bezPrefiksuDataUrl(zasob.base64 ?? '')
           : await FileSystem.readAsStringAsync(zasob.uri, {
               encoding: FileSystem.EncodingType.Base64,
             });
@@ -178,13 +205,104 @@ export default function EkranImportEksportPrzepisow() {
   const doAktualizacji = pozycje?.filter((p) => p.istniejacyId !== null) ?? [];
   const doDodania = pozycje?.filter((p) => p.istniejacyId === null) ?? [];
 
+  async function eksportujSkladnikiPlik() {
+    setBladSkladniki(null);
+    setKomunikatSkladniki(null);
+    setEksportZajetySkladniki(true);
+    try {
+      const skladniki = await pobierzSkladniki();
+      if (skladniki.length === 0) {
+        setBladSkladniki('Katalog składników jest pusty — nie ma czego eksportować.');
+        return;
+      }
+
+      const base64 = await eksportujSkladniki(skladniki);
+      await zapiszPlikXlsx(base64, nazwaPlikuEksportu('skladniki'), setKomunikatSkladniki);
+    } catch (e) {
+      setBladSkladniki(komunikatBledu(e));
+    } finally {
+      setEksportZajetySkladniki(false);
+    }
+  }
+
+  function wyczyscImportSkladnikow() {
+    setNazwaPlikuSkladnikow(null);
+    setBledyParsowaniaSkladnikow([]);
+    setPozycjeSkladnikow(null);
+    setPostepSkladnikow(null);
+    setBledyZapisuSkladnikow([]);
+    setZaimportowanoSkladnikow(null);
+  }
+
+  async function wybierzPlikSkladnikow() {
+    setBladSkladniki(null);
+    setKomunikatSkladniki(null);
+    wyczyscImportSkladnikow();
+
+    try {
+      const wynik = await DocumentPicker.getDocumentAsync({
+        type: [TYP_PLIKU_XLSX, 'application/vnd.ms-excel'],
+        copyToCacheDirectory: true,
+        base64: true,
+      });
+      if (wynik.canceled || wynik.assets.length === 0) return;
+
+      const zasob = wynik.assets[0];
+      setNazwaPlikuSkladnikow(zasob.name);
+
+      const base64 =
+        Platform.OS === 'web'
+          ? bezPrefiksuDataUrl(zasob.base64 ?? '')
+          : await FileSystem.readAsStringAsync(zasob.uri, {
+              encoding: FileSystem.EncodingType.Base64,
+            });
+
+      if (!base64) {
+        setBladSkladniki('Nie udało się odczytać pliku.');
+        return;
+      }
+
+      const istniejaceSkladniki = await supabase.from('skladniki').select('id, nazwa');
+      if (istniejaceSkladniki.error) throw istniejaceSkladniki.error;
+
+      const wczytane = await wczytajPlikSkladnikow(base64);
+      setBledyParsowaniaSkladnikow(wczytane.bledy);
+      setPozycjeSkladnikow(sklasyfikujSkladniki(wczytane.skladniki, istniejaceSkladniki.data ?? []));
+    } catch (e) {
+      setBladSkladniki(komunikatBledu(e));
+    }
+  }
+
+  async function potwierdzImportSkladnikow() {
+    if (!pozycjeSkladnikow) return;
+    setBladSkladniki(null);
+    setImportZajetySkladniki(true);
+    setPostepSkladnikow({ zrobione: 0, razem: pozycjeSkladnikow.length });
+
+    try {
+      const { bledy } = await zaimportujSkladniki(pozycjeSkladnikow, (zrobione, razem) =>
+        setPostepSkladnikow({ zrobione, razem })
+      );
+      setZaimportowanoSkladnikow(pozycjeSkladnikow.length - bledy.length);
+      setBledyZapisuSkladnikow(bledy);
+      setPozycjeSkladnikow(null);
+    } catch (e) {
+      setBladSkladniki(komunikatBledu(e));
+    } finally {
+      setImportZajetySkladniki(false);
+    }
+  }
+
+  const doAktualizacjiSkladnikow = pozycjeSkladnikow?.filter((p) => p.istniejacyId !== null) ?? [];
+  const doDodaniaSkladnikow = pozycjeSkladnikow?.filter((p) => p.istniejacyId === null) ?? [];
+
   return (
     <Ekran
-      tytul="Import / eksport przepisów"
+      tytul="Import / eksport przepisów i składników"
       podtytul="Plik Excel — kopia zapasowa albo masowa edycja poza aplikacją">
       <Karta style={styles.grupa}>
         <ThemedText type="smallBold" themeColor="textSecondary">
-          EKSPORT
+          EKSPORT PRZEPISÓW
         </ThemedText>
         <ThemedText type="small" themeColor="textSecondary">
           Zapisuje przepisy do jednego pliku .xlsx: osobny arkusz na nagłówek dania,
@@ -195,7 +313,7 @@ export default function EkranImportEksportPrzepisow() {
 
       <Karta style={styles.grupa}>
         <ThemedText type="smallBold" themeColor="textSecondary">
-          IMPORT
+          IMPORT PRZEPISÓW
         </ThemedText>
         <ThemedText type="small" themeColor="textSecondary">
           Przepis rozpoznawany jest PO NAZWIE, bez względu na wielkość liter. Identyczna
@@ -289,6 +407,125 @@ export default function EkranImportEksportPrzepisow() {
       {blad && (
         <ThemedText type="small" themeColor="accent">
           {blad}
+        </ThemedText>
+      )}
+
+      <Karta style={styles.grupa}>
+        <ThemedText type="smallBold" themeColor="textSecondary">
+          EKSPORT SKŁADNIKÓW
+        </ThemedText>
+        <ThemedText type="small" themeColor="textSecondary">
+          Zapisuje cały katalog składników — wartości odżywcze na 100 g, źródło i tagi —
+          do jednego pliku .xlsx z arkuszem instrukcji.
+        </ThemedText>
+        <Przycisk
+          tytul="Eksportuj do pliku Excel"
+          onPress={eksportujSkladnikiPlik}
+          zajety={eksportZajetySkladniki}
+        />
+      </Karta>
+
+      <Karta style={styles.grupa}>
+        <ThemedText type="smallBold" themeColor="textSecondary">
+          IMPORT SKŁADNIKÓW
+        </ThemedText>
+        <ThemedText type="small" themeColor="textSecondary">
+          Składnik rozpoznawany jest PO NAZWIE, bez względu na wielkość liter. Identyczna
+          nazwa aktualizuje wartości odżywcze istniejącego składnika. Nowa nazwa zakłada
+          nowy składnik.
+        </ThemedText>
+
+        <Przycisk tytul="Wybierz plik Excel" wariant="poboczny" onPress={wybierzPlikSkladnikow} />
+
+        {nazwaPlikuSkladnikow && (
+          <ThemedText type="small" themeColor="textSecondary">
+            Plik: {nazwaPlikuSkladnikow}
+          </ThemedText>
+        )}
+
+        {bledyParsowaniaSkladnikow.length > 0 && (
+          <View style={styles.blok}>
+            <ThemedText type="smallBold" themeColor="accent">
+              {bledyParsowaniaSkladnikow.length}{' '}
+              {bledyParsowaniaSkladnikow.length === 1 ? 'składnik pominięty' : 'składników pominiętych'}{' '}
+              — błędy w pliku
+            </ThemedText>
+            {bledyParsowaniaSkladnikow.map((b, i) => (
+              <ThemedText key={i} type="small" themeColor="textSecondary">
+                {b.skladnik ? `„${b.skladnik}”: ` : ''}
+                {b.tresc}
+              </ThemedText>
+            ))}
+          </View>
+        )}
+
+        {pozycjeSkladnikow && pozycjeSkladnikow.length > 0 && (
+          <View style={styles.blok}>
+            <ThemedText type="small" themeColor="textSecondary">
+              Gotowe do zapisania: {doDodaniaSkladnikow.length} nowych,{' '}
+              {doAktualizacjiSkladnikow.length} aktualizacji istniejących.
+            </ThemedText>
+            {doAktualizacjiSkladnikow.length > 0 && (
+              <ThemedText type="small" themeColor="textSecondary">
+                Zostaną nadpisane: {doAktualizacjiSkladnikow.map((p) => p.dane.nazwa).join(', ')}
+              </ThemedText>
+            )}
+            <Przycisk
+              tytul={`Zapisz ${pozycjeSkladnikow.length} ${
+                pozycjeSkladnikow.length === 1 ? 'składnik' : 'składników'
+              }`}
+              onPress={potwierdzImportSkladnikow}
+              zajety={importZajetySkladniki}
+            />
+            <Przycisk tytul="Anuluj" wariant="poboczny" onPress={wyczyscImportSkladnikow} />
+          </View>
+        )}
+
+        {pozycjeSkladnikow &&
+          pozycjeSkladnikow.length === 0 &&
+          bledyParsowaniaSkladnikow.length === 0 && (
+            <ThemedText type="small" themeColor="textSecondary">
+              Plik nie zawiera żadnego składnika.
+            </ThemedText>
+          )}
+
+        {postepSkladnikow && importZajetySkladniki && (
+          <ThemedText type="small" themeColor="textSecondary">
+            Zapisywanie: {postepSkladnikow.zrobione} / {postepSkladnikow.razem}
+          </ThemedText>
+        )}
+
+        {zaimportowanoSkladnikow !== null && (
+          <View style={styles.blok}>
+            <ThemedText type="smallBold">
+              Zapisano {zaimportowanoSkladnikow}{' '}
+              {zaimportowanoSkladnikow === 1 ? 'składnik' : 'składników'}.
+            </ThemedText>
+            {bledyZapisuSkladnikow.length > 0 && (
+              <>
+                <ThemedText type="smallBold" themeColor="accent">
+                  Nie udało się zapisać {bledyZapisuSkladnikow.length}:
+                </ThemedText>
+                {bledyZapisuSkladnikow.map((b, i) => (
+                  <ThemedText key={i} type="small" themeColor="textSecondary">
+                    {b.skladnik ? `„${b.skladnik}”: ` : ''}
+                    {b.tresc}
+                  </ThemedText>
+                ))}
+              </>
+            )}
+          </View>
+        )}
+      </Karta>
+
+      {komunikatSkladniki && (
+        <ThemedText type="small" themeColor="textSecondary">
+          {komunikatSkladniki}
+        </ThemedText>
+      )}
+      {bladSkladniki && (
+        <ThemedText type="small" themeColor="accent">
+          {bladSkladniki}
         </ThemedText>
       )}
 
