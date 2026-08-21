@@ -22,9 +22,10 @@ import {
   opisTrwalosci,
   odrzucPrzepis,
   pobierzPrzepisy,
-  przelaczPolubienie,
+  ustawPreferencje,
   zatwierdzPrzepis,
   type PoraPosilku,
+  type Preferencja,
   type PrzepisZMakro,
 } from '@/lib/przepisy';
 import { useSesja } from '@/lib/sesja';
@@ -97,21 +98,24 @@ export default function EkranPrzepisow() {
     }, [pobierz])
   );
 
-  async function lajk(p: PrzepisZMakro) {
+  /**
+   * Ustawia preferencję. Dotknięcie już aktywnego poziomu cofa do „neutralne” —
+   * to jedyny sposób wrócić do stanu bez wiersza w bazie, skoro sam poziom
+   * nie ma osobnego przycisku „wyczyść”.
+   */
+  async function przelaczPreferencje(p: PrzepisZMakro, poziom: Preferencja) {
     if (!sesja) return;
+    const nowy: Preferencja = p.preferencja === poziom ? 'neutralne' : poziom;
 
-    // Zmiana widoczna od razu, zanim baza potwierdzi — inaczej serce reaguje z opóźnieniem.
+    // Zmiana widoczna od razu, zanim baza potwierdzi.
     setPrzepisy((poprzednie) =>
-      poprzednie.map((x) =>
-        x.id === p.id
-          ? { ...x, polubiony: !x.polubiony, polubienia: x.polubienia + (x.polubiony ? -1 : 1) }
-          : x
-      )
+      poprzednie.map((x) => (x.id === p.id ? { ...x, preferencja: nowy } : x))
     );
 
     try {
-      await przelaczPolubienie(p.id, sesja.user.id, p.polubiony);
-    } catch {
+      await ustawPreferencje(p.id, sesja.user.id, nowy);
+    } catch (e) {
+      setBlad(komunikatBledu(e));
       pobierz(); // nie udało się — wracamy do stanu z bazy
     }
   }
@@ -475,20 +479,33 @@ export default function EkranPrzepisow() {
               </Pressable>
             )}
 
-            <Pressable
-              onPress={() => lajk(p)}
-              accessibilityRole="button"
-              accessibilityLabel={p.polubiony ? 'Cofnij polubienie' : 'Polub przepis'}
-              style={({ pressed }) => [styles.lajk, pressed && styles.wcisniety]}>
-              <Ionicons
-                name={p.polubiony ? 'heart' : 'heart-outline'}
-                size={20}
-                color={p.polubiony ? motyw.accent : motyw.textSecondary}
-              />
-              <ThemedText type="small" themeColor={p.polubiony ? 'accent' : 'textSecondary'}>
-                {p.polubienia}
-              </ThemedText>
-            </Pressable>
+            <View style={styles.preferencje}>
+              {(
+                [
+                  { poziom: 'ulubione', ikona: 'star', ikonaPusta: 'star-outline', etykieta: 'Ulubione — chcę jeść często' },
+                  { poziom: 'lubie', ikona: 'heart', ikonaPusta: 'heart-outline', etykieta: 'Lubię — chętnie zjem ponownie' },
+                  { poziom: 'nie_proponuj', ikona: 'close-circle', ikonaPusta: 'close-circle-outline', etykieta: 'Nie proponuj — nie chcę tego dania' },
+                ] as const
+              ).map((opcja) => {
+                const aktywna = p.preferencja === opcja.poziom;
+                return (
+                  <Pressable
+                    key={opcja.poziom}
+                    onPress={() => przelaczPreferencje(p, opcja.poziom)}
+                    hitSlop={6}
+                    accessibilityRole="button"
+                    accessibilityState={{ selected: aktywna }}
+                    accessibilityLabel={opcja.etykieta}
+                    style={({ pressed }) => [styles.preferencja, pressed && styles.wcisniety]}>
+                    <Ionicons
+                      name={aktywna ? opcja.ikona : opcja.ikonaPusta}
+                      size={20}
+                      color={aktywna ? motyw.accent : motyw.textSecondary}
+                    />
+                  </Pressable>
+                );
+              })}
+            </View>
           </View>
         </Karta>
         );
@@ -510,6 +527,16 @@ export default function EkranPrzepisow() {
             wariant="poboczny"
             onPress={() =>
               router.push({ pathname: '/skladniki', params: { powrot: '/przepisy' } })
+            }
+          />
+          <Przycisk
+            tytul="Import / eksport (Excel)"
+            wariant="poboczny"
+            onPress={() =>
+              router.push({
+                pathname: '/przepisy-import-eksport',
+                params: { powrot: '/przepisy' },
+              })
             }
           />
         </>
@@ -583,12 +610,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.two,
     marginLeft: 'auto',
   },
-  lajk: {
+  preferencje: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: Spacing.one,
+    marginLeft: 'auto',
+  },
+  preferencja: {
     paddingVertical: Spacing.one,
-    paddingHorizontal: Spacing.two,
+    paddingHorizontal: Spacing.half,
   },
   wcisniety: { opacity: 0.6 },
 });

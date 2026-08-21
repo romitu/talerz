@@ -6,7 +6,7 @@
 --  w narzedzia/mapowanie-planera.json.
 --
 --  Dań w tym pliku: 31
---  Wygenerowano: 2026-08-15
+--  Wygenerowano: 2026-08-20
 --
 --  Zanim uruchomisz
 --  ----------------

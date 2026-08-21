@@ -25,16 +25,31 @@
  *      niedobre jak za mało, bo cel kaloryczny to przedział, nie podłoga.
  *   2. KARA ZA BIAŁKO — tylko za niedobór. Białka nie ma sensu karać za
  *      nadmiar; przy tym celu to i tak rzadkość.
- *   3. PREMIA ZA POLUBIENIA — przesuwa ulubione w górę, ale nie unieważnia
- *      punktów 1 i 2. Danie lubiane, ale kompletnie nie na to miejsce,
- *      dalej przegra.
+ *   3. PREMIA ZA PREFERENCJĘ — przesuwa lubiane dania w górę, ale nie
+ *      unieważnia punktów 1 i 2. Danie lubiane, ale kompletnie nie na to
+ *      miejsce, dalej przegra. „Nie proponuj” w ogóle tu nie dociera —
+ *      patrz niżej.
  *   4. KARA ZA POWTÓRKĘ — im niedawniej dane danie było w planie, tym większa.
  *      Bez tego automat wstawiłby siedem razy ten sam ulubiony obiad.
  *
  * Na koniec dochodzi odrobina losowości. To ona sprawia, że przy przepisach
- * bez żadnych polubień wynik nie jest zawsze identyczny — i że dwa dania
+ * bez żadnej preferencji wynik nie jest zawsze identyczny — i że dwa dania
  * o zbliżonej ocenie wymieniają się miejscami między jednym a drugim
  * naciśnięciem przycisku.
+ *
+ * Preferencja jest WŁASNA, nie ogólna
+ * ------------------------------------
+ * Premia w punkcie 3 liczy się z preferencji KONTA, dla którego układany
+ * jest plan — nie z tego, ile osób w ogóle polubiło dany przepis. Pierwsza
+ * wersja tego pliku liczyła globalny licznik polubień, co przy jednym koncie
+ * nie robiło różnicy, ale przy kilku kontach premiowałoby cudzy gust.
+ *
+ * „Nie proponuj” nie jest karą — jest wykluczeniem
+ * --------------------------------------------------
+ * Danie oznaczone jako „nie proponuj” nie dostaje gorszej oceny. W ogóle nie
+ * wchodzi do listy kandydatów (`nadajeSieNa` odrzuca je na starcie). Gdyby to
+ * była tylko duża kara, przy braku innych pasujących dań automat i tak by je
+ * wstawił — a „nie proponuj” ma znaczyć NIGDY SAM, nie „tylko w ostateczności”.
  *
  * Świadome uproszczenie
  * ---------------------
@@ -45,7 +60,7 @@
  * widać potem na paskach makro i poprawia się je ręcznie.
  */
 
-import type { PoraPosilku } from './przepisy';
+import type { PoraPosilku, Preferencja } from './przepisy';
 
 /** Kolejność wypełniania w obrębie dnia. */
 export const PORY_AUTOMATU: PoraPosilku[] = ['sniadanie', 'obiad', 'kolacja'];
@@ -58,7 +73,8 @@ export type Kandydat = {
   trwalosc_dni: number;
   kcal: number | null;
   bialko_g: number | null;
-  polubienia: number;
+  /** Preferencja KONTA, dla którego układamy plan — nie popularność ogólna. */
+  preferencja: Preferencja;
 };
 
 export type Miejsce = { data: string; pora: PoraPosilku };
@@ -79,8 +95,22 @@ export type WynikPlanowania = {
   bezObsady: Miejsce[];
 };
 
-/** Ile punktów odejmuje jedno polubienie. Liczy się najwyżej trzy. */
-const WAGA_POLUBIENIA = 0.35;
+/** Premia dania oznaczonego jako „ulubione” — ma się pojawiać najczęściej. */
+const WAGA_ULUBIONE = 1.2;
+
+/** Premia dania oznaczonego jako „lubię” — to dawny, binarny „lajk”. */
+const WAGA_LUBIE = 0.5;
+
+/**
+ * Premia za preferencję konta. „Neutralne” nie dostaje nic, a „nie_proponuj”
+ * tu w ogóle nie dociera — `nadajeSieNa` odrzuca takie dania, zanim trafią
+ * do oceny.
+ */
+function premiaZaPreferencje(preferencja: Preferencja): number {
+  if (preferencja === 'ulubione') return WAGA_ULUBIONE;
+  if (preferencja === 'lubie') return WAGA_LUBIE;
+  return 0;
+}
 
 /** Kara za danie użyte poprzedniego dnia. Maleje z każdym dniem odstępu. */
 const KARA_POWTORKI = 3;
@@ -105,6 +135,7 @@ const MIN_BIALKA_ODNIESIENIA = 12;
  * więc sama sałatka z ciecierzycy nie może zostać całą kolacją.
  */
 export function nadajeSieNa(k: Kandydat, pora: PoraPosilku): boolean {
+  if (k.preferencja === 'nie_proponuj') return false;
   if (k.kcal === null) return false;
   if (k.pory.length === 0) return false;
   return k.pory.includes(pora);
@@ -172,7 +203,7 @@ export function ocen(opcje: {
   const karaKcal = Math.abs(kcal - docelowoKcal) / odniesienieKcal;
   const karaBialka = Math.max(0, docelowoBialko - bialko) / odniesienieBialka;
 
-  const premia = WAGA_POLUBIENIA * Math.min(kandydat.polubienia, 3);
+  const premia = premiaZaPreferencje(kandydat.preferencja);
 
   const karaPowtorki =
     ostatnioWDniu === null ? 0 : KARA_POWTORKI / (1 + (dzien - ostatnioWDniu));

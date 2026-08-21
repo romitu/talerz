@@ -182,10 +182,10 @@ function Zakladki({ kolory }: { kolory: Paleta }) {
         }}
       />
       <Tabs.Screen
-        name="spolecznosc"
+        name="instrukcja"
         options={{
-          title: 'Społeczność',
-          tabBarIcon: ({ color, size }) => <Ionicons name="chatbubbles" size={size} color={color} />,
+          title: 'Instrukcja',
+          tabBarIcon: ({ color, size }) => <Ionicons name="help-circle" size={size} color={color} />,
         }}
       />
       <Tabs.Screen

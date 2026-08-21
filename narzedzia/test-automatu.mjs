@@ -46,8 +46,8 @@ function sprawdz(opis, warunek, dodatek = '') {
 const DNI = ['2026-08-17', '2026-08-18', '2026-08-19', '2026-08-20',
              '2026-08-21', '2026-08-22', '2026-08-23'];
 
-function danie(id, pory, kcal, bialko, trwalosc = 0, polubienia = 0) {
-  return { id, nazwa: id, pory, trwalosc_dni: trwalosc, kcal, bialko_g: bialko, polubienia };
+function danie(id, pory, kcal, bialko, trwalosc = 0, preferencja = 'neutralne') {
+  return { id, nazwa: id, pory, trwalosc_dni: trwalosc, kcal, bialko_g: bialko, preferencja };
 }
 
 // Losowość wyłączona — inaczej test bywałby raz zielony, raz czerwony.
@@ -164,27 +164,34 @@ const PRZEPISY = [
           new Set(kolejne).size === 3, kolejne.join(','));
 }
 
-// --- 6. polubienia przesuwają wybór, ale nie unieważniają dopasowania --------
+// --- 6. preferencja przesuwa wybór, ale nie unieważnia dopasowania ----------
 {
-  const lubiane = danie('lubiane', ['kolacja'], 500, 30, 0, 3);
-  const zwykle = danie('zwykle', ['kolacja'], 500, 30, 0, 0);
-  const bliżejCelu = ocen({
+  const ulubione = danie('ulubione', ['kolacja'], 500, 30, 0, 'ulubione');
+  const lubiane = danie('lubiane', ['kolacja'], 500, 30, 0, 'lubie');
+  const zwykle = danie('zwykle', ['kolacja'], 500, 30, 0, 'neutralne');
+
+  const ocenaZwyklego = ocen({
     kandydat: zwykle, docelowoKcal: 500, docelowoBialko: 30,
     ostatnioWDniu: null, dzien: 0, szum: 0,
   });
-  const zPolubieniami = ocen({
+  const ocenaLubianego = ocen({
     kandydat: lubiane, docelowoKcal: 500, docelowoBialko: 30,
     ostatnioWDniu: null, dzien: 0, szum: 0,
   });
-  sprawdz('przy równym dopasowaniu wygrywa lubiane', zPolubieniami < bliżejCelu);
+  const ocenaUlubionego = ocen({
+    kandydat: ulubione, docelowoKcal: 500, docelowoBialko: 30,
+    ostatnioWDniu: null, dzien: 0, szum: 0,
+  });
+  sprawdz('przy równym dopasowaniu wygrywa lubiane', ocenaLubianego < ocenaZwyklego);
+  sprawdz('ulubione wygrywa z lubianym', ocenaUlubionego < ocenaLubianego);
 
   // A teraz lubiane, ale kompletnie nie na to miejsce.
-  const lubianeAleZle = danie('lubiane-zle', ['kolacja'], 2500, 30, 0, 3);
+  const lubianeAleZle = danie('lubiane-zle', ['kolacja'], 2500, 30, 0, 'lubie');
   const ocenaZlego = ocen({
     kandydat: lubianeAleZle, docelowoKcal: 500, docelowoBialko: 30,
     ostatnioWDniu: null, dzien: 0, szum: 0,
   });
-  sprawdz('lubiane, ale trzykrotnie za kaloryczne, przegrywa', ocenaZlego > bliżejCelu);
+  sprawdz('lubiane, ale trzykrotnie za kaloryczne, przegrywa', ocenaZlego > ocenaZwyklego);
 }
 
 // --- 7. dobór pod cel --------------------------------------------------------
@@ -220,6 +227,11 @@ const PRZEPISY = [
           !nadajeSieNa(danie('brak', ['obiad'], null, null), 'obiad'));
   sprawdz('przepis bez kategorii nie jest kandydatem',
           !nadajeSieNa(danie('nijaki', [], 600, 30), 'obiad'));
+  sprawdz('"nie proponuj" wyklucza danie całkowicie, nie tylko obniża ocenę',
+          !nadajeSieNa(danie('odrzucone', ['obiad'], 600, 30, 0, 'nie_proponuj'), 'obiad'));
+  sprawdz('ulubione i lubiane dalej są kandydatami',
+          nadajeSieNa(danie('x', ['obiad'], 600, 30, 0, 'ulubione'), 'obiad')
+          && nadajeSieNa(danie('y', ['obiad'], 600, 30, 0, 'lubie'), 'obiad'));
   sprawdz('trwałość 0 daje jeden dzień',
           dniGotowania(DNI, 0, 'obiad', 0, new Set()).length === 1);
   sprawdz('trwałość nie wykracza poza koniec tygodnia',

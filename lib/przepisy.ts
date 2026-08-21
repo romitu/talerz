@@ -16,6 +16,21 @@ export type PoraPosilku = 'sniadanie' | 'obiad' | 'kolacja' | 'dodatek';
 export type Kuchnia = 'srodziemnomorska' | 'azjatycka' | 'polska' | 'inna';
 export type Widocznosc = 'prywatna' | 'zgloszona' | 'publiczna';
 
+/**
+ * Poziomy zapisywane w bazie (tabela `preferencje_przepisow`, migracja 0025).
+ * „neutralne” do nich nie należy — to brak wiersza, nie osobny stan. Patrz
+ * `Preferencja` niżej.
+ */
+export type PoziomPreferencji = 'ulubione' | 'lubie' | 'nie_proponuj';
+
+/**
+ * Preferencja użytkownika WZGLĘDEM JEGO WŁASNEGO konta, nie popularność
+ * przepisu wśród wszystkich. Automat wypełniający plan (`lib/automat.ts`)
+ * ma premiować to, co lubi DANY użytkownik, a nie to, co polubił ktoś inny —
+ * stąd to rozróżnienie jest tu istotne, nie tylko kosmetyczne.
+ */
+export type Preferencja = PoziomPreferencji | 'neutralne';
+
 export type PrzepisZMakro = {
   id: string;
   nazwa: string;
@@ -53,8 +68,15 @@ export type PrzepisZMakro = {
   bialko_g_calosc: number | null;
   gramy_porcji: number | null;
   nova_max: number | null;
-  polubienia: number;
-  polubiony: boolean;
+  /** Preferencja TEGO konta względem przepisu. `neutralne`, gdy nie ma wiersza. */
+  preferencja: Preferencja;
+};
+
+export const OPIS_PREFERENCJI: Record<Preferencja, string> = {
+  ulubione: 'Ulubione',
+  lubie: 'Lubię',
+  neutralne: 'Neutralne',
+  nie_proponuj: 'Nie proponuj',
 };
 
 export const OPIS_PORY: Record<PoraPosilku, string> = {
@@ -124,7 +146,7 @@ export async function pobierzPrzepisy(kontoId: string | undefined) {
         `id, nazwa, opis, pory, kuchnie, trwalosc_dni, porcje, czas_przygotowania_min,
          czas_obrobki_min, sprzet, przechowywanie, mozna_mrozic, ratunek, porcjowanie,
          widocznosc, zgloszono_kiedy, powod_odrzucenia, autor_id, zdjecie,
-         polubienia (konto_id)`
+         preferencje_przepisow (konto_id, poziom)`
       )
       .order('nazwa'),
     supabase
@@ -143,7 +165,11 @@ export async function pobierzPrzepisy(kontoId: string | undefined) {
 
   return (wynikPrzepisow.data ?? []).map((p): PrzepisZMakro => {
     const makro = makroWedlugPrzepisu.get(p.id);
-    const polubienia = (p.polubienia ?? []) as { konto_id: string }[];
+    const preferencje = (p.preferencje_przepisow ?? []) as {
+      konto_id: string;
+      poziom: PoziomPreferencji;
+    }[];
+    const wlasna = kontoId ? preferencje.find((x) => x.konto_id === kontoId) : undefined;
 
     return {
       id: p.id,
@@ -176,27 +202,40 @@ export async function pobierzPrzepisy(kontoId: string | undefined) {
       porcje_wyliczone: makro?.porcje_wyliczone ?? null,
       gramy_calosc: makro?.gramy_calosc ?? null,
       nova_max: makro?.nova_max ?? null,
-      polubienia: polubienia.length,
-      polubiony: kontoId ? polubienia.some((x) => x.konto_id === kontoId) : false,
+      preferencja: wlasna?.poziom ?? 'neutralne',
     };
   });
 }
 
-/** Dodaje albo cofa polubienie. */
-export async function przelaczPolubienie(przepisId: string, kontoId: string, polubiony: boolean) {
-  if (polubiony) {
+/**
+ * Ustawia preferencję konta względem przepisu.
+ *
+ * `neutralne` kasuje wiersz — to jest wartość domyślna, więc nie ma czego
+ * zapisywać. Pozostałe trzy poziomy zapisuje się jednym upsertem: jeśli
+ * wiersz już był (inny poziom), podmienia się sam, bez osobnego sprawdzania.
+ */
+export async function ustawPreferencje(
+  przepisId: string,
+  kontoId: string,
+  poziom: Preferencja
+): Promise<void> {
+  if (poziom === 'neutralne') {
     const { error } = await supabase
-      .from('polubienia')
+      .from('preferencje_przepisow')
       .delete()
       .eq('przepis_id', przepisId)
       .eq('konto_id', kontoId);
     if (error) throw error;
-  } else {
-    const { error } = await supabase
-      .from('polubienia')
-      .insert({ przepis_id: przepisId, konto_id: kontoId });
-    if (error) throw error;
+    return;
   }
+
+  const { error } = await supabase
+    .from('preferencje_przepisow')
+    .upsert(
+      { przepis_id: przepisId, konto_id: kontoId, poziom },
+      { onConflict: 'przepis_id,konto_id' }
+    );
+  if (error) throw error;
 }
 
 /**
@@ -310,6 +349,85 @@ export async function pobierzPelnyPrzepis(id: string): Promise<PelnyPrzepis> {
     skladniki,
     etapy,
   };
+}
+
+/**
+ * Wszystkie pełne przepisy naraz — do eksportu.
+ *
+ * `pobierzPelnyPrzepis` woła trzy zapytania NA JEDEN przepis, więc dla
+ * całej bazy zrobiłby ich dziesiątki. Tutaj te same trzy tabele pytamy raz,
+ * dla wszystkich przepisów widocznych temu kontu, i składamy w pamięci —
+ * dokładnie ta sama sztuczka co w `pobierzPrzepisy` z widokiem makra.
+ *
+ * Widoczność pilnują reguły dostępu w bazie: zwykły użytkownik dostanie
+ * tylko swoje prywatne i to, co publiczne; eksport nie omija tego w żaden sposób.
+ */
+export async function pobierzWszystkiePelnePrzepisy(): Promise<PelnyPrzepis[]> {
+  const [wynikPrzepisow, wynikSkladnikow, wynikEtapow] = await Promise.all([
+    supabase
+      .from('przepisy')
+      .select(
+        `id, nazwa, opis, pory, kuchnie, trwalosc_dni, porcjowanie, porcje, porcja_g,
+         czas_przygotowania_min, czas_obrobki_min, sprzet, przechowywanie, mozna_mrozic,
+         ratunek, widocznosc, zgloszono_kiedy, powod_odrzucenia, zdjecie`
+      )
+      .order('nazwa'),
+    supabase
+      .from('przepis_skladniki')
+      .select(
+        'przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, opis_potoczny, kolejnosc, skladniki (nazwa)'
+      )
+      .order('kolejnosc'),
+    supabase
+      .from('etapy')
+      .select('id, przepis_id, nazwa, minuty, kolejnosc, kroki (tresc, sygnal, uwaga, kolejnosc)')
+      .order('kolejnosc'),
+  ]);
+
+  if (wynikPrzepisow.error) throw wynikPrzepisow.error;
+  if (wynikSkladnikow.error) throw wynikSkladnikow.error;
+  if (wynikEtapow.error) throw wynikEtapow.error;
+
+  const skladnikiWedlugPrzepisu = new Map<string, PelnyPrzepis['skladniki']>();
+  for (const s of wynikSkladnikow.data ?? []) {
+    const id = s.przepis_id as string;
+    const lista = skladnikiWedlugPrzepisu.get(id) ?? [];
+    lista.push({
+      skladnik_id: s.skladnik_id as string,
+      nazwa: nazwaSkladnika(s.skladniki),
+      ilosc: Number(s.ilosc),
+      jednostka: s.jednostka as 'g' | 'ml' | 'szt',
+      gramy: Number(s.gramy),
+      stan: s.stan as string | null,
+      zamiennik: s.zamiennik as string | null,
+      opis_potoczny: s.opis_potoczny as string | null,
+      kolejnosc: s.kolejnosc as number,
+    });
+    skladnikiWedlugPrzepisu.set(id, lista);
+  }
+
+  const etapyWedlugPrzepisu = new Map<string, PelnyPrzepis['etapy']>();
+  for (const e of wynikEtapow.data ?? []) {
+    const id = e.przepis_id as string;
+    const lista = etapyWedlugPrzepisu.get(id) ?? [];
+    lista.push({
+      nazwa: e.nazwa as string,
+      minuty: e.minuty as number | null,
+      kroki: (
+        (e.kroki ?? []) as { tresc: string; sygnal: string | null; uwaga: boolean; kolejnosc: number }[]
+      )
+        .slice()
+        .sort((a, b) => a.kolejnosc - b.kolejnosc)
+        .map((k) => ({ tresc: k.tresc, sygnal: k.sygnal, uwaga: k.uwaga })),
+    });
+    etapyWedlugPrzepisu.set(id, lista);
+  }
+
+  return (wynikPrzepisow.data ?? []).map((p) => ({
+    ...(p as Omit<PelnyPrzepis, 'skladniki' | 'etapy'>),
+    skladniki: (skladnikiWedlugPrzepisu.get(p.id) ?? []).slice().sort((a, b) => a.kolejnosc - b.kolejnosc),
+    etapy: etapyWedlugPrzepisu.get(p.id) ?? [],
+  }));
 }
 
 /**
