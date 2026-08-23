@@ -311,7 +311,7 @@ export function sumujDzien(pozycje: PozycjaPlanu[]): Makro {
  * Dokłada danie do posiłku — razem z całą partią.
  *
  * Gotujesz raz, jesz kilka dni. Danie trafia więc nie na jeden dzień, tylko
- * na tyle kolejnych, ile pozwala jego trwałość — i tyle porcji dziennie,
+ * na tyle kolejnych, ile ma porcji bazowych — i tyle porcji dziennie,
  * ile osób je je. Wszystkie pozycje dostają wspólny identyfikator partii,
  * dzięki czemu usunięcie jednej usuwa cały garnek.
  *
@@ -326,17 +326,17 @@ export async function dodajPartie(opcje: {
   kolejnosc: number;
   /** Ile osób je ten posiłek. */
   osoby: number;
-  /** Ile dni wytrzyma danie: 0 oznacza „tylko świeże”, czyli jeden dzień. */
-  trwaloscDni: number;
+  /** Liczba porcji bazowych przepisu: 0 traktujemy jak jeden dzień. */
+  liczbaPorcjiBazowych: number;
   /** Dni planu od dnia dodania włącznie — dalej nie sięgamy. */
   dostepneDni: string[];
 }): Promise<number> {
-  const { kontoId, planId, odData, pora, przepisId, kolejnosc, osoby, trwaloscDni, dostepneDni } =
+  const { kontoId, planId, odData, pora, przepisId, kolejnosc, osoby, liczbaPorcjiBazowych, dostepneDni } =
     opcje;
 
   const dni = dostepneDni
     .filter((d) => d >= odData)
-    .slice(0, Math.max(1, trwaloscDni));
+    .slice(0, Math.max(1, liczbaPorcjiBazowych));
 
   const porcjiRazem = dni.length * Math.max(1, osoby);
 

@@ -46,8 +46,8 @@ function sprawdz(opis, warunek, dodatek = '') {
 const DNI = ['2026-08-17', '2026-08-18', '2026-08-19', '2026-08-20',
              '2026-08-21', '2026-08-22', '2026-08-23'];
 
-function danie(id, pory, kcal, bialko, trwalosc = 0, preferencja = 'neutralne') {
-  return { id, nazwa: id, pory, trwalosc_dni: trwalosc, kcal, bialko_g: bialko, preferencja };
+function danie(id, pory, kcal, bialko, porcjeBazowe = 0, preferencja = 'neutralne') {
+  return { id, nazwa: id, pory, liczba_porcji_bazowych: porcjeBazowe, kcal, bialko_g: bialko, preferencja };
 }
 
 // Losowość wyłączona — inaczej test bywałby raz zielony, raz czerwony.
@@ -100,7 +100,7 @@ const PRZEPISY = [
   });
 
   const obiady = wstawienia.filter((w) => w.pora === 'obiad');
-  sprawdz('barszcz o trwałości 3 dni daje 3 gotowania na 7 dni',
+  sprawdz('barszcz o 3 porcjach bazowych daje 3 gotowania na 7 dni',
           obiady.length === 3, `(jest ${obiady.length})`);
   sprawdz('pierwszy garnek obejmuje 3 kolejne dni',
           obiady[0].dni.length === 3 && obiady[0].dni[0] === DNI[0] && obiady[0].dni[2] === DNI[2],
@@ -109,7 +109,7 @@ const PRZEPISY = [
           obiady[2].dni.length === 1, JSON.stringify(obiady[2].dni));
 
   const sniadania = wstawienia.filter((w) => w.pora === 'sniadanie');
-  sprawdz('danie o trwałości 0 gotuje się codziennie', sniadania.length === 7);
+  sprawdz('danie o 0 porcjach bazowych gotuje się codziennie', sniadania.length === 7);
 }
 
 // --- 3. zajęte miejsca zostają nietknięte ------------------------------------
@@ -232,9 +232,9 @@ const PRZEPISY = [
   sprawdz('ulubione i lubiane dalej są kandydatami',
           nadajeSieNa(danie('x', ['obiad'], 600, 30, 0, 'ulubione'), 'obiad')
           && nadajeSieNa(danie('y', ['obiad'], 600, 30, 0, 'lubie'), 'obiad'));
-  sprawdz('trwałość 0 daje jeden dzień',
+  sprawdz('0 porcji bazowych daje jeden dzień',
           dniGotowania(DNI, 0, 'obiad', 0, new Set()).length === 1);
-  sprawdz('trwałość nie wykracza poza koniec tygodnia',
+  sprawdz('porcje bazowe nie wykraczają poza koniec tygodnia',
           dniGotowania(DNI, 6, 'obiad', 3, new Set()).length === 1);
 }
 

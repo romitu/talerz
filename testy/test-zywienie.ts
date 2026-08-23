@@ -8,6 +8,7 @@
  */
 
 import {
+  dataUrodzeniaZWieku,
   kcalZMakro,
   ocenaBlonnika,
   podpowiedzBlonnika,
@@ -17,7 +18,6 @@ import {
   udzialyProcentowe,
   wiekZDaty,
   wskazowkaWodna,
-  zapotrzebowanie,
 } from '../lib/zywienie.ts';
 
 const przeszlo: string[] = [];
@@ -41,13 +41,6 @@ sprawdz('przemiana podstawowa (M, 90 kg, 189 cm, 59 lat)',
 sprawdz('przemiana podstawowa (K, 60 kg, 165 cm, 30 lat)',
   przemianaPodstawowa('K', 60, 165, 30), 1320);
 
-// --- zapotrzebowanie z aktywnością ---
-sprawdz('zapotrzebowanie przy umiarkowanej aktywności (1791 x 1,55)',
-  zapotrzebowanie('M', 90, 189, 59, 'umiarkowany'), 2776);
-
-sprawdz('zapotrzebowanie przy pracy siedzącej (1791 x 1,2)',
-  zapotrzebowanie('M', 90, 189, 59, 'siedzacy'), 2150);
-
 // --- kalorie z makro ---
 // 142 g białka x4 + 82 g tłuszczu x9 + 246 g węglowodanów x4 = 568 + 738 + 984
 sprawdz('kalorie z makroskładników (142 / 82 / 246)',
@@ -64,6 +57,14 @@ sprawdz('wiek z daty urodzenia (urodziny już minęły)',
 sprawdz('wiek z daty urodzenia (urodziny jeszcze przed nami)',
   wiekZDaty('1967-12-31', new Date('2026-08-13')), 58);
 
+// --- odwrotność: wiek -> data urodzenia ---
+sprawdz('data urodzenia z wieku (dziś 2026-08-13, wiek 59)',
+  dataUrodzeniaZWieku(59, new Date('2026-08-13')), '1967-08-13');
+sprawdz('wiek z tej daty daje z powrotem 59 tego samego dnia',
+  wiekZDaty(dataUrodzeniaZWieku(59, new Date('2026-08-13')), new Date('2026-08-13')), 59);
+sprawdz('a za rok, tego samego dnia, daje 60',
+  wiekZDaty(dataUrodzeniaZWieku(59, new Date('2026-08-13')), new Date('2027-08-13')), 60);
+
 // --- próg białka na posiłek ---
 // Próg posiłkowy zależy od masy ciała, a NIE od celu dziennego podzielonego przez trzy.
 sprawdz('podpowiedź progu białka przy 90 kg', podpowiedzProguBialka(90), 36);
@@ -73,15 +74,11 @@ sprawdz('podpowiedź progu białka przy 60 kg', podpowiedzProguBialka(60), 24);
 //  Ocena celów
 // =============================================================
 
-// Plan Romana: bezpieczny, ale węglowodany poniżej AMDR.
-// Ma przejść bez blokady i z dokładnie jednym ostrzeżeniem.
+// Plan Romana: bezpieczny, mimo że węglowodany poniżej AMDR — to już nie
+// jest sprawdzane, więc ma przejść bez żadnej blokady.
 const romanOcena = oceniaCele(
   { kcal: 2290, bialko: 142, tluszcz: 82, wegle: 246 }, 1791, 2776);
 sprawdz('plan Romana: brak blokad', romanOcena.blokady.length, 0);
-sprawdz('plan Romana: jedno ostrzeżenie (węglowodany poniżej AMDR)',
-  romanOcena.ostrzezenia.length, 1);
-sprawdz('plan Romana: ostrzeżenie dotyczy węglowodanów',
-  romanOcena.ostrzezenia[0].startsWith('Węglowodany'), true);
 
 // Cel poniżej przemiany podstawowej — blokada.
 const zaMalo = oceniaCele({ kcal: 0, bialko: 80, tluszcz: 40, wegle: 100 }, 1791, 2776);
@@ -100,10 +97,8 @@ sprawdz('białko powyżej 35% energii: zablokowane',
 
 // Plan mieszczący się w całości w AMDR — zero uwag.
 // 100 g białka (400 kcal), 60 g tłuszczu (540 kcal), 250 g węglowodanów (1000 kcal) = 1940 kcal
-// udziały: 20,6% / 27,8% / 51,5%
 const wzorcowy = oceniaCele({ kcal: 1940, bialko: 100, tluszcz: 60, wegle: 250 }, 1500, 2000);
 sprawdz('plan mieszczący się w AMDR: brak blokad', wzorcowy.blokady.length, 0);
-sprawdz('plan mieszczący się w AMDR: brak ostrzeżeń', wzorcowy.ostrzezenia.length, 0);
 
 // =============================================================
 //  Błonnik i woda

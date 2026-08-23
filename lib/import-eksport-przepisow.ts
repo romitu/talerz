@@ -30,8 +30,6 @@
  * gramatury byłoby zaskoczeniem, nie funkcją.
  */
 
-import { Workbook } from 'exceljs';
-
 import {
   KATEGORIE,
   OPIS_KUCHNI,
@@ -42,34 +40,26 @@ import {
   type PoraPosilku,
 } from './przepisy';
 import { supabase } from './supabase';
-import type { Skladnik } from './skladniki';
+import type { RolaSkladnika, Skladnik } from './skladniki';
 import {
   bajtyDoBase64,
   dodajArkuszTabeli,
   komorka,
   kluczNazwy,
+  KUCHNIA_WEDLUG_ETYKIETY,
   liczbaKomorki,
   mapaNaglowkow,
-  odwrotnySlownik,
   podzielListe,
+  PORA_WEDLUG_ETYKIETY,
+  PORCJOWANIE_WEDLUG_ETYKIETY,
   tekstKomorki,
   wczytajSkoroszyt,
 } from './import-eksport-wspolne';
+import { wczytajPlikFormularzowy } from './import-eksport-przepis-formularza';
 
 // =============================================================================
 //  SŁOWNIKI: ETYKIETA W ARKUSZU <-> WARTOŚĆ W BAZIE
 // =============================================================================
-
-const PORA_WEDLUG_ETYKIETY = odwrotnySlownik(OPIS_PORY);
-const KUCHNIA_WEDLUG_ETYKIETY = odwrotnySlownik(OPIS_KUCHNI);
-
-const PORCJOWANIE_WEDLUG_ETYKIETY = new Map<string, 'waga' | 'sztuki'>([
-  ['na wagę', 'waga'],
-  ['na wage', 'waga'],
-  ['waga', 'waga'],
-  ['na sztuki', 'sztuki'],
-  ['sztuki', 'sztuki'],
-]);
 
 const ETYKIETA_PORCJOWANIA: Record<'waga' | 'sztuki', string> = {
   waga: 'Na wagę',
@@ -121,6 +111,11 @@ const NAGLOWKI_KROKOW = [
 
 /** Buduje plik .xlsx z podanych przepisów i zwraca go jako base64 — gotowe do zapisu na dysk. */
 export async function eksportujPrzepisy(przepisy: PelnyPrzepis[]): Promise<string> {
+  // Import dynamiczny — inaczej moduł exceljs wykonuje się już przy starcie
+  // aplikacji (Metro pakuje wszystkie ekrany do jednego bundla na telefonie),
+  // co potrafi zapętlić się w wewnętrznym mechanizmie mikrozadań na silniku
+  // Hermes i wywalić całą aplikację, zanim jeszcze cokolwiek się pokaże.
+  const { Workbook } = await import('exceljs');
   const wb = new Workbook();
   wb.creator = 'Talerz';
   wb.created = new Date();
@@ -218,6 +213,13 @@ export type SkladnikDoImportu = {
   stan: string | null;
   zamiennik: string | null;
   opis_potoczny: string | null;
+  /**
+   * Nadpisanie roli/kwantyzacji TYLKO dla tego przepisu (patrz migracja 0035).
+   * Format formularzowy je wypełnia; nieobecne (`undefined`) w płaskim
+   * formacie — tam arkusz o nich nic nie wie, więc kolumny w bazie zostają puste.
+   */
+  rola?: RolaSkladnika | null;
+  mozna_dzielic?: boolean | null;
 };
 
 export type EtapDoImportu = {
@@ -235,6 +237,12 @@ export type PrzepisDoImportu = {
   porcjowanie: 'waga' | 'sztuki';
   porcje: number;
   porcja_g: number | null;
+  /**
+   * Format formularzowy ją wypełnia; nieobecna (`undefined`) w płaskim
+   * formacie, który tej kolumny w arkuszu nie ma — wtedy zapis nie rusza
+   * dotychczasowej wartości w bazie (patrz `zaimportujPrzepis`).
+   */
+  liczba_porcji_bazowych?: number;
   czas_przygotowania_min: number | null;
   czas_obrobki_min: number | null;
   sprzet: string[];
@@ -275,6 +283,14 @@ export async function wczytajPlikPrzepisow(
 
   const arkuszPrzepisow = wb.getWorksheet('Przepisy');
   if (!arkuszPrzepisow) {
+    // Brak arkusza „Przepisy” nie od razu jest błędem — to może być plik
+    // w formacie formularzowym (jeden przepis na arkusz, pola w kolejności
+    // ekranu Edycja przepisu), a nie płaska tabela. Próbujemy tego formatu,
+    // zanim zgłosimy, że pliku nie da się rozpoznać wcale.
+    const formularzowy = wczytajPlikFormularzowy(wb, dostepneSkladniki);
+    if (formularzowy.przepisy.length > 0 || formularzowy.bledy.length > 0) {
+      return formularzowy;
+    }
     return { przepisy: [], bledy: [{ przepis: null, tresc: 'W pliku brakuje arkusza „Przepisy”.' }] };
   }
 
@@ -688,6 +704,11 @@ export async function zaimportujPrzepis(
     przechowywanie: dane.przechowywanie,
     mozna_mrozic: dane.mozna_mrozic,
     ratunek: dane.ratunek,
+    // Format płaski nie zna tego pola (`undefined`) — wtedy update() go pomija
+    // i dotychczasowa wartość w bazie zostaje nietknięta, zamiast wyzerować się.
+    ...(dane.liczba_porcji_bazowych !== undefined
+      ? { liczba_porcji_bazowych: dane.liczba_porcji_bazowych }
+      : {}),
   };
 
   let przepisId: string;
@@ -719,6 +740,8 @@ export async function zaimportujPrzepis(
         zamiennik: s.zamiennik,
         opis_potoczny: s.opis_potoczny,
         kolejnosc: i + 1,
+        rola: s.rola ?? null,
+        mozna_dzielic: s.mozna_dzielic ?? null,
       }))
     );
     if (error) throw error;

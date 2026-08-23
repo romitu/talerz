@@ -1,9 +1,10 @@
 import { Ionicons } from '@expo/vector-icons';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { Tabs } from 'expo-router';
+import { router, Tabs } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useCallback, useEffect, useState } from 'react';
-import { ActivityIndicator, View } from 'react-native';
+import { ActivityIndicator, Pressable, StyleSheet, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import 'react-native-reanimated';
 
 import { EkranLogowania } from '@/components/ekran-logowania';
@@ -136,73 +137,156 @@ function BramkaSesji({ tryb }: { tryb: 'light' | 'dark' }) {
   return <Zakladki kolory={kolory} />;
 }
 
+/** Ekrany schowane pod zębatką — nazwa zakładki, ikona i tytuł menu. */
+const POZYCJE_WIECEJ = [
+  { trasa: '/przepisy-import-eksport', ikona: 'swap-vertical' as const, tytul: 'Import / eksport przepisów' },
+  { trasa: '/skladniki', ikona: 'nutrition' as const, tytul: 'Składniki' },
+  { trasa: '/przepisy-makro', ikona: 'stats-chart' as const, tytul: 'Makro przepisów' },
+  { trasa: '/role-skladnikow', ikona: 'options' as const, tytul: 'Role składników – skalowanie porcji' },
+  { trasa: '/makroskladniki', ikona: 'pie-chart' as const, tytul: 'Makroskładniki – podstawa wg aktualnych zaleceń USA' },
+  { trasa: '/instrukcja', ikona: 'help-circle' as const, tytul: 'Instrukcja' },
+] satisfies { trasa: `/${string}`; ikona: keyof typeof Ionicons.glyphMap; tytul: string }[];
+
 function Zakladki({ kolory }: { kolory: Paleta }) {
+  const [menuOtwarte, setMenuOtwarte] = useState(false);
+  const wstawki = useSafeAreaInsets();
+
   return (
-    <Tabs
-      /*
-        Powrót ma wracać tam, skąd przyszedłeś.
+    <View style={{ flex: 1 }}>
+      <Tabs
+        /*
+          Powrót ma wracać tam, skąd przyszedłeś.
 
-        Domyślnie („firstRoute”) każde cofnięcie skacze na PIERWSZĄ zakładkę,
-        czyli na Plan dnia. Dlatego po zapisaniu przepisu ekran lądował na
-        planie zamiast na liście przepisów — a to samo dotyczyło składników,
-        celów i podglądu przepisu w kuchni.
+          Domyślnie („firstRoute”) każde cofnięcie skacze na PIERWSZĄ zakładkę,
+          czyli na Plan dnia. Dlatego po zapisaniu przepisu ekran lądował na
+          planie zamiast na liście przepisów — a to samo dotyczyło składników,
+          celów i podglądu przepisu w kuchni.
 
-        „history” pilnuje kolejności odwiedzin: z formularza wracasz na listę,
-        z listy tam, gdzie byłeś przed nią.
-      */
-      backBehavior="history"
-      screenOptions={{
-        headerShown: false,
-        tabBarActiveTintColor: kolory.accent,
-        tabBarInactiveTintColor: kolory.textSecondary,
-        tabBarStyle: {
-          backgroundColor: kolory.backgroundElement,
-          borderTopColor: kolory.border,
-        },
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Plan',
-          tabBarIcon: ({ color, size }) => <Ionicons name="today" size={size} color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="zakupy"
-        options={{
-          title: 'Zakupy',
-          tabBarIcon: ({ color, size }) => <Ionicons name="cart" size={size} color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="przepisy"
-        options={{
-          title: 'Przepisy',
-          tabBarIcon: ({ color, size }) => <Ionicons name="restaurant" size={size} color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="instrukcja"
-        options={{
-          title: 'Instrukcja',
-          tabBarIcon: ({ color, size }) => <Ionicons name="help-circle" size={size} color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="profil"
-        options={{
-          title: 'Profil',
-          tabBarIcon: ({ color, size }) => <Ionicons name="person" size={size} color={color} />,
-        }}
-      />
+          „history” pilnuje kolejności odwiedzin: z formularza wracasz na listę,
+          z listy tam, gdzie byłeś przed nią.
+        */
+        backBehavior="history"
+        screenOptions={{
+          headerShown: false,
+          tabBarActiveTintColor: kolory.accent,
+          tabBarInactiveTintColor: kolory.textSecondary,
+          tabBarStyle: {
+            backgroundColor: kolory.backgroundElement,
+            borderTopColor: kolory.border,
+          },
+        }}>
+        <Tabs.Screen
+          name="index"
+          options={{
+            title: 'Plan',
+            tabBarIcon: ({ color, size }) => <Ionicons name="today" size={size} color={color} />,
+          }}
+        />
+        <Tabs.Screen
+          name="zakupy"
+          options={{
+            title: 'Zakupy',
+            tabBarIcon: ({ color, size }) => <Ionicons name="cart" size={size} color={color} />,
+          }}
+        />
+        <Tabs.Screen
+          name="przepisy"
+          options={{
+            title: 'Przepisy',
+            tabBarIcon: ({ color, size }) => <Ionicons name="restaurant" size={size} color={color} />,
+          }}
+        />
+        <Tabs.Screen
+          name="profil"
+          options={{
+            title: 'Profil',
+            tabBarIcon: ({ color, size }) => <Ionicons name="person" size={size} color={color} />,
+          }}
+        />
+        {/*
+          Nie jest prawdziwym ekranem — po dotknięciu nie nawigujemy, tylko
+          rozwijamy menu poniżej. Plik app/menu.tsx istnieje wyłącznie po to,
+          żeby expo-router miał do czego przypiąć tę zakładkę.
+        */}
+        <Tabs.Screen
+          name="menu"
+          options={{
+            title: 'Więcej',
+            tabBarIcon: ({ color, size }) => <Ionicons name="settings" size={size} color={color} />,
+          }}
+          listeners={{
+            tabPress: (e) => {
+              e.preventDefault();
+              setMenuOtwarte((otwarte) => !otwarte);
+            },
+          }}
+        />
 
-      {/* Ekrany otwierane z innych miejsc — nie pokazują się na pasku zakładek. */}
-      <Tabs.Screen name="profil-formularz" options={{ href: null }} />
-      <Tabs.Screen name="cele-formularz" options={{ href: null }} />
-      <Tabs.Screen name="przepis-formularz" options={{ href: null }} />
-      <Tabs.Screen name="skladniki" options={{ href: null }} />
-      <Tabs.Screen name="przepis" options={{ href: null }} />
-      <Tabs.Screen name="uzytkownicy" options={{ href: null }} />
-    </Tabs>
+        {/* Ekrany otwierane z innych miejsc — nie pokazują się na pasku zakładek. */}
+        <Tabs.Screen name="instrukcja" options={{ href: null }} />
+        <Tabs.Screen name="skladniki" options={{ href: null }} />
+        <Tabs.Screen name="przepisy-makro" options={{ href: null }} />
+        <Tabs.Screen name="role-skladnikow" options={{ href: null }} />
+        <Tabs.Screen name="makroskladniki" options={{ href: null }} />
+        <Tabs.Screen name="przepisy-import-eksport" options={{ href: null }} />
+        <Tabs.Screen name="profil-formularz" options={{ href: null }} />
+        <Tabs.Screen name="przepis-formularz" options={{ href: null }} />
+        <Tabs.Screen name="przepis" options={{ href: null }} />
+        <Tabs.Screen name="uzytkownicy" options={{ href: null }} />
+      </Tabs>
+
+      {menuOtwarte && (
+        <>
+          <Pressable
+            accessibilityRole="none"
+            style={StyleSheet.absoluteFill}
+            onPress={() => setMenuOtwarte(false)}
+          />
+          <View
+            style={[
+              stylePasek.menu,
+              {
+                bottom: wstawki.bottom + 56,
+                backgroundColor: kolory.backgroundElement,
+                borderColor: kolory.border,
+              },
+            ]}>
+            {POZYCJE_WIECEJ.map((pozycja) => (
+              <Pressable
+                key={pozycja.trasa}
+                onPress={() => {
+                  setMenuOtwarte(false);
+                  router.push(pozycja.trasa);
+                }}
+                accessibilityRole="button"
+                accessibilityLabel={pozycja.tytul}
+                style={({ pressed }) => [stylePasek.pozycja, pressed && stylePasek.wcisniete]}>
+                <Ionicons name={pozycja.ikona} size={20} color={kolory.text} />
+                <ThemedText type="default">{pozycja.tytul}</ThemedText>
+              </Pressable>
+            ))}
+          </View>
+        </>
+      )}
+    </View>
   );
 }
+
+const stylePasek = StyleSheet.create({
+  menu: {
+    position: 'absolute',
+    right: 12,
+    borderWidth: 1,
+    borderRadius: 12,
+    overflow: 'hidden',
+    minWidth: 220,
+  },
+  pozycja: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+    paddingHorizontal: 16,
+    paddingVertical: 14,
+  },
+  wcisniete: { opacity: 0.7 },
+});

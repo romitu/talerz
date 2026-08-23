@@ -16,6 +16,13 @@ export type KolumnaWyboru<T> = {
   elastyczna?: boolean;
   liczba?: boolean;
   wartosc: (element: T) => string;
+  /**
+   * Własny widok komórki w trybie edycji (patrz `trybEdycji` na tabeli) —
+   * np. `KomorkaEdytowalna` albo `KomorkaWyboru`. Sam ustala swoją szerokość,
+   * więc nie jest dodatkowo owijany. Pomijany, gdy tabela nie jest w trybie
+   * edycji — wtedy liczy się zwykłe `wartosc`.
+   */
+  komorka?: (element: T) => ReactNode;
 };
 
 /** Poniżej tej szerokości kolumna elastyczna przestaje być czytelna. */
@@ -39,6 +46,13 @@ type TabelaWyboruProps<T> = {
   /** Pokazywane pod tabelą, np. przycisk dopisania nowej pozycji. */
   stopka?: (fraza: string) => ReactNode;
   wysokosc?: number;
+  /**
+   * Włącza edycję komórek wprost w tabeli (patrz `komorka` na kolumnie).
+   * Dotknięcie wiersza przestaje wtedy przełączać zaznaczenie — dodawanie
+   * i usuwanie zostaje wyłącznie przy znaku plus po lewej, żeby dotknięcie
+   * pola do edycji nie zaznaczało przy okazji całego wiersza.
+   */
+  trybEdycji?: boolean;
 };
 
 /**
@@ -61,6 +75,7 @@ export function TabelaWyboru<T>({
   placeholderFiltra,
   stopka,
   wysokosc = 320,
+  trybEdycji = false,
 }: TabelaWyboruProps<T>) {
   const motyw = useTheme();
   const [fraza, setFraza] = useState('');
@@ -205,22 +220,41 @@ export function TabelaWyboru<T>({
                       />
                     </Pressable>
 
-                    <Pressable
-                      onPress={() => przelacz(element)}
-                      accessibilityRole="button"
-                      accessibilityState={{ selected: zaznaczony }}
-                      style={({ pressed }) => [styles.komorki, pressed && styles.wcisniety]}>
-                      {kolumny.map((k) => (
-                        <View key={k.tytul} style={[styles.komorka, stylKolumny(k)]}>
-                          <ThemedText
-                            type={zaznaczony ? 'smallBold' : 'small'}
-                            style={k.liczba ? styles.doPrawej : undefined}
-                            numberOfLines={2}>
-                            {k.wartosc(element)}
-                          </ThemedText>
-                        </View>
-                      ))}
-                    </Pressable>
+                    {trybEdycji ? (
+                      <View style={styles.komorki}>
+                        {kolumny.map((k) =>
+                          k.komorka ? (
+                            <View key={k.tytul}>{k.komorka(element)}</View>
+                          ) : (
+                            <View key={k.tytul} style={[styles.komorka, stylKolumny(k)]}>
+                              <ThemedText
+                                type={zaznaczony ? 'smallBold' : 'small'}
+                                style={k.liczba ? styles.doPrawej : undefined}
+                                numberOfLines={2}>
+                                {k.wartosc(element)}
+                              </ThemedText>
+                            </View>
+                          )
+                        )}
+                      </View>
+                    ) : (
+                      <Pressable
+                        onPress={() => przelacz(element)}
+                        accessibilityRole="button"
+                        accessibilityState={{ selected: zaznaczony }}
+                        style={({ pressed }) => [styles.komorki, pressed && styles.wcisniety]}>
+                        {kolumny.map((k) => (
+                          <View key={k.tytul} style={[styles.komorka, stylKolumny(k)]}>
+                            <ThemedText
+                              type={zaznaczony ? 'smallBold' : 'small'}
+                              style={k.liczba ? styles.doPrawej : undefined}
+                              numberOfLines={2}>
+                              {k.wartosc(element)}
+                            </ThemedText>
+                          </View>
+                        ))}
+                      </Pressable>
+                    )}
 
                     {akcjaWiersza?.(element)}
                   </View>

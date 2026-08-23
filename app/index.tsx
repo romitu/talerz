@@ -43,8 +43,10 @@ import {
   type PoraPosilku,
   type PrzepisZMakro,
 } from '@/lib/przepisy';
+import { celZywieniowyNASEM, type PalNasem } from '@/lib/nasem';
 import { useSesja } from '@/lib/sesja';
 import { supabase } from '@/lib/supabase';
+import { wiekZDaty, type Plec, type TrybCelu } from '@/lib/zywienie';
 
 type Cel = {
   kcal: number;
@@ -53,6 +55,22 @@ type Cel = {
   wegle_g: number;
   blonnik_g: number | null;
   prog_bialka_posilek: number | null;
+};
+
+type ProfilZCelem = {
+  id: string;
+  plec: Plec;
+  data_urodzenia: string;
+  wzrost_cm: number;
+  aktywnosc: PalNasem;
+  cele: {
+    tryb: TrybCelu;
+    bialko_procent: number;
+    tluszcz_procent: number;
+    wegle_procent: number;
+    blonnik_g: number | null;
+    prog_bialka_posilek: number | null;
+  }[];
 };
 
 /** Miejsce w planie, do którego wybieramy przepis. */
@@ -120,20 +138,59 @@ export default function EkranPlanu() {
     setWczytywanie(true);
     setBlad(null);
     try {
-      const [wszystkie, lista, wynikCelu, wynikProfili] = await Promise.all([
+      const [wszystkie, lista, wynikProfili] = await Promise.all([
         pobierzPlany(),
         pobierzPrzepisy(sesja?.user.id),
-        supabase
-          .from('cele')
-          .select('kcal, bialko_g, tluszcz_g, wegle_g, blonnik_g, prog_bialka_posilek')
-          .order('obowiazuje_od', { ascending: false })
-          .limit(1)
-          .maybeSingle(),
         // Liczba jedzących bierze się z profili — tyle porcji dziennie zejdzie z garnka.
-        supabase.from('profile').select('id'),
+        supabase
+          .from('profile')
+          .select(
+            'id, plec, data_urodzenia, wzrost_cm, aktywnosc, cele (tryb, bialko_procent, tluszcz_procent, wegle_procent, blonnik_g, prog_bialka_posilek)'
+          )
+          .order('kolejnosc'),
       ]);
 
-      setOsoby(Math.max(1, wynikProfili.data?.length ?? 1));
+      const listaProfili = (wynikProfili.data ?? []) as ProfilZCelem[];
+      setOsoby(Math.max(1, listaProfili.length));
+
+      // Bilans dnia liczy cel PIERWSZEGO profilu na koncie — apka nie ma
+      // jeszcze pojęcia "dla kogo jest ten tydzień" przy kilku profilach.
+      // Kcal i gramy liczą się na bieżąco z wagi/wzrostu/wieku/aktywności,
+      // nie są zapisane jako liczba — dlatego zmiana wagi w profilu od razu
+      // przesuwa bilans tutaj, bez osobnego zapisu celów.
+      let noweCel: Cel | null = null;
+      const pierwszy = listaProfili[0];
+      const zapisanyCel = pierwszy?.cele?.[0];
+      if (pierwszy && zapisanyCel) {
+        const wynikWagi = await supabase
+          .from('pomiary')
+          .select('wartosc')
+          .eq('profil_id', pierwszy.id)
+          .eq('typ', 'waga')
+          .order('data', { ascending: false })
+          .limit(1)
+          .maybeSingle();
+
+        if (wynikWagi.data) {
+          const wynik = celZywieniowyNASEM(
+            pierwszy.plec,
+            wiekZDaty(pierwszy.data_urodzenia),
+            pierwszy.wzrost_cm,
+            Number(wynikWagi.data.wartosc),
+            pierwszy.aktywnosc,
+            zapisanyCel.tryb,
+            { bialko: zapisanyCel.bialko_procent, tluszcz: zapisanyCel.tluszcz_procent, wegle: zapisanyCel.wegle_procent }
+          );
+          noweCel = {
+            kcal: wynik.kcal,
+            bialko_g: wynik.bialko,
+            tluszcz_g: wynik.tluszcz,
+            wegle_g: wynik.wegle,
+            blonnik_g: zapisanyCel.blonnik_g,
+            prog_bialka_posilek: zapisanyCel.prog_bialka_posilek,
+          };
+        }
+      }
 
       // Oglądany tydzień: wskazany ręcznie albo najnowszy. Gdy wskazany zniknął
       // (skasowany gdzie indziej), spadamy na najnowszy zamiast pokazywać pustkę.
@@ -142,7 +199,7 @@ export default function EkranPlanu() {
       setPlany(wszystkie);
       setPlan(p);
       setPrzepisy(lista);
-      if (!wynikCelu.error) setCel(wynikCelu.data);
+      setCel(noweCel);
       setPozycje(p ? await pobierzPozycje(p.id) : []);
     } catch (e) {
       setBlad(komunikatBledu(e));
@@ -191,7 +248,7 @@ export default function EkranPlanu() {
    * Każde wstawienie to jedno GOTOWANIE, nie jeden posiłek — `dodajPartie`
    * rozkłada garnek na przekazane dni. Dlatego przekazujemy dokładnie te dni,
    * które automat wyliczył jako wolne i kolejne; bez tego funkcja policzyłaby
-   * je sama z trwałości przepisu i weszłaby na miejsca zajęte ręcznie.
+   * je sama z liczby porcji bazowych przepisu i weszłaby na miejsca zajęte ręcznie.
    *
    * Kolejność wstawiania ma znaczenie: idziemy po kolei, bo `kolejnosc` musi
    * rosnąć w obrębie posiłku.
@@ -207,7 +264,7 @@ export default function EkranPlanu() {
         przepisId: w.przepisId,
         kolejnosc: 1,
         osoby,
-        trwaloscDni: w.dni.length,
+        liczbaPorcjiBazowych: w.dni.length,
         dostepneDni: w.dni,
       });
     }
@@ -365,7 +422,7 @@ export default function EkranPlanu() {
                   przepisId: p.id,
                   kolejnosc: juz + 1,
                   osoby,
-                  trwaloscDni: p.trwalosc_dni,
+                  liczbaPorcjiBazowych: p.liczba_porcji_bazowych,
                   dostepneDni: dniPlanu(plan),
                 });
                 doPrzywrocenia.current = true;

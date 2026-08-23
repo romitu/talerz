@@ -106,7 +106,7 @@ insert into auth.users (id, email) values ('{ADMIN}', 'roman@t.pl'), ('{GOSC}', 
 update konta set rola = 'administrator' where id = '{ADMIN}';
 
 insert into profile (konto_id, imie, plec, data_urodzenia, wzrost_cm, aktywnosc)
-values ('{GOSC}', 'Gość', 'M', date '1970-03-01', 180, 'siedzacy');
+values ('{GOSC}', 'Gość', 'M', date '1970-03-01', 180, 'nieaktywny');
 
 insert into plany (konto_id, data_start, dni) values ('{GOSC}', current_date, 7);
 insert into zakupy_reczne (konto_id, nazwa) values ('{GOSC}', 'Worki na śmieci');

@@ -2,11 +2,14 @@
  * Wspólne narzędzia do importu i eksportu przez plik Excel.
  *
  * Bez założeń o konkretnej tabeli — współdzielone przez
- * `import-eksport-przepisow.ts` i `import-eksport-skladnikow.ts`.
+ * `import-eksport-przepisow.ts`, `import-eksport-przepis-formularza.ts`
+ * i `import-eksport-skladnikow.ts`.
  */
 
-import { Workbook } from 'exceljs';
-import type { Row, Worksheet } from 'exceljs';
+import type { Row, Workbook, Worksheet } from 'exceljs';
+
+import { OPIS_KUCHNI, OPIS_PORY } from './przepisy';
+import { OPIS_ROLI_SKLADNIKA } from './skladniki';
 
 // =============================================================================
 //  BASE64 <-> BAJTY, BEZ ŻADNYCH ZAŁOŻEŃ O ŚRODOWISKU
@@ -78,6 +81,22 @@ export function odwrotnySlownik<T extends string>(slownik: Record<T, string>): M
   }
   return mapa;
 }
+
+/** Etykieta z arkusza -> kategoria posiłku w bazie. */
+export const PORA_WEDLUG_ETYKIETY = odwrotnySlownik(OPIS_PORY);
+/** Etykieta z arkusza -> kuchnia w bazie. */
+export const KUCHNIA_WEDLUG_ETYKIETY = odwrotnySlownik(OPIS_KUCHNI);
+
+/** Etykieta (albo klucz) z arkusza/tabeli -> rola składnika w bazie. */
+export const ROLA_SKLADNIKA_WEDLUG_ETYKIETY = odwrotnySlownik(OPIS_ROLI_SKLADNIKA);
+
+export const PORCJOWANIE_WEDLUG_ETYKIETY = new Map<string, 'waga' | 'sztuki'>([
+  ['na wagę', 'waga'],
+  ['na wage', 'waga'],
+  ['waga', 'waga'],
+  ['na sztuki', 'sztuki'],
+  ['sztuki', 'sztuki'],
+]);
 
 /** Rozdzielacz list w jednej komórce (kategorie, kuchnie, sprzęt, tagi). */
 export const ROZDZIELACZ = ';';
@@ -164,6 +183,8 @@ export function dodajArkuszTabeli(
  * zamieniamy go tutaj, w jednym miejscu, na czytelny komunikat po polsku.
  */
 export async function wczytajSkoroszyt(base64: string): Promise<Workbook> {
+  // Import dynamiczny — patrz komentarz w eksportujPrzepisy (lib/import-eksport-przepisow.ts).
+  const { Workbook } = await import('exceljs');
   const wb = new Workbook();
   try {
     await wb.xlsx.load(base64DoBajtow(base64).buffer as ArrayBuffer);

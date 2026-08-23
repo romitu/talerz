@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8" />
+<title>Mapa projektu — Talerz</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  :root {
+    --bg: #f7f5f1;
+    --bg-card: #ffffff;
+    --text: #24211c;
+    --text-dim: #6b6459;
+    --border: #e3ddd2;
+    --accent: #b45f39;
+    --accent-soft: #f0e2d8;
+    --ekran: #3d6b52;
+    --ekran-soft: #e2ece5;
+    --logika: #35577c;
+    --logika-soft: #dfe8f0;
+    --komponent: #8a5aa8;
+    --komponent-soft: #ece2f2;
+    --dane: #a8792f;
+    --dane-soft: #f3e8d4;
+    --narzedzie: #6b6459;
+    --narzedzie-soft: #eae7e0;
+    --mono: "SF Mono", Consolas, "Cascadia Code", monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1b1815;
+      --bg-card: #242019;
+      --text: #ece7dd;
+      --text-dim: #a89e8e;
+      --border: #3a352c;
+      --accent: #e08a5c;
+      --accent-soft: #3a2c22;
+      --ekran: #7cbd9c;
+      --ekran-soft: #23342b;
+      --logika: #7fa8d4;
+      --logika-soft: #212f3d;
+      --komponent: #c39ee0;
+      --komponent-soft: #322639;
+      --dane: #e0b565;
+      --dane-soft: #362c1c;
+      --narzedzie: #a89e8e;
+      --narzedzie-soft: #2a2620;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+    padding: 40px 20px 80px;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; }
+  h1 {
+    font-size: 1.7rem;
+    margin: 0 0 4px;
+    letter-spacing: -0.01em;
+  }
+  .podtytul {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    margin: 0 0 28px;
+  }
+  .legenda {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+  .znacznik {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.78rem;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-weight: 600;
+  }
+  .znacznik.ekran { background: var(--ekran-soft); color: var(--ekran); }
+  .znacznik.logika { background: var(--logika-soft); color: var(--logika); }
+  .znacznik.komponent { background: var(--komponent-soft); color: var(--komponent); }
+  .znacznik.dane { background: var(--dane-soft); color: var(--dane); }
+  .znacznik.narzedzie { background: var(--narzedzie-soft); color: var(--narzedzie); }
+
+  details {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    overflow: hidden;
+  }
+  details > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 0.98rem;
+  }
+  details > summary::-webkit-details-marker { display: none; }
+  summary .strzalka {
+    color: var(--text-dim);
+    transition: transform 0.15s ease;
+    font-size: 0.75rem;
+    width: 12px;
+  }
+  details[open] > summary .strzalka { transform: rotate(90deg); }
+  summary .folder-ikona { opacity: 0.85; }
+  summary .opis-folderu {
+    font-weight: 400;
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    margin-left: auto;
+    text-align: right;
+  }
+  .pliki {
+    padding: 2px 16px 14px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .plik {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 5px 0;
+    border-bottom: 1px dotted var(--border);
+    font-size: 0.88rem;
+  }
+  .plik:last-child { border-bottom: none; }
+  .nazwa {
+    font-family: var(--mono);
+    font-size: 0.83rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+    padding: 1px 7px;
+    border-radius: 5px;
+  }
+  .nazwa.ekran { background: var(--ekran-soft); color: var(--ekran); }
+  .nazwa.logika { background: var(--logika-soft); color: var(--logika); }
+  .nazwa.komponent { background: var(--komponent-soft); color: var(--komponent); }
+  .nazwa.dane { background: var(--dane-soft); color: var(--dane); }
+  .nazwa.narzedzie { background: var(--narzedzie-soft); color: var(--narzedzie); }
+  .opis { color: var(--text-dim); }
+  .grupa-naglowek {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-dim);
+    margin: 10px 0 2px;
+  }
+  .stopka {
+    margin-top: 32px;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    text-align: center;
+  }
+  code.sciezka {
+    font-family: var(--mono);
+    background: var(--accent-soft);
+    color: var(--accent);
+    padding: 1px 6px;
+    border-radius: 5px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🍽️ Mapa projektu — Talerz</h1>
+  <p class="podtytul">Planer posiłków i lista zakupów. Expo / React Native + Supabase. Kliknij folder, żeby rozwinąć.</p>
+
+  <div class="legenda">
+    <span class="znacznik ekran">🖥️ ekran (app/)</span>
+    <span class="znacznik komponent">🧩 komponent UI</span>
+    <span class="znacznik logika">⚙️ logika / dane (lib)</span>
+    <span class="znacznik dane">🗄️ baza danych</span>
+    <span class="znacznik narzedzie">🔧 narzędzia / dokumentacja</span>
+  </div>
+
+  <details open>
+    <summary><span class="strzalka">▶</span><span class="folder-ikona">📁</span> app/ <span class="opis-folderu">ekrany — routing przez expo-router (nazwa pliku = ścieżka)</span></summary>
+    <div class="pliki">
+      <div class="plik"><span class="nazwa ekran">_layout.tsx</span><span class="opis">układ główny: logowanie → konto aktywne? → powitanie → 4 zakładki + menu „Więcej”</span></div>
+      <div class="plik"><span class="nazwa ekran">index.tsx</span><span class="opis">zakładka „Plan” — plan dnia / tygodnia</span></div>
+      <div class="plik"><span class="nazwa ekran">zakupy.tsx</span><span class="opis">zakładka „Zakupy”</span></div>
+      <div class="plik"><span class="nazwa ekran">przepisy.tsx</span><span class="opis">zakładka „Przepisy” — lista</span></div>
+      <div class="plik"><span class="nazwa ekran">przepis.tsx</span><span class="opis">podgląd pojedynczego przepisu</span></div>
+      <div class="plik"><span class="nazwa ekran">przepis-formularz.tsx</span><span class="opis">dodawanie / edycja przepisu</span></div>
+      <div class="plik"><span class="nazwa ekran">przepisy-import-eksport.tsx</span><span class="opis">import/eksport przepisów (Excel)</span></div>
+      <div class="plik"><span class="nazwa ekran">skladniki.tsx</span><span class="opis">baza składników + import/eksport</span></div>
+      <div class="plik"><span class="nazwa ekran">profil.tsx</span><span class="opis">zakładka „Profil”</span></div>
+      <div class="plik"><span class="nazwa ekran">profil-formularz.tsx</span><span class="opis">edycja profilu i celów żywieniowych</span></div>
+      <div class="plik"><span class="nazwa ekran">uzytkownicy.tsx</span><span class="opis">zarządzanie użytkownikami (moderator)</span></div>
+      <div class="plik"><span class="nazwa ekran">instrukcja.tsx</span><span class="opis">pomoc / instrukcja obsługi</span></div>
+      <div class="plik"><span class="nazwa ekran">menu.tsx</span><span class="opis">pusty ekran-wieszak pod zakładkę „Więcej”</span></div>
+    </div>
+  </details>
+
+  <details open>
+    <summary><span class="strzalka">▶</span><span class="folder-ikona">📁</span> components/ <span class="opis-folderu">komponenty wielokrotnego użytku</span></summary>
+    <div class="pliki">
+      <div class="plik"><span class="nazwa komponent">ekran-logowania.tsx</span><span class="opis">formularz logowania</span></div>
+      <div class="plik"><span class="nazwa komponent">ekran-powitalny.tsx</span><span class="opis">ekran powitania po zalogowaniu</span></div>
+      <div class="plik"><span class="nazwa komponent">ekran.tsx</span><span class="opis">wspólny szkielet ekranu</span></div>
+      <div class="plik"><span class="nazwa komponent">karta.tsx</span><span class="opis">kontener „karty”</span></div>
+      <div class="plik"><span class="nazwa komponent">przycisk.tsx</span><span class="opis">przycisk motywowany</span></div>
+      <div class="plik"><span class="nazwa komponent">pole.tsx</span><span class="opis">pole tekstowe formularza</span></div>
+      <div class="plik"><span class="nazwa komponent">komorka-edytowalna.tsx</span><span class="opis">edytowalna komórka tabeli</span></div>
+      <div class="plik"><span class="nazwa komponent">tabela-wyboru.tsx</span><span class="opis">tabela z zaznaczaniem wierszy</span></div>
+      <div class="plik"><span class="nazwa komponent">lista-rozwijana.tsx</span><span class="opis">rozwijana lista wyboru</span></div>
+      <div class="plik"><span class="nazwa komponent">wybor.tsx</span> / <span class="nazwa komponent">wybor-wielo.tsx</span> / <span class="nazwa komponent">wybor-stylu.tsx</span><span class="opis">warianty selektorów (pojedynczy / wielokrotny / styl)</span></div>
+      <div class="plik"><span class="nazwa komponent">formularz-skladnika.tsx</span><span class="opis">formularz dodawania składnika</span></div>
+      <div class="plik"><span class="nazwa komponent">dopisz-produkt.tsx</span><span class="opis">szybkie dopisywanie produktu</span></div>
+      <div class="plik"><span class="nazwa komponent">wiersz-makro.tsx</span><span class="opis">wiersz z wartościami makroskładników</span></div>
+      <div class="plik"><span class="nazwa komponent">zdjecie-przepisu.tsx</span><span class="opis">miniatura / upload zdjęcia przepisu</span></div>
+      <div class="plik"><span class="nazwa komponent">themed-text.tsx</span> / <span class="nazwa komponent">themed-view.tsx</span><span class="opis">tekst i widok reagujące na motyw</span></div>
+    </div>
+  </details>
+
+  <details open>
+    <summary><span class="strzalka">▶</span><span class="folder-ikona">📁</span> lib/ <span class="opis-folderu">logika biznesowa i dostęp do danych — oddzielone od UI</span></summary>
+    <div class="pliki">
+      <div class="plik"><span class="nazwa logika">supabase.ts</span><span class="opis">klient Supabase</span></div>
+      <div class="plik"><span class="nazwa logika">sesja.tsx</span><span class="opis">kontekst logowania / sesji użytkownika</span></div>
+      <div class="plik"><span class="nazwa logika">przepisy.ts</span><span class="opis">operacje na przepisach</span></div>
+      <div class="plik"><span class="nazwa logika">skladniki.ts</span><span class="opis">operacje na składnikach</span></div>
+      <div class="plik"><span class="nazwa logika">zakupy.ts</span><span class="opis">operacje na liście zakupów</span></div>
+      <div class="plik"><span class="nazwa logika">plan.ts</span><span class="opis">plan posiłków (dni / tygodnie)</span></div>
+      <div class="plik"><span class="nazwa logika">uzytkownicy.ts</span><span class="opis">zarządzanie kontami, role, status aktywności</span></div>
+      <div class="plik"><span class="nazwa logika">zywienie.ts</span><span class="opis">obliczenia żywieniowe: kalorie, makra, cele</span></div>
+      <div class="plik"><span class="nazwa logika">automat.ts</span><span class="opis">silnik reguł / generator planu</span></div>
+      <div class="plik"><span class="nazwa logika">import-eksport-przepisow.ts</span><span class="opis">import/eksport przepisów (Excel)</span></div>
+      <div class="plik"><span class="nazwa logika">import-eksport-skladnikow.ts</span><span class="opis">import/eksport składników (Excel) — bieżąca gałąź</span></div>
+      <div class="plik"><span class="nazwa logika">import-eksport-wspolne.ts</span><span class="opis">wspólny kod dla obu importów/eksportów</span></div>
+      <div class="plik"><span class="nazwa logika">wyglad.tsx</span><span class="opis">kontekst motywu / stylu wizualnego</span></div>
+      <div class="plik"><span class="nazwa logika">zdjecia.ts</span><span class="opis">obsługa zdjęć (upload, storage)</span></div>
+      <div class="plik"><span class="nazwa logika">nawigacja.ts</span> / <span class="nazwa logika">blad.ts</span><span class="opis">pomocnicze: nawigacja, obsługa błędów</span></div>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="strzalka">▶</span><span class="folder-ikona">📁</span> constants/ · hooks/ <span class="opis-folderu">motyw i hooki</span></summary>
+    <div class="pliki">
+      <div class="plik"><span class="nazwa logika">constants/theme.ts</span><span class="opis">palety kolorów (jasny / ciemny × warianty stylu)</span></div>
+      <div class="plik"><span class="nazwa logika">hooks/use-color-scheme(.web).ts</span><span class="opis">wykrywanie jasny/ciemny motyw systemu</span></div>
+      <div class="plik"><span class="nazwa logika">hooks/use-theme.ts</span><span class="opis">dostęp do aktywnej palety</span></div>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="strzalka">▶</span><span class="folder-ikona">📁</span> supabase/ <span class="opis-folderu">backend — schemat, narzędzia SQL, testy Python</span></summary>
+    <div class="pliki">
+      <div class="grupa-naglowek">migrations/ — 26 migracji, chronologicznie</div>
+      <div class="plik"><span class="nazwa dane">0001…0026</span><span class="opis">od schematu początkowego po najnowszą: <code class="sciezka">0026_cel_liczony_na_biezaco.sql</code> (dziś)</span></div>
+      <div class="grupa-naglowek">narzedzia/ — gotowe zapytania do ręcznego użytku</div>
+      <div class="plik"><span class="nazwa dane">import-przepisow.sql</span><span class="opis">ręczny import przepisów</span></div>
+      <div class="plik"><span class="nazwa dane">skladniki-recznie.sql</span> / <span class="nazwa dane">skladniki-z-planera.sql</span><span class="opis">wprowadzanie składników</span></div>
+      <div class="plik"><span class="nazwa dane">pokaz-skladniki.sql</span> / <span class="nazwa dane">sprawdz-skladniki.sql</span><span class="opis">podgląd i weryfikacja danych</span></div>
+      <div class="plik"><span class="nazwa dane">przeskaluj-ogorkowa.sql</span><span class="opis">przeskalowanie konkretnego przepisu (przykład)</span></div>
+      <div class="grupa-naglowek">testy/ — 14 plików Python, po jednym na obszar</div>
+      <div class="plik"><span class="nazwa dane">test_uprawnien.py, test_publikacji.py, test_kont_nieaktywnych.py…</span><span class="opis">uprawnienia RLS, obieg publikacji, dezaktywacja kont, sprzęt, jednostki, porcjowanie itd.</span></div>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="strzalka">▶</span><span class="folder-ikona">📁</span> narzedzia/ <span class="opis-folderu">skrypty Node poza aplikacją</span></summary>
+    <div class="pliki">
+      <div class="plik"><span class="nazwa narzedzie">import-usda.mjs</span><span class="opis">import bazy składników USDA</span></div>
+      <div class="plik"><span class="nazwa narzedzie">generuj-import.mjs</span> / <span class="nazwa narzedzie">wczytaj-planer.mjs</span><span class="opis">przygotowanie danych importu z planera</span></div>
+      <div class="plik"><span class="nazwa narzedzie">wgraj-zdjecia.mjs</span> / <span class="nazwa narzedzie">wyjmij-zdjecia.js</span><span class="opis">wgrywanie / wyciąganie zdjęć przepisów</span></div>
+      <div class="plik"><span class="nazwa narzedzie">sprawdz-kontrast.mjs</span><span class="opis">sprawdzanie kontrastu kolorów motywu</span></div>
+      <div class="plik"><span class="nazwa narzedzie">test-automatu.mjs</span><span class="opis">test silnika reguł planu</span></div>
+      <div class="plik"><span class="nazwa narzedzie">*.json</span><span class="opis">dane pomocnicze: mapowanie planera, lista składników</span></div>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="strzalka">▶</span><span class="folder-ikona">📁</span> docs/ <span class="opis-folderu">notatki robocze i plany</span></summary>
+    <div class="pliki">
+      <div class="plik"><span class="nazwa narzedzie">CO-TERAZ.md</span><span class="opis">bieżący status prac</span></div>
+      <div class="plik"><span class="nazwa narzedzie">plan-aplikacji.md</span><span class="opis">plan / architektura aplikacji</span></div>
+      <div class="plik"><span class="nazwa narzedzie">pomysly-funkcje.md</span><span class="opis">pomysły na funkcje</span></div>
+      <div class="plik"><span class="nazwa narzedzie">specyfikacja-analiza.md</span> / <span class="nazwa narzedzie">analiza-importu-planera.md</span><span class="opis">analizy tematyczne</span></div>
+      <div class="plik"><span class="nazwa narzedzie">import-trzy-dania.md</span> / <span class="nazwa narzedzie">przyklad-ogorkowa.md</span><span class="opis">przykłady robocze</span></div>
+      <div class="plik"><span class="nazwa narzedzie">mapa-projektu.html</span><span class="opis">👉 ten plik</span></div>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="strzalka">▶</span><span class="folder-ikona">📁</span> testy/ <span class="opis-folderu">testy JS/TS aplikacji (poza testami SQL)</span></summary>
+    <div class="pliki">
+      <div class="plik"><span class="nazwa narzedzie">test-zywienie.ts</span><span class="opis">testy obliczeń żywieniowych</span></div>
+    </div>
+  </details>
+
+  <p class="stopka">
+    Stos: Expo + React Native + expo-router · Supabase (Postgres + RLS) · ExcelJS do importu/eksportu.<br>
+    Konwencja: cała nazwa domenowa po polsku, UI (<code class="sciezka">components/</code>) oddzielone od logiki (<code class="sciezka">lib/</code>).
+  </p>
+</div>
+</body>
+</html>

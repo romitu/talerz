@@ -1,23 +1,27 @@
+import { Ionicons } from '@expo/vector-icons';
 import { router, useFocusEffect } from 'expo-router';
 import { useCallback, useState } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import { Ekran } from '@/components/ekran';
+import { KafleWyniku } from '@/components/kafle-wyniku';
 import { Karta } from '@/components/karta';
-import { WierszMakro } from '@/components/wiersz-makro';
 import { Przycisk } from '@/components/przycisk';
 import { ThemedText } from '@/components/themed-text';
 import { WyborStylu } from '@/components/wybor-stylu';
 import { Spacing } from '@/constants/theme';
+import { useTheme } from '@/hooks/use-theme';
+import { komunikatBledu } from '@/lib/blad';
+import { celZywieniowyNASEM, type PalNasem } from '@/lib/nasem';
 import { useSesja } from '@/lib/sesja';
 import { supabase } from '@/lib/supabase';
-import { wiekZDaty } from '@/lib/zywienie';
+import { wiekZDaty, type Plec, type TrybCelu } from '@/lib/zywienie';
 
 type Cel = {
-  kcal: number;
-  bialko_g: number;
-  tluszcz_g: number;
-  wegle_g: number;
+  tryb: TrybCelu;
+  bialko_procent: number;
+  tluszcz_procent: number;
+  wegle_procent: number;
   blonnik_g: number | null;
   prog_bialka_posilek: number | null;
 };
@@ -25,17 +29,51 @@ type Cel = {
 type Profil = {
   id: string;
   imie: string;
+  plec: Plec;
   data_urodzenia: string;
   wzrost_cm: number;
+  aktywnosc: PalNasem;
   cele: Cel[];
 };
 
+/**
+ * Ikona w miękkim kółku — do wiersza KONTA i do awatara profilu.
+ *
+ * Awatar to na razie inicjał w kółku, nie ilustracja jak w makiecie od
+ * Romana — generowanie własnej grafiki nie jest czymś, co potrafię zrobić.
+ * Jeśli dosyłasz plik z ilustracją, podepnę go tutaj zamiast tej ikony.
+ */
+function Znacznik({
+  ikona,
+  rozmiar = 20,
+  kolko = 36,
+}: {
+  ikona: keyof typeof Ionicons.glyphMap;
+  rozmiar?: number;
+  kolko?: number;
+}) {
+  const motyw = useTheme();
+  return (
+    <View
+      style={[
+        styles.znacznik,
+        { width: kolko, height: kolko, borderRadius: kolko / 2, backgroundColor: `${motyw.accent}1F` },
+      ]}>
+      <Ionicons name={ikona} size={rozmiar} color={motyw.accent} />
+    </View>
+  );
+}
+
 export default function EkranProfilu() {
   const { sesja } = useSesja();
+  const motyw = useTheme();
   const [profile, setProfile] = useState<Profil[]>([]);
+  const [wagi, setWagi] = useState<Record<string, number>>({});
   const [rola, setRola] = useState<string | null>(null);
   const [wczytywanie, setWczytywanie] = useState(true);
   const [blad, setBlad] = useState<string | null>(null);
+  const [doUsuniecia, setDoUsuniecia] = useState<Profil | null>(null);
+  const [usuwanie, setUsuwanie] = useState(false);
 
   const pobierz = useCallback(async () => {
     setWczytywanie(true);
@@ -44,13 +82,39 @@ export default function EkranProfilu() {
     const [wynikProfili, wynikKonta] = await Promise.all([
       supabase
         .from('profile')
-        .select('id, imie, data_urodzenia, wzrost_cm, cele (kcal, bialko_g, tluszcz_g, wegle_g, blonnik_g, prog_bialka_posilek)')
+        .select(
+          'id, imie, plec, data_urodzenia, wzrost_cm, aktywnosc, cele (tryb, bialko_procent, tluszcz_procent, wegle_procent, blonnik_g, prog_bialka_posilek)'
+        )
         .order('kolejnosc'),
       supabase.from('konta').select('rola').single(),
     ]);
 
     if (wynikProfili.error) setBlad(wynikProfili.error.message);
-    else setProfile((wynikProfili.data ?? []) as Profil[]);
+    else {
+      const lista = (wynikProfili.data ?? []) as Profil[];
+      setProfile(lista);
+
+      // Waga to jedyna rzecz, której nie ma w powyższym zapytaniu — a bez niej
+      // nie da się policzyć celu, który ma być zawsze aktualny, nie zamrożony.
+      const wynikiWag = await Promise.all(
+        lista.map((p) =>
+          supabase
+            .from('pomiary')
+            .select('wartosc')
+            .eq('profil_id', p.id)
+            .eq('typ', 'waga')
+            .order('data', { ascending: false })
+            .limit(1)
+            .maybeSingle()
+        )
+      );
+      const mapa: Record<string, number> = {};
+      lista.forEach((p, i) => {
+        const w = wynikiWag[i].data;
+        if (w) mapa[p.id] = Number(w.wartosc);
+      });
+      setWagi(mapa);
+    }
 
     if (!wynikKonta.error) setRola(wynikKonta.data.rola);
 
@@ -64,14 +128,46 @@ export default function EkranProfilu() {
     }, [pobierz])
   );
 
+  // Usunięcie profilu kasuje kaskadowo jego cele i pomiary (waga, talia) —
+  // to jedyne tabele, które się do niego odwołują.
+  async function usunProfil(id: string) {
+    setUsuwanie(true);
+    setBlad(null);
+    try {
+      const { error } = await supabase.from('profile').delete().eq('id', id);
+      if (error) throw error;
+      setDoUsuniecia(null);
+      pobierz();
+    } catch (e) {
+      setBlad(komunikatBledu(e));
+    } finally {
+      setUsuwanie(false);
+    }
+  }
+
   return (
     <Ekran tytul="Profil" podtytul={sesja?.user.email ?? undefined}>
       <Karta>
-        <ThemedText type="smallBold" themeColor="textSecondary">
-          KONTO
-        </ThemedText>
-        <ThemedText type="small">Adres: {sesja?.user.email}</ThemedText>
-        <ThemedText type="small">Rola: {rola ?? 'wczytywanie…'}</ThemedText>
+        <View style={styles.wierszKonta}>
+          <Znacznik ikona="person-circle-outline" />
+          <ThemedText type="smallBold" themeColor="textSecondary">
+            KONTO
+          </ThemedText>
+        </View>
+        <View style={styles.wierszKonta}>
+          <Znacznik ikona="mail-outline" kolko={28} rozmiar={16} />
+          <ThemedText type="small">
+            <ThemedText type="smallBold">Adres: </ThemedText>
+            {sesja?.user.email}
+          </ThemedText>
+        </View>
+        <View style={styles.wierszKonta}>
+          <Znacznik ikona="shield-checkmark-outline" kolko={28} rozmiar={16} />
+          <ThemedText type="small">
+            <ThemedText type="smallBold">Rola: </ThemedText>
+            {rola ?? 'wczytywanie…'}
+          </ThemedText>
+        </View>
       </Karta>
 
       {wczytywanie && (
@@ -99,48 +195,99 @@ export default function EkranProfilu() {
       )}
 
       {profile.map((p) => {
-        const cel = p.cele?.[0];
+        const zapis = p.cele?.[0];
+        const waga = wagi[p.id];
+        // Kcal i gramy liczą się na bieżąco z wagi/wzrostu/wieku/aktywności —
+        // ta karta nigdy nie pokazuje zamrożonej liczby z chwili zapisu.
+        const cel =
+          zapis && waga
+            ? celZywieniowyNASEM(
+                p.plec,
+                wiekZDaty(p.data_urodzenia),
+                p.wzrost_cm,
+                waga,
+                p.aktywnosc,
+                zapis.tryb,
+                { bialko: zapis.bialko_procent, tluszcz: zapis.tluszcz_procent, wegle: zapis.wegle_procent }
+              )
+            : null;
+
         return (
-          <Karta key={p.id}>
-            <ThemedText type="default">{p.imie}</ThemedText>
-            <ThemedText type="small" themeColor="textSecondary">
-              {wiekZDaty(p.data_urodzenia)} lat · {p.wzrost_cm} cm
-            </ThemedText>
+          <Karta key={p.id} style={styles.kartaProfilu}>
+            <View style={styles.naglowekProfilu}>
+              <View style={[styles.awatar, { backgroundColor: `${motyw.accent}1F` }]}>
+                <Ionicons name={p.plec === 'K' ? 'woman' : 'man'} size={34} color={motyw.accent} />
+              </View>
+              <View>
+                <ThemedText type="subtitle">{p.imie}</ThemedText>
+                <ThemedText type="small" themeColor="textSecondary">
+                  {wiekZDaty(p.data_urodzenia)} lat · {p.wzrost_cm} cm
+                </ThemedText>
+              </View>
+            </View>
 
             {cel ? (
               <>
-                <WierszMakro
-                  pozycje={[
-                    { etykieta: 'kcal', wartosc: cel.kcal, jednostka: '' },
-                    { etykieta: 'białko', wartosc: cel.bialko_g, jednostka: ' g' },
-                    { etykieta: 'tłuszcz', wartosc: cel.tluszcz_g, jednostka: ' g' },
-                    { etykieta: 'węgle', wartosc: cel.wegle_g, jednostka: ' g' },
-                  ]}
-                />
-                <ThemedText type="small" themeColor="textSecondary">
-                  {cel.prog_bialka_posilek
-                    ? `Próg białka na posiłek: ${cel.prog_bialka_posilek} g`
-                    : 'Bez progu posiłkowego'}
-                  {cel.blonnik_g ? ` · błonnik: ${cel.blonnik_g} g dziennie` : ''}
-                </ThemedText>
+                <Karta style={styles.kartaWyniku}>
+                  <KafleWyniku cel={cel} />
+                </Karta>
+
+                <View style={[styles.pigulka, { backgroundColor: motyw.backgroundSelected }]}>
+                  <Ionicons
+                    name={zapis!.prog_bialka_posilek ? 'checkmark-circle' : 'checkmark-circle-outline'}
+                    size={18}
+                    color={motyw.accent}
+                  />
+                  <ThemedText type="small" themeColor="accent" style={styles.tekstPigulki}>
+                    {zapis!.prog_bialka_posilek
+                      ? `Próg białka: ${zapis!.prog_bialka_posilek} g`
+                      : 'Bez progu posiłkowego'}
+                    {zapis!.blonnik_g ? ` · błonnik: ${zapis!.blonnik_g} g` : ''}
+                    {' · '}
+                    {zapis!.tryb === 'redukcja' ? 'redukcja' : 'utrzymanie wagi'}
+                  </ThemedText>
+                </View>
               </>
             ) : (
               <ThemedText type="small" themeColor="accent">
-                Brak ustalonych celów dziennych.
+                {zapis ? 'Brak zapisanej wagi — bez niej nie da się policzyć celu.' : 'Brak ustalonych celów dziennych.'}
               </ThemedText>
             )}
 
             <Przycisk
-              tytul={cel ? 'Zmień cele' : 'Ustal cele'}
+              tytul="Edytuj profil"
+              ikona="pencil-outline"
+              onPress={() => router.push({ pathname: '/profil-formularz', params: { profil: p.id, powrot: '/profil' } })}
+            />
+            <Przycisk
+              tytul="Usuń profil"
+              ikona="trash-outline"
               wariant="poboczny"
-              onPress={() => router.push({ pathname: '/cele-formularz', params: { profil: p.id, powrot: '/profil' } })}
+              onPress={() => setDoUsuniecia(p)}
             />
           </Karta>
         );
       })}
 
+      {/* Okno potwierdzenia — usunięcie kasuje też cele i pomiary tego profilu. */}
+      {doUsuniecia && (
+        <Karta>
+          <ThemedText type="smallBold">Usunąć profil „{doUsuniecia.imie}”?</ThemedText>
+          <ThemedText type="small" themeColor="textSecondary">
+            Razem z nim znikną jego cele dzienne oraz historia wagi i talii. Tej operacji nie da
+            się cofnąć.
+          </ThemedText>
+          <Przycisk tytul="Usuń" ikona="trash-outline" onPress={() => usunProfil(doUsuniecia.id)} zajety={usuwanie} />
+          <Przycisk tytul="Anuluj" wariant="poboczny" onPress={() => setDoUsuniecia(null)} wylaczony={usuwanie} />
+        </Karta>
+      )}
+
       {profile.length < 3 && (
-        <Przycisk tytul="Dodaj profil" onPress={() => router.push({ pathname: '/profil-formularz', params: { powrot: '/profil' } })} />
+        <Przycisk
+          tytul="Dodaj profil"
+          ikona="add-circle-outline"
+          onPress={() => router.push({ pathname: '/profil-formularz', params: { powrot: '/profil' } })}
+        />
       )}
 
       <Karta>
@@ -172,6 +319,7 @@ export default function EkranProfilu() {
 
       <Przycisk
         tytul="Wyloguj się"
+        ikona="log-out-outline"
         wariant="poboczny"
         onPress={() => supabase.auth.signOut()}
         style={styles.wyloguj}
@@ -181,6 +329,44 @@ export default function EkranProfilu() {
 }
 
 const styles = StyleSheet.create({
+  wierszKonta: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.two,
+  },
+  znacznik: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  kartaProfilu: {
+    gap: Spacing.three,
+  },
+  naglowekProfilu: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.three,
+  },
+  awatar: {
+    width: 64,
+    height: 64,
+    borderRadius: 32,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  kartaWyniku: {
+    padding: Spacing.two,
+  },
+  pigulka: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.two,
+    borderRadius: Spacing.two,
+    paddingVertical: Spacing.two,
+    paddingHorizontal: Spacing.three,
+  },
+  tekstPigulki: {
+    flex: 1,
+  },
   wyloguj: {
     marginTop: Spacing.four,
   },

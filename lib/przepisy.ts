@@ -6,6 +6,7 @@
  */
 
 import { supabase } from './supabase';
+import type { RolaSkladnika } from './skladniki';
 
 /**
  * Kategoria przepisu. Trzy pierwsze to pory dnia, czwarta nią nie jest:
@@ -38,6 +39,7 @@ export type PrzepisZMakro = {
   pory: PoraPosilku[];
   kuchnie: Kuchnia[];
   trwalosc_dni: number;
+  liczba_porcji_bazowych: number;
   porcjowanie: 'waga' | 'sztuki';
   /** Ile porcji wychodzi — wyliczone przez bazę zgodnie ze sposobem porcjowania. */
   porcje_wyliczone: number | null;
@@ -143,9 +145,9 @@ export async function pobierzPrzepisy(kontoId: string | undefined) {
     supabase
       .from('przepisy')
       .select(
-        `id, nazwa, opis, pory, kuchnie, trwalosc_dni, porcje, czas_przygotowania_min,
-         czas_obrobki_min, sprzet, przechowywanie, mozna_mrozic, ratunek, porcjowanie,
-         widocznosc, zgloszono_kiedy, powod_odrzucenia, autor_id, zdjecie,
+        `id, nazwa, opis, pory, kuchnie, trwalosc_dni, liczba_porcji_bazowych, porcje,
+         czas_przygotowania_min, czas_obrobki_min, sprzet, przechowywanie, mozna_mrozic,
+         ratunek, porcjowanie, widocznosc, zgloszono_kiedy, powod_odrzucenia, autor_id, zdjecie,
          preferencje_przepisow (konto_id, poziom)`
       )
       .order('nazwa'),
@@ -178,6 +180,7 @@ export async function pobierzPrzepisy(kontoId: string | undefined) {
       pory: p.pory ?? [],
       kuchnie: p.kuchnie ?? [],
       trwalosc_dni: p.trwalosc_dni,
+      liczba_porcji_bazowych: p.liczba_porcji_bazowych,
       porcjowanie: p.porcjowanie,
       czas_przygotowania_min: p.czas_przygotowania_min,
       czas_obrobki_min: p.czas_obrobki_min,
@@ -251,6 +254,7 @@ export type PelnyPrzepis = {
   pory: PoraPosilku[];
   kuchnie: Kuchnia[];
   trwalosc_dni: number;
+  liczba_porcji_bazowych: number;
   porcjowanie: 'waga' | 'sztuki';
   porcje: number;
   porcja_g: number | null;
@@ -276,6 +280,9 @@ export type PelnyPrzepis = {
     zamiennik: string | null;
     opis_potoczny: string | null;
     kolejnosc: number;
+    /** Nadpisanie roli/kwantyzacji TYLKO dla tego przepisu — patrz migracja 0035. */
+    rola: RolaSkladnika | null;
+    mozna_dzielic: boolean | null;
   }[];
   etapy: {
     nazwa: string;
@@ -295,16 +302,16 @@ export async function pobierzPelnyPrzepis(id: string): Promise<PelnyPrzepis> {
     supabase
       .from('przepisy')
       .select(
-        `id, nazwa, opis, pory, kuchnie, trwalosc_dni, porcjowanie, porcje, porcja_g,
-         czas_przygotowania_min, czas_obrobki_min, sprzet, przechowywanie, mozna_mrozic,
-         ratunek, widocznosc, zgloszono_kiedy, powod_odrzucenia, zdjecie`
+        `id, nazwa, opis, pory, kuchnie, trwalosc_dni, liczba_porcji_bazowych, porcjowanie,
+         porcje, porcja_g, czas_przygotowania_min, czas_obrobki_min, sprzet, przechowywanie,
+         mozna_mrozic, ratunek, widocznosc, zgloszono_kiedy, powod_odrzucenia, zdjecie`
       )
       .eq('id', id)
       .single(),
     supabase
       .from('przepis_skladniki')
       .select(
-        'skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, opis_potoczny, kolejnosc, skladniki (nazwa)'
+        'skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, opis_potoczny, kolejnosc, rola, mozna_dzielic, skladniki (nazwa)'
       )
       .eq('przepis_id', id)
       .order('kolejnosc'),
@@ -342,6 +349,8 @@ export async function pobierzPelnyPrzepis(id: string): Promise<PelnyPrzepis> {
     zamiennik: s.zamiennik as string | null,
     opis_potoczny: s.opis_potoczny as string | null,
     kolejnosc: s.kolejnosc as number,
+    rola: s.rola as RolaSkladnika | null,
+    mozna_dzielic: s.mozna_dzielic as boolean | null,
   }));
 
   return {
@@ -367,15 +376,15 @@ export async function pobierzWszystkiePelnePrzepisy(): Promise<PelnyPrzepis[]> {
     supabase
       .from('przepisy')
       .select(
-        `id, nazwa, opis, pory, kuchnie, trwalosc_dni, porcjowanie, porcje, porcja_g,
-         czas_przygotowania_min, czas_obrobki_min, sprzet, przechowywanie, mozna_mrozic,
-         ratunek, widocznosc, zgloszono_kiedy, powod_odrzucenia, zdjecie`
+        `id, nazwa, opis, pory, kuchnie, trwalosc_dni, liczba_porcji_bazowych, porcjowanie,
+         porcje, porcja_g, czas_przygotowania_min, czas_obrobki_min, sprzet, przechowywanie,
+         mozna_mrozic, ratunek, widocznosc, zgloszono_kiedy, powod_odrzucenia, zdjecie`
       )
       .order('nazwa'),
     supabase
       .from('przepis_skladniki')
       .select(
-        'przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, opis_potoczny, kolejnosc, skladniki (nazwa)'
+        'przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, opis_potoczny, kolejnosc, rola, mozna_dzielic, skladniki (nazwa)'
       )
       .order('kolejnosc'),
     supabase
@@ -402,6 +411,8 @@ export async function pobierzWszystkiePelnePrzepisy(): Promise<PelnyPrzepis[]> {
       zamiennik: s.zamiennik as string | null,
       opis_potoczny: s.opis_potoczny as string | null,
       kolejnosc: s.kolejnosc as number,
+      rola: s.rola as RolaSkladnika | null,
+      mozna_dzielic: s.mozna_dzielic as boolean | null,
     });
     skladnikiWedlugPrzepisu.set(id, lista);
   }

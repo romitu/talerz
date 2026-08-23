@@ -15,8 +15,6 @@
  * reguły, którą wymusza ręczne dodawanie.
  */
 
-import { Workbook } from 'exceljs';
-
 import {
   bajtyDoBase64,
   dodajArkuszTabeli,
@@ -26,11 +24,20 @@ import {
   mapaNaglowkow,
   odwrotnySlownik,
   podzielListe,
+  ROLA_SKLADNIKA_WEDLUG_ETYKIETY,
   ROZDZIELACZ,
   tekstKomorki,
   wczytajSkoroszyt,
 } from './import-eksport-wspolne';
-import { sprawdzSkladnik, zapiszSkladnik, type DaneSkladnika, type Skladnik } from './skladniki';
+import {
+  OPIS_ROLI_SKLADNIKA,
+  ROLE_SKLADNIKA,
+  sprawdzSkladnik,
+  zapiszSkladnik,
+  type DaneSkladnika,
+  type RolaSkladnika,
+  type Skladnik,
+} from './skladniki';
 
 const OPIS_ZRODLA: Record<Skladnik['zrodlo'], string> = {
   usda: 'USDA',
@@ -53,6 +60,8 @@ const NAGLOWKI_SKLADNIKOW = [
   'NOVA',
   'Gramatura opakowania (g)',
   'Masa sztuki (g)',
+  'Można podzielić',
+  'Rola',
   'Tagi',
 ] as const;
 
@@ -68,6 +77,8 @@ function nazwaPlikuInstrukcji(): string[] {
     `Źródło: ${Object.values(OPIS_ZRODLA).join(' / ')} — puste pole liczy się jako „Własne”.`,
     'NOVA: liczba całkowita od 1 do 4, opcjonalnie.',
     'Gramatura opakowania i Masa sztuki: opcjonalne, w gramach.',
+    'Można podzielić: „tak” (np. sól) albo „nie” (np. jajko) — opcjonalne, puste pole zostaje nieustawione.',
+    `Rola: opcjonalna, dokładnie jedna z: ${ROLE_SKLADNIKA.map((r) => OPIS_ROLI_SKLADNIKA[r]).join(', ')} — puste pole liczy się jako „Baza”.`,
     'Tagi: kilka naraz, oddzielone średnikiem.',
     '',
     'Wiersz odrzucony przez walidację (np. suma białka, tłuszczu i węglowodanów',
@@ -77,6 +88,8 @@ function nazwaPlikuInstrukcji(): string[] {
 
 /** Buduje plik .xlsx z podanych składników i zwraca go jako base64 — gotowe do zapisu na dysk. */
 export async function eksportujSkladniki(skladniki: Skladnik[]): Promise<string> {
+  // Import dynamiczny — patrz komentarz w eksportujPrzepisy (lib/import-eksport-przepisow.ts).
+  const { Workbook } = await import('exceljs');
   const wb = new Workbook();
   wb.creator = 'Talerz';
   wb.created = new Date();
@@ -98,6 +111,8 @@ export async function eksportujSkladniki(skladniki: Skladnik[]): Promise<string>
     s.nova ?? '',
     s.gramatura_opakowania_g ?? '',
     s.masa_sztuki_g ?? '',
+    s.mozna_dzielic === null || s.mozna_dzielic === undefined ? '' : s.mozna_dzielic ? 'tak' : 'nie',
+    OPIS_ROLI_SKLADNIKA[s.rola],
     s.tagi.join(`${ROZDZIELACZ} `),
   ]);
   dodajArkuszTabeli(wb, 'Składniki', NAGLOWKI_SKLADNIKOW, wiersze);
@@ -158,6 +173,34 @@ export async function wczytajPlikSkladnikow(base64: string): Promise<WynikWczyta
 
     const nova = liczbaKomorki(komorka(wiersz, nagl, 'NOVA'));
 
+    const etykietaRoli = tekstKomorki(komorka(wiersz, nagl, 'Rola')).trim().toLowerCase();
+    let rola: RolaSkladnika = 'baza';
+    if (etykietaRoli) {
+      const rolaWpisana = ROLA_SKLADNIKA_WEDLUG_ETYKIETY.get(etykietaRoli);
+      if (!rolaWpisana) {
+        bledy.push({
+          skladnik: nazwa,
+          tresc: `Wiersz ${numer}: „Rola” musi być jedną z: ${ROLE_SKLADNIKA.map((r) => OPIS_ROLI_SKLADNIKA[r]).join(', ')}.`,
+        });
+        return;
+      }
+      rola = rolaWpisana;
+    }
+
+    const etykietaKwantyzacji = tekstKomorki(komorka(wiersz, nagl, 'Można podzielić'))
+      .trim()
+      .toLowerCase();
+    let moznaDzielic: boolean | null = null;
+    if (etykietaKwantyzacji === 'tak') moznaDzielic = true;
+    else if (etykietaKwantyzacji === 'nie') moznaDzielic = false;
+    else if (etykietaKwantyzacji) {
+      bledy.push({
+        skladnik: nazwa,
+        tresc: `Wiersz ${numer}: „Można podzielić” musi być „tak” albo „nie”.`,
+      });
+      return;
+    }
+
     const dane: DaneSkladnika = {
       nazwa,
       zrodlo,
@@ -171,6 +214,8 @@ export async function wczytajPlikSkladnikow(base64: string): Promise<WynikWczyta
       nova,
       gramatura_opakowania_g: liczbaKomorki(komorka(wiersz, nagl, 'Gramatura opakowania (g)')),
       masa_sztuki_g: liczbaKomorki(komorka(wiersz, nagl, 'Masa sztuki (g)')),
+      mozna_dzielic: moznaDzielic,
+      rola,
       tagi: podzielListe(tekstKomorki(komorka(wiersz, nagl, 'Tagi'))),
     };
 

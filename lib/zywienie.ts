@@ -6,7 +6,12 @@
  * stoją w jednym miejscu, zamiast być rozsiane po interfejsie.
  *
  * Źródła:
- *   * przemiana podstawowa — wzór Mifflina-St Jeora
+ *   * przemiana podstawowa — wzór Mifflina-St Jeora. Zostaje tu wyłącznie jako
+ *     dolna granica bezpieczeństwa dla celu redukcyjnego (patrz lib/nasem.ts) —
+ *     samo zapotrzebowanie dzienne liczy już NASEM (patrz niżej).
+ *   * zapotrzebowanie dzienne i cel kaloryczny — równania NASEM 2023
+ *     (Dietary Reference Intakes for Energy), w lib/nasem.ts. Zastąpiły
+ *     dawny wzór „przemiana razy mnożnik aktywności” z tego pliku.
  *   * zakresy makroskładników — AMDR (białko 10-35%, tłuszcz 20-35%, węglowodany 45-65%)
  *
  * UWAGA: współczynniki białka na kilogram masy ciała celowo NIE są tu wpisane.
@@ -15,8 +20,6 @@
  */
 
 export type Plec = 'K' | 'M';
-
-export type PoziomAktywnosci = 'siedzacy' | 'lekki' | 'umiarkowany' | 'duzy' | 'bardzo_duzy';
 
 export type Makro = {
   kcal: number;
@@ -72,14 +75,6 @@ export const AMDR = {
   wegle: { min: 45, max: 65 },
 } as const;
 
-export const AKTYWNOSC: Record<PoziomAktywnosci, { mnoznik: number; opis: string }> = {
-  siedzacy: { mnoznik: 1.2, opis: 'praca siedząca, brak ćwiczeń' },
-  lekki: { mnoznik: 1.375, opis: 'lekkie ćwiczenia 1–3 razy w tygodniu' },
-  umiarkowany: { mnoznik: 1.55, opis: 'ćwiczenia 3–5 razy w tygodniu' },
-  duzy: { mnoznik: 1.725, opis: 'ćwiczenia 6–7 razy w tygodniu' },
-  bardzo_duzy: { mnoznik: 1.9, opis: 'praca fizyczna lub dwa treningi dziennie' },
-};
-
 /** Największy dopuszczalny deficyt dzienny — około 1 kg tygodniowo. */
 export const MAKS_DEFICYT_KCAL = 1000;
 
@@ -112,16 +107,10 @@ function przemianaDokladna(
   return podstawa + (plec === 'M' ? 5 : -161);
 }
 
-/** Całkowite zapotrzebowanie: przemiana podstawowa razy współczynnik aktywności. */
-export function zapotrzebowanie(
-  plec: Plec,
-  wagaKg: number,
-  wzrostCm: number,
-  wiekLat: number,
-  aktywnosc: PoziomAktywnosci
-): number {
-  return Math.round(przemianaDokladna(plec, wagaKg, wzrostCm, wiekLat) * AKTYWNOSC[aktywnosc].mnoznik);
-}
+export type TrybCelu = 'redukcja' | 'utrzymanie';
+
+/** Umiarkowany deficyt na redukcję — nie mniej niż przemiana podstawowa. */
+export const DEFICYT_REDUKCJI_KCAL = 400;
 
 /** Wiek w pełnych latach. */
 export function wiekZDaty(dataUrodzenia: string, dzisiaj = new Date()): number {
@@ -132,6 +121,23 @@ export function wiekZDaty(dataUrodzenia: string, dzisiaj = new Date()): number {
     lata -= 1;
   }
   return lata;
+}
+
+/**
+ * Odwrotność `wiekZDaty()`: zamienia wiek w latach na datę urodzenia.
+ *
+ * Formularz profilu pyta wprost o wiek, nie o datę urodzenia — ale baza
+ * i tak przechowuje datę, żeby wiek dało się liczyć NA BIEŻĄCO zamiast
+ * zamrażać go w chwili zapisu (ten sam powód co przy celu kalorycznym,
+ * patrz migracja 0026). Sztuczka: data „dzisiaj minus N lat” ma zawsze
+ * dokładnie taki wiek dzisiaj, a za rok — poprawnie — o jeden więcej,
+ * mimo że nie znamy prawdziwego dnia urodzin.
+ */
+export function dataUrodzeniaZWieku(wiekLat: number, dzisiaj = new Date()): string {
+  const rok = dzisiaj.getFullYear() - wiekLat;
+  const miesiac = String(dzisiaj.getMonth() + 1).padStart(2, '0');
+  const dzien = String(dzisiaj.getDate()).padStart(2, '0');
+  return `${rok}-${miesiac}-${dzien}`;
 }
 
 /** Kalorie pochodzące z podanych gramatur makroskładników. */
@@ -154,24 +160,20 @@ export function udzialyProcentowe(makro: Makro) {
 export type Ocena = {
   /** Powody, dla których celów NIE wolno zapisać. */
   blokady: string[];
-  /** Odstępstwa od zaleceń — można je świadomie zaakceptować. */
-  ostrzezenia: string[];
 };
 
 /**
  * Sprawdza cele według zasady: blokujemy niebezpieczeństwo, nie nietypowość.
  *
- * Blokady dotyczą wartości realnie groźnych. Wyjście poza zakresy AMDR jest
- * jedynie ostrzeżeniem — plan wysokobiałkowy potrafi mieć węglowodany poniżej
- * dolnej granicy i nie jest przez to niebezpieczny.
+ * Blokady dotyczą wyłącznie wartości realnie groźnych. Wyjście poza zakresy
+ * AMDR celowo NIE jest tu sprawdzane — plan wysokobiałkowy potrafi mieć
+ * węglowodany poniżej dolnej granicy i nie jest przez to niebezpieczny.
  */
 export function oceniaCele(makro: Makro, przemiana: number, zapotrzebowanieDzienne: number): Ocena {
   const blokady: string[] = [];
-  const ostrzezenia: string[] = [];
   const kcal = kcalZMakro(makro.bialko, makro.tluszcz, makro.wegle);
   const udzialy = udzialyProcentowe(makro);
 
-  // --- blokady twarde ---
   if (kcal < przemiana) {
     blokady.push(
       `Cel ${kcal} kcal jest poniżej przemiany podstawowej (${przemiana} kcal). ` +
@@ -193,30 +195,7 @@ export function oceniaCele(makro: Makro, przemiana: number, zapotrzebowanieDzien
     );
   }
 
-  // --- ostrzeżenia miękkie ---
-  const sprawdzZakres = (nazwa: string, udzial: number, zakres: { min: number; max: number }) => {
-    if (udzial < zakres.min) {
-      ostrzezenia.push(
-        `${nazwa}: ${udzial}% energii, poniżej zalecanego zakresu ${zakres.min}–${zakres.max}%.`
-      );
-    } else if (udzial > zakres.max) {
-      ostrzezenia.push(
-        `${nazwa}: ${udzial}% energii, powyżej zalecanego zakresu ${zakres.min}–${zakres.max}%.`
-      );
-    }
-  };
-
-  sprawdzZakres('Białko', udzialy.bialko, AMDR.bialko);
-  sprawdzZakres('Tłuszcz', udzialy.tluszcz, AMDR.tluszcz);
-  sprawdzZakres('Węglowodany', udzialy.wegle, AMDR.wegle);
-
-  if (deficyt < -300) {
-    ostrzezenia.push(
-      `Cel przekracza zapotrzebowanie o ${Math.abs(deficyt)} kcal — to nadwyżka, nie redukcja.`
-    );
-  }
-
-  return { blokady, ostrzezenia };
+  return { blokady };
 }
 
 /** Ocena spożycia błonnika względem celu — informacja, nigdy blokada. */

@@ -170,3 +170,15 @@ export const Spacing = {
 
 /** Maksymalna szerokość treści — żeby na dużym monitorze tekst nie rozjeżdżał się na cały ekran. */
 export const MaxContentWidth = 760;
+
+/**
+ * Kolory identyfikujące trzy makroskładniki — te same na ekranie Makroskładniki
+ * i w wyniku formularza Profilu. To identyfikacja grupy, nie akcent aplikacji,
+ * więc — inaczej niż `Paleta` — jest jedna wersja, wspólna dla wszystkich
+ * stylów i obu trybów jasny/ciemny.
+ */
+export const KOLOR_MAKRO = {
+  bialko: '#3F8F5F',
+  tluszcz: '#D98A20',
+  wegle: '#3E7BC4',
+} as const;

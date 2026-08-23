@@ -6,6 +6,7 @@ import { Pressable, ScrollView, StyleSheet, useWindowDimensions, View } from 're
 import { Ekran } from '@/components/ekran';
 import { FormularzSkladnika } from '@/components/formularz-skladnika';
 import { KomorkaEdytowalna } from '@/components/komorka-edytowalna';
+import { KomorkaWyboru } from '@/components/komorka-wyboru';
 import { Karta } from '@/components/karta';
 import { Pole } from '@/components/pole';
 import { Przycisk } from '@/components/przycisk';
@@ -13,14 +14,18 @@ import { ThemedText } from '@/components/themed-text';
 import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import { komunikatBledu } from '@/lib/blad';
+import { ROLA_SKLADNIKA_WEDLUG_ETYKIETY } from '@/lib/import-eksport-wspolne';
 import { wroc } from '@/lib/nawigacja';
 import {
+  OPIS_ROLI_SKLADNIKA,
   pobierzSkladniki,
   pobierzUzycia,
+  ROLE_SKLADNIKA,
   sprawdzSkladnik,
   usunSkladnik,
   zapiszSkladnik,
   type DaneSkladnika,
+  type RolaSkladnika,
   type Skladnik,
   type UzycieSkladnika,
 } from '@/lib/skladniki';
@@ -39,6 +44,8 @@ const KOLUMNY = [
   { klucz: 'nova', tytul: 'NOVA', szerokosc: 54, liczba: true },
   { klucz: 'gramatura_opakowania_g', tytul: 'opak.', szerokosc: 58, liczba: true },
   { klucz: 'masa_sztuki_g', tytul: 'szt. waży', szerokosc: 66, liczba: true },
+  { klucz: 'mozna_dzielic', tytul: 'kwant.', szerokosc: 62, liczba: false },
+  { klucz: 'rola', tytul: 'rola', szerokosc: 90, liczba: false },
   { klucz: 'uzycia', tytul: 'w daniach', szerokosc: 72, liczba: true },
 ] as const;
 
@@ -49,6 +56,15 @@ const SZEROKOSC_TABELI =
 
 /** Kolumna nazwy nie schodzi poniżej tej szerokości, gdy się rozciąga. */
 const MIN_NAZWY = 200;
+
+/** Opcje komórki-wyboru dla roli. Pusta lista możliwości nie istnieje — rola zawsze jest jakaś. */
+const OPCJE_ROLI = ROLE_SKLADNIKA.map((r) => ({ wartosc: r, etykieta: OPIS_ROLI_SKLADNIKA[r] }));
+
+/** Opcje komórki-wyboru dla kwantyzacji — w przeciwieństwie do roli, nieobowiązkowa. */
+const OPCJE_MOZNA_DZIELIC: { wartosc: 'nie' | 'tak'; etykieta: string }[] = [
+  { wartosc: 'nie', etykieta: 'Nie można podzielić' },
+  { wartosc: 'tak', etykieta: 'Można podzielić' },
+];
 
 export default function EkranSkladnikow() {
   const { powrot } = useLocalSearchParams<{ powrot?: string }>();
@@ -88,6 +104,8 @@ export default function EkranSkladnikow() {
     nova: '',
     gramatura_opakowania_g: '',
     masa_sztuki_g: '',
+    mozna_dzielic: '',
+    rola: '',
   };
   const [nowyWiersz, setNowyWiersz] = useState<Record<string, string>>(PUSTY_WIERSZ);
   const [dopisywanie, setDopisywanie] = useState(false);
@@ -134,8 +152,12 @@ export default function EkranSkladnikow() {
 
       if (sortujPo === 'nazwa') {
         wynik = a.nazwa.localeCompare(b.nazwa, 'pl');
+      } else if (sortujPo === 'rola') {
+        wynik = OPIS_ROLI_SKLADNIKA[a.rola].localeCompare(OPIS_ROLI_SKLADNIKA[b.rola], 'pl');
       } else if (sortujPo === 'uzycia') {
         wynik = liczbaUzyc(a.id) - liczbaUzyc(b.id);
+      } else if (sortujPo === 'mozna_dzielic') {
+        wynik = Number(a.mozna_dzielic ?? -1) - Number(b.mozna_dzielic ?? -1);
       } else {
         wynik = ((a[sortujPo] as number) ?? -1) - ((b[sortujPo] as number) ?? -1);
       }
@@ -171,10 +193,21 @@ export default function EkranSkladnikow() {
     const poprzednie = skladniki;
     setBlad(null);
 
-    const liczbowe = pole !== 'nazwa';
-    let wartosc: string | number | null;
+    const liczbowe = pole !== 'nazwa' && pole !== 'rola' && pole !== 'mozna_dzielic';
+    let wartosc: string | number | boolean | null;
 
-    if (liczbowe) {
+    if (pole === 'rola') {
+      const rolaWpisana = ROLA_SKLADNIKA_WEDLUG_ETYKIETY.get(tekst.trim().toLowerCase());
+      if (!rolaWpisana) {
+        setBlad(
+          `Rola musi być jedną z: ${ROLE_SKLADNIKA.map((r) => OPIS_ROLI_SKLADNIKA[r]).join(', ')}.`
+        );
+        return;
+      }
+      wartosc = rolaWpisana;
+    } else if (pole === 'mozna_dzielic') {
+      wartosc = tekst === 'tak' ? true : tekst === 'nie' ? false : null;
+    } else if (liczbowe) {
       const t = tekst.replace(',', '.').trim();
       if (t === '' || t === '—') {
         wartosc = pole === 'nova' || pole === 'gramatura_opakowania_g' ? null : 0;
@@ -220,8 +253,21 @@ export default function EkranSkladnikow() {
     return Number.isFinite(n) ? n : domyslna;
   }
 
+  /** Zamienia tekst z komórki na rolę; puste pole daje domyślną „Baza”. */
+  function rolaZKomorki(tekst: string): RolaSkladnika | 'BLAD' {
+    const t = tekst.trim();
+    if (t === '') return 'baza';
+    return ROLA_SKLADNIKA_WEDLUG_ETYKIETY.get(t.toLowerCase()) ?? 'BLAD';
+  }
+
   async function dopiszWiersz() {
     setBlad(null);
+
+    const rolaNowa = rolaZKomorki(nowyWiersz.rola ?? '');
+    if (rolaNowa === 'BLAD') {
+      setBlad(`Rola musi być jedną z: ${ROLE_SKLADNIKA.map((r) => OPIS_ROLI_SKLADNIKA[r]).join(', ')}.`);
+      return;
+    }
 
     const dane: DaneSkladnika = {
       nazwa: (nowyWiersz.nazwa ?? '').trim(),
@@ -236,6 +282,9 @@ export default function EkranSkladnikow() {
       nova: zKomorki(nowyWiersz.nova, null),
       gramatura_opakowania_g: zKomorki(nowyWiersz.gramatura_opakowania_g, null),
       masa_sztuki_g: zKomorki(nowyWiersz.masa_sztuki_g, null),
+      mozna_dzielic:
+        nowyWiersz.mozna_dzielic === 'tak' ? true : nowyWiersz.mozna_dzielic === 'nie' ? false : null,
+      rola: rolaNowa,
       tagi: [],
     };
 
@@ -274,6 +323,11 @@ export default function EkranSkladnikow() {
 
   function wartoscKomorki(s: Skladnik, klucz: KluczKolumny): string {
     if (klucz === 'nazwa') return s.nazwa;
+    if (klucz === 'rola') return OPIS_ROLI_SKLADNIKA[s.rola];
+    if (klucz === 'mozna_dzielic') {
+      if (s.mozna_dzielic === null || s.mozna_dzielic === undefined) return trybEdycji ? '' : '—';
+      return s.mozna_dzielic ? 'tak' : 'nie';
+    }
     if (klucz === 'uzycia') {
       const n = liczbaUzyc(s.id);
       return n === 0 ? (trybEdycji ? '' : '—') : String(n);
@@ -444,18 +498,52 @@ export default function EkranSkladnikow() {
 
                   {trybEdycji ? (
                     <View style={styles.komorki}>
-                      {KOLUMNY.map((k) => (
-                        <KomorkaEdytowalna
-                          key={k.klucz}
-                          wartosc={wartoscKomorki(s, k.klucz)}
-                          szerokosc={k.szerokosc}
-                          elastycznaSzerokosc={miesciSie && k.klucz === 'nazwa'}
-                          liczba={k.liczba}
-                          /* Kolumna „w daniach” jest wyliczana, więc nie da się jej wpisać. */
-                          edytowalna={k.klucz !== 'uzycia'}
-                          onZapisz={(nowa) => zapiszKomorke(s, k.klucz as keyof Skladnik, nowa)}
-                        />
-                      ))}
+                      {KOLUMNY.map((k) => {
+                        if (k.klucz === 'rola') {
+                          return (
+                            <KomorkaWyboru
+                              key={k.klucz}
+                              wartosc={s.rola}
+                              etykieta={OPIS_ROLI_SKLADNIKA[s.rola]}
+                              opcje={OPCJE_ROLI}
+                              szerokosc={k.szerokosc}
+                              edytowalna
+                              onWybierz={(nowa) => zapiszKomorke(s, 'rola', nowa)}
+                            />
+                          );
+                        }
+                        if (k.klucz === 'mozna_dzielic') {
+                          const wartosc =
+                            s.mozna_dzielic === null || s.mozna_dzielic === undefined
+                              ? null
+                              : s.mozna_dzielic
+                                ? 'tak'
+                                : 'nie';
+                          return (
+                            <KomorkaWyboru
+                              key={k.klucz}
+                              wartosc={wartosc}
+                              etykieta={wartoscKomorki(s, 'mozna_dzielic') || '—'}
+                              opcje={OPCJE_MOZNA_DZIELIC}
+                              szerokosc={k.szerokosc}
+                              edytowalna
+                              onWybierz={(nowa) => zapiszKomorke(s, 'mozna_dzielic', nowa)}
+                            />
+                          );
+                        }
+                        return (
+                          <KomorkaEdytowalna
+                            key={k.klucz}
+                            wartosc={wartoscKomorki(s, k.klucz)}
+                            szerokosc={k.szerokosc}
+                            elastycznaSzerokosc={miesciSie && k.klucz === 'nazwa'}
+                            liczba={k.liczba}
+                            /* Kolumna „w daniach” jest wyliczana, więc nie da się jej wpisać. */
+                            edytowalna={k.klucz !== 'uzycia'}
+                            onZapisz={(nowa) => zapiszKomorke(s, k.klucz as keyof Skladnik, nowa)}
+                          />
+                        );
+                      })}
                     </View>
                   ) : (
                     <Pressable
@@ -526,19 +614,52 @@ export default function EkranSkladnikow() {
               </View>
 
               <View style={styles.komorki}>
-                {KOLUMNY.map((k) => (
-                  <KomorkaEdytowalna
-                    key={k.klucz}
-                    wartosc={k.klucz === 'uzycia' ? '' : (nowyWiersz[k.klucz] ?? '')}
-                    szerokosc={k.szerokosc}
-                    elastycznaSzerokosc={miesciSie && k.klucz === 'nazwa'}
-                    liczba={k.liczba}
-                    edytowalna={k.klucz !== 'uzycia'}
-                    onZapisz={(nowa) =>
-                      setNowyWiersz((p) => ({ ...p, [k.klucz]: nowa }))
-                    }
-                  />
-                ))}
+                {KOLUMNY.map((k) => {
+                  if (k.klucz === 'rola') {
+                    const wybrana = (nowyWiersz.rola || 'baza') as RolaSkladnika;
+                    return (
+                      <KomorkaWyboru
+                        key={k.klucz}
+                        wartosc={wybrana}
+                        etykieta={OPIS_ROLI_SKLADNIKA[wybrana]}
+                        opcje={OPCJE_ROLI}
+                        szerokosc={k.szerokosc}
+                        edytowalna
+                        onWybierz={(nowa) => setNowyWiersz((p) => ({ ...p, rola: nowa }))}
+                      />
+                    );
+                  }
+                  if (k.klucz === 'mozna_dzielic') {
+                    const wybrana =
+                      nowyWiersz.mozna_dzielic === 'tak' || nowyWiersz.mozna_dzielic === 'nie'
+                        ? nowyWiersz.mozna_dzielic
+                        : null;
+                    return (
+                      <KomorkaWyboru
+                        key={k.klucz}
+                        wartosc={wybrana}
+                        etykieta={wybrana === 'tak' ? 'tak' : wybrana === 'nie' ? 'nie' : '—'}
+                        opcje={OPCJE_MOZNA_DZIELIC}
+                        szerokosc={k.szerokosc}
+                        edytowalna
+                        onWybierz={(nowa) => setNowyWiersz((p) => ({ ...p, mozna_dzielic: nowa }))}
+                      />
+                    );
+                  }
+                  return (
+                    <KomorkaEdytowalna
+                      key={k.klucz}
+                      wartosc={k.klucz === 'uzycia' ? '' : (nowyWiersz[k.klucz] ?? '')}
+                      szerokosc={k.szerokosc}
+                      elastycznaSzerokosc={miesciSie && k.klucz === 'nazwa'}
+                      liczba={k.liczba}
+                      edytowalna={k.klucz !== 'uzycia'}
+                      onZapisz={(nowa) =>
+                        setNowyWiersz((p) => ({ ...p, [k.klucz]: nowa }))
+                      }
+                    />
+                  );
+                })}
               </View>
 
               <Pressable
@@ -577,7 +698,8 @@ export default function EkranSkladnikow() {
         {trybEdycji
           ? ' Komórki są teraz polami do wpisywania.'
           : ' Dotknij wiersza, aby otworzyć pełny formularz.'}
-        {' '}B — białko, T — tłuszcz, W — węglowodany.
+        {' '}B — białko, T — tłuszcz, W — węglowodany, kwant. — czy można podzielić,
+        rola — rola przy skalowaniu porcji ({ROLE_SKLADNIKA.map((r) => OPIS_ROLI_SKLADNIKA[r]).join(', ')}).
       </ThemedText>
 
       <Przycisk tytul="Wróć" wariant="poboczny" onPress={() => wroc(powrot, '/przepisy')} />

@@ -7,6 +7,8 @@ import { komunikatBledu } from '@/lib/blad';
 import { wroc } from '@/lib/nawigacja';
 import { Ekran } from '@/components/ekran';
 import { Karta } from '@/components/karta';
+import { KomorkaEdytowalna } from '@/components/komorka-edytowalna';
+import { KomorkaWyboru } from '@/components/komorka-wyboru';
 import { WierszMakro } from '@/components/wiersz-makro';
 import { Pole } from '@/components/pole';
 import { Przycisk } from '@/components/przycisk';
@@ -18,6 +20,7 @@ import { WyborWielo } from '@/components/wybor-wielo';
 import { ZdjeciePrzepisu } from '@/components/zdjecie-przepisu';
 import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
+import { ROLA_SKLADNIKA_WEDLUG_ETYKIETY } from '@/lib/import-eksport-wspolne';
 import {
   KATEGORIE,
   OPIS_KUCHNI,
@@ -31,9 +34,28 @@ import {
   type PoraPosilku,
   type Widocznosc,
 } from '@/lib/przepisy';
-import { pobierzSkladniki, type Skladnik } from '@/lib/skladniki';
+import {
+  OPIS_ROLI_SKLADNIKA,
+  pobierzSkladniki,
+  pobierzUzycia,
+  ROLE_SKLADNIKA,
+  sprawdzSkladnik,
+  zapiszSkladnik,
+  type RolaSkladnika,
+  type Skladnik,
+  type UzycieSkladnika,
+} from '@/lib/skladniki';
 import { useSesja } from '@/lib/sesja';
 import { supabase } from '@/lib/supabase';
+
+/** Opcje komórki-wyboru dla roli — jak na ekranie Składniki. */
+const OPCJE_ROLI = ROLE_SKLADNIKA.map((r) => ({ wartosc: r, etykieta: OPIS_ROLI_SKLADNIKA[r] }));
+
+/** Opcje komórki-wyboru dla kwantyzacji — nieobowiązkowa, więc `null` znaczy „nie wybrano”. */
+const OPCJE_MOZNA_DZIELIC: { wartosc: 'nie' | 'tak'; etykieta: string }[] = [
+  { wartosc: 'nie', etykieta: 'Nie można podzielić' },
+  { wartosc: 'tak', etykieta: 'Można podzielić' },
+];
 
 type Jednostka = 'g' | 'ml' | 'szt';
 
@@ -45,7 +67,19 @@ type WybranySkladnik = {
   stan: string;
   zamiennik: string;
   opisPotoczny: string;
+  /** Rola TEGO składnika W TYM przepisie — domyślnie z katalogu, tu zmienialna tylko lokalnie. */
+  rola: RolaSkladnika;
+  /** Kwantyzacja TEGO składnika W TYM przepisie — jw. Puste = nie ustawiono. */
+  moznaDzielic: '' | 'nie' | 'tak';
 };
+
+/** Wartości domyślne pól roli/kwantyzacji przy dodaniu składnika do przepisu. */
+function domyslneRolaIKwant(s: Skladnik): Pick<WybranySkladnik, 'rola' | 'moznaDzielic'> {
+  return {
+    rola: s.rola,
+    moznaDzielic: s.mozna_dzielic === null || s.mozna_dzielic === undefined ? '' : s.mozna_dzielic ? 'tak' : 'nie',
+  };
+}
 
 /**
  * Masa w gramach — podstawa wszystkich wyliczeń.
@@ -87,15 +121,17 @@ export default function FormularzPrzepisu() {
 
   const [dostepne, setDostepne] = useState<Skladnik[]>([]);
   const [wybrane, setWybrane] = useState<WybranySkladnik[]>([]);
+  const [uzyciaSkladnikow, setUzyciaSkladnikow] = useState<Map<string, UzycieSkladnika>>(new Map());
+  const [trybEdycjiSkladnikow, setTrybEdycjiSkladnikow] = useState(false);
 
   const [nazwa, setNazwa] = useState('');
   const [opis, setOpis] = useState('');
   const [pory, setPory] = useState<PoraPosilku[]>([]);
   const [kuchnie, setKuchnie] = useState<Kuchnia[]>(['srodziemnomorska']);
   const [trwalosc, setTrwalosc] = useState<'0' | '1' | '2' | '3'>('0');
+  const [porcjeBazowe, setPorcjeBazowe] = useState('0');
   const [porcjowanie, setPorcjowanie] = useState<'waga' | 'sztuki'>('sztuki');
   const [porcje, setPorcje] = useState('');
-  const [porcjaG, setPorcjaG] = useState('');
   const [czasPrzygotowania, setCzasPrzygotowania] = useState('');
   const [czasObrobki, setCzasObrobki] = useState('');
   const [sprzet, setSprzet] = useState<string[]>([]);
@@ -127,11 +163,99 @@ export default function FormularzPrzepisu() {
 
   const wczytajSkladniki = useCallback(async () => {
     try {
-      setDostepne(await pobierzSkladniki());
+      const [lista, mapa] = await Promise.all([pobierzSkladniki(), pobierzUzycia()]);
+      setDostepne(lista);
+      setUzyciaSkladnikow(mapa);
     } catch (e) {
       setBlad(komunikatBledu(e));
     }
   }, []);
+
+  const liczbaUzycSkladnika = useCallback(
+    (id: string) => uzyciaSkladnikow.get(id)?.przepisy.length ?? 0,
+    [uzyciaSkladnikow]
+  );
+
+  /** Tekst komórki w tabeli składników — te same reguły co na ekranie Składniki. */
+  function wartoscKomorkiSkladnika(s: Skladnik, klucz: string): string {
+    if (klucz === 'rola') return OPIS_ROLI_SKLADNIKA[s.rola];
+    if (klucz === 'mozna_dzielic') {
+      if (s.mozna_dzielic === null || s.mozna_dzielic === undefined) return '';
+      return s.mozna_dzielic ? 'tak' : 'nie';
+    }
+    if (klucz === 'uzycia') {
+      const n = liczbaUzycSkladnika(s.id);
+      return n === 0 ? '' : String(n);
+    }
+    const w = (s as unknown as Record<string, number | null>)[klucz];
+    if (w === null || w === undefined) return '';
+    return String(w);
+  }
+
+  /**
+   * Zapis pojedynczej komórki parametrów składnika, bez opuszczania formularza przepisu.
+   *
+   * Ten sam wzorzec co na ekranie Składniki: zmiana trafia najpierw na ekran,
+   * a dopiero potem do bazy; przy odmowie bazy wraca poprzednia wartość.
+   * Zmieniony składnik trzeba też podmienić w `wybrane`, bo tam trzyma się
+   * jego własna kopia, użyta do liczenia makro.
+   */
+  async function zapiszKomorkeSkladnika(skladnik: Skladnik, pole: keyof Skladnik, tekst: string) {
+    setBlad(null);
+
+    const liczbowe = pole !== 'nazwa' && pole !== 'rola' && pole !== 'mozna_dzielic';
+    let wartosc: string | number | boolean | null;
+
+    if (pole === 'rola') {
+      const rolaWpisana = ROLA_SKLADNIKA_WEDLUG_ETYKIETY.get(tekst.trim().toLowerCase());
+      if (!rolaWpisana) {
+        setBlad(
+          `Rola musi być jedną z: ${ROLE_SKLADNIKA.map((r) => OPIS_ROLI_SKLADNIKA[r]).join(', ')}.`
+        );
+        return;
+      }
+      wartosc = rolaWpisana;
+    } else if (pole === 'mozna_dzielic') {
+      wartosc = tekst === 'tak' ? true : tekst === 'nie' ? false : null;
+    } else if (liczbowe) {
+      const t = tekst.replace(',', '.').trim();
+      if (t === '' || t === '—') {
+        wartosc = pole === 'nova' || pole === 'gramatura_opakowania_g' ? null : 0;
+      } else {
+        const n = Number(t);
+        if (!Number.isFinite(n)) {
+          setBlad(`„${tekst}” nie jest liczbą.`);
+          return;
+        }
+        wartosc = n;
+      }
+    } else {
+      wartosc = tekst.trim();
+    }
+
+    const poprzedni = skladnik;
+    const zmieniony = { ...skladnik, [pole]: wartosc } as Skladnik;
+
+    const problemy = sprawdzSkladnik(zmieniony);
+    if (problemy.length > 0) {
+      setBlad(problemy[0]);
+      return;
+    }
+
+    setDostepne((p) => p.map((x) => (x.id === skladnik.id ? zmieniony : x)));
+    setWybrane((p) => p.map((w) => (w.skladnik.id === skladnik.id ? { ...w, skladnik: zmieniony } : w)));
+
+    try {
+      const { id, ...dane } = zmieniony;
+      await zapiszSkladnik(dane, id);
+    } catch (e) {
+      setDostepne((p) => p.map((x) => (x.id === skladnik.id ? poprzedni : x)));
+      setWybrane((p) =>
+        p.map((w) => (w.skladnik.id === skladnik.id ? { ...w, skladnik: poprzedni } : w))
+      );
+      setBlad(komunikatBledu(e));
+    }
+  }
 
   const wczytajSprzet = useCallback(async () => {
     // Widok sprzet_uzycie dokłada informację, w ilu przepisach sprzęt występuje.
@@ -169,9 +293,9 @@ export default function FormularzPrzepisu() {
     setPory([]);
     setKuchnie(['srodziemnomorska']);
     setTrwalosc('0');
+    setPorcjeBazowe('0');
     setPorcjowanie('sztuki');
     setPorcje('');
-    setPorcjaG('');
     setCzasPrzygotowania('');
     setCzasObrobki('');
     setSprzet([]);
@@ -206,9 +330,9 @@ export default function FormularzPrzepisu() {
         setPory(p.pory);
         setKuchnie(p.kuchnie);
         setTrwalosc(String(p.trwalosc_dni) as '0' | '1' | '2' | '3');
+        setPorcjeBazowe(String(p.liczba_porcji_bazowych));
         setPorcjowanie(p.porcjowanie);
         setPorcje(String(p.porcje));
-        setPorcjaG(p.porcja_g ? String(p.porcja_g) : '800');
         setCzasPrzygotowania(p.czas_przygotowania_min ? String(p.czas_przygotowania_min) : '');
         setCzasObrobki(p.czas_obrobki_min ? String(p.czas_obrobki_min) : '');
         setSprzet(p.sprzet ?? []);
@@ -232,6 +356,14 @@ export default function FormularzPrzepisu() {
                 stan: x.stan ?? '',
                 zamiennik: x.zamiennik ?? '',
                 opisPotoczny: x.opis_potoczny ?? '',
+                rola: x.rola ?? skladnik.rola,
+                moznaDzielic:
+                  (x.mozna_dzielic ?? skladnik.mozna_dzielic) === null ||
+                  (x.mozna_dzielic ?? skladnik.mozna_dzielic) === undefined
+                    ? ''
+                    : (x.mozna_dzielic ?? skladnik.mozna_dzielic)
+                      ? 'tak'
+                      : 'nie',
               } as WybranySkladnik;
             })
             .filter((x): x is WybranySkladnik => x !== null)
@@ -290,16 +422,22 @@ export default function FormularzPrzepisu() {
 
   /**
    * Liczba porcji zależy od sposobu porcjowania.
-   * Przy wadze dzielimy masę garnka przez wielkość chochli; przy sztukach
-   * bierzemy podaną liczbę. Dokładnie tak, jak liczy to widok w bazie.
+   * Przy wadze bierzemy liczbę porcji bazowych wprost; przy sztukach —
+   * podaną liczbę sztuk.
    */
   const liczbaPorcji =
     porcjowanie === 'waga'
-      ? Math.max(masaCalosci / Math.max(liczba(porcjaG), 1), 0.1)
+      ? Math.max(1, Math.round(liczba(porcjeBazowe)) || 1)
       : Math.max(1, Math.round(liczba(porcje)) || 1);
 
+  /**
+   * Waga jednej porcji przy porcjowaniu wagowym już się nie wpisuje —
+   * wynika z podzielenia masy całej potrawy przez liczbę porcji bazowych.
+   */
+  const wagaPorcjiWyliczona = porcjowanie === 'waga' ? masaCalosci / liczbaPorcji : null;
+
   /** Czy podano wartość odpowiadającą wybranemu sposobowi porcjowania. */
-  const podanoPorcjowanie = porcjowanie === 'waga' ? liczba(porcjaG) > 0 : liczba(porcje) > 0;
+  const podanoPorcjowanie = porcjowanie === 'waga' ? liczba(porcjeBazowe) > 0 : liczba(porcje) > 0;
 
 
   const makroPorcji = {
@@ -320,7 +458,15 @@ export default function FormularzPrzepisu() {
   const dodajSkladnik = useCallback((s: Skladnik) => {
     setWybrane((p) => [
       ...p,
-      { skladnik: s, ilosc: '', jednostka: 'g', stan: '', zamiennik: '', opisPotoczny: '' },
+      {
+        skladnik: s,
+        ilosc: '',
+        jednostka: 'g',
+        stan: '',
+        zamiennik: '',
+        opisPotoczny: '',
+        ...domyslneRolaIKwant(s),
+      },
     ]);
   }, []);
 
@@ -341,6 +487,7 @@ export default function FormularzPrzepisu() {
         stan: '',
         zamiennik: '',
         opisPotoczny: '',
+        ...domyslneRolaIKwant(s),
       };
       const wynik = juz ? poprzednie.filter((w) => w.skladnik.id !== s.id) : [...poprzednie, nowy];
       return wynik;
@@ -449,9 +596,10 @@ export default function FormularzPrzepisu() {
           pory,
           kuchnie,
           trwalosc_dni: Number(trwalosc),
+          liczba_porcji_bazowych: Math.round(liczba(porcjeBazowe)),
           porcjowanie,
           porcje: porcjowanie === 'sztuki' ? Math.round(liczbaPorcji) : 1,
-          porcja_g: porcjowanie === 'waga' ? Math.round(liczba(porcjaG)) : null,
+          porcja_g: porcjowanie === 'waga' ? Math.round(wagaPorcjiWyliczona ?? 0) : null,
           czas_przygotowania_min: liczba(czasPrzygotowania) || null,
           czas_obrobki_min: liczba(czasObrobki) || null,
           sprzet,
@@ -492,6 +640,8 @@ export default function FormularzPrzepisu() {
           zamiennik: w.zamiennik.trim() || null,
           opis_potoczny: w.opisPotoczny.trim() || null,
           kolejnosc: i + 1,
+          rola: w.rola,
+          mozna_dzielic: w.moznaDzielic === '' ? null : w.moznaDzielic === 'tak',
         }))
       );
       if (bladSkladnikow) throw bladSkladnikow;
@@ -609,20 +759,31 @@ export default function FormularzPrzepisu() {
                 ustaw: setPorcje,
                 jednostka: 'sztuk',
                 podpowiedz: 'np. 4',
+                edytowalne: true,
               }
             : {
                 etykieta: 'Waga jednej porcji',
-                wartosc: porcjaG,
-                ustaw: setPorcjaG,
+                wartosc: wagaPorcjiWyliczona ? String(Math.round(wagaPorcjiWyliczona)) : '',
+                ustaw: () => {},
                 jednostka: 'g',
-                podpowiedz: 'np. 800',
+                podpowiedz: '—',
+                edytowalne: false,
               },
+          {
+            etykieta: 'Liczba porcji bazowych',
+            wartosc: porcjeBazowe,
+            ustaw: setPorcjeBazowe,
+            jednostka: 'porcji',
+            podpowiedz: 'np. 4',
+            edytowalne: true,
+          },
           {
             etykieta: 'Czas przygotowania',
             wartosc: czasPrzygotowania,
             ustaw: setCzasPrzygotowania,
             jednostka: 'min',
             podpowiedz: 'np. 20',
+            edytowalne: true,
           },
           {
             etykieta: 'Czas obróbki',
@@ -630,6 +791,7 @@ export default function FormularzPrzepisu() {
             ustaw: setCzasObrobki,
             jednostka: 'min',
             podpowiedz: 'np. 50',
+            edytowalne: true,
           },
         ].map((w) => (
           <View key={w.etykieta} style={[styles.wierszMetryczki, { borderColor: motyw.border }]}>
@@ -639,12 +801,14 @@ export default function FormularzPrzepisu() {
             <TextInput
               value={w.wartosc}
               onChangeText={w.ustaw}
+              editable={w.edytowalne}
               inputMode="numeric"
               placeholder={w.podpowiedz}
               placeholderTextColor={motyw.textSecondary}
               style={[
                 styles.poleMetryczki,
                 { color: motyw.text, borderColor: motyw.border, backgroundColor: motyw.backgroundElement },
+                !w.edytowalne && { opacity: 0.6 },
               ]}
             />
             <ThemedText type="small" themeColor="textSecondary" style={styles.jednostkaMetryczki}>
@@ -653,18 +817,24 @@ export default function FormularzPrzepisu() {
           </View>
         ))}
 
+        {porcjowanie === 'waga' && (
+          <ThemedText type="small" themeColor="textSecondary">
+            Waga jednej porcji wynika z podzielenia masy całej potrawy przez liczbę porcji bazowych —
+            nie wpisuje się jej ręcznie.
+          </ThemedText>
+        )}
+
         {wybrane.length > 0 && podanoPorcjowanie && (
           <ThemedText type="small" themeColor="textSecondary">
             {porcjowanie === 'waga'
-              ? `Z ${Math.round(masaCalosci)} g wychodzi około ${liczbaPorcji.toFixed(1).replace('.', ',')} porcji po ${porcjaG || '?'} g.`
+              ? `Z ${Math.round(masaCalosci)} g wychodzi ${liczbaPorcji} porcji po około ${Math.round(wagaPorcjiWyliczona ?? 0)} g.`
               : `Z ${Math.round(masaCalosci)} g wychodzi ${liczbaPorcji} porcji po około ${Math.round(masaCalosci / liczbaPorcji)} g.`}
           </ThemedText>
         )}
 
         <ThemedText type="small" themeColor="textSecondary">
-          „Na ile porcji” nie jest cechą przepisu — garnek ma stałą zawartość, zmienna
-          jest wielkość chochli. Dlatego przy daniach dzielonych podajesz wagę porcji,
-          a liczba wychodzi z rachunku.
+          Przy daniach dzielonych na wagę podajesz liczbę porcji bazowych, a waga
+          jednej porcji wychodzi z rachunku: masa całej potrawy podzielona przez tę liczbę.
         </ThemedText>
 
       </Karta>
@@ -726,11 +896,31 @@ export default function FormularzPrzepisu() {
           </ThemedText>
         )}
 
-        <Przycisk
-          tytul="Odśwież listę składników"
-          wariant="poboczny"
-          onPress={wczytajSkladniki}
-        />
+        <View style={styles.przyciskiSkladnikow}>
+          <Przycisk
+            tytul="Odśwież listę składników"
+            wariant="poboczny"
+            onPress={wczytajSkladniki}
+          />
+          <Przycisk
+            tytul={
+              trybEdycjiSkladnikow
+                ? 'Zakończ edycję parametrów bazowych'
+                : 'Edytuj parametry składników - bazowe'
+            }
+            wariant="poboczny"
+            onPress={() => setTrybEdycjiSkladnikow((p) => !p)}
+          />
+        </View>
+
+        {trybEdycjiSkladnikow && (
+          <ThemedText type="small" themeColor="textSecondary">
+            Komórki są teraz polami do wpisywania — zmiana trafia od razu do bazy i dotyczy
+            składnika wszędzie, nie tylko w tym przepisie. Dodawanie do przepisu działa dalej
+            znakiem plus po lewej. Rolę i kwantyzację TYLKO dla tego przepisu zmienisz niżej,
+            w tabeli wybranych składników.
+          </ThemedText>
+        )}
 
         <TabelaWyboru
           dane={dostepne}
@@ -740,13 +930,188 @@ export default function FormularzPrzepisu() {
           placeholderFiltra="dorsz, ryba, warzywo…"
           wybrane={wybraneId}
           onPrzelacz={przelaczSkladnik}
+          trybEdycji={trybEdycjiSkladnikow}
           kolumny={[
             { tytul: 'Nazwa', elastyczna: true, wartosc: (s) => s.nazwa },
-            { tytul: 'kcal', szerokosc: 56, liczba: true, wartosc: (s) => String(s.kcal_100g) },
-            { tytul: 'B', szerokosc: 48, liczba: true, wartosc: (s) => String(s.bialko_100g) },
-            { tytul: 'T', szerokosc: 48, liczba: true, wartosc: (s) => String(s.tluszcz_100g) },
-            { tytul: 'W', szerokosc: 48, liczba: true, wartosc: (s) => String(s.wegle_100g) },
-            { tytul: 'błonnik', szerokosc: 60, liczba: true, wartosc: (s) => String(s.blonnik_100g) },
+            {
+              tytul: 'kcal',
+              szerokosc: 56,
+              liczba: true,
+              wartosc: (s) => String(s.kcal_100g),
+              komorka: (s) => (
+                <KomorkaEdytowalna
+                  wartosc={wartoscKomorkiSkladnika(s, 'kcal_100g')}
+                  szerokosc={56}
+                  liczba
+                  edytowalna
+                  onZapisz={(nowa) => zapiszKomorkeSkladnika(s, 'kcal_100g', nowa)}
+                />
+              ),
+            },
+            {
+              tytul: 'B',
+              szerokosc: 48,
+              liczba: true,
+              wartosc: (s) => String(s.bialko_100g),
+              komorka: (s) => (
+                <KomorkaEdytowalna
+                  wartosc={wartoscKomorkiSkladnika(s, 'bialko_100g')}
+                  szerokosc={48}
+                  liczba
+                  edytowalna
+                  onZapisz={(nowa) => zapiszKomorkeSkladnika(s, 'bialko_100g', nowa)}
+                />
+              ),
+            },
+            {
+              tytul: 'T',
+              szerokosc: 48,
+              liczba: true,
+              wartosc: (s) => String(s.tluszcz_100g),
+              komorka: (s) => (
+                <KomorkaEdytowalna
+                  wartosc={wartoscKomorkiSkladnika(s, 'tluszcz_100g')}
+                  szerokosc={48}
+                  liczba
+                  edytowalna
+                  onZapisz={(nowa) => zapiszKomorkeSkladnika(s, 'tluszcz_100g', nowa)}
+                />
+              ),
+            },
+            {
+              tytul: 'W',
+              szerokosc: 48,
+              liczba: true,
+              wartosc: (s) => String(s.wegle_100g),
+              komorka: (s) => (
+                <KomorkaEdytowalna
+                  wartosc={wartoscKomorkiSkladnika(s, 'wegle_100g')}
+                  szerokosc={48}
+                  liczba
+                  edytowalna
+                  onZapisz={(nowa) => zapiszKomorkeSkladnika(s, 'wegle_100g', nowa)}
+                />
+              ),
+            },
+            {
+              tytul: 'błonnik',
+              szerokosc: 60,
+              liczba: true,
+              wartosc: (s) => String(s.blonnik_100g),
+              komorka: (s) => (
+                <KomorkaEdytowalna
+                  wartosc={wartoscKomorkiSkladnika(s, 'blonnik_100g')}
+                  szerokosc={60}
+                  liczba
+                  edytowalna
+                  onZapisz={(nowa) => zapiszKomorkeSkladnika(s, 'blonnik_100g', nowa)}
+                />
+              ),
+            },
+            {
+              tytul: 'c. wolne',
+              szerokosc: 66,
+              liczba: true,
+              wartosc: (s) => String(s.cukry_wolne_100g),
+              komorka: (s) => (
+                <KomorkaEdytowalna
+                  wartosc={wartoscKomorkiSkladnika(s, 'cukry_wolne_100g')}
+                  szerokosc={66}
+                  liczba
+                  edytowalna
+                  onZapisz={(nowa) => zapiszKomorkeSkladnika(s, 'cukry_wolne_100g', nowa)}
+                />
+              ),
+            },
+            {
+              tytul: 'NOVA',
+              szerokosc: 54,
+              liczba: true,
+              wartosc: (s) => wartoscKomorkiSkladnika(s, 'nova') || '—',
+              komorka: (s) => (
+                <KomorkaEdytowalna
+                  wartosc={wartoscKomorkiSkladnika(s, 'nova')}
+                  szerokosc={54}
+                  liczba
+                  edytowalna
+                  onZapisz={(nowa) => zapiszKomorkeSkladnika(s, 'nova', nowa)}
+                />
+              ),
+            },
+            {
+              tytul: 'opak.',
+              szerokosc: 58,
+              liczba: true,
+              wartosc: (s) => wartoscKomorkiSkladnika(s, 'gramatura_opakowania_g') || '—',
+              komorka: (s) => (
+                <KomorkaEdytowalna
+                  wartosc={wartoscKomorkiSkladnika(s, 'gramatura_opakowania_g')}
+                  szerokosc={58}
+                  liczba
+                  edytowalna
+                  onZapisz={(nowa) => zapiszKomorkeSkladnika(s, 'gramatura_opakowania_g', nowa)}
+                />
+              ),
+            },
+            {
+              tytul: 'szt. waży',
+              szerokosc: 66,
+              liczba: true,
+              wartosc: (s) => wartoscKomorkiSkladnika(s, 'masa_sztuki_g') || '—',
+              komorka: (s) => (
+                <KomorkaEdytowalna
+                  wartosc={wartoscKomorkiSkladnika(s, 'masa_sztuki_g')}
+                  szerokosc={66}
+                  liczba
+                  edytowalna
+                  onZapisz={(nowa) => zapiszKomorkeSkladnika(s, 'masa_sztuki_g', nowa)}
+                />
+              ),
+            },
+            {
+              tytul: 'kwant.',
+              szerokosc: 62,
+              wartosc: (s) => wartoscKomorkiSkladnika(s, 'mozna_dzielic') || '—',
+              komorka: (s) => {
+                const wybrana =
+                  s.mozna_dzielic === null || s.mozna_dzielic === undefined
+                    ? null
+                    : s.mozna_dzielic
+                      ? 'tak'
+                      : 'nie';
+                return (
+                  <KomorkaWyboru
+                    wartosc={wybrana}
+                    etykieta={wartoscKomorkiSkladnika(s, 'mozna_dzielic') || '—'}
+                    opcje={OPCJE_MOZNA_DZIELIC}
+                    szerokosc={62}
+                    edytowalna
+                    onWybierz={(nowa) => zapiszKomorkeSkladnika(s, 'mozna_dzielic', nowa)}
+                  />
+                );
+              },
+            },
+            {
+              tytul: 'rola',
+              szerokosc: 90,
+              wartosc: (s) => OPIS_ROLI_SKLADNIKA[s.rola],
+              komorka: (s) => (
+                <KomorkaWyboru
+                  wartosc={s.rola}
+                  etykieta={OPIS_ROLI_SKLADNIKA[s.rola]}
+                  opcje={OPCJE_ROLI}
+                  szerokosc={90}
+                  edytowalna
+                  onWybierz={(nowa) => zapiszKomorkeSkladnika(s, 'rola', nowa)}
+                />
+              ),
+            },
+            {
+              tytul: 'w daniach',
+              szerokosc: 72,
+              liczba: true,
+              wartosc: (s) => wartoscKomorkiSkladnika(s, 'uzycia') || '—',
+            },
           ]}
           poWyborze={
             wybrane.length > 0 ? (
@@ -769,6 +1134,12 @@ export default function FormularzPrzepisu() {
                   </ThemedText>
                   <ThemedText type="smallBold" themeColor="textSecondary" style={styles.kolStan}>
                     Zamiennik
+                  </ThemedText>
+                  <ThemedText type="smallBold" themeColor="textSecondary" style={styles.kolRola}>
+                    Rola
+                  </ThemedText>
+                  <ThemedText type="smallBold" themeColor="textSecondary" style={styles.kolKwant}>
+                    Kwant.
                   </ThemedText>
                   <View style={styles.kolUsun} />
                 </View>
@@ -845,6 +1216,24 @@ export default function FormularzPrzepisu() {
                           ]}
                         />
                       </View>
+
+                      <KomorkaWyboru
+                        wartosc={w.rola}
+                        etykieta={OPIS_ROLI_SKLADNIKA[w.rola]}
+                        opcje={OPCJE_ROLI}
+                        szerokosc={100}
+                        edytowalna
+                        onWybierz={(nowa) => zmienSkladnik(w.skladnik.id, { rola: nowa })}
+                      />
+
+                      <KomorkaWyboru
+                        wartosc={w.moznaDzielic === '' ? null : w.moznaDzielic}
+                        etykieta={w.moznaDzielic === 'tak' ? 'tak' : w.moznaDzielic === 'nie' ? 'nie' : '—'}
+                        opcje={OPCJE_MOZNA_DZIELIC}
+                        szerokosc={90}
+                        edytowalna
+                        onWybierz={(nowa) => zmienSkladnik(w.skladnik.id, { moznaDzielic: nowa })}
+                      />
 
                       <Pressable
                         onPress={() => przelaczSkladnik(w.skladnik)}
@@ -1386,6 +1775,7 @@ export default function FormularzPrzepisu() {
 
 const styles = StyleSheet.create({
   grupa: { gap: Spacing.three },
+  przyciskiSkladnikow: { flexDirection: 'row', flexWrap: 'wrap', gap: Spacing.two },
   zgoda: {
     flexDirection: 'row',
     alignItems: 'flex-start',
@@ -1512,6 +1902,8 @@ const styles = StyleSheet.create({
   kolJednostka: { width: 44, alignItems: 'center', justifyContent: 'center' },
   kolGramy: { width: 72, textAlign: 'right' },
   kolStan: { flex: 2 },
+  kolRola: { width: 100 },
+  kolKwant: { width: 90 },
   kolUsun: { width: 32, alignItems: 'center', justifyContent: 'center' },
   polePozycji: {
     borderWidth: 1,

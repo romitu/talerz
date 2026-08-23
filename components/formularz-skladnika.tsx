@@ -5,16 +5,31 @@ import { Karta } from './karta';
 import { Pole } from './pole';
 import { Przycisk } from './przycisk';
 import { ThemedText } from './themed-text';
+import { Wybor } from './wybor';
 
 import { Spacing } from '@/constants/theme';
 import { komunikatBledu } from '@/lib/blad';
 import {
+  OPIS_ROLI_SKLADNIKA,
   ostrzezenieOKaloriach,
+  ROLE_SKLADNIKA,
   sprawdzSkladnik,
   zapiszSkladnik,
   type DaneSkladnika,
+  type RolaSkladnika,
   type Skladnik,
 } from '@/lib/skladniki';
+
+/** Krótki opis pod nazwą roli w wyborze — z ekranu „Role składników”. */
+const OPIS_ROLI: Record<RolaSkladnika, string> = {
+  baza: 'Domyślna rola większości składników — ilość rośnie proporcjonalnie do porcji.',
+  doprawienie: 'Wpływa głównie na smak i stężenie — przy większej skali lekko tłumione.',
+  aromat: 'Dominuje aromatem lub ostrością — rośnie wolniej niż baza.',
+  smazenie: 'Tłuszcz do smażenia — zależny bardziej od naczynia niż liczby porcji.',
+  duszenie: 'Płyn pracujący technologicznie w garnku — częściowo odparowuje.',
+  woda: 'Woda technologiczna — nie skaluje się automatycznie.',
+  do_smaku: 'Składnik orientacyjny — bez automatycznego przelicznika.',
+};
 
 type FormularzSkladnikaProps = {
   /** Podany — formularz edytuje istniejący składnik. Pominięty — dodaje nowy. */
@@ -58,6 +73,14 @@ export function FormularzSkladnika({
   const [nova, setNova] = useState(naTekst(skladnik?.nova));
   const [opakowanie, setOpakowanie] = useState(naTekst(skladnik?.gramatura_opakowania_g));
   const [masaSztuki, setMasaSztuki] = useState(naTekst(skladnik?.masa_sztuki_g));
+  const [moznaDzielic, setMoznaDzielic] = useState<'' | 'nie' | 'tak'>(
+    skladnik?.mozna_dzielic === null || skladnik?.mozna_dzielic === undefined
+      ? ''
+      : skladnik.mozna_dzielic
+        ? 'tak'
+        : 'nie'
+  );
+  const [rola, setRola] = useState<RolaSkladnika>(skladnik?.rola ?? 'baza');
   const [tagi, setTagi] = useState((skladnik?.tagi ?? []).join(', '));
 
   const [zajety, setZajety] = useState(false);
@@ -76,6 +99,8 @@ export function FormularzSkladnika({
     nova: nova.trim() ? naLiczbe(nova) : null,
     gramatura_opakowania_g: opakowanie.trim() ? Math.round(naLiczbe(opakowanie)) : null,
     masa_sztuki_g: masaSztuki.trim() ? naLiczbe(masaSztuki) : null,
+    mozna_dzielic: moznaDzielic === '' ? null : moznaDzielic === 'tak',
+    rola,
     tagi: tagi
       .split(',')
       .map((t) => t.trim())
@@ -176,6 +201,27 @@ export function FormularzSkladnika({
           ząbek czosnku 5 g. Wtedy w przepisie można podać „2 szt”, a aplikacja przeliczy
           to na gramy.
         </ThemedText>
+
+        <Wybor
+          etykieta="Rola przy skalowaniu porcji"
+          wybrana={rola}
+          onZmiana={setRola}
+          opcje={ROLE_SKLADNIKA.map((r) => ({
+            wartosc: r,
+            etykieta: OPIS_ROLI_SKLADNIKA[r],
+            opis: OPIS_ROLI[r],
+          }))}
+        />
+
+        <Wybor
+          etykieta="Kwantyzacja (nieobowiązkowa)"
+          wybrana={moznaDzielic}
+          onZmiana={setMoznaDzielic}
+          opcje={[
+            { wartosc: 'nie', etykieta: 'Nie można podzielić - np. jajko' },
+            { wartosc: 'tak', etykieta: 'Można podzielić - np. sól' },
+          ]}
+        />
 
         <Pole
           etykieta="Etykiety, oddzielone przecinkami"

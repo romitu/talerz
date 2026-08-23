@@ -7,6 +7,7 @@ import { Pressable, StyleSheet, View } from 'react-native';
 import { komunikatBledu } from '@/lib/blad';
 import { Ekran } from '@/components/ekran';
 import { Karta } from '@/components/karta';
+import { ThemedView } from '@/components/themed-view';
 import { WierszMakro } from '@/components/wiersz-makro';
 import { Pole } from '@/components/pole';
 import { Przycisk } from '@/components/przycisk';
@@ -69,6 +70,17 @@ export default function EkranPrzepisow() {
   const [odrzucany, setOdrzucany] = useState<string | null>(null);
   const [powod, setPowod] = useState('');
 
+  /** Przepis, który ktoś właśnie chce skasować — potwierdzenie przed usunięciem. */
+  const [doUsuniecia, setDoUsuniecia] = useState<PrzepisZMakro | null>(null);
+  const [usuwanie, setUsuwanie] = useState(false);
+
+  /**
+   * Dymek z wyjaśnieniem ikony preferencji — `id przepisu:poziom` albo `null`.
+   * Na dotyk (telefon) i tak się nie pojawi, bo tam nie ma najechania myszką —
+   * tam wyjaśnienie niesie sam `accessibilityLabel` czytany przez czytnik ekranu.
+   */
+  const [dymek, setDymek] = useState<string | null>(null);
+
   const pobierz = useCallback(async () => {
     setWczytywanie(true);
     setBlad(null);
@@ -121,6 +133,34 @@ export default function EkranPrzepisow() {
   }
 
   const mozeDodawac = rola === 'moderator' || rola === 'administrator';
+
+  /** Kto wolno edytować, wolno też usuwać — ta sama zasada co przy ołówku niżej. */
+  function mozeUsuwac(p: PrzepisZMakro): boolean {
+    return mozeDodawac || (p.autor_id === sesja?.user.id && p.widocznosc !== 'publiczna');
+  }
+
+  async function usunPrzepis(p: PrzepisZMakro) {
+    setUsuwanie(true);
+    setBlad(null);
+    try {
+      const { error } = await supabase.from('przepisy').delete().eq('id', p.id);
+      if (error) throw error;
+      setDoUsuniecia(null);
+      await pobierz();
+    } catch (e) {
+      // Kod 23503 — przepis jest wpięty w plan posiłków albo w ugotowaną
+      // partię (klucz obcy z `on delete restrict`, celowo, żeby nie znikał
+      // spod nóg z planu, który ktoś właśnie realizuje).
+      const kod = (e as { code?: string })?.code;
+      setBlad(
+        kod === '23503'
+          ? `Nie można usunąć „${p.nazwa}” — jest użyty w czyimś planie posiłków albo w ugotowanej partii. Usuń go najpierw stamtąd.`
+          : komunikatBledu(e)
+      );
+    } finally {
+      setUsuwanie(false);
+    }
+  }
 
   /**
    * Filtrowanie frazą idzie PRZED zakładkami kategorii, a nie po nich.
@@ -267,6 +307,7 @@ export default function EkranPrzepisow() {
           </ThemedText>
         </Karta>
       )}
+
 
       {!wczytywanie && przepisy.length === 0 && (
         <Karta>
@@ -479,34 +520,76 @@ export default function EkranPrzepisow() {
               </Pressable>
             )}
 
+            {mozeUsuwac(p) && (
+              <Pressable
+                onPress={() => setDoUsuniecia(p)}
+                hitSlop={8}
+                accessibilityLabel={`Usuń ${p.nazwa}`}
+                style={styles.edytuj}>
+                <Ionicons name="trash-outline" size={18} color={motyw.textSecondary} />
+              </Pressable>
+            )}
+
             <View style={styles.preferencje}>
               {(
                 [
-                  { poziom: 'ulubione', ikona: 'star', ikonaPusta: 'star-outline', etykieta: 'Ulubione — chcę jeść często' },
-                  { poziom: 'lubie', ikona: 'heart', ikonaPusta: 'heart-outline', etykieta: 'Lubię — chętnie zjem ponownie' },
-                  { poziom: 'nie_proponuj', ikona: 'close-circle', ikonaPusta: 'close-circle-outline', etykieta: 'Nie proponuj — nie chcę tego dania' },
+                  { poziom: 'ulubione', ikona: 'star', ikonaPusta: 'star-outline', etykieta: 'Ulubione — planuj często podczas automatyzacji planu' },
+                  { poziom: 'lubie', ikona: 'heart', ikonaPusta: 'heart-outline', etykieta: 'Lubię — wybieraj podczas automatyzacji planu' },
+                  { poziom: 'nie_proponuj', ikona: 'close-circle', ikonaPusta: 'close-circle-outline', etykieta: 'Nie proponuj podczas automatyzacji planu' },
                 ] as const
               ).map((opcja) => {
                 const aktywna = p.preferencja === opcja.poziom;
+                const klucz = `${p.id}:${opcja.poziom}`;
                 return (
-                  <Pressable
-                    key={opcja.poziom}
-                    onPress={() => przelaczPreferencje(p, opcja.poziom)}
-                    hitSlop={6}
-                    accessibilityRole="button"
-                    accessibilityState={{ selected: aktywna }}
-                    accessibilityLabel={opcja.etykieta}
-                    style={({ pressed }) => [styles.preferencja, pressed && styles.wcisniety]}>
-                    <Ionicons
-                      name={aktywna ? opcja.ikona : opcja.ikonaPusta}
-                      size={20}
-                      color={aktywna ? motyw.accent : motyw.textSecondary}
-                    />
-                  </Pressable>
+                  <View key={opcja.poziom} style={styles.preferencjaOpakowanie}>
+                    {dymek === klucz && (
+                      <ThemedView
+                        type="backgroundElement"
+                        style={[styles.dymek, { borderColor: motyw.border }]}>
+                        <ThemedText type="small">{opcja.etykieta}</ThemedText>
+                      </ThemedView>
+                    )}
+                    <Pressable
+                      onPress={() => przelaczPreferencje(p, opcja.poziom)}
+                      onHoverIn={() => setDymek(klucz)}
+                      onHoverOut={() => setDymek(null)}
+                      hitSlop={6}
+                      accessibilityRole="button"
+                      accessibilityState={{ selected: aktywna }}
+                      accessibilityLabel={opcja.etykieta}
+                      style={({ pressed }) => [styles.preferencja, pressed && styles.wcisniety]}>
+                      <Ionicons
+                        name={aktywna ? opcja.ikona : opcja.ikonaPusta}
+                        size={20}
+                        color={aktywna ? motyw.accent : motyw.textSecondary}
+                      />
+                    </Pressable>
+                  </View>
                 );
               })}
             </View>
           </View>
+
+          {/* Potwierdzenie usunięcia — wewnątrz TEJ karty, żeby nie znikało z pola widzenia na długiej liście. */}
+          {doUsuniecia?.id === p.id && (
+            <View style={[styles.potwierdzenieUsuniecia, { borderColor: motyw.accent }]}>
+              <ThemedText type="smallBold" themeColor="accent">
+                Usunąć „{p.nazwa}”?
+              </ThemedText>
+              <ThemedText type="small" themeColor="textSecondary">
+                Razem z przepisem znikną jego składniki, etapy i kroki. Tej operacji nie da się
+                cofnąć. Jeśli przepis jest w czyimś planie posiłków albo w ugotowanej partii,
+                usunięcie się nie powiedzie — trzeba go najpierw stamtąd zdjąć.
+              </ThemedText>
+              <Przycisk tytul="Usuń" onPress={() => usunPrzepis(p)} zajety={usuwanie} />
+              <Przycisk
+                tytul="Anuluj"
+                wariant="poboczny"
+                onPress={() => setDoUsuniecia(null)}
+                wylaczony={usuwanie}
+              />
+            </View>
+          )}
         </Karta>
         );
       })}
@@ -596,6 +679,13 @@ const styles = StyleSheet.create({
     gap: Spacing.two,
     marginTop: Spacing.one,
   },
+  potwierdzenieUsuniecia: {
+    borderWidth: 1,
+    borderRadius: Spacing.two,
+    padding: Spacing.two,
+    gap: Spacing.two,
+    marginTop: Spacing.one,
+  },
   decyzje: { flexDirection: 'row', gap: Spacing.two },
   decyzja: { flex: 1 },
   stopka: {
@@ -619,6 +709,21 @@ const styles = StyleSheet.create({
   preferencja: {
     paddingVertical: Spacing.one,
     paddingHorizontal: Spacing.half,
+  },
+  preferencjaOpakowanie: { position: 'relative' },
+  dymek: {
+    position: 'absolute',
+    bottom: '100%',
+    right: 0,
+    marginBottom: Spacing.one,
+    paddingVertical: Spacing.half,
+    paddingHorizontal: Spacing.two,
+    borderRadius: Spacing.one,
+    borderWidth: 1,
+    zIndex: 10,
+    // Szerokość zależy od tekstu, ale nie może rozjechać się na cały ekran
+    // na wąskim widoku telefonu — stąd `right: 0` zamiast wyśrodkowania.
+    maxWidth: 220,
   },
   wcisniety: { opacity: 0.6 },
 });

@@ -1,9 +1,12 @@
+import { useLocalSearchParams } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
 
 import { Ekran } from '@/components/ekran';
 import { Karta } from '@/components/karta';
+import { Przycisk } from '@/components/przycisk';
 import { ThemedText } from '@/components/themed-text';
 import { Spacing } from '@/constants/theme';
+import { wroc } from '@/lib/nawigacja';
 
 /**
  * Instrukcja — dlaczego Talerz istnieje i jak z niego korzystać.
@@ -74,10 +77,11 @@ const DLACZEGO_TALERZ: PytanieOdpowiedz[] = [
   {
     tytul: 'Co się dzieje, kiedy oznaczę posiłek?',
     akapity: [
-      'Przy każdym przepisie są trzy ikony: gwiazdka „Ulubione” (chcę jeść często), serce „Lubię” (chętnie zjem ponownie) i przekreślone kółko „Nie proponuj” (nie chcę tego dania). Dotknięcie już zaznaczonej ikony cofa ją do stanu neutralnego — bez ikony, „może się pojawiać”.',
-      'Nie oznacza to, że oznaczone jako „Ulubione” danie będziesz jadł bez przerwy. Oznacza natomiast, że przy „Wypełnij wolne miejsca” aplikacja będzie częściej wybierała potrawy, które już znasz i lubisz — im wyższy poziom, tym mocniejsza premia w ocenie.',
-      '„Nie proponuj” działa inaczej niż reszta: takiego dania automat nie zaproponuje NIGDY sam, niezależnie od tego, jak dobrze pasowałoby do celu dnia. Ręcznie oczywiście nadal możesz je wybrać.',
-      'Z czasem plan wypełniany automatem powinien coraz bardziej przypominać Twój własny sposób jedzenia, a coraz mniej przypadkowy zestaw przepisów. Preferencja jest zawsze Twoja własna — nie zależy od tego, co lubią inni użytkownicy.',
+      'Przy każdym przepisie są trzy ikony: gwiazdka, serce i przekreślone kółko (X). Gwiazdka oznacza, że przepis będzie wybierany często podczas automatycznego wypełniania listy. Serce oznacza, że przepis będzie wybierany podczas automatycznego wypełniania listy. Przekreślone kółko (X) oznacza „Nie proponuj” — taki przepis będzie pomijany podczas automatycznego wypełniania listy. Dotknięcie już zaznaczonej ikony cofa ją do stanu neutralnego — bez żadnej preferencji.',
+      'Gwiazdka nie oznacza, że dane danie będziesz jadł bez przerwy. Oznacza natomiast, że podczas automatycznego wypełniania listy aplikacja będzie wybierała ten przepis częściej niż pozostałe.',
+      'Serce oznacza, że przepis będzie brany pod uwagę podczas automatycznego wypełniania listy, ale bez dodatkowej preferencji częstszego wyboru, jak w przypadku gwiazdki.',
+      '„Nie proponuj” działa inaczej niż pozostałe oznaczenia: takiego dania automat nie zaproponuje sam. Ręcznie oczywiście nadal możesz je wybrać.',
+      'Z czasem plan wypełniany automatycznie powinien coraz bardziej odpowiadać Twoim własnym preferencjom. Preferencja jest zawsze Twoja własna — nie zależy od tego, co lubią inni użytkownicy.',
     ],
   },
   {
@@ -108,7 +112,7 @@ const DLACZEGO_TALERZ: PytanieOdpowiedz[] = [
     tytul: 'A jeżeli dużo trenuję?',
     akapity: [
       'Wraz z aktywnością fizyczną rośnie przede wszystkim zapotrzebowanie na energię. Przy regularnym i intensywnym treningu zwiększa się także znaczenie odpowiedniej podaży węglowodanów i białka — w żywieniu sportowym zapotrzebowanie na białko może być wyraźnie większe niż podstawowa wartość dla przeciętnej osoby dorosłej.',
-      'Dlatego w Profilu ustawiasz poziom aktywności: siedzący (praca siedząca, brak ćwiczeń), lekki (lekkie ćwiczenia 1–3 razy w tygodniu), umiarkowany (ćwiczenia 3–5 razy w tygodniu), duży (ćwiczenia 6–7 razy w tygodniu) albo bardzo duży (praca fizyczna lub dwa treningi dziennie). Talerz liczy z tego zapotrzebowanie energetyczne, które potem widać w Celach dziennych.',
+      'Dlatego w Profilu ustawiasz poziom aktywności: siedzący (praca siedząca, brak ćwiczeń), lekki (lekkie ćwiczenia 1–3 razy w tygodniu), umiarkowany (ćwiczenia 3–5 razy w tygodniu), duży (ćwiczenia 6–7 razy w tygodniu) albo bardzo duży (praca fizyczna lub dwa treningi dziennie). Talerz liczy z tego zapotrzebowanie energetyczne, które od razu widać niżej na tym samym ekranie, w sekcji celów dziennych.',
     ],
   },
   {
@@ -121,7 +125,7 @@ const DLACZEGO_TALERZ: PytanieOdpowiedz[] = [
   {
     tytul: 'Chcę schudnąć. Ile powinienem jeść?',
     akapity: [
-      'W zakładce Profil → Cele dzienne ustawiasz własne cele: białko, tłuszcz i węglowodany w gramach. Przycisk „Podpowiedz wartości” liczy propozycję na podstawie Twojego zapotrzebowania i umiarkowanego deficytu — punkt startowy, nie ostateczna odpowiedź. Liczby zawsze możesz poprawić ręcznie.',
+      'W zakładce Profil, przy edycji profilu, wybierasz tryb (redukcja albo utrzymanie wagi) i proporcje makroskładników w procentach energii. Kcal i gramy Talerz liczy z tego sam, na bieżąco z Twojej wagi, wzrostu, wieku i aktywności — nie zapisujesz sztywnej liczby, więc zmiana wagi od razu przesuwa cel.',
       'Talerz jest narzędziem do planowania i realizacji sposobu żywienia, a nie indywidualną konsultacją dietetyczną. Jeżeli potrzebujesz dokładnie określonego zapotrzebowania energetycznego ze względu na chorobę, intensywny sport, znaczną redukcję masy ciała albo inne szczególne potrzeby — warto ustalić je z lekarzem lub dietetykiem. Talerz może potem pomóc konsekwentnie ten cel realizować.',
       'To ważne rozróżnienie: specjalista pomaga ustalić cel, Talerz pomaga go codziennie wykonać.',
     ],
@@ -180,7 +184,7 @@ const ZAKLADKI: PytanieOdpowiedz[] = [
   {
     tytul: 'Profil',
     akapity: [
-      'Dane potrzebne do wyliczeń: płeć, data urodzenia, wzrost, poziom aktywności oraz historia wagi. Cele dzienne (białko, tłuszcz, węglowodany, próg białka na posiłek) ustawia się osobno, z podpowiedzią policzoną z profilu.',
+      'Jeden formularz na profil zawiera zarówno dane potrzebne do wyliczeń (płeć, data urodzenia, wzrost, waga, poziom aktywności), jak i cele dzienne (tryb, proporcje makro, błonnik, próg białka na posiłek) — kcal i gramy nie są zapisane na sztywno, tylko liczone na bieżąco z tych danych. Do 3 profili na konto.',
       'Administrator widzi tu dodatkowo zarządzanie kontami: włączanie i wyłączanie użytkowników oraz nadawanie roli moderatora.',
     ],
   },
@@ -204,6 +208,8 @@ function Sekcja({ dane }: { dane: PytanieOdpowiedz[] }) {
 }
 
 export default function EkranInstrukcji() {
+  const { powrot } = useLocalSearchParams<{ powrot?: string }>();
+
   return (
     <Ekran tytul="Instrukcja" podtytul="Po co jest Talerz i jak z niego korzystać">
       <View style={styles.naglowekSekcji}>
@@ -219,6 +225,8 @@ export default function EkranInstrukcji() {
         </ThemedText>
       </View>
       <Sekcja dane={ZAKLADKI} />
+
+      <Przycisk tytul="Wróć" wariant="poboczny" onPress={() => wroc(powrot, '/przepisy')} />
     </Ekran>
   );
 }

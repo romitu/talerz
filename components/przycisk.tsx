@@ -1,3 +1,4 @@
+import { Ionicons } from '@expo/vector-icons';
 import { ActivityIndicator, Pressable, StyleSheet, type ViewStyle } from 'react-native';
 
 import { ThemedText } from './themed-text';
@@ -9,6 +10,8 @@ type PrzyciskProps = {
   tytul: string;
   onPress: () => void;
   wariant?: 'glowny' | 'poboczny';
+  /** Ikona przed tekstem — opcjonalna, np. do „Edytuj” albo „Usuń”. */
+  ikona?: keyof typeof Ionicons.glyphMap;
   zajety?: boolean;
   wylaczony?: boolean;
   style?: ViewStyle;
@@ -18,6 +21,7 @@ export function Przycisk({
   tytul,
   onPress,
   wariant = 'glowny',
+  ikona,
   zajety = false,
   wylaczony = false,
   style,
@@ -25,6 +29,7 @@ export function Przycisk({
   const motyw = useTheme();
   const glowny = wariant === 'glowny';
   const nieczynny = wylaczony || zajety;
+  const kolorTekstu = glowny ? '#FFFFFF' : motyw.accent;
 
   return (
     <Pressable
@@ -43,11 +48,14 @@ export function Przycisk({
         style,
       ]}>
       {zajety ? (
-        <ActivityIndicator color={glowny ? '#FFFFFF' : motyw.accent} />
+        <ActivityIndicator color={kolorTekstu} />
       ) : (
-        <ThemedText type="smallBold" style={{ color: glowny ? '#FFFFFF' : motyw.accent }}>
-          {tytul}
-        </ThemedText>
+        <>
+          {ikona && <Ionicons name={ikona} size={18} color={kolorTekstu} />}
+          <ThemedText type="smallBold" style={{ color: kolorTekstu }}>
+            {tytul}
+          </ThemedText>
+        </>
       )}
     </Pressable>
   );
@@ -55,6 +63,8 @@ export function Przycisk({
 
 const styles = StyleSheet.create({
   przycisk: {
+    flexDirection: 'row',
+    gap: Spacing.two,
     borderRadius: Spacing.two,
     paddingVertical: Spacing.three,
     paddingHorizontal: Spacing.four,

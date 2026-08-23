@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Role składników</title>
+  <style>
+    :root {
+      --bg: #f6f8f7;
+      --card: #ffffff;
+      --text: #1f2933;
+      --muted: #667085;
+      --border: #d9e1dd;
+      --accent: #2f7d5a;
+      --accent-soft: #eaf5ef;
+      --danger: #b54747;
+      --shadow: 0 8px 24px rgba(31, 41, 51, 0.06);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    .wrap {
+      max-width: 1500px;
+      margin: 0 auto;
+      padding: 28px;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: flex-end;
+      margin-bottom: 18px;
+    }
+    h1 {
+      margin: 0 0 6px 0;
+      font-size: 30px;
+      line-height: 1.15;
+    }
+    .subtitle {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      max-width: 900px;
+    }
+    .legend {
+      background: var(--accent-soft);
+      border: 1px solid #cfe7d8;
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin: 18px 0;
+      font-size: 14px;
+      line-height: 1.55;
+    }
+    .legend code {
+      font-size: 13px;
+      background: rgba(255,255,255,.75);
+      padding: 2px 6px;
+      border-radius: 6px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .table-wrap { overflow-x: auto; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 1180px;
+    }
+    thead th {
+      text-align: left;
+      font-size: 13px;
+      color: #475467;
+      background: #f9fbfa;
+      border-bottom: 1px solid var(--border);
+      padding: 14px 16px;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+    tbody td {
+      vertical-align: top;
+      border-bottom: 1px solid #edf1ef;
+      padding: 16px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    tbody tr:last-child td { border-bottom: 0; }
+    tbody tr:hover { background: #fcfdfc; }
+    .role {
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .role small {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-weight: 500;
+      white-space: normal;
+    }
+    .formula {
+      width: 100%;
+      min-width: 185px;
+      border: 1px solid #cfd8d3;
+      border-radius: 9px;
+      background: #fff;
+      padding: 10px 11px;
+      font-family: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
+      font-size: 13px;
+      color: #1f2933;
+      outline: none;
+    }
+    .formula:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(47, 125, 90, 0.12);
+    }
+    .examples {
+      margin: 0;
+      padding-left: 18px;
+    }
+    .examples li + li { margin-top: 7px; }
+    .examples strong { color: #344054; }
+    .actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 16px;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+    }
+    button {
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 10px 14px;
+      font-size: 14px;
+      cursor: pointer;
+      background: #fff;
+      color: var(--text);
+    }
+    button.primary {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+    }
+    button.danger { color: var(--danger); }
+    .status {
+      margin-right: auto;
+      align-self: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    @media (max-width: 760px) {
+      .wrap { padding: 16px; }
+      .header { align-items: flex-start; flex-direction: column; }
+      h1 { font-size: 25px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="header">
+      <div>
+        <h1>Role składników</h1>
+        <p class="subtitle">
+          Tabela określa sposób skalowania składników przy zmianie liczby porcji.
+          Wzory można edytować bezpośrednio w tabeli.
+        </p>
+      </div>
+    </div>
+
+    <div class="legend">
+      <strong>Założenia:</strong>
+      <code>k = liczba porcji przygotowywanych / liczba porcji bazowych</code>.
+      Dla zmniejszania przepisu można przyjąć skalowanie liniowe, o ile przepis nie ma ustawionej
+      minimalnej liczby porcji. Kwantyzacja jest osobną cechą składnika i nie wynika z roli.
+    </div>
+
+    <div class="card">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:15%">Rola</th>
+              <th style="width:18%">Wzór</th>
+              <th style="width:27%">Kiedy używać</th>
+              <th style="width:40%">Przykład</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="role">Baza<small>Domyślna rola większości składników.</small></td>
+              <td><input class="formula" data-key="baza" value="ilość × k"></td>
+              <td>Gdy ilość składnika powinna rosnąć lub maleć bezpośrednio proporcjonalnie do liczby przygotowywanych porcji.</td>
+              <td>
+                <ul class="examples">
+                  <li><strong>Mięso:</strong> 400 g kurczaka na 4 porcje → przy 6 porcjach 600 g.</li>
+                  <li><strong>Ryż:</strong> 240 g na 4 porcje → przy 6 porcjach 360 g.</li>
+                  <li><strong>Warzywa:</strong> 300 g marchwi na 4 porcje → przy 6 porcjach 450 g.</li>
+                  <li><strong>Nabiał:</strong> 200 g jogurtu w sosie na 4 porcje → przy 6 porcjach 300 g.</li>
+                  <li><strong>Passata:</strong> 500 g na 4 porcje → przy 6 porcjach 750 g.</li>
+                </ul>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="role">Doprawienie<small>Składniki wpływające przede wszystkim na smak i stężenie.</small></td>
+              <td><input class="formula" data-key="doprawienie" value="k ≤ 1: ilość × k; k > 1: ilość × k^0,85"></td>
+              <td>Dla składników, których ilość powinna rosnąć wraz z daniem, ale przy większej skali można zastosować lekkie tłumienie.</td>
+              <td>
+                <ul class="examples">
+                  <li><strong>Sól:</strong> 8 g na 4 porcje → dla 6 porcji ok. 11,3 g zamiast pełnych 12 g.</li>
+                  <li><strong>Sos sojowy:</strong> 30 ml na 4 porcje → dla 8 porcji ok. 54 ml zamiast 60 ml.</li>
+                  <li><strong>Ocet:</strong> 20 ml w sosie na 4 porcje → przy podwojeniu dania wzrost jest lekko tłumiony.</li>
+                  <li><strong>Musztarda:</strong> gdy pełni funkcję smakową w sosie, a nie głównego składnika.</li>
+                </ul>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="role">Aromat mocny<small>Składniki dominujące aromatem lub ostrością.</small></td>
+              <td><input class="formula" data-key="aromat" value="k ≤ 1: ilość × k; k > 1: ilość × k^0,75"></td>
+              <td>Dla składników, których zbyt szybkie zwiększanie może zdominować danie. Przy większej liczbie porcji rosną wolniej niż baza.</td>
+              <td>
+                <ul class="examples">
+                  <li><strong>Czosnek:</strong> 4 ząbki na 4 porcje → dla 8 porcji ok. 7 zamiast 8 po kwantyzacji.</li>
+                  <li><strong>Chili:</strong> 4 g na 4 porcje → dla 8 porcji ok. 6,7 g zamiast 8 g.</li>
+                  <li><strong>Liść laurowy:</strong> 2 szt. na 4 porcje → wynik po skalowaniu można skwantyzować do pełnej sztuki.</li>
+                  <li><strong>Pasta curry:</strong> gdy jest bardzo intensywna i stanowi tylko akcent smakowy.</li>
+                </ul>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="role">Tłuszcz do smażenia<small>Zależny bardziej od powierzchni naczynia niż liczby porcji.</small></td>
+              <td><input class="formula" data-key="smazenie" value="k ≤ 1: ilość × k; k > 1: ilość × k^0,67"></td>
+              <td>Gdy olej, oliwa, masło lub inny tłuszcz służy głównie do pokrycia patelni lub przeprowadzenia obróbki cieplnej.</td>
+              <td>
+                <ul class="examples">
+                  <li><strong>Oliwa do smażenia cebuli:</strong> 15 ml na 4 porcje → dla 8 porcji nie trzeba automatycznie dawać 30 ml.</li>
+                  <li><strong>Masło do smażenia pieczarek:</strong> większa ilość pieczarek może wymagać dwóch partii, ale niekoniecznie dwa razy więcej masła.</li>
+                  <li><strong>Olej do obsmażenia mięsa:</strong> jego ilość zależy od patelni, temperatury i techniki smażenia.</li>
+                </ul>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="role">Płyn do duszenia<small>Płyn pracujący technologicznie w garnku.</small></td>
+              <td><input class="formula" data-key="duszenie" value="k ≤ 1: ilość × k; k > 1: ilość × k^0,85"></td>
+              <td>Dla bulionu, wina, mleka kokosowego lub innego płynu, który podczas duszenia częściowo odparowuje i nie zawsze musi rosnąć dokładnie proporcjonalnie.</td>
+              <td>
+                <ul class="examples">
+                  <li><strong>Bulion w gulaszu:</strong> 500 ml na 4 porcje → dla 8 porcji mniej niż 1000 ml może być wystarczające.</li>
+                  <li><strong>Wino do duszenia:</strong> część alkoholu i wody odparowuje, więc pełne skalowanie może dać zbyt rzadki sos.</li>
+                  <li><strong>Mleko kokosowe:</strong> jeśli jest bazą sosu może mieć rolę „baza”, a jeśli tylko pomaga w duszeniu — „płyn do duszenia”.</li>
+                </ul>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="role">Woda technologiczna<small>Nie jest bezpośrednio częścią porcji.</small></td>
+              <td><input class="formula" data-key="woda" value="bez automatycznego skalowania"></td>
+              <td>Gdy woda służy do ugotowania produktu, blanszowania, płukania lub innego procesu, a jej większość nie trafia do gotowego dania.</td>
+              <td>
+                <ul class="examples">
+                  <li><strong>Woda na makaron:</strong> 2 l nie oznacza, że przy podwojeniu makaronu zawsze trzeba użyć 4 l.</li>
+                  <li><strong>Woda do ziemniaków:</strong> jej zadaniem jest przykrycie produktu w garnku.</li>
+                  <li><strong>Woda do blanszowania:</strong> zależy od wielkości garnka i procesu, nie od kalorii dania.</li>
+                  <li><strong>Uwaga:</strong> woda będąca składnikiem zupy nie powinna mieć tej roli — wtedy jest bazą albo podlega ograniczeniom przepisu.</li>
+                </ul>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="role">Do smaku<small>Składnik orientacyjny, bez sztywnego przelicznika.</small></td>
+              <td><input class="formula" data-key="do_smaku" value="bez automatycznego skalowania"></td>
+              <td>Gdy dokładna ilość nie powinna być wyliczana matematycznie, bo użytkownik dobiera ją według własnego smaku lub jako wykończenie dania.</td>
+              <td>
+                <ul class="examples">
+                  <li><strong>Pieprz na talerzu:</strong> użytkownik dodaje według własnych preferencji.</li>
+                  <li><strong>Natka pietruszki:</strong> kilka gramów jako posypka nie wymaga ścisłego skalowania.</li>
+                  <li><strong>Szczypiorek:</strong> dekoracja i świeży akcent smakowy.</li>
+                  <li><strong>Kolendra:</strong> szczególnie gdy część osób dodaje ją dopiero na swoim talerzu.</li>
+                </ul>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="actions">
+      <div class="status" id="status">Zmiany wzorów są zapisywane lokalnie w przeglądarce.</div>
+      <button class="danger" id="resetBtn">Przywróć domyślne</button>
+      <button class="primary" id="saveBtn">Zapisz wzory</button>
+    </div>
+  </div>
+
+  <script>
+    const inputs = [...document.querySelectorAll(".formula")];
+    const status = document.getElementById("status");
+    const storageKey = "talerz_role_wzory_v1";
+    const defaults = Object.fromEntries(inputs.map(i => [i.dataset.key, i.value]));
+
+    function loadSaved() {
+      const raw = localStorage.getItem(storageKey);
+      if (!raw) return;
+      try {
+        const saved = JSON.parse(raw);
+        inputs.forEach(input => {
+          if (Object.prototype.hasOwnProperty.call(saved, input.dataset.key)) {
+            input.value = saved[input.dataset.key];
+          }
+        });
+      } catch (e) {}
+    }
+
+    function save() {
+      const data = Object.fromEntries(inputs.map(i => [i.dataset.key, i.value]));
+      localStorage.setItem(storageKey, JSON.stringify(data));
+      status.textContent = "Zapisano.";
+      setTimeout(() => {
+        status.textContent = "Zmiany wzorów są zapisywane lokalnie w przeglądarce.";
+      }, 1600);
+    }
+
+    function reset() {
+      inputs.forEach(input => input.value = defaults[input.dataset.key]);
+      localStorage.removeItem(storageKey);
+      status.textContent = "Przywrócono wartości domyślne.";
+    }
+
+    document.getElementById("saveBtn").addEventListener("click", save);
+    document.getElementById("resetBtn").addEventListener("click", reset);
+    loadSaved();
+  </script>
+</body>
+</html>

@@ -2,23 +2,25 @@ import { useLocalSearchParams } from 'expo-router';
 import * as DocumentPicker from 'expo-document-picker';
 import * as FileSystem from 'expo-file-system/legacy';
 import * as Sharing from 'expo-sharing';
-import { useState } from 'react';
-import { Platform, StyleSheet, View } from 'react-native';
+import { useCallback, useEffect, useState } from 'react';
+import { Platform, Pressable, StyleSheet, View } from 'react-native';
 
 import { Ekran } from '@/components/ekran';
 import { Karta } from '@/components/karta';
+import { Pole } from '@/components/pole';
 import { Przycisk } from '@/components/przycisk';
 import { ThemedText } from '@/components/themed-text';
 import { Spacing } from '@/constants/theme';
+import { useTheme } from '@/hooks/use-theme';
 import { komunikatBledu } from '@/lib/blad';
 import {
-  eksportujPrzepisy,
   sklasyfikujPrzepisy,
   wczytajPlikPrzepisow,
   zaimportujPrzepisy,
   type BladImportu,
   type PozycjaImportu,
 } from '@/lib/import-eksport-przepisow';
+import { eksportujPrzepisFormularzowy } from '@/lib/import-eksport-przepis-formularza';
 import {
   eksportujSkladniki,
   sklasyfikujSkladniki,
@@ -29,7 +31,7 @@ import {
 } from '@/lib/import-eksport-skladnikow';
 import { bezPrefiksuDataUrl } from '@/lib/import-eksport-wspolne';
 import { wroc } from '@/lib/nawigacja';
-import { pobierzWszystkiePelnePrzepisy } from '@/lib/przepisy';
+import { pobierzPelnyPrzepis, pobierzPrzepisy } from '@/lib/przepisy';
 import { useSesja } from '@/lib/sesja';
 import { pobierzSkladniki } from '@/lib/skladniki';
 import { supabase } from '@/lib/supabase';
@@ -51,6 +53,12 @@ const TYP_PLIKU_XLSX = 'application/vnd.openxmlformats-officedocument.spreadshee
 function nazwaPlikuEksportu(prefiks: string): string {
   const dzis = new Date().toISOString().slice(0, 10);
   return `talerz-${prefiks}-${dzis}.xlsx`;
+}
+
+/** Nazwa przepisu -> bezpieczny fragment nazwy pliku (bez polskich znaków, spacji, wielkości liter). */
+function fragmentNazwyPliku(nazwa: string): string {
+  const bezOgonkow = nazwa.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+  return bezOgonkow.replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'przepis';
 }
 
 /** Pobranie/udostępnienie już zbudowanego pliku .xlsx — identyczne dla przepisów i składników. */
@@ -82,11 +90,16 @@ async function zapiszPlikXlsx(base64: string, nazwa: string, poZapisie: (komunik
 export default function EkranImportEksportPrzepisow() {
   const { powrot } = useLocalSearchParams<{ powrot?: string }>();
   const { sesja } = useSesja();
+  const motyw = useTheme();
 
   const [eksportZajety, setEksportZajety] = useState(false);
   const [importZajety, setImportZajety] = useState(false);
   const [blad, setBlad] = useState<string | null>(null);
   const [komunikat, setKomunikat] = useState<string | null>(null);
+
+  const [listaPrzepisow, setListaPrzepisow] = useState<{ id: string; nazwa: string }[]>([]);
+  const [szukajPrzepisu, setSzukajPrzepisu] = useState('');
+  const [wybranyPrzepisId, setWybranyPrzepisId] = useState<string | null>(null);
 
   const [nazwaPliku, setNazwaPliku] = useState<string | null>(null);
   const [bledyParsowania, setBledyParsowania] = useState<BladImportu[]>([]);
@@ -109,19 +122,41 @@ export default function EkranImportEksportPrzepisow() {
   const [bledyZapisuSkladnikow, setBledyZapisuSkladnikow] = useState<BladImportuSkladnika[]>([]);
   const [zaimportowanoSkladnikow, setZaimportowanoSkladnikow] = useState<number | null>(null);
 
-  async function eksportuj() {
+  const wczytajListePrzepisow = useCallback(async () => {
+    try {
+      const przepisy = await pobierzPrzepisy(sesja?.user.id);
+      setListaPrzepisow(przepisy.map((p) => ({ id: p.id, nazwa: p.nazwa })));
+    } catch (e) {
+      setBlad(komunikatBledu(e));
+    }
+  }, [sesja?.user.id]);
+
+  useEffect(() => {
+    wczytajListePrzepisow();
+  }, [wczytajListePrzepisow]);
+
+  const fraza = szukajPrzepisu.trim().toLowerCase();
+  const przepisyPasujace = fraza
+    ? listaPrzepisow.filter((p) => p.nazwa.toLowerCase().includes(fraza)).slice(0, 8)
+    : [];
+  const wybranyPrzepis = listaPrzepisow.find((p) => p.id === wybranyPrzepisId) ?? null;
+
+  async function eksportujJeden() {
+    if (!wybranyPrzepisId) return;
     setBlad(null);
     setKomunikat(null);
     setEksportZajety(true);
     try {
-      const przepisy = await pobierzWszystkiePelnePrzepisy();
-      if (przepisy.length === 0) {
-        setBlad('Baza przepisów jest pusta — nie ma czego eksportować.');
-        return;
-      }
-
-      const base64 = await eksportujPrzepisy(przepisy);
-      await zapiszPlikXlsx(base64, nazwaPlikuEksportu('przepisy'), setKomunikat);
+      const [pelny, skladniki] = await Promise.all([
+        pobierzPelnyPrzepis(wybranyPrzepisId),
+        pobierzSkladniki(),
+      ]);
+      const base64 = await eksportujPrzepisFormularzowy(pelny, skladniki);
+      await zapiszPlikXlsx(
+        base64,
+        nazwaPlikuEksportu(`przepis-${fragmentNazwyPliku(pelny.nazwa)}`),
+        setKomunikat
+      );
     } catch (e) {
       setBlad(komunikatBledu(e));
     } finally {
@@ -302,13 +337,57 @@ export default function EkranImportEksportPrzepisow() {
       podtytul="Plik Excel — kopia zapasowa albo masowa edycja poza aplikacją">
       <Karta style={styles.grupa}>
         <ThemedText type="smallBold" themeColor="textSecondary">
-          EKSPORT PRZEPISÓW
+          EKSPORT PRZEPISU
         </ThemedText>
         <ThemedText type="small" themeColor="textSecondary">
-          Zapisuje przepisy do jednego pliku .xlsx: osobny arkusz na nagłówek dania,
-          składniki, etapy i kroki, plus arkusz z instrukcją formatu.
+          Zapisuje JEDEN przepis do pliku .xlsx w formacie formularzowym — jeden arkusz,
+          pola w tej samej kolejności co w ekranie Edycja przepisu. Ten sam format
+          rozpoznaje import niżej, więc plik da się poprawić ręcznie w Excelu i wczytać
+          z powrotem.
         </ThemedText>
-        <Przycisk tytul="Eksportuj do pliku Excel" onPress={eksportuj} zajety={eksportZajety} />
+
+        <Pole
+          etykieta="Znajdź przepis po nazwie"
+          value={wybranyPrzepis ? wybranyPrzepis.nazwa : szukajPrzepisu}
+          onChangeText={(t) => {
+            setSzukajPrzepisu(t);
+            setWybranyPrzepisId(null);
+          }}
+          placeholder="np. barszcz"
+        />
+
+        {!wybranyPrzepisId && przepisyPasujace.length > 0 && (
+          <View style={[styles.listaPrzepisow, { borderColor: motyw.border }]}>
+            {przepisyPasujace.map((p) => (
+              <Pressable
+                key={p.id}
+                onPress={() => {
+                  setWybranyPrzepisId(p.id);
+                  setSzukajPrzepisu('');
+                }}
+                style={({ pressed }) => [
+                  styles.pozycjaListy,
+                  { borderColor: motyw.border },
+                  pressed && styles.wcisnieta,
+                ]}>
+                <ThemedText type="small">{p.nazwa}</ThemedText>
+              </Pressable>
+            ))}
+          </View>
+        )}
+
+        {!wybranyPrzepisId && fraza && przepisyPasujace.length === 0 && (
+          <ThemedText type="small" themeColor="textSecondary">
+            Żaden przepis nie pasuje do „{szukajPrzepisu}”.
+          </ThemedText>
+        )}
+
+        <Przycisk
+          tytul={wybranyPrzepis ? `Eksportuj „${wybranyPrzepis.nazwa}”` : 'Eksportuj do pliku Excel'}
+          onPress={eksportujJeden}
+          zajety={eksportZajety}
+          wylaczony={!wybranyPrzepisId}
+        />
       </Karta>
 
       <Karta style={styles.grupa}>
@@ -319,6 +398,10 @@ export default function EkranImportEksportPrzepisow() {
           Przepis rozpoznawany jest PO NAZWIE, bez względu na wielkość liter. Identyczna
           nazwa zastępuje treść istniejącego dania — to korekta, nie duplikat. Nowa nazwa
           zakłada nowy, prywatny przepis. Zdjęcia i stanu publikacji import nie rusza.
+          Rozpoznawane są dwa formaty pliku: formularz — jeden przepis na arkusz, pola
+          w tej samej kolejności co w ekranie edycji przepisu (tak jak z eksportu powyżej,
+          wiele arkuszy naraz też można) — albo starsza płaska tabela (arkusze Przepisy/
+          Składniki/Etapy/Kroki), gdyby trzeba było wczytać dawny plik kopii zapasowej.
         </ThemedText>
 
         <Przycisk tytul="Wybierz plik Excel" wariant="poboczny" onPress={wybierzPlik} />
@@ -537,4 +620,15 @@ export default function EkranImportEksportPrzepisow() {
 const styles = StyleSheet.create({
   grupa: { gap: Spacing.three },
   blok: { gap: Spacing.one },
+  listaPrzepisow: {
+    borderWidth: 1,
+    borderRadius: Spacing.two,
+    overflow: 'hidden',
+  },
+  pozycjaListy: {
+    paddingHorizontal: Spacing.three,
+    paddingVertical: Spacing.two,
+    borderBottomWidth: 1,
+  },
+  wcisnieta: { opacity: 0.7 },
 });

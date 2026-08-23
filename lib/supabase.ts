@@ -48,6 +48,27 @@ if (!baza_skonfigurowana) {
   );
 }
 
+/**
+ * Blokada bez kolejkowania — omija błąd biblioteki, który na urządzeniu
+ * mobilnym potrafi zawiesić aplikację w nieskończonej pętli obietnic.
+ *
+ * `GoTrueClient` przed każdym zapytaniem wymagającym sesji woła
+ * `_acquireLock`, żeby żadne dwie karty przeglądarki nie odświeżały tokenu
+ * naraz. W przeglądarce robi to prawdziwe Web Locks API. Na React Native
+ * tego API nie ma, więc biblioteka używa własnej, wewnętrznej kolejki —
+ * a ta kolejka ma znany błąd (supabase/supabase-js#1594, #2013): przy kilku
+ * równoległych zapytaniach (a ekrany Plan, Zakupy, Przepisy i Profil robią
+ * `Promise.all` z kilkoma zapytaniami naraz) potrafi zapętlić się w kółko
+ * obietnic, aż Hermes wywali `Maximum call stack size exceeded`.
+ *
+ * Jedna aplikacja mobilna nie ma wielu kart do zsynchronizowania, więc
+ * blokada nie chroni tu przed niczym realnym — możemy ją bezpiecznie
+ * zastąpić funkcją, która po prostu odpala zapytanie od razu.
+ */
+async function blokadaBezKolejki<R>(_nazwa: string, _limitCzasu: number, fn: () => Promise<R>): Promise<R> {
+  return fn();
+}
+
 // Adres zapasowy musi być poprawnym adresem — inaczej `createClient` rzuca
 // wyjątkiem i aplikacja nie wstaje wcale, zamiast pokazać czytelny komunikat
 // na ekranie logowania.
@@ -59,5 +80,8 @@ export const supabase = createClient(adres ?? 'https://brak.supabase.co', klucz 
     persistSession: true,
     // Wykrywanie sesji z adresu URL ma sens tylko w przeglądarce.
     detectSessionInUrl: Platform.OS === 'web',
+    // W przeglądarce zostaje domyślna blokada (Web Locks API działa tam
+    // poprawnie) — problem dotyczy wyłącznie natywnego React Native.
+    lock: Platform.OS === 'web' ? undefined : blokadaBezKolejki,
   },
 });

@@ -70,7 +70,7 @@ export type Kandydat = {
   id: string;
   nazwa: string;
   pory: PoraPosilku[];
-  trwalosc_dni: number;
+  liczba_porcji_bazowych: number;
   kcal: number | null;
   bialko_g: number | null;
   /** Preferencja KONTA, dla którego układamy plan — nie popularność ogólna. */
@@ -149,7 +149,7 @@ function klucz(data: string, pora: PoraPosilku): string {
 /**
  * Dni, na które realnie rozłoży się jedno gotowanie.
  *
- * Nie wystarczy wziąć trwałości przepisu. Kolejny dzień może już mieć coś
+ * Nie wystarczy wziąć liczby porcji bazowych przepisu. Kolejny dzień może już mieć coś
  * wpisanego ręcznie, a wtedy dołożenie tam drugiego dania byłoby cichym
  * nadpisaniem decyzji użytkownika. Bierzemy więc tylko dni KOLEJNE I WOLNE —
  * pierwsza przeszkoda kończy serię.
@@ -158,10 +158,10 @@ export function dniGotowania(
   dni: string[],
   odIndeksu: number,
   pora: PoraPosilku,
-  trwalosc: number,
+  liczbaPorcjiBazowych: number,
   zajete: Set<string>
 ): string[] {
-  const ile = Math.max(1, trwalosc);
+  const ile = Math.max(1, liczbaPorcjiBazowych);
   const wynik: string[] = [];
 
   for (let i = odIndeksu; i < dni.length && wynik.length < ile; i++) {
@@ -285,7 +285,7 @@ export function zaplanuj(opcje: {
         }
       }
 
-      const objete = dniGotowania(dni, i, pora, najlepszy.trwalosc_dni, zajeteKlucze);
+      const objete = dniGotowania(dni, i, pora, najlepszy.liczba_porcji_bazowych, zajeteKlucze);
       if (objete.length === 0) continue; // nie powinno się zdarzyć: miejsce jest wolne
 
       wstawienia.push({
