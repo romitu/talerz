@@ -5,7 +5,7 @@ import { ActivityIndicator, Pressable, ScrollView, StyleSheet, View } from 'reac
 
 import { Ekran } from '@/components/ekran';
 import { Karta } from '@/components/karta';
-import { ListaRozwijana } from '@/components/lista-rozwijana';
+import { NaglowekPlanu } from '@/components/naglowek-planu';
 import { Przycisk } from '@/components/przycisk';
 import { TabelaWyboru } from '@/components/tabela-wyboru';
 import { ThemedText } from '@/components/themed-text';
@@ -680,10 +680,18 @@ export default function EkranPlanu() {
         przewijanie.current?.scrollTo({ y: pozycja.current, animated: false });
       }}
       tytul="Plan dnia"
-      podtytul={
-        plan
-          ? `${plan.dni} dni · ${osoby} ${osoby === 1 ? 'osoba' : 'osoby'}`
-          : undefined
+      podtytul={wczytywanie ? 'wczytywanie…' : undefined}
+      naglowekStaly={
+        plan ? (
+          <NaglowekPlanu
+            plan={plan}
+            osoby={osoby}
+            mozliweDaty={mozliweDaty}
+            onZmianaPierwszegoDnia={(d) => zDbem(() => zmienDatePlanu(plan.id, d))}
+            plany={plany}
+            onZmianaTygodnia={(id) => setWybranyPlanId(id)}
+          />
+        ) : undefined
       }>
       {blad && (
         <Karta>
@@ -704,54 +712,6 @@ export default function EkranPlanu() {
           <ThemedText type="small" themeColor="accent">
             Nie masz ustalonych celów dziennych — nie będzie do czego porównywać sum.
             Ustawisz je w zakładce Profil.
-          </ThemedText>
-        </Karta>
-      )}
-
-      {plan && (
-        <Karta>
-          <View style={styles.kartaNaglowek}>
-            <View style={[styles.ikonaKolo, { backgroundColor: motyw.backgroundSelected }]}>
-              <Ionicons name="calendar-outline" size={26} color={motyw.accent} />
-            </View>
-          </View>
-
-          <View style={styles.selektory}>
-            <View style={styles.selektor}>
-              <ListaRozwijana
-                etykieta="PIERWSZY DZIEŃ PLANU"
-                wybrana={plan.data_start}
-                onZmiana={(d) => zDbem(() => zmienDatePlanu(plan.id, d))}
-                opcje={mozliweDaty.map((d) => ({
-                  wartosc: d,
-                  etykieta: opisDnia(d),
-                  opis: czyDzisiaj(d) ? 'dzisiaj' : undefined,
-                }))}
-              />
-            </View>
-
-            {/*
-              Przełącznik tygodni pokazuje się dopiero, gdy jest co przełączać.
-              Przy pierwszym tygodniu byłby polem z jedną pozycją.
-            */}
-            {plany.length > 1 && (
-              <View style={styles.selektor}>
-                <ListaRozwijana
-                  etykieta="OGLĄDANY TYDZIEŃ"
-                  wybrana={plan.id}
-                  onZmiana={(id) => setWybranyPlanId(id)}
-                  opcje={plany.map((p) => ({
-                    wartosc: p.id,
-                    etykieta: `od ${opisDnia(p.data_start)}`,
-                    opis: p.id === plany[0].id ? 'najnowszy' : undefined,
-                  }))}
-                />
-              </View>
-            )}
-          </View>
-
-          <ThemedText type="small" themeColor="textSecondary">
-            Pozostałe dni ułożą się od niego. Posiłki zostają przy swoich datach.
           </ThemedText>
         </Karta>
       )}
@@ -1268,18 +1228,6 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-
-  /* Dwa pola wyboru (pierwszy dzień, oglądany tydzień) obok siebie na
-     szerszym ekranie, jedno pod drugim na wąskim telefonie. */
-  selektory: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: Spacing.three,
-  },
-  selektor: {
-    flexGrow: 1,
-    flexBasis: 220,
   },
 
   /* Duży przycisk „Wypełnij wolne miejsca" — najważniejsza akcja karty. */
