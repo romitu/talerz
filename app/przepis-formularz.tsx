@@ -147,6 +147,8 @@ export default function FormularzPrzepisu() {
   const [nowySprzet, setNowySprzet] = useState('');
   const [przechowywanie, setPrzechowywanie] = useState('');
   const [moznaMrozic, setMoznaMrozic] = useState<'tak' | 'nie' | 'nie wiem'>('nie wiem');
+  /** Czy automat wolno automatycznie skalować ten przepis kalorycznie (migracja 0036). */
+  const [skalowalny, setSkalowalny] = useState(false);
   const [ratunek, setRatunek] = useState('');
   const [zdjecie, setZdjecie] = useState<string | null>(null);
 
@@ -301,6 +303,7 @@ export default function FormularzPrzepisu() {
     setSprzet([]);
     setPrzechowywanie('');
     setMoznaMrozic('nie wiem');
+    setSkalowalny(false);
     setRatunek('');
     setZdjecie(null);
     setDoPublikacji(false);
@@ -338,6 +341,7 @@ export default function FormularzPrzepisu() {
         setSprzet(p.sprzet ?? []);
         setPrzechowywanie(p.przechowywanie ?? '');
         setMoznaMrozic(p.mozna_mrozic === null ? 'nie wiem' : p.mozna_mrozic ? 'tak' : 'nie');
+        setSkalowalny(p.skalowalny);
         setRatunek(p.ratunek ?? '');
         setZdjecie(p.zdjecie ?? null);
         setWidocznosc(p.widocznosc);
@@ -607,6 +611,7 @@ export default function FormularzPrzepisu() {
           mozna_mrozic: moznaMrozic === 'nie wiem' ? null : moznaMrozic === 'tak',
           ratunek: ratunek.trim() || null,
           zdjecie,
+          skalowalny,
       };
 
       let przepisId: string;
@@ -837,6 +842,32 @@ export default function FormularzPrzepisu() {
           jednej porcji wychodzi z rachunku: masa całej potrawy podzielona przez tę liczbę.
         </ThemedText>
 
+        <Pressable
+          onPress={() => setSkalowalny((x) => !x)}
+          accessibilityRole="checkbox"
+          accessibilityState={{ checked: skalowalny }}
+          style={({ pressed }) => [
+            styles.zgoda,
+            { borderColor: skalowalny ? motyw.accent : motyw.border },
+            pressed && styles.wcisniety,
+          ]}>
+          <Ionicons
+            name={skalowalny ? 'checkbox' : 'square-outline'}
+            size={22}
+            color={skalowalny ? motyw.accent : motyw.textSecondary}
+          />
+          <View style={styles.trescZgody}>
+            <ThemedText type="default" themeColor={skalowalny ? 'accent' : 'text'}>
+              Można skalować kalorycznie
+            </ThemedText>
+            <ThemedText type="small" themeColor="textSecondary">
+              Dla dań o elastycznej wielkości — sałatka, kanapka „na kromkę". Automat
+              wypełniający plan wolno mu wtedy dokładać albo ujmować składników, żeby
+              dobić do celu kalorycznego posiłku, zamiast wstawiać przepis zawsze
+              w bazowym rozmiarze.
+            </ThemedText>
+          </View>
+        </Pressable>
       </Karta>
       <Karta style={styles.grupa}>
         <WyborWielo

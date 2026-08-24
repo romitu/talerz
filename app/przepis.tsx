@@ -21,6 +21,7 @@ import {
   type PelnyPrzepis,
   type PrzepisZMakro,
 } from '@/lib/przepisy';
+import { pobierzPrzeskalowanyPrzepis, type PrzeskalowanyPrzepis } from '@/lib/przepisy-skalowane';
 import { useSesja } from '@/lib/sesja';
 import { adresZdjecia } from '@/lib/zdjecia';
 
@@ -43,12 +44,25 @@ import { adresZdjecia } from '@/lib/zdjecia';
  *     czy masz wszystko i czy trzeba wyjąć blender.
  */
 export default function EkranPrzepisu() {
-  const { id, powrot } = useLocalSearchParams<{ id: string; powrot?: string }>();
+  const { id, skalowany, powrot, porcjeRazem } = useLocalSearchParams<{
+    id: string;
+    /** Ustawione, gdy wchodzimy z planu na konkretny przeskalowany wariant (migracja 0036). */
+    skalowany?: string;
+    powrot?: string;
+    /**
+     * Ile porcji trzeba ugotować NARAZ dla tej konkretnej partii z planu —
+     * dni, na które rozłożono garnek, razy jedzący. Ustawione tylko przy
+     * wejściu z planu (patrz `app/index.tsx`); przy wejściu z katalogu
+     * przepisów go nie ma i pokazujemy ilości bazowe, jak dawniej.
+     */
+    porcjeRazem?: string;
+  }>();
   const { sesja } = useSesja();
   const motyw = useTheme();
 
   const [przepis, setPrzepis] = useState<PelnyPrzepis | null>(null);
   const [makro, setMakro] = useState<PrzepisZMakro | null>(null);
+  const [wariant, setWariant] = useState<PrzeskalowanyPrzepis | null>(null);
   const [zrobione, setZrobione] = useState<Set<string>>(new Set());
   const [wczytywanie, setWczytywanie] = useState(true);
   const [blad, setBlad] = useState<string | null>(null);
@@ -58,18 +72,20 @@ export default function EkranPrzepisu() {
     setWczytywanie(true);
     setBlad(null);
     try {
-      const [pelny, wszystkie] = await Promise.all([
+      const [pelny, wszystkie, przeskalowany] = await Promise.all([
         pobierzPelnyPrzepis(id),
         pobierzPrzepisy(sesja?.user.id),
+        skalowany ? pobierzPrzeskalowanyPrzepis(skalowany) : Promise.resolve(null),
       ]);
       setPrzepis(pelny);
       setMakro(wszystkie.find((p) => p.id === id) ?? null);
+      setWariant(przeskalowany);
     } catch (e) {
       setBlad(komunikatBledu(e));
     } finally {
       setWczytywanie(false);
     }
-  }, [id, sesja?.user.id]);
+  }, [id, skalowany, sesja?.user.id]);
 
   useFocusEffect(
     useCallback(() => {
@@ -113,12 +129,71 @@ export default function EkranPrzepisu() {
   const czas = czasRazem(przepis.czas_przygotowania_min, przepis.czas_obrobki_min);
   const krokowRazem = przepis.etapy.reduce((s, e) => s + e.kroki.length, 0);
 
+  // Ten posiłek w planie jest wariantem skalowanym (migracja 0036) — pokazujemy
+  // ilości, jakie FAKTYCZNIE wyszły z przeliczenia, nie bazowy przepis
+  // źródłowy. Etapy, sprzęt i reszta treści zostają z przepisu — skalowanie
+  // dotyczy wyłącznie ilości składników.
+  const wariantSkladnikow = wariant ? new Map(wariant.skladniki.map((s) => [s.skladnik_id, s])) : null;
+
+  // Ile razy więcej niż bazowa ilość trzeba ugotować dla TEJ partii z planu —
+  // np. „wytrzyma 3 dni w lodówce” przy 1 osobie i przepisie bazowanym na
+  // 1 porcji daje mnożnik ×3.
+  //
+  // Wariant skalowany (migracja 0036) potrzebuje INNEGO wzoru niż zwykłe
+  // danie: jego ilości w bazie reprezentują już dokładnie JEDNĄ porcję (jedną
+  // osobę, jeden posiłek) — `celKcal` w automacie to cel na osobę, nie na całą
+  // partię, patrz `zapiszWstawienia` w `app/index.tsx`. Dzielenie przez
+  // `porcje_wyliczone` (bazowa liczba porcji ZWYKŁEGO przepisu) byłoby więc
+  // błędne; mnożnik to po prostu `porcjeRazem` wprost.
+  const mnoznikPorcji = wariant
+    ? Number(porcjeRazem ?? 1) || 1
+    : porcjeRazem && makro?.porcje_wyliczone
+      ? Number(porcjeRazem) / makro.porcje_wyliczone
+      : 1;
+  const skalujPorcje = Math.abs(mnoznikPorcji - 1) > 0.01;
+
+  const skladnikiDoPokazania = wariantSkladnikow
+    ? przepis.skladniki.map((s) => {
+        const nadpisany = wariantSkladnikow.get(s.skladnik_id);
+        return nadpisany
+          ? {
+              ...s,
+              ilosc: nadpisany.ilosc * mnoznikPorcji,
+              jednostka: nadpisany.jednostka,
+              gramy: nadpisany.gramy * mnoznikPorcji,
+            }
+          : s;
+      })
+    : skalujPorcje
+      ? przepis.skladniki.map((s) => ({
+          ...s,
+          ilosc: s.ilosc * mnoznikPorcji,
+          gramy: s.gramy * mnoznikPorcji,
+        }))
+      : przepis.skladniki;
+
+  const makroDoPokazania = wariant?.makro
+    ? {
+        kcal: wariant.makro.kcal,
+        bialko_g: wariant.makro.bialko_g,
+        tluszcz_g: wariant.makro.tluszcz_g,
+        wegle_g: wariant.makro.wegle_g,
+        blonnik_g: wariant.makro.blonnik_g,
+        porcje_wyliczone: null as number | null,
+        gramy_calosc: null as number | null,
+      }
+    : makro;
+
   return (
     <Ekran
       tytul={przepis.nazwa}
       podtytul={[
         czas ? `${czas} min` : null,
-        przepis.porcja_g ? `porcja ${przepis.porcja_g} g` : null,
+        wariant?.makro
+          ? `porcja ${Math.round(wariant.makro.gramy_porcji)} g (przeliczona)`
+          : przepis.porcja_g
+            ? `porcja ${przepis.porcja_g} g`
+            : null,
         opisTrwalosci(przepis.trwalosc_dni),
       ]
         .filter(Boolean)
@@ -135,24 +210,49 @@ export default function EkranPrzepisu() {
         </Karta>
       )}
 
-      {makro?.kcal != null && (
+      {wariant && (
+        <Karta>
+          <ThemedText type="smallBold" themeColor="accent">
+            PRZELICZONE DLA TEGO POSIŁKU
+          </ThemedText>
+          <ThemedText type="small" themeColor="textSecondary">
+            Ilości na osobę są przeskalowane pod cel {wariant.cel_kcal} kcal (współczynnik ×
+            {Math.round(wariant.wspolczynnik_k * 100) / 100}) — inne niż w katalogu przepisów.
+          </ThemedText>
+        </Karta>
+      )}
+
+      {skalujPorcje && (
+        <Karta>
+          <ThemedText type="smallBold" themeColor="accent">
+            PRZELICZONE NA CAŁĄ PARTIĘ
+          </ThemedText>
+          <ThemedText type="small" themeColor="textSecondary">
+            {wariant
+              ? `Ten garnek ma starczyć na ${Math.round(Number(porcjeRazem ?? 0) * 10) / 10} porcji (osoby × dni w lodówce) — ilości niżej są przemnożone ×${Math.round(mnoznikPorcji * 100) / 100} względem jednej porcji wyżej.`
+              : `Ten garnek ma starczyć na ${Math.round(Number(porcjeRazem ?? 0) * 10) / 10} porcji zamiast ${makro?.porcje_wyliczone} bazowych — ilości niżej są przemnożone ×${Math.round(mnoznikPorcji * 100) / 100}.`}
+          </ThemedText>
+        </Karta>
+      )}
+
+      {makroDoPokazania?.kcal != null && (
         <Karta>
           <ThemedText type="smallBold" themeColor="textSecondary">
-            NA PORCJĘ
+            {wariant ? 'TEN POSIŁEK' : 'NA PORCJĘ'}
           </ThemedText>
           <WierszMakro
             pozycje={[
-              { etykieta: 'kcal', wartosc: makro.kcal, jednostka: '' },
-              { etykieta: 'białko', wartosc: makro.bialko_g ?? 0, jednostka: ' g' },
-              { etykieta: 'tłuszcz', wartosc: makro.tluszcz_g ?? 0, jednostka: ' g' },
-              { etykieta: 'węgle', wartosc: makro.wegle_g ?? 0, jednostka: ' g' },
-              { etykieta: 'błonnik', wartosc: makro.blonnik_g ?? 0, jednostka: ' g' },
+              { etykieta: 'kcal', wartosc: makroDoPokazania.kcal, jednostka: '' },
+              { etykieta: 'białko', wartosc: makroDoPokazania.bialko_g ?? 0, jednostka: ' g' },
+              { etykieta: 'tłuszcz', wartosc: makroDoPokazania.tluszcz_g ?? 0, jednostka: ' g' },
+              { etykieta: 'węgle', wartosc: makroDoPokazania.wegle_g ?? 0, jednostka: ' g' },
+              { etykieta: 'błonnik', wartosc: makroDoPokazania.blonnik_g ?? 0, jednostka: ' g' },
             ]}
           />
-          {makro.porcje_wyliczone && (
+          {makroDoPokazania.porcje_wyliczone && (
             <ThemedText type="small" themeColor="textSecondary">
-              Z całego garnka wychodzi {Math.round(makro.porcje_wyliczone * 10) / 10} porcji
-              {makro.gramy_calosc ? ` (${makro.gramy_calosc} g razem)` : ''}.
+              Z całego garnka wychodzi {Math.round(makroDoPokazania.porcje_wyliczone * 10) / 10} porcji
+              {makroDoPokazania.gramy_calosc ? ` (${makroDoPokazania.gramy_calosc} g razem)` : ''}.
             </ThemedText>
           )}
         </Karta>
@@ -171,9 +271,9 @@ export default function EkranPrzepisu() {
       {/* --- składniki ---------------------------------------------------- */}
       <Karta>
         <ThemedText type="smallBold" themeColor="textSecondary">
-          SKŁADNIKI ({przepis.skladniki.length})
+          SKŁADNIKI ({skladnikiDoPokazania.length})
         </ThemedText>
-        {przepis.skladniki.map((s) => {
+        {skladnikiDoPokazania.map((s) => {
           const klucz = `s:${s.skladnik_id}`;
           const odhaczony = zrobione.has(klucz);
           return (
@@ -279,7 +379,7 @@ export default function EkranPrzepisu() {
 
       {zrobione.size > 0 && (
         <Przycisk
-          tytul={`Odznacz wszystko (${zrobione.size} z ${przepis.skladniki.length + krokowRazem})`}
+          tytul={`Odznacz wszystko (${zrobione.size} z ${skladnikiDoPokazania.length + krokowRazem})`}
           wariant="poboczny"
           onPress={() => setZrobione(new Set())}
         />

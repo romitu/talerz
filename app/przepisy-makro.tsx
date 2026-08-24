@@ -1,3 +1,4 @@
+import { Ionicons } from '@expo/vector-icons';
 import { useLocalSearchParams } from 'expo-router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, useWindowDimensions, View } from 'react-native';
@@ -10,7 +11,7 @@ import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import { komunikatBledu } from '@/lib/blad';
 import { wroc } from '@/lib/nawigacja';
-import { pobierzPrzepisy, type PrzepisZMakro } from '@/lib/przepisy';
+import { OPIS_KUCHNI, OPIS_PORY, pobierzPrzepisy, ustawSkalowalny, type PrzepisZMakro } from '@/lib/przepisy';
 import { useSesja } from '@/lib/sesja';
 
 /**
@@ -24,6 +25,8 @@ import { useSesja } from '@/lib/sesja';
 
 const KOLUMNY = [
   { klucz: 'nazwa', tytul: 'Nazwa', szerokosc: 220, liczba: false },
+  { klucz: 'kategoria', tytul: 'Kategoria', szerokosc: 140, liczba: false },
+  { klucz: 'kuchnia', tytul: 'Kuchnia', szerokosc: 130, liczba: false },
   { klucz: 'liczba_porcji_bazowych', tytul: 'porcje baz.', szerokosc: 78, liczba: true },
   { klucz: 'kcal', tytul: 'kcal', szerokosc: 60, liczba: true },
   { klucz: 'bialko_g', tytul: 'białko', szerokosc: 62, liczba: true },
@@ -31,6 +34,7 @@ const KOLUMNY = [
   { klucz: 'tluszcz_g', tytul: 'tłuszcz', szerokosc: 62, liczba: true },
   { klucz: 'blonnik_g', tytul: 'błonnik', szerokosc: 62, liczba: true },
   { klucz: 'trwalosc_dni', tytul: 'dni w lodówce', szerokosc: 90, liczba: true },
+  { klucz: 'skalowalny', tytul: 'skalowalny', szerokosc: 80, liczba: false },
 ] as const;
 
 type KluczKolumny = (typeof KOLUMNY)[number]['klucz'];
@@ -38,10 +42,23 @@ type KluczKolumny = (typeof KOLUMNY)[number]['klucz'];
 const SZEROKOSC_TABELI = KOLUMNY.reduce((s, k) => s + k.szerokosc, 0) + 24;
 const MIN_NAZWY = 180;
 
+/** Kuchnie przepisu jako tekst — do wyświetlenia i do sortowania. */
+function tekstKuchni(p: PrzepisZMakro): string {
+  return p.kuchnie.map((k) => OPIS_KUCHNI[k]).join(', ');
+}
+
+/** Kategorie (pory) przepisu jako tekst — do wyświetlenia i do sortowania. */
+function tekstKategorii(p: PrzepisZMakro): string {
+  return p.pory.map((k) => OPIS_PORY[k]).join(', ');
+}
+
 function tekstKomorki(p: PrzepisZMakro, klucz: KluczKolumny): string {
   if (klucz === 'nazwa') return p.nazwa;
+  if (klucz === 'kategoria') return tekstKategorii(p) || '—';
+  if (klucz === 'kuchnia') return tekstKuchni(p) || '—';
   if (klucz === 'liczba_porcji_bazowych') return String(p.liczba_porcji_bazowych);
   if (klucz === 'trwalosc_dni') return String(p.trwalosc_dni);
+  if (klucz === 'skalowalny') return p.skalowalny ? 'tak' : 'nie';
 
   const w = p[klucz];
   if (w === null || w === undefined) return '—';
@@ -60,6 +77,7 @@ export default function EkranPrzepisyMakro() {
   const [szukaj, setSzukaj] = useState('');
   const [sortujPo, setSortujPo] = useState<KluczKolumny>('nazwa');
   const [malejaco, setMalejaco] = useState(false);
+  const [zapisywany, setZapisywany] = useState<string | null>(null);
 
   const pobierz = useCallback(async () => {
     setWczytywanie(true);
@@ -77,6 +95,27 @@ export default function EkranPrzepisyMakro() {
     pobierz();
   }, [pobierz]);
 
+  /**
+   * Zmienia checkbox „skalowalny" wprost z tabeli, bez otwierania formularza.
+   *
+   * Optymistycznie na ekranie od razu, zapis do bazy potem — przy odmowie
+   * bazy wraca poprzednia wartość, tak jak w pozostałych tabelach Talerza.
+   */
+  async function przelaczSkalowalny(p: PrzepisZMakro) {
+    setBlad(null);
+    const nowaWartosc = !p.skalowalny;
+    setPrzepisy((lista) => lista.map((x) => (x.id === p.id ? { ...x, skalowalny: nowaWartosc } : x)));
+    setZapisywany(p.id);
+    try {
+      await ustawSkalowalny(p.id, nowaWartosc);
+    } catch (e) {
+      setPrzepisy((lista) => lista.map((x) => (x.id === p.id ? { ...x, skalowalny: p.skalowalny } : x)));
+      setBlad(komunikatBledu(e));
+    } finally {
+      setZapisywany(null);
+    }
+  }
+
   function przelaczSortowanie(klucz: KluczKolumny) {
     if (klucz === sortujPo) setMalejaco((p) => !p);
     else {
@@ -93,6 +132,12 @@ export default function EkranPrzepisyMakro() {
       let wynik: number;
       if (sortujPo === 'nazwa') {
         wynik = a.nazwa.localeCompare(b.nazwa, 'pl');
+      } else if (sortujPo === 'kategoria') {
+        wynik = tekstKategorii(a).localeCompare(tekstKategorii(b), 'pl');
+      } else if (sortujPo === 'kuchnia') {
+        wynik = tekstKuchni(a).localeCompare(tekstKuchni(b), 'pl');
+      } else if (sortujPo === 'skalowalny') {
+        wynik = Number(a.skalowalny) - Number(b.skalowalny);
       } else {
         wynik = ((a[sortujPo] as number | null) ?? -1) - ((b[sortujPo] as number | null) ?? -1);
       }
@@ -162,13 +207,30 @@ export default function EkranPrzepisyMakro() {
                   backgroundColor: i % 2 === 0 ? motyw.backgroundElement : motyw.background,
                 },
               ]}>
-              {KOLUMNY.map((k) => (
-                <View key={k.klucz} style={[styles.komorka, stylKolumny(k)]}>
-                  <ThemedText type="small" style={k.liczba ? styles.doPrawej : undefined} numberOfLines={2}>
-                    {tekstKomorki(p, k.klucz)}
-                  </ThemedText>
-                </View>
-              ))}
+              {KOLUMNY.map((k) =>
+                k.klucz === 'skalowalny' ? (
+                  <Pressable
+                    key={k.klucz}
+                    onPress={() => przelaczSkalowalny(p)}
+                    disabled={zapisywany === p.id}
+                    accessibilityRole="checkbox"
+                    accessibilityState={{ checked: p.skalowalny }}
+                    accessibilityLabel={`Można skalować kalorycznie: ${p.nazwa}`}
+                    style={[styles.komorka, styles.komorkaSrodek, stylKolumny(k)]}>
+                    <Ionicons
+                      name={p.skalowalny ? 'checkbox' : 'square-outline'}
+                      size={20}
+                      color={p.skalowalny ? motyw.accent : motyw.textSecondary}
+                    />
+                  </Pressable>
+                ) : (
+                  <View key={k.klucz} style={[styles.komorka, stylKolumny(k)]}>
+                    <ThemedText type="small" style={k.liczba ? styles.doPrawej : undefined} numberOfLines={2}>
+                      {tekstKomorki(p, k.klucz)}
+                    </ThemedText>
+                  </View>
+                )
+              )}
             </View>
           ))}
         </View>
@@ -182,7 +244,9 @@ export default function EkranPrzepisyMakro() {
 
       <ThemedText type="small" themeColor="textSecondary">
         Dotknij nagłówka, aby posortować. Wartości puste (—) oznaczają przepis bez policzonego
-        makro — zwykle brak zapisanych składników.
+        makro — zwykle brak zapisanych składników. Kolumna „skalowalny" — dotknij, żeby
+        przełączyć: czy automat wypełniający plan wolno mu rozciągać ten przepis pod cel
+        kaloryczny posiłku.
       </ThemedText>
 
       <Przycisk tytul="Wróć" wariant="poboczny" onPress={() => wroc(powrot, '/przepisy')} />
@@ -207,5 +271,6 @@ const styles = StyleSheet.create({
     paddingVertical: Spacing.one,
     justifyContent: 'center',
   },
+  komorkaSrodek: { alignItems: 'center' },
   doPrawej: { textAlign: 'right' },
 });

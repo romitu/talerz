@@ -85,7 +85,12 @@ export default function EkranProfilu() {
         .select(
           'id, imie, plec, data_urodzenia, wzrost_cm, aktywnosc, cele (tryb, bialko_procent, tluszcz_procent, wegle_procent, blonnik_g, prog_bialka_posilek)'
         )
-        .order('kolejnosc'),
+        .order('kolejnosc')
+        // `cele` trzyma PEŁNĄ historię (jeden wiersz na obowiazuje_od) — bez
+        // sortowania dołączona tablica wraca w dowolnej kolejności i `cele[0]`
+        // (patrz niżej) potrafił złapać stary zapis zamiast aktualnego.
+        .order('obowiazuje_od', { foreignTable: 'cele', ascending: false })
+        .limit(1, { foreignTable: 'cele' }),
       supabase.from('konta').select('rola').single(),
     ]);
 

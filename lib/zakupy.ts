@@ -63,7 +63,7 @@ export async function pobierzListeZakupow(
 ): Promise<PozycjaZakupow[]> {
   const { data: pozycje, error } = await supabase
     .from('plan_pozycje')
-    .select('przepis_id, porcje, przepisy (nazwa)')
+    .select('przepis_id, przepis_skalowany_id, porcje, przepisy (nazwa)')
     .eq('plan_id', planId)
     .gte('data', odData)
     .lte('data', doData);
@@ -71,18 +71,45 @@ export async function pobierzListeZakupow(
   if (error) throw error;
   if (!pozycje || pozycje.length === 0) return [];
 
-  const idPrzepisow = [...new Set(pozycje.map((p) => p.przepis_id as string))];
+  // Pozycja bierze składniki ALBO z przepisu źródłowego, ALBO z konkretnego
+  // wariantu skalowanego (migracja 0036) — nigdy z obu naraz. Stąd dwa
+  // rozłączne zbiory identyfikatorów i dwa niezależne zapytania niżej.
+  const zwykle = pozycje.filter((p) => !p.przepis_skalowany_id);
+  const skalowane = pozycje.filter((p) => p.przepis_skalowany_id);
 
-  const [wynikSkladnikow, wynikMakro] = await Promise.all([
-    supabase
-      .from('przepis_skladniki')
-      .select('przepis_id, skladnik_id, gramy, skladniki (nazwa, tagi, gramatura_opakowania_g)')
-      .in('przepis_id', idPrzepisow),
-    supabase.from('przepis_makro').select('przepis_id, porcje_wyliczone').in('przepis_id', idPrzepisow),
+  const idPrzepisow = [...new Set(zwykle.map((p) => p.przepis_id as string))];
+  const idSkalowanych = [...new Set(skalowane.map((p) => p.przepis_skalowany_id as string))];
+
+  type DaneSkladnika = { nazwa: string; tagi: string[]; gramatura_opakowania_g: number | null };
+  // Supabase zwraca powiązanie raz jako obiekt, raz jako jednoelementową listę.
+  function jedenSkladnik(surowy: unknown): DaneSkladnika | null {
+    const x = surowy as DaneSkladnika | DaneSkladnika[] | null;
+    return Array.isArray(x) ? (x[0] ?? null) : x;
+  }
+
+  const [wynikSkladnikow, wynikMakro, wynikSkalowanych] = await Promise.all([
+    idPrzepisow.length > 0
+      ? supabase
+          .from('przepis_skladniki')
+          .select('przepis_id, skladnik_id, gramy, skladniki (nazwa, tagi, gramatura_opakowania_g)')
+          .in('przepis_id', idPrzepisow)
+      : Promise.resolve({ data: [], error: null }),
+    idPrzepisow.length > 0
+      ? supabase.from('przepis_makro').select('przepis_id, porcje_wyliczone').in('przepis_id', idPrzepisow)
+      : Promise.resolve({ data: [], error: null }),
+    idSkalowanych.length > 0
+      ? supabase
+          .from('przepisy_skalowane_skladniki')
+          .select(
+            'przepis_skalowany_id, skladnik_id, gramy, skladniki (nazwa, tagi, gramatura_opakowania_g)'
+          )
+          .in('przepis_skalowany_id', idSkalowanych)
+      : Promise.resolve({ data: [], error: null }),
   ]);
 
   if (wynikSkladnikow.error) throw wynikSkladnikow.error;
   if (wynikMakro.error) throw wynikMakro.error;
+  if (wynikSkalowanych.error) throw wynikSkalowanych.error;
 
   const porcjiWPrzepisie = new Map(
     (wynikMakro.data ?? []).map((m) => [m.przepis_id as string, Number(m.porcje_wyliczone) || 1])
@@ -90,7 +117,28 @@ export async function pobierzListeZakupow(
 
   const zebrane = new Map<string, PozycjaZakupow>();
 
-  for (const pozycja of pozycje) {
+  function dolicz(
+    id: string,
+    dane: DaneSkladnika,
+    gramy: number,
+    nazwaDania: string
+  ) {
+    const wpis = zebrane.get(id) ?? {
+      skladnik_id: id,
+      nazwa: dane.nazwa,
+      gramy: 0,
+      tagi: dane.tagi ?? [],
+      opakowanie_g: dane.gramatura_opakowania_g,
+      opakowan: null,
+      reszta_g: null,
+      dania: [],
+    };
+    wpis.gramy += gramy;
+    if (nazwaDania && !wpis.dania.includes(nazwaDania)) wpis.dania.push(nazwaDania);
+    zebrane.set(id, wpis);
+  }
+
+  for (const pozycja of zwykle) {
     const przepisId = pozycja.przepis_id as string;
     const przepis = pozycja.przepisy as { nazwa: string } | { nazwa: string }[] | null;
     const nazwaDania = (Array.isArray(przepis) ? przepis[0]?.nazwa : przepis?.nazwa) ?? '';
@@ -99,32 +147,26 @@ export async function pobierzListeZakupow(
 
     for (const s of wynikSkladnikow.data ?? []) {
       if (s.przepis_id !== przepisId) continue;
-
-      type DaneSkladnika = {
-        nazwa: string;
-        tagi: string[];
-        gramatura_opakowania_g: number | null;
-      };
-      // Supabase zwraca powiązanie raz jako obiekt, raz jako jednoelementową listę.
-      const surowy = s.skladniki as unknown as DaneSkladnika | DaneSkladnika[] | null;
-      const skladnik = Array.isArray(surowy) ? surowy[0] : surowy;
+      const skladnik = jedenSkladnik(s.skladniki);
       if (!skladnik) continue;
+      dolicz(s.skladnik_id as string, skladnik, Number(s.gramy) * mnoznik, nazwaDania);
+    }
+  }
 
-      const id = s.skladnik_id as string;
-      const wpis = zebrane.get(id) ?? {
-        skladnik_id: id,
-        nazwa: skladnik.nazwa,
-        gramy: 0,
-        tagi: skladnik.tagi ?? [],
-        opakowanie_g: skladnik.gramatura_opakowania_g,
-        opakowan: null,
-        reszta_g: null,
-        dania: [],
-      };
+  // Wariant skalowany reprezentuje JEDEN posiłek (patrz lib/skalowanie-kalorii.ts
+  // i migracja 0036) — bez dzielenia przez porcje_wyliczone, tylko razy liczba
+  // jedzących (porcje) tej pozycji, tak jak przy zwykłym przepisie na sztuki.
+  for (const pozycja of skalowane) {
+    const przepisSkalowanyId = pozycja.przepis_skalowany_id as string;
+    const przepis = pozycja.przepisy as { nazwa: string } | { nazwa: string }[] | null;
+    const nazwaDania = (Array.isArray(przepis) ? przepis[0]?.nazwa : przepis?.nazwa) ?? '';
+    const mnoznik = pozycja.porcje as number;
 
-      wpis.gramy += Number(s.gramy) * mnoznik;
-      if (nazwaDania && !wpis.dania.includes(nazwaDania)) wpis.dania.push(nazwaDania);
-      zebrane.set(id, wpis);
+    for (const s of wynikSkalowanych.data ?? []) {
+      if (s.przepis_skalowany_id !== przepisSkalowanyId) continue;
+      const skladnik = jedenSkladnik(s.skladniki);
+      if (!skladnik) continue;
+      dolicz(s.skladnik_id as string, skladnik, Number(s.gramy) * mnoznik, nazwaDania);
     }
   }
 

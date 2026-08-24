@@ -60,6 +60,7 @@
  * widać potem na paskach makro i poprawia się je ręcznie.
  */
 
+import { K_MAX, K_MIN } from './skalowanie-kalorii';
 import type { PoraPosilku, Preferencja } from './przepisy';
 
 /** Kolejność wypełniania w obrębie dnia. */
@@ -75,6 +76,10 @@ export type Kandydat = {
   bialko_g: number | null;
   /** Preferencja KONTA, dla którego układamy plan — nie popularność ogólna. */
   preferencja: Preferencja;
+  /** Checkbox na przepisie (migracja 0036) — wolno automatowi rozciągać go pod cel kaloryczny? */
+  skalowalny: boolean;
+  /** Ile dni danie wytrzyma w lodówce — patrz `uwzglednijTrwalosc` w `zaplanuj`. */
+  trwalosc_dni: number;
 };
 
 export type Miejsce = { data: string; pora: PoraPosilku };
@@ -87,6 +92,13 @@ export type Wstawienie = {
   odData: string;
   /** Kolejne dni objęte tym samym garnkiem. Pierwszy z nich to `odData`. */
   dni: string[];
+  /**
+   * Ustawione, gdy danie zostało wybrane jako skalowalne — cel kaloryczny,
+   * pod który TEN konkretny posiłek trzeba jeszcze przeliczyć i zapisać jako
+   * wariant (patrz `lib/przepisy-skalowane.ts`). `null` = wstawiamy przepis
+   * w bazowym rozmiarze, bez żadnego przeliczania.
+   */
+  celKcalDlaSkalowania: number | null;
 };
 
 export type WynikPlanowania = {
@@ -175,6 +187,40 @@ export function dniGotowania(
 type StanDnia = { kcal: number; bialko: number };
 
 /**
+ * Kara za odchylenie wartości kandydata (kcal albo białko) od celu.
+ *
+ * Danie skalowalne (checkbox na przepisie, migracja 0036) da się rozciągnąć
+ * w zakresie [K_MIN, K_MAX] razy jego bazowa wartość — jeśli cel mieści się
+ * w tym zakresie, kara wynosi zero, bo `lib/skalowanie-kalorii.ts` i tak
+ * dobierze k tak, żeby w niego trafić. Poza zakresem liczy się odległość do
+ * NAJBLIŻSZEJ osiągalnej granicy, nie do samej wartości bazowej — inaczej
+ * skalowalna „kromka” przegrywałaby z daniem, którego w ogóle nie da się
+ * dociągnąć.
+ *
+ * `tylkoNiedobor` odtwarza dawne zachowanie kary za białko: nadmiar nie karze,
+ * więc przy skalowalnym daniu liczy się wyłącznie górna granica zasięgu.
+ */
+function karaOdchylenia(
+  wartosc: number,
+  cel: number,
+  odniesienie: number,
+  skalowalny: boolean,
+  tylkoNiedobor: boolean
+): number {
+  if (!skalowalny || wartosc <= 0) {
+    return tylkoNiedobor ? Math.max(0, cel - wartosc) / odniesienie : Math.abs(wartosc - cel) / odniesienie;
+  }
+
+  const dolna = wartosc * K_MIN;
+  const gorna = wartosc * K_MAX;
+
+  if (tylkoNiedobor) return Math.max(0, cel - gorna) / odniesienie;
+  if (cel < dolna) return (dolna - cel) / odniesienie;
+  if (cel > gorna) return (cel - gorna) / odniesienie;
+  return 0;
+}
+
+/**
  * Ocena kandydata na konkretne miejsce. Im mniej, tym lepiej.
  *
  * Wyciągnięte osobno, żeby dało się to sprawdzić testem bez budowania
@@ -200,8 +246,8 @@ export function ocen(opcje: {
   const odniesienieKcal = Math.max(docelowoKcal, MIN_KCAL_ODNIESIENIA);
   const odniesienieBialka = Math.max(docelowoBialko, MIN_BIALKA_ODNIESIENIA);
 
-  const karaKcal = Math.abs(kcal - docelowoKcal) / odniesienieKcal;
-  const karaBialka = Math.max(0, docelowoBialko - bialko) / odniesienieBialka;
+  const karaKcal = karaOdchylenia(kcal, docelowoKcal, odniesienieKcal, kandydat.skalowalny, false);
+  const karaBialka = karaOdchylenia(bialko, docelowoBialko, odniesienieBialka, kandydat.skalowalny, true);
 
   const premia = premiaZaPreferencje(kandydat.preferencja);
 
@@ -227,10 +273,17 @@ export function zaplanuj(opcje: {
   /** Dzienny cel. `null` wyłącza dobór pod cel i zostawia sam ranking. */
   celKcal: number | null;
   celBialko: number | null;
+  /**
+   * Rozkłada garnek na tyle kolejnych dni, ile danie wytrzyma w lodówce
+   * (`trwalosc_dni`), zamiast na jego liczbę porcji bazowych — „wytrzyma
+   * 3 dni” ma znaczyć „kopiuj ten obiad na 3 kolejne dni”. Domyślnie
+   * wyłączone — dawne zachowanie (tylko liczba porcji bazowych).
+   */
+  uwzglednijTrwalosc?: boolean;
   /** Wstrzykiwane, żeby test mógł podać wartość stałą. */
   losowo?: () => number;
 }): WynikPlanowania {
-  const { dni, zajete, makroDni, przepisy, celKcal, celBialko } = opcje;
+  const { dni, zajete, makroDni, przepisy, celKcal, celBialko, uwzglednijTrwalosc = false } = opcje;
   const losowo = opcje.losowo ?? Math.random;
 
   const zajeteKlucze = new Set(zajete.map((m) => klucz(m.data, m.pora)));
@@ -285,8 +338,41 @@ export function zaplanuj(opcje: {
         }
       }
 
-      const objete = dniGotowania(dni, i, pora, najlepszy.liczba_porcji_bazowych, zajeteKlucze);
+      // TRWAŁOŚĆ ma pierwszeństwo przed skalowaniem: gdy `uwzglednijTrwalosc`
+      // jest włączone, „wytrzyma 3 dni w lodówce” ma znaczyć „kopiuj ten
+      // posiłek na 3 kolejne dni” NAWET jeśli danie jest skalowalne — garnek
+      // ugotowany raz i przeliczony pod cel pierwszego dnia dalej jest tym
+      // samym garnkiem drugiego i trzeciego dnia, tylko zjadanym z lodówki.
+      // Bez `uwzglednijTrwalosc` wariant skalowany zostaje na jeden posiłek
+      // (każdy dzień ma inny cel, więc nie ma go z czym kopiować), w
+      // przeciwnym razie liczba porcji bazowych decyduje jak dawniej.
+      const uzyjSkalowania = najlepszy.skalowalny && (najlepszy.kcal ?? 0) > 0;
+      const liczbaDni = uwzglednijTrwalosc
+        ? Math.max(1, najlepszy.trwalosc_dni)
+        : uzyjSkalowania
+          ? 1
+          : najlepszy.liczba_porcji_bazowych;
+      const objete = dniGotowania(dni, i, pora, liczbaDni, zajeteKlucze);
       if (objete.length === 0) continue; // nie powinno się zdarzyć: miejsce jest wolne
+
+      // Do bieżącego bilansu dnia liczymy nie bazową wartość dania, tylko to,
+      // co po skalowaniu realnie wyjdzie — ograniczone do [K_MIN, K_MAX], tak
+      // samo jak zrobi to `lib/skalowanie-kalorii.ts` przy faktycznym zapisie.
+      // Białko skalujemy proporcjonalnie do kalorii — dokładną wartość policzy
+      // dopiero silnik, to tylko bilans wewnątrz automatu.
+      let kcalWstawienia = najlepszy.kcal ?? 0;
+      let bialkoWstawienia = najlepszy.bialko_g ?? 0;
+      let celKcalDlaSkalowania: number | null = null;
+
+      if (uzyjSkalowania) {
+        const bazowyKcal = najlepszy.kcal ?? 0;
+        const dolna = bazowyKcal * K_MIN;
+        const gorna = bazowyKcal * K_MAX;
+        const celOgraniczony = Math.min(gorna, Math.max(dolna, docelowoKcal));
+        celKcalDlaSkalowania = celOgraniczony;
+        kcalWstawienia = celOgraniczony;
+        bialkoWstawienia = (najlepszy.bialko_g ?? 0) * (celOgraniczony / bazowyKcal);
+      }
 
       wstawienia.push({
         przepisId: najlepszy.id,
@@ -294,14 +380,15 @@ export function zaplanuj(opcje: {
         pora,
         odData: data,
         dni: objete,
+        celKcalDlaSkalowania,
       });
 
       for (const d of objete) {
         zajeteKlucze.add(klucz(d, pora));
         const s = stan.get(d);
         if (s) {
-          s.kcal += najlepszy.kcal ?? 0;
-          s.bialko += najlepszy.bialko_g ?? 0;
+          s.kcal += kcalWstawienia;
+          s.bialko += bialkoWstawienia;
         }
       }
       ostatnieUzycie.set(najlepszy.id, i + objete.length - 1);
@@ -384,6 +471,10 @@ export function powtorzTydzien(opcje: {
       pora: posortowana[0].pora,
       odData: objete[0],
       dni: objete,
+      // Powtórka tygodnia wstawia przepis w bazowym rozmiarze, nawet jeśli
+      // źródłowy posiłek był wariantem skalowanym — przeliczanie pod (inny)
+      // dzienny bilans docelowego tygodnia to osobna sprawa, tu jej nie ma.
+      celKcalDlaSkalowania: null,
     });
 
     for (const d of objete) zajeteKlucze.add(klucz(d, posortowana[0].pora));

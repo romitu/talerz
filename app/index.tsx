@@ -29,6 +29,7 @@ import {
   sumujDzien,
   usunPosilek,
   TYGODNI_HISTORII,
+  ustawPrzepisSkalowanyPozycji,
   utworzPlan,
   usunPartie,
   wyczyscPlan,
@@ -39,12 +40,15 @@ import {
 import {
   OPIS_PORY,
   pasujeDoPory,
+  pobierzPelnyPrzepis,
   pobierzPrzepisy,
   type PoraPosilku,
   type PrzepisZMakro,
 } from '@/lib/przepisy';
+import { utworzPrzeskalowanyPrzepis } from '@/lib/przepisy-skalowane';
 import { celZywieniowyNASEM, type PalNasem } from '@/lib/nasem';
 import { useSesja } from '@/lib/sesja';
+import { pobierzSkladniki, type Skladnik } from '@/lib/skladniki';
 import { supabase } from '@/lib/supabase';
 import { wiekZDaty, type Plec, type TrybCelu } from '@/lib/zywienie';
 
@@ -99,6 +103,47 @@ function opisBilansu(
   return `${bialko} · ${kalorie}`;
 }
 
+/** Odmiana słowa „dzień” w komunikatach — 1 = dzień, każda inna liczba = dni. */
+function odmianaDni(n: number): string {
+  return n === 1 ? 'dzień' : 'dni';
+}
+
+/** Checkbox z opisem — pod „Wypełnij wolne miejsca", ustawienia automatu. */
+function PrzelacznikAutomatu({
+  zaznaczone,
+  onZmiana,
+  etykieta,
+  opis,
+}: {
+  zaznaczone: boolean;
+  onZmiana: (wartosc: boolean) => void;
+  etykieta: string;
+  opis: string;
+}) {
+  const motyw = useTheme();
+  return (
+    <Pressable
+      onPress={() => onZmiana(!zaznaczone)}
+      accessibilityRole="checkbox"
+      accessibilityState={{ checked: zaznaczone }}
+      style={({ pressed }) => [styles.checkboxWiersz, pressed && styles.wcisniete]}>
+      <Ionicons
+        name={zaznaczone ? 'checkbox' : 'square-outline'}
+        size={20}
+        color={zaznaczone ? motyw.accent : motyw.textSecondary}
+      />
+      <View style={styles.checkboxTresc}>
+        <ThemedText type="small" themeColor={zaznaczone ? 'accent' : 'text'}>
+          {etykieta}
+        </ThemedText>
+        <ThemedText type="small" themeColor="textSecondary">
+          {opis}
+        </ThemedText>
+      </View>
+    </Pressable>
+  );
+}
+
 export default function EkranPlanu() {
   const { sesja } = useSesja();
   const motyw = useTheme();
@@ -119,6 +164,9 @@ export default function EkranPlanu() {
   const [pracuje, setPracuje] = useState(false);
   const [czyscic, setCzyscic] = useState(false);
   const [komunikat, setKomunikat] = useState<string | null>(null);
+  /** Checkboxy pod „Wypełnij wolne miejsca" — patrz `wypelnijAutomatem`. */
+  const [skalujPoWypelnieniu, setSkalujPoWypelnieniu] = useState(false);
+  const [uwzglednijTrwalosc, setUwzglednijTrwalosc] = useState(false);
 
   /*
     Powrót na to samo miejsce po wybraniu dania.
@@ -147,7 +195,12 @@ export default function EkranPlanu() {
           .select(
             'id, plec, data_urodzenia, wzrost_cm, aktywnosc, cele (tryb, bialko_procent, tluszcz_procent, wegle_procent, blonnik_g, prog_bialka_posilek)'
           )
-          .order('kolejnosc'),
+          .order('kolejnosc')
+          // `cele` trzyma pełną historię (jeden wiersz na obowiazuje_od) — bez
+          // sortowania dołączona tablica wraca w dowolnej kolejności i
+          // `cele[0]` (patrz niżej) potrafił złapać stary zapis, nie aktualny.
+          .order('obowiazuje_od', { foreignTable: 'cele', ascending: false })
+          .limit(1, { foreignTable: 'cele' }),
       ]);
 
       const listaProfili = (wynikProfili.data ?? []) as ProfilZCelem[];
@@ -255,7 +308,26 @@ export default function EkranPlanu() {
    */
   async function zapiszWstawienia(cel: Plan, lista: Wstawienie[]) {
     if (!sesja) return;
+
+    // Katalog składników trzeba tylko wtedy, gdy automat faktycznie wybrał
+    // choć jedno danie skalowalne — nie ma sensu ściągać go za każdym razem.
+    const potrzebujeSkalowania = lista.some((w) => w.celKcalDlaSkalowania !== null);
+    const dostepneSkladniki = potrzebujeSkalowania ? await pobierzSkladniki() : [];
+
     for (const w of lista) {
+      let przepisSkalowanyId: string | undefined;
+
+      if (w.celKcalDlaSkalowania !== null) {
+        const pelny = await pobierzPelnyPrzepis(w.przepisId);
+        const wynik = await utworzPrzeskalowanyPrzepis({
+          kontoId: sesja.user.id,
+          przepis: pelny,
+          dostepneSkladniki,
+          celKcal: w.celKcalDlaSkalowania,
+        });
+        przepisSkalowanyId = wynik.id;
+      }
+
       await dodajPartie({
         kontoId: sesja.user.id,
         planId: cel.id,
@@ -266,6 +338,7 @@ export default function EkranPlanu() {
         osoby,
         liczbaPorcjiBazowych: w.dni.length,
         dostepneDni: w.dni,
+        przepisSkalowanyId,
       });
     }
   }
@@ -297,6 +370,7 @@ export default function EkranPlanu() {
         przepisy,
         celKcal: cel?.kcal ?? null,
         celBialko: cel?.bialko_g ?? null,
+        uwzglednijTrwalosc,
       });
 
       if (wstawienia.length === 0) {
@@ -312,10 +386,24 @@ export default function EkranPlanu() {
       await pobierz();
 
       const posilkow = wstawienia.reduce((s, w) => s + w.dni.length, 0);
-      setKomunikat(
+      let komunikatWypelnienia =
         `Dołożono ${posilkow} posiłków z ${wstawienia.length} gotowań.` +
-          (bezObsady.length > 0 ? ` Bez obsady zostało ${bezObsady.length} miejsc.` : '')
-      );
+        (bezObsady.length > 0 ? ` Bez obsady zostało ${bezObsady.length} miejsc.` : '');
+
+      // Checkbox „Skaluj cały tydzień do celów" — dokłada drugi etap od razu
+      // po wypełnieniu, zamiast zmuszać do osobnego kliknięcia przycisku niżej.
+      if (skalujPoWypelnieniu && cel) {
+        const { szczegoly, dniZmienione } = await przeliczSkalowalneWTygodniu();
+        if (szczegoly.length > 0) {
+          await pobierz();
+          komunikatWypelnienia +=
+            `\n\nPrzeliczono ${szczegoly.length} ${szczegoly.length === 1 ? 'danie' : 'dania'} ` +
+            `w ${dniZmienione.size} ${odmianaDni(dniZmienione.size)}:\n` +
+            szczegoly.join('\n');
+        }
+      }
+
+      setKomunikat(komunikatWypelnienia);
     } catch (e) {
       setBlad(komunikatBledu(e));
     } finally {
@@ -358,10 +446,106 @@ export default function EkranPlanu() {
       await zapiszWstawienia(plan, wstawienia);
       await pobierz();
 
-      const posilkow = wstawienia.reduce((s, w) => s + w.dni.length, 0);
+      // Komunikat liczy DNI, nie posiłków — to pytanie, na które faktycznie
+      // ktoś chce znać odpowiedź: „ile dni tygodnia mam już z głowy".
+      const dniWypelnione = new Set(wstawienia.flatMap((w) => w.dni)).size;
       setKomunikat(
-        `Przeniesiono ${posilkow} posiłków z tygodnia od ${opisDnia(poprzedni.data_start)}.` +
+        `Uzupełniono ${dniWypelnione} ${odmianaDni(dniWypelnione)} z tygodnia od ${opisDnia(poprzedni.data_start)}.` +
           (bezObsady.length > 0 ? ` Pominięto ${bezObsady.length} zajętych miejsc.` : '')
+      );
+    } catch (e) {
+      setBlad(komunikatBledu(e));
+    } finally {
+      setPracuje(false);
+    }
+  }
+
+  /**
+   * Przelicza WSZYSTKIE dania oznaczone jako skalowalne w bieżącym tygodniu,
+   * dzień po dniu, pod dzienny cel kaloryczny z profilu.
+   *
+   * Dania nieskalowalne w ogóle nie są ruszane — liczą się tylko do bilansu
+   * dnia jako wartość stała. Reszta celu (cel minus to, co stałe) rozkłada
+   * się równo między skalowalne dania TEGO dnia — jeśli jest ich kilka,
+   * każde dostaje swój kawałek, a nie cały brakujący cel naraz.
+   *
+   * Działa niezależnie od tego, czy dane danie było już wcześniej
+   * przeskalowane — zawsze liczy od nowa, z aktualnym celem.
+   *
+   * Czysta praca z bazą, bez `setKomunikat`/`setPracuje` — dzięki temu ta sama
+   * logika służy zarówno osobnemu przyciskowi, jak i checkboxowi „Skaluj cały
+   * tydzień do celów” pod „Wypełnij wolne miejsca”, gdzie komunikat musi się
+   * złożyć z DWÓCH etapów (wypełnienie + skalowanie), nie nadpisywać się.
+   * Wymaga `plan`, `sesja` i `cel` — sprawdza je WOŁAJĄCY.
+   */
+  async function przeliczSkalowalneWTygodniu(): Promise<{ szczegoly: string[]; dniZmienione: Set<string> }> {
+    if (!plan || !sesja || !cel) return { szczegoly: [], dniZmienione: new Set() };
+
+    const przepisyWedlugId = new Map(przepisy.map((p) => [p.id, p]));
+    let dostepneSkladniki: Skladnik[] | null = null;
+    const dniZmienione = new Set<string>();
+    // Szczegóły do komunikatu — bez nich „przeliczono 3 dania” nie mówi,
+    // czy któreś z nich trafiło w granicę [K_MIN, K_MAX] i nie dobiło do celu.
+    const szczegoly: string[] = [];
+
+    for (const data of dniPlanu(plan)) {
+      const dniowe = pozycje.filter((p) => p.data === data);
+      const skalowalne = dniowe.filter((p) => przepisyWedlugId.get(p.przepis_id)?.skalowalny);
+      if (skalowalne.length === 0) continue;
+
+      const stale = dniowe.filter((p) => !skalowalne.includes(p));
+      const kcalStalych = stale.reduce((s, p) => s + p.kcal * p.porcje, 0);
+      const docelowoNaSkalowalne = Math.max(0, cel.kcal - kcalStalych);
+      const docelowoNaJedno = docelowoNaSkalowalne / skalowalne.length;
+
+      if (!dostepneSkladniki) dostepneSkladniki = await pobierzSkladniki();
+
+      for (const pozycja of skalowalne) {
+        const celTegoDania = docelowoNaJedno / Math.max(1, pozycja.porcje);
+        const pelny = await pobierzPelnyPrzepis(pozycja.przepis_id);
+        const wynik = await utworzPrzeskalowanyPrzepis({
+          kontoId: sesja.user.id,
+          przepis: pelny,
+          dostepneSkladniki,
+          celKcal: celTegoDania,
+        });
+        await ustawPrzepisSkalowanyPozycji(pozycja.id, wynik.id);
+        dniZmienione.add(data);
+
+        szczegoly.push(
+          `${pozycja.nazwa}: ${Math.round(pozycja.kcal)}→${wynik.kcal} kcal (cel ${Math.round(celTegoDania)})` +
+            (wynik.kOgraniczone ? ' — trafiło w granicę skalowania, nie dobiło do celu' : '')
+        );
+      }
+    }
+
+    return { szczegoly, dniZmienione };
+  }
+
+  async function skalujCalyTydzien() {
+    if (!plan || !sesja) return;
+    if (!cel) {
+      setKomunikat('Brak ustawionego celu kalorycznego w profilu — nie ma do czego skalować.');
+      return;
+    }
+
+    setKomunikat(null);
+    setPracuje(true);
+    try {
+      const { szczegoly, dniZmienione } = await przeliczSkalowalneWTygodniu();
+
+      if (szczegoly.length === 0) {
+        setKomunikat(
+          'W tym tygodniu nie ma żadnego dania oznaczonego jako skalowalne — nie ma czego przeliczyć.'
+        );
+        return;
+      }
+
+      await pobierz();
+      setKomunikat(
+        `Przeliczono ${szczegoly.length} ${szczegoly.length === 1 ? 'danie' : 'dania'} ` +
+          `w ${dniZmienione.size} ${odmianaDni(dniZmienione.size)}:\n` +
+          szczegoly.join('\n')
       );
     } catch (e) {
       setBlad(komunikatBledu(e));
@@ -422,7 +606,12 @@ export default function EkranPlanu() {
                   przepisId: p.id,
                   kolejnosc: juz + 1,
                   osoby,
-                  liczbaPorcjiBazowych: p.liczba_porcji_bazowych,
+                  // Ten sam checkbox „Uwzględnij ile dni wytrzyma w lodówce” co przy
+                  // automacie (patrz `wypelnijAutomatem`) — inaczej ręczne wstawienie
+                  // dania z ustawioną trwałością nigdy by jej nie uwzględniało.
+                  liczbaPorcjiBazowych: uwzglednijTrwalosc
+                    ? Math.max(1, p.trwalosc_dni)
+                    : p.liczba_porcji_bazowych,
                   dostepneDni: dniPlanu(plan),
                 });
                 doPrzywrocenia.current = true;
@@ -556,6 +745,33 @@ export default function EkranPlanu() {
           <ThemedText type="small" themeColor="textSecondary">
             Dobiera z ulubionych tak, żeby domknąć dzienne białko i kalorie. Tego, co
             już wybrałeś, nie rusza — od zera służy czyszczenie poniżej.
+          </ThemedText>
+
+          <PrzelacznikAutomatu
+            zaznaczone={skalujPoWypelnieniu}
+            onZmiana={setSkalujPoWypelnieniu}
+            etykieta="Skaluj cały tydzień do celów"
+            opis="Od razu po wypełnieniu przelicza dania skalowalne pod dzienny cel — jak osobny przycisk niżej, tylko bez dodatkowego kliknięcia."
+          />
+
+          <PrzelacznikAutomatu
+            zaznaczone={uwzglednijTrwalosc}
+            onZmiana={setUwzglednijTrwalosc}
+            etykieta="Uwzględnij ile dni wytrzyma w lodówce"
+            opis="Kopiuje danie na tyle kolejnych dni, ile wytrzyma w lodówce, zamiast na jego liczbę porcji bazowych."
+          />
+
+          <Przycisk
+            tytul={pracuje ? 'Przeliczam…' : 'Skaluj cały tydzień do celów'}
+            wariant="poboczny"
+            onPress={skalujCalyTydzien}
+            zajety={pracuje}
+            wylaczony={pracuje}
+          />
+          <ThemedText type="small" themeColor="textSecondary">
+            Przelicza dania oznaczone jako skalowalne (checkbox w formularzu przepisu albo
+            na ekranie „Makro przepisów") tak, żeby każdy dzień celniej trafiał w dzienny
+            cel kaloryczny. Reszty dań nie rusza.
           </ThemedText>
 
           <Przycisk
@@ -738,12 +954,26 @@ export default function EkranPlanu() {
                           w plan i chcesz zobaczyć, co i jak zrobić.
                         */}
                         <Pressable
-                          onPress={() =>
+                          onPress={() => {
+                            // Ile porcji trzeba UGOTOWAĆ NARAZ dla tej partii: tyle dni,
+                            // ile pozycji dzieli ten sam partia_id, razy jedzący danego dnia.
+                            // Bez tego ekran przepisu pokazywałby bazową ilość składników,
+                            // nawet gdy garnek ma starczyć na kilka dni z rzędu.
+                            const dniPartii = pozycja.partia_id
+                              ? pozycje.filter((p) => p.partia_id === pozycja.partia_id).length
+                              : 1;
                             router.push({
                               pathname: '/przepis',
-                              params: { id: pozycja.przepis_id, powrot: '/' },
-                            })
-                          }
+                              params: {
+                                id: pozycja.przepis_id,
+                                powrot: '/',
+                                porcjeRazem: String(dniPartii * pozycja.porcje),
+                                ...(pozycja.przepis_skalowany_id
+                                  ? { skalowany: pozycja.przepis_skalowany_id }
+                                  : {}),
+                              },
+                            });
+                          }}
                           accessibilityRole="link"
                           accessibilityLabel={`Otwórz przepis: ${pozycja.nazwa}`}
                           style={({ pressed }) => [styles.otworzPrzepis, pressed && styles.wcisniete]}>
@@ -864,6 +1094,13 @@ export default function EkranPlanu() {
 
 const styles = StyleSheet.create({
   narzedzia: { gap: Spacing.two },
+  checkboxWiersz: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    gap: Spacing.two,
+    paddingVertical: Spacing.one,
+  },
+  checkboxTresc: { flex: 1, gap: 2 },
 
   /*
     Pasek nagłówka dnia. Ujemne marginesy znoszą wewnętrzny odstęp karty,

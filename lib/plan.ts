@@ -28,6 +28,8 @@ export type PozycjaPlanu = {
   zjedzone: boolean;
   /** Wspólny identyfikator dań ugotowanych jednym garnkiem. */
   partia_id: string | null;
+  /** Ustawione, gdy ten posiłek to przeskalowany wariant (migracja 0036), nie bazowy przepis. */
+  przepis_skalowany_id: string | null;
   /** Waga jednej porcji przepisu w gramach. */
   gramy_porcji: number;
   /** Wartości jednej porcji przepisu. */
@@ -245,7 +247,9 @@ export async function utworzPlan(kontoId: string, dataStart: string, dni = 7): P
 export async function pobierzPozycje(planId: string): Promise<PozycjaPlanu[]> {
   const { data: pozycje, error } = await supabase
     .from('plan_pozycje')
-    .select('id, data, pora, przepis_id, porcje, kolejnosc, zjedzone, partia_id, przepisy (nazwa)')
+    .select(
+      'id, data, pora, przepis_id, przepis_skalowany_id, porcje, kolejnosc, zjedzone, partia_id, przepisy (nazwa)'
+    )
     .eq('plan_id', planId)
     .order('data')
     .order('kolejnosc');
@@ -254,18 +258,39 @@ export async function pobierzPozycje(planId: string): Promise<PozycjaPlanu[]> {
   if (!pozycje || pozycje.length === 0) return [];
 
   const idPrzepisow = [...new Set(pozycje.map((p) => p.przepis_id as string))];
+  const idSkalowanych = [
+    ...new Set(pozycje.map((p) => p.przepis_skalowany_id as string | null).filter((x): x is string => x !== null)),
+  ];
 
-  const { data: makro, error: bladMakro } = await supabase
-    .from('przepis_makro')
-    .select('przepis_id, kcal, bialko_g, tluszcz_g, wegle_g, blonnik_g, gramy_porcji')
-    .in('przepis_id', idPrzepisow);
+  // Dwa osobne widoki, bo jedna pozycja czerpie makro ALBO z przepisu
+  // źródłowego, ALBO z konkretnego wariantu skalowanego (migracja 0036) —
+  // nigdy z obu naraz.
+  const [wynikMakro, wynikMakroSkalowanych] = await Promise.all([
+    supabase
+      .from('przepis_makro')
+      .select('przepis_id, kcal, bialko_g, tluszcz_g, wegle_g, blonnik_g, gramy_porcji')
+      .in('przepis_id', idPrzepisow),
+    idSkalowanych.length > 0
+      ? supabase
+          .from('przepis_skalowany_makro')
+          .select('przepis_skalowany_id, kcal, bialko_g, tluszcz_g, wegle_g, blonnik_g, gramy_porcji')
+          .in('przepis_skalowany_id', idSkalowanych)
+      : Promise.resolve({ data: [], error: null }),
+  ]);
 
-  if (bladMakro) throw bladMakro;
+  if (wynikMakro.error) throw wynikMakro.error;
+  if (wynikMakroSkalowanych.error) throw wynikMakroSkalowanych.error;
 
-  const wedlugPrzepisu = new Map((makro ?? []).map((m) => [m.przepis_id as string, m]));
+  const wedlugPrzepisu = new Map((wynikMakro.data ?? []).map((m) => [m.przepis_id as string, m]));
+  const wedlugSkalowanego = new Map(
+    (wynikMakroSkalowanych.data ?? []).map((m) => [m.przepis_skalowany_id as string, m])
+  );
 
   return pozycje.map((p): PozycjaPlanu => {
-    const m = wedlugPrzepisu.get(p.przepis_id as string);
+    const przepisSkalowanyId = p.przepis_skalowany_id as string | null;
+    const m = przepisSkalowanyId
+      ? wedlugSkalowanego.get(przepisSkalowanyId)
+      : wedlugPrzepisu.get(p.przepis_id as string);
     const przepis = p.przepisy as { nazwa: string } | { nazwa: string }[] | null;
 
     return {
@@ -278,6 +303,7 @@ export async function pobierzPozycje(planId: string): Promise<PozycjaPlanu[]> {
       kolejnosc: p.kolejnosc,
       zjedzone: p.zjedzone,
       partia_id: p.partia_id,
+      przepis_skalowany_id: przepisSkalowanyId,
       gramy_porcji: Number(m?.gramy_porcji ?? 0),
       kcal: Number(m?.kcal ?? 0),
       bialko_g: Number(m?.bialko_g ?? 0),
@@ -330,9 +356,29 @@ export async function dodajPartie(opcje: {
   liczbaPorcjiBazowych: number;
   /** Dni planu od dnia dodania włącznie — dalej nie sięgamy. */
   dostepneDni: string[];
+  /**
+   * Ustawione, gdy zamiast bazowego przepisu wstawiamy jego przeskalowany
+   * wariant (migracja 0036) — `przepis_id` nadal wskazuje przepis źródłowy,
+   * to pole mówi, skąd brać makro. Domyślnie rozkłada się na JEDEN dzień
+   * (wariant jest policzony pod cel kaloryczny TEGO posiłku), chyba że
+   * wołający przekaże `liczbaPorcjiBazowych` większą niż 1 — dzieje się tak,
+   * gdy trwałość dania (checkbox „Uwzględnij ile dni wytrzyma w lodówce”)
+   * ma pierwszeństwo: patrz `zaplanuj` w `lib/automat.ts`.
+   */
+  przepisSkalowanyId?: string;
 }): Promise<number> {
-  const { kontoId, planId, odData, pora, przepisId, kolejnosc, osoby, liczbaPorcjiBazowych, dostepneDni } =
-    opcje;
+  const {
+    kontoId,
+    planId,
+    odData,
+    pora,
+    przepisId,
+    kolejnosc,
+    osoby,
+    liczbaPorcjiBazowych,
+    dostepneDni,
+    przepisSkalowanyId,
+  } = opcje;
 
   const dni = dostepneDni
     .filter((d) => d >= odData)
@@ -360,6 +406,7 @@ export async function dodajPartie(opcje: {
       data: d,
       pora,
       przepis_id: przepisId,
+      przepis_skalowany_id: przepisSkalowanyId ?? null,
       porcje: Math.max(1, osoby),
       kolejnosc,
       partia_id: partia.id,
@@ -403,6 +450,22 @@ export async function usunPosilek(id: string) {
 /** Przeniesienie posiłku na inny dzień albo porę. */
 export async function przeniesPosilek(id: string, data: string, pora: PoraPosilku) {
   const { error } = await supabase.from('plan_pozycje').update({ data, pora }).eq('id', id);
+  if (error) throw error;
+}
+
+/**
+ * Podmienia wariant skalowany JUŻ ISTNIEJĄCEJ pozycji planu — bez usuwania
+ * i wstawiania od nowa. `przepis_id` (przepis źródłowy) zostaje bez zmian,
+ * zmienia się tylko to, skąd bierze się makro tego jednego posiłku.
+ */
+export async function ustawPrzepisSkalowanyPozycji(
+  pozycjaId: string,
+  przepisSkalowanyId: string
+): Promise<void> {
+  const { error } = await supabase
+    .from('plan_pozycje')
+    .update({ przepis_skalowany_id: przepisSkalowanyId })
+    .eq('id', pozycjaId);
   if (error) throw error;
 }
 

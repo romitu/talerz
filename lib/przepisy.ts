@@ -58,6 +58,8 @@ export type PrzepisZMakro = {
   autor_id: string | null;
   /** Ścieżka pliku w zasobniku Storage; samego obrazu w bazie nie ma. */
   zdjecie: string | null;
+  /** Czy automat wolno automatycznie skalować ten przepis kalorycznie (migracja 0036). */
+  skalowalny: boolean;
   /** Wartości NA JEDNĄ PORCJĘ — bo to ona trafia na talerz. */
   kcal: number | null;
   bialko_g: number | null;
@@ -148,7 +150,7 @@ export async function pobierzPrzepisy(kontoId: string | undefined) {
         `id, nazwa, opis, pory, kuchnie, trwalosc_dni, liczba_porcji_bazowych, porcje,
          czas_przygotowania_min, czas_obrobki_min, sprzet, przechowywanie, mozna_mrozic,
          ratunek, porcjowanie, widocznosc, zgloszono_kiedy, powod_odrzucenia, autor_id, zdjecie,
-         preferencje_przepisow (konto_id, poziom)`
+         skalowalny, preferencje_przepisow (konto_id, poziom)`
       )
       .order('nazwa'),
     supabase
@@ -193,6 +195,7 @@ export async function pobierzPrzepisy(kontoId: string | undefined) {
       powod_odrzucenia: p.powod_odrzucenia ?? null,
       autor_id: p.autor_id,
       zdjecie: p.zdjecie ?? null,
+      skalowalny: p.skalowalny,
       kcal: makro?.kcal ?? null,
       bialko_g: makro?.bialko_g ?? null,
       tluszcz_g: makro?.tluszcz_g ?? null,
@@ -241,6 +244,12 @@ export async function ustawPreferencje(
   if (error) throw error;
 }
 
+/** Włącza/wyłącza checkbox „można skalować kalorycznie" (migracja 0036) bez otwierania pełnego formularza. */
+export async function ustawSkalowalny(przepisId: string, skalowalny: boolean): Promise<void> {
+  const { error } = await supabase.from('przepisy').update({ skalowalny }).eq('id', przepisId);
+  if (error) throw error;
+}
+
 /**
  * Pełna treść przepisu do edycji.
  *
@@ -268,6 +277,8 @@ export type PelnyPrzepis = {
   zgloszono_kiedy: string | null;
   powod_odrzucenia: string | null;
   zdjecie: string | null;
+  /** Czy automat wolno automatycznie skalować ten przepis kalorycznie (migracja 0036). */
+  skalowalny: boolean;
   skladniki: {
     skladnik_id: string;
     /** Nazwa z tabeli składników — do wyświetlenia przy gotowaniu. */
@@ -304,7 +315,7 @@ export async function pobierzPelnyPrzepis(id: string): Promise<PelnyPrzepis> {
       .select(
         `id, nazwa, opis, pory, kuchnie, trwalosc_dni, liczba_porcji_bazowych, porcjowanie,
          porcje, porcja_g, czas_przygotowania_min, czas_obrobki_min, sprzet, przechowywanie,
-         mozna_mrozic, ratunek, widocznosc, zgloszono_kiedy, powod_odrzucenia, zdjecie`
+         mozna_mrozic, ratunek, widocznosc, zgloszono_kiedy, powod_odrzucenia, zdjecie, skalowalny`
       )
       .eq('id', id)
       .single(),
@@ -378,7 +389,7 @@ export async function pobierzWszystkiePelnePrzepisy(): Promise<PelnyPrzepis[]> {
       .select(
         `id, nazwa, opis, pory, kuchnie, trwalosc_dni, liczba_porcji_bazowych, porcjowanie,
          porcje, porcja_g, czas_przygotowania_min, czas_obrobki_min, sprzet, przechowywanie,
-         mozna_mrozic, ratunek, widocznosc, zgloszono_kiedy, powod_odrzucenia, zdjecie`
+         mozna_mrozic, ratunek, widocznosc, zgloszono_kiedy, powod_odrzucenia, zdjecie, skalowalny`
       )
       .order('nazwa'),
     supabase

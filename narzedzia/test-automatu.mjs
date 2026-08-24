@@ -46,8 +46,11 @@ function sprawdz(opis, warunek, dodatek = '') {
 const DNI = ['2026-08-17', '2026-08-18', '2026-08-19', '2026-08-20',
              '2026-08-21', '2026-08-22', '2026-08-23'];
 
-function danie(id, pory, kcal, bialko, porcjeBazowe = 0, preferencja = 'neutralne') {
-  return { id, nazwa: id, pory, liczba_porcji_bazowych: porcjeBazowe, kcal, bialko_g: bialko, preferencja };
+function danie(id, pory, kcal, bialko, porcjeBazowe = 0, preferencja = 'neutralne', skalowalny = false, trwaloscDni = 3) {
+  return {
+    id, nazwa: id, pory, liczba_porcji_bazowych: porcjeBazowe, kcal, bialko_g: bialko,
+    preferencja, skalowalny, trwalosc_dni: trwaloscDni,
+  };
 }
 
 // Losowość wyłączona — inaczej test bywałby raz zielony, raz czerwony.
@@ -87,6 +90,8 @@ const PRZEPISY = [
   });
   sprawdz('każde danie trafia na swoją porę', zlaPora.length === 0,
           zlaPora.map((w) => `${w.przepisId}->${w.pora}`).join(', '));
+  sprawdz('żadne wstawienie bez skalowania nie ma celKcalDlaSkalowania',
+          wstawienia.every((w) => w.celKcalDlaSkalowania === null));
 }
 
 // --- 2. gotowanie rozkłada się na kilka dni ----------------------------------
@@ -269,6 +274,142 @@ const PRZEPISY = [
           !zZajetym.wstawienia.some((w) => w.przepisId === 'barszcz'));
   sprawdz('reszta układu wchodzi mimo to',
           zZajetym.wstawienia.some((w) => w.przepisId === 'owsianka'));
+  sprawdz('powtórzenie tygodnia nie skaluje (celKcalDlaSkalowania=null)',
+          wstawienia.every((w) => w.celKcalDlaSkalowania === null));
+}
+
+// --- 11. skalowanie kaloryczne (checkbox "skalowalny", migracja 0036) -------
+{
+  // Kanapka "na kromkę": bazowo 300 kcal, ale checkbox skalowalny=true
+  // pozwala rozciągnąć ją w zakresie [K_MIN, K_MAX] * 300 = [75, 1200].
+  // Cel na to miejsce: 900 kcal — poza zasięgiem zwykłego dania (250 kcal
+  // twarożku), ale w zasięgu kanapki po przeskalowaniu.
+  const kanapka = danie('kanapka', ['sniadanie'], 300, 15, 0, 'neutralne', true);
+  const twarozek = danie('twarozek', ['sniadanie'], 250, 20, 0, 'neutralne', false);
+
+  const { wstawienia } = zaplanuj({
+    dni: [DNI[0]],
+    zajete: [{ data: DNI[0], pora: 'obiad' }, { data: DNI[0], pora: 'kolacja' }],
+    makroDni: new Map([[DNI[0], { kcal: 1100, bialko: 60 }]]),
+    przepisy: [kanapka, twarozek],
+    celKcal: 2000, celBialko: 140, losowo: BEZ_LOSU,
+  });
+
+  sprawdz('skalowalna kanapka wygrywa z niedopasowanym twarożkiem mimo mniejszej bazowej wartości',
+          wstawienia[0]?.przepisId === 'kanapka', wstawienia[0]?.przepisId);
+  sprawdz('celKcalDlaSkalowania ustawione na ~900 (brakujące kcal na to miejsce)',
+          Math.abs((wstawienia[0]?.celKcalDlaSkalowania ?? 0) - 900) < 1,
+          wstawienia[0]?.celKcalDlaSkalowania);
+
+  // Ocena bezpośrednio: kanapka (skalowalna) powinna dostać zerową karę
+  // kaloryczną za cel w zasięgu [75, 1200], mimo że baza (300) daleko od 900.
+  const ocenaKanapki = ocen({
+    kandydat: kanapka, docelowoKcal: 900, docelowoBialko: 60,
+    ostatnioWDniu: null, dzien: 0, szum: 0,
+  });
+  const ocenaTwarozku = ocen({
+    kandydat: twarozek, docelowoKcal: 900, docelowoBialko: 60,
+    ostatnioWDniu: null, dzien: 0, szum: 0,
+  });
+  sprawdz('skalowalna kanapka dostaje mniejszą karę niż niedopasowany twarożek',
+          ocenaKanapki < ocenaTwarozku, `kanapka=${ocenaKanapki} twarozek=${ocenaTwarozku}`);
+
+  // Cel poza zasięgiem [75, 1200] karze proporcjonalnie do odległości od granicy.
+  const ocenaZaDuzoCelu = ocen({
+    kandydat: kanapka, docelowoKcal: 5000, docelowoBialko: 60,
+    ostatnioWDniu: null, dzien: 0, szum: 0,
+  });
+  sprawdz('cel poza górną granicą [K_MIN,K_MAX] daje karę > 0',
+          ocenaZaDuzoCelu > 0, ocenaZaDuzoCelu);
+
+  // Skalowalne danie nie karze nadmiaru białka (tylkoNiedobor=true).
+  const bogataWBialko = danie('bogata', ['sniadanie'], 300, 100, 0, 'neutralne', true);
+  const ocenaNadmiarBialka = ocen({
+    kandydat: bogataWBialko, docelowoKcal: 300, docelowoBialko: 10,
+    ostatnioWDniu: null, dzien: 0, szum: 0,
+  });
+  sprawdz('nadmiar białka przy skalowalnym daniu nie karze (kara białka = 0)',
+          ocenaNadmiarBialka < 0.01, ocenaNadmiarBialka);
+}
+
+// --- 12. uwzglednijTrwalosc — trwałość, nie porcje bazowe, decyduje o dniach
+{
+  // "Dorsz po grecku": 1 porcja bazowa (jak wiele przepisów w praktyce), ale
+  // trwałość 3 dni. Z opcją włączoną ma się skopiować na 3 kolejne dni —
+  // trwałość PRZEBIJA liczbę porcji bazowych, nie jest tylko jej górną granicą.
+  const dorsz = danie('dorsz', ['obiad'], 650, 42, 1, 'neutralne', false, 3);
+
+  const bezOpcji = zaplanuj({
+    dni: DNI, zajete: [], makroDni: new Map(),
+    przepisy: [dorsz],
+    celKcal: 2000, celBialko: 140, losowo: BEZ_LOSU,
+  });
+  const pierwszyBezOpcji = bezOpcji.wstawienia.find((w) => w.odData === DNI[0]);
+  sprawdz('bez uwzglednijTrwalosc garnek rozkłada się na porcje bazowe (1 dzień)',
+          pierwszyBezOpcji.dni.length === 1, JSON.stringify(pierwszyBezOpcji.dni));
+
+  const zOpcja = zaplanuj({
+    dni: DNI, zajete: [], makroDni: new Map(),
+    przepisy: [dorsz],
+    celKcal: 2000, celBialko: 140, losowo: BEZ_LOSU,
+    uwzglednijTrwalosc: true,
+  });
+  const pierwszyZOpcja = zOpcja.wstawienia.find((w) => w.odData === DNI[0]);
+  sprawdz('z uwzglednijTrwalosc garnek kopiuje się na trwałość (3 dni), mimo 1 porcji bazowej',
+          pierwszyZOpcja.dni.length === 3, JSON.stringify(pierwszyZOpcja.dni));
+
+  // I odwrotny przypadek: trwałość krótsza niż porcje bazowe też obowiązuje.
+  const gulaszTrwaly = danie('gulaszTrwaly', ['kolacja'], 700, 40, 6, 'neutralne', false, 2);
+  const zKrotszaTrwaloscia = zaplanuj({
+    dni: DNI, zajete: [], makroDni: new Map(),
+    przepisy: [gulaszTrwaly],
+    celKcal: 2000, celBialko: 140, losowo: BEZ_LOSU,
+    uwzglednijTrwalosc: true,
+  });
+  const pierwszyGulasz = zKrotszaTrwaloscia.wstawienia.find((w) => w.odData === DNI[0]);
+  sprawdz('trwałość krótsza niż porcje bazowe (2 dni) też ogranicza rozłożenie',
+          pierwszyGulasz.dni.length === 2, JSON.stringify(pierwszyGulasz.dni));
+
+  // trwalosc_dni=0 ("tylko świeże") nie zeruje garnka — nadal co najmniej 1 dzień.
+  const tylkoSwieze = danie('tylkoSwieze', ['kolacja'], 500, 30, 4, 'neutralne', false, 0);
+  const zeSwiezym = zaplanuj({
+    dni: DNI, zajete: [], makroDni: new Map(),
+    przepisy: [tylkoSwieze],
+    celKcal: 2000, celBialko: 140, losowo: BEZ_LOSU,
+    uwzglednijTrwalosc: true,
+  });
+  const pierwszySwiezy = zeSwiezym.wstawienia.find((w) => w.odData === DNI[0]);
+  sprawdz('trwałość 0 dni ("tylko świeże") nadal daje co najmniej 1 dzień',
+          pierwszySwiezy.dni.length === 1, JSON.stringify(pierwszySwiezy.dni));
+
+  // Skalowalne danie + uwzglednijTrwalosc: trwałość ma wygrywać. Bez opcji
+  // wariant skalowany zostaje na jeden dzień (każdy dzień inny cel), ale
+  // z opcją ma się skopiować na tyle dni, ile wytrzyma w lodówce — ten sam
+  // garnek, przeliczony raz pod cel pierwszego dnia.
+  const dorszSkalowalny = danie('dorszSkalowalny', ['obiad'], 650, 42, 1, 'neutralne', true, 3);
+
+  const skalowalnyBezOpcji = zaplanuj({
+    dni: DNI, zajete: [], makroDni: new Map(),
+    przepisy: [dorszSkalowalny],
+    celKcal: 2000, celBialko: 140, losowo: BEZ_LOSU,
+  });
+  const pierwszySkalowalnyBezOpcji = skalowalnyBezOpcji.wstawienia.find((w) => w.odData === DNI[0]);
+  sprawdz('skalowalne danie bez uwzglednijTrwalosc zostaje na jeden dzień',
+          pierwszySkalowalnyBezOpcji.dni.length === 1, JSON.stringify(pierwszySkalowalnyBezOpcji.dni));
+  sprawdz('skalowalne danie bez uwzglednijTrwalosc dalej ma ustawiony cel skalowania',
+          pierwszySkalowalnyBezOpcji.celKcalDlaSkalowania !== null);
+
+  const skalowalnyZOpcja = zaplanuj({
+    dni: DNI, zajete: [], makroDni: new Map(),
+    przepisy: [dorszSkalowalny],
+    celKcal: 2000, celBialko: 140, losowo: BEZ_LOSU,
+    uwzglednijTrwalosc: true,
+  });
+  const pierwszySkalowalnyZOpcja = skalowalnyZOpcja.wstawienia.find((w) => w.odData === DNI[0]);
+  sprawdz('trwałość PRZEBIJA skalowanie: garnek kopiuje się na 3 dni mimo checkboxu skalowalny',
+          pierwszySkalowalnyZOpcja.dni.length === 3, JSON.stringify(pierwszySkalowalnyZOpcja.dni));
+  sprawdz('mimo priorytetu trwałości, danie nadal jest przeliczone (celKcalDlaSkalowania ustawione)',
+          pierwszySkalowalnyZOpcja.celKcalDlaSkalowania !== null);
 }
 
 rmSync(kosz, { recursive: true, force: true });
