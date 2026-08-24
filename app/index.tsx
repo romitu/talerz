@@ -170,9 +170,12 @@ export default function EkranPlanu() {
   const [wczytywanie, setWczytywanie] = useState(true);
   const [blad, setBlad] = useState<string | null>(null);
 
-  /** Wszystkie tygodnie konta — do przełączania i do powtarzania układu. */
-  const [plany, setPlany] = useState<Plan[]>([]);
-  /** `null` oznacza „pokaż najnowszy”. */
+  /**
+   * `null` oznacza „pokaż najnowszy”. Ustawiane tylko po założeniu nowego
+   * tygodnia (patrz „Zacznij nowy tydzień od dzisiaj” niżej) — wybór
+   * OGLĄDANEGO tygodnia z listy zniknął z ekranu jako niepotrzebny, więc
+   * to jedyna droga, którą ta wartość się zmienia.
+   */
   const [wybranyPlanId, setWybranyPlanId] = useState<string | null>(null);
   const [pracuje, setPracuje] = useState(false);
   const [czyscic, setCzyscic] = useState(false);
@@ -262,7 +265,6 @@ export default function EkranPlanu() {
       // (skasowany gdzie indziej), spadamy na najnowszy zamiast pokazywać pustkę.
       const p = wszystkie.find((x) => x.id === wybranyPlanId) ?? wszystkie[0] ?? null;
 
-      setPlany(wszystkie);
       setPlan(p);
       setPrzepisy(lista);
       setCel(noweCel);
@@ -688,8 +690,6 @@ export default function EkranPlanu() {
             osoby={osoby}
             mozliweDaty={mozliweDaty}
             onZmianaPierwszegoDnia={(d) => zDbem(() => zmienDatePlanu(plan.id, d))}
-            plany={plany}
-            onZmianaTygodnia={(id) => setWybranyPlanId(id)}
           />
         ) : undefined
       }>

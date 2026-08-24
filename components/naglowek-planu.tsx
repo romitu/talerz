@@ -10,49 +10,51 @@ import { useTheme } from '@/hooks/use-theme';
 import { czyDzisiaj, opisDnia, type Plan } from '@/lib/plan';
 
 /**
- * Nagłówek ekranu planu — ikona, tytuł z licznikiem dni/osób i dwa pola
- * wyboru (pierwszy dzień, oglądany tydzień). Stały (patrz `naglowekStaly`
- * w `Ekran`), więc daty zostają pod ręką przy przewijaniu długiej listy dni,
- * tak jak nagłówki list zakupów i przepisów.
+ * Nagłówek ekranu planu — tytuł, liczba osób i kompaktowe pole daty z ikoną,
+ * bez ikony-koła i bez podpisów nad polami (v03). Stały (patrz
+ * `naglowekStaly` w `Ekran`), więc data zostaje pod ręką przy przewijaniu
+ * długiej listy dni, tak jak nagłówki list zakupów i przepisów.
+ *
+ * Wysokość karty celowo dopasowana do nagłówka listy zakupów
+ * (`NaglowekZakupow`) — ten sam rozmiar tytułu i ta sama otoczka dolnego
+ * wiersza — żeby ekrany obok siebie w dolnej nawigacji nie „skakały”.
+ *
+ * Wyboru OGLĄDANEGO tygodnia celowo tu nie ma — nie robił nic, czego nie
+ * robi już samo przewijanie do najnowszego, a zajmował drugi wiersz.
  */
 export function NaglowekPlanu({
   plan,
   osoby,
   mozliweDaty,
   onZmianaPierwszegoDnia,
-  plany,
-  onZmianaTygodnia,
 }: {
   plan: Plan;
   osoby: number;
   mozliweDaty: string[];
   onZmianaPierwszegoDnia: (data: string) => void;
-  plany: Plan[];
-  onZmianaTygodnia: (id: string) => void;
 }) {
   const motyw = useTheme();
 
   return (
     <ThemedView type="backgroundElement" style={[styles.karta, { borderColor: motyw.border }]}>
       <View style={styles.gorny}>
-        <View style={[styles.ikonaKolo, { backgroundColor: motyw.backgroundSelected }]}>
-          <Ionicons name="calendar-outline" size={26} color={motyw.accent} />
-        </View>
+        <ThemedText type="subtitle" numberOfLines={1}>
+          Plan dnia
+        </ThemedText>
 
-        <View style={styles.tytulOpis}>
-          <ThemedText type="subtitle" numberOfLines={1}>
-            Plan dnia
-          </ThemedText>
+        <View style={styles.osoby}>
+          <Ionicons name="people-outline" size={14} color={motyw.textSecondary} />
           <ThemedText type="small" themeColor="textSecondary" numberOfLines={1}>
-            {plan.dni} dni · {osoby} {osoby === 1 ? 'osoba' : 'osoby'}
+            {osoby} {osoby === 1 ? 'osoba' : 'osoby'}
           </ThemedText>
         </View>
       </View>
 
-      <View style={styles.pola}>
-        <View style={styles.pole}>
+      <View style={[styles.dolny, { backgroundColor: motyw.background, borderColor: motyw.border }]}>
+        <View style={styles.poleDaty}>
           <ListaRozwijana
-            etykieta="PIERWSZY DZIEŃ PLANU"
+            ikona="calendar-outline"
+            kompaktowy
             wybrana={plan.data_start}
             onZmiana={onZmianaPierwszegoDnia}
             opcje={mozliweDaty.map((d) => ({
@@ -63,29 +65,13 @@ export function NaglowekPlanu({
           />
         </View>
 
-        {/*
-          Przełącznik tygodni pokazuje się dopiero, gdy jest co przełączać.
-          Przy pierwszym tygodniu byłby polem z jedną pozycją.
-        */}
-        {plany.length > 1 && (
-          <View style={styles.pole}>
-            <ListaRozwijana
-              etykieta="OGLĄDANY TYDZIEŃ"
-              wybrana={plan.id}
-              onZmiana={onZmianaTygodnia}
-              opcje={plany.map((p) => ({
-                wartosc: p.id,
-                etykieta: `od ${opisDnia(p.data_start)}`,
-                opis: p.id === plany[0].id ? 'najnowszy' : undefined,
-              }))}
-            />
-          </View>
-        )}
+        <View style={styles.info}>
+          <Ionicons name="information-circle-outline" size={15} color={motyw.textSecondary} />
+          <ThemedText type="small" themeColor="textSecondary" style={styles.infoTekst}>
+            Pozostałe dni ułożą się od niego. Posiłki zostają przy swoich datach.
+          </ThemedText>
+        </View>
       </View>
-
-      <ThemedText type="small" themeColor="textSecondary">
-        Pozostałe dni ułożą się od niego. Posiłki zostają przy swoich datach.
-      </ThemedText>
     </ThemedView>
   );
 }
@@ -100,23 +86,39 @@ const styles = StyleSheet.create({
   gorny: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: Spacing.three,
+    justifyContent: 'space-between',
+    gap: Spacing.two,
   },
-  ikonaKolo: {
-    width: 52,
-    height: 52,
-    borderRadius: 26,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  tytulOpis: { flex: 1, gap: 2 },
-  pola: {
+  osoby: {
     flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: Spacing.three,
+    alignItems: 'center',
+    gap: 4,
   },
-  pole: {
-    flexGrow: 1,
-    flexBasis: 220,
+  /* Ta sama otoczka co pasek liczników w nagłówku listy zakupów — żeby obie
+     karty miały porównywalną wysokość na ekranach obok siebie w nawigacji. */
+  dolny: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    gap: Spacing.two,
+    borderWidth: 1,
+    borderRadius: Spacing.two,
+    paddingVertical: Spacing.two,
+    paddingHorizontal: Spacing.two,
+  },
+  poleDaty: {
+    flexBasis: 190,
+    flexGrow: 0,
+    flexShrink: 0,
+  },
+  info: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    gap: Spacing.one,
+    minWidth: 0,
+    paddingTop: 2,
+  },
+  infoTekst: {
+    flex: 1,
   },
 });

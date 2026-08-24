@@ -14,7 +14,17 @@ type Opcja<T extends string> = {
 };
 
 type Props<T extends string> = {
-  etykieta: string;
+  /** Pominięta = bez podpisu nad polem, do ciasnych nagłówków. */
+  etykieta?: string;
+  /** Ikona przed wartością — zastępuje podpis, gdy miejsca jest mało. */
+  ikona?: keyof typeof Ionicons.glyphMap;
+  /**
+   * Ścieśniona wersja: niższe pole, mniejsza czcionka, bez drugiej linii
+   * (`opis` przy wybranej opcji się nie mieści). Lista PO rozwinięciu zostaje
+   * pełnowymiarowa — zwinięte pole zajmuje mniej miejsca, ale wybieranie
+   * z niego jedną ręką w kuchni ma być tak samo wygodne jak zawsze.
+   */
+  kompaktowy?: boolean;
   opcje: Opcja<T>[];
   wybrana: T | null;
   onZmiana: (wartosc: T) => void;
@@ -46,6 +56,8 @@ type Props<T extends string> = {
  */
 export function ListaRozwijana<T extends string>({
   etykieta,
+  ikona,
+  kompaktowy = false,
   opcje,
   wybrana,
   onZmiana,
@@ -60,28 +72,39 @@ export function ListaRozwijana<T extends string>({
 
   return (
     <View style={styles.grupa}>
-      <ThemedText type="smallBold" themeColor="textSecondary">
-        {etykieta}
-      </ThemedText>
+      {etykieta && (
+        <ThemedText type="smallBold" themeColor="textSecondary">
+          {etykieta}
+        </ThemedText>
+      )}
 
       <Pressable
         onPress={() => setOtwarta((x) => !x)}
         accessibilityRole="button"
         accessibilityState={{ expanded: otwarta }}
-        accessibilityLabel={`${etykieta}: ${aktualna?.etykieta ?? placeholder}`}
+        accessibilityLabel={
+          etykieta
+            ? `${etykieta}: ${aktualna?.etykieta ?? placeholder}`
+            : (aktualna?.etykieta ?? placeholder)
+        }
         style={({ pressed }) => [
           styles.pole,
+          kompaktowy && styles.poleKompaktowe,
           {
             borderColor: otwarta ? motyw.accent : motyw.border,
             backgroundColor: motyw.backgroundElement,
           },
           pressed && styles.wcisniete,
         ]}>
+        {ikona && <Ionicons name={ikona} size={kompaktowy ? 15 : 18} color={motyw.textSecondary} />}
         <View style={styles.trescPola}>
-          <ThemedText type="default" themeColor={aktualna ? 'text' : 'textSecondary'}>
+          <ThemedText
+            type={kompaktowy ? 'small' : 'default'}
+            themeColor={aktualna ? 'text' : 'textSecondary'}
+            numberOfLines={1}>
             {aktualna?.etykieta ?? placeholder}
           </ThemedText>
-          {aktualna?.opis && (
+          {aktualna?.opis && !kompaktowy && (
             <ThemedText type="small" themeColor="textSecondary">
               {aktualna.opis}
             </ThemedText>
@@ -89,7 +112,7 @@ export function ListaRozwijana<T extends string>({
         </View>
         <Ionicons
           name={otwarta ? 'chevron-up' : 'chevron-down'}
-          size={18}
+          size={kompaktowy ? 15 : 18}
           color={motyw.textSecondary}
         />
       </Pressable>
@@ -149,6 +172,12 @@ const styles = StyleSheet.create({
     borderRadius: Spacing.two,
     paddingHorizontal: Spacing.three,
     paddingVertical: Spacing.two,
+  },
+  poleKompaktowe: {
+    borderRadius: Spacing.one,
+    paddingHorizontal: Spacing.two,
+    paddingVertical: Spacing.one,
+    gap: Spacing.one,
   },
   trescPola: { flex: 1, gap: 2 },
   lista: {
