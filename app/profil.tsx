@@ -6,6 +6,7 @@ import { StyleSheet, View } from 'react-native';
 import { Ekran } from '@/components/ekran';
 import { KafleWyniku } from '@/components/kafle-wyniku';
 import { Karta } from '@/components/karta';
+import { NaglowekProfilu } from '@/components/naglowek-profilu';
 import { Przycisk } from '@/components/przycisk';
 import { ThemedText } from '@/components/themed-text';
 import { WyborStylu } from '@/components/wybor-stylu';
@@ -35,34 +36,6 @@ type Profil = {
   aktywnosc: PalNasem;
   cele: Cel[];
 };
-
-/**
- * Ikona w miękkim kółku — do wiersza KONTA i do awatara profilu.
- *
- * Awatar to na razie inicjał w kółku, nie ilustracja jak w makiecie od
- * Romana — generowanie własnej grafiki nie jest czymś, co potrafię zrobić.
- * Jeśli dosyłasz plik z ilustracją, podepnę go tutaj zamiast tej ikony.
- */
-function Znacznik({
-  ikona,
-  rozmiar = 20,
-  kolko = 36,
-}: {
-  ikona: keyof typeof Ionicons.glyphMap;
-  rozmiar?: number;
-  kolko?: number;
-}) {
-  const motyw = useTheme();
-  return (
-    <View
-      style={[
-        styles.znacznik,
-        { width: kolko, height: kolko, borderRadius: kolko / 2, backgroundColor: `${motyw.accent}1F` },
-      ]}>
-      <Ionicons name={ikona} size={rozmiar} color={motyw.accent} />
-    </View>
-  );
-}
 
 export default function EkranProfilu() {
   const { sesja } = useSesja();
@@ -151,19 +124,10 @@ export default function EkranProfilu() {
   }
 
   return (
-    <Ekran tytul="Profil" podtytul={sesja?.user.email ?? undefined}>
-      {/* Adres e-mail jest już w podtytule ekranu — tu tylko rola, żeby karta
-          nie powtarzała tego samego dwa razy. */}
-      <Karta style={styles.kartaKonta}>
-        <View style={styles.wierszKonta}>
-          <Znacznik ikona="shield-checkmark-outline" kolko={28} rozmiar={16} />
-          <ThemedText type="small">
-            <ThemedText type="smallBold">Rola: </ThemedText>
-            {rola ?? 'wczytywanie…'}
-          </ThemedText>
-        </View>
-      </Karta>
-
+    <Ekran
+      tytul="Profil"
+      podtytul={sesja?.user.email ?? undefined}
+      naglowekStaly={<NaglowekProfilu email={sesja?.user.email} rola={rola} />}>
       {wczytywanie && (
         <ThemedText type="small" themeColor="textSecondary">
           Wczytywanie z bazy…
@@ -222,16 +186,16 @@ export default function EkranProfilu() {
 
             {cel ? (
               <>
-                <Karta style={styles.kartaWyniku}>
-                  <KafleWyniku cel={cel} />
-                </Karta>
+                <KafleWyniku cel={cel} />
 
                 <View style={[styles.pigulka, { backgroundColor: motyw.backgroundSelected }]}>
-                  <Ionicons
-                    name={zapis!.prog_bialka_posilek ? 'checkmark-circle' : 'checkmark-circle-outline'}
-                    size={18}
-                    color={motyw.accent}
-                  />
+                  <View
+                    style={[
+                      styles.pigulkaIkona,
+                      { backgroundColor: zapis!.prog_bialka_posilek ? motyw.accent : motyw.border },
+                    ]}>
+                    <Ionicons name="checkmark" size={13} color="#FFFFFF" />
+                  </View>
                   <ThemedText type="small" themeColor="accent" style={styles.tekstPigulki}>
                     {zapis!.prog_bialka_posilek
                       ? `Próg białka: ${zapis!.prog_bialka_posilek} g`
@@ -248,17 +212,21 @@ export default function EkranProfilu() {
               </ThemedText>
             )}
 
-            <Przycisk
-              tytul="Edytuj profil"
-              ikona="pencil-outline"
-              onPress={() => router.push({ pathname: '/profil-formularz', params: { profil: p.id, powrot: '/profil' } })}
-            />
-            <Przycisk
-              tytul="Usuń profil"
-              ikona="trash-outline"
-              wariant="poboczny"
-              onPress={() => setDoUsuniecia(p)}
-            />
+            <View style={styles.akcjeProfilu}>
+              <Przycisk
+                tytul="Edytuj profil"
+                ikona="pencil-outline"
+                onPress={() => router.push({ pathname: '/profil-formularz', params: { profil: p.id, powrot: '/profil' } })}
+                style={styles.akcjaProfilu}
+              />
+              <Przycisk
+                tytul="Usuń profil"
+                ikona="trash-outline"
+                wariant="poboczny"
+                onPress={() => setDoUsuniecia(p)}
+                style={styles.akcjaProfilu}
+              />
+            </View>
           </Karta>
         );
       })}
@@ -323,18 +291,6 @@ export default function EkranProfilu() {
 }
 
 const styles = StyleSheet.create({
-  kartaKonta: {
-    paddingVertical: Spacing.two,
-  },
-  wierszKonta: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: Spacing.two,
-  },
-  znacznik: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   kartaProfilu: {
     gap: Spacing.three,
   },
@@ -350,9 +306,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  kartaWyniku: {
-    padding: Spacing.two,
-  },
   pigulka: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -361,7 +314,21 @@ const styles = StyleSheet.create({
     paddingVertical: Spacing.two,
     paddingHorizontal: Spacing.three,
   },
+  pigulkaIkona: {
+    width: 22,
+    height: 22,
+    borderRadius: 11,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   tekstPigulki: {
+    flex: 1,
+  },
+  akcjeProfilu: {
+    flexDirection: 'row',
+    gap: Spacing.two,
+  },
+  akcjaProfilu: {
     flex: 1,
   },
   wyloguj: {
