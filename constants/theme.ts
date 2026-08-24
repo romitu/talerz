@@ -181,4 +181,5 @@ export const KOLOR_MAKRO = {
   bialko: '#3F8F5F',
   tluszcz: '#D98A20',
   wegle: '#3E7BC4',
+  blonnik: '#7A5CA3',
 } as const;

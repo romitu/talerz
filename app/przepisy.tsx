@@ -7,12 +7,12 @@ import { Pressable, StyleSheet, View } from 'react-native';
 import { komunikatBledu } from '@/lib/blad';
 import { Ekran } from '@/components/ekran';
 import { Karta } from '@/components/karta';
+import { NaglowekPrzepisow, type ZakladkaPrzepisow } from '@/components/naglowek-przepisow';
 import { ThemedView } from '@/components/themed-view';
-import { WierszMakro } from '@/components/wiersz-makro';
 import { Pole } from '@/components/pole';
 import { Przycisk } from '@/components/przycisk';
 import { ThemedText } from '@/components/themed-text';
-import { Spacing } from '@/constants/theme';
+import { KOLOR_MAKRO, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import {
   czasRazem,
@@ -201,98 +201,58 @@ export default function EkranPrzepisow() {
       ? poFrazie
       : poFrazie.filter((p) => p.pory.includes(kategoria));
 
+  // Zakładki: „Wszystkie" + jedna na kategorię, a na końcu — tylko gdy jest co
+  // rozpatrywać — kolejka moderatora. Przepisy przegląda się tutaj, więc
+  // i decyzje o nich zapadają tutaj, obok zwykłych filtrów.
+  const zakladki: ZakladkaPrzepisow[] = przepisy.length === 0
+    ? []
+    : [
+        {
+          klucz: 'wszystkie',
+          etykieta: 'Wszystkie',
+          ile: poFrazie.length,
+          wybrana: kategoria === null,
+          onPress: () => {
+            setKategoria(null);
+            setKolejka(false);
+          },
+        },
+        ...KATEGORIE.map((k) => ({
+          klucz: k,
+          etykieta: OPIS_KATEGORII[k],
+          ile: licznik(k),
+          wybrana: kategoria === k,
+          onPress: () => {
+            setKategoria(k);
+            setKolejka(false);
+          },
+        })),
+        ...(mozeDodawac && doZatwierdzenia.length > 0
+          ? [
+              {
+                klucz: 'kolejka',
+                etykieta: 'Do zatwierdzenia',
+                ile: doZatwierdzenia.length,
+                wybrana: kolejka,
+                akcent: true,
+                onPress: () => setKolejka((x) => !x),
+              },
+            ]
+          : []),
+      ];
+
   return (
     <Ekran
       tytul="Przepisy"
-      podtytul={
-        wczytywanie
-          ? 'wczytywanie…'
-          : szukane
-            ? `${widoczne.length} z ${przepisy.length}`
-            : `${przepisy.length} w bazie`
+      naglowekStaly={
+        <NaglowekPrzepisow
+          liczbaWBazie={przepisy.length}
+          wczytywanie={wczytywanie}
+          fraza={fraza}
+          onZmianaFrazy={setFraza}
+          zakladki={zakladki}
+        />
       }>
-      {przepisy.length > 0 && (
-        <View style={styles.szukanie}>
-          <View style={styles.polePola}>
-            <Pole
-              etykieta="Szukaj przepisu"
-              value={fraza}
-              onChangeText={setFraza}
-              placeholder="dorsz, tom kha, zupa…"
-              autoCorrect={false}
-              autoCapitalize="none"
-              // Krzyżyk czyszczący pola na iOS. Na pozostałych platformach
-              // pomijany, dlatego niżej jest jeszcze własny przycisk.
-              clearButtonMode="while-editing"
-            />
-          </View>
-          {fraza.length > 0 && (
-            <Pressable
-              onPress={() => setFraza('')}
-              hitSlop={8}
-              accessibilityRole="button"
-              accessibilityLabel="Wyczyść szukanie"
-              style={({ pressed }) => [styles.wyczysc, pressed && styles.wcisniety]}>
-              <Ionicons name="close-circle" size={22} color={motyw.textSecondary} />
-            </Pressable>
-          )}
-        </View>
-      )}
-
-      {przepisy.length > 0 && (
-        <View style={styles.zakladki}>
-          {[null, ...KATEGORIE].map((k) => {
-            const wybrana = kategoria === k;
-            const etykieta = k === null ? 'Wszystkie' : OPIS_KATEGORII[k];
-            const ile = k === null ? poFrazie.length : licznik(k);
-            return (
-              <Pressable
-                key={k ?? 'wszystkie'}
-                onPress={() => {
-                  setKategoria(k);
-                  setKolejka(false);
-                }}
-                accessibilityRole="button"
-                accessibilityState={{ selected: wybrana }}
-                accessibilityLabel={`${etykieta}, ${ile}`}
-                style={[
-                  styles.zakladka,
-                  { borderColor: wybrana ? motyw.accent : motyw.border },
-                  wybrana && styles.zakladkaWybrana,
-                ]}>
-                <ThemedText
-                  type="smallBold"
-                  themeColor={wybrana ? 'accent' : 'textSecondary'}>
-                  {etykieta} {ile}
-                </ThemedText>
-              </Pressable>
-            );
-          })}
-
-          {/*
-            Kolejka moderatora stoi OBOK kategorii, a nie w osobnym miejscu.
-            Przepisy przegląda się tutaj, więc i decyzje o nich zapadają tutaj.
-            Zakładka pokazuje się tylko wtedy, gdy jest co rozpatrywać — pusta
-            uczyłaby, że zwykle nic w niej nie ma, i przestałaby być zauważana.
-          */}
-          {mozeDodawac && doZatwierdzenia.length > 0 && (
-            <Pressable
-              onPress={() => setKolejka((x) => !x)}
-              accessibilityRole="button"
-              accessibilityState={{ selected: kolejka }}
-              accessibilityLabel={`Do zatwierdzenia, ${doZatwierdzenia.length}`}
-              style={[
-                styles.zakladka,
-                { borderColor: motyw.accent, borderWidth: kolejka ? 2 : 1 },
-              ]}>
-              <ThemedText type="smallBold" themeColor="accent">
-                Do zatwierdzenia {doZatwierdzenia.length}
-              </ThemedText>
-            </Pressable>
-          )}
-        </View>
-      )}
-
       {kategoria !== null && bezKategorii.length > 0 && (
         <ThemedText type="small" themeColor="textSecondary">
           {bezKategorii.length} {bezKategorii.length === 1 ? 'przepis nie ma' : 'przepisów nie ma'}
@@ -351,6 +311,24 @@ export default function EkranPrzepisow() {
 
       {widoczne.map((p) => {
         const zdjecie = adresZdjecia(p.zdjecie);
+        const razem = czasRazem(p.czas_przygotowania_min, p.czas_obrobki_min);
+
+        const tagi: { klucz: string; ikona: keyof typeof Ionicons.glyphMap; tekst: string }[] = [
+          {
+            klucz: 'pora',
+            ikona: 'restaurant-outline',
+            tekst: p.pory.map((x) => OPIS_PORY[x]).join(', ') || 'bez kategorii',
+          },
+          ...(p.kuchnie.length > 0
+            ? [{ klucz: 'kuchnia', ikona: 'earth-outline' as const, tekst: p.kuchnie.map((x) => OPIS_KUCHNI[x]).join(', ') }]
+            : []),
+          ...(razem ? [{ klucz: 'czas', ikona: 'time-outline' as const, tekst: `${razem} min` }] : []),
+          { klucz: 'trwalosc', ikona: 'calendar-outline', tekst: opisTrwalosci(p.trwalosc_dni) },
+          ...(p.mozna_mrozic
+            ? [{ klucz: 'mrozenie', ikona: 'snow-outline' as const, tekst: 'można mrozić' }]
+            : []),
+        ];
+
         return (
         <Karta key={p.id}>
           {zdjecie && (
@@ -362,8 +340,9 @@ export default function EkranPrzepisow() {
               accessibilityLabel={p.nazwa}
             />
           )}
+
           <View style={styles.naglowek}>
-            <ThemedText type="default" style={styles.nazwa}>
+            <ThemedText type="subtitle" style={styles.nazwa}>
               {p.nazwa}
             </ThemedText>
             {p.widocznosc !== 'publiczna' && (
@@ -379,39 +358,74 @@ export default function EkranPrzepisow() {
             </ThemedText>
           )}
 
-          <ThemedText type="small" themeColor="textSecondary">
-            {p.pory.map((x) => OPIS_PORY[x]).join(', ') || 'bez kategorii'}
-            {' · '}
-            {p.kuchnie.map((x) => OPIS_KUCHNI[x]).join(', ')}
-            {(() => {
-              const razem = czasRazem(p.czas_przygotowania_min, p.czas_obrobki_min);
-              return razem ? ` · ${razem} min` : '';
-            })()}
-            {' · '}
-            {opisTrwalosci(p.trwalosc_dni)}
-            {p.mozna_mrozic ? ' · można mrozić' : ''}
-          </ThemedText>
+          <View style={styles.tagi}>
+            {tagi.map((t) => (
+              <View
+                key={t.klucz}
+                style={[styles.tag, { borderColor: motyw.border, backgroundColor: motyw.background }]}>
+                <Ionicons name={t.ikona} size={16} color={motyw.accent} />
+                <ThemedText type="small">{t.tekst}</ThemedText>
+              </View>
+            ))}
+          </View>
+
+          <View style={[styles.dzielnik, { backgroundColor: motyw.border }]} />
 
           {p.kcal !== null ? (
             <>
-              <ThemedText type="smallBold" themeColor="textSecondary">
+              <ThemedText type="smallBold" themeColor="accent">
                 NA PORCJĘ
                 {p.gramy_porcji ? ` (${p.gramy_porcji} g)` : ''}
                 {p.porcje_wyliczone ? ` · z ${p.porcje_wyliczone} porcji` : ''}
               </ThemedText>
-              <WierszMakro
-                pozycje={[
-                  { etykieta: 'kcal', wartosc: p.kcal, jednostka: '' },
-                  { etykieta: 'białko', wartosc: p.bialko_g ?? 0, jednostka: ' g' },
-                  { etykieta: 'tłuszcz', wartosc: p.tluszcz_g ?? 0, jednostka: ' g' },
-                  { etykieta: 'węgle', wartosc: p.wegle_g ?? 0, jednostka: ' g' },
-                ]}
-              />
-              {p.kcal_calosc !== null && (
-                <ThemedText type="small" themeColor="textSecondary">
-                  Cała potrawa: {p.gramy_calosc ? `${p.gramy_calosc} g, ` : ''}
-                  {p.kcal_calosc} kcal, {p.bialko_g_calosc} g białka
-                </ThemedText>
+
+              <View style={[styles.makroBox, { backgroundColor: motyw.background }]}>
+                {(
+                  [
+                    { etykieta: 'kcal', wartosc: p.kcal, jednostka: '', ikona: 'flame-outline' as const, kolor: KOLOR_MAKRO.bialko },
+                    { etykieta: 'białko', wartosc: p.bialko_g ?? 0, jednostka: ' g', ikona: 'barbell-outline' as const, kolor: KOLOR_MAKRO.bialko },
+                    { etykieta: 'tłuszcz', wartosc: p.tluszcz_g ?? 0, jednostka: ' g', ikona: 'water-outline' as const, kolor: KOLOR_MAKRO.tluszcz },
+                    { etykieta: 'węgle', wartosc: p.wegle_g ?? 0, jednostka: ' g', ikona: 'nutrition-outline' as const, kolor: KOLOR_MAKRO.wegle },
+                  ]
+                ).map((m, i, tablica) => (
+                  <View
+                    key={m.etykieta}
+                    style={[
+                      styles.makroPozycja,
+                      i < tablica.length - 1 && { borderRightWidth: 1, borderRightColor: motyw.border },
+                    ]}>
+                    <Ionicons name={m.ikona} size={20} color={m.kolor} />
+                    <ThemedText type="smallBold" numberOfLines={1}>
+                      {m.wartosc}
+                      {m.jednostka}
+                    </ThemedText>
+                    <ThemedText type="small" themeColor="textSecondary" numberOfLines={1}>
+                      {m.etykieta}
+                    </ThemedText>
+                  </View>
+                ))}
+              </View>
+
+              {(p.kcal_calosc !== null || (p.cukry_wolne_g ?? 0) > 0) && (
+                <View style={[styles.podsumowanie, { backgroundColor: motyw.background }]}>
+                  {p.kcal_calosc !== null && (
+                    <View style={styles.podsumowanieWiersz}>
+                      <Ionicons name="scale-outline" size={16} color={motyw.accent} />
+                      <ThemedText type="small" themeColor="textSecondary">
+                        Cała potrawa: {p.gramy_calosc ? `${p.gramy_calosc} g, ` : ''}
+                        {p.kcal_calosc} kcal, {p.bialko_g_calosc} g białka
+                      </ThemedText>
+                    </View>
+                  )}
+                  {p.cukry_wolne_g !== null && p.cukry_wolne_g > 0 && (
+                    <View style={styles.podsumowanieWiersz}>
+                      <Ionicons name="diamond-outline" size={16} color={motyw.accent} />
+                      <ThemedText type="small" themeColor="textSecondary">
+                        cukry wolne: {p.cukry_wolne_g} g
+                      </ThemedText>
+                    </View>
+                  )}
+                </View>
               )}
             </>
           ) : (
@@ -498,13 +512,13 @@ export default function EkranPrzepisow() {
             </View>
           )}
 
-          <View style={styles.stopka}>
-            {p.cukry_wolne_g !== null && p.cukry_wolne_g > 0 && (
-              <ThemedText type="small" themeColor="textSecondary">
-                cukry wolne: {p.cukry_wolne_g} g
-              </ThemedText>
-            )}
-
+          {/*
+            Pasek akcji na dole karty — segmenty oddzielone pionową kreską,
+            jak w makiecie. Edytuj/Usuń mają etykietę, preferencje są
+            ikonami — jest ich zawsze trzy, więc tylko ostatnia jest bez
+            prawej krawędzi niezależnie od tego, czy Edytuj/Usuń się pokazują.
+          */}
+          <View style={[styles.akcjeBar, { borderColor: motyw.border, backgroundColor: motyw.background }]}>
             {(mozeDodawac || (p.autor_id === sesja?.user.id && p.widocznosc === 'prywatna')) && (
               <Pressable
                 onPress={() =>
@@ -513,61 +527,77 @@ export default function EkranPrzepisow() {
                     params: { id: p.id, powrot: '/przepisy' },
                   })
                 }
-                hitSlop={8}
+                accessibilityRole="button"
                 accessibilityLabel={`Edytuj ${p.nazwa}`}
-                style={styles.edytuj}>
+                style={({ pressed }) => [
+                  styles.akcjaSegment,
+                  { borderRightColor: motyw.border },
+                  pressed && styles.wcisniety,
+                ]}>
                 <Ionicons name="create-outline" size={18} color={motyw.textSecondary} />
+                <ThemedText type="small" themeColor="textSecondary">
+                  Edytuj
+                </ThemedText>
               </Pressable>
             )}
 
             {mozeUsuwac(p) && (
               <Pressable
                 onPress={() => setDoUsuniecia(p)}
-                hitSlop={8}
+                accessibilityRole="button"
                 accessibilityLabel={`Usuń ${p.nazwa}`}
-                style={styles.edytuj}>
+                style={({ pressed }) => [
+                  styles.akcjaSegment,
+                  { borderRightColor: motyw.border },
+                  pressed && styles.wcisniety,
+                ]}>
                 <Ionicons name="trash-outline" size={18} color={motyw.textSecondary} />
+                <ThemedText type="small" themeColor="textSecondary">
+                  Usuń
+                </ThemedText>
               </Pressable>
             )}
 
-            <View style={styles.preferencje}>
-              {(
-                [
-                  { poziom: 'ulubione', ikona: 'star', ikonaPusta: 'star-outline', etykieta: 'Ulubione — planuj często podczas automatyzacji planu' },
-                  { poziom: 'lubie', ikona: 'heart', ikonaPusta: 'heart-outline', etykieta: 'Lubię — wybieraj podczas automatyzacji planu' },
-                  { poziom: 'nie_proponuj', ikona: 'close-circle', ikonaPusta: 'close-circle-outline', etykieta: 'Nie proponuj podczas automatyzacji planu' },
-                ] as const
-              ).map((opcja) => {
-                const aktywna = p.preferencja === opcja.poziom;
-                const klucz = `${p.id}:${opcja.poziom}`;
-                return (
-                  <View key={opcja.poziom} style={styles.preferencjaOpakowanie}>
-                    {dymek === klucz && (
-                      <ThemedView
-                        type="backgroundElement"
-                        style={[styles.dymek, { borderColor: motyw.border }]}>
-                        <ThemedText type="small">{opcja.etykieta}</ThemedText>
-                      </ThemedView>
-                    )}
-                    <Pressable
-                      onPress={() => przelaczPreferencje(p, opcja.poziom)}
-                      onHoverIn={() => setDymek(klucz)}
-                      onHoverOut={() => setDymek(null)}
-                      hitSlop={6}
-                      accessibilityRole="button"
-                      accessibilityState={{ selected: aktywna }}
-                      accessibilityLabel={opcja.etykieta}
-                      style={({ pressed }) => [styles.preferencja, pressed && styles.wcisniety]}>
-                      <Ionicons
-                        name={aktywna ? opcja.ikona : opcja.ikonaPusta}
-                        size={20}
-                        color={aktywna ? motyw.accent : motyw.textSecondary}
-                      />
-                    </Pressable>
-                  </View>
-                );
-              })}
-            </View>
+            {(
+              [
+                { poziom: 'ulubione', ikona: 'star', ikonaPusta: 'star-outline', etykieta: 'Ulubione — planuj często podczas automatyzacji planu' },
+                { poziom: 'lubie', ikona: 'heart', ikonaPusta: 'heart-outline', etykieta: 'Lubię — wybieraj podczas automatyzacji planu' },
+                { poziom: 'nie_proponuj', ikona: 'close-circle', ikonaPusta: 'close-circle-outline', etykieta: 'Nie proponuj podczas automatyzacji planu' },
+              ] as const
+            ).map((opcja, i) => {
+              const aktywna = p.preferencja === opcja.poziom;
+              const klucz = `${p.id}:${opcja.poziom}`;
+              const ostatnia = i === 2;
+              return (
+                <View key={opcja.poziom} style={styles.preferencjaOpakowanie}>
+                  {dymek === klucz && (
+                    <ThemedView
+                      type="backgroundElement"
+                      style={[styles.dymek, { borderColor: motyw.border }]}>
+                      <ThemedText type="small">{opcja.etykieta}</ThemedText>
+                    </ThemedView>
+                  )}
+                  <Pressable
+                    onPress={() => przelaczPreferencje(p, opcja.poziom)}
+                    onHoverIn={() => setDymek(klucz)}
+                    onHoverOut={() => setDymek(null)}
+                    accessibilityRole="button"
+                    accessibilityState={{ selected: aktywna }}
+                    accessibilityLabel={opcja.etykieta}
+                    style={({ pressed }) => [
+                      styles.akcjaSegmentIkona,
+                      !ostatnia && { borderRightWidth: 1, borderRightColor: motyw.border },
+                      pressed && styles.wcisniety,
+                    ]}>
+                    <Ionicons
+                      name={aktywna ? opcja.ikona : opcja.ikonaPusta}
+                      size={22}
+                      color={aktywna ? motyw.accent : motyw.textSecondary}
+                    />
+                  </Pressable>
+                </View>
+              );
+            })}
           </View>
 
           {/* Potwierdzenie usunięcia — wewnątrz TEJ karty, żeby nie znikało z pola widzenia na długiej liście. */}
@@ -595,34 +625,40 @@ export default function EkranPrzepisow() {
       })}
 
       {mozeDodawac && (
-        <>
-          <Przycisk
-            tytul="Dodaj przepis"
-            onPress={() =>
-              router.push({
-                pathname: '/przepis-formularz',
-                params: { powrot: '/przepisy' },
-              })
-            }
-          />
-          <Przycisk
-            tytul="Składniki"
-            wariant="poboczny"
-            onPress={() =>
-              router.push({ pathname: '/skladniki', params: { powrot: '/przepisy' } })
-            }
-          />
-          <Przycisk
-            tytul="Import / eksport (Excel)"
-            wariant="poboczny"
-            onPress={() =>
-              router.push({
-                pathname: '/przepisy-import-eksport',
-                params: { powrot: '/przepisy' },
-              })
-            }
-          />
-        </>
+        <Przycisk
+          tytul="Dodaj przepis"
+          onPress={() =>
+            router.push({
+              pathname: '/przepis-formularz',
+              params: { powrot: '/przepisy' },
+            })
+          }
+        />
+      )}
+
+      {/*
+        Składniki widzi każde konto — każdy może dopisać brakujący, a katalog
+        i tak jest wspólny (patrz `skladniki_wstawianie`, migracja 0037).
+        Edycję i kasowanie istniejących wierszy pilnuje RLS, więc ekran
+        składników sam ukrywa te przyciski dla nie-moderatorów.
+      */}
+      <Przycisk
+        tytul="Składniki"
+        wariant="poboczny"
+        onPress={() => router.push({ pathname: '/skladniki', params: { powrot: '/przepisy' } })}
+      />
+
+      {mozeDodawac && (
+        <Przycisk
+          tytul="Import / eksport (Excel)"
+          wariant="poboczny"
+          onPress={() =>
+            router.push({
+              pathname: '/przepisy-import-eksport',
+              params: { powrot: '/przepisy' },
+            })
+          }
+        />
       )}
 
       {!mozeDodawac && !wczytywanie && (
@@ -635,30 +671,6 @@ export default function EkranPrzepisow() {
 }
 
 const styles = StyleSheet.create({
-  szukanie: {
-    flexDirection: 'row',
-    alignItems: 'flex-end',
-    gap: Spacing.two,
-  },
-  polePola: { flex: 1 },
-  wyczysc: {
-    height: 46,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  zakladki: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: Spacing.one,
-    paddingBottom: Spacing.one,
-  },
-  zakladka: {
-    borderWidth: 1,
-    borderRadius: 999,
-    paddingVertical: Spacing.one,
-    paddingHorizontal: Spacing.two,
-  },
-  zakladkaWybrana: { opacity: 1 },
   zdjecie: {
     width: '100%',
     aspectRatio: 16 / 9,
@@ -688,29 +700,75 @@ const styles = StyleSheet.create({
   },
   decyzje: { flexDirection: 'row', gap: Spacing.two },
   decyzja: { flex: 1 },
-  stopka: {
+
+  /* Tagi — pigułki z ikoną, jak w makiecie. */
+  tagi: {
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    gap: Spacing.two,
-    paddingTop: Spacing.one,
+    flexWrap: 'wrap',
+    gap: Spacing.one,
   },
-  edytuj: {
-    paddingVertical: Spacing.one,
-    paddingHorizontal: Spacing.two,
-    marginLeft: 'auto',
-  },
-  preferencje: {
+  tag: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: Spacing.one,
-    marginLeft: 'auto',
-  },
-  preferencja: {
+    borderWidth: 1,
+    borderRadius: Spacing.two,
     paddingVertical: Spacing.one,
-    paddingHorizontal: Spacing.half,
+    paddingHorizontal: Spacing.two,
   },
-  preferencjaOpakowanie: { position: 'relative' },
+  dzielnik: { height: 1 },
+
+  /* Makro na porcję — cztery ikony w rzędzie na wspólnym tle. */
+  makroBox: {
+    flexDirection: 'row',
+    borderRadius: Spacing.two,
+    paddingVertical: Spacing.two,
+  },
+  makroPozycja: {
+    flex: 1,
+    alignItems: 'center',
+    gap: 2,
+    paddingHorizontal: Spacing.one,
+  },
+
+  /* Podsumowanie — cała potrawa / cukry wolne, wiersz z ikoną. */
+  podsumowanie: {
+    gap: Spacing.one,
+    borderRadius: Spacing.two,
+    padding: Spacing.two,
+  },
+  podsumowanieWiersz: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.one,
+  },
+
+  /* Pasek akcji na dole karty — segmenty oddzielone pionową kreską. */
+  akcjeBar: {
+    flexDirection: 'row',
+    alignItems: 'stretch',
+    borderWidth: 1,
+    borderRadius: Spacing.two,
+    overflow: 'hidden',
+    marginTop: Spacing.one,
+  },
+  akcjaSegment: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: Spacing.one,
+    paddingVertical: Spacing.two,
+    paddingHorizontal: Spacing.one,
+    borderRightWidth: 1,
+  },
+  akcjaSegmentIkona: {
+    flex: 1,
+    width: 52,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  preferencjaOpakowanie: { position: 'relative', flex: 1 },
   dymek: {
     position: 'absolute',
     bottom: '100%',

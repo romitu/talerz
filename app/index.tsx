@@ -1,16 +1,15 @@
 import { Ionicons } from '@expo/vector-icons';
 import { router, useFocusEffect } from 'expo-router';
 import { useCallback, useMemo, useRef, useState } from 'react';
-import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 
 import { Ekran } from '@/components/ekran';
 import { Karta } from '@/components/karta';
 import { ListaRozwijana } from '@/components/lista-rozwijana';
-import { WierszMakro } from '@/components/wiersz-makro';
 import { Przycisk } from '@/components/przycisk';
 import { TabelaWyboru } from '@/components/tabela-wyboru';
 import { ThemedText } from '@/components/themed-text';
-import { Spacing } from '@/constants/theme';
+import { KOLOR_MAKRO, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import { komunikatBledu } from '@/lib/blad';
 import { powtorzTydzien, zaplanuj, type Wstawienie } from '@/lib/automat';
@@ -108,17 +107,28 @@ function odmianaDni(n: number): string {
   return n === 1 ? 'dzień' : 'dni';
 }
 
+/** Ikona przy nazwie posiłku w karcie dnia. */
+const IKONA_PORY: Record<PoraPosilku, keyof typeof Ionicons.glyphMap> = {
+  sniadanie: 'sunny-outline',
+  obiad: 'restaurant-outline',
+  kolacja: 'moon-outline',
+  dodatek: 'add-circle-outline',
+};
+
 /** Checkbox z opisem — pod „Wypełnij wolne miejsca", ustawienia automatu. */
 function PrzelacznikAutomatu({
   zaznaczone,
   onZmiana,
   etykieta,
   opis,
+  ikona,
 }: {
   zaznaczone: boolean;
   onZmiana: (wartosc: boolean) => void;
   etykieta: string;
   opis: string;
+  /** Ikona po prawej, w kółku — jak w karcie „Układanie tygodnia". */
+  ikona: keyof typeof Ionicons.glyphMap;
 }) {
   const motyw = useTheme();
   return (
@@ -139,6 +149,9 @@ function PrzelacznikAutomatu({
         <ThemedText type="small" themeColor="textSecondary">
           {opis}
         </ThemedText>
+      </View>
+      <View style={[styles.ikonaKoloMala, { backgroundColor: motyw.backgroundSelected }]}>
+        <Ionicons name={ikona} size={16} color={motyw.accent} />
       </View>
     </Pressable>
   );
@@ -697,61 +710,96 @@ export default function EkranPlanu() {
 
       {plan && (
         <Karta>
-          <ListaRozwijana
-            etykieta="PIERWSZY DZIEŃ PLANU"
-            wybrana={plan.data_start}
-            onZmiana={(d) => zDbem(() => zmienDatePlanu(plan.id, d))}
-            opcje={mozliweDaty.map((d) => ({
-              wartosc: d,
-              etykieta: opisDnia(d),
-              opis: czyDzisiaj(d) ? 'dzisiaj' : undefined,
-            }))}
-          />
+          <View style={styles.kartaNaglowek}>
+            <View style={[styles.ikonaKolo, { backgroundColor: motyw.backgroundSelected }]}>
+              <Ionicons name="calendar-outline" size={26} color={motyw.accent} />
+            </View>
+          </View>
+
+          <View style={styles.selektory}>
+            <View style={styles.selektor}>
+              <ListaRozwijana
+                etykieta="PIERWSZY DZIEŃ PLANU"
+                wybrana={plan.data_start}
+                onZmiana={(d) => zDbem(() => zmienDatePlanu(plan.id, d))}
+                opcje={mozliweDaty.map((d) => ({
+                  wartosc: d,
+                  etykieta: opisDnia(d),
+                  opis: czyDzisiaj(d) ? 'dzisiaj' : undefined,
+                }))}
+              />
+            </View>
+
+            {/*
+              Przełącznik tygodni pokazuje się dopiero, gdy jest co przełączać.
+              Przy pierwszym tygodniu byłby polem z jedną pozycją.
+            */}
+            {plany.length > 1 && (
+              <View style={styles.selektor}>
+                <ListaRozwijana
+                  etykieta="OGLĄDANY TYDZIEŃ"
+                  wybrana={plan.id}
+                  onZmiana={(id) => setWybranyPlanId(id)}
+                  opcje={plany.map((p) => ({
+                    wartosc: p.id,
+                    etykieta: `od ${opisDnia(p.data_start)}`,
+                    opis: p.id === plany[0].id ? 'najnowszy' : undefined,
+                  }))}
+                />
+              </View>
+            )}
+          </View>
+
           <ThemedText type="small" themeColor="textSecondary">
             Pozostałe dni ułożą się od niego. Posiłki zostają przy swoich datach.
           </ThemedText>
-
-          {/*
-            Przełącznik tygodni pokazuje się dopiero, gdy jest co przełączać.
-            Przy pierwszym tygodniu byłby polem z jedną pozycją.
-          */}
-          {plany.length > 1 && (
-            <ListaRozwijana
-              etykieta="OGLĄDANY TYDZIEŃ"
-              wybrana={plan.id}
-              onZmiana={(id) => setWybranyPlanId(id)}
-              opcje={plany.map((p) => ({
-                wartosc: p.id,
-                etykieta: `od ${opisDnia(p.data_start)}`,
-                opis: p.id === plany[0].id ? 'najnowszy' : undefined,
-              }))}
-            />
-          )}
         </Karta>
       )}
 
       {plan && (
         <Karta style={styles.narzedzia}>
-          <ThemedText type="smallBold" themeColor="textSecondary">
-            UKŁADANIE TYGODNIA
-          </ThemedText>
+          <View style={styles.kartaNaglowek}>
+            <View style={[styles.ikonaKolo, { backgroundColor: motyw.backgroundSelected }]}>
+              <Ionicons name="layers-outline" size={26} color={motyw.accent} />
+            </View>
+            <ThemedText type="smallBold" themeColor="textSecondary">
+              UKŁADANIE TYGODNIA
+            </ThemedText>
+          </View>
 
-          <Przycisk
-            tytul={pracuje ? 'Układam…' : 'Wypełnij wolne miejsca'}
+          <Pressable
             onPress={wypelnijAutomatem}
-            zajety={pracuje}
-            wylaczony={pracuje || przepisy.length === 0}
-          />
-          <ThemedText type="small" themeColor="textSecondary">
-            Dobiera z ulubionych tak, żeby domknąć dzienne białko i kalorie. Tego, co
-            już wybrałeś, nie rusza — od zera służy czyszczenie poniżej.
-          </ThemedText>
+            disabled={pracuje || przepisy.length === 0}
+            accessibilityRole="button"
+            style={({ pressed }) => [
+              styles.wypelnijPrzycisk,
+              { backgroundColor: motyw.accent },
+              (pressed || pracuje || przepisy.length === 0) && styles.wcisniete,
+            ]}>
+            {pracuje ? (
+              <ActivityIndicator color="#fff" />
+            ) : (
+              <>
+                <Ionicons name="sparkles-outline" size={26} color="#fff" />
+                <View style={styles.wypelnijTresc}>
+                  <ThemedText type="smallBold" style={styles.bialyTekst}>
+                    Wypełnij wolne miejsca
+                  </ThemedText>
+                  <ThemedText type="small" style={[styles.bialyTekst, styles.wypelnijOpis]}>
+                    Dobiera z ulubionych tak, żeby domknąć dzienne białko i kalorie.
+                    Tego, co już wybrałeś, nie rusza.
+                  </ThemedText>
+                </View>
+              </>
+            )}
+          </Pressable>
 
           <PrzelacznikAutomatu
             zaznaczone={skalujPoWypelnieniu}
             onZmiana={setSkalujPoWypelnieniu}
             etykieta="Skaluj cały tydzień do celów"
             opis="Od razu po wypełnieniu przelicza dania skalowalne pod dzienny cel — jak osobny przycisk niżej, tylko bez dodatkowego kliknięcia."
+            ikona="trending-up-outline"
           />
 
           <PrzelacznikAutomatu
@@ -759,55 +807,70 @@ export default function EkranPlanu() {
             onZmiana={setUwzglednijTrwalosc}
             etykieta="Uwzględnij ile dni wytrzyma w lodówce"
             opis="Kopiuje danie na tyle kolejnych dni, ile wytrzyma w lodówce, zamiast na jego liczbę porcji bazowych."
+            ikona="archive-outline"
           />
 
-          <Przycisk
-            tytul={pracuje ? 'Przeliczam…' : 'Skaluj cały tydzień do celów'}
-            wariant="poboczny"
-            onPress={skalujCalyTydzien}
-            zajety={pracuje}
-            wylaczony={pracuje}
-          />
-          <ThemedText type="small" themeColor="textSecondary">
-            Przelicza dania oznaczone jako skalowalne (checkbox w formularzu przepisu albo
-            na ekranie „Makro przepisów") tak, żeby każdy dzień celniej trafiał w dzienny
-            cel kaloryczny. Reszty dań nie rusza.
-          </ThemedText>
+          <View style={styles.akcjeSiatka}>
+            <Przycisk
+              tytul={pracuje ? 'Przeliczam…' : 'Skaluj cały tydzień do celów'}
+              wariant="poboczny"
+              ikona="stats-chart-outline"
+              onPress={skalujCalyTydzien}
+              zajety={pracuje}
+              wylaczony={pracuje}
+              style={styles.akcjaKafelek}
+            />
 
-          <Przycisk
-            tytul="Powtórz poprzedni tydzień"
-            wariant="poboczny"
-            onPress={powtorzPoprzedni}
-            zajety={pracuje}
-            wylaczony={pracuje}
-          />
+            <Przycisk
+              tytul="Powtórz poprzedni tydzień"
+              wariant="poboczny"
+              ikona="refresh-outline"
+              onPress={powtorzPoprzedni}
+              zajety={pracuje}
+              wylaczony={pracuje}
+              style={styles.akcjaKafelek}
+            />
 
-          <Przycisk
-            tytul="Zacznij nowy tydzień od dzisiaj"
-            wariant="poboczny"
-            onPress={() =>
-              zDbem(async () => {
-                if (!sesja) return;
-                const nowy = await utworzPlan(sesja.user.id, naDate(new Date()));
-                setWybranyPlanId(nowy.id);
+            <Przycisk
+              tytul="Zacznij nowy tydzień od dzisiaj"
+              wariant="poboczny"
+              ikona="add-circle-outline"
+              onPress={() =>
+                zDbem(async () => {
+                  if (!sesja) return;
+                  const nowy = await utworzPlan(sesja.user.id, naDate(new Date()));
+                  setWybranyPlanId(nowy.id);
 
-                // Sprzątamy przy zakładaniu nowego tygodnia, a nie przy każdym
-                // wejściu na ekran. To jedyny moment, w którym historia rośnie,
-                // więc jedyny, w którym trzeba coś przyciąć.
-                const usunietych = await posprzatajStarePlany();
-                if (usunietych > 0) {
-                  setKomunikat(
-                    `Trzymamy ${TYGODNI_HISTORII} ostatnich tygodni — starsze ` +
-                      `${usunietych === 1 ? 'zniknął' : 'zniknęły'} (${usunietych}).`
-                  );
-                }
-              })
-            }
-            zajety={pracuje}
-          />
+                  // Sprzątamy przy zakładaniu nowego tygodnia, a nie przy każdym
+                  // wejściu na ekran. To jedyny moment, w którym historia rośnie,
+                  // więc jedyny, w którym trzeba coś przyciąć.
+                  const usunietych = await posprzatajStarePlany();
+                  if (usunietych > 0) {
+                    setKomunikat(
+                      `Trzymamy ${TYGODNI_HISTORII} ostatnich tygodni — starsze ` +
+                        `${usunietych === 1 ? 'zniknął' : 'zniknęły'} (${usunietych}).`
+                    );
+                  }
+                })
+              }
+              zajety={pracuje}
+              style={styles.akcjaKafelek}
+            />
+
+            <Przycisk
+              tytul="Wyczyść wszystko"
+              wariant="poboczny"
+              ikona="trash-outline"
+              onPress={() => setCzyscic(true)}
+              wylaczony={pozycje.length === 0 || pracuje}
+              style={styles.akcjaKafelek}
+            />
+          </View>
+
           <ThemedText type="small" themeColor="textSecondary">
             Zakłada kolejny tydzień od dzisiaj. Poprzedni zostaje — to z niego bierze
-            się „powtórz poprzedni tydzień”.
+            się „powtórz poprzedni tydzień”. Skalowanie przelicza dania oznaczone jako
+            skalowalne tak, żeby każdy dzień celniej trafiał w dzienny cel kaloryczny.
           </ThemedText>
 
           {/*
@@ -815,7 +878,7 @@ export default function EkranPlanu() {
             drugiego dotknięcia. Okienko systemowe odpada: na przeglądarce
             wygląda jak komunikat o błędzie, a na telefonie bywa blokowane.
           */}
-          {czyscic ? (
+          {czyscic && (
             <>
               <ThemedText type="small" themeColor="accent">
                 Skasować wszystkie {pozycje.length} posiłków tego tygodnia razem
@@ -832,13 +895,6 @@ export default function EkranPlanu() {
               />
               <Przycisk tytul="Zostaw" wariant="poboczny" onPress={() => setCzyscic(false)} />
             </>
-          ) : (
-            <Przycisk
-              tytul="Wyczyść wszystko"
-              wariant="poboczny"
-              onPress={() => setCzyscic(true)}
-              wylaczony={pozycje.length === 0 || pracuje}
-            />
           )}
 
           {komunikat && (
@@ -869,24 +925,26 @@ export default function EkranPlanu() {
                   : { marginTop: Spacing.three }
               }>
               {/*
-                Pasek nagłówka rozciąga się na całą szerokość karty — stąd ujemne
-                marginesy, które znoszą jej wewnętrzny odstęp. To on oddziela
-                dni od siebie podczas przewijania; wcześniej nagłówek był zwykłym
-                wierszem tekstu i granica dnia dawała się rozpoznać dopiero po
-                przeczytaniu daty.
+                Nagłówek dnia — samodzielna pigułka z ikoną, datą i licznikiem
+                obsadzonych posiłków, oddzielona od kart posiłków poniżej.
               */}
               <View
                 style={[
-                  styles.pasekDnia,
+                  styles.dzienNaglowek,
                   {
                     backgroundColor: komplet ? motyw.backgroundSelected : motyw.background,
-                    borderBottomColor: motyw.border,
+                    borderColor: motyw.border,
                   },
                 ]}>
-                <ThemedText type="smallBold" themeColor={dzisiaj ? 'accent' : 'text'}>
-                  {opisDnia(data)}
-                  {dzisiaj ? ' · dzisiaj' : ''}
-                </ThemedText>
+                <View style={styles.dzienNaglowekLewo}>
+                  <View style={[styles.ikonaKoloDnia, { backgroundColor: motyw.backgroundElement }]}>
+                    <Ionicons name="calendar-outline" size={22} color={motyw.accent} />
+                  </View>
+                  <ThemedText type="default" themeColor={dzisiaj ? 'accent' : 'text'}>
+                    {opisDnia(data)}
+                    {dzisiaj ? ' · dzisiaj' : ''}
+                  </ThemedText>
+                </View>
 
                 <View style={styles.stanDnia}>
                   {/*
@@ -896,7 +954,9 @@ export default function EkranPlanu() {
                   */}
                   <View style={styles.licznikPosilkow}>
                     {komplet && (
-                      <Ionicons name="checkmark-circle" size={14} color={motyw.textSecondary} />
+                      <View style={[styles.checkKoloMale, { backgroundColor: motyw.accent }]}>
+                        <Ionicons name="checkmark" size={12} color="#fff" />
+                      </View>
                     )}
                     <ThemedText
                       type="smallBold"
@@ -924,92 +984,108 @@ export default function EkranPlanu() {
                 const zaMalo = progBialka !== null && dania.length > 0 && bialko < progBialka;
 
                 return (
-                  <View key={pora} style={styles.posilek}>
-                    {dania.map((pozycja) => (
-                      <View key={pozycja.id} style={[styles.pozycja, { borderColor: motyw.border }]}>
-                        <View style={styles.naglowekPozycji}>
-                          <ThemedText type="small" themeColor="accent">
-                            {OPIS_PORY[pora].toUpperCase()}
-                            {dania.length > 1 ? ` · danie ${pozycja.kolejnosc}` : ''}
-                          </ThemedText>
-                          <Pressable
-                            onPress={() =>
-                              zDbem(() =>
-                                pozycja.partia_id
-                                  ? usunPartie(pozycja.partia_id)
-                                  : usunPosilek(pozycja.id)
-                              )
-                            }
-                            hitSlop={8}
-                            accessibilityLabel={
-                              pozycja.partia_id ? 'Usuń całą partię' : 'Usuń danie'
-                            }>
-                            <Ionicons name="close" size={16} color={motyw.textSecondary} />
-                          </Pressable>
-                        </View>
-
-                        {/*
-                          Nazwa dania otwiera przepis do gotowania. To jest droga,
-                          którą chodzi się najczęściej: stoisz w kuchni, patrzysz
-                          w plan i chcesz zobaczyć, co i jak zrobić.
-                        */}
-                        <Pressable
-                          onPress={() => {
-                            // Ile porcji trzeba UGOTOWAĆ NARAZ dla tej partii: tyle dni,
-                            // ile pozycji dzieli ten sam partia_id, razy jedzący danego dnia.
-                            // Bez tego ekran przepisu pokazywałby bazową ilość składników,
-                            // nawet gdy garnek ma starczyć na kilka dni z rzędu.
-                            const dniPartii = pozycja.partia_id
-                              ? pozycje.filter((p) => p.partia_id === pozycja.partia_id).length
-                              : 1;
-                            router.push({
-                              pathname: '/przepis',
-                              params: {
-                                id: pozycja.przepis_id,
-                                powrot: '/',
-                                porcjeRazem: String(dniPartii * pozycja.porcje),
-                                ...(pozycja.przepis_skalowany_id
-                                  ? { skalowany: pozycja.przepis_skalowany_id }
-                                  : {}),
-                              },
-                            });
-                          }}
-                          accessibilityRole="link"
-                          accessibilityLabel={`Otwórz przepis: ${pozycja.nazwa}`}
-                          style={({ pressed }) => [styles.otworzPrzepis, pressed && styles.wcisniete]}>
-                          <ThemedText type="small" style={styles.nazwaDania}>
-                            {pozycja.nazwa}
-                          </ThemedText>
-                          <Ionicons name="chevron-forward" size={16} color={motyw.textSecondary} />
-                        </Pressable>
-
-                        <View style={styles.wierszPozycji}>
-                          {/*
-                            Liczba porcji nie jest edytowalna z osobna — wynika z liczby
-                            jedzących i rozkłada się na tyle dni, ile danie wytrzyma.
-                            Zmiana pojedynczego dnia rozjechałaby się z garnkiem.
-                          */}
-                          <ThemedText type="smallBold">
-                            {pozycja.porcje}{' '}
-                            {pozycja.porcje === 1 ? 'porcja' : 'porcje'}
-                          </ThemedText>
-
-                          {pozycja.gramy_porcji > 0 && (
-                            <ThemedText type="small" themeColor="textSecondary">
-                              {Math.round(pozycja.gramy_porcji * pozycja.porcje)} g
-                            </ThemedText>
-                          )}
-
-                          <ThemedText
-                            type="small"
-                            themeColor="textSecondary"
-                            style={styles.makroPozycji}>
-                            {Math.round(pozycja.kcal * pozycja.porcje)} kcal{' · '}
-                            {Math.round(pozycja.bialko_g * pozycja.porcje * 10) / 10} g białka
-                          </ThemedText>
-                        </View>
+                  <View
+                    key={pora}
+                    style={[
+                      styles.posilekKarta,
+                      { borderColor: motyw.border, backgroundColor: motyw.backgroundElement },
+                    ]}>
+                    <View style={styles.posilekGlowny}>
+                      <View style={[styles.posilekIkona, { backgroundColor: motyw.background }]}>
+                        <Ionicons name={IKONA_PORY[pora]} size={26} color={motyw.accent} />
                       </View>
-                    ))}
+
+                      <View style={styles.posilekTresc}>
+                        <ThemedText type="smallBold" themeColor="accent">
+                          {OPIS_PORY[pora].toUpperCase()}
+                        </ThemedText>
+
+                        {dania.map((pozycja) => (
+                          <View key={pozycja.id} style={styles.pozycja}>
+                            {/*
+                              Nazwa dania otwiera przepis do gotowania. To jest droga,
+                              którą chodzi się najczęściej: stoisz w kuchni, patrzysz
+                              w plan i chcesz zobaczyć, co i jak zrobić.
+                            */}
+                            <View style={styles.wierszNazwyDania}>
+                              <Pressable
+                                onPress={() => {
+                                  // Ile porcji trzeba UGOTOWAĆ NARAZ dla tej partii: tyle dni,
+                                  // ile pozycji dzieli ten sam partia_id, razy jedzący danego dnia.
+                                  // Bez tego ekran przepisu pokazywałby bazową ilość składników,
+                                  // nawet gdy garnek ma starczyć na kilka dni z rzędu.
+                                  const dniPartii = pozycja.partia_id
+                                    ? pozycje.filter((p) => p.partia_id === pozycja.partia_id).length
+                                    : 1;
+                                  router.push({
+                                    pathname: '/przepis',
+                                    params: {
+                                      id: pozycja.przepis_id,
+                                      powrot: '/',
+                                      porcjeRazem: String(dniPartii * pozycja.porcje),
+                                      ...(pozycja.przepis_skalowany_id
+                                        ? { skalowany: pozycja.przepis_skalowany_id }
+                                        : {}),
+                                    },
+                                  });
+                                }}
+                                accessibilityRole="link"
+                                accessibilityLabel={`Otwórz przepis: ${pozycja.nazwa}`}
+                                style={({ pressed }) => [styles.otworzPrzepis, pressed && styles.wcisniete]}>
+                                <ThemedText type="small" style={styles.nazwaDania} numberOfLines={2}>
+                                  {pozycja.nazwa}
+                                  {dania.length > 1 ? ` · danie ${pozycja.kolejnosc}` : ''}
+                                </ThemedText>
+                                <Ionicons name="chevron-forward" size={18} color={motyw.textSecondary} />
+                              </Pressable>
+
+                              <View style={styles.akcjeDania}>
+                                <Pressable
+                                  onPress={() =>
+                                    zDbem(() =>
+                                      pozycja.partia_id
+                                        ? usunPartie(pozycja.partia_id)
+                                        : usunPosilek(pozycja.id)
+                                    )
+                                  }
+                                  hitSlop={8}
+                                  accessibilityLabel={
+                                    pozycja.partia_id ? 'Usuń całą partię' : 'Usuń danie'
+                                  }>
+                                  <Ionicons name="close" size={18} color={motyw.textSecondary} />
+                                </Pressable>
+                              </View>
+                            </View>
+
+                            <View style={styles.wierszPozycji}>
+                              {/*
+                                Liczba porcji nie jest edytowalna z osobna — wynika z liczby
+                                jedzących i rozkłada się na tyle dni, ile danie wytrzyma.
+                                Zmiana pojedynczego dnia rozjechałaby się z garnkiem.
+                              */}
+                              <ThemedText type="smallBold">
+                                {pozycja.porcje}{' '}
+                                {pozycja.porcje === 1 ? 'porcja' : 'porcje'}
+                              </ThemedText>
+
+                              {pozycja.gramy_porcji > 0 && (
+                                <ThemedText type="small" themeColor="textSecondary">
+                                  {Math.round(pozycja.gramy_porcji * pozycja.porcje)} g
+                                </ThemedText>
+                              )}
+
+                              <ThemedText
+                                type="small"
+                                themeColor="textSecondary"
+                                style={styles.makroPozycji}>
+                                {Math.round(pozycja.kcal * pozycja.porcje)} kcal{' · '}
+                                {Math.round(pozycja.bialko_g * pozycja.porcje * 10) / 10} g białka
+                              </ThemedText>
+                            </View>
+                          </View>
+                        ))}
+                      </View>
+                    </View>
 
                     <Pressable
                       onPress={() => setWybierany({ data, pora })}
@@ -1027,11 +1103,21 @@ export default function EkranPlanu() {
                     </Pressable>
 
                     {zaMalo && (
-                      <ThemedText type="small" themeColor="accent">
-                        {OPIS_PORY[pora]}: {Math.round(bialko * 10) / 10} g białka,
-                        próg {progBialka} g. Lekki posiłek — jeśli reszta dnia to nadrobi,
-                        nic się nie dzieje.
-                      </ThemedText>
+                      <View
+                        style={[
+                          styles.infoBialko,
+                          { backgroundColor: motyw.background, borderColor: motyw.border },
+                        ]}>
+                        <Ionicons name="leaf-outline" size={18} color={motyw.accent} />
+                        <ThemedText
+                          type="small"
+                          themeColor="textSecondary"
+                          style={styles.infoBialkoTekst}>
+                          {OPIS_PORY[pora]}: {Math.round(bialko * 10) / 10} g białka,
+                          próg {progBialka} g. Lekki posiłek — jeśli reszta dnia to nadrobi,
+                          nic się nie dzieje.
+                        </ThemedText>
+                      </View>
                     )}
                   </View>
                 );
@@ -1039,16 +1125,78 @@ export default function EkranPlanu() {
 
 
               {dzien.length > 0 && (
-                <>
-                  <WierszMakro
-                    pozycje={[
-                      { etykieta: 'kcal', wartosc: Math.round(suma.kcal), jednostka: '', cel: cel?.kcal },
-                      { etykieta: 'białko', wartosc: Math.round(suma.bialko), jednostka: ' g', cel: cel?.bialko_g },
-                      { etykieta: 'tłuszcz', wartosc: Math.round(suma.tluszcz), jednostka: ' g', cel: cel?.tluszcz_g },
-                      { etykieta: 'węgle', wartosc: Math.round(suma.wegle), jednostka: ' g', cel: cel?.wegle_g },
-                      { etykieta: 'błonnik', wartosc: Math.round(suma.blonnik), jednostka: ' g', cel: cel?.blonnik_g ?? undefined },
-                    ]}
-                  />
+                <View
+                  style={[
+                    styles.dzienPodsumowanie,
+                    { backgroundColor: motyw.background, borderColor: motyw.border },
+                  ]}>
+                  <View style={styles.summarySiatka}>
+                    {(
+                      [
+                        {
+                          etykieta: 'kcal',
+                          wartosc: Math.round(suma.kcal),
+                          jednostka: '',
+                          cel: cel?.kcal,
+                          ikona: 'flame-outline' as const,
+                          kolor: KOLOR_MAKRO.bialko,
+                        },
+                        {
+                          etykieta: 'białko',
+                          wartosc: Math.round(suma.bialko),
+                          jednostka: ' g',
+                          cel: cel?.bialko_g,
+                          ikona: 'barbell-outline' as const,
+                          kolor: KOLOR_MAKRO.bialko,
+                        },
+                        {
+                          etykieta: 'tłuszcz',
+                          wartosc: Math.round(suma.tluszcz),
+                          jednostka: ' g',
+                          cel: cel?.tluszcz_g,
+                          ikona: 'water-outline' as const,
+                          kolor: KOLOR_MAKRO.tluszcz,
+                        },
+                        {
+                          etykieta: 'węgle',
+                          wartosc: Math.round(suma.wegle),
+                          jednostka: ' g',
+                          cel: cel?.wegle_g,
+                          ikona: 'nutrition-outline' as const,
+                          kolor: KOLOR_MAKRO.wegle,
+                        },
+                        {
+                          etykieta: 'błonnik',
+                          wartosc: Math.round(suma.blonnik),
+                          jednostka: ' g',
+                          cel: cel?.blonnik_g ?? undefined,
+                          ikona: 'leaf-outline' as const,
+                          kolor: KOLOR_MAKRO.blonnik,
+                        },
+                      ]
+                    ).map((p) => (
+                      <View key={p.etykieta} style={styles.summaryPozycja}>
+                        <View style={[styles.summaryIkona, { backgroundColor: `${p.kolor}22` }]}>
+                          <Ionicons name={p.ikona} size={18} color={p.kolor} />
+                        </View>
+                        <View style={styles.summaryWartosci}>
+                          <ThemedText type="smallBold" numberOfLines={1}>
+                            {p.wartosc}
+                            {p.jednostka}
+                          </ThemedText>
+                          {p.cel !== undefined && (
+                            <ThemedText type="small" themeColor="textSecondary" numberOfLines={1}>
+                              z {p.cel}
+                              {p.jednostka}
+                            </ThemedText>
+                          )}
+                          <ThemedText type="small" themeColor="textSecondary" numberOfLines={1}>
+                            {p.etykieta}
+                          </ThemedText>
+                        </View>
+                      </View>
+                    ))}
+                  </View>
 
                   {/*
                     Najbardziej użyteczna liczba w całym ekranie: jak daleko dzień
@@ -1061,14 +1209,14 @@ export default function EkranPlanu() {
                   */}
                   {cel && (
                     <View
-                      style={[
-                        styles.bilans,
-                        {
-                          borderLeftColor:
-                            suma.bialko < cel.bialko_g ? motyw.accent : motyw.border,
-                          backgroundColor: motyw.background,
-                        },
-                      ]}>
+                      style={[styles.summaryStatus, { backgroundColor: motyw.backgroundSelected }]}>
+                      <View
+                        style={[
+                          styles.checkKoloMale,
+                          { backgroundColor: suma.bialko < cel.bialko_g ? motyw.accent : KOLOR_MAKRO.bialko },
+                        ]}>
+                        <Ionicons name="checkmark" size={12} color="#fff" />
+                      </View>
                       <ThemedText
                         type="smallBold"
                         themeColor={suma.bialko < cel.bialko_g ? 'accent' : 'text'}>
@@ -1076,8 +1224,7 @@ export default function EkranPlanu() {
                       </ThemedText>
                     </View>
                   )}
-
-                </>
+                </View>
               )}
             </Karta>
           );
@@ -1096,30 +1243,92 @@ const styles = StyleSheet.create({
   narzedzia: { gap: Spacing.two },
   checkboxWiersz: {
     flexDirection: 'row',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     gap: Spacing.two,
     paddingVertical: Spacing.one,
   },
   checkboxTresc: { flex: 1, gap: 2 },
 
-  /*
-    Pasek nagłówka dnia. Ujemne marginesy znoszą wewnętrzny odstęp karty,
-    żeby tło paska sięgało jej krawędzi — inaczej byłby prostokątem
-    pływającym w środku i nie czytałby się jako granica dnia.
-  */
-  pasekDnia: {
+  /* Nagłówek karty — ikona w kółku, jak przy „Lista zakupów". */
+  kartaNaglowek: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.two,
+  },
+  ikonaKolo: {
+    width: 52,
+    height: 52,
+    borderRadius: 26,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  ikonaKoloMala: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  /* Dwa pola wyboru (pierwszy dzień, oglądany tydzień) obok siebie na
+     szerszym ekranie, jedno pod drugim na wąskim telefonie. */
+  selektory: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: Spacing.three,
+  },
+  selektor: {
+    flexGrow: 1,
+    flexBasis: 220,
+  },
+
+  /* Duży przycisk „Wypełnij wolne miejsca" — najważniejsza akcja karty. */
+  wypelnijPrzycisk: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.three,
+    borderRadius: Spacing.three,
+    padding: Spacing.three,
+    minHeight: 72,
+  },
+  wypelnijTresc: { flex: 1, gap: Spacing.half },
+  wypelnijOpis: { opacity: 0.9 },
+  bialyTekst: { color: '#FFFFFF' },
+
+  /* Przyciski akcji — po dwa w rzędzie, jak kafelki w makiecie. */
+  akcjeSiatka: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: Spacing.two,
+  },
+  akcjaKafelek: {
+    flexGrow: 1,
+    flexBasis: '46%',
+  },
+
+  /* Nagłówek dnia — pigułka z ikoną, datą i licznikiem obsadzonych posiłków. */
+  dzienNaglowek: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    flexWrap: 'wrap',
     gap: Spacing.two,
-    marginTop: -Spacing.three,
-    marginHorizontal: -Spacing.three,
-    marginBottom: Spacing.one,
+    borderWidth: 1,
+    borderRadius: Spacing.three,
     paddingHorizontal: Spacing.three,
     paddingVertical: Spacing.two,
-    borderTopLeftRadius: Spacing.three,
-    borderTopRightRadius: Spacing.three,
-    borderBottomWidth: 1,
+  },
+  dzienNaglowekLewo: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.two,
+  },
+  ikonaKoloDnia: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   stanDnia: {
     flexDirection: 'row',
@@ -1131,18 +1340,35 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: Spacing.one,
   },
+  checkKoloMale: {
+    width: 18,
+    height: 18,
+    borderRadius: 9,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 
-  /* Bilans dnia — pasek z lewą krawędzią, żeby odciąć go od zwykłych zdań. */
-  bilans: {
-    borderLeftWidth: 3,
-    paddingLeft: Spacing.two,
-    paddingVertical: Spacing.one,
-    borderRadius: 0,
+  /* Karta jednego posiłku — ikona typu posiłku po lewej, dania po prawej. */
+  posilekKarta: {
+    borderWidth: 1,
+    borderRadius: Spacing.three,
+    padding: Spacing.three,
+    gap: Spacing.two,
   },
-  posilek: {
-    gap: Spacing.one,
-    paddingBottom: Spacing.two,
+  posilekGlowny: {
+    flexDirection: 'row',
+    gap: Spacing.three,
+    alignItems: 'flex-start',
   },
+  posilekIkona: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  posilekTresc: { flex: 1, gap: Spacing.two, minWidth: 0 },
+
   puste: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -1153,16 +1379,17 @@ const styles = StyleSheet.create({
     padding: Spacing.two,
   },
   wcisniete: { opacity: 0.6 },
-  pozycja: {
-    borderWidth: 1,
-    borderRadius: Spacing.two,
-    padding: Spacing.two,
-    gap: Spacing.one,
-  },
-  naglowekPozycji: {
+  pozycja: { gap: Spacing.one },
+  wierszNazwyDania: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    gap: Spacing.two,
+  },
+  akcjeDania: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.two,
   },
   wierszPozycji: {
     flexDirection: 'row',
@@ -1171,10 +1398,64 @@ const styles = StyleSheet.create({
   },
   makroPozycji: { marginLeft: 'auto' },
   otworzPrzepis: {
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     gap: Spacing.one,
     paddingVertical: Spacing.half,
   },
   nazwaDania: { flex: 1 },
+
+  /* Ostrzeżenie o niskim białku posiłku — pigułka z ikoną, jak w makiecie. */
+  infoBialko: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    gap: Spacing.two,
+    borderWidth: 1,
+    borderRadius: Spacing.two,
+    padding: Spacing.two,
+  },
+  infoBialkoTekst: { flex: 1 },
+
+  /* Podsumowanie dnia — siatka makro z ikonami i pasek bilansu na dole. */
+  dzienPodsumowanie: {
+    borderWidth: 1,
+    borderRadius: Spacing.three,
+    padding: Spacing.three,
+    gap: Spacing.two,
+  },
+  /*
+    Zawsze w jednej linii, bez zawijania — jak `WierszMakro`. Szerokość
+    kolumny jest UŁAMKIEM rzędu (100% / 5 pozycji), a odstęp robi wewnętrzny
+    `paddingRight`, nie `gap` — `gap` doliczyłby się do stu procent
+    zajmowanych przez kolumny i rząd znów by się zawinął.
+  */
+  summarySiatka: {
+    flexDirection: 'row',
+  },
+  summaryPozycja: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: Spacing.one,
+    width: '20%',
+    minWidth: 0,
+  },
+  summaryIkona: {
+    width: 28,
+    height: 28,
+    borderRadius: 14,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: 0,
+  },
+  summaryWartosci: { gap: 2, minWidth: 0 },
+  summaryStatus: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.two,
+    borderRadius: Spacing.two,
+    paddingHorizontal: Spacing.two,
+    paddingVertical: Spacing.one,
+  },
 });
