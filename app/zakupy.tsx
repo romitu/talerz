@@ -284,18 +284,6 @@ export default function EkranZakupow() {
                       themeColor={odhaczony ? 'textSecondary' : 'text'}>
                       {p.nazwa} — {opisIlosci(p.gramy)}
                     </ThemedText>
-
-                    {p.opakowan !== null && (
-                      <ThemedText type="small" themeColor="textSecondary">
-                        {p.opakowan}{' '}
-                        {p.opakowan === 1 ? 'opakowanie' : 'opakowania'} po {p.opakowanie_g} g
-                        {p.reszta_g ? ` · zostanie ${p.reszta_g} g` : ' · bez reszty'}
-                      </ThemedText>
-                    )}
-
-                    <ThemedText type="small" themeColor="textSecondary">
-                      {p.dania.join(', ')}
-                    </ThemedText>
                   </View>
                 </Pressable>
               );
