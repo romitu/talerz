@@ -32,6 +32,12 @@ type EkranProps = {
   onScroll?: ScrollViewProps['onScroll'];
   onContentSizeChange?: ScrollViewProps['onContentSizeChange'];
 
+  /**
+   * Własny nagłówek zamiast domyślnego tytułu/podtytułu — renderowany NAD
+   * przewijaną treścią, więc zostaje na miejscu, gdy lista pod nim się przewija.
+   */
+  naglowekStaly?: ReactNode;
+
   children: ReactNode;
 };
 
@@ -47,11 +53,21 @@ export function Ekran({
   refPrzewijania,
   onScroll,
   onContentSizeChange,
+  naglowekStaly,
   children,
 }: EkranProps) {
   return (
     <ThemedView style={styles.tlo}>
       <SafeAreaView edges={['top']} style={styles.obszarBezpieczny}>
+        {naglowekStaly ? (
+          <View
+            style={[
+              styles.owinkaNaglowka,
+              pelnaSzerokosc ? styles.bezOgraniczenia : styles.zOgraniczeniem,
+            ]}>
+            {naglowekStaly}
+          </View>
+        ) : null}
         <ScrollView
           ref={refPrzewijania}
           onScroll={onScroll}
@@ -65,14 +81,16 @@ export function Ekran({
             pelnaSzerokosc ? styles.bezOgraniczenia : styles.zOgraniczeniem,
           ]}
           showsVerticalScrollIndicator={false}>
-          <View style={styles.naglowek}>
-            <ThemedText type="subtitle">{tytul}</ThemedText>
-            {podtytul ? (
-              <ThemedText type="small" themeColor="textSecondary">
-                {podtytul}
-              </ThemedText>
-            ) : null}
-          </View>
+          {!naglowekStaly && (
+            <View style={styles.naglowek}>
+              <ThemedText type="subtitle">{tytul}</ThemedText>
+              {podtytul ? (
+                <ThemedText type="small" themeColor="textSecondary">
+                  {podtytul}
+                </ThemedText>
+              ) : null}
+            </View>
+          )}
           {children}
         </ScrollView>
       </SafeAreaView>
@@ -109,5 +127,11 @@ const styles = StyleSheet.create({
     paddingTop: Spacing.three,
     paddingBottom: Spacing.one,
     gap: Spacing.half,
+  },
+  owinkaNaglowka: {
+    paddingHorizontal: Spacing.three,
+    paddingTop: Spacing.three,
+    width: '100%',
+    alignSelf: 'center',
   },
 });

@@ -5,8 +5,8 @@ import { Pressable, StyleSheet, View } from 'react-native';
 
 import { DopiszProdukt } from '@/components/dopisz-produkt';
 import { Ekran } from '@/components/ekran';
-import { ListaRozwijana } from '@/components/lista-rozwijana';
 import { Karta } from '@/components/karta';
+import { NaglowekZakupow } from '@/components/naglowek-zakupow';
 import { Przycisk } from '@/components/przycisk';
 import { ThemedText } from '@/components/themed-text';
 import { Spacing } from '@/constants/theme';
@@ -39,7 +39,7 @@ function opisIlosci(gramy: number): string {
 }
 
 export default function EkranZakupow() {
-  const { dni, powrot } = useLocalSearchParams<{ dni?: string; powrot?: string }>();
+  const { powrot } = useLocalSearchParams<{ powrot?: string }>();
   const motyw = useTheme();
   const { sesja } = useSesja();
   const kontoId = sesja?.user.id;
@@ -49,13 +49,8 @@ export default function EkranZakupow() {
   const [reczne, setReczne] = useState<ProduktReczny[]>([]);
   const [historia, setHistoria] = useState<string[]>([]);
   const [kupione, setKupione] = useState<Set<string>>(new Set());
-  const [zakres, setZakres] = useState(Number(dni) || 7);
   const [wczytywanie, setWczytywanie] = useState(true);
   const [blad, setBlad] = useState<string | null>(null);
-
-  /** Tygodnie do wyboru — lista zakupów ma pokazywać ten sam, co ekran planu. */
-  const [plany, setPlany] = useState<Plan[]>([]);
-  const [wybranyPlanId, setWybranyPlanId] = useState<string | null>(null);
 
   /** Kłopot poboczny, który nie może wywrócić całej listy. */
   const [ostrzezenie, setOstrzezenie] = useState<string | null>(null);
@@ -101,24 +96,23 @@ export default function EkranZakupow() {
     }
 
     try {
-      // Tydzień wskazany ręcznie albo najnowszy — tak samo jak na ekranie planu.
+      // Zawsze najnowszy tydzień — tak samo jak na ekranie planu.
       const wszystkie = await pobierzPlany();
-      setPlany(wszystkie);
-      const p = wszystkie.find((x) => x.id === wybranyPlanId) ?? wszystkie[0] ?? null;
+      const p = wszystkie[0] ?? null;
       setPlan(p);
 
       if (!p) {
         setPozycje([]);
         return;
       }
-      const dniListy = dniPlanu(p).slice(0, zakres);
+      const dniListy = dniPlanu(p);
       setPozycje(await pobierzListeZakupow(p.id, dniListy[0], dniListy[dniListy.length - 1]));
     } catch (e) {
       setBlad(komunikatBledu(e));
     } finally {
       setWczytywanie(false);
     }
-  }, [zakres, kontoId, wybranyPlanId]);
+  }, [kontoId]);
 
   // Odświeżenie przy KAŻDYM wejściu na zakładkę, nie tylko przy pierwszym.
   //
@@ -141,8 +135,33 @@ export default function EkranZakupow() {
     return mapa;
   }, [pozycje]);
 
-  const doKupienia = pozycje.filter((p) => !kupione.has(p.skladnik_id)).length + reczne.length;
+  /**
+   * Odhaczone pozycje schodzą na dół sekcji, a sekcja odhaczona w całości
+   * schodzi na dół listy działów — dzięki temu to, co jeszcze do kupienia,
+   * zawsze jest na wierzchu.
+   */
+  const dzialyPosortowane = useMemo(() => {
+    return DZIALY.map((dzial) => {
+      const wDziale = wedlugDzialow.get(dzial.nazwa);
+      if (!wDziale || wDziale.length === 0) return null;
+
+      const posortowane = [...wDziale].sort((a, b) => {
+        const aOdhaczony = kupione.has(a.skladnik_id) ? 1 : 0;
+        const bOdhaczony = kupione.has(b.skladnik_id) ? 1 : 0;
+        return aOdhaczony - bOdhaczony;
+      });
+      const wszystkoOdhaczone = wDziale.every((p) => kupione.has(p.skladnik_id));
+
+      return { dzial, pozycje: posortowane, wszystkoOdhaczone };
+    })
+      .filter((x): x is NonNullable<typeof x> => x !== null)
+      .sort((a, b) => Number(a.wszystkoOdhaczone) - Number(b.wszystkoOdhaczone));
+  }, [wedlugDzialow, kupione]);
+
+  const zrealizowane = kupione.size;
+  const niezrealizowane = pozycje.length - kupione.size + reczne.length;
   const resztyRazem = pozycje.reduce((s, p) => s + (p.reszta_g ?? 0), 0);
+  const cosOdhaczone = kupione.size > 0;
 
   /**
    * Odhaczenie widoczne od razu, zapis w tle.
@@ -192,17 +211,21 @@ export default function EkranZakupow() {
     }
   }
 
-  const cosOdhaczone = kupione.size > 0;
-
   return (
     <Ekran
       tytul="Lista zakupów"
-      podtytul={
-        wczytywanie
-          ? 'wczytywanie…'
-          : plan
-            ? `${zakres} dni od ${opisDnia(plan.data_start)} · zostało ${doKupienia} pozycji`
-            : `zostało ${doKupienia} pozycji`
+      naglowekStaly={
+        <NaglowekZakupow
+          data={
+            wczytywanie
+              ? 'wczytywanie…'
+              : plan
+                ? `tydzień od ${opisDnia(plan.data_start)}`
+                : undefined
+          }
+          zrealizowane={zrealizowane}
+          niezrealizowane={niezrealizowane}
+        />
       }>
       {blad && (
         <Karta>
@@ -220,33 +243,6 @@ export default function EkranZakupow() {
         </Karta>
       )}
 
-      {plany.length > 1 && (
-        <Karta>
-          <ListaRozwijana
-            etykieta="TYDZIEŃ"
-            wybrana={plan?.id ?? plany[0].id}
-            onZmiana={(id) => setWybranyPlanId(id)}
-            opcje={plany.map((p) => ({
-              wartosc: p.id,
-              etykieta: `od ${opisDnia(p.data_start)}`,
-              opis: p.id === plany[0].id ? 'najnowszy' : undefined,
-            }))}
-          />
-        </Karta>
-      )}
-
-      <View style={styles.zakres}>
-        {[3, 7].map((n) => (
-          <Przycisk
-            key={n}
-            tytul={`${n} dni`}
-            wariant={zakres === n ? 'glowny' : 'poboczny'}
-            onPress={() => setZakres(n)}
-            style={styles.przyciskZakresu}
-          />
-        ))}
-      </View>
-
       {!wczytywanie && pozycje.length === 0 && reczne.length === 0 && (
         <Karta>
           <ThemedText type="default">Nie ma czego kupować</ThemedText>
@@ -257,10 +253,7 @@ export default function EkranZakupow() {
         </Karta>
       )}
 
-      {DZIALY.map((dzial) => {
-        const wDziale = wedlugDzialow.get(dzial.nazwa);
-        if (!wDziale || wDziale.length === 0) return null;
-
+      {dzialyPosortowane.map(({ dzial, pozycje: wDziale }) => {
         return (
           <Karta key={dzial.nazwa}>
             <ThemedText type="smallBold" themeColor="textSecondary">
@@ -323,8 +316,7 @@ export default function EkranZakupow() {
         {reczne.length === 0 ? (
           <ThemedText type="small" themeColor="textSecondary">
             Rzeczy spoza kuchni: worki na śmieci, papier śniadaniowy, gąbki. Nie wynikają
-            z planu, więc czekają tu, aż je kupisz — niezależnie od tego, czy patrzysz
-            na 3 czy 7 dni.
+            z planu, więc czekają tu, aż je kupisz.
           </ThemedText>
         ) : (
           reczne.map((p) => (
@@ -409,8 +401,6 @@ export default function EkranZakupow() {
 }
 
 const styles = StyleSheet.create({
-  zakres: { flexDirection: 'row', gap: Spacing.two },
-  przyciskZakresu: { flex: 1 },
   pozycja: {
     flexDirection: 'row',
     alignItems: 'flex-start',
