@@ -152,20 +152,9 @@ export default function EkranProfilu() {
 
   return (
     <Ekran tytul="Profil" podtytul={sesja?.user.email ?? undefined}>
-      <Karta>
-        <View style={styles.wierszKonta}>
-          <Znacznik ikona="person-circle-outline" />
-          <ThemedText type="smallBold" themeColor="textSecondary">
-            KONTO
-          </ThemedText>
-        </View>
-        <View style={styles.wierszKonta}>
-          <Znacznik ikona="mail-outline" kolko={28} rozmiar={16} />
-          <ThemedText type="small">
-            <ThemedText type="smallBold">Adres: </ThemedText>
-            {sesja?.user.email}
-          </ThemedText>
-        </View>
+      {/* Adres e-mail jest już w podtytule ekranu — tu tylko rola, żeby karta
+          nie powtarzała tego samego dwa razy. */}
+      <Karta style={styles.kartaKonta}>
         <View style={styles.wierszKonta}>
           <Znacznik ikona="shield-checkmark-outline" kolko={28} rozmiar={16} />
           <ThemedText type="small">
@@ -334,6 +323,9 @@ export default function EkranProfilu() {
 }
 
 const styles = StyleSheet.create({
+  kartaKonta: {
+    paddingVertical: Spacing.two,
+  },
   wierszKonta: {
     flexDirection: 'row',
     alignItems: 'center',
