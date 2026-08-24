@@ -17,16 +17,21 @@ type Tryb = 'logowanie' | 'rejestracja';
 /**
  * Czy pokazywać zakładanie konta.
  *
- * W Supabase rejestracja jest WYŁĄCZONA (Authentication → Sign In / Providers →
- * „Allow new users to sign up”), bo Talerz jest aplikacją na zaproszenie —
- * konta zakłada się z panelu. Przycisk „Nie mam jeszcze konta” prowadziłby więc
- * do formularza, który zawsze kończy się błędem, a to gorsze niż brak przycisku:
- * użytkownik zakłada, że coś jest zepsute.
+ * Rejestracja jest otwarta — każdy z linkiem do aplikacji może założyć sobie
+ * konto sam, bez zgody administratora. Nowe konto trafia do bazy od razu
+ * jako aktywne, z rolą zwykłego użytkownika (trigger `konto_po_rejestracji`,
+ * migracja 0001 i 0023) — nie ma tu żadnego ręcznego zatwierdzania.
+ * Administrator widzi je na ekranie „Użytkownicy” (patrz baner nowych kont
+ * od ostatniej wizyty) i w razie czego może je wyłączyć.
  *
- * Gdyby rejestracja kiedyś miała zostać otwarta, zmienia się tę jedną stałą
- * TU I W PANELU SUPABASE. Sam kod rejestracji zostaje na miejscu, bo działa.
+ * Warunek: w Supabase musi być włączone „Allow new users to sign up"
+ * (Authentication → Sign In / Providers) — bez tego ta stała nic nie da,
+ * `signUp` niżej i tak skończy się błędem z panelu.
+ *
+ * Żeby to cofnąć, wystarczy przestawić tę jedną stałą z powrotem na `false`
+ * (i wyłączyć rejestrację w panelu) — sam kod rejestracji zostaje na miejscu.
  */
-const REJESTRACJA_OTWARTA = false;
+const REJESTRACJA_OTWARTA = true;
 
 /** Tłumaczy komunikaty Supabase na zrozumiały polski. */
 function komunikat(tresc: string): string {

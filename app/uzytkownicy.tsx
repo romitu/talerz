@@ -1,6 +1,7 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Ionicons } from '@expo/vector-icons';
 import { useFocusEffect, useLocalSearchParams } from 'expo-router';
-import { useCallback, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import { Ekran } from '@/components/ekran';
@@ -41,6 +42,18 @@ import {
  * wtedy narobić kolejnych administratorów, którzy zostaliby w bazie nawet
  * po zmianie hasła.
  */
+
+/**
+ * Kiedy administrator ostatnio otworzył ten ekran — na TYM urządzeniu.
+ *
+ * Rejestracja jest teraz otwarta (patrz `ekran-logowania.tsx`) i zatwierdza
+ * się sama, więc jedynym śladem nowego konta jest ten ekran. Zamiast e-maila
+ * czy powiadomienia push — których apka nie wysyła — próg w pamięci telefonu
+ * mówi, co przybyło od ostatniej wizyty. To celowo lokalne, nie w bazie: na
+ * dwóch urządzeniach administrator i tak dostanie osobny baner na każdym.
+ */
+const KLUCZ_OSTATNIEJ_WIZYTY = 'talerz-uzytkownicy-ostatnia-wizyta';
+
 export default function EkranUzytkownikow() {
   const { powrot } = useLocalSearchParams<{ powrot?: string }>();
   const { sesja } = useSesja();
@@ -51,11 +64,23 @@ export default function EkranUzytkownikow() {
   const [blad, setBlad] = useState<string | null>(null);
   const [pytanie, setPytanie] = useState<string | null>(null);
 
+  /**
+   * Próg poprzedniej wizyty. `null` = pierwsze uruchomienie tej funkcji na tym
+   * telefonie — wtedy nic nie oznaczamy jako nowe, żeby nie podświetlić od razu
+   * całej dotychczasowej listy kont.
+   */
+  const progRef = useRef<string | null>(null);
+  const [nowe, setNowe] = useState<Set<string>>(new Set());
+
   const pobierz = useCallback(async () => {
     setWczytywanie(true);
     setBlad(null);
     try {
-      setKonta(await pobierzKonta());
+      const lista = await pobierzKonta();
+      setKonta(lista);
+      if (progRef.current) {
+        setNowe(new Set(lista.filter((k) => k.utworzono > progRef.current!).map((k) => k.id)));
+      }
     } catch (e) {
       setBlad(komunikatBledu(e));
     } finally {
@@ -65,7 +90,19 @@ export default function EkranUzytkownikow() {
 
   useFocusEffect(
     useCallback(() => {
-      pobierz();
+      // Próg czytamy PRZED zapisem nowego — inaczej porównywalibyśmy „teraz”
+      // z „teraz” i nic nigdy nie wyszłoby jako nowe.
+      AsyncStorage.getItem(KLUCZ_OSTATNIEJ_WIZYTY)
+        .then((zapisany) => {
+          progRef.current = zapisany;
+          AsyncStorage.setItem(KLUCZ_OSTATNIEJ_WIZYTY, new Date().toISOString()).catch(() => {});
+        })
+        .catch(() => {
+          progRef.current = null;
+        })
+        .finally(() => {
+          pobierz();
+        });
     }, [pobierz])
   );
 
@@ -106,12 +143,29 @@ export default function EkranUzytkownikow() {
         </Karta>
       )}
 
+      {/*
+        Jedyny ślad po tym, że ktoś sam się zarejestrował — apka nie wysyła
+        e-maila ani push. Baner znika po kolejnej wizycie na tym urządzeniu.
+      */}
+      {nowe.size > 0 && (
+        <Karta style={{ borderWidth: 2, borderColor: motyw.accent }}>
+          <ThemedText type="smallBold" themeColor="accent">
+            {nowe.size} {nowe.size === 1 ? 'nowe konto' : 'nowych kont'} od ostatniej wizyty
+          </ThemedText>
+          <ThemedText type="small" themeColor="textSecondary">
+            Zarejestrowały się same i są od razu czynne. Podświetlone niżej — sprawdź
+            i w razie czego wyłącz.
+          </ThemedText>
+        </Karta>
+      )}
+
       {konta.map((k) => {
         const toJa = k.id === sesja?.user.id;
         const pytamy = pytanie === k.id;
+        const jestNowe = nowe.has(k.id);
 
         return (
-          <Karta key={k.id}>
+          <Karta key={k.id} style={jestNowe ? { borderWidth: 2, borderColor: motyw.accent } : undefined}>
             <View style={styles.naglowek}>
               <View style={styles.tozsamosc}>
                 <ThemedText type="default" themeColor={k.aktywne ? 'text' : 'textSecondary'}>
@@ -120,6 +174,7 @@ export default function EkranUzytkownikow() {
                 <ThemedText type="small" themeColor="textSecondary">
                   {opisRoli(k.rola)}
                   {toJa ? ' · to Ty' : ''}
+                  {jestNowe ? ' · nowe' : ''}
                 </ThemedText>
               </View>
 
@@ -219,8 +274,10 @@ export default function EkranUzytkownikow() {
 
       <Karta>
         <ThemedText type="small" themeColor="textSecondary">
-          Nowe konta zakłada się w panelu Supabase, w sekcji Authentication → Users.
-          Rejestracja z poziomu aplikacji jest wyłączona, więc nikt nie założy konta sam.
+          Rejestracja jest otwarta — każdy z linkiem do aplikacji może sam założyć konto,
+          bez Twojej zgody. Nowe konto jest od razu czynne, z rolą zwykłego użytkownika.
+          Baner na górze tego ekranu pokazuje, co przybyło od Twojej ostatniej wizyty —
+          to jedyne powiadomienie, jakie dostajesz; sprawdź się tu od czasu do czasu.
         </ThemedText>
       </Karta>
 
