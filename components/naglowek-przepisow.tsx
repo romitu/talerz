@@ -1,5 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
-import { Pressable, StyleSheet, TextInput, View } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, TextInput, View } from 'react-native';
 
 import { ThemedText } from './themed-text';
 import { ThemedView } from './themed-view';
@@ -83,7 +83,10 @@ export function NaglowekPrzepisow({
       )}
 
       {zakladki.length > 0 && (
-        <View style={styles.zakladki}>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.zakladki}>
           {zakladki.map((z) => (
             <Pressable
               key={z.klucz}
@@ -105,7 +108,7 @@ export function NaglowekPrzepisow({
               </ThemedText>
             </Pressable>
           ))}
-        </View>
+        </ScrollView>
       )}
     </ThemedView>
   );
@@ -156,9 +159,13 @@ const styles = StyleSheet.create({
     fontSize: 16,
     paddingVertical: Spacing.one,
   },
+  /*
+    Jeden wiersz, bez zawijania — na wąskim telefonie i tak by się nie
+    zmieściło (pięć zakładek plus ewentualna kolejka moderatora), więc
+    zamiast łamać się na dwie linie, rząd przewija się w bok.
+  */
   zakladki: {
     flexDirection: 'row',
-    flexWrap: 'wrap',
     gap: Spacing.one,
   },
   zakladka: {

@@ -49,6 +49,18 @@ function doPorownania(tekst: string): string {
     .toLowerCase();
 }
 
+/**
+ * Skrócone etykiety zakładek kategorii — tylko na te pigułki w nagłówku.
+ * Pełne nazwy (`OPIS_KATEGORII`) zostają wszędzie indziej (komunikaty,
+ * formularz przepisu) — tam nie ma problemu z miejscem w jednej linii.
+ */
+const SKROT_KATEGORII: Record<PoraPosilku, string> = {
+  sniadanie: 'Śniad.',
+  obiad: 'Obiad',
+  kolacja: 'Kolacj.',
+  dodatek: 'Dodat.',
+};
+
 export default function EkranPrzepisow() {
   const { sesja } = useSesja();
   const motyw = useTheme();
@@ -209,7 +221,7 @@ export default function EkranPrzepisow() {
     : [
         {
           klucz: 'wszystkie',
-          etykieta: 'Wszystkie',
+          etykieta: 'Wszyst.',
           ile: poFrazie.length,
           wybrana: kategoria === null,
           onPress: () => {
@@ -219,7 +231,7 @@ export default function EkranPrzepisow() {
         },
         ...KATEGORIE.map((k) => ({
           klucz: k,
-          etykieta: OPIS_KATEGORII[k],
+          etykieta: SKROT_KATEGORII[k],
           ile: licznik(k),
           wybrana: kategoria === k,
           onPress: () => {
