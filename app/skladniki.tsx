@@ -29,6 +29,7 @@ import {
   type Skladnik,
   type UzycieSkladnika,
 } from '@/lib/skladniki';
+import { supabase } from '@/lib/supabase';
 
 /** Definicja kolumn tabeli — szerokości muszą się zgadzać z nagłówkiem. */
 const SZEROKOSC_ROZWIJANIA = 36;
@@ -113,9 +114,22 @@ export default function EkranSkladnikow() {
   const [wczytywanie, setWczytywanie] = useState(true);
   const [blad, setBlad] = useState<string | null>(null);
 
+  /** Katalog widzi i dopisuje każde konto; edycję i kasowanie pilnuje RLS moderatorowi. */
+  const [rola, setRola] = useState<string | null>(null);
+  const mozeModerowac = rola === 'moderator' || rola === 'administrator';
+
   const pobierz = useCallback(async () => {
     setWczytywanie(true);
     setBlad(null);
+
+    supabase
+      .from('konta')
+      .select('rola')
+      .single()
+      .then(({ data, error }) => {
+        if (!error && data) setRola(data.rola);
+      });
+
     try {
       const [lista, mapa] = await Promise.all([pobierzSkladniki(), pobierzUzycia()]);
       setSkladniki(lista);
@@ -375,13 +389,22 @@ export default function EkranSkladnikow() {
 
       <View style={styles.paskiNarzedzi}>
         <Przycisk tytul="Dodaj składnik" onPress={() => setDodawanie(true)} style={styles.przyciskPaska} />
-        <Przycisk
-          tytul={trybEdycji ? 'Zakończ edycję' : 'Edytuj w tabeli'}
-          wariant={trybEdycji ? 'glowny' : 'poboczny'}
-          onPress={() => setTrybEdycji((p) => !p)}
-          style={styles.przyciskPaska}
-        />
+        {mozeModerowac && (
+          <Przycisk
+            tytul={trybEdycji ? 'Zakończ edycję' : 'Edytuj w tabeli'}
+            wariant={trybEdycji ? 'glowny' : 'poboczny'}
+            onPress={() => setTrybEdycji((p) => !p)}
+            style={styles.przyciskPaska}
+          />
+        )}
       </View>
+
+      {!mozeModerowac && (
+        <ThemedText type="small" themeColor="textSecondary">
+          Dopisany składnik trafia od razu do wspólnego katalogu. Poprawianie i kasowanie
+          istniejących składników wymaga uprawnień moderatora.
+        </ThemedText>
+      )}
 
       {trybEdycji && (
         <Karta>
@@ -545,7 +568,7 @@ export default function EkranSkladnikow() {
                         );
                       })}
                     </View>
-                  ) : (
+                  ) : mozeModerowac ? (
                     <Pressable
                       onPress={() => setEdytowany(s)}
                       style={({ pressed }) => [styles.komorki, pressed && styles.wcisniety]}>
@@ -560,25 +583,40 @@ export default function EkranSkladnikow() {
                         </View>
                       ))}
                     </Pressable>
+                  ) : (
+                    <View style={styles.komorki}>
+                      {KOLUMNY.map((k) => (
+                        <View key={k.klucz} style={[styles.komorka, stylKolumny(k)]}>
+                          <ThemedText
+                            type="small"
+                            style={k.liczba ? styles.doPrawej : undefined}
+                            numberOfLines={2}>
+                            {wartoscKomorki(s, k.klucz)}
+                          </ThemedText>
+                        </View>
+                      ))}
+                    </View>
                   )}
 
-                  {zapisywany === s.id ? (
-                    <View style={styles.komorkaKosza}>
-                      <Ionicons name="sync" size={16} color={motyw.accent} />
-                    </View>
-                  ) : (
-                    <Pressable
-                      onPress={() => setDoUsuniecia(s)}
-                      hitSlop={8}
-                      accessibilityLabel={`Usuń ${s.nazwa}`}
-                      style={styles.komorkaKosza}>
-                      <Ionicons
-                        name="trash-outline"
-                        size={16}
-                        color={uzyty ? motyw.border : motyw.textSecondary}
-                      />
-                    </Pressable>
-                  )}
+                  {/* Edycja i kasowanie istniejących wierszy — tylko moderator (patrz RLS). */}
+                  {mozeModerowac &&
+                    (zapisywany === s.id ? (
+                      <View style={styles.komorkaKosza}>
+                        <Ionicons name="sync" size={16} color={motyw.accent} />
+                      </View>
+                    ) : (
+                      <Pressable
+                        onPress={() => setDoUsuniecia(s)}
+                        hitSlop={8}
+                        accessibilityLabel={`Usuń ${s.nazwa}`}
+                        style={styles.komorkaKosza}>
+                        <Ionicons
+                          name="trash-outline"
+                          size={16}
+                          color={uzyty ? motyw.border : motyw.textSecondary}
+                        />
+                      </Pressable>
+                    ))}
                 </View>
 
                 {otwarty && (
