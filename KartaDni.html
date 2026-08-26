@@ -1,0 +1,992 @@
+<style>
+.day-card {
+    --bg: #ffffff;
+    --text: #1f2b24;
+    --muted: #687a70;
+    --green: #3f704b;
+    --green-dark: #2e5c39;
+    --green-soft: #eef4eb;
+    --border: #dce6dc;
+    --line: #e8eee8;
+
+    max-width: 1000px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+    color: var(--text);
+}
+
+
+/* =========================
+   NAGŁÓWEK DNIA
+========================= */
+
+.day-header {
+    min-height: 74px;
+    padding: 14px 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+
+    background: linear-gradient(
+        90deg,
+        #f2f6ef 0%,
+        #fafbf8 100%
+    );
+
+    border: 1px solid #e6ece3;
+    border-radius: 22px;
+    margin-bottom: 18px;
+}
+
+.day-header__left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.day-header__icon {
+    width: 48px;
+    height: 48px;
+    flex: 0 0 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    background: #e6efdf;
+}
+
+.day-header__icon svg {
+    width: 26px;
+    height: 26px;
+    stroke: var(--green);
+}
+
+.day-header__date {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.day-header__stats {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+
+    color: var(--muted);
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.day-header__complete {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.day-header__check {
+    width: 22px;
+    height: 22px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    background: #508054;
+}
+
+.day-header__check svg {
+    width: 14px;
+    height: 14px;
+    stroke: #fff;
+}
+
+
+/* =========================
+   POSIŁKI
+========================= */
+
+.meal-card {
+    padding: 22px 28px;
+
+    background: #fff;
+    border: 1px solid #e4eae3;
+    border-radius: 22px;
+
+    box-shadow:
+        0 4px 16px rgba(35, 55, 40, 0.045);
+
+    margin-bottom: 16px;
+}
+
+.meal-main {
+    display: grid;
+    grid-template-columns: 58px 1fr auto;
+    gap: 18px;
+    align-items: start;
+}
+
+.meal-icon {
+    width: 58px;
+    height: 58px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    background: #f0f5eb;
+}
+
+.meal-icon svg {
+    width: 30px;
+    height: 30px;
+    stroke: var(--green);
+}
+
+.meal-content {
+    min-width: 0;
+}
+
+.meal-type {
+    margin-bottom: 10px;
+
+    color: var(--green);
+    font-size: 17px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.meal-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.meal-name {
+    font-size: 19px;
+    font-weight: 700;
+}
+
+.meal-nutrition {
+    color: var(--muted);
+    font-size: 17px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.meal-meta {
+    margin-top: 14px;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    font-size: 17px;
+}
+
+.meal-meta strong {
+    font-weight: 700;
+}
+
+.meal-meta span {
+    color: var(--muted);
+}
+
+.meal-actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.icon-button {
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 0;
+    background: transparent;
+    color: #65776b;
+
+    cursor: pointer;
+}
+
+.icon-button svg {
+    width: 23px;
+    height: 23px;
+    stroke: currentColor;
+}
+
+
+/* =========================
+   DODAJ DANIE
+========================= */
+
+.add-meal {
+    margin-top: 18px;
+    min-height: 56px;
+    padding: 0 18px;
+
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    border: 1px dashed #cedbd0;
+    border-radius: 13px;
+
+    background: #fff;
+
+    color: var(--muted);
+    font-size: 17px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.add-meal svg {
+    width: 23px;
+    height: 23px;
+    stroke: #708276;
+}
+
+
+/* =========================
+   INFO O BIAŁKU
+========================= */
+
+.meal-info {
+    margin-top: 14px;
+    padding: 11px 16px;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    background: #f4f7f1;
+    border: 1px solid #dde7d9;
+    border-radius: 10px;
+
+    color: #56705d;
+    font-size: 15px;
+    line-height: 1.45;
+}
+
+.meal-info svg {
+    width: 21px;
+    height: 21px;
+    flex: 0 0 21px;
+    stroke: var(--green);
+}
+
+.meal-info strong {
+    color: var(--green-dark);
+}
+
+
+/* =========================
+   PODSUMOWANIE
+========================= */
+
+.day-summary {
+    padding: 20px 28px 16px;
+
+    background: linear-gradient(
+        90deg,
+        #f7f9f5,
+        #ffffff
+    );
+
+    border: 1px solid #dae4d7;
+    border-radius: 22px;
+}
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.summary-item {
+    min-width: 0;
+    padding: 5px 18px;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    border-right: 1px solid #e1e7df;
+}
+
+.summary-item:first-child {
+    padding-left: 0;
+}
+
+.summary-item:last-child {
+    border-right: 0;
+    padding-right: 0;
+}
+
+.summary-icon {
+    width: 48px;
+    height: 48px;
+    flex: 0 0 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    background: #edf3e9;
+}
+
+.summary-icon svg {
+    width: 26px;
+    height: 26px;
+    stroke: var(--green);
+}
+
+.summary-icon--fat {
+    background: #fff1e5;
+}
+
+.summary-icon--fat svg {
+    stroke: #c56d16;
+}
+
+.summary-icon--carbs {
+    background: #ebf3fb;
+}
+
+.summary-icon--carbs svg {
+    stroke: #3677b8;
+}
+
+.summary-icon--fiber {
+    background: #f0ecf7;
+}
+
+.summary-icon--fiber svg {
+    stroke: #735ca3;
+}
+
+.summary-values {
+    min-width: 0;
+}
+
+.summary-value {
+    font-size: 18px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.summary-target {
+    margin-top: 5px;
+
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.35;
+}
+
+.summary-target strong {
+    display: block;
+    font-weight: 600;
+}
+
+.summary-status {
+    margin-top: 18px;
+    padding: 11px 16px;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    background: #eff4eb;
+    border: 1px solid #d9e5d4;
+    border-radius: 10px;
+
+    color: var(--green-dark);
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.summary-status__icon {
+    width: 21px;
+    height: 21px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    background: #508054;
+}
+
+.summary-status__icon svg {
+    width: 13px;
+    height: 13px;
+    stroke: white;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 780px) {
+
+    .day-header {
+        padding: 12px 16px;
+    }
+
+    .day-header__date {
+        font-size: 18px;
+    }
+
+    .day-header__stats {
+        gap: 12px;
+        font-size: 15px;
+    }
+
+    .meal-card {
+        padding: 18px;
+    }
+
+    .meal-main {
+        grid-template-columns: 44px 1fr auto;
+        gap: 12px;
+    }
+
+    .meal-icon {
+        width: 44px;
+        height: 44px;
+    }
+
+    .meal-icon svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    .meal-row {
+        display: block;
+    }
+
+    .meal-nutrition {
+        margin-top: 8px;
+        white-space: normal;
+    }
+
+    .summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px 0;
+    }
+
+    .summary-item {
+        border-right: 0;
+        padding: 4px 10px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .day-header__icon {
+        display: none;
+    }
+
+    .day-header__stats {
+        font-size: 14px;
+    }
+
+    .meal-main {
+        grid-template-columns: 1fr auto;
+    }
+
+    .meal-icon {
+        display: none;
+    }
+
+    .summary-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .summary-icon {
+        width: 40px;
+        height: 40px;
+        flex-basis: 40px;
+    }
+}
+</style>
+
+
+<div class="day-card">
+
+
+    <!-- ======================
+         NAGŁÓWEK
+    ======================= -->
+
+    <div class="day-header">
+
+        <div class="day-header__left">
+
+            <div class="day-header__icon">
+                <svg viewBox="0 0 24 24"
+                     fill="none"
+                     stroke-width="2"
+                     stroke-linecap="round"
+                     stroke-linejoin="round">
+                    <rect x="3" y="5" width="18" height="16" rx="2"/>
+                    <path d="M8 3v4M16 3v4M3 10h18"/>
+                </svg>
+            </div>
+
+            <div class="day-header__date">
+                wtorek, 25 sierpnia
+            </div>
+
+        </div>
+
+        <div class="day-header__stats">
+
+            <div class="day-header__complete">
+                <span class="day-header__check">
+                    <svg viewBox="0 0 24 24"
+                         fill="none"
+                         stroke-width="3"
+                         stroke-linecap="round"
+                         stroke-linejoin="round">
+                        <path d="M5 12l4 4L19 7"/>
+                    </svg>
+                </span>
+
+                3/3
+            </div>
+
+            <div>2199 kcal</div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ======================
+         ŚNIADANIE
+    ======================= -->
+
+    <section class="meal-card">
+
+        <div class="meal-main">
+
+            <div class="meal-icon">
+                <svg viewBox="0 0 24 24"
+                     fill="none"
+                     stroke-width="1.8"
+                     stroke-linecap="round">
+                    <circle cx="12" cy="12" r="4"/>
+                    <path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/>
+                </svg>
+            </div>
+
+            <div class="meal-content">
+
+                <div class="meal-type">
+                    Śniadanie
+                </div>
+
+                <div class="meal-row">
+                    <div class="meal-name">
+                        Owsianka
+                    </div>
+
+                    <div class="meal-nutrition">
+                        728 kcal · 29.5 g białka
+                    </div>
+                </div>
+
+                <div class="meal-meta">
+                    <strong>1 porcja</strong>
+                    <span>·</span>
+                    <span>442 g</span>
+                </div>
+
+            </div>
+
+            <div class="meal-actions">
+
+                <button class="icon-button">
+                    <svg viewBox="0 0 24 24"
+                         fill="none"
+                         stroke-width="2"
+                         stroke-linecap="round">
+                        <path d="M9 6l6 6-6 6"/>
+                    </svg>
+                </button>
+
+                <button class="icon-button">
+                    <svg viewBox="0 0 24 24"
+                         fill="none"
+                         stroke-width="2"
+                         stroke-linecap="round">
+                        <path d="M6 6l12 12M18 6L6 18"/>
+                    </svg>
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <button class="add-meal">
+            <svg viewBox="0 0 24 24"
+                 fill="none"
+                 stroke-width="1.8">
+                <circle cx="12" cy="12" r="9"/>
+                <path d="M12 8v8M8 12h8"/>
+            </svg>
+
+            Dodaj danie do śniadania
+        </button>
+
+
+        <div class="meal-info">
+
+            <svg viewBox="0 0 24 24"
+                 fill="none"
+                 stroke-width="1.8"
+                 stroke-linecap="round"
+                 stroke-linejoin="round">
+                <path d="M5 21c7-2 12-8 14-17C10 4 5 9 5 16c0 2 .5 3.5 1 5z"/>
+                <path d="M5 21c2-5 6-8 10-11"/>
+            </svg>
+
+            <span>
+                <strong>Śniadanie: 29.5 g białka</strong>,
+                próg 35 g. Lekki posiłek — jeśli reszta dnia to nadrobi,
+                nic się nie dzieje.
+            </span>
+
+        </div>
+
+    </section>
+
+
+    <!-- ======================
+         OBIAD
+    ======================= -->
+
+    <section class="meal-card">
+
+        <div class="meal-main">
+
+            <div class="meal-icon">
+                <svg viewBox="0 0 24 24"
+                     fill="none"
+                     stroke-width="1.8"
+                     stroke-linecap="round"
+                     stroke-linejoin="round">
+                    <path d="M4 13h16c0 5-3 7-8 7s-8-2-8-7z"/>
+                    <path d="M8 9c-1-1 1-2 0-4M12 9c-1-1 1-2 0-4M16 9c-1-1 1-2 0-4"/>
+                </svg>
+            </div>
+
+            <div class="meal-content">
+
+                <div class="meal-type">
+                    Obiad
+                </div>
+
+                <div class="meal-row">
+                    <div class="meal-name">
+                        Barszcz ukraiński z fasolą
+                    </div>
+
+                    <div class="meal-nutrition">
+                        743 kcal · 60.2 g białka
+                    </div>
+                </div>
+
+                <div class="meal-meta">
+                    <strong>1 porcja</strong>
+                    <span>·</span>
+                    <span>1371 g</span>
+                </div>
+
+            </div>
+
+            <div class="meal-actions">
+
+                <button class="icon-button">
+                    <svg viewBox="0 0 24 24"
+                         fill="none"
+                         stroke-width="2">
+                        <path d="M9 6l6 6-6 6"/>
+                    </svg>
+                </button>
+
+                <button class="icon-button">
+                    <svg viewBox="0 0 24 24"
+                         fill="none"
+                         stroke-width="2">
+                        <path d="M6 6l12 12M18 6L6 18"/>
+                    </svg>
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <button class="add-meal">
+            <svg viewBox="0 0 24 24"
+                 fill="none"
+                 stroke-width="1.8">
+                <circle cx="12" cy="12" r="9"/>
+                <path d="M12 8v8M8 12h8"/>
+            </svg>
+
+            Dodaj danie do obiadu
+        </button>
+
+    </section>
+
+
+    <!-- ======================
+         KOLACJA
+    ======================= -->
+
+    <section class="meal-card">
+
+        <div class="meal-main">
+
+            <div class="meal-icon">
+                <svg viewBox="0 0 24 24"
+                     fill="none"
+                     stroke-width="1.8"
+                     stroke-linecap="round"
+                     stroke-linejoin="round">
+                    <path d="M18 16a7 7 0 01-10-10 8 8 0 1010 10z"/>
+                </svg>
+            </div>
+
+            <div class="meal-content">
+
+                <div class="meal-type">
+                    Kolacja
+                </div>
+
+                <div class="meal-row">
+                    <div class="meal-name">
+                        Krupnik z kaszą jęczmienną
+                    </div>
+
+                    <div class="meal-nutrition">
+                        728 kcal · 57 g białka
+                    </div>
+                </div>
+
+                <div class="meal-meta">
+                    <strong>1 porcja</strong>
+                    <span>·</span>
+                    <span>1560 g</span>
+                </div>
+
+            </div>
+
+            <div class="meal-actions">
+
+                <button class="icon-button">
+                    <svg viewBox="0 0 24 24"
+                         fill="none"
+                         stroke-width="2">
+                        <path d="M9 6l6 6-6 6"/>
+                    </svg>
+                </button>
+
+                <button class="icon-button">
+                    <svg viewBox="0 0 24 24"
+                         fill="none"
+                         stroke-width="2">
+                        <path d="M6 6l12 12M18 6L6 18"/>
+                    </svg>
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <button class="add-meal">
+            <svg viewBox="0 0 24 24"
+                 fill="none"
+                 stroke-width="1.8">
+                <circle cx="12" cy="12" r="9"/>
+                <path d="M12 8v8M8 12h8"/>
+            </svg>
+
+            Dodaj danie do kolacji
+        </button>
+
+    </section>
+
+
+    <!-- ======================
+         PODSUMOWANIE DNIA
+    ======================= -->
+
+    <section class="day-summary">
+
+        <div class="summary-grid">
+
+
+            <!-- kcal -->
+
+            <div class="summary-item">
+
+                <div class="summary-icon">
+                    <svg viewBox="0 0 24 24"
+                         fill="none"
+                         stroke-width="1.8"
+                         stroke-linecap="round"
+                         stroke-linejoin="round">
+                        <path d="M13 2s2 4-1 7c-2 2-1 4 0 5 3-1 5-3 5-6 3 3 4 6 3 9-1 4-4 6-8 6-5 0-9-3-9-8 0-4 3-7 5-9 0 3 1 4 2 5 2-3 1-6 3-9z"/>
+                    </svg>
+                </div>
+
+                <div class="summary-values">
+                    <div class="summary-value">2199</div>
+                    <div class="summary-target">
+                        <strong>z 2183</strong>
+                        kcal
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- białko -->
+
+            <div class="summary-item">
+
+                <div class="summary-icon">
+                    <svg viewBox="0 0 24 24"
+                         fill="none"
+                         stroke-width="1.8">
+                        <path d="M5 21c7-2 12-8 14-17C10 4 5 9 5 16c0 2 .5 3.5 1 5z"/>
+                        <path d="M5 21c2-5 6-8 10-11"/>
+                    </svg>
+                </div>
+
+                <div class="summary-values">
+                    <div class="summary-value">147 g</div>
+                    <div class="summary-target">
+                        <strong>z 136 g</strong>
+                        białko
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- tłuszcz -->
+
+            <div class="summary-item">
+
+                <div class="summary-icon summary-icon--fat">
+                    <svg viewBox="0 0 24 24"
+                         fill="none"
+                         stroke-width="1.8">
+                        <path d="M12 2C9 7 5 11 5 16a7 7 0 0014 0c0-5-4-9-7-14z"/>
+                    </svg>
+                </div>
+
+                <div class="summary-values">
+                    <div class="summary-value">54 g</div>
+                    <div class="summary-target">
+                        <strong>z 73 g</strong>
+                        tłuszcz
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- węgle -->
+
+            <div class="summary-item">
+
+                <div class="summary-icon summary-icon--carbs">
+                    <svg viewBox="0 0 24 24"
+                         fill="none"
+                         stroke-width="1.8"
+                         stroke-linecap="round">
+                        <path d="M12 3v18"/>
+                        <path d="M12 7c-4 0-6-2-6-4 4 0 6 2 6 4z"/>
+                        <path d="M12 11c4 0 6-2 6-4-4 0-6 2-6 4z"/>
+                        <path d="M12 15c-4 0-6-2-6-4 4 0 6 2 6 4z"/>
+                        <path d="M12 19c4 0 6-2 6-4-4 0-6 2-6 4z"/>
+                    </svg>
+                </div>
+
+                <div class="summary-values">
+                    <div class="summary-value">298 g</div>
+                    <div class="summary-target">
+                        <strong>z 246 g</strong>
+                        węgle
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- błonnik -->
+
+            <div class="summary-item">
+
+                <div class="summary-icon summary-icon--fiber">
+                    <svg viewBox="0 0 24 24"
+                         fill="none"
+                         stroke-width="1.8">
+                        <path d="M5 21c7-2 12-8 14-17C10 4 5 9 5 16c0 2 .5 3.5 1 5z"/>
+                        <path d="M5 21c2-5 6-8 10-11"/>
+                    </svg>
+                </div>
+
+                <div class="summary-values">
+                    <div class="summary-value">61 g</div>
+                    <div class="summary-target">
+                        <strong>z 31 g</strong>
+                        błonnik
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="summary-status">
+
+            <span class="summary-status__icon">
+                <svg viewBox="0 0 24 24"
+                     fill="none"
+                     stroke-width="3"
+                     stroke-linecap="round"
+                     stroke-linejoin="round">
+                    <path d="M5 12l4 4L19 7"/>
+                </svg>
+            </span>
+
+            11 g białka ponad cel · 16 kcal ponad cel
+
+        </div>
+
+    </section>
+
+</div>

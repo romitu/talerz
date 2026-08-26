@@ -41,9 +41,27 @@ const DLACZEGO_TALERZ: PytanieOdpowiedz[] = [
     akapity: [
       'Talerz powstał z bardzo prostego powodu: żeby codziennie nie zastanawiać się, co jutro zjeść.',
       'Nie chcę każdego wieczoru otwierać lodówki i wymyślać obiadu. Nie chcę też robić przypadkowych zakupów, z których później połowa zostaje w lodówce.',
-      'Chcę zaplanować kilka kolejnych dni, wygenerować listę zakupów, zrobić zakupy i później po prostu zjadać to, co wcześniej zaplanowałem.',
-      'Dzięki temu łatwiej jeść rozsądnie i regularnie. Łatwiej również kontrolować masę ciała. A efekty zdrowego odżywiania nie kończą się na wadze. Chodzi też o to, żeby lepiej się czuć, mieć więcej energii, swobodniej się poruszać i żeby koszulka leżała na nas, a nie na brzuchu.',
+      'Chcę zaplanować kilka kolejnych dni, wygenerować listę zakupów, zrobić zakupy, a później po prostu jeść to, co wcześniej zaplanowałem — z zachowaniem odpowiedniego balansu białka, węglowodanów i tłuszczów.',
+      'Dzięki temu łatwiej jeść rozsądnie i regularnie. Łatwiej również kontrolować masę ciała. A efekty zdrowego odżywiania nie kończą się na wadze. Chodzi także o to, żeby lepiej się czuć, mieć więcej energii, swobodniej się poruszać i żeby koszulka leżała na nas, a nie na brzuchu.',
       'Talerz nie jest dietą na miesiąc. Ma być sposobem normalnego jedzenia przez lata.',
+    ],
+  },
+  {
+    tytul: 'Pierwsze kroki',
+    akapity: [
+      'Z aplikacji mogą wspólnie korzystać maksymalnie 3 osoby. Wszyscy korzystają z tego samego konta — jednego adresu e-mail podanego podczas rejestracji oraz wspólnego hasła.',
+      'Po rejestracji należy w zakładce „Profil” określić cele żywieniowe dla każdej osoby.',
+      'Następnie warto przejrzeć zakładkę „Przepisy” i określić swoje preferencje. Gwiazdką zaznaczamy posiłki, które aplikacja powinna proponować często, serduszkiem te, które lubimy, a iksem te, których aplikacja nie powinna proponować podczas automatycznego planowania.',
+      'Kolejnym krokiem jest przejście do zakładki „Plan”.',
+      'Aplikacja pozwala zaplanować posiłki maksymalnie na 7 dni. Przepisy referencyjne mogą być zmieniane wyłącznie przez moderatora. Każdy przycisk w zakładce jest opisany, dlatego można sprawdzić, do czego służy albo po prostu wypróbować jego działanie.',
+      'Każdy posiłek można również wybrać ręcznie z listy. W tym celu należy kliknąć znak „+” przy pozycji „ŚNIADANIE”, „OBIAD” lub „KOLACJA”.',
+      'Można też automatycznie wypełnić cały tydzień, a następnie usunąć ostatni dzień lub dwa ostatnie dni. W ten sposób można łatwo przygotować plan np. na 5 dni, a lista zakupów zostanie utworzona tylko dla zaplanowanego okresu.',
+    ],
+  },
+  {
+    tytul: 'Przyrządzanie posiłku',
+    akapity: [
+      'Idziemy do Planu, odszukujemy aktualny dzień i klikamy na wybrany wcześniej posiłek. Aplikacja przeniesie nas do ekranu gdzie krok po kroku poprowadzi nas przez proces przygotowania posiłku.',
     ],
   },
   {
@@ -52,7 +70,6 @@ const DLACZEGO_TALERZ: PytanieOdpowiedz[] = [
       'Jednym z podstawowych założeń Talerza jest to, że zdrowe jedzenie nie powinno oznaczać codziennego spędzania godziny w kuchni.',
       'Jeżeli przygotowujesz danie, zastanów się, czy możesz od razu zrobić go na dwa albo trzy dni.',
       'Przykład: dzisiaj około godziny gotowania, jutro 10–15 minut na przygotowanie lub odgrzanie posiłku.',
-      'Niektóre potrawy można również podzielić na porcje i zamrozić. Dzięki temu po pewnym czasie w zamrażarce zaczyna powstawać własny zestaw gotowych, dobrych posiłków.',
       'Talerz preferuje więc takie planowanie, w którym gotujemy rzadziej, ale rozsądnie wykorzystujemy przygotowane jedzenie — dlatego przepis ma trwałość w dniach, a plan rozkłada jedno gotowanie na kilka posiłków z rzędu.',
     ],
   },
@@ -62,7 +79,7 @@ const DLACZEGO_TALERZ: PytanieOdpowiedz[] = [
       'Liczba osób nie zmienia sposobu działania Talerza. Zmienia jedynie liczbę przygotowywanych porcji.',
       'Jedna osoba: 1 osoba × 3 dni = 3 porcje. Gotujesz raz i masz obiad na trzy dni.',
       'Dwie osoby: 2 osoby × 2 dni = 4 porcje. Jedno gotowanie zapewnia dwa wspólne obiady.',
-      'Trzy osoby: 3 osoby × 1 dzień = 3 porcje, albo 3 osoby × 2 dni = 6 porcji.',
+      'Trzy osoby: 3 osoby × 1 dzień = 3 porcje albo 3 osoby × 2 dni = 6 porcji.',
       'To Ty decydujesz, jak często chcesz gotować — w formularzu przepisu podajesz wagę porcji albo liczbę sztuk, a Talerz sam przelicza składniki i układa plan.',
     ],
   },
@@ -158,6 +175,13 @@ const DLACZEGO_TALERZ: PytanieOdpowiedz[] = [
 
 const ZAKLADKI: PytanieOdpowiedz[] = [
   {
+    tytul: 'Profil',
+    akapity: [
+      'Jeden formularz na profil zawiera zarówno dane potrzebne do wyliczeń (płeć, data urodzenia, wzrost, waga, poziom aktywności), jak i cele dzienne (tryb, proporcje makro, błonnik, próg białka na posiłek) — kcal i gramy nie są zapisane na sztywno, tylko liczone na bieżąco z tych danych. Do 3 profili na konto.',
+      'Administrator widzi tu dodatkowo zarządzanie kontami: włączanie i wyłączanie użytkowników oraz nadawanie roli moderatora.',
+    ],
+  },
+  {
     tytul: 'Plan',
     akapity: [
       'Tydzień podzielony na dni, a każdy dzień na śniadanie, obiad i kolację. Puste miejsce ma przycisk wyboru dania; wybrane miejsce pokazuje makro i pozwala je usunąć.',
@@ -179,13 +203,6 @@ const ZAKLADKI: PytanieOdpowiedz[] = [
       'Baza dań z filtrem po nazwie i zakładkami kategorii (śniadanie, obiad, kolacja, dodatek). „Dodatek” to coś, co dokładasz do posiłku — grillowana pierś, surówka, sałatka z ciecierzycy — dlatego pojawia się przy wyborze dania do każdej pory dnia.',
       'Dodawanie i edycja przepisów wymaga roli moderatora. Nowy przepis jest prywatny; zgłoszenie do publikacji i zatwierdzenie to osobny obieg z ptaszkiem zgody autora.',
       'Import i eksport przez plik Excel (dostępny dla moderatora) pozwala zrobić kopię zapasową całej bazy albo masowo poprawić przepisy poza aplikacją — plik rozpoznaje dania po nazwie i nadpisuje istniejące zamiast tworzyć duplikaty.',
-    ],
-  },
-  {
-    tytul: 'Profil',
-    akapity: [
-      'Jeden formularz na profil zawiera zarówno dane potrzebne do wyliczeń (płeć, data urodzenia, wzrost, waga, poziom aktywności), jak i cele dzienne (tryb, proporcje makro, błonnik, próg białka na posiłek) — kcal i gramy nie są zapisane na sztywno, tylko liczone na bieżąco z tych danych. Do 3 profili na konto.',
-      'Administrator widzi tu dodatkowo zarządzanie kontami: włączanie i wyłączanie użytkowników oraz nadawanie roli moderatora.',
     ],
   },
 ];

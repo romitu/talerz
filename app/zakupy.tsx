@@ -158,10 +158,18 @@ export default function EkranZakupow() {
       .sort((a, b) => Number(a.wszystkoOdhaczone) - Number(b.wszystkoOdhaczone));
   }, [wedlugDzialow, kupione]);
 
-  const zrealizowane = kupione.size;
-  const niezrealizowane = pozycje.length - kupione.size + reczne.length;
+  /*
+    `kupione` jest zapamiętane per konto, nie per lista (patrz komentarz przy
+    tabeli `zakupy_odhaczone`) — dlatego liczymy tylko odhaczenia, które
+    dotyczą składników FAKTYCZNIE obecnych na bieżącej liście. Bez tego
+    filtra odhaczenia sprzed zmiany planu (np. z tygodnia, który już zniknął
+    z listy) zawyżałyby „zrealizowane” i potrafiły zepchnąć „niezrealizowane”
+    poniżej zera.
+  */
+  const zrealizowane = pozycje.filter((p) => kupione.has(p.skladnik_id)).length;
+  const niezrealizowane = pozycje.length - zrealizowane + reczne.length;
   const resztyRazem = pozycje.reduce((s, p) => s + (p.reszta_g ?? 0), 0);
-  const cosOdhaczone = kupione.size > 0;
+  const cosOdhaczone = zrealizowane > 0;
 
   /**
    * Odhaczenie widoczne od razu, zapis w tle.
@@ -362,7 +370,7 @@ export default function EkranZakupow() {
 
       {cosOdhaczone && (
         <Przycisk
-          tytul={`Zacznij nowe zakupy (odznacz ${kupione.size})`}
+          tytul={`Zacznij nowe zakupy (odznacz ${zrealizowane})`}
           wariant="poboczny"
           onPress={async () => {
             if (!kontoId) return;

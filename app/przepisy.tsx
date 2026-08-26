@@ -23,6 +23,7 @@ import {
   opisTrwalosci,
   odrzucPrzepis,
   pobierzPrzepisy,
+  ukryjPrzepis,
   ustawPreferencje,
   zatwierdzPrzepis,
   type PoraPosilku,
@@ -102,9 +103,11 @@ export default function EkranPrzepisow() {
     supabase
       .from('konta')
       .select('rola')
+      .eq('id', sesja?.user.id)
       .single()
       .then(({ data, error }) => {
-        if (!error && data) setRola(data.rola);
+        if (error) setBlad((poprzedni) => poprzedni ?? error.message);
+        else if (data) setRola(data.rola);
       });
 
     try {
@@ -171,6 +174,22 @@ export default function EkranPrzepisow() {
       );
     } finally {
       setUsuwanie(false);
+    }
+  }
+
+  /**
+   * Szybki przełącznik publiczny/prywatny dla moderatora — poza kolejką
+   * zgłoszeń, żeby dało się cofnąć publikację albo opublikować coś wprost,
+   * bez przechodzenia przez obieg „zgłoszenie → decyzja”.
+   */
+  async function przelaczWidocznosc(p: PrzepisZMakro) {
+    setBlad(null);
+    try {
+      if (p.widocznosc === 'publiczna') await ukryjPrzepis(p.id);
+      else await zatwierdzPrzepis(p.id);
+      await pobierz();
+    } catch (e) {
+      setBlad(komunikatBledu(e));
     }
   }
 
@@ -259,7 +278,6 @@ export default function EkranPrzepisow() {
       naglowekStaly={
         <NaglowekPrzepisow
           liczbaWBazie={przepisy.length}
-          wczytywanie={wczytywanie}
           fraza={fraza}
           onZmianaFrazy={setFraza}
           zakladki={zakladki}
@@ -343,6 +361,54 @@ export default function EkranPrzepisow() {
 
         return (
         <Karta key={p.id}>
+          <View style={styles.naglowek}>
+            <ThemedText type="subtitle" style={styles.nazwa}>
+              {p.nazwa}
+            </ThemedText>
+
+            {/*
+              Dla moderatora pigułka statusu jest jednocześnie przełącznikiem
+              publiczny/prywatny — najszybszy sposób ustalić i zmienić, co jest
+              widoczne dla wszystkich, bez wchodzenia w kolejkę zgłoszeń.
+              Zgłoszony ma swój własny obieg decyzji niżej, więc tu jest tylko
+              etykietą.
+            */}
+            {mozeDodawac && p.widocznosc !== 'zgloszona' ? (
+              <Pressable
+                onPress={() => przelaczWidocznosc(p)}
+                accessibilityRole="button"
+                accessibilityLabel={
+                  p.widocznosc === 'publiczna' ? `Ukryj ${p.nazwa}` : `Opublikuj ${p.nazwa}`
+                }
+                style={({ pressed }) => [
+                  styles.widocznoscPigulka,
+                  p.widocznosc === 'publiczna'
+                    ? { backgroundColor: motyw.backgroundSelected }
+                    : { borderWidth: 1, borderColor: motyw.border },
+                  pressed && styles.wcisniety,
+                ]}>
+                <Ionicons
+                  name={p.widocznosc === 'publiczna' ? 'earth' : 'lock-closed-outline'}
+                  size={14}
+                  color={p.widocznosc === 'publiczna' ? motyw.accent : motyw.textSecondary}
+                />
+                <ThemedText
+                  type="small"
+                  themeColor={p.widocznosc === 'publiczna' ? 'accent' : 'textSecondary'}>
+                  {p.widocznosc === 'publiczna' ? 'publiczny' : 'prywatny'}
+                </ThemedText>
+              </Pressable>
+            ) : (
+              <ThemedText type="small" themeColor="textSecondary">
+                {p.widocznosc === 'publiczna'
+                  ? 'publiczny'
+                  : p.widocznosc === 'prywatna'
+                    ? 'prywatny'
+                    : 'zgłoszony'}
+              </ThemedText>
+            )}
+          </View>
+
           {zdjecie && (
             <Image
               source={{ uri: zdjecie }}
@@ -352,17 +418,6 @@ export default function EkranPrzepisow() {
               accessibilityLabel={p.nazwa}
             />
           )}
-
-          <View style={styles.naglowek}>
-            <ThemedText type="subtitle" style={styles.nazwa}>
-              {p.nazwa}
-            </ThemedText>
-            {p.widocznosc !== 'publiczna' && (
-              <ThemedText type="small" themeColor="textSecondary">
-                {p.widocznosc === 'prywatna' ? 'prywatny' : 'zgłoszony'}
-              </ThemedText>
-            )}
-          </View>
 
           {p.opis && (
             <ThemedText type="small" themeColor="textSecondary">
@@ -696,6 +751,14 @@ const styles = StyleSheet.create({
     gap: Spacing.two,
   },
   nazwa: { flex: 1 },
+  widocznoscPigulka: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    borderRadius: 999,
+    paddingVertical: Spacing.half,
+    paddingHorizontal: Spacing.two,
+  },
   moderacja: {
     borderWidth: 1,
     borderRadius: Spacing.two,

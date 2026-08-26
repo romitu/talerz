@@ -1,0 +1,559 @@
+<style>
+.macro-page {
+    --bg: #f4f7f4;
+    --card: #ffffff;
+    --text: #1c2620;
+    --muted: #5f7268;
+    --border: #d8e3d9;
+
+    --protein: #2f6b46;
+    --protein-soft: #edf6ef;
+
+    --fat: #9a5b0a;
+    --fat-soft: #fff5e7;
+
+    --carbs: #2f66a3;
+    --carbs-soft: #edf4fb;
+
+    --accent: #3f6b4a;
+    --accent-soft: #e6efe8;
+
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 24px 16px 50px;
+    box-sizing: border-box;
+
+    font-family: Arial, sans-serif;
+    color: var(--text);
+}
+
+.macro-page * {
+    box-sizing: border-box;
+}
+
+.macro-title {
+    margin: 0;
+    font-size: 32px;
+    line-height: 1.15;
+    font-weight: 750;
+}
+
+.macro-subtitle {
+    margin: 5px 0 22px;
+    color: var(--muted);
+    font-size: 15px;
+}
+
+
+/* INTRO */
+
+.macro-intro {
+    padding: 18px 20px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    line-height: 1.55;
+    font-size: 15px;
+}
+
+.macro-intro strong {
+    color: var(--accent);
+}
+
+
+/* TRZY MAKROSKŁADNIKI */
+
+.macro-types {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 14px;
+}
+
+.macro-type {
+    padding: 16px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+}
+
+.macro-type__head {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: 750;
+}
+
+.macro-dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    flex: 0 0 11px;
+}
+
+.macro-type--protein .macro-dot {
+    background: #3f8f5f;
+}
+
+.macro-type--protein .macro-type__head {
+    color: var(--protein);
+}
+
+.macro-type--fat .macro-dot {
+    background: #d98a20;
+}
+
+.macro-type--fat .macro-type__head {
+    color: var(--fat);
+}
+
+.macro-type--carbs .macro-dot {
+    background: #3e7bc4;
+}
+
+.macro-type--carbs .macro-type__head {
+    color: var(--carbs);
+}
+
+.macro-type p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+
+/* DGA – BIAŁKO */
+
+.protein-current {
+    margin-top: 16px;
+    padding: 18px 20px;
+
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 16px;
+
+    background: var(--protein-soft);
+    border: 1px solid #cfe2d4;
+    border-radius: 16px;
+}
+
+.protein-current__value {
+    min-width: 122px;
+    text-align: center;
+    padding-right: 16px;
+    border-right: 1px solid #c7dacb;
+}
+
+.protein-current__number {
+    display: block;
+    color: var(--protein);
+    font-size: 25px;
+    line-height: 1.1;
+    font-weight: 800;
+}
+
+.protein-current__unit {
+    display: block;
+    margin-top: 3px;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.protein-current h3 {
+    margin: 0 0 5px;
+    font-size: 16px;
+    color: var(--protein);
+}
+
+.protein-current p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+
+/* SEKCJA */
+
+.macro-section-title {
+    margin: 28px 0 10px;
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 750;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+}
+
+
+/* AMDR */
+
+.amdr-grid {
+    display: grid;
+    gap: 10px;
+}
+
+.amdr-card {
+    padding: 16px 18px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+}
+
+.amdr-age {
+    margin-bottom: 13px;
+    font-size: 16px;
+    font-weight: 750;
+}
+
+.amdr-values {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+
+.amdr-value {
+    padding: 10px 11px;
+    border-radius: 11px;
+}
+
+.amdr-value span {
+    display: block;
+    margin-bottom: 3px;
+    font-size: 12px;
+}
+
+.amdr-value strong {
+    font-size: 17px;
+}
+
+.amdr-value--protein {
+    background: var(--protein-soft);
+    color: var(--protein);
+}
+
+.amdr-value--fat {
+    background: var(--fat-soft);
+    color: var(--fat);
+}
+
+.amdr-value--carbs {
+    background: var(--carbs-soft);
+    color: var(--carbs);
+}
+
+
+/* STARSZE OSOBY */
+
+.older-note {
+    margin-top: 12px;
+    padding: 16px 18px;
+    background: #f9faf7;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: 12px;
+}
+
+.older-note strong {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--accent);
+}
+
+.older-note p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+
+/* PRAKTYKA */
+
+.food-guide {
+    padding: 18px 20px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+}
+
+.food-guide p {
+    margin: 0 0 10px;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.food-guide ul {
+    margin: 0;
+    padding-left: 21px;
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.food-guide li::marker {
+    color: var(--accent);
+}
+
+
+/* METODOLOGIA */
+
+.method-note {
+    margin-top: 18px;
+    padding: 15px 18px;
+    background: var(--accent-soft);
+    border-radius: 14px;
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--muted);
+}
+
+.method-note strong {
+    color: var(--accent);
+}
+
+.sources {
+    margin-top: 16px;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 650px) {
+
+    .macro-types {
+        grid-template-columns: 1fr;
+    }
+
+    .protein-current {
+        grid-template-columns: 1fr;
+    }
+
+    .protein-current__value {
+        text-align: left;
+        padding: 0 0 12px;
+        border-right: 0;
+        border-bottom: 1px solid #c7dacb;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .macro-page {
+        padding-inline: 12px;
+    }
+
+    .macro-title {
+        font-size: 28px;
+    }
+
+    .amdr-values {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+
+<section class="macro-page">
+
+    <h1 class="macro-title">Makroskładniki</h1>
+
+    <div class="macro-subtitle">
+        Zakresy AMDR oraz aktualne zalecenia żywieniowe USA
+    </div>
+
+
+    <div class="macro-intro">
+        <strong>AMDR — Acceptable Macronutrient Distribution Ranges</strong>
+        określa, jaka część całkowitej energii może pochodzić z białka,
+        tłuszczu i węglowodanów. AMDR jest zakresem procentowym —
+        nie jest indywidualnym celem spożycia w gramach.
+    </div>
+
+
+    <div class="macro-types">
+
+        <div class="macro-type macro-type--protein">
+            <div class="macro-type__head">
+                <span class="macro-dot"></span>
+                Białko
+            </div>
+            <p>
+                Dostarcza aminokwasów potrzebnych m.in. do budowy
+                i utrzymania tkanek, w tym mięśni.
+            </p>
+        </div>
+
+        <div class="macro-type macro-type--fat">
+            <div class="macro-type__head">
+                <span class="macro-dot"></span>
+                Tłuszcz
+            </div>
+            <p>
+                Jest potrzebny m.in. do budowy błon komórkowych
+                i wchłaniania witamin A, D, E i K.
+            </p>
+        </div>
+
+        <div class="macro-type macro-type--carbs">
+            <div class="macro-type__head">
+                <span class="macro-dot"></span>
+                Węglowodany
+            </div>
+            <p>
+                Są ważnym źródłem energii. Warto wybierać przede
+                wszystkim produkty mało przetworzone i bogate w błonnik.
+            </p>
+        </div>
+
+    </div>
+
+
+    <div class="protein-current">
+
+        <div class="protein-current__value">
+            <span class="protein-current__number">1,2–1,6</span>
+            <span class="protein-current__unit">g/kg masy ciała / dobę</span>
+        </div>
+
+        <div>
+            <h3>Białko w Dietary Guidelines for Americans 2025–2030</h3>
+            <p>
+                Aktualne zalecenia USA wskazują na priorytetowe
+                uwzględnianie wartościowych źródeł białka w posiłkach.
+                Podany zakres należy dostosować do indywidualnego
+                zapotrzebowania energetycznego.
+            </p>
+        </div>
+
+    </div>
+
+
+    <div class="macro-section-title">
+        Zakresy AMDR wg wieku
+    </div>
+
+
+    <div class="amdr-grid">
+
+        <div class="amdr-card">
+            <div class="amdr-age">1–3 lata</div>
+
+            <div class="amdr-values">
+                <div class="amdr-value amdr-value--protein">
+                    <span>Białko</span>
+                    <strong>5–20%</strong>
+                </div>
+
+                <div class="amdr-value amdr-value--fat">
+                    <span>Tłuszcz</span>
+                    <strong>30–40%</strong>
+                </div>
+
+                <div class="amdr-value amdr-value--carbs">
+                    <span>Węglowodany</span>
+                    <strong>45–65%</strong>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="amdr-card">
+            <div class="amdr-age">4–18 lat</div>
+
+            <div class="amdr-values">
+                <div class="amdr-value amdr-value--protein">
+                    <span>Białko</span>
+                    <strong>10–30%</strong>
+                </div>
+
+                <div class="amdr-value amdr-value--fat">
+                    <span>Tłuszcz</span>
+                    <strong>25–35%</strong>
+                </div>
+
+                <div class="amdr-value amdr-value--carbs">
+                    <span>Węglowodany</span>
+                    <strong>45–65%</strong>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="amdr-card">
+            <div class="amdr-age">Dorośli — 19 lat i więcej</div>
+
+            <div class="amdr-values">
+                <div class="amdr-value amdr-value--protein">
+                    <span>Białko</span>
+                    <strong>10–35%</strong>
+                </div>
+
+                <div class="amdr-value amdr-value--fat">
+                    <span>Tłuszcz</span>
+                    <strong>20–35%</strong>
+                </div>
+
+                <div class="amdr-value amdr-value--carbs">
+                    <span>Węglowodany</span>
+                    <strong>45–65%</strong>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="older-note">
+        <strong>Starsze osoby dorosłe</strong>
+        <p>
+            Zakres AMDR pozostaje taki sam jak u pozostałych dorosłych.
+            Z wiekiem szczególnego znaczenia nabiera odpowiednia ilość
+            białka i wybór wartościowych jego źródeł, ponieważ
+            zapotrzebowanie energetyczne może się zmniejszać, podczas gdy
+            potrzeba dostarczenia białka pozostaje wysoka.
+        </p>
+    </div>
+
+
+    <div class="macro-section-title">
+        Jak przełożyć to na codzienne jedzenie?
+    </div>
+
+    <div class="food-guide">
+        <p>
+            Aktualne Dietary Guidelines for Americans 2025–2030
+            kładą nacisk przede wszystkim na:
+        </p>
+
+        <ul>
+            <li>wartościowe źródła białka w każdym posiłku,</li>
+            <li>różnorodne warzywa i owoce,</li>
+            <li>produkty pełnoziarniste bogate w błonnik,</li>
+            <li>tłuszcze pochodzące głównie z pełnowartościowych produktów,</li>
+            <li>ograniczanie żywności wysoko przetworzonej i rafinowanych węglowodanów.</li>
+        </ul>
+    </div>
+
+
+    <div class="method-note">
+        <strong>Ważne:</strong>
+        AMDR i cel białka w g/kg opisują dwie różne rzeczy.
+        AMDR określa procent energii z makroskładników,
+        natomiast wartość g/kg służy do określenia ilości białka
+        względem masy ciała.
+    </div>
+
+
+    <div class="sources">
+        Podstawa: Dietary Reference Intakes — Acceptable Macronutrient
+        Distribution Ranges (AMDR); Dietary Guidelines for Americans
+        2025–2030, USDA/HHS, 2026.
+    </div>
+
+</section>

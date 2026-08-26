@@ -64,7 +64,7 @@ export default function EkranProfilu() {
         // (patrz niżej) potrafił złapać stary zapis zamiast aktualnego.
         .order('obowiazuje_od', { foreignTable: 'cele', ascending: false })
         .limit(1, { foreignTable: 'cele' }),
-      supabase.from('konta').select('rola').single(),
+      supabase.from('konta').select('rola').eq('id', sesja?.user.id).single(),
     ]);
 
     if (wynikProfili.error) setBlad(wynikProfili.error.message);
@@ -94,10 +94,11 @@ export default function EkranProfilu() {
       setWagi(mapa);
     }
 
-    if (!wynikKonta.error) setRola(wynikKonta.data.rola);
+    if (wynikKonta.error) setBlad((poprzedni) => poprzedni ?? wynikKonta.error.message);
+    else setRola(wynikKonta.data.rola);
 
     setWczytywanie(false);
-  }, []);
+  }, [sesja?.user.id]);
 
   // Odświeżenie po powrocie z formularza — inaczej lista byłaby nieaktualna.
   useFocusEffect(

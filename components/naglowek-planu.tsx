@@ -51,6 +51,10 @@ export function NaglowekPlanu({
       </View>
 
       <View style={[styles.dolny, { backgroundColor: motyw.background, borderColor: motyw.border }]}>
+        <ThemedText type="small" themeColor="textSecondary">
+          Start od:
+        </ThemedText>
+
         <View style={styles.poleDaty}>
           <ListaRozwijana
             ikona="calendar-outline"
@@ -63,13 +67,6 @@ export function NaglowekPlanu({
               opis: czyDzisiaj(d) ? 'dzisiaj' : undefined,
             }))}
           />
-        </View>
-
-        <View style={styles.info}>
-          <Ionicons name="information-circle-outline" size={15} color={motyw.textSecondary} />
-          <ThemedText type="small" themeColor="textSecondary" style={styles.infoTekst}>
-            Pozostałe dni ułożą się od niego. Posiłki zostają przy swoich datach.
-          </ThemedText>
         </View>
       </View>
     </ThemedView>
@@ -98,7 +95,7 @@ const styles = StyleSheet.create({
      karty miały porównywalną wysokość na ekranach obok siebie w nawigacji. */
   dolny: {
     flexDirection: 'row',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     gap: Spacing.two,
     borderWidth: 1,
     borderRadius: Spacing.two,
@@ -109,16 +106,5 @@ const styles = StyleSheet.create({
     flexBasis: 190,
     flexGrow: 0,
     flexShrink: 0,
-  },
-  info: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    gap: Spacing.one,
-    minWidth: 0,
-    paddingTop: 2,
-  },
-  infoTekst: {
-    flex: 1,
   },
 });

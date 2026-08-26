@@ -18,19 +18,17 @@ export type ZakladkaPrzepisow = {
 };
 
 /**
- * Nagłówek ekranu przepisów — ikona, tytuł z licznikiem, szukajka i zakładki
- * kategorii. Stały (patrz `naglowekStaly` w `Ekran`), więc szukanie i filtry
- * zostają pod ręką, nawet gdy lista przepisów jest długa i przewija się.
+ * Nagłówek ekranu przepisów — szukajka z ikoną książki i zakładki kategorii.
+ * Stały (patrz `naglowekStaly` w `Ekran`), więc szukanie i filtry zostają
+ * pod ręką, nawet gdy lista przepisów jest długa i przewija się.
  */
 export function NaglowekPrzepisow({
   liczbaWBazie,
-  wczytywanie,
   fraza,
   onZmianaFrazy,
   zakladki,
 }: {
   liczbaWBazie: number;
-  wczytywanie: boolean;
   fraza: string;
   onZmianaFrazy: (tekst: string) => void;
   zakladki: ZakladkaPrzepisow[];
@@ -39,26 +37,12 @@ export function NaglowekPrzepisow({
 
   return (
     <ThemedView type="backgroundElement" style={[styles.karta, { borderColor: motyw.border }]}>
-      <View style={styles.gorny}>
-        <View style={[styles.ikonaKolo, { backgroundColor: motyw.backgroundSelected }]}>
-          <Ionicons name="book-outline" size={26} color={motyw.accent} />
-        </View>
-
-        <View style={styles.tytulOpis}>
-          <ThemedText type="subtitle" numberOfLines={1}>
-            Przepisy
-          </ThemedText>
-          <View style={[styles.licznikPigulka, { backgroundColor: motyw.backgroundSelected }]}>
-            <ThemedText type="smallBold" themeColor="accent" numberOfLines={1}>
-              {wczytywanie ? 'wczytywanie…' : `${liczbaWBazie} w bazie`}
-            </ThemedText>
-          </View>
-        </View>
-      </View>
-
       {liczbaWBazie > 0 && (
         <View
           style={[styles.szukajka, { borderColor: motyw.accent, backgroundColor: motyw.background }]}>
+          <View style={[styles.ikonaKolo, { backgroundColor: motyw.backgroundSelected }]}>
+            <Ionicons name="book-outline" size={22} color={motyw.accent} />
+          </View>
           <Ionicons name="search" size={20} color={motyw.textSecondary} />
           <TextInput
             value={fraza}
@@ -121,29 +105,12 @@ const styles = StyleSheet.create({
     padding: Spacing.three,
     gap: Spacing.two,
   },
-  gorny: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: Spacing.three,
-  },
   ikonaKolo: {
-    width: 52,
-    height: 52,
-    borderRadius: 26,
+    width: 34,
+    height: 34,
+    borderRadius: 17,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  tytulOpis: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    flexWrap: 'wrap',
-    gap: Spacing.two,
-  },
-  licznikPigulka: {
-    borderRadius: 999,
-    paddingHorizontal: Spacing.two,
-    paddingVertical: Spacing.half,
   },
   szukajka: {
     flexDirection: 'row',

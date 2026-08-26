@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 12px;
+    background: #f3f5f1;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #213229;
+}
+
+.day-plan {
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+
+    padding: 10px 12px;
+
+    background: #fff;
+    border: 1px solid #dde5dd;
+    border-radius: 14px;
+
+    box-shadow: 0 2px 8px rgba(35,55,40,.04);
+}
+
+
+/* ===== GÓRA ===== */
+
+.day-plan__top {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    margin-bottom: 7px;
+}
+
+.day-plan__title {
+    margin: 0;
+
+    font-size: 17px;
+    line-height: 1;
+    font-weight: 700;
+
+    color: #203128;
+}
+
+.day-plan__weekday {
+    font-size: 12px;
+    font-weight: 600;
+
+    color: #6c7d72;
+}
+
+.day-plan__people {
+    margin-left: auto;
+
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    white-space: nowrap;
+
+    font-size: 11.5px;
+    font-weight: 600;
+
+    color: #607168;
+}
+
+.day-plan__people svg {
+    width: 13px;
+    height: 13px;
+}
+
+
+/* ===== DÓŁ ===== */
+
+.day-plan__bottom {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+
+/* DATEPICKER */
+
+.day-plan__date {
+    position: relative;
+
+    width: 138px;
+    flex: 0 0 138px;
+}
+
+.day-plan__date svg {
+    position: absolute;
+
+    left: 8px;
+    top: 50%;
+
+    width: 15px;
+    height: 15px;
+
+    transform: translateY(-50%);
+
+    pointer-events: none;
+
+    color: #55745d;
+}
+
+.day-plan__date input {
+    display: block;
+
+    width: 100%;
+    height: 34px;
+
+    padding: 0 5px 0 29px;
+
+    background: #f7f9f6;
+
+    border: 1px solid #dce4dc;
+    border-radius: 8px;
+
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+
+    color: #26382d;
+}
+
+
+/* INFO */
+
+.day-plan__info {
+    min-width: 0;
+
+    display: flex;
+    align-items: flex-start;
+    gap: 5px;
+
+    font-size: 10.5px;
+    line-height: 1.25;
+
+    color: #707c74;
+}
+
+.day-plan__info svg {
+    width: 13px;
+    height: 13px;
+
+    flex: 0 0 13px;
+
+    color: #7c8e81;
+}
+
+
+/* bardzo wąski telefon */
+
+@media (max-width: 355px) {
+
+    .day-plan {
+        padding: 9px 10px;
+    }
+
+    .day-plan__date {
+        width: 128px;
+        flex-basis: 128px;
+    }
+
+    .day-plan__info {
+        font-size: 9.8px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="day-plan">
+
+    <div class="day-plan__top">
+
+        <h2 class="day-plan__title">
+            Plan dnia
+        </h2>
+
+        <span class="day-plan__weekday" id="weekday">
+            Poniedziałek
+        </span>
+
+        <div class="day-plan__people">
+
+            <svg viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="2">
+                <circle cx="12" cy="8" r="4"/>
+                <path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/>
+            </svg>
+
+            1 osoba
+
+        </div>
+
+    </div>
+
+
+    <div class="day-plan__bottom">
+
+        <div class="day-plan__date">
+
+            <svg viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="2">
+                <rect x="3" y="5" width="18" height="16" rx="2"/>
+                <path d="M16 3v4M8 3v4M3 10h18"/>
+            </svg>
+
+            <input
+                type="date"
+                id="planDate"
+                value="2026-08-24"
+            >
+
+        </div>
+
+
+        <div class="day-plan__info">
+
+            <svg viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="2">
+                <circle cx="12" cy="12" r="9"/>
+                <path d="M12 11v5M12 8h.01"/>
+            </svg>
+
+            <span>
+                Pozostałe dni ułożą się od niego. Posiłki zostają przy swoich datach.
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+const input = document.getElementById('planDate');
+const weekday = document.getElementById('weekday');
+
+function updateWeekday() {
+    if (!input.value) return;
+
+    const [y, m, d] = input.value.split('-').map(Number);
+    const date = new Date(y, m - 1, d);
+
+    let name = date.toLocaleDateString('pl-PL', {
+        weekday: 'long'
+    });
+
+    weekday.textContent =
+        name.charAt(0).toUpperCase() + name.slice(1);
+}
+
+input.addEventListener('change', updateWeekday);
+updateWeekday();
+</script>
+
+</body>
+</html>

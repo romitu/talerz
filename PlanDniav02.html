@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Plan dnia</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 24px;
+
+    background: #f2f5f1;
+
+    font-family: Arial, Helvetica, sans-serif;
+    color: #203028;
+}
+
+
+/* =========================================================
+   KARTA
+   ========================================================= */
+
+.plan-card {
+    width: 100%;
+    max-width: 980px;
+
+    padding: 22px 24px 18px;
+
+    background: #ffffff;
+
+    border: 1px solid #e6ebe4;
+    border-radius: 20px;
+
+    box-shadow: 0 3px 12px rgba(38, 65, 45, 0.04);
+}
+
+
+/* =========================================================
+   NAGŁÓWEK
+   ========================================================= */
+
+.plan-header {
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    margin-bottom: 22px;
+}
+
+.plan-icon {
+    width: 50px;
+    height: 50px;
+
+    flex: 0 0 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #e9f3e9;
+    color: #34714a;
+}
+
+.plan-icon svg {
+    width: 25px;
+    height: 25px;
+
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+}
+
+.plan-heading {
+    min-width: 0;
+}
+
+.plan-title {
+    margin: 0 0 4px;
+
+    font-size: 30px;
+    line-height: 1.1;
+    font-weight: 700;
+
+    color: #1d2c24;
+}
+
+.plan-meta {
+    font-size: 14px;
+    font-weight: 600;
+
+    color: #67776d;
+}
+
+
+/* =========================================================
+   POLA
+   ========================================================= */
+
+.plan-fields {
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 16px;
+}
+
+.plan-field {
+    min-width: 0;
+}
+
+.plan-label {
+    display: block;
+
+    margin-bottom: 6px;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    color: #66796d;
+}
+
+
+/* =========================================================
+   SELECT
+   ========================================================= */
+
+.plan-select {
+    position: relative;
+}
+
+.plan-select select {
+    appearance: none;
+    -webkit-appearance: none;
+
+    width: 100%;
+    height: 56px;
+
+    padding: 0 48px 0 16px;
+
+    background: #ffffff;
+
+    border: 1px solid #d5ded4;
+    border-radius: 9px;
+
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 500;
+
+    color: #1e3026;
+
+    cursor: pointer;
+    outline: none;
+}
+
+.plan-select select:hover {
+    border-color: #b9c9ba;
+}
+
+.plan-select select:focus {
+    border-color: #668b69;
+
+    box-shadow: 0 0 0 3px rgba(86, 127, 91, 0.10);
+}
+
+
+/* strzałka */
+
+.plan-select::after {
+    content: "";
+
+    position: absolute;
+
+    right: 18px;
+    top: 50%;
+
+    width: 8px;
+    height: 8px;
+
+    border-right: 2px solid #52725b;
+    border-bottom: 2px solid #52725b;
+
+    transform:
+        translateY(-70%)
+        rotate(45deg);
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   POLE TYGODNIA
+   ========================================================= */
+
+.week-select select {
+    height: 64px;
+
+    padding-top: 4px;
+    padding-bottom: 20px;
+}
+
+.week-note {
+    position: absolute;
+
+    left: 16px;
+    bottom: 9px;
+
+    pointer-events: none;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    color: #718068;
+}
+
+
+/* =========================================================
+   OPIS
+   ========================================================= */
+
+.plan-info {
+    margin: 14px 0 0;
+
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.45;
+
+    color: #75857b;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 650px) {
+
+    body {
+        padding: 12px;
+    }
+
+    .plan-card {
+        padding: 18px;
+
+        border-radius: 16px;
+    }
+
+    .plan-title {
+        font-size: 26px;
+    }
+
+    .plan-fields {
+        grid-template-columns: 1fr;
+    }
+
+}
+</style>
+</head>
+
+
+<body>
+
+<section class="plan-card">
+
+    <!-- NAGŁÓWEK -->
+
+    <header class="plan-header">
+
+        <div class="plan-icon">
+
+            <svg viewBox="0 0 24 24">
+                <rect x="3" y="5" width="18" height="16" rx="2"/>
+                <path d="M8 3v4M16 3v4M3 10h18"/>
+                <path d="M8 14h.01M12 14h.01M16 14h.01"/>
+                <path d="M8 18h.01M12 18h.01M16 18h.01"/>
+            </svg>
+
+        </div>
+
+
+        <div class="plan-heading">
+
+            <h1 class="plan-title">
+                Plan dnia
+            </h1>
+
+            <div class="plan-meta">
+                7 dni · 1 osoba
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- POLA -->
+
+    <div class="plan-fields">
+
+
+        <!-- PIERWSZY DZIEŃ -->
+
+        <div class="plan-field">
+
+            <label
+                class="plan-label"
+                for="start-day"
+            >
+                Pierwszy dzień planu
+            </label>
+
+            <div class="plan-select">
+
+                <select id="start-day">
+
+                    <option>
+                        wtorek, 25 sierpnia
+                    </option>
+
+                    <option>
+                        środa, 26 sierpnia
+                    </option>
+
+                    <option>
+                        czwartek, 27 sierpnia
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- OGLĄDANY TYDZIEŃ -->
+
+        <div class="plan-field">
+
+            <label
+                class="plan-label"
+                for="week"
+            >
+                Oglądany tydzień
+            </label>
+
+            <div class="plan-select week-select">
+
+                <select id="week">
+
+                    <option>
+                        od wtorku, 25 sierpnia
+                    </option>
+
+                    <option>
+                        od wtorku, 18 sierpnia
+                    </option>
+
+                    <option>
+                        od wtorku, 11 sierpnia
+                    </option>
+
+                </select>
+
+                <span class="week-note">
+                    najnowszy
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- INFORMACJA -->
+
+    <p class="plan-info">
+        Pozostałe dni ułożą się od niego. Posiłki zostają przy swoich datach.
+    </p>
+
+</section>
+
+</body>
+</html>

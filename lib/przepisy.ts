@@ -513,6 +513,19 @@ export async function zatwierdzPrzepis(przepisId: string) {
 }
 
 /**
+ * Moderator ukrywa już opublikowany przepis — bez podawania powodu, bo nie ma
+ * tu autora, którego trzeba czegokolwiek nauczyć (to nie jest odrzucenie
+ * zgłoszenia, tylko wycofanie publikacji).
+ */
+export async function ukryjPrzepis(przepisId: string) {
+  const { error } = await supabase
+    .from('przepisy')
+    .update({ widocznosc: 'prywatna' })
+    .eq('id', przepisId);
+  if (error) throw error;
+}
+
+/**
  * Moderator odsyła przepis do poprawki.
  *
  * Powód jest obowiązkowy. Odrzucenie bez uzasadnienia kończy się tym, że autor

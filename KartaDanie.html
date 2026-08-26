@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Dorsz po grecku</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #f2f4f1;
+    color: #223127;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* =========================================================
+   STRONA
+   ========================================================= */
+
+.page {
+    width: 100%;
+    padding: 24px;
+}
+
+
+/* =========================================================
+   KARTA PRZEPISU
+   ========================================================= */
+
+.recipe-card {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+
+    padding: 24px;
+
+    background: #ffffff;
+    border: 1px solid #e5e9e2;
+    border-radius: 26px;
+
+    box-shadow:
+        0 8px 28px rgba(40, 60, 40, 0.06);
+}
+
+
+/* =========================================================
+   GÓRNA CZĘŚĆ
+   ========================================================= */
+
+.recipe-main {
+    display: grid;
+
+    /*
+       Nie używamy 57% + 43%,
+       bo gap dodawał się ponad 100%.
+    */
+    grid-template-columns:
+        minmax(0, 1.22fr)
+        minmax(370px, 0.78fr);
+
+    gap: 28px;
+
+    align-items: start;
+}
+
+
+/* =========================================================
+   ZDJĘCIE – ZAWSZE 16:9
+   ========================================================= */
+
+.recipe-photo {
+    position: relative;
+
+    width: 100%;
+    aspect-ratio: 16 / 9;
+
+    overflow: hidden;
+
+    border-radius: 18px;
+
+    background: #e7e7e7;
+}
+
+.recipe-photo img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+/* =========================================================
+   PRAWA KOLUMNA
+   ========================================================= */
+
+.recipe-content {
+    min-width: 0;
+}
+
+
+/* =========================================================
+   TYTUŁ
+   ========================================================= */
+
+.recipe-title {
+    margin: 0 0 16px;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: clamp(34px, 3.4vw, 50px);
+    line-height: 1.05;
+
+    color: #17331e;
+
+    letter-spacing: -0.7px;
+}
+
+
+/* =========================================================
+   OPIS
+   ========================================================= */
+
+.recipe-description {
+    margin: 0 0 18px;
+
+    font-size: 17px;
+    line-height: 1.48;
+
+    color: #536058;
+}
+
+
+/* =========================================================
+   TAGI
+   ========================================================= */
+
+.recipe-tags {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin-bottom: 18px;
+}
+
+.tag {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 7px;
+
+    min-height: 38px;
+
+    padding: 8px 12px;
+
+    border: 1px solid #dfe5dc;
+    border-radius: 12px;
+
+    background: #fbfcfa;
+
+    color: #314b36;
+
+    font-size: 14px;
+
+    white-space: nowrap;
+}
+
+.tag svg {
+    width: 18px;
+    height: 18px;
+
+    flex: 0 0 18px;
+
+    stroke: #587b5e;
+    fill: none;
+
+    stroke-width: 1.8;
+}
+
+
+/* =========================================================
+   LINIA
+   ========================================================= */
+
+.divider {
+    width: 100%;
+    height: 1px;
+
+    margin: 4px 0 18px;
+
+    background: #e5e9e3;
+}
+
+
+/* =========================================================
+   NAGŁÓWEK MAKRO
+   ========================================================= */
+
+.nutrition-title {
+    margin: 0 0 12px;
+
+    font-size: 17px;
+    line-height: 1.25;
+
+    font-weight: 700;
+
+    color: #4c7352;
+}
+
+
+/* =========================================================
+   MAKRO
+   ========================================================= */
+
+.nutrition-box {
+    display: grid;
+
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+
+    width: 100%;
+
+    padding: 14px 6px;
+
+    background: #f7f8f5;
+
+    border-radius: 15px;
+}
+
+.nutrition-item {
+    min-width: 0;
+
+    padding: 2px 8px;
+
+    text-align: center;
+
+    border-right: 1px solid #e0e5de;
+}
+
+.nutrition-item:last-child {
+    border-right: 0;
+}
+
+.nutrition-icon {
+    height: 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 5px;
+
+    font-size: 21px;
+
+    color: #54765a;
+}
+
+.nutrition-value {
+    display: block;
+
+    margin-bottom: 3px;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 20px;
+
+    font-weight: 700;
+
+    color: #223127;
+
+    white-space: nowrap;
+}
+
+.nutrition-label {
+    display: block;
+
+    font-size: 14px;
+
+    color: #637067;
+}
+
+
+/* =========================================================
+   PODSUMOWANIE
+   ========================================================= */
+
+.recipe-summary {
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+
+    margin-top: 12px;
+
+    padding: 11px 14px;
+
+    background: #f2f4f0;
+
+    border-radius: 12px;
+
+    font-size: 14px;
+
+    color: #56645a;
+}
+
+.summary-row {
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    min-width: 0;
+}
+
+.summary-icon {
+    color: #54765a;
+
+    width: 22px;
+
+    flex: 0 0 22px;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   DOLNY PASEK
+   ========================================================= */
+
+.recipe-footer {
+    display: grid;
+
+    grid-template-columns:
+        minmax(150px, 1.2fr)
+        minmax(130px, 1fr)
+        minmax(130px, 1fr)
+        80px
+        80px
+        80px;
+
+    margin-top: 22px;
+
+    min-height: 72px;
+
+    overflow: hidden;
+
+    background: #fbfcfa;
+
+    border: 1px solid #e5e9e2;
+    border-radius: 16px;
+}
+
+.action {
+    appearance: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    min-width: 0;
+
+    padding: 12px;
+
+    border: 0;
+    border-right: 1px solid #e4e8e1;
+
+    background: transparent;
+
+    font: inherit;
+
+    color: #45654b;
+
+    cursor: pointer;
+}
+
+.action:last-child {
+    border-right: 0;
+}
+
+.action:hover {
+    background: #f2f5f0;
+}
+
+.action-icon {
+    font-size: 25px;
+    line-height: 1;
+}
+
+.action-text {
+    font-size: 15px;
+
+    white-space: nowrap;
+}
+
+.action-heart {
+    color: #416d48;
+
+    font-size: 31px;
+}
+
+.action-star {
+    font-size: 32px;
+}
+
+.action-close {
+    font-size: 28px;
+}
+
+
+/* =========================================================
+   RESPONSYWNOŚĆ
+   ========================================================= */
+
+/*
+   Tablet:
+   nadal dwie kolumny,
+   ale prawa część może być mniejsza.
+*/
+
+@media (max-width: 1050px) {
+
+    .recipe-main {
+        grid-template-columns:
+            minmax(0, 1.1fr)
+            minmax(330px, 0.9fr);
+
+        gap: 20px;
+    }
+
+    .recipe-card {
+        padding: 18px;
+    }
+
+    .recipe-title {
+        font-size: 35px;
+    }
+
+    .recipe-description {
+        font-size: 15px;
+    }
+
+    .tag {
+        font-size: 13px;
+        padding: 7px 9px;
+    }
+
+    .nutrition-value {
+        font-size: 18px;
+    }
+
+}
+
+
+/*
+   Małe ekrany:
+   obraz nad treścią.
+*/
+
+@media (max-width: 820px) {
+
+    .page {
+        padding: 12px;
+    }
+
+    .recipe-main {
+        grid-template-columns: 1fr;
+    }
+
+    .recipe-photo {
+        aspect-ratio: 16 / 9;
+    }
+
+    .recipe-footer {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .action:nth-child(3) {
+        border-right: 0;
+    }
+
+    .action:nth-child(-n+3) {
+        border-bottom: 1px solid #e4e8e1;
+    }
+
+}
+
+
+/*
+   Telefon
+*/
+
+@media (max-width: 520px) {
+
+    .recipe-card {
+        padding: 12px;
+
+        border-radius: 18px;
+    }
+
+    .recipe-photo {
+        border-radius: 14px;
+    }
+
+    .recipe-title {
+        margin-top: 4px;
+
+        font-size: 31px;
+    }
+
+    .recipe-tags {
+        gap: 6px;
+    }
+
+    .nutrition-box {
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 14px 0;
+    }
+
+    .nutrition-item:nth-child(2) {
+        border-right: 0;
+    }
+
+    .nutrition-item:nth-child(1),
+    .nutrition-item:nth-child(2) {
+        padding-bottom: 14px;
+
+        border-bottom: 1px solid #e0e5de;
+    }
+
+    .recipe-footer {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .action {
+        min-height: 58px;
+
+        border-bottom: 1px solid #e4e8e1;
+    }
+
+}
+</style>
+</head>
+
+
+<body>
+
+<div class="page">
+
+    <article class="recipe-card">
+
+        <div class="recipe-main">
+
+            <!-- =================================================
+                 ZDJĘCIE
+                 ================================================= -->
+
+            <div class="recipe-photo">
+                <img
+                    src="dorsz-po-grecku.jpg"
+                    alt="Dorsz po grecku"
+                >
+            </div>
+
+
+            <!-- =================================================
+                 INFORMACJE
+                 ================================================= -->
+
+            <div class="recipe-content">
+
+                <h1 class="recipe-title">
+                    Dorsz po grecku
+                </h1>
+
+
+                <p class="recipe-description">
+                    Trzyma się 3–4 dni i z dnia na dzień smakuje lepiej.
+                    Dorsz i mintaj to ryby dziko poławiane — szukaj oznaczenia MSC.
+                    Przepis rozpisany na cały garnek — 3 porcje.
+                </p>
+
+
+                <!-- TAGI -->
+
+                <div class="recipe-tags">
+
+                    <div class="tag">
+
+                        <svg viewBox="0 0 24 24">
+                            <path d="M8 3v8M16 3v8M4 12h16M6 21h12a2 2 0 0 0 2-2v-7H4v7a2 2 0 0 0 2 2z"/>
+                        </svg>
+
+                        Obiad
+
+                    </div>
+
+
+                    <div class="tag">
+
+                        <svg viewBox="0 0 24 24">
+                            <path d="M20 3c-7 0-12 4-12 10 4 0 9-2 12-10z"/>
+                            <path d="M5 21c1-5 4-9 10-12"/>
+                        </svg>
+
+                        śródziemnomorska
+
+                    </div>
+
+
+                    <div class="tag">
+
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="9"/>
+                            <path d="M12 7v5l3 2"/>
+                        </svg>
+
+                        40 min
+
+                    </div>
+
+
+                    <div class="tag">
+
+                        <svg viewBox="0 0 24 24">
+                            <rect x="3" y="5" width="18" height="16" rx="2"/>
+                            <path d="M8 3v4M16 3v4M3 10h18"/>
+                        </svg>
+
+                        najwyżej 3 dni
+
+                    </div>
+
+                </div>
+
+
+                <div class="divider"></div>
+
+
+                <!-- MAKRO -->
+
+                <div class="nutrition-title">
+                    NA PORCJĘ (732 g) · z 1 porcji
+                </div>
+
+
+                <div class="nutrition-box">
+
+
+                    <div class="nutrition-item">
+
+                        <div class="nutrition-icon">
+                            ♨
+                        </div>
+
+                        <span class="nutrition-value">
+                            533
+                        </span>
+
+                        <span class="nutrition-label">
+                            kcal
+                        </span>
+
+                    </div>
+
+
+                    <div class="nutrition-item">
+
+                        <div class="nutrition-icon">
+                            〽
+                        </div>
+
+                        <span class="nutrition-value">
+                            41.1 g
+                        </span>
+
+                        <span class="nutrition-label">
+                            białko
+                        </span>
+
+                    </div>
+
+
+                    <div class="nutrition-item">
+
+                        <div class="nutrition-icon">
+                            ◇
+                        </div>
+
+                        <span class="nutrition-value">
+                            12.5 g
+                        </span>
+
+                        <span class="nutrition-label">
+                            tłuszcz
+                        </span>
+
+                    </div>
+
+
+                    <div class="nutrition-item">
+
+                        <div class="nutrition-icon">
+                            🌾
+                        </div>
+
+                        <span class="nutrition-value">
+                            68.5 g
+                        </span>
+
+                        <span class="nutrition-label">
+                            węgle
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PODSUMOWANIE -->
+
+                <div class="recipe-summary">
+
+                    <div class="summary-row">
+
+                        <div class="summary-icon">
+                            ⚖
+                        </div>
+
+                        <span>
+                            Cała potrawa: 732 g, 533 kcal, 41.1 g białka
+                        </span>
+
+                    </div>
+
+
+                    <div class="summary-row">
+
+                        <div class="summary-icon">
+                            ◇
+                        </div>
+
+                        <span>
+                            cukry wolne: 2.3 g
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+             DOLNY PASEK
+             ===================================================== -->
+
+        <div class="recipe-footer">
+
+
+            <button class="action">
+
+                <span class="action-icon">
+                    ♙
+                </span>
+
+                <span class="action-text">
+                    1 porcja
+                </span>
+
+                <span>
+                   ⌄
+                </span>
+
+            </button>
+
+
+            <button class="action">
+
+                <span class="action-icon">
+                    ✎
+                </span>
+
+                <span class="action-text">
+                    Edytuj
+                </span>
+
+            </button>
+
+
+            <button class="action">
+
+                <span class="action-icon">
+                    ♲
+                </span>
+
+                <span class="action-text">
+                    Usuń
+                </span>
+
+            </button>
+
+
+            <button class="action action-star"
+                    aria-label="Ulubione">
+
+                ☆
+
+            </button>
+
+
+            <button class="action action-heart"
+                    aria-label="Lubię">
+
+                ♥
+
+            </button>
+
+
+            <button class="action action-close"
+                    aria-label="Nie proponuj">
+
+                ⊗
+
+            </button>
+
+        </div>
+
+    </article>
+
+</div>
+
+</body>
+</html>

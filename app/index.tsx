@@ -201,23 +201,42 @@ export default function EkranPlanu() {
   const pobierz = useCallback(async () => {
     setWczytywanie(true);
     setBlad(null);
+
     try {
-      const [wszystkie, lista, wynikProfili] = await Promise.all([
-        pobierzPlany(),
-        pobierzPrzepisy(sesja?.user.id),
-        // Liczba jedzących bierze się z profili — tyle porcji dziennie zejdzie z garnka.
-        supabase
-          .from('profile')
-          .select(
-            'id, plec, data_urodzenia, wzrost_cm, aktywnosc, cele (tryb, bialko_procent, tluszcz_procent, wegle_procent, blonnik_g, prog_bialka_posilek)'
-          )
-          .order('kolejnosc')
-          // `cele` trzyma pełną historię (jeden wiersz na obowiazuje_od) — bez
-          // sortowania dołączona tablica wraca w dowolnej kolejności i
-          // `cele[0]` (patrz niżej) potrafił złapać stary zapis, nie aktualny.
-          .order('obowiazuje_od', { foreignTable: 'cele', ascending: false })
-          .limit(1, { foreignTable: 'cele' }),
-      ]);
+      const [wszystkie, lista] = await Promise.all([pobierzPlany(), pobierzPrzepisy(sesja?.user.id)]);
+
+      // Oglądany tydzień: wskazany ręcznie albo najnowszy. Gdy wskazany zniknął
+      // (skasowany gdzie indziej), spadamy na najnowszy zamiast pokazywać pustkę.
+      const p = wszystkie.find((x) => x.id === wybranyPlanId) ?? wszystkie[0] ?? null;
+
+      setPlan(p);
+      setPrzepisy(lista);
+      setPozycje(p ? await pobierzPozycje(p.id) : []);
+    } catch (e) {
+      setBlad(komunikatBledu(e));
+    }
+
+    /*
+      Liczba jedzących i bilans dnia liczą się z profili NIEZALEŻNIE od planu,
+      we własnym bloku — inaczej awaria tutaj (zły pomiar wagi, brzegowy
+      przypadek w wyliczeniu celu) chowałaby plan, który normalnie by się
+      wczytał. Ta sama zasada co przy produktach dopisanych ręcznie w
+      zakupach (patrz komentarz w `app/zakupy.tsx`).
+    */
+    try {
+      // Liczba jedzących bierze się z profili — tyle porcji dziennie zejdzie z garnka.
+      const wynikProfili = await supabase
+        .from('profile')
+        .select(
+          'id, plec, data_urodzenia, wzrost_cm, aktywnosc, cele (tryb, bialko_procent, tluszcz_procent, wegle_procent, blonnik_g, prog_bialka_posilek)'
+        )
+        .order('kolejnosc')
+        // `cele` trzyma pełną historię (jeden wiersz na obowiazuje_od) — bez
+        // sortowania dołączona tablica wraca w dowolnej kolejności i
+        // `cele[0]` (patrz niżej) potrafił złapać stary zapis, nie aktualny.
+        .order('obowiazuje_od', { foreignTable: 'cele', ascending: false })
+        .limit(1, { foreignTable: 'cele' });
+      if (wynikProfili.error) throw wynikProfili.error;
 
       const listaProfili = (wynikProfili.data ?? []) as ProfilZCelem[];
       setOsoby(Math.max(1, listaProfili.length));
@@ -239,6 +258,7 @@ export default function EkranPlanu() {
           .order('data', { ascending: false })
           .limit(1)
           .maybeSingle();
+        if (wynikWagi.error) throw wynikWagi.error;
 
         if (wynikWagi.data) {
           const wynik = celZywieniowyNASEM(
@@ -260,17 +280,9 @@ export default function EkranPlanu() {
           };
         }
       }
-
-      // Oglądany tydzień: wskazany ręcznie albo najnowszy. Gdy wskazany zniknął
-      // (skasowany gdzie indziej), spadamy na najnowszy zamiast pokazywać pustkę.
-      const p = wszystkie.find((x) => x.id === wybranyPlanId) ?? wszystkie[0] ?? null;
-
-      setPlan(p);
-      setPrzepisy(lista);
       setCel(noweCel);
-      setPozycje(p ? await pobierzPozycje(p.id) : []);
     } catch (e) {
-      setBlad(komunikatBledu(e));
+      setBlad((poprzedni) => poprzedni ?? komunikatBledu(e));
     } finally {
       setWczytywanie(false);
     }
@@ -567,6 +579,22 @@ export default function EkranPlanu() {
     } finally {
       setPracuje(false);
     }
+  }
+
+  // --- błąd wczytywania ---
+  // Osobno od „brak planu” niżej — inaczej prawdziwa awaria (np. bazy) wyglądałaby
+  // jak zaproszenie do założenia nowego tygodnia, choć plan istnieje i tylko się
+  // nie wczytał.
+  if (!wczytywanie && !plan && blad) {
+    return (
+      <Ekran tytul="Plan dnia">
+        <Karta>
+          <ThemedText type="small" themeColor="accent">
+            Nie udało się wczytać: {blad}
+          </ThemedText>
+        </Karta>
+      </Ekran>
+    );
   }
 
   // --- brak planu ---
@@ -1034,10 +1062,7 @@ export default function EkranPlanu() {
                                 </ThemedText>
                               )}
 
-                              <ThemedText
-                                type="small"
-                                themeColor="textSecondary"
-                                style={styles.makroPozycji}>
+                              <ThemedText type="small" themeColor="textSecondary">
                                 {Math.round(pozycja.kcal * pozycja.porcje)} kcal{' · '}
                                 {Math.round(pozycja.bialko_g * pozycja.porcje * 10) / 10} g białka
                               </ThemedText>
@@ -1342,9 +1367,10 @@ const styles = StyleSheet.create({
   wierszPozycji: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: Spacing.two,
+    flexWrap: 'wrap',
+    rowGap: Spacing.half,
+    columnGap: Spacing.two,
   },
-  makroPozycji: { marginLeft: 'auto' },
   otworzPrzepis: {
     flex: 1,
     flexDirection: 'row',
