@@ -281,22 +281,34 @@ export async function podpowiedziZHistorii(kontoId: string, ile = 40): Promise<s
 //  ODHACZENIA POZYCJI Z PLANU
 // =============================================================================
 
-/** Identyfikatory składników już wrzuconych do koszyka. */
-export async function pobierzOdhaczone(kontoId: string): Promise<Set<string>> {
+/**
+ * Identyfikatory składników już wrzuconych do koszyka — DLA TEGO PLANU.
+ *
+ * Ptaszek jest właściwością tygodnia, nie konta: bez `planId` w kluczu ten
+ * sam składnik w nowo wygenerowanym, identycznym planie wracał jako „już
+ * kupiony", choć do tej listy nikt jeszcze nie zajrzał.
+ */
+export async function pobierzOdhaczone(kontoId: string, planId: string): Promise<Set<string>> {
   const { data, error } = await supabase
     .from('zakupy_odhaczone')
     .select('skladnik_id')
-    .eq('konto_id', kontoId);
+    .eq('konto_id', kontoId)
+    .eq('plan_id', planId);
 
   if (error) throw error;
   return new Set((data ?? []).map((x) => x.skladnik_id as string));
 }
 
-export async function ustawOdhaczenie(kontoId: string, skladnikId: string, odhaczony: boolean) {
+export async function ustawOdhaczenie(
+  kontoId: string,
+  planId: string,
+  skladnikId: string,
+  odhaczony: boolean
+) {
   if (odhaczony) {
     const { error } = await supabase
       .from('zakupy_odhaczone')
-      .upsert({ konto_id: kontoId, skladnik_id: skladnikId });
+      .upsert({ konto_id: kontoId, plan_id: planId, skladnik_id: skladnikId });
     if (error) throw error;
     return;
   }
@@ -305,12 +317,17 @@ export async function ustawOdhaczenie(kontoId: string, skladnikId: string, odhac
     .from('zakupy_odhaczone')
     .delete()
     .eq('konto_id', kontoId)
+    .eq('plan_id', planId)
     .eq('skladnik_id', skladnikId);
   if (error) throw error;
 }
 
-/** Czyści wszystkie ptaszki — początek nowych zakupów. */
-export async function wyczyscOdhaczenia(kontoId: string) {
-  const { error } = await supabase.from('zakupy_odhaczone').delete().eq('konto_id', kontoId);
+/** Czyści ptaszki TEGO planu — początek nowych zakupów albo czyszczenie tygodnia. */
+export async function wyczyscOdhaczenia(kontoId: string, planId: string) {
+  const { error } = await supabase
+    .from('zakupy_odhaczone')
+    .delete()
+    .eq('konto_id', kontoId)
+    .eq('plan_id', planId);
   if (error) throw error;
 }

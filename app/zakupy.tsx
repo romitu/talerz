@@ -60,6 +60,20 @@ export default function EkranZakupow() {
     setBlad(null);
     setOstrzezenie(null);
 
+    // Odhaczenia są przypisane do planu (patrz komentarz przy tabeli
+    // `zakupy_odhaczone`), więc plan trzeba znać, zanim się o nie zapyta.
+    let p: Plan | null = null;
+    try {
+      // Zawsze najnowszy tydzień — tak samo jak na ekranie planu.
+      const wszystkie = await pobierzPlany();
+      p = wszystkie[0] ?? null;
+      setPlan(p);
+    } catch (e) {
+      setBlad(komunikatBledu(e));
+      setWczytywanie(false);
+      return;
+    }
+
     /*
       Produkty dopisane ręcznie pobieramy W OSOBNYM bloku i z własną obsługą
       błędu — NIE razem z listą z planu.
@@ -78,7 +92,7 @@ export default function EkranZakupow() {
         const [lista, hist, odhaczone] = await Promise.all([
           pobierzReczne(kontoId),
           podpowiedziZHistorii(kontoId),
-          pobierzOdhaczone(kontoId),
+          p ? pobierzOdhaczone(kontoId, p.id) : Promise.resolve(new Set<string>()),
         ]);
         setReczne(lista);
         setHistoria(hist);
@@ -96,11 +110,6 @@ export default function EkranZakupow() {
     }
 
     try {
-      // Zawsze najnowszy tydzień — tak samo jak na ekranie planu.
-      const wszystkie = await pobierzPlany();
-      const p = wszystkie[0] ?? null;
-      setPlan(p);
-
       if (!p) {
         setPozycje([]);
         return;
@@ -159,12 +168,11 @@ export default function EkranZakupow() {
   }, [wedlugDzialow, kupione]);
 
   /*
-    `kupione` jest zapamiętane per konto, nie per lista (patrz komentarz przy
-    tabeli `zakupy_odhaczone`) — dlatego liczymy tylko odhaczenia, które
-    dotyczą składników FAKTYCZNIE obecnych na bieżącej liście. Bez tego
-    filtra odhaczenia sprzed zmiany planu (np. z tygodnia, który już zniknął
-    z listy) zawyżałyby „zrealizowane” i potrafiły zepchnąć „niezrealizowane”
-    poniżej zera.
+    Odhaczenia są przypisane do planu (patrz komentarz przy tabeli
+    `zakupy_odhaczone`), więc `kupione` w praktyce zawsze dotyczy bieżącej
+    listy. Filtr zostaje mimo to jako zabezpieczenie — gdyby lista zdążyła
+    się przeliczyć, zanim doszły świeże odhaczenia, nie chcemy zliczać
+    składnika, którego już nie ma na ekranie.
   */
   const zrealizowane = pozycje.filter((p) => kupione.has(p.skladnik_id)).length;
   const niezrealizowane = pozycje.length - zrealizowane + reczne.length;
@@ -179,7 +187,7 @@ export default function EkranZakupow() {
    * i mówimy o tym — cicha rozbieżność byłaby gorsza od komunikatu.
    */
   async function przelacz(id: string) {
-    if (!kontoId) return;
+    if (!kontoId || !plan) return;
     const bedzieOdhaczony = !kupione.has(id);
 
     setKupione((p) => {
@@ -190,7 +198,7 @@ export default function EkranZakupow() {
     });
 
     try {
-      await ustawOdhaczenie(kontoId, id, bedzieOdhaczony);
+      await ustawOdhaczenie(kontoId, plan.id, id, bedzieOdhaczony);
     } catch (e) {
       setBlad(komunikatBledu(e));
       pobierz();
@@ -373,10 +381,10 @@ export default function EkranZakupow() {
           tytul={`Zacznij nowe zakupy (odznacz ${zrealizowane})`}
           wariant="poboczny"
           onPress={async () => {
-            if (!kontoId) return;
+            if (!kontoId || !plan) return;
             setKupione(new Set());
             try {
-              await wyczyscOdhaczenia(kontoId);
+              await wyczyscOdhaczenia(kontoId, plan.id);
             } catch (e) {
               setBlad(komunikatBledu(e));
               pobierz();

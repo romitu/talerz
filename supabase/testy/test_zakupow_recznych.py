@@ -163,23 +163,34 @@ on conflict do nothing;
 """)
 skladnik = w("select id from skladniki where nazwa='Marchew próbna'")
 
+sql(f"insert into plany (konto_id, data_start) values ('{A}', '2024-01-01'), ('{C}', '2024-01-01');")
+plan_a = w(f"select id from plany where konto_id='{A}' and data_start='2024-01-01'")
+plan_c = w(f"select id from plany where konto_id='{C}' and data_start='2024-01-01'")
+
+sql(f"insert into plany (konto_id, data_start) values ('{A}', '2024-01-08');")
+plan_a2 = w(f"select id from plany where konto_id='{A}' and data_start='2024-01-08'")
+
 out, blad = sql(f"""
-insert into zakupy_odhaczone (konto_id, skladnik_id) values ('{A}', '{skladnik}');
+insert into zakupy_odhaczone (konto_id, plan_id, skladnik_id) values ('{A}', '{plan_a}', '{skladnik}');
 """)
 sprawdz("da się odhaczyć składnik", not blad, out[:300] if blad else "")
 
 przed = w("select count(*) from zakupy_odhaczone")
-sql(f"insert into zakupy_odhaczone (konto_id, skladnik_id) values ('{A}', '{skladnik}');")
+sql(f"insert into zakupy_odhaczone (konto_id, plan_id, skladnik_id) values ('{A}', '{plan_a}', '{skladnik}');")
 sprawdz("drugie takie samo odhaczenie nie tworzy wiersza",
         przed == w("select count(*) from zakupy_odhaczone"))
 
-sql(f"insert into zakupy_odhaczone (konto_id, skladnik_id) values ('{C}', '{skladnik}');")
-sprawdz("dwa konta mogą odhaczyć ten sam składnik",
+sql(f"insert into zakupy_odhaczone (konto_id, plan_id, skladnik_id) values ('{A}', '{plan_a2}', '{skladnik}');")
+sprawdz("ten sam skladnik w INNYM planie tego samego konta to osobny ptaszek",
         w("select count(*) from zakupy_odhaczone") == "2")
 
-sql(f"delete from zakupy_odhaczone where konto_id='{A}';")
-sprawdz("czyszczenie zabiera tylko własne ptaszki",
-        w("select count(*) from zakupy_odhaczone") == "1")
+sql(f"insert into zakupy_odhaczone (konto_id, plan_id, skladnik_id) values ('{C}', '{plan_c}', '{skladnik}');")
+sprawdz("dwa konta mogą odhaczyć ten sam składnik",
+        w("select count(*) from zakupy_odhaczone") == "3")
+
+sql(f"delete from zakupy_odhaczone where konto_id='{A}' and plan_id='{plan_a}';")
+sprawdz("czyszczenie zabiera tylko ptaszki WSKAZANEGO planu",
+        w("select count(*) from zakupy_odhaczone") == "2")
 
 # --- 6. kasowanie konta zabiera listę -----------------------------------------
 sql(f"delete from konta where id='{C}';")
