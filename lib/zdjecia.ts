@@ -128,20 +128,34 @@ function wczytajObraz(plik: Blob): Promise<HTMLImageElement> {
 }
 
 /**
- * Nazwa pliku w zasobniku. Bez polskich znaków i spacji — Storage ich nie lubi.
- * Ta sama zasada co w narzedzia/wgraj-zdjecia.mjs, żeby zdjęcia przeniesione
- * ze starego planera i te dodane w aplikacji trafiały w to samo miejsce.
+ * Rdzeń nazwy pliku w zasobniku, wyprowadzony z nazwy przepisu. Bez polskich
+ * znaków i spacji — Storage ich nie lubi. Ta sama zasada co w
+ * narzedzia/wgraj-zdjecia.mjs, żeby zdjęcia przeniesione ze starego planera
+ * dało się rozpoznać po nazwie.
+ */
+function rdzenNazwy(nazwaPrzepisu: string): string {
+  return (
+    nazwaPrzepisu
+      .normalize('NFD')
+      .replace(/[̀-ͯ]/g, '')
+      .replace(/ł/g, 'l')
+      .replace(/Ł/g, 'L')
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '') || 'przepis'
+  );
+}
+
+/**
+ * Nazwa pliku dla nowego wgrania — z unikalnym znacznikiem czasu.
+ *
+ * Bez znacznika kolejne wgranie zdjęcia dla tego samego przepisu trafiało
+ * pod dokładnie ten sam adres, a `expo-image` i CDN Supabase pamiętają
+ * odpowiedź pod danym adresem — więc po wymianie zdjęcia i tak widać było
+ * stare, zbuforowane. Unikalna nazwa = nowy adres = brak szans na stary cache.
  */
 export function nazwaPliku(nazwaPrzepisu: string): string {
-  const rdzen = nazwaPrzepisu
-    .normalize('NFD')
-    .replace(/[̀-ͯ]/g, '')
-    .replace(/ł/g, 'l')
-    .replace(/Ł/g, 'L')
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '');
-  return `${rdzen || 'przepis'}.jpg`;
+  return `${rdzenNazwy(nazwaPrzepisu)}-${Date.now()}.jpg`;
 }
 
 /** Publiczny adres zdjęcia albo `null`, gdy przepis go nie ma. */
@@ -154,9 +168,8 @@ export function adresZdjecia(sciezka: string | null | undefined): string | null 
 /**
  * Wysyła zdjęcie i zwraca ścieżkę do zapisania w `przepisy.zdjecie`.
  *
- * `upsert` jest tu konieczny: wymiana zdjęcia zapisuje pod tą samą nazwą,
- * bo nazwa wynika z nazwy przepisu. Bez tego druga próba kończy się błędem
- * „plik już istnieje”, a użytkownik nie ma pojęcia dlaczego.
+ * Stary plik pod poprzednią ścieżką trzeba skasować osobno przez
+ * `usunZdjecie` — ta funkcja tylko wysyła nowy, pod nową, unikalną nazwą.
  */
 export async function wyslijZdjecie(nazwaPrzepisu: string, dane: Blob): Promise<string> {
   const plik = nazwaPliku(nazwaPrzepisu);

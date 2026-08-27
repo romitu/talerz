@@ -79,9 +79,13 @@ export function ZdjeciePrzepisu({ nazwaPrzepisu, zdjecie, onZmiana }: Props) {
       const wybrane = await wybierzZdjecie();
       if (!wybrane) return;
       setWysylany(wybrane.podglad);
+      const poprzednia = zdjecie;
       const sciezka = await wyslijZdjecie(nazwaPrzepisu, wybrane.dane);
       setWgrane({ sciezka, podglad: wybrane.podglad });
       onZmiana(sciezka);
+      // Każde wgranie ma teraz unikalną nazwę (patrz nazwaPliku w lib/zdjecia.ts),
+      // więc stary plik trzeba skasować osobno — inaczej zostaje osierocony w zasobniku.
+      if (poprzednia && poprzednia !== sciezka) usunZdjecie(poprzednia);
     } catch (e) {
       setWgrane(null);
       setBlad(komunikatBledu(e));
