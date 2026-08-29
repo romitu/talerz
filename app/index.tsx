@@ -628,6 +628,14 @@ export default function EkranPlanu() {
         pelnaSzerokosc
         tytul={OPIS_PORY[wybierany.pora]}
         podtytul={opisDnia(wybierany.data)}>
+        {blad && (
+          <Karta>
+            <ThemedText type="small" themeColor="accent">
+              {blad}
+            </ThemedText>
+          </Karta>
+        )}
+
         <Karta>
           <TabelaWyboru
             dane={przepisy.filter((p) => pasujeDoPory(p.pory, wybierany.pora))}
