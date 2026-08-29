@@ -100,7 +100,13 @@ function jednostkiDla(s: Skladnik): Jednostka[] {
   return s.masa_sztuki_g ? ['g', 'ml', 'szt'] : ['g', 'ml'];
 }
 
-type Krok = { tresc: string; sygnal: string; uwaga: boolean };
+type Krok = {
+  tresc: string;
+  sygnal: string;
+  uwaga: boolean;
+  /** Tylko UI — czy pole „Po czym poznać, że gotowe” jest rozwinięte. Nie zapisuje się do bazy. */
+  sygnalRozwiniety: boolean;
+};
 
 type Etap = {
   nazwa: string;
@@ -381,6 +387,8 @@ export default function FormularzPrzepisu() {
               tresc: k.tresc,
               sygnal: k.sygnal ?? '',
               uwaga: k.uwaga,
+              // Rozwinięte od razu, gdy krok ma już wpisaną treść — inaczej wyglądałoby to na utratę danych.
+              sygnalRozwiniety: Boolean(k.sygnal),
             })),
           }))
         );
@@ -539,7 +547,7 @@ export default function FormularzPrzepisu() {
    * gdy okazało się, że czegoś brakuje w środku.
    */
   function wstawKrok(indeksEtapu: number, poIndeksie?: number) {
-    const pusty: Krok = { tresc: '', sygnal: '', uwaga: false };
+    const pusty: Krok = { tresc: '', sygnal: '', uwaga: false, sygnalRozwiniety: false };
     setEtapy((p) =>
       p.map((e, i) => {
         if (i !== indeksEtapu) return e;
@@ -1658,12 +1666,24 @@ export default function FormularzPrzepisu() {
                   placeholder="Doprowadź do wrzenia i zbierz szumowiny"
                   multiline
                 />
-                <Pole
-                  etykieta="Po czym poznać, że gotowe (nieobowiązkowe)"
-                  value={krok.sygnal}
-                  onChangeText={(t) => zmienKrok(i, j, { sygnal: t })}
-                  placeholder="aż ziemniaki będą miękkie"
-                />
+                {krok.sygnalRozwiniety ? (
+                  <Pole
+                    etykieta="Po czym poznać, że gotowe (nieobowiązkowe)"
+                    value={krok.sygnal}
+                    onChangeText={(t) => zmienKrok(i, j, { sygnal: t })}
+                    placeholder="aż ziemniaki będą miękkie"
+                  />
+                ) : (
+                  <Pressable
+                    onPress={() => zmienKrok(i, j, { sygnalRozwiniety: true })}
+                    hitSlop={6}
+                    style={styles.rozwinSygnal}>
+                    <Ionicons name="add" size={14} color={motyw.textSecondary} />
+                    <ThemedText type="small" themeColor="textSecondary">
+                      Po czym poznać, że gotowe
+                    </ThemedText>
+                  </Pressable>
+                )}
               </View>
             ))}
 
@@ -1886,6 +1906,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: Spacing.one,
     marginLeft: 'auto',
+  },
+  rozwinSygnal: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.one,
+    alignSelf: 'flex-start',
   },
   wierszMetryczki: {
     flexDirection: 'row',
