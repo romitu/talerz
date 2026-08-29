@@ -197,28 +197,52 @@ export type UzycieSkladnika = {
 /**
  * Zwraca mapę: identyfikator składnika -> przepisy, w których go użyto.
  *
- * Jedno zapytanie zamiast pytania osobno o każdy składnik. Widoczność
- * przepisów ograniczają reguły dostępu w bazie, więc zwykły użytkownik
- * zobaczy tylko te, do których ma prawo.
+ * Dwa zapytania, nie jedno: składnik może siedzieć w zwykłym przepisie
+ * (`przepis_skladniki`) ALBO w zrzucie wariantu przeskalowanego kalorycznie
+ * (`przepisy_skalowane_skladniki`, migracja 0036) — to rozłączne tabele,
+ * a klucz obcy `przepisy_skalowane_skladniki_skladnik_id_fkey` blokuje
+ * kasowanie składnika użytego tylko w wariancie. Pomijanie tej drugiej
+ * tabeli dawało fałszywe „0 użyć” na ekranie i surowy błąd bazy (23503)
+ * zamiast zrozumiałego komunikatu z listą dań.
+ *
+ * Widoczność przepisów i wariantów ograniczają reguły dostępu w bazie,
+ * więc zwykły użytkownik zobaczy tylko te, do których ma prawo.
  */
 export async function pobierzUzycia(): Promise<Map<string, UzycieSkladnika>> {
-  const { data, error } = await supabase
-    .from('przepis_skladniki')
-    .select('skladnik_id, gramy, przepisy (nazwa)');
+  const [zwykle, skalowane] = await Promise.all([
+    supabase.from('przepis_skladniki').select('skladnik_id, gramy, przepisy (nazwa)'),
+    supabase
+      .from('przepisy_skalowane_skladniki')
+      .select('skladnik_id, gramy, przepisy_skalowane (przepisy (nazwa))'),
+  ]);
 
-  if (error) throw error;
+  if (zwykle.error) throw zwykle.error;
+  if (skalowane.error) throw skalowane.error;
 
   const mapa = new Map<string, UzycieSkladnika>();
 
-  for (const wiersz of data ?? []) {
-    const id = wiersz.skladnik_id as string;
+  function dodaj(id: string, nazwa: string | undefined, gramy: number) {
+    if (!nazwa) return;
+    const wpis = mapa.get(id) ?? { przepisy: [] };
+    wpis.przepisy.push({ nazwa, gramy });
+    mapa.set(id, wpis);
+  }
+
+  for (const wiersz of zwykle.data ?? []) {
     const przepis = wiersz.przepisy as { nazwa: string } | { nazwa: string }[] | null;
     const nazwa = Array.isArray(przepis) ? przepis[0]?.nazwa : przepis?.nazwa;
-    if (!nazwa) continue;
+    dodaj(wiersz.skladnik_id as string, nazwa, Number(wiersz.gramy));
+  }
 
-    const wpis = mapa.get(id) ?? { przepisy: [] };
-    wpis.przepisy.push({ nazwa, gramy: Number(wiersz.gramy) });
-    mapa.set(id, wpis);
+  for (const wiersz of skalowane.data ?? []) {
+    const skalowany = wiersz.przepisy_skalowane as
+      | { przepisy: { nazwa: string } | { nazwa: string }[] | null }
+      | { przepisy: { nazwa: string } | { nazwa: string }[] | null }[]
+      | null;
+    const jeden = Array.isArray(skalowany) ? skalowany[0] : skalowany;
+    const przepis = jeden?.przepisy ?? null;
+    const nazwa = Array.isArray(przepis) ? przepis[0]?.nazwa : przepis?.nazwa;
+    dodaj(wiersz.skladnik_id as string, nazwa, Number(wiersz.gramy));
   }
 
   // Alfabetycznie, żeby kolejność nie zmieniała się przy każdym odświeżeniu.
