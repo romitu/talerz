@@ -16,6 +16,7 @@ import { useTheme } from '@/hooks/use-theme';
 import { komunikatBledu } from '@/lib/blad';
 import { ROLA_SKLADNIKA_WEDLUG_ETYKIETY } from '@/lib/import-eksport-wspolne';
 import { wroc } from '@/lib/nawigacja';
+import { useSesja } from '@/lib/sesja';
 import {
   OPIS_ROLI_SKLADNIKA,
   pobierzSkladniki,
@@ -70,6 +71,7 @@ const OPCJE_MOZNA_DZIELIC: { wartosc: 'nie' | 'tak'; etykieta: string }[] = [
 export default function EkranSkladnikow() {
   const { powrot } = useLocalSearchParams<{ powrot?: string }>();
   const motyw = useTheme();
+  const { sesja } = useSesja();
   const { width: szerokoscOkna } = useWindowDimensions();
 
   /* Gdy tabela mieści się na ekranie, kolumna nazwy zabiera wolne miejsce
@@ -125,6 +127,7 @@ export default function EkranSkladnikow() {
     supabase
       .from('konta')
       .select('rola')
+      .eq('id', sesja?.user.id)
       .single()
       .then(({ data, error }) => {
         if (!error && data) setRola(data.rola);
@@ -139,7 +142,7 @@ export default function EkranSkladnikow() {
     } finally {
       setWczytywanie(false);
     }
-  }, []);
+  }, [sesja?.user.id]);
 
   useEffect(() => {
     pobierz();
