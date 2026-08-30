@@ -138,8 +138,6 @@ export default function FormularzPrzepisu() {
   const [porcjeBazowe, setPorcjeBazowe] = useState('0');
   const [porcjowanie, setPorcjowanie] = useState<'waga' | 'sztuki'>('sztuki');
   const [porcje, setPorcje] = useState('');
-  const [czasPrzygotowania, setCzasPrzygotowania] = useState('');
-  const [czasObrobki, setCzasObrobki] = useState('');
   const [sprzet, setSprzet] = useState<string[]>([]);
   const [katalogSprzetu, setKatalogSprzetu] = useState<
     { id: string; nazwa: string; rodzaj: string; w_przepisach: number; przepisy: string[] }[]
@@ -304,8 +302,6 @@ export default function FormularzPrzepisu() {
     setPorcjeBazowe('0');
     setPorcjowanie('sztuki');
     setPorcje('');
-    setCzasPrzygotowania('');
-    setCzasObrobki('');
     setSprzet([]);
     setPrzechowywanie('');
     setMoznaMrozic('nie wiem');
@@ -342,8 +338,6 @@ export default function FormularzPrzepisu() {
         setPorcjeBazowe(String(p.liczba_porcji_bazowych));
         setPorcjowanie(p.porcjowanie);
         setPorcje(String(p.porcje));
-        setCzasPrzygotowania(p.czas_przygotowania_min ? String(p.czas_przygotowania_min) : '');
-        setCzasObrobki(p.czas_obrobki_min ? String(p.czas_obrobki_min) : '');
         setSprzet(p.sprzet ?? []);
         setPrzechowywanie(p.przechowywanie ?? '');
         setMoznaMrozic(p.mozna_mrozic === null ? 'nie wiem' : p.mozna_mrozic ? 'tak' : 'nie');
@@ -450,6 +444,15 @@ export default function FormularzPrzepisu() {
 
   /** Czy podano wartość odpowiadającą wybranemu sposobowi porcjowania. */
   const podanoPorcjowanie = porcjowanie === 'waga' ? liczba(porcjeBazowe) > 0 : liczba(porcje) > 0;
+
+  /**
+   * Czas przygotowania i obróbki też się już nie wpisuje ręcznie — wynika
+   * z etapów. Pierwszy etap to zawsze przygotowanie składników, reszta to
+   * obróbka (gotowanie, smażenie, pieczenie...), więc czas ma z czego wynikać
+   * bez osobnego, łatwo rozjeżdżającego się pola.
+   */
+  const czasPrzygotowaniaWyliczony = etapy.length > 0 ? liczba(etapy[0].minuty) : 0;
+  const czasObrobkiWyliczony = etapy.slice(1).reduce((suma, e) => suma + liczba(e.minuty), 0);
 
 
   const makroPorcji = {
@@ -612,8 +615,8 @@ export default function FormularzPrzepisu() {
           porcjowanie,
           porcje: porcjowanie === 'sztuki' ? Math.round(liczbaPorcji) : 1,
           porcja_g: porcjowanie === 'waga' ? Math.round(wagaPorcjiWyliczona ?? 0) : null,
-          czas_przygotowania_min: liczba(czasPrzygotowania) || null,
-          czas_obrobki_min: liczba(czasObrobki) || null,
+          czas_przygotowania_min: czasPrzygotowaniaWyliczony || null,
+          czas_obrobki_min: czasObrobkiWyliczony || null,
           sprzet,
           przechowywanie: przechowywanie.trim() || null,
           mozna_mrozic: moznaMrozic === 'nie wiem' ? null : moznaMrozic === 'tak',
@@ -661,7 +664,14 @@ export default function FormularzPrzepisu() {
 
       // Etapy zapisujemy razem, żeby poznać ich identyfikatory,
       // a dopiero potem kroki przypisane do każdego z nich.
-      const doZapisu = etapy.filter((e) => e.nazwa.trim());
+      // Pierwszy etap to zawsze przygotowanie składników — narzucone niezależnie
+      // od tego, co akurat siedzi w stanie (pole jest nieedytowalne, ale
+      // wymuszamy to też tutaj, żeby przestawianie/wstawianie etapów nigdy
+      // tego nie rozjechało).
+      const etapyDoZapisu = etapy.map((e, i) =>
+        i === 0 ? { ...e, nazwa: 'Przygotowanie składników' } : e
+      );
+      const doZapisu = etapyDoZapisu.filter((e) => e.nazwa.trim());
 
       if (doZapisu.length > 0) {
         const { data: zapisaneEtapy, error: bladEtapow } = await supabase
@@ -792,19 +802,19 @@ export default function FormularzPrzepisu() {
           },
           {
             etykieta: 'Czas przygotowania',
-            wartosc: czasPrzygotowania,
-            ustaw: setCzasPrzygotowania,
+            wartosc: czasPrzygotowaniaWyliczony ? String(czasPrzygotowaniaWyliczony) : '',
+            ustaw: () => {},
             jednostka: 'min',
-            podpowiedz: 'np. 20',
-            edytowalne: true,
+            podpowiedz: '—',
+            edytowalne: false,
           },
           {
             etykieta: 'Czas obróbki',
-            wartosc: czasObrobki,
-            ustaw: setCzasObrobki,
+            wartosc: czasObrobkiWyliczony ? String(czasObrobkiWyliczony) : '',
+            ustaw: () => {},
             jednostka: 'min',
-            podpowiedz: 'np. 50',
-            edytowalne: true,
+            podpowiedz: '—',
+            edytowalne: false,
           },
         ].map((w) => (
           <View key={w.etykieta} style={[styles.wierszMetryczki, { borderColor: motyw.border }]}>
@@ -829,6 +839,11 @@ export default function FormularzPrzepisu() {
             </ThemedText>
           </View>
         ))}
+
+        <ThemedText type="small" themeColor="textSecondary">
+          Czas przygotowania i obróbki wynikają z etapów niżej — pierwszy etap to
+          przygotowanie, reszta to obróbka — i nie wpisuje się ich ręcznie.
+        </ThemedText>
 
         {porcjowanie === 'waga' && (
           <ThemedText type="small" themeColor="textSecondary">
@@ -1586,12 +1601,21 @@ export default function FormularzPrzepisu() {
               </View>
             </View>
 
-            <Pole
-              etykieta="Nazwa etapu"
-              value={etap.nazwa}
-              onChangeText={(t) => zmienEtap(i, 'nazwa', t)}
-              placeholder="Gotowanie wywaru"
-            />
+            {i === 0 ? (
+              <Pole
+                etykieta="Nazwa etapu"
+                value="Przygotowanie składników"
+                editable={false}
+                style={styles.poleNieedytowalne}
+              />
+            ) : (
+              <Pole
+                etykieta="Nazwa etapu"
+                value={etap.nazwa}
+                onChangeText={(t) => zmienEtap(i, 'nazwa', t)}
+                placeholder="Gotowanie wywaru"
+              />
+            )}
             <Pole
               etykieta="Czas etapu (min)"
               value={etap.minuty}
@@ -1880,6 +1904,9 @@ const styles = StyleSheet.create({
     borderRadius: Spacing.two,
     padding: Spacing.two,
     gap: Spacing.two,
+  },
+  poleNieedytowalne: {
+    opacity: 0.6,
   },
   naglowekEtapu: {
     flexDirection: 'row',
