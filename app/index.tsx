@@ -182,8 +182,8 @@ export default function EkranPlanu() {
   const [czyscic, setCzyscic] = useState(false);
   const [komunikat, setKomunikat] = useState<string | null>(null);
   /** Checkboxy pod „Wypełnij wolne miejsca" — patrz `wypelnijAutomatem`. */
-  const [skalujPoWypelnieniu, setSkalujPoWypelnieniu] = useState(false);
-  const [uwzglednijTrwalosc, setUwzglednijTrwalosc] = useState(false);
+  const [skalujPoWypelnieniu, setSkalujPoWypelnieniu] = useState(true);
+  const [uwzglednijTrwalosc, setUwzglednijTrwalosc] = useState(true);
 
   /*
     Powrót na to samo miejsce po wybraniu dania.

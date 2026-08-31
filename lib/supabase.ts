@@ -74,8 +74,15 @@ async function blokadaBezKolejki<R>(_nazwa: string, _limitCzasu: number, fn: () 
 // na ekranie logowania.
 export const supabase = createClient(adres ?? 'https://brak.supabase.co', klucz ?? 'brak', {
   auth: {
-    // Na telefonie sesję trzymamy w pamięci urządzenia, w przeglądarce robi to sama przeglądarka.
-    storage: Platform.OS === 'web' ? undefined : AsyncStorage,
+    // Na telefonie sesję trzymamy w pamięci urządzenia. W przeglądarce jawnie
+    // używamy sessionStorage zamiast domyślnego localStorage — ten drugi jest
+    // dzielony między WSZYSTKIMI kartami tej samej przeglądarki, więc dwie
+    // różne osoby zalogowane w dwóch kartach (albo osoba B logująca się po A
+    // w tej samej karcie) kończyły z jednym wspólnym tokenem i każda karta
+    // pokazywała profile tego, kto zalogował się ostatni. sessionStorage jest
+    // odrębny dla każdej karty, więc sesje się nie nadpisują — kosztem tego,
+    // że trzeba zalogować się ponownie po otwarciu nowej karty.
+    storage: Platform.OS === 'web' ? window.sessionStorage : AsyncStorage,
     autoRefreshToken: true,
     persistSession: true,
     // Wykrywanie sesji z adresu URL ma sens tylko w przeglądarce.
