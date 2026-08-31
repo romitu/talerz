@@ -49,7 +49,7 @@ const DLACZEGO_TALERZ: PytanieOdpowiedz[] = [
   {
     tytul: 'Pierwsze kroki',
     akapity: [
-      'Z aplikacji mogą wspólnie korzystać maksymalnie 3 osoby. Wszyscy korzystają z tego samego konta — jednego adresu e-mail podanego podczas rejestracji oraz wspólnego hasła.',
+      'Z aplikacji mogą wspólnie korzystać maksymalnie 4 osoby. Wszyscy korzystają z tego samego konta — jednego adresu e-mail podanego podczas rejestracji oraz wspólnego hasła.',
       'Po rejestracji należy w zakładce „Profil” określić cele żywieniowe dla każdej osoby.',
       'Następnie warto przejrzeć zakładkę „Przepisy” i określić swoje preferencje. Gwiazdką zaznaczamy posiłki, które aplikacja powinna proponować często, serduszkiem te, które lubimy, a iksem te, których aplikacja nie powinna proponować podczas automatycznego planowania.',
       'Kolejnym krokiem jest przejście do zakładki „Plan”.',
@@ -177,7 +177,7 @@ const ZAKLADKI: PytanieOdpowiedz[] = [
   {
     tytul: 'Profil',
     akapity: [
-      'Jeden formularz na profil zawiera zarówno dane potrzebne do wyliczeń (płeć, data urodzenia, wzrost, waga, poziom aktywności), jak i cele dzienne (tryb, proporcje makro, błonnik, próg białka na posiłek) — kcal i gramy nie są zapisane na sztywno, tylko liczone na bieżąco z tych danych. Do 3 profili na konto.',
+      'Jeden formularz na profil zawiera zarówno dane potrzebne do wyliczeń (płeć, data urodzenia, wzrost, waga, poziom aktywności), jak i cele dzienne (tryb, proporcje makro, błonnik, próg białka na posiłek) — kcal i gramy nie są zapisane na sztywno, tylko liczone na bieżąco z tych danych. Do 4 profili na konto.',
       'Administrator widzi tu dodatkowo zarządzanie kontami: włączanie i wyłączanie użytkowników oraz nadawanie roli moderatora.',
     ],
   },

@@ -6,12 +6,14 @@ import { Pressable, StyleSheet, View } from 'react-native';
 
 import { Ekran } from '@/components/ekran';
 import { Karta } from '@/components/karta';
+import { RozkladPosilku, type UdzialOsoby } from '@/components/rozklad-posilku';
 import { WierszMakro } from '@/components/wiersz-makro';
 import { Przycisk } from '@/components/przycisk';
 import { ThemedText } from '@/components/themed-text';
 import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import { komunikatBledu } from '@/lib/blad';
+import { celZywieniowyNASEM, type PalNasem } from '@/lib/nasem';
 import { wroc } from '@/lib/nawigacja';
 import {
   czasRazem,
@@ -23,7 +25,24 @@ import {
 } from '@/lib/przepisy';
 import { pobierzPrzeskalowanyPrzepis, type PrzeskalowanyPrzepis } from '@/lib/przepisy-skalowane';
 import { useSesja } from '@/lib/sesja';
+import { supabase } from '@/lib/supabase';
 import { adresZdjecia } from '@/lib/zdjecia';
+import { wiekZDaty, type Plec, type TrybCelu } from '@/lib/zywienie';
+
+type ProfilZCelem = {
+  id: string;
+  imie: string;
+  plec: Plec;
+  data_urodzenia: string;
+  wzrost_cm: number;
+  aktywnosc: PalNasem;
+  cele: {
+    tryb: TrybCelu;
+    bialko_procent: number;
+    tluszcz_procent: number;
+    wegle_procent: number;
+  }[];
+};
 
 /**
  * Przepis do czytania przy garnku.
@@ -66,6 +85,9 @@ export default function EkranPrzepisu() {
   const [zrobione, setZrobione] = useState<Set<string>>(new Set());
   const [wczytywanie, setWczytywanie] = useState(true);
   const [blad, setBlad] = useState<string | null>(null);
+  const [udzialyOsob, setUdzialyOsob] = useState<
+    Omit<UdzialOsoby, 'kcal' | 'bialko_g' | 'tluszcz_g' | 'wegle_g' | 'blonnik_g'>[] | null
+  >(null);
 
   const pobierz = useCallback(async () => {
     if (!id) return;
@@ -87,10 +109,74 @@ export default function EkranPrzepisu() {
     }
   }, [id, skalowany, sesja?.user.id]);
 
+  /*
+    Udział każdej osoby w tym posiłku — niezależny blok, we własnym
+    try/catch, tak jak liczenie jedzących w `app/index.tsx`: awaria tutaj
+    (brak wagi, brzegowy przypadek w wyliczeniu celu) nie ma prawa schować
+    samego przepisu, po który ktoś tu wszedł.
+  */
+  const pobierzUdzialy = useCallback(async () => {
+    try {
+      const wynikProfili = await supabase
+        .from('profile')
+        .select('id, imie, plec, data_urodzenia, wzrost_cm, aktywnosc, cele (tryb, bialko_procent, tluszcz_procent, wegle_procent)')
+        .order('kolejnosc')
+        .order('obowiazuje_od', { foreignTable: 'cele', ascending: false })
+        .limit(1, { foreignTable: 'cele' });
+      if (wynikProfili.error) throw wynikProfili.error;
+
+      const listaProfili = (wynikProfili.data ?? []) as ProfilZCelem[];
+      if (listaProfili.length < 2) {
+        setUdzialyOsob(null);
+        return;
+      }
+
+      const zCelami = (
+        await Promise.all(
+          listaProfili.map(async (p) => {
+            const zapis = p.cele?.[0];
+            if (!zapis) return null;
+            const wynikWagi = await supabase
+              .from('pomiary')
+              .select('wartosc')
+              .eq('profil_id', p.id)
+              .eq('typ', 'waga')
+              .order('data', { ascending: false })
+              .limit(1)
+              .maybeSingle();
+            if (wynikWagi.error || !wynikWagi.data) return null;
+
+            const cel = celZywieniowyNASEM(
+              p.plec,
+              wiekZDaty(p.data_urodzenia),
+              p.wzrost_cm,
+              Number(wynikWagi.data.wartosc),
+              p.aktywnosc,
+              zapis.tryb,
+              { bialko: zapis.bialko_procent, tluszcz: zapis.tluszcz_procent, wegle: zapis.wegle_procent }
+            );
+            return { id: p.id, imie: p.imie, kcal: cel.kcal };
+          })
+        )
+      ).filter((x): x is { id: string; imie: string; kcal: number } => x !== null);
+
+      const sumaKcal = zCelami.reduce((s, o) => s + o.kcal, 0);
+      if (zCelami.length < 2 || sumaKcal <= 0) {
+        setUdzialyOsob(null);
+        return;
+      }
+
+      setUdzialyOsob(zCelami.map((o) => ({ id: o.id, imie: o.imie, udzial: o.kcal / sumaKcal })));
+    } catch {
+      setUdzialyOsob(null);
+    }
+  }, []);
+
   useFocusEffect(
     useCallback(() => {
       pobierz();
-    }, [pobierz])
+      pobierzUdzialy();
+    }, [pobierz, pobierzUdzialy])
   );
 
   function przelacz(klucz: string) {
@@ -184,6 +270,24 @@ export default function EkranPrzepisu() {
       }
     : makro;
 
+  // Ile z TEJ porcji zjada każda osoba — jedna „porcja" w planie odpowiada
+  // jednemu profilowi (patrz `porcje: osoby` w `zapiszWstawienia`,
+  // `app/index.tsx`), więc razem wszyscy zjadają `makroDoPokazania` pomnożone
+  // przez liczbę osób z udziałem. To dzielimy dalej proporcjonalnie do
+  // dziennego zapotrzebowania, zamiast po równo.
+  const kcalNaPorcje = makroDoPokazania?.kcal;
+  const rozkladPosilku =
+    udzialyOsob && kcalNaPorcje != null
+      ? udzialyOsob.map((o) => ({
+          ...o,
+          kcal: Math.round(kcalNaPorcje * udzialyOsob.length * o.udzial),
+          bialko_g: Math.round((makroDoPokazania!.bialko_g ?? 0) * udzialyOsob.length * o.udzial),
+          tluszcz_g: Math.round((makroDoPokazania!.tluszcz_g ?? 0) * udzialyOsob.length * o.udzial),
+          wegle_g: Math.round((makroDoPokazania!.wegle_g ?? 0) * udzialyOsob.length * o.udzial),
+          blonnik_g: Math.round((makroDoPokazania!.blonnik_g ?? 0) * udzialyOsob.length * o.udzial),
+        }))
+      : null;
+
   return (
     <Ekran
       tytul={przepis.nazwa}
@@ -198,6 +302,8 @@ export default function EkranPrzepisu() {
       ]
         .filter(Boolean)
         .join(' · ')}>
+      {rozkladPosilku && rozkladPosilku.length > 1 && <RozkladPosilku osoby={rozkladPosilku} />}
+
       {zdjecie && (
         <Image source={{ uri: zdjecie }} style={styles.zdjecie} contentFit="cover" transition={150} />
       )}

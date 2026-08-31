@@ -413,8 +413,8 @@ export default function FormularzProfilu() {
     } catch (e) {
       const tresc = komunikatBledu(e);
       setBlad(
-        tresc.includes('najwyżej 3 profile')
-          ? 'Konto może mieć najwyżej 3 profile.'
+        tresc.includes('najwyżej 4 profile')
+          ? 'Konto może mieć najwyżej 4 profile.'
           : tresc.includes('pełnoletnich')
             ? 'Talerz jest przeznaczony wyłącznie dla osób pełnoletnich.'
             : tresc

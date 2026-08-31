@@ -245,7 +245,7 @@ export default function EkranProfilu() {
         </Karta>
       )}
 
-      {profile.length < 3 && (
+      {profile.length < 4 && (
         <Przycisk
           tytul="Dodaj profil"
           ikona="add-circle-outline"

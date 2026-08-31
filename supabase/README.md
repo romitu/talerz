@@ -111,7 +111,7 @@ wysyłając zapytanie bezpośrednio do bazy:
 | Zasada | Mechanizm |
 |---|---|
 | Wyłącznie osoby pełnoletnie | wyzwalacz na `profile` |
-| Najwyżej 3 profile na konto | wyzwalacz na `profile` |
+| Najwyżej 4 profile na konto | wyzwalacz na `profile` |
 | Trwałość dania 0–3 dni | ograniczenie CHECK |
 | Cukry wolne nie większe niż ogółem | ograniczenie CHECK |
 | Data przydatności partii z trwałości przepisu | wyzwalacz na `partie` |

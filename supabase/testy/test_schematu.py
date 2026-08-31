@@ -162,17 +162,18 @@ wykonaj(
     f"""insert into profile (konto_id, imie, plec, data_urodzenia, wzrost_cm) values
         ('{KONTO_A}', 'Roman', 'M', '1967-01-01', 189),
         ('{KONTO_A}', 'Ewa',   'K', '1970-05-05', 165),
-        ('{KONTO_A}', 'Marek', 'M', '1990-03-03', 180);"""
+        ('{KONTO_A}', 'Marek', 'M', '1990-03-03', 180),
+        ('{KONTO_A}', 'Zofia', 'K', '1995-07-07', 168);"""
 )
 
-sprawdz("trzy profile pełnoletnie przyjęte",
-        wartosc("select count(*) from profile") == "3",
+sprawdz("cztery profile pełnoletnie przyjęte",
+        wartosc("select count(*) from profile") == "4",
         f"profili: {wartosc('select count(*) from profile')}")
 
 ma_odrzucic(
-    "czwarty profil odrzucony",
+    "piąty profil odrzucony",
     f"insert into profile (konto_id, imie, plec, data_urodzenia, wzrost_cm) "
-    f"values ('{KONTO_A}', 'Czwarty', 'M', '1985-01-01', 175);",
+    f"values ('{KONTO_A}', 'Piąty', 'M', '1985-01-01', 175);",
     "select count(*) from profile",
 )
 
