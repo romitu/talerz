@@ -77,10 +77,11 @@ const DLACZEGO_TALERZ: PytanieOdpowiedz[] = [
     tytul: 'Planowanie dla jednej, dwóch i kilku osób',
     akapity: [
       'Liczba osób nie zmienia sposobu działania Talerza. Zmienia jedynie liczbę przygotowywanych porcji.',
+      'Talerz pilnuje przy tym, żeby jedno gotowanie nie wyszło z jednego garnka absurdalnie duże: liczba osób razy liczba dni, na które gotujesz, nigdy nie przekracza 4 porcji naraz. Im więcej osób je razem, tym mniej dni warto ugotować na zapas.',
       'Jedna osoba: 1 osoba × 3 dni = 3 porcje. Gotujesz raz i masz obiad na trzy dni.',
       'Dwie osoby: 2 osoby × 2 dni = 4 porcje. Jedno gotowanie zapewnia dwa wspólne obiady.',
-      'Trzy osoby: 3 osoby × 1 dzień = 3 porcje albo 3 osoby × 2 dni = 6 porcji.',
-      'To Ty decydujesz, jak często chcesz gotować — w formularzu przepisu podajesz wagę porcji albo liczbę sztuk, a Talerz sam przelicza składniki i układa plan.',
+      'Trzy lub cztery osoby: nawet jeśli przepis wytrzyma w lodówce dłużej, Talerz ugotuje go tylko na dziś (3 albo 4 porcje) — na tyle osób szkoda by było gotować zapas na kilka dni z jednego garnka.',
+      'Danie nigdy nie zostaje przez to pominięte — zawsze da się je ugotować przynajmniej na jeden dzień, niezależnie od liczby osób. W formularzu przepisu podajesz wagę porcji albo liczbę sztuk, a Talerz sam przelicza składniki i układa plan.',
     ],
   },
   {

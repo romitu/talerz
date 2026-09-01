@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Podział żywienia</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 24px;
+    background: #f3f6f1;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #26352b;
+}
+
+.panel {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 24px;
+
+    background: #fff;
+    border: 1px solid #e0e7df;
+    border-radius: 22px;
+
+    box-shadow: 0 5px 18px rgba(35, 60, 40, 0.06);
+}
+
+
+/* =====================================================
+   NAGŁÓWEK
+   ===================================================== */
+
+.header {
+    margin-bottom: 22px;
+}
+
+.title {
+    margin: 0 0 5px;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    font-size: 27px;
+    font-weight: 700;
+}
+
+.title-icon {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #eaf1e9;
+    border-radius: 11px;
+
+    color: #52745a;
+}
+
+.title-icon svg {
+    width: 22px;
+    height: 22px;
+}
+
+.subtitle {
+    margin-left: 48px;
+
+    font-size: 13px;
+    color: #78847c;
+}
+
+
+/* =====================================================
+   KARTY
+   ===================================================== */
+
+.people-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+}
+
+.person-card {
+    padding: 17px;
+
+    background: #fbfcfa;
+    border: 1px solid #e1e7e0;
+    border-radius: 17px;
+}
+
+
+/* OSOBA */
+
+.person-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    margin-bottom: 16px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+
+    flex: 0 0 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #e7efe6;
+    color: #55765c;
+}
+
+.avatar svg {
+    width: 21px;
+    height: 21px;
+}
+
+.person-name {
+    font-size: 17px;
+    font-weight: 700;
+}
+
+
+/* KCAL */
+
+.calories {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    margin-bottom: 17px;
+    padding: 11px 12px;
+
+    background: #f1f5ef;
+    border-radius: 12px;
+}
+
+.calorie-icon {
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background: #dde9dc;
+    color: #4b7355;
+}
+
+.calorie-icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+.calories-value {
+    font-size: 25px;
+    line-height: 1;
+    font-weight: 700;
+}
+
+.calories-label {
+    margin-top: 3px;
+
+    font-size: 11px;
+    color: #7a877e;
+}
+
+
+/* =====================================================
+   MAKRO
+   ===================================================== */
+
+.macros {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.macro-row {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    min-height: 36px;
+}
+
+.macro-icon {
+    width: 30px;
+    height: 30px;
+
+    flex: 0 0 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+}
+
+.macro-icon svg {
+    width: 17px;
+    height: 17px;
+}
+
+
+/* kolory ikon */
+
+.protein {
+    background: #e9f3ed;
+    color: #48805a;
+}
+
+.fat {
+    background: #f7f0df;
+    color: #a27c2e;
+}
+
+.carbs {
+    background: #f5eadf;
+    color: #a66e3e;
+}
+
+.fiber {
+    background: #e9f2e4;
+    color: #6c8b4c;
+}
+
+.macro-label {
+    flex: 1;
+
+    font-size: 12.5px;
+    color: #6c786f;
+}
+
+.macro-value {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   UDZIAŁ
+   ===================================================== */
+
+.share {
+    margin-top: 15px;
+    padding-top: 13px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border-top: 1px solid #e3e8e2;
+}
+
+.share-left {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    font-size: 12px;
+    color: #758178;
+}
+
+.share-left svg {
+    width: 16px;
+    height: 16px;
+
+    color: #718a76;
+}
+
+.share-value {
+    font-size: 22px;
+    font-weight: 700;
+
+    color: #4d7456;
+}
+
+
+/* =====================================================
+   PASEK
+   ===================================================== */
+
+.share-section {
+    margin-top: 27px;
+    padding-top: 20px;
+
+    border-top: 1px solid #e7ebe6;
+}
+
+.share-section-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    margin-bottom: 11px;
+
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.share-section-title svg {
+    width: 18px;
+    height: 18px;
+
+    color: #5e7c65;
+}
+
+.share-bar {
+    width: 100%;
+    height: 34px;
+
+    display: flex;
+    overflow: hidden;
+
+    border-radius: 11px;
+
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,.04);
+}
+
+.share-segment {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    color: white;
+}
+
+.roman {
+    width: 23%;
+    background: #65866c;
+}
+
+.esterka {
+    width: 22%;
+    background: #88a18c;
+}
+
+.pysiek {
+    width: 28%;
+    background: #476e52;
+}
+
+.antoni {
+    width: 27%;
+    background: #78937c;
+}
+
+
+/* LEGENDA */
+
+.legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+
+    margin-top: 11px;
+
+    font-size: 12px;
+    color: #68756c;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.legend-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+}
+
+
+/* RESPONSYWNOŚĆ */
+
+@media (max-width: 850px) {
+    .people-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 500px) {
+
+    body {
+        padding: 10px;
+    }
+
+    .panel {
+        padding: 14px;
+    }
+
+    .people-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .subtitle {
+        margin-left: 0;
+        margin-top: 8px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="panel">
+
+    <!-- =================================================
+         NAGŁÓWEK
+    ================================================== -->
+
+    <div class="header">
+
+        <h1 class="title">
+
+            <span class="title-icon">
+                <svg viewBox="0 0 24 24"
+                     fill="none"
+                     stroke="currentColor"
+                     stroke-width="1.8">
+                    <circle cx="12" cy="12" r="9"/>
+                    <path d="M8 3v7"/>
+                    <path d="M5 3v4c0 2 1 3 3 3s3-1 3-3V3"/>
+                    <path d="M16 3v18"/>
+                    <path d="M16 3c3 2 3 6 0 8"/>
+                </svg>
+            </span>
+
+            Podział żywienia
+        </h1>
+
+        <div class="subtitle">
+            Dzienne zapotrzebowanie i udział każdej osoby
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         KARTY
+    ================================================== -->
+
+    <div class="people-grid">
+
+
+        <!-- ROMAN -->
+
+        <div class="person-card">
+
+            <div class="person-header">
+
+                <div class="avatar">
+                    <svg viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="1.8">
+                        <circle cx="12" cy="8" r="4"/>
+                        <path d="M5 21c0-4 3-7 7-7s7 3 7 7"/>
+                    </svg>
+                </div>
+
+                <div class="person-name">Roman</div>
+
+            </div>
+
+            <div class="calories">
+
+                <div class="calorie-icon">
+                    <svg viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="1.8">
+                        <path d="M12 22c4 0 7-3 7-7 0-5-4-7-4-11-3 2-5 5-5 8-1-1-2-3-2-4-2 2-3 4-3 7 0 4 3 7 7 7z"/>
+                    </svg>
+                </div>
+
+                <div>
+                    <div class="calories-value">2183</div>
+                    <div class="calories-label">kcal / dzień</div>
+                </div>
+
+            </div>
+
+            <div class="macros">
+
+                <div class="macro-row">
+                    <div class="macro-icon protein">🥩</div>
+                    <div class="macro-label">Białko</div>
+                    <div class="macro-value">136 g</div>
+                </div>
+
+                <div class="macro-row">
+                    <div class="macro-icon fat">🥑</div>
+                    <div class="macro-label">Tłuszcz</div>
+                    <div class="macro-value">73 g</div>
+                </div>
+
+                <div class="macro-row">
+                    <div class="macro-icon carbs">🌾</div>
+                    <div class="macro-label">Węglowodany</div>
+                    <div class="macro-value">246 g</div>
+                </div>
+
+                <div class="macro-row">
+                    <div class="macro-icon fiber">🌿</div>
+                    <div class="macro-label">Błonnik</div>
+                    <div class="macro-value">30 g</div>
+                </div>
+
+            </div>
+
+            <div class="share">
+
+                <div class="share-left">
+                    <svg viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2">
+                        <circle cx="12" cy="12" r="9"/>
+                        <path d="M12 3v9h9"/>
+                    </svg>
+
+                    Udział
+                </div>
+
+                <div class="share-value">23%</div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ESTERKA -->
+
+        <div class="person-card">
+
+            <div class="person-header">
+
+                <div class="avatar">
+                    <svg viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="1.8">
+                        <circle cx="12" cy="8" r="4"/>
+                        <path d="M5 21c0-4 3-7 7-7s7 3 7 7"/>
+                    </svg>
+                </div>
+
+                <div class="person-name">Esterka</div>
+
+            </div>
+
+            <div class="calories">
+
+                <div class="calorie-icon">
+                    <svg viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="1.8">
+                        <path d="M12 22c4 0 7-3 7-7 0-5-4-7-4-11-3 2-5 5-5 8-1-1-2-3-2-4-2 2-3 4-3 7 0 4 3 7 7 7z"/>
+                    </svg>
+                </div>
+
+                <div>
+                    <div class="calories-value">2129</div>
+                    <div class="calories-label">kcal / dzień</div>
+                </div>
+
+            </div>
+
+            <div class="macros">
+
+                <div class="macro-row">
+                    <div class="macro-icon protein">🥩</div>
+                    <div class="macro-label">Białko</div>
+                    <div class="macro-value">133 g</div>
+                </div>
+
+                <div class="macro-row">
+                    <div class="macro-icon fat">🥑</div>
+                    <div class="macro-label">Tłuszcz</div>
+                    <div class="macro-value">71 g</div>
+                </div>
+
+                <div class="macro-row">
+                    <div class="macro-icon carbs">🌾</div>
+                    <div class="macro-label">Węglowodany</div>
+                    <div class="macro-value">240 g</div>
+                </div>
+
+                <div class="macro-row">
+                    <div class="macro-icon fiber">🌿</div>
+                    <div class="macro-label">Błonnik</div>
+                    <div class="macro-value">30 g</div>
+                </div>
+
+            </div>
+
+            <div class="share">
+                <div class="share-left">◔ Udział</div>
+                <div class="share-value">22%</div>
+            </div>
+
+        </div>
+
+
+        <!-- PYSIEK -->
+
+        <div class="person-card">
+
+            <div class="person-header">
+
+                <div class="avatar">
+                    <svg viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="1.8">
+                        <circle cx="12" cy="8" r="4"/>
+                        <path d="M5 21c0-4 3-7 7-7s7 3 7 7"/>
+                    </svg>
+                </div>
+
+                <div class="person-name">Pysiek</div>
+
+            </div>
+
+            <div class="calories">
+
+                <div class="calorie-icon">
+                    <svg viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="1.8">
+                        <path d="M12 22c4 0 7-3 7-7 0-5-4-7-4-11-3 2-5 5-5 8-1-1-2-3-2-4-2 2-3 4-3 7 0 4 3 7 7 7z"/>
+                    </svg>
+                </div>
+
+                <div>
+                    <div class="calories-value">2635</div>
+                    <div class="calories-label">kcal / dzień</div>
+                </div>
+
+            </div>
+
+            <div class="macros">
+
+                <div class="macro-row">
+                    <div class="macro-icon protein">🥩</div>
+                    <div class="macro-label">Białko</div>
+                    <div class="macro-value">165 g</div>
+                </div>
+
+                <div class="macro-row">
+                    <div class="macro-icon fat">🥑</div>
+                    <div class="macro-label">Tłuszcz</div>
+                    <div class="macro-value">88 g</div>
+                </div>
+
+                <div class="macro-row">
+                    <div class="macro-icon carbs">🌾</div>
+                    <div class="macro-label">Węglowodany</div>
+                    <div class="macro-value">296 g</div>
+                </div>
+
+                <div class="macro-row">
+                    <div class="macro-icon fiber">🌿</div>
+                    <div class="macro-label">Błonnik</div>
+                    <div class="macro-value">30 g</div>
+                </div>
+
+            </div>
+
+            <div class="share">
+                <div class="share-left">◔ Udział</div>
+                <div class="share-value">28%</div>
+            </div>
+
+        </div>
+
+
+        <!-- ANTONI -->
+
+        <div class="person-card">
+
+            <div class="person-header">
+
+                <div class="avatar">
+                    <svg viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="1.8">
+                        <circle cx="12" cy="8" r="4"/>
+                        <path d="M5 21c0-4 3-7 7-7s7 3 7 7"/>
+                    </svg>
+                </div>
+
+                <div class="person-name">Antoni</div>
+
+            </div>
+
+            <div class="calories">
+
+                <div class="calorie-icon">
+                    <svg viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="1.8">
+                        <path d="M12 22c4 0 7-3 7-7 0-5-4-7-4-11-3 2-5 5-5 8-1-1-2-3-2-4-2 2-3 4-3 7 0 4 3 7 7 7z"/>
+                    </svg>
+                </div>
+
+                <div>
+                    <div class="calories-value">2554</div>
+                    <div class="calories-label">kcal / dzień</div>
+                </div>
+
+            </div>
+
+            <div class="macros">
+
+                <div class="macro-row">
+                    <div class="macro-icon protein">🥩</div>
+                    <div class="macro-label">Białko</div>
+                    <div class="macro-value">160 g</div>
+                </div>
+
+                <div class="macro-row">
+                    <div class="macro-icon fat">🥑</div>
+                    <div class="macro-label">Tłuszcz</div>
+                    <div class="macro-value">85 g</div>
+                </div>
+
+                <div class="macro-row">
+                    <div class="macro-icon carbs">🌾</div>
+                    <div class="macro-label">Węglowodany</div>
+                    <div class="macro-value">287 g</div>
+                </div>
+
+                <div class="macro-row">
+                    <div class="macro-icon fiber">🌿</div>
+                    <div class="macro-label">Błonnik</div>
+                    <div class="macro-value">30 g</div>
+                </div>
+
+            </div>
+
+            <div class="share">
+                <div class="share-left">◔ Udział</div>
+                <div class="share-value">27%</div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         PASEK PODZIAŁU
+    ================================================== -->
+
+    <div class="share-section">
+
+        <div class="share-section-title">
+
+            <svg viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="2">
+                <circle cx="12" cy="12" r="9"/>
+                <path d="M12 3v9h9"/>
+            </svg>
+
+            Proporcja podziału przygotowanego jedzenia
+
+        </div>
+
+        <div class="share-bar">
+
+            <div class="share-segment roman">
+                Roman 23%
+            </div>
+
+            <div class="share-segment esterka">
+                Esterka 22%
+            </div>
+
+            <div class="share-segment pysiek">
+                Pysiek 28%
+            </div>
+
+            <div class="share-segment antoni">
+                Antoni 27%
+            </div>
+
+        </div>
+
+        <div class="legend">
+
+            <div class="legend-item">
+                <span class="legend-dot" style="background:#65866c"></span>
+                Roman
+            </div>
+
+            <div class="legend-item">
+                <span class="legend-dot" style="background:#88a18c"></span>
+                Esterka
+            </div>
+
+            <div class="legend-item">
+                <span class="legend-dot" style="background:#476e52"></span>
+                Pysiek
+            </div>
+
+            <div class="legend-item">
+                <span class="legend-dot" style="background:#78937c"></span>
+                Antoni
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -57,7 +57,7 @@ function tekstKomorki(p: PrzepisZMakro, klucz: KluczKolumny): string {
   if (klucz === 'kategoria') return tekstKategorii(p) || '—';
   if (klucz === 'kuchnia') return tekstKuchni(p) || '—';
   if (klucz === 'liczba_porcji_bazowych') return String(p.liczba_porcji_bazowych);
-  if (klucz === 'trwalosc_dni') return String(p.trwalosc_dni);
+  if (klucz === 'trwalosc_dni') return String(p.trwalosc_dni_bazowa);
   if (klucz === 'skalowalny') return p.skalowalny ? 'tak' : 'nie';
 
   const w = p[klucz];
@@ -138,6 +138,8 @@ export default function EkranPrzepisyMakro() {
         wynik = tekstKuchni(a).localeCompare(tekstKuchni(b), 'pl');
       } else if (sortujPo === 'skalowalny') {
         wynik = Number(a.skalowalny) - Number(b.skalowalny);
+      } else if (sortujPo === 'trwalosc_dni') {
+        wynik = a.trwalosc_dni_bazowa - b.trwalosc_dni_bazowa;
       } else {
         wynik = ((a[sortujPo] as number | null) ?? -1) - ((b[sortujPo] as number | null) ?? -1);
       }

@@ -1,0 +1,12 @@
+1. Czasy przygotowania
+
+update przepisy p
+set
+  czas_przygotowania_min = (
+    select e.minuty from etapy e where e.przepis_id = p.id and e.kolejnosc = 1
+  ),
+  czas_obrobki_min = (
+    select nullif(coalesce(sum(e.minuty), 0), 0)
+    from etapy e where e.przepis_id = p.id and e.kolejnosc > 1
+  )
+where exists (select 1 from etapy e where e.przepis_id = p.id);

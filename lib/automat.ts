@@ -131,6 +131,35 @@ const KARA_POWTORKI = 3;
 const SZUM = 0.3;
 
 /**
+ * Ile dni gotujemy na zapas.
+ *
+ * Danie może leżeć w lodówce kilka dni (`trwalosc_dni`), ale im więcej osób
+ * je razem, tym mniej dni warto gotować na zapas — inaczej z jednego
+ * gotowania wyszłoby absurdalnie dużo jedzenia (np. 4 osoby × 4 dni = 16
+ * porcji naraz).
+ *
+ * Dlatego liczbę dni ucinamy tak, żeby łączna liczba porcji z jednego
+ * gotowania (`osoby × dni`) nie przekroczyła tego limitu. Danie nigdy nie
+ * jest przez to odrzucane — zawsze da się ugotować przynajmniej na jeden
+ * dzień, bo limit jest ustawiony na tyle wysoko (≥ maksymalna liczba osób
+ * na koncie), że nawet dla największej możliwej liczby osób starczy miejsca
+ * na co najmniej jeden dzień. Efekt: dla 1-2 osób gotujemy na kilka dni
+ * naraz, dla 3-4 osób — tylko na dziś.
+ */
+const LIMIT_PORCJI = 4;
+
+/**
+ * Ile dni faktycznie gotować na zapas — `trwalosc_dni` ucięte tak, żeby
+ * `osoby × dni` nie przekroczyło `LIMIT_PORCJI`. Współdzielone przez automat
+ * (`zaplanuj`) i ręczne wstawianie dania z checkboxem „uwzględnij trwałość”
+ * (`app/index.tsx`), żeby oba działały tak samo.
+ */
+export function dniZLimitem(trwaloscDni: number, osoby: number): number {
+  const dniWLimicie = Math.max(1, Math.floor(LIMIT_PORCJI / Math.max(1, osoby)));
+  return Math.max(1, Math.min(trwaloscDni, dniWLimicie));
+}
+
+/**
  * Widełki, poniżej których nie schodzimy przy dzieleniu.
  * Bez nich dzień prawie domknięty dawałby dzielenie przez wartość bliską zeru
  * i pojedyncza kaloria różnicy rozstrzygałaby o wyborze dania.
@@ -280,10 +309,12 @@ export function zaplanuj(opcje: {
    * wyłączone — dawne zachowanie (tylko liczba porcji bazowych).
    */
   uwzglednijTrwalosc?: boolean;
+  /** Ile osób je z tego samego garnka — patrz `LIMIT_PORCJI`. Domyślnie 1. */
+  osoby?: number;
   /** Wstrzykiwane, żeby test mógł podać wartość stałą. */
   losowo?: () => number;
 }): WynikPlanowania {
-  const { dni, zajete, makroDni, przepisy, celKcal, celBialko, uwzglednijTrwalosc = false } = opcje;
+  const { dni, zajete, makroDni, przepisy, celKcal, celBialko, uwzglednijTrwalosc = false, osoby = 1 } = opcje;
   const losowo = opcje.losowo ?? Math.random;
 
   const zajeteKlucze = new Set(zajete.map((m) => klucz(m.data, m.pora)));
@@ -348,7 +379,7 @@ export function zaplanuj(opcje: {
       // przeciwnym razie liczba porcji bazowych decyduje jak dawniej.
       const uzyjSkalowania = najlepszy.skalowalny && (najlepszy.kcal ?? 0) > 0;
       const liczbaDni = uwzglednijTrwalosc
-        ? Math.max(1, najlepszy.trwalosc_dni)
+        ? dniZLimitem(najlepszy.trwalosc_dni, osoby)
         : uzyjSkalowania
           ? 1
           : najlepszy.liczba_porcji_bazowych;

@@ -298,7 +298,7 @@ export default function EkranPrzepisu() {
           : przepis.porcja_g
             ? `porcja ${przepis.porcja_g} g`
             : null,
-        opisTrwalosci(przepis.trwalosc_dni),
+        opisTrwalosci(makro?.trwalosc_dni ?? przepis.trwalosc_dni),
       ]
         .filter(Boolean)
         .join(' · ')}>

@@ -69,6 +69,23 @@ async function blokadaBezKolejki<R>(_nazwa: string, _limitCzasu: number, fn: () 
   return fn();
 }
 
+/**
+ * Zaślepka pamięci sesji używana wyłącznie przy renderowaniu strony
+ * startowej po stronie serwera (SSR, w Node).
+ *
+ * Tam `Platform.OS` jest już `'web'`, ale nie ma ani `window`, ani żadnej
+ * trwałej pamięci — a `AsyncStorage` (przeznaczony na telefon) i tak w
+ * środku odwołuje się do `window.localStorage` bez sprawdzania, więc użyty
+ * jako zapasowa opcja wywalał budowanie tym samym błędem „window is not
+ * defined”, przed którym miał chronić. SSR i tak nie ma sesji do wczytania,
+ * więc wystarczy atrapa, która nic nie przechowuje.
+ */
+const pamiecSSR = {
+  getItem: async () => null,
+  setItem: async () => {},
+  removeItem: async () => {},
+};
+
 // Adres zapasowy musi być poprawnym adresem — inaczej `createClient` rzuca
 // wyjątkiem i aplikacja nie wstaje wcale, zamiast pokazać czytelny komunikat
 // na ekranie logowania.
@@ -82,11 +99,22 @@ export const supabase = createClient(adres ?? 'https://brak.supabase.co', klucz 
     // pokazywała profile tego, kto zalogował się ostatni. sessionStorage jest
     // odrębny dla każdej karty, więc sesje się nie nadpisują — kosztem tego,
     // że trzeba zalogować się ponownie po otwarciu nowej karty.
-    storage: Platform.OS === 'web' ? window.sessionStorage : AsyncStorage,
+    // `typeof window` sprawdzamy osobno, bo Expo Router renderuje stronę
+    // startową na webie także po stronie serwera (SSR, w Node) — tam
+    // `Platform.OS` już jest `'web'`, ale `window` jeszcze nie istnieje,
+    // więc samo `Platform.OS === 'web'` wywalało budowanie komunikatem
+    // „window is not defined” (widoczne tylko w przeglądarce na komputerze,
+    // nie na telefonie, bo tam idzie gałąź natywna z AsyncStorage).
+    storage:
+      Platform.OS === 'web'
+        ? typeof window !== 'undefined'
+          ? window.sessionStorage
+          : pamiecSSR
+        : AsyncStorage,
     autoRefreshToken: true,
     persistSession: true,
     // Wykrywanie sesji z adresu URL ma sens tylko w przeglądarce.
-    detectSessionInUrl: Platform.OS === 'web',
+    detectSessionInUrl: Platform.OS === 'web' && typeof window !== 'undefined',
     // W przeglądarce zostaje domyślna blokada (Web Locks API działa tam
     // poprawnie) — problem dotyczy wyłącznie natywnego React Native.
     lock: Platform.OS === 'web' ? undefined : blokadaBezKolejki,

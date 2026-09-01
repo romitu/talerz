@@ -38,7 +38,17 @@ export type PrzepisZMakro = {
   opis: string | null;
   pory: PoraPosilku[];
   kuchnie: Kuchnia[];
+  /**
+   * Efektywna trwałość TEGO konta — `min(trwalosc_dni_wlasna, trwalosc_dni_bazowa)`,
+   * gdy konto ma własne (skrócone) ustawienie, inaczej równa bazowej. To ta
+   * wartość ma trafiać wszędzie tam, gdzie liczy się planowanie i wyświetlanie
+   * (patrz `trwalosc_wlasna`, migracja 0040).
+   */
   trwalosc_dni: number;
+  /** Górny limit z przepisu — ustawia go autor w formularzu przepisu. */
+  trwalosc_dni_bazowa: number;
+  /** Własne skrócenie TEGO konta, albo `null`, gdy trzyma się wartości z przepisu. */
+  trwalosc_dni_wlasna: number | null;
   liczba_porcji_bazowych: number;
   porcjowanie: 'waga' | 'sztuki';
   /** Ile porcji wychodzi — wyliczone przez bazę zgodnie ze sposobem porcjowania. */
@@ -150,7 +160,7 @@ export async function pobierzPrzepisy(kontoId: string | undefined) {
         `id, nazwa, opis, pory, kuchnie, trwalosc_dni, liczba_porcji_bazowych, porcje,
          czas_przygotowania_min, czas_obrobki_min, sprzet, przechowywanie, mozna_mrozic,
          ratunek, porcjowanie, widocznosc, zgloszono_kiedy, powod_odrzucenia, autor_id, zdjecie,
-         skalowalny, preferencje_przepisow (konto_id, poziom)`
+         skalowalny, preferencje_przepisow (konto_id, poziom), trwalosc_wlasna (konto_id, dni)`
       )
       .order('nazwa'),
     supabase
@@ -175,13 +185,24 @@ export async function pobierzPrzepisy(kontoId: string | undefined) {
     }[];
     const wlasna = kontoId ? preferencje.find((x) => x.konto_id === kontoId) : undefined;
 
+    const trwalosciWlasne = (p.trwalosc_wlasna ?? []) as { konto_id: string; dni: number }[];
+    const trwaloscWlasna = kontoId
+      ? (trwalosciWlasne.find((x) => x.konto_id === kontoId)?.dni ?? null)
+      : null;
+    // Górny limit z przepisu obowiązuje zawsze, nawet gdyby własne ustawienie
+    // było starsze niż ostatnia (niższa) zmiana bazowej wartości przez autora.
+    const trwaloscEfektywna =
+      trwaloscWlasna !== null ? Math.min(trwaloscWlasna, p.trwalosc_dni) : p.trwalosc_dni;
+
     return {
       id: p.id,
       nazwa: p.nazwa,
       opis: p.opis,
       pory: p.pory ?? [],
       kuchnie: p.kuchnie ?? [],
-      trwalosc_dni: p.trwalosc_dni,
+      trwalosc_dni: trwaloscEfektywna,
+      trwalosc_dni_bazowa: p.trwalosc_dni,
+      trwalosc_dni_wlasna: trwaloscWlasna,
       liczba_porcji_bazowych: p.liczba_porcji_bazowych,
       porcjowanie: p.porcjowanie,
       czas_przygotowania_min: p.czas_przygotowania_min,
@@ -239,6 +260,40 @@ export async function ustawPreferencje(
     .from('preferencje_przepisow')
     .upsert(
       { przepis_id: przepisId, konto_id: kontoId, poziom },
+      { onConflict: 'przepis_id,konto_id' }
+    );
+  if (error) throw error;
+}
+
+/**
+ * Ustawia własną (skróconą) trwałość konta dla danego przepisu (migracja 0040).
+ *
+ * `dni` równe bazowej wartości z przepisu kasuje wiersz — to znaczy „trzymaj
+ * się przepisu”, więc nie ma czego osobno zapisywać. Wartość zawsze przycinamy
+ * do `[0, bazowaDni]`, żeby nie dało się ustawić dłużej niż pozwala przepis.
+ */
+export async function ustawTrwaloscWlasna(
+  przepisId: string,
+  kontoId: string,
+  dni: number,
+  bazowaDni: number
+): Promise<void> {
+  const docelowe = Math.min(Math.max(0, dni), bazowaDni);
+
+  if (docelowe === bazowaDni) {
+    const { error } = await supabase
+      .from('trwalosc_wlasna')
+      .delete()
+      .eq('przepis_id', przepisId)
+      .eq('konto_id', kontoId);
+    if (error) throw error;
+    return;
+  }
+
+  const { error } = await supabase
+    .from('trwalosc_wlasna')
+    .upsert(
+      { przepis_id: przepisId, konto_id: kontoId, dni: docelowe },
       { onConflict: 'przepis_id,konto_id' }
     );
   if (error) throw error;

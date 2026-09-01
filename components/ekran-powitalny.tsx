@@ -66,18 +66,24 @@ export function EkranPowitalny({ onDalej }: { onDalej: () => void }) {
           />
 
           <View style={styles.tekst}>
-            <ThemedText type="subtitle">Planowanie posiłków, które trzyma się kupy</ThemedText>
+            <ThemedText type="subtitle">Jeden plan, jedna lista zakupów</ThemedText>
 
             <ThemedText type="default">
-              Talerz układa tydzień z Twoich przepisów, liczy wartości odżywcze ze składników
-              i sam robi listę zakupów. Gotujesz garnkiem na kilka dni, a nie osobno na każdy
-              posiłek — i to widać w planie.
+              Zakładasz profil dla siebie i domowników — do czterech osób. Ustalasz cele,
+              nanosisz własne korekty. Przeglądasz przepisy, które omijają żywność wysoko
+              przetworzoną, i oznaczasz: bardzo lubię, lubię, nie lubię. Co lubisz najbardziej,
+              wraca częściej; czego nie lubisz, nie wraca wcale.
             </ThemedText>
 
             <ThemedText type="default" themeColor="textSecondary">
-              Wartości odżywcze liczone są ze składników i ich gramatur, więc zmiana przepisu
-              od razu zmienia liczby. Nic nie jest wpisywane ręcznie i nic nie rozjedzie się
-              z tym, co naprawdę wkładasz do garnka.
+              Przy każdym daniu wybierasz, na ile dni ma starczyć. Klikasz raz — Talerz układa
+              plan do siedmiu dni i składa z niego jedną listę zakupów. W sklepie odhaczasz,
+              w domu klikasz nazwę przepisu i gotujesz krok po kroku.
+            </ThemedText>
+
+            <ThemedText type="default" themeColor="textSecondary">
+              Kalorie liczy równaniami NASEM 2023 — amerykańską normą DRI na energię — z wieku,
+              wzrostu, masy ciała i aktywności. Żadna liczba nie jest brana na oko.
             </ThemedText>
 
             <View style={[styles.zastrzezenie, { borderLeftColor: motyw.border }]}>

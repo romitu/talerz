@@ -25,6 +25,7 @@ import {
   pobierzPrzepisy,
   ukryjPrzepis,
   ustawPreferencje,
+  ustawTrwaloscWlasna,
   zatwierdzPrzepis,
   type PoraPosilku,
   type Preferencja,
@@ -94,6 +95,9 @@ export default function EkranPrzepisow() {
    */
   const [dymek, setDymek] = useState<string | null>(null);
 
+  /** Id przepisu, którego lista wyboru trwałości jest właśnie rozwinięta — jedna naraz. */
+  const [trwaloscOtwarta, setTrwaloscOtwarta] = useState<string | null>(null);
+
   const pobierz = useCallback(async () => {
     setWczytywanie(true);
     setBlad(null);
@@ -141,6 +145,36 @@ export default function EkranPrzepisow() {
 
     try {
       await ustawPreferencje(p.id, sesja.user.id, nowy);
+    } catch (e) {
+      setBlad(komunikatBledu(e));
+      pobierz(); // nie udało się — wracamy do stanu z bazy
+    }
+  }
+
+  /**
+   * Ustawia własną (skróconą) trwałość TEGO konta dla przepisu — nie dłuższą
+   * niż `trwalosc_dni_bazowa` z przepisu (patrz `ustawTrwaloscWlasna`,
+   * migracja 0040). Wybranie wartości równej bazowej wraca do „trzymam się
+   * przepisu” — funkcja w bibliotece sama wtedy kasuje wiersz.
+   */
+  async function zmienTrwalosc(p: PrzepisZMakro, dni: number) {
+    if (!sesja) return;
+
+    // Zmiana widoczna od razu, zanim baza potwierdzi.
+    setPrzepisy((poprzednie) =>
+      poprzednie.map((x) =>
+        x.id === p.id
+          ? {
+              ...x,
+              trwalosc_dni: dni,
+              trwalosc_dni_wlasna: dni === x.trwalosc_dni_bazowa ? null : dni,
+            }
+          : x
+      )
+    );
+
+    try {
+      await ustawTrwaloscWlasna(p.id, sesja.user.id, dni, p.trwalosc_dni_bazowa);
     } catch (e) {
       setBlad(komunikatBledu(e));
       pobierz(); // nie udało się — wracamy do stanu z bazy
@@ -353,7 +387,6 @@ export default function EkranPrzepisow() {
             ? [{ klucz: 'kuchnia', ikona: 'earth-outline' as const, tekst: p.kuchnie.map((x) => OPIS_KUCHNI[x]).join(', ') }]
             : []),
           ...(razem ? [{ klucz: 'czas', ikona: 'time-outline' as const, tekst: `${razem} min` }] : []),
-          { klucz: 'trwalosc', ikona: 'calendar-outline', tekst: opisTrwalosci(p.trwalosc_dni) },
           ...(p.mozna_mrozic
             ? [{ klucz: 'mrozenie', ikona: 'snow-outline' as const, tekst: 'można mrozić' }]
             : []),
@@ -434,7 +467,78 @@ export default function EkranPrzepisow() {
                 <ThemedText type="small">{t.tekst}</ThemedText>
               </View>
             ))}
+
+            {/*
+              Trwałość jest jedynym tagiem, który da się dotknąć — jedyna
+              wartość konfigurowalna PER KONTO, więc jedyna, która ma sens
+              jako przycisk zamiast zwykłej etykiety. Przepis bez zapasu dni
+              (0 = „tylko świeże”) nie ma czego skracać, więc zostaje zwykłą
+              etykietą.
+            */}
+            {p.trwalosc_dni_bazowa > 0 ? (
+              <Pressable
+                onPress={() => setTrwaloscOtwarta((x) => (x === p.id ? null : p.id))}
+                accessibilityRole="button"
+                accessibilityState={{ expanded: trwaloscOtwarta === p.id }}
+                accessibilityLabel={`Twoja trwałość w lodówce: ${opisTrwalosci(p.trwalosc_dni)}. Z przepisu wynika najwyżej ${opisTrwalosci(p.trwalosc_dni_bazowa)}.`}
+                style={({ pressed }) => [
+                  styles.tag,
+                  {
+                    borderColor: p.trwalosc_dni_wlasna !== null ? motyw.accent : motyw.border,
+                    backgroundColor: motyw.background,
+                  },
+                  pressed && styles.wcisniety,
+                ]}>
+                <Ionicons name="calendar-outline" size={16} color={motyw.accent} />
+                <ThemedText type="small">{opisTrwalosci(p.trwalosc_dni)}</ThemedText>
+                <Ionicons
+                  name={trwaloscOtwarta === p.id ? 'chevron-up' : 'chevron-down'}
+                  size={12}
+                  color={motyw.textSecondary}
+                />
+              </Pressable>
+            ) : (
+              <View
+                style={[styles.tag, { borderColor: motyw.border, backgroundColor: motyw.background }]}>
+                <Ionicons name="calendar-outline" size={16} color={motyw.accent} />
+                <ThemedText type="small">{opisTrwalosci(p.trwalosc_dni)}</ThemedText>
+              </View>
+            )}
           </View>
+
+          {trwaloscOtwarta === p.id && (
+            <View style={[styles.trwaloscLista, { borderColor: motyw.border }]}>
+              <ThemedText type="small" themeColor="textSecondary">
+                Twoje ustawienie — nie zmienia przepisu, tylko Twój plan. Przepis pozwala na
+                najwyżej: {opisTrwalosci(p.trwalosc_dni_bazowa)}.
+              </ThemedText>
+              {Array.from({ length: p.trwalosc_dni_bazowa + 1 }, (_, dni) => dni).map((dni) => {
+                const zaznaczona = dni === p.trwalosc_dni;
+                return (
+                  <Pressable
+                    key={dni}
+                    onPress={() => {
+                      zmienTrwalosc(p, dni);
+                      setTrwaloscOtwarta(null);
+                    }}
+                    accessibilityRole="radio"
+                    accessibilityState={{ selected: zaznaczona }}
+                    style={({ pressed }) => [
+                      styles.trwaloscOpcja,
+                      {
+                        backgroundColor: zaznaczona ? motyw.backgroundSelected : motyw.backgroundElement,
+                      },
+                      pressed && styles.wcisniety,
+                    ]}>
+                    <ThemedText type={zaznaczona ? 'smallBold' : 'small'}>
+                      {opisTrwalosci(dni)}
+                    </ThemedText>
+                    {zaznaczona && <Ionicons name="checkmark" size={16} color={motyw.accent} />}
+                  </Pressable>
+                );
+              })}
+            </View>
+          )}
 
           <View style={[styles.dzielnik, { backgroundColor: motyw.border }]} />
 
@@ -750,7 +854,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     gap: Spacing.two,
   },
-  nazwa: { flex: 1 },
+  nazwa: { flex: 1, fontSize: 22, lineHeight: 31 },
   widocznoscPigulka: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -792,6 +896,23 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.two,
   },
   dzielnik: { height: 1 },
+
+  /* Rozwijana lista wyboru własnej trwałości — pod pigułką „dni w lodówce”. */
+  trwaloscLista: {
+    borderWidth: 1,
+    borderRadius: Spacing.two,
+    padding: Spacing.two,
+    gap: Spacing.one,
+    marginTop: -Spacing.one,
+  },
+  trwaloscOpcja: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    borderRadius: Spacing.one,
+    paddingVertical: Spacing.one,
+    paddingHorizontal: Spacing.two,
+  },
 
   /* Makro na porcję — cztery ikony w rzędzie na wspólnym tle. */
   makroBox: {

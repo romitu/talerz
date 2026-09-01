@@ -12,7 +12,7 @@ import { ThemedText } from '@/components/themed-text';
 import { KOLOR_MAKRO, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import { komunikatBledu } from '@/lib/blad';
-import { powtorzTydzien, zaplanuj, type Wstawienie } from '@/lib/automat';
+import { dniZLimitem, powtorzTydzien, zaplanuj, type Wstawienie } from '@/lib/automat';
 import {
   czyDzisiaj,
   dniPlanu,
@@ -20,14 +20,12 @@ import {
   opisDnia,
   pobierzPlany,
   pobierzPoprzedniPlan,
-  posprzatajStarePlany,
   pobierzPozycje,
   PORY,
   bialkoPosilku,
   dodajPartie,
   sumujDzien,
   usunPosilek,
-  TYGODNI_HISTORII,
   ustawPrzepisSkalowanyPozycji,
   utworzPlan,
   usunPartie,
@@ -171,18 +169,10 @@ export default function EkranPlanu() {
   const [wczytywanie, setWczytywanie] = useState(true);
   const [blad, setBlad] = useState<string | null>(null);
 
-  /**
-   * `null` oznacza „pokaż najnowszy”. Ustawiane tylko po założeniu nowego
-   * tygodnia (patrz „Zacznij nowy tydzień od dzisiaj” niżej) — wybór
-   * OGLĄDANEGO tygodnia z listy zniknął z ekranu jako niepotrzebny, więc
-   * to jedyna droga, którą ta wartość się zmienia.
-   */
-  const [wybranyPlanId, setWybranyPlanId] = useState<string | null>(null);
   const [pracuje, setPracuje] = useState(false);
   const [czyscic, setCzyscic] = useState(false);
   const [komunikat, setKomunikat] = useState<string | null>(null);
-  /** Checkboxy pod „Wypełnij wolne miejsca" — patrz `wypelnijAutomatem`. */
-  const [skalujPoWypelnieniu, setSkalujPoWypelnieniu] = useState(true);
+  /** Checkbox pod „Wypełnij wolne miejsca" — patrz `wypelnijAutomatem`. */
   const [uwzglednijTrwalosc, setUwzglednijTrwalosc] = useState(true);
 
   /*
@@ -206,9 +196,8 @@ export default function EkranPlanu() {
     try {
       const [wszystkie, lista] = await Promise.all([pobierzPlany(), pobierzPrzepisy(sesja?.user.id)]);
 
-      // Oglądany tydzień: wskazany ręcznie albo najnowszy. Gdy wskazany zniknął
-      // (skasowany gdzie indziej), spadamy na najnowszy zamiast pokazywać pustkę.
-      const p = wszystkie.find((x) => x.id === wybranyPlanId) ?? wszystkie[0] ?? null;
+      // Zawsze pokazujemy najnowszy tydzień.
+      const p = wszystkie[0] ?? null;
 
       setPlan(p);
       setPrzepisy(lista);
@@ -287,7 +276,7 @@ export default function EkranPlanu() {
     } finally {
       setWczytywanie(false);
     }
-  }, [sesja?.user.id, wybranyPlanId]);
+  }, [sesja?.user.id]);
 
   useFocusEffect(
     useCallback(() => {
@@ -399,6 +388,7 @@ export default function EkranPlanu() {
         celKcal: cel?.kcal ?? null,
         celBialko: cel?.bialko_g ?? null,
         uwzglednijTrwalosc,
+        osoby,
       });
 
       if (wstawienia.length === 0) {
@@ -418,9 +408,9 @@ export default function EkranPlanu() {
         `Dołożono ${posilkow} posiłków z ${wstawienia.length} gotowań.` +
         (bezObsady.length > 0 ? ` Bez obsady zostało ${bezObsady.length} miejsc.` : '');
 
-      // Checkbox „Skaluj cały tydzień do celów" — dokłada drugi etap od razu
-      // po wypełnieniu, zamiast zmuszać do osobnego kliknięcia przycisku niżej.
-      if (skalujPoWypelnieniu && cel) {
+      // Skalowanie dań skalowalnych pod dzienny cel dzieje się od razu po
+      // wypełnieniu — bez osobnego checkboxa ani przycisku, zawsze gdy jest cel.
+      if (cel) {
         const { szczegoly, dniZmienione } = await przeliczSkalowalneWTygodniu();
         if (szczegoly.length > 0) {
           await pobierz();
@@ -500,10 +490,9 @@ export default function EkranPlanu() {
    * Działa niezależnie od tego, czy dane danie było już wcześniej
    * przeskalowane — zawsze liczy od nowa, z aktualnym celem.
    *
-   * Czysta praca z bazą, bez `setKomunikat`/`setPracuje` — dzięki temu ta sama
-   * logika służy zarówno osobnemu przyciskowi, jak i checkboxowi „Skaluj cały
-   * tydzień do celów” pod „Wypełnij wolne miejsca”, gdzie komunikat musi się
-   * złożyć z DWÓCH etapów (wypełnienie + skalowanie), nie nadpisywać się.
+   * Czysta praca z bazą, bez `setKomunikat`/`setPracuje` — woła ją
+   * `wypelnijAutomatem`, gdzie komunikat musi się złożyć z DWÓCH etapów
+   * (wypełnienie + skalowanie), nie nadpisywać się.
    * Wymaga `plan`, `sesja` i `cel` — sprawdza je WOŁAJĄCY.
    */
   async function przeliczSkalowalneWTygodniu(): Promise<{ szczegoly: string[]; dniZmienione: Set<string> }> {
@@ -550,37 +539,6 @@ export default function EkranPlanu() {
     return { szczegoly, dniZmienione };
   }
 
-  async function skalujCalyTydzien() {
-    if (!plan || !sesja) return;
-    if (!cel) {
-      setKomunikat('Brak ustawionego celu kalorycznego w profilu — nie ma do czego skalować.');
-      return;
-    }
-
-    setKomunikat(null);
-    setPracuje(true);
-    try {
-      const { szczegoly, dniZmienione } = await przeliczSkalowalneWTygodniu();
-
-      if (szczegoly.length === 0) {
-        setKomunikat(
-          'W tym tygodniu nie ma żadnego dania oznaczonego jako skalowalne — nie ma czego przeliczyć.'
-        );
-        return;
-      }
-
-      await pobierz();
-      setKomunikat(
-        `Przeliczono ${szczegoly.length} ${szczegoly.length === 1 ? 'danie' : 'dania'} ` +
-          `w ${dniZmienione.size} ${odmianaDni(dniZmienione.size)}:\n` +
-          szczegoly.join('\n')
-      );
-    } catch (e) {
-      setBlad(komunikatBledu(e));
-    } finally {
-      setPracuje(false);
-    }
-  }
 
   // --- błąd wczytywania ---
   // Osobno od „brak planu” niżej — inaczej prawdziwa awaria (np. bazy) wyglądałaby
@@ -650,6 +608,32 @@ export default function EkranPlanu() {
                 const juz = pozycje.filter(
                   (x) => x.data === wybierany.data && x.pora === wybierany.pora
                 ).length;
+
+                // Danie skalowalne, wybrane ręcznie, przelicza się w locie pod
+                // dzienny cel — tak samo jak wybrane przez automat (patrz
+                // `wypelnijAutomatem`), tylko liczone dla jednego, tego
+                // konkretnego miejsca zamiast dla całego dnia naraz.
+                let przepisSkalowanyId: string | undefined;
+                if (p.skalowalny && cel && (p.kcal ?? 0) > 0) {
+                  const dniowe = pozycje.filter((x) => x.data === wybierany.data);
+                  const kcalDnia = sumujDzien(dniowe).kcal;
+                  const brakKcal = Math.max(0, cel.kcal - kcalDnia);
+                  const wolnychWDniu = PORY.filter(
+                    (pora) => !dniowe.some((x) => x.pora === pora)
+                  ).length;
+                  const celTegoDania = brakKcal / Math.max(1, wolnychWDniu) / Math.max(1, osoby);
+
+                  const pelny = await pobierzPelnyPrzepis(p.id);
+                  const dostepneSkladniki = await pobierzSkladniki();
+                  const wynik = await utworzPrzeskalowanyPrzepis({
+                    kontoId: sesja.user.id,
+                    przepis: pelny,
+                    dostepneSkladniki,
+                    celKcal: celTegoDania,
+                  });
+                  przepisSkalowanyId = wynik.id;
+                }
+
                 await dodajPartie({
                   kontoId: sesja.user.id,
                   planId: plan.id,
@@ -660,11 +644,17 @@ export default function EkranPlanu() {
                   osoby,
                   // Ten sam checkbox „Uwzględnij ile dni wytrzyma w lodówce” co przy
                   // automacie (patrz `wypelnijAutomatem`) — inaczej ręczne wstawienie
-                  // dania z ustawioną trwałością nigdy by jej nie uwzględniało.
+                  // dania z ustawioną trwałością nigdy by jej nie uwzględniało. Danie
+                  // skalowalne bez tego checkboxa zostaje na jeden dzień — przeliczone
+                  // jest pod cel TEGO dnia, więc kopiowanie go na kolejne nie ma sensu
+                  // (tak samo jak w automacie, patrz `dniZLimitem`/`uzyjSkalowania`).
                   liczbaPorcjiBazowych: uwzglednijTrwalosc
-                    ? Math.max(1, p.trwalosc_dni)
-                    : p.liczba_porcji_bazowych,
+                    ? dniZLimitem(p.trwalosc_dni, osoby)
+                    : przepisSkalowanyId
+                      ? 1
+                      : p.liczba_porcji_bazowych,
                   dostepneDni: dniPlanu(plan),
+                  przepisSkalowanyId,
                 });
                 doPrzywrocenia.current = true;
                 setWybierany(null);
@@ -792,14 +782,6 @@ export default function EkranPlanu() {
           </Pressable>
 
           <PrzelacznikAutomatu
-            zaznaczone={skalujPoWypelnieniu}
-            onZmiana={setSkalujPoWypelnieniu}
-            etykieta="Skaluj cały tydzień do celów"
-            opis="Od razu po wypełnieniu przelicza dania skalowalne pod dzienny cel — jak osobny przycisk niżej, tylko bez dodatkowego kliknięcia."
-            ikona="trending-up-outline"
-          />
-
-          <PrzelacznikAutomatu
             zaznaczone={uwzglednijTrwalosc}
             onZmiana={setUwzglednijTrwalosc}
             etykieta="Uwzględnij ile dni wytrzyma w lodówce"
@@ -809,48 +791,12 @@ export default function EkranPlanu() {
 
           <View style={styles.akcjeSiatka}>
             <Przycisk
-              tytul={pracuje ? 'Przeliczam…' : 'Skaluj cały tydzień do celów'}
-              wariant="poboczny"
-              ikona="stats-chart-outline"
-              onPress={skalujCalyTydzien}
-              zajety={pracuje}
-              wylaczony={pracuje}
-              style={styles.akcjaKafelek}
-            />
-
-            <Przycisk
               tytul="Powtórz poprzedni tydzień"
               wariant="poboczny"
               ikona="refresh-outline"
               onPress={powtorzPoprzedni}
               zajety={pracuje}
               wylaczony={pracuje}
-              style={styles.akcjaKafelek}
-            />
-
-            <Przycisk
-              tytul="Zacznij nowy tydzień od dzisiaj"
-              wariant="poboczny"
-              ikona="add-circle-outline"
-              onPress={() =>
-                zDbem(async () => {
-                  if (!sesja) return;
-                  const nowy = await utworzPlan(sesja.user.id, naDate(new Date()));
-                  setWybranyPlanId(nowy.id);
-
-                  // Sprzątamy przy zakładaniu nowego tygodnia, a nie przy każdym
-                  // wejściu na ekran. To jedyny moment, w którym historia rośnie,
-                  // więc jedyny, w którym trzeba coś przyciąć.
-                  const usunietych = await posprzatajStarePlany();
-                  if (usunietych > 0) {
-                    setKomunikat(
-                      `Trzymamy ${TYGODNI_HISTORII} ostatnich tygodni — starsze ` +
-                        `${usunietych === 1 ? 'zniknął' : 'zniknęły'} (${usunietych}).`
-                    );
-                  }
-                })
-              }
-              zajety={pracuje}
               style={styles.akcjaKafelek}
             />
 
@@ -865,9 +811,9 @@ export default function EkranPlanu() {
           </View>
 
           <ThemedText type="small" themeColor="textSecondary">
-            Zakłada kolejny tydzień od dzisiaj. Poprzedni zostaje — to z niego bierze
-            się „powtórz poprzedni tydzień”. Skalowanie przelicza dania oznaczone jako
-            skalowalne tak, żeby każdy dzień celniej trafiał w dzienny cel kaloryczny.
+            „Powtórz poprzedni tydzień” bierze układ z poprzedniego tygodnia. Dania
+            skalowalne — zarówno z automatu, jak i wybrane ręcznie — przeliczają się
+            pod dzienny cel kaloryczny od razu, bez osobnego kroku.
           </ThemedText>
 
           {/*

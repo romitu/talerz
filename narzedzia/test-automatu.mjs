@@ -412,6 +412,45 @@ const PRZEPISY = [
           pierwszySkalowalnyZOpcja.celKcalDlaSkalowania !== null);
 }
 
+// --- 13. osoby — limit wielkości garnka (LIMIT_PORCJI = 4)
+{
+  // Zupa: trwałość 3 dni. Im więcej osób je razem, tym mniej dni warto
+  // ugotować na zapas, żeby osoby × dni nie przekroczyło limitu — ale
+  // nigdy nie schodzimy poniżej jednego dnia.
+  const zupa = danie('zupa', ['obiad'], 500, 30, 2, 'neutralne', false, 3);
+
+  const oczekiwane = [
+    [1, 3], // 1 osoba: limit starcza na całą trwałość
+    [2, 2], // 2 osoby: limit ucina trwałość z 3 do 2 dni
+    [3, 1], // 3 osoby: limit ucina do 1 dnia
+    [4, 1], // 4 osoby (maksimum profili): nadal 1 dzień, danie NIE jest odrzucone
+  ];
+
+  for (const [osoby, oczekiwaneDni] of oczekiwane) {
+    const { wstawienia } = zaplanuj({
+      dni: DNI, zajete: [], makroDni: new Map(),
+      przepisy: [zupa],
+      celKcal: 2000, celBialko: 140, losowo: BEZ_LOSU,
+      uwzglednijTrwalosc: true,
+      osoby,
+    });
+    const pierwsze = wstawienia.find((w) => w.odData === DNI[0]);
+    sprawdz(`${osoby} ${osoby === 1 ? 'osoba' : 'osoby'}: garnek ugotowany na ${oczekiwaneDni} dni`,
+            pierwsze.dni.length === oczekiwaneDni, JSON.stringify(pierwsze?.dni));
+  }
+
+  // Bez podania `osoby` zachowanie ma zostać jak dawniej (domyślnie 1 osoba).
+  const domyslneOsoby = zaplanuj({
+    dni: DNI, zajete: [], makroDni: new Map(),
+    przepisy: [zupa],
+    celKcal: 2000, celBialko: 140, losowo: BEZ_LOSU,
+    uwzglednijTrwalosc: true,
+  });
+  const pierwszeDomyslne = domyslneOsoby.wstawienia.find((w) => w.odData === DNI[0]);
+  sprawdz('bez podania `osoby` limit liczy się jak dla 1 osoby (3 dni)',
+          pierwszeDomyslne.dni.length === 3, JSON.stringify(pierwszeDomyslne.dni));
+}
+
 rmSync(kosz, { recursive: true, force: true });
 
 console.log();
