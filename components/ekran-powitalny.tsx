@@ -69,7 +69,7 @@ export function EkranPowitalny({ onDalej }: { onDalej: () => void }) {
             <ThemedText type="subtitle">Jeden plan, jedna lista zakupów</ThemedText>
 
             <ThemedText type="default">
-              Zakładasz profil dla siebie i domowników — do czterech osób. Ustalasz cele,
+              Zakładasz profil dla siebie i domowników. Ustalasz cele,
               nanosisz własne korekty. Przeglądasz przepisy, które omijają żywność wysoko
               przetworzoną, i oznaczasz: bardzo lubię, lubię, nie lubię. Co lubisz najbardziej,
               wraca częściej; czego nie lubisz, nie wraca wcale.
