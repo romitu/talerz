@@ -3,7 +3,6 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Przycisk } from './przycisk';
-import { ThemedText } from './themed-text';
 import { ThemedView } from './themed-view';
 
 import { MaxContentWidth, Spacing } from '@/constants/theme';
@@ -18,8 +17,8 @@ import { MaxContentWidth, Spacing } from '@/constants/theme';
  *
  * Grafika
  * -------
- * `assets/images/ilustracja-plan.png`, 527 na 393 punkty — wycinek z projektu
- * ekranu powitalnego dostarczonego przez Romana.
+ * `assets/images/ilustracja-plan.png`, 941 na 1672 punkty — pełny zrzut
+ * ekranu powitalnego dostarczony przez Romana, bez przycinania.
  */
 export function EkranPowitalny({ onDalej }: { onDalej: () => void }) {
   /*
@@ -44,18 +43,13 @@ export function EkranPowitalny({ onDalej }: { onDalej: () => void }) {
             source={grafika}
             style={styles.grafika}
             contentFit="contain"
-            accessibilityLabel="Miska sałatki obok kalendarza z odhaczonym dniem"
+            accessibilityLabel="Talerz — powiedz, dla ilu osób planujesz i na ile dni; Talerz zdecyduje co ugotować, ile zrobić, co zjeść jutro i co dokładnie kupić"
             transition={200}
           />
 
-          <View style={styles.tekst}>
-            <ThemedText type="default" style={styles.wysrodkowany}>
-              Powiedz, dla ilu osób planujesz i na ile dni. Talerz zdecyduje co ugotować,
-              ile zrobić, co zjeść jutro i co dokładnie kupić.
-            </ThemedText>
+          <View style={styles.bialeTlo}>
+            <Przycisk tytul="Zaczynamy" onPress={onDalej} />
           </View>
-
-          <Przycisk tytul="Zaczynamy" onPress={onDalej} />
         </ScrollView>
       </SafeAreaView>
     </ThemedView>
@@ -78,8 +72,11 @@ const styles = StyleSheet.create({
   },
   grafika: {
     width: '100%',
-    aspectRatio: 527 / 393,
+    aspectRatio: 941 / 1672,
   },
-  tekst: { gap: Spacing.three },
-  wysrodkowany: { textAlign: 'center' },
+  bialeTlo: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: Spacing.three,
+    padding: Spacing.three,
+  },
 });
