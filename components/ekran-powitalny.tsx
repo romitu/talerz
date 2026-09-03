@@ -17,8 +17,8 @@ import { MaxContentWidth, Spacing } from '@/constants/theme';
  *
  * Grafika
  * -------
- * `assets/images/ilustracja-plan_v02.png`, 1254 na 1254 punkty — druga wersja
- * zrzutu ekranu powitalnego dostarczona przez Romana.
+ * `assets/images/ilustracja-plan.png`, 941 na 1672 punkty — logo aplikacji
+ * dostarczone przez Romana.
  */
 export function EkranPowitalny({ onDalej }: { onDalej: () => void }) {
   /*
@@ -33,7 +33,7 @@ export function EkranPowitalny({ onDalej }: { onDalej: () => void }) {
     Ścieżka względna nie zależy od żadnej konfiguracji i rozwiązuje się tak
     samo przy uruchomieniu lokalnym i przy budowaniu na serwer.
   */
-  const grafika = require('../assets/images/ilustracja-plan_v02.png');
+  const grafika = require('../assets/images/ilustracja-plan.png');
 
   return (
     <ThemedView style={styles.tlo}>
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
   },
   grafika: {
     width: '100%',
-    aspectRatio: 1,
+    aspectRatio: 941 / 1672,
   },
   bialeTlo: {
     backgroundColor: '#FFFFFF',
