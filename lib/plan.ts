@@ -76,6 +76,11 @@ export function czyDzisiaj(data: string): boolean {
   return data === naDate(new Date());
 }
 
+/** Data sprzed dzisiaj — używane tylko do oznaczenia dat wstecznych w wyborze startu planu. */
+export function czyPrzeszly(data: string): boolean {
+  return data < naDate(new Date());
+}
+
 /** Pobiera najnowszy plan konta albo null, gdy żadnego jeszcze nie ma. */
 export async function pobierzPlan(): Promise<Plan | null> {
   const { data, error } = await supabase
