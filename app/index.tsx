@@ -47,7 +47,6 @@ import { celZywieniowyNASEM, type PalNasem } from '@/lib/nasem';
 import { useSesja } from '@/lib/sesja';
 import { pobierzSkladniki, type Skladnik } from '@/lib/skladniki';
 import { supabase } from '@/lib/supabase';
-import { wyczyscOdhaczenia } from '@/lib/zakupy';
 import { wiekZDaty, type Plec, type TrybCelu } from '@/lib/zywienie';
 
 type Cel = {
@@ -840,11 +839,10 @@ export default function EkranPlanu() {
                 onPress={() =>
                   zDbem(async () => {
                     await wyczyscPlan(plan.id);
-                    // Odhaczenia są przypisane do planu, ale ten sam plan_id
-                    // zostaje po wyczyszczeniu tygodnia — bez jawnego czyszczenia
-                    // tu, ponowne wstawienie tych samych dań pokazywałoby stare
-                    // ptaszki, choć nikt jeszcze nic nie odhaczył dla nowej treści.
-                    if (sesja) await wyczyscOdhaczenia(sesja.user.id, plan.id);
+                    // Odhaczenie trzyma się gotowania (partia_id/pozycja_id), nie
+                    // planu — ponowne wstawienie dań dostaje nowe identyfikatory,
+                    // więc stare ptaszki nigdy nie mogą do nich pasować. Nie trzeba
+                    // ich tu jawnie czyścić (patrz komentarz w lib/zakupy.ts).
                     setCzyscic(false);
                   })
                 }

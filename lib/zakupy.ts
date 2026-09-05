@@ -7,8 +7,21 @@
 
 import { supabase } from './supabase';
 
+/**
+ * Co identyfikuje „potrzebę" składnika przy odhaczaniu: konkretne gotowanie
+ * (partia — danie na kilka dni) albo pojedynczy posiłek bez partii.
+ *
+ * NIE plan i NIE okno dat — plan bywa dowolnej długości i zaczyna się
+ * w dowolnym dniu („Start od" przesuwa ten sam plan zamiast zakładać nowy
+ * tydzień), więc odhaczenie przypięte do planu gubiło się przy każdej takiej
+ * zmianie. Gotowanie samo w sobie jest jedyną rzeczą, która się nie zmienia.
+ */
+export type ZrodloTyp = 'partia' | 'pozycja';
+
 export type PozycjaZakupow = {
   skladnik_id: string;
+  zrodlo_typ: ZrodloTyp;
+  zrodlo_id: string;
   nazwa: string;
   gramy: number;
   tagi: string[];
@@ -20,7 +33,22 @@ export type PozycjaZakupow = {
   reszta_g: number | null;
   /** W ilu daniach składnik wystąpi. */
   dania: string[];
+  /**
+   * Danie było ugotowane przed dzisiaj — skoro powstało zgodnie z planem,
+   * składniki musiały już być kupione, niezależnie czy ktoś zdążył odhaczyć
+   * checkbox (np. aplikacja zawiesiła się w sklepie). Patrz `pobierzListeZakupow`.
+   */
+  zrealizowano_automatycznie: boolean;
 };
+
+/** Klucz odhaczenia — ten sam wzór używany przy zapisie i przy odczycie. */
+export function kluczOdhaczenia(p: {
+  zrodlo_typ: string;
+  zrodlo_id: string;
+  skladnik_id: string;
+}): string {
+  return `${p.zrodlo_typ}:${p.zrodlo_id}:${p.skladnik_id}`;
+}
 
 /** Działy sklepu — kolejność odpowiada typowej trasie po markecie. */
 export const DZIALY: { nazwa: string; tagi: string[] }[] = [
@@ -50,26 +78,48 @@ export function dzialDla(tagi: string[]): string {
 }
 
 /**
- * Zbiera składniki ze wszystkich posiłków planu w podanym zakresie dat.
+ * Zbiera składniki ze WSZYSTKICH posiłków konta, które są jeszcze aktualne —
+ * nie z jednego planu ani jednego zakresu dat.
+ *
+ * „Aktualne" znaczy:
+ *  - danie z partii (gotowanie na kilka dni): dopóki partia jest jadalna
+ *    (`wazne_do` >= dzisiaj) — bez względu na to, w którym planie i w jakim
+ *    oknie dat leżą jej poszczególne dni;
+ *  - danie bez partii (pojedynczy posiłek): dopóki jego dzień jeszcze nie minął.
+ *
+ * RLS na `plan_pozycje` już ogranicza wynik do własnych planów konta — nie
+ * trzeba filtrować po `plan_id`. To celowe: plan bywa dowolnej długości
+ * i zaczyna się w dowolnym dniu, więc „zakres dat jednego planu" nie jest
+ * stabilnym pojęciem, na którym dałoby się oprzeć listę zakupów.
  *
  * Ilość każdego składnika mnożymy przez liczbę porcji w planie i dzielimy
  * przez liczbę porcji, na które rozpisany jest przepis — inaczej przy zupie
  * na sześć osób kupilibyśmy sześciokrotność tego, co potrzebne.
  */
-export async function pobierzListeZakupow(
-  planId: string,
-  odData: string,
-  doData: string
-): Promise<PozycjaZakupow[]> {
-  const { data: pozycje, error } = await supabase
+export async function pobierzListeZakupow(dzisiaj: string): Promise<PozycjaZakupow[]> {
+  const { data: wszystkie, error } = await supabase
     .from('plan_pozycje')
-    .select('przepis_id, przepis_skalowany_id, porcje, przepisy (nazwa)')
-    .eq('plan_id', planId)
-    .gte('data', odData)
-    .lte('data', doData);
+    .select(
+      'id, data, przepis_id, przepis_skalowany_id, porcje, partia_id, przepisy (nazwa), partie (data_ugotowania, wazne_do)'
+    );
 
   if (error) throw error;
-  if (!pozycje || pozycje.length === 0) return [];
+  if (!wszystkie || wszystkie.length === 0) return [];
+
+  type DanePartii = { data_ugotowania: string; wazne_do: string };
+  // Supabase zwraca powiązanie raz jako obiekt, raz jako jednoelementową listę.
+  function jednaPartia(surowy: unknown): DanePartii | null {
+    const x = surowy as DanePartii | DanePartii[] | null;
+    return Array.isArray(x) ? (x[0] ?? null) : x;
+  }
+
+  const pozycje = wszystkie.filter((p) => {
+    const partia = jednaPartia(p.partie);
+    if (partia) return partia.wazne_do >= dzisiaj;
+    return (p.data as string) >= dzisiaj;
+  });
+
+  if (pozycje.length === 0) return [];
 
   // Pozycja bierze składniki ALBO z przepisu źródłowego, ALBO z konkretnego
   // wariantu skalowanego (migracja 0036) — nigdy z obu naraz. Stąd dwa
@@ -115,16 +165,26 @@ export async function pobierzListeZakupow(
     (wynikMakro.data ?? []).map((m) => [m.przepis_id as string, Number(m.porcje_wyliczone) || 1])
   );
 
+  // Klucz to skladnik_id + zrodlo (partia albo pozycja) — NIE sam skladnik_id.
+  // Inaczej ten sam składnik z gotowania już zrealizowanego zlałby się z tym
+  // samym składnikiem dania dopiero zaplanowanego, dając jedną scaloną ilość
+  // z niejednoznacznym stanem odhaczenia.
   const zebrane = new Map<string, PozycjaZakupow>();
 
   function dolicz(
     id: string,
+    zrodloTyp: ZrodloTyp,
+    zrodloId: string,
+    zrealizowanoAutomatycznie: boolean,
     dane: DaneSkladnika,
     gramy: number,
     nazwaDania: string
   ) {
-    const wpis = zebrane.get(id) ?? {
+    const klucz = `${zrodloTyp}::${zrodloId}::${id}`;
+    const wpis = zebrane.get(klucz) ?? {
       skladnik_id: id,
+      zrodlo_typ: zrodloTyp,
+      zrodlo_id: zrodloId,
       nazwa: dane.nazwa,
       gramy: 0,
       tagi: dane.tagi ?? [],
@@ -132,14 +192,19 @@ export async function pobierzListeZakupow(
       opakowan: null,
       reszta_g: null,
       dania: [],
+      zrealizowano_automatycznie: zrealizowanoAutomatycznie,
     };
     wpis.gramy += gramy;
     if (nazwaDania && !wpis.dania.includes(nazwaDania)) wpis.dania.push(nazwaDania);
-    zebrane.set(id, wpis);
+    zebrane.set(klucz, wpis);
   }
 
   for (const pozycja of zwykle) {
     const przepisId = pozycja.przepis_id as string;
+    const partia = jednaPartia(pozycja.partie);
+    const zrodloTyp: ZrodloTyp = partia ? 'partia' : 'pozycja';
+    const zrodloId = partia ? (pozycja.partia_id as string) : (pozycja.id as string);
+    const zrealizowanoAutomatycznie = partia ? partia.data_ugotowania < dzisiaj : false;
     const przepis = pozycja.przepisy as { nazwa: string } | { nazwa: string }[] | null;
     const nazwaDania = (Array.isArray(przepis) ? przepis[0]?.nazwa : przepis?.nazwa) ?? '';
     const naPorcje = porcjiWPrzepisie.get(przepisId) ?? 1;
@@ -149,7 +214,15 @@ export async function pobierzListeZakupow(
       if (s.przepis_id !== przepisId) continue;
       const skladnik = jedenSkladnik(s.skladniki);
       if (!skladnik) continue;
-      dolicz(s.skladnik_id as string, skladnik, Number(s.gramy) * mnoznik, nazwaDania);
+      dolicz(
+        s.skladnik_id as string,
+        zrodloTyp,
+        zrodloId,
+        zrealizowanoAutomatycznie,
+        skladnik,
+        Number(s.gramy) * mnoznik,
+        nazwaDania
+      );
     }
   }
 
@@ -158,6 +231,10 @@ export async function pobierzListeZakupow(
   // jedzących (porcje) tej pozycji, tak jak przy zwykłym przepisie na sztuki.
   for (const pozycja of skalowane) {
     const przepisSkalowanyId = pozycja.przepis_skalowany_id as string;
+    const partia = jednaPartia(pozycja.partie);
+    const zrodloTyp: ZrodloTyp = partia ? 'partia' : 'pozycja';
+    const zrodloId = partia ? (pozycja.partia_id as string) : (pozycja.id as string);
+    const zrealizowanoAutomatycznie = partia ? partia.data_ugotowania < dzisiaj : false;
     const przepis = pozycja.przepisy as { nazwa: string } | { nazwa: string }[] | null;
     const nazwaDania = (Array.isArray(przepis) ? przepis[0]?.nazwa : przepis?.nazwa) ?? '';
     const mnoznik = pozycja.porcje as number;
@@ -166,7 +243,15 @@ export async function pobierzListeZakupow(
       if (s.przepis_skalowany_id !== przepisSkalowanyId) continue;
       const skladnik = jedenSkladnik(s.skladniki);
       if (!skladnik) continue;
-      dolicz(s.skladnik_id as string, skladnik, Number(s.gramy) * mnoznik, nazwaDania);
+      dolicz(
+        s.skladnik_id as string,
+        zrodloTyp,
+        zrodloId,
+        zrealizowanoAutomatycznie,
+        skladnik,
+        Number(s.gramy) * mnoznik,
+        nazwaDania
+      );
     }
   }
 
@@ -282,33 +367,38 @@ export async function podpowiedziZHistorii(kontoId: string, ile = 40): Promise<s
 // =============================================================================
 
 /**
- * Identyfikatory składników już wrzuconych do koszyka — DLA TEGO PLANU.
+ * Klucze (patrz `kluczOdhaczenia`) składników już wrzuconych do koszyka —
+ * DLA TEGO KONTA, po gotowaniu (`zrodlo_typ` + `zrodlo_id`), nie po planie.
  *
- * Ptaszek jest właściwością tygodnia, nie konta: bez `planId` w kluczu ten
- * sam składnik w nowo wygenerowanym, identycznym planie wracał jako „już
- * kupiony", choć do tej listy nikt jeszcze nie zajrzał.
+ * Ptaszek jest właściwością gotowania, nie okna planu: plan bywa dowolnej
+ * długości i zaczyna się w dowolnym dniu („Start od" przesuwa ten sam plan
+ * zamiast zakładać nowy tydzień), więc klucz na `plan_id` gubił odhaczenie
+ * przy każdej takiej zmianie, mimo że danie fizycznie zostało kupione.
  */
-export async function pobierzOdhaczone(kontoId: string, planId: string): Promise<Set<string>> {
+export async function pobierzOdhaczone(kontoId: string): Promise<Set<string>> {
   const { data, error } = await supabase
     .from('zakupy_odhaczone')
-    .select('skladnik_id')
-    .eq('konto_id', kontoId)
-    .eq('plan_id', planId);
+    .select('skladnik_id, zrodlo_typ, zrodlo_id')
+    .eq('konto_id', kontoId);
 
   if (error) throw error;
-  return new Set((data ?? []).map((x) => x.skladnik_id as string));
+  return new Set((data ?? []).map((x) => kluczOdhaczenia(x)));
 }
 
 export async function ustawOdhaczenie(
   kontoId: string,
-  planId: string,
+  zrodloTyp: ZrodloTyp,
+  zrodloId: string,
   skladnikId: string,
   odhaczony: boolean
 ) {
   if (odhaczony) {
-    const { error } = await supabase
-      .from('zakupy_odhaczone')
-      .upsert({ konto_id: kontoId, plan_id: planId, skladnik_id: skladnikId });
+    const { error } = await supabase.from('zakupy_odhaczone').upsert({
+      konto_id: kontoId,
+      zrodlo_typ: zrodloTyp,
+      zrodlo_id: zrodloId,
+      skladnik_id: skladnikId,
+    });
     if (error) throw error;
     return;
   }
@@ -317,17 +407,21 @@ export async function ustawOdhaczenie(
     .from('zakupy_odhaczone')
     .delete()
     .eq('konto_id', kontoId)
-    .eq('plan_id', planId)
+    .eq('zrodlo_typ', zrodloTyp)
+    .eq('zrodlo_id', zrodloId)
     .eq('skladnik_id', skladnikId);
   if (error) throw error;
 }
 
-/** Czyści ptaszki TEGO planu — początek nowych zakupów albo czyszczenie tygodnia. */
-export async function wyczyscOdhaczenia(kontoId: string, planId: string) {
-  const { error } = await supabase
-    .from('zakupy_odhaczone')
-    .delete()
-    .eq('konto_id', kontoId)
-    .eq('plan_id', planId);
+/**
+ * Czyści wszystkie ptaszki konta — początek nowego, świeżego liczenia zakupów.
+ *
+ * Bezpieczne mimo braku podziału na plan: danie już zrealizowane automatycznie
+ * (`zrealizowano_automatycznie` — data ugotowania minęła) i tak nie wróci jako
+ * „do kupienia", więc czyszczenie rusza tylko to, co faktycznie wymaga
+ * ponownego potwierdzenia.
+ */
+export async function wyczyscOdhaczenia(kontoId: string) {
+  const { error } = await supabase.from('zakupy_odhaczone').delete().eq('konto_id', kontoId);
   if (error) throw error;
 }

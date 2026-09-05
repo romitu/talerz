@@ -13,13 +13,14 @@ import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import { komunikatBledu } from '@/lib/blad';
 import { wroc } from '@/lib/nawigacja';
-import { dniPlanu, opisDnia, pobierzPlany, type Plan } from '@/lib/plan';
+import { naDate } from '@/lib/plan';
 import { useSesja } from '@/lib/sesja';
 import {
   dodajReczny,
   dzialDla,
   DZIAL_RECZNY,
   DZIALY,
+  kluczOdhaczenia,
   kupionoReczny,
   pobierzListeZakupow,
   pobierzOdhaczone,
@@ -38,13 +39,21 @@ function opisIlosci(gramy: number): string {
   return `${gramy} g`;
 }
 
+/**
+ * Zrealizowane — albo ręcznie odhaczone, albo automatycznie: danie było
+ * ugotowane przed dzisiaj, więc składniki musiały już być kupione (patrz
+ * `zrealizowano_automatycznie` w lib/zakupy.ts).
+ */
+function czyZrealizowany(p: PozycjaZakupow, kupione: Set<string>): boolean {
+  return p.zrealizowano_automatycznie || kupione.has(kluczOdhaczenia(p));
+}
+
 export default function EkranZakupow() {
   const { powrot } = useLocalSearchParams<{ powrot?: string }>();
   const motyw = useTheme();
   const { sesja } = useSesja();
   const kontoId = sesja?.user.id;
 
-  const [plan, setPlan] = useState<Plan | null>(null);
   const [pozycje, setPozycje] = useState<PozycjaZakupow[]>([]);
   const [reczne, setReczne] = useState<ProduktReczny[]>([]);
   const [historia, setHistoria] = useState<string[]>([]);
@@ -59,20 +68,6 @@ export default function EkranZakupow() {
     setWczytywanie(true);
     setBlad(null);
     setOstrzezenie(null);
-
-    // Odhaczenia są przypisane do planu (patrz komentarz przy tabeli
-    // `zakupy_odhaczone`), więc plan trzeba znać, zanim się o nie zapyta.
-    let p: Plan | null = null;
-    try {
-      // Zawsze najnowszy tydzień — tak samo jak na ekranie planu.
-      const wszystkie = await pobierzPlany();
-      p = wszystkie[0] ?? null;
-      setPlan(p);
-    } catch (e) {
-      setBlad(komunikatBledu(e));
-      setWczytywanie(false);
-      return;
-    }
 
     /*
       Produkty dopisane ręcznie pobieramy W OSOBNYM bloku i z własną obsługą
@@ -92,7 +87,7 @@ export default function EkranZakupow() {
         const [lista, hist, odhaczone] = await Promise.all([
           pobierzReczne(kontoId),
           podpowiedziZHistorii(kontoId),
-          p ? pobierzOdhaczone(kontoId, p.id) : Promise.resolve(new Set<string>()),
+          pobierzOdhaczone(kontoId),
         ]);
         setReczne(lista);
         setHistoria(hist);
@@ -110,12 +105,7 @@ export default function EkranZakupow() {
     }
 
     try {
-      if (!p) {
-        setPozycje([]);
-        return;
-      }
-      const dniListy = dniPlanu(p);
-      setPozycje(await pobierzListeZakupow(p.id, dniListy[0], dniListy[dniListy.length - 1]));
+      setPozycje(await pobierzListeZakupow(naDate(new Date())));
     } catch (e) {
       setBlad(komunikatBledu(e));
     } finally {
@@ -155,11 +145,11 @@ export default function EkranZakupow() {
       if (!wDziale || wDziale.length === 0) return null;
 
       const posortowane = [...wDziale].sort((a, b) => {
-        const aOdhaczony = kupione.has(a.skladnik_id) ? 1 : 0;
-        const bOdhaczony = kupione.has(b.skladnik_id) ? 1 : 0;
+        const aOdhaczony = czyZrealizowany(a, kupione) ? 1 : 0;
+        const bOdhaczony = czyZrealizowany(b, kupione) ? 1 : 0;
         return aOdhaczony - bOdhaczony;
       });
-      const wszystkoOdhaczone = wDziale.every((p) => kupione.has(p.skladnik_id));
+      const wszystkoOdhaczone = wDziale.every((p) => czyZrealizowany(p, kupione));
 
       return { dzial, pozycje: posortowane, wszystkoOdhaczone };
     })
@@ -167,17 +157,15 @@ export default function EkranZakupow() {
       .sort((a, b) => Number(a.wszystkoOdhaczone) - Number(b.wszystkoOdhaczone));
   }, [wedlugDzialow, kupione]);
 
-  /*
-    Odhaczenia są przypisane do planu (patrz komentarz przy tabeli
-    `zakupy_odhaczone`), więc `kupione` w praktyce zawsze dotyczy bieżącej
-    listy. Filtr zostaje mimo to jako zabezpieczenie — gdyby lista zdążyła
-    się przeliczyć, zanim doszły świeże odhaczenia, nie chcemy zliczać
-    składnika, którego już nie ma na ekranie.
-  */
-  const zrealizowane = pozycje.filter((p) => kupione.has(p.skladnik_id)).length;
+  const zrealizowane = pozycje.filter((p) => czyZrealizowany(p, kupione)).length;
   const niezrealizowane = pozycje.length - zrealizowane + reczne.length;
   const resztyRazem = pozycje.reduce((s, p) => s + (p.reszta_g ?? 0), 0);
-  const cosOdhaczone = zrealizowane > 0;
+
+  // Tylko odhaczone RĘCZNIE — te zrealizowane automatycznie (danie już
+  // ugotowane) i tak nie wrócą jako „do kupienia", więc nie ma czego cofać.
+  const odhaczoneRecznie = pozycje.filter(
+    (p) => !p.zrealizowano_automatycznie && kupione.has(kluczOdhaczenia(p))
+  ).length;
 
   /**
    * Odhaczenie widoczne od razu, zapis w tle.
@@ -186,19 +174,26 @@ export default function EkranZakupow() {
    * powrocie odpowiedzi z serwera. Gdy zapis padnie, wracamy do stanu z bazy
    * i mówimy o tym — cicha rozbieżność byłaby gorsza od komunikatu.
    */
-  async function przelacz(id: string) {
-    if (!kontoId || !plan) return;
-    const bedzieOdhaczony = !kupione.has(id);
+  async function przelacz(pozycja: PozycjaZakupow) {
+    if (!kontoId || pozycja.zrealizowano_automatycznie) return;
+    const klucz = kluczOdhaczenia(pozycja);
+    const bedzieOdhaczony = !kupione.has(klucz);
 
     setKupione((p) => {
       const n = new Set(p);
-      if (bedzieOdhaczony) n.add(id);
-      else n.delete(id);
+      if (bedzieOdhaczony) n.add(klucz);
+      else n.delete(klucz);
       return n;
     });
 
     try {
-      await ustawOdhaczenie(kontoId, plan.id, id, bedzieOdhaczony);
+      await ustawOdhaczenie(
+        kontoId,
+        pozycja.zrodlo_typ,
+        pozycja.zrodlo_id,
+        pozycja.skladnik_id,
+        bedzieOdhaczony
+      );
     } catch (e) {
       setBlad(komunikatBledu(e));
       pobierz();
@@ -232,13 +227,7 @@ export default function EkranZakupow() {
       tytul="Lista zakupów"
       naglowekStaly={
         <NaglowekZakupow
-          data={
-            wczytywanie
-              ? 'wczytywanie…'
-              : plan
-                ? `tydzień od ${opisDnia(plan.data_start)}`
-                : undefined
-          }
+          data={wczytywanie ? 'wczytywanie…' : undefined}
           zrealizowane={zrealizowane}
           niezrealizowane={niezrealizowane}
         />
@@ -277,12 +266,14 @@ export default function EkranZakupow() {
             </ThemedText>
 
             {wDziale.map((p) => {
-              const odhaczony = kupione.has(p.skladnik_id);
+              const odhaczony = czyZrealizowany(p, kupione);
+              const klucz = kluczOdhaczenia(p);
 
               return (
                 <Pressable
-                  key={p.skladnik_id}
-                  onPress={() => przelacz(p.skladnik_id)}
+                  key={klucz}
+                  onPress={() => przelacz(p)}
+                  disabled={p.zrealizowano_automatycznie}
                   style={({ pressed }) => [
                     styles.pozycja,
                     { borderColor: motyw.border },
@@ -300,6 +291,11 @@ export default function EkranZakupow() {
                       themeColor={odhaczony ? 'textSecondary' : 'text'}>
                       {p.nazwa} — {opisIlosci(p.gramy)}
                     </ThemedText>
+                    {p.zrealizowano_automatycznie && (
+                      <ThemedText type="small" themeColor="textSecondary">
+                        już ugotowane — składniki musiały być kupione
+                      </ThemedText>
+                    )}
                   </View>
                 </Pressable>
               );
@@ -376,15 +372,15 @@ export default function EkranZakupow() {
         </Karta>
       )}
 
-      {cosOdhaczone && (
+      {odhaczoneRecznie > 0 && (
         <Przycisk
-          tytul={`Zacznij nowe zakupy (odznacz ${zrealizowane})`}
+          tytul={`Zacznij nowe zakupy (odznacz ${odhaczoneRecznie})`}
           wariant="poboczny"
           onPress={async () => {
-            if (!kontoId || !plan) return;
+            if (!kontoId) return;
             setKupione(new Set());
             try {
-              await wyczyscOdhaczenia(kontoId, plan.id);
+              await wyczyscOdhaczenia(kontoId);
             } catch (e) {
               setBlad(komunikatBledu(e));
               pobierz();
