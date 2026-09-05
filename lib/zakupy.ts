@@ -50,6 +50,60 @@ export function kluczOdhaczenia(p: {
   return `${p.zrodlo_typ}:${p.zrodlo_id}:${p.skladnik_id}`;
 }
 
+export type PozycjaSkonsolidowana = {
+  skladnik_id: string;
+  nazwa: string;
+  gramy: number;
+  tagi: string[];
+  opakowanie_g: number | null;
+  opakowan: number | null;
+  reszta_g: number | null;
+  dania: string[];
+  /** Wszystkie źródła zsumowane w tę pozycję — odhaczenie musi ustawić je WSZYSTKIE naraz. */
+  zrodla: { zrodlo_typ: ZrodloTyp; zrodlo_id: string }[];
+};
+
+/**
+ * Sumuje granularne pozycje (per składnik + źródło) do jednej pozycji na
+ * składnik, do pokazania w jednej sekcji listy („do kupienia" albo
+ * „zrealizowane w poprzedniej sesji").
+ *
+ * Podział na sekcje robi wywołujący, PRZED wywołaniem tej funkcji — inaczej
+ * już kupiona partia zlałaby się z jeszcze nie kupioną w jedną liczbę
+ * z niejednoznacznym stanem odhaczenia.
+ */
+export function skonsolidujSkladniki(pozycje: PozycjaZakupow[]): PozycjaSkonsolidowana[] {
+  const zebrane = new Map<string, PozycjaSkonsolidowana>();
+
+  for (const p of pozycje) {
+    const wpis = zebrane.get(p.skladnik_id) ?? {
+      skladnik_id: p.skladnik_id,
+      nazwa: p.nazwa,
+      gramy: 0,
+      tagi: p.tagi,
+      opakowanie_g: p.opakowanie_g,
+      opakowan: null,
+      reszta_g: null,
+      dania: [],
+      zrodla: [],
+    };
+    wpis.gramy += p.gramy;
+    for (const d of p.dania) if (!wpis.dania.includes(d)) wpis.dania.push(d);
+    wpis.zrodla.push({ zrodlo_typ: p.zrodlo_typ, zrodlo_id: p.zrodlo_id });
+    zebrane.set(p.skladnik_id, wpis);
+  }
+
+  for (const wpis of zebrane.values()) {
+    wpis.gramy = Math.round(wpis.gramy);
+    if (wpis.opakowanie_g && wpis.opakowanie_g > 0) {
+      wpis.opakowan = Math.ceil(wpis.gramy / wpis.opakowanie_g);
+      wpis.reszta_g = wpis.opakowan * wpis.opakowanie_g - wpis.gramy;
+    }
+  }
+
+  return [...zebrane.values()].sort((a, b) => a.nazwa.localeCompare(b.nazwa, 'pl'));
+}
+
 /** Działy sklepu — kolejność odpowiada typowej trasie po markecie. */
 export const DZIALY: { nazwa: string; tagi: string[] }[] = [
   { nazwa: 'Warzywa i owoce', tagi: ['warzywo', 'owoc', 'ziola', 'suszone'] },

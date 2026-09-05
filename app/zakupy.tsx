@@ -26,9 +26,11 @@ import {
   pobierzOdhaczone,
   pobierzReczne,
   podpowiedziZHistorii,
+  skonsolidujSkladniki,
   ustawOdhaczenie,
   usunReczny,
   wyczyscOdhaczenia,
+  type PozycjaSkonsolidowana,
   type PozycjaZakupow,
   type ProduktReczny,
 } from '@/lib/zakupy';
@@ -125,41 +127,43 @@ export default function EkranZakupow() {
     }, [pobierz])
   );
 
-  const wedlugDzialow = useMemo(() => {
-    const mapa = new Map<string, PozycjaZakupow[]>();
-    for (const p of pozycje) {
-      const dzial = dzialDla(p.tagi);
-      mapa.set(dzial, [...(mapa.get(dzial) ?? []), p]);
-    }
-    return mapa;
-  }, [pozycje]);
-
   /**
-   * Odhaczone pozycje schodzą na dół sekcji, a sekcja odhaczona w całości
-   * schodzi na dół listy działów — dzięki temu to, co jeszcze do kupienia,
-   * zawsze jest na wierzchu.
+   * Rozdziela na dwie sekcje PRZED scaleniem — inaczej ten sam składnik
+   * z gotowania już zrealizowanego i jeszcze nie zrealizowanego zlałby się
+   * w jedną liczbę z niejednoznacznym stanem odhaczenia (patrz komentarz
+   * przy `skonsolidujSkladniki` w lib/zakupy.ts).
    */
-  const dzialyPosortowane = useMemo(() => {
+  const { doKupienia, zrealizowaneSkladniki } = useMemo(() => {
+    const aktualne: PozycjaZakupow[] = [];
+    const zrobione: PozycjaZakupow[] = [];
+    for (const p of pozycje) (czyZrealizowany(p, kupione) ? zrobione : aktualne).push(p);
+    return {
+      doKupienia: skonsolidujSkladniki(aktualne),
+      zrealizowaneSkladniki: skonsolidujSkladniki(zrobione),
+    };
+  }, [pozycje, kupione]);
+
+  function pogrupujWgDzialow(lista: PozycjaSkonsolidowana[]) {
+    const mapa = new Map<string, PozycjaSkonsolidowana[]>();
+    for (const p of lista) mapa.set(dzialDla(p.tagi), [...(mapa.get(dzialDla(p.tagi)) ?? []), p]);
     return DZIALY.map((dzial) => {
-      const wDziale = wedlugDzialow.get(dzial.nazwa);
-      if (!wDziale || wDziale.length === 0) return null;
+      const wDziale = mapa.get(dzial.nazwa);
+      return wDziale && wDziale.length > 0 ? { dzial, pozycje: wDziale } : null;
+    }).filter((x): x is NonNullable<typeof x> => x !== null);
+  }
 
-      const posortowane = [...wDziale].sort((a, b) => {
-        const aOdhaczony = czyZrealizowany(a, kupione) ? 1 : 0;
-        const bOdhaczony = czyZrealizowany(b, kupione) ? 1 : 0;
-        return aOdhaczony - bOdhaczony;
-      });
-      const wszystkoOdhaczone = wDziale.every((p) => czyZrealizowany(p, kupione));
+  const dzialyDoKupienia = useMemo(() => pogrupujWgDzialow(doKupienia), [doKupienia]);
+  const dzialyZrealizowane = useMemo(
+    () => pogrupujWgDzialow(zrealizowaneSkladniki),
+    [zrealizowaneSkladniki]
+  );
 
-      return { dzial, pozycje: posortowane, wszystkoOdhaczone };
-    })
-      .filter((x): x is NonNullable<typeof x> => x !== null)
-      .sort((a, b) => Number(a.wszystkoOdhaczone) - Number(b.wszystkoOdhaczone));
-  }, [wedlugDzialow, kupione]);
-
-  const zrealizowane = pozycje.filter((p) => czyZrealizowany(p, kupione)).length;
-  const niezrealizowane = pozycje.length - zrealizowane + reczne.length;
-  const resztyRazem = pozycje.reduce((s, p) => s + (p.reszta_g ?? 0), 0);
+  const zrealizowane = zrealizowaneSkladniki.length;
+  const niezrealizowane = doKupienia.length + reczne.length;
+  const resztyRazem = [...doKupienia, ...zrealizowaneSkladniki].reduce(
+    (s, p) => s + (p.reszta_g ?? 0),
+    0
+  );
 
   // Tylko odhaczone RĘCZNIE — te zrealizowane automatycznie (danie już
   // ugotowane) i tak nie wrócą jako „do kupienia", więc nie ma czego cofać.
@@ -168,31 +172,32 @@ export default function EkranZakupow() {
   ).length;
 
   /**
-   * Odhaczenie widoczne od razu, zapis w tle.
+   * Odhaczenie widoczne od razu, zapis w tle. Pozycja jest już scalona,
+   * więc może nieść WIELE źródeł (kilka gotowań potrzebujących tego samego
+   * składnika) — odhaczamy je wszystkie naraz, bo kupno jednego worka mąki
+   * pokrywa je wszystkie razem.
    *
    * W sklepie liczy się to, żeby ptaszek pojawił się pod palcem, a nie po
    * powrocie odpowiedzi z serwera. Gdy zapis padnie, wracamy do stanu z bazy
    * i mówimy o tym — cicha rozbieżność byłaby gorsza od komunikatu.
    */
-  async function przelacz(pozycja: PozycjaZakupow) {
-    if (!kontoId || pozycja.zrealizowano_automatycznie) return;
-    const klucz = kluczOdhaczenia(pozycja);
-    const bedzieOdhaczony = !kupione.has(klucz);
+  async function oznaczKupione(pozycja: PozycjaSkonsolidowana) {
+    if (!kontoId) return;
+    const klucze = pozycja.zrodla.map((z) =>
+      kluczOdhaczenia({ ...z, skladnik_id: pozycja.skladnik_id })
+    );
 
     setKupione((p) => {
       const n = new Set(p);
-      if (bedzieOdhaczony) n.add(klucz);
-      else n.delete(klucz);
+      klucze.forEach((k) => n.add(k));
       return n;
     });
 
     try {
-      await ustawOdhaczenie(
-        kontoId,
-        pozycja.zrodlo_typ,
-        pozycja.zrodlo_id,
-        pozycja.skladnik_id,
-        bedzieOdhaczony
+      await Promise.all(
+        pozycja.zrodla.map((z) =>
+          ustawOdhaczenie(kontoId, z.zrodlo_typ, z.zrodlo_id, pozycja.skladnik_id, true)
+        )
       );
     } catch (e) {
       setBlad(komunikatBledu(e));
@@ -258,51 +263,64 @@ export default function EkranZakupow() {
         </Karta>
       )}
 
-      {dzialyPosortowane.map(({ dzial, pozycje: wDziale }) => {
-        return (
-          <Karta key={dzial.nazwa}>
-            <ThemedText type="smallBold" themeColor="textSecondary">
-              {dzial.nazwa.toUpperCase()}
-            </ThemedText>
+      {doKupienia.length > 0 && (
+        <ThemedText type="smallBold" themeColor="textSecondary">
+          AKTUALNA LISTA ZAKUPÓW
+        </ThemedText>
+      )}
 
-            {wDziale.map((p) => {
-              const odhaczony = czyZrealizowany(p, kupione);
-              const klucz = kluczOdhaczenia(p);
+      {dzialyDoKupienia.map(({ dzial, pozycje: wDziale }) => (
+        <Karta key={`do-kupienia-${dzial.nazwa}`}>
+          <ThemedText type="smallBold" themeColor="textSecondary">
+            {dzial.nazwa.toUpperCase()}
+          </ThemedText>
 
-              return (
-                <Pressable
-                  key={klucz}
-                  onPress={() => przelacz(p)}
-                  disabled={p.zrealizowano_automatycznie}
-                  style={({ pressed }) => [
-                    styles.pozycja,
-                    { borderColor: motyw.border },
-                    pressed && styles.wcisnieta,
-                  ]}>
-                  <Ionicons
-                    name={odhaczony ? 'checkbox' : 'square-outline'}
-                    size={20}
-                    color={odhaczony ? motyw.accent : motyw.textSecondary}
-                  />
+          {wDziale.map((p) => (
+            <Pressable
+              key={p.skladnik_id}
+              onPress={() => oznaczKupione(p)}
+              style={({ pressed }) => [
+                styles.pozycja,
+                { borderColor: motyw.border },
+                pressed && styles.wcisnieta,
+              ]}>
+              <Ionicons name="square-outline" size={20} color={motyw.textSecondary} />
+              <View style={styles.trescPozycji}>
+                <ThemedText type="smallBold">
+                  {p.nazwa} — {opisIlosci(p.gramy)}
+                </ThemedText>
+              </View>
+            </Pressable>
+          ))}
+        </Karta>
+      ))}
 
-                  <View style={styles.trescPozycji}>
-                    <ThemedText
-                      type={odhaczony ? 'small' : 'smallBold'}
-                      themeColor={odhaczony ? 'textSecondary' : 'text'}>
-                      {p.nazwa} — {opisIlosci(p.gramy)}
-                    </ThemedText>
-                    {p.zrealizowano_automatycznie && (
-                      <ThemedText type="small" themeColor="textSecondary">
-                        już ugotowane — składniki musiały być kupione
-                      </ThemedText>
-                    )}
-                  </View>
-                </Pressable>
-              );
-            })}
-          </Karta>
-        );
-      })}
+      {zrealizowaneSkladniki.length > 0 && (
+        <ThemedText type="smallBold" themeColor="textSecondary">
+          ZREALIZOWANE W POPRZEDNIEJ SESJI
+        </ThemedText>
+      )}
+
+      {dzialyZrealizowane.map(({ dzial, pozycje: wDziale }) => (
+        <Karta key={`zrealizowane-${dzial.nazwa}`}>
+          <ThemedText type="smallBold" themeColor="textSecondary">
+            {dzial.nazwa.toUpperCase()}
+          </ThemedText>
+
+          {wDziale.map((p) => (
+            <View
+              key={p.skladnik_id}
+              style={[styles.pozycja, { borderColor: motyw.border }]}>
+              <Ionicons name="checkbox" size={20} color={motyw.accent} />
+              <View style={styles.trescPozycji}>
+                <ThemedText type="small" themeColor="textSecondary">
+                  {p.nazwa} — {opisIlosci(p.gramy)}
+                </ThemedText>
+              </View>
+            </View>
+          ))}
+        </Karta>
+      ))}
 
       {/*
         Dział ręczny zawsze na końcu — i wtedy, gdy jest pusty, bo to jedyne
