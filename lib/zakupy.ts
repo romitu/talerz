@@ -9,6 +9,15 @@ import { supabase } from './supabase';
 
 export type PozycjaZakupow = {
   skladnik_id: string;
+  /**
+   * Plan, z którego wzięto tę pozycję.
+   *
+   * Zwykle to plan bieżącego tygodnia, ale przy daniu rozłożonym na kilka dni,
+   * które przechodzi w nowy tydzień, może to być plan POPRZEDNI — stąd pole
+   * jest tu, żeby ekran zakupów mógł pokazać taką pozycję jako „z poprzedniej
+   * sesji zakupowej" zamiast cicho zlewać ją z resztą.
+   */
+  plan_id: string;
   nazwa: string;
   gramy: number;
   tagi: string[];
@@ -55,16 +64,23 @@ export function dzialDla(tagi: string[]): string {
  * Ilość każdego składnika mnożymy przez liczbę porcji w planie i dzielimy
  * przez liczbę porcji, na które rozpisany jest przepis — inaczej przy zupie
  * na sześć osób kupilibyśmy sześciokrotność tego, co potrzebne.
+ *
+ * `planId` przyjmuje też tablicę — potrzebne, gdy danie rozłożone na kilka
+ * dni (np. „ugotuj na 3 dni") przechodzi z jednego tygodnia w drugi: wtedy
+ * jego ogon leży w planie POPRZEDNIM, a mimo to musi trafić na listę zakupów
+ * bieżącego tygodnia. Wywołujący filtruje datami tak, żeby z poprzedniego
+ * planu wziąć tylko ten ogon, nie cały tamten tydzień.
  */
 export async function pobierzListeZakupow(
-  planId: string,
+  planId: string | string[],
   odData: string,
   doData: string
 ): Promise<PozycjaZakupow[]> {
+  const idyPlanow = Array.isArray(planId) ? planId : [planId];
   const { data: pozycje, error } = await supabase
     .from('plan_pozycje')
-    .select('przepis_id, przepis_skalowany_id, porcje, przepisy (nazwa)')
-    .eq('plan_id', planId)
+    .select('plan_id, przepis_id, przepis_skalowany_id, porcje, przepisy (nazwa)')
+    .in('plan_id', idyPlanow)
     .gte('data', odData)
     .lte('data', doData);
 
@@ -115,16 +131,24 @@ export async function pobierzListeZakupow(
     (wynikMakro.data ?? []).map((m) => [m.przepis_id as string, Number(m.porcje_wyliczone) || 1])
   );
 
+  // Klucz to skladnik_id + plan_id, NIE sam skladnik_id — inaczej ten sam
+  // składnik z dania „już zrealizowanego" w poprzednim tygodniu zlałby się
+  // z tym samym składnikiem dania dopiero zaplanowanego w bieżącym, dając
+  // jedną scaloną ilość z niejednoznacznym stanem odhaczenia (patrz ekran
+  // zakupów: pozycje z różnych planów mają osobne ptaszki).
   const zebrane = new Map<string, PozycjaZakupow>();
 
   function dolicz(
     id: string,
+    planId: string,
     dane: DaneSkladnika,
     gramy: number,
     nazwaDania: string
   ) {
-    const wpis = zebrane.get(id) ?? {
+    const klucz = `${planId}::${id}`;
+    const wpis = zebrane.get(klucz) ?? {
       skladnik_id: id,
+      plan_id: planId,
       nazwa: dane.nazwa,
       gramy: 0,
       tagi: dane.tagi ?? [],
@@ -135,11 +159,12 @@ export async function pobierzListeZakupow(
     };
     wpis.gramy += gramy;
     if (nazwaDania && !wpis.dania.includes(nazwaDania)) wpis.dania.push(nazwaDania);
-    zebrane.set(id, wpis);
+    zebrane.set(klucz, wpis);
   }
 
   for (const pozycja of zwykle) {
     const przepisId = pozycja.przepis_id as string;
+    const planId = pozycja.plan_id as string;
     const przepis = pozycja.przepisy as { nazwa: string } | { nazwa: string }[] | null;
     const nazwaDania = (Array.isArray(przepis) ? przepis[0]?.nazwa : przepis?.nazwa) ?? '';
     const naPorcje = porcjiWPrzepisie.get(przepisId) ?? 1;
@@ -149,7 +174,7 @@ export async function pobierzListeZakupow(
       if (s.przepis_id !== przepisId) continue;
       const skladnik = jedenSkladnik(s.skladniki);
       if (!skladnik) continue;
-      dolicz(s.skladnik_id as string, skladnik, Number(s.gramy) * mnoznik, nazwaDania);
+      dolicz(s.skladnik_id as string, planId, skladnik, Number(s.gramy) * mnoznik, nazwaDania);
     }
   }
 
@@ -158,6 +183,7 @@ export async function pobierzListeZakupow(
   // jedzących (porcje) tej pozycji, tak jak przy zwykłym przepisie na sztuki.
   for (const pozycja of skalowane) {
     const przepisSkalowanyId = pozycja.przepis_skalowany_id as string;
+    const planId = pozycja.plan_id as string;
     const przepis = pozycja.przepisy as { nazwa: string } | { nazwa: string }[] | null;
     const nazwaDania = (Array.isArray(przepis) ? przepis[0]?.nazwa : przepis?.nazwa) ?? '';
     const mnoznik = pozycja.porcje as number;
@@ -166,7 +192,7 @@ export async function pobierzListeZakupow(
       if (s.przepis_skalowany_id !== przepisSkalowanyId) continue;
       const skladnik = jedenSkladnik(s.skladniki);
       if (!skladnik) continue;
-      dolicz(s.skladnik_id as string, skladnik, Number(s.gramy) * mnoznik, nazwaDania);
+      dolicz(s.skladnik_id as string, planId, skladnik, Number(s.gramy) * mnoznik, nazwaDania);
     }
   }
 
