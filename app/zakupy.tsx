@@ -38,19 +38,6 @@ function opisIlosci(gramy: number): string {
   return `${gramy} g`;
 }
 
-/**
- * Klucz odhaczenia: `plan_id` + `skladnik_id`, NIE sam `skladnik_id`.
- *
- * Danie rozłożone na kilka dni, które przechodzi w nowy tydzień, potrafi
- * dać dwie osobne pozycje tego samego składnika — jedną z planu poprzedniego
- * (już kupioną), jedną z bieżącego (jeszcze nie). Odhaczenia bazy trzymane
- * są per plan (patrz `zakupy_odhaczone`), więc stan w tym ekranie musi za
- * tym nadążać, inaczej odhaczenie jednej pozycji odznaczyłoby też drugą.
- */
-function kluczOdhaczenia(p: Pick<PozycjaZakupow, 'plan_id' | 'skladnik_id'>): string {
-  return `${p.plan_id}:${p.skladnik_id}`;
-}
-
 export default function EkranZakupow() {
   const { powrot } = useLocalSearchParams<{ powrot?: string }>();
   const motyw = useTheme();
@@ -76,15 +63,10 @@ export default function EkranZakupow() {
     // Odhaczenia są przypisane do planu (patrz komentarz przy tabeli
     // `zakupy_odhaczone`), więc plan trzeba znać, zanim się o nie zapyta.
     let p: Plan | null = null;
-    // Poprzedni tydzień — potrzebny tylko po to, żeby złapać ogon dania
-    // rozłożonego na kilka dni, które przeszło z niego w bieżący tydzień.
-    // Patrz komentarz przy `pobierzListeZakupow` w lib/zakupy.ts.
-    let poprzedni: Plan | null = null;
     try {
       // Zawsze najnowszy tydzień — tak samo jak na ekranie planu.
       const wszystkie = await pobierzPlany();
       p = wszystkie[0] ?? null;
-      poprzedni = wszystkie[1] ?? null;
       setPlan(p);
     } catch (e) {
       setBlad(komunikatBledu(e));
@@ -105,25 +87,16 @@ export default function EkranZakupow() {
       Ta sama zasada obowiązuje w ekranie przepisów przy pobieraniu roli:
       jedna nieudana rzecz nie może ukrywać drugiej, niezależnej.
     */
-    // Plany, z których w ogóle może pochodzić coś widocznego na tym ekranie —
-    // bieżący zawsze, poprzedni tylko jeśli istnieje.
-    const planyDoOdczytu = [poprzedni?.id, p?.id].filter((x): x is string => !!x);
-
     if (kontoId) {
       try {
-        const [lista, hist, odhaczoneListy] = await Promise.all([
+        const [lista, hist, odhaczone] = await Promise.all([
           pobierzReczne(kontoId),
           podpowiedziZHistorii(kontoId),
-          Promise.all(planyDoOdczytu.map((id) => pobierzOdhaczone(kontoId, id))),
+          p ? pobierzOdhaczone(kontoId, p.id) : Promise.resolve(new Set<string>()),
         ]);
         setReczne(lista);
         setHistoria(hist);
-
-        const polaczone = new Set<string>();
-        planyDoOdczytu.forEach((id, i) => {
-          for (const skladnikId of odhaczoneListy[i]) polaczone.add(`${id}:${skladnikId}`);
-        });
-        setKupione(polaczone);
+        setKupione(odhaczone);
       } catch (e) {
         setReczne([]);
         setHistoria([]);
@@ -142,9 +115,7 @@ export default function EkranZakupow() {
         return;
       }
       const dniListy = dniPlanu(p);
-      setPozycje(
-        await pobierzListeZakupow(planyDoOdczytu, dniListy[0], dniListy[dniListy.length - 1])
-      );
+      setPozycje(await pobierzListeZakupow(p.id, dniListy[0], dniListy[dniListy.length - 1]));
     } catch (e) {
       setBlad(komunikatBledu(e));
     } finally {
@@ -184,11 +155,11 @@ export default function EkranZakupow() {
       if (!wDziale || wDziale.length === 0) return null;
 
       const posortowane = [...wDziale].sort((a, b) => {
-        const aOdhaczony = kupione.has(kluczOdhaczenia(a)) ? 1 : 0;
-        const bOdhaczony = kupione.has(kluczOdhaczenia(b)) ? 1 : 0;
+        const aOdhaczony = kupione.has(a.skladnik_id) ? 1 : 0;
+        const bOdhaczony = kupione.has(b.skladnik_id) ? 1 : 0;
         return aOdhaczony - bOdhaczony;
       });
-      const wszystkoOdhaczone = wDziale.every((p) => kupione.has(kluczOdhaczenia(p)));
+      const wszystkoOdhaczone = wDziale.every((p) => kupione.has(p.skladnik_id));
 
       return { dzial, pozycje: posortowane, wszystkoOdhaczone };
     })
@@ -203,7 +174,7 @@ export default function EkranZakupow() {
     się przeliczyć, zanim doszły świeże odhaczenia, nie chcemy zliczać
     składnika, którego już nie ma na ekranie.
   */
-  const zrealizowane = pozycje.filter((p) => kupione.has(kluczOdhaczenia(p))).length;
+  const zrealizowane = pozycje.filter((p) => kupione.has(p.skladnik_id)).length;
   const niezrealizowane = pozycje.length - zrealizowane + reczne.length;
   const resztyRazem = pozycje.reduce((s, p) => s + (p.reszta_g ?? 0), 0);
   const cosOdhaczone = zrealizowane > 0;
@@ -215,20 +186,19 @@ export default function EkranZakupow() {
    * powrocie odpowiedzi z serwera. Gdy zapis padnie, wracamy do stanu z bazy
    * i mówimy o tym — cicha rozbieżność byłaby gorsza od komunikatu.
    */
-  async function przelacz(pozycja: PozycjaZakupow) {
-    if (!kontoId) return;
-    const klucz = kluczOdhaczenia(pozycja);
-    const bedzieOdhaczony = !kupione.has(klucz);
+  async function przelacz(id: string) {
+    if (!kontoId || !plan) return;
+    const bedzieOdhaczony = !kupione.has(id);
 
     setKupione((p) => {
       const n = new Set(p);
-      if (bedzieOdhaczony) n.add(klucz);
-      else n.delete(klucz);
+      if (bedzieOdhaczony) n.add(id);
+      else n.delete(id);
       return n;
     });
 
     try {
-      await ustawOdhaczenie(kontoId, pozycja.plan_id, pozycja.skladnik_id, bedzieOdhaczony);
+      await ustawOdhaczenie(kontoId, plan.id, id, bedzieOdhaczony);
     } catch (e) {
       setBlad(komunikatBledu(e));
       pobierz();
@@ -307,15 +277,12 @@ export default function EkranZakupow() {
             </ThemedText>
 
             {wDziale.map((p) => {
-              const odhaczony = kupione.has(kluczOdhaczenia(p));
-              // Ogon dania z poprzedniego tygodnia — patrz komentarz przy
-              // `plan_id` w typie `PozycjaZakupow`.
-              const zPoprzedniegoTygodnia = plan !== null && p.plan_id !== plan.id;
+              const odhaczony = kupione.has(p.skladnik_id);
 
               return (
                 <Pressable
-                  key={kluczOdhaczenia(p)}
-                  onPress={() => przelacz(p)}
+                  key={p.skladnik_id}
+                  onPress={() => przelacz(p.skladnik_id)}
                   style={({ pressed }) => [
                     styles.pozycja,
                     { borderColor: motyw.border },
@@ -333,11 +300,6 @@ export default function EkranZakupow() {
                       themeColor={odhaczony ? 'textSecondary' : 'text'}>
                       {p.nazwa} — {opisIlosci(p.gramy)}
                     </ThemedText>
-                    {zPoprzedniegoTygodnia && (
-                      <ThemedText type="small" themeColor="textSecondary">
-                        z poprzedniego tygodnia
-                      </ThemedText>
-                    )}
                   </View>
                 </Pressable>
               );
@@ -422,10 +384,7 @@ export default function EkranZakupow() {
             if (!kontoId || !plan) return;
             setKupione(new Set());
             try {
-              // Może dotyczyć też planu poprzedniego, jeśli lista pokazuje
-              // ogon dania, które w niego jeszcze sięga.
-              const planyNaLiscie = [...new Set(pozycje.map((p) => p.plan_id))];
-              await Promise.all(planyNaLiscie.map((id) => wyczyscOdhaczenia(kontoId, id)));
+              await wyczyscOdhaczenia(kontoId, plan.id);
             } catch (e) {
               setBlad(komunikatBledu(e));
               pobierz();
