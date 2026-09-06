@@ -628,7 +628,7 @@ export default function EkranPlanu() {
                   const wolnychWDniu = PORY.filter(
                     (pora) => !dniowe.some((x) => x.pora === pora)
                   ).length;
-                  const celTegoDania = brakKcal / Math.max(1, wolnychWDniu) / Math.max(1, osoby);
+                  const celTegoDania = brakKcal / Math.max(1, wolnychWDniu);
 
                   const pelny = await pobierzPelnyPrzepis(p.id);
                   const dostepneSkladniki = await pobierzSkladniki();

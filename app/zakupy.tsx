@@ -42,12 +42,16 @@ function opisIlosci(gramy: number): string {
 }
 
 /**
- * Zrealizowane — albo ręcznie odhaczone, albo automatycznie: danie było
- * ugotowane przed dzisiaj, więc składniki musiały już być kupione (patrz
- * `zrealizowano_automatycznie` w lib/zakupy.ts).
+ * Zrealizowane W POPRZEDNIEJ SESJI — albo automatycznie (danie ugotowane
+ * przed dzisiaj, patrz `zrealizowano_automatycznie` w lib/zakupy.ts), albo
+ * odhaczone ręcznie, ale zanim ten ekran się otworzył.
+ *
+ * Celowo `przedSesja`, nie bieżący stan `kupione` — inaczej odhaczenie
+ * TERAZ przerzucałoby pozycję do sekcji „poprzednia sesja" pod ręką
+ * użytkownika, zamiast zostawić ją na aktualnej liście z ptaszkiem.
  */
-function czyZrealizowany(p: PozycjaZakupow, kupione: Set<string>): boolean {
-  return p.zrealizowano_automatycznie || kupione.has(kluczOdhaczenia(p));
+function czyZrealizowany(p: PozycjaZakupow, przedSesja: Set<string>): boolean {
+  return p.zrealizowano_automatycznie || przedSesja.has(kluczOdhaczenia(p));
 }
 
 export default function EkranZakupow() {
@@ -60,6 +64,8 @@ export default function EkranZakupow() {
   const [reczne, setReczne] = useState<ProduktReczny[]>([]);
   const [historia, setHistoria] = useState<string[]>([]);
   const [kupione, setKupione] = useState<Set<string>>(new Set());
+  /** Migawka `kupione` sprzed otwarcia ekranu — patrz `czyZrealizowany`. */
+  const [kupionePrzedSesja, setKupionePrzedSesja] = useState<Set<string>>(new Set());
   const [wczytywanie, setWczytywanie] = useState(true);
   const [blad, setBlad] = useState<string | null>(null);
 
@@ -94,10 +100,12 @@ export default function EkranZakupow() {
         setReczne(lista);
         setHistoria(hist);
         setKupione(odhaczone);
+        setKupionePrzedSesja(new Set(odhaczone));
       } catch (e) {
         setReczne([]);
         setHistoria([]);
         setKupione(new Set());
+        setKupionePrzedSesja(new Set());
         setOstrzezenie(
           'Dopisywanie produktów i zapamiętywanie odhaczeń nie działa — wygląda na to, ' +
             'że migracja 0019_zakupy_reczne.sql nie została jeszcze wykonana w Supabase. ' +
@@ -136,12 +144,17 @@ export default function EkranZakupow() {
   const { doKupienia, zrealizowaneSkladniki } = useMemo(() => {
     const aktualne: PozycjaZakupow[] = [];
     const zrobione: PozycjaZakupow[] = [];
-    for (const p of pozycje) (czyZrealizowany(p, kupione) ? zrobione : aktualne).push(p);
+    for (const p of pozycje) (czyZrealizowany(p, kupionePrzedSesja) ? zrobione : aktualne).push(p);
     return {
       doKupienia: skonsolidujSkladniki(aktualne),
       zrealizowaneSkladniki: skonsolidujSkladniki(zrobione),
     };
-  }, [pozycje, kupione]);
+  }, [pozycje, kupionePrzedSesja]);
+
+  /** Czy pozycja została odhaczona TERAZ, w tej sesji (patrz `kupionePrzedSesja`). */
+  function czyOdhaczonaWSesji(p: PozycjaSkonsolidowana): boolean {
+    return p.zrodla.every((z) => kupione.has(kluczOdhaczenia({ ...z, skladnik_id: p.skladnik_id })));
+  }
 
   function pogrupujWgDzialow(lista: PozycjaSkonsolidowana[]) {
     const mapa = new Map<string, PozycjaSkonsolidowana[]>();
@@ -152,14 +165,36 @@ export default function EkranZakupow() {
     }).filter((x): x is NonNullable<typeof x> => x !== null);
   }
 
-  const dzialyDoKupienia = useMemo(() => pogrupujWgDzialow(doKupienia), [doKupienia]);
+  /**
+   * Odhaczone TERAZ pozycje schodzą na dół własnego działu, a dział cały
+   * odhaczony — na dół całej aktualnej listy. Nigdy jednak poniżej sekcji
+   * „zrealizowane w poprzedniej sesji" — ta zostaje osobnym blokiem niżej.
+   */
+  const dzialyDoKupienia = useMemo(() => {
+    const grupy = pogrupujWgDzialow(doKupienia).map((g) => ({
+      dzial: g.dzial,
+      pozycje: [...g.pozycje].sort(
+        (a, b) => Number(czyOdhaczonaWSesji(a)) - Number(czyOdhaczonaWSesji(b))
+      ),
+    }));
+    return [...grupy].sort(
+      (a, b) =>
+        Number(a.pozycje.every(czyOdhaczonaWSesji)) - Number(b.pozycje.every(czyOdhaczonaWSesji))
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [doKupienia, kupione]);
   const dzialyZrealizowane = useMemo(
     () => pogrupujWgDzialow(zrealizowaneSkladniki),
     [zrealizowaneSkladniki]
   );
 
-  const zrealizowane = zrealizowaneSkladniki.length;
-  const niezrealizowane = doKupienia.length + reczne.length;
+  // Licznik w nagłówku liczy TERAZ odhaczone razem z tymi z poprzedniej
+  // sesji — inaczej odhaczenie czegoś nie ruszałoby paska postępu, mimo że
+  // pozycja fizycznie została kupiona (tylko wizualnie zostaje na aktualnej
+  // liście, patrz `czyZrealizowany`).
+  const zaznaczoneTeraz = doKupienia.filter(czyOdhaczonaWSesji).length;
+  const zrealizowane = zrealizowaneSkladniki.length + zaznaczoneTeraz;
+  const niezrealizowane = doKupienia.length - zaznaczoneTeraz + reczne.length;
   const resztyRazem = [...doKupienia, ...zrealizowaneSkladniki].reduce(
     (s, p) => s + (p.reszta_g ?? 0),
     0
@@ -172,10 +207,10 @@ export default function EkranZakupow() {
   ).length;
 
   /**
-   * Odhaczenie widoczne od razu, zapis w tle. Pozycja jest już scalona,
-   * więc może nieść WIELE źródeł (kilka gotowań potrzebujących tego samego
-   * składnika) — odhaczamy je wszystkie naraz, bo kupno jednego worka mąki
-   * pokrywa je wszystkie razem.
+   * Odhaczenie (albo cofnięcie) widoczne od razu, zapis w tle. Pozycja jest
+   * już scalona, więc może nieść WIELE źródeł (kilka gotowań potrzebujących
+   * tego samego składnika) — przełączamy je wszystkie naraz, bo kupno
+   * jednego worka mąki pokrywa je wszystkie razem.
    *
    * W sklepie liczy się to, żeby ptaszek pojawił się pod palcem, a nie po
    * powrocie odpowiedzi z serwera. Gdy zapis padnie, wracamy do stanu z bazy
@@ -186,17 +221,18 @@ export default function EkranZakupow() {
     const klucze = pozycja.zrodla.map((z) =>
       kluczOdhaczenia({ ...z, skladnik_id: pozycja.skladnik_id })
     );
+    const nowyStan = !czyOdhaczonaWSesji(pozycja);
 
     setKupione((p) => {
       const n = new Set(p);
-      klucze.forEach((k) => n.add(k));
+      klucze.forEach((k) => (nowyStan ? n.add(k) : n.delete(k)));
       return n;
     });
 
     try {
       await Promise.all(
         pozycja.zrodla.map((z) =>
-          ustawOdhaczenie(kontoId, z.zrodlo_typ, z.zrodlo_id, pozycja.skladnik_id, true)
+          ustawOdhaczenie(kontoId, z.zrodlo_typ, z.zrodlo_id, pozycja.skladnik_id, nowyStan)
         )
       );
     } catch (e) {
@@ -226,6 +262,66 @@ export default function EkranZakupow() {
       pobierz();
     }
   }
+
+  /*
+    Dopóki jest tu coś niekupionego, dział wisi NAD sekcją „poprzednia
+    sesja" — inaczej rzeczy spoza kuchni ginęłyby na samym dole listy, pod
+    już zrealizowanym jedzeniem. Gdy jest pusty, wraca na koniec (jedyne
+    miejsce, w którym da się cokolwiek dopisać, i tak zawsze widoczny).
+  */
+  const dzialReczny = (
+    <Karta>
+      <ThemedText type="smallBold" themeColor="textSecondary">
+        {DZIAL_RECZNY.toUpperCase()}
+      </ThemedText>
+
+      {reczne.length === 0 ? (
+        <ThemedText type="small" themeColor="textSecondary">
+          Rzeczy spoza kuchni: worki na śmieci, papier śniadaniowy, gąbki. Nie wynikają
+          z planu, więc czekają tu, aż je kupisz.
+        </ThemedText>
+      ) : (
+        reczne.map((p) => (
+          <View key={p.id} style={[styles.pozycja, { borderColor: motyw.border }]}>
+            <Pressable
+              onPress={() => odhaczReczny(p)}
+              hitSlop={6}
+              accessibilityRole="checkbox"
+              accessibilityState={{ checked: false }}
+              accessibilityLabel={`Kupione: ${p.nazwa}`}>
+              <Ionicons name="square-outline" size={20} color={motyw.textSecondary} />
+            </Pressable>
+
+            <Pressable style={styles.trescPozycji} onPress={() => odhaczReczny(p)}>
+              <ThemedText type="smallBold">
+                {p.nazwa}
+                {p.ilosc ? ` — ${p.ilosc}` : ''}
+              </ThemedText>
+            </Pressable>
+
+            <Pressable
+              onPress={() => skasujReczny(p)}
+              hitSlop={8}
+              accessibilityRole="button"
+              accessibilityLabel={`Usuń ${p.nazwa} z listy`}>
+              <Ionicons name="close" size={18} color={motyw.textSecondary} />
+            </Pressable>
+          </View>
+        ))
+      )}
+
+      {kontoId && (
+        <DopiszProdukt
+          historia={historia}
+          juzNaLiscie={reczne.map((p) => p.nazwa)}
+          onDodaj={async (nazwa, ilosc) => {
+            await dodajReczny(kontoId, nazwa, ilosc);
+            setReczne(await pobierzReczne(kontoId));
+          }}
+        />
+      )}
+    </Karta>
+  );
 
   return (
     <Ekran
@@ -275,25 +371,36 @@ export default function EkranZakupow() {
             {dzial.nazwa.toUpperCase()}
           </ThemedText>
 
-          {wDziale.map((p) => (
-            <Pressable
-              key={p.skladnik_id}
-              onPress={() => oznaczKupione(p)}
-              style={({ pressed }) => [
-                styles.pozycja,
-                { borderColor: motyw.border },
-                pressed && styles.wcisnieta,
-              ]}>
-              <Ionicons name="square-outline" size={20} color={motyw.textSecondary} />
-              <View style={styles.trescPozycji}>
-                <ThemedText type="smallBold">
-                  {p.nazwa} — {opisIlosci(p.gramy)}
-                </ThemedText>
-              </View>
-            </Pressable>
-          ))}
+          {wDziale.map((p) => {
+            const zaznaczona = czyOdhaczonaWSesji(p);
+            return (
+              <Pressable
+                key={p.skladnik_id}
+                onPress={() => oznaczKupione(p)}
+                accessibilityRole="checkbox"
+                accessibilityState={{ checked: zaznaczona }}
+                style={({ pressed }) => [
+                  styles.pozycja,
+                  { borderColor: motyw.border },
+                  pressed && styles.wcisnieta,
+                ]}>
+                <Ionicons
+                  name={zaznaczona ? 'checkbox' : 'square-outline'}
+                  size={20}
+                  color={zaznaczona ? motyw.accent : motyw.textSecondary}
+                />
+                <View style={styles.trescPozycji}>
+                  <ThemedText type="smallBold" themeColor={zaznaczona ? 'textSecondary' : undefined}>
+                    {p.nazwa} — {opisIlosci(p.gramy)}
+                  </ThemedText>
+                </View>
+              </Pressable>
+            );
+          })}
         </Karta>
       ))}
+
+      {reczne.length > 0 && dzialReczny}
 
       {zrealizowaneSkladniki.length > 0 && (
         <ThemedText type="smallBold" themeColor="textSecondary">
@@ -322,61 +429,7 @@ export default function EkranZakupow() {
         </Karta>
       ))}
 
-      {/*
-        Dział ręczny zawsze na końcu — i wtedy, gdy jest pusty, bo to jedyne
-        miejsce, w którym da się cokolwiek dopisać.
-      */}
-      <Karta>
-        <ThemedText type="smallBold" themeColor="textSecondary">
-          {DZIAL_RECZNY.toUpperCase()}
-        </ThemedText>
-
-        {reczne.length === 0 ? (
-          <ThemedText type="small" themeColor="textSecondary">
-            Rzeczy spoza kuchni: worki na śmieci, papier śniadaniowy, gąbki. Nie wynikają
-            z planu, więc czekają tu, aż je kupisz.
-          </ThemedText>
-        ) : (
-          reczne.map((p) => (
-            <View key={p.id} style={[styles.pozycja, { borderColor: motyw.border }]}>
-              <Pressable
-                onPress={() => odhaczReczny(p)}
-                hitSlop={6}
-                accessibilityRole="checkbox"
-                accessibilityState={{ checked: false }}
-                accessibilityLabel={`Kupione: ${p.nazwa}`}>
-                <Ionicons name="square-outline" size={20} color={motyw.textSecondary} />
-              </Pressable>
-
-              <Pressable style={styles.trescPozycji} onPress={() => odhaczReczny(p)}>
-                <ThemedText type="smallBold">
-                  {p.nazwa}
-                  {p.ilosc ? ` — ${p.ilosc}` : ''}
-                </ThemedText>
-              </Pressable>
-
-              <Pressable
-                onPress={() => skasujReczny(p)}
-                hitSlop={8}
-                accessibilityRole="button"
-                accessibilityLabel={`Usuń ${p.nazwa} z listy`}>
-                <Ionicons name="close" size={18} color={motyw.textSecondary} />
-              </Pressable>
-            </View>
-          ))
-        )}
-
-        {kontoId && (
-          <DopiszProdukt
-            historia={historia}
-            juzNaLiscie={reczne.map((p) => p.nazwa)}
-            onDodaj={async (nazwa, ilosc) => {
-              await dodajReczny(kontoId, nazwa, ilosc);
-              setReczne(await pobierzReczne(kontoId));
-            }}
-          />
-        )}
-      </Karta>
+      {reczne.length === 0 && dzialReczny}
 
       {resztyRazem > 0 && (
         <Karta>
