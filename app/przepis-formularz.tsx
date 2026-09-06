@@ -884,7 +884,7 @@ export default function FormularzPrzepisu() {
               Można skalować kalorycznie
             </ThemedText>
             <ThemedText type="small" themeColor="textSecondary">
-              Dla dań o elastycznej wielkości — sałatka, kanapka „na kromkę". Automat
+              Dla dań o elastycznej wielkości — sałatka, kanapka „na kromkę”. Automat
               wypełniający plan wolno mu wtedy dokładać albo ujmować składników, żeby
               dobić do celu kalorycznego posiłku, zamiast wstawiać przepis zawsze
               w bazowym rozmiarze.

@@ -79,17 +79,18 @@ export default function EkranPrzepisyMakro() {
   const [malejaco, setMalejaco] = useState(false);
   const [zapisywany, setZapisywany] = useState<string | null>(null);
 
+  const kontoId = sesja?.user.id;
   const pobierz = useCallback(async () => {
     setWczytywanie(true);
     setBlad(null);
     try {
-      setPrzepisy(await pobierzPrzepisy(sesja?.user.id));
+      setPrzepisy(await pobierzPrzepisy(kontoId));
     } catch (e) {
       setBlad(komunikatBledu(e));
     } finally {
       setWczytywanie(false);
     }
-  }, [sesja?.user.id]);
+  }, [kontoId]);
 
   useEffect(() => {
     pobierz();
@@ -246,7 +247,7 @@ export default function EkranPrzepisyMakro() {
 
       <ThemedText type="small" themeColor="textSecondary">
         Dotknij nagłówka, aby posortować. Wartości puste (—) oznaczają przepis bez policzonego
-        makro — zwykle brak zapisanych składników. Kolumna „skalowalny" — dotknij, żeby
+        makro — zwykle brak zapisanych składników. Kolumna „skalowalny” — dotknij, żeby
         przełączyć: czy automat wypełniający plan wolno mu rozciągać ten przepis pod cel
         kaloryczny posiłku.
       </ThemedText>

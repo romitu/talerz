@@ -102,6 +102,7 @@ export default function EkranPrzepisow() {
   /** Id przepisu, którego lista wyboru trwałości jest właśnie rozwinięta — jedna naraz. */
   const [trwaloscOtwarta, setTrwaloscOtwarta] = useState<string | null>(null);
 
+  const kontoId = sesja?.user.id;
   const pobierz = useCallback(async () => {
     setWczytywanie(true);
     setBlad(null);
@@ -111,7 +112,7 @@ export default function EkranPrzepisow() {
     supabase
       .from('konta')
       .select('rola')
-      .eq('id', sesja?.user.id)
+      .eq('id', kontoId)
       .single()
       .then(({ data, error }) => {
         if (error) setBlad((poprzedni) => poprzedni ?? error.message);
@@ -119,13 +120,13 @@ export default function EkranPrzepisow() {
       });
 
     try {
-      setPrzepisy(await pobierzPrzepisy(sesja?.user.id));
+      setPrzepisy(await pobierzPrzepisy(kontoId));
     } catch (e) {
       setBlad(komunikatBledu(e));
     } finally {
       setWczytywanie(false);
     }
-  }, [sesja?.user.id]);
+  }, [kontoId]);
 
   useFocusEffect(
     useCallback(() => {
