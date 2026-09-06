@@ -51,7 +51,7 @@ const DLACZEGO_TALERZ: PytanieOdpowiedz[] = [
     akapity: [
       'Z aplikacji mogą wspólnie korzystać maksymalnie 4 osoby. Wszyscy korzystają z tego samego konta — jednego adresu e-mail podanego podczas rejestracji oraz wspólnego hasła.',
       'Po rejestracji należy w zakładce „Profil” określić cele żywieniowe dla każdej osoby.',
-      'Następnie warto przejrzeć zakładkę „Przepisy” i określić swoje preferencje. Gwiazdką zaznaczamy posiłki, które aplikacja powinna proponować często, serduszkiem te, które lubimy, a iksem te, których aplikacja nie powinna proponować podczas automatycznego planowania.',
+      'Następnie warto przejrzeć zakładkę „Przepisy” i określić swoje preferencje. Serduszkiem zaznaczamy posiłki, które lubimy, a iksem te, których aplikacja nie powinna proponować podczas automatycznego planowania.',
       'Kolejnym krokiem jest przejście do zakładki „Plan”.',
       'Aplikacja pozwala zaplanować posiłki maksymalnie na 7 dni. Przepisy referencyjne mogą być zmieniane wyłącznie przez moderatora. Każdy przycisk w zakładce jest opisany, dlatego można sprawdzić, do czego służy albo po prostu wypróbować jego działanie.',
       'Każdy posiłek można również wybrać ręcznie z listy. W tym celu należy kliknąć znak „+” przy pozycji „ŚNIADANIE”, „OBIAD” lub „KOLACJA”.',
@@ -95,10 +95,10 @@ const DLACZEGO_TALERZ: PytanieOdpowiedz[] = [
   {
     tytul: 'Co się dzieje, kiedy oznaczę posiłek?',
     akapity: [
-      'Przy każdym przepisie są trzy ikony: gwiazdka, serce i przekreślone kółko (X). Gwiazdka oznacza, że przepis będzie wybierany często podczas automatycznego wypełniania listy. Serce oznacza, że przepis będzie wybierany podczas automatycznego wypełniania listy. Przekreślone kółko (X) oznacza „Nie proponuj” — taki przepis będzie pomijany podczas automatycznego wypełniania listy. Dotknięcie już zaznaczonej ikony cofa ją do stanu neutralnego — bez żadnej preferencji.',
-      'Gwiazdka nie oznacza, że dane danie będziesz jadł bez przerwy. Oznacza natomiast, że podczas automatycznego wypełniania listy aplikacja będzie wybierała ten przepis częściej niż pozostałe.',
-      'Serce oznacza, że przepis będzie brany pod uwagę podczas automatycznego wypełniania listy, ale bez dodatkowej preferencji częstszego wyboru, jak w przypadku gwiazdki.',
-      '„Nie proponuj” działa inaczej niż pozostałe oznaczenia: takiego dania automat nie zaproponuje sam. Ręcznie oczywiście nadal możesz je wybrać.',
+      'Przy każdym przepisie są trzy ikony: przekreślone oko, serce i przekreślone kółko (X). Serce oznacza, że przepis będzie wybierany podczas automatycznego wypełniania listy. Przekreślone kółko (X) oznacza „Nie proponuj” — taki przepis będzie pomijany podczas automatycznego wypełniania listy. Dotknięcie już zaznaczonego serca albo X cofa je do stanu neutralnego — bez żadnej preferencji.',
+      'Przekreślone oko to „Ukryj” — chowa przepis z Twojej listy w zakładce „Przepisy” i wyklucza go z automatycznego wypełniania planu, bez usuwania go z bazy. Przydaje się do dań, których już się nie gotuje, ale szkoda kasować. Ponowne dotknięcie przywraca przepis na listę i do automatu. Ręcznie taki przepis nadal możesz wybrać.',
+      'Obok zakładek „Wszystkie”, „Śniad.” i pozostałych kategorii pojawia się zakładka „Ukryte”, gdy coś jest schowane — pokazuje z powrotem wszystkie ukryte przepisy na liście; dotknięcie jej jeszcze raz chowa je z powrotem.',
+      '„Nie proponuj” działa inaczej niż serce: takiego dania automat nie zaproponuje sam. Ręcznie oczywiście nadal możesz je wybrać.',
       'Z czasem plan wypełniany automatycznie powinien coraz bardziej odpowiadać Twoim własnym preferencjom. Preferencja jest zawsze Twoja własna — nie zależy od tego, co lubią inni użytkownicy.',
     ],
   },
@@ -186,7 +186,7 @@ const ZAKLADKI: PytanieOdpowiedz[] = [
     tytul: 'Plan',
     akapity: [
       'Tydzień podzielony na dni, a każdy dzień na śniadanie, obiad i kolację. Puste miejsce ma przycisk wyboru dania; wybrane miejsce pokazuje makro i pozwala je usunąć.',
-      '„Wypełnij wolne miejsca” układa automat: dobiera dania pod cel kaloryczny i białkowy dnia, premiuje „Ulubione” i „Lubię”, nigdy nie proponuje sam dania oznaczonego jako „Nie proponuj” i unika powtórek z ostatnich dni. Rusza tylko puste miejsca — nic, co już wpisałeś ręcznie, nie zostanie nadpisane.',
+      '„Wypełnij wolne miejsca” układa automat: dobiera dania pod cel kaloryczny i białkowy dnia, premiuje „Lubię”, nigdy nie proponuje sam dania oznaczonego jako „Nie proponuj” i unika powtórek z ostatnich dni. Rusza tylko puste miejsca — nic, co już wpisałeś ręcznie, nie zostanie nadpisane.',
       '„Powtórz poprzedni tydzień” przenosi układ z poprzedniego tygodnia na bieżący, całymi gotowaniami. „Wyczyść wszystko” czyści cały bieżący tydzień od nowa.',
       'Bilans dnia pokazuje liczbowo, ile brakuje do celu kalorycznego i białkowego — nie tylko kolor, bo „prawie dobrze” i „daleko od celu” to różne sytuacje.',
     ],

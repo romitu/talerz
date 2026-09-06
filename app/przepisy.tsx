@@ -26,6 +26,7 @@ import {
   ukryjPrzepis,
   ustawPreferencje,
   ustawTrwaloscWlasna,
+  ustawUkryty,
   zatwierdzPrzepis,
   type PoraPosilku,
   type Preferencja,
@@ -80,6 +81,9 @@ export default function EkranPrzepisow() {
 
   /** Kolejka moderatora — zamiast kategorii pokazujemy zgłoszone przepisy. */
   const [kolejka, setKolejka] = useState(false);
+
+  /** Domyślnie schowane przepisy nie zaśmiecają listy — ten przełącznik je wraca. */
+  const [pokazUkryte, setPokazUkryte] = useState(false);
   /** Przepis, który moderator właśnie odrzuca, i pisane uzasadnienie. */
   const [odrzucany, setOdrzucany] = useState<string | null>(null);
   const [powod, setPowod] = useState('');
@@ -148,6 +152,23 @@ export default function EkranPrzepisow() {
     } catch (e) {
       setBlad(komunikatBledu(e));
       pobierz(); // nie udało się — wracamy do stanu z bazy
+    }
+  }
+
+  /** Chowa albo przywraca przepis na WŁASNEJ liście — nie zmienia preferencji automatu. */
+  async function przelaczUkryty(p: PrzepisZMakro) {
+    if (!sesja) return;
+    const nowy = !p.ukryty;
+
+    setPrzepisy((poprzednie) =>
+      poprzednie.map((x) => (x.id === p.id ? { ...x, ukryty: nowy } : x))
+    );
+
+    try {
+      await ustawUkryty(p.id, sesja.user.id, nowy);
+    } catch (e) {
+      setBlad(komunikatBledu(e));
+      pobierz();
     }
   }
 
@@ -250,10 +271,18 @@ export default function EkranPrzepisow() {
     });
   }, [przepisy, szukane]);
 
+  /**
+   * Ukryte przepisy znikają PRZED wszystkim innym filtrowaniem — poza kolejką
+   * moderatora, tam liczy się każde zgłoszenie, niezależnie od tego, czy ktoś
+   * akurat schował je sobie z widoku.
+   */
+  const liczbaUkrytych = poFrazie.filter((p) => p.ukryty).length;
+  const poUkrytych = pokazUkryte ? poFrazie : poFrazie.filter((p) => !p.ukryty);
+
   // Przepis bez kategorii nie znika — trafia do „Bez kategorii”. Inaczej
   // dodany w pośpiechu przepis przepadałby z widoku i nie dałoby się go poprawić.
-  const bezKategorii = poFrazie.filter((p) => p.pory.length === 0);
-  const licznik = (k: PoraPosilku) => poFrazie.filter((p) => p.pory.includes(k)).length;
+  const bezKategorii = poUkrytych.filter((p) => p.pory.length === 0);
+  const licznik = (k: PoraPosilku) => poUkrytych.filter((p) => p.pory.includes(k)).length;
 
   /** Ile przepisów czeka na decyzję. Liczone z całej listy, nie z przefiltrowanej. */
   const doZatwierdzenia = przepisy.filter((p) => p.widocznosc === 'zgloszona');
@@ -263,8 +292,8 @@ export default function EkranPrzepisow() {
         .filter((p) => p.widocznosc === 'zgloszona')
         .sort((a, b) => (a.zgloszono_kiedy ?? '').localeCompare(b.zgloszono_kiedy ?? ''))
     : kategoria === null
-      ? poFrazie
-      : poFrazie.filter((p) => p.pory.includes(kategoria));
+      ? poUkrytych
+      : poUkrytych.filter((p) => p.pory.includes(kategoria));
 
   // Zakładki: „Wszystkie" + jedna na kategorię, a na końcu — tylko gdy jest co
   // rozpatrywać — kolejka moderatora. Przepisy przegląda się tutaj, więc
@@ -275,7 +304,7 @@ export default function EkranPrzepisow() {
         {
           klucz: 'wszystkie',
           etykieta: 'Wszyst.',
-          ile: poFrazie.length,
+          ile: poUkrytych.length,
           wybrana: kategoria === null,
           onPress: () => {
             setKategoria(null);
@@ -292,6 +321,19 @@ export default function EkranPrzepisow() {
             setKolejka(false);
           },
         })),
+        // Nie zeruje kategorii ani kolejki — to osobny, niewykluczający się
+        // przełącznik ("pokaż też schowane"), nie kolejny filtr kategorii.
+        ...(liczbaUkrytych > 0
+          ? [
+              {
+                klucz: 'ukryte',
+                etykieta: 'Ukryte',
+                ile: liczbaUkrytych,
+                wybrana: pokazUkryte,
+                onPress: () => setPokazUkryte((x) => !x),
+              },
+            ]
+          : []),
         ...(mozeDodawac && doZatwierdzenia.length > 0
           ? [
               {
@@ -729,16 +771,51 @@ export default function EkranPrzepisow() {
               </Pressable>
             )}
 
+            {/*
+              Chowanie zajmuje miejsce dawnej gwiazdki — pierwsza ikona w
+              pasku. To osobny przełącznik, nie poziom preferencji: działa
+              na `p.ukryty` (widok tego konta), nie na `p.preferencja`
+              (automat wypełniający plan) — stąd poza wspólnym `.map()` niżej.
+            */}
+            <View style={styles.preferencjaOpakowanie}>
+              {dymek === `${p.id}:ukryj` && (
+                <ThemedView
+                  type="backgroundElement"
+                  style={[styles.dymek, { borderColor: motyw.border }]}>
+                  <ThemedText type="small">
+                    {p.ukryty ? 'Ukryty — przywróć na listę' : 'Ukryj — schowaj z listy przepisów'}
+                  </ThemedText>
+                </ThemedView>
+              )}
+              <Pressable
+                onPress={() => przelaczUkryty(p)}
+                onHoverIn={() => setDymek(`${p.id}:ukryj`)}
+                onHoverOut={() => setDymek(null)}
+                accessibilityRole="button"
+                accessibilityState={{ selected: p.ukryty }}
+                accessibilityLabel={p.ukryty ? `Przywróć ${p.nazwa}` : `Ukryj ${p.nazwa}`}
+                style={({ pressed }) => [
+                  styles.akcjaSegmentIkona,
+                  { borderRightWidth: 1, borderRightColor: motyw.border },
+                  pressed && styles.wcisniety,
+                ]}>
+                <Ionicons
+                  name={p.ukryty ? 'eye-off' : 'eye-off-outline'}
+                  size={22}
+                  color={p.ukryty ? motyw.accent : motyw.textSecondary}
+                />
+              </Pressable>
+            </View>
+
             {(
               [
-                { poziom: 'ulubione', ikona: 'star', ikonaPusta: 'star-outline', etykieta: 'Ulubione — planuj często podczas automatyzacji planu' },
                 { poziom: 'lubie', ikona: 'heart', ikonaPusta: 'heart-outline', etykieta: 'Lubię — wybieraj podczas automatyzacji planu' },
                 { poziom: 'nie_proponuj', ikona: 'close-circle', ikonaPusta: 'close-circle-outline', etykieta: 'Nie proponuj podczas automatyzacji planu' },
               ] as const
             ).map((opcja, i) => {
               const aktywna = p.preferencja === opcja.poziom;
               const klucz = `${p.id}:${opcja.poziom}`;
-              const ostatnia = i === 2;
+              const ostatnia = i === 1;
               return (
                 <View key={opcja.poziom} style={styles.preferencjaOpakowanie}>
                   {dymek === klucz && (

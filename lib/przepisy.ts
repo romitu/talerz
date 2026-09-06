@@ -18,11 +18,11 @@ export type Kuchnia = 'srodziemnomorska' | 'azjatycka' | 'polska' | 'inna';
 export type Widocznosc = 'prywatna' | 'zgloszona' | 'publiczna';
 
 /**
- * Poziomy zapisywane w bazie (tabela `preferencje_przepisow`, migracja 0025).
- * „neutralne” do nich nie należy — to brak wiersza, nie osobny stan. Patrz
- * `Preferencja` niżej.
+ * Poziomy zapisywane w bazie (tabela `preferencje_przepisow`, migracja 0025,
+ * bez „ulubione” od migracji 0042). „neutralne” do nich nie należy — to brak
+ * wiersza, nie osobny stan. Patrz `Preferencja` niżej.
  */
-export type PoziomPreferencji = 'ulubione' | 'lubie' | 'nie_proponuj';
+export type PoziomPreferencji = 'lubie' | 'nie_proponuj';
 
 /**
  * Preferencja użytkownika WZGLĘDEM JEGO WŁASNEGO konta, nie popularność
@@ -84,10 +84,11 @@ export type PrzepisZMakro = {
   nova_max: number | null;
   /** Preferencja TEGO konta względem przepisu. `neutralne`, gdy nie ma wiersza. */
   preferencja: Preferencja;
+  /** Czy TO konto schowało przepis z listy (migracja 0042, tabela `przepisy_ukryte`). */
+  ukryty: boolean;
 };
 
 export const OPIS_PREFERENCJI: Record<Preferencja, string> = {
-  ulubione: 'Ulubione',
   lubie: 'Lubię',
   neutralne: 'Neutralne',
   nie_proponuj: 'Nie proponuj',
@@ -160,7 +161,8 @@ export async function pobierzPrzepisy(kontoId: string | undefined) {
         `id, nazwa, opis, pory, kuchnie, trwalosc_dni, liczba_porcji_bazowych, porcje,
          czas_przygotowania_min, czas_obrobki_min, sprzet, przechowywanie, mozna_mrozic,
          ratunek, porcjowanie, widocznosc, zgloszono_kiedy, powod_odrzucenia, autor_id, zdjecie,
-         skalowalny, preferencje_przepisow (konto_id, poziom), trwalosc_wlasna (konto_id, dni)`
+         skalowalny, preferencje_przepisow (konto_id, poziom), trwalosc_wlasna (konto_id, dni),
+         przepisy_ukryte (konto_id)`
       )
       .order('nazwa'),
     supabase
@@ -193,6 +195,9 @@ export async function pobierzPrzepisy(kontoId: string | undefined) {
     // było starsze niż ostatnia (niższa) zmiana bazowej wartości przez autora.
     const trwaloscEfektywna =
       trwaloscWlasna !== null ? Math.min(trwaloscWlasna, p.trwalosc_dni) : p.trwalosc_dni;
+
+    const ukryte = (p.przepisy_ukryte ?? []) as { konto_id: string }[];
+    const ukryty = kontoId ? ukryte.some((x) => x.konto_id === kontoId) : false;
 
     return {
       id: p.id,
@@ -230,6 +235,7 @@ export async function pobierzPrzepisy(kontoId: string | undefined) {
       gramy_calosc: makro?.gramy_calosc ?? null,
       nova_max: makro?.nova_max ?? null,
       preferencja: wlasna?.poziom ?? 'neutralne',
+      ukryty,
     };
   });
 }
@@ -260,6 +266,35 @@ export async function ustawPreferencje(
     .from('preferencje_przepisow')
     .upsert(
       { przepis_id: przepisId, konto_id: kontoId, poziom },
+      { onConflict: 'przepis_id,konto_id' }
+    );
+  if (error) throw error;
+}
+
+/**
+ * Chowa albo przywraca przepis na liście TEGO konta (migracja 0042, tabela
+ * `przepisy_ukryte`). Czysto widokowe — automat wypełniający plan
+ * (`lib/automat.ts`) w ogóle na to nie patrzy, tylko na preferencję.
+ */
+export async function ustawUkryty(
+  przepisId: string,
+  kontoId: string,
+  ukryty: boolean
+): Promise<void> {
+  if (!ukryty) {
+    const { error } = await supabase
+      .from('przepisy_ukryte')
+      .delete()
+      .eq('przepis_id', przepisId)
+      .eq('konto_id', kontoId);
+    if (error) throw error;
+    return;
+  }
+
+  const { error } = await supabase
+    .from('przepisy_ukryte')
+    .upsert(
+      { przepis_id: przepisId, konto_id: kontoId },
       { onConflict: 'przepis_id,konto_id' }
     );
   if (error) throw error;
