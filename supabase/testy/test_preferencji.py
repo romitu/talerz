@@ -141,13 +141,13 @@ sprawdz("stare polubienie przetrwało jako poziom 'lubie'", w(
 
 # --- 2. własną preferencję widać i da się ją zmienić --------------------------
 out, blad = jako(ROMAN, f"""
-update preferencje_przepisow set poziom = 'ulubione'
+update preferencje_przepisow set poziom = 'nie_proponuj'
  where przepis_id = '{PRZEPIS}' and konto_id = '{ROMAN}';
 """)
 sprawdz("właściciel zmienia własną preferencję", not blad, out[:200] if blad else "")
 sprawdz("zmiana się zapisała", w(
     f"select poziom from preferencje_przepisow where przepis_id='{PRZEPIS}' and konto_id='{ROMAN}'"
-) == "ulubione")
+) == "nie_proponuj")
 
 # --- 3. SEDNO: gość nie widzi preferencji Romana -------------------------------
 out, _ = jako(GOSC, f"select 'L<'||count(*)||'>' from preferencje_przepisow;")
@@ -168,11 +168,11 @@ update preferencje_przepisow set poziom = 'nie_proponuj'
  where przepis_id = '{PRZEPIS}' and konto_id = '{ROMAN}';
 """)
 sprawdz("gość nie zmieni preferencji Romana (0 wierszy dotkniętych)",
-        w(f"select poziom from preferencje_przepisow where konto_id='{ROMAN}'") == "ulubione")
+        w(f"select poziom from preferencje_przepisow where konto_id='{ROMAN}'") == "nie_proponuj")
 
 out, blad = jako(GOSC, f"""
 insert into preferencje_przepisow (przepis_id, konto_id, poziom)
-values ('{PRZEPIS}', '{ROMAN}', 'ulubione')
+values ('{PRZEPIS}', '{ROMAN}', 'lubie')
 on conflict (przepis_id, konto_id) do update set poziom = excluded.poziom;
 """)
 sprawdz("gość nie wstawi/nadpisze wiersza na cudzym koncie", blad, out[:200] if blad else "")

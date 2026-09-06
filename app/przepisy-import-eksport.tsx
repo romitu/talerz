@@ -122,14 +122,15 @@ export default function EkranImportEksportPrzepisow() {
   const [bledyZapisuSkladnikow, setBledyZapisuSkladnikow] = useState<BladImportuSkladnika[]>([]);
   const [zaimportowanoSkladnikow, setZaimportowanoSkladnikow] = useState<number | null>(null);
 
+  const kontoId = sesja?.user.id;
   const wczytajListePrzepisow = useCallback(async () => {
     try {
-      const przepisy = await pobierzPrzepisy(sesja?.user.id);
+      const przepisy = await pobierzPrzepisy(kontoId);
       setListaPrzepisow(przepisy.map((p) => ({ id: p.id, nazwa: p.nazwa })));
     } catch (e) {
       setBlad(komunikatBledu(e));
     }
-  }, [sesja?.user.id]);
+  }, [kontoId]);
 
   useEffect(() => {
     wczytajListePrzepisow();

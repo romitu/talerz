@@ -11,6 +11,12 @@ type Opcja<T extends string> = {
   wartosc: T;
   etykieta: string;
   opis?: string;
+  /**
+   * Wyróżnia opcję kolorem akcentu zamiast zwykłego tekstu — dla wartości
+   * nietypowych, na które trzeba zwrócić uwagę przed wybraniem (np. data
+   * wsteczna w „Start od" planu, patrz `mozliweDaty` w app/index.tsx).
+   */
+  nietypowa?: boolean;
 };
 
 type Props<T extends string> = {
@@ -100,7 +106,7 @@ export function ListaRozwijana<T extends string>({
         <View style={styles.trescPola}>
           <ThemedText
             type={kompaktowy ? 'small' : 'default'}
-            themeColor={aktualna ? 'text' : 'textSecondary'}
+            themeColor={aktualna?.nietypowa ? 'accent' : aktualna ? 'text' : 'textSecondary'}
             numberOfLines={1}>
             {aktualna?.etykieta ?? placeholder}
           </ThemedText>
@@ -143,7 +149,11 @@ export function ListaRozwijana<T extends string>({
                     pressed && styles.wcisniete,
                   ]}>
                   <View style={styles.trescOpcji}>
-                    <ThemedText type={zaznaczona ? 'smallBold' : 'small'}>{o.etykieta}</ThemedText>
+                    <ThemedText
+                      type={zaznaczona ? 'smallBold' : 'small'}
+                      themeColor={o.nietypowa ? 'accent' : undefined}>
+                      {o.etykieta}
+                    </ThemedText>
                     {o.opis && (
                       <ThemedText type="small" themeColor="textSecondary">
                         {o.opis}

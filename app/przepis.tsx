@@ -89,6 +89,7 @@ export default function EkranPrzepisu() {
     Omit<UdzialOsoby, 'kcal' | 'bialko_g' | 'tluszcz_g' | 'wegle_g' | 'blonnik_g'>[] | null
   >(null);
 
+  const kontoId = sesja?.user.id;
   const pobierz = useCallback(async () => {
     if (!id) return;
     setWczytywanie(true);
@@ -96,7 +97,7 @@ export default function EkranPrzepisu() {
     try {
       const [pelny, wszystkie, przeskalowany] = await Promise.all([
         pobierzPelnyPrzepis(id),
-        pobierzPrzepisy(sesja?.user.id),
+        pobierzPrzepisy(kontoId),
         skalowany ? pobierzPrzeskalowanyPrzepis(skalowany) : Promise.resolve(null),
       ]);
       setPrzepis(pelny);
@@ -107,7 +108,7 @@ export default function EkranPrzepisu() {
     } finally {
       setWczytywanie(false);
     }
-  }, [id, skalowany, sesja?.user.id]);
+  }, [id, skalowany, kontoId]);
 
   /*
     Udział każdej osoby w tym posiłku — niezależny blok, we własnym

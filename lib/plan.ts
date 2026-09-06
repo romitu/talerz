@@ -76,6 +76,11 @@ export function czyDzisiaj(data: string): boolean {
   return data === naDate(new Date());
 }
 
+/** Data sprzed dzisiaj — używane tylko do oznaczenia dat wstecznych w wyborze startu planu. */
+export function czyPrzeszly(data: string): boolean {
+  return data < naDate(new Date());
+}
+
 /** Pobiera najnowszy plan konta albo null, gdy żadnego jeszcze nie ma. */
 export async function pobierzPlan(): Promise<Plan | null> {
   const { data, error } = await supabase
@@ -314,20 +319,31 @@ export async function pobierzPozycje(planId: string): Promise<PozycjaPlanu[]> {
   });
 }
 
-/** Ocena białka w posiłku — liczona dla WSZYSTKICH dań tej pory razem. */
+/**
+ * Ocena białka w posiłku — liczona dla WSZYSTKICH dań tej pory razem.
+ *
+ * BEZ mnożenia przez `porcje`. `porcje` mówi, na ile talerzy rozeszło się
+ * gotowanie (patrz `dodajPartie` — to liczba osób jedzących z tego samego
+ * garnka), a `bialko_g` pozycji to wartość JEDNEGO talerza. Próg białka i cel
+ * dnia (`cel` w `app/index.tsx`) dotyczą jednej, śledzonej osoby — ona zjada
+ * jeden talerz, niezależnie od tego, dla ilu osób ugotowano resztę.
+ * Przemnożenie przez `porcje` liczyłoby więc to, co zjadła cała rodzina, i
+ * porównywało to z celem jednej osoby — przy czterech jedzących wychodził
+ * stąd pozorny, poczwórny nadmiar kalorii i białka.
+ */
 export function bialkoPosilku(dania: PozycjaPlanu[]): number {
-  return dania.reduce((s, p) => s + p.bialko_g * p.porcje, 0);
+  return dania.reduce((s, p) => s + p.bialko_g, 0);
 }
 
-/** Suma makro z podanych pozycji, z uwzględnieniem liczby porcji. */
+/** Suma makro z podanych pozycji — jeden talerz na pozycję, patrz `bialkoPosilku`. */
 export function sumujDzien(pozycje: PozycjaPlanu[]): Makro {
   return pozycje.reduce<Makro>(
     (s, p) => ({
-      kcal: s.kcal + p.kcal * p.porcje,
-      bialko: s.bialko + p.bialko_g * p.porcje,
-      tluszcz: s.tluszcz + p.tluszcz_g * p.porcje,
-      wegle: s.wegle + p.wegle_g * p.porcje,
-      blonnik: s.blonnik + p.blonnik_g * p.porcje,
+      kcal: s.kcal + p.kcal,
+      bialko: s.bialko + p.bialko_g,
+      tluszcz: s.tluszcz + p.tluszcz_g,
+      wegle: s.wegle + p.wegle_g,
+      blonnik: s.blonnik + p.blonnik_g,
     }),
     { kcal: 0, bialko: 0, tluszcz: 0, wegle: 0, blonnik: 0 }
   );

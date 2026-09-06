@@ -13,21 +13,24 @@ import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import { komunikatBledu } from '@/lib/blad';
 import { wroc } from '@/lib/nawigacja';
-import { dniPlanu, opisDnia, pobierzPlany, type Plan } from '@/lib/plan';
+import { naDate } from '@/lib/plan';
 import { useSesja } from '@/lib/sesja';
 import {
   dodajReczny,
   dzialDla,
   DZIAL_RECZNY,
   DZIALY,
+  kluczOdhaczenia,
   kupionoReczny,
   pobierzListeZakupow,
   pobierzOdhaczone,
   pobierzReczne,
   podpowiedziZHistorii,
+  skonsolidujSkladniki,
   ustawOdhaczenie,
   usunReczny,
   wyczyscOdhaczenia,
+  type PozycjaSkonsolidowana,
   type PozycjaZakupow,
   type ProduktReczny,
 } from '@/lib/zakupy';
@@ -38,17 +41,31 @@ function opisIlosci(gramy: number): string {
   return `${gramy} g`;
 }
 
+/**
+ * Zrealizowane W POPRZEDNIEJ SESJI — albo automatycznie (danie ugotowane
+ * przed dzisiaj, patrz `zrealizowano_automatycznie` w lib/zakupy.ts), albo
+ * odhaczone ręcznie, ale zanim ten ekran się otworzył.
+ *
+ * Celowo `przedSesja`, nie bieżący stan `kupione` — inaczej odhaczenie
+ * TERAZ przerzucałoby pozycję do sekcji „poprzednia sesja" pod ręką
+ * użytkownika, zamiast zostawić ją na aktualnej liście z ptaszkiem.
+ */
+function czyZrealizowany(p: PozycjaZakupow, przedSesja: Set<string>): boolean {
+  return p.zrealizowano_automatycznie || przedSesja.has(kluczOdhaczenia(p));
+}
+
 export default function EkranZakupow() {
   const { powrot } = useLocalSearchParams<{ powrot?: string }>();
   const motyw = useTheme();
   const { sesja } = useSesja();
   const kontoId = sesja?.user.id;
 
-  const [plan, setPlan] = useState<Plan | null>(null);
   const [pozycje, setPozycje] = useState<PozycjaZakupow[]>([]);
   const [reczne, setReczne] = useState<ProduktReczny[]>([]);
   const [historia, setHistoria] = useState<string[]>([]);
   const [kupione, setKupione] = useState<Set<string>>(new Set());
+  /** Migawka `kupione` sprzed otwarcia ekranu — patrz `czyZrealizowany`. */
+  const [kupionePrzedSesja, setKupionePrzedSesja] = useState<Set<string>>(new Set());
   const [wczytywanie, setWczytywanie] = useState(true);
   const [blad, setBlad] = useState<string | null>(null);
 
@@ -59,20 +76,6 @@ export default function EkranZakupow() {
     setWczytywanie(true);
     setBlad(null);
     setOstrzezenie(null);
-
-    // Odhaczenia są przypisane do planu (patrz komentarz przy tabeli
-    // `zakupy_odhaczone`), więc plan trzeba znać, zanim się o nie zapyta.
-    let p: Plan | null = null;
-    try {
-      // Zawsze najnowszy tydzień — tak samo jak na ekranie planu.
-      const wszystkie = await pobierzPlany();
-      p = wszystkie[0] ?? null;
-      setPlan(p);
-    } catch (e) {
-      setBlad(komunikatBledu(e));
-      setWczytywanie(false);
-      return;
-    }
 
     /*
       Produkty dopisane ręcznie pobieramy W OSOBNYM bloku i z własną obsługą
@@ -92,15 +95,17 @@ export default function EkranZakupow() {
         const [lista, hist, odhaczone] = await Promise.all([
           pobierzReczne(kontoId),
           podpowiedziZHistorii(kontoId),
-          p ? pobierzOdhaczone(kontoId, p.id) : Promise.resolve(new Set<string>()),
+          pobierzOdhaczone(kontoId),
         ]);
         setReczne(lista);
         setHistoria(hist);
         setKupione(odhaczone);
+        setKupionePrzedSesja(new Set(odhaczone));
       } catch (e) {
         setReczne([]);
         setHistoria([]);
         setKupione(new Set());
+        setKupionePrzedSesja(new Set());
         setOstrzezenie(
           'Dopisywanie produktów i zapamiętywanie odhaczeń nie działa — wygląda na to, ' +
             'że migracja 0019_zakupy_reczne.sql nie została jeszcze wykonana w Supabase. ' +
@@ -110,12 +115,7 @@ export default function EkranZakupow() {
     }
 
     try {
-      if (!p) {
-        setPozycje([]);
-        return;
-      }
-      const dniListy = dniPlanu(p);
-      setPozycje(await pobierzListeZakupow(p.id, dniListy[0], dniListy[dniListy.length - 1]));
+      setPozycje(await pobierzListeZakupow(naDate(new Date())));
     } catch (e) {
       setBlad(komunikatBledu(e));
     } finally {
@@ -135,70 +135,106 @@ export default function EkranZakupow() {
     }, [pobierz])
   );
 
-  const wedlugDzialow = useMemo(() => {
-    const mapa = new Map<string, PozycjaZakupow[]>();
-    for (const p of pozycje) {
-      const dzial = dzialDla(p.tagi);
-      mapa.set(dzial, [...(mapa.get(dzial) ?? []), p]);
-    }
-    return mapa;
-  }, [pozycje]);
-
   /**
-   * Odhaczone pozycje schodzą na dół sekcji, a sekcja odhaczona w całości
-   * schodzi na dół listy działów — dzięki temu to, co jeszcze do kupienia,
-   * zawsze jest na wierzchu.
+   * Rozdziela na dwie sekcje PRZED scaleniem — inaczej ten sam składnik
+   * z gotowania już zrealizowanego i jeszcze nie zrealizowanego zlałby się
+   * w jedną liczbę z niejednoznacznym stanem odhaczenia (patrz komentarz
+   * przy `skonsolidujSkladniki` w lib/zakupy.ts).
    */
-  const dzialyPosortowane = useMemo(() => {
+  const { doKupienia, zrealizowaneSkladniki } = useMemo(() => {
+    const aktualne: PozycjaZakupow[] = [];
+    const zrobione: PozycjaZakupow[] = [];
+    for (const p of pozycje) (czyZrealizowany(p, kupionePrzedSesja) ? zrobione : aktualne).push(p);
+    return {
+      doKupienia: skonsolidujSkladniki(aktualne),
+      zrealizowaneSkladniki: skonsolidujSkladniki(zrobione),
+    };
+  }, [pozycje, kupionePrzedSesja]);
+
+  /** Czy pozycja została odhaczona TERAZ, w tej sesji (patrz `kupionePrzedSesja`). */
+  function czyOdhaczonaWSesji(p: PozycjaSkonsolidowana): boolean {
+    return p.zrodla.every((z) => kupione.has(kluczOdhaczenia({ ...z, skladnik_id: p.skladnik_id })));
+  }
+
+  function pogrupujWgDzialow(lista: PozycjaSkonsolidowana[]) {
+    const mapa = new Map<string, PozycjaSkonsolidowana[]>();
+    for (const p of lista) mapa.set(dzialDla(p.tagi), [...(mapa.get(dzialDla(p.tagi)) ?? []), p]);
     return DZIALY.map((dzial) => {
-      const wDziale = wedlugDzialow.get(dzial.nazwa);
-      if (!wDziale || wDziale.length === 0) return null;
-
-      const posortowane = [...wDziale].sort((a, b) => {
-        const aOdhaczony = kupione.has(a.skladnik_id) ? 1 : 0;
-        const bOdhaczony = kupione.has(b.skladnik_id) ? 1 : 0;
-        return aOdhaczony - bOdhaczony;
-      });
-      const wszystkoOdhaczone = wDziale.every((p) => kupione.has(p.skladnik_id));
-
-      return { dzial, pozycje: posortowane, wszystkoOdhaczone };
-    })
-      .filter((x): x is NonNullable<typeof x> => x !== null)
-      .sort((a, b) => Number(a.wszystkoOdhaczone) - Number(b.wszystkoOdhaczone));
-  }, [wedlugDzialow, kupione]);
-
-  /*
-    Odhaczenia są przypisane do planu (patrz komentarz przy tabeli
-    `zakupy_odhaczone`), więc `kupione` w praktyce zawsze dotyczy bieżącej
-    listy. Filtr zostaje mimo to jako zabezpieczenie — gdyby lista zdążyła
-    się przeliczyć, zanim doszły świeże odhaczenia, nie chcemy zliczać
-    składnika, którego już nie ma na ekranie.
-  */
-  const zrealizowane = pozycje.filter((p) => kupione.has(p.skladnik_id)).length;
-  const niezrealizowane = pozycje.length - zrealizowane + reczne.length;
-  const resztyRazem = pozycje.reduce((s, p) => s + (p.reszta_g ?? 0), 0);
-  const cosOdhaczone = zrealizowane > 0;
+      const wDziale = mapa.get(dzial.nazwa);
+      return wDziale && wDziale.length > 0 ? { dzial, pozycje: wDziale } : null;
+    }).filter((x): x is NonNullable<typeof x> => x !== null);
+  }
 
   /**
-   * Odhaczenie widoczne od razu, zapis w tle.
+   * Odhaczone TERAZ pozycje schodzą na dół własnego działu, a dział cały
+   * odhaczony — na dół całej aktualnej listy. Nigdy jednak poniżej sekcji
+   * „zrealizowane w poprzedniej sesji" — ta zostaje osobnym blokiem niżej.
+   */
+  const dzialyDoKupienia = useMemo(() => {
+    const grupy = pogrupujWgDzialow(doKupienia).map((g) => ({
+      dzial: g.dzial,
+      pozycje: [...g.pozycje].sort(
+        (a, b) => Number(czyOdhaczonaWSesji(a)) - Number(czyOdhaczonaWSesji(b))
+      ),
+    }));
+    return [...grupy].sort(
+      (a, b) =>
+        Number(a.pozycje.every(czyOdhaczonaWSesji)) - Number(b.pozycje.every(czyOdhaczonaWSesji))
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [doKupienia, kupione]);
+  const dzialyZrealizowane = useMemo(
+    () => pogrupujWgDzialow(zrealizowaneSkladniki),
+    [zrealizowaneSkladniki]
+  );
+
+  // Licznik w nagłówku liczy TERAZ odhaczone razem z tymi z poprzedniej
+  // sesji — inaczej odhaczenie czegoś nie ruszałoby paska postępu, mimo że
+  // pozycja fizycznie została kupiona (tylko wizualnie zostaje na aktualnej
+  // liście, patrz `czyZrealizowany`).
+  const zaznaczoneTeraz = doKupienia.filter(czyOdhaczonaWSesji).length;
+  const zrealizowane = zrealizowaneSkladniki.length + zaznaczoneTeraz;
+  const niezrealizowane = doKupienia.length - zaznaczoneTeraz + reczne.length;
+  const resztyRazem = [...doKupienia, ...zrealizowaneSkladniki].reduce(
+    (s, p) => s + (p.reszta_g ?? 0),
+    0
+  );
+
+  // Tylko odhaczone RĘCZNIE — te zrealizowane automatycznie (danie już
+  // ugotowane) i tak nie wrócą jako „do kupienia", więc nie ma czego cofać.
+  const odhaczoneRecznie = pozycje.filter(
+    (p) => !p.zrealizowano_automatycznie && kupione.has(kluczOdhaczenia(p))
+  ).length;
+
+  /**
+   * Odhaczenie (albo cofnięcie) widoczne od razu, zapis w tle. Pozycja jest
+   * już scalona, więc może nieść WIELE źródeł (kilka gotowań potrzebujących
+   * tego samego składnika) — przełączamy je wszystkie naraz, bo kupno
+   * jednego worka mąki pokrywa je wszystkie razem.
    *
    * W sklepie liczy się to, żeby ptaszek pojawił się pod palcem, a nie po
    * powrocie odpowiedzi z serwera. Gdy zapis padnie, wracamy do stanu z bazy
    * i mówimy o tym — cicha rozbieżność byłaby gorsza od komunikatu.
    */
-  async function przelacz(id: string) {
-    if (!kontoId || !plan) return;
-    const bedzieOdhaczony = !kupione.has(id);
+  async function oznaczKupione(pozycja: PozycjaSkonsolidowana) {
+    if (!kontoId) return;
+    const klucze = pozycja.zrodla.map((z) =>
+      kluczOdhaczenia({ ...z, skladnik_id: pozycja.skladnik_id })
+    );
+    const nowyStan = !czyOdhaczonaWSesji(pozycja);
 
     setKupione((p) => {
       const n = new Set(p);
-      if (bedzieOdhaczony) n.add(id);
-      else n.delete(id);
+      klucze.forEach((k) => (nowyStan ? n.add(k) : n.delete(k)));
       return n;
     });
 
     try {
-      await ustawOdhaczenie(kontoId, plan.id, id, bedzieOdhaczony);
+      await Promise.all(
+        pozycja.zrodla.map((z) =>
+          ustawOdhaczenie(kontoId, z.zrodlo_typ, z.zrodlo_id, pozycja.skladnik_id, nowyStan)
+        )
+      );
     } catch (e) {
       setBlad(komunikatBledu(e));
       pobierz();
@@ -227,18 +263,72 @@ export default function EkranZakupow() {
     }
   }
 
+  /*
+    Dopóki jest tu coś niekupionego, dział wisi NAD sekcją „poprzednia
+    sesja" — inaczej rzeczy spoza kuchni ginęłyby na samym dole listy, pod
+    już zrealizowanym jedzeniem. Gdy jest pusty, wraca na koniec (jedyne
+    miejsce, w którym da się cokolwiek dopisać, i tak zawsze widoczny).
+  */
+  const dzialReczny = (
+    <Karta>
+      <ThemedText type="smallBold" themeColor="textSecondary">
+        {DZIAL_RECZNY.toUpperCase()}
+      </ThemedText>
+
+      {reczne.length === 0 ? (
+        <ThemedText type="small" themeColor="textSecondary">
+          Rzeczy spoza kuchni: worki na śmieci, papier śniadaniowy, gąbki. Nie wynikają
+          z planu, więc czekają tu, aż je kupisz.
+        </ThemedText>
+      ) : (
+        reczne.map((p) => (
+          <View key={p.id} style={[styles.pozycja, { borderColor: motyw.border }]}>
+            <Pressable
+              onPress={() => odhaczReczny(p)}
+              hitSlop={6}
+              accessibilityRole="checkbox"
+              accessibilityState={{ checked: false }}
+              accessibilityLabel={`Kupione: ${p.nazwa}`}>
+              <Ionicons name="square-outline" size={20} color={motyw.textSecondary} />
+            </Pressable>
+
+            <Pressable style={styles.trescPozycji} onPress={() => odhaczReczny(p)}>
+              <ThemedText type="smallBold">
+                {p.nazwa}
+                {p.ilosc ? ` — ${p.ilosc}` : ''}
+              </ThemedText>
+            </Pressable>
+
+            <Pressable
+              onPress={() => skasujReczny(p)}
+              hitSlop={8}
+              accessibilityRole="button"
+              accessibilityLabel={`Usuń ${p.nazwa} z listy`}>
+              <Ionicons name="close" size={18} color={motyw.textSecondary} />
+            </Pressable>
+          </View>
+        ))
+      )}
+
+      {kontoId && (
+        <DopiszProdukt
+          historia={historia}
+          juzNaLiscie={reczne.map((p) => p.nazwa)}
+          onDodaj={async (nazwa, ilosc) => {
+            await dodajReczny(kontoId, nazwa, ilosc);
+            setReczne(await pobierzReczne(kontoId));
+          }}
+        />
+      )}
+    </Karta>
+  );
+
   return (
     <Ekran
       tytul="Lista zakupów"
       naglowekStaly={
         <NaglowekZakupow
-          data={
-            wczytywanie
-              ? 'wczytywanie…'
-              : plan
-                ? `tydzień od ${opisDnia(plan.data_start)}`
-                : undefined
-          }
+          data={wczytywanie ? 'wczytywanie…' : undefined}
           zrealizowane={zrealizowane}
           niezrealizowane={niezrealizowane}
         />
@@ -269,100 +359,77 @@ export default function EkranZakupow() {
         </Karta>
       )}
 
-      {dzialyPosortowane.map(({ dzial, pozycje: wDziale }) => {
-        return (
-          <Karta key={dzial.nazwa}>
-            <ThemedText type="smallBold" themeColor="textSecondary">
-              {dzial.nazwa.toUpperCase()}
-            </ThemedText>
-
-            {wDziale.map((p) => {
-              const odhaczony = kupione.has(p.skladnik_id);
-
-              return (
-                <Pressable
-                  key={p.skladnik_id}
-                  onPress={() => przelacz(p.skladnik_id)}
-                  style={({ pressed }) => [
-                    styles.pozycja,
-                    { borderColor: motyw.border },
-                    pressed && styles.wcisnieta,
-                  ]}>
-                  <Ionicons
-                    name={odhaczony ? 'checkbox' : 'square-outline'}
-                    size={20}
-                    color={odhaczony ? motyw.accent : motyw.textSecondary}
-                  />
-
-                  <View style={styles.trescPozycji}>
-                    <ThemedText
-                      type={odhaczony ? 'small' : 'smallBold'}
-                      themeColor={odhaczony ? 'textSecondary' : 'text'}>
-                      {p.nazwa} — {opisIlosci(p.gramy)}
-                    </ThemedText>
-                  </View>
-                </Pressable>
-              );
-            })}
-          </Karta>
-        );
-      })}
-
-      {/*
-        Dział ręczny zawsze na końcu — i wtedy, gdy jest pusty, bo to jedyne
-        miejsce, w którym da się cokolwiek dopisać.
-      */}
-      <Karta>
+      {doKupienia.length > 0 && (
         <ThemedText type="smallBold" themeColor="textSecondary">
-          {DZIAL_RECZNY.toUpperCase()}
+          AKTUALNA LISTA ZAKUPÓW
         </ThemedText>
+      )}
 
-        {reczne.length === 0 ? (
-          <ThemedText type="small" themeColor="textSecondary">
-            Rzeczy spoza kuchni: worki na śmieci, papier śniadaniowy, gąbki. Nie wynikają
-            z planu, więc czekają tu, aż je kupisz.
+      {dzialyDoKupienia.map(({ dzial, pozycje: wDziale }) => (
+        <Karta key={`do-kupienia-${dzial.nazwa}`}>
+          <ThemedText type="smallBold" themeColor="textSecondary">
+            {dzial.nazwa.toUpperCase()}
           </ThemedText>
-        ) : (
-          reczne.map((p) => (
-            <View key={p.id} style={[styles.pozycja, { borderColor: motyw.border }]}>
+
+          {wDziale.map((p) => {
+            const zaznaczona = czyOdhaczonaWSesji(p);
+            return (
               <Pressable
-                onPress={() => odhaczReczny(p)}
-                hitSlop={6}
+                key={p.skladnik_id}
+                onPress={() => oznaczKupione(p)}
                 accessibilityRole="checkbox"
-                accessibilityState={{ checked: false }}
-                accessibilityLabel={`Kupione: ${p.nazwa}`}>
-                <Ionicons name="square-outline" size={20} color={motyw.textSecondary} />
+                accessibilityState={{ checked: zaznaczona }}
+                style={({ pressed }) => [
+                  styles.pozycja,
+                  { borderColor: motyw.border },
+                  pressed && styles.wcisnieta,
+                ]}>
+                <Ionicons
+                  name={zaznaczona ? 'checkbox' : 'square-outline'}
+                  size={20}
+                  color={zaznaczona ? motyw.accent : motyw.textSecondary}
+                />
+                <View style={styles.trescPozycji}>
+                  <ThemedText type="smallBold" themeColor={zaznaczona ? 'textSecondary' : undefined}>
+                    {p.nazwa} — {opisIlosci(p.gramy)}
+                  </ThemedText>
+                </View>
               </Pressable>
+            );
+          })}
+        </Karta>
+      ))}
 
-              <Pressable style={styles.trescPozycji} onPress={() => odhaczReczny(p)}>
-                <ThemedText type="smallBold">
-                  {p.nazwa}
-                  {p.ilosc ? ` — ${p.ilosc}` : ''}
+      {reczne.length > 0 && dzialReczny}
+
+      {zrealizowaneSkladniki.length > 0 && (
+        <ThemedText type="smallBold" themeColor="textSecondary">
+          ZREALIZOWANE W POPRZEDNIEJ SESJI
+        </ThemedText>
+      )}
+
+      {dzialyZrealizowane.map(({ dzial, pozycje: wDziale }) => (
+        <Karta key={`zrealizowane-${dzial.nazwa}`}>
+          <ThemedText type="smallBold" themeColor="textSecondary">
+            {dzial.nazwa.toUpperCase()}
+          </ThemedText>
+
+          {wDziale.map((p) => (
+            <View
+              key={p.skladnik_id}
+              style={[styles.pozycja, { borderColor: motyw.border }]}>
+              <Ionicons name="checkbox" size={20} color={motyw.accent} />
+              <View style={styles.trescPozycji}>
+                <ThemedText type="small" themeColor="textSecondary">
+                  {p.nazwa} — {opisIlosci(p.gramy)}
                 </ThemedText>
-              </Pressable>
-
-              <Pressable
-                onPress={() => skasujReczny(p)}
-                hitSlop={8}
-                accessibilityRole="button"
-                accessibilityLabel={`Usuń ${p.nazwa} z listy`}>
-                <Ionicons name="close" size={18} color={motyw.textSecondary} />
-              </Pressable>
+              </View>
             </View>
-          ))
-        )}
+          ))}
+        </Karta>
+      ))}
 
-        {kontoId && (
-          <DopiszProdukt
-            historia={historia}
-            juzNaLiscie={reczne.map((p) => p.nazwa)}
-            onDodaj={async (nazwa, ilosc) => {
-              await dodajReczny(kontoId, nazwa, ilosc);
-              setReczne(await pobierzReczne(kontoId));
-            }}
-          />
-        )}
-      </Karta>
+      {reczne.length === 0 && dzialReczny}
 
       {resztyRazem > 0 && (
         <Karta>
@@ -376,15 +443,15 @@ export default function EkranZakupow() {
         </Karta>
       )}
 
-      {cosOdhaczone && (
+      {odhaczoneRecznie > 0 && (
         <Przycisk
-          tytul={`Zacznij nowe zakupy (odznacz ${zrealizowane})`}
+          tytul={`Zacznij nowe zakupy (odznacz ${odhaczoneRecznie})`}
           wariant="poboczny"
           onPress={async () => {
-            if (!kontoId || !plan) return;
+            if (!kontoId) return;
             setKupione(new Set());
             try {
-              await wyczyscOdhaczenia(kontoId, plan.id);
+              await wyczyscOdhaczenia(kontoId);
             } catch (e) {
               setBlad(komunikatBledu(e));
               pobierz();

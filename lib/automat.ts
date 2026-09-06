@@ -80,6 +80,8 @@ export type Kandydat = {
   skalowalny: boolean;
   /** Ile dni danie wytrzyma w lodówce — patrz `uwzglednijTrwalosc` w `zaplanuj`. */
   trwalosc_dni: number;
+  /** Schowany przez to konto (migracja 0042) — automat ma go traktować jak „nie proponuj”. */
+  ukryty: boolean;
 };
 
 export type Miejsce = { data: string; pora: PoraPosilku };
@@ -107,9 +109,6 @@ export type WynikPlanowania = {
   bezObsady: Miejsce[];
 };
 
-/** Premia dania oznaczonego jako „ulubione” — ma się pojawiać najczęściej. */
-const WAGA_ULUBIONE = 1.2;
-
 /** Premia dania oznaczonego jako „lubię” — to dawny, binarny „lajk”. */
 const WAGA_LUBIE = 0.5;
 
@@ -119,7 +118,6 @@ const WAGA_LUBIE = 0.5;
  * do oceny.
  */
 function premiaZaPreferencje(preferencja: Preferencja): number {
-  if (preferencja === 'ulubione') return WAGA_ULUBIONE;
   if (preferencja === 'lubie') return WAGA_LUBIE;
   return 0;
 }
@@ -177,6 +175,7 @@ const MIN_BIALKA_ODNIESIENIA = 12;
  */
 export function nadajeSieNa(k: Kandydat, pora: PoraPosilku): boolean {
   if (k.preferencja === 'nie_proponuj') return false;
+  if (k.ukryty) return false;
   if (k.kcal === null) return false;
   if (k.pory.length === 0) return false;
   return k.pory.includes(pora);

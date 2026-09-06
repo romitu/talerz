@@ -1,6 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { router, Tabs } from 'expo-router';
+import { DarkTheme, DefaultTheme, router, Tabs, ThemeProvider } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useCallback, useEffect, useState } from 'react';
 import { ActivityIndicator, Pressable, StyleSheet, View } from 'react-native';
@@ -142,14 +141,42 @@ const POZYCJE_WIECEJ = [
   { trasa: '/przepisy-import-eksport', ikona: 'swap-vertical' as const, tytul: 'Import / eksport przepisów' },
   { trasa: '/skladniki', ikona: 'nutrition' as const, tytul: 'Składniki' },
   { trasa: '/przepisy-makro', ikona: 'stats-chart' as const, tytul: 'Makro przepisów' },
-  { trasa: '/role-skladnikow', ikona: 'options' as const, tytul: 'Role składników – skalowanie porcji' },
-  { trasa: '/makroskladniki', ikona: 'pie-chart' as const, tytul: 'Makroskładniki – podstawa wg aktualnych zaleceń USA' },
+  {
+    trasa: '/role-skladnikow',
+    ikona: 'options' as const,
+    tytul: 'Role składników – skalowanie porcji',
+    // Baza i tak odmówi odczytu spoza tej roli (migracja 0043) — pozycja
+    // menu znika tylko po to, żeby nie kusić przyciskiem, który i tak nic
+    // nie pokaże.
+    wymagaModeratora: true,
+  },
+  { trasa: '/makroskladniki', ikona: 'pie-chart' as const, tytul: 'Podstawa żywieniowa przepisów' },
+  { trasa: '/dlaczego-talerz', ikona: 'sparkles' as const, tytul: 'Dlaczego Talerz' },
   { trasa: '/instrukcja', ikona: 'help-circle' as const, tytul: 'Instrukcja' },
-] satisfies { trasa: `/${string}`; ikona: keyof typeof Ionicons.glyphMap; tytul: string }[];
+] satisfies { trasa: `/${string}`; ikona: keyof typeof Ionicons.glyphMap; tytul: string; wymagaModeratora?: boolean }[];
 
 function Zakladki({ kolory }: { kolory: Paleta }) {
+  const { sesja } = useSesja();
   const [menuOtwarte, setMenuOtwarte] = useState(false);
+  const [rola, setRola] = useState<string | null>(null);
   const wstawki = useSafeAreaInsets();
+
+  useEffect(() => {
+    const kontoId = sesja?.user.id;
+    if (!kontoId) {
+      setRola(null);
+      return;
+    }
+    supabase
+      .from('konta')
+      .select('rola')
+      .eq('id', kontoId)
+      .single()
+      .then(({ data }) => setRola(data?.rola ?? null));
+  }, [sesja?.user.id]);
+
+  const jestModeratorem = rola === 'moderator' || rola === 'administrator';
+  const pozycjeMenu = POZYCJE_WIECEJ.filter((p) => !p.wymagaModeratora || jestModeratorem);
 
   return (
     <View style={{ flex: 1 }}>
@@ -228,6 +255,7 @@ function Zakladki({ kolory }: { kolory: Paleta }) {
         <Tabs.Screen name="przepisy-makro" options={{ href: null }} />
         <Tabs.Screen name="role-skladnikow" options={{ href: null }} />
         <Tabs.Screen name="makroskladniki" options={{ href: null }} />
+        <Tabs.Screen name="dlaczego-talerz" options={{ href: null }} />
         <Tabs.Screen name="przepisy-import-eksport" options={{ href: null }} />
         <Tabs.Screen name="profil-formularz" options={{ href: null }} />
         <Tabs.Screen name="przepis-formularz" options={{ href: null }} />
@@ -251,7 +279,7 @@ function Zakladki({ kolory }: { kolory: Paleta }) {
                 borderColor: kolory.border,
               },
             ]}>
-            {POZYCJE_WIECEJ.map((pozycja) => (
+            {pozycjeMenu.map((pozycja) => (
               <Pressable
                 key={pozycja.trasa}
                 onPress={() => {

@@ -47,7 +47,6 @@ import { celZywieniowyNASEM, type PalNasem } from '@/lib/nasem';
 import { useSesja } from '@/lib/sesja';
 import { pobierzSkladniki, type Skladnik } from '@/lib/skladniki';
 import { supabase } from '@/lib/supabase';
-import { wyczyscOdhaczenia } from '@/lib/zakupy';
 import { wiekZDaty, type Plec, type TrybCelu } from '@/lib/zywienie';
 
 type Cel = {
@@ -284,12 +283,20 @@ export default function EkranPlanu() {
     }, [pobierz])
   );
 
-  /** Dni do wyboru jako początek planu: od dzisiaj przez dwa tygodnie. */
+  /**
+   * Dni do wyboru jako początek planu: dwa dni wstecz, potem od dzisiaj
+   * przez dwa tygodnie.
+   *
+   * Dwa dni wstecz są tu wyłącznie do ręcznego odtworzenia sytuacji „danie
+   * na kilka dni przechodzi w nowy tydzień" przy testowaniu listy zakupów —
+   * na co dzień nikt nie zaczyna planu w przeszłości. `NaglowekPlanu`
+   * pokazuje je innym kolorem, żeby to nie wyglądało jak zwykła opcja.
+   */
   const mozliweDaty = useMemo(() => {
     const dzis = new Date();
-    return Array.from({ length: 14 }, (_, i) => {
+    return Array.from({ length: 16 }, (_, i) => {
       const d = new Date(dzis);
-      d.setDate(dzis.getDate() + i);
+      d.setDate(dzis.getDate() + i - 2);
       return naDate(d);
     });
   }, []);
@@ -596,7 +603,7 @@ export default function EkranPlanu() {
 
         <Karta>
           <TabelaWyboru
-            dane={przepisy.filter((p) => pasujeDoPory(p.pory, wybierany.pora))}
+            dane={przepisy.filter((p) => !p.ukryty && pasujeDoPory(p.pory, wybierany.pora))}
             klucz={(p) => p.id}
             tekstDoFiltra={(p) => p.nazwa}
             etykietaFiltra="Filtruj przepisy"
@@ -621,7 +628,7 @@ export default function EkranPlanu() {
                   const wolnychWDniu = PORY.filter(
                     (pora) => !dniowe.some((x) => x.pora === pora)
                   ).length;
-                  const celTegoDania = brakKcal / Math.max(1, wolnychWDniu) / Math.max(1, osoby);
+                  const celTegoDania = brakKcal / Math.max(1, wolnychWDniu);
 
                   const pelny = await pobierzPelnyPrzepis(p.id);
                   const dostepneSkladniki = await pobierzSkladniki();
@@ -832,11 +839,10 @@ export default function EkranPlanu() {
                 onPress={() =>
                   zDbem(async () => {
                     await wyczyscPlan(plan.id);
-                    // Odhaczenia są przypisane do planu, ale ten sam plan_id
-                    // zostaje po wyczyszczeniu tygodnia — bez jawnego czyszczenia
-                    // tu, ponowne wstawienie tych samych dań pokazywałoby stare
-                    // ptaszki, choć nikt jeszcze nic nie odhaczył dla nowej treści.
-                    if (sesja) await wyczyscOdhaczenia(sesja.user.id, plan.id);
+                    // Odhaczenie trzyma się gotowania (partia_id/pozycja_id), nie
+                    // planu — ponowne wstawienie dań dostaje nowe identyfikatory,
+                    // więc stare ptaszki nigdy nie mogą do nich pasować. Nie trzeba
+                    // ich tu jawnie czyścić (patrz komentarz w lib/zakupy.ts).
                     setCzyscic(false);
                   })
                 }

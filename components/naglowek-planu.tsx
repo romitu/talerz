@@ -7,7 +7,7 @@ import { ThemedView } from './themed-view';
 
 import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
-import { czyDzisiaj, opisDnia, type Plan } from '@/lib/plan';
+import { czyDzisiaj, czyPrzeszly, opisDnia, type Plan } from '@/lib/plan';
 
 /**
  * Nagłówek ekranu planu — tytuł, liczba osób i kompaktowe pole daty z ikoną,
@@ -64,7 +64,8 @@ export function NaglowekPlanu({
             opcje={mozliweDaty.map((d) => ({
               wartosc: d,
               etykieta: opisDnia(d),
-              opis: czyDzisiaj(d) ? 'dzisiaj' : undefined,
+              opis: czyDzisiaj(d) ? 'dzisiaj' : czyPrzeszly(d) ? 'data wsteczna — do testów' : undefined,
+              nietypowa: czyPrzeszly(d),
             }))}
           />
         </View>

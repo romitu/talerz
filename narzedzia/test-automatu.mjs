@@ -46,10 +46,10 @@ function sprawdz(opis, warunek, dodatek = '') {
 const DNI = ['2026-08-17', '2026-08-18', '2026-08-19', '2026-08-20',
              '2026-08-21', '2026-08-22', '2026-08-23'];
 
-function danie(id, pory, kcal, bialko, porcjeBazowe = 0, preferencja = 'neutralne', skalowalny = false, trwaloscDni = 3) {
+function danie(id, pory, kcal, bialko, porcjeBazowe = 0, preferencja = 'neutralne', skalowalny = false, trwaloscDni = 3, ukryty = false) {
   return {
     id, nazwa: id, pory, liczba_porcji_bazowych: porcjeBazowe, kcal, bialko_g: bialko,
-    preferencja, skalowalny, trwalosc_dni: trwaloscDni,
+    preferencja, skalowalny, trwalosc_dni: trwaloscDni, ukryty,
   };
 }
 
@@ -171,7 +171,6 @@ const PRZEPISY = [
 
 // --- 6. preferencja przesuwa wybór, ale nie unieważnia dopasowania ----------
 {
-  const ulubione = danie('ulubione', ['kolacja'], 500, 30, 0, 'ulubione');
   const lubiane = danie('lubiane', ['kolacja'], 500, 30, 0, 'lubie');
   const zwykle = danie('zwykle', ['kolacja'], 500, 30, 0, 'neutralne');
 
@@ -183,12 +182,7 @@ const PRZEPISY = [
     kandydat: lubiane, docelowoKcal: 500, docelowoBialko: 30,
     ostatnioWDniu: null, dzien: 0, szum: 0,
   });
-  const ocenaUlubionego = ocen({
-    kandydat: ulubione, docelowoKcal: 500, docelowoBialko: 30,
-    ostatnioWDniu: null, dzien: 0, szum: 0,
-  });
   sprawdz('przy równym dopasowaniu wygrywa lubiane', ocenaLubianego < ocenaZwyklego);
-  sprawdz('ulubione wygrywa z lubianym', ocenaUlubionego < ocenaLubianego);
 
   // A teraz lubiane, ale kompletnie nie na to miejsce.
   const lubianeAleZle = danie('lubiane-zle', ['kolacja'], 2500, 30, 0, 'lubie');
@@ -234,9 +228,10 @@ const PRZEPISY = [
           !nadajeSieNa(danie('nijaki', [], 600, 30), 'obiad'));
   sprawdz('"nie proponuj" wyklucza danie całkowicie, nie tylko obniża ocenę',
           !nadajeSieNa(danie('odrzucone', ['obiad'], 600, 30, 0, 'nie_proponuj'), 'obiad'));
-  sprawdz('ulubione i lubiane dalej są kandydatami',
-          nadajeSieNa(danie('x', ['obiad'], 600, 30, 0, 'ulubione'), 'obiad')
-          && nadajeSieNa(danie('y', ['obiad'], 600, 30, 0, 'lubie'), 'obiad'));
+  sprawdz('lubiane dalej jest kandydatem',
+          nadajeSieNa(danie('y', ['obiad'], 600, 30, 0, 'lubie'), 'obiad'));
+  sprawdz('ukryty przepis wyklucza całkowicie, nawet gdy pasuje i nie ma preferencji',
+          !nadajeSieNa(danie('schowany', ['obiad'], 600, 30, 0, 'neutralne', false, 3, true), 'obiad'));
   sprawdz('0 porcji bazowych daje jeden dzień',
           dniGotowania(DNI, 0, 'obiad', 0, new Set()).length === 1);
   sprawdz('porcje bazowe nie wykraczają poza koniec tygodnia',
