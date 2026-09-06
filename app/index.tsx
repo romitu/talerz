@@ -603,7 +603,7 @@ export default function EkranPlanu() {
 
         <Karta>
           <TabelaWyboru
-            dane={przepisy.filter((p) => pasujeDoPory(p.pory, wybierany.pora))}
+            dane={przepisy.filter((p) => !p.ukryty && pasujeDoPory(p.pory, wybierany.pora))}
             klucz={(p) => p.id}
             tekstDoFiltra={(p) => p.nazwa}
             etykietaFiltra="Filtruj przepisy"
