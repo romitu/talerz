@@ -11,6 +11,8 @@ import { Spacing } from '@/constants/theme';
 import { komunikatBledu } from '@/lib/blad';
 import { wroc } from '@/lib/nawigacja';
 import { pobierzRoleSkladnikow, zapiszWzorRoli, type RolaSkladnika } from '@/lib/role-skladnikow';
+import { useSesja } from '@/lib/sesja';
+import { supabase } from '@/lib/supabase';
 
 /**
  * Role składników — edycja wzorów skalowania.
@@ -22,6 +24,11 @@ import { pobierzRoleSkladnikow, zapiszWzorRoli, type RolaSkladnika } from '@/lib
  * Ról jest stałe siedem (migracja 0031) i ten ekran ich nie dodaje ani nie
  * usuwa — edytowalny jest wyłącznie „Wzór”. Reszta kolumn to dokumentacja,
  * po co dana rola istnieje i kiedy jej użyć.
+ *
+ * Widoczny wyłącznie dla moderatora i administratora (migracja 0043) — baza
+ * odmawia odczytu spoza tej roli, więc `pobierzRoleSkladnikow()` zwróciłaby
+ * pustą listę. Sprawdzenie roli tutaj jest tylko po to, żeby zamiast mylącej
+ * pustej tabeli pokazać jasny komunikat, dlaczego nic tu nie ma.
  */
 
 /** Wzory z chwili wczytania danej roli — do wykrycia niezapisanej zmiany. */
@@ -31,6 +38,7 @@ function domyslneWzory(role: RolaSkladnika[]): Record<string, string> {
 
 export default function EkranRoleSkladnikow() {
   const { powrot } = useLocalSearchParams<{ powrot?: string }>();
+  const { sesja } = useSesja();
 
   const [role, setRole] = useState<RolaSkladnika[]>([]);
   const [wzory, setWzory] = useState<Record<string, string>>({});
@@ -38,6 +46,22 @@ export default function EkranRoleSkladnikow() {
   const [zapisywanie, setZapisywanie] = useState(false);
   const [blad, setBlad] = useState<string | null>(null);
   const [status, setStatus] = useState<string | null>(null);
+
+  /** `null` dopóki rola się nie wczyta — wtedy NIE pokazujemy jeszcze odmowy. */
+  const [rola, setRola] = useState<string | null>(null);
+  const kontoId = sesja?.user.id;
+
+  useEffect(() => {
+    if (!kontoId) return;
+    supabase
+      .from('konta')
+      .select('rola')
+      .eq('id', kontoId)
+      .single()
+      .then(({ data }) => setRola(data?.rola ?? 'uzytkownik'));
+  }, [kontoId]);
+
+  const jestModeratorem = rola === 'moderator' || rola === 'administrator';
 
   const pobierz = useCallback(async () => {
     setWczytywanie(true);
@@ -86,6 +110,21 @@ export default function EkranRoleSkladnikow() {
     setWzory(domyslneWzory(role));
     setStatus(null);
     setBlad(null);
+  }
+
+  if (rola !== null && !jestModeratorem) {
+    return (
+      <Ekran tytul="Role składników">
+        <Karta>
+          <ThemedText type="default">Ten ekran jest dla moderatora i administratora</ThemedText>
+          <ThemedText type="small" themeColor="textSecondary">
+            Role składników wpływają na skalowanie WSZYSTKICH przepisów, więc zmienia je
+            tylko osoba z odpowiednimi uprawnieniami.
+          </ThemedText>
+        </Karta>
+        <Przycisk tytul="Wróć" wariant="poboczny" onPress={() => wroc(powrot, '/przepisy')} />
+      </Ekran>
+    );
   }
 
   return (
@@ -173,11 +212,6 @@ export default function EkranRoleSkladnikow() {
         zajety={zapisywanie}
         wylaczony={!zmieniono || wczytywanie}
       />
-
-      <ThemedText type="small" themeColor="textSecondary">
-        Zapis wymaga uprawnień moderatora — pozostałym osobom baza odmówi z odpowiednim
-        komunikatem.
-      </ThemedText>
 
       <Przycisk tytul="Wróć" wariant="poboczny" onPress={() => wroc(powrot, '/przepisy')} />
     </Ekran>
