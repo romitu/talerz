@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Talerz — dlaczego powstał i na czym polega metoda</title>
+<style>
+:root{
+  --bg:#f4f7f4;
+  --paper:#ffffff;
+  --ink:#1c2620;
+  --muted:#5f7268;
+  --green:#3f6b4a;
+  --green-2:#52785c;
+  --green-soft:#eaf1eb;
+  --green-soft-2:#f0f5f0;
+  --border:#d8e3d9;
+  --warm:#f4efe4;
+  --warm-border:#e7dcc8;
+  --shadow:0 18px 50px rgba(35,60,40,.08);
+  --radius:24px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height:1.6;
+}
+a{color:inherit}
+.wrap{width:min(1160px,calc(100% - 32px));margin:auto}
+.hero{
+  position:relative;
+  overflow:hidden;
+  padding:28px 0 70px;
+}
+.hero:before{
+  content:"";
+  position:absolute;
+  width:560px;height:560px;
+  right:-180px;top:-220px;
+  border-radius:50%;
+  background:radial-gradient(circle at 40% 40%,rgba(91,132,103,.15),rgba(91,132,103,0) 68%);
+}
+.topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+  margin-bottom:58px;
+}
+.brand{
+  display:flex;align-items:center;gap:11px;
+  font-weight:800;font-size:20px;letter-spacing:-.02em;
+}
+.brand-mark{
+  width:40px;height:40px;border-radius:13px;
+  display:grid;place-items:center;
+  background:var(--green);
+  color:white;
+  box-shadow:0 8px 20px rgba(63,107,74,.18);
+}
+.toplink{
+  color:var(--green);text-decoration:none;font-size:14px;font-weight:700;
+  padding:10px 14px;border:1px solid var(--border);border-radius:12px;background:#fff;
+}
+.hero-grid{
+  display:grid;
+  grid-template-columns:1.08fr .92fr;
+  gap:54px;
+  align-items:center;
+}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  color:var(--green);background:var(--green-soft);
+  border:1px solid var(--border);
+  padding:7px 11px;border-radius:999px;
+  font-size:12px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;
+}
+h1{
+  margin:18px 0 18px;
+  font-size:clamp(42px,6vw,72px);
+  line-height:.99;letter-spacing:-.055em;
+  max-width:760px;
+}
+.hero-lead{
+  font-size:clamp(18px,2vw,21px);
+  color:var(--muted);
+  max-width:720px;
+  margin:0 0 28px;
+}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:48px;padding:0 18px;border-radius:13px;
+  text-decoration:none;font-weight:800;font-size:14px;
+}
+.btn-primary{background:var(--green);color:#fff}
+.btn-secondary{background:#fff;border:1px solid var(--border);color:var(--green)}
+.hero-note{
+  margin-top:26px;color:var(--muted);font-size:13px;
+  display:flex;gap:18px;flex-wrap:wrap
+}
+.hero-note span{display:flex;align-items:center;gap:7px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--green)}
+
+.app-shell{
+  background:#fff;border:1px solid var(--border);border-radius:28px;
+  box-shadow:var(--shadow);padding:18px;
+  transform:rotate(1deg);
+}
+.app-head{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:7px 5px 17px;
+}
+.app-title{font-size:18px;font-weight:800}
+.app-person{font-size:12px;color:var(--muted);background:var(--green-soft-2);padding:6px 9px;border-radius:999px}
+.plan-banner{
+  border:1px solid var(--border);background:var(--green-soft-2);
+  border-radius:16px;padding:13px 14px;display:flex;justify-content:space-between;gap:14px;align-items:center
+}
+.plan-banner b{font-size:14px}
+.plan-banner small{display:block;color:var(--muted);font-size:11px;margin-top:2px}
+.plan-days{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin:13px 0}
+.day{
+  border:1px solid var(--border);border-radius:13px;padding:9px 7px;text-align:center;background:#fff
+}
+.day strong{display:block;font-size:12px}
+.day span{font-size:10px;color:var(--muted)}
+.day.active{background:var(--green);border-color:var(--green);color:#fff}
+.day.active span{color:#e7f0e8}
+.meal-card{
+  border:1px solid var(--border);border-radius:16px;padding:13px 14px;margin-top:8px;
+  display:grid;grid-template-columns:38px 1fr auto;gap:11px;align-items:center
+}
+.meal-ico{
+  width:38px;height:38px;border-radius:12px;background:var(--green-soft);
+  display:grid;place-items:center;font-size:18px
+}
+.meal-card b{font-size:13px;display:block;line-height:1.25}
+.meal-card small{font-size:10px;color:var(--muted)}
+.kcal{font-weight:800;font-size:12px;color:var(--green)}
+.shopping{
+  margin-top:14px;background:#f9fbf9;border:1px dashed #c9d8cb;
+  border-radius:16px;padding:12px 13px;display:flex;justify-content:space-between;align-items:center
+}
+.shopping b{font-size:12px}.shopping span{color:var(--muted);font-size:11px}
+
+section{padding:72px 0}
+.section-head{max-width:780px;margin-bottom:30px}
+.kicker{color:var(--green);font-weight:800;font-size:13px;letter-spacing:.04em;text-transform:uppercase}
+h2{
+  font-size:clamp(32px,4.5vw,50px);
+  line-height:1.05;letter-spacing:-.045em;
+  margin:8px 0 14px;
+}
+.section-head p{font-size:18px;color:var(--muted);margin:0}
+
+.problem-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:26px}
+.quote-card{
+  background:var(--green);color:#fff;border-radius:var(--radius);padding:34px;
+  min-height:310px;display:flex;flex-direction:column;justify-content:space-between
+}
+.quote-card .big{
+  font-size:clamp(28px,3.6vw,43px);line-height:1.07;letter-spacing:-.04em;font-weight:800
+}
+.quote-card p{color:#e3ede5;margin:22px 0 0;max-width:650px}
+.pain-stack{display:grid;gap:12px}
+.pain{
+  background:#fff;border:1px solid var(--border);border-radius:18px;padding:20px;
+  display:flex;gap:14px;align-items:flex-start
+}
+.pain-ico{
+  width:42px;height:42px;flex:0 0 42px;border-radius:13px;background:var(--green-soft);
+  display:grid;place-items:center
+}
+.pain b{display:block;margin-bottom:3px}
+.pain p{margin:0;color:var(--muted);font-size:14px}
+
+.method-wrap{
+  background:#fff;border:1px solid var(--border);border-radius:30px;padding:36px;
+  box-shadow:0 14px 38px rgba(35,60,40,.05)
+}
+.method-line{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:28px
+}
+.step{
+  position:relative;background:var(--green-soft-2);border:1px solid var(--border);
+  border-radius:18px;padding:18px;min-height:170px
+}
+.step-no{font-size:11px;font-weight:900;color:var(--green);letter-spacing:.08em}
+.step h3{font-size:17px;line-height:1.2;margin:26px 0 8px}
+.step p{font-size:13px;color:var(--muted);margin:0}
+.mantra{
+  margin-top:18px;border-radius:18px;background:var(--green);color:#fff;
+  padding:18px 22px;font-weight:900;font-size:clamp(20px,3vw,30px);letter-spacing:-.025em;
+  text-align:center
+}
+
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.compare-card{border-radius:22px;padding:28px;border:1px solid var(--border)}
+.compare-card.bad{background:#faf8f4;border-color:#ebe2d4}
+.compare-card.good{background:#fff}
+.compare-card h3{font-size:22px;margin:0 0 18px}
+.compare-row{
+  display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-top:1px solid rgba(0,0,0,.055)
+}
+.compare-row:first-of-type{border-top:0}
+.check,.x{
+  width:24px;height:24px;border-radius:8px;display:grid;place-items:center;flex:0 0 24px;font-size:12px;font-weight:900
+}
+.check{background:var(--green-soft);color:var(--green)}
+.x{background:#eee8df;color:#8a7352}
+.compare-row b{font-size:14px}
+.compare-row span{display:block;color:var(--muted);font-size:13px;margin-top:2px}
+
+.foundation-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.foundation{
+  background:#fff;border:1px solid var(--border);border-radius:20px;padding:22px
+}
+.foundation .ico{font-size:23px;margin-bottom:28px}
+.foundation h3{font-size:17px;margin:0 0 7px}
+.foundation p{margin:0;color:var(--muted);font-size:13px}
+
+.important{
+  display:grid;grid-template-columns:.95fr 1.05fr;gap:28px;align-items:stretch
+}
+.important-copy{
+  background:var(--warm);border:1px solid var(--warm-border);border-radius:28px;padding:34px
+}
+.important-copy h2{font-size:40px}
+.important-copy p{color:#685e4f;font-size:16px}
+.important-copy strong{color:#3f372d}
+.why-list{
+  background:#fff;border:1px solid var(--border);border-radius:28px;padding:24px
+}
+.why-item{padding:16px;border-bottom:1px solid #edf1ed;display:grid;grid-template-columns:42px 1fr;gap:13px}
+.why-item:last-child{border-bottom:0}
+.why-item .num{
+  width:42px;height:42px;border-radius:13px;background:var(--green-soft);color:var(--green);display:grid;place-items:center;font-weight:900
+}
+.why-item h3{font-size:16px;margin:0 0 3px}
+.why-item p{font-size:13px;color:var(--muted);margin:0}
+
+.outcome{
+  background:linear-gradient(135deg,#345e40,#4b7557);
+  color:#fff;border-radius:32px;padding:42px;position:relative;overflow:hidden
+}
+.outcome:after{
+  content:"";position:absolute;width:350px;height:350px;border:70px solid rgba(255,255,255,.05);
+  border-radius:50%;right:-160px;bottom:-190px
+}
+.outcome h2{max-width:800px;margin-top:0}
+.outcome p{color:#e5eee7;max-width:780px;font-size:17px}
+.outcome-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:28px;position:relative;z-index:1}
+.outcome-item{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.13);border-radius:18px;padding:18px}
+.outcome-item b{display:block;font-size:16px;margin-bottom:5px}
+.outcome-item span{font-size:12px;color:#dbe8de}
+
+.disclaimer{
+  max-width:900px;margin:22px auto 0;text-align:center;color:var(--muted);font-size:12px
+}
+.footer{padding:40px 0 56px;color:var(--muted);font-size:12px}
+.footer-inner{border-top:1px solid var(--border);padding-top:22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+
+@media(max-width:900px){
+  .hero-grid,.problem-grid,.important{grid-template-columns:1fr}
+  .method-line{grid-template-columns:1fr 1fr}
+  .foundation-grid,.outcome-grid{grid-template-columns:1fr 1fr}
+  .app-shell{transform:none;max-width:620px}
+}
+@media(max-width:620px){
+  .topbar{margin-bottom:36px}
+  .hero{padding-bottom:45px}
+  section{padding:52px 0}
+  .method-wrap{padding:22px}
+  .method-line,.compare,.foundation-grid,.outcome-grid{grid-template-columns:1fr}
+  .quote-card,.important-copy,.outcome{padding:26px}
+  .hero-actions .btn{width:100%}
+  .day:nth-child(4),.day:nth-child(5){display:none}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <div class="brand-mark">🍽</div>
+        <span>Talerz</span>
+      </div>
+      <a class="toplink" href="#metoda">Poznaj metodę ↓</a>
+    </div>
+
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">Nie kolejna dieta. Lepszy sposób organizacji jedzenia.</div>
+        <h1>Dobre jedzenie nie powinno wymagać codziennie silnej woli.</h1>
+        <p class="hero-lead">
+          Talerz zamienia codzienne pytanie „co dziś zjeść?” w plan na kilka dni.
+          Ustalasz cel i preferencje, planujesz, robisz jedne konkretne zakupy
+          i później po prostu jesz to, co wcześniej zdecydowałeś.
+        </p>
+        <div class="hero-actions">
+          <a href="#metoda" class="btn btn-primary">Zobacz, na czym polega metoda</a>
+          <a href="#dlaczego" class="btn btn-secondary">Dlaczego to ma znaczenie</a>
+        </div>
+        <div class="hero-note">
+          <span><i class="dot"></i> plan na kilka dni</span>
+          <span><i class="dot"></i> lista zakupów z planu</span>
+          <span><i class="dot"></i> gotowanie na 2–3 dni</span>
+        </div>
+      </div>
+
+      <div class="app-shell" aria-label="Przykładowy ekran Talerza">
+        <div class="app-head">
+          <div class="app-title">Plan dnia</div>
+          <div class="app-person">1 osoba</div>
+        </div>
+        <div class="plan-banner">
+          <div>
+            <b>Plan na 5 dni</b>
+            <small>Pozostałe dni ułożą się od niego.</small>
+          </div>
+          <b style="color:var(--green)">2100 kcal</b>
+        </div>
+
+        <div class="plan-days">
+          <div class="day active"><strong>Pon</strong><span>7 wrz</span></div>
+          <div class="day"><strong>Wt</strong><span>8 wrz</span></div>
+          <div class="day"><strong>Śr</strong><span>9 wrz</span></div>
+          <div class="day"><strong>Czw</strong><span>10 wrz</span></div>
+          <div class="day"><strong>Pt</strong><span>11 wrz</span></div>
+        </div>
+
+        <div class="meal-card">
+          <div class="meal-ico">🥣</div>
+          <div><b>Szakszuka z mozzarellą</b><small>śniadanie</small></div>
+          <div class="kcal">520 kcal</div>
+        </div>
+        <div class="meal-card">
+          <div class="meal-ico">🍗</div>
+          <div><b>Kurczak z ryżem i warzywami</b><small>obiad · porcja także na jutro</small></div>
+          <div class="kcal">760 kcal</div>
+        </div>
+        <div class="meal-card">
+          <div class="meal-ico">🥪</div>
+          <div><b>Kanapki z pastą z tuńczyka</b><small>kolacja</small></div>
+          <div class="kcal">540 kcal</div>
+        </div>
+
+        <div class="shopping">
+          <div><b>Lista zakupów gotowa</b><span> · produkty z całego planu</span></div>
+          <b style="color:var(--green)">34 pozycje</b>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+<section id="dlaczego">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">Dlaczego powstał Talerz</div>
+      <h2>Problemem często nie jest brak wiedzy. Problemem jest codzienna improwizacja.</h2>
+      <p>
+        Większość z nas wie, że warto jeść rozsądniej. Trudniejsze jest robienie tego
+        regularnie — po pracy, przy pustej lodówce, bez planu i z koniecznością kolejnego wyboru.
+      </p>
+    </div>
+
+    <div class="problem-grid">
+      <div class="quote-card">
+        <div class="big">Talerz przenosi decyzje z każdego dnia do jednego krótkiego momentu planowania.</div>
+        <p>
+          Zamiast trzy razy dziennie negocjować ze sobą, najpierw ustalasz plan.
+          Potem realizujesz to, co już zostało wybrane.
+        </p>
+      </div>
+      <div class="pain-stack">
+        <div class="pain">
+          <div class="pain-ico">🤔</div>
+          <div><b>„Co dzisiaj zjeść?”</b><p>Ta sama decyzja wraca codziennie, często wtedy, gdy jesteśmy już głodni i zmęczeni.</p></div>
+        </div>
+        <div class="pain">
+          <div class="pain-ico">🛒</div>
+          <div><b>„Co właściwie kupić?”</b><p>Bez planu zakupy łatwo stają się zbiorem pojedynczych produktów, a nie podstawą konkretnych posiłków.</p></div>
+        </div>
+        <div class="pain">
+          <div class="pain-ico">⚖️</div>
+          <div><b>„Czy to pasuje do mojego celu?”</b><p>Sam pojedynczy „zdrowy” posiłek nie mówi jeszcze, jak wygląda bilans całego dnia i całego tygodnia.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="metoda">
+  <div class="wrap">
+    <div class="method-wrap">
+      <div class="section-head" style="margin-bottom:0">
+        <div class="kicker">Metoda Talerza</div>
+        <h2>Najpierw decyzja. Potem wykonanie.</h2>
+        <p>
+          Talerz nie próbuje codziennie motywować Cię od nowa. Pomaga zbudować prosty proces,
+          który można powtarzać tydzień po tygodniu.
+        </p>
+      </div>
+
+      <div class="method-line">
+        <div class="step">
+          <div class="step-no">01</div>
+          <h3>Ustal swój cel</h3>
+          <p>Profil określa zapotrzebowanie i sposób, w jaki ma być układany plan.</p>
+        </div>
+        <div class="step">
+          <div class="step-no">02</div>
+          <h3>Powiedz, co lubisz</h3>
+          <p>Algorytm ma pracować na daniach, które naprawdę chcesz później zjeść.</p>
+        </div>
+        <div class="step">
+          <div class="step-no">03</div>
+          <h3>Zaplanuj kilka dni</h3>
+          <p>Plan bierze pod uwagę porcje, bilans dnia i możliwość przygotowania jedzenia na zapas.</p>
+        </div>
+        <div class="step">
+          <div class="step-no">04</div>
+          <h3>Kup konkretnie</h3>
+          <p>Lista zakupów wynika z planu. Kupujesz to, co ma później trafić na talerz.</p>
+        </div>
+        <div class="step">
+          <div class="step-no">05</div>
+          <h3>Ugotuj i powtórz</h3>
+          <p>Jeżeli danie dobrze się przechowuje, jedno gotowanie może obsłużyć dwa lub trzy dni.</p>
+        </div>
+      </div>
+
+      <div class="mantra">Zaplanuj. Kup. Ugotuj. Zjedz. Powtórz.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">Nie dieta. System.</div>
+      <h2>Nie chodzi o perfekcyjny tydzień. Chodzi o sposób, który da się utrzymać.</h2>
+    </div>
+
+    <div class="compare">
+      <div class="compare-card bad">
+        <h3>Codzienna improwizacja</h3>
+        <div class="compare-row"><div class="x">×</div><div><b>Decyzja przy każdym posiłku</b><span>ciągłe wymyślanie od nowa</span></div></div>
+        <div class="compare-row"><div class="x">×</div><div><b>Zakupy bez pełnego planu</b><span>produkty nie zawsze składają się w konkretne posiłki</span></div></div>
+        <div class="compare-row"><div class="x">×</div><div><b>Gotowanie od zera każdego dnia</b><span>dużo czasu i wysoki próg wejścia</span></div></div>
+        <div class="compare-row"><div class="x">×</div><div><b>Cel gdzieś w tle</b><span>trudniej ocenić bilans całego dnia</span></div></div>
+      </div>
+
+      <div class="compare-card good">
+        <h3>Metoda Talerza</h3>
+        <div class="compare-row"><div class="check">✓</div><div><b>Decyzje podejmujesz wcześniej</b><span>w tygodniu głównie realizujesz plan</span></div></div>
+        <div class="compare-row"><div class="check">✓</div><div><b>Zakupy wynikają z posiłków</b><span>lista tworzy się z konkretnego planu</span></div></div>
+        <div class="compare-row"><div class="check">✓</div><div><b>Gotujesz rozsądniej</b><span>część potraw może być przygotowana na 2–3 dni</span></div></div>
+        <div class="compare-row"><div class="check">✓</div><div><b>Bilans jest częścią planu</b><span>energia, białko i pozostałe cele są widoczne od początku</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">Co jest pod spodem</div>
+      <h2>Prosta obsługa, ale nie przypadkowe założenia.</h2>
+      <p>
+        Talerz ma upraszczać codzienne jedzenie, nie upraszczać żywienia do samej liczby kalorii.
+      </p>
+    </div>
+
+    <div class="foundation-grid">
+      <div class="foundation">
+        <div class="ico">🥕</div>
+        <h3>Mniej żywności ultraprzetworzonej</h3>
+        <p>Baza preferuje produkty nieprzetworzone i nisko przetworzone; klasyfikacja NOVA jest jednym z filtrów.</p>
+      </div>
+      <div class="foundation">
+        <div class="ico">⚖️</div>
+        <h3>Bilans, nie jedna magiczna proporcja</h3>
+        <p>Makroskładniki są traktowane jako zakresy, a nie jako jedna sztywna wartość odpowiednia dla wszystkich.</p>
+      </div>
+      <div class="foundation">
+        <div class="ico">🌾</div>
+        <h3>Błonnik ma znaczenie</h3>
+        <p>Plan nie kończy się na kaloriach i białku. Błonnik jest osobnym elementem celu żywieniowego.</p>
+      </div>
+      <div class="foundation">
+        <div class="ico">👤</div>
+        <h3>Cel zależy od człowieka</h3>
+        <p>Wiek, masa ciała, wzrost, aktywność i wybrany tryb wpływają na wartości widoczne w profilu.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="important">
+      <div class="important-copy">
+        <div class="kicker">Dlaczego to jest ważne</div>
+        <h2>Jedzenie działa codziennie — nie dopiero wtedy, gdy zaczynamy „dietę”.</h2>
+        <p>
+          Sposób żywienia wpływa na masę ciała, samopoczucie i zdrowie w dłuższej perspektywie.
+          <strong>Talerz nie obiecuje leczenia ani szybkiej przemiany.</strong>
+          Jego rolą jest pomóc zamienić rozsądny cel w codzienny, wykonalny proces.
+        </p>
+      </div>
+
+      <div class="why-list">
+        <div class="why-item">
+          <div class="num">1</div>
+          <div><h3>Cel bez wykonania niewiele zmienia</h3><p>Wiedzieć, co warto jeść, to jedno. Mieć plan i produkty potrzebne do jego realizacji — to drugie.</p></div>
+        </div>
+        <div class="why-item">
+          <div class="num">2</div>
+          <div><h3>Najważniejsza jest powtarzalność</h3><p>Nie potrzebujesz idealnego menu przez siedem dni. Potrzebujesz rozwiązania, do którego można wracać przez większość tygodni w roku.</p></div>
+        </div>
+        <div class="why-item">
+          <div class="num">3</div>
+          <div><h3>Małe decyzje sumują się</h3><p>Śniadanie, obiad i kolacja to setki decyzji w ciągu roku. Talerz próbuje uprościć właśnie tę codzienność.</p></div>
+        </div>
+        <div class="why-item">
+          <div class="num">4</div>
+          <div><h3>Specjalista ustala szczególny cel. Talerz pomaga go realizować.</h3><p>Przy chorobach, ciąży, żywieniu dzieci czy intensywnym sporcie cel powinien wynikać z właściwej konsultacji.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="outcome">
+      <div class="kicker" style="color:#dce9df">Po co to wszystko</div>
+      <h2>Żeby dobre jedzenie stało się najprostszym wyborem, a nie kolejnym codziennym problemem.</h2>
+      <p>
+        Talerz nie ma być dietą na miesiąc. Ma pomagać organizować normalne jedzenie przez lata:
+        z planem, konkretnymi zakupami, sensownymi porcjami i mniejszą liczbą decyzji.
+      </p>
+
+      <div class="outcome-grid">
+        <div class="outcome-item"><b>Mniej zastanawiania</b><span>wiesz wcześniej, co będziesz jeść</span></div>
+        <div class="outcome-item"><b>Mniej gotowania od zera</b><span>wykorzystujesz dania na kolejne dni</span></div>
+        <div class="outcome-item"><b>Zakupy z konkretnym celem</b><span>lista wynika z planu posiłków</span></div>
+        <div class="outcome-item"><b>Więcej konsekwencji</b><span>plan jest łatwiejszy do realizacji niż codzienna improwizacja</span></div>
+      </div>
+    </div>
+
+    <div class="disclaimer">
+      Talerz jest narzędziem do planowania sposobu żywienia dla ogólnej populacji i nie zastępuje lekarza ani dietetyka.
+      Założenia żywieniowe oparto m.in. na zakresach AMDR, wartościach referencyjnych EFSA, klasyfikacji NOVA oraz polskim Talerzu Zdrowego Żywienia.
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div><strong style="color:var(--ink)">Talerz</strong> — planowanie posiłków i zakupów</div>
+    <div>Metoda: planuj wcześniej, kup konkretnie, gotuj rozsądniej, powtarzaj.</div>
+  </div>
+</footer>
+
+</body>
+</html>

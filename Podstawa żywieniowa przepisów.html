@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Podstawa żywieniowa przepisów – Talerz</title>
+  <style>
+    :root{
+      --bg:#f4f7f2;
+      --card:#ffffff;
+      --text:#25312a;
+      --muted:#657168;
+      --line:#dbe5dc;
+      --accent:#2f5d44;
+      --accent-soft:#eef5ef;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter,Segoe UI,Arial,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.65;
+    }
+    .wrap{
+      max-width:960px;
+      margin:40px auto;
+      padding:0 20px 48px;
+    }
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:38px;
+      box-shadow:0 8px 28px rgba(28,47,35,.05);
+    }
+    h1{
+      margin:0 0 10px;
+      font-size:34px;
+      line-height:1.2;
+      letter-spacing:-.02em;
+    }
+    .lead{
+      margin:0 0 30px;
+      color:var(--muted);
+      font-size:18px;
+    }
+    h2{
+      margin:34px 0 12px;
+      font-size:22px;
+      line-height:1.3;
+    }
+    p{
+      margin:0 0 16px;
+    }
+    ul{
+      margin:10px 0 0 22px;
+      padding:0;
+    }
+    li{
+      margin:8px 0;
+    }
+    .box{
+      margin:26px 0;
+      padding:22px 24px;
+      background:var(--accent-soft);
+      border:1px solid #d7e6da;
+      border-radius:16px;
+    }
+    .box strong{
+      color:var(--accent);
+    }
+    .rule{
+      margin:34px 0 8px;
+      padding:28px;
+      border-radius:18px;
+      background:#f8faf8;
+      border:1px solid var(--line);
+      text-align:center;
+    }
+    .rule .main{
+      display:block;
+      font-size:22px;
+      font-weight:700;
+      color:var(--accent);
+      margin-bottom:10px;
+    }
+    .rule .sub{
+      color:var(--muted);
+    }
+    .sources{
+      margin-top:34px;
+      padding-top:22px;
+      border-top:1px solid var(--line);
+      color:var(--muted);
+      font-size:14px;
+    }
+    .sources a{
+      color:var(--accent);
+      text-decoration:none;
+    }
+    .sources a:hover{
+      text-decoration:underline;
+    }
+    @media (max-width:700px){
+      .wrap{margin:18px auto;padding:0 12px 24px}
+      .card{padding:24px 20px;border-radius:18px}
+      h1{font-size:28px}
+      h2{font-size:20px}
+      .lead{font-size:16px}
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <article class="card">
+      <h1>Podstawa żywieniowa przepisów</h1>
+      <p class="lead">Na jakich zasadach dobierane są dania i składniki w aplikacji Talerz.</p>
+
+      <h2>Na czym opierają się dania w Talerzu?</h2>
+      <p>
+        Przepisy i baza składników w Talerzu nie zostały zbudowane wyłącznie na podstawie kalorii
+        i makroskładników. Punktem wyjścia są aktualne zalecenia żywieniowe oraz wyniki badań
+        dotyczących sposobu odżywiania i zdrowia.
+      </p>
+      <p>
+        Jedną z głównych podstaw są <strong>Dietary Guidelines for Americans 2025–2030</strong>,
+        opracowane przez USDA i HHS. Aktualna edycja kładzie nacisk przede wszystkim na
+        pełnowartościową, możliwie mało przetworzoną żywność oraz ograniczanie produktów
+        wysoko przetworzonych, cukrów dodanych i rafinowanych węglowodanów.
+      </p>
+
+      <h2>Dlatego w Talerzu preferujemy</h2>
+      <ul>
+        <li><strong>wartościowe źródła białka</strong> – mięso, ryby, jaja, nabiał, rośliny strączkowe, orzechy i nasiona,</li>
+        <li><strong>warzywa i owoce</strong> w możliwie naturalnej postaci,</li>
+        <li><strong>produkty pełnoziarniste</strong> i inne źródła błonnika,</li>
+        <li><strong>tłuszcze pochodzące przede wszystkim z pełnowartościowych produktów</strong>,</li>
+        <li>produkty o <strong>krótkim i prostym składzie</strong>, które można wykorzystać do przygotowania zwykłego domowego posiłku.</li>
+      </ul>
+
+      <h2>Czego staramy się unikać?</h2>
+      <ul>
+        <li>żywności wysoko przetworzonej,</li>
+        <li>produktów z dużą ilością cukrów dodanych,</li>
+        <li>słodzonych napojów,</li>
+        <li>rafinowanych produktów będących głównie źródłem szybko dostępnych węglowodanów,</li>
+        <li>gotowych produktów, które można łatwo zastąpić prostszymi składnikami.</li>
+      </ul>
+
+      <div class="box">
+        <strong>To nie jest lista produktów zakazanych.</strong>
+        Liczy się cały sposób odżywiania i to, co jemy regularnie.
+        Aktualne zalecenia żywieniowe również traktują dietę jako całościowy wzorzec,
+        a nie listę obowiązkowych konkretnych posiłków.
+      </div>
+
+      <h2>Danie ma być nie tylko „zdrowe na papierze”</h2>
+      <p>Przy tworzeniu przepisów bierzemy pod uwagę również to, czy posiłek:</p>
+      <ul>
+        <li>dostarcza odpowiednią ilość energii i białka,</li>
+        <li>zawiera warzywa lub inne wartościowe składniki,</li>
+        <li>zapewnia błonnik,</li>
+        <li>jest możliwy do przygotowania ze zwykłych produktów,</li>
+        <li>nadaje się do normalnego, codziennego jedzenia.</li>
+      </ul>
+      <p>
+        Talerz nie ma tworzyć idealnej diety laboratoryjnej. Ma pomagać przez większość dni
+        wybierać <strong>proste, sycące i wartościowe posiłki, które rzeczywiście chce się ugotować i zjeść.</strong>
+      </p>
+
+      <h2>Kalorie i makroskładniki</h2>
+      <p>
+        Przy bilansowaniu posiłków wykorzystywane są również
+        <strong>Dietary Reference Intakes (DRI)</strong> opracowane przez National Academies
+        oraz zakresy <strong>AMDR – Acceptable Macronutrient Distribution Ranges</strong>
+        dla białka, tłuszczów i węglowodanów.
+      </p>
+      <p>
+        AMDR określają zakres udziału poszczególnych makroskładników w całkowitej energii diety.
+        Aktualne zalecenia dodatkowo zwracają uwagę na odpowiednią podaż białka
+        i wartościowe jego źródła.
+      </p>
+
+      <div class="rule">
+        <span class="main">Najpierw wybieramy dobre jedzenie. Dopiero później dopasowujemy jego ilość do potrzeb konkretnej osoby.</span>
+        <span class="sub">Kalorie, białko, tłuszcz i węglowodany pomagają określić porcję. Nie powinny jednak decydować o jakości produktu.</span>
+      </div>
+
+      <section class="sources">
+        <strong>Podstawa:</strong><br>
+        Dietary Guidelines for Americans 2025–2030, USDA/HHS;<br>
+        Dietary Reference Intakes, National Academies of Sciences, Engineering, and Medicine;<br>
+        USDA Nutrition Evidence Systematic Review.
+      </section>
+    </article>
+  </main>
+</body>
+</html>

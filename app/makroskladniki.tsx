@@ -1,257 +1,236 @@
 import { StyleSheet, View } from 'react-native';
 
+import {
+  HeroArtykulu,
+  Kafel,
+  ListaPunktow,
+  NaglowekSekcji,
+  PasekSekcji,
+  Punkt,
+  SiatkaKafli,
+  useNawigacjaSekcji,
+  Uwaga,
+  Wyroznienie,
+  Zrodla,
+} from '@/components/artykul';
 import { Ekran } from '@/components/ekran';
 import { Karta } from '@/components/karta';
 import { ThemedText } from '@/components/themed-text';
 import { KOLOR_MAKRO, Spacing } from '@/constants/theme';
+import { useTheme } from '@/hooks/use-theme';
 
 /**
- * Makroskładniki — podstawa wg aktualnych zaleceń USA.
+ * Podstawa żywieniowa przepisów — treść zsynchronizowana z makietą
+ * `Podstawa żywieniowa przepisów.html` od Romana, złożona z klocków
+ * z `components/artykul.tsx` (te same, co „Dlaczego Talerz”).
  *
- * Układ przeniesiony z makiety `Makroskładniki.html` od Romana: krótkie
- * wprowadzenie, trzy makroskładniki, wyróżniony zakres białka z Dietary
- * Guidelines, AMDR w trzech grupach wiekowych (zamiast poprzednich
- * jedenastu grup wiek/płeć — AMDR w tych przedziałach i tak się nie różni
- * między płciami) i lista praktycznych wskazówek zamiast grafiki talerza.
+ * Ekran odpowiada na jedno pytanie: skąd biorą się dania w Talerzu. Dlatego
+ * dwie listy — co preferujemy i czego unikamy — stoją naprzeciw siebie jako
+ * ptaszki i krzyżyki, a nie jako dwa nieodróżnialne akapity.
  */
 
-type Zakres = readonly [number, number];
-
-type GrupaWiekowa = {
-  wiek: string;
-  bialko: Zakres;
-  tluszcz: Zakres;
-  wegle: Zakres;
-};
-
-const GRUPY: GrupaWiekowa[] = [
-  { wiek: '1–3 lata', bialko: [5, 20], tluszcz: [30, 40], wegle: [45, 65] },
-  { wiek: '4–18 lat', bialko: [10, 30], tluszcz: [25, 35], wegle: [45, 65] },
-  { wiek: 'Dorośli — 19 lat i więcej', bialko: [10, 35], tluszcz: [20, 35], wegle: [45, 65] },
+const SEKCJE = [
+  { id: 'podstawa', skrot: 'Podstawa' },
+  { id: 'wybory', skrot: 'Wybory' },
+  { id: 'danie', skrot: 'Danie' },
+  { id: 'makro', skrot: 'Makro' },
 ];
 
-const WSKAZOWKI = [
-  'wartościowe źródła białka w każdym posiłku,',
-  'różnorodne warzywa i owoce,',
-  'produkty pełnoziarniste bogate w błonnik,',
-  'tłuszcze pochodzące głównie z pełnowartościowych produktów,',
-  'ograniczanie żywności wysoko przetworzonej i rafinowanych węglowodanów.',
+const PREFEROWANE: Punkt[] = [
+  {
+    tytul: 'Wartościowe źródła białka',
+    opis: 'mięso, ryby, jaja, nabiał, rośliny strączkowe, orzechy i nasiona',
+  },
+  { tytul: 'Warzywa i owoce', opis: 'w możliwie naturalnej postaci' },
+  { tytul: 'Produkty pełnoziarniste', opis: 'i inne źródła błonnika' },
+  {
+    tytul: 'Tłuszcze z pełnowartościowych produktów',
+    opis: 'a nie dodane przy okazji przetwarzania',
+  },
+  {
+    tytul: 'Krótki i prosty skład',
+    opis: 'produkty, z których da się przygotować zwykły domowy posiłek',
+  },
 ];
 
-function TypMakro({
-  etykieta,
-  kolor,
-  opis,
-}: {
-  etykieta: string;
-  kolor: string;
-  opis: string;
-}) {
+const UNIKANE: Punkt[] = [
+  { tytul: 'Żywność wysoko przetworzona' },
+  { tytul: 'Produkty z dużą ilością cukrów dodanych' },
+  { tytul: 'Słodzone napoje' },
+  {
+    tytul: 'Produkty rafinowane',
+    opis: 'będące głównie źródłem szybko dostępnych węglowodanów',
+  },
+  {
+    tytul: 'Gotowce do zastąpienia',
+    opis: 'wszystko, co łatwo złożyć z prostszych składników',
+  },
+];
+
+const OCENA_DANIA: Kafel[] = [
+  { ikona: 'flame-outline', tytul: 'Energia i białko', opis: 'posiłek dostarcza ich odpowiednią ilość' },
+  { ikona: 'leaf-outline', tytul: 'Warzywa', opis: 'lub inne wartościowe składniki' },
+  { ikona: 'nutrition-outline', tytul: 'Błonnik', opis: 'traktowany jako osobny cel, nie efekt uboczny' },
+  { ikona: 'cart-outline', tytul: 'Zwykłe produkty', opis: 'da się je kupić przy okazji normalnych zakupów' },
+  { ikona: 'today-outline', tytul: 'Codzienność', opis: 'nadaje się do normalnego, powtarzalnego jedzenia' },
+];
+
+const MAKRO_CHIPY = [
+  { etykieta: 'Białko', kolor: KOLOR_MAKRO.bialko },
+  { etykieta: 'Tłuszcz', kolor: KOLOR_MAKRO.tluszcz },
+  { etykieta: 'Węglowodany', kolor: KOLOR_MAKRO.wegle },
+];
+
+export default function EkranPodstawyZywieniowej() {
+  const motyw = useTheme();
+  const { przewijanie, zapiszUklad, przewinDo } = useNawigacjaSekcji();
+
   return (
-    <Karta>
-      <View style={styles.naglowekTypu}>
-        <View style={[styles.kropka, { backgroundColor: kolor }]} />
-        <ThemedText type="smallBold" style={{ color: kolor }}>
-          {etykieta}
+    <Ekran
+      tytul="Podstawa żywieniowa przepisów"
+      refPrzewijania={przewijanie}
+      naglowekStaly={<PasekSekcji pozycje={SEKCJE} onWybor={przewinDo} />}>
+      <HeroArtykulu
+        ikona="restaurant"
+        odznaka="Podstawa żywieniowa"
+        tytul="Na jakich zasadach dobierane są dania i składniki"
+        lead="Przepisy i baza składników w Talerzu nie zostały zbudowane wyłącznie na podstawie kalorii i makroskładników. Punktem wyjścia są aktualne zalecenia żywieniowe oraz wyniki badań dotyczących sposobu odżywiania i zdrowia."
+      />
+
+      <NaglowekSekcji
+        nadtytul="Na czym opierają się dania"
+        tytul="Aktualne zalecenia, nie sama tabela wartości odżywczych."
+        onUklad={zapiszUklad('podstawa')}
+      />
+      <Karta>
+        <View style={[styles.odznakaZrodla, { backgroundColor: `${motyw.accent}14` }]}>
+          <ThemedText type="smallBold" style={[styles.odznakaTekst, { color: motyw.accent }]}>
+            DIETARY GUIDELINES FOR AMERICANS 2025–2030
+          </ThemedText>
+        </View>
+        <ThemedText type="small" themeColor="textSecondary">
+          Jedną z głównych podstaw są wytyczne opracowane przez USDA i HHS. Aktualna edycja kładzie
+          nacisk przede wszystkim na pełnowartościową, możliwie mało przetworzoną żywność oraz
+          ograniczanie produktów wysoko przetworzonych, cukrów dodanych i rafinowanych
+          węglowodanów.
         </ThemedText>
-      </View>
+      </Karta>
+
+      <NaglowekSekcji
+        nadtytul="Wybory przy budowaniu bazy"
+        tytul="Co trafia do przepisów, a co zostaje poza nimi."
+        onUklad={zapiszUklad('wybory')}
+      />
+      <Karta>
+        <ThemedText type="smallBold" themeColor="accent" style={styles.tytulListy}>
+          PREFERUJEMY
+        </ThemedText>
+        <ListaPunktow pozycje={PREFEROWANE} wariant="tak" />
+      </Karta>
+      <Karta>
+        <ThemedText type="smallBold" themeColor="textSecondary" style={styles.tytulListy}>
+          STARAMY SIĘ UNIKAĆ
+        </ThemedText>
+        <ListaPunktow pozycje={UNIKANE} wariant="nie" />
+      </Karta>
+      <Uwaga
+        tytul="To nie jest lista produktów zakazanych"
+        tekst="Liczy się cały sposób odżywiania i to, co jemy regularnie. Aktualne zalecenia żywieniowe również traktują dietę jako całościowy wzorzec, a nie listę obowiązkowych konkretnych posiłków."
+      />
+
+      <NaglowekSekcji
+        nadtytul="Dobre danie"
+        tytul="Danie ma być nie tylko „zdrowe na papierze”."
+        onUklad={zapiszUklad('danie')}
+      />
       <ThemedText type="small" themeColor="textSecondary">
-        {opis}
+        Przy tworzeniu przepisów bierzemy pod uwagę również to, czy posiłek:
       </ThemedText>
-    </Karta>
-  );
-}
-
-function ChipAmdr({ etykieta, kolor, zakres }: { etykieta: string; kolor: string; zakres: Zakres }) {
-  return (
-    <View style={[styles.chip, { backgroundColor: `${kolor}1F` }]}>
-      <ThemedText type="small" style={{ color: kolor }}>
-        {etykieta}
+      <SiatkaKafli kafle={OCENA_DANIA} />
+      <ThemedText type="small" themeColor="textSecondary">
+        Talerz nie ma tworzyć idealnej diety laboratoryjnej. Ma pomagać przez większość dni
+        wybierać proste, sycące i wartościowe posiłki, które rzeczywiście chce się ugotować
+        i zjeść.
       </ThemedText>
-      <ThemedText type="smallBold" style={[styles.chipWartosc, { color: kolor }]}>
-        {zakres[0]}–{zakres[1]}%
-      </ThemedText>
-    </View>
-  );
-}
 
-function KartaGrupy({ grupa }: { grupa: GrupaWiekowa }) {
-  return (
-    <Karta>
-      <ThemedText type="smallBold">{grupa.wiek}</ThemedText>
-      <View style={styles.chipy}>
-        <ChipAmdr etykieta="Białko" kolor={KOLOR_MAKRO.bialko} zakres={grupa.bialko} />
-        <ChipAmdr etykieta="Tłuszcz" kolor={KOLOR_MAKRO.tluszcz} zakres={grupa.tluszcz} />
-        <ChipAmdr etykieta="Węglowodany" kolor={KOLOR_MAKRO.wegle} zakres={grupa.wegle} />
-      </View>
-    </Karta>
-  );
-}
-
-export default function EkranMakroskladnikow() {
-  return (
-    <Ekran tytul="Makroskładniki" podtytul="Zakresy AMDR oraz aktualne zalecenia żywieniowe USA">
+      <NaglowekSekcji
+        nadtytul="Kalorie i makroskładniki"
+        tytul="Liczby pomagają dobrać porcję, nie ocenić produkt."
+        onUklad={zapiszUklad('makro')}
+      />
       <Karta>
         <ThemedText type="small" themeColor="textSecondary">
-          <ThemedText type="smallBold" themeColor="accent">
-            AMDR — Acceptable Macronutrient Distribution Ranges{' '}
-          </ThemedText>
-          określa, jaka część całkowitej energii może pochodzić z białka, tłuszczu
-          i węglowodanów. AMDR jest zakresem procentowym — nie jest indywidualnym celem
-          spożycia w gramach.
+          Przy bilansowaniu posiłków wykorzystywane są również Dietary Reference Intakes (DRI)
+          opracowane przez National Academies oraz zakresy AMDR — Acceptable Macronutrient
+          Distribution Ranges.
         </ThemedText>
-      </Karta>
-
-      <TypMakro
-        etykieta="Białko"
-        kolor={KOLOR_MAKRO.bialko}
-        opis="Dostarcza aminokwasów potrzebnych m.in. do budowy i utrzymania tkanek, w tym mięśni."
-      />
-      <TypMakro
-        etykieta="Tłuszcz"
-        kolor={KOLOR_MAKRO.tluszcz}
-        opis="Jest potrzebny m.in. do budowy błon komórkowych i wchłaniania witamin A, D, E i K."
-      />
-      <TypMakro
-        etykieta="Węglowodany"
-        kolor={KOLOR_MAKRO.wegle}
-        opis="Są ważnym źródłem energii. Warto wybierać przede wszystkim produkty mało przetworzone i bogate w błonnik."
-      />
-
-      <Karta style={{ ...styles.kartaBialka, backgroundColor: `${KOLOR_MAKRO.bialko}14` }}>
-        <View style={styles.wartoscBialka}>
-          <ThemedText type="title" style={[styles.liczbaBialka, { color: KOLOR_MAKRO.bialko }]}>
-            1,2–1,6
-          </ThemedText>
-          <ThemedText type="small" themeColor="textSecondary">
-            g/kg masy ciała / dobę
-          </ThemedText>
-        </View>
-        <View style={styles.opisBialka}>
-          <ThemedText type="smallBold" style={{ color: KOLOR_MAKRO.bialko }}>
-            Białko w Dietary Guidelines for Americans 2025–2030
-          </ThemedText>
-          <ThemedText type="small" themeColor="textSecondary">
-            Aktualne zalecenia USA wskazują na priorytetowe uwzględnianie wartościowych źródeł
-            białka w posiłkach. Podany zakres należy dostosować do indywidualnego zapotrzebowania
-            energetycznego.
-          </ThemedText>
-        </View>
-      </Karta>
-
-      <ThemedText type="smallBold" themeColor="textSecondary">
-        ZAKRESY AMDR WG WIEKU
-      </ThemedText>
-
-      {GRUPY.map((g) => (
-        <KartaGrupy key={g.wiek} grupa={g} />
-      ))}
-
-      <Karta style={{ ...styles.kartaStarsi, borderLeftColor: KOLOR_MAKRO.bialko }}>
-        <ThemedText type="smallBold" style={{ color: KOLOR_MAKRO.bialko }}>
-          Starsze osoby dorosłe
-        </ThemedText>
-        <ThemedText type="small" themeColor="textSecondary">
-          Zakres AMDR pozostaje taki sam jak u pozostałych dorosłych. Z wiekiem szczególnego
-          znaczenia nabiera odpowiednia ilość białka i wybór wartościowych jego źródeł, ponieważ
-          zapotrzebowanie energetyczne może się zmniejszać, podczas gdy potrzeba dostarczenia
-          białka pozostaje wysoka.
-        </ThemedText>
-      </Karta>
-
-      <ThemedText type="smallBold" themeColor="textSecondary">
-        JAK PRZEŁOŻYĆ TO NA CODZIENNE JEDZENIE?
-      </ThemedText>
-
-      <Karta>
-        <ThemedText type="small" themeColor="textSecondary">
-          Aktualne Dietary Guidelines for Americans 2025–2030 kładą nacisk przede wszystkim na:
-        </ThemedText>
-        <View style={styles.lista}>
-          {WSKAZOWKI.map((w) => (
-            <View key={w} style={styles.pozycjaListy}>
-              <ThemedText type="small" style={{ color: KOLOR_MAKRO.bialko }}>
-                •
-              </ThemedText>
-              <ThemedText type="small" style={styles.tekstListy}>
-                {w}
+        <View style={styles.chipy}>
+          {MAKRO_CHIPY.map((c) => (
+            <View key={c.etykieta} style={[styles.chip, { backgroundColor: `${c.kolor}1F` }]}>
+              <View style={[styles.kropka, { backgroundColor: c.kolor }]} />
+              <ThemedText type="smallBold" style={[styles.chipTekst, { color: c.kolor }]}>
+                {c.etykieta}
               </ThemedText>
             </View>
           ))}
         </View>
-      </Karta>
-
-      <Karta>
         <ThemedText type="small" themeColor="textSecondary">
-          <ThemedText type="smallBold" themeColor="accent">
-            Ważne:{' '}
-          </ThemedText>
-          AMDR i cel białka w g/kg opisują dwie różne rzeczy. AMDR określa procent energii
-          z makroskładników, natomiast wartość g/kg służy do określenia ilości białka względem
-          masy ciała.
+          AMDR określają zakres udziału poszczególnych makroskładników w całkowitej energii diety.
+          Aktualne zalecenia dodatkowo zwracają uwagę na odpowiednią podaż białka i wartościowe
+          jego źródła.
         </ThemedText>
       </Karta>
 
-      <ThemedText type="small" themeColor="textSecondary">
-        Podstawa: Dietary Reference Intakes — Acceptable Macronutrient Distribution Ranges (AMDR);
-        Dietary Guidelines for Americans 2025–2030, USDA/HHS, 2026.
-      </ThemedText>
+      <Wyroznienie
+        tekst="Najpierw wybieramy dobre jedzenie. Dopiero później dopasowujemy jego ilość do potrzeb konkretnej osoby."
+        podtekst="Kalorie, białko, tłuszcz i węglowodany pomagają określić porcję. Nie powinny jednak decydować o jakości produktu."
+      />
+
+      <Zrodla
+        pozycje={[
+          'Dietary Guidelines for Americans 2025–2030, USDA/HHS',
+          'Dietary Reference Intakes, National Academies of Sciences, Engineering, and Medicine',
+          'USDA Nutrition Evidence Systematic Review',
+        ]}
+      />
     </Ekran>
   );
 }
 
 const styles = StyleSheet.create({
-  naglowekTypu: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: Spacing.two,
+  odznakaZrodla: {
+    alignSelf: 'flex-start',
+    borderRadius: 999,
+    paddingVertical: 6,
+    paddingHorizontal: Spacing.three,
   },
-  kropka: {
-    width: 10,
-    height: 10,
-    borderRadius: 5,
+  odznakaTekst: {
+    fontSize: 11,
+    letterSpacing: 0.6,
   },
-  kartaBialka: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: Spacing.three,
-  },
-  wartoscBialka: {
-    alignItems: 'center',
-    gap: 2,
-  },
-  liczbaBialka: {
-    fontSize: 25,
-    lineHeight: 28,
-  },
-  opisBialka: {
-    flex: 1,
-    gap: Spacing.half,
+  tytulListy: {
+    fontSize: 11,
+    letterSpacing: 0.8,
   },
   chipy: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
     gap: Spacing.two,
   },
   chip: {
-    flex: 1,
-    borderRadius: Spacing.two,
-    padding: Spacing.two,
-    gap: 2,
-  },
-  chipWartosc: {
-    fontSize: 16,
-  },
-  kartaStarsi: {
-    borderLeftWidth: 4,
-  },
-  lista: {
-    gap: Spacing.one,
-  },
-  pozycjaListy: {
     flexDirection: 'row',
-    gap: Spacing.two,
+    alignItems: 'center',
+    gap: Spacing.one,
+    borderRadius: 999,
+    paddingVertical: 6,
+    paddingHorizontal: Spacing.two,
   },
-  tekstListy: {
-    flex: 1,
+  kropka: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+  },
+  chipTekst: {
+    fontSize: 12,
   },
 });

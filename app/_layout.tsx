@@ -150,7 +150,8 @@ const POZYCJE_WIECEJ = [
     // nie pokaże.
     wymagaModeratora: true,
   },
-  { trasa: '/makroskladniki', ikona: 'pie-chart' as const, tytul: 'Makroskładniki – podstawa wg aktualnych zaleceń USA' },
+  { trasa: '/makroskladniki', ikona: 'pie-chart' as const, tytul: 'Podstawa żywieniowa przepisów' },
+  { trasa: '/dlaczego-talerz', ikona: 'sparkles' as const, tytul: 'Dlaczego Talerz' },
   { trasa: '/instrukcja', ikona: 'help-circle' as const, tytul: 'Instrukcja' },
 ] satisfies { trasa: `/${string}`; ikona: keyof typeof Ionicons.glyphMap; tytul: string; wymagaModeratora?: boolean }[];
 
@@ -254,6 +255,7 @@ function Zakladki({ kolory }: { kolory: Paleta }) {
         <Tabs.Screen name="przepisy-makro" options={{ href: null }} />
         <Tabs.Screen name="role-skladnikow" options={{ href: null }} />
         <Tabs.Screen name="makroskladniki" options={{ href: null }} />
+        <Tabs.Screen name="dlaczego-talerz" options={{ href: null }} />
         <Tabs.Screen name="przepisy-import-eksport" options={{ href: null }} />
         <Tabs.Screen name="profil-formularz" options={{ href: null }} />
         <Tabs.Screen name="przepis-formularz" options={{ href: null }} />
