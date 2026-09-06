@@ -1,6 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { router, Tabs } from 'expo-router';
+import { DarkTheme, DefaultTheme, router, Tabs, ThemeProvider } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useCallback, useEffect, useState } from 'react';
 import { ActivityIndicator, Pressable, StyleSheet, View } from 'react-native';
