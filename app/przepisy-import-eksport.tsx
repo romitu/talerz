@@ -377,7 +377,7 @@ export default function EkranImportEksportPrzepisow() {
           </View>
         )}
 
-        {!wybranyPrzepisId && fraza && przepisyPasujace.length === 0 && (
+        {!wybranyPrzepisId && fraza !== '' && przepisyPasujace.length === 0 && (
           <ThemedText type="small" themeColor="textSecondary">
             Żaden przepis nie pasuje do „{szukajPrzepisu}”.
           </ThemedText>

@@ -236,6 +236,13 @@ const PYTANIA: Pytanie[] = [
     ],
   },
   {
+    pytanie: 'Czy mogę dodawać przepisy?',
+    bloki: [
+      { rodzaj: 'tekst', tresc: 'Tak. W tym celu wyeksportuj najbardziej podobny przepis do tego, który chcesz przygotować, do pliku Excel. Zmień w pliku nazwę potrawy na własną i w zasadzie możesz od razu zaimportować go z powrotem jako swój prywatny przepis, a następnie edytować jego składniki w aplikacji.' },
+      { rodzaj: 'tekst', tresc: 'Eksport i import znajdziesz na ekranie „Import / eksport przepisów” dostępnym z listy przepisów.' },
+    ],
+  },
+  {
     pytanie: 'Ile białka, węglowodanów, tłuszczu i błonnika?',
     bloki: [
       { rodzaj: 'tekst', tresc: 'Nie istnieje jedna idealna proporcja odpowiednia dla wszystkich. Talerz traktuje makroskładniki jako zakresy, a nie jedną obowiązkową wartość. Dla zdrowej osoby dorosłej dobrym europejskim punktem odniesienia są wartości EFSA: węglowodany około 45–60% energii, tłuszcz około 20–35% energii, białko 0,83 g/kg masy ciała na dobę jako populacyjna wartość referencyjna i około 25 g błonnika dziennie.' },
