@@ -264,10 +264,12 @@ export default function EkranZakupow() {
   }
 
   /*
-    Dopóki jest tu coś niekupionego, dział wisi NAD sekcją „poprzednia
-    sesja" — inaczej rzeczy spoza kuchni ginęłyby na samym dole listy, pod
-    już zrealizowanym jedzeniem. Gdy jest pusty, wraca na koniec (jedyne
-    miejsce, w którym da się cokolwiek dopisać, i tak zawsze widoczny).
+    Dopóki jest tu coś niekupionego, dział wisi NA GÓRZE aktualnej listy —
+    tak samo jak dowolny inny niedokończony dział (patrz sortowanie w
+    `dzialyDoKupienia`). Inaczej rzeczy spoza kuchni ginęłyby pod już
+    odhaczonym jedzeniem, które zjechało na dół. Gdy jest pusty, wraca na
+    koniec (jedyne miejsce, w którym da się cokolwiek dopisać, i tak zawsze
+    widoczny).
   */
   const dzialReczny = (
     <Karta>
@@ -365,6 +367,8 @@ export default function EkranZakupow() {
         </ThemedText>
       )}
 
+      {reczne.length > 0 && dzialReczny}
+
       {dzialyDoKupienia.map(({ dzial, pozycje: wDziale }) => (
         <Karta key={`do-kupienia-${dzial.nazwa}`}>
           <ThemedText type="smallBold" themeColor="textSecondary">
@@ -399,8 +403,6 @@ export default function EkranZakupow() {
           })}
         </Karta>
       ))}
-
-      {reczne.length > 0 && dzialReczny}
 
       {zrealizowaneSkladniki.length > 0 && (
         <ThemedText type="smallBold" themeColor="textSecondary">
