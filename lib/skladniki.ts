@@ -184,18 +184,19 @@ export function ostrzezenieOKaloriach(dane: Partial<DaneSkladnika>): string | nu
   );
 }
 
-/** W jakich przepisach i w jakiej ilości użyto poszczególnych składników. */
+/** Danie, w którym użyto składnika. */
 export type UzycieWPrzepisie = {
+  id: string;
   nazwa: string;
-  gramy: number;
 };
 
 export type UzycieSkladnika = {
+  /** Każdy przepis raz, alfabetycznie. */
   przepisy: UzycieWPrzepisie[];
 };
 
 /**
- * Zwraca mapę: identyfikator składnika -> przepisy, w których go użyto.
+ * Zwraca mapę: identyfikator składnika -> dania, w których go użyto.
  *
  * Dwa zapytania, nie jedno: składnik może siedzieć w zwykłym przepisie
  * (`przepis_skladniki`) ALBO w zrzucie wariantu przeskalowanego kalorycznie
@@ -205,49 +206,60 @@ export type UzycieSkladnika = {
  * tabeli dawało fałszywe „0 użyć” na ekranie i surowy błąd bazy (23503)
  * zamiast zrozumiałego komunikatu z listą dań.
  *
+ * Wariant liczy się jako jego przepis źródłowy — każde wpisanie dania do
+ * planu zapisuje nowy wariant, więc inaczej jedno danie dawało kilka
+ * linijek. Zwijamy po id przepisu, NIE po nazwie: dwa różne przepisy
+ * o tej samej nazwie mają być widoczne, żeby dało się je wyłapać.
+ *
  * Widoczność przepisów i wariantów ograniczają reguły dostępu w bazie,
  * więc zwykły użytkownik zobaczy tylko te, do których ma prawo.
  */
 export async function pobierzUzycia(): Promise<Map<string, UzycieSkladnika>> {
   const [zwykle, skalowane] = await Promise.all([
-    supabase.from('przepis_skladniki').select('skladnik_id, gramy, przepisy (nazwa)'),
+    supabase.from('przepis_skladniki').select('skladnik_id, przepisy (id, nazwa)'),
     supabase
       .from('przepisy_skalowane_skladniki')
-      .select('skladnik_id, gramy, przepisy_skalowane (przepisy (nazwa))'),
+      .select('skladnik_id, przepisy_skalowane (przepisy (id, nazwa))'),
   ]);
 
   if (zwykle.error) throw zwykle.error;
   if (skalowane.error) throw skalowane.error;
 
-  const mapa = new Map<string, UzycieSkladnika>();
+  type Przepis = { id: string; nazwa: string };
+  function jeden<T>(x: T | T[] | null | undefined): T | null {
+    return (Array.isArray(x) ? x[0] : x) ?? null;
+  }
 
-  function dodaj(id: string, nazwa: string | undefined, gramy: number) {
-    if (!nazwa) return;
-    const wpis = mapa.get(id) ?? { przepisy: [] };
-    wpis.przepisy.push({ nazwa, gramy });
-    mapa.set(id, wpis);
+  // skladnik_id → (id przepisu → przepis)
+  const zebrane = new Map<string, Map<string, UzycieWPrzepisie>>();
+
+  function dodaj(skladnikId: string, przepis: Przepis | null) {
+    if (!przepis) return;
+    const dania = zebrane.get(skladnikId) ?? new Map<string, UzycieWPrzepisie>();
+    dania.set(przepis.id, { id: przepis.id, nazwa: przepis.nazwa });
+    zebrane.set(skladnikId, dania);
   }
 
   for (const wiersz of zwykle.data ?? []) {
-    const przepis = wiersz.przepisy as { nazwa: string } | { nazwa: string }[] | null;
-    const nazwa = Array.isArray(przepis) ? przepis[0]?.nazwa : przepis?.nazwa;
-    dodaj(wiersz.skladnik_id as string, nazwa, Number(wiersz.gramy));
+    dodaj(wiersz.skladnik_id as string, jeden(wiersz.przepisy as Przepis | Przepis[] | null));
   }
 
   for (const wiersz of skalowane.data ?? []) {
-    const skalowany = wiersz.przepisy_skalowane as
-      | { przepisy: { nazwa: string } | { nazwa: string }[] | null }
-      | { przepisy: { nazwa: string } | { nazwa: string }[] | null }[]
-      | null;
-    const jeden = Array.isArray(skalowany) ? skalowany[0] : skalowany;
-    const przepis = jeden?.przepisy ?? null;
-    const nazwa = Array.isArray(przepis) ? przepis[0]?.nazwa : przepis?.nazwa;
-    dodaj(wiersz.skladnik_id as string, nazwa, Number(wiersz.gramy));
+    const skalowany = jeden(
+      wiersz.przepisy_skalowane as
+        | { przepisy: Przepis | Przepis[] | null }
+        | { przepisy: Przepis | Przepis[] | null }[]
+        | null
+    );
+    dodaj(wiersz.skladnik_id as string, jeden(skalowany?.przepisy));
   }
 
   // Alfabetycznie, żeby kolejność nie zmieniała się przy każdym odświeżeniu.
-  for (const wpis of mapa.values()) {
-    wpis.przepisy.sort((a, b) => a.nazwa.localeCompare(b.nazwa, 'pl'));
+  const mapa = new Map<string, UzycieSkladnika>();
+  for (const [id, dania] of zebrane) {
+    mapa.set(id, {
+      przepisy: [...dania.values()].sort((a, b) => a.nazwa.localeCompare(b.nazwa, 'pl')),
+    });
   }
 
   return mapa;

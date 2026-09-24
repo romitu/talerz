@@ -445,8 +445,8 @@ export default function EkranSkladnikow() {
                 zmieniłoby makro tych dań, więc baza na to nie pozwoli.
               </ThemedText>
               {uzycia.get(doUsuniecia.id)?.przepisy.map((p) => (
-                <ThemedText key={`${p.nazwa}-${p.gramy}`} type="small">
-                  • {p.nazwa} — {p.gramy} g
+                <ThemedText key={p.id} type="small">
+                  • {p.nazwa}
                 </ThemedText>
               ))}
               <ThemedText type="small" themeColor="textSecondary">
@@ -632,8 +632,8 @@ export default function EkranSkladnikow() {
                       UŻYTY W DANIACH
                     </ThemedText>
                     {uzycia.get(s.id)?.przepisy.map((p) => (
-                      <ThemedText key={`${p.nazwa}-${p.gramy}`} type="small">
-                        • {p.nazwa} — {p.gramy} g
+                      <ThemedText key={p.id} type="small">
+                        • {p.nazwa}
                       </ThemedText>
                     ))}
                   </View>
