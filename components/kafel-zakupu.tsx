@@ -21,7 +21,7 @@ export function SiatkaKafli({ children }: { children: ReactNode }) {
   );
 }
 
-const OPIS_ZRODLA: Record<ZrodloZdjecia, { tytul: string; opis: string }> = {
+export const OPIS_ZRODLA: Record<ZrodloZdjecia, { tytul: string; opis: string }> = {
   ai: { tytul: 'Grafika AI', opis: 'Wygenerowana, poglądowa' },
   wlasne: { tytul: 'Zdjęcie własne', opis: 'Dodane przez użytkownika' },
 };
@@ -33,7 +33,7 @@ const OPIS_ZRODLA: Record<ZrodloZdjecia, { tytul: string; opis: string }> = {
  * dymek po najechaniu myszką (przeglądarka) albo po dotknięciu (telefon).
  * Na telefonie dymek chowa się sam po chwili, bo nie ma „zjechania” palcem.
  */
-function ZnaczekZrodla({ zrodlo }: { zrodlo: ZrodloZdjecia }) {
+export function ZnaczekZrodla({ zrodlo }: { zrodlo: ZrodloZdjecia }) {
   const [widoczny, setWidoczny] = useState(false);
 
   useEffect(() => {

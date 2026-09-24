@@ -150,6 +150,13 @@ const POZYCJE_WIECEJ = [
     // nie pokaże.
     wymagaModeratora: true,
   },
+  {
+    trasa: '/zdjecia-skladnikow',
+    ikona: 'images' as const,
+    tytul: 'Zdjęcia składników',
+    // Zapis chronią reguły w bazie (migracja 0045) — zwykłe konto i tak nic tu nie zmieni.
+    wymagaModeratora: true,
+  },
   { trasa: '/makroskladniki', ikona: 'pie-chart' as const, tytul: 'Podstawa żywieniowa przepisów' },
   { trasa: '/dlaczego-talerz', ikona: 'sparkles' as const, tytul: 'Dlaczego Talerz' },
   { trasa: '/instrukcja', ikona: 'help-circle' as const, tytul: 'Instrukcja' },
@@ -254,6 +261,7 @@ function Zakladki({ kolory }: { kolory: Paleta }) {
         <Tabs.Screen name="skladniki" options={{ href: null }} />
         <Tabs.Screen name="przepisy-makro" options={{ href: null }} />
         <Tabs.Screen name="role-skladnikow" options={{ href: null }} />
+        <Tabs.Screen name="zdjecia-skladnikow" options={{ href: null }} />
         <Tabs.Screen name="makroskladniki" options={{ href: null }} />
         <Tabs.Screen name="dlaczego-talerz" options={{ href: null }} />
         <Tabs.Screen name="przepisy-import-eksport" options={{ href: null }} />

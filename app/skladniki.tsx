@@ -1,5 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
-import { useLocalSearchParams } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, useWindowDimensions, View } from 'react-native';
 
@@ -397,6 +397,17 @@ export default function EkranSkladnikow() {
             tytul={trybEdycji ? 'Zakończ edycję' : 'Edytuj w tabeli'}
             wariant={trybEdycji ? 'glowny' : 'poboczny'}
             onPress={() => setTrybEdycji((p) => !p)}
+            style={styles.przyciskPaska}
+          />
+        )}
+        {mozeModerowac && (
+          <Przycisk
+            tytul="Zdjęcia"
+            ikona="images-outline"
+            wariant="poboczny"
+            onPress={() =>
+              router.push({ pathname: '/zdjecia-skladnikow', params: { powrot: '/skladniki' } })
+            }
             style={styles.przyciskPaska}
           />
         )}
