@@ -156,6 +156,38 @@ dojdą.
 
 ---
 
+## Zdjęcia składników
+
+Zdjęcia do listy zakupów. Najpierw jednorazowo migracja
+`supabase/migrations/0045_zdjecia_skladnikow.sql` (SQL Editor w Supabase).
+
+Pliki kładziesz do folderu `zdjecia-skladnikow/` w głównym katalogu projektu:
+
+```
+zdjecia-skladnikow/
+  AI/        ← grafiki wygenerowane — na liście znaczek „AI”
+  wlasne/    ← zdjęcia zrobione samemu — na liście ikona zdjęcia
+```
+
+Nazwa pliku to nazwa składnika, numer z przodu jest pomijany:
+`025 - Cebula, surowa.png`. Wielkość liter, ogonki i przecinki nie mają
+znaczenia. Format: PNG, JPG albo WEBP — skrypt i tak przytnie do 480×480
+i zapisze jako JPG.
+
+```
+node narzedzia/wgraj-zdjecia-skladnikow.mjs --podglad
+node narzedzia/wgraj-zdjecia-skladnikow.mjs
+```
+
+Podgląd niczego nie wysyła i pokazuje pliki, które nie pasują do żadnego
+składnika (z podpowiedzią najbliższej nazwy), oraz składniki, które nie mają
+jeszcze zdjęcia. Skrypt można puszczać wiele razy — niezmienione zdjęcia
+są pomijane, zmienione podmieniane.
+
+Folder `zdjecia-skladnikow/` nie trafia do Gita.
+
+---
+
 ## Testy
 
 ```

@@ -18,6 +18,9 @@ import { supabase } from './supabase';
  */
 export type ZrodloTyp = 'partia' | 'pozycja';
 
+/** Skąd zdjęcie składnika: grafika AI (poglądowa) albo zdjęcie własne. */
+export type ZrodloZdjecia = 'ai' | 'wlasne';
+
 export type PozycjaZakupow = {
   skladnik_id: string;
   zrodlo_typ: ZrodloTyp;
@@ -33,6 +36,9 @@ export type PozycjaZakupow = {
   reszta_g: number | null;
   /** W ilu daniach składnik wystąpi. */
   dania: string[];
+  /** Ścieżka w zasobniku „zdjecia-skladnikow” albo null (migracja 0045). */
+  zdjecie: string | null;
+  zdjecie_zrodlo: ZrodloZdjecia | null;
   /**
    * Danie było ugotowane przed dzisiaj — skoro powstało zgodnie z planem,
    * składniki musiały już być kupione, niezależnie czy ktoś zdążył odhaczyć
@@ -59,6 +65,8 @@ export type PozycjaSkonsolidowana = {
   opakowan: number | null;
   reszta_g: number | null;
   dania: string[];
+  zdjecie: string | null;
+  zdjecie_zrodlo: ZrodloZdjecia | null;
   /** Wszystkie źródła zsumowane w tę pozycję — odhaczenie musi ustawić je WSZYSTKIE naraz. */
   zrodla: { zrodlo_typ: ZrodloTyp; zrodlo_id: string }[];
 };
@@ -85,6 +93,8 @@ export function skonsolidujSkladniki(pozycje: PozycjaZakupow[]): PozycjaSkonsoli
       opakowan: null,
       reszta_g: null,
       dania: [],
+      zdjecie: p.zdjecie,
+      zdjecie_zrodlo: p.zdjecie_zrodlo,
       zrodla: [],
     };
     wpis.gramy += p.gramy;
@@ -184,7 +194,13 @@ export async function pobierzListeZakupow(dzisiaj: string): Promise<PozycjaZakup
   const idPrzepisow = [...new Set(zwykle.map((p) => p.przepis_id as string))];
   const idSkalowanych = [...new Set(skalowane.map((p) => p.przepis_skalowany_id as string))];
 
-  type DaneSkladnika = { nazwa: string; tagi: string[]; gramatura_opakowania_g: number | null };
+  type DaneSkladnika = {
+    nazwa: string;
+    tagi: string[];
+    gramatura_opakowania_g: number | null;
+    zdjecie: string | null;
+    zdjecie_zrodlo: ZrodloZdjecia | null;
+  };
   // Supabase zwraca powiązanie raz jako obiekt, raz jako jednoelementową listę.
   function jedenSkladnik(surowy: unknown): DaneSkladnika | null {
     const x = surowy as DaneSkladnika | DaneSkladnika[] | null;
@@ -195,7 +211,7 @@ export async function pobierzListeZakupow(dzisiaj: string): Promise<PozycjaZakup
     idPrzepisow.length > 0
       ? supabase
           .from('przepis_skladniki')
-          .select('przepis_id, skladnik_id, gramy, skladniki (nazwa, tagi, gramatura_opakowania_g)')
+          .select('przepis_id, skladnik_id, gramy, skladniki (nazwa, tagi, gramatura_opakowania_g, zdjecie, zdjecie_zrodlo)')
           .in('przepis_id', idPrzepisow)
       : Promise.resolve({ data: [], error: null }),
     idPrzepisow.length > 0
@@ -205,7 +221,7 @@ export async function pobierzListeZakupow(dzisiaj: string): Promise<PozycjaZakup
       ? supabase
           .from('przepisy_skalowane_skladniki')
           .select(
-            'przepis_skalowany_id, skladnik_id, gramy, skladniki (nazwa, tagi, gramatura_opakowania_g)'
+            'przepis_skalowany_id, skladnik_id, gramy, skladniki (nazwa, tagi, gramatura_opakowania_g, zdjecie, zdjecie_zrodlo)'
           )
           .in('przepis_skalowany_id', idSkalowanych)
       : Promise.resolve({ data: [], error: null }),
@@ -246,6 +262,8 @@ export async function pobierzListeZakupow(dzisiaj: string): Promise<PozycjaZakup
       opakowan: null,
       reszta_g: null,
       dania: [],
+      zdjecie: dane.zdjecie ?? null,
+      zdjecie_zrodlo: dane.zdjecie_zrodlo ?? null,
       zrealizowano_automatycznie: zrealizowanoAutomatycznie,
     };
     wpis.gramy += gramy;

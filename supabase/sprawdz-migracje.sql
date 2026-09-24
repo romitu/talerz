@@ -295,6 +295,15 @@ with sprawdzenia as (
          and c.relkind in ('r', 'p', 'v', 'm')
          and not has_table_privilege('authenticated', c.oid, 'select')
     )
+  union all
+  select
+    '0045_zdjecia_skladnikow',
+    'kolumny skladniki.zdjecie / zdjecie_zrodlo i zasobnik zdjecia-skladnikow',
+    exists (
+      select 1 from information_schema.columns
+       where table_name = 'skladniki' and column_name = 'zdjecie_zrodlo'
+    )
+    and exists (select 1 from storage.buckets where id = 'zdjecia-skladnikow')
 )
 select
   migracja,

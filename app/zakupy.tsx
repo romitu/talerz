@@ -1,20 +1,18 @@
-import { Ionicons } from '@expo/vector-icons';
 import { useFocusEffect, useLocalSearchParams } from 'expo-router';
 import { useCallback, useMemo, useState } from 'react';
-import { Pressable, StyleSheet, View } from 'react-native';
 
 import { DopiszProdukt } from '@/components/dopisz-produkt';
 import { Ekran } from '@/components/ekran';
+import { KafelZakupu, SiatkaKafli } from '@/components/kafel-zakupu';
 import { Karta } from '@/components/karta';
 import { NaglowekZakupow } from '@/components/naglowek-zakupow';
 import { Przycisk } from '@/components/przycisk';
 import { ThemedText } from '@/components/themed-text';
-import { Spacing } from '@/constants/theme';
-import { useTheme } from '@/hooks/use-theme';
 import { komunikatBledu } from '@/lib/blad';
 import { wroc } from '@/lib/nawigacja';
 import { naDate } from '@/lib/plan';
 import { useSesja } from '@/lib/sesja';
+import { adresZdjeciaSkladnika } from '@/lib/zdjecia';
 import {
   dodajReczny,
   dzialDla,
@@ -56,7 +54,6 @@ function czyZrealizowany(p: PozycjaZakupow, przedSesja: Set<string>): boolean {
 
 export default function EkranZakupow() {
   const { powrot } = useLocalSearchParams<{ powrot?: string }>();
-  const motyw = useTheme();
   const { sesja } = useSesja();
   const kontoId = sesja?.user.id;
 
@@ -283,33 +280,20 @@ export default function EkranZakupow() {
           z planu, więc czekają tu, aż je kupisz.
         </ThemedText>
       ) : (
-        reczne.map((p) => (
-          <View key={p.id} style={[styles.pozycja, { borderColor: motyw.border }]}>
-            <Pressable
+        <SiatkaKafli>
+          {reczne.map((p) => (
+            <KafelZakupu
+              key={p.id}
+              nazwa={p.nazwa}
+              ilosc={p.ilosc}
+              zdjecie={null}
+              zrodlo={null}
+              zaznaczona={false}
               onPress={() => odhaczReczny(p)}
-              hitSlop={6}
-              accessibilityRole="checkbox"
-              accessibilityState={{ checked: false }}
-              accessibilityLabel={`Kupione: ${p.nazwa}`}>
-              <Ionicons name="square-outline" size={20} color={motyw.textSecondary} />
-            </Pressable>
-
-            <Pressable style={styles.trescPozycji} onPress={() => odhaczReczny(p)}>
-              <ThemedText type="smallBold">
-                {p.nazwa}
-                {p.ilosc ? ` — ${p.ilosc}` : ''}
-              </ThemedText>
-            </Pressable>
-
-            <Pressable
-              onPress={() => skasujReczny(p)}
-              hitSlop={8}
-              accessibilityRole="button"
-              accessibilityLabel={`Usuń ${p.nazwa} z listy`}>
-              <Ionicons name="close" size={18} color={motyw.textSecondary} />
-            </Pressable>
-          </View>
-        ))
+              onUsun={() => skasujReczny(p)}
+            />
+          ))}
+        </SiatkaKafli>
       )}
 
       {kontoId && (
@@ -375,32 +359,19 @@ export default function EkranZakupow() {
             {dzial.nazwa.toUpperCase()}
           </ThemedText>
 
-          {wDziale.map((p) => {
-            const zaznaczona = czyOdhaczonaWSesji(p);
-            return (
-              <Pressable
+          <SiatkaKafli>
+            {wDziale.map((p) => (
+              <KafelZakupu
                 key={p.skladnik_id}
+                nazwa={p.nazwa}
+                ilosc={opisIlosci(p.gramy)}
+                zdjecie={adresZdjeciaSkladnika(p.zdjecie)}
+                zrodlo={p.zdjecie_zrodlo}
+                zaznaczona={czyOdhaczonaWSesji(p)}
                 onPress={() => oznaczKupione(p)}
-                accessibilityRole="checkbox"
-                accessibilityState={{ checked: zaznaczona }}
-                style={({ pressed }) => [
-                  styles.pozycja,
-                  { borderColor: motyw.border },
-                  pressed && styles.wcisnieta,
-                ]}>
-                <Ionicons
-                  name={zaznaczona ? 'checkbox' : 'square-outline'}
-                  size={20}
-                  color={zaznaczona ? motyw.accent : motyw.textSecondary}
-                />
-                <View style={styles.trescPozycji}>
-                  <ThemedText type="smallBold" themeColor={zaznaczona ? 'textSecondary' : undefined}>
-                    {p.nazwa} — {opisIlosci(p.gramy)}
-                  </ThemedText>
-                </View>
-              </Pressable>
-            );
-          })}
+              />
+            ))}
+          </SiatkaKafli>
         </Karta>
       ))}
 
@@ -416,18 +387,18 @@ export default function EkranZakupow() {
             {dzial.nazwa.toUpperCase()}
           </ThemedText>
 
-          {wDziale.map((p) => (
-            <View
-              key={p.skladnik_id}
-              style={[styles.pozycja, { borderColor: motyw.border }]}>
-              <Ionicons name="checkbox" size={20} color={motyw.accent} />
-              <View style={styles.trescPozycji}>
-                <ThemedText type="small" themeColor="textSecondary">
-                  {p.nazwa} — {opisIlosci(p.gramy)}
-                </ThemedText>
-              </View>
-            </View>
-          ))}
+          <SiatkaKafli>
+            {wDziale.map((p) => (
+              <KafelZakupu
+                key={p.skladnik_id}
+                nazwa={p.nazwa}
+                ilosc={opisIlosci(p.gramy)}
+                zdjecie={adresZdjeciaSkladnika(p.zdjecie)}
+                zrodlo={p.zdjecie_zrodlo}
+                zaznaczona
+              />
+            ))}
+          </SiatkaKafli>
         </Karta>
       ))}
 
@@ -472,16 +443,3 @@ export default function EkranZakupow() {
     </Ekran>
   );
 }
-
-const styles = StyleSheet.create({
-  pozycja: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    gap: Spacing.two,
-    borderWidth: 1,
-    borderRadius: Spacing.two,
-    padding: Spacing.two,
-  },
-  trescPozycji: { flex: 1, gap: 2 },
-  wcisnieta: { opacity: 0.7 },
-});

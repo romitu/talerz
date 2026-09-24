@@ -3,8 +3,24 @@
   "configurations": [
     {
       "name": "talerz-web",
-      "url": "http://localhost:8081",
+      "runtimeExecutable": "npx.cmd",
+      "runtimeArgs": [
+        "expo",
+        "start",
+        "--web",
+        "--port",
+        "8081"
+      ],
       "port": 8081
+    },
+    {
+      "name": "makiety-html",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "-e",
+        "const h=require('http'),f=require('fs'),p=require('path');h.createServer((q,r)=>{const n=p.join(process.cwd(),decodeURIComponent(q.url.split('?')[0]));f.readFile(n,(e,d)=>{if(e){r.writeHead(404);return r.end('404')}r.writeHead(200,{'Content-Type':n.endsWith('.html')?'text/html; charset=utf-8':'application/octet-stream'});r.end(d)})}).listen(8765)"
+      ],
+      "port": 8765
     }
   ]
 }

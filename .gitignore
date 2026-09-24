@@ -50,3 +50,7 @@ supabase/testy/__pycache__/
 
 # klucze do skryptów pomocniczych
 .env.local
+
+# zdjęcia składników przed wgraniem (ok. 125 MB) — trafiają do Supabase Storage,
+# nie do repozytorium; wgrywa je narzedzia/wgraj-zdjecia-skladnikow.mjs
+zdjecia-skladnikow/

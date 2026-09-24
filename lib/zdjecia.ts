@@ -158,6 +158,18 @@ export function nazwaPliku(nazwaPrzepisu: string): string {
   return `${rdzenNazwy(nazwaPrzepisu)}-${Date.now()}.jpg`;
 }
 
+/**
+ * Publiczny adres zdjęcia składnika (lista zakupów) albo `null`.
+ *
+ * Osobny zasobnik niż przepisy — migracja 0045. Ścieżka zawiera skrót
+ * zawartości, więc podmiana zdjęcia zmienia adres i nie trafia na stary cache.
+ */
+export function adresZdjeciaSkladnika(sciezka: string | null | undefined): string | null {
+  if (!sciezka) return null;
+  const { data } = supabase.storage.from('zdjecia-skladnikow').getPublicUrl(sciezka);
+  return data.publicUrl ?? null;
+}
+
 /** Publiczny adres zdjęcia albo `null`, gdy przepis go nie ma. */
 export function adresZdjecia(sciezka: string | null | undefined): string | null {
   if (!sciezka) return null;
