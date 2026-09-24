@@ -32,8 +32,11 @@ export const OPIS_ZRODLA: Record<ZrodloZdjecia, { tytul: string; opis: string }>
  * Na stałe widać tylko ikonę („AI” albo obrazek) — pełny opis pokazuje
  * dymek po najechaniu myszką (przeglądarka) albo po dotknięciu (telefon).
  * Na telefonie dymek chowa się sam po chwili, bo nie ma „zjechania” palcem.
+ *
+ * `staly` — sama ikona, bez dymka i bez przycisku. Dla miejsc, gdzie cały
+ * kafel jest przyciskiem: przycisk w przycisku to błąd HTML w przeglądarce.
  */
-export function ZnaczekZrodla({ zrodlo }: { zrodlo: ZrodloZdjecia }) {
+export function ZnaczekZrodla({ zrodlo, staly = false }: { zrodlo: ZrodloZdjecia; staly?: boolean }) {
   const [widoczny, setWidoczny] = useState(false);
 
   useEffect(() => {
@@ -43,6 +46,20 @@ export function ZnaczekZrodla({ zrodlo }: { zrodlo: ZrodloZdjecia }) {
   }, [widoczny]);
 
   const { tytul, opis } = OPIS_ZRODLA[zrodlo];
+  const ikona =
+    zrodlo === 'ai' ? (
+      <ThemedText style={styles.znaczekTekst}>AI</ThemedText>
+    ) : (
+      <Ionicons name="image-outline" size={12} color="#4b514e" />
+    );
+
+  if (staly) {
+    return (
+      <View style={styles.znaczek} accessibilityLabel={tytul}>
+        {ikona}
+      </View>
+    );
+  }
 
   return (
     <>
@@ -60,11 +77,7 @@ export function ZnaczekZrodla({ zrodlo }: { zrodlo: ZrodloZdjecia }) {
         accessibilityRole="button"
         accessibilityLabel={tytul}
         style={styles.znaczek}>
-        {zrodlo === 'ai' ? (
-          <ThemedText style={styles.znaczekTekst}>AI</ThemedText>
-        ) : (
-          <Ionicons name="image-outline" size={12} color="#4b514e" />
-        )}
+        {ikona}
       </Pressable>
     </>
   );

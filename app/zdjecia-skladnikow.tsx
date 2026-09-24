@@ -437,7 +437,7 @@ export default function EkranZdjecSkladnikow() {
                     <ThemedText style={styles.brakTekst}>Brak zdjęcia</ThemedText>
                   </View>
                 )}
-                {s.zdjecie && s.zdjecie_zrodlo && <ZnaczekZrodla zrodlo={s.zdjecie_zrodlo} />}
+                {s.zdjecie && s.zdjecie_zrodlo && <ZnaczekZrodla zrodlo={s.zdjecie_zrodlo} staly />}
               </View>
               <ThemedText type="small" style={styles.podpis} numberOfLines={3}>
                 {s.nazwa}
