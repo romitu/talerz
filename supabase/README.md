@@ -54,6 +54,27 @@ Brakujące wgrywaj po kolei, od najniższego numeru.
 Objaw niewgranej migracji to komunikat w aplikacji w rodzaju
 `column przepisy.porcjowanie does not exist`.
 
+### Nowa tabela lub widok — zawsze z GRANT
+
+Od 30 października 2026 Supabase nie nadaje już automatycznie uprawnień
+do nowych tabel w schemacie `public`. Migracja, która tworzy tabelę albo
+widok, musi w tym samym pliku nadać dostęp:
+
+```sql
+grant select, insert, update, delete on public.nowa_tabela to authenticated;
+grant select, insert, update, delete on public.nowa_tabela to service_role;
+-- dla widoku: grant select on public.nowy_widok to authenticated, service_role;
+```
+
+Dotyczy to też widoku usuniętego i utworzonego od nowa (`drop view` +
+`create view`). Roli `anon` nie nadajemy nic — aplikacja działa wyłącznie
+po zalogowaniu. Granty tylko wpuszczają do tabeli; kto widzi które wiersze,
+dalej rozstrzyga RLS.
+
+Objaw brakującego grantu: `permission denied for table ...` w aplikacji,
+mimo poprawnych reguł RLS. Stan wszystkich tabel pokazuje dolna część
+migracji `0044_uprawnienia_data_api.sql`.
+
 ### Krok 3 — sprawdzenie
 
 W panelu **Table Editor** powinno być widocznych 19 tabel: `cele`, `czasy_sprzet`,

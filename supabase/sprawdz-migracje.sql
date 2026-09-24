@@ -283,6 +283,18 @@ with sprawdzenia as (
     '0040_trwalosc_wlasna',
     'wlasna (per-konto) trwalosc dania w lodowce',
     to_regclass('public.trwalosc_wlasna') is not null
+  union all
+  select
+    '0044_uprawnienia_data_api',
+    'kazda tabela i widok ma GRANT dla authenticated (Data API)',
+    not exists (
+      select 1
+        from pg_class c
+        join pg_namespace n on n.oid = c.relnamespace
+       where n.nspname = 'public'
+         and c.relkind in ('r', 'p', 'v', 'm')
+         and not has_table_privilege('authenticated', c.oid, 'select')
+    )
 )
 select
   migracja,
