@@ -1,0 +1,41 @@
+{
+  "nazwa": "Serek wiejski z pomidorem, ogórkiem i pestkami dyni",
+  "opis": "Serek wiejski ze świeżym pomidorem, chrupiącym ogórkiem i pestkami dyni. Przepis na 1 porcję.",
+  "pory": ["sniadanie", "kolacja"],
+  "kuchnie": ["inna"],
+  "porcjowanie": "waga",
+  "porcja_g": 446.5,
+  "trwalosc_dni": 1,
+  "czas_przygotowania_min": 7,
+  "czas_obrobki_min": 0,
+  "sprzet": ["miska", "Widelec", "Nóż szefa kuchni", "Deska do krojenia", "Waga kuchenna"],
+  "przechowywanie": "Przechowuj w zamkniętym pojemniku w lodówce do 1 dnia. Pestki dyni najlepiej dodaj tuż przed jedzeniem.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli całość puściła dużo wody, odlej nadmiar płynu. Jeśli smak jest zbyt łagodny, dodaj odrobinę soli i pieprzu.",
+  "skladniki": [
+    {"nazwa": "Serek wiejski naturalny", "ilosc": 200, "jednostka": "g"},
+    {"nazwa": "Pomidory, surowe", "ilosc": 1, "jednostka": "szt", "stan": "pokrojony w kostkę"},
+    {"nazwa": "Ogórek, surowy", "ilosc": 0.5, "jednostka": "szt", "stan": "pokrojony w kostkę"},
+    {"nazwa": "Pestki dyni", "ilosc": 15, "jednostka": "g"},
+    {"nazwa": "Sól kuchenna", "ilosc": 1, "jednostka": "g"},
+    {"nazwa": "Czarny pieprz mielony", "ilosc": 0.5, "jednostka": "g"}
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie",
+      "minuty": 5,
+      "kroki": [
+        {"tresc": "Pomidora i ogórek pokrój w kostkę."},
+        {"tresc": "Serek wiejski przełóż do miski i dodaj pokrojone warzywa."},
+        {"tresc": "Dopraw solą i pieprzem, a następnie delikatnie wymieszaj.", "uwaga": true}
+      ]
+    },
+    {
+      "nazwa": "Podanie",
+      "minuty": 2,
+      "kroki": [
+        {"tresc": "Posyp porcję pestkami dyni i podaj od razu.", "sygnal": "pestki pozostają suche i chrupiące"}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "nazwa": "Tosty z mozzarellą i pomidorem",
+  "opis": "Chrupiące tosty z roztopioną mozzarellą, pomidorem i bazylią. Przepis na 1 porcję.",
+  "pory": ["sniadanie", "kolacja"],
+  "kuchnie": ["srodziemnomorska"],
+  "porcjowanie": "waga",
+  "porcja_g": 219,
+  "trwalosc_dni": 0,
+  "czas_przygotowania_min": 5,
+  "czas_obrobki_min": 5,
+  "sprzet": ["Grill kontaktowy", "Nóż szefa kuchni", "Deska do krojenia", "Waga kuchenna"],
+  "przechowywanie": "Tosty zjedz bezpośrednio po przygotowaniu, zanim pieczywo zmięknie.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli pieczywo rumieni się szybciej niż topi ser, zmniejsz temperaturę urządzenia. Jeśli pomidor puszcza dużo soku, osusz plasterki przed ułożeniem.",
+  "skladniki": [
+    {"nazwa": "Chleb żytni razowy", "ilosc": 2, "jednostka": "szt", "stan": "kromki"},
+    {"nazwa": "Ser mozzarella", "ilosc": 80, "jednostka": "g", "stan": "pokrojony w plastry"},
+    {"nazwa": "Pomidory, surowe", "ilosc": 0.5, "jednostka": "szt", "stan": "pokrojony w cienkie plastry"},
+    {"nazwa": "Bazylia świeża", "ilosc": 3, "jednostka": "g"},
+    {"nazwa": "Sól kuchenna", "ilosc": 0.5, "jednostka": "g"},
+    {"nazwa": "Czarny pieprz mielony", "ilosc": 0.5, "jednostka": "g"}
+  ],
+  "etapy": [
+    {
+      "nazwa": "Składanie tostów",
+      "minuty": 5,
+      "kroki": [
+        {"tresc": "Mozzarellę i pomidora pokrój w cienkie plastry."},
+        {"tresc": "Na jednej kromce ułóż mozzarellę, pomidora i bazylię. Dopraw solą oraz pieprzem i przykryj drugą kromką.", "uwaga": true}
+      ]
+    },
+    {
+      "nazwa": "Opiekanie",
+      "minuty": 5,
+      "kroki": [
+        {"tresc": "Tost opiekaj w rozgrzanym tosterze lub grillu kontaktowym.", "sygnal": "pieczywo jest rumiane i chrupiące, a mozzarella się roztopiła"},
+        {"tresc": "Odczekaj minutę, przekrój tost i podaj."}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "nazwa": "Jajecznica z pomidorem i szczypiorkiem",
+  "opis": "Kremowa jajecznica z pomidorem i świeżym szczypiorkiem. Przepis na 1 porcję.",
+  "pory": ["sniadanie", "kolacja"],
+  "kuchnie": ["polska"],
+  "porcjowanie": "waga",
+  "porcja_g": 196.5,
+  "trwalosc_dni": 0,
+  "czas_przygotowania_min": 6,
+  "czas_obrobki_min": 5,
+  "sprzet": ["Patelnia 24 cm", "miska", "Widelec", "Nóż szefa kuchni", "Deska do krojenia", "Waga kuchenna"],
+  "przechowywanie": "Jajecznicę zjedz bezpośrednio po przygotowaniu.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli jajecznica wyszła zbyt sucha, zdejmij ją z ognia i wmieszaj mały kawałek masła. Jeśli pomidor puścił dużo wody, smaż chwilę dłużej bez przykrycia.",
+  "skladniki": [
+    {"nazwa": "Jaja kurze, całe, surowe", "ilosc": 2, "jednostka": "szt", "stan": "roztrzepane"},
+    {"nazwa": "Pomidory, surowe", "ilosc": 0.5, "jednostka": "szt", "stan": "pokrojony w kostkę"},
+    {"nazwa": "Szczypiorek świeży", "ilosc": 10, "jednostka": "g", "stan": "drobno posiekany"},
+    {"nazwa": "Masło", "ilosc": 10, "jednostka": "g"},
+    {"nazwa": "Sól kuchenna", "ilosc": 1, "jednostka": "g"},
+    {"nazwa": "Czarny pieprz mielony", "ilosc": 0.5, "jednostka": "g"}
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 6,
+      "kroki": [
+        {"tresc": "Pomidora pokrój w kostkę, a szczypiorek drobno posiekaj."},
+        {"tresc": "Jajka wbij do miski, dopraw solą i pieprzem, po czym roztrzep widelcem.", "uwaga": true}
+      ]
+    },
+    {
+      "nazwa": "Smażenie",
+      "minuty": 5,
+      "kroki": [
+        {"tresc": "Na patelni rozpuść masło, dodaj pomidora i smaż około 2 minut, aż odparuje część soku."},
+        {"tresc": "Wlej jajka i smaż na małym ogniu, mieszając, aż będą miękko ścięte.", "sygnal": "jajka są kremowe i nie ma na patelni płynnego białka"},
+        {"tresc": "Zdejmij z ognia, dodaj szczypiorek i od razu podaj."}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "nazwa": "Sałatka z jajkiem, fetą i warzywami",
+  "opis": "Sałatka z jajkami na twardo, fetą, pomidorem, ogórkiem i sałatą, skropiona oliwą. Przepis na 1 porcję.",
+  "pory": ["sniadanie", "kolacja"],
+  "kuchnie": ["srodziemnomorska"],
+  "porcjowanie": "waga",
+  "porcja_g": 386.5,
+  "trwalosc_dni": 1,
+  "czas_przygotowania_min": 10,
+  "czas_obrobki_min": 9,
+  "sprzet": ["Garnek 2 l", "miska", "Widelec", "Nóż szefa kuchni", "Deska do krojenia", "Waga kuchenna"],
+  "przechowywanie": "Przechowuj w zamkniętym pojemniku w lodówce do 1 dnia. Oliwę i przyprawy najlepiej dodaj przed jedzeniem.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli sałatka puściła wodę, odlej płyn i dodaj świeżą sałatę. Jeśli feta jest bardzo słona, ogranicz ilość dodatkowej soli.",
+  "skladniki": [
+    {"nazwa": "Jaja kurze, całe, surowe", "ilosc": 2, "jednostka": "szt"},
+    {"nazwa": "Ser feta", "ilosc": 50, "jednostka": "g", "stan": "pokruszony"},
+    {"nazwa": "Pomidory, surowe", "ilosc": 0.5, "jednostka": "szt", "stan": "pokrojony w cząstki"},
+    {"nazwa": "Ogórek, surowy", "ilosc": 0.5, "jednostka": "szt", "stan": "pokrojony w półplasterki"},
+    {"nazwa": "Sałata rzymska", "ilosc": 50, "jednostka": "g", "stan": "porwana na mniejsze kawałki"},
+    {"nazwa": "Oliwa z oliwek", "ilosc": 10, "jednostka": "g"},
+    {"nazwa": "Sól kuchenna", "ilosc": 1, "jednostka": "g"},
+    {"nazwa": "Czarny pieprz mielony", "ilosc": 0.5, "jednostka": "g"}
+  ],
+  "etapy": [
+    {
+      "nazwa": "Gotowanie jajek",
+      "minuty": 9,
+      "kroki": [
+        {"tresc": "Jajka włóż do garnka, zalej wodą i gotuj 9 minut od zagotowania."},
+        {"tresc": "Schłodź jajka, obierz i pokrój w ćwiartki.", "sygnal": "żółtka są całkowicie ścięte"}
+      ]
+    },
+    {
+      "nazwa": "Przygotowanie sałatki",
+      "minuty": 10,
+      "kroki": [
+        {"tresc": "Pomidora pokrój w cząstki, ogórek w półplasterki, a sałatę porwij."},
+        {"tresc": "Warzywa przełóż do miski, dodaj jajka i pokruszoną fetę."},
+        {"tresc": "Skrop oliwą, dopraw solą oraz pieprzem i delikatnie wymieszaj.", "uwaga": true}
+      ]
+    }
+  ]
+}

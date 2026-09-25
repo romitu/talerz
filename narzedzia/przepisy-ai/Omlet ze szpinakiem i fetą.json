@@ -1,0 +1,42 @@
+{
+  "nazwa": "Omlet ze szpinakiem i fetą",
+  "opis": "Delikatny omlet z liśćmi szpinaku i słoną fetą. Przepis na 1 porcję.",
+  "pory": ["sniadanie", "kolacja"],
+  "kuchnie": ["srodziemnomorska"],
+  "porcjowanie": "waga",
+  "porcja_g": 206.5,
+  "trwalosc_dni": 1,
+  "czas_przygotowania_min": 7,
+  "czas_obrobki_min": 8,
+  "sprzet": ["Patelnia 24 cm", "miska", "Widelec", "Nóż szefa kuchni", "Deska do krojenia", "Waga kuchenna"],
+  "przechowywanie": "Po ostudzeniu przechowuj w zamkniętym pojemniku w lodówce do 1 dnia. Odgrzej na patelni na małym ogniu.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli omlet przywiera, zmniejsz ogień i delikatnie podważ brzegi. Jeśli wierzch pozostaje płynny, przykryj patelnię na 1–2 minuty.",
+  "skladniki": [
+    {"nazwa": "Jaja kurze, całe, surowe", "ilosc": 2, "jednostka": "szt", "stan": "roztrzepane"},
+    {"nazwa": "Szpinak, surowy", "ilosc": 50, "jednostka": "g"},
+    {"nazwa": "Ser feta", "ilosc": 40, "jednostka": "g", "stan": "pokruszony"},
+    {"nazwa": "Olej rzepakowy", "ilosc": 5, "jednostka": "g"},
+    {"nazwa": "Sól kuchenna", "ilosc": 1, "jednostka": "g"},
+    {"nazwa": "Czarny pieprz mielony", "ilosc": 0.5, "jednostka": "g"}
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie masy",
+      "minuty": 7,
+      "kroki": [
+        {"tresc": "Jajka wbij do miski, dopraw solą i pieprzem, a następnie roztrzep widelcem."},
+        {"tresc": "Fetę pokrusz, a większe liście szpinaku posiekaj."}
+      ]
+    },
+    {
+      "nazwa": "Smażenie omletu",
+      "minuty": 8,
+      "kroki": [
+        {"tresc": "Rozgrzej olej na patelni, dodaj szpinak i smaż około 1 minuty, aż zwiędnie."},
+        {"tresc": "Wlej jajka, rozłóż fetę na wierzchu i smaż na małym ogniu.", "uwaga": true},
+        {"tresc": "Gdy spód się zetnie, złóż omlet na pół i smaż jeszcze 1–2 minuty.", "sygnal": "środek jest ścięty, ale pozostaje miękki"}
+      ]
+    }
+  ]
+}

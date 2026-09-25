@@ -1,0 +1,35 @@
+{
+  "nazwa": "Kanapki z mozzarellą, pomidorem i bazylią",
+  "opis": "Kanapki z mozzarellą, świeżym pomidorem i bazylią, skropione oliwą. Przepis na 1 porcję.",
+  "pory": ["sniadanie", "kolacja"],
+  "kuchnie": ["srodziemnomorska"],
+  "porcjowanie": "waga",
+  "porcja_g": 226.5,
+  "trwalosc_dni": 0,
+  "czas_przygotowania_min": 7,
+  "czas_obrobki_min": 0,
+  "sprzet": ["Nóż szefa kuchni", "Deska do krojenia", "Waga kuchenna"],
+  "przechowywanie": "Kanapki najlepiej zjedz od razu. Składniki możesz przechowywać osobno w lodówce i złożyć tuż przed podaniem.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli pomidor jest bardzo soczysty, osusz plasterki ręcznikiem papierowym. Jeśli kanapki są mdłe, dodaj odrobinę soli i pieprzu.",
+  "skladniki": [
+    {"nazwa": "Chleb żytni razowy", "ilosc": 2, "jednostka": "szt", "stan": "kromki"},
+    {"nazwa": "Ser mozzarella", "ilosc": 80, "jednostka": "g", "stan": "pokrojony w plastry"},
+    {"nazwa": "Pomidory, surowe", "ilosc": 0.5, "jednostka": "szt", "stan": "pokrojony w plastry"},
+    {"nazwa": "Bazylia świeża", "ilosc": 5, "jednostka": "g"},
+    {"nazwa": "Oliwa z oliwek", "ilosc": 5, "jednostka": "g"},
+    {"nazwa": "Sól kuchenna", "ilosc": 1, "jednostka": "g"},
+    {"nazwa": "Czarny pieprz mielony", "ilosc": 0.5, "jednostka": "g"}
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie kanapek",
+      "minuty": 7,
+      "kroki": [
+        {"tresc": "Mozzarellę i pomidora pokrój w plastry."},
+        {"tresc": "Na kromkach chleba ułóż mozzarellę, pomidora i liście bazylii."},
+        {"tresc": "Skrop oliwą, dopraw solą oraz pieprzem i podaj.", "uwaga": true}
+      ]
+    }
+  ]
+}

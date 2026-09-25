@@ -1,0 +1,99 @@
+{
+  "nazwa": "Twarożek ze szczypiorkiem, rzodkiewką i pieczywem",
+  "opis": "Klasyczny twarożek z chrupiącą rzodkiewką i świeżym szczypiorkiem, podany z dwiema kromkami chleba żytniego razowego. Przepis na 1 porcję.",
+  "pory": [
+    "sniadanie",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "polska"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 312,
+  "trwalosc_dni": 1,
+  "czas_przygotowania_min": 8,
+  "czas_obrobki_min": 0,
+  "sprzet": [
+    "miska",
+    "Widelec",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Twarożek przechowuj w zamkniętym pojemniku w lodówce do 1 dnia. Pieczywo trzymaj osobno i dodaj dopiero przy podaniu.",
+  "mozna_mrozic": false,
+  "ratunek": "Twarożek za gęsty — dodaj łyżkę jogurtu. Zbyt rzadki — dodaj trochę więcej twarogu. Za słony — dołóż kilka plasterków rzodkiewki albo odrobinę jogurtu.",
+  "skladniki": [
+    {
+      "nazwa": "Twaróg półtłusty",
+      "ilosc": 150,
+      "jednostka": "g",
+      "stan": "rozgnieciony widelcem"
+    },
+    {
+      "nazwa": "Jogurt naturalny 2%",
+      "ilosc": 30,
+      "jednostka": "g",
+      "stan": "do rozluźnienia twarogu"
+    },
+    {
+      "nazwa": "Rzodkiewka, surowa",
+      "ilosc": 5,
+      "jednostka": "szt",
+      "stan": "pokrojona w drobną kostkę lub cienkie półplasterki"
+    },
+    {
+      "nazwa": "Szczypiorek świeży",
+      "ilosc": 10,
+      "jednostka": "g",
+      "stan": "drobno posiekany"
+    },
+    {
+      "nazwa": "Chleb żytni razowy",
+      "ilosc": 2,
+      "jednostka": "szt",
+      "stan": "kromki"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 1,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie twarożku",
+      "minuty": 6,
+      "kroki": [
+        {
+          "tresc": "Twaróg przełóż do miski i rozgnieć widelcem z jogurtem.",
+          "sygnal": "aż masa będzie kremowa, ale nadal lekko grudkowata"
+        },
+        {
+          "tresc": "Rzodkiewki pokrój drobno, a szczypiorek posiekaj."
+        },
+        {
+          "tresc": "Dodaj rzodkiewkę i szczypiorek do twarogu, dopraw solą oraz pieprzem i wymieszaj.",
+          "uwaga": true
+        }
+      ]
+    },
+    {
+      "nazwa": "Podanie",
+      "minuty": 2,
+      "kroki": [
+        {
+          "tresc": "Spróbuj twarożku i w razie potrzeby skoryguj solą albo pieprzem."
+        },
+        {
+          "tresc": "Podaj twarożek z kromkami chleba żytniego razowego."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "nazwa": "Jajka na miękko z pieczywem i warzywami",
+  "opis": "Jajka z płynnym żółtkiem, podane z chlebem żytnim, pomidorem i ogórkiem. Przepis na 1 porcję.",
+  "pory": ["sniadanie", "kolacja"],
+  "kuchnie": ["polska"],
+  "porcjowanie": "waga",
+  "porcja_g": 296.5,
+  "trwalosc_dni": 0,
+  "czas_przygotowania_min": 5,
+  "czas_obrobki_min": 6,
+  "sprzet": ["Garnek 2 l", "Nóż szefa kuchni", "Deska do krojenia"],
+  "przechowywanie": "Danie najlepiej zjedz od razu po przygotowaniu. Jajek ugotowanych na miękko nie przechowuj na później.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli żółtko jest zbyt płynne, włóż jajka ponownie do gorącej wody na 30–60 sekund. Jeśli są zbyt twarde, skróć gotowanie przy następnym przygotowaniu.",
+  "skladniki": [
+    {"nazwa": "Jaja kurze, całe, surowe", "ilosc": 2, "jednostka": "szt"},
+    {"nazwa": "Chleb żytni razowy", "ilosc": 2, "jednostka": "szt", "stan": "kromki"},
+    {"nazwa": "Pomidory, surowe", "ilosc": 0.5, "jednostka": "szt", "stan": "pokrojony w cząstki"},
+    {"nazwa": "Ogórek, surowy", "ilosc": 0.25, "jednostka": "szt", "stan": "pokrojony w plasterki"},
+    {"nazwa": "Sól kuchenna", "ilosc": 1, "jednostka": "g"},
+    {"nazwa": "Czarny pieprz mielony", "ilosc": 0.5, "jednostka": "g"}
+  ],
+  "etapy": [
+    {
+      "nazwa": "Gotowanie jajek",
+      "minuty": 6,
+      "kroki": [
+        {"tresc": "W garnku zagotuj tyle wody, aby przykryła jajka."},
+        {"tresc": "Delikatnie włóż jajka do wrzątku i gotuj 5–6 minut od ponownego zagotowania.", "uwaga": true, "sygnal": "białko jest ścięte, a żółtko pozostaje płynne"},
+        {"tresc": "Jajka wyjmij i krótko schłodź pod zimną wodą."}
+      ]
+    },
+    {
+      "nazwa": "Podanie",
+      "minuty": 5,
+      "kroki": [
+        {"tresc": "Pomidora pokrój w cząstki, a ogórek w plasterki."},
+        {"tresc": "Podaj jajka z pieczywem i warzywami. Dopraw solą oraz pieprzem."}
+      ]
+    }
+  ]
+}

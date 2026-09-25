@@ -1,0 +1,42 @@
+{
+  "nazwa": "Owsianka z jabłkiem, cynamonem i orzechami",
+  "opis": "Kremowa owsianka na mleku z jabłkiem, cynamonem i orzechami włoskimi. Przepis na 1 porcję.",
+  "pory": ["sniadanie"],
+  "kuchnie": ["inna"],
+  "porcjowanie": "waga",
+  "porcja_g": 422.5,
+  "trwalosc_dni": 1,
+  "czas_przygotowania_min": 5,
+  "czas_obrobki_min": 7,
+  "sprzet": ["Rondel", "miska", "Widelec", "Nóż szefa kuchni", "Deska do krojenia", "Waga kuchenna"],
+  "przechowywanie": "Po ostudzeniu przechowuj w zamkniętym pojemniku w lodówce do 1 dnia. Przy odgrzewaniu dodaj odrobinę mleka.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli owsianka jest za gęsta, dolej trochę mleka. Jeśli jest zbyt rzadka, gotuj jeszcze 1–2 minuty, często mieszając.",
+  "skladniki": [
+    {"nazwa": "Płatki owsiane", "ilosc": 60, "jednostka": "g"},
+    {"nazwa": "Mleko 2%", "ilosc": 250, "jednostka": "g"},
+    {"nazwa": "Jabłko ze skórką", "ilosc": 0.5, "jednostka": "szt", "stan": "pokrojone w małą kostkę"},
+    {"nazwa": "Cynamon mielony", "ilosc": 2, "jednostka": "g"},
+    {"nazwa": "Orzechy włoskie", "ilosc": 20, "jednostka": "g", "stan": "grubo posiekane"},
+    {"nazwa": "Sól kuchenna", "ilosc": 0.5, "jednostka": "g"}
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 5,
+      "kroki": [
+        {"tresc": "Jabłko pokrój w małą kostkę, a orzechy grubo posiekaj."}
+      ]
+    },
+    {
+      "nazwa": "Gotowanie owsianki",
+      "minuty": 7,
+      "kroki": [
+        {"tresc": "Do rondla wsyp płatki, wlej mleko i dodaj sól."},
+        {"tresc": "Gotuj na małym ogniu przez 5–7 minut, często mieszając.", "uwaga": true, "sygnal": "płatki są miękkie, a owsianka kremowa"},
+        {"tresc": "Dodaj jabłko i cynamon, wymieszaj i podgrzewaj jeszcze około minuty."},
+        {"tresc": "Przełóż do miski i posyp orzechami."}
+      ]
+    }
+  ]
+}

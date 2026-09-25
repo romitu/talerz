@@ -1,0 +1,42 @@
+{
+  "nazwa": "Kanapki z jajkiem, awokado i pomidorem",
+  "opis": "Syte kanapki z jajkiem na twardo, kremowym awokado i świeżym pomidorem. Przepis na 1 porcję.",
+  "pory": ["sniadanie", "kolacja"],
+  "kuchnie": ["inna"],
+  "porcjowanie": "waga",
+  "porcja_g": 261.5,
+  "trwalosc_dni": 0,
+  "czas_przygotowania_min": 10,
+  "czas_obrobki_min": 9,
+  "sprzet": ["Garnek 2 l", "miska", "Widelec", "Nóż szefa kuchni", "Deska do krojenia"],
+  "przechowywanie": "Kanapki zjedz od razu po przygotowaniu. Ugotowane jajko możesz przechować osobno w lodówce do następnego dnia.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli awokado jest zbyt twarde, pokrój je w cienkie plasterki zamiast rozgniatać. Jeśli pasta ciemnieje, przygotuj ją bezpośrednio przed podaniem.",
+  "skladniki": [
+    {"nazwa": "Chleb żytni razowy", "ilosc": 2, "jednostka": "szt", "stan": "kromki"},
+    {"nazwa": "Jaja kurze, całe, surowe", "ilosc": 1, "jednostka": "szt"},
+    {"nazwa": "Awokado", "ilosc": 0.5, "jednostka": "szt", "stan": "miąższ rozgnieciony widelcem"},
+    {"nazwa": "Pomidory, surowe", "ilosc": 0.5, "jednostka": "szt", "stan": "pokrojony w plastry"},
+    {"nazwa": "Sól kuchenna", "ilosc": 1, "jednostka": "g"},
+    {"nazwa": "Czarny pieprz mielony", "ilosc": 0.5, "jednostka": "g"}
+  ],
+  "etapy": [
+    {
+      "nazwa": "Gotowanie jajka",
+      "minuty": 9,
+      "kroki": [
+        {"tresc": "Jajko włóż do garnka, zalej wodą i gotuj 9 minut od zagotowania."},
+        {"tresc": "Schłodź je w zimnej wodzie, obierz i pokrój w plastry.", "sygnal": "żółtko jest całkowicie ścięte"}
+      ]
+    },
+    {
+      "nazwa": "Składanie kanapek",
+      "minuty": 7,
+      "kroki": [
+        {"tresc": "Miąższ awokado rozgnieć w misce widelcem i dopraw częścią soli oraz pieprzu.", "uwaga": true},
+        {"tresc": "Pastę z awokado rozsmaruj na chlebie, a na wierzchu ułóż plastry pomidora i jajka."},
+        {"tresc": "Dopraw pozostałą solą oraz pieprzem i podaj."}
+      ]
+    }
+  ]
+}

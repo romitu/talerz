@@ -1,0 +1,33 @@
+{
+  "nazwa": "Skyr z owocami, płatkami owsianymi i orzechami",
+  "opis": "Skyr z bananem, borówkami, płatkami owsianymi i orzechami włoskimi. Przepis na 1 porcję.",
+  "pory": ["sniadanie", "dodatek"],
+  "kuchnie": ["inna"],
+  "porcjowanie": "waga",
+  "porcja_g": 385,
+  "trwalosc_dni": 1,
+  "czas_przygotowania_min": 5,
+  "czas_obrobki_min": 0,
+  "sprzet": ["miska", "Nóż szefa kuchni", "Deska do krojenia", "Waga kuchenna"],
+  "przechowywanie": "Przechowuj w zamkniętym pojemniku w lodówce do 1 dnia. Orzechy i płatki dodaj przed jedzeniem, aby pozostały chrupiące.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli skyr jest zbyt gęsty, dodaj odrobinę wody lub mleka. Jeśli owoce są kwaśne, rozgnieć część banana i wymieszaj ze skyrem.",
+  "skladniki": [
+    {"nazwa": "Skyr naturalny", "ilosc": 200, "jednostka": "g"},
+    {"nazwa": "Banan", "ilosc": 0.5, "jednostka": "szt", "stan": "pokrojony w plasterki"},
+    {"nazwa": "Borówki amerykańskie", "ilosc": 80, "jednostka": "g"},
+    {"nazwa": "Płatki owsiane", "ilosc": 30, "jednostka": "g"},
+    {"nazwa": "Orzechy włoskie", "ilosc": 15, "jednostka": "g", "stan": "grubo posiekane"}
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie",
+      "minuty": 5,
+      "kroki": [
+        {"tresc": "Banana pokrój w plasterki, a orzechy grubo posiekaj."},
+        {"tresc": "Skyr przełóż do miski i ułóż na nim banana oraz borówki."},
+        {"tresc": "Posyp płatkami owsianymi i orzechami tuż przed podaniem.", "sygnal": "płatki i orzechy pozostają suche i chrupiące"}
+      ]
+    }
+  ]
+}
