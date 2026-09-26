@@ -24,21 +24,31 @@ export const KLUCZ_WIDOKU_WYBORU_DANIA = 'talerz-widok-wyboru-dania';
 /**
  * Domyślnie wiersze z miniaturką — mieszczą mniej więcej dwa razy więcej
  * pozycji na ekranie niż kafle, a obrazek nadal pomaga rozpoznać pozycję.
+ * Ekran może podać inny domyślny, np. kafle na tablecie.
  */
 const DOMYSLNY: WidokListy = 'miniatury';
+
+/** Od tej szerokości okna ekran traktujemy jak tablet albo komputer. */
+export const SZEROKOSC_TABLETU = 768;
 
 function czyWidok(x: unknown): x is WidokListy {
   return WIDOKI_LISTY.some((w) => w.wartosc === x);
 }
 
-export function useWidokListy(klucz: string) {
-  const [widok, setWidok] = useState<WidokListy>(DOMYSLNY);
+/**
+ * `domyslny` obowiązuje, dopóki użytkownik sam czegoś nie wybierze. Nie jest
+ * zapisywany — dzięki temu po obróceniu tabletu albo zwężeniu okna podąża
+ * za szerokością, a wybór zrobiony ręcznie zostaje na stałe.
+ */
+export function useWidokListy(klucz: string, domyslny: WidokListy = DOMYSLNY) {
+  const [wybrany, setWybrany] = useState<WidokListy | null>(null);
+  const widok = wybrany ?? domyslny;
 
   useEffect(() => {
     let aktualny = true;
     AsyncStorage.getItem(klucz)
       .then((zapisany) => {
-        if (aktualny && czyWidok(zapisany)) setWidok(zapisany);
+        if (aktualny && czyWidok(zapisany)) setWybrany(zapisany);
       })
       .catch(() => {
         // Brak dostępu do pamięci — zostaje widok domyślny.
@@ -50,7 +60,7 @@ export function useWidokListy(klucz: string) {
 
   const ustawWidok = useCallback(
     (nowy: WidokListy) => {
-      setWidok(nowy);
+      setWybrany(nowy);
       AsyncStorage.setItem(klucz, nowy).catch(() => {
         // Nie udało się zapamiętać — widok i tak działa do końca sesji.
       });

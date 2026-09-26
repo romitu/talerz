@@ -1,7 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { router, useFocusEffect } from 'expo-router';
 import { useCallback, useMemo, useRef, useState } from 'react';
-import { ActivityIndicator, Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, Pressable, ScrollView, StyleSheet, useWindowDimensions, View } from 'react-native';
 
 import { Ekran } from '@/components/ekran';
 import { FiltryPrzepisow } from '@/components/filtry-przepisow';
@@ -51,7 +51,7 @@ import { celZywieniowyNASEM, type PalNasem } from '@/lib/nasem';
 import { useSesja } from '@/lib/sesja';
 import { pobierzSkladniki, type Skladnik } from '@/lib/skladniki';
 import { supabase } from '@/lib/supabase';
-import { KLUCZ_WIDOKU_WYBORU_DANIA, useWidokListy } from '@/lib/widok-listy';
+import { KLUCZ_WIDOKU_WYBORU_DANIA, SZEROKOSC_TABLETU, useWidokListy } from '@/lib/widok-listy';
 import { wiekZDaty, type Plec, type TrybCelu } from '@/lib/zywienie';
 
 type Cel = {
@@ -561,7 +561,13 @@ export default function EkranPlanu() {
     ? przepisy.filter((p) => !p.ukryty && pasujeDoPory(p.pory, wybierany.pora))
     : [];
   const filtry = useFiltryPrzepisow(doWyboru);
-  const { widok, ustawWidok } = useWidokListy(KLUCZ_WIDOKU_WYBORU_DANIA);
+  // Na tablecie i komputerze dania wybiera się ze zdjęć — kafle mieszczą się
+  // tam po kilka w rzędzie. Na telefonie wiersze, jak na liście zakupów.
+  const { width: szerokoscOkna } = useWindowDimensions();
+  const { widok, ustawWidok } = useWidokListy(
+    KLUCZ_WIDOKU_WYBORU_DANIA,
+    szerokoscOkna >= SZEROKOSC_TABLETU ? 'kafle' : 'miniatury'
+  );
 
   // --- błąd wczytywania ---
   // Osobno od „brak planu” niżej — inaczej prawdziwa awaria (np. bazy) wyglądałaby
