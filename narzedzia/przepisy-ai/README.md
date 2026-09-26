@@ -6,6 +6,10 @@ Jeden plik JSON = jeden przepis. Import:
 node narzedzia/generuj-import-ai.mjs
 ```
 
+Autorem przepisów jest konto `TALERZ_EMAIL` z pliku `.env.local` (albo
+`--autor=adres@e-mail`). Nowy przepis jest prywatny — widzi go autor
+i moderator, dopóki moderator go nie opublikuje.
+
 Powstaje `supabase/narzedzia/import-przepisow-ai.sql` — uruchom go w SQL Editorze
 w panelu Supabase. Jeśli w katalogach brakuje składnika albo sprzętu, skrypt
 kończy się błędem `IMPORT PRZERWANY — …` z listą braków i podobnymi pozycjami

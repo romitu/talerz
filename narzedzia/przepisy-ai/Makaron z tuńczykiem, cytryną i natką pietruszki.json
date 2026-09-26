@@ -1,0 +1,102 @@
+{
+  "nazwa": "Makaron z tuńczykiem, cytryną i natką pietruszki",
+  "opis": "Szybki pełnoziarnisty makaron z tuńczykiem, cytryną, czosnkiem i natką pietruszki. Przepis na 1 porcję.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "srodziemnomorska"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 266.5,
+  "trwalosc_dni": 2,
+  "czas_przygotowania_min": 7,
+  "czas_obrobki_min": 15,
+  "sprzet": [
+    "Garnek 3 l",
+    "Patelnia 28 cm",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Przechowuj w lodówce do 2 dni. Przy odgrzewaniu dodaj niewielką ilość wody.",
+  "mozna_mrozic": false,
+  "ratunek": "Za suchy makaron rozluźnij wodą z gotowania i oliwą. Zbyt kwaśny smak złagodź dodatkowym makaronem.",
+  "skladniki": [
+    {
+      "nazwa": "Makaron pełnoziarnisty, suchy",
+      "ilosc": 85.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Tuńczyk w wodzie, odsączony",
+      "ilosc": 130.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cytryna",
+      "ilosc": 20.0,
+      "jednostka": "g",
+      "stan": "sok"
+    },
+    {
+      "nazwa": "Pietruszka natka",
+      "ilosc": 15.0,
+      "jednostka": "g",
+      "stan": "posiekana"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 5.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 10.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Chili suszone",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Gotowanie makaronu",
+      "minuty": 15,
+      "kroki": [
+        {
+          "tresc": "Makaron ugotuj al dente. Zachowaj około pół szklanki wody z gotowania."
+        }
+      ]
+    },
+    {
+      "nazwa": "Łączenie",
+      "minuty": 7,
+      "kroki": [
+        {
+          "tresc": "Na oliwie krótko podgrzej czosnek i chili."
+        },
+        {
+          "tresc": "Dodaj tuńczyka, makaron, sok z cytryny i część wody z gotowania.",
+          "uwaga": true
+        },
+        {
+          "tresc": "Wymieszaj, dopraw i posyp natką pietruszki."
+        }
+      ]
+    }
+  ]
+}

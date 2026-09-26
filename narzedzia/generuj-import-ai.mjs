@@ -27,6 +27,7 @@ import { basename, dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { tablica, tekst } from './generuj-import.mjs';
+import { wczytajEnv } from './import-usda.mjs';
 
 const KATALOG = dirname(fileURLToPath(import.meta.url));
 const KORZEN = join(KATALOG, '..');
@@ -120,7 +121,7 @@ export function sprawdzPrzepis(p) {
  * Zwykłe instrukcje, bez PL/pgSQL — z tego samego powodu co w
  * generuj-import.mjs: parser panelu Supabase gubi się w `do $$ ... $$`.
  */
-export function sqlPrzepisu(p) {
+export function sqlPrzepisu(p, autor) {
   const N = tekst(p.nazwa);
   const waga = p.porcjowanie === 'waga';
   const l = [];
@@ -137,7 +138,7 @@ export function sqlPrzepisu(p) {
   l.push('   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,');
   l.push('   sprzet, przechowywanie, mozna_mrozic, ratunek)');
   l.push('select');
-  l.push(`  ${N}, ${tekst(p.opis)}, (select id from konta order by utworzono limit 1),`);
+  l.push(`  ${N}, ${tekst(p.opis)}, (select id from konta where lower(email) = lower(${tekst(autor)})),`);
   l.push(`  ${tablica(p.pory)}::pora_posilku[], ${tablica(p.kuchnie)}::rodzaj_kuchni[],`);
   l.push(`  ${p.trwalosc_dni}, 'prywatna',`);
   l.push(`  ${tekst(p.porcjowanie)}, ${waga ? p.porcja_g : 'null'}, ${waga ? 1 : p.porcje},`);
@@ -222,7 +223,7 @@ export function sqlPrzepisu(p) {
  * przy braku pokazujemy pozycje z katalogu, które mają wspólne słowo z brakującą
  * nazwą. Zwykle wystarczy poprawić nazwę w JSON-ie zamiast dodawać nową.
  */
-export function sqlSprawdzenia(przepisy) {
+export function sqlSprawdzenia(przepisy, autor) {
   const skladniki = [];
   const sprzet = [];
   for (const p of przepisy) {
@@ -238,6 +239,11 @@ ${skladniki.map(([p, n, szt]) => `    (${tekst(p)}, ${tekst(n)}, ${szt})`).join(
 ${sprzet.map(([p, n]) => `    (${tekst(p)}, ${tekst(n)})`).join(',\n')}
   ),
   braki(opis) as (
+    -- Bez konta autora przepisy weszłyby bez właściciela i nikt poza
+    -- moderatorem by ich nie zobaczył.
+    select 'brak konta ' || ${tekst(autor)}
+     where not exists (select 1 from konta where lower(email) = lower(${tekst(autor)}))
+    union all
     select 'brak składnika „' || ps.nazwa || '” (' || ps.przepis || ')'
            || coalesce(' — podobne w katalogu: ' || (
                 select string_agg(sk.nazwa, ', ' order by sk.nazwa)
@@ -271,6 +277,16 @@ select ('IMPORT PRZERWANY — ' || string_agg(opis, '; '))::int as sprawdzenie_k
 // ---------------------------------------------------------------------------
 
 function main() {
+  // Autor po adresie, a nie „najstarsze konto” — to drugie działało tylko
+  // dlatego, że najstarsze konto przypadkiem należało do administratora.
+  const autor =
+    process.argv.find((a) => a.startsWith('--autor='))?.slice('--autor='.length) ??
+    wczytajEnv().TALERZ_EMAIL;
+  if (!autor) {
+    console.error('Podaj autora: --autor=adres@e-mail albo TALERZ_EMAIL w pliku .env.local.');
+    process.exit(1);
+  }
+
   const wybrane = process.argv.slice(2).filter((a) => !a.startsWith('--'));
   const pliki = wybrane.length > 0
     ? wybrane.map((f) => basename(f))
@@ -329,14 +345,14 @@ function main() {
 --  i niczego nie zapisuje.
 --
 --  Przepis o tej samej nazwie jest AKTUALIZOWANY, nie kasowany. Nowe przepisy
---  wchodzą jako prywatne.
+--  wchodzą jako prywatne, a ich autorem jest konto ${autor}.
 --
 --  Wykonanie: SQL Editor w panelu Supabase.
 -- =============================================================================
 
 begin;
 
-${sqlSprawdzenia(przepisy)}
+${sqlSprawdzenia(przepisy, autor)}
 `;
 
   const oczekiwane = przepisy.map((p) => ({
@@ -394,7 +410,7 @@ order by p.nazwa;
 `;
 
   const sciezka = join(KORZEN, 'supabase', 'narzedzia', 'import-przepisow-ai.sql');
-  writeFileSync(sciezka, naglowek + '\n' + przepisy.map(sqlPrzepisu).join('\n') + stopka, 'utf8');
+  writeFileSync(sciezka, naglowek + '\n' + przepisy.map((p) => sqlPrzepisu(p, autor)).join('\n') + stopka, 'utf8');
 
   console.log(`Wygenerowano ${przepisy.length} przepisów:`);
   przepisy.forEach((p) => console.log('  -', p.nazwa));

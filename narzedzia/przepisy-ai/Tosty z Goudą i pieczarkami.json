@@ -1,0 +1,93 @@
+{
+  "nazwa": "Tosty z Goudą i pieczarkami",
+  "opis": "Chrupiące tosty z serem Gouda, podsmażonymi pieczarkami i cebulą. Przepis na 1 porcję.",
+  "pory": [
+    "sniadanie",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "inna"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 296.0,
+  "trwalosc_dni": 0,
+  "czas_przygotowania_min": 8,
+  "czas_obrobki_min": 9,
+  "sprzet": [
+    "Patelnia 24 cm",
+    "Grill kontaktowy",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Tosty zjedz bezpośrednio po przygotowaniu.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli nadzienie jest wodniste, smaż pieczarki dłużej. Gdy pieczywo rumieni się za szybko, zmniejsz temperaturę urządzenia.",
+  "skladniki": [
+    {
+      "nazwa": "Chleb żytni razowy",
+      "ilosc": 2.0,
+      "jednostka": "szt",
+      "stan": "kromki"
+    },
+    {
+      "nazwa": "Ser Gouda",
+      "ilosc": 70.0,
+      "jednostka": "g",
+      "stan": "pokrojony w plastry"
+    },
+    {
+      "nazwa": "Pieczarki, surowe",
+      "ilosc": 120.0,
+      "jednostka": "g",
+      "stan": "pokrojone w plasterki"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 30.0,
+      "jednostka": "g",
+      "stan": "drobno posiekana"
+    },
+    {
+      "nazwa": "Masło",
+      "ilosc": 5.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Tymianek suszony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie nadzienia",
+      "minuty": 8,
+      "kroki": [
+        {
+          "tresc": "Na maśle smaż cebulę i pieczarki, aż odparuje cała woda. Dodaj tymianek i pieprz.",
+          "sygnal": "pieczarki są rumiane i suche"
+        }
+      ]
+    },
+    {
+      "nazwa": "Opiekanie",
+      "minuty": 5,
+      "kroki": [
+        {
+          "tresc": "Na kromce ułóż połowę Goudy, pieczarki i pozostały ser. Przykryj drugą kromką.",
+          "uwaga": true
+        },
+        {
+          "tresc": "Opiekaj w tosterze lub grillu kontaktowym.",
+          "sygnal": "pieczywo jest rumiane, a ser całkowicie roztopiony"
+        }
+      ]
+    }
+  ]
+}

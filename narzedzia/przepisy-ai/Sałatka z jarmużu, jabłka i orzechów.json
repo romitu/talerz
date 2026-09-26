@@ -1,0 +1,99 @@
+{
+  "nazwa": "Sałatka z jarmużu, jabłka i orzechów",
+  "opis": "Chrupiąca sałatka z jarmużu, jabłka, pomarańczy i orzechów w cytrynowo-musztardowym dressingu. Przepis na 1 porcję.",
+  "pory": [
+    "kolacja",
+    "dodatek"
+  ],
+  "kuchnie": [
+    "inna"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 406.0,
+  "trwalosc_dni": 1,
+  "czas_przygotowania_min": 15,
+  "czas_obrobki_min": 0,
+  "sprzet": [
+    "miska",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Przechowuj w lodówce do 1 dnia. Orzechy dodaj przed podaniem.",
+  "mozna_mrozic": false,
+  "ratunek": "Twardy jarmuż masuj dłużej z dressingiem. Zbyt kwaśny sos złagodź sokiem z pomarańczy.",
+  "skladniki": [
+    {
+      "nazwa": "Jarmuż, surowy",
+      "ilosc": 100.0,
+      "jednostka": "g",
+      "stan": "bez twardych łodyg"
+    },
+    {
+      "nazwa": "Jabłko ze skórką",
+      "ilosc": 1.0,
+      "jednostka": "szt",
+      "stan": "pokrojone"
+    },
+    {
+      "nazwa": "Pomarańcza",
+      "ilosc": 0.5,
+      "jednostka": "szt",
+      "stan": "cząstki i sok"
+    },
+    {
+      "nazwa": "Orzechy włoskie",
+      "ilosc": 25.0,
+      "jednostka": "g",
+      "stan": "posiekane"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 10.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cytryna",
+      "ilosc": 15.0,
+      "jednostka": "g",
+      "stan": "sok"
+    },
+    {
+      "nazwa": "Musztarda",
+      "ilosc": 5.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie",
+      "minuty": 15,
+      "kroki": [
+        {
+          "tresc": "Usuń twarde łodygi jarmużu i porwij liście. Jabłko pokrój, a pomarańczę podziel na cząstki."
+        },
+        {
+          "tresc": "Oliwę wymieszaj z cytryną, sokiem z pomarańczy, musztardą, solą i pieprzem."
+        },
+        {
+          "tresc": "Jarmuż masuj z dressingiem przez 2–3 minuty.",
+          "sygnal": "liście stają się ciemniejsze i delikatniejsze",
+          "uwaga": true
+        },
+        {
+          "tresc": "Dodaj owoce i orzechy."
+        }
+      ]
+    }
+  ]
+}

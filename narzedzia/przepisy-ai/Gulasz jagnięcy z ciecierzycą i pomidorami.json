@@ -1,0 +1,129 @@
+{
+  "nazwa": "Gulasz jagnięcy z ciecierzycą i pomidorami",
+  "opis": "Aromatyczny gulasz jagnięcy z ciecierzycą, pomidorami i korzennymi przyprawami, podany z bulgurem. Przepis na 1 porcję.",
+  "pory": [
+    "obiad"
+  ],
+  "kuchnie": [
+    "inna"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 737.5,
+  "trwalosc_dni": 3,
+  "czas_przygotowania_min": 15,
+  "czas_obrobki_min": 80,
+  "sprzet": [
+    "Garnek 3 l",
+    "Garnek 2 l",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Przechowuj w lodówce do 3 dni albo zamroź. Kaszę trzymaj osobno.",
+  "mozna_mrozic": true,
+  "ratunek": "Twardą jagnięcinę duś dalej na małym ogniu. Za rzadki sos odparuj bez przykrycia.",
+  "skladniki": [
+    {
+      "nazwa": "Jagnięcina, udziec surowy",
+      "ilosc": 160.0,
+      "jednostka": "g",
+      "stan": "pokrojona w kostkę"
+    },
+    {
+      "nazwa": "Ciecierzyca z puszki, odsączona",
+      "ilosc": 100.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Pomidory krojone z puszki",
+      "ilosc": 180.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Kasza bulgur, sucha",
+      "ilosc": 50.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Marchew, surowa",
+      "ilosc": 60.0,
+      "jednostka": "g",
+      "stan": "pokrojona"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 50.0,
+      "jednostka": "g",
+      "stan": "posiekana"
+    },
+    {
+      "nazwa": "Domowy bulion warzywny",
+      "ilosc": 120.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 5.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 8.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Kmin rzymski mielony",
+      "ilosc": 2.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cynamon mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Papryka słodka mielona",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie",
+      "minuty": 15,
+      "kroki": [
+        {
+          "tresc": "Jagnięcinę pokrój i osusz. Marchew pokrój, cebulę i czosnek posiekaj."
+        },
+        {
+          "tresc": "Kaszę bulgur ugotuj."
+        }
+      ]
+    },
+    {
+      "nazwa": "Duszenie",
+      "minuty": 80,
+      "kroki": [
+        {
+          "tresc": "Na oliwie obsmaż jagnięcinę partiami. Dodaj cebulę i marchew."
+        },
+        {
+          "tresc": "Dodaj czosnek, przyprawy, pomidory i bulion. Duś pod przykryciem około 60 minut."
+        },
+        {
+          "tresc": "Dodaj ciecierzycę i duś kolejne 15 minut.",
+          "sygnal": "mięso jest miękkie, a sos gęsty",
+          "uwaga": true
+        },
+        {
+          "tresc": "Podaj z kaszą bulgur."
+        }
+      ]
+    }
+  ]
+}

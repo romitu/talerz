@@ -1,0 +1,116 @@
+{
+  "nazwa": "Pieczone warzywa korzeniowe z tymiankiem",
+  "opis": "Mieszanka pieczonych ziemniaków, buraków, marchewki, pasternaku i selera z tymiankiem. Przepis na 1 porcję.",
+  "pory": [
+    "dodatek"
+  ],
+  "kuchnie": [
+    "polska"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 342.5,
+  "trwalosc_dni": 3,
+  "czas_przygotowania_min": 15,
+  "czas_obrobki_min": 40,
+  "sprzet": [
+    "Piekarnik",
+    "Blacha do pieczenia",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Przechowuj w lodówce do 3 dni. Odgrzewaj w piekarniku lub na patelni.",
+  "mozna_mrozic": true,
+  "ratunek": "Jeśli warzywa są blade i miękkie, rozłóż je luźniej i zwiększ temperaturę. Twarde kawałki pokrój drobniej i dopiecz.",
+  "skladniki": [
+    {
+      "nazwa": "Ziemniaki, surowe",
+      "ilosc": 100.0,
+      "jednostka": "g",
+      "stan": "pokrojone"
+    },
+    {
+      "nazwa": "Buraki, surowe",
+      "ilosc": 60.0,
+      "jednostka": "g",
+      "stan": "pokrojone"
+    },
+    {
+      "nazwa": "Marchew, surowa",
+      "ilosc": 60.0,
+      "jednostka": "g",
+      "stan": "pokrojona"
+    },
+    {
+      "nazwa": "Pasternak, surowy",
+      "ilosc": 40.0,
+      "jednostka": "g",
+      "stan": "pokrojony"
+    },
+    {
+      "nazwa": "Seler korzeń",
+      "ilosc": 30.0,
+      "jednostka": "g",
+      "stan": "pokrojony"
+    },
+    {
+      "nazwa": "Cebula czerwona, surowa",
+      "ilosc": 40.0,
+      "jednostka": "g",
+      "stan": "pokrojona"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 8.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Tymianek suszony",
+      "ilosc": 2.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Rozmaryn suszony",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie",
+      "minuty": 15,
+      "kroki": [
+        {
+          "tresc": "Piekarnik rozgrzej do 210°C. Warzywa pokrój na podobnej wielkości kawałki."
+        },
+        {
+          "tresc": "Wymieszaj je z oliwą, tymiankiem, rozmarynem, solą i pieprzem."
+        }
+      ]
+    },
+    {
+      "nazwa": "Pieczenie",
+      "minuty": 40,
+      "kroki": [
+        {
+          "tresc": "Warzywa rozłóż luźno na blasze i piecz około 40 minut."
+        },
+        {
+          "tresc": "Po 20 minutach dokładnie je przemieszaj i piecz dalej do końca podanego czasu.",
+          "sygnal": "warzywa są miękkie w środku i rumiane na brzegach",
+          "uwaga": true
+        }
+      ]
+    }
+  ]
+}

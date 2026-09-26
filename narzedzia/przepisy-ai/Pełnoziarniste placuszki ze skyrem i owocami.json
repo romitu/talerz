@@ -1,0 +1,97 @@
+{
+  "nazwa": "Pełnoziarniste placuszki ze skyrem i owocami",
+  "opis": "Pełnoziarniste placuszki podane ze skyrem i borówkami. Przepis na 1 porcję.",
+  "pory": [
+    "sniadanie"
+  ],
+  "kuchnie": [
+    "inna"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 521.0,
+  "trwalosc_dni": 1,
+  "czas_przygotowania_min": 10,
+  "czas_obrobki_min": 15,
+  "sprzet": [
+    "Patelnia 24 cm",
+    "miska",
+    "Widelec",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Placuszki przechowuj w lodówce do 1 dnia. Skyr i owoce trzymaj osobno.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli ciasto jest za gęste, dolej mleka. Jeśli placuszki przywierają, patelnia jest za chłodna albo ma za mało oleju.",
+  "skladniki": [
+    {
+      "nazwa": "Mąka orkiszowa pełnoziarnista",
+      "ilosc": 80.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Jaja kurze, całe, surowe",
+      "ilosc": 1.0,
+      "jednostka": "szt"
+    },
+    {
+      "nazwa": "Mleko 2%",
+      "ilosc": 120.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Skyr naturalny",
+      "ilosc": 150.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Borówki amerykańskie",
+      "ilosc": 100.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Olej rzepakowy",
+      "ilosc": 5.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Miód",
+      "ilosc": 10.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cynamon mielony",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie ciasta",
+      "minuty": 10,
+      "kroki": [
+        {
+          "tresc": "Jajko roztrzep z mlekiem. Dodaj mąkę i cynamon, a następnie wymieszaj na gładkie ciasto."
+        },
+        {
+          "tresc": "Odstaw ciasto na 5 minut."
+        }
+      ]
+    },
+    {
+      "nazwa": "Smażenie",
+      "minuty": 15,
+      "kroki": [
+        {
+          "tresc": "Patelnię posmaruj olejem i smaż niewielkie placuszki na średnim ogniu."
+        },
+        {
+          "tresc": "Odwracaj, gdy na powierzchni pojawią się pęcherzyki.",
+          "sygnal": "obie strony są złote",
+          "uwaga": true
+        },
+        {
+          "tresc": "Podaj ze skyrem, borówkami i miodem."
+        }
+      ]
+    }
+  ]
+}

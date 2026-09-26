@@ -1,0 +1,105 @@
+{
+  "nazwa": "Sałatka z pieczonym burakiem i fetą",
+  "opis": "Sałatka z pieczonym burakiem, fetą, rukolą, orzechami i czerwoną cebulą. Przepis na 1 porcję.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "srodziemnomorska"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 431.5,
+  "trwalosc_dni": 2,
+  "czas_przygotowania_min": 10,
+  "czas_obrobki_min": 35,
+  "sprzet": [
+    "Piekarnik",
+    "Blacha do pieczenia",
+    "miska",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Pieczone buraki przechowuj w lodówce do 2 dni. Rukolę i dressing dodaj przed jedzeniem.",
+  "mozna_mrozic": false,
+  "ratunek": "Twardego buraka dopiecz pod przykryciem. Za słoną sałatkę zrównoważ większą ilością rukoli i buraka.",
+  "skladniki": [
+    {
+      "nazwa": "Buraki, surowe",
+      "ilosc": 220.0,
+      "jednostka": "g",
+      "stan": "pokrojone w kostkę"
+    },
+    {
+      "nazwa": "Ser feta",
+      "ilosc": 70.0,
+      "jednostka": "g",
+      "stan": "pokruszony"
+    },
+    {
+      "nazwa": "Rukola",
+      "ilosc": 60.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cebula czerwona, surowa",
+      "ilosc": 40.0,
+      "jednostka": "g",
+      "stan": "cienko pokrojona"
+    },
+    {
+      "nazwa": "Orzechy włoskie",
+      "ilosc": 20.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 10.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Ocet winny czerwony",
+      "ilosc": 10.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Tymianek suszony",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Pieczenie buraka",
+      "minuty": 35,
+      "kroki": [
+        {
+          "tresc": "Piekarnik rozgrzej do 200°C. Buraka wymieszaj z połową oliwy i tymiankiem."
+        },
+        {
+          "tresc": "Piecz około 30–35 minut, a następnie lekko ostudź.",
+          "sygnal": "burak jest miękki i lekko zrumieniony"
+        }
+      ]
+    },
+    {
+      "nazwa": "Składanie sałatki",
+      "minuty": 10,
+      "kroki": [
+        {
+          "tresc": "Połącz rukolę, buraka, cebulę i orzechy."
+        },
+        {
+          "tresc": "Dodaj fetę, pozostałą oliwę, ocet i pieprz. Delikatnie wymieszaj.",
+          "uwaga": true
+        }
+      ]
+    }
+  ]
+}

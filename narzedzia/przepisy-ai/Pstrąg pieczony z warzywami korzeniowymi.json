@@ -1,0 +1,112 @@
+{
+  "nazwa": "Pstrąg pieczony z warzywami korzeniowymi",
+  "opis": "Pstrąg pieczony z ziemniakami, marchewką, pasternakiem i selerem. Przepis na 1 porcję.",
+  "pory": [
+    "obiad"
+  ],
+  "kuchnie": [
+    "polska"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 672.5,
+  "trwalosc_dni": 2,
+  "czas_przygotowania_min": 15,
+  "czas_obrobki_min": 40,
+  "sprzet": [
+    "Piekarnik",
+    "Blacha do pieczenia",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Gotowe danie przechowuj w lodówce do 2 dni.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli warzywa są twarde, zdejmij rybę i dopiekaj warzywa osobno. Suchą rybę skrop cytryną i oliwą.",
+  "skladniki": [
+    {
+      "nazwa": "Pstrąg tęczowy, surowy",
+      "ilosc": 200.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Ziemniaki, surowe",
+      "ilosc": 200.0,
+      "jednostka": "g",
+      "stan": "pokrojone w cząstki"
+    },
+    {
+      "nazwa": "Marchew, surowa",
+      "ilosc": 100.0,
+      "jednostka": "g",
+      "stan": "pokrojona"
+    },
+    {
+      "nazwa": "Pasternak, surowy",
+      "ilosc": 70.0,
+      "jednostka": "g",
+      "stan": "pokrojony"
+    },
+    {
+      "nazwa": "Seler korzeń",
+      "ilosc": 70.0,
+      "jednostka": "g",
+      "stan": "pokrojony"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 10.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cytryna",
+      "ilosc": 20.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Rozmaryn suszony",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie",
+      "minuty": 15,
+      "kroki": [
+        {
+          "tresc": "Piekarnik rozgrzej do 200°C. Warzywa pokrój na podobnej wielkości kawałki."
+        },
+        {
+          "tresc": "Warzywa wymieszaj z oliwą, rozmarynem, solą i pieprzem."
+        }
+      ]
+    },
+    {
+      "nazwa": "Pieczenie",
+      "minuty": 40,
+      "kroki": [
+        {
+          "tresc": "Warzywa piecz 20 minut, następnie przesuń je na boki i dodaj pstrąga."
+        },
+        {
+          "tresc": "Rybę skrop cytryną i lekko dopraw.",
+          "uwaga": true
+        },
+        {
+          "tresc": "Piecz jeszcze około 18–20 minut.",
+          "sygnal": "mięso ryby jest nieprzezroczyste i łatwo odchodzi od ości"
+        }
+      ]
+    }
+  ]
+}

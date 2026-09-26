@@ -1,0 +1,106 @@
+{
+  "nazwa": "Krewetki z czosnkiem, cukinią i ryżem",
+  "opis": "Krewetki smażone z czosnkiem, cukinią, chili i cytryną, podane z ryżem. Przepis na 1 porcję.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "srodziemnomorska"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 442.0,
+  "trwalosc_dni": 1,
+  "czas_przygotowania_min": 10,
+  "czas_obrobki_min": 15,
+  "sprzet": [
+    "Patelnia 28 cm",
+    "Garnek 2 l",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Przechowuj w lodówce do 1 dnia. Podgrzewaj bardzo krótko.",
+  "mozna_mrozic": false,
+  "ratunek": "Gumowate krewetki były smażone za długo. Jeśli cukinia puściła wodę, zwiększ ogień i szybko ją odparuj.",
+  "skladniki": [
+    {
+      "nazwa": "Krewetki, surowe",
+      "ilosc": 180.0,
+      "jednostka": "g",
+      "stan": "obrane i osuszone"
+    },
+    {
+      "nazwa": "Cukinia, surowa",
+      "ilosc": 150.0,
+      "jednostka": "g",
+      "stan": "pokrojona w półplasterki"
+    },
+    {
+      "nazwa": "Ryż jaśminowy, suchy",
+      "ilosc": 70.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 8.0,
+      "jednostka": "g",
+      "stan": "posiekany"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 8.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cytryna",
+      "ilosc": 15.0,
+      "jednostka": "g",
+      "stan": "sok"
+    },
+    {
+      "nazwa": "Pietruszka natka",
+      "ilosc": 10.0,
+      "jednostka": "g",
+      "stan": "posiekana"
+    },
+    {
+      "nazwa": "Chili suszone",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie",
+      "minuty": 10,
+      "kroki": [
+        {
+          "tresc": "Ryż ugotuj. Krewetki dokładnie osusz, a cukinię pokrój."
+        }
+      ]
+    },
+    {
+      "nazwa": "Smażenie",
+      "minuty": 15,
+      "kroki": [
+        {
+          "tresc": "Na połowie oliwy smaż cukinię na dużym ogniu przez 4–5 minut. Przełóż ją na bok."
+        },
+        {
+          "tresc": "Dodaj resztę oliwy, czosnek, chili i krewetki. Smaż 2–3 minuty.",
+          "sygnal": "krewetki są różowe i sprężyste",
+          "uwaga": true
+        },
+        {
+          "tresc": "Dodaj cukinię, sok z cytryny, sól oraz natkę. Wymieszaj i podaj z ryżem."
+        }
+      ]
+    }
+  ]
+}

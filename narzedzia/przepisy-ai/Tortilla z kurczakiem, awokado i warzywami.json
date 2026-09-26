@@ -1,0 +1,124 @@
+{
+  "nazwa": "Tortilla z kurczakiem, awokado i warzywami",
+  "opis": "Pełnoziarnista tortilla z grillowanym kurczakiem, awokado, pomidorem, ogórkiem i sosem jogurtowym. Przepis na 1 porcję.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "inna"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 557.0,
+  "trwalosc_dni": 1,
+  "czas_przygotowania_min": 12,
+  "czas_obrobki_min": 10,
+  "sprzet": [
+    "Patelnia 24 cm",
+    "miska",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Składniki przechowuj osobno w lodówce do 1 dnia. Tortillę składaj przed jedzeniem.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli tortilla pęka, ogrzej ją na suchej patelni. Suchą pierś pokrój cienko i wymieszaj z sosem.",
+  "skladniki": [
+    {
+      "nazwa": "Tortilla pełnoziarnista",
+      "ilosc": 60.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Pierś z kurczaka, surowa",
+      "ilosc": 150.0,
+      "jednostka": "g",
+      "stan": "pokrojona w paski"
+    },
+    {
+      "nazwa": "Awokado",
+      "ilosc": 0.5,
+      "jednostka": "szt",
+      "stan": "pokrojone"
+    },
+    {
+      "nazwa": "Pomidory, surowe",
+      "ilosc": 100.0,
+      "jednostka": "g",
+      "stan": "pokrojone"
+    },
+    {
+      "nazwa": "Ogórek, surowy",
+      "ilosc": 80.0,
+      "jednostka": "g",
+      "stan": "pokrojony"
+    },
+    {
+      "nazwa": "Sałata rzymska",
+      "ilosc": 40.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Jogurt naturalny 2%",
+      "ilosc": 40.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Olej rzepakowy",
+      "ilosc": 5.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cytryna",
+      "ilosc": 10.0,
+      "jednostka": "g",
+      "stan": "sok"
+    },
+    {
+      "nazwa": "Papryka słodka mielona",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie",
+      "minuty": 12,
+      "kroki": [
+        {
+          "tresc": "Warzywa pokrój, sałatę osusz, a jogurt wymieszaj z cytryną i częścią przypraw."
+        },
+        {
+          "tresc": "Kurczaka natrzyj olejem, papryką, solą i pieprzem."
+        }
+      ]
+    },
+    {
+      "nazwa": "Smażenie i składanie",
+      "minuty": 10,
+      "kroki": [
+        {
+          "tresc": "Kurczaka smaż na rozgrzanej patelni przez 6–8 minut.",
+          "sygnal": "mięso jest całkowicie ścięte, ale nadal soczyste",
+          "uwaga": true
+        },
+        {
+          "tresc": "Tortillę ogrzej, posmaruj sosem i ułóż na niej sałatę, warzywa, awokado oraz kurczaka."
+        },
+        {
+          "tresc": "Zawiń boki do środka i ciasno zroluj."
+        }
+      ]
+    }
+  ]
+}

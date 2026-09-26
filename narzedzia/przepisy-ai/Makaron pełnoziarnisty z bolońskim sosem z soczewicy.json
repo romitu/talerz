@@ -1,0 +1,125 @@
+{
+  "nazwa": "Makaron pełnoziarnisty z bolońskim sosem z soczewicy",
+  "opis": "Pełnoziarnisty makaron z gęstym pomidorowym sosem z czerwonej soczewicy i warzyw. Przepis na 1 porcję.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "inna"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 710.5,
+  "trwalosc_dni": 3,
+  "czas_przygotowania_min": 10,
+  "czas_obrobki_min": 28,
+  "sprzet": [
+    "Garnek 3 l",
+    "Garnek 2 l",
+    "Tarka o grubych oczkach",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Sos przechowuj w lodówce do 3 dni lub zamroź. Makaron najlepiej ugotować świeży.",
+  "mozna_mrozic": true,
+  "ratunek": "Za kwaśny sos złagodź dłuższym gotowaniem i dodatkową marchewką. Za gęsty rozcieńcz wodą z makaronu.",
+  "skladniki": [
+    {
+      "nazwa": "Makaron pełnoziarnisty, suchy",
+      "ilosc": 85.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Soczewica czerwona, sucha",
+      "ilosc": 60.0,
+      "jednostka": "g",
+      "stan": "opłukana"
+    },
+    {
+      "nazwa": "Passata pomidorowa",
+      "ilosc": 250.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "woda",
+      "ilosc": 150.0,
+      "jednostka": "ml"
+    },
+    {
+      "nazwa": "Marchew, surowa",
+      "ilosc": 80.0,
+      "jednostka": "g",
+      "stan": "starta"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 70.0,
+      "jednostka": "g",
+      "stan": "posiekana"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 5.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 5.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oregano suszone",
+      "ilosc": 2.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Bazylia suszona",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Papryka słodka mielona",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie",
+      "minuty": 10,
+      "kroki": [
+        {
+          "tresc": "Marchew zetrzyj, a cebulę i czosnek posiekaj. Soczewicę opłucz."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie",
+      "minuty": 28,
+      "kroki": [
+        {
+          "tresc": "Na oliwie smaż cebulę i marchew 5 minut. Dodaj czosnek oraz przyprawy."
+        },
+        {
+          "tresc": "Dodaj passatę, soczewicę i 150 ml wody. Gotuj około 20 minut.",
+          "sygnal": "soczewica jest miękka, a sos gęsty",
+          "uwaga": true
+        },
+        {
+          "tresc": "Makaron ugotuj al dente i połącz z sosem."
+        }
+      ]
+    }
+  ]
+}

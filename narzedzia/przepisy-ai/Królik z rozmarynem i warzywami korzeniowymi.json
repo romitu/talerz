@@ -1,0 +1,123 @@
+{
+  "nazwa": "Królik z rozmarynem i warzywami korzeniowymi",
+  "opis": "Królik pieczony z ziemniakami, marchewką, pasternakiem, selerem i rozmarynem. Przepis na 1 porcję.",
+  "pory": [
+    "obiad"
+  ],
+  "kuchnie": [
+    "polska"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 731.5,
+  "trwalosc_dni": 3,
+  "czas_przygotowania_min": 18,
+  "czas_obrobki_min": 70,
+  "sprzet": [
+    "Piekarnik",
+    "Naczynie żaroodporne",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Przechowuj w zamkniętym pojemniku w lodówce do 3 dni.",
+  "mozna_mrozic": true,
+  "ratunek": "Jeśli mięso jest twarde, przykryj naczynie i piecz dłużej z dodatkiem bulionu. Suche mięso polej płynem z pieczenia.",
+  "skladniki": [
+    {
+      "nazwa": "Królik, mięso surowe",
+      "ilosc": 180.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Ziemniaki, surowe",
+      "ilosc": 180.0,
+      "jednostka": "g",
+      "stan": "pokrojone"
+    },
+    {
+      "nazwa": "Marchew, surowa",
+      "ilosc": 70.0,
+      "jednostka": "g",
+      "stan": "pokrojona"
+    },
+    {
+      "nazwa": "Pasternak, surowy",
+      "ilosc": 50.0,
+      "jednostka": "g",
+      "stan": "pokrojony"
+    },
+    {
+      "nazwa": "Seler korzeń",
+      "ilosc": 40.0,
+      "jednostka": "g",
+      "stan": "pokrojony"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 40.0,
+      "jednostka": "g",
+      "stan": "pokrojona"
+    },
+    {
+      "nazwa": "Domowy bulion warzywny",
+      "ilosc": 150.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 10.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 5.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Rozmaryn świeży",
+      "ilosc": 5.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie",
+      "minuty": 18,
+      "kroki": [
+        {
+          "tresc": "Piekarnik rozgrzej do 190°C. Warzywa pokrój na podobnej wielkości kawałki."
+        },
+        {
+          "tresc": "Królika natrzyj oliwą, czosnkiem, rozmarynem, solą i pieprzem."
+        }
+      ]
+    },
+    {
+      "nazwa": "Pieczenie",
+      "minuty": 70,
+      "kroki": [
+        {
+          "tresc": "Królika i warzywa ułóż w naczyniu, wlej bulion i przykryj."
+        },
+        {
+          "tresc": "Piecz 50 minut, następnie odkryj i piecz jeszcze około 20 minut.",
+          "sygnal": "mięso jest miękkie i łatwo odchodzi od kości",
+          "uwaga": true
+        },
+        {
+          "tresc": "Przed podaniem polej mięso płynem z pieczenia."
+        }
+      ]
+    }
+  ]
+}

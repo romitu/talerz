@@ -1,0 +1,111 @@
+{
+  "nazwa": "Tortilla z hummusem i warzywami",
+  "opis": "Pełnoziarnista tortilla z domowym hummusem, pomidorem, ogórkiem i sałatą. Przepis na 1 porcję.",
+  "pory": [
+    "sniadanie",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "srodziemnomorska"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 474.5,
+  "trwalosc_dni": 1,
+  "czas_przygotowania_min": 15,
+  "czas_obrobki_min": 0,
+  "sprzet": [
+    "Blender ręczny",
+    "miska",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Hummus przechowuj w lodówce do 2 dni. Tortillę złóż bezpośrednio przed jedzeniem.",
+  "mozna_mrozic": false,
+  "ratunek": "Za gęsty hummus rozcieńcz wodą. Jeśli tortilla mięknie, osusz warzywa i składaj ją tuż przed podaniem.",
+  "skladniki": [
+    {
+      "nazwa": "Tortilla pełnoziarnista",
+      "ilosc": 60.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Ciecierzyca z puszki, odsączona",
+      "ilosc": 150.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sezam",
+      "ilosc": 15.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 10.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cytryna",
+      "ilosc": 15.0,
+      "jednostka": "g",
+      "stan": "sok"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 3.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Ogórek, surowy",
+      "ilosc": 80.0,
+      "jednostka": "g",
+      "stan": "pokrojony"
+    },
+    {
+      "nazwa": "Pomidory, surowe",
+      "ilosc": 100.0,
+      "jednostka": "g",
+      "stan": "pokrojone"
+    },
+    {
+      "nazwa": "Sałata rzymska",
+      "ilosc": 40.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Kmin rzymski mielony",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie hummusu",
+      "minuty": 10,
+      "kroki": [
+        {
+          "tresc": "Ciecierzycę, sezam, oliwę, cytrynę, czosnek, kmin i sól zblenduj z odrobiną wody.",
+          "sygnal": "pasta jest gładka i łatwo się rozsmarowuje",
+          "uwaga": true
+        }
+      ]
+    },
+    {
+      "nazwa": "Składanie tortilli",
+      "minuty": 5,
+      "kroki": [
+        {
+          "tresc": "Warzywa pokrój, a sałatę osusz."
+        },
+        {
+          "tresc": "Tortillę posmaruj hummusem, ułóż warzywa i ciasno zawiń."
+        }
+      ]
+    }
+  ]
+}

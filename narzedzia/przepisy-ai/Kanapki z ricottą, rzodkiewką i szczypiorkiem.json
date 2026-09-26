@@ -1,0 +1,84 @@
+{
+  "nazwa": "Kanapki z ricottą, rzodkiewką i szczypiorkiem",
+  "opis": "Delikatne kanapki z ricottą, chrupiącą rzodkiewką i świeżym szczypiorkiem. Przepis na 1 porcję.",
+  "pory": [
+    "sniadanie",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "inna"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 251.0,
+  "trwalosc_dni": 0,
+  "czas_przygotowania_min": 10,
+  "czas_obrobki_min": 0,
+  "sprzet": [
+    "miska",
+    "Widelec",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Pastę z ricotty przechowuj w lodówce do 1 dnia. Pieczywo smaruj przed podaniem.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli ricotta jest zbyt gęsta, dodaj odrobinę jogurtu. Za łagodny smak popraw pieprzem i szczypiorkiem.",
+  "skladniki": [
+    {
+      "nazwa": "Chleb żytni razowy",
+      "ilosc": 2.0,
+      "jednostka": "szt",
+      "stan": "kromki"
+    },
+    {
+      "nazwa": "Ser ricotta",
+      "ilosc": 100.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Rzodkiewka, surowa",
+      "ilosc": 5.0,
+      "jednostka": "szt",
+      "stan": "pokrojona w cienkie plasterki"
+    },
+    {
+      "nazwa": "Szczypiorek świeży",
+      "ilosc": 10.0,
+      "jednostka": "g",
+      "stan": "posiekany"
+    },
+    {
+      "nazwa": "Jogurt naturalny 2%",
+      "ilosc": 20.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie kanapek",
+      "minuty": 10,
+      "kroki": [
+        {
+          "tresc": "Ricottę wymieszaj z jogurtem, szczypiorkiem, solą i pieprzem.",
+          "uwaga": true
+        },
+        {
+          "tresc": "Rzodkiewki pokrój w cienkie plasterki."
+        },
+        {
+          "tresc": "Pieczywo posmaruj ricottą i ułóż na nim rzodkiewkę."
+        }
+      ]
+    }
+  ]
+}

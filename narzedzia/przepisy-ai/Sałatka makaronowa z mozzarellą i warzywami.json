@@ -1,0 +1,116 @@
+{
+  "nazwa": "Sałatka makaronowa z mozzarellą i warzywami",
+  "opis": "Sałatka z pełnoziarnistym makaronem, mozzarellą, pomidorem, ogórkiem, papryką i bazylią. Przepis na 1 porcję.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "srodziemnomorska"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 559.0,
+  "trwalosc_dni": 2,
+  "czas_przygotowania_min": 12,
+  "czas_obrobki_min": 12,
+  "sprzet": [
+    "Garnek 3 l",
+    "Sitko",
+    "miska",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Przechowuj w zamkniętym pojemniku w lodówce do 2 dni. Oliwę najlepiej dodaj przed jedzeniem.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli sałatka puściła wodę, odlej płyn i dopraw ponownie. Za suchą sałatkę skrop dodatkową oliwą.",
+  "skladniki": [
+    {
+      "nazwa": "Makaron pełnoziarnisty, suchy",
+      "ilosc": 80.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Ser mozzarella",
+      "ilosc": 90.0,
+      "jednostka": "g",
+      "stan": "pokrojony"
+    },
+    {
+      "nazwa": "Pomidory, surowe",
+      "ilosc": 130.0,
+      "jednostka": "g",
+      "stan": "pokrojone"
+    },
+    {
+      "nazwa": "Ogórek, surowy",
+      "ilosc": 100.0,
+      "jednostka": "g",
+      "stan": "pokrojony"
+    },
+    {
+      "nazwa": "Papryka czerwona, surowa",
+      "ilosc": 100.0,
+      "jednostka": "g",
+      "stan": "pokrojona"
+    },
+    {
+      "nazwa": "Oliwki czarne",
+      "ilosc": 30.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 10.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Bazylia świeża",
+      "ilosc": 8.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cytryna",
+      "ilosc": 10.0,
+      "jednostka": "g",
+      "stan": "sok"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Gotowanie makaronu",
+      "minuty": 12,
+      "kroki": [
+        {
+          "tresc": "Makaron ugotuj al dente, odcedź i całkowicie ostudź."
+        }
+      ]
+    },
+    {
+      "nazwa": "Przygotowanie sałatki",
+      "minuty": 12,
+      "kroki": [
+        {
+          "tresc": "Mozzarellę i warzywa pokrój na podobnej wielkości kawałki."
+        },
+        {
+          "tresc": "Połącz makaron, mozzarellę, warzywa, oliwki i bazylię."
+        },
+        {
+          "tresc": "Skrop oliwą oraz cytryną, dopraw i wymieszaj.",
+          "uwaga": true
+        }
+      ]
+    }
+  ]
+}

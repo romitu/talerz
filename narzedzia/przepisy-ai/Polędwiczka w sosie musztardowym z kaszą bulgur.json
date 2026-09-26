@@ -1,0 +1,120 @@
+{
+  "nazwa": "Polędwiczka w sosie musztardowym z kaszą bulgur",
+  "opis": "Polędwiczka wieprzowa w lekkim sosie musztardowo-jogurtowym z pieczarkami i kaszą bulgur. Przepis na 1 porcję.",
+  "pory": [
+    "obiad"
+  ],
+  "kuchnie": [
+    "polska"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 655.5,
+  "trwalosc_dni": 2,
+  "czas_przygotowania_min": 12,
+  "czas_obrobki_min": 23,
+  "sprzet": [
+    "Patelnia 28 cm",
+    "Garnek 2 l",
+    "miska",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Przechowuj w lodówce do 2 dni. Odgrzewaj na małym ogniu.",
+  "mozna_mrozic": false,
+  "ratunek": "Twardą polędwiczkę pokrój cieniej i duś chwilę w sosie. Za ostry sos złagodź jogurtem.",
+  "skladniki": [
+    {
+      "nazwa": "Polędwiczka wieprzowa, surowa",
+      "ilosc": 170.0,
+      "jednostka": "g",
+      "stan": "pokrojona w plastry"
+    },
+    {
+      "nazwa": "Kasza bulgur, sucha",
+      "ilosc": 70.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Pieczarki, surowe",
+      "ilosc": 150.0,
+      "jednostka": "g",
+      "stan": "pokrojone"
+    },
+    {
+      "nazwa": "Jogurt grecki naturalny 2%",
+      "ilosc": 80.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Musztarda",
+      "ilosc": 15.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 60.0,
+      "jednostka": "g",
+      "stan": "posiekana"
+    },
+    {
+      "nazwa": "Domowy bulion warzywny",
+      "ilosc": 100.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Olej rzepakowy",
+      "ilosc": 8.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Tymianek suszony",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie",
+      "minuty": 12,
+      "kroki": [
+        {
+          "tresc": "Kaszę bulgur ugotuj. Polędwiczkę pokrój w plastry, pieczarki pokrój, a cebulę posiekaj."
+        },
+        {
+          "tresc": "Jogurt wymieszaj z musztardą."
+        }
+      ]
+    },
+    {
+      "nazwa": "Smażenie i sos",
+      "minuty": 23,
+      "kroki": [
+        {
+          "tresc": "Na mocno rozgrzanym oleju smaż mięso partiami po około 2 minuty z każdej strony. Odłóż."
+        },
+        {
+          "tresc": "Na patelni smaż cebulę i pieczarki, aż odparuje woda. Dodaj bulion i tymianek."
+        },
+        {
+          "tresc": "Zmniejsz ogień, dodaj mięso oraz jogurt z musztardą. Podgrzej bez zagotowywania.",
+          "sygnal": "mięso jest soczyste, a sos gładki",
+          "uwaga": true
+        },
+        {
+          "tresc": "Podaj z kaszą bulgur."
+        }
+      ]
+    }
+  ]
+}

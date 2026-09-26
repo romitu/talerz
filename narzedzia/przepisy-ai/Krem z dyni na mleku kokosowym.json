@@ -1,0 +1,129 @@
+{
+  "nazwa": "Krem z dyni na mleku kokosowym",
+  "opis": "Aromatyczny krem z dyni, czerwonej soczewicy, imbiru i mleka kokosowego. Przepis na 1 porcję.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "azjatycka"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 792.0,
+  "trwalosc_dni": 3,
+  "czas_przygotowania_min": 12,
+  "czas_obrobki_min": 28,
+  "sprzet": [
+    "Garnek 3 l",
+    "Blender ręczny",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Przechowuj w lodówce do 3 dni albo zamroź po całkowitym ostudzeniu.",
+  "mozna_mrozic": true,
+  "ratunek": "Za gęsty krem rozcieńcz bulionem. Za ostry złagodź dodatkowym mlekiem kokosowym.",
+  "skladniki": [
+    {
+      "nazwa": "Dynia, surowa",
+      "ilosc": 250.0,
+      "jednostka": "g",
+      "stan": "pokrojona w kostkę"
+    },
+    {
+      "nazwa": "Marchew, surowa",
+      "ilosc": 60.0,
+      "jednostka": "g",
+      "stan": "pokrojona"
+    },
+    {
+      "nazwa": "Mleko kokosowe light z puszki",
+      "ilosc": 100.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Domowy bulion warzywny",
+      "ilosc": 150.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Soczewica czerwona, sucha",
+      "ilosc": 50.0,
+      "jednostka": "g",
+      "stan": "opłukana"
+    },
+    {
+      "nazwa": "woda",
+      "ilosc": 100.0,
+      "jednostka": "ml"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 40.0,
+      "jednostka": "g",
+      "stan": "posiekana"
+    },
+    {
+      "nazwa": "Imbir korzeń, surowy",
+      "ilosc": 8.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 5.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Pasta curry czerwona",
+      "ilosc": 8.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Olej rzepakowy",
+      "ilosc": 5.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Limonka",
+      "ilosc": 15.0,
+      "jednostka": "g",
+      "stan": "sok"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie",
+      "minuty": 12,
+      "kroki": [
+        {
+          "tresc": "Dynię i marchew pokrój, cebulę, czosnek oraz imbir posiekaj, a soczewicę opłucz."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie i blendowanie",
+      "minuty": 28,
+      "kroki": [
+        {
+          "tresc": "Na oleju smaż cebulę 3 minuty. Dodaj czosnek, imbir i pastę curry."
+        },
+        {
+          "tresc": "Dodaj dynię, marchew, soczewicę, bulion oraz wodę. Gotuj około 20 minut.",
+          "sygnal": "warzywa i soczewica są całkowicie miękkie"
+        },
+        {
+          "tresc": "Dodaj mleko kokosowe i zblenduj na gładko.",
+          "uwaga": true
+        },
+        {
+          "tresc": "Dopraw limonką i solą."
+        }
+      ]
+    }
+  ]
+}

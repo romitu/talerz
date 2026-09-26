@@ -1,0 +1,96 @@
+{
+  "nazwa": "Tortilla z Goudą, szpinakiem i pomidorem",
+  "opis": "Ciepła pełnoziarnista tortilla z roztopioną Goudą, szpinakiem i pomidorem. Przepis na 1 porcję.",
+  "pory": [
+    "sniadanie",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "inna"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 336.0,
+  "trwalosc_dni": 0,
+  "czas_przygotowania_min": 7,
+  "czas_obrobki_min": 8,
+  "sprzet": [
+    "Patelnia 24 cm",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Najlepiej zjedz od razu. Po przechowaniu tortilla straci chrupkość.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli tortilla pęka, ogrzej ją przed zwijaniem. Wodnisty farsz smaż chwilę dłużej przed dodaniem sera.",
+  "skladniki": [
+    {
+      "nazwa": "Tortilla pełnoziarnista",
+      "ilosc": 60.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Ser Gouda",
+      "ilosc": 60.0,
+      "jednostka": "g",
+      "stan": "drobno pokrojony"
+    },
+    {
+      "nazwa": "Szpinak, surowy",
+      "ilosc": 80.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Pomidory, surowe",
+      "ilosc": 100.0,
+      "jednostka": "g",
+      "stan": "pokrojone w kostkę"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 30.0,
+      "jednostka": "g",
+      "stan": "drobno posiekana"
+    },
+    {
+      "nazwa": "Olej rzepakowy",
+      "ilosc": 5.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oregano suszone",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie farszu",
+      "minuty": 7,
+      "kroki": [
+        {
+          "tresc": "Na oleju zeszklij cebulę, dodaj pomidora i szpinak. Smaż, aż odparuje nadmiar płynu.",
+          "sygnal": "szpinak jest zwiędnięty, a farsz nie jest wodnisty"
+        }
+      ]
+    },
+    {
+      "nazwa": "Składanie i opiekanie",
+      "minuty": 8,
+      "kroki": [
+        {
+          "tresc": "Na tortilli rozłóż farsz i Goudę, dodaj oregano oraz pieprz.",
+          "uwaga": true
+        },
+        {
+          "tresc": "Zawiń tortillę i opiekaj na suchej patelni po 2–3 minuty z każdej strony.",
+          "sygnal": "tortilla jest rumiana, a ser roztopiony"
+        }
+      ]
+    }
+  ]
+}

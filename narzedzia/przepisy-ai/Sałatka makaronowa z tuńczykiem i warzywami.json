@@ -1,0 +1,109 @@
+{
+  "nazwa": "Sałatka makaronowa z tuńczykiem i warzywami",
+  "opis": "Sałatka z pełnoziarnistym makaronem, tuńczykiem, pomidorem, ogórkiem i kukurydzą. Przepis na 1 porcję.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "srodziemnomorska"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 576.0,
+  "trwalosc_dni": 2,
+  "czas_przygotowania_min": 12,
+  "czas_obrobki_min": 12,
+  "sprzet": [
+    "Garnek 2 l",
+    "Sitko",
+    "miska",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Przechowuj w zamkniętym pojemniku w lodówce do 2 dni.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli sałatka jest sucha, dodaj trochę jogurtu. Jeśli puściła wodę, odlej płyn i dopraw ponownie.",
+  "skladniki": [
+    {
+      "nazwa": "Makaron pełnoziarnisty, suchy",
+      "ilosc": 80.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Tuńczyk w wodzie, odsączony",
+      "ilosc": 120.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Ogórek, surowy",
+      "ilosc": 100.0,
+      "jednostka": "g",
+      "stan": "pokrojony w kostkę"
+    },
+    {
+      "nazwa": "Pomidory, surowe",
+      "ilosc": 130.0,
+      "jednostka": "g",
+      "stan": "pokrojone"
+    },
+    {
+      "nazwa": "Kukurydza konserwowa, odsączona",
+      "ilosc": 80.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Jogurt grecki naturalny 2%",
+      "ilosc": 50.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Musztarda",
+      "ilosc": 5.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Szczypiorek świeży",
+      "ilosc": 10.0,
+      "jednostka": "g",
+      "stan": "posiekany"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Gotowanie makaronu",
+      "minuty": 12,
+      "kroki": [
+        {
+          "tresc": "Makaron ugotuj al dente, odcedź i całkowicie ostudź."
+        }
+      ]
+    },
+    {
+      "nazwa": "Łączenie sałatki",
+      "minuty": 12,
+      "kroki": [
+        {
+          "tresc": "Ogórek i pomidora pokrój. Jogurt wymieszaj z musztardą, solą oraz pieprzem."
+        },
+        {
+          "tresc": "Połącz makaron z tuńczykiem, warzywami, kukurydzą i sosem.",
+          "uwaga": true
+        },
+        {
+          "tresc": "Posyp szczypiorkiem i podaj lub schłodź."
+        }
+      ]
+    }
+  ]
+}

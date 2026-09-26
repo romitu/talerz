@@ -1,0 +1,93 @@
+{
+  "nazwa": "Tosty z serem salami i papryką",
+  "opis": "Ciepłe tosty z serem salami, papryką i musztardą. Przepis na 1 porcję.",
+  "pory": [
+    "sniadanie",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "inna"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 251.0,
+  "trwalosc_dni": 0,
+  "czas_przygotowania_min": 6,
+  "czas_obrobki_min": 6,
+  "sprzet": [
+    "Grill kontaktowy",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Tosty zjedz bezpośrednio po przygotowaniu.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli papryka pozostaje zbyt twarda, pokrój ją bardzo cienko. Gdy ser wypływa, zostaw szerszy brzeg pieczywa bez nadzienia.",
+  "skladniki": [
+    {
+      "nazwa": "Chleb żytni razowy",
+      "ilosc": 2.0,
+      "jednostka": "szt",
+      "stan": "kromki"
+    },
+    {
+      "nazwa": "Ser salami",
+      "ilosc": 70.0,
+      "jednostka": "g",
+      "stan": "pokrojony w plastry"
+    },
+    {
+      "nazwa": "Papryka czerwona, surowa",
+      "ilosc": 100.0,
+      "jednostka": "g",
+      "stan": "pokrojona w cienkie paski"
+    },
+    {
+      "nazwa": "Musztarda",
+      "ilosc": 5.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Masło",
+      "ilosc": 5.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Papryka wędzona mielona",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Składanie tostów",
+      "minuty": 6,
+      "kroki": [
+        {
+          "tresc": "Paprykę pokrój w bardzo cienkie paski."
+        },
+        {
+          "tresc": "Pieczywo posmaruj musztardą. Ułóż ser, paprykę i przyprawy, a następnie przykryj drugą kromką.",
+          "uwaga": true
+        },
+        {
+          "tresc": "Zewnętrzne strony pieczywa cienko posmaruj masłem."
+        }
+      ]
+    },
+    {
+      "nazwa": "Opiekanie",
+      "minuty": 6,
+      "kroki": [
+        {
+          "tresc": "Opiekaj w tosterze lub grillu kontaktowym.",
+          "sygnal": "pieczywo jest chrupiące, a ser roztopiony"
+        }
+      ]
+    }
+  ]
+}

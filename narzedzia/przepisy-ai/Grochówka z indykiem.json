@@ -1,0 +1,133 @@
+{
+  "nazwa": "Grochówka z indykiem",
+  "opis": "Treściwa grochówka z mięsem indyka, ziemniakami, warzywami korzeniowymi i majerankiem. Przepis na 1 porcję.",
+  "pory": [
+    "obiad"
+  ],
+  "kuchnie": [
+    "polska"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 820.5,
+  "trwalosc_dni": 3,
+  "czas_przygotowania_min": 15,
+  "czas_obrobki_min": 55,
+  "sprzet": [
+    "Garnek 3 l",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Przechowuj w lodówce do 3 dni albo zamroź w porcjach.",
+  "mozna_mrozic": true,
+  "ratunek": "Jeśli groch pozostaje twardy, gotuj dalej i uzupełniaj wodę. Za gęstą zupę rozcieńcz gorącym bulionem.",
+  "skladniki": [
+    {
+      "nazwa": "Groch łuskany, suchy",
+      "ilosc": 50.0,
+      "jednostka": "g",
+      "stan": "opłukany"
+    },
+    {
+      "nazwa": "Pierś z indyka, surowa",
+      "ilosc": 100.0,
+      "jednostka": "g",
+      "stan": "pokrojona w kostkę"
+    },
+    {
+      "nazwa": "Ziemniaki, surowe",
+      "ilosc": 100.0,
+      "jednostka": "g",
+      "stan": "pokrojone w kostkę"
+    },
+    {
+      "nazwa": "Marchew, surowa",
+      "ilosc": 50.0,
+      "jednostka": "g",
+      "stan": "pokrojona"
+    },
+    {
+      "nazwa": "Pietruszka korzeń",
+      "ilosc": 30.0,
+      "jednostka": "g",
+      "stan": "pokrojona"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 30.0,
+      "jednostka": "g",
+      "stan": "posiekana"
+    },
+    {
+      "nazwa": "Domowy bulion warzywny",
+      "ilosc": 150.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "woda",
+      "ilosc": 300.0,
+      "jednostka": "ml"
+    },
+    {
+      "nazwa": "Olej rzepakowy",
+      "ilosc": 5.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Majeranek suszony",
+      "ilosc": 2.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "liść laurowy",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "ziele angielskie",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie",
+      "minuty": 15,
+      "kroki": [
+        {
+          "tresc": "Groch opłucz. Indyka i warzywa pokrój, a cebulę posiekaj."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie",
+      "minuty": 55,
+      "kroki": [
+        {
+          "tresc": "Na oleju zeszklij cebulę, dodaj indyka i smaż, aż straci surowy kolor."
+        },
+        {
+          "tresc": "Dodaj groch, marchew, pietruszkę, bulion, wodę, liść laurowy i ziele angielskie. Gotuj 30 minut."
+        },
+        {
+          "tresc": "Dodaj ziemniaki i gotuj jeszcze około 20 minut.",
+          "sygnal": "groch się rozpada, a mięso i ziemniaki są miękkie",
+          "uwaga": true
+        },
+        {
+          "tresc": "Dodaj majeranek, sól i pieprz."
+        }
+      ]
+    }
+  ]
+}

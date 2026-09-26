@@ -1,0 +1,120 @@
+{
+  "nazwa": "Curry z ciecierzycy, pomidorów i szpinaku",
+  "opis": "Łagodne jednogarnkowe curry z ciecierzycą, szpinakiem i pomidorami. Przepis na 1 porcję.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "azjatycka"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 662.0,
+  "trwalosc_dni": 3,
+  "czas_przygotowania_min": 8,
+  "czas_obrobki_min": 22,
+  "sprzet": [
+    "Garnek 3 l",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Curry przechowuj w lodówce do 3 dni lub zamroź po ostudzeniu.",
+  "mozna_mrozic": true,
+  "ratunek": "Za gęste curry rozcieńcz wodą. Jeśli jest mdłe, dodaj odrobinę soli, kminu i soku z cytryny.",
+  "skladniki": [
+    {
+      "nazwa": "Ciecierzyca z puszki, odsączona",
+      "ilosc": 180.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Szpinak, surowy",
+      "ilosc": 80.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Pomidory krojone z puszki",
+      "ilosc": 200.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Mleko kokosowe light z puszki",
+      "ilosc": 100.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 70.0,
+      "jednostka": "g",
+      "stan": "posiekana"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 5.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Imbir korzeń, surowy",
+      "ilosc": 8.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Olej rzepakowy",
+      "ilosc": 5.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Garam masala",
+      "ilosc": 2.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Kmin rzymski mielony",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cytryna",
+      "ilosc": 10.0,
+      "jednostka": "g",
+      "stan": "sok"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie",
+      "minuty": 8,
+      "kroki": [
+        {
+          "tresc": "Cebulę, czosnek i imbir drobno posiekaj."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie curry",
+      "minuty": 22,
+      "kroki": [
+        {
+          "tresc": "Na oleju smaż cebulę 4 minuty. Dodaj czosnek, imbir, garam masala oraz kmin."
+        },
+        {
+          "tresc": "Dodaj pomidory, mleko kokosowe i ciecierzycę. Gotuj 15 minut."
+        },
+        {
+          "tresc": "Dodaj szpinak, sól i sok z cytryny. Gotuj jeszcze 2 minuty.",
+          "sygnal": "szpinak zwiędł, a sos lekko zgęstniał",
+          "uwaga": true
+        },
+        {
+          "tresc": "Spróbuj i w razie potrzeby skoryguj sól oraz kwaśność."
+        }
+      ]
+    }
+  ]
+}

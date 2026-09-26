@@ -1,0 +1,120 @@
+{
+  "nazwa": "Makaron z pieczonymi warzywami i mozzarellą",
+  "opis": "Pełnoziarnisty makaron z pieczoną cukinią, papryką, pomidorem i mozzarellą. Przepis na 1 porcję.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "srodziemnomorska"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 625.0,
+  "trwalosc_dni": 2,
+  "czas_przygotowania_min": 12,
+  "czas_obrobki_min": 30,
+  "sprzet": [
+    "Piekarnik",
+    "Blacha do pieczenia",
+    "Garnek 3 l",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Przechowuj w lodówce do 2 dni.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli warzywa puściły wodę, dopiekaj je kilka minut na wyższej temperaturze. Za suchy makaron skrop oliwą.",
+  "skladniki": [
+    {
+      "nazwa": "Makaron pełnoziarnisty, suchy",
+      "ilosc": 85.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Ser mozzarella",
+      "ilosc": 90.0,
+      "jednostka": "g",
+      "stan": "porwany na kawałki"
+    },
+    {
+      "nazwa": "Cukinia, surowa",
+      "ilosc": 130.0,
+      "jednostka": "g",
+      "stan": "pokrojona"
+    },
+    {
+      "nazwa": "Papryka żółta, surowa",
+      "ilosc": 120.0,
+      "jednostka": "g",
+      "stan": "pokrojona"
+    },
+    {
+      "nazwa": "Pomidory, surowe",
+      "ilosc": 130.0,
+      "jednostka": "g",
+      "stan": "pokrojone"
+    },
+    {
+      "nazwa": "Cebula czerwona, surowa",
+      "ilosc": 50.0,
+      "jednostka": "g",
+      "stan": "pokrojona"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 10.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oregano suszone",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Bazylia świeża",
+      "ilosc": 8.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Pieczenie warzyw",
+      "minuty": 30,
+      "kroki": [
+        {
+          "tresc": "Piekarnik rozgrzej do 210°C. Warzywa pokrój i wymieszaj z oliwą, oregano, solą oraz pieprzem."
+        },
+        {
+          "tresc": "Piecz warzywa około 25 minut.",
+          "sygnal": "są miękkie i lekko zrumienione"
+        }
+      ]
+    },
+    {
+      "nazwa": "Łączenie makaronu",
+      "minuty": 12,
+      "kroki": [
+        {
+          "tresc": "Makaron ugotuj al dente i odcedź."
+        },
+        {
+          "tresc": "Gorący makaron połącz z warzywami i mozzarellą.",
+          "uwaga": true
+        },
+        {
+          "tresc": "Dodaj świeżą bazylię i podaj."
+        }
+      ]
+    }
+  ]
+}

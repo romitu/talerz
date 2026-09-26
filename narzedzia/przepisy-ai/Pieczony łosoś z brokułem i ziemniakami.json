@@ -1,0 +1,108 @@
+{
+  "nazwa": "Pieczony łosoś z brokułem i ziemniakami",
+  "opis": "Łosoś pieczony na jednej blasze z brokułem i ziemniakami, doprawiony cytryną oraz czosnkiem. Przepis na 1 porcję.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "srodziemnomorska"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 667.5,
+  "trwalosc_dni": 2,
+  "czas_przygotowania_min": 12,
+  "czas_obrobki_min": 30,
+  "sprzet": [
+    "Piekarnik",
+    "Blacha do pieczenia",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Po ostudzeniu przechowuj w zamkniętym pojemniku w lodówce do 2 dni.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli łosoś jest suchy, podaj go z jogurtem i cytryną. Twarde ziemniaki dopiekaj osobno jeszcze kilka minut.",
+  "skladniki": [
+    {
+      "nazwa": "Łosoś dziki, surowy",
+      "ilosc": 180.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Brokuł, surowy",
+      "ilosc": 200.0,
+      "jednostka": "g",
+      "stan": "podzielony na różyczki"
+    },
+    {
+      "nazwa": "Ziemniaki, surowe",
+      "ilosc": 250.0,
+      "jednostka": "g",
+      "stan": "pokrojone w małe cząstki"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 10.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cytryna",
+      "ilosc": 20.0,
+      "jednostka": "g",
+      "stan": "sok i cząstki"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 5.0,
+      "jednostka": "g",
+      "stan": "drobno posiekany"
+    },
+    {
+      "nazwa": "Tymianek suszony",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie",
+      "minuty": 12,
+      "kroki": [
+        {
+          "tresc": "Piekarnik rozgrzej do 210°C. Ziemniaki pokrój w małe cząstki, a brokuł podziel na różyczki."
+        },
+        {
+          "tresc": "Ziemniaki wymieszaj z połową oliwy, tymiankiem i częścią soli."
+        }
+      ]
+    },
+    {
+      "nazwa": "Pieczenie",
+      "minuty": 30,
+      "kroki": [
+        {
+          "tresc": "Ziemniaki piecz 15 minut. Następnie dodaj brokuł i piecz kolejne 5 minut."
+        },
+        {
+          "tresc": "Na blasze ułóż łososia. Skrop wszystko pozostałą oliwą i cytryną, dodaj czosnek, sól oraz pieprz.",
+          "uwaga": true
+        },
+        {
+          "tresc": "Piecz jeszcze 10–12 minut.",
+          "sygnal": "łosoś łatwo rozdziela się widelcem, ale pozostaje soczysty"
+        }
+      ]
+    }
+  ]
+}

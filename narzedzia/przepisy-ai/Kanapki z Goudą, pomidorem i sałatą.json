@@ -1,0 +1,83 @@
+{
+  "nazwa": "Kanapki z Goudą, pomidorem i sałatą",
+  "opis": "Klasyczne kanapki z serem Gouda, pomidorem, ogórkiem i sałatą. Przepis na 1 porcję.",
+  "pory": [
+    "sniadanie",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "inna"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 275.5,
+  "trwalosc_dni": 0,
+  "czas_przygotowania_min": 7,
+  "czas_obrobki_min": 0,
+  "sprzet": [
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Kanapki najlepiej zjedz od razu. Składniki przechowuj osobno w lodówce.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli pomidor jest bardzo soczysty, osusz plasterki. Za łagodny smak popraw musztardą i pieprzem.",
+  "skladniki": [
+    {
+      "nazwa": "Chleb żytni razowy",
+      "ilosc": 2.0,
+      "jednostka": "szt",
+      "stan": "kromki"
+    },
+    {
+      "nazwa": "Ser Gouda",
+      "ilosc": 60.0,
+      "jednostka": "g",
+      "stan": "pokrojony w plastry"
+    },
+    {
+      "nazwa": "Pomidory, surowe",
+      "ilosc": 80.0,
+      "jednostka": "g",
+      "stan": "pokrojone w plastry"
+    },
+    {
+      "nazwa": "Ogórek, surowy",
+      "ilosc": 40.0,
+      "jednostka": "g",
+      "stan": "pokrojony w plastry"
+    },
+    {
+      "nazwa": "Sałata masłowa",
+      "ilosc": 20.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Musztarda",
+      "ilosc": 5.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie kanapek",
+      "minuty": 7,
+      "kroki": [
+        {
+          "tresc": "Pomidora i ogórek pokrój w plastry, a sałatę umyj i osusz."
+        },
+        {
+          "tresc": "Pieczywo cienko posmaruj musztardą."
+        },
+        {
+          "tresc": "Ułóż sałatę, Goudę, pomidora i ogórek. Dopraw pieprzem.",
+          "uwaga": true
+        }
+      ]
+    }
+  ]
+}

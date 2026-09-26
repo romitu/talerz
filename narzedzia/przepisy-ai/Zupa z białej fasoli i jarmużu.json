@@ -1,0 +1,128 @@
+{
+  "nazwa": "Zupa z białej fasoli i jarmużu",
+  "opis": "Warzywna zupa z białą fasolą, jarmużem i pomidorami, podana z pieczywem. Przepis na 1 porcję.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "srodziemnomorska"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 825.5,
+  "trwalosc_dni": 3,
+  "czas_przygotowania_min": 12,
+  "czas_obrobki_min": 30,
+  "sprzet": [
+    "Garnek 3 l",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Zupę przechowuj w lodówce do 3 dni lub zamroź. Pieczywo trzymaj osobno.",
+  "mozna_mrozic": true,
+  "ratunek": "Za rzadką zupę zagęść, rozgniatając część fasoli. Twardy jarmuż gotuj kilka minut dłużej.",
+  "skladniki": [
+    {
+      "nazwa": "Fasola biała z puszki, odsączona",
+      "ilosc": 150.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Jarmuż, surowy",
+      "ilosc": 50.0,
+      "jednostka": "g",
+      "stan": "bez twardych łodyg"
+    },
+    {
+      "nazwa": "Pomidory krojone z puszki",
+      "ilosc": 150.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Domowy bulion warzywny",
+      "ilosc": 250.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Marchew, surowa",
+      "ilosc": 60.0,
+      "jednostka": "g",
+      "stan": "pokrojona"
+    },
+    {
+      "nazwa": "Seler naciowy, surowy",
+      "ilosc": 40.0,
+      "jednostka": "g",
+      "stan": "pokrojony"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 40.0,
+      "jednostka": "g",
+      "stan": "posiekana"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 5.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 8.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Tymianek suszony",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Chleb żytni razowy",
+      "ilosc": 2.0,
+      "jednostka": "szt",
+      "stan": "kromki"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie",
+      "minuty": 12,
+      "kroki": [
+        {
+          "tresc": "Marchew i seler pokrój, cebulę i czosnek posiekaj, a z jarmużu usuń twarde łodygi."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie",
+      "minuty": 30,
+      "kroki": [
+        {
+          "tresc": "Na oliwie smaż cebulę, marchew i seler przez 5 minut. Dodaj czosnek i tymianek."
+        },
+        {
+          "tresc": "Dodaj pomidory, bulion i fasolę. Gotuj 18 minut."
+        },
+        {
+          "tresc": "Dodaj jarmuż i gotuj jeszcze 5–7 minut.",
+          "sygnal": "warzywa są miękkie, a jarmuż delikatny",
+          "uwaga": true
+        },
+        {
+          "tresc": "Dopraw solą oraz pieprzem i podaj z pieczywem."
+        }
+      ]
+    }
+  ]
+}

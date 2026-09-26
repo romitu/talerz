@@ -1,0 +1,71 @@
+{
+  "nazwa": "Serek wiejski z owocami i orzechami",
+  "opis": "Serek wiejski z bananem, borówkami, orzechami i cynamonem. Przepis na 1 porcję.",
+  "pory": [
+    "sniadanie",
+    "dodatek"
+  ],
+  "kuchnie": [
+    "inna"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 361.0,
+  "trwalosc_dni": 1,
+  "czas_przygotowania_min": 5,
+  "czas_obrobki_min": 0,
+  "sprzet": [
+    "miska",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Przechowuj w lodówce do 1 dnia. Orzechy dodaj tuż przed jedzeniem.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli serek jest zbyt rzadki, odlej część płynu. Mało słodki smak popraw bardziej dojrzałym bananem.",
+  "skladniki": [
+    {
+      "nazwa": "Serek wiejski naturalny",
+      "ilosc": 200.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Banan",
+      "ilosc": 0.5,
+      "jednostka": "szt",
+      "stan": "pokrojony w plasterki"
+    },
+    {
+      "nazwa": "Borówki amerykańskie",
+      "ilosc": 80.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Orzechy włoskie",
+      "ilosc": 20.0,
+      "jednostka": "g",
+      "stan": "grubo posiekane"
+    },
+    {
+      "nazwa": "Cynamon mielony",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie",
+      "minuty": 5,
+      "kroki": [
+        {
+          "tresc": "Banana pokrój w plasterki, a orzechy grubo posiekaj."
+        },
+        {
+          "tresc": "Serek przełóż do miski i dodaj owoce."
+        },
+        {
+          "tresc": "Posyp cynamonem i orzechami tuż przed podaniem."
+        }
+      ]
+    }
+  ]
+}

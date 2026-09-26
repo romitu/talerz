@@ -1,0 +1,100 @@
+{
+  "nazwa": "Tortilla z jajkiem i szpinakiem",
+  "opis": "Ciepła pełnoziarnista tortilla z jajkiem, szpinakiem, pomidorem i fetą. Przepis na 1 porcję.",
+  "pory": [
+    "sniadanie",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "inna"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 366.0,
+  "trwalosc_dni": 0,
+  "czas_przygotowania_min": 8,
+  "czas_obrobki_min": 8,
+  "sprzet": [
+    "Patelnia 24 cm",
+    "miska",
+    "Widelec",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Najlepiej zjedz bezpośrednio po przygotowaniu.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli tortilla pęka, ogrzej ją chwilę na suchej patelni. Zbyt mokry farsz smaż dłużej bez przykrycia.",
+  "skladniki": [
+    {
+      "nazwa": "Tortilla pełnoziarnista",
+      "ilosc": 60.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Jaja kurze, całe, surowe",
+      "ilosc": 2.0,
+      "jednostka": "szt",
+      "stan": "roztrzepane"
+    },
+    {
+      "nazwa": "Szpinak, surowy",
+      "ilosc": 60.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Pomidory, surowe",
+      "ilosc": 100.0,
+      "jednostka": "g",
+      "stan": "pokrojone w kostkę"
+    },
+    {
+      "nazwa": "Ser feta",
+      "ilosc": 30.0,
+      "jednostka": "g",
+      "stan": "pokruszony"
+    },
+    {
+      "nazwa": "Olej rzepakowy",
+      "ilosc": 5.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie",
+      "minuty": 8,
+      "kroki": [
+        {
+          "tresc": "Jajka roztrzep z solą i pieprzem. Pomidora pokrój, a fetę pokrusz."
+        }
+      ]
+    },
+    {
+      "nazwa": "Smażenie i zwijanie",
+      "minuty": 8,
+      "kroki": [
+        {
+          "tresc": "Na oleju podsmaż szpinak i pomidora. Dodaj jajka i mieszaj do ścięcia."
+        },
+        {
+          "tresc": "Tortillę krótko ogrzej, nałóż farsz i dodaj fetę.",
+          "uwaga": true
+        },
+        {
+          "tresc": "Zawiń boki do środka, zroluj i opiekaj na suchej patelni po około 1 minucie z każdej strony.",
+          "sygnal": "tortilla trzyma farsz i jest lekko zrumieniona"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,138 @@
+{
+  "nazwa": "Gulasz wołowy z warzywami korzeniowymi",
+  "opis": "Długo duszony gulasz wołowy z ziemniakami, marchewką, pasternakiem i selerem. Przepis na 1 porcję.",
+  "pory": [
+    "obiad"
+  ],
+  "kuchnie": [
+    "polska"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 953.5,
+  "trwalosc_dni": 3,
+  "czas_przygotowania_min": 18,
+  "czas_obrobki_min": 130,
+  "sprzet": [
+    "Garnek 3 l",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Przechowuj w lodówce do 3 dni albo zamroź po ostudzeniu.",
+  "mozna_mrozic": true,
+  "ratunek": "Twarde mięso duś dalej na małym ogniu, uzupełniając gorącą wodę. Za rzadki sos odparuj bez przykrycia.",
+  "skladniki": [
+    {
+      "nazwa": "Pręga wołowa bez kości, surowa",
+      "ilosc": 180.0,
+      "jednostka": "g",
+      "stan": "pokrojona w kostkę"
+    },
+    {
+      "nazwa": "Ziemniaki, surowe",
+      "ilosc": 150.0,
+      "jednostka": "g",
+      "stan": "pokrojone"
+    },
+    {
+      "nazwa": "Marchew, surowa",
+      "ilosc": 60.0,
+      "jednostka": "g",
+      "stan": "pokrojona"
+    },
+    {
+      "nazwa": "Pasternak, surowy",
+      "ilosc": 40.0,
+      "jednostka": "g",
+      "stan": "pokrojony"
+    },
+    {
+      "nazwa": "Seler korzeń",
+      "ilosc": 30.0,
+      "jednostka": "g",
+      "stan": "pokrojony"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 40.0,
+      "jednostka": "g",
+      "stan": "posiekana"
+    },
+    {
+      "nazwa": "Passata pomidorowa",
+      "ilosc": 70.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Domowy bulion warzywny",
+      "ilosc": 120.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "woda",
+      "ilosc": 250.0,
+      "jednostka": "ml"
+    },
+    {
+      "nazwa": "Olej rzepakowy",
+      "ilosc": 8.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Papryka słodka mielona",
+      "ilosc": 2.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Majeranek suszony",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "liść laurowy",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie",
+      "minuty": 18,
+      "kroki": [
+        {
+          "tresc": "Mięso osusz i pokrój w kostkę. Warzywa pokrój na podobnej wielkości kawałki."
+        }
+      ]
+    },
+    {
+      "nazwa": "Duszenie",
+      "minuty": 130,
+      "kroki": [
+        {
+          "tresc": "Na mocno rozgrzanym oleju obsmaż mięso partiami. Dodaj cebulę."
+        },
+        {
+          "tresc": "Dodaj passatę, bulion, wodę, paprykę, majeranek i liść laurowy. Duś pod przykryciem około 90 minut; co pewien czas sprawdzaj ilość płynu."
+        },
+        {
+          "tresc": "Dodaj warzywa i duś jeszcze 30–35 minut.",
+          "sygnal": "wołowina daje się łatwo rozdzielić widelcem, a warzywa są miękkie",
+          "uwaga": true
+        },
+        {
+          "tresc": "Dopraw solą i pieprzem."
+        }
+      ]
+    }
+  ]
+}

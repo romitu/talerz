@@ -1,0 +1,125 @@
+{
+  "nazwa": "Dorsz w kokosowym curry ze szpinakiem",
+  "opis": "Delikatny dorsz w kokosowym sosie curry ze szpinakiem, podany z ryżem. Przepis na 1 porcję.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "azjatycka"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 748.5,
+  "trwalosc_dni": 2,
+  "czas_przygotowania_min": 10,
+  "czas_obrobki_min": 20,
+  "sprzet": [
+    "Patelnia 28 cm",
+    "Garnek 2 l",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Przechowuj w lodówce do 2 dni. Podgrzewaj delikatnie, aby ryba się nie rozpadła.",
+  "mozna_mrozic": false,
+  "ratunek": "Za rzadki sos odparuj przed dodaniem ryby. Jeśli dorsz się rozpadnie, podaj całość jako gęste curry.",
+  "skladniki": [
+    {
+      "nazwa": "Filet z dorsza atlantyckiego",
+      "ilosc": 180.0,
+      "jednostka": "g",
+      "stan": "pokrojony na duże kawałki"
+    },
+    {
+      "nazwa": "Szpinak, surowy",
+      "ilosc": 100.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Mleko kokosowe light z puszki",
+      "ilosc": 150.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Pomidory krojone z puszki",
+      "ilosc": 150.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Ryż basmati, suchy",
+      "ilosc": 60.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 60.0,
+      "jednostka": "g",
+      "stan": "posiekana"
+    },
+    {
+      "nazwa": "Pasta curry czerwona",
+      "ilosc": 15.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Imbir korzeń, surowy",
+      "ilosc": 8.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 5.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Olej rzepakowy",
+      "ilosc": 5.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Limonka",
+      "ilosc": 15.0,
+      "jednostka": "g",
+      "stan": "sok"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie",
+      "minuty": 10,
+      "kroki": [
+        {
+          "tresc": "Ryż ugotuj. Cebulę, czosnek i imbir posiekaj, a dorsza pokrój na duże kawałki."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie curry",
+      "minuty": 20,
+      "kroki": [
+        {
+          "tresc": "Na oleju zeszklij cebulę. Dodaj czosnek, imbir i pastę curry."
+        },
+        {
+          "tresc": "Dodaj pomidory oraz mleko kokosowe i gotuj 8 minut."
+        },
+        {
+          "tresc": "Dodaj dorsza i gotuj na małym ogniu 6–8 minut bez intensywnego mieszania.",
+          "uwaga": true
+        },
+        {
+          "tresc": "Dodaj szpinak, sok z limonki i sól.",
+          "sygnal": "ryba jest ścięta, a szpinak zwiędł"
+        },
+        {
+          "tresc": "Podaj curry z ryżem."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "nazwa": "Kurczak pieczony z batatem i brokułem",
+  "opis": "Pierś kurczaka pieczona na jednej blasze z batatem, brokułem i czerwoną cebulą. Przepis na 1 porcję.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "inna"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 708.5,
+  "trwalosc_dni": 3,
+  "czas_przygotowania_min": 12,
+  "czas_obrobki_min": 35,
+  "sprzet": [
+    "Piekarnik",
+    "Blacha do pieczenia",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Przechowuj w zamkniętym pojemniku w lodówce do 3 dni.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli kurczak jest suchy, pokrój go i podaj z jogurtem. Twardego batata dopiekaj osobno.",
+  "skladniki": [
+    {
+      "nazwa": "Pierś z kurczaka, surowa",
+      "ilosc": 180.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Batat, surowy",
+      "ilosc": 250.0,
+      "jednostka": "g",
+      "stan": "pokrojony w kostkę"
+    },
+    {
+      "nazwa": "Brokuł, surowy",
+      "ilosc": 200.0,
+      "jednostka": "g",
+      "stan": "podzielony na różyczki"
+    },
+    {
+      "nazwa": "Cebula czerwona, surowa",
+      "ilosc": 60.0,
+      "jednostka": "g",
+      "stan": "pokrojona"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 10.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Papryka wędzona mielona",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Tymianek suszony",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 5.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie",
+      "minuty": 12,
+      "kroki": [
+        {
+          "tresc": "Piekarnik rozgrzej do 210°C. Batata pokrój w małą kostkę, brokuł podziel, a cebulę pokrój."
+        },
+        {
+          "tresc": "Warzywa wymieszaj z połową oliwy i przyprawami."
+        }
+      ]
+    },
+    {
+      "nazwa": "Pieczenie",
+      "minuty": 35,
+      "kroki": [
+        {
+          "tresc": "Batata i cebulę piecz 15 minut. Następnie dodaj brokuł."
+        },
+        {
+          "tresc": "Kurczaka natrzyj pozostałą oliwą, czosnkiem, solą i pieprzem. Ułóż na blasze.",
+          "uwaga": true
+        },
+        {
+          "tresc": "Piecz jeszcze około 18–20 minut.",
+          "sygnal": "kurczak jest całkowicie ścięty, ale soczysty"
+        }
+      ]
+    }
+  ]
+}

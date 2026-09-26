@@ -1,0 +1,113 @@
+{
+  "nazwa": "Ryż z pieczarkami, szpinakiem i parmezanem",
+  "opis": "Kremowy ryż z pieczarkami, szpinakiem i parmezanem przygotowany w jednym garnku. Przepis na 1 porcję.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "inna"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 739.0,
+  "trwalosc_dni": 2,
+  "czas_przygotowania_min": 10,
+  "czas_obrobki_min": 25,
+  "sprzet": [
+    "Garnek 3 l",
+    "Tarka o drobnych oczkach",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Przechowuj w lodówce do 2 dni. Odgrzewaj z niewielką ilością wody.",
+  "mozna_mrozic": false,
+  "ratunek": "Za suchy ryż podlej gorącym bulionem. Jeśli ryż jest twardy, gotuj dłużej na małym ogniu.",
+  "skladniki": [
+    {
+      "nazwa": "Ryż parboiled, suchy",
+      "ilosc": 80.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Pieczarki, surowe",
+      "ilosc": 180.0,
+      "jednostka": "g",
+      "stan": "pokrojone w plasterki"
+    },
+    {
+      "nazwa": "Szpinak, surowy",
+      "ilosc": 80.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Parmezan",
+      "ilosc": 25.0,
+      "jednostka": "g",
+      "stan": "drobno starty; wybierz wersję z podpuszczką mikrobiologiczną"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 60.0,
+      "jednostka": "g",
+      "stan": "posiekana"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 5.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Domowy bulion warzywny",
+      "ilosc": 300.0,
+      "jednostka": "g",
+      "stan": "gorący"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 8.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie",
+      "minuty": 10,
+      "kroki": [
+        {
+          "tresc": "Pieczarki pokrój w plasterki, a cebulę i czosnek posiekaj."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie",
+      "minuty": 25,
+      "kroki": [
+        {
+          "tresc": "Na oliwie smaż cebulę i pieczarki, aż odparuje większość wody."
+        },
+        {
+          "tresc": "Dodaj czosnek i ryż, wymieszaj, a następnie stopniowo wlewaj gorący bulion.",
+          "uwaga": true
+        },
+        {
+          "tresc": "Gotuj na małym ogniu do miękkości ryżu. Dodaj szpinak i parmezan.",
+          "sygnal": "ryż jest miękki i kremowy"
+        },
+        {
+          "tresc": "Dopraw solą oraz pieprzem i podaj."
+        }
+      ]
+    }
+  ]
+}

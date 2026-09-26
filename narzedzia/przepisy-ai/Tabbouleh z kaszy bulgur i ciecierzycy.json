@@ -1,0 +1,117 @@
+{
+  "nazwa": "Tabbouleh z kaszy bulgur i ciecierzycy",
+  "opis": "Świeża sałatka z kaszy bulgur, ciecierzycy, pomidora, ogórka, natki i mięty. Przepis na 1 porcję.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "srodziemnomorska"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 546.0,
+  "trwalosc_dni": 2,
+  "czas_przygotowania_min": 15,
+  "czas_obrobki_min": 12,
+  "sprzet": [
+    "Garnek 2 l",
+    "Sitko",
+    "miska",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Przechowuj w zamkniętym pojemniku w lodówce do 2 dni.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli sałatka puściła wodę, odlej ją i dodaj świeże zioła. Za suchą sałatkę skrop cytryną i oliwą.",
+  "skladniki": [
+    {
+      "nazwa": "Kasza bulgur, sucha",
+      "ilosc": 70.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Ciecierzyca z puszki, odsączona",
+      "ilosc": 150.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Pomidory, surowe",
+      "ilosc": 130.0,
+      "jednostka": "g",
+      "stan": "pokrojone w kostkę"
+    },
+    {
+      "nazwa": "Ogórek, surowy",
+      "ilosc": 100.0,
+      "jednostka": "g",
+      "stan": "pokrojony w kostkę"
+    },
+    {
+      "nazwa": "Cebula czerwona, surowa",
+      "ilosc": 30.0,
+      "jednostka": "g",
+      "stan": "drobno posiekana"
+    },
+    {
+      "nazwa": "Pietruszka natka",
+      "ilosc": 25.0,
+      "jednostka": "g",
+      "stan": "posiekana"
+    },
+    {
+      "nazwa": "Mięta świeża",
+      "ilosc": 10.0,
+      "jednostka": "g",
+      "stan": "posiekana"
+    },
+    {
+      "nazwa": "Cytryna",
+      "ilosc": 20.0,
+      "jednostka": "g",
+      "stan": "sok"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 10.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Gotowanie kaszy",
+      "minuty": 12,
+      "kroki": [
+        {
+          "tresc": "Kaszę bulgur ugotuj, odcedź i całkowicie ostudź."
+        }
+      ]
+    },
+    {
+      "nazwa": "Przygotowanie sałatki",
+      "minuty": 15,
+      "kroki": [
+        {
+          "tresc": "Warzywa pokrój w drobną kostkę, a zioła posiekaj."
+        },
+        {
+          "tresc": "Połącz kaszę z ciecierzycą, warzywami i ziołami."
+        },
+        {
+          "tresc": "Dodaj cytrynę, oliwę, sól oraz pieprz i wymieszaj.",
+          "uwaga": true
+        }
+      ]
+    }
+  ]
+}

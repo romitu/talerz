@@ -1,0 +1,96 @@
+{
+  "nazwa": "Stek z tuńczyka z fasolką szparagową i ziemniakami",
+  "opis": "Krótko smażony stek z tuńczyka z fasolką szparagową i gotowanymi ziemniakami. Przepis na 1 porcję.",
+  "pory": [
+    "obiad"
+  ],
+  "kuchnie": [
+    "srodziemnomorska"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 641.5,
+  "trwalosc_dni": 1,
+  "czas_przygotowania_min": 10,
+  "czas_obrobki_min": 20,
+  "sprzet": [
+    "Patelnia 28 cm",
+    "Garnek 3 l",
+    "Garnek 2 l",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Najlepiej zjedz od razu. Ewentualną pozostałość przechowuj w lodówce do 1 dnia.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli tuńczyk jest przesmażony, pokrój go cienko i skrop oliwą z cytryną. Twardą fasolkę gotuj dłużej.",
+  "skladniki": [
+    {
+      "nazwa": "Tuńczyk świeży, surowy",
+      "ilosc": 180.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Fasolka szparagowa, surowa",
+      "ilosc": 180.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Ziemniaki, surowe",
+      "ilosc": 250.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 10.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cytryna",
+      "ilosc": 15.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 5.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Gotowanie dodatków",
+      "minuty": 20,
+      "kroki": [
+        {
+          "tresc": "Ziemniaki ugotuj do miękkości. Fasolkę ugotuj tak, aby pozostała lekko jędrna."
+        }
+      ]
+    },
+    {
+      "nazwa": "Smażenie tuńczyka",
+      "minuty": 10,
+      "kroki": [
+        {
+          "tresc": "Tuńczyka osusz, posmaruj połową oliwy i dopraw solą oraz pieprzem."
+        },
+        {
+          "tresc": "Smaż na mocno rozgrzanej patelni około 2 minuty z każdej strony.",
+          "sygnal": "środek pozostaje różowy i soczysty",
+          "uwaga": true
+        },
+        {
+          "tresc": "Pozostałą oliwę połącz z cytryną i czosnkiem. Polej nią fasolkę oraz ziemniaki i podaj z tuńczykiem."
+        }
+      ]
+    }
+  ]
+}

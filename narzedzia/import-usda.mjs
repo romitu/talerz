@@ -33,7 +33,7 @@ const KORZEN = join(KATALOG, '..');
 //  Ustawienia z pliku .env
 // ---------------------------------------------------------------------------
 
-function wczytajEnv() {
+export function wczytajEnv() {
   const wynik = {};
   for (const nazwa of ['.env', '.env.local']) {
     try {

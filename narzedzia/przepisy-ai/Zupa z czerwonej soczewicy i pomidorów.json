@@ -1,0 +1,125 @@
+{
+  "nazwa": "Zupa z czerwonej soczewicy i pomidorów",
+  "opis": "Gęsta zupa z czerwonej soczewicy, pomidorów i marchewki, podana z pieczywem. Przepis na 1 porcję.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "inna"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 703.5,
+  "trwalosc_dni": 3,
+  "czas_przygotowania_min": 10,
+  "czas_obrobki_min": 30,
+  "sprzet": [
+    "Garnek 3 l",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Zupę przechowuj w lodówce do 3 dni albo zamroź po ostudzeniu. Pieczywo trzymaj osobno.",
+  "mozna_mrozic": true,
+  "ratunek": "Za gęstą zupę rozcieńcz bulionem. Za kwaśną pogotuj z dodatkową marchewką.",
+  "skladniki": [
+    {
+      "nazwa": "Soczewica czerwona, sucha",
+      "ilosc": 60.0,
+      "jednostka": "g",
+      "stan": "opłukana"
+    },
+    {
+      "nazwa": "Pomidory krojone z puszki",
+      "ilosc": 180.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Domowy bulion warzywny",
+      "ilosc": 250.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Marchew, surowa",
+      "ilosc": 70.0,
+      "jednostka": "g",
+      "stan": "pokrojona"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 50.0,
+      "jednostka": "g",
+      "stan": "posiekana"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 5.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 5.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Kmin rzymski mielony",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Papryka wędzona mielona",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cytryna",
+      "ilosc": 10.0,
+      "jednostka": "g",
+      "stan": "sok"
+    },
+    {
+      "nazwa": "Chleb żytni razowy",
+      "ilosc": 2.0,
+      "jednostka": "szt",
+      "stan": "kromki"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie",
+      "minuty": 10,
+      "kroki": [
+        {
+          "tresc": "Marchew pokrój, cebulę i czosnek posiekaj, a soczewicę opłucz."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie",
+      "minuty": 30,
+      "kroki": [
+        {
+          "tresc": "Na oliwie smaż cebulę i marchew przez 5 minut. Dodaj czosnek oraz przyprawy."
+        },
+        {
+          "tresc": "Dodaj pomidory, bulion i soczewicę. Gotuj około 22 minut.",
+          "sygnal": "soczewica całkowicie zmiękła",
+          "uwaga": true
+        },
+        {
+          "tresc": "Dopraw cytryną, solą oraz pieprzem i podaj z pieczywem."
+        }
+      ]
+    }
+  ]
+}

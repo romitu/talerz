@@ -1,0 +1,126 @@
+{
+  "nazwa": "Chili sin carne z czarną fasolą",
+  "opis": "Jednogarnkowe chili bez mięsa z czarną i czerwoną fasolą, kukurydzą oraz papryką. Przepis na 1 porcję.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "inna"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 584.5,
+  "trwalosc_dni": 3,
+  "czas_przygotowania_min": 10,
+  "czas_obrobki_min": 28,
+  "sprzet": [
+    "Garnek 3 l",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Chili przechowuj w lodówce do 3 dni lub zamroź po ostudzeniu.",
+  "mozna_mrozic": true,
+  "ratunek": "Za ostre chili złagodź dodatkową passatą. Za rzadkie gotuj kilka minut bez przykrycia.",
+  "skladniki": [
+    {
+      "nazwa": "Fasola czarna z puszki, odsączona",
+      "ilosc": 80.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Fasola czerwona z puszki, odsączona",
+      "ilosc": 80.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Kukurydza konserwowa, odsączona",
+      "ilosc": 50.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Pomidory krojone z puszki",
+      "ilosc": 150.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Passata pomidorowa",
+      "ilosc": 80.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Papryka czerwona, surowa",
+      "ilosc": 80.0,
+      "jednostka": "g",
+      "stan": "pokrojona w kostkę"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 50.0,
+      "jednostka": "g",
+      "stan": "drobno posiekana"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 5.0,
+      "jednostka": "g",
+      "stan": "posiekany"
+    },
+    {
+      "nazwa": "Olej rzepakowy",
+      "ilosc": 5.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Kmin rzymski mielony",
+      "ilosc": 2.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Papryka wędzona mielona",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Chili suszone",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie",
+      "minuty": 10,
+      "kroki": [
+        {
+          "tresc": "Cebulę oraz czosnek posiekaj, a paprykę pokrój w kostkę."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie chili",
+      "minuty": 28,
+      "kroki": [
+        {
+          "tresc": "Na oleju zeszklij cebulę. Dodaj czosnek, paprykę, kmin, wędzoną paprykę i chili; smaż 3 minuty."
+        },
+        {
+          "tresc": "Dodaj pomidory, passatę, obie fasole i kukurydzę. Wymieszaj i gotuj 20 minut bez przykrycia.",
+          "uwaga": true
+        },
+        {
+          "tresc": "Dopraw solą.",
+          "sygnal": "sos jest gęsty, a papryka miękka"
+        },
+        {
+          "tresc": "Spróbuj i w razie potrzeby skoryguj ostrość."
+        }
+      ]
+    }
+  ]
+}

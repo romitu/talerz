@@ -1,0 +1,107 @@
+{
+  "nazwa": "Pieczona makrela z burakami i ziemniakami",
+  "opis": "Pieczona makrela z burakami, ziemniakami, czerwoną cebulą i koperkiem. Przepis na 1 porcję.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "polska"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 716.5,
+  "trwalosc_dni": 2,
+  "czas_przygotowania_min": 15,
+  "czas_obrobki_min": 45,
+  "sprzet": [
+    "Piekarnik",
+    "Blacha do pieczenia",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Przechowuj w lodówce do 2 dni. Ze względu na intensywny aromat użyj szczelnego pojemnika.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli buraki są twarde, pokrój je drobniej i dopiecz bez ryby. Suchą makrelę skrop cytryną.",
+  "skladniki": [
+    {
+      "nazwa": "Makrela atlantycka, surowa",
+      "ilosc": 180.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Buraki, surowe",
+      "ilosc": 200.0,
+      "jednostka": "g",
+      "stan": "pokrojone w małą kostkę"
+    },
+    {
+      "nazwa": "Ziemniaki, surowe",
+      "ilosc": 250.0,
+      "jednostka": "g",
+      "stan": "pokrojone w małą kostkę"
+    },
+    {
+      "nazwa": "Cebula czerwona, surowa",
+      "ilosc": 50.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 10.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cytryna",
+      "ilosc": 15.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "koperek świeży",
+      "ilosc": 10.0,
+      "jednostka": "g",
+      "stan": "posiekany"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie",
+      "minuty": 15,
+      "kroki": [
+        {
+          "tresc": "Piekarnik rozgrzej do 200°C. Buraki i ziemniaki pokrój w małą kostkę, cebulę w piórka."
+        },
+        {
+          "tresc": "Warzywa wymieszaj z oliwą, solą oraz pieprzem."
+        }
+      ]
+    },
+    {
+      "nazwa": "Pieczenie",
+      "minuty": 45,
+      "kroki": [
+        {
+          "tresc": "Warzywa piecz 30 minut, mieszając je po 15 minutach."
+        },
+        {
+          "tresc": "Dodaj makrelę, skrop ją cytryną i piecz jeszcze 12–15 minut.",
+          "sygnal": "mięso ryby łatwo odchodzi od ości",
+          "uwaga": true
+        },
+        {
+          "tresc": "Przed podaniem posyp koperkiem."
+        }
+      ]
+    }
+  ]
+}

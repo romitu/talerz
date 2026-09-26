@@ -1,0 +1,88 @@
+{
+  "nazwa": "Nocna owsianka z bananem i chia",
+  "opis": "Nocna owsianka z bananem, nasionami chia i masłem orzechowym. Przepis na 1 porcję.",
+  "pory": [
+    "sniadanie"
+  ],
+  "kuchnie": [
+    "inna"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 386.0,
+  "trwalosc_dni": 2,
+  "czas_przygotowania_min": 7,
+  "czas_obrobki_min": 0,
+  "sprzet": [
+    "miska",
+    "Widelec",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Przechowuj pod przykryciem w lodówce do 2 dni. Banana najlepiej dodaj przed jedzeniem.",
+  "mozna_mrozic": false,
+  "ratunek": "Za gęstą owsiankę rozcieńcz mlekiem. Zbyt rzadka zgęstnieje po dodaniu chia i kolejnych 15 minutach chłodzenia.",
+  "skladniki": [
+    {
+      "nazwa": "Płatki owsiane",
+      "ilosc": 55.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Mleko 2%",
+      "ilosc": 160.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Jogurt naturalny 2%",
+      "ilosc": 80.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Banan",
+      "ilosc": 0.5,
+      "jednostka": "szt",
+      "stan": "pokrojony w plasterki"
+    },
+    {
+      "nazwa": "Nasiona chia",
+      "ilosc": 15.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Masło orzechowe bez cukru",
+      "ilosc": 15.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cynamon mielony",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie wieczorem",
+      "minuty": 5,
+      "kroki": [
+        {
+          "tresc": "Płatki wymieszaj z mlekiem, jogurtem, chia i cynamonem."
+        },
+        {
+          "tresc": "Przykryj i wstaw do lodówki na co najmniej 6 godzin.",
+          "sygnal": "po schłodzeniu płatki są miękkie, a masa kremowa",
+          "uwaga": true
+        }
+      ]
+    },
+    {
+      "nazwa": "Podanie",
+      "minuty": 2,
+      "kroki": [
+        {
+          "tresc": "Rano wymieszaj owsiankę. Dodaj plasterki banana i masło orzechowe."
+        }
+      ]
+    }
+  ]
+}

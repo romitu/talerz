@@ -1,0 +1,106 @@
+{
+  "nazwa": "Tofucznica ze szpinakiem i pomidorem",
+  "opis": "Szybka tofucznica ze szpinakiem, pomidorem, cebulą i kurkumą, podana z pieczywem. Przepis na 1 porcję.",
+  "pory": [
+    "sniadanie",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "inna"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 487.5,
+  "trwalosc_dni": 1,
+  "czas_przygotowania_min": 7,
+  "czas_obrobki_min": 8,
+  "sprzet": [
+    "Patelnia 24 cm",
+    "miska",
+    "Widelec",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Najlepiej zjedz od razu. Pozostałość można przechować w lodówce do 1 dnia.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli tofucznica jest sucha, dodaj łyżkę wody. Jeżeli pomidor puścił dużo soku, smaż chwilę bez przykrycia.",
+  "skladniki": [
+    {
+      "nazwa": "Tofu naturalne",
+      "ilosc": 180.0,
+      "jednostka": "g",
+      "stan": "rozgniecione widelcem"
+    },
+    {
+      "nazwa": "Szpinak, surowy",
+      "ilosc": 60.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Pomidory, surowe",
+      "ilosc": 130.0,
+      "jednostka": "g",
+      "stan": "pokrojone w kostkę"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 40.0,
+      "jednostka": "g",
+      "stan": "posiekana"
+    },
+    {
+      "nazwa": "Chleb żytni razowy",
+      "ilosc": 2.0,
+      "jednostka": "szt",
+      "stan": "kromki"
+    },
+    {
+      "nazwa": "Olej rzepakowy",
+      "ilosc": 5.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Kurkuma mielona",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie",
+      "minuty": 7,
+      "kroki": [
+        {
+          "tresc": "Tofu rozgnieć widelcem. Pomidora pokrój w kostkę, a cebulę posiekaj."
+        }
+      ]
+    },
+    {
+      "nazwa": "Smażenie",
+      "minuty": 8,
+      "kroki": [
+        {
+          "tresc": "Na oleju smaż cebulę 2 minuty. Dodaj tofu, kurkumę, sól i pieprz."
+        },
+        {
+          "tresc": "Dodaj pomidora i szpinak. Smaż, mieszając, jeszcze 4–5 minut.",
+          "sygnal": "szpinak zwiędł, a tofu jest gorące",
+          "uwaga": true
+        },
+        {
+          "tresc": "Podaj bezpośrednio po przygotowaniu z kromkami chleba żytniego."
+        }
+      ]
+    }
+  ]
+}

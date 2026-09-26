@@ -1,0 +1,102 @@
+{
+  "nazwa": "Makaron z ricottą i szpinakiem",
+  "opis": "Szybki pełnoziarnisty makaron z kremową ricottą, szpinakiem, czosnkiem i cytryną. Przepis na 1 porcję.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "srodziemnomorska"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 354.5,
+  "trwalosc_dni": 2,
+  "czas_przygotowania_min": 7,
+  "czas_obrobki_min": 15,
+  "sprzet": [
+    "Patelnia 28 cm",
+    "Garnek 3 l",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Przechowuj w lodówce do 2 dni. Przy odgrzewaniu dodaj odrobinę wody.",
+  "mozna_mrozic": false,
+  "ratunek": "Za gęsty sos rozcieńcz wodą z makaronu. Jeśli ricotta jest mdła, dodaj cytrynę i pieprz.",
+  "skladniki": [
+    {
+      "nazwa": "Makaron pełnoziarnisty, suchy",
+      "ilosc": 85.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Ser ricotta",
+      "ilosc": 120.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Szpinak, surowy",
+      "ilosc": 120.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 5.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 8.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cytryna",
+      "ilosc": 15.0,
+      "jednostka": "g",
+      "stan": "sok"
+    },
+    {
+      "nazwa": "Gałka muszkatołowa mielona",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Gotowanie makaronu",
+      "minuty": 15,
+      "kroki": [
+        {
+          "tresc": "Makaron ugotuj al dente. Zachowaj trochę wody z gotowania."
+        }
+      ]
+    },
+    {
+      "nazwa": "Przygotowanie sosu",
+      "minuty": 7,
+      "kroki": [
+        {
+          "tresc": "Na oliwie krótko podsmaż czosnek, dodaj szpinak i poczekaj, aż zwiędnie."
+        },
+        {
+          "tresc": "Dodaj ricottę, cytrynę, gałkę muszkatołową oraz niewielką ilość wody z makaronu."
+        },
+        {
+          "tresc": "Dodaj makaron, dopraw i dokładnie wymieszaj.",
+          "sygnal": "sos równomiernie pokrywa makaron",
+          "uwaga": true
+        }
+      ]
+    }
+  ]
+}

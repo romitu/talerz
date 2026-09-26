@@ -1,0 +1,122 @@
+{
+  "nazwa": "Pieczony bakłażan z ciecierzycą i fetą",
+  "opis": "Pieczony bakłażan z ciecierzycą, pomidorami, fetą i kaszą bulgur. Przepis na 1 porcję.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "srodziemnomorska"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 728.0,
+  "trwalosc_dni": 2,
+  "czas_przygotowania_min": 12,
+  "czas_obrobki_min": 35,
+  "sprzet": [
+    "Piekarnik",
+    "Naczynie żaroodporne",
+    "Garnek 2 l",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Danie przechowuj w zamkniętym pojemniku w lodówce do 2 dni.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli bakłażan jest twardy, piecz go dłużej pod przykryciem. Za słone danie złagodź dodatkową porcją pomidorów.",
+  "skladniki": [
+    {
+      "nazwa": "Bakłażan, surowy",
+      "ilosc": 250.0,
+      "jednostka": "g",
+      "stan": "pokrojony w kostkę"
+    },
+    {
+      "nazwa": "Ciecierzyca z puszki, odsączona",
+      "ilosc": 150.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Pomidory, surowe",
+      "ilosc": 130.0,
+      "jednostka": "g",
+      "stan": "pokrojone"
+    },
+    {
+      "nazwa": "Ser feta",
+      "ilosc": 60.0,
+      "jednostka": "g",
+      "stan": "pokruszony"
+    },
+    {
+      "nazwa": "Kasza bulgur, sucha",
+      "ilosc": 60.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cebula czerwona, surowa",
+      "ilosc": 60.0,
+      "jednostka": "g",
+      "stan": "pokrojona w piórka"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 5.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 10.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oregano suszone",
+      "ilosc": 2.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie",
+      "minuty": 12,
+      "kroki": [
+        {
+          "tresc": "Piekarnik rozgrzej do 210°C. Bakłażana i pomidora pokrój, a cebulę pokrój w piórka."
+        },
+        {
+          "tresc": "Kaszę bulgur ugotuj."
+        }
+      ]
+    },
+    {
+      "nazwa": "Pieczenie",
+      "minuty": 35,
+      "kroki": [
+        {
+          "tresc": "Bakłażana, cebulę i ciecierzycę wymieszaj w naczyniu z oliwą, czosnkiem, oregano, solą i pieprzem."
+        },
+        {
+          "tresc": "Piecz 25 minut, następnie dodaj pomidora i fetę.",
+          "uwaga": true
+        },
+        {
+          "tresc": "Piecz jeszcze 8–10 minut.",
+          "sygnal": "bakłażan jest miękki, a feta lekko zrumieniona"
+        },
+        {
+          "tresc": "Podaj z kaszą bulgur."
+        }
+      ]
+    }
+  ]
+}

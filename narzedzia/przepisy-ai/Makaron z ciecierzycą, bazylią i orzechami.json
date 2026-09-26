@@ -1,0 +1,107 @@
+{
+  "nazwa": "Makaron z ciecierzycą, bazylią i orzechami",
+  "opis": "Pełnoziarnisty makaron z ciecierzycą i szybkim sosem z bazylii, orzechów oraz oliwy. Przepis na 1 porcję.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "srodziemnomorska"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 396.0,
+  "trwalosc_dni": 2,
+  "czas_przygotowania_min": 10,
+  "czas_obrobki_min": 15,
+  "sprzet": [
+    "Garnek 3 l",
+    "Blender ręczny",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Przechowuj w lodówce do 2 dni. Przy odgrzewaniu dodaj odrobinę wody.",
+  "mozna_mrozic": false,
+  "ratunek": "Za gęsty sos rozcieńcz wodą z makaronu. Gorycz bazylii złagodź odrobiną cytryny.",
+  "skladniki": [
+    {
+      "nazwa": "Makaron pełnoziarnisty, suchy",
+      "ilosc": 85.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Ciecierzyca z puszki, odsączona",
+      "ilosc": 140.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Bazylia świeża",
+      "ilosc": 20.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Orzechy włoskie",
+      "ilosc": 20.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 12.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 3.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cytryna",
+      "ilosc": 15.0,
+      "jednostka": "g",
+      "stan": "sok"
+    },
+    {
+      "nazwa": "Pomidory, surowe",
+      "ilosc": 100.0,
+      "jednostka": "g",
+      "stan": "pokrojone"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Gotowanie",
+      "minuty": 15,
+      "kroki": [
+        {
+          "tresc": "Makaron ugotuj al dente. Zachowaj część wody z gotowania."
+        }
+      ]
+    },
+    {
+      "nazwa": "Przygotowanie sosu",
+      "minuty": 10,
+      "kroki": [
+        {
+          "tresc": "Bazylię, orzechy, oliwę, czosnek, cytrynę, sól i pieprz zblenduj z niewielką ilością wody z makaronu."
+        },
+        {
+          "tresc": "Makaron połącz z sosem, ciecierzycą i pomidorem.",
+          "uwaga": true
+        },
+        {
+          "tresc": "Podgrzewaj krótko, tylko do połączenia smaków."
+        }
+      ]
+    }
+  ]
+}

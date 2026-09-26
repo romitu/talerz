@@ -1,0 +1,72 @@
+{
+  "nazwa": "Skyr kakaowy z bananem i masłem orzechowym",
+  "opis": "Kakaowy skyr z bananem i masłem orzechowym, przygotowany bez gotowania. Przepis na 1 porcję.",
+  "pory": [
+    "sniadanie",
+    "dodatek"
+  ],
+  "kuchnie": [
+    "inna"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 380.0,
+  "trwalosc_dni": 1,
+  "czas_przygotowania_min": 5,
+  "czas_obrobki_min": 0,
+  "sprzet": [
+    "miska",
+    "Widelec",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Przechowuj w zamkniętym pojemniku w lodówce do 1 dnia.",
+  "mozna_mrozic": false,
+  "ratunek": "Za gęsty skyr rozcieńcz mlekiem. Jeśli kakao jest zbyt gorzkie, wmieszaj część rozgniecionego banana.",
+  "skladniki": [
+    {
+      "nazwa": "Skyr naturalny",
+      "ilosc": 200.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Banan",
+      "ilosc": 1.0,
+      "jednostka": "szt",
+      "stan": "częściowo rozgnieciony"
+    },
+    {
+      "nazwa": "Kakao bez cukru, proszek",
+      "ilosc": 10.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Masło orzechowe bez cukru",
+      "ilosc": 20.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Mleko 2%",
+      "ilosc": 30.0,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie",
+      "minuty": 5,
+      "kroki": [
+        {
+          "tresc": "Połowę banana rozgnieć, a połowę pokrój w plasterki."
+        },
+        {
+          "tresc": "Skyr wymieszaj z kakao, mlekiem i rozgniecionym bananem.",
+          "uwaga": true
+        },
+        {
+          "tresc": "Dodaj masło orzechowe i plasterki banana."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "nazwa": "Sałatka brokułowa z jajkiem i sosem jogurtowym",
+  "opis": "Sałatka z brokułem, jajkami na twardo, kukurydzą i szczypiorkiem w sosie jogurtowo-musztardowym. Przepis na 1 porcję.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "inna"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 586.0,
+  "trwalosc_dni": 2,
+  "czas_przygotowania_min": 12,
+  "czas_obrobki_min": 10,
+  "sprzet": [
+    "Garnek 3 l",
+    "miska",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Przechowuj w zamkniętym pojemniku w lodówce do 2 dni.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli brokuł jest rozgotowany, ostudź go szybko i delikatnie mieszaj. Za gęsty sos rozcieńcz wodą.",
+  "skladniki": [
+    {
+      "nazwa": "Brokuł, surowy",
+      "ilosc": 250.0,
+      "jednostka": "g",
+      "stan": "podzielony na różyczki"
+    },
+    {
+      "nazwa": "Jaja kurze, całe, surowe",
+      "ilosc": 2.0,
+      "jednostka": "szt"
+    },
+    {
+      "nazwa": "Jogurt grecki naturalny 2%",
+      "ilosc": 100.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Kukurydza konserwowa, odsączona",
+      "ilosc": 80.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cebula czerwona, surowa",
+      "ilosc": 30.0,
+      "jednostka": "g",
+      "stan": "drobno posiekana"
+    },
+    {
+      "nazwa": "Musztarda",
+      "ilosc": 5.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Szczypiorek świeży",
+      "ilosc": 10.0,
+      "jednostka": "g",
+      "stan": "posiekany"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Gotowanie",
+      "minuty": 10,
+      "kroki": [
+        {
+          "tresc": "Jajka ugotuj na twardo, schłodź i obierz."
+        },
+        {
+          "tresc": "Brokuł gotuj 4–5 minut, aby pozostał lekko jędrny, następnie ostudź."
+        }
+      ]
+    },
+    {
+      "nazwa": "Przygotowanie sałatki",
+      "minuty": 12,
+      "kroki": [
+        {
+          "tresc": "Jajka pokrój. Jogurt wymieszaj z musztardą, solą i pieprzem."
+        },
+        {
+          "tresc": "Połącz brokuł, jajka, kukurydzę, cebulę i sos.",
+          "uwaga": true
+        },
+        {
+          "tresc": "Posyp szczypiorkiem."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,113 @@
+{
+  "nazwa": "Makaron z indykiem, pieczarkami i jogurtem",
+  "opis": "Pełnoziarnisty makaron z indykiem i pieczarkami w lekkim sosie jogurtowym. Przepis na 1 porcję.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "inna"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 560.5,
+  "trwalosc_dni": 2,
+  "czas_przygotowania_min": 10,
+  "czas_obrobki_min": 20,
+  "sprzet": [
+    "Patelnia 28 cm",
+    "Garnek 3 l",
+    "miska",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Przechowuj w lodówce do 2 dni. Odgrzewaj łagodnie, aby jogurt się nie zwarzył.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli sos się zwarzył, zdejmij patelnię z ognia i energicznie wymieszaj z łyżką zimnego jogurtu. Za gęsty sos rozcieńcz wodą z makaronu.",
+  "skladniki": [
+    {
+      "nazwa": "Makaron pełnoziarnisty, suchy",
+      "ilosc": 85.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Pierś z indyka, surowa",
+      "ilosc": 150.0,
+      "jednostka": "g",
+      "stan": "pokrojona w paski"
+    },
+    {
+      "nazwa": "Pieczarki, surowe",
+      "ilosc": 180.0,
+      "jednostka": "g",
+      "stan": "pokrojone w plasterki"
+    },
+    {
+      "nazwa": "Jogurt grecki naturalny 2%",
+      "ilosc": 80.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 50.0,
+      "jednostka": "g",
+      "stan": "posiekana"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 5.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Olej rzepakowy",
+      "ilosc": 8.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Tymianek suszony",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie",
+      "minuty": 10,
+      "kroki": [
+        {
+          "tresc": "Makaron ugotuj al dente. Indyka pokrój w paski, pieczarki w plasterki, a cebulę posiekaj."
+        },
+        {
+          "tresc": "Jogurt zahartuj dwiema łyżkami ciepłej wody z makaronu."
+        }
+      ]
+    },
+    {
+      "nazwa": "Smażenie",
+      "minuty": 20,
+      "kroki": [
+        {
+          "tresc": "Na oleju smaż indyka 5 minut. Dodaj cebulę, pieczarki, czosnek i tymianek."
+        },
+        {
+          "tresc": "Smaż, aż odparuje woda z pieczarek, a indyk będzie gotowy.",
+          "sygnal": "mięso jest całkowicie ścięte",
+          "uwaga": true
+        },
+        {
+          "tresc": "Zmniejsz ogień, dodaj makaron i jogurt. Wymieszaj bez zagotowywania."
+        }
+      ]
+    }
+  ]
+}

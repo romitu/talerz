@@ -1,0 +1,114 @@
+{
+  "nazwa": "Morszczuk w sosie pomidorowym z ryżem",
+  "opis": "Morszczuk duszony w ziołowym sosie pomidorowym, podany z ryżem. Przepis na 1 porcję.",
+  "pory": [
+    "obiad"
+  ],
+  "kuchnie": [
+    "srodziemnomorska"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 556.5,
+  "trwalosc_dni": 2,
+  "czas_przygotowania_min": 10,
+  "czas_obrobki_min": 25,
+  "sprzet": [
+    "Patelnia 28 cm",
+    "Garnek 2 l",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Przechowuj w lodówce do 2 dni. Ryż trzymaj osobno.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli sos jest kwaśny, dodaj odrobinę startej marchewki. Jeśli ryba się rozpada, ogranicz mieszanie.",
+  "skladniki": [
+    {
+      "nazwa": "Morszczuk, surowy",
+      "ilosc": 180.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Passata pomidorowa",
+      "ilosc": 220.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Ryż parboiled, suchy",
+      "ilosc": 70.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 60.0,
+      "jednostka": "g",
+      "stan": "posiekana"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 5.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 8.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Papryka słodka mielona",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oregano suszone",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Pietruszka natka",
+      "ilosc": 10.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie",
+      "minuty": 10,
+      "kroki": [
+        {
+          "tresc": "Ryż ugotuj. Cebulę i czosnek posiekaj, a rybę osusz i dopraw."
+        }
+      ]
+    },
+    {
+      "nazwa": "Duszenie",
+      "minuty": 25,
+      "kroki": [
+        {
+          "tresc": "Na oliwie zeszklij cebulę. Dodaj czosnek, passatę, paprykę i oregano."
+        },
+        {
+          "tresc": "Sos gotuj 10 minut, następnie włóż morszczuka."
+        },
+        {
+          "tresc": "Duś pod przykryciem 8–10 minut.",
+          "sygnal": "ryba jest nieprzezroczysta i łatwo dzieli się na płatki",
+          "uwaga": true
+        },
+        {
+          "tresc": "Posyp natką i podaj z ryżem."
+        }
+      ]
+    }
+  ]
+}

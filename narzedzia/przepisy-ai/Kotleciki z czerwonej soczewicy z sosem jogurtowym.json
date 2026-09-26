@@ -1,0 +1,133 @@
+{
+  "nazwa": "Kotleciki z czerwonej soczewicy z sosem jogurtowym",
+  "opis": "Rumiane kotleciki z czerwonej soczewicy i płatków owsianych, podane z ogórkowym sosem jogurtowym. Przepis na 1 porcję.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "inna"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 406.5,
+  "trwalosc_dni": 2,
+  "czas_przygotowania_min": 18,
+  "czas_obrobki_min": 20,
+  "sprzet": [
+    "Garnek 2 l",
+    "Patelnia 28 cm",
+    "miska",
+    "Tarka o grubych oczkach",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Kotleciki przechowuj w lodówce do 2 dni. Sos trzymaj osobno.",
+  "mozna_mrozic": true,
+  "ratunek": "Jeśli masa się rozpada, dodaj płatki owsiane i odczekaj 5 minut. Za gęsty sos rozrzedź wodą.",
+  "skladniki": [
+    {
+      "nazwa": "Soczewica czerwona, sucha",
+      "ilosc": 70.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Płatki owsiane",
+      "ilosc": 30.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Marchew, surowa",
+      "ilosc": 60.0,
+      "jednostka": "g",
+      "stan": "starta"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 40.0,
+      "jednostka": "g",
+      "stan": "drobno posiekana"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 5.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Olej rzepakowy",
+      "ilosc": 8.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Kmin rzymski mielony",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Papryka słodka mielona",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Jogurt grecki naturalny 2%",
+      "ilosc": 80.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Ogórek, surowy",
+      "ilosc": 100.0,
+      "jednostka": "g",
+      "stan": "starty i odciśnięty"
+    },
+    {
+      "nazwa": "Cytryna",
+      "ilosc": 10.0,
+      "jednostka": "g",
+      "stan": "sok"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie masy i sosu",
+      "minuty": 18,
+      "kroki": [
+        {
+          "tresc": "Soczewicę ugotuj do miękkości i dokładnie odcedź."
+        },
+        {
+          "tresc": "Połącz ją z marchewką, cebulą, czosnkiem, płatkami i przyprawami. Rozgnieć widelcem."
+        },
+        {
+          "tresc": "Jogurt wymieszaj z ogórkiem, sokiem z cytryny i częścią soli."
+        }
+      ]
+    },
+    {
+      "nazwa": "Smażenie",
+      "minuty": 20,
+      "kroki": [
+        {
+          "tresc": "Z masy uformuj małe, zwarte kotleciki.",
+          "uwaga": true
+        },
+        {
+          "tresc": "Smaż je na oleju po 4–5 minut z każdej strony.",
+          "sygnal": "kotleciki są rumiane i łatwo odchodzą od patelni"
+        },
+        {
+          "tresc": "Podaj z sosem jogurtowym."
+        }
+      ]
+    }
+  ]
+}

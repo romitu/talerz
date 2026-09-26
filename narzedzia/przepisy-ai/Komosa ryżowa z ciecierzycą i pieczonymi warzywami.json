@@ -1,0 +1,125 @@
+{
+  "nazwa": "Komosa ryżowa z ciecierzycą i pieczonymi warzywami",
+  "opis": "Miska z komosą ryżową, ciecierzycą, cukinią, papryką i pomidorem, doprawiona cytryną. Przepis na 1 porcję.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "srodziemnomorska"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 657.5,
+  "trwalosc_dni": 2,
+  "czas_przygotowania_min": 12,
+  "czas_obrobki_min": 30,
+  "sprzet": [
+    "Piekarnik",
+    "Blacha do pieczenia",
+    "Garnek 2 l",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Przechowuj w zamkniętym pojemniku w lodówce do 2 dni.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli warzywa są wodniste, rozłóż je luźniej i dopiecz. Za suchą komosę skrop dodatkowym sokiem z cytryny.",
+  "skladniki": [
+    {
+      "nazwa": "Komosa ryżowa, sucha",
+      "ilosc": 70.0,
+      "jednostka": "g",
+      "stan": "opłukana"
+    },
+    {
+      "nazwa": "Ciecierzyca z puszki, odsączona",
+      "ilosc": 150.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cukinia, surowa",
+      "ilosc": 120.0,
+      "jednostka": "g",
+      "stan": "pokrojona"
+    },
+    {
+      "nazwa": "Papryka czerwona, surowa",
+      "ilosc": 100.0,
+      "jednostka": "g",
+      "stan": "pokrojona"
+    },
+    {
+      "nazwa": "Pomidory, surowe",
+      "ilosc": 130.0,
+      "jednostka": "g",
+      "stan": "pokrojone"
+    },
+    {
+      "nazwa": "Cebula czerwona, surowa",
+      "ilosc": 50.0,
+      "jednostka": "g",
+      "stan": "pokrojona"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 10.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cytryna",
+      "ilosc": 15.0,
+      "jednostka": "g",
+      "stan": "sok"
+    },
+    {
+      "nazwa": "Pietruszka natka",
+      "ilosc": 10.0,
+      "jednostka": "g",
+      "stan": "posiekana"
+    },
+    {
+      "nazwa": "Oregano suszone",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie",
+      "minuty": 12,
+      "kroki": [
+        {
+          "tresc": "Piekarnik rozgrzej do 210°C. Warzywa pokrój, a komosę dokładnie opłucz."
+        }
+      ]
+    },
+    {
+      "nazwa": "Pieczenie i gotowanie",
+      "minuty": 30,
+      "kroki": [
+        {
+          "tresc": "Warzywa i ciecierzycę wymieszaj z oliwą, oregano, solą oraz pieprzem. Piecz 25 minut.",
+          "sygnal": "warzywa są miękkie i rumiane na brzegach"
+        },
+        {
+          "tresc": "Komosę ugotuj do miękkości i odstaw pod przykryciem na 5 minut.",
+          "sygnal": "ziarna są miękkie i sypkie"
+        },
+        {
+          "tresc": "Połącz komosę z pieczonymi warzywami, sokiem z cytryny i natką.",
+          "uwaga": true
+        }
+      ]
+    }
+  ]
+}

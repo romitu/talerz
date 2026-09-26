@@ -1,0 +1,110 @@
+{
+  "nazwa": "Pieczony kalafior z ziołowym sosem jogurtowym",
+  "opis": "Rumiany pieczony kalafior podany z lekkim sosem jogurtowym, cytryną i natką pietruszki. Przepis na 1 porcję.",
+  "pory": [
+    "dodatek"
+  ],
+  "kuchnie": [
+    "srodziemnomorska"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 371.5,
+  "trwalosc_dni": 2,
+  "czas_przygotowania_min": 10,
+  "czas_obrobki_min": 30,
+  "sprzet": [
+    "Piekarnik",
+    "Blacha do pieczenia",
+    "miska",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Kalafior i sos przechowuj osobno w lodówce do 2 dni.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli kalafior jest miękki, ale blady, dopiecz go kilka minut w wyższej temperaturze. Za gęsty sos rozcieńcz wodą.",
+  "skladniki": [
+    {
+      "nazwa": "Kalafior, surowy",
+      "ilosc": 250.0,
+      "jednostka": "g",
+      "stan": "podzielony na różyczki"
+    },
+    {
+      "nazwa": "Jogurt grecki naturalny 2%",
+      "ilosc": 80.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 8.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cytryna",
+      "ilosc": 15.0,
+      "jednostka": "g",
+      "stan": "sok"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 5.0,
+      "jednostka": "g",
+      "stan": "drobno posiekany"
+    },
+    {
+      "nazwa": "Pietruszka natka",
+      "ilosc": 10.0,
+      "jednostka": "g",
+      "stan": "posiekana"
+    },
+    {
+      "nazwa": "Kmin rzymski mielony",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Papryka wędzona mielona",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Pieczenie kalafiora",
+      "minuty": 30,
+      "kroki": [
+        {
+          "tresc": "Piekarnik rozgrzej do 220°C. Kalafior wymieszaj z oliwą, kminem, papryką, solą i pieprzem."
+        },
+        {
+          "tresc": "Rozłóż różyczki w jednej warstwie i piecz około 25–30 minut.",
+          "sygnal": "brzegi są mocno zrumienione, a środek miękki",
+          "uwaga": true
+        }
+      ]
+    },
+    {
+      "nazwa": "Przygotowanie sosu",
+      "minuty": 5,
+      "kroki": [
+        {
+          "tresc": "Jogurt wymieszaj z cytryną, czosnkiem i natką."
+        },
+        {
+          "tresc": "Podaj sos obok gorącego kalafiora."
+        }
+      ]
+    }
+  ]
+}

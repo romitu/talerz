@@ -1,0 +1,83 @@
+{
+  "nazwa": "Kanapki z serem salami, ogórkiem kiszonym i musztardą",
+  "opis": "Wyraziste kanapki z serem salami, ogórkiem kiszonym, musztardą i czerwoną cebulą. Przepis na 1 porcję.",
+  "pory": [
+    "sniadanie",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "polska"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 270.5,
+  "trwalosc_dni": 0,
+  "czas_przygotowania_min": 7,
+  "czas_obrobki_min": 0,
+  "sprzet": [
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Kanapki zjedz bezpośrednio po przygotowaniu, aby pieczywo nie zmiękło.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli ogórek jest bardzo kwaśny lub słony, opłucz go i osusz. Nie dosalaj kanapek przed spróbowaniem.",
+  "skladniki": [
+    {
+      "nazwa": "Chleb żytni razowy",
+      "ilosc": 2.0,
+      "jednostka": "szt",
+      "stan": "kromki"
+    },
+    {
+      "nazwa": "Ser salami",
+      "ilosc": 60.0,
+      "jednostka": "g",
+      "stan": "pokrojony w plastry"
+    },
+    {
+      "nazwa": "ogórki kiszone bio",
+      "ilosc": 80.0,
+      "jednostka": "g",
+      "stan": "pokrojone w plastry"
+    },
+    {
+      "nazwa": "Musztarda",
+      "ilosc": 10.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sałata masłowa",
+      "ilosc": 30.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cebula czerwona, surowa",
+      "ilosc": 20.0,
+      "jednostka": "g",
+      "stan": "cienko pokrojona"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie kanapek",
+      "minuty": 7,
+      "kroki": [
+        {
+          "tresc": "Ogórka i cebulę cienko pokrój, a sałatę osusz."
+        },
+        {
+          "tresc": "Pieczywo posmaruj musztardą."
+        },
+        {
+          "tresc": "Ułóż sałatę, ser salami, ogórka i cebulę. Dopraw pieprzem.",
+          "uwaga": true
+        }
+      ]
+    }
+  ]
+}

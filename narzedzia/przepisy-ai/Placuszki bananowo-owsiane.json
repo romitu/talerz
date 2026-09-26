@@ -1,0 +1,93 @@
+{
+  "nazwa": "Placuszki bananowo-owsiane",
+  "opis": "Miękkie placuszki z banana, jajka i mąki owsianej, podane z jogurtem. Przepis na 1 porcję.",
+  "pory": [
+    "sniadanie"
+  ],
+  "kuchnie": [
+    "inna"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 381.0,
+  "trwalosc_dni": 1,
+  "czas_przygotowania_min": 8,
+  "czas_obrobki_min": 12,
+  "sprzet": [
+    "Patelnia 24 cm",
+    "miska",
+    "Widelec",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Placuszki przechowuj w lodówce do 1 dnia. Jogurt trzymaj osobno.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli placuszki się rozpadają, dodaj odrobinę mąki. Jeśli zbyt szybko ciemnieją, zmniejsz ogień.",
+  "skladniki": [
+    {
+      "nazwa": "Banan",
+      "ilosc": 1.0,
+      "jednostka": "szt",
+      "stan": "bardzo dojrzały"
+    },
+    {
+      "nazwa": "Jaja kurze, całe, surowe",
+      "ilosc": 1.0,
+      "jednostka": "szt"
+    },
+    {
+      "nazwa": "Mąka owsiana pełnoziarnista",
+      "ilosc": 60.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Mleko 2%",
+      "ilosc": 60.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Jogurt naturalny 2%",
+      "ilosc": 80.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Olej rzepakowy",
+      "ilosc": 5.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cynamon mielony",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie ciasta",
+      "minuty": 8,
+      "kroki": [
+        {
+          "tresc": "Banana dokładnie rozgnieć widelcem."
+        },
+        {
+          "tresc": "Dodaj jajko, mleko, mąkę i cynamon. Wymieszaj na jednolitą masę."
+        }
+      ]
+    },
+    {
+      "nazwa": "Smażenie",
+      "minuty": 12,
+      "kroki": [
+        {
+          "tresc": "Patelnię lekko posmaruj olejem. Nakładaj małe porcje ciasta."
+        },
+        {
+          "tresc": "Smaż po około 2 minuty z każdej strony.",
+          "sygnal": "na powierzchni pojawiają się pęcherzyki, a spód jest rumiany",
+          "uwaga": true
+        },
+        {
+          "tresc": "Podaj z jogurtem."
+        }
+      ]
+    }
+  ]
+}

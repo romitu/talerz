@@ -1,0 +1,114 @@
+{
+  "nazwa": "Sałatka z komosy, buraka i koziego sera",
+  "opis": "Sałatka z komosy ryżowej, pieczonego buraka, koziego sera, rukoli i orzechów. Przepis na 1 porcję.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "srodziemnomorska"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 502.0,
+  "trwalosc_dni": 2,
+  "czas_przygotowania_min": 12,
+  "czas_obrobki_min": 35,
+  "sprzet": [
+    "Piekarnik",
+    "Blacha do pieczenia",
+    "Garnek 2 l",
+    "miska",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Przechowuj w lodówce do 2 dni. Rukolę i dressing najlepiej trzymaj osobno.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli burak pozostaje twardy, pokrój go drobniej i dopiecz. Za słony ser zrównoważ dodatkową komosą.",
+  "skladniki": [
+    {
+      "nazwa": "Komosa ryżowa, sucha",
+      "ilosc": 70.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Buraki, surowe",
+      "ilosc": 180.0,
+      "jednostka": "g",
+      "stan": "pokrojone w kostkę"
+    },
+    {
+      "nazwa": "Ser kozi miękki",
+      "ilosc": 60.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Rukola",
+      "ilosc": 50.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Jabłko ze skórką",
+      "ilosc": 100.0,
+      "jednostka": "g",
+      "stan": "pokrojone"
+    },
+    {
+      "nazwa": "Orzechy włoskie",
+      "ilosc": 20.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 10.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Ocet winny czerwony",
+      "ilosc": 10.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Tymianek suszony",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Pieczenie i gotowanie",
+      "minuty": 35,
+      "kroki": [
+        {
+          "tresc": "Piekarnik rozgrzej do 200°C. Buraka wymieszaj z połową oliwy i tymiankiem, piecz około 30 minut."
+        },
+        {
+          "tresc": "Komosę opłucz, ugotuj i ostudź."
+        }
+      ]
+    },
+    {
+      "nazwa": "Składanie sałatki",
+      "minuty": 12,
+      "kroki": [
+        {
+          "tresc": "Połącz komosę, buraka, rukolę, jabłko i orzechy."
+        },
+        {
+          "tresc": "Dodaj kozi ser. Skrop pozostałą oliwą i octem, dopraw i delikatnie wymieszaj.",
+          "uwaga": true
+        }
+      ]
+    }
+  ]
+}

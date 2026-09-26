@@ -1,0 +1,105 @@
+{
+  "nazwa": "Łosoś ze szpinakiem i kaszą bulgur",
+  "opis": "Smażony łosoś ze szpinakiem, cytryną i kaszą bulgur. Przepis na 1 porcję.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "srodziemnomorska"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 409.5,
+  "trwalosc_dni": 2,
+  "czas_przygotowania_min": 10,
+  "czas_obrobki_min": 20,
+  "sprzet": [
+    "Patelnia 24 cm",
+    "Garnek 2 l",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Przechowuj w lodówce do 2 dni. Kaszę najlepiej trzymaj osobno.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli łosoś przywiera, poczekaj aż sam łatwo odejdzie od patelni. Za suchy szpinak podlej odrobiną wody.",
+  "skladniki": [
+    {
+      "nazwa": "Łosoś dziki, surowy",
+      "ilosc": 160.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Szpinak, surowy",
+      "ilosc": 100.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Kasza bulgur, sucha",
+      "ilosc": 70.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Jogurt grecki naturalny 2%",
+      "ilosc": 50.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cytryna",
+      "ilosc": 15.0,
+      "jednostka": "g",
+      "stan": "sok"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 5.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 8.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie",
+      "minuty": 10,
+      "kroki": [
+        {
+          "tresc": "Kaszę bulgur ugotuj. Łososia osusz i dopraw solą oraz pieprzem."
+        },
+        {
+          "tresc": "Jogurt wymieszaj z połową soku z cytryny."
+        }
+      ]
+    },
+    {
+      "nazwa": "Smażenie",
+      "minuty": 20,
+      "kroki": [
+        {
+          "tresc": "Na oliwie smaż łososia po 4–5 minut z każdej strony.",
+          "sygnal": "środek jest soczysty, a mięso rozdziela się na płatki",
+          "uwaga": true
+        },
+        {
+          "tresc": "Zdejmij rybę. Na tej samej patelni krótko podsmaż czosnek i szpinak."
+        },
+        {
+          "tresc": "Podaj łososia ze szpinakiem, bulgurem i sosem jogurtowym."
+        }
+      ]
+    }
+  ]
+}

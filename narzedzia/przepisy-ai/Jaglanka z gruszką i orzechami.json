@@ -1,0 +1,92 @@
+{
+  "nazwa": "Jaglanka z gruszką i orzechami",
+  "opis": "Kremowa kasza jaglana na mleku z gruszką, cynamonem i orzechami włoskimi. Przepis na 1 porcję.",
+  "pory": [
+    "sniadanie"
+  ],
+  "kuchnie": [
+    "inna"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 431.5,
+  "trwalosc_dni": 2,
+  "czas_przygotowania_min": 7,
+  "czas_obrobki_min": 18,
+  "sprzet": [
+    "Rondel",
+    "Sitko",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Przechowuj w lodówce do 2 dni. Przy odgrzewaniu dodaj trochę mleka.",
+  "mozna_mrozic": false,
+  "ratunek": "Gorycz kaszy oznacza niedokładne wypłukanie — złagodź ją cynamonem i gruszką. Za gęstą jaglankę rozcieńcz mlekiem.",
+  "skladniki": [
+    {
+      "nazwa": "Kasza jaglana, sucha",
+      "ilosc": 60.0,
+      "jednostka": "g",
+      "stan": "dokładnie wypłukana"
+    },
+    {
+      "nazwa": "Mleko 2%",
+      "ilosc": 250.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Gruszka ze skórką",
+      "ilosc": 0.5,
+      "jednostka": "szt",
+      "stan": "pokrojona w kostkę"
+    },
+    {
+      "nazwa": "Orzechy włoskie",
+      "ilosc": 20.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cynamon mielony",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Miód",
+      "ilosc": 10.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie",
+      "minuty": 7,
+      "kroki": [
+        {
+          "tresc": "Kaszę płucz najpierw gorącą, potem zimną wodą. Gruszkę pokrój w kostkę."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie",
+      "minuty": 18,
+      "kroki": [
+        {
+          "tresc": "Kaszę zalej mlekiem, dodaj sól i gotuj na małym ogniu około 15 minut, często mieszając.",
+          "uwaga": true
+        },
+        {
+          "tresc": "Dodaj gruszkę i cynamon, gotuj jeszcze 2–3 minuty.",
+          "sygnal": "kasza jest miękka i kremowa"
+        },
+        {
+          "tresc": "Podaj z miodem i orzechami."
+        }
+      ]
+    }
+  ]
+}

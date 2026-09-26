@@ -1,0 +1,127 @@
+{
+  "nazwa": "Gulasz z białej fasoli, jarmużu i pomidorów",
+  "opis": "Gęsty roślinny gulasz z białej fasoli, jarmużu i pomidorów, podany z pieczywem. Przepis na 1 porcję.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "srodziemnomorska"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 747.5,
+  "trwalosc_dni": 3,
+  "czas_przygotowania_min": 12,
+  "czas_obrobki_min": 30,
+  "sprzet": [
+    "Garnek 3 l",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Gulasz przechowuj w lodówce do 3 dni albo zamroź po całkowitym ostudzeniu. Pieczywo trzymaj osobno.",
+  "mozna_mrozic": true,
+  "ratunek": "Za rzadki gulasz odparuj bez przykrycia lub rozgnieć część fasoli. Za kwaśny dodaj trochę marchewki i pogotuj.",
+  "skladniki": [
+    {
+      "nazwa": "Fasola biała z puszki, odsączona",
+      "ilosc": 160.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Jarmuż, surowy",
+      "ilosc": 60.0,
+      "jednostka": "g",
+      "stan": "bez twardych łodyg"
+    },
+    {
+      "nazwa": "Pomidory krojone z puszki",
+      "ilosc": 180.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Marchew, surowa",
+      "ilosc": 60.0,
+      "jednostka": "g",
+      "stan": "pokrojona w kostkę"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 50.0,
+      "jednostka": "g",
+      "stan": "posiekana"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 5.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Domowy bulion warzywny",
+      "ilosc": 150.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 8.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Chleb żytni razowy",
+      "ilosc": 2.0,
+      "jednostka": "szt",
+      "stan": "kromki"
+    },
+    {
+      "nazwa": "Tymianek suszony",
+      "ilosc": 2.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Papryka wędzona mielona",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie",
+      "minuty": 12,
+      "kroki": [
+        {
+          "tresc": "Marchew pokrój w kostkę, cebulę i czosnek posiekaj, a z jarmużu usuń twarde łodygi."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie",
+      "minuty": 30,
+      "kroki": [
+        {
+          "tresc": "Na oliwie smaż cebulę i marchew przez 5 minut. Dodaj czosnek i przyprawy."
+        },
+        {
+          "tresc": "Dodaj pomidory, bulion i fasolę. Gotuj 20 minut na małym ogniu."
+        },
+        {
+          "tresc": "Dodaj jarmuż i gotuj jeszcze 5 minut.",
+          "sygnal": "jarmuż jest miękki, a sos gęsty",
+          "uwaga": true
+        },
+        {
+          "tresc": "Spróbuj, skoryguj sól oraz pieprz i podaj z pieczywem."
+        }
+      ]
+    }
+  ]
+}

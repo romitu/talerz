@@ -1,0 +1,113 @@
+{
+  "nazwa": "Tofu z brokułem i ryżem",
+  "opis": "Smażone tofu z brokułem, imbirem, czosnkiem i sezamem, podane z ryżem. Przepis na 1 porcję.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "azjatycka"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 518.0,
+  "trwalosc_dni": 2,
+  "czas_przygotowania_min": 12,
+  "czas_obrobki_min": 18,
+  "sprzet": [
+    "Patelnia 28 cm",
+    "Garnek 2 l",
+    "Tarka o drobnych oczkach",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Tofu z brokułem i ryż przechowuj w lodówce do 2 dni. Odgrzewaj krótko na patelni.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli tofu nie rumieni się, osusz je i smaż partiami. Za słony sos złagodź niewielką ilością wody.",
+  "skladniki": [
+    {
+      "nazwa": "Tofu naturalne",
+      "ilosc": 180.0,
+      "jednostka": "g",
+      "stan": "osuszone i pokrojone w kostkę"
+    },
+    {
+      "nazwa": "Brokuł, surowy",
+      "ilosc": 200.0,
+      "jednostka": "g",
+      "stan": "podzielony na małe różyczki"
+    },
+    {
+      "nazwa": "Ryż jaśminowy, suchy",
+      "ilosc": 70.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sos sojowy",
+      "ilosc": 20.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Olej rzepakowy",
+      "ilosc": 8.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Imbir korzeń, surowy",
+      "ilosc": 10.0,
+      "jednostka": "g",
+      "stan": "drobno starty"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 5.0,
+      "jednostka": "g",
+      "stan": "posiekany"
+    },
+    {
+      "nazwa": "Sezam",
+      "ilosc": 10.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cebula dymka, surowa",
+      "ilosc": 15.0,
+      "jednostka": "g",
+      "stan": "pokrojona"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie",
+      "minuty": 12,
+      "kroki": [
+        {
+          "tresc": "Ryż ugotuj. Tofu dokładnie osusz i pokrój w kostkę."
+        },
+        {
+          "tresc": "Brokuł podziel na małe różyczki, czosnek posiekaj, a imbir zetrzyj."
+        }
+      ]
+    },
+    {
+      "nazwa": "Smażenie",
+      "minuty": 18,
+      "kroki": [
+        {
+          "tresc": "Na połowie oleju smaż tofu przez 6–8 minut, obracając je, aż będzie rumiane. Przełóż je na bok.",
+          "sygnal": "kostki mają złote krawędzie"
+        },
+        {
+          "tresc": "Dodaj resztę oleju i brokuł. Smaż 5 minut, następnie dodaj czosnek oraz imbir."
+        },
+        {
+          "tresc": "Włóż tofu z powrotem, dodaj sos sojowy i wymieszaj.",
+          "uwaga": true
+        },
+        {
+          "tresc": "Podaj z ryżem, sezamem i cebulą dymką."
+        }
+      ]
+    }
+  ]
+}

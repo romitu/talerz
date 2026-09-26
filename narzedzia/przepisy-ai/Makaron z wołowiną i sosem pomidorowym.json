@@ -1,0 +1,116 @@
+{
+  "nazwa": "Makaron z wołowiną i sosem pomidorowym",
+  "opis": "Pełnoziarnisty makaron z mieloną wołowiną i warzywnym sosem pomidorowym. Przepis na 1 porcję.",
+  "pory": [
+    "obiad"
+  ],
+  "kuchnie": [
+    "inna"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 648.5,
+  "trwalosc_dni": 3,
+  "czas_przygotowania_min": 12,
+  "czas_obrobki_min": 30,
+  "sprzet": [
+    "Patelnia 28 cm",
+    "Garnek 3 l",
+    "Tarka o grubych oczkach",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Sos przechowuj w lodówce do 3 dni albo zamroź. Makaron najlepiej trzymaj osobno.",
+  "mozna_mrozic": true,
+  "ratunek": "Jeśli sos jest tłusty, zbierz nadmiar tłuszczu. Za kwaśny sos złagodź marchewką i dłuższym gotowaniem.",
+  "skladniki": [
+    {
+      "nazwa": "Makaron pełnoziarnisty, suchy",
+      "ilosc": 85.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Wołowina mielona 5% tłuszczu, surowa",
+      "ilosc": 150.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Passata pomidorowa",
+      "ilosc": 250.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Marchew, surowa",
+      "ilosc": 80.0,
+      "jednostka": "g",
+      "stan": "starta"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 70.0,
+      "jednostka": "g",
+      "stan": "posiekana"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 5.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 5.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oregano suszone",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Bazylia suszona",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie",
+      "minuty": 12,
+      "kroki": [
+        {
+          "tresc": "Marchew zetrzyj, cebulę i czosnek posiekaj. Makaron ugotuj al dente."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie sosu",
+      "minuty": 30,
+      "kroki": [
+        {
+          "tresc": "Na oliwie smaż cebulę i marchew 4 minuty. Dodaj wołowinę i rozdrobnij ją."
+        },
+        {
+          "tresc": "Smaż, aż mięso straci surowy kolor. Dodaj czosnek, passatę i zioła.",
+          "uwaga": true
+        },
+        {
+          "tresc": "Gotuj sos 18–20 minut.",
+          "sygnal": "sos jest gęsty, a mięso całkowicie ścięte"
+        },
+        {
+          "tresc": "Podaj z makaronem."
+        }
+      ]
+    }
+  ]
+}

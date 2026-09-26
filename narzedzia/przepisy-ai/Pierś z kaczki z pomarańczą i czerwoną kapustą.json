@@ -1,0 +1,137 @@
+{
+  "nazwa": "Pierś z kaczki z pomarańczą i czerwoną kapustą",
+  "opis": "Pierś z kaczki z duszoną czerwoną kapustą, jabłkiem, pomarańczą i ziemniakami. Przepis na 1 porcję.",
+  "pory": [
+    "obiad"
+  ],
+  "kuchnie": [
+    "inna"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 727.5,
+  "trwalosc_dni": 2,
+  "czas_przygotowania_min": 15,
+  "czas_obrobki_min": 35,
+  "sprzet": [
+    "Patelnia 28 cm",
+    "Garnek 3 l",
+    "Garnek 2 l",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Przechowuj w lodówce do 2 dni. Kaczkę odgrzewaj krótko, aby jej nie wysuszyć.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli mięso jest przesmażone, pokrój je cienko i podaj z większą ilością sosu. Za kwaśną kapustę złagodź jabłkiem.",
+  "skladniki": [
+    {
+      "nazwa": "Kaczka, pierś bez skóry, surowa",
+      "ilosc": 180.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Kapusta czerwona, surowa",
+      "ilosc": 150.0,
+      "jednostka": "g",
+      "stan": "cienko poszatkowana"
+    },
+    {
+      "nazwa": "Pomarańcza",
+      "ilosc": 0.5,
+      "jednostka": "szt",
+      "stan": "sok i cząstki"
+    },
+    {
+      "nazwa": "Jabłko ze skórką",
+      "ilosc": 0.5,
+      "jednostka": "szt",
+      "stan": "pokrojone"
+    },
+    {
+      "nazwa": "Ziemniaki, surowe",
+      "ilosc": 180.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cebula czerwona, surowa",
+      "ilosc": 40.0,
+      "jednostka": "g",
+      "stan": "posiekana"
+    },
+    {
+      "nazwa": "Olej rzepakowy",
+      "ilosc": 5.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Ocet jabłkowy",
+      "ilosc": 10.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cynamon mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Goździki suszone",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie",
+      "minuty": 10,
+      "kroki": [
+        {
+          "tresc": "Kapustę poszatkuj, ziemniaki przygotuj do gotowania, jabłko pokrój, cebulę posiekaj, a z pomarańczy wyciśnij sok."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie dodatków",
+      "minuty": 25,
+      "kroki": [
+        {
+          "tresc": "Ziemniaki gotuj w garnku około 15–20 minut.",
+          "sygnal": "są miękkie po nakłuciu widelcem"
+        },
+        {
+          "tresc": "W drugim garnku na oleju zeszklij cebulę. Dodaj kapustę, jabłko, połowę soku, ocet i przyprawy. Duś około 25 minut.",
+          "sygnal": "kapusta jest miękka, ale nie rozpada się"
+        }
+      ]
+    },
+    {
+      "nazwa": "Smażenie kaczki",
+      "minuty": 15,
+      "kroki": [
+        {
+          "tresc": "Pierś z kaczki osusz i dopraw solą oraz pieprzem."
+        },
+        {
+          "tresc": "Smaż na średnim ogniu po 3–4 minuty z każdej strony, zależnie od grubości.",
+          "sygnal": "mięso jest sprężyste, a środek pozostaje soczysty",
+          "uwaga": true
+        },
+        {
+          "tresc": "Odstaw mięso na 5 minut. Patelnię zdeglasuj pozostałym sokiem pomarańczowym."
+        },
+        {
+          "tresc": "Kaczkę pokrój i podaj z kapustą, sosem pomarańczowym oraz ziemniakami."
+        }
+      ]
+    }
+  ]
+}

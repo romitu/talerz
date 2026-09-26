@@ -1,0 +1,102 @@
+{
+  "nazwa": "Makaron z brokułem i fetą",
+  "opis": "Pełnoziarnisty makaron z brokułem, fetą, czosnkiem i cytryną. Przepis na 1 porcję.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "srodziemnomorska"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 406.0,
+  "trwalosc_dni": 2,
+  "czas_przygotowania_min": 8,
+  "czas_obrobki_min": 18,
+  "sprzet": [
+    "Garnek 3 l",
+    "Patelnia 28 cm",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Przechowuj w lodówce do 2 dni.",
+  "mozna_mrozic": false,
+  "ratunek": "Twardy brokuł gotuj minutę dłużej. Za słone danie złagodź dodatkowym makaronem lub brokułem.",
+  "skladniki": [
+    {
+      "nazwa": "Makaron pełnoziarnisty, suchy",
+      "ilosc": 85.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Brokuł, surowy",
+      "ilosc": 220.0,
+      "jednostka": "g",
+      "stan": "podzielony na małe różyczki"
+    },
+    {
+      "nazwa": "Ser feta",
+      "ilosc": 70.0,
+      "jednostka": "g",
+      "stan": "pokruszony"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 5.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 10.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cytryna",
+      "ilosc": 15.0,
+      "jednostka": "g",
+      "stan": "sok"
+    },
+    {
+      "nazwa": "Papryka ostra mielona",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Gotowanie",
+      "minuty": 18,
+      "kroki": [
+        {
+          "tresc": "Makaron gotuj zgodnie z instrukcją. Na 4 minuty przed końcem dodaj do garnka brokuł."
+        },
+        {
+          "tresc": "Odcedź, zachowując niewielką ilość wody z gotowania."
+        }
+      ]
+    },
+    {
+      "nazwa": "Łączenie",
+      "minuty": 8,
+      "kroki": [
+        {
+          "tresc": "Na oliwie krótko podgrzej czosnek i ostrą paprykę."
+        },
+        {
+          "tresc": "Dodaj makaron z brokułem, fetę, cytrynę i odrobinę wody z gotowania.",
+          "uwaga": true
+        },
+        {
+          "tresc": "Wymieszaj i dopraw pieprzem.",
+          "sygnal": "feta częściowo się rozpuszcza i tworzy lekki sos"
+        }
+      ]
+    }
+  ]
+}

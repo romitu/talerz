@@ -1,0 +1,119 @@
+{
+  "nazwa": "Krem z brokułów z fetą",
+  "opis": "Kremowa zupa brokułowa z ziemniakiem, jogurtem i fetą, podana z pieczywem. Przepis na 1 porcję.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "inna"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 771.0,
+  "trwalosc_dni": 3,
+  "czas_przygotowania_min": 10,
+  "czas_obrobki_min": 25,
+  "sprzet": [
+    "Garnek 3 l",
+    "Blender ręczny",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Przechowuj w lodówce do 3 dni. Jeśli planujesz mrożenie, odłóż porcję przed dodaniem jogurtu i fety; dodaj je dopiero po rozmrożeniu i podgrzaniu. Pieczywo trzymaj osobno.",
+  "mozna_mrozic": true,
+  "ratunek": "Za gęsty krem rozcieńcz bulionem. Jeśli feta mocno zasoliła zupę, dodaj więcej brokułu lub ziemniaka.",
+  "skladniki": [
+    {
+      "nazwa": "Brokuł, surowy",
+      "ilosc": 220.0,
+      "jednostka": "g",
+      "stan": "podzielony na różyczki"
+    },
+    {
+      "nazwa": "Ziemniaki, surowe",
+      "ilosc": 100.0,
+      "jednostka": "g",
+      "stan": "pokrojone"
+    },
+    {
+      "nazwa": "Domowy bulion warzywny",
+      "ilosc": 250.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 40.0,
+      "jednostka": "g",
+      "stan": "posiekana"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 5.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 5.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Jogurt naturalny 2%",
+      "ilosc": 40.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Ser feta",
+      "ilosc": 40.0,
+      "jednostka": "g",
+      "stan": "pokruszony"
+    },
+    {
+      "nazwa": "Chleb żytni razowy",
+      "ilosc": 2.0,
+      "jednostka": "szt",
+      "stan": "kromki"
+    },
+    {
+      "nazwa": "Gałka muszkatołowa mielona",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie",
+      "minuty": 10,
+      "kroki": [
+        {
+          "tresc": "Brokuł podziel na różyczki, ziemniaka pokrój, a cebulę i czosnek posiekaj."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie i blendowanie",
+      "minuty": 25,
+      "kroki": [
+        {
+          "tresc": "Na oliwie zeszklij cebulę. Dodaj czosnek, ziemniaki i bulion; gotuj 12 minut."
+        },
+        {
+          "tresc": "Dodaj brokuł i gotuj kolejne 7–8 minut.",
+          "sygnal": "brokuł i ziemniaki są miękkie"
+        },
+        {
+          "tresc": "Zblenduj zupę, dodaj gałkę i pieprz. Jeśli część zupy mrozisz, odłóż ją teraz; do pozostałej po lekkim przestudzeniu wmieszaj jogurt.",
+          "uwaga": true
+        },
+        {
+          "tresc": "Podaj z pokruszoną fetą i pieczywem."
+        }
+      ]
+    }
+  ]
+}

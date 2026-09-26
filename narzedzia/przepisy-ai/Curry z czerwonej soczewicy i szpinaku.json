@@ -1,0 +1,116 @@
+{
+  "nazwa": "Curry z czerwonej soczewicy i szpinaku",
+  "opis": "Kremowe jednogarnkowe curry z czerwonej soczewicy, szpinaku i pomidorów. Przepis na 1 porcję.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "azjatycka"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 747.0,
+  "trwalosc_dni": 3,
+  "czas_przygotowania_min": 8,
+  "czas_obrobki_min": 25,
+  "sprzet": [
+    "Garnek 3 l",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Curry przechowuj w zamkniętym pojemniku w lodówce do 3 dni.",
+  "mozna_mrozic": true,
+  "ratunek": "Za gęste curry rozprowadź niewielką ilością wody. Zbyt łagodny smak popraw odrobiną pasty curry i soku z cytryny.",
+  "skladniki": [
+    {
+      "nazwa": "Soczewica czerwona, sucha",
+      "ilosc": 70.0,
+      "jednostka": "g",
+      "stan": "opłukana"
+    },
+    {
+      "nazwa": "Szpinak, surowy",
+      "ilosc": 80.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Pomidory krojone z puszki",
+      "ilosc": 200.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Mleko kokosowe light z puszki",
+      "ilosc": 100.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "woda",
+      "ilosc": 200.0,
+      "jednostka": "ml"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 70.0,
+      "jednostka": "g",
+      "stan": "drobno posiekana"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 5.0,
+      "jednostka": "g",
+      "stan": "drobno posiekany"
+    },
+    {
+      "nazwa": "Pasta curry czerwona",
+      "ilosc": 15.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Olej rzepakowy",
+      "ilosc": 5.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Kurkuma mielona",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie",
+      "minuty": 8,
+      "kroki": [
+        {
+          "tresc": "Cebulę i czosnek drobno posiekaj, a soczewicę opłucz."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie curry",
+      "minuty": 25,
+      "kroki": [
+        {
+          "tresc": "W garnku rozgrzej olej. Dodaj cebulę i smaż 3 minuty, następnie dodaj czosnek, pastę curry i kurkumę."
+        },
+        {
+          "tresc": "Dodaj soczewicę, pomidory, mleko kokosowe i wodę. Gotuj na małym ogniu około 18 minut, często mieszając.",
+          "uwaga": true
+        },
+        {
+          "tresc": "Dodaj szpinak i sól. Gotuj jeszcze 2–3 minuty.",
+          "sygnal": "soczewica jest miękka, a sos kremowy"
+        },
+        {
+          "tresc": "Spróbuj i w razie potrzeby skoryguj ostrość oraz sól."
+        }
+      ]
+    }
+  ]
+}

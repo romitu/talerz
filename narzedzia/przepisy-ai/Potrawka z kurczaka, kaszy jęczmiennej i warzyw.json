@@ -1,0 +1,118 @@
+{
+  "nazwa": "Potrawka z kurczaka, kaszy jęczmiennej i warzyw",
+  "opis": "Jednogarnkowa potrawka z kurczaka, kaszy jęczmiennej, marchewki, pora i groszku. Przepis na 1 porcję.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "polska"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 737.5,
+  "trwalosc_dni": 3,
+  "czas_przygotowania_min": 12,
+  "czas_obrobki_min": 35,
+  "sprzet": [
+    "Garnek 3 l",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Przechowuj w lodówce do 3 dni. Potrawkę można zamrozić.",
+  "mozna_mrozic": true,
+  "ratunek": "Za gęstą potrawkę rozcieńcz bulionem. Jeśli kasza jest twarda, gotuj dłużej i uzupełnij płyn.",
+  "skladniki": [
+    {
+      "nazwa": "Udo z kurczaka bez skóry, surowe",
+      "ilosc": 150.0,
+      "jednostka": "g",
+      "stan": "pokrojone w kostkę"
+    },
+    {
+      "nazwa": "Kasza jęczmienna, sucha",
+      "ilosc": 60.0,
+      "jednostka": "g",
+      "stan": "opłukana"
+    },
+    {
+      "nazwa": "Marchew, surowa",
+      "ilosc": 70.0,
+      "jednostka": "g",
+      "stan": "pokrojona"
+    },
+    {
+      "nazwa": "Por, surowy",
+      "ilosc": 50.0,
+      "jednostka": "g",
+      "stan": "pokrojony"
+    },
+    {
+      "nazwa": "Groszek zielony mrożony",
+      "ilosc": 60.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Seler naciowy, surowy",
+      "ilosc": 40.0,
+      "jednostka": "g",
+      "stan": "pokrojony"
+    },
+    {
+      "nazwa": "Domowy bulion warzywny",
+      "ilosc": 300.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Olej rzepakowy",
+      "ilosc": 5.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Tymianek suszony",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie",
+      "minuty": 12,
+      "kroki": [
+        {
+          "tresc": "Kurczaka i warzywa pokrój, a kaszę opłucz."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie",
+      "minuty": 35,
+      "kroki": [
+        {
+          "tresc": "Na oleju obsmaż kurczaka, aż straci surowy kolor. Dodaj por, marchew i seler."
+        },
+        {
+          "tresc": "Wsyp kaszę, dodaj bulion i tymianek. Gotuj pod przykryciem 25 minut."
+        },
+        {
+          "tresc": "Dodaj groszek i gotuj jeszcze 5 minut.",
+          "sygnal": "kasza i mięso są miękkie, a płyn częściowo wchłonięty",
+          "uwaga": true
+        },
+        {
+          "tresc": "Dopraw solą oraz pieprzem."
+        }
+      ]
+    }
+  ]
+}

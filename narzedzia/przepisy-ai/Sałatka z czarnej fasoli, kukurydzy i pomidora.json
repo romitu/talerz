@@ -1,0 +1,109 @@
+{
+  "nazwa": "Sałatka z czarnej fasoli, kukurydzy i pomidora",
+  "opis": "Kolorowa sałatka z czarnej fasoli, kukurydzy, pomidora, papryki i awokado. Przepis na 1 porcję.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "inna"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 631.5,
+  "trwalosc_dni": 1,
+  "czas_przygotowania_min": 15,
+  "czas_obrobki_min": 0,
+  "sprzet": [
+    "miska",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Przechowuj w lodówce do 1 dnia. Awokado najlepiej dodaj przed jedzeniem.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli sałatka puściła wodę, odlej płyn. Za kwaśny dressing złagodź większą ilością awokado.",
+  "skladniki": [
+    {
+      "nazwa": "Fasola czarna z puszki, odsączona",
+      "ilosc": 160.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Kukurydza konserwowa, odsączona",
+      "ilosc": 100.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Pomidory, surowe",
+      "ilosc": 130.0,
+      "jednostka": "g",
+      "stan": "pokrojone"
+    },
+    {
+      "nazwa": "Papryka czerwona, surowa",
+      "ilosc": 100.0,
+      "jednostka": "g",
+      "stan": "pokrojona"
+    },
+    {
+      "nazwa": "Awokado",
+      "ilosc": 0.5,
+      "jednostka": "szt",
+      "stan": "pokrojone"
+    },
+    {
+      "nazwa": "Cebula czerwona, surowa",
+      "ilosc": 40.0,
+      "jednostka": "g",
+      "stan": "drobno posiekana"
+    },
+    {
+      "nazwa": "Limonka",
+      "ilosc": 15.0,
+      "jednostka": "g",
+      "stan": "sok"
+    },
+    {
+      "nazwa": "Kolendra świeża",
+      "ilosc": 10.0,
+      "jednostka": "g",
+      "stan": "posiekana"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 5.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Kmin rzymski mielony",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie",
+      "minuty": 15,
+      "kroki": [
+        {
+          "tresc": "Warzywa i awokado pokrój, a kolendrę posiekaj."
+        },
+        {
+          "tresc": "Limonkę wymieszaj z oliwą, kminem i solą."
+        },
+        {
+          "tresc": "Połącz fasolę, kukurydzę, warzywa i dressing.",
+          "uwaga": true
+        },
+        {
+          "tresc": "Dodaj awokado oraz kolendrę i delikatnie wymieszaj."
+        }
+      ]
+    }
+  ]
+}

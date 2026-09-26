@@ -1,0 +1,92 @@
+{
+  "nazwa": "Kanapki z halloumi, awokado i pomidorem",
+  "opis": "Kanapki z grillowanym halloumi, awokado, pomidorem i rukolą. Przepis na 1 porcję.",
+  "pory": [
+    "sniadanie",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "srodziemnomorska"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 325.5,
+  "trwalosc_dni": 0,
+  "czas_przygotowania_min": 8,
+  "czas_obrobki_min": 6,
+  "sprzet": [
+    "Patelnia 24 cm",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Kanapki zjedz od razu. Składniki można przechować osobno w lodówce do następnego dnia.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli halloumi jest zbyt słone, nie dosalaj pozostałych składników. Twarde awokado pokrój w cienkie plastry.",
+  "skladniki": [
+    {
+      "nazwa": "Chleb żytni razowy",
+      "ilosc": 2.0,
+      "jednostka": "szt",
+      "stan": "kromki"
+    },
+    {
+      "nazwa": "Halloumi",
+      "ilosc": 80.0,
+      "jednostka": "g",
+      "stan": "pokrojone w plastry"
+    },
+    {
+      "nazwa": "Awokado",
+      "ilosc": 0.5,
+      "jednostka": "szt",
+      "stan": "pokrojone"
+    },
+    {
+      "nazwa": "Pomidory, surowe",
+      "ilosc": 0.5,
+      "jednostka": "szt",
+      "stan": "pokrojony w plastry"
+    },
+    {
+      "nazwa": "Rukola",
+      "ilosc": 30.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cytryna",
+      "ilosc": 10.0,
+      "jednostka": "g",
+      "stan": "sok"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie",
+      "minuty": 8,
+      "kroki": [
+        {
+          "tresc": "Awokado i pomidora pokrój, a awokado skrop cytryną."
+        }
+      ]
+    },
+    {
+      "nazwa": "Grillowanie i składanie",
+      "minuty": 6,
+      "kroki": [
+        {
+          "tresc": "Halloumi smaż na suchej patelni po około 2 minuty z każdej strony.",
+          "sygnal": "ser jest złoty z zewnątrz",
+          "uwaga": true
+        },
+        {
+          "tresc": "Na pieczywie ułóż rukolę, awokado, pomidora i ciepłe halloumi. Dopraw pieprzem."
+        }
+      ]
+    }
+  ]
+}

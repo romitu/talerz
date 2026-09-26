@@ -1,0 +1,129 @@
+{
+  "nazwa": "Krem z kalafiora z pieczoną ciecierzycą",
+  "opis": "Krem z kalafiora i ziemniaka podany z pieczoną ciecierzycą oraz pieczywem. Przepis na 1 porcję.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "inna"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 796.5,
+  "trwalosc_dni": 3,
+  "czas_przygotowania_min": 12,
+  "czas_obrobki_min": 30,
+  "sprzet": [
+    "Piekarnik",
+    "Blacha do pieczenia",
+    "Garnek 3 l",
+    "Blender ręczny",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Krem przechowuj w lodówce do 3 dni lub zamroź. Ciecierzycę i pieczywo trzymaj osobno.",
+  "mozna_mrozic": true,
+  "ratunek": "Za rzadki krem gotuj chwilę bez przykrycia. Miękką ciecierzycę dopiecz w wyższej temperaturze.",
+  "skladniki": [
+    {
+      "nazwa": "Kalafior, surowy",
+      "ilosc": 220.0,
+      "jednostka": "g",
+      "stan": "podzielony na różyczki"
+    },
+    {
+      "nazwa": "Ziemniaki, surowe",
+      "ilosc": 100.0,
+      "jednostka": "g",
+      "stan": "pokrojone"
+    },
+    {
+      "nazwa": "Ciecierzyca z puszki, odsączona",
+      "ilosc": 100.0,
+      "jednostka": "g",
+      "stan": "dokładnie osuszona"
+    },
+    {
+      "nazwa": "Domowy bulion warzywny",
+      "ilosc": 250.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 40.0,
+      "jednostka": "g",
+      "stan": "posiekana"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 5.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 8.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Chleb żytni razowy",
+      "ilosc": 2.0,
+      "jednostka": "szt",
+      "stan": "kromki"
+    },
+    {
+      "nazwa": "Kmin rzymski mielony",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Papryka wędzona mielona",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie",
+      "minuty": 12,
+      "kroki": [
+        {
+          "tresc": "Piekarnik rozgrzej do 210°C. Kalafior podziel na różyczki, ziemniaka pokrój, cebulę posiekaj."
+        },
+        {
+          "tresc": "Ciecierzycę wymieszaj z połową oliwy, kminem i wędzoną papryką."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie i pieczenie",
+      "minuty": 30,
+      "kroki": [
+        {
+          "tresc": "Ciecierzycę piecz około 25 minut, mieszając w połowie.",
+          "sygnal": "jest sucha i chrupiąca"
+        },
+        {
+          "tresc": "Na pozostałej oliwie zeszklij cebulę, dodaj czosnek, ziemniaki, kalafior i bulion. Gotuj 20 minut."
+        },
+        {
+          "tresc": "Zblenduj zupę i dopraw.",
+          "uwaga": true
+        },
+        {
+          "tresc": "Podaj krem z pieczoną ciecierzycą i pieczywem."
+        }
+      ]
+    }
+  ]
+}

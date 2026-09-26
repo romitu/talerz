@@ -1,0 +1,91 @@
+{
+  "nazwa": "Kanapki z Goudą, jajkiem i szczypiorkiem",
+  "opis": "Syte kanapki z serem Gouda, jajkiem na twardo, pomidorem i szczypiorkiem. Przepis na 1 porcję.",
+  "pory": [
+    "sniadanie",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "polska"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 285.5,
+  "trwalosc_dni": 0,
+  "czas_przygotowania_min": 8,
+  "czas_obrobki_min": 9,
+  "sprzet": [
+    "Garnek 2 l",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Kanapki zjedz od razu. Ugotowane jajko możesz przechować osobno w lodówce do następnego dnia.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli kanapki są suche, dodaj odrobinę jogurtu. Nie dosalaj przed spróbowaniem sera.",
+  "skladniki": [
+    {
+      "nazwa": "Chleb żytni razowy",
+      "ilosc": 2.0,
+      "jednostka": "szt",
+      "stan": "kromki"
+    },
+    {
+      "nazwa": "Ser Gouda",
+      "ilosc": 50.0,
+      "jednostka": "g",
+      "stan": "pokrojony w plastry"
+    },
+    {
+      "nazwa": "Jaja kurze, całe, surowe",
+      "ilosc": 1.0,
+      "jednostka": "szt"
+    },
+    {
+      "nazwa": "Pomidory, surowe",
+      "ilosc": 80.0,
+      "jednostka": "g",
+      "stan": "pokrojone w plastry"
+    },
+    {
+      "nazwa": "Jogurt naturalny 2%",
+      "ilosc": 20.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Szczypiorek świeży",
+      "ilosc": 10.0,
+      "jednostka": "g",
+      "stan": "posiekany"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Gotowanie jajka",
+      "minuty": 9,
+      "kroki": [
+        {
+          "tresc": "Jajko ugotuj na twardo, schłodź, obierz i pokrój w plastry.",
+          "sygnal": "żółtko jest całkowicie ścięte"
+        }
+      ]
+    },
+    {
+      "nazwa": "Składanie kanapek",
+      "minuty": 8,
+      "kroki": [
+        {
+          "tresc": "Pieczywo cienko posmaruj jogurtem."
+        },
+        {
+          "tresc": "Ułóż Goudę, pomidora i jajko. Posyp szczypiorkiem i pieprzem.",
+          "uwaga": true
+        }
+      ]
+    }
+  ]
+}

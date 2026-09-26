@@ -1,0 +1,116 @@
+{
+  "nazwa": "Małże w pomidorowym bulionie",
+  "opis": "Małże gotowane w aromatycznym bulionie pomidorowym z czosnkiem, selerem naciowym i natką. Przepis na 1 porcję.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "srodziemnomorska"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 676.5,
+  "trwalosc_dni": 0,
+  "czas_przygotowania_min": 15,
+  "czas_obrobki_min": 15,
+  "sprzet": [
+    "Garnek 3 l",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Danie zjedz bezpośrednio po ugotowaniu. Nie przechowuj małży, które nie otworzyły się podczas gotowania.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli bulion jest zbyt kwaśny, dodaj nieco więcej bulionu warzywnego. Nieotwarte małże wyrzuć.",
+  "skladniki": [
+    {
+      "nazwa": "Małże, surowe",
+      "ilosc": 250.0,
+      "jednostka": "g",
+      "stan": "oczyszczone"
+    },
+    {
+      "nazwa": "Pomidory krojone z puszki",
+      "ilosc": 150.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Domowy bulion warzywny",
+      "ilosc": 100.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Seler naciowy, surowy",
+      "ilosc": 40.0,
+      "jednostka": "g",
+      "stan": "pokrojony"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 40.0,
+      "jednostka": "g",
+      "stan": "posiekana"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 8.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 8.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Pietruszka natka",
+      "ilosc": 10.0,
+      "jednostka": "g",
+      "stan": "posiekana"
+    },
+    {
+      "nazwa": "Chleb żytni razowy",
+      "ilosc": 2.0,
+      "jednostka": "szt",
+      "stan": "kromki"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie",
+      "minuty": 15,
+      "kroki": [
+        {
+          "tresc": "Małże dokładnie oczyść. Usuń sztuki pęknięte oraz takie, które nie zamykają się po dotknięciu.",
+          "uwaga": true
+        },
+        {
+          "tresc": "Cebulę, czosnek i seler naciowy posiekaj."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie",
+      "minuty": 15,
+      "kroki": [
+        {
+          "tresc": "Na oliwie smaż cebulę i seler przez 4 minuty. Dodaj czosnek, pomidory oraz bulion."
+        },
+        {
+          "tresc": "Doprowadź do wrzenia, dodaj małże i przykryj garnek."
+        },
+        {
+          "tresc": "Gotuj 5–7 minut, potrząsając garnkiem.",
+          "sygnal": "muszle się otworzyły"
+        },
+        {
+          "tresc": "Wyrzuć nieotwarte małże. Posyp natką i podaj z pieczywem."
+        }
+      ]
+    }
+  ]
+}

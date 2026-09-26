@@ -1,0 +1,116 @@
+{
+  "nazwa": "Kałamarnica z papryką i ryżem",
+  "opis": "Krótko smażona kałamarnica z papryką, pomidorami i ziołami, podana z ryżem. Przepis na 1 porcję.",
+  "pory": [
+    "obiad"
+  ],
+  "kuchnie": [
+    "srodziemnomorska"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 599.5,
+  "trwalosc_dni": 1,
+  "czas_przygotowania_min": 12,
+  "czas_obrobki_min": 15,
+  "sprzet": [
+    "Patelnia 28 cm",
+    "Garnek 2 l",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Przechowuj w lodówce do 1 dnia. Odgrzewaj krótko, aby kałamarnica nie stwardniała.",
+  "mozna_mrozic": false,
+  "ratunek": "Twardą kałamarnicę duś dalej w sosie około 25 minut. Wodnisty sos odparuj na dużym ogniu.",
+  "skladniki": [
+    {
+      "nazwa": "Kałamarnica, surowa",
+      "ilosc": 180.0,
+      "jednostka": "g",
+      "stan": "oczyszczona i pokrojona w krążki"
+    },
+    {
+      "nazwa": "Papryka czerwona, surowa",
+      "ilosc": 150.0,
+      "jednostka": "g",
+      "stan": "pokrojona w paski"
+    },
+    {
+      "nazwa": "Ryż basmati, suchy",
+      "ilosc": 70.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Passata pomidorowa",
+      "ilosc": 100.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 60.0,
+      "jednostka": "g",
+      "stan": "pokrojona w piórka"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 5.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 8.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Papryka wędzona mielona",
+      "ilosc": 1.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cytryna",
+      "ilosc": 15.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Pietruszka natka",
+      "ilosc": 10.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie",
+      "minuty": 12,
+      "kroki": [
+        {
+          "tresc": "Ryż ugotuj. Kałamarnicę osusz, paprykę pokrój w paski, a cebulę w piórka."
+        }
+      ]
+    },
+    {
+      "nazwa": "Smażenie",
+      "minuty": 15,
+      "kroki": [
+        {
+          "tresc": "Na oliwie smaż cebulę i paprykę przez 5 minut. Dodaj czosnek oraz wędzoną paprykę."
+        },
+        {
+          "tresc": "Dodaj kałamarnicę i smaż na dużym ogniu 2–3 minuty.",
+          "sygnal": "krążki są nieprzezroczyste, ale nadal miękkie",
+          "uwaga": true
+        },
+        {
+          "tresc": "Dodaj passatę, zagotuj i zdejmij z ognia. Dopraw cytryną oraz solą."
+        },
+        {
+          "tresc": "Podaj z ryżem i natką pietruszki."
+        }
+      ]
+    }
+  ]
+}

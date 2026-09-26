@@ -1,0 +1,88 @@
+{
+  "nazwa": "Kanapki z sardynkami, pomidorem i rukolą",
+  "opis": "Szybkie kanapki z sardynkami, pomidorem, rukolą i cytryną. Przepis na 1 porcję.",
+  "pory": [
+    "sniadanie",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "srodziemnomorska"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 355.5,
+  "trwalosc_dni": 0,
+  "czas_przygotowania_min": 10,
+  "czas_obrobki_min": 0,
+  "sprzet": [
+    "miska",
+    "Widelec",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Kanapki zjedz od razu. Otwarte sardynki przechowuj zgodnie z informacją na opakowaniu.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli pasta jest sucha, dodaj odrobinę oliwy. Zbyt intensywny smak sardynek złagodź pomidorem i cytryną.",
+  "skladniki": [
+    {
+      "nazwa": "Sardynki w oliwie, odsączone",
+      "ilosc": 100.0,
+      "jednostka": "g",
+      "stan": "rozgniecione"
+    },
+    {
+      "nazwa": "Chleb żytni razowy",
+      "ilosc": 2.0,
+      "jednostka": "szt",
+      "stan": "kromki"
+    },
+    {
+      "nazwa": "Pomidory, surowe",
+      "ilosc": 130.0,
+      "jednostka": "g",
+      "stan": "pokrojone w plastry"
+    },
+    {
+      "nazwa": "Rukola",
+      "ilosc": 40.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cytryna",
+      "ilosc": 10.0,
+      "jednostka": "g",
+      "stan": "sok"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 5.0,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie kanapek",
+      "minuty": 10,
+      "kroki": [
+        {
+          "tresc": "Sardynki rozgnieć widelcem z sokiem z cytryny, oliwą i pieprzem."
+        },
+        {
+          "tresc": "Pomidora pokrój w plastry."
+        },
+        {
+          "tresc": "Na chlebie rozłóż rukolę, pastę z sardynek i pomidora.",
+          "uwaga": true
+        },
+        {
+          "tresc": "Podaj bezpośrednio po przygotowaniu."
+        }
+      ]
+    }
+  ]
+}
