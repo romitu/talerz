@@ -1,6 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
-import { useMemo, useState } from 'react';
-import { Pressable, StyleSheet, View } from 'react-native';
+import { useMemo, useRef, useState } from 'react';
+import { Pressable, StyleSheet, TextInput, View } from 'react-native';
 
 import { Pole } from './pole';
 import { Przycisk } from './przycisk';
@@ -45,15 +45,28 @@ export function DopiszProdukt({ historia, juzNaLiscie, onDodaj }: Props) {
   const [ilosc, setIlosc] = useState('');
   const [zajety, setZajety] = useState(false);
   const [blad, setBlad] = useState<string | null>(null);
+  const poleIlosci = useRef<TextInput>(null);
 
   const pasujace = useMemo(() => {
     const szukane = doPorownania(nazwa.trim());
     if (szukane.length < 2) return [];
+    // Nazwa wybrana z podpowiedzi — nie ma już czego podpowiadać.
+    if (historia.some((h) => doPorownania(h) === szukane)) return [];
     const wykluczone = new Set(juzNaLiscie.map(doPorownania));
     return historia
       .filter((h) => doPorownania(h).includes(szukane) && !wykluczone.has(doPorownania(h)))
       .slice(0, 5);
   }, [historia, juzNaLiscie, nazwa]);
+
+  /**
+   * Podpowiedź tylko UZUPEŁNIA nazwę, nie dopisuje od razu. Dopisanie jednym
+   * dotknięciem nie zostawiało szansy na ilość — produkt lądował na liście
+   * z pustym polem „Ile”.
+   */
+  function wybierz(h: string) {
+    setNazwa(h);
+    poleIlosci.current?.focus();
+  }
 
   async function dodaj(jaka: string) {
     const czysta = jaka.trim();
@@ -88,6 +101,7 @@ export function DopiszProdukt({ historia, juzNaLiscie, onDodaj }: Props) {
         </View>
         <View style={styles.poleIlosci}>
           <Pole
+            ref={poleIlosci}
             etykieta="Ile"
             value={ilosc}
             onChangeText={setIlosc}
@@ -104,10 +118,10 @@ export function DopiszProdukt({ historia, juzNaLiscie, onDodaj }: Props) {
           {pasujace.map((h) => (
             <Pressable
               key={h}
-              onPress={() => dodaj(h)}
+              onPress={() => wybierz(h)}
               disabled={zajety}
               accessibilityRole="button"
-              accessibilityLabel={`Dopisz ${h}`}
+              accessibilityLabel={`Wybierz ${h}`}
               style={({ pressed }) => [
                 styles.podpowiedz,
                 { borderColor: motyw.border, backgroundColor: motyw.backgroundElement },

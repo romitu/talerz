@@ -1,5 +1,5 @@
 import { useFocusEffect, useLocalSearchParams } from 'expo-router';
-import { useCallback, useMemo, useState } from 'react';
+import { Fragment, useCallback, useMemo, useState } from 'react';
 
 import { DopiszProdukt } from '@/components/dopisz-produkt';
 import { Ekran } from '@/components/ekran';
@@ -59,6 +59,11 @@ export default function EkranZakupow() {
 
   const [pozycje, setPozycje] = useState<PozycjaZakupow[]>([]);
   const [reczne, setReczne] = useState<ProduktReczny[]>([]);
+  /**
+   * Produkty ręczne odhaczone TERAZ. W bazie są już kupione, ale zostają
+   * na ekranie z ptaszkiem — tak jak jedzenie — dopóki lista się nie odświeży.
+   */
+  const [recznieOdhaczone, setRecznieOdhaczone] = useState<Set<string>>(new Set());
   const [historia, setHistoria] = useState<string[]>([]);
   const [kupione, setKupione] = useState<Set<string>>(new Set());
   /** Migawka `kupione` sprzed otwarcia ekranu — patrz `czyZrealizowany`. */
@@ -95,6 +100,7 @@ export default function EkranZakupow() {
           pobierzOdhaczone(kontoId),
         ]);
         setReczne(lista);
+        setRecznieOdhaczone(new Set());
         setHistoria(hist);
         setKupione(odhaczone);
         setKupionePrzedSesja(new Set(odhaczone));
@@ -190,8 +196,9 @@ export default function EkranZakupow() {
   // pozycja fizycznie została kupiona (tylko wizualnie zostaje na aktualnej
   // liście, patrz `czyZrealizowany`).
   const zaznaczoneTeraz = doKupienia.filter(czyOdhaczonaWSesji).length;
-  const zrealizowane = zrealizowaneSkladniki.length + zaznaczoneTeraz;
-  const niezrealizowane = doKupienia.length - zaznaczoneTeraz + reczne.length;
+  const zrealizowane = zrealizowaneSkladniki.length + zaznaczoneTeraz + recznieOdhaczone.size;
+  const niezrealizowane =
+    doKupienia.length - zaznaczoneTeraz + reczne.length - recznieOdhaczone.size;
   const resztyRazem = [...doKupienia, ...zrealizowaneSkladniki].reduce(
     (s, p) => s + (p.reszta_g ?? 0),
     0
@@ -238,12 +245,22 @@ export default function EkranZakupow() {
     }
   }
 
-  /** Kupiony produkt ręczny schodzi z listy, ale zostaje w historii podpowiedzi. */
+  /**
+   * Odhaczenie produktu ręcznego działa jak przy jedzeniu: ptaszek pod palcem,
+   * pozycja schodzi na dół działu. Z listy znika dopiero przy odświeżeniu —
+   * wtedy zostaje już tylko w historii podpowiedzi.
+   */
   async function odhaczReczny(p: ProduktReczny) {
-    setReczne((lista) => lista.filter((x) => x.id !== p.id));
-    setHistoria((h) => (h.includes(p.nazwa) ? h : [p.nazwa, ...h]));
+    const nowyStan = !recznieOdhaczone.has(p.id);
+    setRecznieOdhaczone((s) => {
+      const n = new Set(s);
+      if (nowyStan) n.add(p.id);
+      else n.delete(p.id);
+      return n;
+    });
+    if (nowyStan) setHistoria((h) => (h.includes(p.nazwa) ? h : [p.nazwa, ...h]));
     try {
-      await kupionoReczny(p.id);
+      await kupionoReczny(p.id, nowyStan);
     } catch (e) {
       setBlad(komunikatBledu(e));
       pobierz();
@@ -261,12 +278,15 @@ export default function EkranZakupow() {
   }
 
   /*
-    Dział czeka NA DOLE listy — chemia leży przy kasach, więc bierze się ją
-    na końcu. Na górę wskakuje dopiero wtedy, gdy całe jedzenie z aktualnej
-    listy jest odhaczone, a tu jeszcze coś zostało: wtedy to jedyne, co
-    zostało do kupienia, i nie może ginąć pod odhaczonymi działami.
+    Dział ręczny zachowuje się jak każdy inny: odhaczone schodzą na dół
+    działu, a dział cały odhaczony — na dół listy. Wśród niedokończonych
+    stoi ostatni, bo chemia leży przy kasach. Pusty liczy się jak gotowy,
+    więc z polem do dopisywania czeka na samym dole.
   */
-  const recznyNaGorze = reczne.length > 0 && doKupienia.every(czyOdhaczonaWSesji);
+  const reczneWKolejnosci = [...reczne].sort(
+    (a, b) => Number(recznieOdhaczone.has(a.id)) - Number(recznieOdhaczone.has(b.id))
+  );
+  const recznyGotowy = reczne.every((p) => recznieOdhaczone.has(p.id));
 
   const dzialReczny = (
     <Karta>
@@ -281,14 +301,14 @@ export default function EkranZakupow() {
         </ThemedText>
       ) : (
         <SiatkaKafli>
-          {reczne.map((p) => (
+          {reczneWKolejnosci.map((p) => (
             <KafelZakupu
               key={p.id}
               nazwa={p.nazwa}
               ilosc={p.ilosc}
               zdjecie={null}
               zrodlo={null}
-              zaznaczona={false}
+              zaznaczona={recznieOdhaczone.has(p.id)}
               onPress={() => odhaczReczny(p)}
               onUsun={() => skasujReczny(p)}
             />
@@ -351,29 +371,45 @@ export default function EkranZakupow() {
         </ThemedText>
       )}
 
-      {recznyNaGorze && dzialReczny}
+      {/*
+        Jedna lista działów razem z ręcznym — z trwałymi kluczami. Gdyby dział
+        ręczny miał dwa osobne miejsca w drzewie, przeskok między nimi
+        montowałby go od nowa i kasował to, co akurat wpisujesz w „Dopisz”.
+        Sortowanie jest stabilne: niedokończone przed gotowymi, a wewnątrz
+        każdej grupy kolejność działów ze sklepu, dział ręczny na końcu.
+      */}
+      {[
+        ...dzialyDoKupienia.map(({ dzial, pozycje: wDziale }) => ({
+          klucz: `do-kupienia-${dzial.nazwa}`,
+          gotowy: wDziale.every(czyOdhaczonaWSesji),
+          element: (
+            <Karta>
+              <ThemedText type="smallBold" themeColor="textSecondary">
+                {dzial.nazwa.toUpperCase()}
+              </ThemedText>
 
-      {dzialyDoKupienia.map(({ dzial, pozycje: wDziale }) => (
-        <Karta key={`do-kupienia-${dzial.nazwa}`}>
-          <ThemedText type="smallBold" themeColor="textSecondary">
-            {dzial.nazwa.toUpperCase()}
-          </ThemedText>
-
-          <SiatkaKafli>
-            {wDziale.map((p) => (
-              <KafelZakupu
-                key={p.skladnik_id}
-                nazwa={p.nazwa}
-                ilosc={opisIlosci(p.gramy)}
-                zdjecie={adresZdjeciaSkladnika(p.zdjecie)}
-                zrodlo={p.zdjecie_zrodlo}
-                zaznaczona={czyOdhaczonaWSesji(p)}
-                onPress={() => oznaczKupione(p)}
-              />
-            ))}
-          </SiatkaKafli>
-        </Karta>
-      ))}
+              <SiatkaKafli>
+                {wDziale.map((p) => (
+                  <KafelZakupu
+                    key={p.skladnik_id}
+                    nazwa={p.nazwa}
+                    ilosc={opisIlosci(p.gramy)}
+                    zdjecie={adresZdjeciaSkladnika(p.zdjecie)}
+                    zrodlo={p.zdjecie_zrodlo}
+                    zaznaczona={czyOdhaczonaWSesji(p)}
+                    onPress={() => oznaczKupione(p)}
+                  />
+                ))}
+              </SiatkaKafli>
+            </Karta>
+          ),
+        })),
+        { klucz: 'reczny', gotowy: recznyGotowy, element: dzialReczny },
+      ]
+        .sort((a, b) => Number(a.gotowy) - Number(b.gotowy))
+        .map((s) => (
+          <Fragment key={s.klucz}>{s.element}</Fragment>
+        ))}
 
       {zrealizowaneSkladniki.length > 0 && (
         <ThemedText type="smallBold" themeColor="textSecondary">
@@ -401,8 +437,6 @@ export default function EkranZakupow() {
           </SiatkaKafli>
         </Karta>
       ))}
-
-      {!recznyNaGorze && dzialReczny}
 
       {resztyRazem > 0 && (
         <Karta>

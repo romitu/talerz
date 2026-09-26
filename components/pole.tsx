@@ -1,3 +1,4 @@
+import type { Ref } from 'react';
 import { StyleSheet, TextInput, View, type TextInputProps } from 'react-native';
 
 import { ThemedText } from './themed-text';
@@ -7,6 +8,8 @@ import { useTheme } from '@/hooks/use-theme';
 
 type PoleProps = TextInputProps & {
   etykieta: string;
+  /** Do przeniesienia kursora z innego pola. */
+  ref?: Ref<TextInput>;
 };
 
 /** Pole tekstowe z podpisem, dopasowane do jasnego i ciemnego motywu. */
