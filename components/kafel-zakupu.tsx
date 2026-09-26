@@ -6,7 +6,7 @@ import { Pressable, StyleSheet, View } from 'react-native';
 import { ThemedText } from '@/components/themed-text';
 import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
-import type { WidokZakupow } from '@/lib/widok-zakupow';
+import type { WidokListy } from '@/lib/widok-listy';
 import type { ZrodloZdjecia } from '@/lib/zakupy';
 
 /** Ile kafli w rzędzie — trzy mieszczą się czytelnie nawet na małym telefonie. */
@@ -18,7 +18,7 @@ const ODSTEP = 3;
  * kafle siedzą w kilku miejscach ekranu (działy, produkty ręczne, zrealizowane)
  * i każde musiałoby go przekazywać tak samo.
  */
-export const KontekstWidokuZakupow = createContext<WidokZakupow>('kafle');
+export const KontekstWidokuZakupow = createContext<WidokListy>('kafle');
 
 /** Siatka kafli po trzy w rzędzie — albo kolumna wierszy w widokach listowych. */
 export function SiatkaKafli({ children }: { children: ReactNode }) {

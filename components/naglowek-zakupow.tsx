@@ -1,12 +1,13 @@
 import { Ionicons } from '@expo/vector-icons';
-import { Pressable, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
+import { PrzelacznikWidoku } from './przelacznik-widoku';
 import { ThemedText } from './themed-text';
 import { ThemedView } from './themed-view';
 
 import { KOLOR_MAKRO, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
-import { WIDOKI_ZAKUPOW, type WidokZakupow } from '@/lib/widok-zakupow';
+import type { WidokListy } from '@/lib/widok-listy';
 
 /**
  * Nagłówek listy zakupów — koszyk, tytuł, tydzień i liczniki zrealizowane/
@@ -23,8 +24,8 @@ export function NaglowekZakupow({
   data?: string;
   zrealizowane: number;
   niezrealizowane: number;
-  widok: WidokZakupow;
-  onZmianaWidoku: (widok: WidokZakupow) => void;
+  widok: WidokListy;
+  onZmianaWidoku: (widok: WidokListy) => void;
 }) {
   const motyw = useTheme();
   const zielony = KOLOR_MAKRO.bialko;
@@ -73,30 +74,7 @@ export function NaglowekZakupow({
         </View>
       </View>
 
-      <View
-        style={[styles.przelacznik, { backgroundColor: motyw.background, borderColor: motyw.border }]}
-        accessibilityRole="radiogroup"
-        accessibilityLabel="Widok listy">
-        {WIDOKI_ZAKUPOW.map((w) => {
-          const wybrany = w.wartosc === widok;
-          return (
-            <Pressable
-              key={w.wartosc}
-              onPress={() => onZmianaWidoku(w.wartosc)}
-              accessibilityRole="radio"
-              accessibilityState={{ checked: wybrany }}
-              style={[styles.opcjaWidoku, wybrany && { backgroundColor: motyw.backgroundSelected }]}>
-              <Ionicons name={w.ikona} size={16} color={wybrany ? motyw.accent : motyw.textSecondary} />
-              <ThemedText
-                type={wybrany ? 'smallBold' : 'small'}
-                themeColor={wybrany ? 'accent' : 'textSecondary'}
-                numberOfLines={1}>
-                {w.etykieta}
-              </ThemedText>
-            </Pressable>
-          );
-        })}
-      </View>
+      <PrzelacznikWidoku widok={widok} onZmiana={onZmianaWidoku} />
     </ThemedView>
   );
 }
@@ -154,22 +132,6 @@ const styles = StyleSheet.create({
     borderRadius: 9,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  przelacznik: {
-    flexDirection: 'row',
-    borderWidth: 1,
-    borderRadius: Spacing.two,
-    padding: 3,
-    gap: 3,
-  },
-  opcjaWidoku: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 4,
-    paddingVertical: 6,
-    borderRadius: 6,
   },
   kolkoPuste: {
     backgroundColor: 'transparent',

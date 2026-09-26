@@ -7,9 +7,11 @@ import { Ekran } from '@/components/ekran';
 import { FiltryPrzepisow } from '@/components/filtry-przepisow';
 import { Karta } from '@/components/karta';
 import { NaglowekPlanu } from '@/components/naglowek-planu';
+import { PrzelacznikWidoku } from '@/components/przelacznik-widoku';
 import { Przycisk } from '@/components/przycisk';
 import { TabelaWyboru } from '@/components/tabela-wyboru';
 import { ThemedText } from '@/components/themed-text';
+import { WyborDania } from '@/components/wybor-dania';
 import { KOLOR_MAKRO, Spacing } from '@/constants/theme';
 import { useFiltryPrzepisow } from '@/hooks/use-filtry-przepisow';
 import { useTheme } from '@/hooks/use-theme';
@@ -49,6 +51,7 @@ import { celZywieniowyNASEM, type PalNasem } from '@/lib/nasem';
 import { useSesja } from '@/lib/sesja';
 import { pobierzSkladniki, type Skladnik } from '@/lib/skladniki';
 import { supabase } from '@/lib/supabase';
+import { KLUCZ_WIDOKU_WYBORU_DANIA, useWidokListy } from '@/lib/widok-listy';
 import { wiekZDaty, type Plec, type TrybCelu } from '@/lib/zywienie';
 
 type Cel = {
@@ -558,6 +561,7 @@ export default function EkranPlanu() {
     ? przepisy.filter((p) => !p.ukryty && pasujeDoPory(p.pory, wybierany.pora))
     : [];
   const filtry = useFiltryPrzepisow(doWyboru);
+  const { widok, ustawWidok } = useWidokListy(KLUCZ_WIDOKU_WYBORU_DANIA);
 
   // --- błąd wczytywania ---
   // Osobno od „brak planu” niżej — inaczej prawdziwa awaria (np. bazy) wyglądałaby
@@ -600,6 +604,64 @@ export default function EkranPlanu() {
 
   // --- wybór przepisu do konkretnego miejsca ---
   if (wybierany) {
+    const wybierzDanie = (p: PrzepisZMakro) =>
+      zDbem(async () => {
+        if (!plan || !sesja) return;
+        const juz = pozycje.filter(
+          (x) => x.data === wybierany.data && x.pora === wybierany.pora
+        ).length;
+
+        // Danie skalowalne, wybrane ręcznie, przelicza się w locie pod
+        // dzienny cel — tak samo jak wybrane przez automat (patrz
+        // `wypelnijAutomatem`), tylko liczone dla jednego, tego
+        // konkretnego miejsca zamiast dla całego dnia naraz.
+        let przepisSkalowanyId: string | undefined;
+        if (p.skalowalny && cel && (p.kcal ?? 0) > 0) {
+          const dniowe = pozycje.filter((x) => x.data === wybierany.data);
+          const kcalDnia = sumujDzien(dniowe).kcal;
+          const brakKcal = Math.max(0, cel.kcal - kcalDnia);
+          const wolnychWDniu = PORY.filter(
+            (pora) => !dniowe.some((x) => x.pora === pora)
+          ).length;
+          const celTegoDania = brakKcal / Math.max(1, wolnychWDniu);
+
+          const pelny = await pobierzPelnyPrzepis(p.id);
+          const dostepneSkladniki = await pobierzSkladniki();
+          const wynik = await utworzPrzeskalowanyPrzepis({
+            kontoId: sesja.user.id,
+            przepis: pelny,
+            dostepneSkladniki,
+            celKcal: celTegoDania,
+          });
+          przepisSkalowanyId = wynik.id;
+        }
+
+        await dodajPartie({
+          kontoId: sesja.user.id,
+          planId: plan.id,
+          odData: wybierany.data,
+          pora: wybierany.pora,
+          przepisId: p.id,
+          kolejnosc: juz + 1,
+          osoby,
+          // Ten sam checkbox „Uwzględnij ile dni wytrzyma w lodówce” co przy
+          // automacie (patrz `wypelnijAutomatem`) — inaczej ręczne wstawienie
+          // dania z ustawioną trwałością nigdy by jej nie uwzględniało. Danie
+          // skalowalne bez tego checkboxa zostaje na jeden dzień — przeliczone
+          // jest pod cel TEGO dnia, więc kopiowanie go na kolejne nie ma sensu
+          // (tak samo jak w automacie, patrz `dniZLimitem`/`uzyjSkalowania`).
+          liczbaPorcjiBazowych: uwzglednijTrwalosc
+            ? dniZLimitem(p.trwalosc_dni, osoby)
+            : przepisSkalowanyId
+              ? 1
+              : p.liczba_porcji_bazowych,
+          dostepneDni: dniPlanu(plan),
+          przepisSkalowanyId,
+        });
+        doPrzywrocenia.current = true;
+        setWybierany(null);
+      });
+
     return (
       <Ekran
         pelnaSzerokosc
@@ -615,6 +677,7 @@ export default function EkranPlanu() {
 
         <Karta>
           <FiltryPrzepisow {...filtry.wlasciwosci} />
+          <PrzelacznikWidoku widok={widok} onZmiana={ustawWidok} />
         </Karta>
 
         {doWyboru.length > 0 && !doWyboru.some(filtry.pasuje) && (
@@ -631,78 +694,31 @@ export default function EkranPlanu() {
         )}
 
         <Karta>
-          <TabelaWyboru
-            dane={doWyboru.filter(filtry.pasuje)}
-            klucz={(p) => p.id}
-            tekstDoFiltra={(p) => p.nazwa}
-            etykietaFiltra="Filtruj przepisy"
-            placeholderFiltra="zupa, dorsz, owsianka…"
-            wybrane={[]}
-            onPrzelacz={(p) =>
-              zDbem(async () => {
-                if (!plan || !sesja) return;
-                const juz = pozycje.filter(
-                  (x) => x.data === wybierany.data && x.pora === wybierany.pora
-                ).length;
-
-                // Danie skalowalne, wybrane ręcznie, przelicza się w locie pod
-                // dzienny cel — tak samo jak wybrane przez automat (patrz
-                // `wypelnijAutomatem`), tylko liczone dla jednego, tego
-                // konkretnego miejsca zamiast dla całego dnia naraz.
-                let przepisSkalowanyId: string | undefined;
-                if (p.skalowalny && cel && (p.kcal ?? 0) > 0) {
-                  const dniowe = pozycje.filter((x) => x.data === wybierany.data);
-                  const kcalDnia = sumujDzien(dniowe).kcal;
-                  const brakKcal = Math.max(0, cel.kcal - kcalDnia);
-                  const wolnychWDniu = PORY.filter(
-                    (pora) => !dniowe.some((x) => x.pora === pora)
-                  ).length;
-                  const celTegoDania = brakKcal / Math.max(1, wolnychWDniu);
-
-                  const pelny = await pobierzPelnyPrzepis(p.id);
-                  const dostepneSkladniki = await pobierzSkladniki();
-                  const wynik = await utworzPrzeskalowanyPrzepis({
-                    kontoId: sesja.user.id,
-                    przepis: pelny,
-                    dostepneSkladniki,
-                    celKcal: celTegoDania,
-                  });
-                  przepisSkalowanyId = wynik.id;
-                }
-
-                await dodajPartie({
-                  kontoId: sesja.user.id,
-                  planId: plan.id,
-                  odData: wybierany.data,
-                  pora: wybierany.pora,
-                  przepisId: p.id,
-                  kolejnosc: juz + 1,
-                  osoby,
-                  // Ten sam checkbox „Uwzględnij ile dni wytrzyma w lodówce” co przy
-                  // automacie (patrz `wypelnijAutomatem`) — inaczej ręczne wstawienie
-                  // dania z ustawioną trwałością nigdy by jej nie uwzględniało. Danie
-                  // skalowalne bez tego checkboxa zostaje na jeden dzień — przeliczone
-                  // jest pod cel TEGO dnia, więc kopiowanie go na kolejne nie ma sensu
-                  // (tak samo jak w automacie, patrz `dniZLimitem`/`uzyjSkalowania`).
-                  liczbaPorcjiBazowych: uwzglednijTrwalosc
-                    ? dniZLimitem(p.trwalosc_dni, osoby)
-                    : przepisSkalowanyId
-                      ? 1
-                      : p.liczba_porcji_bazowych,
-                  dostepneDni: dniPlanu(plan),
-                  przepisSkalowanyId,
-                });
-                doPrzywrocenia.current = true;
-                setWybierany(null);
-              })
-            }
-            kolumny={[
-              { tytul: 'Nazwa', elastyczna: true, wartosc: (p) => p.nazwa },
-              { tytul: 'kcal', szerokosc: 60, liczba: true, wartosc: (p) => String(p.kcal ?? '—') },
-              { tytul: 'białko', szerokosc: 64, liczba: true, wartosc: (p) => String(p.bialko_g ?? '—') },
-              { tytul: 'porcja', szerokosc: 68, liczba: true, wartosc: (p) => (p.gramy_porcji ? `${p.gramy_porcji} g` : '—') },
-            ]}
-          />
+          {/* Sortowanie po kcal czy białku zostaje tylko w tabeli — kafle
+              i wiersze pokazują dania w kolejności, w jakiej przyszły. */}
+          {widok === 'lista' ? (
+            <TabelaWyboru
+              dane={doWyboru.filter(filtry.pasuje)}
+              klucz={(p) => p.id}
+              tekstDoFiltra={(p) => p.nazwa}
+              etykietaFiltra="Filtruj przepisy"
+              placeholderFiltra="zupa, dorsz, owsianka…"
+              wybrane={[]}
+              onPrzelacz={wybierzDanie}
+              kolumny={[
+                { tytul: 'Nazwa', elastyczna: true, wartosc: (p) => p.nazwa },
+                { tytul: 'kcal', szerokosc: 60, liczba: true, wartosc: (p) => String(p.kcal ?? '—') },
+                { tytul: 'białko', szerokosc: 64, liczba: true, wartosc: (p) => String(p.bialko_g ?? '—') },
+                { tytul: 'porcja', szerokosc: 68, liczba: true, wartosc: (p) => (p.gramy_porcji ? `${p.gramy_porcji} g` : '—') },
+              ]}
+            />
+          ) : (
+            <WyborDania
+              dania={doWyboru.filter(filtry.pasuje)}
+              kafle={widok === 'kafle'}
+              onWybierz={wybierzDanie}
+            />
+          )}
         </Karta>
 
         {przepisy.length === 0 && (

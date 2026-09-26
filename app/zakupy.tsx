@@ -12,7 +12,7 @@ import { komunikatBledu } from '@/lib/blad';
 import { wroc } from '@/lib/nawigacja';
 import { naDate } from '@/lib/plan';
 import { useSesja } from '@/lib/sesja';
-import { useWidokZakupow } from '@/lib/widok-zakupow';
+import { KLUCZ_WIDOKU_ZAKUPOW, useWidokListy } from '@/lib/widok-listy';
 import { adresZdjeciaSkladnika } from '@/lib/zdjecia';
 import {
   dodajReczny,
@@ -57,7 +57,7 @@ export default function EkranZakupow() {
   const { powrot } = useLocalSearchParams<{ powrot?: string }>();
   const { sesja } = useSesja();
   const kontoId = sesja?.user.id;
-  const { widok, ustawWidok } = useWidokZakupow();
+  const { widok, ustawWidok } = useWidokListy(KLUCZ_WIDOKU_ZAKUPOW);
 
   const [pozycje, setPozycje] = useState<PozycjaZakupow[]>([]);
   const [reczne, setReczne] = useState<ProduktReczny[]>([]);
