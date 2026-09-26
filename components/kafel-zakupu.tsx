@@ -1,19 +1,29 @@
 import { Ionicons } from '@expo/vector-icons';
 import { Image } from 'expo-image';
-import { Children, useEffect, useState, type ReactNode } from 'react';
+import { Children, createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
+import type { WidokZakupow } from '@/lib/widok-zakupow';
 import type { ZrodloZdjecia } from '@/lib/zakupy';
 
 /** Ile kafli w rzędzie — trzy mieszczą się czytelnie nawet na małym telefonie. */
 const W_RZEDZIE = 3;
 const ODSTEP = 3;
 
-/** Siatka kafli po trzy w rzędzie. */
+/**
+ * Widok listy ustawiany raz na ekranie zakupów. Kontekst zamiast propsa, bo
+ * kafle siedzą w kilku miejscach ekranu (działy, produkty ręczne, zrealizowane)
+ * i każde musiałoby go przekazywać tak samo.
+ */
+export const KontekstWidokuZakupow = createContext<WidokZakupow>('kafle');
+
+/** Siatka kafli po trzy w rzędzie — albo kolumna wierszy w widokach listowych. */
 export function SiatkaKafli({ children }: { children: ReactNode }) {
+  const widok = useContext(KontekstWidokuZakupow);
+  if (widok !== 'kafle') return <View>{children}</View>;
   return (
     <View style={styles.siatka}>
       {Children.map(children, (dziecko) => (dziecko ? <View style={styles.komorka}>{dziecko}</View> : null))}
@@ -98,7 +108,13 @@ type Props = {
 };
 
 /** Pozycja listy zakupów jako kafel ze zdjęciem. Podpis taki sam jak na liście: „nazwa — ilość”. */
-export function KafelZakupu({ nazwa, ilosc, zdjecie, zrodlo, zaznaczona, onPress, onUsun }: Props) {
+export function KafelZakupu(props: Props) {
+  const widok = useContext(KontekstWidokuZakupow);
+  if (widok !== 'kafle') return <WierszZakupu {...props} miniatura={widok === 'miniatury'} />;
+  return <Kafel {...props} />;
+}
+
+function Kafel({ nazwa, ilosc, zdjecie, zrodlo, zaznaczona, onPress, onUsun }: Props) {
   const motyw = useTheme();
   const podpis = ilosc ? `${nazwa} — ${ilosc}` : nazwa;
   const wyciszony = zaznaczona ? styles.wyciszony : null;
@@ -169,8 +185,107 @@ export function KafelZakupu({ nazwa, ilosc, zdjecie, zrodlo, zaznaczona, onPress
   );
 }
 
+/**
+ * Ta sama pozycja jako jeden wiersz: pole wyboru, opcjonalnie miniatura,
+ * nazwa i ilość po prawej. Ilość osobno, a nie w podpisie „nazwa — ilość”,
+ * bo w kolumnie oko szuka jej zawsze w tym samym miejscu.
+ */
+function WierszZakupu({
+  nazwa,
+  ilosc,
+  zdjecie,
+  zaznaczona,
+  onPress,
+  onUsun,
+  miniatura,
+}: Props & { miniatura: boolean }) {
+  const motyw = useTheme();
+  const podpis = ilosc ? `${nazwa} — ${ilosc}` : nazwa;
+  const wyciszony = zaznaczona ? styles.wyciszony : null;
+
+  return (
+    <Pressable
+      onPress={onPress}
+      disabled={!onPress}
+      accessibilityRole="checkbox"
+      accessibilityState={{ checked: zaznaczona, disabled: !onPress }}
+      accessibilityLabel={`Kupione: ${podpis}`}
+      style={({ pressed }) => [
+        styles.wiersz,
+        miniatura && styles.wierszZMiniatura,
+        { borderColor: motyw.border },
+        pressed && styles.wcisniety,
+      ]}>
+      <Ionicons
+        name={zaznaczona ? 'checkbox' : 'square-outline'}
+        size={22}
+        color={zaznaczona ? motyw.accent : motyw.textSecondary}
+      />
+
+      {miniatura && (
+        <View style={[styles.miniatura, { backgroundColor: motyw.backgroundSelected }, wyciszony]}>
+          {zdjecie ? (
+            <Image
+              source={{ uri: zdjecie }}
+              style={StyleSheet.absoluteFill}
+              contentFit="cover"
+              transition={150}
+              accessibilityIgnoresInvertColors
+            />
+          ) : (
+            <Ionicons name="image-outline" size={18} color="#8a96a3" />
+          )}
+        </View>
+      )}
+
+      <ThemedText
+        type="default"
+        themeColor={zaznaczona ? 'textSecondary' : undefined}
+        style={[styles.wierszNazwa, zaznaczona && styles.przekreslony]}
+        numberOfLines={2}>
+        {nazwa}
+      </ThemedText>
+
+      {ilosc ? (
+        <ThemedText type="smallBold" themeColor={zaznaczona ? 'textSecondary' : 'accent'} numberOfLines={1}>
+          {ilosc}
+        </ThemedText>
+      ) : null}
+
+      {onUsun && (
+        <Pressable
+          onPress={onUsun}
+          hitSlop={8}
+          accessibilityRole="button"
+          accessibilityLabel={`Usuń ${nazwa} z listy`}>
+          <Ionicons name="close" size={18} color={motyw.textSecondary} />
+        </Pressable>
+      )}
+    </Pressable>
+  );
+}
+
 const styles = StyleSheet.create({
-  siatka: { flexDirection: 'row', flexWrap: 'wrap', margin: -ODSTEP / 2 },
+  wiersz: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.two,
+    minHeight: 44,
+    paddingVertical: Spacing.one,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+  wierszZMiniatura: { minHeight: 52 },
+  miniatura: {
+    width: 40,
+    height: 40,
+    borderRadius: 6,
+    overflow: 'hidden',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  wierszNazwa: { flex: 1 },
+  przekreslony: { textDecorationLine: 'line-through' },
+  siatka:{ flexDirection: 'row', flexWrap: 'wrap', margin: -ODSTEP / 2 },
   komorka: { width: `${100 / W_RZEDZIE}%`, padding: ODSTEP / 2 },
   kafel: {
     flex: 1,

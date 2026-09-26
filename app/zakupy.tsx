@@ -3,7 +3,7 @@ import { Fragment, useCallback, useMemo, useState } from 'react';
 
 import { DopiszProdukt } from '@/components/dopisz-produkt';
 import { Ekran } from '@/components/ekran';
-import { KafelZakupu, SiatkaKafli } from '@/components/kafel-zakupu';
+import { KafelZakupu, KontekstWidokuZakupow, SiatkaKafli } from '@/components/kafel-zakupu';
 import { Karta } from '@/components/karta';
 import { NaglowekZakupow } from '@/components/naglowek-zakupow';
 import { Przycisk } from '@/components/przycisk';
@@ -12,6 +12,7 @@ import { komunikatBledu } from '@/lib/blad';
 import { wroc } from '@/lib/nawigacja';
 import { naDate } from '@/lib/plan';
 import { useSesja } from '@/lib/sesja';
+import { useWidokZakupow } from '@/lib/widok-zakupow';
 import { adresZdjeciaSkladnika } from '@/lib/zdjecia';
 import {
   dodajReczny,
@@ -56,6 +57,7 @@ export default function EkranZakupow() {
   const { powrot } = useLocalSearchParams<{ powrot?: string }>();
   const { sesja } = useSesja();
   const kontoId = sesja?.user.id;
+  const { widok, ustawWidok } = useWidokZakupow();
 
   const [pozycje, setPozycje] = useState<PozycjaZakupow[]>([]);
   const [reczne, setReczne] = useState<ProduktReczny[]>([]);
@@ -330,150 +332,154 @@ export default function EkranZakupow() {
   );
 
   return (
-    <Ekran
-      tytul="Lista zakupów"
-      naglowekStaly={
-        <NaglowekZakupow
-          data={wczytywanie ? 'wczytywanie…' : undefined}
-          zrealizowane={zrealizowane}
-          niezrealizowane={niezrealizowane}
-        />
-      }>
-      {blad && (
-        <Karta>
-          <ThemedText type="small" themeColor="accent">
-            {blad}
+    <KontekstWidokuZakupow.Provider value={widok}>
+      <Ekran
+        tytul="Lista zakupów"
+        naglowekStaly={
+          <NaglowekZakupow
+            data={wczytywanie ? 'wczytywanie…' : undefined}
+            zrealizowane={zrealizowane}
+            niezrealizowane={niezrealizowane}
+            widok={widok}
+            onZmianaWidoku={ustawWidok}
+          />
+        }>
+        {blad && (
+          <Karta>
+            <ThemedText type="small" themeColor="accent">
+              {blad}
+            </ThemedText>
+          </Karta>
+        )}
+
+        {ostrzezenie && (
+          <Karta>
+            <ThemedText type="small" themeColor="accent">
+              {ostrzezenie}
+            </ThemedText>
+          </Karta>
+        )}
+
+        {!wczytywanie && pozycje.length === 0 && reczne.length === 0 && (
+          <Karta>
+            <ThemedText type="default">Nie ma czego kupować</ThemedText>
+            <ThemedText type="small" themeColor="textSecondary">
+              Jedzenie zbiera się tu samo z posiłków wpisanych do planu. Rzeczy spoza
+              kuchni — worki, papier, chemię — dopisujesz na dole tej listy.
+            </ThemedText>
+          </Karta>
+        )}
+
+        {doKupienia.length > 0 && (
+          <ThemedText type="smallBold" themeColor="textSecondary">
+            AKTUALNA LISTA ZAKUPÓW
           </ThemedText>
-        </Karta>
-      )}
+        )}
 
-      {ostrzezenie && (
-        <Karta>
-          <ThemedText type="small" themeColor="accent">
-            {ostrzezenie}
+        {/*
+          Jedna lista działów razem z ręcznym — z trwałymi kluczami. Gdyby dział
+          ręczny miał dwa osobne miejsca w drzewie, przeskok między nimi
+          montowałby go od nowa i kasował to, co akurat wpisujesz w „Dopisz”.
+          Sortowanie jest stabilne: niedokończone przed gotowymi, a wewnątrz
+          każdej grupy kolejność działów ze sklepu, dział ręczny na końcu.
+        */}
+        {[
+          ...dzialyDoKupienia.map(({ dzial, pozycje: wDziale }) => ({
+            klucz: `do-kupienia-${dzial.nazwa}`,
+            gotowy: wDziale.every(czyOdhaczonaWSesji),
+            element: (
+              <Karta>
+                <ThemedText type="smallBold" themeColor="textSecondary">
+                  {dzial.nazwa.toUpperCase()}
+                </ThemedText>
+
+                <SiatkaKafli>
+                  {wDziale.map((p) => (
+                    <KafelZakupu
+                      key={p.skladnik_id}
+                      nazwa={p.nazwa}
+                      ilosc={opisIlosci(p.gramy)}
+                      zdjecie={adresZdjeciaSkladnika(p.zdjecie)}
+                      zrodlo={p.zdjecie_zrodlo}
+                      zaznaczona={czyOdhaczonaWSesji(p)}
+                      onPress={() => oznaczKupione(p)}
+                    />
+                  ))}
+                </SiatkaKafli>
+              </Karta>
+            ),
+          })),
+          { klucz: 'reczny', gotowy: recznyGotowy, element: dzialReczny },
+        ]
+          .sort((a, b) => Number(a.gotowy) - Number(b.gotowy))
+          .map((s) => (
+            <Fragment key={s.klucz}>{s.element}</Fragment>
+          ))}
+
+        {zrealizowaneSkladniki.length > 0 && (
+          <ThemedText type="smallBold" themeColor="textSecondary">
+            ZREALIZOWANE W POPRZEDNIEJ SESJI
           </ThemedText>
-        </Karta>
-      )}
+        )}
 
-      {!wczytywanie && pozycje.length === 0 && reczne.length === 0 && (
-        <Karta>
-          <ThemedText type="default">Nie ma czego kupować</ThemedText>
-          <ThemedText type="small" themeColor="textSecondary">
-            Jedzenie zbiera się tu samo z posiłków wpisanych do planu. Rzeczy spoza
-            kuchni — worki, papier, chemię — dopisujesz na dole tej listy.
-          </ThemedText>
-        </Karta>
-      )}
+        {dzialyZrealizowane.map(({ dzial, pozycje: wDziale }) => (
+          <Karta key={`zrealizowane-${dzial.nazwa}`}>
+            <ThemedText type="smallBold" themeColor="textSecondary">
+              {dzial.nazwa.toUpperCase()}
+            </ThemedText>
 
-      {doKupienia.length > 0 && (
-        <ThemedText type="smallBold" themeColor="textSecondary">
-          AKTUALNA LISTA ZAKUPÓW
-        </ThemedText>
-      )}
-
-      {/*
-        Jedna lista działów razem z ręcznym — z trwałymi kluczami. Gdyby dział
-        ręczny miał dwa osobne miejsca w drzewie, przeskok między nimi
-        montowałby go od nowa i kasował to, co akurat wpisujesz w „Dopisz”.
-        Sortowanie jest stabilne: niedokończone przed gotowymi, a wewnątrz
-        każdej grupy kolejność działów ze sklepu, dział ręczny na końcu.
-      */}
-      {[
-        ...dzialyDoKupienia.map(({ dzial, pozycje: wDziale }) => ({
-          klucz: `do-kupienia-${dzial.nazwa}`,
-          gotowy: wDziale.every(czyOdhaczonaWSesji),
-          element: (
-            <Karta>
-              <ThemedText type="smallBold" themeColor="textSecondary">
-                {dzial.nazwa.toUpperCase()}
-              </ThemedText>
-
-              <SiatkaKafli>
-                {wDziale.map((p) => (
-                  <KafelZakupu
-                    key={p.skladnik_id}
-                    nazwa={p.nazwa}
-                    ilosc={opisIlosci(p.gramy)}
-                    zdjecie={adresZdjeciaSkladnika(p.zdjecie)}
-                    zrodlo={p.zdjecie_zrodlo}
-                    zaznaczona={czyOdhaczonaWSesji(p)}
-                    onPress={() => oznaczKupione(p)}
-                  />
-                ))}
-              </SiatkaKafli>
-            </Karta>
-          ),
-        })),
-        { klucz: 'reczny', gotowy: recznyGotowy, element: dzialReczny },
-      ]
-        .sort((a, b) => Number(a.gotowy) - Number(b.gotowy))
-        .map((s) => (
-          <Fragment key={s.klucz}>{s.element}</Fragment>
+            <SiatkaKafli>
+              {wDziale.map((p) => (
+                <KafelZakupu
+                  key={p.skladnik_id}
+                  nazwa={p.nazwa}
+                  ilosc={opisIlosci(p.gramy)}
+                  zdjecie={adresZdjeciaSkladnika(p.zdjecie)}
+                  zrodlo={p.zdjecie_zrodlo}
+                  zaznaczona
+                />
+              ))}
+            </SiatkaKafli>
+          </Karta>
         ))}
 
-      {zrealizowaneSkladniki.length > 0 && (
-        <ThemedText type="smallBold" themeColor="textSecondary">
-          ZREALIZOWANE W POPRZEDNIEJ SESJI
+        {resztyRazem > 0 && (
+          <Karta>
+            <ThemedText type="smallBold" themeColor="textSecondary">
+              RESZTKI Z OPAKOWAŃ
+            </ThemedText>
+            <ThemedText type="small" themeColor="textSecondary">
+              Po ugotowaniu wszystkiego z listy zostanie około {opisIlosci(resztyRazem)} produktów.
+              To one najczęściej lądują w koszu — warto dobrać przepis, który je zużyje.
+            </ThemedText>
+          </Karta>
+        )}
+
+        {odhaczoneRecznie > 0 && (
+          <Przycisk
+            tytul={`Zacznij nowe zakupy (odznacz ${odhaczoneRecznie})`}
+            wariant="poboczny"
+            onPress={async () => {
+              if (!kontoId) return;
+              setKupione(new Set());
+              try {
+                await wyczyscOdhaczenia(kontoId);
+              } catch (e) {
+                setBlad(komunikatBledu(e));
+                pobierz();
+              }
+            }}
+          />
+        )}
+
+        <ThemedText type="small" themeColor="textSecondary">
+          Ptaszki są zapamiętane — możesz wyjść z aplikacji w połowie zakupów i wrócić
+          do tego samego miejsca. Same ilości jedzenia przeliczają się z planu, więc po
+          zmianie posiłków mogą się zmienić.
         </ThemedText>
-      )}
 
-      {dzialyZrealizowane.map(({ dzial, pozycje: wDziale }) => (
-        <Karta key={`zrealizowane-${dzial.nazwa}`}>
-          <ThemedText type="smallBold" themeColor="textSecondary">
-            {dzial.nazwa.toUpperCase()}
-          </ThemedText>
-
-          <SiatkaKafli>
-            {wDziale.map((p) => (
-              <KafelZakupu
-                key={p.skladnik_id}
-                nazwa={p.nazwa}
-                ilosc={opisIlosci(p.gramy)}
-                zdjecie={adresZdjeciaSkladnika(p.zdjecie)}
-                zrodlo={p.zdjecie_zrodlo}
-                zaznaczona
-              />
-            ))}
-          </SiatkaKafli>
-        </Karta>
-      ))}
-
-      {resztyRazem > 0 && (
-        <Karta>
-          <ThemedText type="smallBold" themeColor="textSecondary">
-            RESZTKI Z OPAKOWAŃ
-          </ThemedText>
-          <ThemedText type="small" themeColor="textSecondary">
-            Po ugotowaniu wszystkiego z listy zostanie około {opisIlosci(resztyRazem)} produktów.
-            To one najczęściej lądują w koszu — warto dobrać przepis, który je zużyje.
-          </ThemedText>
-        </Karta>
-      )}
-
-      {odhaczoneRecznie > 0 && (
-        <Przycisk
-          tytul={`Zacznij nowe zakupy (odznacz ${odhaczoneRecznie})`}
-          wariant="poboczny"
-          onPress={async () => {
-            if (!kontoId) return;
-            setKupione(new Set());
-            try {
-              await wyczyscOdhaczenia(kontoId);
-            } catch (e) {
-              setBlad(komunikatBledu(e));
-              pobierz();
-            }
-          }}
-        />
-      )}
-
-      <ThemedText type="small" themeColor="textSecondary">
-        Ptaszki są zapamiętane — możesz wyjść z aplikacji w połowie zakupów i wrócić
-        do tego samego miejsca. Same ilości jedzenia przeliczają się z planu, więc po
-        zmianie posiłków mogą się zmienić.
-      </ThemedText>
-
-      <Przycisk tytul="Wróć do planu" wariant="poboczny" onPress={() => wroc(powrot, '/')} />
-    </Ekran>
+        <Przycisk tytul="Wróć do planu" wariant="poboczny" onPress={() => wroc(powrot, '/')} />
+      </Ekran>
+    </KontekstWidokuZakupow.Provider>
   );
 }
