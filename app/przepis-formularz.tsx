@@ -25,13 +25,16 @@ import {
   KATEGORIE,
   OPIS_KUCHNI,
   OPIS_PORY,
+  OPIS_RODZAJU,
   opisTrwalosci,
   pobierzPelnyPrzepis,
+  RODZAJE_DAN,
   wyczyscTrescPrzepisu,
   wycofajZgloszenie,
   zglosDoPublikacji,
   type Kuchnia,
   type PoraPosilku,
+  type RodzajDania,
   type Widocznosc,
 } from '@/lib/przepisy';
 import {
@@ -134,6 +137,7 @@ export default function FormularzPrzepisu() {
   const [opis, setOpis] = useState('');
   const [pory, setPory] = useState<PoraPosilku[]>([]);
   const [kuchnie, setKuchnie] = useState<Kuchnia[]>(['srodziemnomorska']);
+  const [rodzaje, setRodzaje] = useState<RodzajDania[]>([]);
   const [trwalosc, setTrwalosc] = useState<'0' | '1' | '2' | '3'>('0');
   const [porcjeBazowe, setPorcjeBazowe] = useState('0');
   const [porcjowanie, setPorcjowanie] = useState<'waga' | 'sztuki'>('sztuki');
@@ -298,6 +302,7 @@ export default function FormularzPrzepisu() {
     setOpis('');
     setPory([]);
     setKuchnie(['srodziemnomorska']);
+    setRodzaje([]);
     setTrwalosc('0');
     setPorcjeBazowe('0');
     setPorcjowanie('sztuki');
@@ -334,6 +339,7 @@ export default function FormularzPrzepisu() {
         setOpis(p.opis ?? '');
         setPory(p.pory);
         setKuchnie(p.kuchnie);
+        setRodzaje(p.rodzaje);
         setTrwalosc(String(p.trwalosc_dni) as '0' | '1' | '2' | '3');
         setPorcjeBazowe(String(p.liczba_porcji_bazowych));
         setPorcjowanie(p.porcjowanie);
@@ -610,6 +616,7 @@ export default function FormularzPrzepisu() {
           opis: opis.trim() || null,
           pory,
           kuchnie,
+          rodzaje,
           trwalosc_dni: Number(trwalosc),
           liczba_porcji_bazowych: Math.round(liczba(porcjeBazowe)),
           porcjowanie,
@@ -906,6 +913,21 @@ export default function FormularzPrzepisu() {
           Można zaznaczyć kilka — zupa bywa i obiadem, i kolacją. „Dodatek” to coś,
           co dokładasz do posiłku: grillowana pierś, surówka, sałatka z ciecierzycy.
           Dodatki pojawiają się przy wyborze dania do każdego posiłku.
+        </ThemedText>
+        <WyborWielo
+          etykieta="Rodzaj dania"
+          wybrane={rodzaje}
+          // Najwyżej dwa (reguła w bazie, migracja 0046) — trzeci wypycha najstarszy.
+          onZmiana={(w) => setRodzaje(w.slice(-2))}
+          opcje={RODZAJE_DAN.map((r) => ({
+            wartosc: r,
+            etykieta: OPIS_RODZAJU[r],
+          }))}
+        />
+        <ThemedText type="small" themeColor="textSecondary">
+          Jeden albo dwa — potrawka z kaszą jest i gulaszem, i daniem z kaszą. Po tym
+          rodzaju filtruje się listę przepisów. Główne białko (drób, ryba, strączki…)
+          nie jest tu do wyboru, bo wylicza się samo ze składników.
         </ThemedText>
         <WyborWielo
           etykieta="Kuchnia"

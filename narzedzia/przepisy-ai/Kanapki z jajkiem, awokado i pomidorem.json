@@ -3,6 +3,7 @@
   "opis": "Syte kanapki z jajkiem na twardo, kremowym awokado i świeżym pomidorem. Przepis na 1 porcję.",
   "pory": ["sniadanie", "kolacja"],
   "kuchnie": ["inna"],
+  "rodzaje": ["kanapki"],
   "porcjowanie": "waga",
   "porcja_g": 261.5,
   "trwalosc_dni": 0,

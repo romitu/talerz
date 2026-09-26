@@ -8,6 +8,7 @@
   "kuchnie": [
     "inna"
   ],
+  "rodzaje": ["zupa"],
   "porcjowanie": "waga",
   "porcja_g": 796.5,
   "trwalosc_dni": 3,

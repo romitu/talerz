@@ -8,6 +8,7 @@
   "kuchnie": [
     "srodziemnomorska"
   ],
+  "rodzaje": ["salatka"],
   "porcjowanie": "waga",
   "porcja_g": 431.5,
   "trwalosc_dni": 2,

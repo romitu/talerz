@@ -1350,12 +1350,13 @@ select ('IMPORT PRZERWANY — ' || string_agg(opis, '; '))::int as sprawdzenie_k
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Chili sin carne z czarną fasolą', 'Jednogarnkowe chili bez mięsa z czarną i czerwoną fasolą, kukurydzą oraz papryką. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
+  array['gulasz_curry']::rodzaj_dania[],
   3, 'prywatna',
   'waga', 585, 1,
   10, 28,
@@ -1368,6 +1369,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -1479,12 +1481,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Curry z ciecierzycy, pomidorów i szpinaku', 'Łagodne jednogarnkowe curry z ciecierzycą, szpinakiem i pomidorami. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['azjatycka']::rodzaj_kuchni[],
+  array['gulasz_curry']::rodzaj_dania[],
   3, 'prywatna',
   'waga', 662, 1,
   8, 22,
@@ -1497,6 +1500,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -1603,12 +1607,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Curry z czerwonej soczewicy i szpinaku', 'Kremowe jednogarnkowe curry z czerwonej soczewicy, szpinaku i pomidorów. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['azjatycka']::rodzaj_kuchni[],
+  array['gulasz_curry']::rodzaj_dania[],
   3, 'prywatna',
   'waga', 747, 1,
   8, 25,
@@ -1621,6 +1626,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -1722,12 +1728,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Dorsz w kokosowym curry ze szpinakiem', 'Delikatny dorsz w kokosowym sosie curry ze szpinakiem, podany z ryżem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['azjatycka']::rodzaj_kuchni[],
+  array['gulasz_curry', 'kasza_ryz']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 749, 1,
   10, 20,
@@ -1740,6 +1747,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -1847,12 +1855,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Grochówka z indykiem', 'Treściwa grochówka z mięsem indyka, ziemniakami, warzywami korzeniowymi i majerankiem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad']::pora_posilku[], array['polska']::rodzaj_kuchni[],
+  array['zupa']::rodzaj_dania[],
   3, 'prywatna',
   'waga', 821, 1,
   15, 55,
@@ -1865,6 +1874,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -1981,12 +1991,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Gulasz jagnięcy z ciecierzycą i pomidorami', 'Aromatyczny gulasz jagnięcy z ciecierzycą, pomidorami i korzennymi przyprawami, podany z bulgurem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad']::pora_posilku[], array['inna']::rodzaj_kuchni[],
+  array['gulasz_curry']::rodzaj_dania[],
   3, 'prywatna',
   'waga', 738, 1,
   15, 80,
@@ -1999,6 +2010,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -2111,12 +2123,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Gulasz wołowy z warzywami korzeniowymi', 'Długo duszony gulasz wołowy z ziemniakami, marchewką, pasternakiem i selerem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad']::pora_posilku[], array['polska']::rodzaj_kuchni[],
+  array['gulasz_curry']::rodzaj_dania[],
   3, 'prywatna',
   'waga', 954, 1,
   18, 130,
@@ -2129,6 +2142,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -2250,12 +2264,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Gulasz z białej fasoli, jarmużu i pomidorów', 'Gęsty roślinny gulasz z białej fasoli, jarmużu i pomidorów, podany z pieczywem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
+  array['gulasz_curry']::rodzaj_dania[],
   3, 'prywatna',
   'waga', 748, 1,
   12, 30,
@@ -2268,6 +2283,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -2379,12 +2395,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Jaglanka z gruszką i orzechami', 'Kremowa kasza jaglana na mleku z gruszką, cynamonem i orzechami włoskimi. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie']::pora_posilku[], array['inna']::rodzaj_kuchni[],
+  array['na_slodko']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 432, 1,
   7, 18,
@@ -2397,6 +2414,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -2477,12 +2495,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Jajecznica z pomidorem i szczypiorkiem', 'Kremowa jajecznica z pomidorem i świeżym szczypiorkiem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['polska']::rodzaj_kuchni[],
+  array['jajka']::rodzaj_dania[],
   0, 'prywatna',
   'waga', 197, 1,
   6, 5,
@@ -2495,6 +2514,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -2571,12 +2591,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Jajka na miękko z pieczywem i warzywami', 'Jajka z płynnym żółtkiem, podane z chlebem żytnim, pomidorem i ogórkiem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['polska']::rodzaj_kuchni[],
+  array['jajka']::rodzaj_dania[],
   0, 'prywatna',
   'waga', 297, 1,
   5, 6,
@@ -2589,6 +2610,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -2665,12 +2687,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Kanapki z Goudą, jajkiem i szczypiorkiem', 'Syte kanapki z serem Gouda, jajkiem na twardo, pomidorem i szczypiorkiem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['polska']::rodzaj_kuchni[],
+  array['kanapki']::rodzaj_dania[],
   0, 'prywatna',
   'waga', 286, 1,
   8, 9,
@@ -2683,6 +2706,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -2762,12 +2786,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Kanapki z Goudą, pomidorem i sałatą', 'Klasyczne kanapki z serem Gouda, pomidorem, ogórkiem i sałatą. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
+  array['kanapki']::rodzaj_dania[],
   0, 'prywatna',
   'waga', 276, 1,
   7, 0,
@@ -2780,6 +2805,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -2849,12 +2875,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Kanapki z halloumi, awokado i pomidorem', 'Kanapki z grillowanym halloumi, awokado, pomidorem i rukolą. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
+  array['kanapki']::rodzaj_dania[],
   0, 'prywatna',
   'waga', 326, 1,
   8, 6,
@@ -2867,6 +2894,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -2946,12 +2974,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Kanapki z jajkiem, awokado i pomidorem', 'Syte kanapki z jajkiem na twardo, kremowym awokado i świeżym pomidorem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
+  array['kanapki']::rodzaj_dania[],
   0, 'prywatna',
   'waga', 262, 1,
   10, 9,
@@ -2964,6 +2993,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -3040,12 +3070,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Kanapki z mozzarellą, pomidorem i bazylią', 'Kanapki z mozzarellą, świeżym pomidorem i bazylią, skropione oliwą. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
+  array['kanapki']::rodzaj_dania[],
   0, 'prywatna',
   'waga', 227, 1,
   7, 0,
@@ -3058,6 +3089,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -3127,12 +3159,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Kanapki z pastą jajeczną', 'Kanapki z kremową pastą z jajek, jogurtu, musztardy i szczypiorku. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['polska']::rodzaj_kuchni[],
+  array['kanapki']::rodzaj_dania[],
   1, 'prywatna',
   'waga', 227, 1,
   10, 9,
@@ -3145,6 +3178,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -3226,12 +3260,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Kanapki z ricottą, rzodkiewką i szczypiorkiem', 'Delikatne kanapki z ricottą, chrupiącą rzodkiewką i świeżym szczypiorkiem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
+  array['kanapki']::rodzaj_dania[],
   0, 'prywatna',
   'waga', 251, 1,
   10, 0,
@@ -3244,6 +3279,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -3313,12 +3349,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Kanapki z sardynkami, pomidorem i rukolą', 'Szybkie kanapki z sardynkami, pomidorem, rukolą i cytryną. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
+  array['kanapki']::rodzaj_dania[],
   0, 'prywatna',
   'waga', 356, 1,
   10, 0,
@@ -3331,6 +3368,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -3401,12 +3439,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Kanapki z serem salami, ogórkiem kiszonym i musztardą', 'Wyraziste kanapki z serem salami, ogórkiem kiszonym, musztardą i czerwoną cebulą. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['polska']::rodzaj_kuchni[],
+  array['kanapki']::rodzaj_dania[],
   0, 'prywatna',
   'waga', 271, 1,
   7, 0,
@@ -3419,6 +3458,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -3488,12 +3528,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Kałamarnica z papryką i ryżem', 'Krótko smażona kałamarnica z papryką, pomidorami i ziołami, podana z ryżem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
+  array['kasza_ryz']::rodzaj_dania[],
   1, 'prywatna',
   'waga', 600, 1,
   12, 15,
@@ -3506,6 +3547,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -3607,12 +3649,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Klopsiki z indyka w sosie pomidorowym z bulgurem', 'Delikatne klopsiki z indyka duszone w sosie pomidorowym, podane z kaszą bulgur. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad']::pora_posilku[], array['inna']::rodzaj_kuchni[],
+  array['kasza_ryz']::rodzaj_dania[],
   3, 'prywatna',
   'waga', 652, 1,
   15, 30,
@@ -3625,6 +3668,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -3733,12 +3777,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Komosa ryżowa z ciecierzycą i pieczonymi warzywami', 'Miska z komosą ryżową, ciecierzycą, cukinią, papryką i pomidorem, doprawiona cytryną. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
+  array['kasza_ryz', 'z_piekarnika']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 658, 1,
   12, 30,
@@ -3751,6 +3796,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -3986,12 +4032,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Krem z brokułów z fetą', 'Kremowa zupa brokułowa z ziemniakiem, jogurtem i fetą, podana z pieczywem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
+  array['zupa']::rodzaj_dania[],
   3, 'prywatna',
   'waga', 771, 1,
   10, 25,
@@ -4004,6 +4051,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -4105,12 +4153,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Krem z dyni na mleku kokosowym', 'Aromatyczny krem z dyni, czerwonej soczewicy, imbiru i mleka kokosowego. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['azjatycka']::rodzaj_kuchni[],
+  array['zupa']::rodzaj_dania[],
   3, 'prywatna',
   'waga', 792, 1,
   12, 28,
@@ -4123,6 +4172,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -4234,12 +4284,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Krem z kalafiora z pieczoną ciecierzycą', 'Krem z kalafiora i ziemniaka podany z pieczoną ciecierzycą oraz pieczywem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
+  array['zupa']::rodzaj_dania[],
   3, 'prywatna',
   'waga', 797, 1,
   12, 30,
@@ -4252,6 +4303,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -4359,12 +4411,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Krewetki z czosnkiem, cukinią i ryżem', 'Krewetki smażone z czosnkiem, cukinią, chili i cytryną, podane z ryżem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
+  array['kasza_ryz']::rodzaj_dania[],
   1, 'prywatna',
   'waga', 442, 1,
   10, 15,
@@ -4377,6 +4430,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -4467,12 +4521,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Królik z rozmarynem i warzywami korzeniowymi', 'Królik pieczony z ziemniakami, marchewką, pasternakiem, selerem i rozmarynem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad']::pora_posilku[], array['polska']::rodzaj_kuchni[],
+  array['z_piekarnika']::rodzaj_dania[],
   3, 'prywatna',
   'waga', 732, 1,
   18, 70,
@@ -4485,6 +4540,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -4591,12 +4647,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Kurczak pieczony z batatem i brokułem', 'Pierś kurczaka pieczona na jednej blasze z batatem, brokułem i czerwoną cebulą. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
+  array['z_piekarnika']::rodzaj_dania[],
   3, 'prywatna',
   'waga', 709, 1,
   12, 35,
@@ -4609,6 +4666,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -4705,12 +4763,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Makaron pełnoziarnisty z bolońskim sosem z soczewicy', 'Pełnoziarnisty makaron z gęstym pomidorowym sosem z czerwonej soczewicy i warzyw. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
+  array['makaron']::rodzaj_dania[],
   3, 'prywatna',
   'waga', 711, 1,
   10, 28,
@@ -4723,6 +4782,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -4833,12 +4893,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Makaron z brokułem i fetą', 'Pełnoziarnisty makaron z brokułem, fetą, czosnkiem i cytryną. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
+  array['makaron']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 406, 1,
   8, 18,
@@ -4851,6 +4912,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -4937,12 +4999,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Makaron z ciecierzycą, bazylią i orzechami', 'Pełnoziarnisty makaron z ciecierzycą i szybkim sosem z bazylii, orzechów oraz oliwy. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
+  array['makaron']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 396, 1,
   10, 15,
@@ -4955,6 +5018,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -5050,12 +5114,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Makaron z indykiem, pieczarkami i jogurtem', 'Pełnoziarnisty makaron z indykiem i pieczarkami w lekkim sosie jogurtowym. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
+  array['makaron']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 561, 1,
   10, 20,
@@ -5068,6 +5133,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -5164,12 +5230,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Makaron z kurczakiem, szpinakiem i pomidorami', 'Pełnoziarnisty makaron z kurczakiem, szpinakiem i pomidorowym sosem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
+  array['makaron']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 642, 1,
   10, 20,
@@ -5182,6 +5249,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -5287,12 +5355,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Makaron z pieczonymi warzywami i mozzarellą', 'Pełnoziarnisty makaron z pieczoną cukinią, papryką, pomidorem i mozzarellą. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
+  array['makaron']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 625, 1,
   12, 30,
@@ -5305,6 +5374,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -5406,12 +5476,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Makaron z polędwiczką i pieczarkami', 'Pełnoziarnisty makaron z polędwiczką wieprzową i pieczarkami w lekkim sosie jogurtowym. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad']::pora_posilku[], array['inna']::rodzaj_kuchni[],
+  array['makaron']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 556, 1,
   12, 18,
@@ -5424,6 +5495,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -5525,12 +5597,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Makaron z ricottą i szpinakiem', 'Szybki pełnoziarnisty makaron z kremową ricottą, szpinakiem, czosnkiem i cytryną. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
+  array['makaron']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 355, 1,
   7, 15,
@@ -5543,6 +5616,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -5633,12 +5707,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Makaron z tuńczykiem, cytryną i natką pietruszki', 'Szybki pełnoziarnisty makaron z tuńczykiem, cytryną, czosnkiem i natką pietruszki. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
+  array['makaron']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 267, 1,
   7, 15,
@@ -5651,6 +5726,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -5741,12 +5817,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Makaron z wołowiną i sosem pomidorowym', 'Pełnoziarnisty makaron z mieloną wołowiną i warzywnym sosem pomidorowym. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad']::pora_posilku[], array['inna']::rodzaj_kuchni[],
+  array['makaron']::rodzaj_dania[],
   3, 'prywatna',
   'waga', 649, 1,
   12, 30,
@@ -5759,6 +5836,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -5975,12 +6053,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Morszczuk w sosie pomidorowym z ryżem', 'Morszczuk duszony w ziołowym sosie pomidorowym, podany z ryżem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
+  array['kasza_ryz']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 557, 1,
   10, 25,
@@ -5993,6 +6072,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -6094,12 +6174,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Nocna owsianka z bananem i chia', 'Nocna owsianka z bananem, nasionami chia i masłem orzechowym. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie']::pora_posilku[], array['inna']::rodzaj_kuchni[],
+  array['na_slodko']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 386, 1,
   7, 0,
@@ -6112,6 +6193,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -6191,12 +6273,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Nocna owsianka z borówkami i orzechami', 'Nocna owsianka z borówkami, jogurtem, chia i orzechami włoskimi. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie']::pora_posilku[], array['inna']::rodzaj_kuchni[],
+  array['na_slodko']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 435, 1,
   7, 0,
@@ -6209,6 +6292,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -6283,12 +6367,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Omlet ze szpinakiem i fetą', 'Delikatny omlet z liśćmi szpinaku i słoną fetą. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
+  array['jajka']::rodzaj_dania[],
   1, 'prywatna',
   'waga', 207, 1,
   7, 8,
@@ -6301,6 +6386,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -6377,12 +6463,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Owsianka z jabłkiem, cynamonem i orzechami', 'Kremowa owsianka na mleku z jabłkiem, cynamonem i orzechami włoskimi. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie']::pora_posilku[], array['inna']::rodzaj_kuchni[],
+  array['na_slodko']::rodzaj_dania[],
   1, 'prywatna',
   'waga', 423, 1,
   5, 7,
@@ -6395,6 +6482,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -6471,12 +6559,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Papryka faszerowana soczewicą i kaszą bulgur', 'Pieczona papryka wypełniona soczewicą, kaszą bulgur i pomidorowym farszem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
+  array['z_piekarnika']::rodzaj_dania[],
   3, 'prywatna',
   'waga', 644, 1,
   15, 40,
@@ -6489,6 +6578,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -6591,12 +6681,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Pełnoziarniste placuszki ze skyrem i owocami', 'Pełnoziarniste placuszki podane ze skyrem i borówkami. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie']::pora_posilku[], array['inna']::rodzaj_kuchni[],
+  array['na_slodko']::rodzaj_dania[],
   1, 'prywatna',
   'waga', 521, 1,
   10, 15,
@@ -6609,6 +6700,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -6695,12 +6787,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Pieczona makrela z burakami i ziemniakami', 'Pieczona makrela z burakami, ziemniakami, czerwoną cebulą i koperkiem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['polska']::rodzaj_kuchni[],
+  array['z_piekarnika']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 717, 1,
   15, 45,
@@ -6713,6 +6806,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -6804,12 +6898,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Pieczone warzywa korzeniowe z tymiankiem', 'Mieszanka pieczonych ziemniaków, buraków, marchewki, pasternaku i selera z tymiankiem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['dodatek']::pora_posilku[], array['polska']::rodzaj_kuchni[],
+  array['z_piekarnika']::rodzaj_dania[],
   3, 'prywatna',
   'waga', 343, 1,
   15, 40,
@@ -6822,6 +6917,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -6922,12 +7018,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Pieczony bakłażan z ciecierzycą i fetą', 'Pieczony bakłażan z ciecierzycą, pomidorami, fetą i kaszą bulgur. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
+  array['z_piekarnika']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 728, 1,
   12, 35,
@@ -6940,6 +7037,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -7042,12 +7140,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Pieczony kalafior z ziołowym sosem jogurtowym', 'Rumiany pieczony kalafior podany z lekkim sosem jogurtowym, cytryną i natką pietruszki. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['dodatek']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
+  array['z_piekarnika']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 372, 1,
   10, 30,
@@ -7060,6 +7159,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -7155,12 +7255,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Pieczony łosoś z brokułem i ziemniakami', 'Łosoś pieczony na jednej blasze z brokułem i ziemniakami, doprawiony cytryną oraz czosnkiem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
+  array['z_piekarnika']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 668, 1,
   12, 30,
@@ -7173,6 +7274,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -7400,12 +7502,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Placuszki bananowo-owsiane', 'Miękkie placuszki z banana, jajka i mąki owsianej, podane z jogurtem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie']::pora_posilku[], array['inna']::rodzaj_kuchni[],
+  array['na_slodko']::rodzaj_dania[],
   1, 'prywatna',
   'waga', 381, 1,
   8, 12,
@@ -7418,6 +7521,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -7499,12 +7603,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Polędwiczka w sosie musztardowym z kaszą bulgur', 'Polędwiczka wieprzowa w lekkim sosie musztardowo-jogurtowym z pieczarkami i kaszą bulgur. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad']::pora_posilku[], array['polska']::rodzaj_kuchni[],
+  array['kasza_ryz']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 656, 1,
   12, 23,
@@ -7517,6 +7622,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -7619,12 +7725,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Potrawka z kurczaka, kaszy jęczmiennej i warzyw', 'Jednogarnkowa potrawka z kurczaka, kaszy jęczmiennej, marchewki, pora i groszku. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['polska']::rodzaj_kuchni[],
+  array['gulasz_curry', 'kasza_ryz']::rodzaj_dania[],
   3, 'prywatna',
   'waga', 738, 1,
   12, 35,
@@ -7637,6 +7744,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -7738,12 +7846,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Pstrąg pieczony z warzywami korzeniowymi', 'Pstrąg pieczony z ziemniakami, marchewką, pasternakiem i selerem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad']::pora_posilku[], array['polska']::rodzaj_kuchni[],
+  array['z_piekarnika']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 673, 1,
   15, 40,
@@ -7756,6 +7865,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -7852,12 +7962,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Pudding chia z mango i mlekiem kokosowym', 'Wegański pudding chia na mleku kokosowym z mango, migdałami i daktylami. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'dodatek']::pora_posilku[], array['inna']::rodzaj_kuchni[],
+  array['na_slodko']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 435, 1,
   8, 0,
@@ -7870,6 +7981,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -7939,12 +8051,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Ryż z pieczarkami, szpinakiem i parmezanem', 'Kremowy ryż z pieczarkami, szpinakiem i parmezanem przygotowany w jednym garnku. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
+  array['kasza_ryz']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 739, 1,
   10, 25,
@@ -7957,6 +8070,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -8053,12 +8167,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Sałatka brokułowa z jajkiem i sosem jogurtowym', 'Sałatka z brokułem, jajkami na twardo, kukurydzą i szczypiorkiem w sosie jogurtowo-musztardowym. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
+  array['salatka']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 586, 1,
   12, 10,
@@ -8071,6 +8186,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -8162,12 +8278,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Sałatka makaronowa z mozzarellą i warzywami', 'Sałatka z pełnoziarnistym makaronem, mozzarellą, pomidorem, ogórkiem, papryką i bazylią. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
+  array['salatka']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 559, 1,
   12, 12,
@@ -8180,6 +8297,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -8280,12 +8398,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Sałatka makaronowa z tuńczykiem i warzywami', 'Sałatka z pełnoziarnistym makaronem, tuńczykiem, pomidorem, ogórkiem i kukurydzą. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
+  array['salatka']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 576, 1,
   12, 12,
@@ -8298,6 +8417,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -8393,12 +8513,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Sałatka z czarnej fasoli, kukurydzy i pomidora', 'Kolorowa sałatka z czarnej fasoli, kukurydzy, pomidora, papryki i awokado. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
+  array['salatka']::rodzaj_dania[],
   1, 'prywatna',
   'waga', 632, 1,
   15, 0,
@@ -8411,6 +8532,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -8501,12 +8623,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Sałatka z jajkiem, fetą i warzywami', 'Sałatka z jajkami na twardo, fetą, pomidorem, ogórkiem i sałatą, skropiona oliwą. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
+  array['salatka']::rodzaj_dania[],
   1, 'prywatna',
   'waga', 387, 1,
   10, 9,
@@ -8519,6 +8642,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -8605,12 +8729,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Sałatka z jarmużu, jabłka i orzechów', 'Chrupiąca sałatka z jarmużu, jabłka, pomarańczy i orzechów w cytrynowo-musztardowym dressingu. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['kolacja', 'dodatek']::pora_posilku[], array['inna']::rodzaj_kuchni[],
+  array['salatka']::rodzaj_dania[],
   1, 'prywatna',
   'waga', 406, 1,
   15, 0,
@@ -8623,6 +8748,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -8703,12 +8829,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Sałatka z komosy, buraka i koziego sera', 'Sałatka z komosy ryżowej, pieczonego buraka, koziego sera, rukoli i orzechów. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
+  array['salatka']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 502, 1,
   12, 35,
@@ -8721,6 +8848,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -8821,12 +8949,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Sałatka z pieczonym burakiem i fetą', 'Sałatka z pieczonym burakiem, fetą, rukolą, orzechami i czerwoną cebulą. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
+  array['salatka']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 432, 1,
   10, 35,
@@ -8839,6 +8968,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -8929,12 +9059,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Serek wiejski z owocami i orzechami', 'Serek wiejski z bananem, borówkami, orzechami i cynamonem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'dodatek']::pora_posilku[], array['inna']::rodzaj_kuchni[],
+  array['na_slodko']::rodzaj_dania[],
   1, 'prywatna',
   'waga', 361, 1,
   5, 0,
@@ -8947,6 +9078,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -9099,12 +9231,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Skyr kakaowy z bananem i masłem orzechowym', 'Kakaowy skyr z bananem i masłem orzechowym, przygotowany bez gotowania. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'dodatek']::pora_posilku[], array['inna']::rodzaj_kuchni[],
+  array['na_slodko']::rodzaj_dania[],
   1, 'prywatna',
   'waga', 380, 1,
   5, 0,
@@ -9117,6 +9250,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -9176,12 +9310,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Skyr z owocami, płatkami owsianymi i orzechami', 'Skyr z bananem, borówkami, płatkami owsianymi i orzechami włoskimi. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'dodatek']::pora_posilku[], array['inna']::rodzaj_kuchni[],
+  array['na_slodko']::rodzaj_dania[],
   1, 'prywatna',
   'waga', 385, 1,
   5, 0,
@@ -9194,6 +9329,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -9356,12 +9492,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Tabbouleh z kaszy bulgur i ciecierzycy', 'Świeża sałatka z kaszy bulgur, ciecierzycy, pomidora, ogórka, natki i mięty. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
+  array['salatka']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 546, 1,
   15, 12,
@@ -9374,6 +9511,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -9474,12 +9612,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Tofu z brokułem i ryżem', 'Smażone tofu z brokułem, imbirem, czosnkiem i sezamem, podane z ryżem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['azjatycka']::rodzaj_kuchni[],
+  array['kasza_ryz']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 518, 1,
   12, 18,
@@ -9492,6 +9631,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -9692,12 +9832,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Tortilla z Goudą, szpinakiem i pomidorem', 'Ciepła pełnoziarnista tortilla z roztopioną Goudą, szpinakiem i pomidorem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
+  array['kanapki']::rodzaj_dania[],
   0, 'prywatna',
   'waga', 336, 1,
   7, 8,
@@ -9710,6 +9851,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -9794,12 +9936,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Tortilla z hummusem i warzywami', 'Pełnoziarnista tortilla z domowym hummusem, pomidorem, ogórkiem i sałatą. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
+  array['kanapki']::rodzaj_dania[],
   1, 'prywatna',
   'waga', 475, 1,
   15, 0,
@@ -9812,6 +9955,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -9911,12 +10055,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Tortilla z jajkiem i szpinakiem', 'Ciepła pełnoziarnista tortilla z jajkiem, szpinakiem, pomidorem i fetą. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
+  array['kanapki']::rodzaj_dania[],
   0, 'prywatna',
   'waga', 366, 1,
   8, 8,
@@ -9929,6 +10074,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -10014,12 +10160,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Tortilla z kurczakiem, awokado i warzywami', 'Pełnoziarnista tortilla z grillowanym kurczakiem, awokado, pomidorem, ogórkiem i sosem jogurtowym. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
+  array['kanapki']::rodzaj_dania[],
   1, 'prywatna',
   'waga', 557, 1,
   12, 10,
@@ -10032,6 +10179,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -10138,12 +10286,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Tortilla z tofu i chrupiącymi warzywami', 'Pełnoziarnista tortilla z rumianym tofu, kapustą pekińską, marchewką i ogórkiem w sosie orzechowo-sojowym. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['azjatycka']::rodzaj_kuchni[],
+  array['kanapki']::rodzaj_dania[],
   1, 'prywatna',
   'waga', 513, 1,
   12, 8,
@@ -10156,6 +10305,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -10252,12 +10402,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Tosty z Goudą i pieczarkami', 'Chrupiące tosty z serem Gouda, podsmażonymi pieczarkami i cebulą. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
+  array['kanapki']::rodzaj_dania[],
   0, 'prywatna',
   'waga', 296, 1,
   8, 9,
@@ -10270,6 +10421,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -10349,12 +10501,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Tosty z mozzarellą i pomidorem', 'Chrupiące tosty z roztopioną mozzarellą, pomidorem i bazylią. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
+  array['kanapki']::rodzaj_dania[],
   0, 'prywatna',
   'waga', 219, 1,
   5, 5,
@@ -10367,6 +10520,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -10442,12 +10596,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Tosty z serem salami i papryką', 'Ciepłe tosty z serem salami, papryką i musztardą. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
+  array['kanapki']::rodzaj_dania[],
   0, 'prywatna',
   'waga', 251, 1,
   6, 6,
@@ -10460,6 +10615,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -10540,12 +10696,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Twarożek ze szczypiorkiem, rzodkiewką i pieczywem', 'Klasyczny twarożek z chrupiącą rzodkiewką i świeżym szczypiorkiem, podany z dwiema kromkami chleba żytniego razowego. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['polska']::rodzaj_kuchni[],
+  array['kanapki']::rodzaj_dania[],
   1, 'prywatna',
   'waga', 312, 1,
   8, 0,
@@ -10558,6 +10715,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -10639,12 +10797,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Wieprzowina z kapustą pekińską i ryżem', 'Szybko smażona wieprzowina z kapustą pekińską, marchewką, imbirem i ryżem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad']::pora_posilku[], array['azjatycka']::rodzaj_kuchni[],
+  array['kasza_ryz']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 621, 1,
   12, 18,
@@ -10657,6 +10816,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -10754,12 +10914,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Zupa z białej fasoli i jarmużu', 'Warzywna zupa z białą fasolą, jarmużem i pomidorami, podana z pieczywem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
+  array['zupa']::rodzaj_dania[],
   3, 'prywatna',
   'waga', 826, 1,
   12, 30,
@@ -10772,6 +10933,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -10883,12 +11045,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Zupa z czerwonej soczewicy i pomidorów', 'Gęsta zupa z czerwonej soczewicy, pomidorów i marchewki, podana z pieczywem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
+  array['zupa']::rodzaj_dania[],
   3, 'prywatna',
   'waga', 704, 1,
   10, 30,
@@ -10901,6 +11064,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
@@ -11011,12 +11175,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
    porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Łosoś ze szpinakiem i kaszą bulgur', 'Smażony łosoś ze szpinakiem, cytryną i kaszą bulgur. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
+  array['kasza_ryz']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 410, 1,
   10, 20,
@@ -11029,6 +11194,7 @@ on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,

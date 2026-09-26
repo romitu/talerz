@@ -8,6 +8,7 @@
   "kuchnie": [
     "srodziemnomorska"
   ],
+  "rodzaje": ["kasza_ryz"],
   "porcjowanie": "waga",
   "porcja_g": 442.0,
   "trwalosc_dni": 1,

@@ -8,6 +8,7 @@
   "kuchnie": [
     "polska"
   ],
+  "rodzaje": ["z_piekarnika"],
   "porcjowanie": "waga",
   "porcja_g": 716.5,
   "trwalosc_dni": 2,

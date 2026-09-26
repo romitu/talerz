@@ -8,6 +8,7 @@
   "kuchnie": [
     "azjatycka"
   ],
+  "rodzaje": ["zupa"],
   "porcjowanie": "waga",
   "porcja_g": 792.0,
   "trwalosc_dni": 3,

@@ -31,11 +31,20 @@ import {
   podzielListe,
   PORA_WEDLUG_ETYKIETY,
   PORCJOWANIE_WEDLUG_ETYKIETY,
+  RODZAJ_WEDLUG_ETYKIETY,
   ROLA_SKLADNIKA_WEDLUG_ETYKIETY,
   tekstKomorki,
 } from './import-eksport-wspolne';
 import { OPIS_ROLI_SKLADNIKA, type RolaSkladnika, type Skladnik } from './skladniki';
-import { OPIS_KUCHNI, OPIS_PORY, type Kuchnia, type PelnyPrzepis, type PoraPosilku } from './przepisy';
+import {
+  OPIS_KUCHNI,
+  OPIS_PORY,
+  OPIS_RODZAJU,
+  type Kuchnia,
+  type PelnyPrzepis,
+  type PoraPosilku,
+  type RodzajDania,
+} from './przepisy';
 // Tylko typy — bez importu wartości, żeby nie zamknąć cyklu z import-eksport-przepisow.ts,
 // który sam importuje wczytajPlikFormularzowy z tego pliku.
 import type { BladImportu, EtapDoImportu, PrzepisDoImportu, SkladnikDoImportu } from './import-eksport-przepisow';
@@ -199,6 +208,22 @@ function wczytajPrzepisZKursora(k: Kursor, skladnikiWedlugNazwy: Map<string, Skl
     kuchnie.push(kuch);
   }
 
+  // Wiersz doszedł z migracją 0046 — starsze pliki go nie mają. Brak wiersza
+  // (`undefined`) zostawia rodzaje w bazie bez zmian; pusty wiersz je czyści.
+  let rodzaje: RodzajDania[] | undefined;
+  if (k.pasuje('Rodzaj dania')) {
+    const wierszRodzaju = k.wez();
+    rodzaje = [];
+    for (const e of podzielListe(wierszRodzaju.cele[1] ?? '')) {
+      const r = RODZAJ_WEDLUG_ETYKIETY.get(e.toLowerCase());
+      if (!r) throw new BladArkusza(wierszRodzaju.numer, `nieznany rodzaj dania „${e}”.`);
+      if (!rodzaje.includes(r)) rodzaje.push(r);
+    }
+    if (rodzaje.length > 2) {
+      throw new BladArkusza(wierszRodzaju.numer, `najwyżej dwa rodzaje dania, a jest ${rodzaje.length}.`);
+    }
+  }
+
   const wierszTrwalosci = k.oczekaj('Ile dni wytrzyma w lodówce');
   const tekstTrwalosci = (wierszTrwalosci.cele[1] ?? '').trim();
   const trwaloscDni = tekstTrwalosci === '' ? 0 : liczbaZTekstu(tekstTrwalosci);
@@ -340,6 +365,7 @@ function wczytajPrzepisZKursora(k: Kursor, skladnikiWedlugNazwy: Map<string, Skl
     opis,
     pory,
     kuchnie,
+    rodzaje,
     trwalosc_dni: trwaloscDni,
     porcjowanie,
     porcje,
@@ -415,6 +441,7 @@ export async function eksportujPrzepisFormularzowy(
   wiersz('Czas obróbki', p.czas_obrobki_min ?? '');
   wiersz('Kategoria', p.pory.map((x) => OPIS_PORY[x]).join('; '));
   wiersz('Kuchnia', p.kuchnie.map((x) => OPIS_KUCHNI[x]).join('; '));
+  wiersz('Rodzaj dania', p.rodzaje.map((x) => OPIS_RODZAJU[x]).join('; '));
   wiersz('Ile dni wytrzyma w lodówce', p.trwalosc_dni);
 
   arkusz.addRow(['Składnik', 'Składnik', 'ilość', 'Jedn', '', 'Stan', 'Zamiennik', 'Rola', 'Kwant.']);

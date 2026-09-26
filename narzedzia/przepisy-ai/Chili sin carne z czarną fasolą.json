@@ -8,6 +8,7 @@
   "kuchnie": [
     "inna"
   ],
+  "rodzaje": ["gulasz_curry"],
   "porcjowanie": "waga",
   "porcja_g": 584.5,
   "trwalosc_dni": 3,

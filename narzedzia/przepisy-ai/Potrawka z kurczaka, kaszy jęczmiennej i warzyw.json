@@ -8,6 +8,7 @@
   "kuchnie": [
     "polska"
   ],
+  "rodzaje": ["gulasz_curry", "kasza_ryz"],
   "porcjowanie": "waga",
   "porcja_g": 737.5,
   "trwalosc_dni": 3,

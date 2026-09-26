@@ -3,6 +3,7 @@
   "opis": "Skyr z bananem, borówkami, płatkami owsianymi i orzechami włoskimi. Przepis na 1 porcję.",
   "pory": ["sniadanie", "dodatek"],
   "kuchnie": ["inna"],
+  "rodzaje": ["na_slodko"],
   "porcjowanie": "waga",
   "porcja_g": 385,
   "trwalosc_dni": 1,

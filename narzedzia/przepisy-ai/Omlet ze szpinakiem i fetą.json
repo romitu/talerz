@@ -3,6 +3,7 @@
   "opis": "Delikatny omlet z liśćmi szpinaku i słoną fetą. Przepis na 1 porcję.",
   "pory": ["sniadanie", "kolacja"],
   "kuchnie": ["srodziemnomorska"],
+  "rodzaje": ["jajka"],
   "porcjowanie": "waga",
   "porcja_g": 206.5,
   "trwalosc_dni": 1,

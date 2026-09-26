@@ -3,6 +3,7 @@
   "opis": "Kanapki z kremową pastą z jajek, jogurtu, musztardy i szczypiorku. Przepis na 1 porcję.",
   "pory": ["sniadanie", "kolacja"],
   "kuchnie": ["polska"],
+  "rodzaje": ["kanapki"],
   "porcjowanie": "waga",
   "porcja_g": 226.5,
   "trwalosc_dni": 1,

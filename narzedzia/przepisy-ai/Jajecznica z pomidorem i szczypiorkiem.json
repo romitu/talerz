@@ -3,6 +3,7 @@
   "opis": "Kremowa jajecznica z pomidorem i świeżym szczypiorkiem. Przepis na 1 porcję.",
   "pory": ["sniadanie", "kolacja"],
   "kuchnie": ["polska"],
+  "rodzaje": ["jajka"],
   "porcjowanie": "waga",
   "porcja_g": 196.5,
   "trwalosc_dni": 0,

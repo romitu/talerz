@@ -7,6 +7,7 @@
   "kuchnie": [
     "polska"
   ],
+  "rodzaje": ["gulasz_curry"],
   "porcjowanie": "waga",
   "porcja_g": 953.5,
   "trwalosc_dni": 3,

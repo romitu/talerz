@@ -3,6 +3,7 @@
   "opis": "Kanapki z mozzarellą, świeżym pomidorem i bazylią, skropione oliwą. Przepis na 1 porcję.",
   "pory": ["sniadanie", "kolacja"],
   "kuchnie": ["srodziemnomorska"],
+  "rodzaje": ["kanapki"],
   "porcjowanie": "waga",
   "porcja_g": 226.5,
   "trwalosc_dni": 0,

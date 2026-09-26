@@ -8,6 +8,7 @@
   "kuchnie": [
     "srodziemnomorska"
   ],
+  "rodzaje": ["zupa"],
   "porcjowanie": "waga",
   "porcja_g": 825.5,
   "trwalosc_dni": 3,

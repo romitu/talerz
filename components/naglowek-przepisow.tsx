@@ -1,4 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
+import type { ReactNode } from 'react';
 import { Pressable, ScrollView, StyleSheet, TextInput, View } from 'react-native';
 
 import { ThemedText } from './themed-text';
@@ -18,7 +19,8 @@ export type ZakladkaPrzepisow = {
 };
 
 /**
- * Nagłówek ekranu przepisów — szukajka z ikoną książki i zakładki kategorii.
+ * Nagłówek ekranu przepisów — szukajka z ikoną książki, zakładki kategorii
+ * i pod nimi filtry (`FiltryPrzepisow`).
  * Stały (patrz `naglowekStaly` w `Ekran`), więc szukanie i filtry zostają
  * pod ręką, nawet gdy lista przepisów jest długa i przewija się.
  */
@@ -27,11 +29,13 @@ export function NaglowekPrzepisow({
   fraza,
   onZmianaFrazy,
   zakladki,
+  filtry,
 }: {
   liczbaWBazie: number;
   fraza: string;
   onZmianaFrazy: (tekst: string) => void;
   zakladki: ZakladkaPrzepisow[];
+  filtry?: ReactNode;
 }) {
   const motyw = useTheme();
 
@@ -94,6 +98,8 @@ export function NaglowekPrzepisow({
           ))}
         </ScrollView>
       )}
+
+      {filtry}
     </ThemedView>
   );
 }

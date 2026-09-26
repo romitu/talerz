@@ -8,6 +8,7 @@
   "kuchnie": [
     "azjatycka"
   ],
+  "rodzaje": ["kasza_ryz"],
   "porcjowanie": "waga",
   "porcja_g": 518.0,
   "trwalosc_dni": 2,

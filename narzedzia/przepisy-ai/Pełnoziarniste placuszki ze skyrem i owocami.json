@@ -7,6 +7,7 @@
   "kuchnie": [
     "inna"
   ],
+  "rodzaje": ["na_slodko"],
   "porcjowanie": "waga",
   "porcja_g": 521.0,
   "trwalosc_dni": 1,

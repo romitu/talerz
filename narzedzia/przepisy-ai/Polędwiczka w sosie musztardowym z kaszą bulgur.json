@@ -7,6 +7,7 @@
   "kuchnie": [
     "polska"
   ],
+  "rodzaje": ["kasza_ryz"],
   "porcjowanie": "waga",
   "porcja_g": 655.5,
   "trwalosc_dni": 2,

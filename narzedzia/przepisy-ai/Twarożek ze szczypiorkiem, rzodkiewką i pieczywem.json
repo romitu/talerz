@@ -8,6 +8,7 @@
   "kuchnie": [
     "polska"
   ],
+  "rodzaje": ["kanapki"],
   "porcjowanie": "waga",
   "porcja_g": 312,
   "trwalosc_dni": 1,

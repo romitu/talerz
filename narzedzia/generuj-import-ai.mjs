@@ -35,6 +35,7 @@ const FOLDER = join(KATALOG, 'przepisy-ai');
 
 const PORY = ['sniadanie', 'obiad', 'kolacja', 'dodatek'];
 const KUCHNIE = ['srodziemnomorska', 'azjatycka', 'polska', 'inna'];
+const RODZAJE = ['zupa', 'salatka', 'makaron', 'kasza_ryz', 'gulasz_curry', 'z_piekarnika', 'kanapki', 'jajka', 'na_slodko'];
 const JEDNOSTKI = ['g', 'ml', 'szt'];
 
 // ---------------------------------------------------------------------------
@@ -56,6 +57,16 @@ export function sprawdzPrzepis(p) {
     else
       p[pole].filter((x) => !dozwolone.includes(x))
         .forEach((x) => b.push(`${pole}: „${x}” — dozwolone ${dozwolone.join(', ')}`));
+  }
+
+  // Nieobowiązkowe: bez pola import nie rusza rodzajów w bazie (migracja 0046).
+  if (p.rodzaje !== undefined) {
+    if (!Array.isArray(p.rodzaje)) b.push('rodzaje: ma być listą');
+    else {
+      p.rodzaje.filter((x) => !RODZAJE.includes(x))
+        .forEach((x) => b.push(`rodzaje: „${x}” — dozwolone ${RODZAJE.join(', ')}`));
+      if (p.rodzaje.length > 2) b.push('rodzaje: najwyżej dwa');
+    }
   }
 
   // AI liczy porcja_g jako sumę mas, razem z pół grama pieprzu — wychodzi
@@ -134,12 +145,14 @@ export function sqlPrzepisu(p, autor) {
   // Istniejący przepis o tej nazwie jest aktualizowany, nie kasowany —
   // zostają polubienia, zdjęcie i powiązanie z planem.
   l.push('insert into przepisy');
-  l.push('  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,');
+  const zRodzajami = p.rodzaje !== undefined;
+  l.push(`  (nazwa, opis, autor_id, pory, kuchnie, ${zRodzajami ? 'rodzaje, ' : ''}trwalosc_dni, widocznosc,`);
   l.push('   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,');
   l.push('   sprzet, przechowywanie, mozna_mrozic, ratunek)');
   l.push('select');
   l.push(`  ${N}, ${tekst(p.opis)}, (select id from konta where lower(email) = lower(${tekst(autor)})),`);
   l.push(`  ${tablica(p.pory)}::pora_posilku[], ${tablica(p.kuchnie)}::rodzaj_kuchni[],`);
+  if (zRodzajami) l.push(`  ${tablica(p.rodzaje)}::rodzaj_dania[],`);
   l.push(`  ${p.trwalosc_dni}, 'prywatna',`);
   l.push(`  ${tekst(p.porcjowanie)}, ${waga ? p.porcja_g : 'null'}, ${waga ? 1 : p.porcje},`);
   l.push(`  ${p.czas_przygotowania_min}, ${p.czas_obrobki_min},`);
@@ -154,6 +167,7 @@ export function sqlPrzepisu(p, autor) {
   l.push('  opis                   = excluded.opis,');
   l.push('  pory                   = excluded.pory,');
   l.push('  kuchnie                = excluded.kuchnie,');
+  if (zRodzajami) l.push('  rodzaje                = excluded.rodzaje,');
   l.push('  trwalosc_dni           = excluded.trwalosc_dni,');
   l.push('  porcjowanie            = excluded.porcjowanie,');
   l.push('  porcja_g               = excluded.porcja_g,');

@@ -6,6 +6,7 @@ import { Pressable, StyleSheet, View } from 'react-native';
 
 import { komunikatBledu } from '@/lib/blad';
 import { Ekran } from '@/components/ekran';
+import { FiltryPrzepisow } from '@/components/filtry-przepisow';
 import { Karta } from '@/components/karta';
 import { NaglowekPrzepisow, type ZakladkaPrzepisow } from '@/components/naglowek-przepisow';
 import { ThemedView } from '@/components/themed-view';
@@ -13,13 +14,16 @@ import { Pole } from '@/components/pole';
 import { Przycisk } from '@/components/przycisk';
 import { ThemedText } from '@/components/themed-text';
 import { KOLOR_MAKRO, Spacing } from '@/constants/theme';
+import { useFiltryPrzepisow } from '@/hooks/use-filtry-przepisow';
 import { useTheme } from '@/hooks/use-theme';
 import {
   czasRazem,
   KATEGORIE,
+  OPIS_BIALKA,
   OPIS_KATEGORII,
   OPIS_KUCHNI,
   OPIS_PORY,
+  OPIS_RODZAJU,
   opisTrwalosci,
   odrzucPrzepis,
   pobierzPrzepisy,
@@ -267,6 +271,7 @@ export default function EkranPrzepisow() {
         p.opis ?? '',
         ...p.kuchnie.map((x) => OPIS_KUCHNI[x]),
         ...p.pory.map((x) => OPIS_PORY[x]),
+        ...p.rodzaje.map((x) => OPIS_RODZAJU[x]),
       ].join(' ');
       return doPorownania(tekst).includes(szukane);
     });
@@ -280,10 +285,21 @@ export default function EkranPrzepisow() {
   const liczbaUkrytych = poFrazie.filter((p) => p.ukryty).length;
   const poUkrytych = pokazUkryte ? poFrazie : poFrazie.filter((p) => !p.ukryty);
 
+  /*
+    Filtry, tak jak fraza, działają PRZED zakładkami — liczby przy zakładkach
+    mówią, ile pasujących dań jest w każdej porze. Liczby przy opcjach filtra
+    liczone są w bieżącej zakładce.
+  */
+  const filtry = useFiltryPrzepisow(
+    poUkrytych.filter((p) => kategoria === null || p.pory.includes(kategoria))
+  );
+  const poFiltrach = poUkrytych.filter(filtry.pasuje);
+  const { liczbaFiltrow, wyczysc: wyczyscFiltry } = filtry;
+
   // Przepis bez kategorii nie znika — trafia do „Bez kategorii”. Inaczej
   // dodany w pośpiechu przepis przepadałby z widoku i nie dałoby się go poprawić.
-  const bezKategorii = poUkrytych.filter((p) => p.pory.length === 0);
-  const licznik = (k: PoraPosilku) => poUkrytych.filter((p) => p.pory.includes(k)).length;
+  const bezKategorii = poFiltrach.filter((p) => p.pory.length === 0);
+  const licznik = (k: PoraPosilku) => poFiltrach.filter((p) => p.pory.includes(k)).length;
 
   /** Ile przepisów czeka na decyzję. Liczone z całej listy, nie z przefiltrowanej. */
   const doZatwierdzenia = przepisy.filter((p) => p.widocznosc === 'zgloszona');
@@ -293,8 +309,8 @@ export default function EkranPrzepisow() {
         .filter((p) => p.widocznosc === 'zgloszona')
         .sort((a, b) => (a.zgloszono_kiedy ?? '').localeCompare(b.zgloszono_kiedy ?? ''))
     : kategoria === null
-      ? poUkrytych
-      : poUkrytych.filter((p) => p.pory.includes(kategoria));
+      ? poFiltrach
+      : poFiltrach.filter((p) => p.pory.includes(kategoria));
 
   // Zakładki: „Wszystkie" + jedna na kategorię, a na końcu — tylko gdy jest co
   // rozpatrywać — kolejka moderatora. Przepisy przegląda się tutaj, więc
@@ -305,7 +321,7 @@ export default function EkranPrzepisow() {
         {
           klucz: 'wszystkie',
           etykieta: 'Wszyst.',
-          ile: poUkrytych.length,
+          ile: poFiltrach.length,
           wybrana: kategoria === null,
           onPress: () => {
             setKategoria(null);
@@ -358,6 +374,12 @@ export default function EkranPrzepisow() {
           fraza={fraza}
           onZmianaFrazy={setFraza}
           zakladki={zakladki}
+          filtry={
+            // Kolejka moderatora pokazuje każde zgłoszenie — filtry by ją tylko myliły.
+            przepisy.length > 0 && !kolejka ? (
+              <FiltryPrzepisow {...filtry.wlasciwosci} />
+            ) : undefined
+          }
         />
       }>
       {kategoria !== null && bezKategorii.length > 0 && (
@@ -390,16 +412,31 @@ export default function EkranPrzepisow() {
         <Karta>
           <ThemedText type="default">Nic nie pasuje do „{fraza.trim()}”</ThemedText>
           <ThemedText type="small" themeColor="textSecondary">
-            Szukam w nazwie, opisie, kuchni i kategorii. Ogonki i wielkość liter nie mają
+            Szukam w nazwie, opisie, kuchni, kategorii i rodzaju dania. Ogonki i wielkość liter nie mają
             znaczenia.
           </ThemedText>
           <Przycisk tytul="Wyczyść szukanie" wariant="poboczny" onPress={() => setFraza('')} />
         </Karta>
       )}
 
+      {!wczytywanie && !kolejka && poUkrytych.length > 0 && widoczne.length === 0 && liczbaFiltrow > 0 && (
+        <Karta>
+          <ThemedText type="default">
+            Nic nie pasuje do wybranych filtrów
+            {kategoria !== null ? ` w kategorii „${OPIS_KATEGORII[kategoria]}”` : ''}
+          </ThemedText>
+          <ThemedText type="small" themeColor="textSecondary">
+            Zdejmij któryś filtr albo zmień zakładkę — liczby przy zakładkach mówią,
+            gdzie coś pasuje.
+          </ThemedText>
+          <Przycisk tytul="Wyczyść filtry" wariant="poboczny" onPress={wyczyscFiltry} />
+        </Karta>
+      )}
+
       {!wczytywanie &&
         poFrazie.length > 0 &&
         widoczne.length === 0 &&
+        liczbaFiltrow === 0 &&
         kategoria !== null && (
           <Karta>
             <ThemedText type="default">
@@ -426,6 +463,12 @@ export default function EkranPrzepisow() {
             ikona: 'restaurant-outline',
             tekst: p.pory.map((x) => OPIS_PORY[x]).join(', ') || 'bez kategorii',
           },
+          ...(p.rodzaje.length > 0
+            ? [{ klucz: 'rodzaj', ikona: 'pricetag-outline' as const, tekst: p.rodzaje.map((x) => OPIS_RODZAJU[x]).join(', ') }]
+            : []),
+          ...(p.glowne_bialko
+            ? [{ klucz: 'bialko', ikona: 'barbell-outline' as const, tekst: OPIS_BIALKA[p.glowne_bialko] }]
+            : []),
           ...(p.kuchnie.length > 0
             ? [{ klucz: 'kuchnia', ikona: 'earth-outline' as const, tekst: p.kuchnie.map((x) => OPIS_KUCHNI[x]).join(', ') }]
             : []),

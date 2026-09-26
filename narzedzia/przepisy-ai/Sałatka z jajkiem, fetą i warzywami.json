@@ -3,6 +3,7 @@
   "opis": "Sałatka z jajkami na twardo, fetą, pomidorem, ogórkiem i sałatą, skropiona oliwą. Przepis na 1 porcję.",
   "pory": ["sniadanie", "kolacja"],
   "kuchnie": ["srodziemnomorska"],
+  "rodzaje": ["salatka"],
   "porcjowanie": "waga",
   "porcja_g": 386.5,
   "trwalosc_dni": 1,

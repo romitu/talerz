@@ -34,10 +34,13 @@ import {
   KATEGORIE,
   OPIS_KUCHNI,
   OPIS_PORY,
+  OPIS_RODZAJU,
+  RODZAJE_DAN,
   wyczyscTrescPrzepisu,
   type Kuchnia,
   type PelnyPrzepis,
   type PoraPosilku,
+  type RodzajDania,
 } from './przepisy';
 import { supabase } from './supabase';
 import type { RolaSkladnika, Skladnik } from './skladniki';
@@ -52,6 +55,7 @@ import {
   podzielListe,
   PORA_WEDLUG_ETYKIETY,
   PORCJOWANIE_WEDLUG_ETYKIETY,
+  RODZAJ_WEDLUG_ETYKIETY,
   tekstKomorki,
   wczytajSkoroszyt,
 } from './import-eksport-wspolne';
@@ -75,6 +79,7 @@ const NAGLOWKI_PRZEPISOW = [
   'Opis',
   'Kategoria',
   'Kuchnia',
+  'Rodzaj',
   'Trwałość (dni)',
   'Porcjowanie',
   'Porcje',
@@ -134,6 +139,7 @@ export async function eksportujPrzepisy(przepisy: PelnyPrzepis[]): Promise<strin
     '',
     `Kategoria (arkusz Przepisy): ${KATEGORIE.map((k) => OPIS_PORY[k]).join('; ')} — kilka naraz, oddzielone średnikiem.`,
     `Kuchnia: ${(Object.values(OPIS_KUCHNI) as string[]).join('; ')} — tak samo, kilka naraz.`,
+    `Rodzaj: ${RODZAJE_DAN.map((r) => OPIS_RODZAJU[r]).join('; ')} — jeden albo dwa. Plik bez tej kolumny nie zmienia rodzajów w bazie.`,
     'Porcjowanie: „Na wagę” (podajesz Porcja (g)) albo „Na sztuki” (podajesz Porcje).',
     'Sprzęt: nazwy oddzielone średnikiem. Nieznane trafiają do katalogu sprzętu same.',
     'Można mrozić: Tak / Nie / puste (nie wiadomo).',
@@ -152,6 +158,7 @@ export async function eksportujPrzepisy(przepisy: PelnyPrzepis[]): Promise<strin
     p.opis ?? '',
     p.pory.map((x) => OPIS_PORY[x]).join('; '),
     p.kuchnie.map((x) => OPIS_KUCHNI[x]).join('; '),
+    p.rodzaje.map((x) => OPIS_RODZAJU[x]).join('; '),
     p.trwalosc_dni,
     ETYKIETA_PORCJOWANIA[p.porcjowanie],
     p.porcjowanie === 'sztuki' ? p.porcje : '',
@@ -233,6 +240,11 @@ export type PrzepisDoImportu = {
   opis: string | null;
   pory: PoraPosilku[];
   kuchnie: Kuchnia[];
+  /**
+   * `undefined`, gdy arkusz nie ma kolumny „Rodzaj” (pliki sprzed migracji 0046)
+   * — wtedy zapis nie rusza rodzajów w bazie, zamiast je wyzerować.
+   */
+  rodzaje?: RodzajDania[];
   trwalosc_dni: number;
   porcjowanie: 'waga' | 'sztuki';
   porcje: number;
@@ -343,6 +355,23 @@ export async function wczytajPlikPrzepisow(
       kuchnie.push(k);
     }
 
+    let rodzaje: RodzajDania[] | undefined;
+    if (naglPrzepisow.has('Rodzaj')) {
+      rodzaje = [];
+      for (const e of podzielListe(tekstKomorki(komorka(wiersz, naglPrzepisow, 'Rodzaj')))) {
+        const r = RODZAJ_WEDLUG_ETYKIETY.get(e.toLowerCase());
+        if (!r) {
+          bledy.push({ przepis: nazwa, tresc: `Wiersz ${numer}: nieznany rodzaj dania „${e}”.` });
+          return;
+        }
+        if (!rodzaje.includes(r)) rodzaje.push(r);
+      }
+      if (rodzaje.length > 2) {
+        bledy.push({ przepis: nazwa, tresc: `Wiersz ${numer}: najwyżej dwa rodzaje dania, a jest ${rodzaje.length}.` });
+        return;
+      }
+    }
+
     const trwalosc = liczbaKomorki(komorka(wiersz, naglPrzepisow, 'Trwałość (dni)'));
     if (trwalosc === null || !Number.isInteger(trwalosc) || trwalosc < 0 || trwalosc > 3) {
       bledy.push({
@@ -398,6 +427,7 @@ export async function wczytajPlikPrzepisow(
       opis: tekstKomorki(komorka(wiersz, naglPrzepisow, 'Opis')).trim() || null,
       pory,
       kuchnie,
+      rodzaje,
       trwalosc_dni: trwalosc,
       porcjowanie,
       porcje,
@@ -704,6 +734,7 @@ export async function zaimportujPrzepis(
     przechowywanie: dane.przechowywanie,
     mozna_mrozic: dane.mozna_mrozic,
     ratunek: dane.ratunek,
+    ...(dane.rodzaje !== undefined ? { rodzaje: dane.rodzaje } : {}),
     // Format płaski nie zna tego pola (`undefined`) — wtedy update() go pomija
     // i dotychczasowa wartość w bazie zostaje nietknięta, zamiast wyzerować się.
     ...(dane.liczba_porcji_bazowych !== undefined

@@ -8,6 +8,7 @@
   "kuchnie": [
     "azjatycka"
   ],
+  "rodzaje": ["gulasz_curry"],
   "porcjowanie": "waga",
   "porcja_g": 747.0,
   "trwalosc_dni": 3,

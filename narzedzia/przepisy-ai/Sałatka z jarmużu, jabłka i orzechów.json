@@ -8,6 +8,7 @@
   "kuchnie": [
     "inna"
   ],
+  "rodzaje": ["salatka"],
   "porcjowanie": "waga",
   "porcja_g": 406.0,
   "trwalosc_dni": 1,

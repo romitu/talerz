@@ -8,6 +8,7 @@
   "kuchnie": [
     "inna"
   ],
+  "rodzaje": ["kanapki"],
   "porcjowanie": "waga",
   "porcja_g": 251.0,
   "trwalosc_dni": 0,

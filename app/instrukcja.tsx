@@ -167,6 +167,7 @@ const SEKCJE: Sekcja[] = [
     ikona: 'book-outline',
     bloki: [
       { rodzaj: 'tekst', tresc: 'Zakładka „Przepisy” zawiera wyszukiwarkę i kategorie: śniadanie, obiad, kolacja oraz dodatek. „Dodatek” oznacza element, który można dołożyć do dowolnej pory dnia – np. grillowaną pierś, surówkę albo sałatkę z ciecierzycy.' },
+      { rodzaj: 'tekst', tresc: 'Przycisk „Filtry” pod kategoriami zawęża listę: po rodzaju dania (zupy, sałatki, makarony…), po głównym białku (drób, mięso, ryby, strączki, jajka, nabiał) i po szybkich przełącznikach: do 20 minut, na zapas, bez gotowania. Główne białko nie jest wpisywane ręcznie – aplikacja wylicza je ze składników, więc nie jest to filtr diety ani alergenów.' },
       { rodzaj: 'tekst', tresc: 'Dodawanie i edycja przepisów wymaga roli moderatora. Nowy przepis jest domyślnie prywatny; zgłoszenie go do publikacji i zatwierdzenie to osobny obieg wymagający zgody autora zgodnie z zasadami aplikacji.' },
       { rodzaj: 'tekst', tresc: 'Moderator może importować i eksportować bazę przez plik Excel. Pozwala to zrobić kopię zapasową lub masowo poprawiać przepisy poza aplikacją. Przy imporcie dania są rozpoznawane po nazwie, a istniejące rekordy są aktualizowane zamiast tworzenia duplikatów.' },
     ],

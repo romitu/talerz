@@ -304,6 +304,15 @@ with sprawdzenia as (
        where table_name = 'skladniki' and column_name = 'zdjecie_zrodlo'
     )
     and exists (select 1 from storage.buckets where id = 'zdjecia-skladnikow')
+  union all
+  select
+    '0046_rodzaje_dan_i_glowne_bialko',
+    'kolumna przepisy.rodzaje i widok przepis_bialko',
+    exists (
+      select 1 from information_schema.columns
+       where table_name = 'przepisy' and column_name = 'rodzaje'
+    )
+    and to_regclass('public.przepis_bialko') is not null
 )
 select
   migracja,

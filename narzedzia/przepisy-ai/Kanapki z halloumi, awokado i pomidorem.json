@@ -8,6 +8,7 @@
   "kuchnie": [
     "srodziemnomorska"
   ],
+  "rodzaje": ["kanapki"],
   "porcjowanie": "waga",
   "porcja_g": 325.5,
   "trwalosc_dni": 0,

@@ -8,6 +8,7 @@
   "kuchnie": [
     "inna"
   ],
+  "rodzaje": ["makaron"],
   "porcjowanie": "waga",
   "porcja_g": 710.5,
   "trwalosc_dni": 3,

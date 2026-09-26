@@ -8,6 +8,7 @@
   "kuchnie": [
     "srodziemnomorska"
   ],
+  "rodzaje": ["z_piekarnika"],
   "porcjowanie": "waga",
   "porcja_g": 667.5,
   "trwalosc_dni": 2,

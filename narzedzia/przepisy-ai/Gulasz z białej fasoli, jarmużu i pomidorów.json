@@ -8,6 +8,7 @@
   "kuchnie": [
     "srodziemnomorska"
   ],
+  "rodzaje": ["gulasz_curry"],
   "porcjowanie": "waga",
   "porcja_g": 747.5,
   "trwalosc_dni": 3,

@@ -8,6 +8,7 @@
   "kuchnie": [
     "azjatycka"
   ],
+  "rodzaje": ["kanapki"],
   "porcjowanie": "waga",
   "porcja_g": 513.0,
   "trwalosc_dni": 1,

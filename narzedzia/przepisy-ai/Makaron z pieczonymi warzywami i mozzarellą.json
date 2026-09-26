@@ -8,6 +8,7 @@
   "kuchnie": [
     "srodziemnomorska"
   ],
+  "rodzaje": ["makaron"],
   "porcjowanie": "waga",
   "porcja_g": 625.0,
   "trwalosc_dni": 2,

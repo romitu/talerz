@@ -15,6 +15,27 @@ import type { RolaSkladnika } from './skladniki';
  */
 export type PoraPosilku = 'sniadanie' | 'obiad' | 'kolacja' | 'dodatek';
 export type Kuchnia = 'srodziemnomorska' | 'azjatycka' | 'polska' | 'inna';
+
+/**
+ * Rodzaj dania — czym danie jest na talerzu. Trzecia oś obok pory i kuchni
+ * (migracja 0046). Przepis ma jeden albo dwa; pusta lista = jeszcze nieprzypisany.
+ */
+export type RodzajDania =
+  | 'zupa'
+  | 'salatka'
+  | 'makaron'
+  | 'kasza_ryz'
+  | 'gulasz_curry'
+  | 'z_piekarnika'
+  | 'kanapki'
+  | 'jajka'
+  | 'na_slodko';
+
+/**
+ * Główne źródło białka — wyliczane z tagów składników przez widok
+ * `przepis_bialko`, nigdy wpisywane ręcznie. To nie jest filtr diety.
+ */
+export type GlowneBialko = 'drob' | 'mieso' | 'ryba' | 'straczki' | 'jaja' | 'nabial';
 export type Widocznosc = 'prywatna' | 'zgloszona' | 'publiczna';
 
 /**
@@ -38,6 +59,9 @@ export type PrzepisZMakro = {
   opis: string | null;
   pory: PoraPosilku[];
   kuchnie: Kuchnia[];
+  rodzaje: RodzajDania[];
+  /** `null`, gdy żadna grupa składników nie daje wyraźnej większości białka. */
+  glowne_bialko: GlowneBialko | null;
   /**
    * Efektywna trwałość TEGO konta — `min(trwalosc_dni_wlasna, trwalosc_dni_bazowa)`,
    * gdy konto ma własne (skrócone) ustawienie, inaczej równa bazowej. To ta
@@ -126,6 +150,64 @@ export function pasujeDoPory(pory: PoraPosilku[], pora: PoraPosilku): boolean {
   return pory.includes(pora) || pory.includes('dodatek');
 }
 
+/** Kolejność i nazwy rodzajów — tak samo w filtrach, formularzu i arkuszu. */
+export const RODZAJE_DAN: RodzajDania[] = [
+  'zupa',
+  'salatka',
+  'makaron',
+  'kasza_ryz',
+  'gulasz_curry',
+  'z_piekarnika',
+  'kanapki',
+  'jajka',
+  'na_slodko',
+];
+
+export const OPIS_RODZAJU: Record<RodzajDania, string> = {
+  zupa: 'Zupa lub krem',
+  salatka: 'Sałatka',
+  makaron: 'Makaron',
+  kasza_ryz: 'Kasza lub ryż z dodatkami',
+  gulasz_curry: 'Gulasz lub curry',
+  z_piekarnika: 'Z piekarnika',
+  kanapki: 'Kanapki i tortille',
+  jajka: 'Jajka',
+  na_slodko: 'Na słodko',
+};
+
+/** Krótkie nazwy — na pigułki filtrów, gdzie liczy się szerokość. */
+export const SKROT_RODZAJU: Record<RodzajDania, string> = {
+  zupa: 'Zupy',
+  salatka: 'Sałatki',
+  makaron: 'Makarony',
+  kasza_ryz: 'Kasza, ryż',
+  gulasz_curry: 'Gulasz, curry',
+  z_piekarnika: 'Z piekarnika',
+  kanapki: 'Kanapki',
+  jajka: 'Jajka',
+  na_slodko: 'Na słodko',
+};
+
+export const GLOWNE_BIALKA: GlowneBialko[] = ['drob', 'mieso', 'ryba', 'straczki', 'jaja', 'nabial'];
+
+export const OPIS_BIALKA: Record<GlowneBialko, string> = {
+  drob: 'Drób',
+  mieso: 'Mięso',
+  ryba: 'Ryby i owoce morza',
+  straczki: 'Strączki i tofu',
+  jaja: 'Jajka',
+  nabial: 'Nabiał',
+};
+
+export const SKROT_BIALKA: Record<GlowneBialko, string> = {
+  drob: 'Drób',
+  mieso: 'Mięso',
+  ryba: 'Ryby',
+  straczki: 'Strączki',
+  jaja: 'Jajka',
+  nabial: 'Nabiał',
+};
+
 export const OPIS_KUCHNI: Record<Kuchnia, string> = {
   srodziemnomorska: 'śródziemnomorska',
   azjatycka: 'azjatycka',
@@ -154,11 +236,11 @@ export async function pobierzPrzepisy(kontoId: string | undefined) {
   // Dwa zapytania zamiast jednego, bo `przepis_makro` jest WIDOKIEM.
   // Widok nie ma klucza obcego, więc Supabase nie potrafi go dołączyć
   // do przepisów automatycznie — łączymy je po stronie aplikacji.
-  const [wynikPrzepisow, wynikMakro] = await Promise.all([
+  const [wynikPrzepisow, wynikMakro, wynikBialka] = await Promise.all([
     supabase
       .from('przepisy')
       .select(
-        `id, nazwa, opis, pory, kuchnie, trwalosc_dni, liczba_porcji_bazowych, porcje,
+        `id, nazwa, opis, pory, kuchnie, rodzaje, trwalosc_dni, liczba_porcji_bazowych, porcje,
          czas_przygotowania_min, czas_obrobki_min, sprzet, przechowywanie, mozna_mrozic,
          ratunek, porcjowanie, widocznosc, zgloszono_kiedy, powod_odrzucenia, autor_id, zdjecie,
          skalowalny, preferencje_przepisow (konto_id, poziom), trwalosc_wlasna (konto_id, dni),
@@ -170,13 +252,18 @@ export async function pobierzPrzepisy(kontoId: string | undefined) {
       .select(
         'przepis_id, porcje_wyliczone, gramy_porcji, gramy_calosc, kcal, bialko_g, tluszcz_g, wegle_g, blonnik_g, cukry_wolne_g, kcal_calosc, bialko_g_calosc, nova_max'
       ),
+    supabase.from('przepis_bialko').select('przepis_id, glowne_bialko'),
   ]);
 
   if (wynikPrzepisow.error) throw wynikPrzepisow.error;
   if (wynikMakro.error) throw wynikMakro.error;
+  if (wynikBialka.error) throw wynikBialka.error;
 
   const makroWedlugPrzepisu = new Map(
     (wynikMakro.data ?? []).map((m) => [m.przepis_id as string, m])
+  );
+  const bialkoWedlugPrzepisu = new Map(
+    (wynikBialka.data ?? []).map((b) => [b.przepis_id as string, b.glowne_bialko as GlowneBialko])
   );
 
   return (wynikPrzepisow.data ?? []).map((p): PrzepisZMakro => {
@@ -205,6 +292,8 @@ export async function pobierzPrzepisy(kontoId: string | undefined) {
       opis: p.opis,
       pory: p.pory ?? [],
       kuchnie: p.kuchnie ?? [],
+      rodzaje: p.rodzaje ?? [],
+      glowne_bialko: bialkoWedlugPrzepisu.get(p.id) ?? null,
       trwalosc_dni: trwaloscEfektywna,
       trwalosc_dni_bazowa: p.trwalosc_dni,
       trwalosc_dni_wlasna: trwaloscWlasna,
@@ -352,6 +441,7 @@ export type PelnyPrzepis = {
   opis: string | null;
   pory: PoraPosilku[];
   kuchnie: Kuchnia[];
+  rodzaje: RodzajDania[];
   trwalosc_dni: number;
   liczba_porcji_bazowych: number;
   porcjowanie: 'waga' | 'sztuki';
@@ -403,7 +493,7 @@ export async function pobierzPelnyPrzepis(id: string): Promise<PelnyPrzepis> {
     supabase
       .from('przepisy')
       .select(
-        `id, nazwa, opis, pory, kuchnie, trwalosc_dni, liczba_porcji_bazowych, porcjowanie,
+        `id, nazwa, opis, pory, kuchnie, rodzaje, trwalosc_dni, liczba_porcji_bazowych, porcjowanie,
          porcje, porcja_g, czas_przygotowania_min, czas_obrobki_min, sprzet, przechowywanie,
          mozna_mrozic, ratunek, widocznosc, zgloszono_kiedy, powod_odrzucenia, zdjecie, skalowalny`
       )
@@ -477,7 +567,7 @@ export async function pobierzWszystkiePelnePrzepisy(): Promise<PelnyPrzepis[]> {
     supabase
       .from('przepisy')
       .select(
-        `id, nazwa, opis, pory, kuchnie, trwalosc_dni, liczba_porcji_bazowych, porcjowanie,
+        `id, nazwa, opis, pory, kuchnie, rodzaje, trwalosc_dni, liczba_porcji_bazowych, porcjowanie,
          porcje, porcja_g, czas_przygotowania_min, czas_obrobki_min, sprzet, przechowywanie,
          mozna_mrozic, ratunek, widocznosc, zgloszono_kiedy, powod_odrzucenia, zdjecie, skalowalny`
       )

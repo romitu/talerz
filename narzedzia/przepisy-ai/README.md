@@ -31,6 +31,7 @@ Prompt dla AI z aktualnymi, zamkniętymi listami nazw zwraca
 | `nazwa` | 3–120 znaków | Ta sama nazwa co w bazie = aktualizacja przepisu |
 | `pory` | `sniadanie`, `obiad`, `kolacja`, `dodatek` | Pusta lista = pasuje wszędzie |
 | `kuchnie` | `srodziemnomorska`, `azjatycka`, `polska`, `inna` | |
+| `rodzaje` | `zupa`, `salatka`, `makaron`, `kasza_ryz`, `gulasz_curry`, `z_piekarnika`, `kanapki`, `jajka`, `na_slodko` | Jeden albo dwa. Nieobowiązkowe — bez pola import nie zmienia rodzajów w bazie |
 | `porcjowanie` | `waga` albo `sztuki` | |
 | `porcja_g` | liczba całkowita 20–2000 | Tylko przy `waga` |
 | `porcje` | liczba całkowita 1–30 | Tylko przy `sztuki` |

@@ -4,12 +4,14 @@ import { useCallback, useMemo, useRef, useState } from 'react';
 import { ActivityIndicator, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 
 import { Ekran } from '@/components/ekran';
+import { FiltryPrzepisow } from '@/components/filtry-przepisow';
 import { Karta } from '@/components/karta';
 import { NaglowekPlanu } from '@/components/naglowek-planu';
 import { Przycisk } from '@/components/przycisk';
 import { TabelaWyboru } from '@/components/tabela-wyboru';
 import { ThemedText } from '@/components/themed-text';
 import { KOLOR_MAKRO, Spacing } from '@/constants/theme';
+import { useFiltryPrzepisow } from '@/hooks/use-filtry-przepisow';
 import { useTheme } from '@/hooks/use-theme';
 import { komunikatBledu } from '@/lib/blad';
 import { dniZLimitem, powtorzTydzien, zaplanuj, type Wstawienie } from '@/lib/automat';
@@ -546,6 +548,16 @@ export default function EkranPlanu() {
     return { szczegoly, dniZmienione };
   }
 
+  /*
+    Przepisy do wyboru w bieżącym miejscu planu i filtry nad nimi — te same co
+    na liście przepisów. Hook musi być wywołany przed wczesnymi `return` niżej.
+    Filtry zostają włączone między kolejnymi wyborami: układając tydzień
+    obiadów z drobiem, nie trzeba ich zaznaczać siedem razy.
+  */
+  const doWyboru = wybierany
+    ? przepisy.filter((p) => !p.ukryty && pasujeDoPory(p.pory, wybierany.pora))
+    : [];
+  const filtry = useFiltryPrzepisow(doWyboru);
 
   // --- błąd wczytywania ---
   // Osobno od „brak planu” niżej — inaczej prawdziwa awaria (np. bazy) wyglądałaby
@@ -602,8 +614,25 @@ export default function EkranPlanu() {
         )}
 
         <Karta>
+          <FiltryPrzepisow {...filtry.wlasciwosci} />
+        </Karta>
+
+        {doWyboru.length > 0 && !doWyboru.some(filtry.pasuje) && (
+          <Karta>
+            <ThemedText type="default">
+              Żadne danie nie pasuje do wybranych filtrów
+            </ThemedText>
+            <ThemedText type="small" themeColor="textSecondary">
+              Filtry zostają włączone między kolejnymi wyborami — zdejmij te, które
+              zostały z poprzedniego posiłku.
+            </ThemedText>
+            <Przycisk tytul="Wyczyść filtry" wariant="poboczny" onPress={filtry.wyczysc} />
+          </Karta>
+        )}
+
+        <Karta>
           <TabelaWyboru
-            dane={przepisy.filter((p) => !p.ukryty && pasujeDoPory(p.pory, wybierany.pora))}
+            dane={doWyboru.filter(filtry.pasuje)}
             klucz={(p) => p.id}
             tekstDoFiltra={(p) => p.nazwa}
             etykietaFiltra="Filtruj przepisy"

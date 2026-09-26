@@ -3,6 +3,7 @@
   "opis": "Chrupiące tosty z roztopioną mozzarellą, pomidorem i bazylią. Przepis na 1 porcję.",
   "pory": ["sniadanie", "kolacja"],
   "kuchnie": ["srodziemnomorska"],
+  "rodzaje": ["kanapki"],
   "porcjowanie": "waga",
   "porcja_g": 219,
   "trwalosc_dni": 0,

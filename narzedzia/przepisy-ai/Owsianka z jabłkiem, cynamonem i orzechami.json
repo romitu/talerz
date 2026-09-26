@@ -3,6 +3,7 @@
   "opis": "Kremowa owsianka na mleku z jabłkiem, cynamonem i orzechami włoskimi. Przepis na 1 porcję.",
   "pory": ["sniadanie"],
   "kuchnie": ["inna"],
+  "rodzaje": ["na_slodko"],
   "porcjowanie": "waga",
   "porcja_g": 422.5,
   "trwalosc_dni": 1,

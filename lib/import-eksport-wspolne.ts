@@ -8,7 +8,7 @@
 
 import type { Row, Workbook, Worksheet } from 'exceljs';
 
-import { OPIS_KUCHNI, OPIS_PORY } from './przepisy';
+import { OPIS_KUCHNI, OPIS_PORY, OPIS_RODZAJU } from './przepisy';
 import { OPIS_ROLI_SKLADNIKA } from './skladniki';
 
 // =============================================================================
@@ -86,6 +86,8 @@ export function odwrotnySlownik<T extends string>(slownik: Record<T, string>): M
 export const PORA_WEDLUG_ETYKIETY = odwrotnySlownik(OPIS_PORY);
 /** Etykieta z arkusza -> kuchnia w bazie. */
 export const KUCHNIA_WEDLUG_ETYKIETY = odwrotnySlownik(OPIS_KUCHNI);
+/** Etykieta z arkusza -> rodzaj dania w bazie. */
+export const RODZAJ_WEDLUG_ETYKIETY = odwrotnySlownik(OPIS_RODZAJU);
 
 /** Etykieta (albo klucz) z arkusza/tabeli -> rola składnika w bazie. */
 export const ROLA_SKLADNIKA_WEDLUG_ETYKIETY = odwrotnySlownik(OPIS_ROLI_SKLADNIKA);

@@ -8,6 +8,7 @@
   "kuchnie": [
     "azjatycka"
   ],
+  "rodzaje": ["gulasz_curry", "kasza_ryz"],
   "porcjowanie": "waga",
   "porcja_g": 748.5,
   "trwalosc_dni": 2,
