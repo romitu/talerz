@@ -7,6 +7,7 @@ import { Pressable, StyleSheet, View } from 'react-native';
 import { komunikatBledu } from '@/lib/blad';
 import { Ekran } from '@/components/ekran';
 import { FiltryPrzepisow } from '@/components/filtry-przepisow';
+import { ZnaczekZrodla } from '@/components/kafel-zakupu';
 import { Karta } from '@/components/karta';
 import { NaglowekPrzepisow, type ZakladkaPrzepisow } from '@/components/naglowek-przepisow';
 import { ThemedView } from '@/components/themed-view';
@@ -529,13 +530,16 @@ export default function EkranPrzepisow() {
           </View>
 
           {zdjecie && (
-            <Image
-              source={{ uri: zdjecie }}
-              style={styles.zdjecie}
-              contentFit="cover"
-              transition={150}
-              accessibilityLabel={p.nazwa}
-            />
+            <View style={styles.ramkaZdjecia}>
+              <Image
+                source={{ uri: zdjecie }}
+                style={styles.zdjecie}
+                contentFit="cover"
+                transition={150}
+                accessibilityLabel={p.nazwa}
+              />
+              {p.zdjecie_zrodlo && <ZnaczekZrodla zrodlo={p.zdjecie_zrodlo} />}
+            </View>
           )}
 
           {p.opis && (
@@ -963,11 +967,11 @@ export default function EkranPrzepisow() {
 }
 
 const styles = StyleSheet.create({
+  ramkaZdjecia: { marginBottom: Spacing.one },
   zdjecie: {
     width: '100%',
     aspectRatio: 16 / 9,
     borderRadius: Spacing.two,
-    marginBottom: Spacing.one,
   },
   naglowek: {
     flexDirection: 'row',

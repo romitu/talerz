@@ -7,6 +7,7 @@
 
 import { supabase } from './supabase';
 import type { RolaSkladnika } from './skladniki';
+import type { ZrodloZdjecia } from './zakupy';
 
 /**
  * Kategoria przepisu. Trzy pierwsze to pory dnia, czwarta nią nie jest:
@@ -92,6 +93,8 @@ export type PrzepisZMakro = {
   autor_id: string | null;
   /** Ścieżka pliku w zasobniku Storage; samego obrazu w bazie nie ma. */
   zdjecie: string | null;
+  /** Skąd zdjęcie (migracja 0047). `null` przy zdjęciu = jeszcze nieoznaczone. */
+  zdjecie_zrodlo: ZrodloZdjecia | null;
   /** Czy automat wolno automatycznie skalować ten przepis kalorycznie (migracja 0036). */
   skalowalny: boolean;
   /** Wartości NA JEDNĄ PORCJĘ — bo to ona trafia na talerz. */
@@ -251,7 +254,7 @@ export async function pobierzPrzepisy(kontoId: string | undefined) {
       .select(
         `id, nazwa, opis, pory, kuchnie, rodzaje, trwalosc_dni, liczba_porcji_bazowych, porcje,
          czas_przygotowania_min, czas_obrobki_min, sprzet, przechowywanie, mozna_mrozic,
-         ratunek, porcjowanie, widocznosc, zgloszono_kiedy, powod_odrzucenia, autor_id, zdjecie,
+         ratunek, porcjowanie, widocznosc, zgloszono_kiedy, powod_odrzucenia, autor_id, zdjecie, zdjecie_zrodlo,
          skalowalny, preferencje_przepisow (konto_id, poziom), trwalosc_wlasna (konto_id, dni),
          przepisy_ukryte (konto_id)`
       )
@@ -319,6 +322,7 @@ export async function pobierzPrzepisy(kontoId: string | undefined) {
       powod_odrzucenia: p.powod_odrzucenia ?? null,
       autor_id: p.autor_id,
       zdjecie: p.zdjecie ?? null,
+      zdjecie_zrodlo: p.zdjecie_zrodlo ?? null,
       skalowalny: p.skalowalny,
       kcal: makro?.kcal ?? null,
       bialko_g: makro?.bialko_g ?? null,
@@ -466,6 +470,7 @@ export type PelnyPrzepis = {
   zgloszono_kiedy: string | null;
   powod_odrzucenia: string | null;
   zdjecie: string | null;
+  zdjecie_zrodlo: ZrodloZdjecia | null;
   /** Czy automat wolno automatycznie skalować ten przepis kalorycznie (migracja 0036). */
   skalowalny: boolean;
   skladniki: {
@@ -504,7 +509,7 @@ export async function pobierzPelnyPrzepis(id: string): Promise<PelnyPrzepis> {
       .select(
         `id, nazwa, opis, pory, kuchnie, rodzaje, trwalosc_dni, liczba_porcji_bazowych, porcjowanie,
          porcje, porcja_g, czas_przygotowania_min, czas_obrobki_min, sprzet, przechowywanie,
-         mozna_mrozic, ratunek, widocznosc, zgloszono_kiedy, powod_odrzucenia, zdjecie, skalowalny`
+         mozna_mrozic, ratunek, widocznosc, zgloszono_kiedy, powod_odrzucenia, zdjecie, zdjecie_zrodlo, skalowalny`
       )
       .eq('id', id)
       .single(),
@@ -578,7 +583,7 @@ export async function pobierzWszystkiePelnePrzepisy(): Promise<PelnyPrzepis[]> {
       .select(
         `id, nazwa, opis, pory, kuchnie, rodzaje, trwalosc_dni, liczba_porcji_bazowych, porcjowanie,
          porcje, porcja_g, czas_przygotowania_min, czas_obrobki_min, sprzet, przechowywanie,
-         mozna_mrozic, ratunek, widocznosc, zgloszono_kiedy, powod_odrzucenia, zdjecie, skalowalny`
+         mozna_mrozic, ratunek, widocznosc, zgloszono_kiedy, powod_odrzucenia, zdjecie, zdjecie_zrodlo, skalowalny`
       )
       .order('nazwa'),
     supabase

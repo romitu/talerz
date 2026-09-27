@@ -50,6 +50,7 @@ import {
 } from '@/lib/skladniki';
 import { useSesja } from '@/lib/sesja';
 import { supabase } from '@/lib/supabase';
+import type { ZrodloZdjecia } from '@/lib/zakupy';
 
 /** Opcje komórki-wyboru dla roli — jak na ekranie Składniki. */
 const OPCJE_ROLI = ROLE_SKLADNIKA.map((r) => ({ wartosc: r, etykieta: OPIS_ROLI_SKLADNIKA[r] }));
@@ -159,6 +160,7 @@ export default function FormularzPrzepisu() {
   const [skalowalny, setSkalowalny] = useState(false);
   const [ratunek, setRatunek] = useState('');
   const [zdjecie, setZdjecie] = useState<string | null>(null);
+  const [zdjecieZrodlo, setZdjecieZrodlo] = useState<ZrodloZdjecia | null>(null);
 
   /** Zgoda autora na upublicznienie. Sam stan w bazie zmienia dopiero zapis. */
   const [doPublikacji, setDoPublikacji] = useState(false);
@@ -313,6 +315,7 @@ export default function FormularzPrzepisu() {
     setSkalowalny(false);
     setRatunek('');
     setZdjecie(null);
+    setZdjecieZrodlo(null);
     setDoPublikacji(false);
     setWidocznosc('prywatna');
     setPowodOdrzucenia(null);
@@ -350,6 +353,7 @@ export default function FormularzPrzepisu() {
         setSkalowalny(p.skalowalny);
         setRatunek(p.ratunek ?? '');
         setZdjecie(p.zdjecie ?? null);
+        setZdjecieZrodlo(p.zdjecie_zrodlo ?? null);
         setWidocznosc(p.widocznosc);
         setDoPublikacji(p.widocznosc !== 'prywatna');
         setPowodOdrzucenia(p.powod_odrzucenia ?? null);
@@ -629,6 +633,7 @@ export default function FormularzPrzepisu() {
           mozna_mrozic: moznaMrozic === 'nie wiem' ? null : moznaMrozic === 'tak',
           ratunek: ratunek.trim() || null,
           zdjecie,
+          zdjecie_zrodlo: zdjecie ? zdjecieZrodlo : null,
           skalowalny,
       };
 
@@ -757,7 +762,13 @@ export default function FormularzPrzepisu() {
           multiline
         />
 
-        <ZdjeciePrzepisu nazwaPrzepisu={nazwa} zdjecie={zdjecie} onZmiana={setZdjecie} />
+        <ZdjeciePrzepisu
+          nazwaPrzepisu={nazwa}
+          zdjecie={zdjecie}
+          onZmiana={setZdjecie}
+          zrodlo={zdjecieZrodlo}
+          onZmianaZrodla={setZdjecieZrodlo}
+        />
 
         <ThemedText type="smallBold" themeColor="textSecondary">
           METRYCZKA

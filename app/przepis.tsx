@@ -5,6 +5,7 @@ import { useCallback, useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 
 import { Ekran } from '@/components/ekran';
+import { ZnaczekZrodla } from '@/components/kafel-zakupu';
 import { Karta } from '@/components/karta';
 import { RozkladPosilku, type UdzialOsoby } from '@/components/rozklad-posilku';
 import { WierszMakro } from '@/components/wiersz-makro';
@@ -306,7 +307,10 @@ export default function EkranPrzepisu() {
       {rozkladPosilku && rozkladPosilku.length > 1 && <RozkladPosilku osoby={rozkladPosilku} />}
 
       {zdjecie && (
-        <Image source={{ uri: zdjecie }} style={styles.zdjecie} contentFit="cover" transition={150} />
+        <View>
+          <Image source={{ uri: zdjecie }} style={styles.zdjecie} contentFit="cover" transition={150} />
+          {przepis.zdjecie_zrodlo && <ZnaczekZrodla zrodlo={przepis.zdjecie_zrodlo} />}
+        </View>
       )}
 
       {przepis.opis && (

@@ -3,6 +3,7 @@ import { Image } from 'expo-image';
 import { useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 
+import { ZnaczekZrodla } from './kafel-zakupu';
 import { Pole } from './pole';
 import { ThemedText } from './themed-text';
 
@@ -128,6 +129,8 @@ function KafelDania({ danie, onPress }: { danie: PrzepisZMakro; onPress: () => v
       ]}>
       <View style={styles.zdjecie}>
         <Obraz sciezka={danie.zdjecie} rozmiarIkony={28} />
+        {/* Cały kafel jest przyciskiem, więc znaczek bez dymka — przycisk w przycisku psuje HTML. */}
+        {danie.zdjecie && danie.zdjecie_zrodlo && <ZnaczekZrodla zrodlo={danie.zdjecie_zrodlo} staly />}
       </View>
       <View style={styles.podpis}>
         <ThemedText type="smallBold" numberOfLines={2}>

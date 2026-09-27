@@ -313,6 +313,14 @@ with sprawdzenia as (
        where table_name = 'przepisy' and column_name = 'rodzaje'
     )
     and to_regclass('public.przepis_bialko') is not null
+  union all
+  select
+    '0047_zrodlo_zdjecia_przepisu',
+    'kolumna przepisy.zdjecie_zrodlo',
+    exists (
+      select 1 from information_schema.columns
+       where table_name = 'przepisy' and column_name = 'zdjecie_zrodlo'
+    )
 )
 select
   migracja,

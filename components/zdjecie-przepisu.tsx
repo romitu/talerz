@@ -2,12 +2,14 @@ import { Image } from 'expo-image';
 import { useState } from 'react';
 import { ActivityIndicator, Pressable, StyleSheet, View } from 'react-native';
 
+import { OPIS_ZRODLA, ZnaczekZrodla } from './kafel-zakupu';
 import { Przycisk } from './przycisk';
 import { ThemedText } from './themed-text';
 
 import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import { komunikatBledu } from '@/lib/blad';
+import type { ZrodloZdjecia } from '@/lib/zakupy';
 import {
   adresZdjecia,
   mozliwyWyborZdjecia,
@@ -23,6 +25,9 @@ type Props = {
   zdjecie: string | null;
   /** Wywoływane po wysłaniu lub usunięciu — rodzic zapisuje ścieżkę w bazie. */
   onZmiana: (sciezka: string | null) => void;
+  /** Skąd zdjęcie; `null` przy zdjęciu = jeszcze nieoznaczone (migracja 0047). */
+  zrodlo: ZrodloZdjecia | null;
+  onZmianaZrodla: (zrodlo: ZrodloZdjecia | null) => void;
 };
 
 /**
@@ -37,7 +42,7 @@ type Props = {
  * w zasobniku. Nikomu to nie szkodzi — nazwa pliku wynika z nazwy przepisu,
  * więc następne wgranie po prostu go nadpisze.
  */
-export function ZdjeciePrzepisu({ nazwaPrzepisu, zdjecie, onZmiana }: Props) {
+export function ZdjeciePrzepisu({ nazwaPrzepisu, zdjecie, onZmiana, zrodlo, onZmianaZrodla }: Props) {
   const motyw = useTheme();
   const [pracuje, setPracuje] = useState(false);
   const [blad, setBlad] = useState<string | null>(null);
@@ -83,6 +88,10 @@ export function ZdjeciePrzepisu({ nazwaPrzepisu, zdjecie, onZmiana }: Props) {
       const sciezka = await wyslijZdjecie(nazwaPrzepisu, wybrane.dane);
       setWgrane({ sciezka, podglad: wybrane.podglad });
       onZmiana(sciezka);
+      // Nowe zdjęcie nie dziedziczy oznaczenia poprzedniego — grafikę AI łatwo
+      // podmienić na własne zdjęcie i zostawić stary znaczek. Bez domyślnej
+      // wartości: pomyłka „własne” przy grafice AI byłaby niewidoczna.
+      onZmianaZrodla(null);
       // Każde wgranie ma teraz unikalną nazwę (patrz nazwaPliku w lib/zdjecia.ts),
       // więc stary plik trzeba skasować osobno — inaczej zostaje osierocony w zasobniku.
       if (poprzednia && poprzednia !== sciezka) usunZdjecie(poprzednia);
@@ -102,6 +111,7 @@ export function ZdjeciePrzepisu({ nazwaPrzepisu, zdjecie, onZmiana }: Props) {
       if (zdjecie) await usunZdjecie(zdjecie);
       setWgrane(null);
       onZmiana(null);
+      onZmianaZrodla(null);
     } catch (e) {
       setBlad(komunikatBledu(e));
     } finally {
@@ -116,12 +126,15 @@ export function ZdjeciePrzepisu({ nazwaPrzepisu, zdjecie, onZmiana }: Props) {
       </ThemedText>
 
       {adres ? (
-        <Image
-          source={{ uri: adres }}
-          style={[styles.podglad, { borderColor: motyw.border }]}
-          contentFit="cover"
-          transition={150}
-        />
+        <View>
+          <Image
+            source={{ uri: adres }}
+            style={[styles.podglad, { borderColor: motyw.border }]}
+            contentFit="cover"
+            transition={150}
+          />
+          {zdjecie && zrodlo && <ZnaczekZrodla zrodlo={zrodlo} />}
+        </View>
       ) : (
         <Pressable
           onPress={mozna ? wybierz : undefined}
@@ -145,6 +158,46 @@ export function ZdjeciePrzepisu({ nazwaPrzepisu, zdjecie, onZmiana }: Props) {
           <ThemedText type="small" themeColor="textSecondary">
             Zmniejszam i wysyłam…
           </ThemedText>
+        </View>
+      )}
+
+      {zdjecie && (
+        <View style={styles.grupa}>
+          <ThemedText type="smallBold" themeColor="textSecondary">
+            POCHODZENIE ZDJĘCIA
+          </ThemedText>
+          <View style={styles.przyciski}>
+            {(['ai', 'wlasne'] as const).map((z) => {
+              const aktywny = zrodlo === z;
+              return (
+                <Pressable
+                  key={z}
+                  onPress={() => onZmianaZrodla(z)}
+                  disabled={pracuje}
+                  accessibilityRole="radio"
+                  accessibilityState={{ selected: aktywny }}
+                  style={[
+                    styles.opcja,
+                    {
+                      borderColor: aktywny ? motyw.accent : motyw.border,
+                      backgroundColor: aktywny ? motyw.backgroundSelected : 'transparent',
+                    },
+                  ]}>
+                  <ThemedText type="smallBold" themeColor={aktywny ? 'accent' : undefined}>
+                    {OPIS_ZRODLA[z].tytul}
+                  </ThemedText>
+                  <ThemedText type="small" themeColor="textSecondary">
+                    {OPIS_ZRODLA[z].opis}
+                  </ThemedText>
+                </Pressable>
+              );
+            })}
+          </View>
+          {!zrodlo && (
+            <ThemedText type="small" themeColor="accent">
+              Zdjęcie nie jest oznaczone — wybierz, czy to grafika AI, czy zdjęcie własne.
+            </ThemedText>
+          )}
         </View>
       )}
 
@@ -206,4 +259,5 @@ const styles = StyleSheet.create({
   pracuje: { flexDirection: 'row', alignItems: 'center', gap: Spacing.two },
   przyciski: { flexDirection: 'row', gap: Spacing.two },
   przycisk: { flex: 1 },
+  opcja: { flex: 1, borderWidth: 1, borderRadius: Spacing.two, padding: Spacing.two, gap: 2 },
 });
