@@ -11,6 +11,7 @@
   "rodzaje": ["z_piekarnika"],
   "porcjowanie": "waga",
   "porcja_g": 728.0,
+  "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 2,
   "czas_przygotowania_min": 12,
   "czas_obrobki_min": 35,

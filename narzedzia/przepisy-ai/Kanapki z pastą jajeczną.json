@@ -1,43 +1,106 @@
 {
   "nazwa": "Kanapki z pastą jajeczną",
-  "opis": "Kanapki z kremową pastą z jajek, jogurtu, musztardy i szczypiorku. Przepis na 1 porcję.",
-  "pory": ["sniadanie", "kolacja"],
-  "kuchnie": ["polska"],
-  "rodzaje": ["kanapki"],
+  "opis": "Trzy kromki chleba żytniego z kremową pastą z jajek, jogurtu, musztardy i szczypiorku. Przepis na 1 porcję.",
+  "pory": [
+    "sniadanie",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "polska"
+  ],
+  "rodzaje": [
+    "kanapki"
+  ],
   "porcjowanie": "waga",
-  "porcja_g": 226.5,
+  "porcja_g": 261,
+  "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 1,
-  "czas_przygotowania_min": 10,
-  "czas_obrobki_min": 9,
-  "sprzet": ["Garnek 2 l", "miska", "Widelec", "Nóż szefa kuchni", "Deska do krojenia", "Waga kuchenna"],
+  "czas_przygotowania_min": 5,
+  "czas_obrobki_min": 18,
+  "sprzet": [
+    "Garnek 2 l",
+    "miska",
+    "Widelec",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
   "przechowywanie": "Pastę przechowuj w zamkniętym pojemniku w lodówce do 1 dnia. Pieczywo smaruj dopiero przed podaniem.",
   "mozna_mrozic": false,
   "ratunek": "Jeśli pasta jest zbyt gęsta, dodaj odrobinę jogurtu. Jeśli jest za rzadka, dodaj więcej rozgniecionego jajka.",
   "skladniki": [
-    {"nazwa": "Jaja kurze, całe, surowe", "ilosc": 2, "jednostka": "szt"},
-    {"nazwa": "Chleb żytni razowy", "ilosc": 2, "jednostka": "szt", "stan": "kromki"},
-    {"nazwa": "Jogurt grecki naturalny 2%", "ilosc": 30, "jednostka": "g"},
-    {"nazwa": "Musztarda", "ilosc": 5, "jednostka": "g"},
-    {"nazwa": "Szczypiorek świeży", "ilosc": 10, "jednostka": "g", "stan": "drobno posiekany"},
-    {"nazwa": "Sól kuchenna", "ilosc": 1, "jednostka": "g"},
-    {"nazwa": "Czarny pieprz mielony", "ilosc": 0.5, "jednostka": "g"}
+    {
+      "nazwa": "Jaja kurze, całe, surowe",
+      "ilosc": 2,
+      "jednostka": "szt"
+    },
+    {
+      "nazwa": "Chleb żytni razowy",
+      "ilosc": 3,
+      "jednostka": "szt",
+      "stan": "kromki"
+    },
+    {
+      "nazwa": "Jogurt grecki naturalny 2%",
+      "ilosc": 30,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Musztarda",
+      "ilosc": 5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Szczypiorek świeży",
+      "ilosc": 10,
+      "jednostka": "g",
+      "stan": "drobno posiekany"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
   ],
   "etapy": [
     {
-      "nazwa": "Gotowanie jajek",
-      "minuty": 9,
+      "nazwa": "Przygotowanie składników",
+      "minuty": 5,
       "kroki": [
-        {"tresc": "Jajka włóż do garnka, zalej wodą i gotuj 9 minut od zagotowania.", "sygnal": "żółtka są całkowicie ścięte"},
-        {"tresc": "Ugotowane jajka schłodź w zimnej wodzie i obierz."}
+        {
+          "tresc": "Szczypiorek drobno posiekaj, odmierz jogurt i musztardę oraz przygotuj trzy kromki chleba."
+        }
       ]
     },
     {
-      "nazwa": "Przygotowanie pasty",
-      "minuty": 8,
+      "nazwa": "Gotowanie jajek i przygotowanie pasty",
+      "minuty": 18,
       "kroki": [
-        {"tresc": "Jajka przełóż do miski i rozgnieć widelcem."},
-        {"tresc": "Dodaj jogurt, musztardę i szczypiorek. Dopraw solą oraz pieprzem i wymieszaj.", "uwaga": true},
-        {"tresc": "Pastę rozsmaruj na kromkach chleba."}
+        {
+          "tresc": "W garnku zagotuj tyle wody, aby przykryła jajka."
+        },
+        {
+          "tresc": "Ostrożnie włóż jajka do wrzątku i gotuj 9 minut od zanurzenia."
+        },
+        {
+          "tresc": "Schłodź jajka pod zimną wodą, obierz i przekrój.",
+          "sygnal": "żółtka są całkowicie ścięte"
+        },
+        {
+          "tresc": "Jajka przełóż do miski i rozgnieć widelcem."
+        },
+        {
+          "tresc": "Dodaj jogurt, musztardę i szczypiorek. Dopraw solą oraz pieprzem i wymieszaj.",
+          "uwaga": true
+        },
+        {
+          "tresc": "Pastę rozsmaruj na trzech kromkach chleba."
+        }
       ]
     }
   ]

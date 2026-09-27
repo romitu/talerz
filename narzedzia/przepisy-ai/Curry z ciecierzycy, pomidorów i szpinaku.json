@@ -1,6 +1,6 @@
 {
   "nazwa": "Curry z ciecierzycy, pomidorów i szpinaku",
-  "opis": "Łagodne jednogarnkowe curry z ciecierzycą, szpinakiem i pomidorami. Przepis na 1 porcję.",
+  "opis": "Łagodne jednogarnkowe curry z ciecierzycą, szpinakiem i pomidorami. Przepis na 2 porcje.",
   "pory": [
     "obiad",
     "kolacja"
@@ -11,6 +11,7 @@
   "rodzaje": ["gulasz_curry"],
   "porcjowanie": "waga",
   "porcja_g": 662.0,
+  "liczba_porcji_bazowych": 2,
   "trwalosc_dni": 3,
   "czas_przygotowania_min": 8,
   "czas_obrobki_min": 22,
@@ -26,63 +27,63 @@
   "skladniki": [
     {
       "nazwa": "Ciecierzyca z puszki, odsączona",
-      "ilosc": 180.0,
+      "ilosc": 360.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Szpinak, surowy",
-      "ilosc": 80.0,
+      "ilosc": 160.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Pomidory krojone z puszki",
-      "ilosc": 200.0,
+      "ilosc": 400.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Mleko kokosowe light z puszki",
-      "ilosc": 100.0,
+      "ilosc": 200.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Cebula, surowa",
-      "ilosc": 70.0,
+      "ilosc": 140.0,
       "jednostka": "g",
       "stan": "posiekana"
     },
     {
       "nazwa": "Czosnek, surowy",
-      "ilosc": 5.0,
+      "ilosc": 10.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Imbir korzeń, surowy",
-      "ilosc": 8.0,
+      "ilosc": 16.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Olej rzepakowy",
-      "ilosc": 5.0,
+      "ilosc": 10.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Garam masala",
-      "ilosc": 2.0,
+      "ilosc": 4.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Kmin rzymski mielony",
-      "ilosc": 1.0,
+      "ilosc": 2.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Sól kuchenna",
-      "ilosc": 1.0,
+      "ilosc": 2.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Cytryna",
-      "ilosc": 10.0,
+      "ilosc": 20.0,
       "jednostka": "g",
       "stan": "sok"
     }

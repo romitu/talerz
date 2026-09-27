@@ -1,6 +1,6 @@
 {
   "nazwa": "Chili sin carne z czarną fasolą",
-  "opis": "Jednogarnkowe chili bez mięsa z czarną i czerwoną fasolą, kukurydzą oraz papryką. Przepis na 1 porcję.",
+  "opis": "Jednogarnkowe chili bez mięsa z czarną i czerwoną fasolą, kukurydzą oraz papryką. Przepis na 2 porcje.",
   "pory": [
     "obiad",
     "kolacja"
@@ -11,6 +11,7 @@
   "rodzaje": ["gulasz_curry"],
   "porcjowanie": "waga",
   "porcja_g": 584.5,
+  "liczba_porcji_bazowych": 2,
   "trwalosc_dni": 3,
   "czas_przygotowania_min": 10,
   "czas_obrobki_min": 28,
@@ -26,70 +27,70 @@
   "skladniki": [
     {
       "nazwa": "Fasola czarna z puszki, odsączona",
-      "ilosc": 80.0,
+      "ilosc": 160.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Fasola czerwona z puszki, odsączona",
-      "ilosc": 80.0,
+      "ilosc": 160.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Kukurydza konserwowa, odsączona",
-      "ilosc": 50.0,
+      "ilosc": 100.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Pomidory krojone z puszki",
-      "ilosc": 150.0,
+      "ilosc": 300.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Passata pomidorowa",
-      "ilosc": 80.0,
+      "ilosc": 160.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Papryka czerwona, surowa",
-      "ilosc": 80.0,
+      "ilosc": 160.0,
       "jednostka": "g",
       "stan": "pokrojona w kostkę"
     },
     {
       "nazwa": "Cebula, surowa",
-      "ilosc": 50.0,
+      "ilosc": 100.0,
       "jednostka": "g",
       "stan": "drobno posiekana"
     },
     {
       "nazwa": "Czosnek, surowy",
-      "ilosc": 5.0,
+      "ilosc": 10.0,
       "jednostka": "g",
       "stan": "posiekany"
     },
     {
       "nazwa": "Olej rzepakowy",
-      "ilosc": 5.0,
+      "ilosc": 10.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Kmin rzymski mielony",
-      "ilosc": 2.0,
+      "ilosc": 4.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Papryka wędzona mielona",
-      "ilosc": 1.0,
+      "ilosc": 2.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Chili suszone",
-      "ilosc": 0.5,
+      "ilosc": 1.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Sól kuchenna",
-      "ilosc": 1.0,
+      "ilosc": 2.0,
       "jednostka": "g"
     }
   ],

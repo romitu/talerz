@@ -1,6 +1,6 @@
 {
   "nazwa": "Gulasz z białej fasoli, jarmużu i pomidorów",
-  "opis": "Gęsty roślinny gulasz z białej fasoli, jarmużu i pomidorów, podany z pieczywem. Przepis na 1 porcję.",
+  "opis": "Gęsty roślinny gulasz z białej fasoli, jarmużu i pomidorów, podany z pieczywem. Przepis na 2 porcje.",
   "pory": [
     "obiad",
     "kolacja"
@@ -11,6 +11,7 @@
   "rodzaje": ["gulasz_curry"],
   "porcjowanie": "waga",
   "porcja_g": 747.5,
+  "liczba_porcji_bazowych": 2,
   "trwalosc_dni": 3,
   "czas_przygotowania_min": 12,
   "czas_obrobki_min": 30,
@@ -26,71 +27,71 @@
   "skladniki": [
     {
       "nazwa": "Fasola biała z puszki, odsączona",
-      "ilosc": 160.0,
+      "ilosc": 320.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Jarmuż, surowy",
-      "ilosc": 60.0,
+      "ilosc": 120.0,
       "jednostka": "g",
       "stan": "bez twardych łodyg"
     },
     {
       "nazwa": "Pomidory krojone z puszki",
-      "ilosc": 180.0,
+      "ilosc": 360.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Marchew, surowa",
-      "ilosc": 60.0,
+      "ilosc": 120.0,
       "jednostka": "g",
       "stan": "pokrojona w kostkę"
     },
     {
       "nazwa": "Cebula, surowa",
-      "ilosc": 50.0,
+      "ilosc": 100.0,
       "jednostka": "g",
       "stan": "posiekana"
     },
     {
       "nazwa": "Czosnek, surowy",
-      "ilosc": 5.0,
+      "ilosc": 10.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Domowy bulion warzywny",
-      "ilosc": 150.0,
+      "ilosc": 300.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Oliwa z oliwek",
-      "ilosc": 8.0,
+      "ilosc": 16.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Chleb żytni razowy",
-      "ilosc": 2.0,
+      "ilosc": 4.0,
       "jednostka": "szt",
       "stan": "kromki"
     },
     {
       "nazwa": "Tymianek suszony",
-      "ilosc": 2.0,
+      "ilosc": 4.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Papryka wędzona mielona",
-      "ilosc": 1.0,
+      "ilosc": 2.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Sól kuchenna",
-      "ilosc": 1.0,
+      "ilosc": 2.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Czarny pieprz mielony",
-      "ilosc": 0.5,
+      "ilosc": 1.0,
       "jednostka": "g"
     }
   ],

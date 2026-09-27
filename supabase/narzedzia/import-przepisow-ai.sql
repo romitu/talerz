@@ -6,7 +6,7 @@
 --  i generuj ponownie.
 --
 --  Przepisów w tym pliku: 89
---  Wygenerowano: 2026-09-26
+--  Wygenerowano: 2026-09-27
 --
 --  Skrypt najpierw sprawdza katalogi składników i sprzętu. Jeśli czegoś
 --  brakuje, kończy się błędem „IMPORT PRZERWANY — …” z listą braków
@@ -136,10 +136,12 @@ with
     ('Jajecznica z pomidorem i szczypiorkiem', 'Pomidory, surowe', true),
     ('Jajecznica z pomidorem i szczypiorkiem', 'Szczypiorek świeży', false),
     ('Jajecznica z pomidorem i szczypiorkiem', 'Masło', false),
+    ('Jajecznica z pomidorem i szczypiorkiem', 'Chleb żytni razowy', true),
     ('Jajecznica z pomidorem i szczypiorkiem', 'Sól kuchenna', false),
     ('Jajecznica z pomidorem i szczypiorkiem', 'Czarny pieprz mielony', false),
     ('Jajka na miękko z pieczywem i warzywami', 'Jaja kurze, całe, surowe', true),
     ('Jajka na miękko z pieczywem i warzywami', 'Chleb żytni razowy', true),
+    ('Jajka na miękko z pieczywem i warzywami', 'Masło', false),
     ('Jajka na miękko z pieczywem i warzywami', 'Pomidory, surowe', true),
     ('Jajka na miękko z pieczywem i warzywami', 'Ogórek, surowy', true),
     ('Jajka na miękko z pieczywem i warzywami', 'Sól kuchenna', false),
@@ -463,6 +465,7 @@ with
     ('Omlet ze szpinakiem i fetą', 'Szpinak, surowy', false),
     ('Omlet ze szpinakiem i fetą', 'Ser feta', false),
     ('Omlet ze szpinakiem i fetą', 'Olej rzepakowy', false),
+    ('Omlet ze szpinakiem i fetą', 'Chleb żytni razowy', true),
     ('Omlet ze szpinakiem i fetą', 'Sól kuchenna', false),
     ('Omlet ze szpinakiem i fetą', 'Czarny pieprz mielony', false),
     ('Owsianka z jabłkiem, cynamonem i orzechami', 'Płatki owsiane', false),
@@ -693,6 +696,7 @@ with
     ('Serek wiejski z pomidorem, ogórkiem i pestkami dyni', 'Pomidory, surowe', true),
     ('Serek wiejski z pomidorem, ogórkiem i pestkami dyni', 'Ogórek, surowy', true),
     ('Serek wiejski z pomidorem, ogórkiem i pestkami dyni', 'Pestki dyni', false),
+    ('Serek wiejski z pomidorem, ogórkiem i pestkami dyni', 'Chleb żytni razowy', true),
     ('Serek wiejski z pomidorem, ogórkiem i pestkami dyni', 'Sól kuchenna', false),
     ('Serek wiejski z pomidorem, ogórkiem i pestkami dyni', 'Czarny pieprz mielony', false),
     ('Skyr kakaowy z bananem i masłem orzechowym', 'Skyr naturalny', false),
@@ -913,6 +917,7 @@ with
     ('Jajka na miękko z pieczywem i warzywami', 'Garnek 2 l'),
     ('Jajka na miękko z pieczywem i warzywami', 'Nóż szefa kuchni'),
     ('Jajka na miękko z pieczywem i warzywami', 'Deska do krojenia'),
+    ('Jajka na miękko z pieczywem i warzywami', 'Waga kuchenna'),
     ('Kanapki z Goudą, jajkiem i szczypiorkiem', 'Garnek 2 l'),
     ('Kanapki z Goudą, jajkiem i szczypiorkiem', 'Nóż szefa kuchni'),
     ('Kanapki z Goudą, jajkiem i szczypiorkiem', 'Deska do krojenia'),
@@ -929,6 +934,7 @@ with
     ('Kanapki z jajkiem, awokado i pomidorem', 'Widelec'),
     ('Kanapki z jajkiem, awokado i pomidorem', 'Nóż szefa kuchni'),
     ('Kanapki z jajkiem, awokado i pomidorem', 'Deska do krojenia'),
+    ('Kanapki z jajkiem, awokado i pomidorem', 'Waga kuchenna'),
     ('Kanapki z mozzarellą, pomidorem i bazylią', 'Nóż szefa kuchni'),
     ('Kanapki z mozzarellą, pomidorem i bazylią', 'Deska do krojenia'),
     ('Kanapki z mozzarellą, pomidorem i bazylią', 'Waga kuchenna'),
@@ -1086,7 +1092,6 @@ with
     ('Omlet ze szpinakiem i fetą', 'Waga kuchenna'),
     ('Owsianka z jabłkiem, cynamonem i orzechami', 'Rondel'),
     ('Owsianka z jabłkiem, cynamonem i orzechami', 'miska'),
-    ('Owsianka z jabłkiem, cynamonem i orzechami', 'Widelec'),
     ('Owsianka z jabłkiem, cynamonem i orzechami', 'Nóż szefa kuchni'),
     ('Owsianka z jabłkiem, cynamonem i orzechami', 'Deska do krojenia'),
     ('Owsianka z jabłkiem, cynamonem i orzechami', 'Waga kuchenna'),
@@ -1185,7 +1190,6 @@ with
     ('Sałatka z czarnej fasoli, kukurydzy i pomidora', 'Waga kuchenna'),
     ('Sałatka z jajkiem, fetą i warzywami', 'Garnek 2 l'),
     ('Sałatka z jajkiem, fetą i warzywami', 'miska'),
-    ('Sałatka z jajkiem, fetą i warzywami', 'Widelec'),
     ('Sałatka z jajkiem, fetą i warzywami', 'Nóż szefa kuchni'),
     ('Sałatka z jajkiem, fetą i warzywami', 'Deska do krojenia'),
     ('Sałatka z jajkiem, fetą i warzywami', 'Waga kuchenna'),
@@ -1351,14 +1355,14 @@ select ('IMPORT PRZERWANY — ' || string_agg(opis, '; '))::int as sprawdzenie_k
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Chili sin carne z czarną fasolą', 'Jednogarnkowe chili bez mięsa z czarną i czerwoną fasolą, kukurydzą oraz papryką. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Chili sin carne z czarną fasolą', 'Jednogarnkowe chili bez mięsa z czarną i czerwoną fasolą, kukurydzą oraz papryką. Przepis na 2 porcje.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['gulasz_curry']::rodzaj_dania[],
   3, 'prywatna',
-  'waga', 585, 1,
+  'waga', 585, 1, 2,
   10, 28,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Garnek 3 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -1374,6 +1378,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -1387,67 +1392,67 @@ delete from etapy            where przepis_id in (select id from przepisy where 
 
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 80, 'g'::jednostka_miary, 80,
+select p.id, sk.id, 160, 'g'::jednostka_miary, 160,
        null, null, sk.rola, sk.mozna_dzielic, 1
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Chili sin carne z czarną fasolą') and sk.nazwa = 'Fasola czarna z puszki, odsączona';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 80, 'g'::jednostka_miary, 80,
+select p.id, sk.id, 160, 'g'::jednostka_miary, 160,
        null, null, sk.rola, sk.mozna_dzielic, 2
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Chili sin carne z czarną fasolą') and sk.nazwa = 'Fasola czerwona z puszki, odsączona';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 50, 'g'::jednostka_miary, 50,
+select p.id, sk.id, 100, 'g'::jednostka_miary, 100,
        null, null, sk.rola, sk.mozna_dzielic, 3
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Chili sin carne z czarną fasolą') and sk.nazwa = 'Kukurydza konserwowa, odsączona';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 150, 'g'::jednostka_miary, 150,
+select p.id, sk.id, 300, 'g'::jednostka_miary, 300,
        null, null, sk.rola, sk.mozna_dzielic, 4
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Chili sin carne z czarną fasolą') and sk.nazwa = 'Pomidory krojone z puszki';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 80, 'g'::jednostka_miary, 80,
+select p.id, sk.id, 160, 'g'::jednostka_miary, 160,
        null, null, sk.rola, sk.mozna_dzielic, 5
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Chili sin carne z czarną fasolą') and sk.nazwa = 'Passata pomidorowa';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 80, 'g'::jednostka_miary, 80,
+select p.id, sk.id, 160, 'g'::jednostka_miary, 160,
        'pokrojona w kostkę', null, sk.rola, sk.mozna_dzielic, 6
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Chili sin carne z czarną fasolą') and sk.nazwa = 'Papryka czerwona, surowa';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 50, 'g'::jednostka_miary, 50,
+select p.id, sk.id, 100, 'g'::jednostka_miary, 100,
        'drobno posiekana', null, sk.rola, sk.mozna_dzielic, 7
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Chili sin carne z czarną fasolą') and sk.nazwa = 'Cebula, surowa';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 5, 'g'::jednostka_miary, 5,
+select p.id, sk.id, 10, 'g'::jednostka_miary, 10,
        'posiekany', null, sk.rola, sk.mozna_dzielic, 8
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Chili sin carne z czarną fasolą') and sk.nazwa = 'Czosnek, surowy';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 5, 'g'::jednostka_miary, 5,
+select p.id, sk.id, 10, 'g'::jednostka_miary, 10,
        null, null, sk.rola, sk.mozna_dzielic, 9
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Chili sin carne z czarną fasolą') and sk.nazwa = 'Olej rzepakowy';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 2, 'g'::jednostka_miary, 2,
+select p.id, sk.id, 4, 'g'::jednostka_miary, 4,
        null, null, sk.rola, sk.mozna_dzielic, 10
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Chili sin carne z czarną fasolą') and sk.nazwa = 'Kmin rzymski mielony';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
+select p.id, sk.id, 2, 'g'::jednostka_miary, 2,
        null, null, sk.rola, sk.mozna_dzielic, 11
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Chili sin carne z czarną fasolą') and sk.nazwa = 'Papryka wędzona mielona';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
+select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
        null, null, sk.rola, sk.mozna_dzielic, 12
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Chili sin carne z czarną fasolą') and sk.nazwa = 'Chili suszone';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
+select p.id, sk.id, 2, 'g'::jednostka_miary, 2,
        null, null, sk.rola, sk.mozna_dzielic, 13
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Chili sin carne z czarną fasolą') and sk.nazwa = 'Sól kuchenna';
 
@@ -1482,14 +1487,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Curry z ciecierzycy, pomidorów i szpinaku', 'Łagodne jednogarnkowe curry z ciecierzycą, szpinakiem i pomidorami. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Curry z ciecierzycy, pomidorów i szpinaku', 'Łagodne jednogarnkowe curry z ciecierzycą, szpinakiem i pomidorami. Przepis na 2 porcje.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['azjatycka']::rodzaj_kuchni[],
   array['gulasz_curry']::rodzaj_dania[],
   3, 'prywatna',
-  'waga', 662, 1,
+  'waga', 662, 1, 2,
   8, 22,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Garnek 3 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -1505,6 +1510,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -1518,62 +1524,62 @@ delete from etapy            where przepis_id in (select id from przepisy where 
 
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 180, 'g'::jednostka_miary, 180,
+select p.id, sk.id, 360, 'g'::jednostka_miary, 360,
        null, null, sk.rola, sk.mozna_dzielic, 1
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Curry z ciecierzycy, pomidorów i szpinaku') and sk.nazwa = 'Ciecierzyca z puszki, odsączona';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 80, 'g'::jednostka_miary, 80,
+select p.id, sk.id, 160, 'g'::jednostka_miary, 160,
        null, null, sk.rola, sk.mozna_dzielic, 2
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Curry z ciecierzycy, pomidorów i szpinaku') and sk.nazwa = 'Szpinak, surowy';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 200, 'g'::jednostka_miary, 200,
+select p.id, sk.id, 400, 'g'::jednostka_miary, 400,
        null, null, sk.rola, sk.mozna_dzielic, 3
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Curry z ciecierzycy, pomidorów i szpinaku') and sk.nazwa = 'Pomidory krojone z puszki';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 100, 'g'::jednostka_miary, 100,
+select p.id, sk.id, 200, 'g'::jednostka_miary, 200,
        null, null, sk.rola, sk.mozna_dzielic, 4
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Curry z ciecierzycy, pomidorów i szpinaku') and sk.nazwa = 'Mleko kokosowe light z puszki';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 70, 'g'::jednostka_miary, 70,
+select p.id, sk.id, 140, 'g'::jednostka_miary, 140,
        'posiekana', null, sk.rola, sk.mozna_dzielic, 5
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Curry z ciecierzycy, pomidorów i szpinaku') and sk.nazwa = 'Cebula, surowa';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 5, 'g'::jednostka_miary, 5,
+select p.id, sk.id, 10, 'g'::jednostka_miary, 10,
        null, null, sk.rola, sk.mozna_dzielic, 6
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Curry z ciecierzycy, pomidorów i szpinaku') and sk.nazwa = 'Czosnek, surowy';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 8, 'g'::jednostka_miary, 8,
+select p.id, sk.id, 16, 'g'::jednostka_miary, 16,
        null, null, sk.rola, sk.mozna_dzielic, 7
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Curry z ciecierzycy, pomidorów i szpinaku') and sk.nazwa = 'Imbir korzeń, surowy';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 5, 'g'::jednostka_miary, 5,
+select p.id, sk.id, 10, 'g'::jednostka_miary, 10,
        null, null, sk.rola, sk.mozna_dzielic, 8
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Curry z ciecierzycy, pomidorów i szpinaku') and sk.nazwa = 'Olej rzepakowy';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 2, 'g'::jednostka_miary, 2,
+select p.id, sk.id, 4, 'g'::jednostka_miary, 4,
        null, null, sk.rola, sk.mozna_dzielic, 9
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Curry z ciecierzycy, pomidorów i szpinaku') and sk.nazwa = 'Garam masala';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
+select p.id, sk.id, 2, 'g'::jednostka_miary, 2,
        null, null, sk.rola, sk.mozna_dzielic, 10
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Curry z ciecierzycy, pomidorów i szpinaku') and sk.nazwa = 'Kmin rzymski mielony';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
+select p.id, sk.id, 2, 'g'::jednostka_miary, 2,
        null, null, sk.rola, sk.mozna_dzielic, 11
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Curry z ciecierzycy, pomidorów i szpinaku') and sk.nazwa = 'Sól kuchenna';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 10, 'g'::jednostka_miary, 10,
+select p.id, sk.id, 20, 'g'::jednostka_miary, 20,
        'sok', null, sk.rola, sk.mozna_dzielic, 12
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Curry z ciecierzycy, pomidorów i szpinaku') and sk.nazwa = 'Cytryna';
 
@@ -1608,14 +1614,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Curry z czerwonej soczewicy i szpinaku', 'Kremowe jednogarnkowe curry z czerwonej soczewicy, szpinaku i pomidorów. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Curry z czerwonej soczewicy i szpinaku', 'Kremowe jednogarnkowe curry z czerwonej soczewicy, szpinaku i pomidorów. Przepis na 2 porcje.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['azjatycka']::rodzaj_kuchni[],
   array['gulasz_curry']::rodzaj_dania[],
   3, 'prywatna',
-  'waga', 747, 1,
+  'waga', 747, 1, 2,
   8, 25,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Garnek 3 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -1631,6 +1637,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -1644,57 +1651,57 @@ delete from etapy            where przepis_id in (select id from przepisy where 
 
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 70, 'g'::jednostka_miary, 70,
+select p.id, sk.id, 140, 'g'::jednostka_miary, 140,
        'opłukana', null, sk.rola, sk.mozna_dzielic, 1
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Curry z czerwonej soczewicy i szpinaku') and sk.nazwa = 'Soczewica czerwona, sucha';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 80, 'g'::jednostka_miary, 80,
+select p.id, sk.id, 160, 'g'::jednostka_miary, 160,
        null, null, sk.rola, sk.mozna_dzielic, 2
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Curry z czerwonej soczewicy i szpinaku') and sk.nazwa = 'Szpinak, surowy';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 200, 'g'::jednostka_miary, 200,
+select p.id, sk.id, 400, 'g'::jednostka_miary, 400,
        null, null, sk.rola, sk.mozna_dzielic, 3
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Curry z czerwonej soczewicy i szpinaku') and sk.nazwa = 'Pomidory krojone z puszki';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 100, 'g'::jednostka_miary, 100,
+select p.id, sk.id, 200, 'g'::jednostka_miary, 200,
        null, null, sk.rola, sk.mozna_dzielic, 4
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Curry z czerwonej soczewicy i szpinaku') and sk.nazwa = 'Mleko kokosowe light z puszki';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 200, 'ml'::jednostka_miary, 200,
+select p.id, sk.id, 400, 'ml'::jednostka_miary, 400,
        null, null, sk.rola, sk.mozna_dzielic, 5
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Curry z czerwonej soczewicy i szpinaku') and sk.nazwa = 'woda';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 70, 'g'::jednostka_miary, 70,
+select p.id, sk.id, 140, 'g'::jednostka_miary, 140,
        'drobno posiekana', null, sk.rola, sk.mozna_dzielic, 6
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Curry z czerwonej soczewicy i szpinaku') and sk.nazwa = 'Cebula, surowa';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 5, 'g'::jednostka_miary, 5,
+select p.id, sk.id, 10, 'g'::jednostka_miary, 10,
        'drobno posiekany', null, sk.rola, sk.mozna_dzielic, 7
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Curry z czerwonej soczewicy i szpinaku') and sk.nazwa = 'Czosnek, surowy';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 15, 'g'::jednostka_miary, 15,
+select p.id, sk.id, 30, 'g'::jednostka_miary, 30,
        null, null, sk.rola, sk.mozna_dzielic, 8
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Curry z czerwonej soczewicy i szpinaku') and sk.nazwa = 'Pasta curry czerwona';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 5, 'g'::jednostka_miary, 5,
+select p.id, sk.id, 10, 'g'::jednostka_miary, 10,
        null, null, sk.rola, sk.mozna_dzielic, 9
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Curry z czerwonej soczewicy i szpinaku') and sk.nazwa = 'Olej rzepakowy';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
+select p.id, sk.id, 2, 'g'::jednostka_miary, 2,
        null, null, sk.rola, sk.mozna_dzielic, 10
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Curry z czerwonej soczewicy i szpinaku') and sk.nazwa = 'Kurkuma mielona';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
+select p.id, sk.id, 2, 'g'::jednostka_miary, 2,
        null, null, sk.rola, sk.mozna_dzielic, 11
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Curry z czerwonej soczewicy i szpinaku') and sk.nazwa = 'Sól kuchenna';
 
@@ -1729,14 +1736,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Dorsz w kokosowym curry ze szpinakiem', 'Delikatny dorsz w kokosowym sosie curry ze szpinakiem, podany z ryżem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['azjatycka']::rodzaj_kuchni[],
   array['gulasz_curry', 'kasza_ryz']::rodzaj_dania[],
   2, 'prywatna',
-  'waga', 749, 1,
+  'waga', 749, 1, 1,
   10, 20,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Patelnia 28 cm', 'Garnek 2 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -1752,6 +1759,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -1856,14 +1864,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Grochówka z indykiem', 'Treściwa grochówka z mięsem indyka, ziemniakami, warzywami korzeniowymi i majerankiem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Grochówka z indykiem', 'Treściwa grochówka z mięsem indyka, ziemniakami, warzywami korzeniowymi i majerankiem. Przepis na 2 porcje.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad']::pora_posilku[], array['polska']::rodzaj_kuchni[],
   array['zupa']::rodzaj_dania[],
   3, 'prywatna',
-  'waga', 821, 1,
+  'waga', 821, 1, 2,
   15, 55,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Garnek 3 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -1879,6 +1887,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -1892,72 +1901,72 @@ delete from etapy            where przepis_id in (select id from przepisy where 
 
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 50, 'g'::jednostka_miary, 50,
+select p.id, sk.id, 100, 'g'::jednostka_miary, 100,
        'opłukany', null, sk.rola, sk.mozna_dzielic, 1
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Grochówka z indykiem') and sk.nazwa = 'Groch łuskany, suchy';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 100, 'g'::jednostka_miary, 100,
+select p.id, sk.id, 200, 'g'::jednostka_miary, 200,
        'pokrojona w kostkę', null, sk.rola, sk.mozna_dzielic, 2
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Grochówka z indykiem') and sk.nazwa = 'Pierś z indyka, surowa';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 100, 'g'::jednostka_miary, 100,
+select p.id, sk.id, 200, 'g'::jednostka_miary, 200,
        'pokrojone w kostkę', null, sk.rola, sk.mozna_dzielic, 3
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Grochówka z indykiem') and sk.nazwa = 'Ziemniaki, surowe';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 50, 'g'::jednostka_miary, 50,
+select p.id, sk.id, 100, 'g'::jednostka_miary, 100,
        'pokrojona', null, sk.rola, sk.mozna_dzielic, 4
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Grochówka z indykiem') and sk.nazwa = 'Marchew, surowa';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 30, 'g'::jednostka_miary, 30,
+select p.id, sk.id, 60, 'g'::jednostka_miary, 60,
        'pokrojona', null, sk.rola, sk.mozna_dzielic, 5
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Grochówka z indykiem') and sk.nazwa = 'Pietruszka korzeń';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 30, 'g'::jednostka_miary, 30,
+select p.id, sk.id, 60, 'g'::jednostka_miary, 60,
        'posiekana', null, sk.rola, sk.mozna_dzielic, 6
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Grochówka z indykiem') and sk.nazwa = 'Cebula, surowa';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 150, 'g'::jednostka_miary, 150,
+select p.id, sk.id, 300, 'g'::jednostka_miary, 300,
        null, null, sk.rola, sk.mozna_dzielic, 7
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Grochówka z indykiem') and sk.nazwa = 'Domowy bulion warzywny';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 300, 'ml'::jednostka_miary, 300,
+select p.id, sk.id, 600, 'ml'::jednostka_miary, 600,
        null, null, sk.rola, sk.mozna_dzielic, 8
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Grochówka z indykiem') and sk.nazwa = 'woda';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 5, 'g'::jednostka_miary, 5,
+select p.id, sk.id, 10, 'g'::jednostka_miary, 10,
        null, null, sk.rola, sk.mozna_dzielic, 9
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Grochówka z indykiem') and sk.nazwa = 'Olej rzepakowy';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 2, 'g'::jednostka_miary, 2,
+select p.id, sk.id, 4, 'g'::jednostka_miary, 4,
        null, null, sk.rola, sk.mozna_dzielic, 10
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Grochówka z indykiem') and sk.nazwa = 'Majeranek suszony';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
+select p.id, sk.id, 2, 'g'::jednostka_miary, 2,
        null, null, sk.rola, sk.mozna_dzielic, 11
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Grochówka z indykiem') and sk.nazwa = 'liść laurowy';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
+select p.id, sk.id, 2, 'g'::jednostka_miary, 2,
        null, null, sk.rola, sk.mozna_dzielic, 12
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Grochówka z indykiem') and sk.nazwa = 'ziele angielskie';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
+select p.id, sk.id, 2, 'g'::jednostka_miary, 2,
        null, null, sk.rola, sk.mozna_dzielic, 13
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Grochówka z indykiem') and sk.nazwa = 'Sól kuchenna';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
+select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
        null, null, sk.rola, sk.mozna_dzielic, 14
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Grochówka z indykiem') and sk.nazwa = 'Czarny pieprz mielony';
 
@@ -1992,14 +2001,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Gulasz jagnięcy z ciecierzycą i pomidorami', 'Aromatyczny gulasz jagnięcy z ciecierzycą, pomidorami i korzennymi przyprawami, podany z bulgurem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Gulasz jagnięcy z ciecierzycą i pomidorami', 'Aromatyczny gulasz jagnięcy z ciecierzycą, pomidorami i korzennymi przyprawami, podany z bulgurem. Przepis na 2 porcje.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['gulasz_curry']::rodzaj_dania[],
   3, 'prywatna',
-  'waga', 738, 1,
+  'waga', 738, 1, 2,
   15, 80,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Garnek 3 l', 'Garnek 2 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -2015,6 +2024,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -2028,67 +2038,67 @@ delete from etapy            where przepis_id in (select id from przepisy where 
 
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 160, 'g'::jednostka_miary, 160,
+select p.id, sk.id, 320, 'g'::jednostka_miary, 320,
        'pokrojona w kostkę', null, sk.rola, sk.mozna_dzielic, 1
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Gulasz jagnięcy z ciecierzycą i pomidorami') and sk.nazwa = 'Jagnięcina, udziec surowy';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 100, 'g'::jednostka_miary, 100,
+select p.id, sk.id, 200, 'g'::jednostka_miary, 200,
        null, null, sk.rola, sk.mozna_dzielic, 2
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Gulasz jagnięcy z ciecierzycą i pomidorami') and sk.nazwa = 'Ciecierzyca z puszki, odsączona';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 180, 'g'::jednostka_miary, 180,
+select p.id, sk.id, 360, 'g'::jednostka_miary, 360,
        null, null, sk.rola, sk.mozna_dzielic, 3
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Gulasz jagnięcy z ciecierzycą i pomidorami') and sk.nazwa = 'Pomidory krojone z puszki';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 50, 'g'::jednostka_miary, 50,
+select p.id, sk.id, 100, 'g'::jednostka_miary, 100,
        null, null, sk.rola, sk.mozna_dzielic, 4
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Gulasz jagnięcy z ciecierzycą i pomidorami') and sk.nazwa = 'Kasza bulgur, sucha';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 60, 'g'::jednostka_miary, 60,
+select p.id, sk.id, 120, 'g'::jednostka_miary, 120,
        'pokrojona', null, sk.rola, sk.mozna_dzielic, 5
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Gulasz jagnięcy z ciecierzycą i pomidorami') and sk.nazwa = 'Marchew, surowa';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 50, 'g'::jednostka_miary, 50,
+select p.id, sk.id, 100, 'g'::jednostka_miary, 100,
        'posiekana', null, sk.rola, sk.mozna_dzielic, 6
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Gulasz jagnięcy z ciecierzycą i pomidorami') and sk.nazwa = 'Cebula, surowa';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 120, 'g'::jednostka_miary, 120,
+select p.id, sk.id, 240, 'g'::jednostka_miary, 240,
        null, null, sk.rola, sk.mozna_dzielic, 7
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Gulasz jagnięcy z ciecierzycą i pomidorami') and sk.nazwa = 'Domowy bulion warzywny';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 5, 'g'::jednostka_miary, 5,
+select p.id, sk.id, 10, 'g'::jednostka_miary, 10,
        null, null, sk.rola, sk.mozna_dzielic, 8
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Gulasz jagnięcy z ciecierzycą i pomidorami') and sk.nazwa = 'Czosnek, surowy';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 8, 'g'::jednostka_miary, 8,
+select p.id, sk.id, 16, 'g'::jednostka_miary, 16,
        null, null, sk.rola, sk.mozna_dzielic, 9
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Gulasz jagnięcy z ciecierzycą i pomidorami') and sk.nazwa = 'Oliwa z oliwek';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 2, 'g'::jednostka_miary, 2,
+select p.id, sk.id, 4, 'g'::jednostka_miary, 4,
        null, null, sk.rola, sk.mozna_dzielic, 10
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Gulasz jagnięcy z ciecierzycą i pomidorami') and sk.nazwa = 'Kmin rzymski mielony';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
+select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
        null, null, sk.rola, sk.mozna_dzielic, 11
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Gulasz jagnięcy z ciecierzycą i pomidorami') and sk.nazwa = 'Cynamon mielony';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
+select p.id, sk.id, 2, 'g'::jednostka_miary, 2,
        null, null, sk.rola, sk.mozna_dzielic, 12
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Gulasz jagnięcy z ciecierzycą i pomidorami') and sk.nazwa = 'Papryka słodka mielona';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
+select p.id, sk.id, 2, 'g'::jednostka_miary, 2,
        null, null, sk.rola, sk.mozna_dzielic, 13
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Gulasz jagnięcy z ciecierzycą i pomidorami') and sk.nazwa = 'Sól kuchenna';
 
@@ -2124,14 +2134,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Gulasz wołowy z warzywami korzeniowymi', 'Długo duszony gulasz wołowy z ziemniakami, marchewką, pasternakiem i selerem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Gulasz wołowy z warzywami korzeniowymi', 'Długo duszony gulasz wołowy z ziemniakami, marchewką, pasternakiem i selerem. Przepis na 2 porcje.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad']::pora_posilku[], array['polska']::rodzaj_kuchni[],
   array['gulasz_curry']::rodzaj_dania[],
   3, 'prywatna',
-  'waga', 954, 1,
+  'waga', 954, 1, 2,
   18, 130,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Garnek 3 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -2147,6 +2157,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -2160,77 +2171,77 @@ delete from etapy            where przepis_id in (select id from przepisy where 
 
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 180, 'g'::jednostka_miary, 180,
+select p.id, sk.id, 360, 'g'::jednostka_miary, 360,
        'pokrojona w kostkę', null, sk.rola, sk.mozna_dzielic, 1
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Gulasz wołowy z warzywami korzeniowymi') and sk.nazwa = 'Pręga wołowa bez kości, surowa';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 150, 'g'::jednostka_miary, 150,
+select p.id, sk.id, 300, 'g'::jednostka_miary, 300,
        'pokrojone', null, sk.rola, sk.mozna_dzielic, 2
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Gulasz wołowy z warzywami korzeniowymi') and sk.nazwa = 'Ziemniaki, surowe';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 60, 'g'::jednostka_miary, 60,
+select p.id, sk.id, 120, 'g'::jednostka_miary, 120,
        'pokrojona', null, sk.rola, sk.mozna_dzielic, 3
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Gulasz wołowy z warzywami korzeniowymi') and sk.nazwa = 'Marchew, surowa';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 40, 'g'::jednostka_miary, 40,
+select p.id, sk.id, 80, 'g'::jednostka_miary, 80,
        'pokrojony', null, sk.rola, sk.mozna_dzielic, 4
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Gulasz wołowy z warzywami korzeniowymi') and sk.nazwa = 'Pasternak, surowy';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 30, 'g'::jednostka_miary, 30,
+select p.id, sk.id, 60, 'g'::jednostka_miary, 60,
        'pokrojony', null, sk.rola, sk.mozna_dzielic, 5
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Gulasz wołowy z warzywami korzeniowymi') and sk.nazwa = 'Seler korzeń';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 40, 'g'::jednostka_miary, 40,
+select p.id, sk.id, 80, 'g'::jednostka_miary, 80,
        'posiekana', null, sk.rola, sk.mozna_dzielic, 6
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Gulasz wołowy z warzywami korzeniowymi') and sk.nazwa = 'Cebula, surowa';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 70, 'g'::jednostka_miary, 70,
+select p.id, sk.id, 140, 'g'::jednostka_miary, 140,
        null, null, sk.rola, sk.mozna_dzielic, 7
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Gulasz wołowy z warzywami korzeniowymi') and sk.nazwa = 'Passata pomidorowa';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 120, 'g'::jednostka_miary, 120,
+select p.id, sk.id, 240, 'g'::jednostka_miary, 240,
        null, null, sk.rola, sk.mozna_dzielic, 8
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Gulasz wołowy z warzywami korzeniowymi') and sk.nazwa = 'Domowy bulion warzywny';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 250, 'ml'::jednostka_miary, 250,
+select p.id, sk.id, 500, 'ml'::jednostka_miary, 500,
        null, null, sk.rola, sk.mozna_dzielic, 9
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Gulasz wołowy z warzywami korzeniowymi') and sk.nazwa = 'woda';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 8, 'g'::jednostka_miary, 8,
+select p.id, sk.id, 16, 'g'::jednostka_miary, 16,
        null, null, sk.rola, sk.mozna_dzielic, 10
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Gulasz wołowy z warzywami korzeniowymi') and sk.nazwa = 'Olej rzepakowy';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 2, 'g'::jednostka_miary, 2,
+select p.id, sk.id, 4, 'g'::jednostka_miary, 4,
        null, null, sk.rola, sk.mozna_dzielic, 11
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Gulasz wołowy z warzywami korzeniowymi') and sk.nazwa = 'Papryka słodka mielona';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
+select p.id, sk.id, 2, 'g'::jednostka_miary, 2,
        null, null, sk.rola, sk.mozna_dzielic, 12
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Gulasz wołowy z warzywami korzeniowymi') and sk.nazwa = 'Majeranek suszony';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
+select p.id, sk.id, 2, 'g'::jednostka_miary, 2,
        null, null, sk.rola, sk.mozna_dzielic, 13
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Gulasz wołowy z warzywami korzeniowymi') and sk.nazwa = 'liść laurowy';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
+select p.id, sk.id, 2, 'g'::jednostka_miary, 2,
        null, null, sk.rola, sk.mozna_dzielic, 14
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Gulasz wołowy z warzywami korzeniowymi') and sk.nazwa = 'Sól kuchenna';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
+select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
        null, null, sk.rola, sk.mozna_dzielic, 15
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Gulasz wołowy z warzywami korzeniowymi') and sk.nazwa = 'Czarny pieprz mielony';
 
@@ -2265,14 +2276,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Gulasz z białej fasoli, jarmużu i pomidorów', 'Gęsty roślinny gulasz z białej fasoli, jarmużu i pomidorów, podany z pieczywem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Gulasz z białej fasoli, jarmużu i pomidorów', 'Gęsty roślinny gulasz z białej fasoli, jarmużu i pomidorów, podany z pieczywem. Przepis na 2 porcje.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['gulasz_curry']::rodzaj_dania[],
   3, 'prywatna',
-  'waga', 748, 1,
+  'waga', 748, 1, 2,
   12, 30,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Garnek 3 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -2288,6 +2299,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -2301,67 +2313,67 @@ delete from etapy            where przepis_id in (select id from przepisy where 
 
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 160, 'g'::jednostka_miary, 160,
+select p.id, sk.id, 320, 'g'::jednostka_miary, 320,
        null, null, sk.rola, sk.mozna_dzielic, 1
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Gulasz z białej fasoli, jarmużu i pomidorów') and sk.nazwa = 'Fasola biała z puszki, odsączona';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 60, 'g'::jednostka_miary, 60,
+select p.id, sk.id, 120, 'g'::jednostka_miary, 120,
        'bez twardych łodyg', null, sk.rola, sk.mozna_dzielic, 2
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Gulasz z białej fasoli, jarmużu i pomidorów') and sk.nazwa = 'Jarmuż, surowy';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 180, 'g'::jednostka_miary, 180,
+select p.id, sk.id, 360, 'g'::jednostka_miary, 360,
        null, null, sk.rola, sk.mozna_dzielic, 3
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Gulasz z białej fasoli, jarmużu i pomidorów') and sk.nazwa = 'Pomidory krojone z puszki';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 60, 'g'::jednostka_miary, 60,
+select p.id, sk.id, 120, 'g'::jednostka_miary, 120,
        'pokrojona w kostkę', null, sk.rola, sk.mozna_dzielic, 4
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Gulasz z białej fasoli, jarmużu i pomidorów') and sk.nazwa = 'Marchew, surowa';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 50, 'g'::jednostka_miary, 50,
+select p.id, sk.id, 100, 'g'::jednostka_miary, 100,
        'posiekana', null, sk.rola, sk.mozna_dzielic, 5
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Gulasz z białej fasoli, jarmużu i pomidorów') and sk.nazwa = 'Cebula, surowa';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 5, 'g'::jednostka_miary, 5,
+select p.id, sk.id, 10, 'g'::jednostka_miary, 10,
        null, null, sk.rola, sk.mozna_dzielic, 6
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Gulasz z białej fasoli, jarmużu i pomidorów') and sk.nazwa = 'Czosnek, surowy';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 150, 'g'::jednostka_miary, 150,
+select p.id, sk.id, 300, 'g'::jednostka_miary, 300,
        null, null, sk.rola, sk.mozna_dzielic, 7
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Gulasz z białej fasoli, jarmużu i pomidorów') and sk.nazwa = 'Domowy bulion warzywny';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 8, 'g'::jednostka_miary, 8,
+select p.id, sk.id, 16, 'g'::jednostka_miary, 16,
        null, null, sk.rola, sk.mozna_dzielic, 8
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Gulasz z białej fasoli, jarmużu i pomidorów') and sk.nazwa = 'Oliwa z oliwek';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 2, 'szt'::jednostka_miary, round((2 * sk.masa_sztuki_g)::numeric, 1),
+select p.id, sk.id, 4, 'szt'::jednostka_miary, round((4 * sk.masa_sztuki_g)::numeric, 1),
        'kromki', null, sk.rola, sk.mozna_dzielic, 9
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Gulasz z białej fasoli, jarmużu i pomidorów') and sk.nazwa = 'Chleb żytni razowy';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 2, 'g'::jednostka_miary, 2,
+select p.id, sk.id, 4, 'g'::jednostka_miary, 4,
        null, null, sk.rola, sk.mozna_dzielic, 10
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Gulasz z białej fasoli, jarmużu i pomidorów') and sk.nazwa = 'Tymianek suszony';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
+select p.id, sk.id, 2, 'g'::jednostka_miary, 2,
        null, null, sk.rola, sk.mozna_dzielic, 11
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Gulasz z białej fasoli, jarmużu i pomidorów') and sk.nazwa = 'Papryka wędzona mielona';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
+select p.id, sk.id, 2, 'g'::jednostka_miary, 2,
        null, null, sk.rola, sk.mozna_dzielic, 12
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Gulasz z białej fasoli, jarmużu i pomidorów') and sk.nazwa = 'Sól kuchenna';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
+select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
        null, null, sk.rola, sk.mozna_dzielic, 13
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Gulasz z białej fasoli, jarmużu i pomidorów') and sk.nazwa = 'Czarny pieprz mielony';
 
@@ -2396,14 +2408,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Jaglanka z gruszką i orzechami', 'Kremowa kasza jaglana na mleku z gruszką, cynamonem i orzechami włoskimi. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['na_slodko']::rodzaj_dania[],
   2, 'prywatna',
-  'waga', 432, 1,
+  'waga', 432, 1, 1,
   7, 18,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Rondel', 'Sitko', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -2419,6 +2431,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -2496,14 +2509,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Jajecznica z pomidorem i szczypiorkiem', 'Kremowa jajecznica z pomidorem i świeżym szczypiorkiem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Jajecznica z pomidorem i szczypiorkiem', 'Kremowa jajecznica z pomidorem i świeżym szczypiorkiem, podana z dwiema kromkami chleba żytniego. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['polska']::rodzaj_kuchni[],
   array['jajka']::rodzaj_dania[],
   0, 'prywatna',
-  'waga', 197, 1,
+  'waga', 267, 1, 1,
   6, 5,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Patelnia 24 cm', 'miska', 'Widelec', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -2519,6 +2532,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -2552,13 +2566,18 @@ select p.id, sk.id, 10, 'g'::jednostka_miary, 10,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Jajecznica z pomidorem i szczypiorkiem') and sk.nazwa = 'Masło';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
+select p.id, sk.id, 2, 'szt'::jednostka_miary, round((2 * sk.masa_sztuki_g)::numeric, 1),
+       'kromki', null, sk.rola, sk.mozna_dzielic, 5
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Jajecznica z pomidorem i szczypiorkiem') and sk.nazwa = 'Chleb żytni razowy';
+insert into przepis_skladniki
+  (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
-       null, null, sk.rola, sk.mozna_dzielic, 5
+       null, null, sk.rola, sk.mozna_dzielic, 6
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Jajecznica z pomidorem i szczypiorkiem') and sk.nazwa = 'Sól kuchenna';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
-       null, null, sk.rola, sk.mozna_dzielic, 6
+       null, null, sk.rola, sk.mozna_dzielic, 7
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Jajecznica z pomidorem i szczypiorkiem') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
@@ -2582,7 +2601,7 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
        (values
          (1::smallint, 'Na patelni rozpuść masło, dodaj pomidora i smaż około 2 minut, aż odparuje część soku.', null::text, false),
          (2::smallint, 'Wlej jajka i smaż na małym ogniu, mieszając, aż będą miękko ścięte.', 'jajka są kremowe i nie ma na patelni płynnego białka'::text, false),
-         (3::smallint, 'Zdejmij z ognia, dodaj szczypiorek i od razu podaj.', null::text, false)
+         (3::smallint, 'Zdejmij patelnię z ognia, dodaj szczypiorek i wymieszaj. Podaj jajecznicę z dwiema kromkami chleba.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Jajecznica z pomidorem i szczypiorkiem') and e.kolejnosc = 2;
 
@@ -2592,20 +2611,20 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Jajka na miękko z pieczywem i warzywami', 'Jajka z płynnym żółtkiem, podane z chlebem żytnim, pomidorem i ogórkiem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Jajka na miękko z pieczywem i warzywami', 'Jajka z płynnym żółtkiem, podane z pieczywem posmarowanym masłem, pomidorem i ogórkiem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['polska']::rodzaj_kuchni[],
   array['jajka']::rodzaj_dania[],
   0, 'prywatna',
-  'waga', 297, 1,
-  5, 6,
+  'waga', 307, 1, 1,
+  5, 12,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Garnek 2 l', 'Nóż szefa kuchni', 'Deska do krojenia']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Garnek 2 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
   'Danie najlepiej zjedz od razu po przygotowaniu. Jajek ugotowanych na miękko nie przechowuj na później.',
-  false, 'Jeśli żółtko jest zbyt płynne, włóż jajka ponownie do gorącej wody na 30–60 sekund. Jeśli są zbyt twarde, skróć gotowanie przy następnym przygotowaniu.'
+  false, 'Jeśli nieotwarte jajka gotowały się krócej niż 6 minut, pozostaw je w gorącej wodzie jeszcze 30–60 sekund. Jeśli po otwarciu okażą się zbyt twarde, rozgnieć je na pieczywie z masłem.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
@@ -2615,6 +2634,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -2638,47 +2658,52 @@ select p.id, sk.id, 2, 'szt'::jednostka_miary, round((2 * sk.masa_sztuki_g)::num
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Jajka na miękko z pieczywem i warzywami') and sk.nazwa = 'Chleb żytni razowy';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
+select p.id, sk.id, 10, 'g'::jednostka_miary, 10,
+       'miękkie, do pieczywa', null, sk.rola, sk.mozna_dzielic, 3
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Jajka na miękko z pieczywem i warzywami') and sk.nazwa = 'Masło';
+insert into przepis_skladniki
+  (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'szt'::jednostka_miary, round((0.5 * sk.masa_sztuki_g)::numeric, 1),
-       'pokrojony w cząstki', null, sk.rola, sk.mozna_dzielic, 3
+       'pokrojony w cząstki', null, sk.rola, sk.mozna_dzielic, 4
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Jajka na miękko z pieczywem i warzywami') and sk.nazwa = 'Pomidory, surowe';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.25, 'szt'::jednostka_miary, round((0.25 * sk.masa_sztuki_g)::numeric, 1),
-       'pokrojony w plasterki', null, sk.rola, sk.mozna_dzielic, 4
+       'pokrojony w plasterki', null, sk.rola, sk.mozna_dzielic, 5
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Jajka na miękko z pieczywem i warzywami') and sk.nazwa = 'Ogórek, surowy';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
-       null, null, sk.rola, sk.mozna_dzielic, 5
+       null, null, sk.rola, sk.mozna_dzielic, 6
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Jajka na miękko z pieczywem i warzywami') and sk.nazwa = 'Sól kuchenna';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
-       null, null, sk.rola, sk.mozna_dzielic, 6
+       null, null, sk.rola, sk.mozna_dzielic, 7
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Jajka na miękko z pieczywem i warzywami') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Gotowanie jajek', 6 from przepisy p where lower(p.nazwa) = lower('Jajka na miękko z pieczywem i warzywami');
-
-insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
-select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
-  from etapy e join przepisy p on p.id = e.przepis_id,
-       (values
-         (1::smallint, 'W garnku zagotuj tyle wody, aby przykryła jajka.', null::text, false),
-         (2::smallint, 'Delikatnie włóż jajka do wrzątku i gotuj 5–6 minut od ponownego zagotowania.', 'białko jest ścięte, a żółtko pozostaje płynne'::text, true),
-         (3::smallint, 'Jajka wyjmij i krótko schłodź pod zimną wodą.', null::text, false)
-       ) as v(nr, tresc, sygnal, uwaga)
- where lower(p.nazwa) = lower('Jajka na miękko z pieczywem i warzywami') and e.kolejnosc = 1;
-
-insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Podanie', 5 from przepisy p where lower(p.nazwa) = lower('Jajka na miękko z pieczywem i warzywami');
+select p.id, 1, 'Przygotowanie składników', 5 from przepisy p where lower(p.nazwa) = lower('Jajka na miękko z pieczywem i warzywami');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
          (1::smallint, 'Pomidora pokrój w cząstki, a ogórek w plasterki.', null::text, false),
-         (2::smallint, 'Podaj jajka z pieczywem i warzywami. Dopraw solą oraz pieprzem.', null::text, false)
+         (2::smallint, 'Kromki chleba posmaruj masłem. Pieczywo i warzywa ułóż na talerzu.', null::text, false)
+       ) as v(nr, tresc, sygnal, uwaga)
+ where lower(p.nazwa) = lower('Jajka na miękko z pieczywem i warzywami') and e.kolejnosc = 1;
+
+insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
+select p.id, 2, 'Gotowanie jajek', 12 from przepisy p where lower(p.nazwa) = lower('Jajka na miękko z pieczywem i warzywami');
+
+insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
+select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
+  from etapy e join przepisy p on p.id = e.przepis_id,
+       (values
+         (1::smallint, 'W garnku zagotuj tyle wody, aby po włożeniu całkowicie przykryła jajka.', null::text, false),
+         (2::smallint, 'Ostrożnie włóż zimne jajka do wrzątku i gotuj 6 minut od zanurzenia, utrzymując łagodne wrzenie.', null::text, true),
+         (3::smallint, 'Wyjmij jajka, schładzaj je pod zimną wodą przez około 30 sekund i od razu podaj z pieczywem oraz warzywami. Dopraw solą i pieprzem.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Jajka na miękko z pieczywem i warzywami') and e.kolejnosc = 2;
 
@@ -2688,14 +2713,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Kanapki z Goudą, jajkiem i szczypiorkiem', 'Syte kanapki z serem Gouda, jajkiem na twardo, pomidorem i szczypiorkiem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['polska']::rodzaj_kuchni[],
   array['kanapki']::rodzaj_dania[],
   0, 'prywatna',
-  'waga', 286, 1,
+  'waga', 286, 1, 1,
   8, 9,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Garnek 2 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -2711,6 +2736,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -2787,14 +2813,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Kanapki z Goudą, pomidorem i sałatą', 'Klasyczne kanapki z serem Gouda, pomidorem, ogórkiem i sałatą. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['kanapki']::rodzaj_dania[],
   0, 'prywatna',
-  'waga', 276, 1,
+  'waga', 276, 1, 1,
   7, 0,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -2810,6 +2836,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -2876,14 +2903,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Kanapki z halloumi, awokado i pomidorem', 'Kanapki z grillowanym halloumi, awokado, pomidorem i rukolą. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['kanapki']::rodzaj_dania[],
   0, 'prywatna',
-  'waga', 326, 1,
+  'waga', 326, 1, 1,
   8, 6,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Patelnia 24 cm', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -2899,6 +2926,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -2975,17 +3003,17 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Kanapki z jajkiem, awokado i pomidorem', 'Syte kanapki z jajkiem na twardo, kremowym awokado i świeżym pomidorem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Kanapki z jajkiem, awokado i pomidorem', 'Syte kanapki z dwoma jajkami na twardo, kremowym awokado i świeżym pomidorem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['kanapki']::rodzaj_dania[],
   0, 'prywatna',
-  'waga', 262, 1,
-  10, 9,
+  'waga', 317, 1, 1,
+  6, 18,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Garnek 2 l', 'miska', 'Widelec', 'Nóż szefa kuchni', 'Deska do krojenia']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Garnek 2 l', 'miska', 'Widelec', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
   'Kanapki zjedz od razu po przygotowaniu. Ugotowane jajko możesz przechować osobno w lodówce do następnego dnia.',
   false, 'Jeśli awokado jest zbyt twarde, pokrój je w cienkie plasterki zamiast rozgniatać. Jeśli pasta ciemnieje, przygotuj ją bezpośrednio przed podaniem.'
@@ -2998,6 +3026,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -3016,7 +3045,7 @@ select p.id, sk.id, 2, 'szt'::jednostka_miary, round((2 * sk.masa_sztuki_g)::num
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Kanapki z jajkiem, awokado i pomidorem') and sk.nazwa = 'Chleb żytni razowy';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 1, 'szt'::jednostka_miary, round((1 * sk.masa_sztuki_g)::numeric, 1),
+select p.id, sk.id, 2, 'szt'::jednostka_miary, round((2 * sk.masa_sztuki_g)::numeric, 1),
        null, null, sk.rola, sk.mozna_dzielic, 2
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Kanapki z jajkiem, awokado i pomidorem') and sk.nazwa = 'Jaja kurze, całe, surowe';
 insert into przepis_skladniki
@@ -3041,27 +3070,28 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Kanapki z jajkiem, awokado i pomidorem') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Gotowanie jajka', 9 from przepisy p where lower(p.nazwa) = lower('Kanapki z jajkiem, awokado i pomidorem');
+select p.id, 1, 'Przygotowanie składników', 6 from przepisy p where lower(p.nazwa) = lower('Kanapki z jajkiem, awokado i pomidorem');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Jajko włóż do garnka, zalej wodą i gotuj 9 minut od zagotowania.', null::text, false),
-         (2::smallint, 'Schłodź je w zimnej wodzie, obierz i pokrój w plastry.', 'żółtko jest całkowicie ścięte'::text, false)
+         (1::smallint, 'Pomidora pokrój w plastry.', null::text, false),
+         (2::smallint, 'Miąższ awokado rozgnieć w misce widelcem i dopraw połową soli oraz pieprzu.', null::text, true)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Kanapki z jajkiem, awokado i pomidorem') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Składanie kanapek', 7 from przepisy p where lower(p.nazwa) = lower('Kanapki z jajkiem, awokado i pomidorem');
+select p.id, 2, 'Gotowanie jajek i składanie kanapek', 18 from przepisy p where lower(p.nazwa) = lower('Kanapki z jajkiem, awokado i pomidorem');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Miąższ awokado rozgnieć w misce widelcem i dopraw częścią soli oraz pieprzu.', null::text, true),
-         (2::smallint, 'Pastę z awokado rozsmaruj na chlebie, a na wierzchu ułóż plastry pomidora i jajka.', null::text, false),
-         (3::smallint, 'Dopraw pozostałą solą oraz pieprzem i podaj.', null::text, false)
+         (1::smallint, 'W garnku zagotuj tyle wody, aby przykryła jajka.', null::text, false),
+         (2::smallint, 'Ostrożnie włóż jajka do wrzątku i gotuj 9 minut od zanurzenia.', null::text, false),
+         (3::smallint, 'Schłodź jajka pod zimną wodą, obierz i pokrój w plastry.', 'żółtka są całkowicie ścięte'::text, false),
+         (4::smallint, 'Pastę z awokado rozsmaruj na chlebie, ułóż pomidora i jajka, a następnie dopraw pozostałą solą oraz pieprzem.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Kanapki z jajkiem, awokado i pomidorem') and e.kolejnosc = 2;
 
@@ -3071,14 +3101,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Kanapki z mozzarellą, pomidorem i bazylią', 'Kanapki z mozzarellą, świeżym pomidorem i bazylią, skropione oliwą. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['kanapki']::rodzaj_dania[],
   0, 'prywatna',
-  'waga', 227, 1,
+  'waga', 226, 1, 1,
   7, 0,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -3094,6 +3124,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -3132,7 +3163,7 @@ select p.id, sk.id, 5, 'g'::jednostka_miary, 5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Kanapki z mozzarellą, pomidorem i bazylią') and sk.nazwa = 'Oliwa z oliwek';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
+select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
        null, null, sk.rola, sk.mozna_dzielic, 6
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Kanapki z mozzarellą, pomidorem i bazylią') and sk.nazwa = 'Sól kuchenna';
 insert into przepis_skladniki
@@ -3142,7 +3173,7 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Kanapki z mozzarellą, pomidorem i bazylią') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie kanapek', 7 from przepisy p where lower(p.nazwa) = lower('Kanapki z mozzarellą, pomidorem i bazylią');
+select p.id, 1, 'Przygotowanie składników', 7 from przepisy p where lower(p.nazwa) = lower('Kanapki z mozzarellą, pomidorem i bazylią');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
@@ -3150,7 +3181,7 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
        (values
          (1::smallint, 'Mozzarellę i pomidora pokrój w plastry.', null::text, false),
          (2::smallint, 'Na kromkach chleba ułóż mozzarellę, pomidora i liście bazylii.', null::text, false),
-         (3::smallint, 'Skrop oliwą, dopraw solą oraz pieprzem i podaj.', null::text, true)
+         (3::smallint, 'Skrop oliwą, dopraw niewielką ilością soli oraz pieprzem i podaj.', null::text, true)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Kanapki z mozzarellą, pomidorem i bazylią') and e.kolejnosc = 1;
 
@@ -3160,15 +3191,15 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Kanapki z pastą jajeczną', 'Kanapki z kremową pastą z jajek, jogurtu, musztardy i szczypiorku. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Kanapki z pastą jajeczną', 'Trzy kromki chleba żytniego z kremową pastą z jajek, jogurtu, musztardy i szczypiorku. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['polska']::rodzaj_kuchni[],
   array['kanapki']::rodzaj_dania[],
   1, 'prywatna',
-  'waga', 227, 1,
-  10, 9,
+  'waga', 261, 1, 1,
+  5, 18,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Garnek 2 l', 'miska', 'Widelec', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
@@ -3183,6 +3214,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -3201,7 +3233,7 @@ select p.id, sk.id, 2, 'szt'::jednostka_miary, round((2 * sk.masa_sztuki_g)::num
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Kanapki z pastą jajeczną') and sk.nazwa = 'Jaja kurze, całe, surowe';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 2, 'szt'::jednostka_miary, round((2 * sk.masa_sztuki_g)::numeric, 1),
+select p.id, sk.id, 3, 'szt'::jednostka_miary, round((3 * sk.masa_sztuki_g)::numeric, 1),
        'kromki', null, sk.rola, sk.mozna_dzielic, 2
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Kanapki z pastą jajeczną') and sk.nazwa = 'Chleb żytni razowy';
 insert into przepis_skladniki
@@ -3221,7 +3253,7 @@ select p.id, sk.id, 10, 'g'::jednostka_miary, 10,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Kanapki z pastą jajeczną') and sk.nazwa = 'Szczypiorek świeży';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
+select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
        null, null, sk.rola, sk.mozna_dzielic, 6
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Kanapki z pastą jajeczną') and sk.nazwa = 'Sól kuchenna';
 insert into przepis_skladniki
@@ -3231,27 +3263,29 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Kanapki z pastą jajeczną') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Gotowanie jajek', 9 from przepisy p where lower(p.nazwa) = lower('Kanapki z pastą jajeczną');
+select p.id, 1, 'Przygotowanie składników', 5 from przepisy p where lower(p.nazwa) = lower('Kanapki z pastą jajeczną');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Jajka włóż do garnka, zalej wodą i gotuj 9 minut od zagotowania.', 'żółtka są całkowicie ścięte'::text, false),
-         (2::smallint, 'Ugotowane jajka schłodź w zimnej wodzie i obierz.', null::text, false)
+         (1::smallint, 'Szczypiorek drobno posiekaj, odmierz jogurt i musztardę oraz przygotuj trzy kromki chleba.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Kanapki z pastą jajeczną') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Przygotowanie pasty', 8 from przepisy p where lower(p.nazwa) = lower('Kanapki z pastą jajeczną');
+select p.id, 2, 'Gotowanie jajek i przygotowanie pasty', 18 from przepisy p where lower(p.nazwa) = lower('Kanapki z pastą jajeczną');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Jajka przełóż do miski i rozgnieć widelcem.', null::text, false),
-         (2::smallint, 'Dodaj jogurt, musztardę i szczypiorek. Dopraw solą oraz pieprzem i wymieszaj.', null::text, true),
-         (3::smallint, 'Pastę rozsmaruj na kromkach chleba.', null::text, false)
+         (1::smallint, 'W garnku zagotuj tyle wody, aby przykryła jajka.', null::text, false),
+         (2::smallint, 'Ostrożnie włóż jajka do wrzątku i gotuj 9 minut od zanurzenia.', null::text, false),
+         (3::smallint, 'Schłodź jajka pod zimną wodą, obierz i przekrój.', 'żółtka są całkowicie ścięte'::text, false),
+         (4::smallint, 'Jajka przełóż do miski i rozgnieć widelcem.', null::text, false),
+         (5::smallint, 'Dodaj jogurt, musztardę i szczypiorek. Dopraw solą oraz pieprzem i wymieszaj.', null::text, true),
+         (6::smallint, 'Pastę rozsmaruj na trzech kromkach chleba.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Kanapki z pastą jajeczną') and e.kolejnosc = 2;
 
@@ -3261,14 +3295,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Kanapki z ricottą, rzodkiewką i szczypiorkiem', 'Delikatne kanapki z ricottą, chrupiącą rzodkiewką i świeżym szczypiorkiem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['kanapki']::rodzaj_dania[],
   0, 'prywatna',
-  'waga', 251, 1,
+  'waga', 251, 1, 1,
   10, 0,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['miska', 'Widelec', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -3284,6 +3318,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -3350,14 +3385,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Kanapki z sardynkami, pomidorem i rukolą', 'Szybkie kanapki z sardynkami, pomidorem, rukolą i cytryną. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['kanapki']::rodzaj_dania[],
   0, 'prywatna',
-  'waga', 356, 1,
+  'waga', 356, 1, 1,
   10, 0,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['miska', 'Widelec', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -3373,6 +3408,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -3440,14 +3476,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Kanapki z serem salami, ogórkiem kiszonym i musztardą', 'Wyraziste kanapki z serem salami, ogórkiem kiszonym, musztardą i czerwoną cebulą. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['polska']::rodzaj_kuchni[],
   array['kanapki']::rodzaj_dania[],
   0, 'prywatna',
-  'waga', 271, 1,
+  'waga', 271, 1, 1,
   7, 0,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -3463,6 +3499,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -3529,14 +3566,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Kałamarnica z papryką i ryżem', 'Krótko smażona kałamarnica z papryką, pomidorami i ziołami, podana z ryżem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['kasza_ryz']::rodzaj_dania[],
   1, 'prywatna',
-  'waga', 600, 1,
+  'waga', 600, 1, 1,
   12, 15,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Patelnia 28 cm', 'Garnek 2 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -3552,6 +3589,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -3650,14 +3688,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Klopsiki z indyka w sosie pomidorowym z bulgurem', 'Delikatne klopsiki z indyka duszone w sosie pomidorowym, podane z kaszą bulgur. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['kasza_ryz']::rodzaj_dania[],
   3, 'prywatna',
-  'waga', 652, 1,
+  'waga', 652, 1, 1,
   15, 30,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Patelnia 28 cm', 'Garnek 2 l', 'miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -3673,6 +3711,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -3778,14 +3817,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Komosa ryżowa z ciecierzycą i pieczonymi warzywami', 'Miska z komosą ryżową, ciecierzycą, cukinią, papryką i pomidorem, doprawiona cytryną. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['kasza_ryz', 'z_piekarnika']::rodzaj_dania[],
   2, 'prywatna',
-  'waga', 658, 1,
+  'waga', 658, 1, 1,
   12, 30,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Piekarnik', 'Blacha do pieczenia', 'Garnek 2 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -3801,6 +3840,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -3903,13 +3943,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Kotleciki z czerwonej soczewicy z sosem jogurtowym', 'Rumiane kotleciki z czerwonej soczewicy i płatków owsianych, podane z ogórkowym sosem jogurtowym. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   2, 'prywatna',
-  'waga', 407, 1,
+  'waga', 407, 1, 1,
   18, 20,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Garnek 2 l', 'Patelnia 28 cm', 'miska', 'Tarka o grubych oczkach', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -3924,6 +3964,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -4033,14 +4074,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Krem z brokułów z fetą', 'Kremowa zupa brokułowa z ziemniakiem, jogurtem i fetą, podana z pieczywem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Krem z brokułów z fetą', 'Kremowa zupa brokułowa z ziemniakiem, jogurtem i fetą, podana z pieczywem. Przepis na 2 porcje.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['zupa']::rodzaj_dania[],
   3, 'prywatna',
-  'waga', 771, 1,
+  'waga', 771, 1, 2,
   10, 25,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Garnek 3 l', 'Blender ręczny', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -4056,6 +4097,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -4069,57 +4111,57 @@ delete from etapy            where przepis_id in (select id from przepisy where 
 
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 220, 'g'::jednostka_miary, 220,
+select p.id, sk.id, 440, 'g'::jednostka_miary, 440,
        'podzielony na różyczki', null, sk.rola, sk.mozna_dzielic, 1
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Krem z brokułów z fetą') and sk.nazwa = 'Brokuł, surowy';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 100, 'g'::jednostka_miary, 100,
+select p.id, sk.id, 200, 'g'::jednostka_miary, 200,
        'pokrojone', null, sk.rola, sk.mozna_dzielic, 2
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Krem z brokułów z fetą') and sk.nazwa = 'Ziemniaki, surowe';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 250, 'g'::jednostka_miary, 250,
+select p.id, sk.id, 500, 'g'::jednostka_miary, 500,
        null, null, sk.rola, sk.mozna_dzielic, 3
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Krem z brokułów z fetą') and sk.nazwa = 'Domowy bulion warzywny';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 40, 'g'::jednostka_miary, 40,
+select p.id, sk.id, 80, 'g'::jednostka_miary, 80,
        'posiekana', null, sk.rola, sk.mozna_dzielic, 4
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Krem z brokułów z fetą') and sk.nazwa = 'Cebula, surowa';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 5, 'g'::jednostka_miary, 5,
+select p.id, sk.id, 10, 'g'::jednostka_miary, 10,
        null, null, sk.rola, sk.mozna_dzielic, 5
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Krem z brokułów z fetą') and sk.nazwa = 'Czosnek, surowy';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 5, 'g'::jednostka_miary, 5,
+select p.id, sk.id, 10, 'g'::jednostka_miary, 10,
        null, null, sk.rola, sk.mozna_dzielic, 6
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Krem z brokułów z fetą') and sk.nazwa = 'Oliwa z oliwek';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 40, 'g'::jednostka_miary, 40,
+select p.id, sk.id, 80, 'g'::jednostka_miary, 80,
        null, null, sk.rola, sk.mozna_dzielic, 7
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Krem z brokułów z fetą') and sk.nazwa = 'Jogurt naturalny 2%';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 40, 'g'::jednostka_miary, 40,
+select p.id, sk.id, 80, 'g'::jednostka_miary, 80,
        'pokruszony', null, sk.rola, sk.mozna_dzielic, 8
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Krem z brokułów z fetą') and sk.nazwa = 'Ser feta';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 2, 'szt'::jednostka_miary, round((2 * sk.masa_sztuki_g)::numeric, 1),
+select p.id, sk.id, 4, 'szt'::jednostka_miary, round((4 * sk.masa_sztuki_g)::numeric, 1),
        'kromki', null, sk.rola, sk.mozna_dzielic, 9
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Krem z brokułów z fetą') and sk.nazwa = 'Chleb żytni razowy';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
+select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
        null, null, sk.rola, sk.mozna_dzielic, 10
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Krem z brokułów z fetą') and sk.nazwa = 'Gałka muszkatołowa mielona';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
+select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
        null, null, sk.rola, sk.mozna_dzielic, 11
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Krem z brokułów z fetą') and sk.nazwa = 'Czarny pieprz mielony';
 
@@ -4154,14 +4196,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Krem z dyni na mleku kokosowym', 'Aromatyczny krem z dyni, czerwonej soczewicy, imbiru i mleka kokosowego. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Krem z dyni na mleku kokosowym', 'Aromatyczny krem z dyni, czerwonej soczewicy, imbiru i mleka kokosowego. Przepis na 2 porcje.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['azjatycka']::rodzaj_kuchni[],
   array['zupa']::rodzaj_dania[],
   3, 'prywatna',
-  'waga', 792, 1,
+  'waga', 792, 1, 2,
   12, 28,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Garnek 3 l', 'Blender ręczny', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -4177,6 +4219,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -4190,67 +4233,67 @@ delete from etapy            where przepis_id in (select id from przepisy where 
 
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 250, 'g'::jednostka_miary, 250,
+select p.id, sk.id, 500, 'g'::jednostka_miary, 500,
        'pokrojona w kostkę', null, sk.rola, sk.mozna_dzielic, 1
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Krem z dyni na mleku kokosowym') and sk.nazwa = 'Dynia, surowa';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 60, 'g'::jednostka_miary, 60,
+select p.id, sk.id, 120, 'g'::jednostka_miary, 120,
        'pokrojona', null, sk.rola, sk.mozna_dzielic, 2
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Krem z dyni na mleku kokosowym') and sk.nazwa = 'Marchew, surowa';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 100, 'g'::jednostka_miary, 100,
+select p.id, sk.id, 200, 'g'::jednostka_miary, 200,
        null, null, sk.rola, sk.mozna_dzielic, 3
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Krem z dyni na mleku kokosowym') and sk.nazwa = 'Mleko kokosowe light z puszki';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 150, 'g'::jednostka_miary, 150,
+select p.id, sk.id, 300, 'g'::jednostka_miary, 300,
        null, null, sk.rola, sk.mozna_dzielic, 4
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Krem z dyni na mleku kokosowym') and sk.nazwa = 'Domowy bulion warzywny';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 50, 'g'::jednostka_miary, 50,
+select p.id, sk.id, 100, 'g'::jednostka_miary, 100,
        'opłukana', null, sk.rola, sk.mozna_dzielic, 5
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Krem z dyni na mleku kokosowym') and sk.nazwa = 'Soczewica czerwona, sucha';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 100, 'ml'::jednostka_miary, 100,
+select p.id, sk.id, 200, 'ml'::jednostka_miary, 200,
        null, null, sk.rola, sk.mozna_dzielic, 6
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Krem z dyni na mleku kokosowym') and sk.nazwa = 'woda';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 40, 'g'::jednostka_miary, 40,
+select p.id, sk.id, 80, 'g'::jednostka_miary, 80,
        'posiekana', null, sk.rola, sk.mozna_dzielic, 7
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Krem z dyni na mleku kokosowym') and sk.nazwa = 'Cebula, surowa';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 8, 'g'::jednostka_miary, 8,
+select p.id, sk.id, 16, 'g'::jednostka_miary, 16,
        null, null, sk.rola, sk.mozna_dzielic, 8
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Krem z dyni na mleku kokosowym') and sk.nazwa = 'Imbir korzeń, surowy';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 5, 'g'::jednostka_miary, 5,
+select p.id, sk.id, 10, 'g'::jednostka_miary, 10,
        null, null, sk.rola, sk.mozna_dzielic, 9
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Krem z dyni na mleku kokosowym') and sk.nazwa = 'Czosnek, surowy';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 8, 'g'::jednostka_miary, 8,
+select p.id, sk.id, 16, 'g'::jednostka_miary, 16,
        null, null, sk.rola, sk.mozna_dzielic, 10
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Krem z dyni na mleku kokosowym') and sk.nazwa = 'Pasta curry czerwona';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 5, 'g'::jednostka_miary, 5,
+select p.id, sk.id, 10, 'g'::jednostka_miary, 10,
        null, null, sk.rola, sk.mozna_dzielic, 11
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Krem z dyni na mleku kokosowym') and sk.nazwa = 'Olej rzepakowy';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 15, 'g'::jednostka_miary, 15,
+select p.id, sk.id, 30, 'g'::jednostka_miary, 30,
        'sok', null, sk.rola, sk.mozna_dzielic, 12
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Krem z dyni na mleku kokosowym') and sk.nazwa = 'Limonka';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
+select p.id, sk.id, 2, 'g'::jednostka_miary, 2,
        null, null, sk.rola, sk.mozna_dzielic, 13
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Krem z dyni na mleku kokosowym') and sk.nazwa = 'Sól kuchenna';
 
@@ -4285,14 +4328,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Krem z kalafiora z pieczoną ciecierzycą', 'Krem z kalafiora i ziemniaka podany z pieczoną ciecierzycą oraz pieczywem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Krem z kalafiora z pieczoną ciecierzycą', 'Krem z kalafiora i ziemniaka podany z pieczoną ciecierzycą oraz pieczywem. Przepis na 2 porcje.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['zupa']::rodzaj_dania[],
   3, 'prywatna',
-  'waga', 797, 1,
+  'waga', 797, 1, 2,
   12, 30,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Piekarnik', 'Blacha do pieczenia', 'Garnek 3 l', 'Blender ręczny', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -4308,6 +4351,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -4321,62 +4365,62 @@ delete from etapy            where przepis_id in (select id from przepisy where 
 
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 220, 'g'::jednostka_miary, 220,
+select p.id, sk.id, 440, 'g'::jednostka_miary, 440,
        'podzielony na różyczki', null, sk.rola, sk.mozna_dzielic, 1
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Krem z kalafiora z pieczoną ciecierzycą') and sk.nazwa = 'Kalafior, surowy';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 100, 'g'::jednostka_miary, 100,
+select p.id, sk.id, 200, 'g'::jednostka_miary, 200,
        'pokrojone', null, sk.rola, sk.mozna_dzielic, 2
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Krem z kalafiora z pieczoną ciecierzycą') and sk.nazwa = 'Ziemniaki, surowe';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 100, 'g'::jednostka_miary, 100,
+select p.id, sk.id, 200, 'g'::jednostka_miary, 200,
        'dokładnie osuszona', null, sk.rola, sk.mozna_dzielic, 3
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Krem z kalafiora z pieczoną ciecierzycą') and sk.nazwa = 'Ciecierzyca z puszki, odsączona';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 250, 'g'::jednostka_miary, 250,
+select p.id, sk.id, 500, 'g'::jednostka_miary, 500,
        null, null, sk.rola, sk.mozna_dzielic, 4
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Krem z kalafiora z pieczoną ciecierzycą') and sk.nazwa = 'Domowy bulion warzywny';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 40, 'g'::jednostka_miary, 40,
+select p.id, sk.id, 80, 'g'::jednostka_miary, 80,
        'posiekana', null, sk.rola, sk.mozna_dzielic, 5
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Krem z kalafiora z pieczoną ciecierzycą') and sk.nazwa = 'Cebula, surowa';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 5, 'g'::jednostka_miary, 5,
+select p.id, sk.id, 10, 'g'::jednostka_miary, 10,
        null, null, sk.rola, sk.mozna_dzielic, 6
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Krem z kalafiora z pieczoną ciecierzycą') and sk.nazwa = 'Czosnek, surowy';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 8, 'g'::jednostka_miary, 8,
+select p.id, sk.id, 16, 'g'::jednostka_miary, 16,
        null, null, sk.rola, sk.mozna_dzielic, 7
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Krem z kalafiora z pieczoną ciecierzycą') and sk.nazwa = 'Oliwa z oliwek';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 2, 'szt'::jednostka_miary, round((2 * sk.masa_sztuki_g)::numeric, 1),
+select p.id, sk.id, 4, 'szt'::jednostka_miary, round((4 * sk.masa_sztuki_g)::numeric, 1),
        'kromki', null, sk.rola, sk.mozna_dzielic, 8
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Krem z kalafiora z pieczoną ciecierzycą') and sk.nazwa = 'Chleb żytni razowy';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
+select p.id, sk.id, 2, 'g'::jednostka_miary, 2,
        null, null, sk.rola, sk.mozna_dzielic, 9
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Krem z kalafiora z pieczoną ciecierzycą') and sk.nazwa = 'Kmin rzymski mielony';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
+select p.id, sk.id, 2, 'g'::jednostka_miary, 2,
        null, null, sk.rola, sk.mozna_dzielic, 10
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Krem z kalafiora z pieczoną ciecierzycą') and sk.nazwa = 'Papryka wędzona mielona';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
+select p.id, sk.id, 2, 'g'::jednostka_miary, 2,
        null, null, sk.rola, sk.mozna_dzielic, 11
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Krem z kalafiora z pieczoną ciecierzycą') and sk.nazwa = 'Sól kuchenna';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
+select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
        null, null, sk.rola, sk.mozna_dzielic, 12
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Krem z kalafiora z pieczoną ciecierzycą') and sk.nazwa = 'Czarny pieprz mielony';
 
@@ -4412,14 +4456,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Krewetki z czosnkiem, cukinią i ryżem', 'Krewetki smażone z czosnkiem, cukinią, chili i cytryną, podane z ryżem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['kasza_ryz']::rodzaj_dania[],
   1, 'prywatna',
-  'waga', 442, 1,
+  'waga', 442, 1, 1,
   10, 15,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Patelnia 28 cm', 'Garnek 2 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -4435,6 +4479,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -4522,14 +4567,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Królik z rozmarynem i warzywami korzeniowymi', 'Królik pieczony z ziemniakami, marchewką, pasternakiem, selerem i rozmarynem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad']::pora_posilku[], array['polska']::rodzaj_kuchni[],
   array['z_piekarnika']::rodzaj_dania[],
   3, 'prywatna',
-  'waga', 732, 1,
+  'waga', 732, 1, 1,
   18, 70,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Piekarnik', 'Naczynie żaroodporne', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -4545,6 +4590,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -4648,14 +4694,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Kurczak pieczony z batatem i brokułem', 'Pierś kurczaka pieczona na jednej blasze z batatem, brokułem i czerwoną cebulą. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['z_piekarnika']::rodzaj_dania[],
   3, 'prywatna',
-  'waga', 709, 1,
+  'waga', 709, 1, 1,
   12, 35,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Piekarnik', 'Blacha do pieczenia', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -4671,6 +4717,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -4764,14 +4811,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Makaron pełnoziarnisty z bolońskim sosem z soczewicy', 'Pełnoziarnisty makaron z gęstym pomidorowym sosem z czerwonej soczewicy i warzyw. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['makaron']::rodzaj_dania[],
   3, 'prywatna',
-  'waga', 711, 1,
+  'waga', 711, 1, 1,
   10, 28,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Garnek 3 l', 'Garnek 2 l', 'Tarka o grubych oczkach', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -4787,6 +4834,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -4894,14 +4942,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Makaron z brokułem i fetą', 'Pełnoziarnisty makaron z brokułem, fetą, czosnkiem i cytryną. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['makaron']::rodzaj_dania[],
   2, 'prywatna',
-  'waga', 406, 1,
+  'waga', 406, 1, 1,
   8, 18,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Garnek 3 l', 'Patelnia 28 cm', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -4917,6 +4965,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -5000,14 +5049,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Makaron z ciecierzycą, bazylią i orzechami', 'Pełnoziarnisty makaron z ciecierzycą i szybkim sosem z bazylii, orzechów oraz oliwy. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['makaron']::rodzaj_dania[],
   2, 'prywatna',
-  'waga', 396, 1,
+  'waga', 396, 1, 1,
   10, 15,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Garnek 3 l', 'Blender ręczny', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -5023,6 +5072,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -5115,14 +5165,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Makaron z indykiem, pieczarkami i jogurtem', 'Pełnoziarnisty makaron z indykiem i pieczarkami w lekkim sosie jogurtowym. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['makaron']::rodzaj_dania[],
   2, 'prywatna',
-  'waga', 561, 1,
+  'waga', 561, 1, 1,
   10, 20,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Patelnia 28 cm', 'Garnek 3 l', 'miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -5138,6 +5188,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -5231,14 +5282,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Makaron z kurczakiem, szpinakiem i pomidorami', 'Pełnoziarnisty makaron z kurczakiem, szpinakiem i pomidorowym sosem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['makaron']::rodzaj_dania[],
   2, 'prywatna',
-  'waga', 642, 1,
+  'waga', 642, 1, 1,
   10, 20,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Patelnia 28 cm', 'Garnek 3 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -5254,6 +5305,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -5356,14 +5408,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Makaron z pieczonymi warzywami i mozzarellą', 'Pełnoziarnisty makaron z pieczoną cukinią, papryką, pomidorem i mozzarellą. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['makaron']::rodzaj_dania[],
   2, 'prywatna',
-  'waga', 625, 1,
+  'waga', 625, 1, 1,
   12, 30,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Piekarnik', 'Blacha do pieczenia', 'Garnek 3 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -5379,6 +5431,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -5477,14 +5530,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Makaron z polędwiczką i pieczarkami', 'Pełnoziarnisty makaron z polędwiczką wieprzową i pieczarkami w lekkim sosie jogurtowym. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['makaron']::rodzaj_dania[],
   2, 'prywatna',
-  'waga', 556, 1,
+  'waga', 556, 1, 1,
   12, 18,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Patelnia 28 cm', 'Garnek 3 l', 'miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -5500,6 +5553,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -5598,14 +5652,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Makaron z ricottą i szpinakiem', 'Szybki pełnoziarnisty makaron z kremową ricottą, szpinakiem, czosnkiem i cytryną. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['makaron']::rodzaj_dania[],
   2, 'prywatna',
-  'waga', 355, 1,
+  'waga', 355, 1, 1,
   7, 15,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Patelnia 28 cm', 'Garnek 3 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -5621,6 +5675,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -5708,14 +5763,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Makaron z tuńczykiem, cytryną i natką pietruszki', 'Szybki pełnoziarnisty makaron z tuńczykiem, cytryną, czosnkiem i natką pietruszki. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['makaron']::rodzaj_dania[],
   2, 'prywatna',
-  'waga', 267, 1,
+  'waga', 267, 1, 1,
   7, 15,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Garnek 3 l', 'Patelnia 28 cm', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -5731,6 +5786,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -5818,14 +5874,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Makaron z wołowiną i sosem pomidorowym', 'Pełnoziarnisty makaron z mieloną wołowiną i warzywnym sosem pomidorowym. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['makaron']::rodzaj_dania[],
   3, 'prywatna',
-  'waga', 649, 1,
+  'waga', 649, 1, 1,
   12, 30,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Patelnia 28 cm', 'Garnek 3 l', 'Tarka o grubych oczkach', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -5841,6 +5897,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -5939,13 +5996,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Małże w pomidorowym bulionie', 'Małże gotowane w aromatycznym bulionie pomidorowym z czosnkiem, selerem naciowym i natką. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   0, 'prywatna',
-  'waga', 677, 1,
+  'waga', 677, 1, 1,
   15, 15,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Garnek 3 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -5960,6 +6017,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -6054,14 +6112,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Morszczuk w sosie pomidorowym z ryżem', 'Morszczuk duszony w ziołowym sosie pomidorowym, podany z ryżem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['kasza_ryz']::rodzaj_dania[],
   2, 'prywatna',
-  'waga', 557, 1,
+  'waga', 557, 1, 1,
   10, 25,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Patelnia 28 cm', 'Garnek 2 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -6077,6 +6135,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -6175,14 +6234,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Nocna owsianka z bananem i chia', 'Nocna owsianka z bananem, nasionami chia i masłem orzechowym. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['na_slodko']::rodzaj_dania[],
   2, 'prywatna',
-  'waga', 386, 1,
+  'waga', 386, 1, 1,
   7, 0,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['miska', 'Widelec', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -6198,6 +6257,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -6274,14 +6334,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Nocna owsianka z borówkami i orzechami', 'Nocna owsianka z borówkami, jogurtem, chia i orzechami włoskimi. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['na_slodko']::rodzaj_dania[],
   2, 'prywatna',
-  'waga', 435, 1,
+  'waga', 435, 1, 1,
   7, 0,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['miska', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -6297,6 +6357,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -6368,19 +6429,19 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Omlet ze szpinakiem i fetą', 'Delikatny omlet z liśćmi szpinaku i słoną fetą. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Omlet ze szpinakiem i fetą', 'Delikatny omlet ze szpinakiem i fetą, podany z kromką chleba żytniego. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['jajka']::rodzaj_dania[],
   1, 'prywatna',
-  'waga', 207, 1,
+  'waga', 241, 1, 1,
   7, 8,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Patelnia 24 cm', 'miska', 'Widelec', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Po ostudzeniu przechowuj w zamkniętym pojemniku w lodówce do 1 dnia. Odgrzej na patelni na małym ogniu.',
+  'Po ostudzeniu przechowuj omlet w zamkniętym pojemniku w lodówce do 1 dnia. Odgrzej na patelni na małym ogniu, a pieczywo przechowuj osobno.',
   false, 'Jeśli omlet przywiera, zmniejsz ogień i delikatnie podważ brzegi. Jeśli wierzch pozostaje płynny, przykryj patelnię na 1–2 minuty.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -6391,6 +6452,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -6424,17 +6486,22 @@ select p.id, sk.id, 5, 'g'::jednostka_miary, 5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Omlet ze szpinakiem i fetą') and sk.nazwa = 'Olej rzepakowy';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
-       null, null, sk.rola, sk.mozna_dzielic, 5
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Omlet ze szpinakiem i fetą') and sk.nazwa = 'Sól kuchenna';
+select p.id, sk.id, 1, 'szt'::jednostka_miary, round((1 * sk.masa_sztuki_g)::numeric, 1),
+       'kromka', null, sk.rola, sk.mozna_dzielic, 5
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Omlet ze szpinakiem i fetą') and sk.nazwa = 'Chleb żytni razowy';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
        null, null, sk.rola, sk.mozna_dzielic, 6
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Omlet ze szpinakiem i fetą') and sk.nazwa = 'Sól kuchenna';
+insert into przepis_skladniki
+  (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
+select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
+       null, null, sk.rola, sk.mozna_dzielic, 7
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Omlet ze szpinakiem i fetą') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie masy', 7 from przepisy p where lower(p.nazwa) = lower('Omlet ze szpinakiem i fetą');
+select p.id, 1, 'Przygotowanie składników', 7 from przepisy p where lower(p.nazwa) = lower('Omlet ze szpinakiem i fetą');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
@@ -6454,7 +6521,8 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
        (values
          (1::smallint, 'Rozgrzej olej na patelni, dodaj szpinak i smaż około 1 minuty, aż zwiędnie.', null::text, false),
          (2::smallint, 'Wlej jajka, rozłóż fetę na wierzchu i smaż na małym ogniu.', null::text, true),
-         (3::smallint, 'Gdy spód się zetnie, złóż omlet na pół i smaż jeszcze 1–2 minuty.', 'środek jest ścięty, ale pozostaje miękki'::text, false)
+         (3::smallint, 'Gdy spód się zetnie, złóż omlet na pół i smaż jeszcze 1–2 minuty.', 'środek jest ścięty, ale pozostaje miękki'::text, false),
+         (4::smallint, 'Podaj omlet od razu z kromką chleba.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Omlet ze szpinakiem i fetą') and e.kolejnosc = 2;
 
@@ -6464,17 +6532,17 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Owsianka z jabłkiem, cynamonem i orzechami', 'Kremowa owsianka na mleku z jabłkiem, cynamonem i orzechami włoskimi. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['na_slodko']::rodzaj_dania[],
   1, 'prywatna',
-  'waga', 423, 1,
-  5, 7,
+  'waga', 423, 1, 1,
+  5, 10,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Rondel', 'miska', 'Widelec', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Rondel', 'miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
   'Po ostudzeniu przechowuj w zamkniętym pojemniku w lodówce do 1 dnia. Przy odgrzewaniu dodaj odrobinę mleka.',
   false, 'Jeśli owsianka jest za gęsta, dolej trochę mleka. Jeśli jest zbyt rzadka, gotuj jeszcze 1–2 minuty, często mieszając.'
@@ -6487,6 +6555,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -6541,14 +6610,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
  where lower(p.nazwa) = lower('Owsianka z jabłkiem, cynamonem i orzechami') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Gotowanie owsianki', 7 from przepisy p where lower(p.nazwa) = lower('Owsianka z jabłkiem, cynamonem i orzechami');
+select p.id, 2, 'Gotowanie owsianki', 10 from przepisy p where lower(p.nazwa) = lower('Owsianka z jabłkiem, cynamonem i orzechami');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
          (1::smallint, 'Do rondla wsyp płatki, wlej mleko i dodaj sól.', null::text, false),
-         (2::smallint, 'Gotuj na małym ogniu przez 5–7 minut, często mieszając.', 'płatki są miękkie, a owsianka kremowa'::text, true),
+         (2::smallint, 'Podgrzewaj, mieszając. Gdy mleko zacznie lekko wrzeć, zmniejsz ogień i gotuj 5–7 minut.', 'płatki są miękkie, a owsianka kremowa'::text, true),
          (3::smallint, 'Dodaj jabłko i cynamon, wymieszaj i podgrzewaj jeszcze około minuty.', null::text, false),
          (4::smallint, 'Przełóż do miski i posyp orzechami.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
@@ -6560,14 +6629,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Papryka faszerowana soczewicą i kaszą bulgur', 'Pieczona papryka wypełniona soczewicą, kaszą bulgur i pomidorowym farszem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['z_piekarnika']::rodzaj_dania[],
   3, 'prywatna',
-  'waga', 644, 1,
+  'waga', 644, 1, 1,
   15, 40,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Piekarnik', 'Naczynie żaroodporne', 'Garnek 2 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -6583,6 +6652,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -6682,14 +6752,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Pełnoziarniste placuszki ze skyrem i owocami', 'Pełnoziarniste placuszki podane ze skyrem i borówkami. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['na_slodko']::rodzaj_dania[],
   1, 'prywatna',
-  'waga', 521, 1,
+  'waga', 521, 1, 1,
   10, 15,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Patelnia 24 cm', 'miska', 'Widelec', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -6705,6 +6775,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -6788,14 +6859,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Pieczona makrela z burakami i ziemniakami', 'Pieczona makrela z burakami, ziemniakami, czerwoną cebulą i koperkiem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['polska']::rodzaj_kuchni[],
   array['z_piekarnika']::rodzaj_dania[],
   2, 'prywatna',
-  'waga', 717, 1,
+  'waga', 717, 1, 1,
   15, 45,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Piekarnik', 'Blacha do pieczenia', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -6811,6 +6882,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -6899,14 +6971,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Pieczone warzywa korzeniowe z tymiankiem', 'Mieszanka pieczonych ziemniaków, buraków, marchewki, pasternaku i selera z tymiankiem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['dodatek']::pora_posilku[], array['polska']::rodzaj_kuchni[],
   array['z_piekarnika']::rodzaj_dania[],
   3, 'prywatna',
-  'waga', 343, 1,
+  'waga', 343, 1, 1,
   15, 40,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Piekarnik', 'Blacha do pieczenia', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -6922,6 +6994,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -7019,14 +7092,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Pieczony bakłażan z ciecierzycą i fetą', 'Pieczony bakłażan z ciecierzycą, pomidorami, fetą i kaszą bulgur. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['z_piekarnika']::rodzaj_dania[],
   2, 'prywatna',
-  'waga', 728, 1,
+  'waga', 728, 1, 1,
   12, 35,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Piekarnik', 'Naczynie żaroodporne', 'Garnek 2 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -7042,6 +7115,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -7141,14 +7215,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Pieczony kalafior z ziołowym sosem jogurtowym', 'Rumiany pieczony kalafior podany z lekkim sosem jogurtowym, cytryną i natką pietruszki. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['dodatek']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['z_piekarnika']::rodzaj_dania[],
   2, 'prywatna',
-  'waga', 372, 1,
+  'waga', 372, 1, 1,
   10, 30,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Piekarnik', 'Blacha do pieczenia', 'miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -7164,6 +7238,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -7256,14 +7331,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Pieczony łosoś z brokułem i ziemniakami', 'Łosoś pieczony na jednej blasze z brokułem i ziemniakami, doprawiony cytryną oraz czosnkiem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['z_piekarnika']::rodzaj_dania[],
   2, 'prywatna',
-  'waga', 668, 1,
+  'waga', 668, 1, 1,
   12, 30,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Piekarnik', 'Blacha do pieczenia', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -7279,6 +7354,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -7367,13 +7443,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Pierś z kaczki z pomarańczą i czerwoną kapustą', 'Pierś z kaczki z duszoną czerwoną kapustą, jabłkiem, pomarańczą i ziemniakami. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   2, 'prywatna',
-  'waga', 728, 1,
+  'waga', 728, 1, 1,
   15, 35,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Patelnia 28 cm', 'Garnek 3 l', 'Garnek 2 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -7388,6 +7464,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -7503,14 +7580,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Placuszki bananowo-owsiane', 'Miękkie placuszki z banana, jajka i mąki owsianej, podane z jogurtem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['na_slodko']::rodzaj_dania[],
   1, 'prywatna',
-  'waga', 381, 1,
+  'waga', 381, 1, 1,
   8, 12,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Patelnia 24 cm', 'miska', 'Widelec', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -7526,6 +7603,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -7604,14 +7682,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Polędwiczka w sosie musztardowym z kaszą bulgur', 'Polędwiczka wieprzowa w lekkim sosie musztardowo-jogurtowym z pieczarkami i kaszą bulgur. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad']::pora_posilku[], array['polska']::rodzaj_kuchni[],
   array['kasza_ryz']::rodzaj_dania[],
   2, 'prywatna',
-  'waga', 656, 1,
+  'waga', 656, 1, 1,
   12, 23,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Patelnia 28 cm', 'Garnek 2 l', 'miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -7627,6 +7705,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -7726,14 +7805,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Potrawka z kurczaka, kaszy jęczmiennej i warzyw', 'Jednogarnkowa potrawka z kurczaka, kaszy jęczmiennej, marchewki, pora i groszku. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Potrawka z kurczaka, kaszy jęczmiennej i warzyw', 'Jednogarnkowa potrawka z kurczaka, kaszy jęczmiennej, marchewki, pora i groszku. Przepis na 2 porcje.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['polska']::rodzaj_kuchni[],
   array['gulasz_curry', 'kasza_ryz']::rodzaj_dania[],
   3, 'prywatna',
-  'waga', 738, 1,
+  'waga', 738, 1, 2,
   12, 35,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Garnek 3 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -7749,6 +7828,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -7762,57 +7842,57 @@ delete from etapy            where przepis_id in (select id from przepisy where 
 
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 150, 'g'::jednostka_miary, 150,
+select p.id, sk.id, 300, 'g'::jednostka_miary, 300,
        'pokrojone w kostkę', null, sk.rola, sk.mozna_dzielic, 1
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Potrawka z kurczaka, kaszy jęczmiennej i warzyw') and sk.nazwa = 'Udo z kurczaka bez skóry, surowe';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 60, 'g'::jednostka_miary, 60,
+select p.id, sk.id, 120, 'g'::jednostka_miary, 120,
        'opłukana', null, sk.rola, sk.mozna_dzielic, 2
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Potrawka z kurczaka, kaszy jęczmiennej i warzyw') and sk.nazwa = 'Kasza jęczmienna, sucha';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 70, 'g'::jednostka_miary, 70,
+select p.id, sk.id, 140, 'g'::jednostka_miary, 140,
        'pokrojona', null, sk.rola, sk.mozna_dzielic, 3
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Potrawka z kurczaka, kaszy jęczmiennej i warzyw') and sk.nazwa = 'Marchew, surowa';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 50, 'g'::jednostka_miary, 50,
+select p.id, sk.id, 100, 'g'::jednostka_miary, 100,
        'pokrojony', null, sk.rola, sk.mozna_dzielic, 4
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Potrawka z kurczaka, kaszy jęczmiennej i warzyw') and sk.nazwa = 'Por, surowy';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 60, 'g'::jednostka_miary, 60,
+select p.id, sk.id, 120, 'g'::jednostka_miary, 120,
        null, null, sk.rola, sk.mozna_dzielic, 5
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Potrawka z kurczaka, kaszy jęczmiennej i warzyw') and sk.nazwa = 'Groszek zielony mrożony';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 40, 'g'::jednostka_miary, 40,
+select p.id, sk.id, 80, 'g'::jednostka_miary, 80,
        'pokrojony', null, sk.rola, sk.mozna_dzielic, 6
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Potrawka z kurczaka, kaszy jęczmiennej i warzyw') and sk.nazwa = 'Seler naciowy, surowy';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 300, 'g'::jednostka_miary, 300,
+select p.id, sk.id, 600, 'g'::jednostka_miary, 600,
        null, null, sk.rola, sk.mozna_dzielic, 7
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Potrawka z kurczaka, kaszy jęczmiennej i warzyw') and sk.nazwa = 'Domowy bulion warzywny';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 5, 'g'::jednostka_miary, 5,
+select p.id, sk.id, 10, 'g'::jednostka_miary, 10,
        null, null, sk.rola, sk.mozna_dzielic, 8
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Potrawka z kurczaka, kaszy jęczmiennej i warzyw') and sk.nazwa = 'Olej rzepakowy';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
+select p.id, sk.id, 2, 'g'::jednostka_miary, 2,
        null, null, sk.rola, sk.mozna_dzielic, 9
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Potrawka z kurczaka, kaszy jęczmiennej i warzyw') and sk.nazwa = 'Tymianek suszony';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
+select p.id, sk.id, 2, 'g'::jednostka_miary, 2,
        null, null, sk.rola, sk.mozna_dzielic, 10
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Potrawka z kurczaka, kaszy jęczmiennej i warzyw') and sk.nazwa = 'Sól kuchenna';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
+select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
        null, null, sk.rola, sk.mozna_dzielic, 11
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Potrawka z kurczaka, kaszy jęczmiennej i warzyw') and sk.nazwa = 'Czarny pieprz mielony';
 
@@ -7847,14 +7927,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Pstrąg pieczony z warzywami korzeniowymi', 'Pstrąg pieczony z ziemniakami, marchewką, pasternakiem i selerem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad']::pora_posilku[], array['polska']::rodzaj_kuchni[],
   array['z_piekarnika']::rodzaj_dania[],
   2, 'prywatna',
-  'waga', 673, 1,
+  'waga', 673, 1, 1,
   15, 40,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Piekarnik', 'Blacha do pieczenia', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -7870,6 +7950,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -7963,14 +8044,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Pudding chia z mango i mlekiem kokosowym', 'Wegański pudding chia na mleku kokosowym z mango, migdałami i daktylami. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'dodatek']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['na_slodko']::rodzaj_dania[],
   2, 'prywatna',
-  'waga', 435, 1,
+  'waga', 435, 1, 1,
   8, 0,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['miska', 'Widelec', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -7986,6 +8067,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -8052,14 +8134,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Ryż z pieczarkami, szpinakiem i parmezanem', 'Kremowy ryż z pieczarkami, szpinakiem i parmezanem przygotowany w jednym garnku. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['kasza_ryz']::rodzaj_dania[],
   2, 'prywatna',
-  'waga', 739, 1,
+  'waga', 739, 1, 1,
   10, 25,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Garnek 3 l', 'Tarka o drobnych oczkach', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -8075,6 +8157,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -8168,14 +8251,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Sałatka brokułowa z jajkiem i sosem jogurtowym', 'Sałatka z brokułem, jajkami na twardo, kukurydzą i szczypiorkiem w sosie jogurtowo-musztardowym. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['salatka']::rodzaj_dania[],
   2, 'prywatna',
-  'waga', 586, 1,
+  'waga', 586, 1, 1,
   12, 10,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Garnek 3 l', 'miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -8191,6 +8274,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -8279,14 +8363,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Sałatka makaronowa z mozzarellą i warzywami', 'Sałatka z pełnoziarnistym makaronem, mozzarellą, pomidorem, ogórkiem, papryką i bazylią. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['salatka']::rodzaj_dania[],
   2, 'prywatna',
-  'waga', 559, 1,
+  'waga', 559, 1, 1,
   12, 12,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Garnek 3 l', 'Sitko', 'miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -8302,6 +8386,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -8399,14 +8484,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Sałatka makaronowa z tuńczykiem i warzywami', 'Sałatka z pełnoziarnistym makaronem, tuńczykiem, pomidorem, ogórkiem i kukurydzą. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['salatka']::rodzaj_dania[],
   2, 'prywatna',
-  'waga', 576, 1,
+  'waga', 576, 1, 1,
   12, 12,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Garnek 2 l', 'Sitko', 'miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -8422,6 +8507,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -8514,14 +8600,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Sałatka z czarnej fasoli, kukurydzy i pomidora', 'Kolorowa sałatka z czarnej fasoli, kukurydzy, pomidora, papryki i awokado. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['salatka']::rodzaj_dania[],
   1, 'prywatna',
-  'waga', 632, 1,
+  'waga', 632, 1, 1,
   15, 0,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -8537,6 +8623,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -8624,17 +8711,17 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Sałatka z jajkiem, fetą i warzywami', 'Sałatka z jajkami na twardo, fetą, pomidorem, ogórkiem i sałatą, skropiona oliwą. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['salatka']::rodzaj_dania[],
   1, 'prywatna',
-  'waga', 387, 1,
-  10, 9,
+  'waga', 386, 1, 1,
+  10, 17,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Garnek 2 l', 'miska', 'Widelec', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Garnek 2 l', 'miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
   'Przechowuj w zamkniętym pojemniku w lodówce do 1 dnia. Oliwę i przyprawy najlepiej dodaj przed jedzeniem.',
   false, 'Jeśli sałatka puściła wodę, odlej płyn i dodaj świeżą sałatę. Jeśli feta jest bardzo słona, ogranicz ilość dodatkowej soli.'
@@ -8647,6 +8734,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -8690,7 +8778,7 @@ select p.id, sk.id, 10, 'g'::jednostka_miary, 10,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Sałatka z jajkiem, fetą i warzywami') and sk.nazwa = 'Oliwa z oliwek';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
+select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
        null, null, sk.rola, sk.mozna_dzielic, 7
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Sałatka z jajkiem, fetą i warzywami') and sk.nazwa = 'Sól kuchenna';
 insert into przepis_skladniki
@@ -8700,27 +8788,28 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Sałatka z jajkiem, fetą i warzywami') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Gotowanie jajek', 9 from przepisy p where lower(p.nazwa) = lower('Sałatka z jajkiem, fetą i warzywami');
+select p.id, 1, 'Przygotowanie składników', 10 from przepisy p where lower(p.nazwa) = lower('Sałatka z jajkiem, fetą i warzywami');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Jajka włóż do garnka, zalej wodą i gotuj 9 minut od zagotowania.', null::text, false),
-         (2::smallint, 'Schłodź jajka, obierz i pokrój w ćwiartki.', 'żółtka są całkowicie ścięte'::text, false)
+         (1::smallint, 'Pomidora pokrój w cząstki, ogórek w półplasterki, a sałatę porwij na mniejsze kawałki.', null::text, false),
+         (2::smallint, 'Fetę pokrusz, a warzywa przełóż do miski.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Sałatka z jajkiem, fetą i warzywami') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Przygotowanie sałatki', 10 from przepisy p where lower(p.nazwa) = lower('Sałatka z jajkiem, fetą i warzywami');
+select p.id, 2, 'Gotowanie jajek i wykończenie sałatki', 17 from przepisy p where lower(p.nazwa) = lower('Sałatka z jajkiem, fetą i warzywami');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Pomidora pokrój w cząstki, ogórek w półplasterki, a sałatę porwij.', null::text, false),
-         (2::smallint, 'Warzywa przełóż do miski, dodaj jajka i pokruszoną fetę.', null::text, false),
-         (3::smallint, 'Skrop oliwą, dopraw solą oraz pieprzem i delikatnie wymieszaj.', null::text, true)
+         (1::smallint, 'W garnku zagotuj tyle wody, aby przykryła jajka.', null::text, false),
+         (2::smallint, 'Ostrożnie włóż jajka do wrzątku i gotuj 9 minut od zanurzenia.', null::text, false),
+         (3::smallint, 'Schłodź jajka pod zimną wodą, obierz i pokrój w ćwiartki.', 'żółtka są całkowicie ścięte'::text, false),
+         (4::smallint, 'Dodaj jajka i fetę do warzyw. Skrop oliwą, dopraw solą oraz pieprzem i delikatnie wymieszaj.', null::text, true)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Sałatka z jajkiem, fetą i warzywami') and e.kolejnosc = 2;
 
@@ -8730,14 +8819,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Sałatka z jarmużu, jabłka i orzechów', 'Chrupiąca sałatka z jarmużu, jabłka, pomarańczy i orzechów w cytrynowo-musztardowym dressingu. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['kolacja', 'dodatek']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['salatka']::rodzaj_dania[],
   1, 'prywatna',
-  'waga', 406, 1,
+  'waga', 406, 1, 1,
   15, 0,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -8753,6 +8842,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -8830,14 +8920,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Sałatka z komosy, buraka i koziego sera', 'Sałatka z komosy ryżowej, pieczonego buraka, koziego sera, rukoli i orzechów. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['salatka']::rodzaj_dania[],
   2, 'prywatna',
-  'waga', 502, 1,
+  'waga', 502, 1, 1,
   12, 35,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Piekarnik', 'Blacha do pieczenia', 'Garnek 2 l', 'miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -8853,6 +8943,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -8950,14 +9041,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Sałatka z pieczonym burakiem i fetą', 'Sałatka z pieczonym burakiem, fetą, rukolą, orzechami i czerwoną cebulą. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['salatka']::rodzaj_dania[],
   2, 'prywatna',
-  'waga', 432, 1,
+  'waga', 432, 1, 1,
   10, 35,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Piekarnik', 'Blacha do pieczenia', 'miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -8973,6 +9064,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -9060,14 +9152,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Serek wiejski z owocami i orzechami', 'Serek wiejski z bananem, borówkami, orzechami i cynamonem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'dodatek']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['na_slodko']::rodzaj_dania[],
   1, 'prywatna',
-  'waga', 361, 1,
+  'waga', 361, 1, 1,
   5, 0,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -9083,6 +9175,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -9138,28 +9231,31 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 -- -------------------------------------------------------------------------
 
 insert into przepisy
-  (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Serek wiejski z pomidorem, ogórkiem i pestkami dyni', 'Serek wiejski ze świeżym pomidorem, chrupiącym ogórkiem i pestkami dyni. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Serek wiejski z pomidorem, ogórkiem i pestkami dyni', 'Serek wiejski ze świeżym pomidorem, ogórkiem i pestkami dyni, podany z dwiema kromkami chleba żytniego. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
+  array['salatka']::rodzaj_dania[],
   1, 'prywatna',
-  'waga', 447, 1,
+  'waga', 516, 1, 1,
   7, 0,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['miska', 'Widelec', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Przechowuj w zamkniętym pojemniku w lodówce do 1 dnia. Pestki dyni najlepiej dodaj tuż przed jedzeniem.',
+  'Serek z warzywami przechowuj w zamkniętym pojemniku w lodówce do 1 dnia. Pestki dyni i pieczywo dodaj dopiero przed jedzeniem.',
   false, 'Jeśli całość puściła dużo wody, odlej nadmiar płynu. Jeśli smak jest zbyt łagodny, dodaj odrobinę soli i pieprzu.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
   kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
   trwalosc_dni           = excluded.trwalosc_dni,
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -9193,38 +9289,32 @@ select p.id, sk.id, 15, 'g'::jednostka_miary, 15,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Serek wiejski z pomidorem, ogórkiem i pestkami dyni') and sk.nazwa = 'Pestki dyni';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
-       null, null, sk.rola, sk.mozna_dzielic, 5
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Serek wiejski z pomidorem, ogórkiem i pestkami dyni') and sk.nazwa = 'Sól kuchenna';
+select p.id, sk.id, 2, 'szt'::jednostka_miary, round((2 * sk.masa_sztuki_g)::numeric, 1),
+       'kromki', null, sk.rola, sk.mozna_dzielic, 5
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Serek wiejski z pomidorem, ogórkiem i pestkami dyni') and sk.nazwa = 'Chleb żytni razowy';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
        null, null, sk.rola, sk.mozna_dzielic, 6
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Serek wiejski z pomidorem, ogórkiem i pestkami dyni') and sk.nazwa = 'Sól kuchenna';
+insert into przepis_skladniki
+  (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
+select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
+       null, null, sk.rola, sk.mozna_dzielic, 7
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Serek wiejski z pomidorem, ogórkiem i pestkami dyni') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie', 5 from przepisy p where lower(p.nazwa) = lower('Serek wiejski z pomidorem, ogórkiem i pestkami dyni');
+select p.id, 1, 'Przygotowanie składników', 7 from przepisy p where lower(p.nazwa) = lower('Serek wiejski z pomidorem, ogórkiem i pestkami dyni');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
          (1::smallint, 'Pomidora i ogórek pokrój w kostkę.', null::text, false),
-         (2::smallint, 'Serek wiejski przełóż do miski i dodaj pokrojone warzywa.', null::text, false),
-         (3::smallint, 'Dopraw solą i pieprzem, a następnie delikatnie wymieszaj.', null::text, true)
+         (2::smallint, 'Serek wiejski przełóż do miski, dodaj warzywa, dopraw solą oraz pieprzem i delikatnie wymieszaj widelcem.', null::text, true),
+         (3::smallint, 'Posyp pestkami dyni i podaj od razu z dwiema kromkami chleba.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Serek wiejski z pomidorem, ogórkiem i pestkami dyni') and e.kolejnosc = 1;
-
-insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Podanie', 2 from przepisy p where lower(p.nazwa) = lower('Serek wiejski z pomidorem, ogórkiem i pestkami dyni');
-
-insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
-select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
-  from etapy e join przepisy p on p.id = e.przepis_id,
-       (values
-         (1::smallint, 'Posyp porcję pestkami dyni i podaj od razu.', 'pestki pozostają suche i chrupiące'::text, false)
-       ) as v(nr, tresc, sygnal, uwaga)
- where lower(p.nazwa) = lower('Serek wiejski z pomidorem, ogórkiem i pestkami dyni') and e.kolejnosc = 2;
 
 -- -------------------------------------------------------------------------
 --  Skyr kakaowy z bananem i masłem orzechowym
@@ -9232,14 +9322,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Skyr kakaowy z bananem i masłem orzechowym', 'Kakaowy skyr z bananem i masłem orzechowym, przygotowany bez gotowania. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'dodatek']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['na_slodko']::rodzaj_dania[],
   1, 'prywatna',
-  'waga', 380, 1,
+  'waga', 380, 1, 1,
   5, 0,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['miska', 'Widelec', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -9255,6 +9345,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -9311,20 +9402,20 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Skyr z owocami, płatkami owsianymi i orzechami', 'Skyr z bananem, borówkami, płatkami owsianymi i orzechami włoskimi. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
-  array['sniadanie', 'dodatek']::pora_posilku[], array['inna']::rodzaj_kuchni[],
+  array['sniadanie', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['na_slodko']::rodzaj_dania[],
   1, 'prywatna',
-  'waga', 385, 1,
+  'waga', 385, 1, 1,
   5, 0,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
   'Przechowuj w zamkniętym pojemniku w lodówce do 1 dnia. Orzechy i płatki dodaj przed jedzeniem, aby pozostały chrupiące.',
-  false, 'Jeśli skyr jest zbyt gęsty, dodaj odrobinę wody lub mleka. Jeśli owoce są kwaśne, rozgnieć część banana i wymieszaj ze skyrem.'
+  false, 'Jeśli skyr jest zbyt gęsty, dodaj łyżeczkę wody. Jeśli owoce są kwaśne, rozgnieć część banana i wymieszaj ze skyrem.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
@@ -9334,6 +9425,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -9372,7 +9464,7 @@ select p.id, sk.id, 15, 'g'::jednostka_miary, 15,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Skyr z owocami, płatkami owsianymi i orzechami') and sk.nazwa = 'Orzechy włoskie';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie', 5 from przepisy p where lower(p.nazwa) = lower('Skyr z owocami, płatkami owsianymi i orzechami');
+select p.id, 1, 'Przygotowanie składników', 5 from przepisy p where lower(p.nazwa) = lower('Skyr z owocami, płatkami owsianymi i orzechami');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
@@ -9380,7 +9472,7 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
        (values
          (1::smallint, 'Banana pokrój w plasterki, a orzechy grubo posiekaj.', null::text, false),
          (2::smallint, 'Skyr przełóż do miski i ułóż na nim banana oraz borówki.', null::text, false),
-         (3::smallint, 'Posyp płatkami owsianymi i orzechami tuż przed podaniem.', 'płatki i orzechy pozostają suche i chrupiące'::text, false)
+         (3::smallint, 'Posyp płatkami owsianymi i orzechami tuż przed podaniem.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Skyr z owocami, płatkami owsianymi i orzechami') and e.kolejnosc = 1;
 
@@ -9390,13 +9482,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Stek z tuńczyka z fasolką szparagową i ziemniakami', 'Krótko smażony stek z tuńczyka z fasolką szparagową i gotowanymi ziemniakami. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   1, 'prywatna',
-  'waga', 642, 1,
+  'waga', 642, 1, 1,
   10, 20,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Patelnia 28 cm', 'Garnek 3 l', 'Garnek 2 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -9411,6 +9503,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -9493,14 +9586,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Tabbouleh z kaszy bulgur i ciecierzycy', 'Świeża sałatka z kaszy bulgur, ciecierzycy, pomidora, ogórka, natki i mięty. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['salatka']::rodzaj_dania[],
   2, 'prywatna',
-  'waga', 546, 1,
+  'waga', 546, 1, 1,
   15, 12,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Garnek 2 l', 'Sitko', 'miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -9516,6 +9609,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -9613,14 +9707,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Tofu z brokułem i ryżem', 'Smażone tofu z brokułem, imbirem, czosnkiem i sezamem, podane z ryżem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['azjatycka']::rodzaj_kuchni[],
   array['kasza_ryz']::rodzaj_dania[],
   2, 'prywatna',
-  'waga', 518, 1,
+  'waga', 518, 1, 1,
   12, 18,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Patelnia 28 cm', 'Garnek 2 l', 'Tarka o drobnych oczkach', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -9636,6 +9730,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -9725,13 +9820,13 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Tofucznica ze szpinakiem i pomidorem', 'Szybka tofucznica ze szpinakiem, pomidorem, cebulą i kurkumą, podana z pieczywem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   1, 'prywatna',
-  'waga', 488, 1,
+  'waga', 488, 1, 1,
   7, 8,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Patelnia 24 cm', 'miska', 'Widelec', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -9746,6 +9841,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -9833,14 +9929,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Tortilla z Goudą, szpinakiem i pomidorem', 'Ciepła pełnoziarnista tortilla z roztopioną Goudą, szpinakiem i pomidorem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['kanapki']::rodzaj_dania[],
   0, 'prywatna',
-  'waga', 336, 1,
+  'waga', 336, 1, 1,
   7, 8,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Patelnia 24 cm', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -9856,6 +9952,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -9937,14 +10034,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Tortilla z hummusem i warzywami', 'Pełnoziarnista tortilla z domowym hummusem, pomidorem, ogórkiem i sałatą. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['kanapki']::rodzaj_dania[],
   1, 'prywatna',
-  'waga', 475, 1,
+  'waga', 475, 1, 1,
   15, 0,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Blender ręczny', 'miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -9960,6 +10057,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -10056,14 +10154,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Tortilla z jajkiem i szpinakiem', 'Ciepła pełnoziarnista tortilla z jajkiem, szpinakiem, pomidorem i fetą. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['kanapki']::rodzaj_dania[],
   0, 'prywatna',
-  'waga', 366, 1,
+  'waga', 366, 1, 1,
   8, 8,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Patelnia 24 cm', 'miska', 'Widelec', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -10079,6 +10177,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -10161,14 +10260,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Tortilla z kurczakiem, awokado i warzywami', 'Pełnoziarnista tortilla z grillowanym kurczakiem, awokado, pomidorem, ogórkiem i sosem jogurtowym. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['kanapki']::rodzaj_dania[],
   1, 'prywatna',
-  'waga', 557, 1,
+  'waga', 557, 1, 1,
   12, 10,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Patelnia 24 cm', 'miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -10184,6 +10283,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -10287,14 +10387,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Tortilla z tofu i chrupiącymi warzywami', 'Pełnoziarnista tortilla z rumianym tofu, kapustą pekińską, marchewką i ogórkiem w sosie orzechowo-sojowym. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['azjatycka']::rodzaj_kuchni[],
   array['kanapki']::rodzaj_dania[],
   1, 'prywatna',
-  'waga', 513, 1,
+  'waga', 513, 1, 1,
   12, 8,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Patelnia 24 cm', 'miska', 'Tarka o grubych oczkach', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -10310,6 +10410,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -10403,14 +10504,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Tosty z Goudą i pieczarkami', 'Chrupiące tosty z serem Gouda, podsmażonymi pieczarkami i cebulą. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['kanapki']::rodzaj_dania[],
   0, 'prywatna',
-  'waga', 296, 1,
+  'waga', 296, 1, 1,
   8, 9,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Patelnia 24 cm', 'Grill kontaktowy', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -10426,6 +10527,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -10502,15 +10604,15 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Tosty z mozzarellą i pomidorem', 'Chrupiące tosty z roztopioną mozzarellą, pomidorem i bazylią. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['kanapki']::rodzaj_dania[],
   0, 'prywatna',
-  'waga', 219, 1,
-  5, 5,
+  'waga', 219, 1, 1,
+  5, 6,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Grill kontaktowy', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
@@ -10525,6 +10627,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -10568,25 +10671,26 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Tosty z mozzarellą i pomidorem') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Składanie tostów', 5 from przepisy p where lower(p.nazwa) = lower('Tosty z mozzarellą i pomidorem');
+select p.id, 1, 'Przygotowanie składników', 5 from przepisy p where lower(p.nazwa) = lower('Tosty z mozzarellą i pomidorem');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Mozzarellę i pomidora pokrój w cienkie plastry.', null::text, false),
-         (2::smallint, 'Na jednej kromce ułóż mozzarellę, pomidora i bazylię. Dopraw solą oraz pieprzem i przykryj drugą kromką.', null::text, true)
+         (1::smallint, 'Włącz grill kontaktowy, aby rozgrzał się podczas przygotowywania składników.', null::text, false),
+         (2::smallint, 'Mozzarellę i pomidora pokrój w cienkie plastry.', null::text, false),
+         (3::smallint, 'Na jednej kromce ułóż mozzarellę, pomidora i bazylię. Dopraw solą oraz pieprzem i przykryj drugą kromką.', null::text, true)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Tosty z mozzarellą i pomidorem') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Opiekanie', 5 from przepisy p where lower(p.nazwa) = lower('Tosty z mozzarellą i pomidorem');
+select p.id, 2, 'Opiekanie', 6 from przepisy p where lower(p.nazwa) = lower('Tosty z mozzarellą i pomidorem');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Tost opiekaj w rozgrzanym tosterze lub grillu kontaktowym.', 'pieczywo jest rumiane i chrupiące, a mozzarella się roztopiła'::text, false),
+         (1::smallint, 'Tost opiekaj w rozgrzanym grillu kontaktowym.', 'pieczywo jest rumiane i chrupiące, a mozzarella się roztopiła'::text, false),
          (2::smallint, 'Odczekaj minutę, przekrój tost i podaj.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Tosty z mozzarellą i pomidorem') and e.kolejnosc = 2;
@@ -10597,14 +10701,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Tosty z serem salami i papryką', 'Ciepłe tosty z serem salami, papryką i musztardą. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['kanapki']::rodzaj_dania[],
   0, 'prywatna',
-  'waga', 251, 1,
+  'waga', 251, 1, 1,
   6, 6,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Grill kontaktowy', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -10620,6 +10724,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -10697,14 +10802,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Twarożek ze szczypiorkiem, rzodkiewką i pieczywem', 'Klasyczny twarożek z chrupiącą rzodkiewką i świeżym szczypiorkiem, podany z dwiema kromkami chleba żytniego razowego. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['polska']::rodzaj_kuchni[],
   array['kanapki']::rodzaj_dania[],
   1, 'prywatna',
-  'waga', 312, 1,
+  'waga', 312, 1, 1,
   8, 0,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['miska', 'Widelec', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -10720,6 +10825,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -10768,29 +10874,19 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Twarożek ze szczypiorkiem, rzodkiewką i pieczywem') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie twarożku', 6 from przepisy p where lower(p.nazwa) = lower('Twarożek ze szczypiorkiem, rzodkiewką i pieczywem');
+select p.id, 1, 'Przygotowanie składników', 8 from przepisy p where lower(p.nazwa) = lower('Twarożek ze szczypiorkiem, rzodkiewką i pieczywem');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Twaróg przełóż do miski i rozgnieć widelcem z jogurtem.', 'aż masa będzie kremowa, ale nadal lekko grudkowata'::text, false),
+         (1::smallint, 'Twaróg przełóż do miski i rozgnieć widelcem z jogurtem.', 'masa jest kremowa, ale nadal lekko grudkowata'::text, false),
          (2::smallint, 'Rzodkiewki pokrój drobno, a szczypiorek posiekaj.', null::text, false),
-         (3::smallint, 'Dodaj rzodkiewkę i szczypiorek do twarogu, dopraw solą oraz pieprzem i wymieszaj.', null::text, true)
+         (3::smallint, 'Dodaj rzodkiewkę i szczypiorek do twarogu, dopraw solą oraz pieprzem i wymieszaj.', null::text, true),
+         (4::smallint, 'Spróbuj twarożku i w razie potrzeby skoryguj solą albo pieprzem.', null::text, false),
+         (5::smallint, 'Podaj twarożek z kromkami chleba żytniego razowego.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Twarożek ze szczypiorkiem, rzodkiewką i pieczywem') and e.kolejnosc = 1;
-
-insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Podanie', 2 from przepisy p where lower(p.nazwa) = lower('Twarożek ze szczypiorkiem, rzodkiewką i pieczywem');
-
-insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
-select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
-  from etapy e join przepisy p on p.id = e.przepis_id,
-       (values
-         (1::smallint, 'Spróbuj twarożku i w razie potrzeby skoryguj solą albo pieprzem.', null::text, false),
-         (2::smallint, 'Podaj twarożek z kromkami chleba żytniego razowego.', null::text, false)
-       ) as v(nr, tresc, sygnal, uwaga)
- where lower(p.nazwa) = lower('Twarożek ze szczypiorkiem, rzodkiewką i pieczywem') and e.kolejnosc = 2;
 
 -- -------------------------------------------------------------------------
 --  Wieprzowina z kapustą pekińską i ryżem
@@ -10798,14 +10894,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Wieprzowina z kapustą pekińską i ryżem', 'Szybko smażona wieprzowina z kapustą pekińską, marchewką, imbirem i ryżem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad']::pora_posilku[], array['azjatycka']::rodzaj_kuchni[],
   array['kasza_ryz']::rodzaj_dania[],
   2, 'prywatna',
-  'waga', 621, 1,
+  'waga', 621, 1, 1,
   12, 18,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Patelnia 28 cm', 'Garnek 2 l', 'Tarka o drobnych oczkach', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -10821,6 +10917,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -10915,14 +11012,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Zupa z białej fasoli i jarmużu', 'Warzywna zupa z białą fasolą, jarmużem i pomidorami, podana z pieczywem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Zupa z białej fasoli i jarmużu', 'Warzywna zupa z białą fasolą, jarmużem i pomidorami, podana z pieczywem. Przepis na 2 porcje.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['zupa']::rodzaj_dania[],
   3, 'prywatna',
-  'waga', 826, 1,
+  'waga', 826, 1, 2,
   12, 30,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Garnek 3 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -10938,6 +11035,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -10951,67 +11049,67 @@ delete from etapy            where przepis_id in (select id from przepisy where 
 
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 150, 'g'::jednostka_miary, 150,
+select p.id, sk.id, 300, 'g'::jednostka_miary, 300,
        null, null, sk.rola, sk.mozna_dzielic, 1
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Zupa z białej fasoli i jarmużu') and sk.nazwa = 'Fasola biała z puszki, odsączona';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 50, 'g'::jednostka_miary, 50,
+select p.id, sk.id, 100, 'g'::jednostka_miary, 100,
        'bez twardych łodyg', null, sk.rola, sk.mozna_dzielic, 2
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Zupa z białej fasoli i jarmużu') and sk.nazwa = 'Jarmuż, surowy';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 150, 'g'::jednostka_miary, 150,
+select p.id, sk.id, 300, 'g'::jednostka_miary, 300,
        null, null, sk.rola, sk.mozna_dzielic, 3
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Zupa z białej fasoli i jarmużu') and sk.nazwa = 'Pomidory krojone z puszki';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 250, 'g'::jednostka_miary, 250,
+select p.id, sk.id, 500, 'g'::jednostka_miary, 500,
        null, null, sk.rola, sk.mozna_dzielic, 4
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Zupa z białej fasoli i jarmużu') and sk.nazwa = 'Domowy bulion warzywny';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 60, 'g'::jednostka_miary, 60,
+select p.id, sk.id, 120, 'g'::jednostka_miary, 120,
        'pokrojona', null, sk.rola, sk.mozna_dzielic, 5
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Zupa z białej fasoli i jarmużu') and sk.nazwa = 'Marchew, surowa';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 40, 'g'::jednostka_miary, 40,
+select p.id, sk.id, 80, 'g'::jednostka_miary, 80,
        'pokrojony', null, sk.rola, sk.mozna_dzielic, 6
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Zupa z białej fasoli i jarmużu') and sk.nazwa = 'Seler naciowy, surowy';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 40, 'g'::jednostka_miary, 40,
+select p.id, sk.id, 80, 'g'::jednostka_miary, 80,
        'posiekana', null, sk.rola, sk.mozna_dzielic, 7
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Zupa z białej fasoli i jarmużu') and sk.nazwa = 'Cebula, surowa';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 5, 'g'::jednostka_miary, 5,
+select p.id, sk.id, 10, 'g'::jednostka_miary, 10,
        null, null, sk.rola, sk.mozna_dzielic, 8
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Zupa z białej fasoli i jarmużu') and sk.nazwa = 'Czosnek, surowy';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 8, 'g'::jednostka_miary, 8,
+select p.id, sk.id, 16, 'g'::jednostka_miary, 16,
        null, null, sk.rola, sk.mozna_dzielic, 9
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Zupa z białej fasoli i jarmużu') and sk.nazwa = 'Oliwa z oliwek';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
+select p.id, sk.id, 2, 'g'::jednostka_miary, 2,
        null, null, sk.rola, sk.mozna_dzielic, 10
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Zupa z białej fasoli i jarmużu') and sk.nazwa = 'Tymianek suszony';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 2, 'szt'::jednostka_miary, round((2 * sk.masa_sztuki_g)::numeric, 1),
+select p.id, sk.id, 4, 'szt'::jednostka_miary, round((4 * sk.masa_sztuki_g)::numeric, 1),
        'kromki', null, sk.rola, sk.mozna_dzielic, 11
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Zupa z białej fasoli i jarmużu') and sk.nazwa = 'Chleb żytni razowy';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
+select p.id, sk.id, 2, 'g'::jednostka_miary, 2,
        null, null, sk.rola, sk.mozna_dzielic, 12
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Zupa z białej fasoli i jarmużu') and sk.nazwa = 'Sól kuchenna';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
+select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
        null, null, sk.rola, sk.mozna_dzielic, 13
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Zupa z białej fasoli i jarmużu') and sk.nazwa = 'Czarny pieprz mielony';
 
@@ -11046,14 +11144,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Zupa z czerwonej soczewicy i pomidorów', 'Gęsta zupa z czerwonej soczewicy, pomidorów i marchewki, podana z pieczywem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Zupa z czerwonej soczewicy i pomidorów', 'Gęsta zupa z czerwonej soczewicy, pomidorów i marchewki, podana z pieczywem. Przepis na 2 porcje.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['zupa']::rodzaj_dania[],
   3, 'prywatna',
-  'waga', 704, 1,
+  'waga', 704, 1, 2,
   10, 30,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Garnek 3 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -11069,6 +11167,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -11082,67 +11181,67 @@ delete from etapy            where przepis_id in (select id from przepisy where 
 
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 60, 'g'::jednostka_miary, 60,
+select p.id, sk.id, 120, 'g'::jednostka_miary, 120,
        'opłukana', null, sk.rola, sk.mozna_dzielic, 1
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Zupa z czerwonej soczewicy i pomidorów') and sk.nazwa = 'Soczewica czerwona, sucha';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 180, 'g'::jednostka_miary, 180,
+select p.id, sk.id, 360, 'g'::jednostka_miary, 360,
        null, null, sk.rola, sk.mozna_dzielic, 2
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Zupa z czerwonej soczewicy i pomidorów') and sk.nazwa = 'Pomidory krojone z puszki';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 250, 'g'::jednostka_miary, 250,
+select p.id, sk.id, 500, 'g'::jednostka_miary, 500,
        null, null, sk.rola, sk.mozna_dzielic, 3
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Zupa z czerwonej soczewicy i pomidorów') and sk.nazwa = 'Domowy bulion warzywny';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 70, 'g'::jednostka_miary, 70,
+select p.id, sk.id, 140, 'g'::jednostka_miary, 140,
        'pokrojona', null, sk.rola, sk.mozna_dzielic, 4
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Zupa z czerwonej soczewicy i pomidorów') and sk.nazwa = 'Marchew, surowa';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 50, 'g'::jednostka_miary, 50,
+select p.id, sk.id, 100, 'g'::jednostka_miary, 100,
        'posiekana', null, sk.rola, sk.mozna_dzielic, 5
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Zupa z czerwonej soczewicy i pomidorów') and sk.nazwa = 'Cebula, surowa';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 5, 'g'::jednostka_miary, 5,
+select p.id, sk.id, 10, 'g'::jednostka_miary, 10,
        null, null, sk.rola, sk.mozna_dzielic, 6
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Zupa z czerwonej soczewicy i pomidorów') and sk.nazwa = 'Czosnek, surowy';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 5, 'g'::jednostka_miary, 5,
+select p.id, sk.id, 10, 'g'::jednostka_miary, 10,
        null, null, sk.rola, sk.mozna_dzielic, 7
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Zupa z czerwonej soczewicy i pomidorów') and sk.nazwa = 'Oliwa z oliwek';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
+select p.id, sk.id, 2, 'g'::jednostka_miary, 2,
        null, null, sk.rola, sk.mozna_dzielic, 8
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Zupa z czerwonej soczewicy i pomidorów') and sk.nazwa = 'Kmin rzymski mielony';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
+select p.id, sk.id, 2, 'g'::jednostka_miary, 2,
        null, null, sk.rola, sk.mozna_dzielic, 9
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Zupa z czerwonej soczewicy i pomidorów') and sk.nazwa = 'Papryka wędzona mielona';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 10, 'g'::jednostka_miary, 10,
+select p.id, sk.id, 20, 'g'::jednostka_miary, 20,
        'sok', null, sk.rola, sk.mozna_dzielic, 10
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Zupa z czerwonej soczewicy i pomidorów') and sk.nazwa = 'Cytryna';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 2, 'szt'::jednostka_miary, round((2 * sk.masa_sztuki_g)::numeric, 1),
+select p.id, sk.id, 4, 'szt'::jednostka_miary, round((4 * sk.masa_sztuki_g)::numeric, 1),
        'kromki', null, sk.rola, sk.mozna_dzielic, 11
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Zupa z czerwonej soczewicy i pomidorów') and sk.nazwa = 'Chleb żytni razowy';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
+select p.id, sk.id, 2, 'g'::jednostka_miary, 2,
        null, null, sk.rola, sk.mozna_dzielic, 12
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Zupa z czerwonej soczewicy i pomidorów') and sk.nazwa = 'Sól kuchenna';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
+select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
        null, null, sk.rola, sk.mozna_dzielic, 13
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Zupa z czerwonej soczewicy i pomidorów') and sk.nazwa = 'Czarny pieprz mielony';
 
@@ -11176,14 +11275,14 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
 
 insert into przepisy
   (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
-   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
   'Łosoś ze szpinakiem i kaszą bulgur', 'Smażony łosoś ze szpinakiem, cytryną i kaszą bulgur. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['kasza_ryz']::rodzaj_dania[],
   2, 'prywatna',
-  'waga', 410, 1,
+  'waga', 410, 1, 1,
   10, 20,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Patelnia 24 cm', 'Garnek 2 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
@@ -11199,6 +11298,7 @@ on conflict (lower(nazwa)) do update set
   porcjowanie            = excluded.porcjowanie,
   porcja_g               = excluded.porcja_g,
   porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
   czas_przygotowania_min = excluded.czas_przygotowania_min,
   czas_obrobki_min       = excluded.czas_obrobki_min,
   sprzet                 = excluded.sprzet,
@@ -11297,14 +11397,14 @@ with oczekiwane(nazwa, skladnikow, etapow, krokow) as (values
   ('Gulasz wołowy z warzywami korzeniowymi', 15, 2, 5),
   ('Gulasz z białej fasoli, jarmużu i pomidorów', 13, 2, 5),
   ('Jaglanka z gruszką i orzechami', 7, 2, 4),
-  ('Jajecznica z pomidorem i szczypiorkiem', 6, 2, 5),
-  ('Jajka na miękko z pieczywem i warzywami', 6, 2, 5),
+  ('Jajecznica z pomidorem i szczypiorkiem', 7, 2, 5),
+  ('Jajka na miękko z pieczywem i warzywami', 7, 2, 5),
   ('Kanapki z Goudą, jajkiem i szczypiorkiem', 7, 2, 3),
   ('Kanapki z Goudą, pomidorem i sałatą', 7, 1, 3),
   ('Kanapki z halloumi, awokado i pomidorem', 7, 2, 3),
-  ('Kanapki z jajkiem, awokado i pomidorem', 6, 2, 5),
+  ('Kanapki z jajkiem, awokado i pomidorem', 6, 2, 6),
   ('Kanapki z mozzarellą, pomidorem i bazylią', 7, 1, 3),
-  ('Kanapki z pastą jajeczną', 7, 2, 5),
+  ('Kanapki z pastą jajeczną', 7, 2, 7),
   ('Kanapki z ricottą, rzodkiewką i szczypiorkiem', 7, 1, 3),
   ('Kanapki z sardynkami, pomidorem i rukolą', 7, 1, 4),
   ('Kanapki z serem salami, ogórkiem kiszonym i musztardą', 7, 1, 3),
@@ -11332,7 +11432,7 @@ with oczekiwane(nazwa, skladnikow, etapow, krokow) as (values
   ('Morszczuk w sosie pomidorowym z ryżem', 11, 2, 5),
   ('Nocna owsianka z bananem i chia', 7, 2, 3),
   ('Nocna owsianka z borówkami i orzechami', 6, 2, 3),
-  ('Omlet ze szpinakiem i fetą', 6, 2, 5),
+  ('Omlet ze szpinakiem i fetą', 7, 2, 6),
   ('Owsianka z jabłkiem, cynamonem i orzechami', 6, 2, 5),
   ('Papryka faszerowana soczewicą i kaszą bulgur', 11, 2, 6),
   ('Pełnoziarniste placuszki ze skyrem i owocami', 8, 2, 5),
@@ -11352,12 +11452,12 @@ with oczekiwane(nazwa, skladnikow, etapow, krokow) as (values
   ('Sałatka makaronowa z mozzarellą i warzywami', 11, 2, 4),
   ('Sałatka makaronowa z tuńczykiem i warzywami', 10, 2, 4),
   ('Sałatka z czarnej fasoli, kukurydzy i pomidora', 11, 1, 4),
-  ('Sałatka z jajkiem, fetą i warzywami', 8, 2, 5),
+  ('Sałatka z jajkiem, fetą i warzywami', 8, 2, 6),
   ('Sałatka z jarmużu, jabłka i orzechów', 9, 1, 4),
   ('Sałatka z komosy, buraka i koziego sera', 11, 2, 4),
   ('Sałatka z pieczonym burakiem i fetą', 9, 2, 4),
   ('Serek wiejski z owocami i orzechami', 5, 1, 3),
-  ('Serek wiejski z pomidorem, ogórkiem i pestkami dyni', 6, 2, 4),
+  ('Serek wiejski z pomidorem, ogórkiem i pestkami dyni', 7, 1, 3),
   ('Skyr kakaowy z bananem i masłem orzechowym', 5, 1, 3),
   ('Skyr z owocami, płatkami owsianymi i orzechami', 5, 1, 3),
   ('Stek z tuńczyka z fasolką szparagową i ziemniakami', 8, 2, 4),
@@ -11370,9 +11470,9 @@ with oczekiwane(nazwa, skladnikow, etapow, krokow) as (values
   ('Tortilla z kurczakiem, awokado i warzywami', 12, 2, 5),
   ('Tortilla z tofu i chrupiącymi warzywami', 10, 2, 5),
   ('Tosty z Goudą i pieczarkami', 7, 2, 3),
-  ('Tosty z mozzarellą i pomidorem', 6, 2, 4),
+  ('Tosty z mozzarellą i pomidorem', 6, 2, 5),
   ('Tosty z serem salami i papryką', 7, 2, 4),
-  ('Twarożek ze szczypiorkiem, rzodkiewką i pieczywem', 7, 2, 5),
+  ('Twarożek ze szczypiorkiem, rzodkiewką i pieczywem', 7, 1, 5),
   ('Wieprzowina z kapustą pekińską i ryżem', 10, 2, 6),
   ('Zupa z białej fasoli i jarmużu', 13, 2, 5),
   ('Zupa z czerwonej soczewicy i pomidorów', 13, 2, 4),

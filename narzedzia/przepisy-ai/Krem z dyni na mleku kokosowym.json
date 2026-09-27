@@ -1,6 +1,6 @@
 {
   "nazwa": "Krem z dyni na mleku kokosowym",
-  "opis": "Aromatyczny krem z dyni, czerwonej soczewicy, imbiru i mleka kokosowego. Przepis na 1 porcję.",
+  "opis": "Aromatyczny krem z dyni, czerwonej soczewicy, imbiru i mleka kokosowego. Przepis na 2 porcje.",
   "pory": [
     "obiad",
     "kolacja"
@@ -11,6 +11,7 @@
   "rodzaje": ["zupa"],
   "porcjowanie": "waga",
   "porcja_g": 792.0,
+  "liczba_porcji_bazowych": 2,
   "trwalosc_dni": 3,
   "czas_przygotowania_min": 12,
   "czas_obrobki_min": 28,
@@ -27,72 +28,72 @@
   "skladniki": [
     {
       "nazwa": "Dynia, surowa",
-      "ilosc": 250.0,
+      "ilosc": 500.0,
       "jednostka": "g",
       "stan": "pokrojona w kostkę"
     },
     {
       "nazwa": "Marchew, surowa",
-      "ilosc": 60.0,
+      "ilosc": 120.0,
       "jednostka": "g",
       "stan": "pokrojona"
     },
     {
       "nazwa": "Mleko kokosowe light z puszki",
-      "ilosc": 100.0,
+      "ilosc": 200.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Domowy bulion warzywny",
-      "ilosc": 150.0,
+      "ilosc": 300.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Soczewica czerwona, sucha",
-      "ilosc": 50.0,
+      "ilosc": 100.0,
       "jednostka": "g",
       "stan": "opłukana"
     },
     {
       "nazwa": "woda",
-      "ilosc": 100.0,
+      "ilosc": 200.0,
       "jednostka": "ml"
     },
     {
       "nazwa": "Cebula, surowa",
-      "ilosc": 40.0,
+      "ilosc": 80.0,
       "jednostka": "g",
       "stan": "posiekana"
     },
     {
       "nazwa": "Imbir korzeń, surowy",
-      "ilosc": 8.0,
+      "ilosc": 16.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Czosnek, surowy",
-      "ilosc": 5.0,
+      "ilosc": 10.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Pasta curry czerwona",
-      "ilosc": 8.0,
+      "ilosc": 16.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Olej rzepakowy",
-      "ilosc": 5.0,
+      "ilosc": 10.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Limonka",
-      "ilosc": 15.0,
+      "ilosc": 30.0,
       "jednostka": "g",
       "stan": "sok"
     },
     {
       "nazwa": "Sól kuchenna",
-      "ilosc": 1.0,
+      "ilosc": 2.0,
       "jednostka": "g"
     }
   ],

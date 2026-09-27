@@ -11,6 +11,7 @@
   "rodzaje": ["kanapki"],
   "porcjowanie": "waga",
   "porcja_g": 366.0,
+  "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 0,
   "czas_przygotowania_min": 8,
   "czas_obrobki_min": 8,

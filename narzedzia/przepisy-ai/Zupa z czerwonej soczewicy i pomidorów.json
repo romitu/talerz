@@ -1,6 +1,6 @@
 {
   "nazwa": "Zupa z czerwonej soczewicy i pomidorów",
-  "opis": "Gęsta zupa z czerwonej soczewicy, pomidorów i marchewki, podana z pieczywem. Przepis na 1 porcję.",
+  "opis": "Gęsta zupa z czerwonej soczewicy, pomidorów i marchewki, podana z pieczywem. Przepis na 2 porcje.",
   "pory": [
     "obiad",
     "kolacja"
@@ -11,6 +11,7 @@
   "rodzaje": ["zupa"],
   "porcjowanie": "waga",
   "porcja_g": 703.5,
+  "liczba_porcji_bazowych": 2,
   "trwalosc_dni": 3,
   "czas_przygotowania_min": 10,
   "czas_obrobki_min": 30,
@@ -26,72 +27,72 @@
   "skladniki": [
     {
       "nazwa": "Soczewica czerwona, sucha",
-      "ilosc": 60.0,
+      "ilosc": 120.0,
       "jednostka": "g",
       "stan": "opłukana"
     },
     {
       "nazwa": "Pomidory krojone z puszki",
-      "ilosc": 180.0,
+      "ilosc": 360.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Domowy bulion warzywny",
-      "ilosc": 250.0,
+      "ilosc": 500.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Marchew, surowa",
-      "ilosc": 70.0,
+      "ilosc": 140.0,
       "jednostka": "g",
       "stan": "pokrojona"
     },
     {
       "nazwa": "Cebula, surowa",
-      "ilosc": 50.0,
+      "ilosc": 100.0,
       "jednostka": "g",
       "stan": "posiekana"
     },
     {
       "nazwa": "Czosnek, surowy",
-      "ilosc": 5.0,
+      "ilosc": 10.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Oliwa z oliwek",
-      "ilosc": 5.0,
+      "ilosc": 10.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Kmin rzymski mielony",
-      "ilosc": 1.0,
+      "ilosc": 2.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Papryka wędzona mielona",
-      "ilosc": 1.0,
+      "ilosc": 2.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Cytryna",
-      "ilosc": 10.0,
+      "ilosc": 20.0,
       "jednostka": "g",
       "stan": "sok"
     },
     {
       "nazwa": "Chleb żytni razowy",
-      "ilosc": 2.0,
+      "ilosc": 4.0,
       "jednostka": "szt",
       "stan": "kromki"
     },
     {
       "nazwa": "Sól kuchenna",
-      "ilosc": 1.0,
+      "ilosc": 2.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Czarny pieprz mielony",
-      "ilosc": 0.5,
+      "ilosc": 1.0,
       "jednostka": "g"
     }
   ],

@@ -11,6 +11,7 @@
   "rodzaje": ["kasza_ryz"],
   "porcjowanie": "waga",
   "porcja_g": 442.0,
+  "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 1,
   "czas_przygotowania_min": 10,
   "czas_obrobki_min": 15,

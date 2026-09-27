@@ -1,6 +1,6 @@
 {
   "nazwa": "Potrawka z kurczaka, kaszy jęczmiennej i warzyw",
-  "opis": "Jednogarnkowa potrawka z kurczaka, kaszy jęczmiennej, marchewki, pora i groszku. Przepis na 1 porcję.",
+  "opis": "Jednogarnkowa potrawka z kurczaka, kaszy jęczmiennej, marchewki, pora i groszku. Przepis na 2 porcje.",
   "pory": [
     "obiad",
     "kolacja"
@@ -11,6 +11,7 @@
   "rodzaje": ["gulasz_curry", "kasza_ryz"],
   "porcjowanie": "waga",
   "porcja_g": 737.5,
+  "liczba_porcji_bazowych": 2,
   "trwalosc_dni": 3,
   "czas_przygotowania_min": 12,
   "czas_obrobki_min": 35,
@@ -26,62 +27,62 @@
   "skladniki": [
     {
       "nazwa": "Udo z kurczaka bez skóry, surowe",
-      "ilosc": 150.0,
+      "ilosc": 300.0,
       "jednostka": "g",
       "stan": "pokrojone w kostkę"
     },
     {
       "nazwa": "Kasza jęczmienna, sucha",
-      "ilosc": 60.0,
+      "ilosc": 120.0,
       "jednostka": "g",
       "stan": "opłukana"
     },
     {
       "nazwa": "Marchew, surowa",
-      "ilosc": 70.0,
+      "ilosc": 140.0,
       "jednostka": "g",
       "stan": "pokrojona"
     },
     {
       "nazwa": "Por, surowy",
-      "ilosc": 50.0,
+      "ilosc": 100.0,
       "jednostka": "g",
       "stan": "pokrojony"
     },
     {
       "nazwa": "Groszek zielony mrożony",
-      "ilosc": 60.0,
+      "ilosc": 120.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Seler naciowy, surowy",
-      "ilosc": 40.0,
+      "ilosc": 80.0,
       "jednostka": "g",
       "stan": "pokrojony"
     },
     {
       "nazwa": "Domowy bulion warzywny",
-      "ilosc": 300.0,
+      "ilosc": 600.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Olej rzepakowy",
-      "ilosc": 5.0,
+      "ilosc": 10.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Tymianek suszony",
-      "ilosc": 1.0,
+      "ilosc": 2.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Sól kuchenna",
-      "ilosc": 1.0,
+      "ilosc": 2.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Czarny pieprz mielony",
-      "ilosc": 0.5,
+      "ilosc": 1.0,
       "jednostka": "g"
     }
   ],

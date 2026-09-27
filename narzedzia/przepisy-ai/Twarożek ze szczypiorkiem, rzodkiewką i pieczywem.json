@@ -8,9 +8,12 @@
   "kuchnie": [
     "polska"
   ],
-  "rodzaje": ["kanapki"],
+  "rodzaje": [
+    "kanapki"
+  ],
   "porcjowanie": "waga",
-  "porcja_g": 312,
+  "porcja_g": 311.5,
+  "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 1,
   "czas_przygotowania_min": 8,
   "czas_obrobki_min": 0,
@@ -68,12 +71,12 @@
   ],
   "etapy": [
     {
-      "nazwa": "Przygotowanie twarożku",
-      "minuty": 6,
+      "nazwa": "Przygotowanie składników",
+      "minuty": 8,
       "kroki": [
         {
           "tresc": "Twaróg przełóż do miski i rozgnieć widelcem z jogurtem.",
-          "sygnal": "aż masa będzie kremowa, ale nadal lekko grudkowata"
+          "sygnal": "masa jest kremowa, ale nadal lekko grudkowata"
         },
         {
           "tresc": "Rzodkiewki pokrój drobno, a szczypiorek posiekaj."
@@ -81,13 +84,7 @@
         {
           "tresc": "Dodaj rzodkiewkę i szczypiorek do twarogu, dopraw solą oraz pieprzem i wymieszaj.",
           "uwaga": true
-        }
-      ]
-    },
-    {
-      "nazwa": "Podanie",
-      "minuty": 2,
-      "kroki": [
+        },
         {
           "tresc": "Spróbuj twarożku i w razie potrzeby skoryguj solą albo pieprzem."
         },

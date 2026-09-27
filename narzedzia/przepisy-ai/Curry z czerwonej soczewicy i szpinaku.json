@@ -1,6 +1,6 @@
 {
   "nazwa": "Curry z czerwonej soczewicy i szpinaku",
-  "opis": "Kremowe jednogarnkowe curry z czerwonej soczewicy, szpinaku i pomidorów. Przepis na 1 porcję.",
+  "opis": "Kremowe jednogarnkowe curry z czerwonej soczewicy, szpinaku i pomidorów. Przepis na 2 porcje.",
   "pory": [
     "obiad",
     "kolacja"
@@ -11,6 +11,7 @@
   "rodzaje": ["gulasz_curry"],
   "porcjowanie": "waga",
   "porcja_g": 747.0,
+  "liczba_porcji_bazowych": 2,
   "trwalosc_dni": 3,
   "czas_przygotowania_min": 8,
   "czas_obrobki_min": 25,
@@ -26,60 +27,60 @@
   "skladniki": [
     {
       "nazwa": "Soczewica czerwona, sucha",
-      "ilosc": 70.0,
+      "ilosc": 140.0,
       "jednostka": "g",
       "stan": "opłukana"
     },
     {
       "nazwa": "Szpinak, surowy",
-      "ilosc": 80.0,
+      "ilosc": 160.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Pomidory krojone z puszki",
-      "ilosc": 200.0,
+      "ilosc": 400.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Mleko kokosowe light z puszki",
-      "ilosc": 100.0,
+      "ilosc": 200.0,
       "jednostka": "g"
     },
     {
       "nazwa": "woda",
-      "ilosc": 200.0,
+      "ilosc": 400.0,
       "jednostka": "ml"
     },
     {
       "nazwa": "Cebula, surowa",
-      "ilosc": 70.0,
+      "ilosc": 140.0,
       "jednostka": "g",
       "stan": "drobno posiekana"
     },
     {
       "nazwa": "Czosnek, surowy",
-      "ilosc": 5.0,
+      "ilosc": 10.0,
       "jednostka": "g",
       "stan": "drobno posiekany"
     },
     {
       "nazwa": "Pasta curry czerwona",
-      "ilosc": 15.0,
+      "ilosc": 30.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Olej rzepakowy",
-      "ilosc": 5.0,
+      "ilosc": 10.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Kurkuma mielona",
-      "ilosc": 1.0,
+      "ilosc": 2.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Sól kuchenna",
-      "ilosc": 1.0,
+      "ilosc": 2.0,
       "jednostka": "g"
     }
   ],

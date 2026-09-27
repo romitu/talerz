@@ -10,6 +10,7 @@
   ],
   "porcjowanie": "waga",
   "porcja_g": 406.5,
+  "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 2,
   "czas_przygotowania_min": 18,
   "czas_obrobki_min": 20,

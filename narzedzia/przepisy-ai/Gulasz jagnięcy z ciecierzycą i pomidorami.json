@@ -1,6 +1,6 @@
 {
   "nazwa": "Gulasz jagnięcy z ciecierzycą i pomidorami",
-  "opis": "Aromatyczny gulasz jagnięcy z ciecierzycą, pomidorami i korzennymi przyprawami, podany z bulgurem. Przepis na 1 porcję.",
+  "opis": "Aromatyczny gulasz jagnięcy z ciecierzycą, pomidorami i korzennymi przyprawami, podany z bulgurem. Przepis na 2 porcje.",
   "pory": [
     "obiad"
   ],
@@ -10,6 +10,7 @@
   "rodzaje": ["gulasz_curry"],
   "porcjowanie": "waga",
   "porcja_g": 737.5,
+  "liczba_porcji_bazowych": 2,
   "trwalosc_dni": 3,
   "czas_przygotowania_min": 15,
   "czas_obrobki_min": 80,
@@ -26,70 +27,70 @@
   "skladniki": [
     {
       "nazwa": "Jagnięcina, udziec surowy",
-      "ilosc": 160.0,
+      "ilosc": 320.0,
       "jednostka": "g",
       "stan": "pokrojona w kostkę"
     },
     {
       "nazwa": "Ciecierzyca z puszki, odsączona",
-      "ilosc": 100.0,
+      "ilosc": 200.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Pomidory krojone z puszki",
-      "ilosc": 180.0,
+      "ilosc": 360.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Kasza bulgur, sucha",
-      "ilosc": 50.0,
+      "ilosc": 100.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Marchew, surowa",
-      "ilosc": 60.0,
+      "ilosc": 120.0,
       "jednostka": "g",
       "stan": "pokrojona"
     },
     {
       "nazwa": "Cebula, surowa",
-      "ilosc": 50.0,
+      "ilosc": 100.0,
       "jednostka": "g",
       "stan": "posiekana"
     },
     {
       "nazwa": "Domowy bulion warzywny",
-      "ilosc": 120.0,
+      "ilosc": 240.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Czosnek, surowy",
-      "ilosc": 5.0,
+      "ilosc": 10.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Oliwa z oliwek",
-      "ilosc": 8.0,
+      "ilosc": 16.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Kmin rzymski mielony",
-      "ilosc": 2.0,
+      "ilosc": 4.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Cynamon mielony",
-      "ilosc": 0.5,
+      "ilosc": 1.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Papryka słodka mielona",
-      "ilosc": 1.0,
+      "ilosc": 2.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Sól kuchenna",
-      "ilosc": 1.0,
+      "ilosc": 2.0,
       "jednostka": "g"
     }
   ],

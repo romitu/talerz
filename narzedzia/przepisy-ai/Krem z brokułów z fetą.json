@@ -1,6 +1,6 @@
 {
   "nazwa": "Krem z brokułów z fetą",
-  "opis": "Kremowa zupa brokułowa z ziemniakiem, jogurtem i fetą, podana z pieczywem. Przepis na 1 porcję.",
+  "opis": "Kremowa zupa brokułowa z ziemniakiem, jogurtem i fetą, podana z pieczywem. Przepis na 2 porcje.",
   "pory": [
     "obiad",
     "kolacja"
@@ -11,6 +11,7 @@
   "rodzaje": ["zupa"],
   "porcjowanie": "waga",
   "porcja_g": 771.0,
+  "liczba_porcji_bazowych": 2,
   "trwalosc_dni": 3,
   "czas_przygotowania_min": 10,
   "czas_obrobki_min": 25,
@@ -27,62 +28,62 @@
   "skladniki": [
     {
       "nazwa": "Brokuł, surowy",
-      "ilosc": 220.0,
+      "ilosc": 440.0,
       "jednostka": "g",
       "stan": "podzielony na różyczki"
     },
     {
       "nazwa": "Ziemniaki, surowe",
-      "ilosc": 100.0,
+      "ilosc": 200.0,
       "jednostka": "g",
       "stan": "pokrojone"
     },
     {
       "nazwa": "Domowy bulion warzywny",
-      "ilosc": 250.0,
+      "ilosc": 500.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Cebula, surowa",
-      "ilosc": 40.0,
+      "ilosc": 80.0,
       "jednostka": "g",
       "stan": "posiekana"
     },
     {
       "nazwa": "Czosnek, surowy",
-      "ilosc": 5.0,
+      "ilosc": 10.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Oliwa z oliwek",
-      "ilosc": 5.0,
+      "ilosc": 10.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Jogurt naturalny 2%",
-      "ilosc": 40.0,
+      "ilosc": 80.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Ser feta",
-      "ilosc": 40.0,
+      "ilosc": 80.0,
       "jednostka": "g",
       "stan": "pokruszony"
     },
     {
       "nazwa": "Chleb żytni razowy",
-      "ilosc": 2.0,
+      "ilosc": 4.0,
       "jednostka": "szt",
       "stan": "kromki"
     },
     {
       "nazwa": "Gałka muszkatołowa mielona",
-      "ilosc": 0.5,
+      "ilosc": 1.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Czarny pieprz mielony",
-      "ilosc": 0.5,
+      "ilosc": 1.0,
       "jednostka": "g"
     }
   ],

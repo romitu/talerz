@@ -1,6 +1,6 @@
 {
   "nazwa": "Gulasz wołowy z warzywami korzeniowymi",
-  "opis": "Długo duszony gulasz wołowy z ziemniakami, marchewką, pasternakiem i selerem. Przepis na 1 porcję.",
+  "opis": "Długo duszony gulasz wołowy z ziemniakami, marchewką, pasternakiem i selerem. Przepis na 2 porcje.",
   "pory": [
     "obiad"
   ],
@@ -10,6 +10,7 @@
   "rodzaje": ["gulasz_curry"],
   "porcjowanie": "waga",
   "porcja_g": 953.5,
+  "liczba_porcji_bazowych": 2,
   "trwalosc_dni": 3,
   "czas_przygotowania_min": 18,
   "czas_obrobki_min": 130,
@@ -25,83 +26,83 @@
   "skladniki": [
     {
       "nazwa": "Pręga wołowa bez kości, surowa",
-      "ilosc": 180.0,
+      "ilosc": 360.0,
       "jednostka": "g",
       "stan": "pokrojona w kostkę"
     },
     {
       "nazwa": "Ziemniaki, surowe",
-      "ilosc": 150.0,
+      "ilosc": 300.0,
       "jednostka": "g",
       "stan": "pokrojone"
     },
     {
       "nazwa": "Marchew, surowa",
-      "ilosc": 60.0,
+      "ilosc": 120.0,
       "jednostka": "g",
       "stan": "pokrojona"
     },
     {
       "nazwa": "Pasternak, surowy",
-      "ilosc": 40.0,
+      "ilosc": 80.0,
       "jednostka": "g",
       "stan": "pokrojony"
     },
     {
       "nazwa": "Seler korzeń",
-      "ilosc": 30.0,
+      "ilosc": 60.0,
       "jednostka": "g",
       "stan": "pokrojony"
     },
     {
       "nazwa": "Cebula, surowa",
-      "ilosc": 40.0,
+      "ilosc": 80.0,
       "jednostka": "g",
       "stan": "posiekana"
     },
     {
       "nazwa": "Passata pomidorowa",
-      "ilosc": 70.0,
+      "ilosc": 140.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Domowy bulion warzywny",
-      "ilosc": 120.0,
+      "ilosc": 240.0,
       "jednostka": "g"
     },
     {
       "nazwa": "woda",
-      "ilosc": 250.0,
+      "ilosc": 500.0,
       "jednostka": "ml"
     },
     {
       "nazwa": "Olej rzepakowy",
-      "ilosc": 8.0,
+      "ilosc": 16.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Papryka słodka mielona",
-      "ilosc": 2.0,
+      "ilosc": 4.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Majeranek suszony",
-      "ilosc": 1.0,
+      "ilosc": 2.0,
       "jednostka": "g"
     },
     {
       "nazwa": "liść laurowy",
-      "ilosc": 1.0,
+      "ilosc": 2.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Sól kuchenna",
-      "ilosc": 1.0,
+      "ilosc": 2.0,
       "jednostka": "g"
     },
     {
       "nazwa": "Czarny pieprz mielony",
-      "ilosc": 0.5,
+      "ilosc": 1.0,
       "jednostka": "g"
     }
   ],

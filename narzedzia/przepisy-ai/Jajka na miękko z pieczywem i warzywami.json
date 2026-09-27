@@ -1,42 +1,99 @@
 {
   "nazwa": "Jajka na miękko z pieczywem i warzywami",
-  "opis": "Jajka z płynnym żółtkiem, podane z chlebem żytnim, pomidorem i ogórkiem. Przepis na 1 porcję.",
-  "pory": ["sniadanie", "kolacja"],
-  "kuchnie": ["polska"],
-  "rodzaje": ["jajka"],
+  "opis": "Jajka z płynnym żółtkiem, podane z pieczywem posmarowanym masłem, pomidorem i ogórkiem. Przepis na 1 porcję.",
+  "pory": [
+    "sniadanie",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "polska"
+  ],
+  "rodzaje": [
+    "jajka"
+  ],
   "porcjowanie": "waga",
-  "porcja_g": 296.5,
+  "porcja_g": 306.5,
+  "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 0,
   "czas_przygotowania_min": 5,
-  "czas_obrobki_min": 6,
-  "sprzet": ["Garnek 2 l", "Nóż szefa kuchni", "Deska do krojenia"],
+  "czas_obrobki_min": 12,
+  "sprzet": [
+    "Garnek 2 l",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
   "przechowywanie": "Danie najlepiej zjedz od razu po przygotowaniu. Jajek ugotowanych na miękko nie przechowuj na później.",
   "mozna_mrozic": false,
-  "ratunek": "Jeśli żółtko jest zbyt płynne, włóż jajka ponownie do gorącej wody na 30–60 sekund. Jeśli są zbyt twarde, skróć gotowanie przy następnym przygotowaniu.",
+  "ratunek": "Jeśli nieotwarte jajka gotowały się krócej niż 6 minut, pozostaw je w gorącej wodzie jeszcze 30–60 sekund. Jeśli po otwarciu okażą się zbyt twarde, rozgnieć je na pieczywie z masłem.",
   "skladniki": [
-    {"nazwa": "Jaja kurze, całe, surowe", "ilosc": 2, "jednostka": "szt"},
-    {"nazwa": "Chleb żytni razowy", "ilosc": 2, "jednostka": "szt", "stan": "kromki"},
-    {"nazwa": "Pomidory, surowe", "ilosc": 0.5, "jednostka": "szt", "stan": "pokrojony w cząstki"},
-    {"nazwa": "Ogórek, surowy", "ilosc": 0.25, "jednostka": "szt", "stan": "pokrojony w plasterki"},
-    {"nazwa": "Sól kuchenna", "ilosc": 1, "jednostka": "g"},
-    {"nazwa": "Czarny pieprz mielony", "ilosc": 0.5, "jednostka": "g"}
+    {
+      "nazwa": "Jaja kurze, całe, surowe",
+      "ilosc": 2,
+      "jednostka": "szt"
+    },
+    {
+      "nazwa": "Chleb żytni razowy",
+      "ilosc": 2,
+      "jednostka": "szt",
+      "stan": "kromki"
+    },
+    {
+      "nazwa": "Masło",
+      "ilosc": 10,
+      "jednostka": "g",
+      "stan": "miękkie, do pieczywa"
+    },
+    {
+      "nazwa": "Pomidory, surowe",
+      "ilosc": 0.5,
+      "jednostka": "szt",
+      "stan": "pokrojony w cząstki"
+    },
+    {
+      "nazwa": "Ogórek, surowy",
+      "ilosc": 0.25,
+      "jednostka": "szt",
+      "stan": "pokrojony w plasterki"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 1,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
   ],
   "etapy": [
     {
-      "nazwa": "Gotowanie jajek",
-      "minuty": 6,
+      "nazwa": "Przygotowanie składników",
+      "minuty": 5,
       "kroki": [
-        {"tresc": "W garnku zagotuj tyle wody, aby przykryła jajka."},
-        {"tresc": "Delikatnie włóż jajka do wrzątku i gotuj 5–6 minut od ponownego zagotowania.", "uwaga": true, "sygnal": "białko jest ścięte, a żółtko pozostaje płynne"},
-        {"tresc": "Jajka wyjmij i krótko schłodź pod zimną wodą."}
+        {
+          "tresc": "Pomidora pokrój w cząstki, a ogórek w plasterki."
+        },
+        {
+          "tresc": "Kromki chleba posmaruj masłem. Pieczywo i warzywa ułóż na talerzu."
+        }
       ]
     },
     {
-      "nazwa": "Podanie",
-      "minuty": 5,
+      "nazwa": "Gotowanie jajek",
+      "minuty": 12,
       "kroki": [
-        {"tresc": "Pomidora pokrój w cząstki, a ogórek w plasterki."},
-        {"tresc": "Podaj jajka z pieczywem i warzywami. Dopraw solą oraz pieprzem."}
+        {
+          "tresc": "W garnku zagotuj tyle wody, aby po włożeniu całkowicie przykryła jajka."
+        },
+        {
+          "tresc": "Ostrożnie włóż zimne jajka do wrzątku i gotuj 6 minut od zanurzenia, utrzymując łagodne wrzenie.",
+          "uwaga": true
+        },
+        {
+          "tresc": "Wyjmij jajka, schładzaj je pod zimną wodą przez około 30 sekund i od razu podaj z pieczywem oraz warzywami. Dopraw solą i pieprzem."
+        }
       ]
     }
   ]
