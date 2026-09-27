@@ -85,6 +85,12 @@ export function sprawdzPrzepis(p) {
     b.push('porcjowanie: „waga” albo „sztuki”');
   }
 
+  // Nieobowiązkowe: bez pola import wpisuje 1, ale nie nadpisuje liczby
+  // ustawionej już w bazie (patrz `on conflict` niżej).
+  if (p.liczba_porcji_bazowych !== undefined && !calkowita(p.liczba_porcji_bazowych, 1, 30)) {
+    b.push('liczba_porcji_bazowych: liczba całkowita od 1 do 30');
+  }
+
   if (!calkowita(p.trwalosc_dni, 0, 3)) b.push('trwalosc_dni: od 0 do 3');
   if (!calkowita(p.czas_przygotowania_min, 1, 1440)) b.push('czas_przygotowania_min: od 1 do 1440');
   if (!calkowita(p.czas_obrobki_min, 0, 1440)) b.push('czas_obrobki_min: od 0 do 1440');
@@ -147,14 +153,14 @@ export function sqlPrzepisu(p, autor) {
   l.push('insert into przepisy');
   const zRodzajami = p.rodzaje !== undefined;
   l.push(`  (nazwa, opis, autor_id, pory, kuchnie, ${zRodzajami ? 'rodzaje, ' : ''}trwalosc_dni, widocznosc,`);
-  l.push('   porcjowanie, porcja_g, porcje, czas_przygotowania_min, czas_obrobki_min,');
+  l.push('   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,');
   l.push('   sprzet, przechowywanie, mozna_mrozic, ratunek)');
   l.push('select');
   l.push(`  ${N}, ${tekst(p.opis)}, (select id from konta where lower(email) = lower(${tekst(autor)})),`);
   l.push(`  ${tablica(p.pory)}::pora_posilku[], ${tablica(p.kuchnie)}::rodzaj_kuchni[],`);
   if (zRodzajami) l.push(`  ${tablica(p.rodzaje)}::rodzaj_dania[],`);
   l.push(`  ${p.trwalosc_dni}, 'prywatna',`);
-  l.push(`  ${tekst(p.porcjowanie)}, ${waga ? p.porcja_g : 'null'}, ${waga ? 1 : p.porcje},`);
+  l.push(`  ${tekst(p.porcjowanie)}, ${waga ? p.porcja_g : 'null'}, ${waga ? 1 : p.porcje}, ${p.liczba_porcji_bazowych ?? 1},`);
   l.push(`  ${p.czas_przygotowania_min}, ${p.czas_obrobki_min},`);
   // Nazwy sprzętu bierzemy w pisowni z katalogu — widok sprzet_uzycie porównuje
   // je dokładnie, więc „miska” z pliku nie zostałaby policzona jako „Miska”.
@@ -172,6 +178,12 @@ export function sqlPrzepisu(p, autor) {
   l.push('  porcjowanie            = excluded.porcjowanie,');
   l.push('  porcja_g               = excluded.porcja_g,');
   l.push('  porcje                 = excluded.porcje,');
+  // Bez pola w pliku uzupełniamy tylko zero — ręcznie ustawiona liczba zostaje.
+  l.push(
+    p.liczba_porcji_bazowych !== undefined
+      ? '  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,'
+      : '  liczba_porcji_bazowych = case when przepisy.liczba_porcji_bazowych = 0 then 1 else przepisy.liczba_porcji_bazowych end,',
+  );
   l.push('  czas_przygotowania_min = excluded.czas_przygotowania_min,');
   l.push('  czas_obrobki_min       = excluded.czas_obrobki_min,');
   l.push('  sprzet                 = excluded.sprzet,');
