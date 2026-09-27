@@ -4,18 +4,21 @@ import type { GrupaFiltrow } from '@/components/filtry-przepisow';
 import {
   czasRazem,
   GLOWNE_BIALKA,
+  KUCHNIE,
   RODZAJE_DAN,
   SKROT_BIALKA,
+  SKROT_KUCHNI,
   SKROT_RODZAJU,
   type GlowneBialko,
+  type Kuchnia,
   type PrzepisZMakro,
   type RodzajDania,
 } from '@/lib/przepisy';
 
 /**
  * Przełączniki z danych, które przepis już ma — bez nowych etykiet.
- * Każdy włączony zawęża listę (szybkie I bez gotowania), inaczej niż rodzaj
- * i białko, gdzie zaznaczenie kilku opcji listę poszerza.
+ * Każdy włączony zawęża listę (szybkie I bez gotowania), inaczej niż rodzaj,
+ * kuchnia i białko, gdzie zaznaczenie kilku opcji listę poszerza.
  */
 type Przelacznik = 'szybkie' | 'na_zapas' | 'bez_gotowania';
 
@@ -49,7 +52,7 @@ function przelaczNaLiscie<T>(lista: T[], wartosc: T): T[] {
 }
 
 /**
- * Filtry przepisów: rodzaj dania, główne białko i szybkie przełączniki.
+ * Filtry przepisów: rodzaj dania, kuchnia, główne białko i szybkie przełączniki.
  * Wspólne dla listy przepisów i wyboru dania w planerze — żeby w obu
  * miejscach „Zupy” i „Do 20 min” znaczyły dokładnie to samo.
  *
@@ -64,6 +67,7 @@ export function useFiltryPrzepisow(bazaLicznikow: PrzepisZMakro[]) {
    * opcja, żeby luki w danych było widać, a nie żeby znikały z listy.
    */
   const [rodzaje, setRodzaje] = useState<(RodzajDania | 'brak')[]>([]);
+  const [kuchnie, setKuchnie] = useState<(Kuchnia | 'brak')[]>([]);
   const [bialka, setBialka] = useState<(GlowneBialko | 'brak')[]>([]);
   const [przelaczniki, setPrzelaczniki] = useState<Przelacznik[]>([]);
   const [otwarte, setOtwarte] = useState(false);
@@ -71,19 +75,25 @@ export function useFiltryPrzepisow(bazaLicznikow: PrzepisZMakro[]) {
   const pasujeRodzaj = (p: PrzepisZMakro) =>
     rodzaje.length === 0 ||
     rodzaje.some((r) => (r === 'brak' ? p.rodzaje.length === 0 : p.rodzaje.includes(r)));
+  const pasujeKuchnia = (p: PrzepisZMakro) =>
+    kuchnie.length === 0 ||
+    kuchnie.some((k) => (k === 'brak' ? p.kuchnie.length === 0 : p.kuchnie.includes(k)));
   const pasujeBialko = (p: PrzepisZMakro) =>
     bialka.length === 0 ||
     bialka.some((b) => (b === 'brak' ? p.glowne_bialko === null : p.glowne_bialko === b));
   const pasujePrzelaczniki = (p: PrzepisZMakro) => przelaczniki.every((k) => PRZELACZNIKI[k].pasuje(p));
 
-  const pasuje = (p: PrzepisZMakro) => pasujeRodzaj(p) && pasujeBialko(p) && pasujePrzelaczniki(p);
-  const liczbaFiltrow = rodzaje.length + bialka.length + przelaczniki.length;
+  const pasuje = (p: PrzepisZMakro) =>
+    pasujeRodzaj(p) && pasujeKuchnia(p) && pasujeBialko(p) && pasujePrzelaczniki(p);
+  const liczbaFiltrow = rodzaje.length + kuchnie.length + bialka.length + przelaczniki.length;
 
-  const bazaRodzaju = bazaLicznikow.filter((p) => pasujeBialko(p) && pasujePrzelaczniki(p));
-  const bazaBialka = bazaLicznikow.filter((p) => pasujeRodzaj(p) && pasujePrzelaczniki(p));
+  const bazaRodzaju = bazaLicznikow.filter((p) => pasujeKuchnia(p) && pasujeBialko(p) && pasujePrzelaczniki(p));
+  const bazaKuchni = bazaLicznikow.filter((p) => pasujeRodzaj(p) && pasujeBialko(p) && pasujePrzelaczniki(p));
+  const bazaBialka = bazaLicznikow.filter((p) => pasujeRodzaj(p) && pasujeKuchnia(p) && pasujePrzelaczniki(p));
   const bazaPrzelacznikow = bazaLicznikow.filter(pasuje);
 
   const bezRodzaju = bazaRodzaju.filter((p) => p.rodzaje.length === 0).length;
+  const bezKuchni = bazaKuchni.filter((p) => p.kuchnie.length === 0).length;
   const bezBialka = bazaBialka.filter((p) => p.glowne_bialko === null).length;
 
   const grupy: GrupaFiltrow[] = [
@@ -106,6 +116,30 @@ export function useFiltryPrzepisow(bazaLicznikow: PrzepisZMakro[]) {
                 ile: bezRodzaju,
                 wybrana: rodzaje.includes('brak'),
                 onPress: () => setRodzaje((f) => przelaczNaLiscie(f, 'brak' as const)),
+              },
+            ]
+          : []),
+      ],
+    },
+    {
+      klucz: 'kuchnia',
+      tytul: 'Kuchnia',
+      opcje: [
+        ...KUCHNIE.map((k) => ({
+          klucz: `kuchnia-${k}`,
+          etykieta: SKROT_KUCHNI[k],
+          ile: bazaKuchni.filter((p) => p.kuchnie.includes(k)).length,
+          wybrana: kuchnie.includes(k),
+          onPress: () => setKuchnie((f) => przelaczNaLiscie(f, k)),
+        })),
+        ...(bezKuchni > 0 || kuchnie.includes('brak')
+          ? [
+              {
+                klucz: 'kuchnia-brak',
+                etykieta: 'Bez kuchni',
+                ile: bezKuchni,
+                wybrana: kuchnie.includes('brak'),
+                onPress: () => setKuchnie((f) => przelaczNaLiscie(f, 'brak' as const)),
               },
             ]
           : []),
@@ -150,6 +184,7 @@ export function useFiltryPrzepisow(bazaLicznikow: PrzepisZMakro[]) {
 
   function wyczysc() {
     setRodzaje([]);
+    setKuchnie([]);
     setBialka([]);
     setPrzelaczniki([]);
   }

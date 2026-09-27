@@ -215,6 +215,15 @@ export const OPIS_KUCHNI: Record<Kuchnia, string> = {
   inna: 'inna',
 };
 
+export const KUCHNIE: Kuchnia[] = ['polska', 'srodziemnomorska', 'azjatycka', 'inna'];
+
+export const SKROT_KUCHNI: Record<Kuchnia, string> = {
+  srodziemnomorska: 'Śródziemnomorska',
+  azjatycka: 'Azjatycka',
+  polska: 'Polska',
+  inna: 'Inna',
+};
+
 /** Łączny czas: przygotowanie plus obróbka termiczna. */
 export function czasRazem(przygotowanie: number | null, obrobka: number | null): number | null {
   if (przygotowanie === null && obrobka === null) return null;
