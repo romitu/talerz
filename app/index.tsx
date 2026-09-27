@@ -49,7 +49,7 @@ import {
 import { utworzPrzeskalowanyPrzepis } from '@/lib/przepisy-skalowane';
 import { celZywieniowyNASEM, type PalNasem } from '@/lib/nasem';
 import { useSesja } from '@/lib/sesja';
-import { pobierzSkladniki, type Skladnik } from '@/lib/skladniki';
+import { pobierzSkladniki } from '@/lib/skladniki';
 import { supabase } from '@/lib/supabase';
 import { KLUCZ_WIDOKU_WYBORU_DANIA, SZEROKOSC_TABLETU, useWidokListy } from '@/lib/widok-listy';
 import { wiekZDaty, type Plec, type TrybCelu } from '@/lib/zywienie';
@@ -502,6 +502,14 @@ export default function EkranPlanu() {
    * Działa niezależnie od tego, czy dane danie było już wcześniej
    * przeskalowane — zawsze liczy od nowa, z aktualnym celem.
    *
+   * Garnek zostaje garnkiem: pozycje z jednej partii (jedno gotowanie
+   * rozłożone na kilka dni, patrz „trwałość przed skalowaniem” w
+   * `lib/automat.ts`) dostają JEDEN wariant, liczony pod średni cel ich dni.
+   * Osobny wariant na każdy dzień rozjeżdżał się z rzeczywistością: gotuje
+   * się według wariantu otwartego dnia razy liczba dni, lista zakupów
+   * sumowała trzy różne warianty, a bilans drugiego dnia zakładał porcję
+   * innej wielkości niż ta, która stoi w lodówce.
+   *
    * Czysta praca z bazą, bez `setKomunikat`/`setPracuje` — woła ją
    * `wypelnijAutomatem`, gdzie komunikat musi się złożyć z DWÓCH etapów
    * (wypełnienie + skalowanie), nie nadpisywać się.
@@ -511,12 +519,13 @@ export default function EkranPlanu() {
     if (!plan || !sesja || !cel) return { szczegoly: [], dniZmienione: new Set() };
 
     const przepisyWedlugId = new Map(przepisy.map((p) => [p.id, p]));
-    let dostepneSkladniki: Skladnik[] | null = null;
     const dniZmienione = new Set<string>();
     // Szczegóły do komunikatu — bez nich „przeliczono 3 dania” nie mówi,
     // czy któreś z nich trafiło w granicę [K_MIN, K_MAX] i nie dobiło do celu.
     const szczegoly: string[] = [];
 
+    // Krok 1: cel każdej skalowalnej pozycji, dzień po dniu — jak dotąd.
+    const celePozycji: { pozycja: PozycjaPlanu; celKcal: number }[] = [];
     for (const data of dniPlanu(plan)) {
       const dniowe = pozycje.filter((p) => p.data === data);
       const skalowalne = dniowe.filter((p) => przepisyWedlugId.get(p.przepis_id)?.skalowalny);
@@ -527,25 +536,43 @@ export default function EkranPlanu() {
       const docelowoNaSkalowalne = Math.max(0, cel.kcal - kcalStalych);
       const docelowoNaJedno = docelowoNaSkalowalne / skalowalne.length;
 
-      if (!dostepneSkladniki) dostepneSkladniki = await pobierzSkladniki();
-
       for (const pozycja of skalowalne) {
-        const celTegoDania = docelowoNaJedno / Math.max(1, pozycja.porcje);
-        const pelny = await pobierzPelnyPrzepis(pozycja.przepis_id);
-        const wynik = await utworzPrzeskalowanyPrzepis({
-          kontoId: sesja.user.id,
-          przepis: pelny,
-          dostepneSkladniki,
-          celKcal: celTegoDania,
-        });
-        await ustawPrzepisSkalowanyPozycji(pozycja.id, wynik.id);
-        dniZmienione.add(data);
-
-        szczegoly.push(
-          `${pozycja.nazwa}: ${Math.round(pozycja.kcal)}→${wynik.kcal} kcal (cel ${Math.round(celTegoDania)})` +
-            (wynik.kOgraniczone ? ' — trafiło w granicę skalowania, nie dobiło do celu' : '')
-        );
+        celePozycji.push({ pozycja, celKcal: docelowoNaJedno / Math.max(1, pozycja.porcje) });
       }
+    }
+    if (celePozycji.length === 0) return { szczegoly, dniZmienione };
+
+    // Krok 2: jeden wariant na garnek. Pozycja bez partii (starsze wpisy)
+    // to osobne gotowanie, więc tworzy własną grupę.
+    const garnki = new Map<string, { pozycja: PozycjaPlanu; celKcal: number }[]>();
+    for (const c of celePozycji) {
+      const klucz = c.pozycja.partia_id ?? `pozycja:${c.pozycja.id}`;
+      garnki.set(klucz, [...(garnki.get(klucz) ?? []), c]);
+    }
+
+    const dostepneSkladniki = await pobierzSkladniki();
+
+    for (const dniGarnka of garnki.values()) {
+      const pierwsza = dniGarnka[0].pozycja;
+      const celGarnka = dniGarnka.reduce((s, c) => s + c.celKcal, 0) / dniGarnka.length;
+      const pelny = await pobierzPelnyPrzepis(pierwsza.przepis_id);
+      const wynik = await utworzPrzeskalowanyPrzepis({
+        kontoId: sesja.user.id,
+        przepis: pelny,
+        dostepneSkladniki,
+        celKcal: celGarnka,
+      });
+      for (const { pozycja } of dniGarnka) {
+        await ustawPrzepisSkalowanyPozycji(pozycja.id, wynik.id);
+        dniZmienione.add(pozycja.data);
+      }
+
+      szczegoly.push(
+        `${pierwsza.nazwa}: ${Math.round(pierwsza.kcal)}→${wynik.kcal} kcal (cel ${Math.round(celGarnka)}` +
+          (dniGarnka.length > 1 ? `, średnio z ${dniGarnka.length} dni jednego garnka` : '') +
+          ')' +
+          (wynik.kOgraniczone ? ' — trafiło w granicę skalowania, nie dobiło do celu' : '')
+      );
     }
 
     return { szczegoly, dniZmienione };
