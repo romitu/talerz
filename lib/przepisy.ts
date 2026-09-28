@@ -436,12 +436,6 @@ export async function ustawTrwaloscWlasna(
   if (error) throw error;
 }
 
-/** Włącza/wyłącza checkbox „można skalować kalorycznie" (migracja 0036) bez otwierania pełnego formularza. */
-export async function ustawSkalowalny(przepisId: string, skalowalny: boolean): Promise<void> {
-  const { error } = await supabase.from('przepisy').update({ skalowalny }).eq('id', przepisId);
-  if (error) throw error;
-}
-
 /**
  * Pełna treść przepisu do edycji.
  *

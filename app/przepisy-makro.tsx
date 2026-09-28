@@ -11,7 +11,7 @@ import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import { komunikatBledu } from '@/lib/blad';
 import { wroc } from '@/lib/nawigacja';
-import { OPIS_KUCHNI, OPIS_PORY, pobierzPrzepisy, ustawSkalowalny, type PrzepisZMakro } from '@/lib/przepisy';
+import { OPIS_KUCHNI, OPIS_PORY, pobierzPrzepisy, type PrzepisZMakro } from '@/lib/przepisy';
 import { useSesja } from '@/lib/sesja';
 
 /**
@@ -77,7 +77,6 @@ export default function EkranPrzepisyMakro() {
   const [szukaj, setSzukaj] = useState('');
   const [sortujPo, setSortujPo] = useState<KluczKolumny>('nazwa');
   const [malejaco, setMalejaco] = useState(false);
-  const [zapisywany, setZapisywany] = useState<string | null>(null);
 
   const kontoId = sesja?.user.id;
   const pobierz = useCallback(async () => {
@@ -95,27 +94,6 @@ export default function EkranPrzepisyMakro() {
   useEffect(() => {
     pobierz();
   }, [pobierz]);
-
-  /**
-   * Zmienia checkbox „skalowalny" wprost z tabeli, bez otwierania formularza.
-   *
-   * Optymistycznie na ekranie od razu, zapis do bazy potem — przy odmowie
-   * bazy wraca poprzednia wartość, tak jak w pozostałych tabelach Talerza.
-   */
-  async function przelaczSkalowalny(p: PrzepisZMakro) {
-    setBlad(null);
-    const nowaWartosc = !p.skalowalny;
-    setPrzepisy((lista) => lista.map((x) => (x.id === p.id ? { ...x, skalowalny: nowaWartosc } : x)));
-    setZapisywany(p.id);
-    try {
-      await ustawSkalowalny(p.id, nowaWartosc);
-    } catch (e) {
-      setPrzepisy((lista) => lista.map((x) => (x.id === p.id ? { ...x, skalowalny: p.skalowalny } : x)));
-      setBlad(komunikatBledu(e));
-    } finally {
-      setZapisywany(null);
-    }
-  }
 
   function przelaczSortowanie(klucz: KluczKolumny) {
     if (klucz === sortujPo) setMalejaco((p) => !p);
@@ -212,20 +190,17 @@ export default function EkranPrzepisyMakro() {
               ]}>
               {KOLUMNY.map((k) =>
                 k.klucz === 'skalowalny' ? (
-                  <Pressable
+                  <View
                     key={k.klucz}
-                    onPress={() => przelaczSkalowalny(p)}
-                    disabled={zapisywany === p.id}
-                    accessibilityRole="checkbox"
-                    accessibilityState={{ checked: p.skalowalny }}
-                    accessibilityLabel={`Można skalować kalorycznie: ${p.nazwa}`}
+                    accessible
+                    accessibilityLabel={`Można skalować kalorycznie: ${p.nazwa} — ${p.skalowalny ? 'tak' : 'nie'}`}
                     style={[styles.komorka, styles.komorkaSrodek, stylKolumny(k)]}>
                     <Ionicons
                       name={p.skalowalny ? 'checkbox' : 'square-outline'}
                       size={20}
-                      color={p.skalowalny ? motyw.accent : motyw.textSecondary}
+                      color={motyw.textSecondary}
                     />
-                  </Pressable>
+                  </View>
                 ) : (
                   <View key={k.klucz} style={[styles.komorka, stylKolumny(k)]}>
                     <ThemedText type="small" style={k.liczba ? styles.doPrawej : undefined} numberOfLines={2}>
@@ -247,9 +222,9 @@ export default function EkranPrzepisyMakro() {
 
       <ThemedText type="small" themeColor="textSecondary">
         Dotknij nagłówka, aby posortować. Wartości puste (—) oznaczają przepis bez policzonego
-        makro — zwykle brak zapisanych składników. Kolumna „skalowalny” — dotknij, żeby
-        przełączyć: czy automat wypełniający plan wolno mu rozciągać ten przepis pod cel
-        kaloryczny posiłku.
+        makro — zwykle brak zapisanych składników. Kolumna „skalowalny” jest tylko do
+        odczytu: czy automat wypełniający plan może rozciągać ten przepis pod cel kaloryczny
+        posiłku. Zmienia się ją w formularzu przepisu.
       </ThemedText>
 
       <Przycisk tytul="Wróć" wariant="poboczny" onPress={() => wroc(powrot, '/przepisy')} />
