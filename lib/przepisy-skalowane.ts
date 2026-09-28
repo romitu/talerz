@@ -8,8 +8,13 @@
  * jest osobnym bytem od `przepisy`.
  */
 
-import { przeskalujPrzepis, type SkladnikPrzepisu } from './skalowanie-kalorii';
-import type { PelnyPrzepis } from './przepisy';
+import {
+  gornaMasaPorcji,
+  limitPorcjiG,
+  przeskalujPrzepis,
+  type SkladnikPrzepisu,
+} from './skalowanie-kalorii';
+import type { PelnyPrzepis, PoraPosilku } from './przepisy';
 import type { Skladnik } from './skladniki';
 import { supabase } from './supabase';
 
@@ -21,9 +26,22 @@ export type WynikZapisuSkalowania = {
   tluszcz_g: number;
   wegle_g: number;
   k: number;
-  /** Czy cel był poza zasięgiem [K_MIN, K_MAX] — wariant został przy granicy. */
+  /** Czy cel był poza zasięgiem granic porcji — wariant został przy granicy. */
   kOgraniczone: boolean;
 };
+
+/**
+ * Ile porcji daje przepis — dokładnie tak jak `porcje_wyliczone` w widoku
+ * `przepis_makro` (migracja 0007): przy wadze masa przez wagę porcji, przy
+ * sztukach podana liczba porcji. Ta sama definicja co na liście zakupów.
+ */
+export function porcjiWPrzepisie(przepis: PelnyPrzepis): number {
+  const masa = przepis.skladniki.reduce((s, x) => s + x.gramy, 0);
+  if (przepis.porcjowanie === 'waga' && (przepis.porcja_g ?? 0) > 0) {
+    return Math.max(masa / (przepis.porcja_g as number), 0.1);
+  }
+  return Math.max(przepis.porcje, 1);
+}
 
 /**
  * Skaluje `przepis` pod `celKcal` i zapisuje wynik jako nowy wiersz
@@ -39,11 +57,18 @@ export async function utworzPrzeskalowanyPrzepis(opcje: {
   przepis: PelnyPrzepis;
   /** Katalog składników — do wartości odżywczych i wartości bazowych rola/mozna_dzielic. */
   dostepneSkladniki: Skladnik[];
+  /** Cel kaloryczny jednego posiłku jednej osoby. */
   celKcal: number;
+  /** Posiłek w planie — od niego zależy limit gramów porcji. */
+  pora: PoraPosilku;
 }): Promise<WynikZapisuSkalowania> {
-  const { kontoId, przepis, dostepneSkladniki, celKcal } = opcje;
+  const { kontoId, przepis, dostepneSkladniki, celKcal, pora } = opcje;
 
   const skladnikiWedlugId = new Map(dostepneSkladniki.map((s) => [s.id, s]));
+
+  // Silnik liczy na jednej porcji bazowej — garnek na 2 porcje dzielimy na pół,
+  // zanim trafi do przeliczenia (patrz „Granice porcji” w skalowanie-kalorii.ts).
+  const porcji = porcjiWPrzepisie(przepis);
 
   const wejscie: SkladnikPrzepisu[] = przepis.skladniki.map((s) => {
     const bazowy = skladnikiWedlugId.get(s.skladnik_id);
@@ -56,7 +81,7 @@ export async function utworzPrzeskalowanyPrzepis(opcje: {
       id: s.skladnik_id,
       rola: s.rola ?? bazowy.rola,
       moznaDzielic: s.mozna_dzielic ?? bazowy.mozna_dzielic,
-      ilosc: s.ilosc,
+      ilosc: s.ilosc / porcji,
       gramyNaJednostke: s.ilosc > 0 ? s.gramy / s.ilosc : 0,
       kcal_100g: bazowy.kcal_100g,
       bialko_100g: bazowy.bialko_100g,
@@ -65,7 +90,9 @@ export async function utworzPrzeskalowanyPrzepis(opcje: {
     };
   });
 
-  const wynik = przeskalujPrzepis(wejscie, celKcal);
+  const masaPorcji = przepis.skladniki.reduce((s, x) => s + x.gramy, 0) / porcji;
+  const masaMax = gornaMasaPorcji(masaPorcji, limitPorcjiG(pora, przepis.pory));
+  const wynik = przeskalujPrzepis(wejscie, celKcal, masaMax);
 
   const { data: nowy, error: bladWstawienia } = await supabase
     .from('przepisy_skalowane')

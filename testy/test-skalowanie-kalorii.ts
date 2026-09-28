@@ -6,8 +6,10 @@
 
 import {
   dobierzWspolczynnik,
-  K_MAX,
-  K_MIN,
+  gornaMasaPorcji,
+  kDlaMasy,
+  limitPorcjiG,
+  masaPrzySkali,
   mnoznikRoli,
   przeskalujPrzepis,
   type SkladnikPrzepisu,
@@ -46,13 +48,80 @@ sprawdz('do_smaku, k=0.25 (bez skalowania)', mnoznikRoli('do_smaku', 0.25), 1);
 sprawdz('baza, k=1 (bez zmian)', mnoznikRoli('baza', 1), 1);
 
 // =============================================================
-//  Prosty przepis: sałatka na 1 kromkę — sama baza (bez tłumienia)
+//  Granice porcji — limity posiłków i wzrost o połowę
 // =============================================================
-//  Chleb: 1 szt (kromka), 60 g/szt, 250 kcal/100g -> 150 kcal bazowo
-//  Szynka: 30 g, 120 kcal/100g -> 36 kcal bazowo
-//  Razem bazowo: 186 kcal
 
-const salatka: SkladnikPrzepisu[] = [
+sprawdz('limit obiadu', limitPorcjiG('obiad', ['obiad', 'kolacja']), 900);
+sprawdz('limit śniadania', limitPorcjiG('sniadanie', ['sniadanie']), 600);
+sprawdz('dodatek ma swój limit niezależnie od posiłku', limitPorcjiG('obiad', ['obiad', 'dodatek']), 600);
+sprawdz('kanapka 250 g na śniadanie: ×1,5 ostrzejsze niż 600 g', gornaMasaPorcji(250, 600), 375);
+sprawdz('krem z dyni 792 g na obiad: limit 900 g ostrzejszy niż ×1,5', gornaMasaPorcji(792, 900), 900);
+sprawdz('barszcz 1065 g na obiad: nie rośnie, ale nie jest ścinany do 900', gornaMasaPorcji(1065, 900), 1065);
+
+// =============================================================
+//  Owsianka — sama baza, bez zaokrągleń
+// =============================================================
+//  Płatki 60 g (380 kcal/100 g) + mleko 200 g (50 kcal/100 g)
+//  = 260 g, 328 kcal. Śniadanie: najwyżej 260 × 1,5 = 390 g.
+
+const owsianka: SkladnikPrzepisu[] = [
+  {
+    id: 'platki', rola: 'baza', moznaDzielic: true, ilosc: 60, gramyNaJednostke: 1,
+    kcal_100g: 380, bialko_100g: 13, tluszcz_100g: 7, wegle_100g: 60,
+  },
+  {
+    id: 'mleko', rola: 'baza', moznaDzielic: true, ilosc: 200, gramyNaJednostke: 1,
+    kcal_100g: 50, bialko_100g: 3.3, tluszcz_100g: 2, wegle_100g: 4.8,
+  },
+];
+const masaMaxOwsianki = gornaMasaPorcji(260, limitPorcjiG('sniadanie', ['sniadanie']));
+
+const owsiankaWZasiegu = przeskalujPrzepis(owsianka, 400, masaMaxOwsianki);
+bliskie('owsianka pod 400 kcal: trafia w cel', owsiankaWZasiegu.kcalRazem, 400, 0.01);
+sprawdz('owsianka pod 400 kcal: nie jest ograniczona', owsiankaWZasiegu.kOgraniczone, false);
+
+const owsiankaZaDuzo = przeskalujPrzepis(owsianka, 800, masaMaxOwsianki);
+bliskie('owsianka pod 800 kcal: staje na ×1,5', owsiankaZaDuzo.k, 1.5, 0.001);
+bliskie('owsianka pod 800 kcal: 390 g, nie więcej',
+  owsiankaZaDuzo.pozycje.reduce((s, p) => s + p.gramyPoSkalowaniu, 0), 390, 0.01);
+sprawdz('owsianka pod 800 kcal: oznaczona jako ograniczona', owsiankaZaDuzo.kOgraniczone, true);
+
+const owsiankaZaMalo = przeskalujPrzepis(owsianka, 200, masaMaxOwsianki);
+sprawdz('owsianka pod 200 kcal: porcja nie maleje (k = 1)', owsiankaZaMalo.k, 1);
+bliskie('owsianka pod 200 kcal: zostaje 328 kcal z przepisu', owsiankaZaMalo.kcalRazem, 328, 0.01);
+
+// =============================================================
+//  Barszcz — porcja bazowa już ponad limitem obiadu
+// =============================================================
+//  Jedna porcja z garnka na dwie: woda 700 g, buraki 250 g, fasola 115 g
+//  = 1065 g, ok. 257 kcal. Brakuje 500 kcal — a i tak nie rośnie.
+
+const barszcz: SkladnikPrzepisu[] = [
+  {
+    id: 'woda', rola: 'woda', moznaDzielic: true, ilosc: 700, gramyNaJednostke: 1,
+    kcal_100g: 0, bialko_100g: 0, tluszcz_100g: 0, wegle_100g: 0,
+  },
+  {
+    id: 'buraki', rola: 'baza', moznaDzielic: true, ilosc: 250, gramyNaJednostke: 1,
+    kcal_100g: 43, bialko_100g: 1.6, tluszcz_100g: 0.2, wegle_100g: 10,
+  },
+  {
+    id: 'fasola', rola: 'baza', moznaDzielic: true, ilosc: 115, gramyNaJednostke: 1,
+    kcal_100g: 130, bialko_100g: 9, tluszcz_100g: 0.5, wegle_100g: 23,
+  },
+];
+const masaMaxBarszczu = gornaMasaPorcji(1065, limitPorcjiG('obiad', ['obiad']));
+sprawdz('barszcz: granica masy to sama porcja bazowa', kDlaMasy(barszcz, masaMaxBarszczu), 1);
+const barszczPod500 = przeskalujPrzepis(barszcz, 500, masaMaxBarszczu);
+sprawdz('barszcz pod 500 kcal: k = 1, nic nie rośnie', barszczPod500.k, 1);
+sprawdz('barszcz pod 500 kcal: brak oznaczony jako ograniczenie', barszczPod500.kOgraniczone, true);
+
+// =============================================================
+//  Zaokrąglenia — tylko składniki całe w porcji bazowej
+// =============================================================
+//  Kromka 60 g (250 kcal/100 g) + szynka 30 g (120 kcal/100 g) = 186 kcal.
+
+const kanapka: SkladnikPrzepisu[] = [
   {
     id: 'chleb', rola: 'baza', moznaDzielic: false, ilosc: 1, gramyNaJednostke: 60,
     kcal_100g: 250, bialko_100g: 8, tluszcz_100g: 2, wegle_100g: 48,
@@ -62,33 +131,21 @@ const salatka: SkladnikPrzepisu[] = [
     kcal_100g: 120, bialko_100g: 20, tluszcz_100g: 4, wegle_100g: 1,
   },
 ];
+const kanapkaX14 = przeskalujPrzepis(kanapka, 260, 1000);
+sprawdz('kanapka ×1,4: kromka zaokrąglona do całej', kanapkaX14.pozycje[0].iloscPoSkalowaniu, 1);
+bliskie('kanapka ×1,4: szynka rośnie ułamkowo', kanapkaX14.pozycje[1].iloscPoSkalowaniu, 30 * kanapkaX14.k, 0.001);
 
-// Same "baza" -> k jest wprost proporcjonalne do kcal: cel 372 kcal (x2) -> k=2.
-const wynikX2 = przeskalujPrzepis(salatka, 372);
-bliskie('sałatka x2: k', wynikX2.k, 2, 0.01);
-bliskie('sałatka x2: kcal razem', wynikX2.kcalRazem, 372, 0.01);
-sprawdz('sałatka x2: chleb zaokrąglony do 2 sztuk (całkowita)', wynikX2.pozycje[0].iloscPoSkalowaniu, 2);
-bliskie('sałatka x2: szynka może być ułamkowa', wynikX2.pozycje[1].iloscPoSkalowaniu, 60, 0.01);
-
-// Cel poniżej zasięgu K_MIN (186 * 0.25 = 46.5 kcal) -> ograniczone do K_MIN.
-const wynikMalo = przeskalujPrzepis(salatka, 10);
-sprawdz('cel poniżej zasięgu -> k = K_MIN', wynikMalo.k, K_MIN);
-sprawdz('cel poniżej zasięgu -> oznaczone jako ograniczone', wynikMalo.kOgraniczone, true);
-
-// Cel powyżej zasięgu K_MAX (186 * 4 = 744 kcal) -> ograniczone do K_MAX.
-const wynikDuzo = przeskalujPrzepis(salatka, 2000);
-sprawdz('cel powyżej zasięgu -> k = K_MAX', wynikDuzo.k, K_MAX);
-sprawdz('cel powyżej zasięgu -> oznaczone jako ograniczone', wynikDuzo.kOgraniczone, true);
-
-// Zaokrąglenie do zera nie kasuje składnika, gdy bazowo był obecny.
-const jednaKromkaMalyCel: SkladnikPrzepisu[] = [
+// Porcja z garnka na dwie osoby: 3 jajka w garnku to 1,5 jajka na porcję.
+// To udział w garnku, nie jajko do rozbicia — nie zaokrąglamy go do 2.
+const jajkaZGarnka: SkladnikPrzepisu[] = [
   {
-    id: 'chleb', rola: 'baza', moznaDzielic: false, ilosc: 1, gramyNaJednostke: 60,
-    kcal_100g: 250, bialko_100g: 8, tluszcz_100g: 2, wegle_100g: 48,
+    id: 'jajka', rola: 'baza', moznaDzielic: false, ilosc: 1.5, gramyNaJednostke: 50,
+    kcal_100g: 143, bialko_100g: 12.6, tluszcz_100g: 9.5, wegle_100g: 0.7,
   },
 ];
-const wynikMin = przeskalujPrzepis(jednaKromkaMalyCel, 1);
-sprawdz('minimalny cel nie zeruje jedynego składnika', wynikMin.pozycje[0].iloscPoSkalowaniu >= 1, true);
+const jajkaWynik = przeskalujPrzepis(jajkaZGarnka, 110, 1000);
+sprawdz('ułamek jajka z garnka nie jest zaokrąglany',
+  Number.isInteger(jajkaWynik.pozycje[0].iloscPoSkalowaniu), false);
 
 // =============================================================
 //  Przepis z mieszanymi rolami — kalorie od tłumionych ról rosną wolniej
@@ -96,7 +153,7 @@ sprawdz('minimalny cel nie zeruje jedynego składnika', wynikMin.pozycje[0].ilos
 //  Baza: 400 g kurczaka, 165 kcal/100g -> 660 kcal
 //  Aromat: 4 szt czosnku po 5 g, 150 kcal/100g -> 30 kcal
 //  Woda: 200 g, 0 kcal/100g -> 0 kcal (i tak się nie liczy)
-//  Bazowo razem: 690 kcal
+//  Bazowo razem: 690 kcal, 620 g
 
 const gulasz: SkladnikPrzepisu[] = [
   {
@@ -113,7 +170,13 @@ const gulasz: SkladnikPrzepisu[] = [
   },
 ];
 
-const wynikGulasz = przeskalujPrzepis(gulasz, 1350); // dwukrotność -> k dąży do ~2, ale aromat rośnie wolniej
+// Granica masy liczy prawdziwe gramy: woda stoi, czosnek rośnie wolniej, więc
+// kurczak może urosnąć bardziej niż o połowę, a porcja i tak nie przekroczy 930 g.
+const kGulaszu = kDlaMasy(gulasz, 930);
+sprawdz('gulasz: k przy granicy masy większe niż 1,5 (woda nie rośnie)', kGulaszu > 1.5, true);
+bliskie('gulasz: masa przy granicznym k to dokładnie 930 g', masaPrzySkali(gulasz, kGulaszu), 930, 0.01);
+
+const wynikGulasz = przeskalujPrzepis(gulasz, 1350, 2000); // dwukrotność -> k dąży do ~2, ale aromat rośnie wolniej
 sprawdz('gulasz x2 kcal: woda nie zmienia ilości', wynikGulasz.pozycje[2].iloscPoSkalowaniu, 200);
 sprawdz(
   'gulasz x2 kcal: czosnek rośnie WOLNIEJ niż x2 (bo aromat tłumiony przy k>1)',
@@ -129,7 +192,7 @@ bliskie('gulasz x2 kcal: trafia blisko celu mimo zaokrąglenia czosnku', wynikGu
 //  dobierzWspolczynnik — spójność z przeskalujPrzepis
 // =============================================================
 
-const { k: kBezposrednio } = dobierzWspolczynnik(gulasz, 1350);
+const { k: kBezposrednio } = dobierzWspolczynnik(gulasz, 1350, kDlaMasy(gulasz, 2000));
 sprawdz('dobierzWspolczynnik zgodny z przeskalujPrzepis', kBezposrednio, wynikGulasz.k);
 
 // =============================================================

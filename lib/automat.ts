@@ -60,7 +60,7 @@
  * widać potem na paskach makro i poprawia się je ręcznie.
  */
 
-import { K_MAX, K_MIN } from './skalowanie-kalorii';
+import { gornaMasaPorcji, limitPorcjiG } from './skalowanie-kalorii';
 import type { PoraPosilku, Preferencja } from './przepisy';
 
 /** Kolejność wypełniania w obrębie dnia. */
@@ -74,6 +74,8 @@ export type Kandydat = {
   liczba_porcji_bazowych: number;
   kcal: number | null;
   bialko_g: number | null;
+  /** Waga jednej porcji bazowej — od niej zależy, ile danie może urosnąć przy skalowaniu. */
+  gramy_porcji: number | null;
   /** Preferencja KONTA, dla którego układamy plan — nie popularność ogólna. */
   preferencja: Preferencja;
   /** Checkbox na przepisie (migracja 0036) — wolno automatowi rozciągać go pod cel kaloryczny? */
@@ -215,35 +217,45 @@ export function dniGotowania(
 type StanDnia = { kcal: number; bialko: number };
 
 /**
+ * Ile razy danie może urosnąć na tym posiłku — 1, gdy nie może wcale.
+ *
+ * Te same granice co w `lib/skalowanie-kalorii.ts`: porcja rośnie najwyżej
+ * o połowę i nie ponad limit gramów posiłku, a nigdy nie maleje. Tu liczymy
+ * je z wagi porcji w przybliżeniu (kalorie proporcjonalne do masy) — dokładną
+ * wartość, z rolami składników, policzy dopiero silnik przy zapisie.
+ */
+export function mnoznikWzrostu(k: Kandydat, pora: PoraPosilku): number {
+  const gramy = k.gramy_porcji ?? 0;
+  if (!k.skalowalny || gramy <= 0) return 1;
+  return gornaMasaPorcji(gramy, limitPorcjiG(pora, k.pory)) / gramy;
+}
+
+/**
  * Kara za odchylenie wartości kandydata (kcal albo białko) od celu.
  *
  * Danie skalowalne (checkbox na przepisie, migracja 0036) da się rozciągnąć
- * w zakresie [K_MIN, K_MAX] razy jego bazowa wartość — jeśli cel mieści się
- * w tym zakresie, kara wynosi zero, bo `lib/skalowanie-kalorii.ts` i tak
- * dobierze k tak, żeby w niego trafić. Poza zakresem liczy się odległość do
- * NAJBLIŻSZEJ osiągalnej granicy, nie do samej wartości bazowej — inaczej
- * skalowalna „kromka” przegrywałaby z daniem, którego w ogóle nie da się
- * dociągnąć.
+ * od bazowej wartości do `wzrost` razy tyle — jeśli cel mieści się w tym
+ * zakresie, kara wynosi zero, bo `lib/skalowanie-kalorii.ts` i tak dobierze
+ * porcję, żeby w niego trafić. Poza zakresem liczy się odległość do
+ * NAJBLIŻSZEJ osiągalnej granicy — inaczej skalowalna „kromka” przegrywałaby
+ * z daniem, którego w ogóle nie da się dociągnąć. Porcja nie maleje, więc
+ * cel poniżej bazowej wartości karze tak samo jak przy daniu nieskalowalnym;
+ * przy `wzrost` = 1 cała funkcja sprowadza się do zwykłej odległości.
  *
  * `tylkoNiedobor` odtwarza dawne zachowanie kary za białko: nadmiar nie karze,
- * więc przy skalowalnym daniu liczy się wyłącznie górna granica zasięgu.
+ * więc liczy się wyłącznie górna granica zasięgu.
  */
 function karaOdchylenia(
   wartosc: number,
   cel: number,
   odniesienie: number,
-  skalowalny: boolean,
+  wzrost: number,
   tylkoNiedobor: boolean
 ): number {
-  if (!skalowalny || wartosc <= 0) {
-    return tylkoNiedobor ? Math.max(0, cel - wartosc) / odniesienie : Math.abs(wartosc - cel) / odniesienie;
-  }
-
-  const dolna = wartosc * K_MIN;
-  const gorna = wartosc * K_MAX;
+  const gorna = wartosc * wzrost;
 
   if (tylkoNiedobor) return Math.max(0, cel - gorna) / odniesienie;
-  if (cel < dolna) return (dolna - cel) / odniesienie;
+  if (cel < wartosc) return (wartosc - cel) / odniesienie;
   if (cel > gorna) return (cel - gorna) / odniesienie;
   return 0;
 }
@@ -256,6 +268,8 @@ function karaOdchylenia(
  */
 export function ocen(opcje: {
   kandydat: Kandydat;
+  /** Posiłek, na który szukamy dania — od niego zależy limit porcji. */
+  pora: PoraPosilku;
   /** Ile kalorii powinno przypaść na to jedno miejsce. */
   docelowoKcal: number;
   /** Ile białka powinno przypaść na to jedno miejsce. */
@@ -266,16 +280,17 @@ export function ocen(opcje: {
   dzien: number;
   szum: number;
 }): number {
-  const { kandydat, docelowoKcal, docelowoBialko, ostatnioWDniu, dzien, szum } = opcje;
+  const { kandydat, pora, docelowoKcal, docelowoBialko, ostatnioWDniu, dzien, szum } = opcje;
 
   const kcal = kandydat.kcal ?? 0;
   const bialko = kandydat.bialko_g ?? 0;
+  const wzrost = mnoznikWzrostu(kandydat, pora);
 
   const odniesienieKcal = Math.max(docelowoKcal, MIN_KCAL_ODNIESIENIA);
   const odniesienieBialka = Math.max(docelowoBialko, MIN_BIALKA_ODNIESIENIA);
 
-  const karaKcal = karaOdchylenia(kcal, docelowoKcal, odniesienieKcal, kandydat.skalowalny, false);
-  const karaBialka = karaOdchylenia(bialko, docelowoBialko, odniesienieBialka, kandydat.skalowalny, true);
+  const karaKcal = karaOdchylenia(kcal, docelowoKcal, odniesienieKcal, wzrost, false);
+  const karaBialka = karaOdchylenia(bialko, docelowoBialko, odniesienieBialka, wzrost, true);
 
   const premia = premiaZaPreferencje(kandydat.preferencja);
 
@@ -356,6 +371,7 @@ export function zaplanuj(opcje: {
       for (const kandydat of kandydaci) {
         const wynik = ocen({
           kandydat,
+          pora,
           docelowoKcal,
           docelowoBialko,
           ostatnioWDniu: ostatnieUzycie.get(kandydat.id) ?? null,
@@ -376,7 +392,14 @@ export function zaplanuj(opcje: {
       // Bez `uwzglednijTrwalosc` wariant skalowany zostaje na jeden posiłek
       // (każdy dzień ma inny cel, więc nie ma go z czym kopiować), w
       // przeciwnym razie liczba porcji bazowych decyduje jak dawniej.
-      const uzyjSkalowania = najlepszy.skalowalny && (najlepszy.kcal ?? 0) > 0;
+      // Skalujemy tylko wtedy, gdy jest po co: jest cel kalorii, brakuje więcej
+      // niż daje porcja bazowa i danie w ogóle może urosnąć na tym posiłku.
+      // Porcja nigdy nie maleje, więc przy mniejszym braku wariant byłby
+      // kopią przepisu.
+      const bazowyKcal = najlepszy.kcal ?? 0;
+      const wzrost = mnoznikWzrostu(najlepszy, pora);
+      const uzyjSkalowania =
+        celKcal !== null && bazowyKcal > 0 && wzrost > 1 && docelowoKcal > bazowyKcal;
       const liczbaDni = uwzglednijTrwalosc
         ? dniZLimitem(najlepszy.trwalosc_dni, osoby)
         : uzyjSkalowania
@@ -386,8 +409,8 @@ export function zaplanuj(opcje: {
       if (objete.length === 0) continue; // nie powinno się zdarzyć: miejsce jest wolne
 
       // Do bieżącego bilansu dnia liczymy nie bazową wartość dania, tylko to,
-      // co po skalowaniu realnie wyjdzie — ograniczone do [K_MIN, K_MAX], tak
-      // samo jak zrobi to `lib/skalowanie-kalorii.ts` przy faktycznym zapisie.
+      // co po skalowaniu realnie wyjdzie — w granicach porcji, tak samo jak
+      // zrobi to `lib/skalowanie-kalorii.ts` przy faktycznym zapisie.
       // Białko skalujemy proporcjonalnie do kalorii — dokładną wartość policzy
       // dopiero silnik, to tylko bilans wewnątrz automatu.
       let kcalWstawienia = najlepszy.kcal ?? 0;
@@ -395,10 +418,7 @@ export function zaplanuj(opcje: {
       let celKcalDlaSkalowania: number | null = null;
 
       if (uzyjSkalowania) {
-        const bazowyKcal = najlepszy.kcal ?? 0;
-        const dolna = bazowyKcal * K_MIN;
-        const gorna = bazowyKcal * K_MAX;
-        const celOgraniczony = Math.min(gorna, Math.max(dolna, docelowoKcal));
+        const celOgraniczony = Math.min(bazowyKcal * wzrost, docelowoKcal);
         celKcalDlaSkalowania = celOgraniczony;
         kcalWstawienia = celOgraniczony;
         bialkoWstawienia = (najlepszy.bialko_g ?? 0) * (celOgraniczony / bazowyKcal);

@@ -16,7 +16,7 @@ import { KOLOR_MAKRO, Spacing } from '@/constants/theme';
 import { useFiltryPrzepisow } from '@/hooks/use-filtry-przepisow';
 import { useTheme } from '@/hooks/use-theme';
 import { komunikatBledu } from '@/lib/blad';
-import { dniZLimitem, powtorzTydzien, zaplanuj, type Wstawienie } from '@/lib/automat';
+import { dniZLimitem, mnoznikWzrostu, powtorzTydzien, zaplanuj, type Wstawienie } from '@/lib/automat';
 import {
   czyDzisiaj,
   dniPlanu,
@@ -353,6 +353,7 @@ export default function EkranPlanu() {
           przepis: pelny,
           dostepneSkladniki,
           celKcal: w.celKcalDlaSkalowania,
+          pora: w.pora,
         });
         przepisSkalowanyId = wynik.id;
       }
@@ -494,13 +495,16 @@ export default function EkranPlanu() {
    * Przelicza WSZYSTKIE dania oznaczone jako skalowalne w bieżącym tygodniu,
    * dzień po dniu, pod dzienny cel kaloryczny z profilu.
    *
-   * Dania nieskalowalne w ogóle nie są ruszane — liczą się tylko do bilansu
-   * dnia jako wartość stała. Reszta celu (cel minus to, co stałe) rozkłada
-   * się równo między skalowalne dania TEGO dnia — jeśli jest ich kilka,
-   * każde dostaje swój kawałek, a nie cały brakujący cel naraz.
+   * Dania, które nie mogą urosnąć — nieskalowalne albo już na limicie porcji
+   * posiłku (barszcz ~1065 g na obiad) — liczą się do bilansu dnia jako
+   * wartość stała, w porcji z przepisu. Reszta celu (cel minus to, co stałe)
+   * rozkłada się równo między dania, które urosnąć mogą — jeśli jest ich
+   * kilka, każde dostaje swój kawałek, a nie cały brakujący cel naraz.
    *
    * Działa niezależnie od tego, czy dane danie było już wcześniej
-   * przeskalowane — zawsze liczy od nowa, z aktualnym celem.
+   * przeskalowane — zawsze liczy od nowa, z aktualnym celem. Porcja nigdy
+   * nie maleje, więc garnek, któremu nic nie brakuje, wraca do przepisu
+   * bez wariantu; tak samo znikają warianty dań, które urosnąć już nie mogą.
    *
    * Garnek zostaje garnkiem: pozycje z jednej partii (jedno gotowanie
    * rozłożone na kilka dni, patrz „trwałość przed skalowaniem” w
@@ -521,22 +525,38 @@ export default function EkranPlanu() {
     const przepisyWedlugId = new Map(przepisy.map((p) => [p.id, p]));
     const dniZmienione = new Set<string>();
     // Szczegóły do komunikatu — bez nich „przeliczono 3 dania” nie mówi,
-    // czy któreś z nich trafiło w granicę [K_MIN, K_MAX] i nie dobiło do celu.
+    // czy któreś z nich trafiło w granicę porcji i nie dobiło do celu.
     const szczegoly: string[] = [];
 
-    // Krok 1: cel każdej skalowalnej pozycji, dzień po dniu — jak dotąd.
+    // Kalorie porcji z przepisu — pozycja z wariantem ma w `kcal` wartość
+    // wariantu, a liczymy od nowa.
+    const kcalBazowe = (p: PozycjaPlanu) => przepisyWedlugId.get(p.przepis_id)?.kcal ?? p.kcal;
+    const mozeRosnac = (p: PozycjaPlanu) => {
+      const przepis = przepisyWedlugId.get(p.przepis_id);
+      return !!przepis && (przepis.kcal ?? 0) > 0 && mnoznikWzrostu(przepis, p.pora) > 1;
+    };
+
+    // Pozycja bez potrzeby wariantu wraca do przepisu — zdejmujemy stary.
+    async function zdejmijWariant(pozycja: PozycjaPlanu) {
+      if (!pozycja.przepis_skalowany_id) return;
+      await ustawPrzepisSkalowanyPozycji(pozycja.id, null);
+      dniZmienione.add(pozycja.data);
+    }
+
+    // Krok 1: cel każdej pozycji, która może urosnąć, dzień po dniu.
     const celePozycji: { pozycja: PozycjaPlanu; celKcal: number }[] = [];
     for (const data of dniPlanu(plan)) {
       const dniowe = pozycje.filter((p) => p.data === data);
-      const skalowalne = dniowe.filter((p) => przepisyWedlugId.get(p.przepis_id)?.skalowalny);
-      if (skalowalne.length === 0) continue;
+      const rosnace = dniowe.filter(mozeRosnac);
+      const stale = dniowe.filter((p) => !rosnace.includes(p));
+      for (const pozycja of stale) await zdejmijWariant(pozycja);
+      if (rosnace.length === 0) continue;
 
-      const stale = dniowe.filter((p) => !skalowalne.includes(p));
-      const kcalStalych = stale.reduce((s, p) => s + p.kcal * p.porcje, 0);
-      const docelowoNaSkalowalne = Math.max(0, cel.kcal - kcalStalych);
-      const docelowoNaJedno = docelowoNaSkalowalne / skalowalne.length;
+      const kcalStalych = stale.reduce((s, p) => s + kcalBazowe(p) * p.porcje, 0);
+      const docelowoNaRosnace = Math.max(0, cel.kcal - kcalStalych);
+      const docelowoNaJedno = docelowoNaRosnace / rosnace.length;
 
-      for (const pozycja of skalowalne) {
+      for (const pozycja of rosnace) {
         celePozycji.push({ pozycja, celKcal: docelowoNaJedno / Math.max(1, pozycja.porcje) });
       }
     }
@@ -555,12 +575,20 @@ export default function EkranPlanu() {
     for (const dniGarnka of garnki.values()) {
       const pierwsza = dniGarnka[0].pozycja;
       const celGarnka = dniGarnka.reduce((s, c) => s + c.celKcal, 0) / dniGarnka.length;
+
+      // Porcja z przepisu wystarcza — nic nie dokładamy, wariant byłby kopią.
+      if (celGarnka <= kcalBazowe(pierwsza)) {
+        for (const { pozycja } of dniGarnka) await zdejmijWariant(pozycja);
+        continue;
+      }
+
       const pelny = await pobierzPelnyPrzepis(pierwsza.przepis_id);
       const wynik = await utworzPrzeskalowanyPrzepis({
         kontoId: sesja.user.id,
         przepis: pelny,
         dostepneSkladniki,
         celKcal: celGarnka,
+        pora: pierwsza.pora,
       });
       for (const { pozycja } of dniGarnka) {
         await ustawPrzepisSkalowanyPozycji(pozycja.id, wynik.id);
@@ -568,10 +596,10 @@ export default function EkranPlanu() {
       }
 
       szczegoly.push(
-        `${pierwsza.nazwa}: ${Math.round(pierwsza.kcal)}→${wynik.kcal} kcal (cel ${Math.round(celGarnka)}` +
+        `${pierwsza.nazwa}: ${Math.round(kcalBazowe(pierwsza))}→${wynik.kcal} kcal (cel ${Math.round(celGarnka)}` +
           (dniGarnka.length > 1 ? `, średnio z ${dniGarnka.length} dni jednego garnka` : '') +
           ')' +
-          (wynik.kOgraniczone ? ' — trafiło w granicę skalowania, nie dobiło do celu' : '')
+          (wynik.kOgraniczone ? ' — porcja doszła do granicy, reszta zostaje brakiem' : '')
       );
     }
 
@@ -649,7 +677,7 @@ export default function EkranPlanu() {
         // `wypelnijAutomatem`), tylko liczone dla jednego, tego
         // konkretnego miejsca zamiast dla całego dnia naraz.
         let przepisSkalowanyId: string | undefined;
-        if (p.skalowalny && cel && (p.kcal ?? 0) > 0) {
+        if (cel && (p.kcal ?? 0) > 0 && mnoznikWzrostu(p, wybierany.pora) > 1) {
           const dniowe = pozycje.filter((x) => x.data === wybierany.data);
           const kcalDnia = sumujDzien(dniowe).kcal;
           const brakKcal = Math.max(0, cel.kcal - kcalDnia);
@@ -658,15 +686,19 @@ export default function EkranPlanu() {
           ).length;
           const celTegoDania = brakKcal / Math.max(1, wolnychWDniu);
 
-          const pelny = await pobierzPelnyPrzepis(p.id);
-          const dostepneSkladniki = await pobierzSkladniki();
-          const wynik = await utworzPrzeskalowanyPrzepis({
-            kontoId: sesja.user.id,
-            przepis: pelny,
-            dostepneSkladniki,
-            celKcal: celTegoDania,
-          });
-          przepisSkalowanyId = wynik.id;
+          // Porcja nie maleje — przy mniejszym braku wariant byłby kopią przepisu.
+          if (celTegoDania > (p.kcal ?? 0)) {
+            const pelny = await pobierzPelnyPrzepis(p.id);
+            const dostepneSkladniki = await pobierzSkladniki();
+            const wynik = await utworzPrzeskalowanyPrzepis({
+              kontoId: sesja.user.id,
+              przepis: pelny,
+              dostepneSkladniki,
+              celKcal: celTegoDania,
+              pora: wybierany.pora,
+            });
+            przepisSkalowanyId = wynik.id;
+          }
         }
 
         await dodajPartie({

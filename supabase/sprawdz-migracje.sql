@@ -321,6 +321,15 @@ with sprawdzenia as (
       select 1 from information_schema.columns
        where table_name = 'przepisy' and column_name = 'zdjecie_zrodlo'
     )
+  union all
+  select
+    '0048_skalowalny_domyslnie',
+    'przepisy.skalowalny domyślnie true',
+    exists (
+      select 1 from information_schema.columns
+       where table_name = 'przepisy' and column_name = 'skalowalny'
+         and column_default = 'true'
+    )
 )
 select
   migracja,

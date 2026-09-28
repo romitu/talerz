@@ -476,7 +476,8 @@ export async function przeniesPosilek(id: string, data: string, pora: PoraPosilk
  */
 export async function ustawPrzepisSkalowanyPozycji(
   pozycjaId: string,
-  przepisSkalowanyId: string
+  /** `null` — pozycja wraca do przepisu źródłowego, bez wariantu. */
+  przepisSkalowanyId: string | null
 ): Promise<void> {
   const { error } = await supabase
     .from('plan_pozycje')

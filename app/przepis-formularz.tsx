@@ -157,7 +157,7 @@ export default function FormularzPrzepisu() {
   const [przechowywanie, setPrzechowywanie] = useState('');
   const [moznaMrozic, setMoznaMrozic] = useState<'tak' | 'nie' | 'nie wiem'>('nie wiem');
   /** Czy automat wolno automatycznie skalować ten przepis kalorycznie (migracja 0036). */
-  const [skalowalny, setSkalowalny] = useState(false);
+  const [skalowalny, setSkalowalny] = useState(true);
   const [ratunek, setRatunek] = useState('');
   const [zdjecie, setZdjecie] = useState<string | null>(null);
   const [zdjecieZrodlo, setZdjecieZrodlo] = useState<ZrodloZdjecia | null>(null);
@@ -312,7 +312,7 @@ export default function FormularzPrzepisu() {
     setSprzet([]);
     setPrzechowywanie('');
     setMoznaMrozic('nie wiem');
-    setSkalowalny(false);
+    setSkalowalny(true);
     setRatunek('');
     setZdjecie(null);
     setZdjecieZrodlo(null);
@@ -902,10 +902,10 @@ export default function FormularzPrzepisu() {
               Można skalować kalorycznie
             </ThemedText>
             <ThemedText type="small" themeColor="textSecondary">
-              Dla dań o elastycznej wielkości — sałatka, kanapka „na kromkę”. Automat
-              wypełniający plan wolno mu wtedy dokładać albo ujmować składników, żeby
-              dobić do celu kalorycznego posiłku, zamiast wstawiać przepis zawsze
-              w bazowym rozmiarze.
+              Gdy do celu kalorii brakuje, plan może powiększyć porcję — najwyżej o połowę
+              i nie ponad 600 g na śniadanie, kolację i dodatek oraz 900 g na obiad.
+              Porcja nigdy nie jest mniejsza niż w przepisie. Odznacz tylko wtedy, gdy
+              tego dania nie wolno zmieniać.
             </ThemedText>
           </View>
         </Pressable>

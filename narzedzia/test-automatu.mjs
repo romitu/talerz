@@ -25,12 +25,13 @@ const kosz = mkdtempSync(path.join(tmpdir(), 'talerz-automat-'));
 
 execFileSync(
   'npx',
-  ['tsc', 'lib/automat.ts', '--outDir', kosz, '--module', 'es2022', '--target', 'es2022',
-   '--moduleResolution', 'bundler', '--skipLibCheck'],
-  { cwd: korzen, stdio: 'inherit' }
+  ['tsc', 'lib/automat.ts', '--outDir', kosz, '--module', 'commonjs', '--target', 'es2022',
+   '--moduleResolution', 'node10', '--ignoreDeprecations', '6.0', '--skipLibCheck', '--ignoreConfig', '--types', 'node'],
+  // Na Windowsie `npx` to skrypt .cmd — bez powłoki execFileSync go nie znajduje.
+  { cwd: korzen, stdio: 'inherit', shell: process.platform === 'win32' }
 );
 
-const { zaplanuj, powtorzTydzien, ocen, dniGotowania, nadajeSieNa } = await import(
+const { zaplanuj, powtorzTydzien, ocen, dniGotowania, nadajeSieNa, mnoznikWzrostu } = await import(
   pathToFileURL(path.join(kosz, 'automat.js')).href
 );
 
@@ -49,6 +50,8 @@ const DNI = ['2026-08-17', '2026-08-18', '2026-08-19', '2026-08-20',
 function danie(id, pory, kcal, bialko, porcjeBazowe = 0, preferencja = 'neutralne', skalowalny = false, trwaloscDni = 3, ukryty = false) {
   return {
     id, nazwa: id, pory, liczba_porcji_bazowych: porcjeBazowe, kcal, bialko_g: bialko,
+    // Waga porcji ważna tylko przy skalowaniu — 300 g mieści ×1,5 w każdym limicie.
+    gramy_porcji: 300,
     preferencja, skalowalny, trwalosc_dni: trwaloscDni, ukryty,
   };
 }
@@ -275,12 +278,21 @@ const PRZEPISY = [
 
 // --- 11. skalowanie kaloryczne (checkbox "skalowalny", migracja 0036) -------
 {
-  // Kanapka "na kromkę": bazowo 300 kcal, ale checkbox skalowalny=true
-  // pozwala rozciągnąć ją w zakresie [K_MIN, K_MAX] * 300 = [75, 1200].
-  // Cel na to miejsce: 900 kcal — poza zasięgiem zwykłego dania (250 kcal
-  // twarożku), ale w zasięgu kanapki po przeskalowaniu.
-  const kanapka = danie('kanapka', ['sniadanie'], 300, 15, 0, 'neutralne', true);
+  // Kanapka "na kromkę": bazowo 300 kcal i 250 g. Na śniadaniu może urosnąć
+  // najwyżej o połowę (375 g, limit 600 g łagodniejszy), czyli do ~450 kcal.
+  // Cel na to miejsce: 900 kcal — kanapka i tak jest bliżej niż twarożek
+  // (250 kcal), ale nie dociągnie dalej niż do swojej granicy.
+  const kanapka = { ...danie('kanapka', ['sniadanie'], 300, 15, 0, 'neutralne', true), gramy_porcji: 250 };
   const twarozek = danie('twarozek', ['sniadanie'], 250, 20, 0, 'neutralne', false);
+
+  sprawdz('kanapka na śniadaniu może urosnąć o połowę',
+          Math.abs(mnoznikWzrostu(kanapka, 'sniadanie') - 1.5) < 1e-9, mnoznikWzrostu(kanapka, 'sniadanie'));
+  const barszczObiad = { ...danie('barszcz', ['obiad'], 260, 12, 2, 'neutralne', true), gramy_porcji: 1065 };
+  sprawdz('barszcz 1065 g na obiad nie może urosnąć (limit 900 g)',
+          mnoznikWzrostu(barszczObiad, 'obiad') === 1, mnoznikWzrostu(barszczObiad, 'obiad'));
+  const kremObiad = { ...danie('krem', ['obiad'], 400, 12, 2, 'neutralne', true), gramy_porcji: 792 };
+  sprawdz('krem 792 g na obiad rośnie tylko do limitu 900 g',
+          Math.abs(mnoznikWzrostu(kremObiad, 'obiad') - 900 / 792) < 1e-9, mnoznikWzrostu(kremObiad, 'obiad'));
 
   const { wstawienia } = zaplanuj({
     dni: [DNI[0]],
@@ -292,39 +304,82 @@ const PRZEPISY = [
 
   sprawdz('skalowalna kanapka wygrywa z niedopasowanym twarożkiem mimo mniejszej bazowej wartości',
           wstawienia[0]?.przepisId === 'kanapka', wstawienia[0]?.przepisId);
-  sprawdz('celKcalDlaSkalowania ustawione na ~900 (brakujące kcal na to miejsce)',
-          Math.abs((wstawienia[0]?.celKcalDlaSkalowania ?? 0) - 900) < 1,
+  sprawdz('celKcalDlaSkalowania staje na granicy kanapki (~450), nie na celu 900',
+          Math.abs((wstawienia[0]?.celKcalDlaSkalowania ?? 0) - 450) < 1,
           wstawienia[0]?.celKcalDlaSkalowania);
 
-  // Ocena bezpośrednio: kanapka (skalowalna) powinna dostać zerową karę
-  // kaloryczną za cel w zasięgu [75, 1200], mimo że baza (300) daleko od 900.
+  // Ocena bezpośrednio: cel w zasięgu kanapki [300, 450] nie daje kary
+  // kalorycznej, choć baza (300) jest od niego daleko.
+  const ocenaKanapkiWZasiegu = ocen({
+    kandydat: kanapka, pora: 'sniadanie', docelowoKcal: 420, docelowoBialko: 10,
+    ostatnioWDniu: null, dzien: 0, szum: 0,
+  });
+  sprawdz('cel w zasięgu kanapki nie daje kary', ocenaKanapkiWZasiegu < 0.01, ocenaKanapkiWZasiegu);
+
   const ocenaKanapki = ocen({
-    kandydat: kanapka, docelowoKcal: 900, docelowoBialko: 60,
+    kandydat: kanapka, pora: 'sniadanie', docelowoKcal: 900, docelowoBialko: 60,
     ostatnioWDniu: null, dzien: 0, szum: 0,
   });
   const ocenaTwarozku = ocen({
-    kandydat: twarozek, docelowoKcal: 900, docelowoBialko: 60,
+    kandydat: twarozek, pora: 'sniadanie', docelowoKcal: 900, docelowoBialko: 60,
     ostatnioWDniu: null, dzien: 0, szum: 0,
   });
   sprawdz('skalowalna kanapka dostaje mniejszą karę niż niedopasowany twarożek',
           ocenaKanapki < ocenaTwarozku, `kanapka=${ocenaKanapki} twarozek=${ocenaTwarozku}`);
 
-  // Cel poza zasięgiem [75, 1200] karze proporcjonalnie do odległości od granicy.
-  const ocenaZaDuzoCelu = ocen({
-    kandydat: kanapka, docelowoKcal: 5000, docelowoBialko: 60,
+  // Porcja nie maleje: cel poniżej bazowej wartości karze tak jak zwykłe danie.
+  const ocenaZaMaloCelu = ocen({
+    kandydat: kanapka, pora: 'sniadanie', docelowoKcal: 200, docelowoBialko: 10,
     ostatnioWDniu: null, dzien: 0, szum: 0,
   });
-  sprawdz('cel poza górną granicą [K_MIN,K_MAX] daje karę > 0',
-          ocenaZaDuzoCelu > 0, ocenaZaDuzoCelu);
+  sprawdz('cel poniżej porcji bazowej daje karę > 0 (porcja nie maleje)',
+          ocenaZaMaloCelu > 0, ocenaZaMaloCelu);
 
   // Skalowalne danie nie karze nadmiaru białka (tylkoNiedobor=true).
   const bogataWBialko = danie('bogata', ['sniadanie'], 300, 100, 0, 'neutralne', true);
   const ocenaNadmiarBialka = ocen({
-    kandydat: bogataWBialko, docelowoKcal: 300, docelowoBialko: 10,
+    kandydat: bogataWBialko, pora: 'sniadanie', docelowoKcal: 300, docelowoBialko: 10,
     ostatnioWDniu: null, dzien: 0, szum: 0,
   });
   sprawdz('nadmiar białka przy skalowalnym daniu nie karze (kara białka = 0)',
           ocenaNadmiarBialka < 0.01, ocenaNadmiarBialka);
+
+  // Bez celu kalorii nie ma do czego skalować — wcześniej cel wychodził 0
+  // i kanapka kurczyła się do K_MIN, czyli ćwierci przepisu.
+  const bezCelu = zaplanuj({
+    dni: [DNI[0]],
+    zajete: [{ data: DNI[0], pora: 'obiad' }, { data: DNI[0], pora: 'kolacja' }],
+    makroDni: new Map(),
+    przepisy: [kanapka],
+    celKcal: null, celBialko: null, losowo: BEZ_LOSU,
+  });
+  sprawdz('bez celu kalorii skalowalne danie wchodzi bez skalowania',
+          bezCelu.wstawienia[0]?.celKcalDlaSkalowania === null,
+          bezCelu.wstawienia[0]?.celKcalDlaSkalowania);
+
+  // Barszcz na limicie obiadu: brakuje dużo, ale nie ma czego przeliczać.
+  const barszczBezSkalowania = zaplanuj({
+    dni: [DNI[0]],
+    zajete: [{ data: DNI[0], pora: 'sniadanie' }, { data: DNI[0], pora: 'kolacja' }],
+    makroDni: new Map([[DNI[0], { kcal: 900, bialko: 60 }]]),
+    przepisy: [barszczObiad],
+    celKcal: 2000, celBialko: 140, losowo: BEZ_LOSU,
+  });
+  sprawdz('barszcz na limicie obiadu wchodzi bez skalowania',
+          barszczBezSkalowania.wstawienia[0]?.celKcalDlaSkalowania === null,
+          barszczBezSkalowania.wstawienia[0]?.celKcalDlaSkalowania);
+
+  // Brakuje mniej niż daje porcja bazowa — porcja nie maleje, więc bez wariantu.
+  const malyBrak = zaplanuj({
+    dni: [DNI[0]],
+    zajete: [{ data: DNI[0], pora: 'obiad' }, { data: DNI[0], pora: 'kolacja' }],
+    makroDni: new Map([[DNI[0], { kcal: 1800, bialko: 120 }]]),
+    przepisy: [kanapka],
+    celKcal: 2000, celBialko: 140, losowo: BEZ_LOSU,
+  });
+  sprawdz('gdy brakuje mniej niż porcja bazowa, danie wchodzi bez skalowania',
+          malyBrak.wstawienia[0]?.celKcalDlaSkalowania === null,
+          malyBrak.wstawienia[0]?.celKcalDlaSkalowania);
 }
 
 // --- 12. uwzglednijTrwalosc — trwałość, nie porcje bazowe, decyduje o dniach

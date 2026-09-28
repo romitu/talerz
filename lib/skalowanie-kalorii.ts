@@ -16,15 +16,64 @@
  *    dryf proporcji jest znikomy.
  *  - po zaokrągleniu składników z `mozna_dzielic = false` do liczby całkowitej
  *    dopuszczamy odchylenie od celu — nie ma dociągania innym składnikiem.
- *  - k ma stałe, globalne granice (nie per przepis) — patrz `K_MIN`/`K_MAX`.
+ *
+ * Granice porcji (ustalone 2026-09-28)
+ * ------------------------------------
+ * Skalowanie ma dopasować danie do celu, ale nie może zrobić z porcji absurdu.
+ * Dlatego liczymy zawsze na JEDNEJ PORCJI BAZOWEJ (masa przepisu podzielona
+ * przez liczbę porcji — wołający dzieli ilości, zanim tu trafią), a k to
+ * mnożnik tej porcji:
+ *
+ *  - k ≥ 1 — porcja nigdy nie maleje poniżej bazowej. Skalowanie tylko DOKŁADA,
+ *    gdy brakuje kalorii; nadmiaru nie koryguje.
+ *  - porcja rośnie najwyżej o połowę (`WZROST_MAX`) i nie ponad limit gramów
+ *    posiłku (`LIMIT_PORCJI_G`) — liczy się to, co ostrzejsze.
+ *  - danie, które już bazowo przekracza limit (barszcz ~1065 g na obiad),
+ *    nie rośnie wcale — ale też nie jest przycinane do limitu.
+ *
+ * Granica masy dotyczy prawdziwych gramów po przeliczeniu ról (przyprawy
+ * i tłuszcz rosną wolniej), a nie samego k. Zaokrąglenie składników w sztukach
+ * może ją przekroczyć o część jednej sztuki.
  */
 
+import type { PoraPosilku } from './przepisy';
 import type { RolaSkladnika } from './skladniki';
 
-/** Dolna granica mnożnika — przepis nie kurczy się poniżej jednej czwartej. */
-export const K_MIN = 0.25;
-/** Górna granica mnożnika — przepis nie rośnie ponad czterokrotność. */
-export const K_MAX = 4;
+/** Porcja może urosnąć najwyżej o tyle względem bazowej (wagowo). */
+export const WZROST_MAX = 1.5;
+
+/**
+ * Największa porcja jednego dania na danym posiłku, w gramach (ml liczymy
+ * jak gramy). Dotyczy KAŻDEGO dania osobno — obiad z dodatkiem może mieć
+ * razem więcej. Przepis z kategorią „dodatek” ma limit dodatku, niezależnie
+ * od posiłku, przy którym stoi.
+ */
+export const LIMIT_PORCJI_G: Record<PoraPosilku, number> = {
+  sniadanie: 600,
+  obiad: 900,
+  kolacja: 600,
+  dodatek: 600,
+};
+
+/** Limit gramów dla dania na danym posiłku — patrz `LIMIT_PORCJI_G`. */
+export function limitPorcjiG(pora: PoraPosilku, poryPrzepisu: PoraPosilku[]): number {
+  return LIMIT_PORCJI_G[poryPrzepisu.includes('dodatek') ? 'dodatek' : pora];
+}
+
+/**
+ * Najcięższa dopuszczalna porcja: bazowa razy `WZROST_MAX`, ale nie ponad
+ * limit posiłku — i nigdy mniej niż sama porcja bazowa.
+ */
+export function gornaMasaPorcji(masaPorcji: number, limitG: number): number {
+  return Math.max(masaPorcji, Math.min(masaPorcji * WZROST_MAX, limitG));
+}
+
+/**
+ * Techniczny sufit poszukiwania k. Prawdziwą granicę wyznacza masa porcji —
+ * ten sufit tylko zamyka połowienie przedziału, gdy przepis ma prawie samą
+ * wodę i przyprawy (ich ilość nie rośnie z k).
+ */
+const K_SUFIT = 10;
 
 /**
  * Wykładnik tłumienia przy k > 1, per rola — liczby wprost z tabeli
@@ -60,7 +109,7 @@ export type SkladnikPrzepisu = {
   rola: RolaSkladnika;
   /** `null` traktujemy jak „nie ustalono” — nie wymuszamy zaokrąglenia. */
   moznaDzielic: boolean | null;
-  /** Ilość w przepisie bazowym, w jednostce widocznej użytkownikowi (g/ml/szt). */
+  /** Ilość w JEDNEJ porcji bazowej, w jednostce widocznej użytkownikowi (g/ml/szt). */
   ilosc: number;
   /** Ile gramów odpowiada jednej jednostce `ilosc` — 1 dla g/ml, masa sztuki dla szt. */
   gramyNaJednostke: number;
@@ -80,7 +129,7 @@ export type PozycjaPoSkalowaniu = SkladnikPrzepisu & {
 };
 
 export type WynikSkalowania = {
-  /** Wybrany współczynnik — po ograniczeniu do [K_MIN, K_MAX]. */
+  /** Wybrany mnożnik porcji bazowej — od 1 do granicy masy. */
   k: number;
   /** Czy k trafił w granicę zamiast w dokładny cel — cel był poza zasięgiem. */
   kOgraniczone: boolean;
@@ -102,28 +151,53 @@ function kcalPrzySkali(skladniki: SkladnikPrzepisu[], k: number): number {
   );
 }
 
+/** Masa porcji w gramach przy DOKŁADNYM (niezaokrąglonym) współczynniku k. */
+export function masaPrzySkali(skladniki: SkladnikPrzepisu[], k: number): number {
+  return skladniki.reduce((suma, s) => suma + mnoznikRoli(s.rola, k) * s.ilosc * s.gramyNaJednostke, 0);
+}
+
 /**
- * Szuka k w [K_MIN, K_MAX], przy którym `kcalPrzySkali` trafia w `celKcal`.
+ * Największe k, przy którym porcja nie przekracza `masaMax` gramów.
+ * Masa od k jest niemalejąca, więc wystarcza połowienie przedziału. Porcja
+ * już bazowo cięższa od granicy daje k = 1 — nie rośnie, ale nie jest ścinana.
+ */
+export function kDlaMasy(skladniki: SkladnikPrzepisu[], masaMax: number): number {
+  if (masaPrzySkali(skladniki, 1) >= masaMax) return 1;
+  if (masaPrzySkali(skladniki, K_SUFIT) <= masaMax) return K_SUFIT;
+
+  let dolna = 1;
+  let gorna = K_SUFIT;
+  for (let i = 0; i < 50; i++) {
+    const srodek = (dolna + gorna) / 2;
+    if (masaPrzySkali(skladniki, srodek) <= masaMax) dolna = srodek;
+    else gorna = srodek;
+  }
+  return dolna;
+}
+
+/**
+ * Szuka k w [1, kMax], przy którym `kcalPrzySkali` trafia w `celKcal`.
  *
  * Funkcja kalorii od k jest ciągła i niemalejąca (każdy mnożnik roli rośnie
  * wraz z k), więc połowienie przedziału zawsze zbiega — 50 iteracji to
  * precyzja dużo poniżej jednej kalorii, kosztem kilkudziesięciu mnożeń.
- * Gdy cel leży poza zasięgiem nawet przy granicznym k, zwracamy tę granicę
- * i flagę `ograniczone` — reszta różnicy zostaje jako odchylenie (patrz
- * `przeskalujPrzepis`), zgodnie z ustaleniem: nie łamiemy granic k.
+ * Gdy cel leży poza zasięgiem, zwracamy granicę i flagę `ograniczone` —
+ * reszta różnicy zostaje w bilansie dnia jako brak (albo nadmiar, gdy cel
+ * jest poniżej porcji bazowej: porcji nie zmniejszamy).
  */
 export function dobierzWspolczynnik(
   skladniki: SkladnikPrzepisu[],
-  celKcal: number
+  celKcal: number,
+  kMax: number
 ): { k: number; ograniczone: boolean } {
-  const kcalMin = kcalPrzySkali(skladniki, K_MIN);
-  const kcalMax = kcalPrzySkali(skladniki, K_MAX);
+  const kcalMin = kcalPrzySkali(skladniki, 1);
+  const kcalMax = kcalPrzySkali(skladniki, kMax);
 
-  if (celKcal <= kcalMin) return { k: K_MIN, ograniczone: true };
-  if (celKcal >= kcalMax) return { k: K_MAX, ograniczone: true };
+  if (celKcal <= kcalMin) return { k: 1, ograniczone: celKcal < kcalMin };
+  if (celKcal >= kcalMax) return { k: kMax, ograniczone: celKcal > kcalMax };
 
-  let dolna = K_MIN;
-  let gorna = K_MAX;
+  let dolna = 1;
+  let gorna = kMax;
   for (let i = 0; i < 50; i++) {
     const srodek = (dolna + gorna) / 2;
     if (kcalPrzySkali(skladniki, srodek) < celKcal) dolna = srodek;
@@ -137,17 +211,24 @@ export function dobierzWspolczynnik(
  * liczy finalne ilości — z zaokrągleniem do całości tam, gdzie składnik
  * tego wymaga (`moznaDzielic === false`).
  *
- * Zaokrąglenie do zera całkiem kasowałoby ze przepisu składnik, który w nim
- * pierwotnie był (np. przy dużym skurczeniu przepisu) — zostawiamy wtedy
- * minimum jedną jednostkę, żeby przepis się nie „rozpadł”.
+ * Zaokrąglamy tylko składniki, które w porcji bazowej są CAŁE. Porcja z garnka
+ * na kilka osób ma np. 1,5 jajka — to nie jest jajko do rozbicia, tylko udział
+ * w garnku, który gotuje się w całości. Zaokrąglenie takiej porcji do 2
+ * zamieniłoby 3 jajka w garnku w 4.
+ *
+ * `masaMax` — najcięższa dopuszczalna porcja w gramach, patrz `gornaMasaPorcji`.
  */
-export function przeskalujPrzepis(skladniki: SkladnikPrzepisu[], celKcal: number): WynikSkalowania {
-  const { k, ograniczone } = dobierzWspolczynnik(skladniki, celKcal);
+export function przeskalujPrzepis(
+  skladniki: SkladnikPrzepisu[],
+  celKcal: number,
+  masaMax: number
+): WynikSkalowania {
+  const { k, ograniczone } = dobierzWspolczynnik(skladniki, celKcal, kDlaMasy(skladniki, masaMax));
 
   const pozycje: PozycjaPoSkalowaniu[] = skladniki.map((s) => {
     let iloscPoSkalowaniu = s.ilosc * mnoznikRoli(s.rola, k);
 
-    if (s.moznaDzielic === false) {
+    if (s.moznaDzielic === false && Math.abs(s.ilosc - Math.round(s.ilosc)) < 1e-9) {
       iloscPoSkalowaniu = Math.round(iloscPoSkalowaniu);
       if (iloscPoSkalowaniu <= 0 && s.ilosc > 0) iloscPoSkalowaniu = 1;
     }
