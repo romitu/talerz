@@ -144,6 +144,7 @@ const SEKCJE: Sekcja[] = [
         ],
       },
       { rodzaj: 'tekst', tresc: 'Przykład: barszcz ma w przepisie ponad litr na porcję, więc nie urośnie wcale. Kanapka na 250 g może urosnąć najwyżej do 375 g. Czego nie da się dołożyć w tych granicach, zostaje brakiem w bilansie dnia – wtedy warto dołożyć dodatek.' },
+      { rodzaj: 'tekst', tresc: 'Porcje przeliczają się same po każdej zmianie planu – gdy dodasz lub usuniesz danie ręcznie, wypełnisz plan automatem albo powtórzysz tydzień. Puste miejsce w planie oznacza, że jesz wtedy coś spoza planu: zachowuje ono swoją część celu dnia, więc pozostałe dania nie rosną za nie, a przeliczenie niczego w nie nie wstawia.' },
       { rodzaj: 'tekst', tresc: 'Danie gotowane na kilka dni jest przeliczane raz, jako cały garnek, pod średni cel tych dni. Dopasowanie działa tylko przy ustawionym celu kalorii. Przepis, którego nie wolno zmieniać, można wyłączyć, odznaczając w formularzu „Można skalować kalorycznie”.' },
       { rodzaj: 'tekst', tresc: 'Bilans dnia pokazuje liczbowo, ile brakuje do celu kalorycznego i białkowego. Dzięki temu widać nie tylko, czy dzień jest „na zielono”, ale również skalę odchylenia od celu.' },
       { rodzaj: 'tekst', tresc: 'Przycisk „Powtórz poprzedni tydzień” przenosi poprzedni układ na bieżący tydzień całymi gotowaniami – danie przygotowane raz i rozłożone na kilka dni pozostaje jednym gotowaniem. Zajęte już miejsca nie są nadpisywane. „Wyczyść wszystko” usuwa plan z bieżącego tygodnia.' },

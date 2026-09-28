@@ -97,10 +97,11 @@ export type Wstawienie = {
   /** Kolejne dni objęte tym samym garnkiem. Pierwszy z nich to `odData`. */
   dni: string[];
   /**
-   * Ustawione, gdy danie zostało wybrane jako skalowalne — cel kaloryczny,
-   * pod który TEN konkretny posiłek trzeba jeszcze przeliczyć i zapisać jako
-   * wariant (patrz `lib/przepisy-skalowane.ts`). `null` = wstawiamy przepis
-   * w bazowym rozmiarze, bez żadnego przeliczania.
+   * Ustawione, gdy automat liczy, że danie urośnie pod cel — szacowany cel
+   * kaloryczny tego posiłku. Służy bilansowi dnia w trakcie wypełniania
+   * i liczbie dni garnka. Sam wariant tworzy dopiero przeliczenie tygodnia
+   * po zapisie (`przeliczSkalowalneWTygodniu` w `app/index.tsx`).
+   * `null` = danie w porcji z przepisu.
    */
   celKcalDlaSkalowania: number | null;
 };

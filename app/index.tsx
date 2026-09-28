@@ -314,10 +314,12 @@ export default function EkranPlanu() {
     return mapa;
   }, [pozycje]);
 
+  /** Zmiana planu: operacja, przeliczenie porcji pod cel i odświeżenie ekranu. */
   async function zDbem(operacja: () => Promise<void>) {
     setBlad(null);
     try {
       await operacja();
+      await przeliczSkalowalneWTygodniu();
       await pobierz();
     } catch (e) {
       setBlad(komunikatBledu(e));
@@ -334,30 +336,15 @@ export default function EkranPlanu() {
    *
    * Kolejność wstawiania ma znaczenie: idziemy po kolei, bo `kolejnosc` musi
    * rosnąć w obrębie posiłku.
+   *
+   * Dania wchodzą w porcji z przepisu. Wielkość porcji dopasowuje potem
+   * `przeliczSkalowalneWTygodniu`, wołane po każdej zmianie planu — ono widzi
+   * cały dzień naraz, więc liczy pewniej niż automat w trakcie wypełniania.
    */
   async function zapiszWstawienia(cel: Plan, lista: Wstawienie[]) {
     if (!sesja) return;
 
-    // Katalog składników trzeba tylko wtedy, gdy automat faktycznie wybrał
-    // choć jedno danie skalowalne — nie ma sensu ściągać go za każdym razem.
-    const potrzebujeSkalowania = lista.some((w) => w.celKcalDlaSkalowania !== null);
-    const dostepneSkladniki = potrzebujeSkalowania ? await pobierzSkladniki() : [];
-
     for (const w of lista) {
-      let przepisSkalowanyId: string | undefined;
-
-      if (w.celKcalDlaSkalowania !== null) {
-        const pelny = await pobierzPelnyPrzepis(w.przepisId);
-        const wynik = await utworzPrzeskalowanyPrzepis({
-          kontoId: sesja.user.id,
-          przepis: pelny,
-          dostepneSkladniki,
-          celKcal: w.celKcalDlaSkalowania,
-          pora: w.pora,
-        });
-        przepisSkalowanyId = wynik.id;
-      }
-
       await dodajPartie({
         kontoId: sesja.user.id,
         planId: cel.id,
@@ -368,7 +355,6 @@ export default function EkranPlanu() {
         osoby,
         liczbaPorcjiBazowych: w.dni.length,
         dostepneDni: w.dni,
-        przepisSkalowanyId,
       });
     }
   }
@@ -404,34 +390,29 @@ export default function EkranPlanu() {
         osoby,
       });
 
+      let komunikatWypelnienia: string;
       if (wstawienia.length === 0) {
-        setKomunikat(
+        komunikatWypelnienia =
           bezObsady.length > 0
             ? 'Nie ma przepisów pasujących do pustych miejsc. Sprawdź, czy przepisy mają ustawioną kategorię.'
-            : 'Wszystkie miejsca są już zajęte.'
-        );
-        return;
+            : 'Wszystkie miejsca są już zajęte.';
+      } else {
+        await zapiszWstawienia(plan, wstawienia);
+        const posilkow = wstawienia.reduce((s, w) => s + w.dni.length, 0);
+        komunikatWypelnienia =
+          `Dołożono ${posilkow} posiłków z ${wstawienia.length} gotowań.` +
+          (bezObsady.length > 0 ? ` Bez obsady zostało ${bezObsady.length} miejsc.` : '');
       }
 
-      await zapiszWstawienia(plan, wstawienia);
+      // Porcje przeliczają się zawsze — także przy pełnym planie, żeby
+      // przycisk dopasował do celu plan ułożony wcześniej albo ręcznie.
+      const { szczegoly, dniZmienione } = await przeliczSkalowalneWTygodniu();
       await pobierz();
-
-      const posilkow = wstawienia.reduce((s, w) => s + w.dni.length, 0);
-      let komunikatWypelnienia =
-        `Dołożono ${posilkow} posiłków z ${wstawienia.length} gotowań.` +
-        (bezObsady.length > 0 ? ` Bez obsady zostało ${bezObsady.length} miejsc.` : '');
-
-      // Skalowanie dań skalowalnych pod dzienny cel dzieje się od razu po
-      // wypełnieniu — bez osobnego checkboxa ani przycisku, zawsze gdy jest cel.
-      if (cel) {
-        const { szczegoly, dniZmienione } = await przeliczSkalowalneWTygodniu();
-        if (szczegoly.length > 0) {
-          await pobierz();
-          komunikatWypelnienia +=
-            `\n\nPrzeliczono ${szczegoly.length} ${szczegoly.length === 1 ? 'danie' : 'dania'} ` +
-            `w ${dniZmienione.size} ${odmianaDni(dniZmienione.size)}:\n` +
-            szczegoly.join('\n');
-        }
+      if (szczegoly.length > 0) {
+        komunikatWypelnienia +=
+          `\n\nPowiększono ${szczegoly.length} ${szczegoly.length === 1 ? 'danie' : 'dania'} ` +
+          `w ${dniZmienione.size} ${odmianaDni(dniZmienione.size)}:\n` +
+          szczegoly.join('\n');
       }
 
       setKomunikat(komunikatWypelnienia);
@@ -475,6 +456,7 @@ export default function EkranPlanu() {
       }
 
       await zapiszWstawienia(plan, wstawienia);
+      await przeliczSkalowalneWTygodniu();
       await pobierz();
 
       // Komunikat liczy DNI, nie posiłków — to pytanie, na które faktycznie
@@ -514,13 +496,24 @@ export default function EkranPlanu() {
    * sumowała trzy różne warianty, a bilans drugiego dnia zakładał porcję
    * innej wielkości niż ta, która stoi w lodówce.
    *
-   * Czysta praca z bazą, bez `setKomunikat`/`setPracuje` — woła ją
-   * `wypelnijAutomatem`, gdzie komunikat musi się złożyć z DWÓCH etapów
-   * (wypełnienie + skalowanie), nie nadpisywać się.
-   * Wymaga `plan`, `sesja` i `cel` — sprawdza je WOŁAJĄCY.
+   * Pusty posiłek to decyzja użytkownika („jem coś innego”), nie luka do
+   * zapełnienia. Zachowuje swoją część celu dnia: dania z pozostałych
+   * posiłków nie rosną za niego. Przeliczenie niczego też nie dokłada
+   * w puste miejsca — to robi wyłącznie „Wypełnij wolne miejsca”.
+   *
+   * Wołane po KAŻDEJ zmianie planu (automat, powtórzenie tygodnia, ręczne
+   * dodanie i usunięcie dania, zmiana daty). Plan i posiłki pobiera świeżo
+   * z bazy — stan ekranu w tej chwili jeszcze nie zna właśnie zapisanej
+   * zmiany. Bez celu kalorii nic nie robi.
+   *
+   * Czysta praca z bazą, bez `setKomunikat`/`setPracuje` — wołający sam
+   * decyduje, czy pokazać szczegóły, i sam odświeża ekran.
    */
   async function przeliczSkalowalneWTygodniu(): Promise<{ szczegoly: string[]; dniZmienione: Set<string> }> {
-    if (!plan || !sesja || !cel) return { szczegoly: [], dniZmienione: new Set() };
+    if (!sesja || !cel) return { szczegoly: [], dniZmienione: new Set() };
+    const aktualnyPlan = (await pobierzPlany())[0];
+    if (!aktualnyPlan) return { szczegoly: [], dniZmienione: new Set() };
+    const aktualnePozycje = await pobierzPozycje(aktualnyPlan.id);
 
     const przepisyWedlugId = new Map(przepisy.map((p) => [p.id, p]));
     const dniZmienione = new Set<string>();
@@ -545,16 +538,19 @@ export default function EkranPlanu() {
 
     // Krok 1: cel każdej pozycji, która może urosnąć, dzień po dniu.
     const celePozycji: { pozycja: PozycjaPlanu; celKcal: number }[] = [];
-    for (const data of dniPlanu(plan)) {
-      const dniowe = pozycje.filter((p) => p.data === data);
+    for (const data of dniPlanu(aktualnyPlan)) {
+      const dniowe = aktualnePozycje.filter((p) => p.data === data);
       const rosnace = dniowe.filter(mozeRosnac);
       const stale = dniowe.filter((p) => !rosnace.includes(p));
       for (const pozycja of stale) await zdejmijWariant(pozycja);
       if (rosnace.length === 0) continue;
 
+      // Puste posiłki zatrzymują swoją część — liczą się jak kolejne „miejsca”
+      // do podziału, tyle że nic z nich nie trafia do dań w planie.
+      const pustych = PORY.filter((pora) => !dniowe.some((p) => p.pora === pora)).length;
       const kcalStalych = stale.reduce((s, p) => s + kcalBazowe(p) * p.porcje, 0);
       const docelowoNaRosnace = Math.max(0, cel.kcal - kcalStalych);
-      const docelowoNaJedno = docelowoNaRosnace / rosnace.length;
+      const docelowoNaJedno = docelowoNaRosnace / (rosnace.length + pustych);
 
       for (const pozycja of rosnace) {
         celePozycji.push({ pozycja, celKcal: docelowoNaJedno / Math.max(1, pozycja.porcje) });
@@ -672,11 +668,10 @@ export default function EkranPlanu() {
           (x) => x.data === wybierany.data && x.pora === wybierany.pora
         ).length;
 
-        // Danie skalowalne, wybrane ręcznie, przelicza się w locie pod
-        // dzienny cel — tak samo jak wybrane przez automat (patrz
-        // `wypelnijAutomatem`), tylko liczone dla jednego, tego
-        // konkretnego miejsca zamiast dla całego dnia naraz.
-        let przepisSkalowanyId: string | undefined;
+        // Wielkość porcji dopasuje przeliczenie po zapisie (`zDbem`). Tu tylko
+        // szacujemy, czy danie urośnie — od tego zależy, na ile dni rozłożyć
+        // garnek bez uwzględniania trwałości, tak samo jak w automacie.
+        let urosnie = false;
         if (cel && (p.kcal ?? 0) > 0 && mnoznikWzrostu(p, wybierany.pora) > 1) {
           const dniowe = pozycje.filter((x) => x.data === wybierany.data);
           const kcalDnia = sumujDzien(dniowe).kcal;
@@ -684,21 +679,7 @@ export default function EkranPlanu() {
           const wolnychWDniu = PORY.filter(
             (pora) => !dniowe.some((x) => x.pora === pora)
           ).length;
-          const celTegoDania = brakKcal / Math.max(1, wolnychWDniu);
-
-          // Porcja nie maleje — przy mniejszym braku wariant byłby kopią przepisu.
-          if (celTegoDania > (p.kcal ?? 0)) {
-            const pelny = await pobierzPelnyPrzepis(p.id);
-            const dostepneSkladniki = await pobierzSkladniki();
-            const wynik = await utworzPrzeskalowanyPrzepis({
-              kontoId: sesja.user.id,
-              przepis: pelny,
-              dostepneSkladniki,
-              celKcal: celTegoDania,
-              pora: wybierany.pora,
-            });
-            przepisSkalowanyId = wynik.id;
-          }
+          urosnie = brakKcal / Math.max(1, wolnychWDniu) > (p.kcal ?? 0);
         }
 
         await dodajPartie({
@@ -717,11 +698,10 @@ export default function EkranPlanu() {
           // (tak samo jak w automacie, patrz `dniZLimitem`/`uzyjSkalowania`).
           liczbaPorcjiBazowych: uwzglednijTrwalosc
             ? dniZLimitem(p.trwalosc_dni, osoby)
-            : przepisSkalowanyId
+            : urosnie
               ? 1
               : p.liczba_porcji_bazowych,
           dostepneDni: dniPlanu(plan),
-          przepisSkalowanyId,
         });
         doPrzywrocenia.current = true;
         setWybierany(null);
