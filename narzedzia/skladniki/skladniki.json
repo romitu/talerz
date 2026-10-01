@@ -4891,8 +4891,10 @@
     "zrodlo": "usda"
   },
   {
-    "nazwa": "sól kłodawska",
-    "tagi": [],
+    "nazwa": "Sól kłodawska",
+    "tagi": [
+      "przyprawa"
+    ],
     "rola": "doprawienie",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,

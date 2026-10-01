@@ -1,5 +1,5 @@
 -- =============================================================================
---  TALERZ — „Sól kuchenna” zamieniona na „sól kłodawska” we wszystkich daniach
+--  TALERZ — „Sól kuchenna” zamieniona na „Sól kłodawska” we wszystkich daniach
 -- =============================================================================
 --  Przepina składnik we wszystkich tabelach, które go używają:
 --    przepis_skladniki, przepisy_skalowane_skladniki, wersje_skladniki,
@@ -19,12 +19,12 @@ begin;
 -- Bez obu składników nie ma czego zamieniać — rzutowanie przerywa skrypt
 -- z czytelnym komunikatem (ten sam sposób co w import-przepisow-ai.sql).
 select ('ZAMIANA PRZERWANA — ' || string_agg('brak składnika „' || n || '”', '; '))::int as sprawdzenie
-  from unnest(array['Sól kuchenna', 'sól kłodawska']) as n
+  from unnest(array['Sól kuchenna', 'Sól kłodawska']) as n
  where not exists (select 1 from skladniki where nazwa = n);
 
 create temp table sol on commit drop as
 select (select id from skladniki where nazwa = 'Sól kuchenna')  as stara,
-       (select id from skladniki where nazwa = 'sól kłodawska') as nowa;
+       (select id from skladniki where nazwa = 'Sól kłodawska') as nowa;
 
 -- --- przepis_skladniki -------------------------------------------------------
 update przepis_skladniki n
@@ -74,5 +74,5 @@ select s.nazwa,
        (select count(*) from wersje_skladniki x             where x.skladnik_id = s.id) as wersje,
        (select count(*) from zakupy_odhaczone x             where x.skladnik_id = s.id) as odhaczenia
   from skladniki s
- where s.nazwa in ('Sól kuchenna', 'sól kłodawska')
+ where s.nazwa in ('Sól kuchenna', 'Sól kłodawska')
  order by s.nazwa;
