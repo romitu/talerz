@@ -1,0 +1,122 @@
+[
+  {
+    "nazwa": "Blacha do pieczenia",
+    "rodzaj": "naczynia"
+  },
+  {
+    "nazwa": "Garnek 2 l",
+    "rodzaj": "naczynia"
+  },
+  {
+    "nazwa": "Garnek 3 l",
+    "rodzaj": "naczynia"
+  },
+  {
+    "nazwa": "Garnek 4 l",
+    "rodzaj": "naczynia"
+  },
+  {
+    "nazwa": "Garnek 5 l",
+    "rodzaj": "naczynia"
+  },
+  {
+    "nazwa": "Miska",
+    "rodzaj": "naczynia"
+  },
+  {
+    "nazwa": "Naczynie żaroodporne",
+    "rodzaj": "naczynia"
+  },
+  {
+    "nazwa": "Patelnia 24 cm",
+    "rodzaj": "naczynia"
+  },
+  {
+    "nazwa": "Patelnia 28 cm",
+    "rodzaj": "naczynia"
+  },
+  {
+    "nazwa": "Rondel",
+    "rodzaj": "naczynia"
+  },
+  {
+    "nazwa": "Chochla",
+    "rodzaj": "narzedzia"
+  },
+  {
+    "nazwa": "Deska do krojenia",
+    "rodzaj": "narzedzia"
+  },
+  {
+    "nazwa": "Durszlak",
+    "rodzaj": "narzedzia"
+  },
+  {
+    "nazwa": "Łyżka cedzakowa",
+    "rodzaj": "narzedzia"
+  },
+  {
+    "nazwa": "Nóż szefa kuchni",
+    "rodzaj": "narzedzia"
+  },
+  {
+    "nazwa": "Obieraczka",
+    "rodzaj": "narzedzia"
+  },
+  {
+    "nazwa": "Pojemniki do przechowywania",
+    "rodzaj": "narzedzia"
+  },
+  {
+    "nazwa": "Sitko",
+    "rodzaj": "narzedzia"
+  },
+  {
+    "nazwa": "Tarka o drobnych oczkach",
+    "rodzaj": "narzedzia"
+  },
+  {
+    "nazwa": "Tarka o grubych oczkach",
+    "rodzaj": "narzedzia"
+  },
+  {
+    "nazwa": "Termometr do mięsa",
+    "rodzaj": "narzedzia"
+  },
+  {
+    "nazwa": "Tłuczek do ziemniaków",
+    "rodzaj": "narzedzia"
+  },
+  {
+    "nazwa": "Waga kuchenna",
+    "rodzaj": "narzedzia"
+  },
+  {
+    "nazwa": "Widelec",
+    "rodzaj": "narzedzia"
+  },
+  {
+    "nazwa": "Blender kielichowy",
+    "rodzaj": "urzadzenia"
+  },
+  {
+    "nazwa": "Blender ręczny",
+    "rodzaj": "urzadzenia"
+  },
+  {
+    "nazwa": "Garnek ciśnieniowy",
+    "rodzaj": "urzadzenia"
+  },
+  {
+    "nazwa": "Grill kontaktowy",
+    "rodzaj": "urzadzenia"
+  },
+  {
+    "nazwa": "Piekarnik",
+    "rodzaj": "urzadzenia"
+  },
+  {
+    "nazwa": "Robot kuchenny",
+    "rodzaj": "urzadzenia"
+  }
+]

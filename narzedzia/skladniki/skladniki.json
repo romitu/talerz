@@ -1,0 +1,5552 @@
+[
+  {
+    "nazwa": "Agrest",
+    "tagi": [
+      "owoc"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 5,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 44,
+    "bialko_100g": 0.88,
+    "tluszcz_100g": 0.58,
+    "wegle_100g": 10.18,
+    "blonnik_100g": 4.3,
+    "cukry_ogolem_100g": 5.88,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Amarantus, suchy",
+    "tagi": [
+      "zboze"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 371,
+    "bialko_100g": 13.6,
+    "tluszcz_100g": 7.02,
+    "wegle_100g": 65.25,
+    "blonnik_100g": 6.7,
+    "cukry_ogolem_100g": 1.7,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Ananas, surowy",
+    "tagi": [
+      "owoc"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 900,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 50,
+    "bialko_100g": 0.54,
+    "tluszcz_100g": 0.12,
+    "wegle_100g": 13.12,
+    "blonnik_100g": 1.4,
+    "cukry_ogolem_100g": 9.85,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Arbuz",
+    "tagi": [
+      "owoc"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 2500,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 30,
+    "bialko_100g": 0.61,
+    "tluszcz_100g": 0.15,
+    "wegle_100g": 7.55,
+    "blonnik_100g": 0.4,
+    "cukry_ogolem_100g": 6.2,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Awokado",
+    "tagi": [
+      "owoc",
+      "tluszcz"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 140,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 160,
+    "bialko_100g": 2,
+    "tluszcz_100g": 14.7,
+    "wegle_100g": 8.53,
+    "blonnik_100g": 6.7,
+    "cukry_ogolem_100g": 0.66,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Bakłażan, surowy",
+    "tagi": [
+      "warzywo"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 25,
+    "bialko_100g": 0.98,
+    "tluszcz_100g": 0.18,
+    "wegle_100g": 5.88,
+    "blonnik_100g": 3,
+    "cukry_ogolem_100g": 3.53,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Banan",
+    "tagi": [
+      "owoc"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 120,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 89,
+    "bialko_100g": 1.09,
+    "tluszcz_100g": 0.33,
+    "wegle_100g": 22.8,
+    "blonnik_100g": 2.6,
+    "cukry_ogolem_100g": 12.2,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Batat, surowy",
+    "tagi": [
+      "warzywo"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 86,
+    "bialko_100g": 1.57,
+    "tluszcz_100g": 0.05,
+    "wegle_100g": 20.1,
+    "blonnik_100g": 3,
+    "cukry_ogolem_100g": 4.18,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Bazylia suszona",
+    "tagi": [],
+    "rola": "doprawienie",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 233,
+    "bialko_100g": 23,
+    "tluszcz_100g": 4.1,
+    "wegle_100g": 47.8,
+    "blonnik_100g": 38,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Bazylia świeża",
+    "tagi": [
+      "ziola"
+    ],
+    "rola": "do_smaku",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 23,
+    "bialko_100g": 3.15,
+    "tluszcz_100g": 0.64,
+    "wegle_100g": 2.65,
+    "blonnik_100g": 1.6,
+    "cukry_ogolem_100g": 0.3,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Bób, surowy",
+    "tagi": [
+      "warzywo",
+      "straczki"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 5,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 88,
+    "bialko_100g": 7.92,
+    "tluszcz_100g": 0.73,
+    "wegle_100g": 17.63,
+    "blonnik_100g": 7.5,
+    "cukry_ogolem_100g": 1.82,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Boćwina, surowa",
+    "tagi": [
+      "warzywo"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 19,
+    "bialko_100g": 1.8,
+    "tluszcz_100g": 0.2,
+    "wegle_100g": 3.74,
+    "blonnik_100g": 1.6,
+    "cukry_ogolem_100g": 1.1,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Boczniaki, surowe",
+    "tagi": [
+      "warzywo"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 33,
+    "bialko_100g": 3.31,
+    "tluszcz_100g": 0.41,
+    "wegle_100g": 6.09,
+    "blonnik_100g": 2.3,
+    "cukry_ogolem_100g": 1.11,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Borowiki, surowe",
+    "tagi": [
+      "warzywo",
+      "grzyby"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 34,
+    "bialko_100g": 3.7,
+    "tluszcz_100g": 0.4,
+    "wegle_100g": 5.1,
+    "blonnik_100g": 2.6,
+    "cukry_ogolem_100g": 1.7,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Borówki amerykańskie",
+    "tagi": [
+      "owoc"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 57,
+    "bialko_100g": 0.74,
+    "tluszcz_100g": 0.33,
+    "wegle_100g": 14.5,
+    "blonnik_100g": 2.4,
+    "cukry_ogolem_100g": 9.96,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Botwina, surowa",
+    "tagi": [
+      "warzywo"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 22,
+    "bialko_100g": 2.2,
+    "tluszcz_100g": 0.13,
+    "wegle_100g": 4.33,
+    "blonnik_100g": 3.7,
+    "cukry_ogolem_100g": 0.5,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Brokuł, surowy",
+    "tagi": [
+      "warzywo"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 400,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 34,
+    "bialko_100g": 2.82,
+    "tluszcz_100g": 0.37,
+    "wegle_100g": 6.64,
+    "blonnik_100g": 2.6,
+    "cukry_ogolem_100g": 1.7,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Brukiew, surowa",
+    "tagi": [
+      "warzywo"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 450,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 37,
+    "bialko_100g": 1.08,
+    "tluszcz_100g": 0.16,
+    "wegle_100g": 8.62,
+    "blonnik_100g": 2.3,
+    "cukry_ogolem_100g": 4.46,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Brukselka, surowa",
+    "tagi": [
+      "warzywo"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 15,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 43,
+    "bialko_100g": 3.38,
+    "tluszcz_100g": 0.3,
+    "wegle_100g": 8.95,
+    "blonnik_100g": 3.8,
+    "cukry_ogolem_100g": 2.2,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Brzoskwinia",
+    "tagi": [
+      "owoc"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": false,
+    "masa_sztuki_g": 150,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 39,
+    "bialko_100g": 0.91,
+    "tluszcz_100g": 0.25,
+    "wegle_100g": 9.54,
+    "blonnik_100g": 1.5,
+    "cukry_ogolem_100g": 8.39,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Bułka tarta",
+    "tagi": [
+      "zboze",
+      "gluten"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 395,
+    "bialko_100g": 13.4,
+    "tluszcz_100g": 5.3,
+    "wegle_100g": 71.9,
+    "blonnik_100g": 4.6,
+    "cukry_ogolem_100g": 6.2,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Buraki, surowe",
+    "tagi": [
+      "warzywo"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 43,
+    "bialko_100g": 1.61,
+    "tluszcz_100g": 0.17,
+    "wegle_100g": 9.56,
+    "blonnik_100g": 2.8,
+    "cukry_ogolem_100g": 6.76,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Cebula czerwona, surowa",
+    "tagi": [
+      "warzywo"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 110,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 40,
+    "bialko_100g": 1.1,
+    "tluszcz_100g": 0.1,
+    "wegle_100g": 9.34,
+    "blonnik_100g": 1.7,
+    "cukry_ogolem_100g": 4.24,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Cebula dymka, surowa",
+    "tagi": [
+      "warzywo"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 15,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 32,
+    "bialko_100g": 1.83,
+    "tluszcz_100g": 0.19,
+    "wegle_100g": 7.34,
+    "blonnik_100g": 2.6,
+    "cukry_ogolem_100g": 2.33,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Cebula, surowa",
+    "tagi": [
+      "warzywo"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 110,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 40,
+    "bialko_100g": 1.1,
+    "tluszcz_100g": 0.1,
+    "wegle_100g": 9.34,
+    "blonnik_100g": 1.7,
+    "cukry_ogolem_100g": 4.24,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Chili suszone",
+    "tagi": [],
+    "rola": "baza",
+    "mozna_dzielic": null,
+    "masa_sztuki_g": null,
+    "gramatura_opakowania_g": null,
+    "kcal_100g": 324,
+    "bialko_100g": 10.6,
+    "tluszcz_100g": 5.8,
+    "wegle_100g": 69.9,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 41.4,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Chleb żytni razowy",
+    "tagi": [
+      "zboze",
+      "gluten"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": false,
+    "masa_sztuki_g": 35,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 259,
+    "bialko_100g": 8.5,
+    "tluszcz_100g": 3.3,
+    "wegle_100g": 48.3,
+    "blonnik_100g": 5.8,
+    "cukry_ogolem_100g": 3.85,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Chrzan tarty",
+    "tagi": [
+      "przyprawa"
+    ],
+    "rola": "doprawienie",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 48,
+    "bialko_100g": 1.18,
+    "tluszcz_100g": 0.69,
+    "wegle_100g": 11.3,
+    "blonnik_100g": 3.3,
+    "cukry_ogolem_100g": 7.99,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Ciecierzyca z puszki, odsączona",
+    "tagi": [
+      "straczki"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 240,
+    "kcal_100g": 139,
+    "bialko_100g": 7.05,
+    "tluszcz_100g": 2.47,
+    "wegle_100g": 22.5,
+    "blonnik_100g": 6.4,
+    "cukry_ogolem_100g": 4,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Ciecierzyca, sucha",
+    "tagi": [
+      "straczki"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 378,
+    "bialko_100g": 20.5,
+    "tluszcz_100g": 6.04,
+    "wegle_100g": 63,
+    "blonnik_100g": 12.2,
+    "cukry_ogolem_100g": 10.7,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Cielęcina, chuda surowa",
+    "tagi": [
+      "mieso"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 172,
+    "bialko_100g": 24.4,
+    "tluszcz_100g": 7.6,
+    "wegle_100g": 0,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Cukinia, surowa",
+    "tagi": [
+      "warzywo"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 200,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 17,
+    "bialko_100g": 1.21,
+    "tluszcz_100g": 0.32,
+    "wegle_100g": 3.11,
+    "blonnik_100g": 1,
+    "cukry_ogolem_100g": 2.5,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Cynamon mielony",
+    "tagi": [
+      "przyprawa"
+    ],
+    "rola": "aromat",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 247,
+    "bialko_100g": 4,
+    "tluszcz_100g": 1.24,
+    "wegle_100g": 80.6,
+    "blonnik_100g": 53.1,
+    "cukry_ogolem_100g": 2.2,
+    "cukry_wolne_100g": 0,
+    "nova": 2,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Cytryna",
+    "tagi": [
+      "owoc"
+    ],
+    "rola": "doprawienie",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 60,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 29,
+    "bialko_100g": 1.1,
+    "tluszcz_100g": 0.3,
+    "wegle_100g": 9.32,
+    "blonnik_100g": 2.8,
+    "cukry_ogolem_100g": 2.5,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Czarny pieprz mielony",
+    "tagi": [
+      "przyprawa"
+    ],
+    "rola": "doprawienie",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 251,
+    "bialko_100g": 10.4,
+    "tluszcz_100g": 3.26,
+    "wegle_100g": 63.9,
+    "blonnik_100g": 25.3,
+    "cukry_ogolem_100g": 0.64,
+    "cukry_wolne_100g": 0,
+    "nova": 2,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Czekolada gorzka 75% kakao",
+    "tagi": [
+      "czekolada",
+      "kakao"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 10,
+    "gramatura_opakowania_g": 100,
+    "kcal_100g": 580,
+    "bialko_100g": 8.5,
+    "tluszcz_100g": 43,
+    "wegle_100g": 35,
+    "blonnik_100g": 11,
+    "cukry_ogolem_100g": 25,
+    "cukry_wolne_100g": 25,
+    "nova": 3,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Czekolada gorzka 80% kakao",
+    "tagi": [
+      "czekolada",
+      "kakao"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 10,
+    "gramatura_opakowania_g": 100,
+    "kcal_100g": 590,
+    "bialko_100g": 9,
+    "tluszcz_100g": 46,
+    "wegle_100g": 30,
+    "blonnik_100g": 12,
+    "cukry_ogolem_100g": 20,
+    "cukry_wolne_100g": 20,
+    "nova": 3,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Czekolada gorzka 85% kakao",
+    "tagi": [
+      "czekolada",
+      "kakao"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 10,
+    "gramatura_opakowania_g": 100,
+    "kcal_100g": 598,
+    "bialko_100g": 10,
+    "tluszcz_100g": 50,
+    "wegle_100g": 24,
+    "blonnik_100g": 13,
+    "cukry_ogolem_100g": 15,
+    "cukry_wolne_100g": 15,
+    "nova": 3,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Czekolada gorzka 90% kakao",
+    "tagi": [
+      "czekolada",
+      "kakao"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 10,
+    "gramatura_opakowania_g": 100,
+    "kcal_100g": 600,
+    "bialko_100g": 10.5,
+    "tluszcz_100g": 53,
+    "wegle_100g": 20,
+    "blonnik_100g": 14,
+    "cukry_ogolem_100g": 8,
+    "cukry_wolne_100g": 8,
+    "nova": 3,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Czekolada gorzka 95% kakao",
+    "tagi": [
+      "czekolada",
+      "kakao"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 10,
+    "gramatura_opakowania_g": 100,
+    "kcal_100g": 610,
+    "bialko_100g": 11.5,
+    "tluszcz_100g": 55,
+    "wegle_100g": 18,
+    "blonnik_100g": 15,
+    "cukry_ogolem_100g": 4,
+    "cukry_wolne_100g": 4,
+    "nova": 3,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Czereśnie",
+    "tagi": [
+      "owoc"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 8,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 63,
+    "bialko_100g": 1.06,
+    "tluszcz_100g": 0.2,
+    "wegle_100g": 16.01,
+    "blonnik_100g": 2.1,
+    "cukry_ogolem_100g": 12.82,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Czosnek, surowy",
+    "tagi": [
+      "warzywo"
+    ],
+    "rola": "aromat",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 5,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 149,
+    "bialko_100g": 6.36,
+    "tluszcz_100g": 0.5,
+    "wegle_100g": 33.1,
+    "blonnik_100g": 2.1,
+    "cukry_ogolem_100g": 1,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Daktyle suszone",
+    "tagi": [
+      "owoc",
+      "suszone"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 282,
+    "bialko_100g": 2.45,
+    "tluszcz_100g": 0.39,
+    "wegle_100g": 75,
+    "blonnik_100g": 8,
+    "cukry_ogolem_100g": 63.4,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Domowy bulion warzywny",
+    "tagi": [
+      "przyprawa"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 5,
+    "bialko_100g": 0.4,
+    "tluszcz_100g": 0.1,
+    "wegle_100g": 0.9,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0.5,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Dorada, surowa",
+    "tagi": [
+      "ryba"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 96,
+    "bialko_100g": 19.7,
+    "tluszcz_100g": 1.9,
+    "wegle_100g": 0,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Dorsz atlantycki, surowy",
+    "tagi": [
+      "ryba"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 82,
+    "bialko_100g": 17.8,
+    "tluszcz_100g": 0.67,
+    "wegle_100g": 0,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Dynia, surowa",
+    "tagi": [
+      "warzywo"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 26,
+    "bialko_100g": 1,
+    "tluszcz_100g": 0.1,
+    "wegle_100g": 6.5,
+    "blonnik_100g": 0.5,
+    "cukry_ogolem_100g": 2.76,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Edamame mrożone",
+    "tagi": [
+      "straczki"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 121,
+    "bialko_100g": 11.9,
+    "tluszcz_100g": 5.2,
+    "wegle_100g": 8.9,
+    "blonnik_100g": 5.2,
+    "cukry_ogolem_100g": 2.2,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Endywia, surowa",
+    "tagi": [
+      "warzywo"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 17,
+    "bialko_100g": 1.25,
+    "tluszcz_100g": 0.2,
+    "wegle_100g": 3.35,
+    "blonnik_100g": 3.1,
+    "cukry_ogolem_100g": 0.25,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Enoki, surowe",
+    "tagi": [
+      "warzywo",
+      "grzyby"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 37,
+    "bialko_100g": 2.66,
+    "tluszcz_100g": 0.29,
+    "wegle_100g": 7.81,
+    "blonnik_100g": 2.7,
+    "cukry_ogolem_100g": 0.22,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Fasola biała z puszki, odsączona",
+    "tagi": [
+      "straczki"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 240,
+    "kcal_100g": 114,
+    "bialko_100g": 7.4,
+    "tluszcz_100g": 0.4,
+    "wegle_100g": 21,
+    "blonnik_100g": 5.4,
+    "cukry_ogolem_100g": 0.3,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Fasola biała, sucha",
+    "tagi": [
+      "straczki"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 333,
+    "bialko_100g": 23.4,
+    "tluszcz_100g": 0.85,
+    "wegle_100g": 60.3,
+    "blonnik_100g": 15.2,
+    "cukry_ogolem_100g": 2.11,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Fasola czarna z puszki, odsączona",
+    "tagi": [
+      "straczki"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 240,
+    "kcal_100g": 132,
+    "bialko_100g": 8.86,
+    "tluszcz_100g": 0.54,
+    "wegle_100g": 23.7,
+    "blonnik_100g": 8.7,
+    "cukry_ogolem_100g": 0.32,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Fasola czarna, sucha",
+    "tagi": [
+      "straczki"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 341,
+    "bialko_100g": 21.6,
+    "tluszcz_100g": 1.42,
+    "wegle_100g": 62.4,
+    "blonnik_100g": 15.5,
+    "cukry_ogolem_100g": 2.1,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Fasola czerwona z puszki, odsączona",
+    "tagi": [
+      "straczki"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 240,
+    "kcal_100g": 124,
+    "bialko_100g": 8.67,
+    "tluszcz_100g": 0.5,
+    "wegle_100g": 22.8,
+    "blonnik_100g": 7.4,
+    "cukry_ogolem_100g": 0.3,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Fasola mung, sucha",
+    "tagi": [
+      "straczki"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 347,
+    "bialko_100g": 23.9,
+    "tluszcz_100g": 1.15,
+    "wegle_100g": 62.6,
+    "blonnik_100g": 16.3,
+    "cukry_ogolem_100g": 6.6,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Fasolka szparagowa mrożona",
+    "tagi": [
+      "warzywo"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 33,
+    "bialko_100g": 1.79,
+    "tluszcz_100g": 0.21,
+    "wegle_100g": 7.54,
+    "blonnik_100g": 2.6,
+    "cukry_ogolem_100g": 2.21,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Fasolka szparagowa, surowa",
+    "tagi": [
+      "warzywo"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 31,
+    "bialko_100g": 1.83,
+    "tluszcz_100g": 0.22,
+    "wegle_100g": 6.97,
+    "blonnik_100g": 2.7,
+    "cukry_ogolem_100g": 3.26,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Fenkuł, surowy",
+    "tagi": [
+      "warzywo"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 250,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 31,
+    "bialko_100g": 1.24,
+    "tluszcz_100g": 0.2,
+    "wegle_100g": 7.3,
+    "blonnik_100g": 3.1,
+    "cukry_ogolem_100g": 3.93,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Figi suszone",
+    "tagi": [
+      "owoc",
+      "suszone"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 249,
+    "bialko_100g": 3.3,
+    "tluszcz_100g": 0.92,
+    "wegle_100g": 63.9,
+    "blonnik_100g": 9.8,
+    "cukry_ogolem_100g": 47.9,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Filet z dorsza atlantyckiego",
+    "tagi": [
+      "ryba"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": null,
+    "gramatura_opakowania_g": null,
+    "kcal_100g": 82,
+    "bialko_100g": 17.8,
+    "tluszcz_100g": 0.7,
+    "wegle_100g": 0,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Filet z indyka, surowy",
+    "tagi": [
+      "mieso",
+      "drob"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 114,
+    "bialko_100g": 23.7,
+    "tluszcz_100g": 1.48,
+    "wegle_100g": 0.14,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0.05,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Flądra, surowa",
+    "tagi": [
+      "ryba"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 70,
+    "bialko_100g": 12.4,
+    "tluszcz_100g": 1.9,
+    "wegle_100g": 0,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Gałka muszkatołowa mielona",
+    "tagi": [
+      "przyprawa"
+    ],
+    "rola": "aromat",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 525,
+    "bialko_100g": 5.84,
+    "tluszcz_100g": 36.3,
+    "wegle_100g": 49.3,
+    "blonnik_100g": 20.8,
+    "cukry_ogolem_100g": 2.99,
+    "cukry_wolne_100g": 0,
+    "nova": 2,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Garam masala",
+    "tagi": [],
+    "rola": "aromat",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": null,
+    "gramatura_opakowania_g": null,
+    "kcal_100g": 350,
+    "bialko_100g": 12,
+    "tluszcz_100g": 13,
+    "wegle_100g": 58,
+    "blonnik_100g": 20,
+    "cukry_ogolem_100g": 2,
+    "cukry_wolne_100g": 0,
+    "nova": 2,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Goździki suszone",
+    "tagi": [
+      "przyprawa"
+    ],
+    "rola": "aromat",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 274,
+    "bialko_100g": 5.97,
+    "tluszcz_100g": 13,
+    "wegle_100g": 65.5,
+    "blonnik_100g": 33.9,
+    "cukry_ogolem_100g": 2.38,
+    "cukry_wolne_100g": 0,
+    "nova": 2,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Granat",
+    "tagi": [
+      "owoc"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 280,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 83,
+    "bialko_100g": 1.67,
+    "tluszcz_100g": 1.17,
+    "wegle_100g": 18.7,
+    "blonnik_100g": 4,
+    "cukry_ogolem_100g": 13.67,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Grejpfrut",
+    "tagi": [
+      "owoc"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 250,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 42,
+    "bialko_100g": 0.77,
+    "tluszcz_100g": 0.14,
+    "wegle_100g": 10.66,
+    "blonnik_100g": 1.6,
+    "cukry_ogolem_100g": 6.89,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Groch łuskany, suchy",
+    "tagi": [
+      "straczki"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 352,
+    "bialko_100g": 23.8,
+    "tluszcz_100g": 1.2,
+    "wegle_100g": 63.7,
+    "blonnik_100g": 25.5,
+    "cukry_ogolem_100g": 8,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Groszek zielony mrożony",
+    "tagi": [
+      "warzywo"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 77,
+    "bialko_100g": 5.2,
+    "tluszcz_100g": 0.4,
+    "wegle_100g": 13.7,
+    "blonnik_100g": 4.5,
+    "cukry_ogolem_100g": 4.1,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Groszek zielony, surowy",
+    "tagi": [
+      "warzywo",
+      "straczki"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 81,
+    "bialko_100g": 5.42,
+    "tluszcz_100g": 0.4,
+    "wegle_100g": 14.45,
+    "blonnik_100g": 5.1,
+    "cukry_ogolem_100g": 5.67,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Gruszka ze skórką",
+    "tagi": [
+      "owoc"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 180,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 57,
+    "bialko_100g": 0.36,
+    "tluszcz_100g": 0.14,
+    "wegle_100g": 15.23,
+    "blonnik_100g": 3.1,
+    "cukry_ogolem_100g": 9.75,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Gulasz wieprzowy, surowy",
+    "tagi": [
+      "mieso"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 151,
+    "bialko_100g": 19.6,
+    "tluszcz_100g": 7.4,
+    "wegle_100g": 0,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Halloumi",
+    "tagi": [
+      "nabial"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 321,
+    "bialko_100g": 22,
+    "tluszcz_100g": 25,
+    "wegle_100g": 2,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 2,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Imbir korzeń, surowy",
+    "tagi": [
+      "przyprawa"
+    ],
+    "rola": "aromat",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 80,
+    "bialko_100g": 1.82,
+    "tluszcz_100g": 0.75,
+    "wegle_100g": 17.8,
+    "blonnik_100g": 2,
+    "cukry_ogolem_100g": 1.7,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Indyk, udo bez skóry, surowe",
+    "tagi": [
+      "mieso",
+      "drob"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 144,
+    "bialko_100g": 19.5,
+    "tluszcz_100g": 6.8,
+    "wegle_100g": 0,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Jabłko ze skórką",
+    "tagi": [
+      "owoc"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 180,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 52,
+    "bialko_100g": 0.26,
+    "tluszcz_100g": 0.17,
+    "wegle_100g": 13.8,
+    "blonnik_100g": 2.4,
+    "cukry_ogolem_100g": 10.4,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Jagnięcina, udziec surowy",
+    "tagi": [
+      "mieso"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 176,
+    "bialko_100g": 20.9,
+    "tluszcz_100g": 10.3,
+    "wegle_100g": 0,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Jaja kurze, całe, surowe",
+    "tagi": [
+      "jaja"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": false,
+    "masa_sztuki_g": 55,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 143,
+    "bialko_100g": 12.6,
+    "tluszcz_100g": 9.51,
+    "wegle_100g": 0.72,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0.37,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Jarmuż, surowy",
+    "tagi": [
+      "warzywo"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 49,
+    "bialko_100g": 4.28,
+    "tluszcz_100g": 0.93,
+    "wegle_100g": 8.75,
+    "blonnik_100g": 3.6,
+    "cukry_ogolem_100g": 2.26,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Jeżyny",
+    "tagi": [
+      "owoc"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 5,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 43,
+    "bialko_100g": 1.39,
+    "tluszcz_100g": 0.49,
+    "wegle_100g": 9.61,
+    "blonnik_100g": 5.3,
+    "cukry_ogolem_100g": 4.88,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Jogurt grecki naturalny 2%",
+    "tagi": [
+      "nabial"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 20,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 73,
+    "bialko_100g": 9.95,
+    "tluszcz_100g": 1.92,
+    "wegle_100g": 3.94,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 3.56,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Jogurt naturalny 2%",
+    "tagi": [
+      "nabial"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 61,
+    "bialko_100g": 3.47,
+    "tluszcz_100g": 3.25,
+    "wegle_100g": 4.66,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 4.66,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Kaczka, pierś bez skóry, surowa",
+    "tagi": [
+      "mieso",
+      "drob"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 135,
+    "bialko_100g": 18.3,
+    "tluszcz_100g": 5.9,
+    "wegle_100g": 0,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Kakao bez cukru, proszek",
+    "tagi": [
+      "kakao"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 228,
+    "bialko_100g": 19.6,
+    "tluszcz_100g": 13.7,
+    "wegle_100g": 57.9,
+    "blonnik_100g": 37,
+    "cukry_ogolem_100g": 1.75,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Kalafior, surowy",
+    "tagi": [
+      "warzywo"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 25,
+    "bialko_100g": 1.92,
+    "tluszcz_100g": 0.28,
+    "wegle_100g": 4.97,
+    "blonnik_100g": 2,
+    "cukry_ogolem_100g": 1.91,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Kałamarnica, surowa",
+    "tagi": [
+      "owoce morza"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 92,
+    "bialko_100g": 15.6,
+    "tluszcz_100g": 1.38,
+    "wegle_100g": 3.08,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Kalarepa, surowa",
+    "tagi": [
+      "warzywo"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 300,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 27,
+    "bialko_100g": 1.7,
+    "tluszcz_100g": 0.1,
+    "wegle_100g": 6.2,
+    "blonnik_100g": 3.6,
+    "cukry_ogolem_100g": 2.6,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Kapusta biała, surowa",
+    "tagi": [
+      "warzywo"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 25,
+    "bialko_100g": 1.28,
+    "tluszcz_100g": 0.1,
+    "wegle_100g": 5.8,
+    "blonnik_100g": 2.5,
+    "cukry_ogolem_100g": 3.2,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Kapusta czerwona, surowa",
+    "tagi": [
+      "warzywo"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 31,
+    "bialko_100g": 1.43,
+    "tluszcz_100g": 0.16,
+    "wegle_100g": 7.37,
+    "blonnik_100g": 2.1,
+    "cukry_ogolem_100g": 3.83,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Kapusta kiszona",
+    "tagi": [
+      "warzywo",
+      "kiszone"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 19,
+    "bialko_100g": 0.91,
+    "tluszcz_100g": 0.14,
+    "wegle_100g": 4.28,
+    "blonnik_100g": 2.9,
+    "cukry_ogolem_100g": 1.78,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Kapusta pekińska, surowa",
+    "tagi": [
+      "warzywo"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 16,
+    "bialko_100g": 1.2,
+    "tluszcz_100g": 0.2,
+    "wegle_100g": 3.2,
+    "blonnik_100g": 1.2,
+    "cukry_ogolem_100g": 1.4,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Kapusta włoska, surowa",
+    "tagi": [
+      "warzywo"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 27,
+    "bialko_100g": 2,
+    "tluszcz_100g": 0.1,
+    "wegle_100g": 6.1,
+    "blonnik_100g": 3.1,
+    "cukry_ogolem_100g": 2.3,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Kardamon mielony",
+    "tagi": [
+      "przyprawa"
+    ],
+    "rola": "aromat",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 311,
+    "bialko_100g": 11,
+    "tluszcz_100g": 6.7,
+    "wegle_100g": 68.5,
+    "blonnik_100g": 28,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 2,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Karp, surowy",
+    "tagi": [
+      "ryba"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 127,
+    "bialko_100g": 17.8,
+    "tluszcz_100g": 5.6,
+    "wegle_100g": 0,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Kasza bulgur, sucha",
+    "tagi": [
+      "zboze",
+      "gluten"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 342,
+    "bialko_100g": 12.3,
+    "tluszcz_100g": 1.33,
+    "wegle_100g": 75.9,
+    "blonnik_100g": 12.5,
+    "cukry_ogolem_100g": 0.41,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Kasza gryczana, sucha",
+    "tagi": [
+      "zboze",
+      "gluten"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 100,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 343,
+    "bialko_100g": 13.2,
+    "tluszcz_100g": 3.4,
+    "wegle_100g": 71.5,
+    "blonnik_100g": 10,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Kasza jaglana, sucha",
+    "tagi": [
+      "zboze"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 378,
+    "bialko_100g": 11,
+    "tluszcz_100g": 4.22,
+    "wegle_100g": 72.85,
+    "blonnik_100g": 8.5,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Kasza jęczmienna, sucha",
+    "tagi": [
+      "zboze",
+      "gluten"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 352,
+    "bialko_100g": 9.91,
+    "tluszcz_100g": 1.16,
+    "wegle_100g": 77.7,
+    "blonnik_100g": 15.6,
+    "cukry_ogolem_100g": 0.8,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Kawa",
+    "tagi": [],
+    "rola": "baza",
+    "mozna_dzielic": null,
+    "masa_sztuki_g": null,
+    "gramatura_opakowania_g": null,
+    "kcal_100g": 364,
+    "bialko_100g": 11,
+    "tluszcz_100g": 4,
+    "wegle_100g": 71,
+    "blonnik_100g": 10,
+    "cukry_ogolem_100g": 2,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Kefir naturalny 2%",
+    "tagi": [
+      "nabial"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 52,
+    "bialko_100g": 3.3,
+    "tluszcz_100g": 2,
+    "wegle_100g": 4.7,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 4.7,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Kiwi",
+    "tagi": [
+      "owoc"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 75,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 61,
+    "bialko_100g": 1.14,
+    "tluszcz_100g": 0.52,
+    "wegle_100g": 14.66,
+    "blonnik_100g": 3,
+    "cukry_ogolem_100g": 8.99,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Kmin rzymski mielony",
+    "tagi": [
+      "przyprawa"
+    ],
+    "rola": "doprawienie",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 375,
+    "bialko_100g": 17.8,
+    "tluszcz_100g": 22.3,
+    "wegle_100g": 44.2,
+    "blonnik_100g": 10.5,
+    "cukry_ogolem_100g": 2.25,
+    "cukry_wolne_100g": 0,
+    "nova": 2,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Kolendra nasiona",
+    "tagi": [
+      "przyprawa"
+    ],
+    "rola": "doprawienie",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 298,
+    "bialko_100g": 12.4,
+    "tluszcz_100g": 17.8,
+    "wegle_100g": 55,
+    "blonnik_100g": 41.9,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 2,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Kolendra świeża",
+    "tagi": [
+      "ziola"
+    ],
+    "rola": "do_smaku",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 23,
+    "bialko_100g": 2.13,
+    "tluszcz_100g": 0.52,
+    "wegle_100g": 3.67,
+    "blonnik_100g": 2.8,
+    "cukry_ogolem_100g": 0.87,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Komosa ryżowa, sucha",
+    "tagi": [
+      "zboze"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 368,
+    "bialko_100g": 14.1,
+    "tluszcz_100g": 6.07,
+    "wegle_100g": 64.2,
+    "blonnik_100g": 7,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Koncentrat pomidorowy",
+    "tagi": [],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 94,
+    "bialko_100g": 5,
+    "tluszcz_100g": 1,
+    "wegle_100g": 15,
+    "blonnik_100g": 2.8,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "koperek świeży",
+    "tagi": [],
+    "rola": "do_smaku",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 43,
+    "bialko_100g": 3.5,
+    "tluszcz_100g": 1.1,
+    "wegle_100g": 7,
+    "blonnik_100g": 2.1,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Krewetki, surowe",
+    "tagi": [
+      "owoce morza"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 85,
+    "bialko_100g": 20.1,
+    "tluszcz_100g": 0.51,
+    "wegle_100g": 0,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Królik, mięso surowe",
+    "tagi": [
+      "mieso"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 136,
+    "bialko_100g": 20.1,
+    "tluszcz_100g": 5.5,
+    "wegle_100g": 0,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Kukurydza cukrowa, surowa",
+    "tagi": [
+      "warzywo",
+      "zboze"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 180,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 86,
+    "bialko_100g": 3.27,
+    "tluszcz_100g": 1.35,
+    "wegle_100g": 18.7,
+    "blonnik_100g": 2,
+    "cukry_ogolem_100g": 6.26,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Kukurydza konserwowa, odsączona",
+    "tagi": [],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": null,
+    "gramatura_opakowania_g": null,
+    "kcal_100g": 86,
+    "bialko_100g": 3.2,
+    "tluszcz_100g": 1.2,
+    "wegle_100g": 16.3,
+    "blonnik_100g": 2.7,
+    "cukry_ogolem_100g": 6.3,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Kurczak, pałka bez skóry, surowa",
+    "tagi": [
+      "mieso",
+      "drob"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 90,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 119,
+    "bialko_100g": 19.7,
+    "tluszcz_100g": 4.2,
+    "wegle_100g": 0,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Kurczak, wątróbka surowa",
+    "tagi": [
+      "mieso",
+      "podroby"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 119,
+    "bialko_100g": 16.9,
+    "tluszcz_100g": 4.8,
+    "wegle_100g": 0.7,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Kurki, surowe",
+    "tagi": [
+      "warzywo",
+      "grzyby"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 38,
+    "bialko_100g": 1.5,
+    "tluszcz_100g": 0.5,
+    "wegle_100g": 6.9,
+    "blonnik_100g": 3.8,
+    "cukry_ogolem_100g": 1.2,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Kurkuma mielona",
+    "tagi": [
+      "przyprawa"
+    ],
+    "rola": "aromat",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 312,
+    "bialko_100g": 9.68,
+    "tluszcz_100g": 3.25,
+    "wegle_100g": 67.1,
+    "blonnik_100g": 22.7,
+    "cukry_ogolem_100g": 3.2,
+    "cukry_wolne_100g": 0,
+    "nova": 2,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "kwas ogórków kiszonych",
+    "tagi": [],
+    "rola": "doprawienie",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 4,
+    "bialko_100g": 0.3,
+    "tluszcz_100g": 0,
+    "wegle_100g": 0.8,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Limonka",
+    "tagi": [],
+    "rola": "doprawienie",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 70,
+    "gramatura_opakowania_g": 70,
+    "kcal_100g": 30,
+    "bialko_100g": 0.7,
+    "tluszcz_100g": 0.2,
+    "wegle_100g": 10,
+    "blonnik_100g": 2.8,
+    "cukry_ogolem_100g": 1,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "liść laurowy",
+    "tagi": [],
+    "rola": "aromat",
+    "mozna_dzielic": false,
+    "masa_sztuki_g": 0.2,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 313,
+    "bialko_100g": 7.6,
+    "tluszcz_100g": 8.4,
+    "wegle_100g": 75,
+    "blonnik_100g": 26.3,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Łosoś atlantycki hodowlany, surowy",
+    "tagi": [
+      "ryba"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 208,
+    "bialko_100g": 20.4,
+    "tluszcz_100g": 13.4,
+    "wegle_100g": 0,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Łosoś dziki, surowy",
+    "tagi": [
+      "ryba"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 142,
+    "bialko_100g": 19.8,
+    "tluszcz_100g": 6.34,
+    "wegle_100g": 0,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Majeranek suszony",
+    "tagi": [
+      "przyprawa"
+    ],
+    "rola": "doprawienie",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 271,
+    "bialko_100g": 12.7,
+    "tluszcz_100g": 7.04,
+    "wegle_100g": 60.6,
+    "blonnik_100g": 40.3,
+    "cukry_ogolem_100g": 4.1,
+    "cukry_wolne_100g": 0,
+    "nova": 2,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Mak niebieski",
+    "tagi": [
+      "nasiona"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 525,
+    "bialko_100g": 18,
+    "tluszcz_100g": 41.6,
+    "wegle_100g": 28.1,
+    "blonnik_100g": 19.5,
+    "cukry_ogolem_100g": 3,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Mąka orkiszowa pełnoziarnista",
+    "tagi": [
+      "zboze",
+      "gluten"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 338,
+    "bialko_100g": 14.6,
+    "tluszcz_100g": 2.4,
+    "wegle_100g": 70.2,
+    "blonnik_100g": 10.7,
+    "cukry_ogolem_100g": 0.4,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Mąka owsiana pełnoziarnista",
+    "tagi": [
+      "zboze",
+      "gluten"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 404,
+    "bialko_100g": 14.7,
+    "tluszcz_100g": 9.1,
+    "wegle_100g": 65.7,
+    "blonnik_100g": 6.5,
+    "cukry_ogolem_100g": 1,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Mąka pszenna pełnoziarnista",
+    "tagi": [
+      "zboze",
+      "gluten"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 340,
+    "bialko_100g": 13.2,
+    "tluszcz_100g": 2.5,
+    "wegle_100g": 72.6,
+    "blonnik_100g": 10.7,
+    "cukry_ogolem_100g": 0.4,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Mąka żytnia pełnoziarnista",
+    "tagi": [
+      "zboze",
+      "gluten"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 325,
+    "bialko_100g": 10.9,
+    "tluszcz_100g": 1.5,
+    "wegle_100g": 68.6,
+    "blonnik_100g": 15.1,
+    "cukry_ogolem_100g": 0.9,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Makaron pełnoziarnisty, suchy",
+    "tagi": [
+      "zboze",
+      "gluten"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 344,
+    "bialko_100g": 12.8,
+    "tluszcz_100g": 1.5,
+    "wegle_100g": 71,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Makrela atlantycka, surowa",
+    "tagi": [
+      "ryba"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 205,
+    "bialko_100g": 18.6,
+    "tluszcz_100g": 13.9,
+    "wegle_100g": 0,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Maliny",
+    "tagi": [
+      "owoc"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 4,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 52,
+    "bialko_100g": 1.2,
+    "tluszcz_100g": 0.65,
+    "wegle_100g": 11.94,
+    "blonnik_100g": 6.5,
+    "cukry_ogolem_100g": 4.42,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Małże, surowe",
+    "tagi": [
+      "owoce morza"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 86,
+    "bialko_100g": 11.9,
+    "tluszcz_100g": 2.2,
+    "wegle_100g": 3.7,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Mandarynki",
+    "tagi": [
+      "owoc"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 90,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 53,
+    "bialko_100g": 0.81,
+    "tluszcz_100g": 0.31,
+    "wegle_100g": 13.34,
+    "blonnik_100g": 1.8,
+    "cukry_ogolem_100g": 10.58,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Mango",
+    "tagi": [
+      "owoc"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 330,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 60,
+    "bialko_100g": 0.82,
+    "tluszcz_100g": 0.38,
+    "wegle_100g": 14.98,
+    "blonnik_100g": 1.6,
+    "cukry_ogolem_100g": 13.66,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Marchew, surowa",
+    "tagi": [
+      "warzywo"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 70,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 41,
+    "bialko_100g": 0.93,
+    "tluszcz_100g": 0.24,
+    "wegle_100g": 9.58,
+    "blonnik_100g": 2.8,
+    "cukry_ogolem_100g": 4.74,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Maślanka naturalna",
+    "tagi": [
+      "nabial"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 40,
+    "bialko_100g": 3.3,
+    "tluszcz_100g": 0.9,
+    "wegle_100g": 4.8,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 4.8,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Masło",
+    "tagi": [
+      "tluszcz",
+      "nabial"
+    ],
+    "rola": "smazenie",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 15,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 717,
+    "bialko_100g": 0.85,
+    "tluszcz_100g": 81.1,
+    "wegle_100g": 0.06,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0.06,
+    "cukry_wolne_100g": 0,
+    "nova": 2,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Masło orzechowe bez cukru",
+    "tagi": [
+      "orzechy"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 598,
+    "bialko_100g": 22.2,
+    "tluszcz_100g": 51.4,
+    "wegle_100g": 22.3,
+    "blonnik_100g": 5,
+    "cukry_ogolem_100g": 4.2,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Melon kantalupa",
+    "tagi": [
+      "owoc"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 700,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 34,
+    "bialko_100g": 0.84,
+    "tluszcz_100g": 0.19,
+    "wegle_100g": 8.16,
+    "blonnik_100g": 0.9,
+    "cukry_ogolem_100g": 7.86,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Mięso mielone wołowo-wieprzowe, surowe",
+    "tagi": [
+      "mieso"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 215,
+    "bialko_100g": 17.2,
+    "tluszcz_100g": 16,
+    "wegle_100g": 0,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Mięso mielone z indyka, surowe",
+    "tagi": [
+      "mieso",
+      "drob"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": null,
+    "gramatura_opakowania_g": null,
+    "kcal_100g": 149,
+    "bialko_100g": 20,
+    "tluszcz_100g": 7,
+    "wegle_100g": 0,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Mięta świeża",
+    "tagi": [
+      "ziola"
+    ],
+    "rola": "do_smaku",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 44,
+    "bialko_100g": 3.29,
+    "tluszcz_100g": 0.73,
+    "wegle_100g": 8.41,
+    "blonnik_100g": 6.8,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Migdały",
+    "tagi": [
+      "orzechy"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 579,
+    "bialko_100g": 21.2,
+    "tluszcz_100g": 49.9,
+    "wegle_100g": 21.6,
+    "blonnik_100g": 12.5,
+    "cukry_ogolem_100g": 4.35,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Mintaj, surowy",
+    "tagi": [
+      "ryba"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 92,
+    "bialko_100g": 19.4,
+    "tluszcz_100g": 0.98,
+    "wegle_100g": 0,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Miód",
+    "tagi": [
+      "slodzik"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 21,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 304,
+    "bialko_100g": 0.3,
+    "tluszcz_100g": 0,
+    "wegle_100g": 82.4,
+    "blonnik_100g": 0.2,
+    "cukry_ogolem_100g": 82.1,
+    "cukry_wolne_100g": 82.1,
+    "nova": 2,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Mleko 1,5%",
+    "tagi": [
+      "nabial"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 46,
+    "bialko_100g": 3.3,
+    "tluszcz_100g": 1.5,
+    "wegle_100g": 4.8,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 4.8,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Mleko 2%",
+    "tagi": [
+      "nabial"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 50,
+    "bialko_100g": 3.3,
+    "tluszcz_100g": 1.98,
+    "wegle_100g": 4.8,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 5.06,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Mleko 3,2%",
+    "tagi": [
+      "nabial"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 61,
+    "bialko_100g": 3.15,
+    "tluszcz_100g": 3.25,
+    "wegle_100g": 4.8,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 4.8,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Mleko kokosowe light z puszki",
+    "tagi": [
+      "roslinne"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 99,
+    "bialko_100g": 1,
+    "tluszcz_100g": 10.7,
+    "wegle_100g": 1.4,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 1.4,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Mleko kokosowe z puszki",
+    "tagi": [
+      "tluszcz"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 197,
+    "bialko_100g": 2.02,
+    "tluszcz_100g": 21.3,
+    "wegle_100g": 2.81,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Mleko kozie",
+    "tagi": [
+      "nabial"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 69,
+    "bialko_100g": 3.56,
+    "tluszcz_100g": 4.14,
+    "wegle_100g": 4.45,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 4.45,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Morela",
+    "tagi": [
+      "owoc"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": false,
+    "masa_sztuki_g": 35,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 48,
+    "bialko_100g": 1.4,
+    "tluszcz_100g": 0.39,
+    "wegle_100g": 11.12,
+    "blonnik_100g": 2,
+    "cukry_ogolem_100g": 9.24,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Morszczuk, surowy",
+    "tagi": [
+      "ryba"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 86,
+    "bialko_100g": 17,
+    "tluszcz_100g": 1.5,
+    "wegle_100g": 0,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Musztarda",
+    "tagi": [],
+    "rola": "aromat",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": null,
+    "gramatura_opakowania_g": null,
+    "kcal_100g": 96,
+    "bialko_100g": 4.2,
+    "tluszcz_100g": 4.7,
+    "wegle_100g": 5.5,
+    "blonnik_100g": 3.5,
+    "cukry_ogolem_100g": 1.2,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Nasiona chia",
+    "tagi": [
+      "nasiona"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 486,
+    "bialko_100g": 16.5,
+    "tluszcz_100g": 30.7,
+    "wegle_100g": 42.1,
+    "blonnik_100g": 34.4,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Nasiona gorczycy",
+    "tagi": [
+      "przyprawa"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 508,
+    "bialko_100g": 26.1,
+    "tluszcz_100g": 36.2,
+    "wegle_100g": 28.1,
+    "blonnik_100g": 12.2,
+    "cukry_ogolem_100g": 6.8,
+    "cukry_wolne_100g": 0,
+    "nova": 2,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Nasiona konopi łuskane",
+    "tagi": [
+      "nasiona"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 553,
+    "bialko_100g": 31.6,
+    "tluszcz_100g": 48.8,
+    "wegle_100g": 8.7,
+    "blonnik_100g": 4,
+    "cukry_ogolem_100g": 1.5,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Nektarynka",
+    "tagi": [
+      "owoc"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": false,
+    "masa_sztuki_g": 140,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 44,
+    "bialko_100g": 1.06,
+    "tluszcz_100g": 0.32,
+    "wegle_100g": 10.55,
+    "blonnik_100g": 1.7,
+    "cukry_ogolem_100g": 7.89,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Nerkowce",
+    "tagi": [
+      "orzechy"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 553,
+    "bialko_100g": 18.2,
+    "tluszcz_100g": 43.9,
+    "wegle_100g": 30.2,
+    "blonnik_100g": 3.3,
+    "cukry_ogolem_100g": 5.9,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Ocet jabłkowy",
+    "tagi": [
+      "przyprawa"
+    ],
+    "rola": "doprawienie",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 15,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 21,
+    "bialko_100g": 0,
+    "tluszcz_100g": 0,
+    "wegle_100g": 0.93,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0.4,
+    "cukry_wolne_100g": 0,
+    "nova": 2,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Ocet winny czerwony",
+    "tagi": [
+      "przyprawa"
+    ],
+    "rola": "doprawienie",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 15,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 19,
+    "bialko_100g": 0.04,
+    "tluszcz_100g": 0,
+    "wegle_100g": 0.27,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 2,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Ogórek, surowy",
+    "tagi": [
+      "warzywo"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 200,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 15,
+    "bialko_100g": 0.65,
+    "tluszcz_100g": 0.11,
+    "wegle_100g": 3.63,
+    "blonnik_100g": 0.5,
+    "cukry_ogolem_100g": 1.67,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "ogórki kiszone bio",
+    "tagi": [],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 60,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 11,
+    "bialko_100g": 0.5,
+    "tluszcz_100g": 0.1,
+    "wegle_100g": 1.2,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 1.2,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Okoń morski, surowy",
+    "tagi": [
+      "ryba"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 97,
+    "bialko_100g": 18.4,
+    "tluszcz_100g": 2,
+    "wegle_100g": 0,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Olej rzepakowy",
+    "tagi": [
+      "tluszcz"
+    ],
+    "rola": "smazenie",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 12,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 884,
+    "bialko_100g": 0,
+    "tluszcz_100g": 100,
+    "wegle_100g": 0,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 2,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Oliwa z oliwek",
+    "tagi": [
+      "tluszcz"
+    ],
+    "rola": "doprawienie",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 12,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 884,
+    "bialko_100g": 0,
+    "tluszcz_100g": 100,
+    "wegle_100g": 0,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 2,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Oliwki czarne",
+    "tagi": [
+      "owoc",
+      "tluszcz"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 115,
+    "bialko_100g": 0.84,
+    "tluszcz_100g": 10.7,
+    "wegle_100g": 6.3,
+    "blonnik_100g": 3.2,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Oliwki zielone",
+    "tagi": [
+      "owoc"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 145,
+    "bialko_100g": 1.03,
+    "tluszcz_100g": 15.3,
+    "wegle_100g": 3.84,
+    "blonnik_100g": 3.3,
+    "cukry_ogolem_100g": 0.54,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Oregano suszone",
+    "tagi": [
+      "ziola"
+    ],
+    "rola": "doprawienie",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 265,
+    "bialko_100g": 9,
+    "tluszcz_100g": 4.28,
+    "wegle_100g": 68.9,
+    "blonnik_100g": 42.5,
+    "cukry_ogolem_100g": 4.09,
+    "cukry_wolne_100g": 0,
+    "nova": 2,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Orzechy brazylijskie",
+    "tagi": [
+      "orzechy"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 5,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 659,
+    "bialko_100g": 14.3,
+    "tluszcz_100g": 67.1,
+    "wegle_100g": 11.7,
+    "blonnik_100g": 7.5,
+    "cukry_ogolem_100g": 2.3,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Orzechy laskowe",
+    "tagi": [
+      "orzechy"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 628,
+    "bialko_100g": 15,
+    "tluszcz_100g": 60.8,
+    "wegle_100g": 16.7,
+    "blonnik_100g": 9.7,
+    "cukry_ogolem_100g": 4.34,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Orzechy pekan",
+    "tagi": [
+      "orzechy"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 691,
+    "bialko_100g": 9.17,
+    "tluszcz_100g": 72,
+    "wegle_100g": 13.9,
+    "blonnik_100g": 9.6,
+    "cukry_ogolem_100g": 4,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Orzechy włoskie",
+    "tagi": [
+      "orzechy"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 654,
+    "bialko_100g": 15.2,
+    "tluszcz_100g": 65.2,
+    "wegle_100g": 13.7,
+    "blonnik_100g": 6.7,
+    "cukry_ogolem_100g": 2.61,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Orzeszki piniowe",
+    "tagi": [
+      "orzechy"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 673,
+    "bialko_100g": 13.7,
+    "tluszcz_100g": 68.4,
+    "wegle_100g": 13.1,
+    "blonnik_100g": 3.7,
+    "cukry_ogolem_100g": 3.6,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Orzeszki ziemne, niesolone",
+    "tagi": [
+      "orzechy"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 567,
+    "bialko_100g": 25.8,
+    "tluszcz_100g": 49.2,
+    "wegle_100g": 16.1,
+    "blonnik_100g": 8.5,
+    "cukry_ogolem_100g": 4.7,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Ośmiornica, surowa",
+    "tagi": [
+      "owoce morza"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 82,
+    "bialko_100g": 14.9,
+    "tluszcz_100g": 1.04,
+    "wegle_100g": 2.2,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Otręby owsiane",
+    "tagi": [
+      "zboze",
+      "gluten"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 246,
+    "bialko_100g": 17.3,
+    "tluszcz_100g": 7.03,
+    "wegle_100g": 66.2,
+    "blonnik_100g": 15.4,
+    "cukry_ogolem_100g": 1.4,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Papryka czerwona, surowa",
+    "tagi": [
+      "warzywo"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 150,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 31.3,
+    "bialko_100g": 0.9,
+    "tluszcz_100g": 0.13,
+    "wegle_100g": 6.65,
+    "blonnik_100g": 1.16,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Papryka ostra mielona",
+    "tagi": [
+      "przyprawa"
+    ],
+    "rola": "aromat",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 318,
+    "bialko_100g": 12,
+    "tluszcz_100g": 17.3,
+    "wegle_100g": 56.6,
+    "blonnik_100g": 27.2,
+    "cukry_ogolem_100g": 10.3,
+    "cukry_wolne_100g": 0,
+    "nova": 2,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Papryka słodka mielona",
+    "tagi": [
+      "przyprawa"
+    ],
+    "rola": "doprawienie",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 282,
+    "bialko_100g": 14.1,
+    "tluszcz_100g": 12.9,
+    "wegle_100g": 54,
+    "blonnik_100g": 34.9,
+    "cukry_ogolem_100g": 10.3,
+    "cukry_wolne_100g": 0,
+    "nova": 2,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Papryka wędzona mielona",
+    "tagi": [],
+    "rola": "doprawienie",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": null,
+    "gramatura_opakowania_g": null,
+    "kcal_100g": 282,
+    "bialko_100g": 14.1,
+    "tluszcz_100g": 12.9,
+    "wegle_100g": 54,
+    "blonnik_100g": 34,
+    "cukry_ogolem_100g": 10.3,
+    "cukry_wolne_100g": 0,
+    "nova": 2,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Papryka zielona, surowa",
+    "tagi": [
+      "warzywo"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 140,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 20,
+    "bialko_100g": 0.86,
+    "tluszcz_100g": 0.17,
+    "wegle_100g": 4.64,
+    "blonnik_100g": 1.7,
+    "cukry_ogolem_100g": 2.4,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Papryka żółta, surowa",
+    "tagi": [
+      "warzywo"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 150,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 27,
+    "bialko_100g": 1,
+    "tluszcz_100g": 0.21,
+    "wegle_100g": 6.32,
+    "blonnik_100g": 0.9,
+    "cukry_ogolem_100g": 3.9,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Parmezan",
+    "tagi": [
+      "nabial"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 420,
+    "bialko_100g": 28.4,
+    "tluszcz_100g": 27.8,
+    "wegle_100g": 13.9,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0.07,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Passata pomidorowa",
+    "tagi": [
+      "warzywo"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 38,
+    "bialko_100g": 1.65,
+    "tluszcz_100g": 0.21,
+    "wegle_100g": 8.98,
+    "blonnik_100g": 1.9,
+    "cukry_ogolem_100g": 4.83,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Pasta curry czerwona",
+    "tagi": [
+      "przyprawa"
+    ],
+    "rola": "aromat",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 15,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 110,
+    "bialko_100g": 3,
+    "tluszcz_100g": 5,
+    "wegle_100g": 12,
+    "blonnik_100g": 3,
+    "cukry_ogolem_100g": 5,
+    "cukry_wolne_100g": 0,
+    "nova": 4,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Pasta tom kha",
+    "tagi": [
+      "przyprawa"
+    ],
+    "rola": "aromat",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 15,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 120,
+    "bialko_100g": 3,
+    "tluszcz_100g": 6,
+    "wegle_100g": 13,
+    "blonnik_100g": 2,
+    "cukry_ogolem_100g": 6,
+    "cukry_wolne_100g": 0,
+    "nova": 4,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Pasternak, surowy",
+    "tagi": [
+      "warzywo"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 120,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 75,
+    "bialko_100g": 1.2,
+    "tluszcz_100g": 0.3,
+    "wegle_100g": 18,
+    "blonnik_100g": 4.9,
+    "cukry_ogolem_100g": 4.8,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Pestki dyni",
+    "tagi": [
+      "nasiona"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 559,
+    "bialko_100g": 30.2,
+    "tluszcz_100g": 49,
+    "wegle_100g": 10.7,
+    "blonnik_100g": 6,
+    "cukry_ogolem_100g": 1.4,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Pestki słonecznika",
+    "tagi": [
+      "nasiona"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 584,
+    "bialko_100g": 20.8,
+    "tluszcz_100g": 51.5,
+    "wegle_100g": 20,
+    "blonnik_100g": 8.6,
+    "cukry_ogolem_100g": 2.62,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Pieczarki, surowe",
+    "tagi": [
+      "warzywo"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 22,
+    "bialko_100g": 3.09,
+    "tluszcz_100g": 0.34,
+    "wegle_100g": 3.26,
+    "blonnik_100g": 1,
+    "cukry_ogolem_100g": 1.98,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Pieprz biały mielony",
+    "tagi": [
+      "przyprawa"
+    ],
+    "rola": "doprawienie",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 296,
+    "bialko_100g": 10.4,
+    "tluszcz_100g": 2.12,
+    "wegle_100g": 68.6,
+    "blonnik_100g": 26.2,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 2,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Pierś z indyka, surowa",
+    "tagi": [
+      "mieso",
+      "drob"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 114,
+    "bialko_100g": 23.7,
+    "tluszcz_100g": 1.48,
+    "wegle_100g": 0.14,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0.05,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Pierś z kurczaka, surowa",
+    "tagi": [
+      "mieso",
+      "drob"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 120,
+    "bialko_100g": 22.5,
+    "tluszcz_100g": 2.62,
+    "wegle_100g": 0,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Pietruszka korzeń",
+    "tagi": [],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 50,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 49,
+    "bialko_100g": 2.6,
+    "tluszcz_100g": 0.5,
+    "wegle_100g": 10.5,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 5.7,
+    "cukry_wolne_100g": 5.7,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Pietruszka natka",
+    "tagi": [
+      "ziola"
+    ],
+    "rola": "do_smaku",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 36,
+    "bialko_100g": 2.97,
+    "tluszcz_100g": 0.79,
+    "wegle_100g": 6.33,
+    "blonnik_100g": 3.3,
+    "cukry_ogolem_100g": 0.85,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Pistacje, niesolone",
+    "tagi": [
+      "orzechy"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 562,
+    "bialko_100g": 20.2,
+    "tluszcz_100g": 45.3,
+    "wegle_100g": 27.2,
+    "blonnik_100g": 10.6,
+    "cukry_ogolem_100g": 7.7,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Płatki owsiane",
+    "tagi": [
+      "zboze",
+      "gluten"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 379,
+    "bialko_100g": 13.2,
+    "tluszcz_100g": 6.52,
+    "wegle_100g": 67.7,
+    "blonnik_100g": 10.1,
+    "cukry_ogolem_100g": 0.99,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Polędwica wołowa, surowa",
+    "tagi": [
+      "mieso"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 146,
+    "bialko_100g": 22.2,
+    "tluszcz_100g": 6.5,
+    "wegle_100g": 0,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Polędwiczka wieprzowa, surowa",
+    "tagi": [
+      "mieso"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 109,
+    "bialko_100g": 20.95,
+    "tluszcz_100g": 2.17,
+    "wegle_100g": 0,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Polenta / kaszka kukurydziana, sucha",
+    "tagi": [
+      "zboze"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 370,
+    "bialko_100g": 8.1,
+    "tluszcz_100g": 1.8,
+    "wegle_100g": 79.4,
+    "blonnik_100g": 3.9,
+    "cukry_ogolem_100g": 1.6,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Pomarańcza",
+    "tagi": [
+      "owoc"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 140,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 47,
+    "bialko_100g": 0.91,
+    "tluszcz_100g": 0.15,
+    "wegle_100g": 11.8,
+    "blonnik_100g": 2,
+    "cukry_ogolem_100g": 8.57,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Pomidory krojone z puszki",
+    "tagi": [
+      "warzywo"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 18,
+    "bialko_100g": 0.84,
+    "tluszcz_100g": 0.5,
+    "wegle_100g": 3.32,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 2.99,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Pomidory suszone w oleju",
+    "tagi": [
+      "warzywo"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 213,
+    "bialko_100g": 5.06,
+    "tluszcz_100g": 14.1,
+    "wegle_100g": 23.3,
+    "blonnik_100g": 5.8,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Pomidory, surowe",
+    "tagi": [
+      "warzywo"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 130,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 18,
+    "bialko_100g": 0.88,
+    "tluszcz_100g": 0.2,
+    "wegle_100g": 3.89,
+    "blonnik_100g": 1.2,
+    "cukry_ogolem_100g": 2.63,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Por, surowy",
+    "tagi": [
+      "warzywo"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 90,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 61,
+    "bialko_100g": 1.5,
+    "tluszcz_100g": 0.3,
+    "wegle_100g": 14.2,
+    "blonnik_100g": 1.8,
+    "cukry_ogolem_100g": 3.9,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Portobello, surowe",
+    "tagi": [
+      "warzywo",
+      "grzyby"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 22,
+    "bialko_100g": 2.11,
+    "tluszcz_100g": 0.35,
+    "wegle_100g": 3.87,
+    "blonnik_100g": 1.3,
+    "cukry_ogolem_100g": 2.5,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Porzeczki czarne",
+    "tagi": [
+      "owoc"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 63,
+    "bialko_100g": 1.4,
+    "tluszcz_100g": 0.41,
+    "wegle_100g": 15.38,
+    "blonnik_100g": 4.3,
+    "cukry_ogolem_100g": 7.37,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Porzeczki czerwone",
+    "tagi": [
+      "owoc"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 56,
+    "bialko_100g": 1.4,
+    "tluszcz_100g": 0.2,
+    "wegle_100g": 13.8,
+    "blonnik_100g": 4.3,
+    "cukry_ogolem_100g": 7.37,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Pręga wołowa bez kości, surowa",
+    "tagi": [
+      "mieso"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 137,
+    "bialko_100g": 21.4,
+    "tluszcz_100g": 4.9,
+    "wegle_100g": 0,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Pstrąg tęczowy, surowy",
+    "tagi": [
+      "ryba"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 148,
+    "bialko_100g": 20.5,
+    "tluszcz_100g": 6.5,
+    "wegle_100g": 0,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Radicchio, surowe",
+    "tagi": [
+      "warzywo"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 23,
+    "bialko_100g": 1.43,
+    "tluszcz_100g": 0.25,
+    "wegle_100g": 4.48,
+    "blonnik_100g": 0.9,
+    "cukry_ogolem_100g": 0.6,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Rodzynki",
+    "tagi": [
+      "owoc",
+      "suszone"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 299,
+    "bialko_100g": 3.3,
+    "tluszcz_100g": 0.25,
+    "wegle_100g": 79.3,
+    "blonnik_100g": 4.5,
+    "cukry_ogolem_100g": 65.2,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Roszponka, surowa",
+    "tagi": [
+      "warzywo"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 21,
+    "bialko_100g": 2,
+    "tluszcz_100g": 0.4,
+    "wegle_100g": 3.6,
+    "blonnik_100g": 1.5,
+    "cukry_ogolem_100g": 0.7,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Rozmaryn suszony",
+    "tagi": [
+      "przyprawa"
+    ],
+    "rola": "doprawienie",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 331,
+    "bialko_100g": 4.88,
+    "tluszcz_100g": 15.2,
+    "wegle_100g": 64.1,
+    "blonnik_100g": 42.6,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 2,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Rozmaryn świeży",
+    "tagi": [
+      "ziola"
+    ],
+    "rola": "doprawienie",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 131,
+    "bialko_100g": 3.31,
+    "tluszcz_100g": 5.86,
+    "wegle_100g": 20.7,
+    "blonnik_100g": 14.1,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Rukola",
+    "tagi": [
+      "warzywo"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 25,
+    "bialko_100g": 2.58,
+    "tluszcz_100g": 0.66,
+    "wegle_100g": 3.65,
+    "blonnik_100g": 1.6,
+    "cukry_ogolem_100g": 2.05,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Ryż basmati, suchy",
+    "tagi": [
+      "zboze"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 365,
+    "bialko_100g": 7.13,
+    "tluszcz_100g": 0.66,
+    "wegle_100g": 80,
+    "blonnik_100g": 1.3,
+    "cukry_ogolem_100g": 0.12,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Ryż brązowy, suchy",
+    "tagi": [
+      "zboze"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 367,
+    "bialko_100g": 7.54,
+    "tluszcz_100g": 3.2,
+    "wegle_100g": 76.2,
+    "blonnik_100g": 3.6,
+    "cukry_ogolem_100g": 0.66,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Ryż dziki, suchy",
+    "tagi": [
+      "zboze"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 357,
+    "bialko_100g": 14.7,
+    "tluszcz_100g": 1.08,
+    "wegle_100g": 74.9,
+    "blonnik_100g": 6.2,
+    "cukry_ogolem_100g": 2.5,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Ryż jaśminowy, suchy",
+    "tagi": [
+      "zboze"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 365,
+    "bialko_100g": 7.13,
+    "tluszcz_100g": 0.66,
+    "wegle_100g": 80,
+    "blonnik_100g": 1.3,
+    "cukry_ogolem_100g": 0.12,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Ryż parboiled, suchy",
+    "tagi": [
+      "zboze"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 374,
+    "bialko_100g": 7.5,
+    "tluszcz_100g": 0.9,
+    "wegle_100g": 81.7,
+    "blonnik_100g": 1.8,
+    "cukry_ogolem_100g": 0.1,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Rzepa, surowa",
+    "tagi": [
+      "warzywo"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 140,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 28,
+    "bialko_100g": 0.9,
+    "tluszcz_100g": 0.1,
+    "wegle_100g": 6.43,
+    "blonnik_100g": 1.8,
+    "cukry_ogolem_100g": 3.8,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Rzodkiewka, surowa",
+    "tagi": [
+      "warzywo"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 10,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 16,
+    "bialko_100g": 0.68,
+    "tluszcz_100g": 0.1,
+    "wegle_100g": 3.4,
+    "blonnik_100g": 1.6,
+    "cukry_ogolem_100g": 1.86,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Sałata lodowa",
+    "tagi": [
+      "warzywo"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 14,
+    "bialko_100g": 0.9,
+    "tluszcz_100g": 0.14,
+    "wegle_100g": 2.97,
+    "blonnik_100g": 1.2,
+    "cukry_ogolem_100g": 1.97,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Sałata masłowa",
+    "tagi": [
+      "warzywo"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 13,
+    "bialko_100g": 1.35,
+    "tluszcz_100g": 0.22,
+    "wegle_100g": 2.23,
+    "blonnik_100g": 1.1,
+    "cukry_ogolem_100g": 0.94,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Sałata rzymska",
+    "tagi": [
+      "warzywo"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 17,
+    "bialko_100g": 1.23,
+    "tluszcz_100g": 0.3,
+    "wegle_100g": 3.29,
+    "blonnik_100g": 2.1,
+    "cukry_ogolem_100g": 1.19,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Sandacz, surowy",
+    "tagi": [
+      "ryba"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 84,
+    "bialko_100g": 19.1,
+    "tluszcz_100g": 0.7,
+    "wegle_100g": 0,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Sardynki w oliwie, odsączone",
+    "tagi": [
+      "ryba"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 208,
+    "bialko_100g": 24.6,
+    "tluszcz_100g": 11.4,
+    "wegle_100g": 0,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Schab wieprzowy, surowy",
+    "tagi": [
+      "mieso"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 143,
+    "bialko_100g": 21.4,
+    "tluszcz_100g": 5.7,
+    "wegle_100g": 0,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Seler korzeń",
+    "tagi": [],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 42,
+    "bialko_100g": 1.5,
+    "tluszcz_100g": 0.3,
+    "wegle_100g": 9.2,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 1.6,
+    "cukry_wolne_100g": 1.6,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Seler naciowy, surowy",
+    "tagi": [
+      "warzywo"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 40,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 14,
+    "bialko_100g": 0.69,
+    "tluszcz_100g": 0.17,
+    "wegle_100g": 2.97,
+    "blonnik_100g": 1.6,
+    "cukry_ogolem_100g": 1.34,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Ser carski",
+    "tagi": [
+      "nabial"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 130,
+    "kcal_100g": 370,
+    "bialko_100g": 27,
+    "tluszcz_100g": 29,
+    "wegle_100g": 0.1,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0.1,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Ser cheddar",
+    "tagi": [
+      "nabial"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 250,
+    "kcal_100g": 410,
+    "bialko_100g": 25,
+    "tluszcz_100g": 34,
+    "wegle_100g": 0.1,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0.1,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Ser edamski",
+    "tagi": [
+      "nabial"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 150,
+    "kcal_100g": 330,
+    "bialko_100g": 26,
+    "tluszcz_100g": 25,
+    "wegle_100g": 0.1,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0.1,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Ser Emmentaler",
+    "tagi": [
+      "nabial"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 150,
+    "kcal_100g": 380,
+    "bialko_100g": 28,
+    "tluszcz_100g": 30,
+    "wegle_100g": 0.1,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0.1,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Ser feta",
+    "tagi": [
+      "nabial"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 265,
+    "bialko_100g": 14.2,
+    "tluszcz_100g": 21.5,
+    "wegle_100g": 3.88,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Ser Gouda",
+    "tagi": [
+      "nabial"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 150,
+    "kcal_100g": 356,
+    "bialko_100g": 24.94,
+    "tluszcz_100g": 27.44,
+    "wegle_100g": 2.22,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 2.22,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Ser Grana Padano",
+    "tagi": [
+      "nabial"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 200,
+    "kcal_100g": 398,
+    "bialko_100g": 33,
+    "tluszcz_100g": 28.4,
+    "wegle_100g": 0,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Ser kozi miękki",
+    "tagi": [
+      "nabial"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 264,
+    "bialko_100g": 18.5,
+    "tluszcz_100g": 21,
+    "wegle_100g": 0,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Ser Maasdamer",
+    "tagi": [
+      "nabial"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 200,
+    "kcal_100g": 353,
+    "bialko_100g": 28,
+    "tluszcz_100g": 26.7,
+    "wegle_100g": 0.1,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0.1,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Ser maślany",
+    "tagi": [
+      "nabial"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 300,
+    "kcal_100g": 355,
+    "bialko_100g": 22,
+    "tluszcz_100g": 29.5,
+    "wegle_100g": 0.1,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0.1,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Ser mozzarella",
+    "tagi": [
+      "nabial"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 304,
+    "bialko_100g": 23.6,
+    "tluszcz_100g": 19.7,
+    "wegle_100g": 8.06,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 2.24,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Ser ricotta",
+    "tagi": [
+      "nabial"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 174,
+    "bialko_100g": 11.3,
+    "tluszcz_100g": 13,
+    "wegle_100g": 3,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0.3,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Ser salami",
+    "tagi": [
+      "nabial"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 150,
+    "kcal_100g": 340,
+    "bialko_100g": 25,
+    "tluszcz_100g": 27,
+    "wegle_100g": 0.5,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0.5,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Ser tylżycki",
+    "tagi": [
+      "nabial"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 300,
+    "kcal_100g": 345,
+    "bialko_100g": 25,
+    "tluszcz_100g": 27,
+    "wegle_100g": 0.1,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0.1,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Serek wiejski naturalny",
+    "tagi": [
+      "nabial"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 82,
+    "bialko_100g": 11.1,
+    "tluszcz_100g": 2.3,
+    "wegle_100g": 3.4,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 2.7,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Sezam",
+    "tagi": [
+      "nasiona"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 9,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 573,
+    "bialko_100g": 17.7,
+    "tluszcz_100g": 49.7,
+    "wegle_100g": 23.4,
+    "blonnik_100g": 11.8,
+    "cukry_ogolem_100g": 0.3,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Shiitake, surowe",
+    "tagi": [
+      "warzywo",
+      "grzyby"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 34,
+    "bialko_100g": 2.24,
+    "tluszcz_100g": 0.49,
+    "wegle_100g": 6.79,
+    "blonnik_100g": 2.5,
+    "cukry_ogolem_100g": 2.38,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Siemię lniane",
+    "tagi": [
+      "nasiona"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 10,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 534,
+    "bialko_100g": 18.3,
+    "tluszcz_100g": 42.2,
+    "wegle_100g": 28.9,
+    "blonnik_100g": 27.3,
+    "cukry_ogolem_100g": 1.55,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Skyr naturalny",
+    "tagi": [
+      "nabial"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 63,
+    "bialko_100g": 11,
+    "tluszcz_100g": 0.2,
+    "wegle_100g": 4,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 4,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Śledź atlantycki, surowy",
+    "tagi": [
+      "ryba"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 158,
+    "bialko_100g": 18,
+    "tluszcz_100g": 9,
+    "wegle_100g": 0,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Śliwki",
+    "tagi": [
+      "owoc"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 70,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 46,
+    "bialko_100g": 0.7,
+    "tluszcz_100g": 0.28,
+    "wegle_100g": 11.42,
+    "blonnik_100g": 1.4,
+    "cukry_ogolem_100g": 9.92,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "śmietana 18% kwaśna",
+    "tagi": [],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 20,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 189,
+    "bialko_100g": 3,
+    "tluszcz_100g": 18,
+    "wegle_100g": 4,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Soczewica brązowa, sucha",
+    "tagi": [
+      "straczki"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 352,
+    "bialko_100g": 24.6,
+    "tluszcz_100g": 1.06,
+    "wegle_100g": 63.4,
+    "blonnik_100g": 10.7,
+    "cukry_ogolem_100g": 2.03,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Soczewica czerwona, sucha",
+    "tagi": [
+      "straczki"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 352,
+    "bialko_100g": 24.6,
+    "tluszcz_100g": 1.06,
+    "wegle_100g": 63.4,
+    "blonnik_100g": 10.7,
+    "cukry_ogolem_100g": 2.03,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Soczewica zielona, sucha",
+    "tagi": [
+      "straczki"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 352,
+    "bialko_100g": 24.6,
+    "tluszcz_100g": 1.06,
+    "wegle_100g": 63.4,
+    "blonnik_100g": 10.7,
+    "cukry_ogolem_100g": 2.03,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Soja, nasiona suche",
+    "tagi": [
+      "straczki"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 446,
+    "bialko_100g": 36.5,
+    "tluszcz_100g": 19.9,
+    "wegle_100g": 30.2,
+    "blonnik_100g": 9.3,
+    "cukry_ogolem_100g": 7.3,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "sól kłodawska",
+    "tagi": [],
+    "rola": "doprawienie",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 0,
+    "bialko_100g": 0,
+    "tluszcz_100g": 0,
+    "wegle_100g": 0,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 2,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Sól kuchenna",
+    "tagi": [
+      "przyprawa"
+    ],
+    "rola": "doprawienie",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 0,
+    "bialko_100g": 0,
+    "tluszcz_100g": 0,
+    "wegle_100g": 0,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 2,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Sos rybny",
+    "tagi": [
+      "przyprawa"
+    ],
+    "rola": "doprawienie",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 18,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 35,
+    "bialko_100g": 5.06,
+    "tluszcz_100g": 0.01,
+    "wegle_100g": 3.64,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 3.64,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Sos sojowy",
+    "tagi": [
+      "przyprawa"
+    ],
+    "rola": "doprawienie",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 16,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 53,
+    "bialko_100g": 8.14,
+    "tluszcz_100g": 0.57,
+    "wegle_100g": 4.93,
+    "blonnik_100g": 0.8,
+    "cukry_ogolem_100g": 0.4,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Szalotka, surowa",
+    "tagi": [
+      "warzywo"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 35,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 72,
+    "bialko_100g": 2.5,
+    "tluszcz_100g": 0.1,
+    "wegle_100g": 16.8,
+    "blonnik_100g": 3.2,
+    "cukry_ogolem_100g": 7.87,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Szczypiorek świeży",
+    "tagi": [
+      "warzywo",
+      "przyprawa"
+    ],
+    "rola": "do_smaku",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 30,
+    "bialko_100g": 3.27,
+    "tluszcz_100g": 0.73,
+    "wegle_100g": 4.35,
+    "blonnik_100g": 2.5,
+    "cukry_ogolem_100g": 1.85,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Szparagi, surowe",
+    "tagi": [
+      "warzywo"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 20,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 20,
+    "bialko_100g": 2.2,
+    "tluszcz_100g": 0.12,
+    "wegle_100g": 3.88,
+    "blonnik_100g": 2.1,
+    "cukry_ogolem_100g": 1.88,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Szpinak mrożony",
+    "tagi": [
+      "warzywo"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 29,
+    "bialko_100g": 3.63,
+    "tluszcz_100g": 0.87,
+    "wegle_100g": 4.19,
+    "blonnik_100g": 2.9,
+    "cukry_ogolem_100g": 0.45,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Szpinak, surowy",
+    "tagi": [
+      "warzywo"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 23,
+    "bialko_100g": 2.86,
+    "tluszcz_100g": 0.39,
+    "wegle_100g": 3.63,
+    "blonnik_100g": 2.2,
+    "cukry_ogolem_100g": 0.42,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Szynka wieprzowa chuda, surowa",
+    "tagi": [
+      "mieso"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 136,
+    "bialko_100g": 20.9,
+    "tluszcz_100g": 5.4,
+    "wegle_100g": 0,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Tajska Żółta Lekko Ostra Pasta Curry Yellow Curry Paste Mild 400g MAE PLOY",
+    "tagi": [],
+    "rola": "aromat",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 400,
+    "gramatura_opakowania_g": 400,
+    "kcal_100g": 135,
+    "bialko_100g": 5.3,
+    "tluszcz_100g": 1.9,
+    "wegle_100g": 22.7,
+    "blonnik_100g": 11.9,
+    "cukry_ogolem_100g": 5.6,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Tofu naturalne",
+    "tagi": [
+      "straczki",
+      "roslinne"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 76,
+    "bialko_100g": 8.1,
+    "tluszcz_100g": 4.8,
+    "wegle_100g": 1.9,
+    "blonnik_100g": 0.3,
+    "cukry_ogolem_100g": 0.6,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Tortilla pełnoziarnista",
+    "tagi": [],
+    "rola": "baza",
+    "mozna_dzielic": false,
+    "masa_sztuki_g": 60,
+    "gramatura_opakowania_g": 360,
+    "kcal_100g": 310,
+    "bialko_100g": 9,
+    "tluszcz_100g": 7.5,
+    "wegle_100g": 50,
+    "blonnik_100g": 7,
+    "cukry_ogolem_100g": 3,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Truskawki",
+    "tagi": [
+      "owoc"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 32,
+    "bialko_100g": 0.67,
+    "tluszcz_100g": 0.3,
+    "wegle_100g": 7.68,
+    "blonnik_100g": 2,
+    "cukry_ogolem_100g": 4.89,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Tuńczyk świeży, surowy",
+    "tagi": [
+      "ryba"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 144,
+    "bialko_100g": 23.3,
+    "tluszcz_100g": 4.9,
+    "wegle_100g": 0,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Tuńczyk w wodzie, odsączony",
+    "tagi": [
+      "ryba"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 140,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 116,
+    "bialko_100g": 25.5,
+    "tluszcz_100g": 0.82,
+    "wegle_100g": 0,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Twaróg chudy",
+    "tagi": [
+      "nabial"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 99,
+    "bialko_100g": 19.8,
+    "tluszcz_100g": 0.5,
+    "wegle_100g": 3.5,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 3.5,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Twaróg półtłusty",
+    "tagi": [
+      "nabial"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 133,
+    "bialko_100g": 18.7,
+    "tluszcz_100g": 4.7,
+    "wegle_100g": 3.5,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 3.5,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Twaróg tłusty",
+    "tagi": [
+      "nabial"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 175,
+    "bialko_100g": 17.7,
+    "tluszcz_100g": 10,
+    "wegle_100g": 3.5,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 3.5,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Tymianek suszony",
+    "tagi": [
+      "przyprawa"
+    ],
+    "rola": "doprawienie",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 276,
+    "bialko_100g": 9.11,
+    "tluszcz_100g": 7.43,
+    "wegle_100g": 63.9,
+    "blonnik_100g": 37,
+    "cukry_ogolem_100g": 1.71,
+    "cukry_wolne_100g": 0,
+    "nova": 2,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Tymianek świeży",
+    "tagi": [
+      "ziola"
+    ],
+    "rola": "doprawienie",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 101,
+    "bialko_100g": 5.56,
+    "tluszcz_100g": 1.68,
+    "wegle_100g": 24.5,
+    "blonnik_100g": 14,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Udo z kurczaka bez skóry, surowe",
+    "tagi": [
+      "mieso",
+      "drob"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 110,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 121,
+    "bialko_100g": 19.7,
+    "tluszcz_100g": 4.12,
+    "wegle_100g": 0,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Wieprzowina, karkówka surowa",
+    "tagi": [
+      "mieso"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 267,
+    "bialko_100g": 17,
+    "tluszcz_100g": 22,
+    "wegle_100g": 0,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Wieprzowina, łopatka surowa",
+    "tagi": [
+      "mieso"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 186,
+    "bialko_100g": 17.4,
+    "tluszcz_100g": 12.4,
+    "wegle_100g": 0,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Winogrona",
+    "tagi": [
+      "owoc"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 5,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 69,
+    "bialko_100g": 0.72,
+    "tluszcz_100g": 0.16,
+    "wegle_100g": 18.1,
+    "blonnik_100g": 0.9,
+    "cukry_ogolem_100g": 15.48,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Wiśnie",
+    "tagi": [
+      "owoc"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 7,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 50,
+    "bialko_100g": 1,
+    "tluszcz_100g": 0.3,
+    "wegle_100g": 12.18,
+    "blonnik_100g": 1.6,
+    "cukry_ogolem_100g": 8.49,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "woda",
+    "tagi": [],
+    "rola": "duszenie",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 0,
+    "bialko_100g": 0,
+    "tluszcz_100g": 0,
+    "wegle_100g": 0,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Wołowina mielona 5% tłuszczu, surowa",
+    "tagi": [
+      "mieso"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 137,
+    "bialko_100g": 21.4,
+    "tluszcz_100g": 5,
+    "wegle_100g": 0,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "Wołowina na plastry (udziec), surowa",
+    "tagi": [
+      "mieso"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 133,
+    "bialko_100g": 22.4,
+    "tluszcz_100g": 4,
+    "wegle_100g": 0,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Wołowina, antrykot surowy",
+    "tagi": [
+      "mieso"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 190,
+    "bialko_100g": 20.5,
+    "tluszcz_100g": 12,
+    "wegle_100g": 0,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Wołowina, rostbef surowy",
+    "tagi": [
+      "mieso"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 166,
+    "bialko_100g": 22.8,
+    "tluszcz_100g": 7.3,
+    "wegle_100g": 0,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Wołowina, wątróbka surowa",
+    "tagi": [
+      "mieso",
+      "podroby"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 135,
+    "bialko_100g": 20.4,
+    "tluszcz_100g": 3.6,
+    "wegle_100g": 3.9,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  },
+  {
+    "nazwa": "żeberka wieprzowe",
+    "tagi": [
+      "mieso"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 244,
+    "bialko_100g": 19.1,
+    "tluszcz_100g": 16.3,
+    "wegle_100g": 0,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "ziele angielskie",
+    "tagi": [],
+    "rola": "aromat",
+    "mozna_dzielic": false,
+    "masa_sztuki_g": 0.1,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 263,
+    "bialko_100g": 6.1,
+    "tluszcz_100g": 8.7,
+    "wegle_100g": 72,
+    "blonnik_100g": 21.6,
+    "cukry_ogolem_100g": 0,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "wlasne"
+  },
+  {
+    "nazwa": "Ziemniaki, surowe",
+    "tagi": [
+      "warzywo"
+    ],
+    "rola": "baza",
+    "mozna_dzielic": true,
+    "masa_sztuki_g": 120,
+    "gramatura_opakowania_g": 1,
+    "kcal_100g": 77,
+    "bialko_100g": 2.05,
+    "tluszcz_100g": 0.09,
+    "wegle_100g": 17.5,
+    "blonnik_100g": 2.1,
+    "cukry_ogolem_100g": 0.82,
+    "cukry_wolne_100g": 0,
+    "nova": 1,
+    "zrodlo": "usda"
+  }
+]

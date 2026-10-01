@@ -5,8 +5,8 @@
 --  w narzedzia/przepisy-ai/. Nie poprawiaj go ręcznie — poprawiaj JSON
 --  i generuj ponownie.
 --
---  Przepisów w tym pliku: 89
---  Wygenerowano: 2026-09-27
+--  Przepisów w tym pliku: 90
+--  Wygenerowano: 2026-10-01
 --
 --  Skrypt najpierw sprawdza katalogi składników i sprzętu. Jeśli czegoś
 --  brakuje, kończy się błędem „IMPORT PRZERWANY — …” z listą braków
@@ -34,7 +34,7 @@ with
     ('Chili sin carne z czarną fasolą', 'Kmin rzymski mielony', false),
     ('Chili sin carne z czarną fasolą', 'Papryka wędzona mielona', false),
     ('Chili sin carne z czarną fasolą', 'Chili suszone', false),
-    ('Chili sin carne z czarną fasolą', 'Sól kuchenna', false),
+    ('Chili sin carne z czarną fasolą', 'sól kłodawska', false),
     ('Curry z ciecierzycy, pomidorów i szpinaku', 'Ciecierzyca z puszki, odsączona', false),
     ('Curry z ciecierzycy, pomidorów i szpinaku', 'Szpinak, surowy', false),
     ('Curry z ciecierzycy, pomidorów i szpinaku', 'Pomidory krojone z puszki', false),
@@ -45,7 +45,7 @@ with
     ('Curry z ciecierzycy, pomidorów i szpinaku', 'Olej rzepakowy', false),
     ('Curry z ciecierzycy, pomidorów i szpinaku', 'Garam masala', false),
     ('Curry z ciecierzycy, pomidorów i szpinaku', 'Kmin rzymski mielony', false),
-    ('Curry z ciecierzycy, pomidorów i szpinaku', 'Sól kuchenna', false),
+    ('Curry z ciecierzycy, pomidorów i szpinaku', 'sól kłodawska', false),
     ('Curry z ciecierzycy, pomidorów i szpinaku', 'Cytryna', false),
     ('Curry z czerwonej soczewicy i szpinaku', 'Soczewica czerwona, sucha', false),
     ('Curry z czerwonej soczewicy i szpinaku', 'Szpinak, surowy', false),
@@ -57,7 +57,7 @@ with
     ('Curry z czerwonej soczewicy i szpinaku', 'Pasta curry czerwona', false),
     ('Curry z czerwonej soczewicy i szpinaku', 'Olej rzepakowy', false),
     ('Curry z czerwonej soczewicy i szpinaku', 'Kurkuma mielona', false),
-    ('Curry z czerwonej soczewicy i szpinaku', 'Sól kuchenna', false),
+    ('Curry z czerwonej soczewicy i szpinaku', 'sól kłodawska', false),
     ('Dorsz w kokosowym curry ze szpinakiem', 'Filet z dorsza atlantyckiego', false),
     ('Dorsz w kokosowym curry ze szpinakiem', 'Szpinak, surowy', false),
     ('Dorsz w kokosowym curry ze szpinakiem', 'Mleko kokosowe light z puszki', false),
@@ -69,7 +69,7 @@ with
     ('Dorsz w kokosowym curry ze szpinakiem', 'Czosnek, surowy', false),
     ('Dorsz w kokosowym curry ze szpinakiem', 'Olej rzepakowy', false),
     ('Dorsz w kokosowym curry ze szpinakiem', 'Limonka', false),
-    ('Dorsz w kokosowym curry ze szpinakiem', 'Sól kuchenna', false),
+    ('Dorsz w kokosowym curry ze szpinakiem', 'sól kłodawska', false),
     ('Grochówka z indykiem', 'Groch łuskany, suchy', false),
     ('Grochówka z indykiem', 'Pierś z indyka, surowa', false),
     ('Grochówka z indykiem', 'Ziemniaki, surowe', false),
@@ -82,7 +82,7 @@ with
     ('Grochówka z indykiem', 'Majeranek suszony', false),
     ('Grochówka z indykiem', 'liść laurowy', false),
     ('Grochówka z indykiem', 'ziele angielskie', false),
-    ('Grochówka z indykiem', 'Sól kuchenna', false),
+    ('Grochówka z indykiem', 'sól kłodawska', false),
     ('Grochówka z indykiem', 'Czarny pieprz mielony', false),
     ('Gulasz jagnięcy z ciecierzycą i pomidorami', 'Jagnięcina, udziec surowy', false),
     ('Gulasz jagnięcy z ciecierzycą i pomidorami', 'Ciecierzyca z puszki, odsączona', false),
@@ -96,7 +96,7 @@ with
     ('Gulasz jagnięcy z ciecierzycą i pomidorami', 'Kmin rzymski mielony', false),
     ('Gulasz jagnięcy z ciecierzycą i pomidorami', 'Cynamon mielony', false),
     ('Gulasz jagnięcy z ciecierzycą i pomidorami', 'Papryka słodka mielona', false),
-    ('Gulasz jagnięcy z ciecierzycą i pomidorami', 'Sól kuchenna', false),
+    ('Gulasz jagnięcy z ciecierzycą i pomidorami', 'sól kłodawska', false),
     ('Gulasz wołowy z warzywami korzeniowymi', 'Pręga wołowa bez kości, surowa', false),
     ('Gulasz wołowy z warzywami korzeniowymi', 'Ziemniaki, surowe', false),
     ('Gulasz wołowy z warzywami korzeniowymi', 'Marchew, surowa', false),
@@ -110,7 +110,7 @@ with
     ('Gulasz wołowy z warzywami korzeniowymi', 'Papryka słodka mielona', false),
     ('Gulasz wołowy z warzywami korzeniowymi', 'Majeranek suszony', false),
     ('Gulasz wołowy z warzywami korzeniowymi', 'liść laurowy', false),
-    ('Gulasz wołowy z warzywami korzeniowymi', 'Sól kuchenna', false),
+    ('Gulasz wołowy z warzywami korzeniowymi', 'sól kłodawska', false),
     ('Gulasz wołowy z warzywami korzeniowymi', 'Czarny pieprz mielony', false),
     ('Gulasz z białej fasoli, jarmużu i pomidorów', 'Fasola biała z puszki, odsączona', false),
     ('Gulasz z białej fasoli, jarmużu i pomidorów', 'Jarmuż, surowy', false),
@@ -123,7 +123,7 @@ with
     ('Gulasz z białej fasoli, jarmużu i pomidorów', 'Chleb żytni razowy', true),
     ('Gulasz z białej fasoli, jarmużu i pomidorów', 'Tymianek suszony', false),
     ('Gulasz z białej fasoli, jarmużu i pomidorów', 'Papryka wędzona mielona', false),
-    ('Gulasz z białej fasoli, jarmużu i pomidorów', 'Sól kuchenna', false),
+    ('Gulasz z białej fasoli, jarmużu i pomidorów', 'sól kłodawska', false),
     ('Gulasz z białej fasoli, jarmużu i pomidorów', 'Czarny pieprz mielony', false),
     ('Jaglanka z gruszką i orzechami', 'Kasza jaglana, sucha', false),
     ('Jaglanka z gruszką i orzechami', 'Mleko 2%', false),
@@ -131,20 +131,20 @@ with
     ('Jaglanka z gruszką i orzechami', 'Orzechy włoskie', false),
     ('Jaglanka z gruszką i orzechami', 'Cynamon mielony', false),
     ('Jaglanka z gruszką i orzechami', 'Miód', false),
-    ('Jaglanka z gruszką i orzechami', 'Sól kuchenna', false),
+    ('Jaglanka z gruszką i orzechami', 'sól kłodawska', false),
     ('Jajecznica z pomidorem i szczypiorkiem', 'Jaja kurze, całe, surowe', true),
     ('Jajecznica z pomidorem i szczypiorkiem', 'Pomidory, surowe', true),
     ('Jajecznica z pomidorem i szczypiorkiem', 'Szczypiorek świeży', false),
     ('Jajecznica z pomidorem i szczypiorkiem', 'Masło', false),
     ('Jajecznica z pomidorem i szczypiorkiem', 'Chleb żytni razowy', true),
-    ('Jajecznica z pomidorem i szczypiorkiem', 'Sól kuchenna', false),
+    ('Jajecznica z pomidorem i szczypiorkiem', 'sól kłodawska', false),
     ('Jajecznica z pomidorem i szczypiorkiem', 'Czarny pieprz mielony', false),
     ('Jajka na miękko z pieczywem i warzywami', 'Jaja kurze, całe, surowe', true),
     ('Jajka na miękko z pieczywem i warzywami', 'Chleb żytni razowy', true),
     ('Jajka na miękko z pieczywem i warzywami', 'Masło', false),
     ('Jajka na miękko z pieczywem i warzywami', 'Pomidory, surowe', true),
     ('Jajka na miękko z pieczywem i warzywami', 'Ogórek, surowy', true),
-    ('Jajka na miękko z pieczywem i warzywami', 'Sól kuchenna', false),
+    ('Jajka na miękko z pieczywem i warzywami', 'sól kłodawska', false),
     ('Jajka na miękko z pieczywem i warzywami', 'Czarny pieprz mielony', false),
     ('Kanapki z Goudą, jajkiem i szczypiorkiem', 'Chleb żytni razowy', true),
     ('Kanapki z Goudą, jajkiem i szczypiorkiem', 'Ser Gouda', false),
@@ -171,28 +171,28 @@ with
     ('Kanapki z jajkiem, awokado i pomidorem', 'Jaja kurze, całe, surowe', true),
     ('Kanapki z jajkiem, awokado i pomidorem', 'Awokado', true),
     ('Kanapki z jajkiem, awokado i pomidorem', 'Pomidory, surowe', true),
-    ('Kanapki z jajkiem, awokado i pomidorem', 'Sól kuchenna', false),
+    ('Kanapki z jajkiem, awokado i pomidorem', 'sól kłodawska', false),
     ('Kanapki z jajkiem, awokado i pomidorem', 'Czarny pieprz mielony', false),
     ('Kanapki z mozzarellą, pomidorem i bazylią', 'Chleb żytni razowy', true),
     ('Kanapki z mozzarellą, pomidorem i bazylią', 'Ser mozzarella', false),
     ('Kanapki z mozzarellą, pomidorem i bazylią', 'Pomidory, surowe', true),
     ('Kanapki z mozzarellą, pomidorem i bazylią', 'Bazylia świeża', false),
     ('Kanapki z mozzarellą, pomidorem i bazylią', 'Oliwa z oliwek', false),
-    ('Kanapki z mozzarellą, pomidorem i bazylią', 'Sól kuchenna', false),
+    ('Kanapki z mozzarellą, pomidorem i bazylią', 'sól kłodawska', false),
     ('Kanapki z mozzarellą, pomidorem i bazylią', 'Czarny pieprz mielony', false),
     ('Kanapki z pastą jajeczną', 'Jaja kurze, całe, surowe', true),
     ('Kanapki z pastą jajeczną', 'Chleb żytni razowy', true),
     ('Kanapki z pastą jajeczną', 'Jogurt grecki naturalny 2%', false),
     ('Kanapki z pastą jajeczną', 'Musztarda', false),
     ('Kanapki z pastą jajeczną', 'Szczypiorek świeży', false),
-    ('Kanapki z pastą jajeczną', 'Sól kuchenna', false),
+    ('Kanapki z pastą jajeczną', 'sól kłodawska', false),
     ('Kanapki z pastą jajeczną', 'Czarny pieprz mielony', false),
     ('Kanapki z ricottą, rzodkiewką i szczypiorkiem', 'Chleb żytni razowy', true),
     ('Kanapki z ricottą, rzodkiewką i szczypiorkiem', 'Ser ricotta', false),
     ('Kanapki z ricottą, rzodkiewką i szczypiorkiem', 'Rzodkiewka, surowa', true),
     ('Kanapki z ricottą, rzodkiewką i szczypiorkiem', 'Szczypiorek świeży', false),
     ('Kanapki z ricottą, rzodkiewką i szczypiorkiem', 'Jogurt naturalny 2%', false),
-    ('Kanapki z ricottą, rzodkiewką i szczypiorkiem', 'Sól kuchenna', false),
+    ('Kanapki z ricottą, rzodkiewką i szczypiorkiem', 'sól kłodawska', false),
     ('Kanapki z ricottą, rzodkiewką i szczypiorkiem', 'Czarny pieprz mielony', false),
     ('Kanapki z sardynkami, pomidorem i rukolą', 'Sardynki w oliwie, odsączone', false),
     ('Kanapki z sardynkami, pomidorem i rukolą', 'Chleb żytni razowy', true),
@@ -218,7 +218,7 @@ with
     ('Kałamarnica z papryką i ryżem', 'Papryka wędzona mielona', false),
     ('Kałamarnica z papryką i ryżem', 'Cytryna', false),
     ('Kałamarnica z papryką i ryżem', 'Pietruszka natka', false),
-    ('Kałamarnica z papryką i ryżem', 'Sól kuchenna', false),
+    ('Kałamarnica z papryką i ryżem', 'sól kłodawska', false),
     ('Klopsiki z indyka w sosie pomidorowym z bulgurem', 'Mięso mielone z indyka, surowe', false),
     ('Klopsiki z indyka w sosie pomidorowym z bulgurem', 'Bułka tarta', false),
     ('Klopsiki z indyka w sosie pomidorowym z bulgurem', 'Jaja kurze, całe, surowe', true),
@@ -229,7 +229,7 @@ with
     ('Klopsiki z indyka w sosie pomidorowym z bulgurem', 'Olej rzepakowy', false),
     ('Klopsiki z indyka w sosie pomidorowym z bulgurem', 'Oregano suszone', false),
     ('Klopsiki z indyka w sosie pomidorowym z bulgurem', 'Papryka słodka mielona', false),
-    ('Klopsiki z indyka w sosie pomidorowym z bulgurem', 'Sól kuchenna', false),
+    ('Klopsiki z indyka w sosie pomidorowym z bulgurem', 'sól kłodawska', false),
     ('Klopsiki z indyka w sosie pomidorowym z bulgurem', 'Czarny pieprz mielony', false),
     ('Komosa ryżowa z ciecierzycą i pieczonymi warzywami', 'Komosa ryżowa, sucha', false),
     ('Komosa ryżowa z ciecierzycą i pieczonymi warzywami', 'Ciecierzyca z puszki, odsączona', false),
@@ -241,7 +241,7 @@ with
     ('Komosa ryżowa z ciecierzycą i pieczonymi warzywami', 'Cytryna', false),
     ('Komosa ryżowa z ciecierzycą i pieczonymi warzywami', 'Pietruszka natka', false),
     ('Komosa ryżowa z ciecierzycą i pieczonymi warzywami', 'Oregano suszone', false),
-    ('Komosa ryżowa z ciecierzycą i pieczonymi warzywami', 'Sól kuchenna', false),
+    ('Komosa ryżowa z ciecierzycą i pieczonymi warzywami', 'sól kłodawska', false),
     ('Komosa ryżowa z ciecierzycą i pieczonymi warzywami', 'Czarny pieprz mielony', false),
     ('Kotleciki z czerwonej soczewicy z sosem jogurtowym', 'Soczewica czerwona, sucha', false),
     ('Kotleciki z czerwonej soczewicy z sosem jogurtowym', 'Płatki owsiane', false),
@@ -254,7 +254,7 @@ with
     ('Kotleciki z czerwonej soczewicy z sosem jogurtowym', 'Jogurt grecki naturalny 2%', false),
     ('Kotleciki z czerwonej soczewicy z sosem jogurtowym', 'Ogórek, surowy', false),
     ('Kotleciki z czerwonej soczewicy z sosem jogurtowym', 'Cytryna', false),
-    ('Kotleciki z czerwonej soczewicy z sosem jogurtowym', 'Sól kuchenna', false),
+    ('Kotleciki z czerwonej soczewicy z sosem jogurtowym', 'sól kłodawska', false),
     ('Kotleciki z czerwonej soczewicy z sosem jogurtowym', 'Czarny pieprz mielony', false),
     ('Krem z brokułów z fetą', 'Brokuł, surowy', false),
     ('Krem z brokułów z fetą', 'Ziemniaki, surowe', false),
@@ -279,7 +279,7 @@ with
     ('Krem z dyni na mleku kokosowym', 'Pasta curry czerwona', false),
     ('Krem z dyni na mleku kokosowym', 'Olej rzepakowy', false),
     ('Krem z dyni na mleku kokosowym', 'Limonka', false),
-    ('Krem z dyni na mleku kokosowym', 'Sól kuchenna', false),
+    ('Krem z dyni na mleku kokosowym', 'sól kłodawska', false),
     ('Krem z kalafiora z pieczoną ciecierzycą', 'Kalafior, surowy', false),
     ('Krem z kalafiora z pieczoną ciecierzycą', 'Ziemniaki, surowe', false),
     ('Krem z kalafiora z pieczoną ciecierzycą', 'Ciecierzyca z puszki, odsączona', false),
@@ -290,7 +290,7 @@ with
     ('Krem z kalafiora z pieczoną ciecierzycą', 'Chleb żytni razowy', true),
     ('Krem z kalafiora z pieczoną ciecierzycą', 'Kmin rzymski mielony', false),
     ('Krem z kalafiora z pieczoną ciecierzycą', 'Papryka wędzona mielona', false),
-    ('Krem z kalafiora z pieczoną ciecierzycą', 'Sól kuchenna', false),
+    ('Krem z kalafiora z pieczoną ciecierzycą', 'sól kłodawska', false),
     ('Krem z kalafiora z pieczoną ciecierzycą', 'Czarny pieprz mielony', false),
     ('Krewetki z czosnkiem, cukinią i ryżem', 'Krewetki, surowe', false),
     ('Krewetki z czosnkiem, cukinią i ryżem', 'Cukinia, surowa', false),
@@ -300,7 +300,7 @@ with
     ('Krewetki z czosnkiem, cukinią i ryżem', 'Cytryna', false),
     ('Krewetki z czosnkiem, cukinią i ryżem', 'Pietruszka natka', false),
     ('Krewetki z czosnkiem, cukinią i ryżem', 'Chili suszone', false),
-    ('Krewetki z czosnkiem, cukinią i ryżem', 'Sól kuchenna', false),
+    ('Krewetki z czosnkiem, cukinią i ryżem', 'sól kłodawska', false),
     ('Królik z rozmarynem i warzywami korzeniowymi', 'Królik, mięso surowe', false),
     ('Królik z rozmarynem i warzywami korzeniowymi', 'Ziemniaki, surowe', false),
     ('Królik z rozmarynem i warzywami korzeniowymi', 'Marchew, surowa', false),
@@ -311,7 +311,7 @@ with
     ('Królik z rozmarynem i warzywami korzeniowymi', 'Oliwa z oliwek', false),
     ('Królik z rozmarynem i warzywami korzeniowymi', 'Czosnek, surowy', false),
     ('Królik z rozmarynem i warzywami korzeniowymi', 'Rozmaryn świeży', false),
-    ('Królik z rozmarynem i warzywami korzeniowymi', 'Sól kuchenna', false),
+    ('Królik z rozmarynem i warzywami korzeniowymi', 'sól kłodawska', false),
     ('Królik z rozmarynem i warzywami korzeniowymi', 'Czarny pieprz mielony', false),
     ('Kurczak pieczony z batatem i brokułem', 'Pierś z kurczaka, surowa', false),
     ('Kurczak pieczony z batatem i brokułem', 'Batat, surowy', false),
@@ -321,7 +321,7 @@ with
     ('Kurczak pieczony z batatem i brokułem', 'Papryka wędzona mielona', false),
     ('Kurczak pieczony z batatem i brokułem', 'Tymianek suszony', false),
     ('Kurczak pieczony z batatem i brokułem', 'Czosnek, surowy', false),
-    ('Kurczak pieczony z batatem i brokułem', 'Sól kuchenna', false),
+    ('Kurczak pieczony z batatem i brokułem', 'sól kłodawska', false),
     ('Kurczak pieczony z batatem i brokułem', 'Czarny pieprz mielony', false),
     ('Makaron pełnoziarnisty z bolońskim sosem z soczewicy', 'Makaron pełnoziarnisty, suchy', false),
     ('Makaron pełnoziarnisty z bolońskim sosem z soczewicy', 'Soczewica czerwona, sucha', false),
@@ -334,7 +334,7 @@ with
     ('Makaron pełnoziarnisty z bolońskim sosem z soczewicy', 'Oregano suszone', false),
     ('Makaron pełnoziarnisty z bolońskim sosem z soczewicy', 'Bazylia suszona', false),
     ('Makaron pełnoziarnisty z bolońskim sosem z soczewicy', 'Papryka słodka mielona', false),
-    ('Makaron pełnoziarnisty z bolońskim sosem z soczewicy', 'Sól kuchenna', false),
+    ('Makaron pełnoziarnisty z bolońskim sosem z soczewicy', 'sól kłodawska', false),
     ('Makaron pełnoziarnisty z bolońskim sosem z soczewicy', 'Czarny pieprz mielony', false),
     ('Makaron z brokułem i fetą', 'Makaron pełnoziarnisty, suchy', false),
     ('Makaron z brokułem i fetą', 'Brokuł, surowy', false),
@@ -352,7 +352,7 @@ with
     ('Makaron z ciecierzycą, bazylią i orzechami', 'Czosnek, surowy', false),
     ('Makaron z ciecierzycą, bazylią i orzechami', 'Cytryna', false),
     ('Makaron z ciecierzycą, bazylią i orzechami', 'Pomidory, surowe', false),
-    ('Makaron z ciecierzycą, bazylią i orzechami', 'Sól kuchenna', false),
+    ('Makaron z ciecierzycą, bazylią i orzechami', 'sól kłodawska', false),
     ('Makaron z ciecierzycą, bazylią i orzechami', 'Czarny pieprz mielony', false),
     ('Makaron z indykiem, pieczarkami i jogurtem', 'Makaron pełnoziarnisty, suchy', false),
     ('Makaron z indykiem, pieczarkami i jogurtem', 'Pierś z indyka, surowa', false),
@@ -362,7 +362,7 @@ with
     ('Makaron z indykiem, pieczarkami i jogurtem', 'Czosnek, surowy', false),
     ('Makaron z indykiem, pieczarkami i jogurtem', 'Olej rzepakowy', false),
     ('Makaron z indykiem, pieczarkami i jogurtem', 'Tymianek suszony', false),
-    ('Makaron z indykiem, pieczarkami i jogurtem', 'Sól kuchenna', false),
+    ('Makaron z indykiem, pieczarkami i jogurtem', 'sól kłodawska', false),
     ('Makaron z indykiem, pieczarkami i jogurtem', 'Czarny pieprz mielony', false),
     ('Makaron z kurczakiem, szpinakiem i pomidorami', 'Makaron pełnoziarnisty, suchy', false),
     ('Makaron z kurczakiem, szpinakiem i pomidorami', 'Pierś z kurczaka, surowa', false),
@@ -374,7 +374,7 @@ with
     ('Makaron z kurczakiem, szpinakiem i pomidorami', 'Oliwa z oliwek', false),
     ('Makaron z kurczakiem, szpinakiem i pomidorami', 'Oregano suszone', false),
     ('Makaron z kurczakiem, szpinakiem i pomidorami', 'Bazylia suszona', false),
-    ('Makaron z kurczakiem, szpinakiem i pomidorami', 'Sól kuchenna', false),
+    ('Makaron z kurczakiem, szpinakiem i pomidorami', 'sól kłodawska', false),
     ('Makaron z kurczakiem, szpinakiem i pomidorami', 'Czarny pieprz mielony', false),
     ('Makaron z pieczonymi warzywami i mozzarellą', 'Makaron pełnoziarnisty, suchy', false),
     ('Makaron z pieczonymi warzywami i mozzarellą', 'Ser mozzarella', false),
@@ -385,7 +385,7 @@ with
     ('Makaron z pieczonymi warzywami i mozzarellą', 'Oliwa z oliwek', false),
     ('Makaron z pieczonymi warzywami i mozzarellą', 'Oregano suszone', false),
     ('Makaron z pieczonymi warzywami i mozzarellą', 'Bazylia świeża', false),
-    ('Makaron z pieczonymi warzywami i mozzarellą', 'Sól kuchenna', false),
+    ('Makaron z pieczonymi warzywami i mozzarellą', 'sól kłodawska', false),
     ('Makaron z pieczonymi warzywami i mozzarellą', 'Czarny pieprz mielony', false),
     ('Makaron z polędwiczką i pieczarkami', 'Makaron pełnoziarnisty, suchy', false),
     ('Makaron z polędwiczką i pieczarkami', 'Polędwiczka wieprzowa, surowa', false),
@@ -396,7 +396,7 @@ with
     ('Makaron z polędwiczką i pieczarkami', 'Olej rzepakowy', false),
     ('Makaron z polędwiczką i pieczarkami', 'Musztarda', false),
     ('Makaron z polędwiczką i pieczarkami', 'Tymianek suszony', false),
-    ('Makaron z polędwiczką i pieczarkami', 'Sól kuchenna', false),
+    ('Makaron z polędwiczką i pieczarkami', 'sól kłodawska', false),
     ('Makaron z polędwiczką i pieczarkami', 'Czarny pieprz mielony', false),
     ('Makaron z ricottą i szpinakiem', 'Makaron pełnoziarnisty, suchy', false),
     ('Makaron z ricottą i szpinakiem', 'Ser ricotta', false),
@@ -405,7 +405,7 @@ with
     ('Makaron z ricottą i szpinakiem', 'Oliwa z oliwek', false),
     ('Makaron z ricottą i szpinakiem', 'Cytryna', false),
     ('Makaron z ricottą i szpinakiem', 'Gałka muszkatołowa mielona', false),
-    ('Makaron z ricottą i szpinakiem', 'Sól kuchenna', false),
+    ('Makaron z ricottą i szpinakiem', 'sól kłodawska', false),
     ('Makaron z ricottą i szpinakiem', 'Czarny pieprz mielony', false),
     ('Makaron z tuńczykiem, cytryną i natką pietruszki', 'Makaron pełnoziarnisty, suchy', false),
     ('Makaron z tuńczykiem, cytryną i natką pietruszki', 'Tuńczyk w wodzie, odsączony', false),
@@ -414,7 +414,7 @@ with
     ('Makaron z tuńczykiem, cytryną i natką pietruszki', 'Czosnek, surowy', false),
     ('Makaron z tuńczykiem, cytryną i natką pietruszki', 'Oliwa z oliwek', false),
     ('Makaron z tuńczykiem, cytryną i natką pietruszki', 'Chili suszone', false),
-    ('Makaron z tuńczykiem, cytryną i natką pietruszki', 'Sól kuchenna', false),
+    ('Makaron z tuńczykiem, cytryną i natką pietruszki', 'sól kłodawska', false),
     ('Makaron z tuńczykiem, cytryną i natką pietruszki', 'Czarny pieprz mielony', false),
     ('Makaron z wołowiną i sosem pomidorowym', 'Makaron pełnoziarnisty, suchy', false),
     ('Makaron z wołowiną i sosem pomidorowym', 'Wołowina mielona 5% tłuszczu, surowa', false),
@@ -425,7 +425,7 @@ with
     ('Makaron z wołowiną i sosem pomidorowym', 'Oliwa z oliwek', false),
     ('Makaron z wołowiną i sosem pomidorowym', 'Oregano suszone', false),
     ('Makaron z wołowiną i sosem pomidorowym', 'Bazylia suszona', false),
-    ('Makaron z wołowiną i sosem pomidorowym', 'Sól kuchenna', false),
+    ('Makaron z wołowiną i sosem pomidorowym', 'sól kłodawska', false),
     ('Makaron z wołowiną i sosem pomidorowym', 'Czarny pieprz mielony', false),
     ('Małże w pomidorowym bulionie', 'Małże, surowe', false),
     ('Małże w pomidorowym bulionie', 'Pomidory krojone z puszki', false),
@@ -446,7 +446,7 @@ with
     ('Morszczuk w sosie pomidorowym z ryżem', 'Papryka słodka mielona', false),
     ('Morszczuk w sosie pomidorowym z ryżem', 'Oregano suszone', false),
     ('Morszczuk w sosie pomidorowym z ryżem', 'Pietruszka natka', false),
-    ('Morszczuk w sosie pomidorowym z ryżem', 'Sól kuchenna', false),
+    ('Morszczuk w sosie pomidorowym z ryżem', 'sól kłodawska', false),
     ('Morszczuk w sosie pomidorowym z ryżem', 'Czarny pieprz mielony', false),
     ('Nocna owsianka z bananem i chia', 'Płatki owsiane', false),
     ('Nocna owsianka z bananem i chia', 'Mleko 2%', false),
@@ -466,14 +466,14 @@ with
     ('Omlet ze szpinakiem i fetą', 'Ser feta', false),
     ('Omlet ze szpinakiem i fetą', 'Olej rzepakowy', false),
     ('Omlet ze szpinakiem i fetą', 'Chleb żytni razowy', true),
-    ('Omlet ze szpinakiem i fetą', 'Sól kuchenna', false),
+    ('Omlet ze szpinakiem i fetą', 'sól kłodawska', false),
     ('Omlet ze szpinakiem i fetą', 'Czarny pieprz mielony', false),
     ('Owsianka z jabłkiem, cynamonem i orzechami', 'Płatki owsiane', false),
     ('Owsianka z jabłkiem, cynamonem i orzechami', 'Mleko 2%', false),
     ('Owsianka z jabłkiem, cynamonem i orzechami', 'Jabłko ze skórką', true),
     ('Owsianka z jabłkiem, cynamonem i orzechami', 'Cynamon mielony', false),
     ('Owsianka z jabłkiem, cynamonem i orzechami', 'Orzechy włoskie', false),
-    ('Owsianka z jabłkiem, cynamonem i orzechami', 'Sól kuchenna', false),
+    ('Owsianka z jabłkiem, cynamonem i orzechami', 'sól kłodawska', false),
     ('Papryka faszerowana soczewicą i kaszą bulgur', 'Papryka czerwona, surowa', true),
     ('Papryka faszerowana soczewicą i kaszą bulgur', 'Soczewica brązowa, sucha', false),
     ('Papryka faszerowana soczewicą i kaszą bulgur', 'Kasza bulgur, sucha', false),
@@ -483,7 +483,7 @@ with
     ('Papryka faszerowana soczewicą i kaszą bulgur', 'Oliwa z oliwek', false),
     ('Papryka faszerowana soczewicą i kaszą bulgur', 'Kmin rzymski mielony', false),
     ('Papryka faszerowana soczewicą i kaszą bulgur', 'Pietruszka natka', false),
-    ('Papryka faszerowana soczewicą i kaszą bulgur', 'Sól kuchenna', false),
+    ('Papryka faszerowana soczewicą i kaszą bulgur', 'sól kłodawska', false),
     ('Papryka faszerowana soczewicą i kaszą bulgur', 'Czarny pieprz mielony', false),
     ('Pełnoziarniste placuszki ze skyrem i owocami', 'Mąka orkiszowa pełnoziarnista', false),
     ('Pełnoziarniste placuszki ze skyrem i owocami', 'Jaja kurze, całe, surowe', true),
@@ -500,7 +500,7 @@ with
     ('Pieczona makrela z burakami i ziemniakami', 'Oliwa z oliwek', false),
     ('Pieczona makrela z burakami i ziemniakami', 'Cytryna', false),
     ('Pieczona makrela z burakami i ziemniakami', 'koperek świeży', false),
-    ('Pieczona makrela z burakami i ziemniakami', 'Sól kuchenna', false),
+    ('Pieczona makrela z burakami i ziemniakami', 'sól kłodawska', false),
     ('Pieczona makrela z burakami i ziemniakami', 'Czarny pieprz mielony', false),
     ('Pieczone warzywa korzeniowe z tymiankiem', 'Ziemniaki, surowe', false),
     ('Pieczone warzywa korzeniowe z tymiankiem', 'Buraki, surowe', false),
@@ -511,7 +511,7 @@ with
     ('Pieczone warzywa korzeniowe z tymiankiem', 'Oliwa z oliwek', false),
     ('Pieczone warzywa korzeniowe z tymiankiem', 'Tymianek suszony', false),
     ('Pieczone warzywa korzeniowe z tymiankiem', 'Rozmaryn suszony', false),
-    ('Pieczone warzywa korzeniowe z tymiankiem', 'Sól kuchenna', false),
+    ('Pieczone warzywa korzeniowe z tymiankiem', 'sól kłodawska', false),
     ('Pieczone warzywa korzeniowe z tymiankiem', 'Czarny pieprz mielony', false),
     ('Pieczony bakłażan z ciecierzycą i fetą', 'Bakłażan, surowy', false),
     ('Pieczony bakłażan z ciecierzycą i fetą', 'Ciecierzyca z puszki, odsączona', false),
@@ -522,7 +522,7 @@ with
     ('Pieczony bakłażan z ciecierzycą i fetą', 'Czosnek, surowy', false),
     ('Pieczony bakłażan z ciecierzycą i fetą', 'Oliwa z oliwek', false),
     ('Pieczony bakłażan z ciecierzycą i fetą', 'Oregano suszone', false),
-    ('Pieczony bakłażan z ciecierzycą i fetą', 'Sól kuchenna', false),
+    ('Pieczony bakłażan z ciecierzycą i fetą', 'sól kłodawska', false),
     ('Pieczony bakłażan z ciecierzycą i fetą', 'Czarny pieprz mielony', false),
     ('Pieczony kalafior z ziołowym sosem jogurtowym', 'Kalafior, surowy', false),
     ('Pieczony kalafior z ziołowym sosem jogurtowym', 'Jogurt grecki naturalny 2%', false),
@@ -532,7 +532,7 @@ with
     ('Pieczony kalafior z ziołowym sosem jogurtowym', 'Pietruszka natka', false),
     ('Pieczony kalafior z ziołowym sosem jogurtowym', 'Kmin rzymski mielony', false),
     ('Pieczony kalafior z ziołowym sosem jogurtowym', 'Papryka wędzona mielona', false),
-    ('Pieczony kalafior z ziołowym sosem jogurtowym', 'Sól kuchenna', false),
+    ('Pieczony kalafior z ziołowym sosem jogurtowym', 'sól kłodawska', false),
     ('Pieczony kalafior z ziołowym sosem jogurtowym', 'Czarny pieprz mielony', false),
     ('Pieczony łosoś z brokułem i ziemniakami', 'Łosoś dziki, surowy', false),
     ('Pieczony łosoś z brokułem i ziemniakami', 'Brokuł, surowy', false),
@@ -541,7 +541,7 @@ with
     ('Pieczony łosoś z brokułem i ziemniakami', 'Cytryna', false),
     ('Pieczony łosoś z brokułem i ziemniakami', 'Czosnek, surowy', false),
     ('Pieczony łosoś z brokułem i ziemniakami', 'Tymianek suszony', false),
-    ('Pieczony łosoś z brokułem i ziemniakami', 'Sól kuchenna', false),
+    ('Pieczony łosoś z brokułem i ziemniakami', 'sól kłodawska', false),
     ('Pieczony łosoś z brokułem i ziemniakami', 'Czarny pieprz mielony', false),
     ('Pierś z kaczki z pomarańczą i czerwoną kapustą', 'Kaczka, pierś bez skóry, surowa', false),
     ('Pierś z kaczki z pomarańczą i czerwoną kapustą', 'Kapusta czerwona, surowa', false),
@@ -553,7 +553,7 @@ with
     ('Pierś z kaczki z pomarańczą i czerwoną kapustą', 'Ocet jabłkowy', false),
     ('Pierś z kaczki z pomarańczą i czerwoną kapustą', 'Cynamon mielony', false),
     ('Pierś z kaczki z pomarańczą i czerwoną kapustą', 'Goździki suszone', false),
-    ('Pierś z kaczki z pomarańczą i czerwoną kapustą', 'Sól kuchenna', false),
+    ('Pierś z kaczki z pomarańczą i czerwoną kapustą', 'sól kłodawska', false),
     ('Pierś z kaczki z pomarańczą i czerwoną kapustą', 'Czarny pieprz mielony', false),
     ('Placuszki bananowo-owsiane', 'Banan', true),
     ('Placuszki bananowo-owsiane', 'Jaja kurze, całe, surowe', true),
@@ -571,7 +571,7 @@ with
     ('Polędwiczka w sosie musztardowym z kaszą bulgur', 'Domowy bulion warzywny', false),
     ('Polędwiczka w sosie musztardowym z kaszą bulgur', 'Olej rzepakowy', false),
     ('Polędwiczka w sosie musztardowym z kaszą bulgur', 'Tymianek suszony', false),
-    ('Polędwiczka w sosie musztardowym z kaszą bulgur', 'Sól kuchenna', false),
+    ('Polędwiczka w sosie musztardowym z kaszą bulgur', 'sól kłodawska', false),
     ('Polędwiczka w sosie musztardowym z kaszą bulgur', 'Czarny pieprz mielony', false),
     ('Potrawka z kurczaka, kaszy jęczmiennej i warzyw', 'Udo z kurczaka bez skóry, surowe', false),
     ('Potrawka z kurczaka, kaszy jęczmiennej i warzyw', 'Kasza jęczmienna, sucha', false),
@@ -582,7 +582,7 @@ with
     ('Potrawka z kurczaka, kaszy jęczmiennej i warzyw', 'Domowy bulion warzywny', false),
     ('Potrawka z kurczaka, kaszy jęczmiennej i warzyw', 'Olej rzepakowy', false),
     ('Potrawka z kurczaka, kaszy jęczmiennej i warzyw', 'Tymianek suszony', false),
-    ('Potrawka z kurczaka, kaszy jęczmiennej i warzyw', 'Sól kuchenna', false),
+    ('Potrawka z kurczaka, kaszy jęczmiennej i warzyw', 'sól kłodawska', false),
     ('Potrawka z kurczaka, kaszy jęczmiennej i warzyw', 'Czarny pieprz mielony', false),
     ('Pstrąg pieczony z warzywami korzeniowymi', 'Pstrąg tęczowy, surowy', false),
     ('Pstrąg pieczony z warzywami korzeniowymi', 'Ziemniaki, surowe', false),
@@ -592,7 +592,7 @@ with
     ('Pstrąg pieczony z warzywami korzeniowymi', 'Oliwa z oliwek', false),
     ('Pstrąg pieczony z warzywami korzeniowymi', 'Cytryna', false),
     ('Pstrąg pieczony z warzywami korzeniowymi', 'Rozmaryn suszony', false),
-    ('Pstrąg pieczony z warzywami korzeniowymi', 'Sól kuchenna', false),
+    ('Pstrąg pieczony z warzywami korzeniowymi', 'sól kłodawska', false),
     ('Pstrąg pieczony z warzywami korzeniowymi', 'Czarny pieprz mielony', false),
     ('Pudding chia z mango i mlekiem kokosowym', 'Nasiona chia', false),
     ('Pudding chia z mango i mlekiem kokosowym', 'Mleko kokosowe light z puszki', false),
@@ -607,7 +607,7 @@ with
     ('Ryż z pieczarkami, szpinakiem i parmezanem', 'Czosnek, surowy', false),
     ('Ryż z pieczarkami, szpinakiem i parmezanem', 'Domowy bulion warzywny', false),
     ('Ryż z pieczarkami, szpinakiem i parmezanem', 'Oliwa z oliwek', false),
-    ('Ryż z pieczarkami, szpinakiem i parmezanem', 'Sól kuchenna', false),
+    ('Ryż z pieczarkami, szpinakiem i parmezanem', 'sól kłodawska', false),
     ('Ryż z pieczarkami, szpinakiem i parmezanem', 'Czarny pieprz mielony', false),
     ('Sałatka brokułowa z jajkiem i sosem jogurtowym', 'Brokuł, surowy', false),
     ('Sałatka brokułowa z jajkiem i sosem jogurtowym', 'Jaja kurze, całe, surowe', true),
@@ -616,7 +616,7 @@ with
     ('Sałatka brokułowa z jajkiem i sosem jogurtowym', 'Cebula czerwona, surowa', false),
     ('Sałatka brokułowa z jajkiem i sosem jogurtowym', 'Musztarda', false),
     ('Sałatka brokułowa z jajkiem i sosem jogurtowym', 'Szczypiorek świeży', false),
-    ('Sałatka brokułowa z jajkiem i sosem jogurtowym', 'Sól kuchenna', false),
+    ('Sałatka brokułowa z jajkiem i sosem jogurtowym', 'sól kłodawska', false),
     ('Sałatka brokułowa z jajkiem i sosem jogurtowym', 'Czarny pieprz mielony', false),
     ('Sałatka makaronowa z mozzarellą i warzywami', 'Makaron pełnoziarnisty, suchy', false),
     ('Sałatka makaronowa z mozzarellą i warzywami', 'Ser mozzarella', false),
@@ -627,7 +627,7 @@ with
     ('Sałatka makaronowa z mozzarellą i warzywami', 'Oliwa z oliwek', false),
     ('Sałatka makaronowa z mozzarellą i warzywami', 'Bazylia świeża', false),
     ('Sałatka makaronowa z mozzarellą i warzywami', 'Cytryna', false),
-    ('Sałatka makaronowa z mozzarellą i warzywami', 'Sól kuchenna', false),
+    ('Sałatka makaronowa z mozzarellą i warzywami', 'sól kłodawska', false),
     ('Sałatka makaronowa z mozzarellą i warzywami', 'Czarny pieprz mielony', false),
     ('Sałatka makaronowa z tuńczykiem i warzywami', 'Makaron pełnoziarnisty, suchy', false),
     ('Sałatka makaronowa z tuńczykiem i warzywami', 'Tuńczyk w wodzie, odsączony', false),
@@ -637,7 +637,7 @@ with
     ('Sałatka makaronowa z tuńczykiem i warzywami', 'Jogurt grecki naturalny 2%', false),
     ('Sałatka makaronowa z tuńczykiem i warzywami', 'Musztarda', false),
     ('Sałatka makaronowa z tuńczykiem i warzywami', 'Szczypiorek świeży', false),
-    ('Sałatka makaronowa z tuńczykiem i warzywami', 'Sól kuchenna', false),
+    ('Sałatka makaronowa z tuńczykiem i warzywami', 'sól kłodawska', false),
     ('Sałatka makaronowa z tuńczykiem i warzywami', 'Czarny pieprz mielony', false),
     ('Sałatka z czarnej fasoli, kukurydzy i pomidora', 'Fasola czarna z puszki, odsączona', false),
     ('Sałatka z czarnej fasoli, kukurydzy i pomidora', 'Kukurydza konserwowa, odsączona', false),
@@ -649,14 +649,14 @@ with
     ('Sałatka z czarnej fasoli, kukurydzy i pomidora', 'Kolendra świeża', false),
     ('Sałatka z czarnej fasoli, kukurydzy i pomidora', 'Oliwa z oliwek', false),
     ('Sałatka z czarnej fasoli, kukurydzy i pomidora', 'Kmin rzymski mielony', false),
-    ('Sałatka z czarnej fasoli, kukurydzy i pomidora', 'Sól kuchenna', false),
+    ('Sałatka z czarnej fasoli, kukurydzy i pomidora', 'sól kłodawska', false),
     ('Sałatka z jajkiem, fetą i warzywami', 'Jaja kurze, całe, surowe', true),
     ('Sałatka z jajkiem, fetą i warzywami', 'Ser feta', false),
     ('Sałatka z jajkiem, fetą i warzywami', 'Pomidory, surowe', true),
     ('Sałatka z jajkiem, fetą i warzywami', 'Ogórek, surowy', true),
     ('Sałatka z jajkiem, fetą i warzywami', 'Sałata rzymska', false),
     ('Sałatka z jajkiem, fetą i warzywami', 'Oliwa z oliwek', false),
-    ('Sałatka z jajkiem, fetą i warzywami', 'Sól kuchenna', false),
+    ('Sałatka z jajkiem, fetą i warzywami', 'sól kłodawska', false),
     ('Sałatka z jajkiem, fetą i warzywami', 'Czarny pieprz mielony', false),
     ('Sałatka z jarmużu, jabłka i orzechów', 'Jarmuż, surowy', false),
     ('Sałatka z jarmużu, jabłka i orzechów', 'Jabłko ze skórką', true),
@@ -665,7 +665,7 @@ with
     ('Sałatka z jarmużu, jabłka i orzechów', 'Oliwa z oliwek', false),
     ('Sałatka z jarmużu, jabłka i orzechów', 'Cytryna', false),
     ('Sałatka z jarmużu, jabłka i orzechów', 'Musztarda', false),
-    ('Sałatka z jarmużu, jabłka i orzechów', 'Sól kuchenna', false),
+    ('Sałatka z jarmużu, jabłka i orzechów', 'sól kłodawska', false),
     ('Sałatka z jarmużu, jabłka i orzechów', 'Czarny pieprz mielony', false),
     ('Sałatka z komosy, buraka i koziego sera', 'Komosa ryżowa, sucha', false),
     ('Sałatka z komosy, buraka i koziego sera', 'Buraki, surowe', false),
@@ -676,7 +676,7 @@ with
     ('Sałatka z komosy, buraka i koziego sera', 'Oliwa z oliwek', false),
     ('Sałatka z komosy, buraka i koziego sera', 'Ocet winny czerwony', false),
     ('Sałatka z komosy, buraka i koziego sera', 'Tymianek suszony', false),
-    ('Sałatka z komosy, buraka i koziego sera', 'Sól kuchenna', false),
+    ('Sałatka z komosy, buraka i koziego sera', 'sól kłodawska', false),
     ('Sałatka z komosy, buraka i koziego sera', 'Czarny pieprz mielony', false),
     ('Sałatka z pieczonym burakiem i fetą', 'Buraki, surowe', false),
     ('Sałatka z pieczonym burakiem i fetą', 'Ser feta', false),
@@ -697,7 +697,7 @@ with
     ('Serek wiejski z pomidorem, ogórkiem i pestkami dyni', 'Ogórek, surowy', true),
     ('Serek wiejski z pomidorem, ogórkiem i pestkami dyni', 'Pestki dyni', false),
     ('Serek wiejski z pomidorem, ogórkiem i pestkami dyni', 'Chleb żytni razowy', true),
-    ('Serek wiejski z pomidorem, ogórkiem i pestkami dyni', 'Sól kuchenna', false),
+    ('Serek wiejski z pomidorem, ogórkiem i pestkami dyni', 'sól kłodawska', false),
     ('Serek wiejski z pomidorem, ogórkiem i pestkami dyni', 'Czarny pieprz mielony', false),
     ('Skyr kakaowy z bananem i masłem orzechowym', 'Skyr naturalny', false),
     ('Skyr kakaowy z bananem i masłem orzechowym', 'Banan', true),
@@ -715,7 +715,7 @@ with
     ('Stek z tuńczyka z fasolką szparagową i ziemniakami', 'Oliwa z oliwek', false),
     ('Stek z tuńczyka z fasolką szparagową i ziemniakami', 'Cytryna', false),
     ('Stek z tuńczyka z fasolką szparagową i ziemniakami', 'Czosnek, surowy', false),
-    ('Stek z tuńczyka z fasolką szparagową i ziemniakami', 'Sól kuchenna', false),
+    ('Stek z tuńczyka z fasolką szparagową i ziemniakami', 'sól kłodawska', false),
     ('Stek z tuńczyka z fasolką szparagową i ziemniakami', 'Czarny pieprz mielony', false),
     ('Tabbouleh z kaszy bulgur i ciecierzycy', 'Kasza bulgur, sucha', false),
     ('Tabbouleh z kaszy bulgur i ciecierzycy', 'Ciecierzyca z puszki, odsączona', false),
@@ -726,7 +726,7 @@ with
     ('Tabbouleh z kaszy bulgur i ciecierzycy', 'Mięta świeża', false),
     ('Tabbouleh z kaszy bulgur i ciecierzycy', 'Cytryna', false),
     ('Tabbouleh z kaszy bulgur i ciecierzycy', 'Oliwa z oliwek', false),
-    ('Tabbouleh z kaszy bulgur i ciecierzycy', 'Sól kuchenna', false),
+    ('Tabbouleh z kaszy bulgur i ciecierzycy', 'sól kłodawska', false),
     ('Tabbouleh z kaszy bulgur i ciecierzycy', 'Czarny pieprz mielony', false),
     ('Tofu z brokułem i ryżem', 'Tofu naturalne', false),
     ('Tofu z brokułem i ryżem', 'Brokuł, surowy', false),
@@ -744,7 +744,7 @@ with
     ('Tofucznica ze szpinakiem i pomidorem', 'Chleb żytni razowy', true),
     ('Tofucznica ze szpinakiem i pomidorem', 'Olej rzepakowy', false),
     ('Tofucznica ze szpinakiem i pomidorem', 'Kurkuma mielona', false),
-    ('Tofucznica ze szpinakiem i pomidorem', 'Sól kuchenna', false),
+    ('Tofucznica ze szpinakiem i pomidorem', 'sól kłodawska', false),
     ('Tofucznica ze szpinakiem i pomidorem', 'Czarny pieprz mielony', false),
     ('Tortilla z Goudą, szpinakiem i pomidorem', 'Tortilla pełnoziarnista', false),
     ('Tortilla z Goudą, szpinakiem i pomidorem', 'Ser Gouda', false),
@@ -764,14 +764,14 @@ with
     ('Tortilla z hummusem i warzywami', 'Pomidory, surowe', false),
     ('Tortilla z hummusem i warzywami', 'Sałata rzymska', false),
     ('Tortilla z hummusem i warzywami', 'Kmin rzymski mielony', false),
-    ('Tortilla z hummusem i warzywami', 'Sól kuchenna', false),
+    ('Tortilla z hummusem i warzywami', 'sól kłodawska', false),
     ('Tortilla z jajkiem i szpinakiem', 'Tortilla pełnoziarnista', false),
     ('Tortilla z jajkiem i szpinakiem', 'Jaja kurze, całe, surowe', true),
     ('Tortilla z jajkiem i szpinakiem', 'Szpinak, surowy', false),
     ('Tortilla z jajkiem i szpinakiem', 'Pomidory, surowe', false),
     ('Tortilla z jajkiem i szpinakiem', 'Ser feta', false),
     ('Tortilla z jajkiem i szpinakiem', 'Olej rzepakowy', false),
-    ('Tortilla z jajkiem i szpinakiem', 'Sól kuchenna', false),
+    ('Tortilla z jajkiem i szpinakiem', 'sól kłodawska', false),
     ('Tortilla z jajkiem i szpinakiem', 'Czarny pieprz mielony', false),
     ('Tortilla z kurczakiem, awokado i warzywami', 'Tortilla pełnoziarnista', false),
     ('Tortilla z kurczakiem, awokado i warzywami', 'Pierś z kurczaka, surowa', false),
@@ -783,7 +783,7 @@ with
     ('Tortilla z kurczakiem, awokado i warzywami', 'Olej rzepakowy', false),
     ('Tortilla z kurczakiem, awokado i warzywami', 'Cytryna', false),
     ('Tortilla z kurczakiem, awokado i warzywami', 'Papryka słodka mielona', false),
-    ('Tortilla z kurczakiem, awokado i warzywami', 'Sól kuchenna', false),
+    ('Tortilla z kurczakiem, awokado i warzywami', 'sól kłodawska', false),
     ('Tortilla z kurczakiem, awokado i warzywami', 'Czarny pieprz mielony', false),
     ('Tortilla z tofu i chrupiącymi warzywami', 'Tortilla pełnoziarnista', false),
     ('Tortilla z tofu i chrupiącymi warzywami', 'Tofu naturalne', false),
@@ -806,7 +806,7 @@ with
     ('Tosty z mozzarellą i pomidorem', 'Ser mozzarella', false),
     ('Tosty z mozzarellą i pomidorem', 'Pomidory, surowe', true),
     ('Tosty z mozzarellą i pomidorem', 'Bazylia świeża', false),
-    ('Tosty z mozzarellą i pomidorem', 'Sól kuchenna', false),
+    ('Tosty z mozzarellą i pomidorem', 'sól kłodawska', false),
     ('Tosty z mozzarellą i pomidorem', 'Czarny pieprz mielony', false),
     ('Tosty z serem salami i papryką', 'Chleb żytni razowy', true),
     ('Tosty z serem salami i papryką', 'Ser salami', false),
@@ -820,7 +820,7 @@ with
     ('Twarożek ze szczypiorkiem, rzodkiewką i pieczywem', 'Rzodkiewka, surowa', true),
     ('Twarożek ze szczypiorkiem, rzodkiewką i pieczywem', 'Szczypiorek świeży', false),
     ('Twarożek ze szczypiorkiem, rzodkiewką i pieczywem', 'Chleb żytni razowy', true),
-    ('Twarożek ze szczypiorkiem, rzodkiewką i pieczywem', 'Sól kuchenna', false),
+    ('Twarożek ze szczypiorkiem, rzodkiewką i pieczywem', 'sól kłodawska', false),
     ('Twarożek ze szczypiorkiem, rzodkiewką i pieczywem', 'Czarny pieprz mielony', false),
     ('Wieprzowina z kapustą pekińską i ryżem', 'Polędwiczka wieprzowa, surowa', false),
     ('Wieprzowina z kapustą pekińską i ryżem', 'Kapusta pekińska, surowa', false),
@@ -832,6 +832,20 @@ with
     ('Wieprzowina z kapustą pekińską i ryżem', 'Czosnek, surowy', false),
     ('Wieprzowina z kapustą pekińską i ryżem', 'Olej rzepakowy', false),
     ('Wieprzowina z kapustą pekińską i ryżem', 'Sezam', false),
+    ('Zupa - Tajskie żółte curry z kurczakiem', 'Kurczak, pałka bez skóry, surowa', false),
+    ('Zupa - Tajskie żółte curry z kurczakiem', 'Mleko kokosowe z puszki', false),
+    ('Zupa - Tajskie żółte curry z kurczakiem', 'Tajska Żółta Lekko Ostra Pasta Curry Yellow Curry Paste Mild 400g MAE PLOY', false),
+    ('Zupa - Tajskie żółte curry z kurczakiem', 'Papryka czerwona, surowa', false),
+    ('Zupa - Tajskie żółte curry z kurczakiem', 'Cukinia, surowa', false),
+    ('Zupa - Tajskie żółte curry z kurczakiem', 'Cebula, surowa', false),
+    ('Zupa - Tajskie żółte curry z kurczakiem', 'Imbir korzeń, surowy', false),
+    ('Zupa - Tajskie żółte curry z kurczakiem', 'Sos sojowy', false),
+    ('Zupa - Tajskie żółte curry z kurczakiem', 'Limonka', false),
+    ('Zupa - Tajskie żółte curry z kurczakiem', 'Oliwa z oliwek', false),
+    ('Zupa - Tajskie żółte curry z kurczakiem', 'Ryż jaśminowy, suchy', false),
+    ('Zupa - Tajskie żółte curry z kurczakiem', 'Szczypiorek świeży', false),
+    ('Zupa - Tajskie żółte curry z kurczakiem', 'woda', false),
+    ('Zupa - Tajskie żółte curry z kurczakiem', 'Czosnek, surowy', false),
     ('Zupa z białej fasoli i jarmużu', 'Fasola biała z puszki, odsączona', false),
     ('Zupa z białej fasoli i jarmużu', 'Jarmuż, surowy', false),
     ('Zupa z białej fasoli i jarmużu', 'Pomidory krojone z puszki', false),
@@ -843,7 +857,7 @@ with
     ('Zupa z białej fasoli i jarmużu', 'Oliwa z oliwek', false),
     ('Zupa z białej fasoli i jarmużu', 'Tymianek suszony', false),
     ('Zupa z białej fasoli i jarmużu', 'Chleb żytni razowy', true),
-    ('Zupa z białej fasoli i jarmużu', 'Sól kuchenna', false),
+    ('Zupa z białej fasoli i jarmużu', 'sól kłodawska', false),
     ('Zupa z białej fasoli i jarmużu', 'Czarny pieprz mielony', false),
     ('Zupa z czerwonej soczewicy i pomidorów', 'Soczewica czerwona, sucha', false),
     ('Zupa z czerwonej soczewicy i pomidorów', 'Pomidory krojone z puszki', false),
@@ -856,7 +870,7 @@ with
     ('Zupa z czerwonej soczewicy i pomidorów', 'Papryka wędzona mielona', false),
     ('Zupa z czerwonej soczewicy i pomidorów', 'Cytryna', false),
     ('Zupa z czerwonej soczewicy i pomidorów', 'Chleb żytni razowy', true),
-    ('Zupa z czerwonej soczewicy i pomidorów', 'Sól kuchenna', false),
+    ('Zupa z czerwonej soczewicy i pomidorów', 'sól kłodawska', false),
     ('Zupa z czerwonej soczewicy i pomidorów', 'Czarny pieprz mielony', false),
     ('Łosoś ze szpinakiem i kaszą bulgur', 'Łosoś dziki, surowy', false),
     ('Łosoś ze szpinakiem i kaszą bulgur', 'Szpinak, surowy', false),
@@ -865,7 +879,7 @@ with
     ('Łosoś ze szpinakiem i kaszą bulgur', 'Cytryna', false),
     ('Łosoś ze szpinakiem i kaszą bulgur', 'Czosnek, surowy', false),
     ('Łosoś ze szpinakiem i kaszą bulgur', 'Oliwa z oliwek', false),
-    ('Łosoś ze szpinakiem i kaszą bulgur', 'Sól kuchenna', false),
+    ('Łosoś ze szpinakiem i kaszą bulgur', 'sól kłodawska', false),
     ('Łosoś ze szpinakiem i kaszą bulgur', 'Czarny pieprz mielony', false)
   ),
   potrzebny_sprzet(przepis, nazwa) as (values
@@ -1302,6 +1316,16 @@ with
     ('Wieprzowina z kapustą pekińską i ryżem', 'Nóż szefa kuchni'),
     ('Wieprzowina z kapustą pekińską i ryżem', 'Deska do krojenia'),
     ('Wieprzowina z kapustą pekińską i ryżem', 'Waga kuchenna'),
+    ('Zupa - Tajskie żółte curry z kurczakiem', 'Garnek 3 l'),
+    ('Zupa - Tajskie żółte curry z kurczakiem', 'Garnek 2 l'),
+    ('Zupa - Tajskie żółte curry z kurczakiem', 'Patelnia 24 cm'),
+    ('Zupa - Tajskie żółte curry z kurczakiem', 'Nóż szefa kuchni'),
+    ('Zupa - Tajskie żółte curry z kurczakiem', 'Deska do krojenia'),
+    ('Zupa - Tajskie żółte curry z kurczakiem', 'Sitko'),
+    ('Zupa - Tajskie żółte curry z kurczakiem', 'Łyżka cedzakowa'),
+    ('Zupa - Tajskie żółte curry z kurczakiem', 'Widelec'),
+    ('Zupa - Tajskie żółte curry z kurczakiem', 'Waga kuchenna'),
+    ('Zupa - Tajskie żółte curry z kurczakiem', 'Termometr do mięsa'),
     ('Zupa z białej fasoli i jarmużu', 'Garnek 3 l'),
     ('Zupa z białej fasoli i jarmużu', 'Nóż szefa kuchni'),
     ('Zupa z białej fasoli i jarmużu', 'Deska do krojenia'),
@@ -1454,7 +1478,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 2, 'g'::jednostka_miary, 2,
        null, null, sk.rola, sk.mozna_dzielic, 13
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Chili sin carne z czarną fasolą') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Chili sin carne z czarną fasolą') and sk.nazwa = 'sól kłodawska';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
 select p.id, 1, 'Przygotowanie', 10 from przepisy p where lower(p.nazwa) = lower('Chili sin carne z czarną fasolą');
@@ -1576,7 +1600,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 2, 'g'::jednostka_miary, 2,
        null, null, sk.rola, sk.mozna_dzielic, 11
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Curry z ciecierzycy, pomidorów i szpinaku') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Curry z ciecierzycy, pomidorów i szpinaku') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 20, 'g'::jednostka_miary, 20,
@@ -1703,7 +1727,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 2, 'g'::jednostka_miary, 2,
        null, null, sk.rola, sk.mozna_dzielic, 11
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Curry z czerwonej soczewicy i szpinaku') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Curry z czerwonej soczewicy i szpinaku') and sk.nazwa = 'sól kłodawska';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
 select p.id, 1, 'Przygotowanie', 8 from przepisy p where lower(p.nazwa) = lower('Curry z czerwonej soczewicy i szpinaku');
@@ -1830,7 +1854,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
        null, null, sk.rola, sk.mozna_dzielic, 12
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Dorsz w kokosowym curry ze szpinakiem') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Dorsz w kokosowym curry ze szpinakiem') and sk.nazwa = 'sól kłodawska';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
 select p.id, 1, 'Przygotowanie', 10 from przepisy p where lower(p.nazwa) = lower('Dorsz w kokosowym curry ze szpinakiem');
@@ -1963,7 +1987,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 2, 'g'::jednostka_miary, 2,
        null, null, sk.rola, sk.mozna_dzielic, 13
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Grochówka z indykiem') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Grochówka z indykiem') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
@@ -2100,7 +2124,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 2, 'g'::jednostka_miary, 2,
        null, null, sk.rola, sk.mozna_dzielic, 13
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Gulasz jagnięcy z ciecierzycą i pomidorami') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Gulasz jagnięcy z ciecierzycą i pomidorami') and sk.nazwa = 'sól kłodawska';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
 select p.id, 1, 'Przygotowanie', 15 from przepisy p where lower(p.nazwa) = lower('Gulasz jagnięcy z ciecierzycą i pomidorami');
@@ -2238,7 +2262,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 2, 'g'::jednostka_miary, 2,
        null, null, sk.rola, sk.mozna_dzielic, 14
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Gulasz wołowy z warzywami korzeniowymi') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Gulasz wołowy z warzywami korzeniowymi') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
@@ -2370,7 +2394,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 2, 'g'::jednostka_miary, 2,
        null, null, sk.rola, sk.mozna_dzielic, 12
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Gulasz z białej fasoli, jarmużu i pomidorów') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Gulasz z białej fasoli, jarmużu i pomidorów') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
@@ -2477,7 +2501,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
        null, null, sk.rola, sk.mozna_dzielic, 7
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Jaglanka z gruszką i orzechami') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Jaglanka z gruszką i orzechami') and sk.nazwa = 'sól kłodawska';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
 select p.id, 1, 'Przygotowanie', 7 from przepisy p where lower(p.nazwa) = lower('Jaglanka z gruszką i orzechami');
@@ -2573,7 +2597,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
        null, null, sk.rola, sk.mozna_dzielic, 6
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Jajecznica z pomidorem i szczypiorkiem') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Jajecznica z pomidorem i szczypiorkiem') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
@@ -2675,7 +2699,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
        null, null, sk.rola, sk.mozna_dzielic, 6
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Jajka na miękko z pieczywem i warzywami') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Jajka na miękko z pieczywem i warzywami') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
@@ -3062,7 +3086,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
        null, null, sk.rola, sk.mozna_dzielic, 5
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Kanapki z jajkiem, awokado i pomidorem') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Kanapki z jajkiem, awokado i pomidorem') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
@@ -3165,7 +3189,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
        null, null, sk.rola, sk.mozna_dzielic, 6
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Kanapki z mozzarellą, pomidorem i bazylią') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Kanapki z mozzarellą, pomidorem i bazylią') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
@@ -3255,7 +3279,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
        null, null, sk.rola, sk.mozna_dzielic, 6
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Kanapki z pastą jajeczną') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Kanapki z pastą jajeczną') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
@@ -3359,7 +3383,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
        null, null, sk.rola, sk.mozna_dzielic, 6
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Kanapki z ricottą, rzodkiewką i szczypiorkiem') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Kanapki z ricottą, rzodkiewką i szczypiorkiem') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
@@ -3655,7 +3679,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
        null, null, sk.rola, sk.mozna_dzielic, 11
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Kałamarnica z papryką i ryżem') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Kałamarnica z papryką i ryżem') and sk.nazwa = 'sól kłodawska';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
 select p.id, 1, 'Przygotowanie', 12 from przepisy p where lower(p.nazwa) = lower('Kałamarnica z papryką i ryżem');
@@ -3777,7 +3801,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
        null, null, sk.rola, sk.mozna_dzielic, 11
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Klopsiki z indyka w sosie pomidorowym z bulgurem') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Klopsiki z indyka w sosie pomidorowym z bulgurem') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
@@ -3906,7 +3930,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
        null, null, sk.rola, sk.mozna_dzielic, 11
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Komosa ryżowa z ciecierzycą i pieczonymi warzywami') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Komosa ryżowa z ciecierzycą i pieczonymi warzywami') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
@@ -4035,7 +4059,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
        null, null, sk.rola, sk.mozna_dzielic, 12
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Kotleciki z czerwonej soczewicy z sosem jogurtowym') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Kotleciki z czerwonej soczewicy z sosem jogurtowym') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
@@ -4295,7 +4319,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 2, 'g'::jednostka_miary, 2,
        null, null, sk.rola, sk.mozna_dzielic, 13
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Krem z dyni na mleku kokosowym') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Krem z dyni na mleku kokosowym') and sk.nazwa = 'sól kłodawska';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
 select p.id, 1, 'Przygotowanie', 12 from przepisy p where lower(p.nazwa) = lower('Krem z dyni na mleku kokosowym');
@@ -4417,7 +4441,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 2, 'g'::jednostka_miary, 2,
        null, null, sk.rola, sk.mozna_dzielic, 11
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Krem z kalafiora z pieczoną ciecierzycą') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Krem z kalafiora z pieczoną ciecierzycą') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
@@ -4535,7 +4559,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
        null, null, sk.rola, sk.mozna_dzielic, 9
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Krewetki z czosnkiem, cukinią i ryżem') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Krewetki z czosnkiem, cukinią i ryżem') and sk.nazwa = 'sól kłodawska';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
 select p.id, 1, 'Przygotowanie', 10 from przepisy p where lower(p.nazwa) = lower('Krewetki z czosnkiem, cukinią i ryżem');
@@ -4656,7 +4680,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
        null, null, sk.rola, sk.mozna_dzielic, 11
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Królik z rozmarynem i warzywami korzeniowymi') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Królik z rozmarynem i warzywami korzeniowymi') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
@@ -4773,7 +4797,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
        null, null, sk.rola, sk.mozna_dzielic, 9
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Kurczak pieczony z batatem i brokułem') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Kurczak pieczony z batatem i brokułem') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
@@ -4905,7 +4929,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
        null, null, sk.rola, sk.mozna_dzielic, 12
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Makaron pełnoziarnisty z bolońskim sosem z soczewicy') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Makaron pełnoziarnisty z bolońskim sosem z soczewicy') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
@@ -5128,7 +5152,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
        null, null, sk.rola, sk.mozna_dzielic, 9
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Makaron z ciecierzycą, bazylią i orzechami') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Makaron z ciecierzycą, bazylią i orzechami') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
@@ -5244,7 +5268,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
        null, null, sk.rola, sk.mozna_dzielic, 9
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Makaron z indykiem, pieczarkami i jogurtem') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Makaron z indykiem, pieczarkami i jogurtem') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
@@ -5371,7 +5395,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
        null, null, sk.rola, sk.mozna_dzielic, 11
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Makaron z kurczakiem, szpinakiem i pomidorami') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Makaron z kurczakiem, szpinakiem i pomidorami') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
@@ -5492,7 +5516,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
        null, null, sk.rola, sk.mozna_dzielic, 10
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Makaron z pieczonymi warzywami i mozzarellą') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Makaron z pieczonymi warzywami i mozzarellą') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
@@ -5614,7 +5638,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
        null, null, sk.rola, sk.mozna_dzielic, 10
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Makaron z polędwiczką i pieczarkami') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Makaron z polędwiczką i pieczarkami') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
@@ -5726,7 +5750,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
        null, null, sk.rola, sk.mozna_dzielic, 8
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Makaron z ricottą i szpinakiem') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Makaron z ricottą i szpinakiem') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
@@ -5837,7 +5861,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
        null, null, sk.rola, sk.mozna_dzielic, 8
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Makaron z tuńczykiem, cytryną i natką pietruszki') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Makaron z tuńczykiem, cytryną i natką pietruszki') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
@@ -5958,7 +5982,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
        null, null, sk.rola, sk.mozna_dzielic, 10
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Makaron z wołowiną i sosem pomidorowym') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Makaron z wołowiną i sosem pomidorowym') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
@@ -6196,7 +6220,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
        null, null, sk.rola, sk.mozna_dzielic, 10
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Morszczuk w sosie pomidorowym z ryżem') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Morszczuk w sosie pomidorowym z ryżem') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
@@ -6493,7 +6517,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
        null, null, sk.rola, sk.mozna_dzielic, 6
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Omlet ze szpinakiem i fetą') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Omlet ze szpinakiem i fetą') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
@@ -6596,7 +6620,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
        null, null, sk.rola, sk.mozna_dzielic, 6
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Owsianka z jabłkiem, cynamonem i orzechami') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Owsianka z jabłkiem, cynamonem i orzechami') and sk.nazwa = 'sól kłodawska';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
 select p.id, 1, 'Przygotowanie składników', 5 from przepisy p where lower(p.nazwa) = lower('Owsianka z jabłkiem, cynamonem i orzechami');
@@ -6713,7 +6737,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
        null, null, sk.rola, sk.mozna_dzielic, 10
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Papryka faszerowana soczewicą i kaszą bulgur') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Papryka faszerowana soczewicą i kaszą bulgur') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
@@ -6933,7 +6957,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
        null, null, sk.rola, sk.mozna_dzielic, 8
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Pieczona makrela z burakami i ziemniakami') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Pieczona makrela z burakami i ziemniakami') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
@@ -7055,7 +7079,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
        null, null, sk.rola, sk.mozna_dzielic, 10
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Pieczone warzywa korzeniowe z tymiankiem') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Pieczone warzywa korzeniowe z tymiankiem') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
@@ -7176,7 +7200,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
        null, null, sk.rola, sk.mozna_dzielic, 10
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Pieczony bakłażan z ciecierzycą i fetą') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Pieczony bakłażan z ciecierzycą i fetą') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
@@ -7294,7 +7318,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
        null, null, sk.rola, sk.mozna_dzielic, 9
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Pieczony kalafior z ziołowym sosem jogurtowym') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Pieczony kalafior z ziołowym sosem jogurtowym') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
@@ -7405,7 +7429,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
        null, null, sk.rola, sk.mozna_dzielic, 8
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Pieczony łosoś z brokułem i ziemniakami') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Pieczony łosoś z brokułem i ziemniakami') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
@@ -7530,7 +7554,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
        null, null, sk.rola, sk.mozna_dzielic, 11
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Pierś z kaczki z pomarańczą i czerwoną kapustą') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Pierś z kaczki z pomarańczą i czerwoną kapustą') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
@@ -7766,7 +7790,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
        null, null, sk.rola, sk.mozna_dzielic, 10
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Polędwiczka w sosie musztardowym z kaszą bulgur') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Polędwiczka w sosie musztardowym z kaszą bulgur') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
@@ -7889,7 +7913,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 2, 'g'::jednostka_miary, 2,
        null, null, sk.rola, sk.mozna_dzielic, 10
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Potrawka z kurczaka, kaszy jęczmiennej i warzyw') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Potrawka z kurczaka, kaszy jęczmiennej i warzyw') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
@@ -8006,7 +8030,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
        null, null, sk.rola, sk.mozna_dzielic, 9
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Pstrąg pieczony z warzywami korzeniowymi') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Pstrąg pieczony z warzywami korzeniowymi') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
@@ -8213,7 +8237,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
        null, null, sk.rola, sk.mozna_dzielic, 9
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Ryż z pieczarkami, szpinakiem i parmezanem') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Ryż z pieczarkami, szpinakiem i parmezanem') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
@@ -8325,7 +8349,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
        null, null, sk.rola, sk.mozna_dzielic, 8
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Sałatka brokułowa z jajkiem i sosem jogurtowym') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Sałatka brokułowa z jajkiem i sosem jogurtowym') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
@@ -8447,7 +8471,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
        null, null, sk.rola, sk.mozna_dzielic, 10
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Sałatka makaronowa z mozzarellą i warzywami') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Sałatka makaronowa z mozzarellą i warzywami') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
@@ -8563,7 +8587,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
        null, null, sk.rola, sk.mozna_dzielic, 9
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Sałatka makaronowa z tuńczykiem i warzywami') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Sałatka makaronowa z tuńczykiem i warzywami') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
@@ -8689,7 +8713,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
        null, null, sk.rola, sk.mozna_dzielic, 11
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Sałatka z czarnej fasoli, kukurydzy i pomidora') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Sałatka z czarnej fasoli, kukurydzy i pomidora') and sk.nazwa = 'sól kłodawska';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
 select p.id, 1, 'Przygotowanie', 15 from przepisy p where lower(p.nazwa) = lower('Sałatka z czarnej fasoli, kukurydzy i pomidora');
@@ -8780,7 +8804,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
        null, null, sk.rola, sk.mozna_dzielic, 7
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Sałatka z jajkiem, fetą i warzywami') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Sałatka z jajkiem, fetą i warzywami') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
@@ -8893,7 +8917,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
        null, null, sk.rola, sk.mozna_dzielic, 8
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Sałatka z jarmużu, jabłka i orzechów') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Sałatka z jarmużu, jabłka i orzechów') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
@@ -9004,7 +9028,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
        null, null, sk.rola, sk.mozna_dzielic, 10
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Sałatka z komosy, buraka i koziego sera') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Sałatka z komosy, buraka i koziego sera') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
@@ -9296,7 +9320,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
        null, null, sk.rola, sk.mozna_dzielic, 6
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Serek wiejski z pomidorem, ogórkiem i pestkami dyni') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Serek wiejski z pomidorem, ogórkiem i pestkami dyni') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
@@ -9549,7 +9573,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
        null, null, sk.rola, sk.mozna_dzielic, 7
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Stek z tuńczyka z fasolką szparagową i ziemniakami') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Stek z tuńczyka z fasolką szparagową i ziemniakami') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
@@ -9670,7 +9694,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
        null, null, sk.rola, sk.mozna_dzielic, 10
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Tabbouleh z kaszy bulgur i ciecierzycy') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Tabbouleh z kaszy bulgur i ciecierzycy') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
@@ -9892,7 +9916,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
        null, null, sk.rola, sk.mozna_dzielic, 8
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Tofucznica ze szpinakiem i pomidorem') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Tofucznica ze szpinakiem i pomidorem') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
@@ -10123,7 +10147,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
        null, null, sk.rola, sk.mozna_dzielic, 11
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Tortilla z hummusem i warzywami') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Tortilla z hummusem i warzywami') and sk.nazwa = 'sól kłodawska';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
 select p.id, 1, 'Przygotowanie hummusu', 10 from przepisy p where lower(p.nazwa) = lower('Tortilla z hummusem i warzywami');
@@ -10223,7 +10247,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
        null, null, sk.rola, sk.mozna_dzielic, 7
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Tortilla z jajkiem i szpinakiem') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Tortilla z jajkiem i szpinakiem') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
@@ -10349,7 +10373,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
        null, null, sk.rola, sk.mozna_dzielic, 11
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Tortilla z kurczakiem, awokado i warzywami') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Tortilla z kurczakiem, awokado i warzywami') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
@@ -10663,7 +10687,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
        null, null, sk.rola, sk.mozna_dzielic, 5
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Tosty z mozzarellą i pomidorem') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Tosty z mozzarellą i pomidorem') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
@@ -10866,7 +10890,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
        null, null, sk.rola, sk.mozna_dzielic, 6
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Twarożek ze szczypiorkiem, rzodkiewką i pieczywem') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Twarożek ze szczypiorkiem, rzodkiewką i pieczywem') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
@@ -11007,6 +11031,176 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
  where lower(p.nazwa) = lower('Wieprzowina z kapustą pekińską i ryżem') and e.kolejnosc = 2;
 
 -- -------------------------------------------------------------------------
+--  Zupa - Tajskie żółte curry z kurczakiem
+-- -------------------------------------------------------------------------
+
+insert into przepisy
+  (nazwa, opis, autor_id, pory, kuchnie, rodzaje, trwalosc_dni, widocznosc,
+   porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
+   sprzet, przechowywanie, mozna_mrozic, ratunek)
+select
+  'Zupa - Tajskie żółte curry z kurczakiem', 'Kremowa zupa curry z kurczakiem, mlekiem kokosowym, warzywami, imbirem i limonką, podana z ryżem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. W etapie 1 przygotuj wszystkie składniki. Etap 2 rozpocznij od nastawienia kurczaka; podczas jego gotowania ugotuj ryż i przygotuj bazę curry na drugim palniku. Czasy etapów są orientacyjne i uwzględniają pracę równoległą. Dłuższe gotowanie ryżu zgodnie z opakowaniem lub dodatkowe dogotowanie mięsa wydłuży etap gotowania.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  array['obiad', 'kolacja']::pora_posilku[], array['azjatycka']::rodzaj_kuchni[],
+  array['zupa']::rodzaj_dania[],
+  3, 'prywatna',
+  'waga', 528, 1, 2,
+  12, 48,
+  (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
+     from unnest(array['Garnek 3 l', 'Garnek 2 l', 'Patelnia 24 cm', 'Nóż szefa kuchni', 'Deska do krojenia', 'Sitko', 'Łyżka cedzakowa', 'Widelec', 'Waga kuchenna', 'Termometr do mięsa']::text[]) with ordinality as v(nazwa, poz)
+     join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
+  'Po ostudzeniu przełóż curry do szczelnego pojemnika i przechowuj w lodówce do 2–3 dni. Ryż najlepiej gotować świeży do każdego podania.',
+  false, 'Jeżeli po 32 minutach gotowania pałki nie są miękkie lub nie osiągnęły 74°C w najgrubszym miejscu mięsa, gotuj dalej i sprawdzaj co 5 minut. Gotową bazę curry zdejmij wtedy z ognia, aby nie rozgotować warzyw. Jeśli curry jest zbyt gęste, dodawaj po łyżce wywaru z ugotowanego kurczaka.'
+on conflict (lower(nazwa)) do update set
+  opis                   = excluded.opis,
+  pory                   = excluded.pory,
+  kuchnie                = excluded.kuchnie,
+  rodzaje                = excluded.rodzaje,
+  trwalosc_dni           = excluded.trwalosc_dni,
+  porcjowanie            = excluded.porcjowanie,
+  porcja_g               = excluded.porcja_g,
+  porcje                 = excluded.porcje,
+  liczba_porcji_bazowych = excluded.liczba_porcji_bazowych,
+  czas_przygotowania_min = excluded.czas_przygotowania_min,
+  czas_obrobki_min       = excluded.czas_obrobki_min,
+  sprzet                 = excluded.sprzet,
+  przechowywanie         = excluded.przechowywanie,
+  mozna_mrozic           = excluded.mozna_mrozic,
+  ratunek                = excluded.ratunek,
+  zmieniono              = now();
+
+delete from przepis_skladniki where przepis_id in (select id from przepisy where lower(nazwa) = lower('Zupa - Tajskie żółte curry z kurczakiem'));
+delete from etapy            where przepis_id in (select id from przepisy where lower(nazwa) = lower('Zupa - Tajskie żółte curry z kurczakiem'));
+
+insert into przepis_skladniki
+  (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
+select p.id, sk.id, 250, 'g'::jednostka_miary, 250,
+       'całe pałki z kością, bez skóry; podana masa dotyczy części jadalnej bez kości', null, sk.rola, sk.mozna_dzielic, 1
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Zupa - Tajskie żółte curry z kurczakiem') and sk.nazwa = 'Kurczak, pałka bez skóry, surowa';
+insert into przepis_skladniki
+  (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
+select p.id, sk.id, 240, 'g'::jednostka_miary, 240,
+       null, null, sk.rola, sk.mozna_dzielic, 2
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Zupa - Tajskie żółte curry z kurczakiem') and sk.nazwa = 'Mleko kokosowe z puszki';
+insert into przepis_skladniki
+  (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
+select p.id, sk.id, 25, 'g'::jednostka_miary, 25,
+       null, null, sk.rola, sk.mozna_dzielic, 3
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Zupa - Tajskie żółte curry z kurczakiem') and sk.nazwa = 'Tajska Żółta Lekko Ostra Pasta Curry Yellow Curry Paste Mild 400g MAE PLOY';
+insert into przepis_skladniki
+  (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
+select p.id, sk.id, 80, 'g'::jednostka_miary, 80,
+       'paski szerokości około 5 mm', null, sk.rola, sk.mozna_dzielic, 4
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Zupa - Tajskie żółte curry z kurczakiem') and sk.nazwa = 'Papryka czerwona, surowa';
+insert into przepis_skladniki
+  (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
+select p.id, sk.id, 100, 'g'::jednostka_miary, 100,
+       'półplasterki grubości około 5 mm', null, sk.rola, sk.mozna_dzielic, 5
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Zupa - Tajskie żółte curry z kurczakiem') and sk.nazwa = 'Cukinia, surowa';
+insert into przepis_skladniki
+  (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
+select p.id, sk.id, 60, 'g'::jednostka_miary, 60,
+       'cienkie piórka', null, sk.rola, sk.mozna_dzielic, 6
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Zupa - Tajskie żółte curry z kurczakiem') and sk.nazwa = 'Cebula, surowa';
+insert into przepis_skladniki
+  (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
+select p.id, sk.id, 5, 'g'::jednostka_miary, 5,
+       'drobno posiekany', null, sk.rola, sk.mozna_dzielic, 7
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Zupa - Tajskie żółte curry z kurczakiem') and sk.nazwa = 'Imbir korzeń, surowy';
+insert into przepis_skladniki
+  (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
+select p.id, sk.id, 5, 'g'::jednostka_miary, 5,
+       null, null, sk.rola, sk.mozna_dzielic, 8
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Zupa - Tajskie żółte curry z kurczakiem') and sk.nazwa = 'Sos sojowy';
+insert into przepis_skladniki
+  (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
+select p.id, sk.id, 15, 'g'::jednostka_miary, 15,
+       'do wyciśnięcia soku', null, sk.rola, sk.mozna_dzielic, 9
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Zupa - Tajskie żółte curry z kurczakiem') and sk.nazwa = 'Limonka';
+insert into przepis_skladniki
+  (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
+select p.id, sk.id, 5, 'g'::jednostka_miary, 5,
+       null, null, sk.rola, sk.mozna_dzielic, 10
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Zupa - Tajskie żółte curry z kurczakiem') and sk.nazwa = 'Oliwa z oliwek';
+insert into przepis_skladniki
+  (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
+select p.id, sk.id, 140, 'g'::jednostka_miary, 140,
+       null, null, sk.rola, sk.mozna_dzielic, 11
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Zupa - Tajskie żółte curry z kurczakiem') and sk.nazwa = 'Ryż jaśminowy, suchy';
+insert into przepis_skladniki
+  (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
+select p.id, sk.id, 5, 'g'::jednostka_miary, 5,
+       'posiekany', 'kolendra', sk.rola, sk.mozna_dzielic, 12
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Zupa - Tajskie żółte curry z kurczakiem') and sk.nazwa = 'Szczypiorek świeży';
+insert into przepis_skladniki
+  (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
+select p.id, sk.id, 120, 'ml'::jednostka_miary, 120,
+       'do curry; woda do gotowania ryżu i mięsa jest dodatkowa, jej nadmiar odlej po gotowaniu', null, sk.rola, sk.mozna_dzielic, 13
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Zupa - Tajskie żółte curry z kurczakiem') and sk.nazwa = 'woda';
+insert into przepis_skladniki
+  (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
+select p.id, sk.id, 5, 'g'::jednostka_miary, 5,
+       'drobno posiekany', null, sk.rola, sk.mozna_dzielic, 14
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Zupa - Tajskie żółte curry z kurczakiem') and sk.nazwa = 'Czosnek, surowy';
+
+insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
+select p.id, 1, 'Przygotowanie składników', 12 from przepisy p where lower(p.nazwa) = lower('Zupa - Tajskie żółte curry z kurczakiem');
+
+insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
+select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
+  from etapy e join przepisy p on p.id = e.przepis_id,
+       (values
+         (1::smallint, 'Umyj udka z kurczaka. Zostaw mięso w całości.', null::text, false),
+         (2::smallint, 'Umyj ręce oraz przybory i powierzchnie, które miały kontakt z surowym mięsem. Do warzyw użyj czystej deski i noża.', null::text, false),
+         (3::smallint, 'Obierz cebulę i pokrój w cienkie piórka.', null::text, false),
+         (4::smallint, 'Obierz i drobno posiekaj czosnek oraz imbir.', null::text, false),
+         (5::smallint, 'Umyj paprykę, usuń gniazdo nasienne i pokrój miąższ w paski szerokości około 5 mm.', null::text, false),
+         (6::smallint, 'Umyj cukinię i pokrój w półplasterki grubości około 5 mm.', null::text, false),
+         (7::smallint, 'Umyj i posiekaj szczypiorek. Umyj limonkę, wyciśnij sok z ilości wskazanej na liście składników i odstaw do końcowego doprawienia.', null::text, false),
+         (8::smallint, 'Odmierz mleko kokosowe, pastę curry, sos sojowy, oliwę, suchy ryż i wodę do curry w ilościach wskazanych na liście składników dla przygotowywanej liczby porcji.', null::text, false),
+         (9::smallint, 'Przepłucz ryż na sitku pod zimną wodą i odstaw do gotowania.', null::text, false)
+       ) as v(nr, tresc, sygnal, uwaga)
+ where lower(p.nazwa) = lower('Zupa - Tajskie żółte curry z kurczakiem') and e.kolejnosc = 1;
+
+insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
+select p.id, 2, 'Gotowanie kurczaka oraz równoległe przygotowanie ryżu i curry', 42 from przepisy p where lower(p.nazwa) = lower('Zupa - Tajskie żółte curry z kurczakiem');
+
+insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
+select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
+  from etapy e join przepisy p on p.id = e.przepis_id,
+       (values
+         (1::smallint, 'Włóż pałki do garnka mieszczącego przygotowywaną ilość mięsa. Zalej zimną wodą tak, aby przykryła mięso, i włącz grzanie na pierwszym palniku.', null::text, true),
+         (2::smallint, 'Doprowadź wodę z mięsem do wrzenia; zwykle zajmuje to około 5 minut. Czas zależy od ilości wody i mocy palnika. Składniki są już przygotowane.', null::text, false),
+         (3::smallint, 'Po zagotowaniu zbierz szumowiny łyżką cedzakową. Zmniejsz ogień i uchyl pokrywkę.', null::text, false),
+         (4::smallint, 'Gotuj kurczaka na małym ogniu przez 32 minuty. Licz czas od rozpoczęcia łagodnego gotowania po zebraniu szumowin. Woda ma delikatnie bulgotać. Nastaw minutnik. W czasie gotowania mięsa ugotuj ryż i przygotuj bazę curry według kolejnych kroków. Po sygnale minutnika sprawdź mięso, niezależnie od postępu pracy przy curry.', null::text, true),
+         (5::smallint, 'Na drugim palniku zagotuj w garnku większą ilość wody, tak aby ryż po wsypaniu był zanurzony i mógł swobodnie się gotować. Wsyp opłukany ryż, zamieszaj i gotuj przez czas podany na opakowaniu. Przed odcedzeniem sprawdź, czy ziarna są miękkie. Kurczak w tym czasie gotuje się na pierwszym palniku.', null::text, false),
+         (6::smallint, 'Ugotowany ryż odcedź na sitku, przełóż z powrotem do garnka i przykryj. Odstaw poza palnik do podania. Drugi palnik jest teraz wolny do przygotowania curry.', 'ziarna są miękkie, a nadmiar wody został odcedzony'::text, false),
+         (7::smallint, 'Gdy do końca gotowania kurczaka pozostaje około 12 minut, a drugi palnik jest już wolny, postaw na nim patelnię mieszczącą przygotowywaną ilość curry. Wlej odmierzoną oliwę i rozgrzewaj przez około 1 minutę na średnim ogniu. Jeśli ryż nadal się gotuje, rozpocznij przygotowanie curry zaraz po zdjęciu garnka z palnika.', null::text, false),
+         (8::smallint, 'Dodaj pokrojoną cebulę i smaż przez 3 minuty na średnim ogniu, mieszając.', 'cebula jest szklista, bez przypalonych brzegów'::text, false),
+         (9::smallint, 'Dodaj posiekany czosnek i imbir. Smaż przez 1 minutę na średnim ogniu, mieszając.', null::text, false),
+         (10::smallint, 'Dodaj odmierzoną pastę curry i smaż przez 1 minutę, stale mieszając.', 'pasta intensywnie pachnie, ale nie przypala się'::text, false),
+         (11::smallint, 'Wlej odmierzone mleko kokosowe oraz wodę do curry, dodaj sos sojowy. Wymieszaj i doprowadź do łagodnego wrzenia, podgrzewając przez około 2 minuty.', null::text, false),
+         (12::smallint, 'Dodaj paski papryki do łagodnie gotującej się bazy curry. Gotuj przez 3 minuty na małym ogniu.', null::text, false),
+         (13::smallint, 'Dodaj cukinię i gotuj jeszcze przez 4 minuty na małym ogniu. Papryka będzie gotowała się łącznie 7 minut, cukinia 4 minuty. Jeśli mięso nie jest jeszcze gotowe do dodania, zdejmij patelnię z ognia.', 'warzywa lekko zmiękły i zachowują kształt'::text, false),
+         (14::smallint, 'Po 32 minutach łagodnego gotowania sprawdź najgrubszą część mięsa termometrem, nie dotykając kości. Sprawdź też widelcem, czy mięso łatwo odchodzi od kości. Jeżeli nie osiągnęło 74°C albo nadal jest twarde, gotuj kolejne 5 minut i ponów kontrolę. Powtarzaj w razie potrzeby.', 'co najmniej 74°C w mięsie i łatwe oddzielanie go od kości'::text, true),
+         (15::smallint, 'Gotowe pałki wyjmij łyżką cedzakową na czystą deskę. Wyłącz pierwszy palnik. Wodę z gotowania odlej; możesz zachować niewielką ilość wywaru do ewentualnego rozrzedzenia curry.', null::text, false)
+       ) as v(nr, tresc, sygnal, uwaga)
+ where lower(p.nazwa) = lower('Zupa - Tajskie żółte curry z kurczakiem') and e.kolejnosc = 2;
+
+insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
+select p.id, 3, 'Oddzielenie mięsa, połączenie i podanie', 6 from przepisy p where lower(p.nazwa) = lower('Zupa - Tajskie żółte curry z kurczakiem');
+
+insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
+select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
+  from etapy e join przepisy p on p.id = e.przepis_id,
+       (values
+         (1::smallint, 'Odczekaj około 1 minuty przed oddzielaniem mięsa; pałki nadal będą gorące, więc przytrzymuj je widelcem.', null::text, false),
+         (2::smallint, 'Przytrzymując pałki widelcem, oddziel mięso od kości i chrząstek. Podziel na większe kawałki.', null::text, false),
+         (3::smallint, 'Dodaj mięso do gotowej bazy curry. Podgrzewaj przez 2 minuty na małym ogniu, delikatnie mieszając. Jeśli patelnia czekała poza palnikiem i zawartość przestała być gorąca, najpierw ponownie doprowadź ją do łagodnego wrzenia, a następnie odlicz 2 minuty.', null::text, false),
+         (4::smallint, 'Zdejmij patelnię z ognia i wmieszaj sok z limonki. Rozdziel ugotowany ryż oraz całe curry na przygotowywaną liczbę porcji. Posyp szczypiorkiem i podaj.', null::text, false)
+       ) as v(nr, tresc, sygnal, uwaga)
+ where lower(p.nazwa) = lower('Zupa - Tajskie żółte curry z kurczakiem') and e.kolejnosc = 3;
+
+-- -------------------------------------------------------------------------
 --  Zupa z białej fasoli i jarmużu
 -- -------------------------------------------------------------------------
 
@@ -11106,7 +11300,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 2, 'g'::jednostka_miary, 2,
        null, null, sk.rola, sk.mozna_dzielic, 12
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Zupa z białej fasoli i jarmużu') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Zupa z białej fasoli i jarmużu') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
@@ -11238,7 +11432,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 2, 'g'::jednostka_miary, 2,
        null, null, sk.rola, sk.mozna_dzielic, 12
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Zupa z czerwonej soczewicy i pomidorów') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Zupa z czerwonej soczewicy i pomidorów') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
@@ -11349,7 +11543,7 @@ insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
        null, null, sk.rola, sk.mozna_dzielic, 8
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Łosoś ze szpinakiem i kaszą bulgur') and sk.nazwa = 'Sól kuchenna';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Łosoś ze szpinakiem i kaszą bulgur') and sk.nazwa = 'sól kłodawska';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
@@ -11474,6 +11668,7 @@ with oczekiwane(nazwa, skladnikow, etapow, krokow) as (values
   ('Tosty z serem salami i papryką', 7, 2, 4),
   ('Twarożek ze szczypiorkiem, rzodkiewką i pieczywem', 7, 1, 5),
   ('Wieprzowina z kapustą pekińską i ryżem', 10, 2, 6),
+  ('Zupa - Tajskie żółte curry z kurczakiem', 14, 3, 28),
   ('Zupa z białej fasoli i jarmużu', 13, 2, 5),
   ('Zupa z czerwonej soczewicy i pomidorów', 13, 2, 4),
   ('Łosoś ze szpinakiem i kaszą bulgur', 9, 2, 5)
@@ -11510,6 +11705,6 @@ select
 from przepisy p
 join przepis_skladniki ps on ps.przepis_id = p.id
 join przepis_makro m      on m.przepis_id = p.id
-where lower(p.nazwa) in (lower('Chili sin carne z czarną fasolą'), lower('Curry z ciecierzycy, pomidorów i szpinaku'), lower('Curry z czerwonej soczewicy i szpinaku'), lower('Dorsz w kokosowym curry ze szpinakiem'), lower('Grochówka z indykiem'), lower('Gulasz jagnięcy z ciecierzycą i pomidorami'), lower('Gulasz wołowy z warzywami korzeniowymi'), lower('Gulasz z białej fasoli, jarmużu i pomidorów'), lower('Jaglanka z gruszką i orzechami'), lower('Jajecznica z pomidorem i szczypiorkiem'), lower('Jajka na miękko z pieczywem i warzywami'), lower('Kanapki z Goudą, jajkiem i szczypiorkiem'), lower('Kanapki z Goudą, pomidorem i sałatą'), lower('Kanapki z halloumi, awokado i pomidorem'), lower('Kanapki z jajkiem, awokado i pomidorem'), lower('Kanapki z mozzarellą, pomidorem i bazylią'), lower('Kanapki z pastą jajeczną'), lower('Kanapki z ricottą, rzodkiewką i szczypiorkiem'), lower('Kanapki z sardynkami, pomidorem i rukolą'), lower('Kanapki z serem salami, ogórkiem kiszonym i musztardą'), lower('Kałamarnica z papryką i ryżem'), lower('Klopsiki z indyka w sosie pomidorowym z bulgurem'), lower('Komosa ryżowa z ciecierzycą i pieczonymi warzywami'), lower('Kotleciki z czerwonej soczewicy z sosem jogurtowym'), lower('Krem z brokułów z fetą'), lower('Krem z dyni na mleku kokosowym'), lower('Krem z kalafiora z pieczoną ciecierzycą'), lower('Krewetki z czosnkiem, cukinią i ryżem'), lower('Królik z rozmarynem i warzywami korzeniowymi'), lower('Kurczak pieczony z batatem i brokułem'), lower('Makaron pełnoziarnisty z bolońskim sosem z soczewicy'), lower('Makaron z brokułem i fetą'), lower('Makaron z ciecierzycą, bazylią i orzechami'), lower('Makaron z indykiem, pieczarkami i jogurtem'), lower('Makaron z kurczakiem, szpinakiem i pomidorami'), lower('Makaron z pieczonymi warzywami i mozzarellą'), lower('Makaron z polędwiczką i pieczarkami'), lower('Makaron z ricottą i szpinakiem'), lower('Makaron z tuńczykiem, cytryną i natką pietruszki'), lower('Makaron z wołowiną i sosem pomidorowym'), lower('Małże w pomidorowym bulionie'), lower('Morszczuk w sosie pomidorowym z ryżem'), lower('Nocna owsianka z bananem i chia'), lower('Nocna owsianka z borówkami i orzechami'), lower('Omlet ze szpinakiem i fetą'), lower('Owsianka z jabłkiem, cynamonem i orzechami'), lower('Papryka faszerowana soczewicą i kaszą bulgur'), lower('Pełnoziarniste placuszki ze skyrem i owocami'), lower('Pieczona makrela z burakami i ziemniakami'), lower('Pieczone warzywa korzeniowe z tymiankiem'), lower('Pieczony bakłażan z ciecierzycą i fetą'), lower('Pieczony kalafior z ziołowym sosem jogurtowym'), lower('Pieczony łosoś z brokułem i ziemniakami'), lower('Pierś z kaczki z pomarańczą i czerwoną kapustą'), lower('Placuszki bananowo-owsiane'), lower('Polędwiczka w sosie musztardowym z kaszą bulgur'), lower('Potrawka z kurczaka, kaszy jęczmiennej i warzyw'), lower('Pstrąg pieczony z warzywami korzeniowymi'), lower('Pudding chia z mango i mlekiem kokosowym'), lower('Ryż z pieczarkami, szpinakiem i parmezanem'), lower('Sałatka brokułowa z jajkiem i sosem jogurtowym'), lower('Sałatka makaronowa z mozzarellą i warzywami'), lower('Sałatka makaronowa z tuńczykiem i warzywami'), lower('Sałatka z czarnej fasoli, kukurydzy i pomidora'), lower('Sałatka z jajkiem, fetą i warzywami'), lower('Sałatka z jarmużu, jabłka i orzechów'), lower('Sałatka z komosy, buraka i koziego sera'), lower('Sałatka z pieczonym burakiem i fetą'), lower('Serek wiejski z owocami i orzechami'), lower('Serek wiejski z pomidorem, ogórkiem i pestkami dyni'), lower('Skyr kakaowy z bananem i masłem orzechowym'), lower('Skyr z owocami, płatkami owsianymi i orzechami'), lower('Stek z tuńczyka z fasolką szparagową i ziemniakami'), lower('Tabbouleh z kaszy bulgur i ciecierzycy'), lower('Tofu z brokułem i ryżem'), lower('Tofucznica ze szpinakiem i pomidorem'), lower('Tortilla z Goudą, szpinakiem i pomidorem'), lower('Tortilla z hummusem i warzywami'), lower('Tortilla z jajkiem i szpinakiem'), lower('Tortilla z kurczakiem, awokado i warzywami'), lower('Tortilla z tofu i chrupiącymi warzywami'), lower('Tosty z Goudą i pieczarkami'), lower('Tosty z mozzarellą i pomidorem'), lower('Tosty z serem salami i papryką'), lower('Twarożek ze szczypiorkiem, rzodkiewką i pieczywem'), lower('Wieprzowina z kapustą pekińską i ryżem'), lower('Zupa z białej fasoli i jarmużu'), lower('Zupa z czerwonej soczewicy i pomidorów'), lower('Łosoś ze szpinakiem i kaszą bulgur'))
+where lower(p.nazwa) in (lower('Chili sin carne z czarną fasolą'), lower('Curry z ciecierzycy, pomidorów i szpinaku'), lower('Curry z czerwonej soczewicy i szpinaku'), lower('Dorsz w kokosowym curry ze szpinakiem'), lower('Grochówka z indykiem'), lower('Gulasz jagnięcy z ciecierzycą i pomidorami'), lower('Gulasz wołowy z warzywami korzeniowymi'), lower('Gulasz z białej fasoli, jarmużu i pomidorów'), lower('Jaglanka z gruszką i orzechami'), lower('Jajecznica z pomidorem i szczypiorkiem'), lower('Jajka na miękko z pieczywem i warzywami'), lower('Kanapki z Goudą, jajkiem i szczypiorkiem'), lower('Kanapki z Goudą, pomidorem i sałatą'), lower('Kanapki z halloumi, awokado i pomidorem'), lower('Kanapki z jajkiem, awokado i pomidorem'), lower('Kanapki z mozzarellą, pomidorem i bazylią'), lower('Kanapki z pastą jajeczną'), lower('Kanapki z ricottą, rzodkiewką i szczypiorkiem'), lower('Kanapki z sardynkami, pomidorem i rukolą'), lower('Kanapki z serem salami, ogórkiem kiszonym i musztardą'), lower('Kałamarnica z papryką i ryżem'), lower('Klopsiki z indyka w sosie pomidorowym z bulgurem'), lower('Komosa ryżowa z ciecierzycą i pieczonymi warzywami'), lower('Kotleciki z czerwonej soczewicy z sosem jogurtowym'), lower('Krem z brokułów z fetą'), lower('Krem z dyni na mleku kokosowym'), lower('Krem z kalafiora z pieczoną ciecierzycą'), lower('Krewetki z czosnkiem, cukinią i ryżem'), lower('Królik z rozmarynem i warzywami korzeniowymi'), lower('Kurczak pieczony z batatem i brokułem'), lower('Makaron pełnoziarnisty z bolońskim sosem z soczewicy'), lower('Makaron z brokułem i fetą'), lower('Makaron z ciecierzycą, bazylią i orzechami'), lower('Makaron z indykiem, pieczarkami i jogurtem'), lower('Makaron z kurczakiem, szpinakiem i pomidorami'), lower('Makaron z pieczonymi warzywami i mozzarellą'), lower('Makaron z polędwiczką i pieczarkami'), lower('Makaron z ricottą i szpinakiem'), lower('Makaron z tuńczykiem, cytryną i natką pietruszki'), lower('Makaron z wołowiną i sosem pomidorowym'), lower('Małże w pomidorowym bulionie'), lower('Morszczuk w sosie pomidorowym z ryżem'), lower('Nocna owsianka z bananem i chia'), lower('Nocna owsianka z borówkami i orzechami'), lower('Omlet ze szpinakiem i fetą'), lower('Owsianka z jabłkiem, cynamonem i orzechami'), lower('Papryka faszerowana soczewicą i kaszą bulgur'), lower('Pełnoziarniste placuszki ze skyrem i owocami'), lower('Pieczona makrela z burakami i ziemniakami'), lower('Pieczone warzywa korzeniowe z tymiankiem'), lower('Pieczony bakłażan z ciecierzycą i fetą'), lower('Pieczony kalafior z ziołowym sosem jogurtowym'), lower('Pieczony łosoś z brokułem i ziemniakami'), lower('Pierś z kaczki z pomarańczą i czerwoną kapustą'), lower('Placuszki bananowo-owsiane'), lower('Polędwiczka w sosie musztardowym z kaszą bulgur'), lower('Potrawka z kurczaka, kaszy jęczmiennej i warzyw'), lower('Pstrąg pieczony z warzywami korzeniowymi'), lower('Pudding chia z mango i mlekiem kokosowym'), lower('Ryż z pieczarkami, szpinakiem i parmezanem'), lower('Sałatka brokułowa z jajkiem i sosem jogurtowym'), lower('Sałatka makaronowa z mozzarellą i warzywami'), lower('Sałatka makaronowa z tuńczykiem i warzywami'), lower('Sałatka z czarnej fasoli, kukurydzy i pomidora'), lower('Sałatka z jajkiem, fetą i warzywami'), lower('Sałatka z jarmużu, jabłka i orzechów'), lower('Sałatka z komosy, buraka i koziego sera'), lower('Sałatka z pieczonym burakiem i fetą'), lower('Serek wiejski z owocami i orzechami'), lower('Serek wiejski z pomidorem, ogórkiem i pestkami dyni'), lower('Skyr kakaowy z bananem i masłem orzechowym'), lower('Skyr z owocami, płatkami owsianymi i orzechami'), lower('Stek z tuńczyka z fasolką szparagową i ziemniakami'), lower('Tabbouleh z kaszy bulgur i ciecierzycy'), lower('Tofu z brokułem i ryżem'), lower('Tofucznica ze szpinakiem i pomidorem'), lower('Tortilla z Goudą, szpinakiem i pomidorem'), lower('Tortilla z hummusem i warzywami'), lower('Tortilla z jajkiem i szpinakiem'), lower('Tortilla z kurczakiem, awokado i warzywami'), lower('Tortilla z tofu i chrupiącymi warzywami'), lower('Tosty z Goudą i pieczarkami'), lower('Tosty z mozzarellą i pomidorem'), lower('Tosty z serem salami i papryką'), lower('Twarożek ze szczypiorkiem, rzodkiewką i pieczywem'), lower('Wieprzowina z kapustą pekińską i ryżem'), lower('Zupa - Tajskie żółte curry z kurczakiem'), lower('Zupa z białej fasoli i jarmużu'), lower('Zupa z czerwonej soczewicy i pomidorów'), lower('Łosoś ze szpinakiem i kaszą bulgur'))
 group by p.nazwa, p.porcjowanie, p.porcja_g, p.porcje, m.kcal, m.bialko_g
 order by p.nazwa;

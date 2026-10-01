@@ -1,0 +1,229 @@
+{
+  "nazwa": "Zupa - Tajskie żółte curry z kurczakiem",
+  "opis": "Kremowa zupa curry z kurczakiem, mlekiem kokosowym, warzywami, imbirem i limonką, podana z ryżem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. W etapie 1 przygotuj wszystkie składniki. Etap 2 rozpocznij od nastawienia kurczaka; podczas jego gotowania ugotuj ryż i przygotuj bazę curry na drugim palniku. Czasy etapów są orientacyjne i uwzględniają pracę równoległą. Dłuższe gotowanie ryżu zgodnie z opakowaniem lub dodatkowe dogotowanie mięsa wydłuży etap gotowania.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "azjatycka"
+  ],
+  "rodzaje": [
+    "zupa"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 527.5,
+  "liczba_porcji_bazowych": 2,
+  "trwalosc_dni": 3,
+  "czas_przygotowania_min": 12,
+  "czas_obrobki_min": 48,
+  "sprzet": [
+    "Garnek 3 l",
+    "Garnek 2 l",
+    "Patelnia 24 cm",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Sitko",
+    "Łyżka cedzakowa",
+    "Widelec",
+    "Waga kuchenna",
+    "Termometr do mięsa"
+  ],
+  "przechowywanie": "Po ostudzeniu przełóż curry do szczelnego pojemnika i przechowuj w lodówce do 2–3 dni. Ryż najlepiej gotować świeży do każdego podania.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeżeli po 32 minutach gotowania pałki nie są miękkie lub nie osiągnęły 74°C w najgrubszym miejscu mięsa, gotuj dalej i sprawdzaj co 5 minut. Gotową bazę curry zdejmij wtedy z ognia, aby nie rozgotować warzyw. Jeśli curry jest zbyt gęste, dodawaj po łyżce wywaru z ugotowanego kurczaka.",
+  "skladniki": [
+    {
+      "nazwa": "Kurczak, pałka bez skóry, surowa",
+      "ilosc": 250,
+      "jednostka": "g",
+      "stan": "całe pałki z kością, bez skóry; podana masa dotyczy części jadalnej bez kości"
+    },
+    {
+      "nazwa": "Mleko kokosowe z puszki",
+      "ilosc": 240,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Tajska Żółta Lekko Ostra Pasta Curry Yellow Curry Paste Mild 400g MAE PLOY",
+      "ilosc": 25,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Papryka czerwona, surowa",
+      "ilosc": 80,
+      "jednostka": "g",
+      "stan": "paski szerokości około 5 mm"
+    },
+    {
+      "nazwa": "Cukinia, surowa",
+      "ilosc": 100,
+      "jednostka": "g",
+      "stan": "półplasterki grubości około 5 mm"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 60,
+      "jednostka": "g",
+      "stan": "cienkie piórka"
+    },
+    {
+      "nazwa": "Imbir korzeń, surowy",
+      "ilosc": 5,
+      "jednostka": "g",
+      "stan": "drobno posiekany"
+    },
+    {
+      "nazwa": "Sos sojowy",
+      "ilosc": 5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Limonka",
+      "ilosc": 15,
+      "jednostka": "g",
+      "stan": "do wyciśnięcia soku"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Ryż jaśminowy, suchy",
+      "ilosc": 140,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Szczypiorek świeży",
+      "ilosc": 5,
+      "jednostka": "g",
+      "stan": "posiekany",
+      "zamiennik": "kolendra"
+    },
+    {
+      "nazwa": "woda",
+      "ilosc": 120,
+      "jednostka": "ml",
+      "stan": "do curry; woda do gotowania ryżu i mięsa jest dodatkowa, jej nadmiar odlej po gotowaniu"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 5,
+      "jednostka": "g",
+      "stan": "drobno posiekany"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 12,
+      "kroki": [
+        {
+          "tresc": "Umyj udka z kurczaka. Zostaw mięso w całości."
+        },
+        {
+          "tresc": "Umyj ręce oraz przybory i powierzchnie, które miały kontakt z surowym mięsem. Do warzyw użyj czystej deski i noża."
+        },
+        {
+          "tresc": "Obierz cebulę i pokrój w cienkie piórka."
+        },
+        {
+          "tresc": "Obierz i drobno posiekaj czosnek oraz imbir."
+        },
+        {
+          "tresc": "Umyj paprykę, usuń gniazdo nasienne i pokrój miąższ w paski szerokości około 5 mm."
+        },
+        {
+          "tresc": "Umyj cukinię i pokrój w półplasterki grubości około 5 mm."
+        },
+        {
+          "tresc": "Umyj i posiekaj szczypiorek. Umyj limonkę, wyciśnij sok z ilości wskazanej na liście składników i odstaw do końcowego doprawienia."
+        },
+        {
+          "tresc": "Odmierz mleko kokosowe, pastę curry, sos sojowy, oliwę, suchy ryż i wodę do curry w ilościach wskazanych na liście składników dla przygotowywanej liczby porcji."
+        },
+        {
+          "tresc": "Przepłucz ryż na sitku pod zimną wodą i odstaw do gotowania."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie kurczaka oraz równoległe przygotowanie ryżu i curry",
+      "minuty": 42,
+      "kroki": [
+        {
+          "tresc": "Włóż pałki do garnka mieszczącego przygotowywaną ilość mięsa. Zalej zimną wodą tak, aby przykryła mięso, i włącz grzanie na pierwszym palniku.",
+          "uwaga": true
+        },
+        {
+          "tresc": "Doprowadź wodę z mięsem do wrzenia; zwykle zajmuje to około 5 minut. Czas zależy od ilości wody i mocy palnika. Składniki są już przygotowane."
+        },
+        {
+          "tresc": "Po zagotowaniu zbierz szumowiny łyżką cedzakową. Zmniejsz ogień i uchyl pokrywkę."
+        },
+        {
+          "tresc": "Gotuj kurczaka na małym ogniu przez 32 minuty. Licz czas od rozpoczęcia łagodnego gotowania po zebraniu szumowin. Woda ma delikatnie bulgotać. Nastaw minutnik. W czasie gotowania mięsa ugotuj ryż i przygotuj bazę curry według kolejnych kroków. Po sygnale minutnika sprawdź mięso, niezależnie od postępu pracy przy curry.",
+          "uwaga": true
+        },
+        {
+          "tresc": "Na drugim palniku zagotuj w garnku większą ilość wody, tak aby ryż po wsypaniu był zanurzony i mógł swobodnie się gotować. Wsyp opłukany ryż, zamieszaj i gotuj przez czas podany na opakowaniu. Przed odcedzeniem sprawdź, czy ziarna są miękkie. Kurczak w tym czasie gotuje się na pierwszym palniku."
+        },
+        {
+          "tresc": "Ugotowany ryż odcedź na sitku, przełóż z powrotem do garnka i przykryj. Odstaw poza palnik do podania. Drugi palnik jest teraz wolny do przygotowania curry.",
+          "sygnal": "ziarna są miękkie, a nadmiar wody został odcedzony"
+        },
+        {
+          "tresc": "Gdy do końca gotowania kurczaka pozostaje około 12 minut, a drugi palnik jest już wolny, postaw na nim patelnię mieszczącą przygotowywaną ilość curry. Wlej odmierzoną oliwę i rozgrzewaj przez około 1 minutę na średnim ogniu. Jeśli ryż nadal się gotuje, rozpocznij przygotowanie curry zaraz po zdjęciu garnka z palnika."
+        },
+        {
+          "tresc": "Dodaj pokrojoną cebulę i smaż przez 3 minuty na średnim ogniu, mieszając.",
+          "sygnal": "cebula jest szklista, bez przypalonych brzegów"
+        },
+        {
+          "tresc": "Dodaj posiekany czosnek i imbir. Smaż przez 1 minutę na średnim ogniu, mieszając."
+        },
+        {
+          "tresc": "Dodaj odmierzoną pastę curry i smaż przez 1 minutę, stale mieszając.",
+          "sygnal": "pasta intensywnie pachnie, ale nie przypala się"
+        },
+        {
+          "tresc": "Wlej odmierzone mleko kokosowe oraz wodę do curry, dodaj sos sojowy. Wymieszaj i doprowadź do łagodnego wrzenia, podgrzewając przez około 2 minuty."
+        },
+        {
+          "tresc": "Dodaj paski papryki do łagodnie gotującej się bazy curry. Gotuj przez 3 minuty na małym ogniu."
+        },
+        {
+          "tresc": "Dodaj cukinię i gotuj jeszcze przez 4 minuty na małym ogniu. Papryka będzie gotowała się łącznie 7 minut, cukinia 4 minuty. Jeśli mięso nie jest jeszcze gotowe do dodania, zdejmij patelnię z ognia.",
+          "sygnal": "warzywa lekko zmiękły i zachowują kształt"
+        },
+        {
+          "tresc": "Po 32 minutach łagodnego gotowania sprawdź najgrubszą część mięsa termometrem, nie dotykając kości. Sprawdź też widelcem, czy mięso łatwo odchodzi od kości. Jeżeli nie osiągnęło 74°C albo nadal jest twarde, gotuj kolejne 5 minut i ponów kontrolę. Powtarzaj w razie potrzeby.",
+          "sygnal": "co najmniej 74°C w mięsie i łatwe oddzielanie go od kości",
+          "uwaga": true
+        },
+        {
+          "tresc": "Gotowe pałki wyjmij łyżką cedzakową na czystą deskę. Wyłącz pierwszy palnik. Wodę z gotowania odlej; możesz zachować niewielką ilość wywaru do ewentualnego rozrzedzenia curry."
+        }
+      ]
+    },
+    {
+      "nazwa": "Oddzielenie mięsa, połączenie i podanie",
+      "minuty": 6,
+      "kroki": [
+        {
+          "tresc": "Odczekaj około 1 minuty przed oddzielaniem mięsa; pałki nadal będą gorące, więc przytrzymuj je widelcem."
+        },
+        {
+          "tresc": "Przytrzymując pałki widelcem, oddziel mięso od kości i chrząstek. Podziel na większe kawałki."
+        },
+        {
+          "tresc": "Dodaj mięso do gotowej bazy curry. Podgrzewaj przez 2 minuty na małym ogniu, delikatnie mieszając. Jeśli patelnia czekała poza palnikiem i zawartość przestała być gorąca, najpierw ponownie doprowadź ją do łagodnego wrzenia, a następnie odlicz 2 minuty."
+        },
+        {
+          "tresc": "Zdejmij patelnię z ognia i wmieszaj sok z limonki. Rozdziel ugotowany ryż oraz całe curry na przygotowywaną liczbę porcji. Posyp szczypiorkiem i podaj."
+        }
+      ]
+    }
+  ]
+}
