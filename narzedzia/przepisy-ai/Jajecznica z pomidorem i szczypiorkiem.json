@@ -1,6 +1,6 @@
 {
   "nazwa": "Jajecznica z pomidorem i szczypiorkiem",
-  "opis": "Kremowa jajecznica z pomidorem i świeżym szczypiorkiem, podana z dwiema kromkami chleba żytniego. Przepis na 1 porcję.",
+  "opis": "Kremowa jajecznica z pomidorem i świeżym szczypiorkiem, podana z dwiema kromkami chleba żytniego. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
   "pory": [
     "sniadanie",
     "kolacja"
@@ -16,10 +16,10 @@
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 0,
   "czas_przygotowania_min": 6,
-  "czas_obrobki_min": 5,
+  "czas_obrobki_min": 7,
   "sprzet": [
     "Patelnia 24 cm",
-    "miska",
+    "Miska",
     "Widelec",
     "Nóż szefa kuchni",
     "Deska do krojenia",
@@ -27,7 +27,7 @@
   ],
   "przechowywanie": "Jajecznicę zjedz bezpośrednio po przygotowaniu.",
   "mozna_mrozic": false,
-  "ratunek": "Jeśli jajecznica wyszła zbyt sucha, zdejmij ją z ognia i wmieszaj mały kawałek masła. Jeśli pomidor puścił dużo wody, smaż chwilę dłużej bez przykrycia.",
+  "ratunek": "Płyn z pomidora odparuj przed dodaniem jajek. Gdy jajecznica się zetnie, natychmiast zdejmij ją z ognia, aby nie wyschła.",
   "skladniki": [
     {
       "nazwa": "Jaja kurze, całe, surowe",
@@ -75,27 +75,30 @@
       "minuty": 6,
       "kroki": [
         {
-          "tresc": "Pomidora pokrój w kostkę, a szczypiorek drobno posiekaj."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
         },
         {
-          "tresc": "Jajka wbij do miski, dopraw solą i pieprzem, po czym roztrzep widelcem.",
-          "uwaga": true
+          "tresc": "Umyj pomidora i szczypiorek. Pomidora pokrój w kostkę, szczypiorek posiekaj. Przygotuj pieczywo."
+        },
+        {
+          "tresc": "Wbij jajka do miski, dodaj sól i pieprz, roztrzep widelcem."
         }
       ]
     },
     {
       "nazwa": "Smażenie",
-      "minuty": 5,
+      "minuty": 7,
       "kroki": [
         {
-          "tresc": "Na patelni rozpuść masło, dodaj pomidora i smaż około 2 minut, aż odparuje część soku."
+          "tresc": "Rozpuść masło na patelni przez około 1 minutę na średnim ogniu. Dodaj pomidora i smaż 2 minuty; przed dodaniem jajek odparuj nadmiar płynu."
         },
         {
-          "tresc": "Wlej jajka i smaż na małym ogniu, mieszając, aż będą miękko ścięte.",
-          "sygnal": "jajka są kremowe i nie ma na patelni płynnego białka"
+          "tresc": "Wlej jajka, zmniejsz ogień i smaż 2–3 minuty, łagodnie mieszając.",
+          "sygnal": "jajka są ścięte, bez płynnego białka; pozostają wilgotne",
+          "uwaga": true
         },
         {
-          "tresc": "Zdejmij patelnię z ognia, dodaj szczypiorek i wymieszaj. Podaj jajecznicę z dwiema kromkami chleba."
+          "tresc": "Zdejmij z ognia, dodaj szczypiorek i podaj z pieczywem w ilości wskazanej na liście."
         }
       ]
     }

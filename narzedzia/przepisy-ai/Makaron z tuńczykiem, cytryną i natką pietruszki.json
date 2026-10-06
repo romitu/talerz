@@ -1,6 +1,6 @@
 {
   "nazwa": "Makaron z tuńczykiem, cytryną i natką pietruszki",
-  "opis": "Szybki pełnoziarnisty makaron z tuńczykiem, cytryną, czosnkiem i natką pietruszki. Przepis na 1 porcję.",
+  "opis": "Szybki pełnoziarnisty makaron z tuńczykiem, cytryną, czosnkiem i natką pietruszki. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
   "pory": [
     "obiad",
     "kolacja"
@@ -8,54 +8,57 @@
   "kuchnie": [
     "srodziemnomorska"
   ],
-  "rodzaje": ["makaron"],
+  "rodzaje": [
+    "makaron"
+  ],
   "porcjowanie": "waga",
   "porcja_g": 266.5,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 2,
   "czas_przygotowania_min": 7,
-  "czas_obrobki_min": 15,
+  "czas_obrobki_min": 20,
   "sprzet": [
     "Garnek 3 l",
     "Patelnia 28 cm",
     "Nóż szefa kuchni",
     "Deska do krojenia",
-    "Waga kuchenna"
+    "Waga kuchenna",
+    "Durszlak"
   ],
-  "przechowywanie": "Przechowuj w lodówce do 2 dni. Przy odgrzewaniu dodaj niewielką ilość wody.",
+  "przechowywanie": "Przechowuj w lodówce do 2 dni. Przy odgrzewaniu dodaj niewielką ilość wody. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
   "mozna_mrozic": false,
   "ratunek": "Za suchy makaron rozluźnij wodą z gotowania i oliwą. Zbyt kwaśny smak złagodź dodatkowym makaronem.",
   "skladniki": [
     {
       "nazwa": "Makaron pełnoziarnisty, suchy",
-      "ilosc": 85.0,
+      "ilosc": 85,
       "jednostka": "g"
     },
     {
       "nazwa": "Tuńczyk w wodzie, odsączony",
-      "ilosc": 130.0,
+      "ilosc": 130,
       "jednostka": "g"
     },
     {
       "nazwa": "Cytryna",
-      "ilosc": 20.0,
+      "ilosc": 20,
       "jednostka": "g",
       "stan": "sok"
     },
     {
       "nazwa": "Pietruszka natka",
-      "ilosc": 15.0,
+      "ilosc": 15,
       "jednostka": "g",
       "stan": "posiekana"
     },
     {
       "nazwa": "Czosnek, surowy",
-      "ilosc": 5.0,
+      "ilosc": 5,
       "jednostka": "g"
     },
     {
       "nazwa": "Oliwa z oliwek",
-      "ilosc": 10.0,
+      "ilosc": 10,
       "jednostka": "g"
     },
     {
@@ -76,27 +79,32 @@
   ],
   "etapy": [
     {
-      "nazwa": "Gotowanie makaronu",
-      "minuty": 15,
+      "nazwa": "Przygotowanie składników",
+      "minuty": 7,
       "kroki": [
         {
-          "tresc": "Makaron ugotuj al dente. Zachowaj około pół szklanki wody z gotowania."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+        },
+        {
+          "tresc": "Odsącz tuńczyka. Obierz i posiekaj czosnek. Umyj i posiekaj natkę. Umyj cytrynę i odmierz sok. Przygotuj makaron."
         }
       ]
     },
     {
-      "nazwa": "Łączenie",
-      "minuty": 7,
+      "nazwa": "Gotowanie i łączenie",
+      "minuty": 20,
       "kroki": [
         {
-          "tresc": "Na oliwie krótko podgrzej czosnek i chili."
+          "tresc": "Zagotuj wodę w garnku i ugotuj makaron przez czas wskazany na opakowaniu. Nastaw minutnik; w tym czasie przygotowuj sos na drugim palniku. Przed odcedzeniem zachowaj nieco wody z gotowania. Woda do gotowania jest dodatkowa i zostanie odlana."
         },
         {
-          "tresc": "Dodaj tuńczyka, makaron, sok z cytryny i część wody z gotowania.",
-          "uwaga": true
+          "tresc": "Gdy do końca gotowania makaronu pozostaje około 4 minut, rozgrzej oliwę na drugim palniku przez 1 minutę. Dodaj czosnek i chili; podgrzewaj 20–30 sekund."
         },
         {
-          "tresc": "Wymieszaj, dopraw i posyp natką pietruszki."
+          "tresc": "Dodaj tuńczyka, makaron i niewielką ilość zachowanej wody. Podgrzewaj na małym ogniu przez 1–2 minuty, delikatnie mieszając."
+        },
+        {
+          "tresc": "Zdejmij z ognia. Dodaj sok z cytryny, natkę, sól i pieprz. Podaj."
         }
       ]
     }

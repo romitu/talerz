@@ -1,19 +1,21 @@
 {
   "nazwa": "Jaglanka z gruszką i orzechami",
-  "opis": "Kremowa kasza jaglana na mleku z gruszką, cynamonem i orzechami włoskimi. Przepis na 1 porcję.",
+  "opis": "Kremowa kasza jaglana na mleku z gruszką, cynamonem i orzechami włoskimi. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
   "pory": [
     "sniadanie"
   ],
   "kuchnie": [
     "inna"
   ],
-  "rodzaje": ["na_slodko"],
+  "rodzaje": [
+    "na_slodko"
+  ],
   "porcjowanie": "waga",
   "porcja_g": 431.5,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 2,
   "czas_przygotowania_min": 7,
-  "czas_obrobki_min": 18,
+  "czas_obrobki_min": 25,
   "sprzet": [
     "Rondel",
     "Sitko",
@@ -21,19 +23,19 @@
     "Deska do krojenia",
     "Waga kuchenna"
   ],
-  "przechowywanie": "Przechowuj w lodówce do 2 dni. Przy odgrzewaniu dodaj trochę mleka.",
+  "przechowywanie": "Przechowuj w lodówce do 2 dni. Przy odgrzewaniu dodaj trochę mleka. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
   "mozna_mrozic": false,
-  "ratunek": "Gorycz kaszy oznacza niedokładne wypłukanie — złagodź ją cynamonem i gruszką. Za gęstą jaglankę rozcieńcz mlekiem.",
+  "ratunek": "Jeżeli kasza jest nadal twarda, dodaj trochę gorącej wody i gotuj po 3 minuty, mieszając. Kaszy lub orzechów o zjełczałym zapachu nie używaj; cynamon nie usunie przyczyny takiej goryczy.",
   "skladniki": [
     {
       "nazwa": "Kasza jaglana, sucha",
-      "ilosc": 60.0,
+      "ilosc": 60,
       "jednostka": "g",
       "stan": "dokładnie wypłukana"
     },
     {
       "nazwa": "Mleko 2%",
-      "ilosc": 250.0,
+      "ilosc": 250,
       "jednostka": "g"
     },
     {
@@ -44,17 +46,17 @@
     },
     {
       "nazwa": "Orzechy włoskie",
-      "ilosc": 20.0,
+      "ilosc": 20,
       "jednostka": "g"
     },
     {
       "nazwa": "Cynamon mielony",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "g"
     },
     {
       "nazwa": "Miód",
-      "ilosc": 10.0,
+      "ilosc": 10,
       "jednostka": "g"
     },
     {
@@ -65,28 +67,37 @@
   ],
   "etapy": [
     {
-      "nazwa": "Przygotowanie",
+      "nazwa": "Przygotowanie składników",
       "minuty": 7,
       "kroki": [
         {
-          "tresc": "Kaszę płucz najpierw gorącą, potem zimną wodą. Gruszkę pokrój w kostkę."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+        },
+        {
+          "tresc": "Kaszę przepłucz na sitku pod bieżącą wodą i przelej wrzątkiem."
+        },
+        {
+          "tresc": "Umyj gruszkę, usuń gniazdo nasienne i pokrój w kostkę. Posiekaj orzechy. Odmierz mleko, miód, cynamon i sól."
         }
       ]
     },
     {
       "nazwa": "Gotowanie",
-      "minuty": 18,
+      "minuty": 25,
       "kroki": [
         {
-          "tresc": "Kaszę zalej mlekiem, dodaj sól i gotuj na małym ogniu około 15 minut, często mieszając.",
+          "tresc": "Wlej mleko do rondla, dodaj kaszę i sól. Doprowadź do łagodnego wrzenia przez około 3 minuty."
+        },
+        {
+          "tresc": "Gotuj na małym ogniu pod uchyloną pokrywką przez 15–18 minut lub czas wskazany na opakowaniu, często mieszając przy dnie. W razie potrzeby uzupełnij odparowany płyn gorącą wodą."
+        },
+        {
+          "tresc": "Dodaj gruszkę i cynamon, gotuj jeszcze 2 minuty.",
+          "sygnal": "kasza jest miękka i kremowa",
           "uwaga": true
         },
         {
-          "tresc": "Dodaj gruszkę i cynamon, gotuj jeszcze 2–3 minuty.",
-          "sygnal": "kasza jest miękka i kremowa"
-        },
-        {
-          "tresc": "Podaj z miodem i orzechami."
+          "tresc": "Zdejmij z ognia, dodaj miód i orzechy, podaj."
         }
       ]
     }

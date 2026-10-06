@@ -1,81 +1,85 @@
 {
   "nazwa": "Makaron z wołowiną i sosem pomidorowym",
-  "opis": "Pełnoziarnisty makaron z mieloną wołowiną i warzywnym sosem pomidorowym. Przepis na 1 porcję.",
+  "opis": "Pełnoziarnisty makaron z mieloną wołowiną i warzywnym sosem pomidorowym. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
   "pory": [
     "obiad"
   ],
   "kuchnie": [
     "inna"
   ],
-  "rodzaje": ["makaron"],
+  "rodzaje": [
+    "makaron"
+  ],
   "porcjowanie": "waga",
   "porcja_g": 648.5,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 3,
   "czas_przygotowania_min": 12,
-  "czas_obrobki_min": 30,
+  "czas_obrobki_min": 37,
   "sprzet": [
     "Patelnia 28 cm",
     "Garnek 3 l",
     "Tarka o grubych oczkach",
     "Nóż szefa kuchni",
     "Deska do krojenia",
-    "Waga kuchenna"
+    "Waga kuchenna",
+    "Durszlak",
+    "Termometr do mięsa"
   ],
-  "przechowywanie": "Sos przechowuj w lodówce do 3 dni albo zamroź. Makaron najlepiej trzymaj osobno.",
+  "przechowywanie": "Sos przechowuj w lodówce do 3 dni albo zamroź. Makaron najlepiej trzymaj osobno. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
   "mozna_mrozic": true,
   "ratunek": "Jeśli sos jest tłusty, zbierz nadmiar tłuszczu. Za kwaśny sos złagodź marchewką i dłuższym gotowaniem.",
   "skladniki": [
     {
       "nazwa": "Makaron pełnoziarnisty, suchy",
-      "ilosc": 85.0,
+      "ilosc": 85,
       "jednostka": "g"
     },
     {
       "nazwa": "Wołowina mielona 5% tłuszczu, surowa",
-      "ilosc": 150.0,
+      "ilosc": 150,
       "jednostka": "g"
     },
     {
       "nazwa": "Passata pomidorowa",
-      "ilosc": 250.0,
+      "ilosc": 250,
       "jednostka": "g"
     },
     {
       "nazwa": "Marchew, surowa",
-      "ilosc": 80.0,
+      "ilosc": 80,
       "jednostka": "g",
       "stan": "starta"
     },
     {
       "nazwa": "Cebula, surowa",
-      "ilosc": 70.0,
+      "ilosc": 70,
       "jednostka": "g",
       "stan": "posiekana"
     },
     {
       "nazwa": "Czosnek, surowy",
-      "ilosc": 5.0,
+      "ilosc": 5,
       "jednostka": "g"
     },
     {
       "nazwa": "Oliwa z oliwek",
-      "ilosc": 5.0,
+      "ilosc": 5,
       "jednostka": "g"
     },
     {
       "nazwa": "Oregano suszone",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "g"
     },
     {
       "nazwa": "Bazylia suszona",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "g"
     },
     {
       "nazwa": "Sól kłodawska",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "g"
     },
     {
@@ -86,31 +90,37 @@
   ],
   "etapy": [
     {
-      "nazwa": "Przygotowanie",
+      "nazwa": "Przygotowanie składników",
       "minuty": 12,
       "kroki": [
         {
-          "tresc": "Marchew zetrzyj, cebulę i czosnek posiekaj. Makaron ugotuj al dente."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+        },
+        {
+          "tresc": "Umyj i obierz marchew, zetrzyj na tarce. Obierz i posiekaj cebulę oraz czosnek. Odmierz passatę i makaron. Przygotuj mięso."
         }
       ]
     },
     {
-      "nazwa": "Gotowanie sosu",
-      "minuty": 30,
+      "nazwa": "Gotowanie sosu i makaronu",
+      "minuty": 37,
       "kroki": [
         {
-          "tresc": "Na oliwie smaż cebulę i marchew 4 minuty. Dodaj wołowinę i rozdrobnij ją."
+          "tresc": "Rozgrzej oliwę przez 1 minutę, smaż cebulę i marchew 4 minuty."
         },
         {
-          "tresc": "Smaż, aż mięso straci surowy kolor. Dodaj czosnek, passatę i zioła.",
+          "tresc": "Dodaj mięso i smaż 6–7 minut, rozdzielając grudki. Dodaj czosnek i smaż 30 sekund."
+        },
+        {
+          "tresc": "Dodaj passatę, oregano oraz bazylię suszoną. Doprowadź do wrzenia i gotuj łagodnie przez 18–20 minut, mieszając."
+        },
+        {
+          "tresc": "W czasie gotowania sosu ugotuj makaron przez czas z opakowania na drugim palniku, następnie odcedź."
+        },
+        {
+          "tresc": "Sprawdź sos, dopraw solą i pieprzem i podaj z makaronem.",
+          "sygnal": "wołowina jest rozdrobniona i ugotowana, sos gęsty; mięso co najmniej 71°C",
           "uwaga": true
-        },
-        {
-          "tresc": "Gotuj sos 18–20 minut.",
-          "sygnal": "sos jest gęsty, a mięso całkowicie ścięte"
-        },
-        {
-          "tresc": "Podaj z makaronem."
         }
       ]
     }

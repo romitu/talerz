@@ -1,93 +1,98 @@
 {
   "nazwa": "Pełnoziarniste placuszki ze skyrem i owocami",
-  "opis": "Pełnoziarniste placuszki podane ze skyrem i borówkami. Przepis na 1 porcję.",
+  "opis": "Pełnoziarniste placuszki podane ze skyrem i borówkami. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
   "pory": [
     "sniadanie"
   ],
   "kuchnie": [
     "inna"
   ],
-  "rodzaje": ["na_slodko"],
+  "rodzaje": [
+    "na_slodko"
+  ],
   "porcjowanie": "waga",
-  "porcja_g": 521.0,
+  "porcja_g": 521,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 1,
   "czas_przygotowania_min": 10,
-  "czas_obrobki_min": 15,
+  "czas_obrobki_min": 18,
   "sprzet": [
     "Patelnia 24 cm",
-    "miska",
+    "Miska",
     "Widelec",
     "Waga kuchenna"
   ],
-  "przechowywanie": "Placuszki przechowuj w lodówce do 1 dnia. Skyr i owoce trzymaj osobno.",
+  "przechowywanie": "Placuszki przechowuj w lodówce do 1 dnia. Skyr i owoce trzymaj osobno. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
   "mozna_mrozic": false,
-  "ratunek": "Jeśli ciasto jest za gęste, dolej mleka. Jeśli placuszki przywierają, patelnia jest za chłodna albo ma za mało oleju.",
+  "ratunek": "Jeśli spód ciemnieje, a środek jest surowy, zmniejsz ogień i nakładaj cieńsze placuszki. Przywieranie może wynikać z uszkodzonej powierzchni patelni lub zbyt wczesnego obracania.",
   "skladniki": [
     {
       "nazwa": "Mąka orkiszowa pełnoziarnista",
-      "ilosc": 80.0,
+      "ilosc": 80,
       "jednostka": "g"
     },
     {
       "nazwa": "Jaja kurze, całe, surowe",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "szt"
     },
     {
       "nazwa": "Mleko 2%",
-      "ilosc": 120.0,
+      "ilosc": 120,
       "jednostka": "g"
     },
     {
       "nazwa": "Skyr naturalny",
-      "ilosc": 150.0,
+      "ilosc": 150,
       "jednostka": "g"
     },
     {
       "nazwa": "Borówki amerykańskie",
-      "ilosc": 100.0,
+      "ilosc": 100,
       "jednostka": "g"
     },
     {
       "nazwa": "Olej rzepakowy",
-      "ilosc": 5.0,
+      "ilosc": 5,
       "jednostka": "g"
     },
     {
       "nazwa": "Miód",
-      "ilosc": 10.0,
+      "ilosc": 10,
       "jednostka": "g"
     },
     {
       "nazwa": "Cynamon mielony",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "g"
     }
   ],
   "etapy": [
     {
-      "nazwa": "Przygotowanie ciasta",
+      "nazwa": "Przygotowanie składników",
       "minuty": 10,
       "kroki": [
         {
-          "tresc": "Jajko roztrzep z mlekiem. Dodaj mąkę i cynamon, a następnie wymieszaj na gładkie ciasto."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
         },
         {
-          "tresc": "Odstaw ciasto na 5 minut."
+          "tresc": "Umyj i osusz borówki. Odmierz mąkę, mleko, skyr, miód, cynamon i olej."
+        },
+        {
+          "tresc": "Roztrzep jajko z mlekiem, dodaj mąkę i cynamon. Wymieszaj na jednolite ciasto i odstaw na 5 minut."
         }
       ]
     },
     {
       "nazwa": "Smażenie",
-      "minuty": 15,
+      "minuty": 18,
       "kroki": [
         {
-          "tresc": "Patelnię posmaruj olejem i smaż niewielkie placuszki na średnim ogniu."
+          "tresc": "Rozgrzej patelnię nieprzywierającą przez 1 minutę na średnim ogniu. Rozdziel odmierzony olej między partie."
         },
         {
-          "tresc": "Odwracaj, gdy na powierzchni pojawią się pęcherzyki.",
-          "sygnal": "obie strony są złote",
+          "tresc": "Nakładaj małe porcje ciasta i smaż 2–3 minuty, aż brzegi się zetną i spód zrumieni. Odwróć i smaż jeszcze 1–2 minuty. Powtarzaj z resztą ciasta; etap obejmuje około 3 partie dla bazy.",
+          "sygnal": "placuszki mają rumiane strony i nie mają surowego ciasta w środku",
           "uwaga": true
         },
         {

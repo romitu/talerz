@@ -1,93 +1,98 @@
 {
   "nazwa": "Placuszki bananowo-owsiane",
-  "opis": "Miękkie placuszki z banana, jajka i mąki owsianej, podane z jogurtem. Przepis na 1 porcję.",
+  "opis": "Miękkie placuszki z banana, jajka i mąki owsianej, podane z jogurtem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
   "pory": [
     "sniadanie"
   ],
   "kuchnie": [
     "inna"
   ],
-  "rodzaje": ["na_slodko"],
+  "rodzaje": [
+    "na_slodko"
+  ],
   "porcjowanie": "waga",
-  "porcja_g": 381.0,
+  "porcja_g": 381,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 1,
-  "czas_przygotowania_min": 8,
-  "czas_obrobki_min": 12,
+  "czas_przygotowania_min": 10,
+  "czas_obrobki_min": 18,
   "sprzet": [
     "Patelnia 24 cm",
-    "miska",
+    "Miska",
     "Widelec",
     "Waga kuchenna"
   ],
-  "przechowywanie": "Placuszki przechowuj w lodówce do 1 dnia. Jogurt trzymaj osobno.",
+  "przechowywanie": "Placuszki przechowuj w lodówce do 1 dnia. Jogurt trzymaj osobno. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
   "mozna_mrozic": false,
   "ratunek": "Jeśli placuszki się rozpadają, dodaj odrobinę mąki. Jeśli zbyt szybko ciemnieją, zmniejsz ogień.",
   "skladniki": [
     {
       "nazwa": "Banan",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "szt",
       "stan": "bardzo dojrzały"
     },
     {
       "nazwa": "Jaja kurze, całe, surowe",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "szt"
     },
     {
       "nazwa": "Mąka owsiana pełnoziarnista",
-      "ilosc": 60.0,
+      "ilosc": 60,
       "jednostka": "g"
     },
     {
       "nazwa": "Mleko 2%",
-      "ilosc": 60.0,
+      "ilosc": 60,
       "jednostka": "g"
     },
     {
       "nazwa": "Jogurt naturalny 2%",
-      "ilosc": 80.0,
+      "ilosc": 80,
       "jednostka": "g"
     },
     {
       "nazwa": "Olej rzepakowy",
-      "ilosc": 5.0,
+      "ilosc": 5,
       "jednostka": "g"
     },
     {
       "nazwa": "Cynamon mielony",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "g"
     }
   ],
   "etapy": [
     {
-      "nazwa": "Przygotowanie ciasta",
-      "minuty": 8,
+      "nazwa": "Przygotowanie składników",
+      "minuty": 10,
       "kroki": [
         {
-          "tresc": "Banana dokładnie rozgnieć widelcem."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
         },
         {
-          "tresc": "Dodaj jajko, mleko, mąkę i cynamon. Wymieszaj na jednolitą masę."
+          "tresc": "Obierz banana i rozgnieć widelcem. Odmierz mleko, mąkę, jogurt, cynamon i olej."
+        },
+        {
+          "tresc": "Połącz banana z jajkiem, mlekiem, mąką i cynamonem. Wymieszaj i odstaw na 5 minut, aby mąka wchłonęła płyn."
         }
       ]
     },
     {
       "nazwa": "Smażenie",
-      "minuty": 12,
+      "minuty": 18,
       "kroki": [
         {
-          "tresc": "Patelnię lekko posmaruj olejem. Nakładaj małe porcje ciasta."
+          "tresc": "Rozgrzej patelnię nieprzywierającą przez 1 minutę na średnim ogniu. Podziel olej między partie."
         },
         {
-          "tresc": "Smaż po około 2 minuty z każdej strony.",
-          "sygnal": "na powierzchni pojawiają się pęcherzyki, a spód jest rumiany",
+          "tresc": "Nakładaj małe porcje ciasta i smaż około 2–3 minut z pierwszej strony oraz 1–2 minuty z drugiej. Etap obejmuje około 3 partie dla bazy; przy większej ilości dolicz kolejne partie.",
+          "sygnal": "spód rumiany, brzegi ścięte, środek bez surowego ciasta",
           "uwaga": true
         },
         {
-          "tresc": "Podaj z jogurtem."
+          "tresc": "Podaj z odmierzoną ilością jogurtu."
         }
       ]
     }

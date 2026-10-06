@@ -1,6 +1,6 @@
 {
   "nazwa": "Pudding chia z mango i mlekiem kokosowym",
-  "opis": "Wegański pudding chia na mleku kokosowym z mango, migdałami i daktylami. Przepis na 1 porcję.",
+  "opis": "Pudding kokosowy z mango, daktylami i migdałami. Wymaga co najmniej 4 godzin chłodzenia; czas przygotowania obejmuje oczekiwanie, sama praca zajmuje około 10 minut. Ilości składników dobierz z listy dla przygotowywanej liczby porcji.",
   "pory": [
     "sniadanie",
     "dodatek"
@@ -8,64 +8,87 @@
   "kuchnie": [
     "inna"
   ],
-  "rodzaje": ["na_slodko"],
+  "rodzaje": [
+    "na_slodko"
+  ],
   "porcjowanie": "waga",
-  "porcja_g": 435.0,
+  "porcja_g": 435,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 2,
-  "czas_przygotowania_min": 8,
+  "czas_przygotowania_min": 250,
   "czas_obrobki_min": 0,
   "sprzet": [
-    "miska",
+    "Miska",
     "Widelec",
     "Nóż szefa kuchni",
     "Deska do krojenia",
     "Waga kuchenna"
   ],
-  "przechowywanie": "Przechowuj pod przykryciem w lodówce do 2 dni. Migdały dodaj przed jedzeniem.",
+  "przechowywanie": "Przechowuj pod przykryciem w lodówce do 2 dni. Migdały dodaj przed jedzeniem. Lodówka: do 4°C.",
   "mozna_mrozic": false,
   "ratunek": "Jeśli pudding jest zbyt rzadki, dodaj łyżeczkę chia i odstaw na 20 minut. Za gęsty rozcieńcz mlekiem kokosowym.",
   "skladniki": [
     {
       "nazwa": "Nasiona chia",
-      "ilosc": 30.0,
+      "ilosc": 30,
       "jednostka": "g"
     },
     {
       "nazwa": "Mleko kokosowe light z puszki",
-      "ilosc": 220.0,
+      "ilosc": 220,
       "jednostka": "g"
     },
     {
       "nazwa": "Mango",
-      "ilosc": 150.0,
+      "ilosc": 150,
       "jednostka": "g",
       "stan": "pokrojone w kostkę"
     },
     {
       "nazwa": "Migdały",
-      "ilosc": 15.0,
+      "ilosc": 15,
       "jednostka": "g",
       "stan": "posiekane"
     },
     {
       "nazwa": "Daktyle suszone",
-      "ilosc": 20.0,
+      "ilosc": 20,
       "jednostka": "g",
       "stan": "drobno posiekane"
     }
   ],
   "etapy": [
     {
-      "nazwa": "Przygotowanie",
+      "nazwa": "Przygotowanie składników",
       "minuty": 6,
       "kroki": [
         {
-          "tresc": "Chia wymieszaj z mlekiem kokosowym i daktylami."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
         },
         {
-          "tresc": "Po 10 minutach wymieszaj ponownie, przykryj i wstaw do lodówki na co najmniej 4 godziny.",
-          "sygnal": "po schłodzeniu pudding jest gęsty, a nasiona równomiernie rozłożone",
+          "tresc": "Umyj mango, usuń skórkę i pestkę, pokrój miąższ; przechowaj pod przykryciem w lodówce. Posiekaj migdały."
+        },
+        {
+          "tresc": "Usuń pestki daktyli, jeśli są, i drobno je posiekaj. Odmierz chia i mleko kokosowe."
+        }
+      ]
+    },
+    {
+      "nazwa": "Mieszanie",
+      "minuty": 2,
+      "kroki": [
+        {
+          "tresc": "Dokładnie wymieszaj chia z mlekiem kokosowym i daktylami."
+        }
+      ]
+    },
+    {
+      "nazwa": "Chłodzenie",
+      "minuty": 240,
+      "kroki": [
+        {
+          "tresc": "Przykryj i wstaw do lodówki na co najmniej 4 godziny. Po pierwszych 10 minutach wymieszaj ponownie, aby rozbić grudki.",
+          "sygnal": "nasiona napęczniały, masa jest gęsta i jednolita",
           "uwaga": true
         }
       ]
@@ -75,7 +98,7 @@
       "minuty": 2,
       "kroki": [
         {
-          "tresc": "Dodaj mango i posyp migdałami."
+          "tresc": "Wymieszaj pudding, dodaj przygotowane mango i migdały."
         }
       ]
     }

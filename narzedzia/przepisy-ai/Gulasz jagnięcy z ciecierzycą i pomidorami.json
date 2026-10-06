@@ -1,129 +1,147 @@
 {
   "nazwa": "Gulasz jagnięcy z ciecierzycą i pomidorami",
-  "opis": "Aromatyczny gulasz jagnięcy z ciecierzycą, pomidorami i korzennymi przyprawami, podany z bulgurem. Przepis na 2 porcje.",
+  "opis": "Aromatyczny gulasz jagnięcy z ciecierzycą, pomidorami i korzennymi przyprawami, podany z bulgurem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
   "pory": [
     "obiad"
   ],
   "kuchnie": [
     "inna"
   ],
-  "rodzaje": ["gulasz_curry"],
+  "rodzaje": [
+    "gulasz_curry"
+  ],
   "porcjowanie": "waga",
   "porcja_g": 737.5,
   "liczba_porcji_bazowych": 2,
   "trwalosc_dni": 3,
   "czas_przygotowania_min": 15,
-  "czas_obrobki_min": 80,
+  "czas_obrobki_min": 120,
   "sprzet": [
     "Garnek 3 l",
     "Garnek 2 l",
     "Nóż szefa kuchni",
     "Deska do krojenia",
-    "Waga kuchenna"
+    "Waga kuchenna",
+    "Sitko"
   ],
-  "przechowywanie": "Przechowuj w lodówce do 3 dni albo zamroź. Kaszę trzymaj osobno.",
+  "przechowywanie": "Przechowuj w lodówce do 3 dni albo zamroź. Kaszę trzymaj osobno. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
   "mozna_mrozic": true,
   "ratunek": "Twardą jagnięcinę duś dalej na małym ogniu. Za rzadki sos odparuj bez przykrycia.",
   "skladniki": [
     {
       "nazwa": "Jagnięcina, udziec surowy",
-      "ilosc": 320.0,
+      "ilosc": 320,
       "jednostka": "g",
       "stan": "pokrojona w kostkę"
     },
     {
       "nazwa": "Ciecierzyca z puszki, odsączona",
-      "ilosc": 200.0,
+      "ilosc": 200,
       "jednostka": "g"
     },
     {
       "nazwa": "Pomidory krojone z puszki",
-      "ilosc": 360.0,
+      "ilosc": 360,
       "jednostka": "g"
     },
     {
       "nazwa": "Kasza bulgur, sucha",
-      "ilosc": 100.0,
+      "ilosc": 100,
       "jednostka": "g"
     },
     {
       "nazwa": "Marchew, surowa",
-      "ilosc": 120.0,
+      "ilosc": 120,
       "jednostka": "g",
       "stan": "pokrojona"
     },
     {
       "nazwa": "Cebula, surowa",
-      "ilosc": 100.0,
+      "ilosc": 100,
       "jednostka": "g",
       "stan": "posiekana"
     },
     {
       "nazwa": "Domowy bulion warzywny",
-      "ilosc": 240.0,
+      "ilosc": 240,
       "jednostka": "g"
     },
     {
       "nazwa": "Czosnek, surowy",
-      "ilosc": 10.0,
+      "ilosc": 10,
       "jednostka": "g"
     },
     {
       "nazwa": "Oliwa z oliwek",
-      "ilosc": 16.0,
+      "ilosc": 16,
       "jednostka": "g"
     },
     {
       "nazwa": "Kmin rzymski mielony",
-      "ilosc": 4.0,
+      "ilosc": 4,
       "jednostka": "g"
     },
     {
       "nazwa": "Cynamon mielony",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "g"
     },
     {
       "nazwa": "Papryka słodka mielona",
-      "ilosc": 2.0,
+      "ilosc": 2,
       "jednostka": "g"
     },
     {
       "nazwa": "Sól kłodawska",
-      "ilosc": 2.0,
+      "ilosc": 2,
       "jednostka": "g"
     }
   ],
   "etapy": [
     {
-      "nazwa": "Przygotowanie",
+      "nazwa": "Przygotowanie składników",
       "minuty": 15,
       "kroki": [
         {
-          "tresc": "Jagnięcinę pokrój i osusz. Marchew pokrój, cebulę i czosnek posiekaj."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
         },
         {
-          "tresc": "Kaszę bulgur ugotuj."
+          "tresc": "Mięso osusz i pokrój w kostkę około 3 cm. Po kontakcie z nim umyj przybory i ręce."
+        },
+        {
+          "tresc": "Obierz i posiekaj cebulę oraz czosnek. Umyj i obierz marchew, pokrój w grube półplasterki."
+        },
+        {
+          "tresc": "Opłucz i odsącz ciecierzycę. Odmierz bulgur, bulion oraz pomidory."
         }
       ]
     },
     {
-      "nazwa": "Duszenie",
-      "minuty": 80,
+      "nazwa": "Duszenie i gotowanie kaszy",
+      "minuty": 120,
       "kroki": [
         {
-          "tresc": "Na oliwie obsmaż jagnięcinę partiami. Dodaj cebulę i marchew."
+          "tresc": "Rozgrzej oliwę przez 1 minutę. Obsmaż jagnięcinę partiami po 4–5 minut, obracając; dla porcji bazowej przeznacz około 10 minut. Przełóż na talerz."
         },
         {
-          "tresc": "Dodaj czosnek, przyprawy, pomidory i bulion. Duś pod przykryciem około 60 minut."
+          "tresc": "W tym samym garnku smaż cebulę 4 minuty. Dodaj czosnek, kmin, cynamon i paprykę; smaż 30 sekund."
         },
         {
-          "tresc": "Dodaj ciecierzycę i duś kolejne 15 minut.",
-          "sygnal": "mięso jest miękkie, a sos gęsty",
+          "tresc": "Włóż mięso, dodaj pomidory i bulion. Doprowadź do łagodnego wrzenia przez około 4 minuty. Duś pod przykryciem 60 minut; kontroluj płyn co 20 minut."
+        },
+        {
+          "tresc": "Dodaj marchew i duś 20 minut. Jeśli jagnięcina nadal jest twarda, przed kolejnym krokiem duś po 15 minut, w razie potrzeby uzupełniając gorącą wodę."
+        },
+        {
+          "tresc": "Gdy mięso jest już prawie miękkie, ugotuj bulgur na drugim palniku przez czas z opakowania. Wodę do kaszy traktuj jako wodę do gotowania i odcedź jej nadmiar."
+        },
+        {
+          "tresc": "Dodaj do gulaszu ciecierzycę i gotuj 10 minut, w razie potrzeby bez pokrywki, aby zagęścić sos.",
+          "sygnal": "mięso łatwo rozdziela się widelcem, marchew miękka",
           "uwaga": true
         },
         {
-          "tresc": "Podaj z kaszą bulgur."
+          "tresc": "Dopraw solą i podaj z kaszą."
         }
       ]
     }

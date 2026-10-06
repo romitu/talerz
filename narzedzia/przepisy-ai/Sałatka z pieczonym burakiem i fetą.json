@@ -1,6 +1,6 @@
 {
   "nazwa": "Sałatka z pieczonym burakiem i fetą",
-  "opis": "Sałatka z pieczonym burakiem, fetą, rukolą, orzechami i czerwoną cebulą. Przepis na 1 porcję.",
+  "opis": "Sałatka z pieczonym burakiem, fetą, rukolą, orzechami i czerwoną cebulą. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
   "pory": [
     "obiad",
     "kolacja"
@@ -8,66 +8,68 @@
   "kuchnie": [
     "srodziemnomorska"
   ],
-  "rodzaje": ["salatka"],
+  "rodzaje": [
+    "salatka"
+  ],
   "porcjowanie": "waga",
   "porcja_g": 431.5,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 2,
   "czas_przygotowania_min": 10,
-  "czas_obrobki_min": 35,
+  "czas_obrobki_min": 63,
   "sprzet": [
     "Piekarnik",
     "Blacha do pieczenia",
-    "miska",
+    "Miska",
     "Nóż szefa kuchni",
     "Deska do krojenia",
     "Waga kuchenna"
   ],
-  "przechowywanie": "Pieczone buraki przechowuj w lodówce do 2 dni. Rukolę i dressing dodaj przed jedzeniem.",
+  "przechowywanie": "Pieczone buraki przechowuj w lodówce do 2 dni. Rukolę i dressing dodaj przed jedzeniem. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
   "mozna_mrozic": false,
   "ratunek": "Twardego buraka dopiecz pod przykryciem. Za słoną sałatkę zrównoważ większą ilością rukoli i buraka.",
   "skladniki": [
     {
       "nazwa": "Buraki, surowe",
-      "ilosc": 220.0,
+      "ilosc": 220,
       "jednostka": "g",
       "stan": "pokrojone w kostkę"
     },
     {
       "nazwa": "Ser feta",
-      "ilosc": 70.0,
+      "ilosc": 70,
       "jednostka": "g",
       "stan": "pokruszony"
     },
     {
       "nazwa": "Rukola",
-      "ilosc": 60.0,
+      "ilosc": 60,
       "jednostka": "g"
     },
     {
       "nazwa": "Cebula czerwona, surowa",
-      "ilosc": 40.0,
+      "ilosc": 40,
       "jednostka": "g",
       "stan": "cienko pokrojona"
     },
     {
       "nazwa": "Orzechy włoskie",
-      "ilosc": 20.0,
+      "ilosc": 20,
       "jednostka": "g"
     },
     {
       "nazwa": "Oliwa z oliwek",
-      "ilosc": 10.0,
+      "ilosc": 10,
       "jednostka": "g"
     },
     {
       "nazwa": "Ocet winny czerwony",
-      "ilosc": 10.0,
+      "ilosc": 10,
       "jednostka": "g"
     },
     {
       "nazwa": "Tymianek suszony",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "g"
     },
     {
@@ -78,28 +80,43 @@
   ],
   "etapy": [
     {
-      "nazwa": "Pieczenie buraka",
-      "minuty": 35,
+      "nazwa": "Przygotowanie składników",
+      "minuty": 10,
       "kroki": [
         {
-          "tresc": "Piekarnik rozgrzej do 200°C. Buraka wymieszaj z połową oliwy i tymiankiem."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
         },
         {
-          "tresc": "Piecz około 30–35 minut, a następnie lekko ostudź.",
-          "sygnal": "burak jest miękki i lekko zrumieniony"
+          "tresc": "Umyj i obierz buraki, pokrój w kostkę około 1 cm. Wymieszaj z połową oliwy i tymiankiem."
+        },
+        {
+          "tresc": "Umyj i osusz rukolę. Obierz i cienko pokrój cebulę. Pokrusz fetę i posiekaj orzechy. Odmierz ocet i pozostałą oliwę."
         }
       ]
     },
     {
-      "nazwa": "Składanie sałatki",
-      "minuty": 10,
+      "nazwa": "Pieczenie",
+      "minuty": 50,
       "kroki": [
         {
-          "tresc": "Połącz rukolę, buraka, cebulę i orzechy."
+          "tresc": "Rozgrzej piekarnik do 200°C, grzanie góra–dół, zwykle około 10 minut."
         },
         {
-          "tresc": "Dodaj fetę, pozostałą oliwę, ocet i pieprz. Delikatnie wymieszaj.",
+          "tresc": "Rozłóż buraki na blasze, piecz 30–40 minut, obracając w połowie.",
+          "sygnal": "buraki łatwo dają się nakłuć widelcem",
           "uwaga": true
+        }
+      ]
+    },
+    {
+      "nazwa": "Studzenie i łączenie",
+      "minuty": 13,
+      "kroki": [
+        {
+          "tresc": "Przestudź buraki przez około 10 minut na talerzu; nie dodawaj gorących do rukoli."
+        },
+        {
+          "tresc": "Połącz rukolę, buraki, cebulę, orzechy i fetę. Skrop pozostałą oliwą i octem, dopraw pieprzem."
         }
       ]
     }

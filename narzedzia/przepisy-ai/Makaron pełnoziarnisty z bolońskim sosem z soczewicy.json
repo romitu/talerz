@@ -1,6 +1,6 @@
 {
   "nazwa": "Makaron pełnoziarnisty z bolońskim sosem z soczewicy",
-  "opis": "Pełnoziarnisty makaron z gęstym pomidorowym sosem z czerwonej soczewicy i warzyw. Przepis na 1 porcję.",
+  "opis": "Pełnoziarnisty makaron z gęstym pomidorowym sosem z czerwonej soczewicy i warzyw. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
   "pory": [
     "obiad",
     "kolacja"
@@ -8,86 +8,89 @@
   "kuchnie": [
     "inna"
   ],
-  "rodzaje": ["makaron"],
+  "rodzaje": [
+    "makaron"
+  ],
   "porcjowanie": "waga",
   "porcja_g": 710.5,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 3,
   "czas_przygotowania_min": 10,
-  "czas_obrobki_min": 28,
+  "czas_obrobki_min": 35,
   "sprzet": [
     "Garnek 3 l",
     "Garnek 2 l",
     "Tarka o grubych oczkach",
     "Nóż szefa kuchni",
     "Deska do krojenia",
-    "Waga kuchenna"
+    "Waga kuchenna",
+    "Sitko"
   ],
-  "przechowywanie": "Sos przechowuj w lodówce do 3 dni lub zamroź. Makaron najlepiej ugotować świeży.",
+  "przechowywanie": "Sos przechowuj w lodówce do 3 dni lub zamroź. Makaron najlepiej ugotować świeży. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
   "mozna_mrozic": true,
   "ratunek": "Za kwaśny sos złagodź dłuższym gotowaniem i dodatkową marchewką. Za gęsty rozcieńcz wodą z makaronu.",
   "skladniki": [
     {
       "nazwa": "Makaron pełnoziarnisty, suchy",
-      "ilosc": 85.0,
+      "ilosc": 85,
       "jednostka": "g"
     },
     {
       "nazwa": "Soczewica czerwona, sucha",
-      "ilosc": 60.0,
+      "ilosc": 60,
       "jednostka": "g",
       "stan": "opłukana"
     },
     {
       "nazwa": "Passata pomidorowa",
-      "ilosc": 250.0,
+      "ilosc": 250,
       "jednostka": "g"
     },
     {
       "nazwa": "woda",
-      "ilosc": 150.0,
+      "ilosc": 150,
       "jednostka": "ml"
     },
     {
       "nazwa": "Marchew, surowa",
-      "ilosc": 80.0,
+      "ilosc": 80,
       "jednostka": "g",
       "stan": "starta"
     },
     {
       "nazwa": "Cebula, surowa",
-      "ilosc": 70.0,
+      "ilosc": 70,
       "jednostka": "g",
       "stan": "posiekana"
     },
     {
       "nazwa": "Czosnek, surowy",
-      "ilosc": 5.0,
+      "ilosc": 5,
       "jednostka": "g"
     },
     {
       "nazwa": "Oliwa z oliwek",
-      "ilosc": 5.0,
+      "ilosc": 5,
       "jednostka": "g"
     },
     {
       "nazwa": "Oregano suszone",
-      "ilosc": 2.0,
+      "ilosc": 2,
       "jednostka": "g"
     },
     {
       "nazwa": "Bazylia suszona",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "g"
     },
     {
       "nazwa": "Papryka słodka mielona",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "g"
     },
     {
       "nazwa": "Sól kłodawska",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "g"
     },
     {
@@ -98,28 +101,37 @@
   ],
   "etapy": [
     {
-      "nazwa": "Przygotowanie",
+      "nazwa": "Przygotowanie składników",
       "minuty": 10,
       "kroki": [
         {
-          "tresc": "Marchew zetrzyj, a cebulę i czosnek posiekaj. Soczewicę opłucz."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+        },
+        {
+          "tresc": "Umyj i obierz marchew, zetrzyj na tarce. Obierz i posiekaj cebulę oraz czosnek."
+        },
+        {
+          "tresc": "Opłucz soczewicę na sitku. Odmierz wodę z listy, passatę i makaron."
         }
       ]
     },
     {
-      "nazwa": "Gotowanie",
-      "minuty": 28,
+      "nazwa": "Gotowanie sosu i makaronu",
+      "minuty": 35,
       "kroki": [
         {
-          "tresc": "Na oliwie smaż cebulę i marchew 5 minut. Dodaj czosnek oraz przyprawy."
+          "tresc": "Rozgrzej oliwę w garnku przez 1 minutę, smaż cebulę i marchew 5 minut. Dodaj czosnek, oregano, bazylię i paprykę; smaż 30 sekund."
         },
         {
-          "tresc": "Dodaj passatę, soczewicę i 150 ml wody. Gotuj około 20 minut.",
-          "sygnal": "soczewica jest miękka, a sos gęsty",
+          "tresc": "Dodaj soczewicę oraz odmierzoną wodę. Doprowadź do wrzenia przez około 2 minuty i gotuj pod uchyloną pokrywką 12–15 minut, często mieszając. Uzupełnij odparowaną wodę, jeżeli soczewica jeszcze nie zmiękła."
+        },
+        {
+          "tresc": "Już podczas gotowania soczewicy nastaw wodę na makaron na drugim palniku. Ugotuj go przez czas z opakowania tak, aby był gotowy pod koniec gotowania sosu; zachowaj nieco wody przed odcedzeniem. Do miękkiej soczewicy dodaj passatę i gotuj sos 10 minut bez przykrycia."
+        },
+        {
+          "tresc": "Wymieszaj sos z makaronem, dopraw solą i pieprzem. W razie potrzeby rozluźnij wodą z makaronu.",
+          "sygnal": "soczewica miękka, sos oblepia makaron",
           "uwaga": true
-        },
-        {
-          "tresc": "Makaron ugotuj al dente i połącz z sosem."
         }
       ]
     }

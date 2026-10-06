@@ -1,6 +1,6 @@
 {
   "nazwa": "Stek z tuńczyka z fasolką szparagową i ziemniakami",
-  "opis": "Krótko smażony stek z tuńczyka z fasolką szparagową i gotowanymi ziemniakami. Przepis na 1 porcję.",
+  "opis": "Krótko smażony stek z tuńczyka z fasolką szparagową i gotowanymi ziemniakami. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
   "pory": [
     "obiad"
   ],
@@ -12,52 +12,54 @@
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 1,
   "czas_przygotowania_min": 10,
-  "czas_obrobki_min": 20,
+  "czas_obrobki_min": 38,
   "sprzet": [
     "Patelnia 28 cm",
     "Garnek 3 l",
     "Garnek 2 l",
     "Nóż szefa kuchni",
     "Deska do krojenia",
-    "Waga kuchenna"
+    "Waga kuchenna",
+    "Durszlak",
+    "Termometr do mięsa"
   ],
-  "przechowywanie": "Najlepiej zjedz od razu. Ewentualną pozostałość przechowuj w lodówce do 1 dnia.",
+  "przechowywanie": "Najlepiej zjedz od razu. Ewentualną pozostałość przechowuj w lodówce do 1 dnia. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
   "mozna_mrozic": false,
   "ratunek": "Jeśli tuńczyk jest przesmażony, pokrój go cienko i skrop oliwą z cytryną. Twardą fasolkę gotuj dłużej.",
   "skladniki": [
     {
       "nazwa": "Tuńczyk świeży, surowy",
-      "ilosc": 180.0,
+      "ilosc": 180,
       "jednostka": "g"
     },
     {
       "nazwa": "Fasolka szparagowa, surowa",
-      "ilosc": 180.0,
+      "ilosc": 180,
       "jednostka": "g"
     },
     {
       "nazwa": "Ziemniaki, surowe",
-      "ilosc": 250.0,
+      "ilosc": 250,
       "jednostka": "g"
     },
     {
       "nazwa": "Oliwa z oliwek",
-      "ilosc": 10.0,
+      "ilosc": 10,
       "jednostka": "g"
     },
     {
       "nazwa": "Cytryna",
-      "ilosc": 15.0,
+      "ilosc": 15,
       "jednostka": "g"
     },
     {
       "nazwa": "Czosnek, surowy",
-      "ilosc": 5.0,
+      "ilosc": 5,
       "jednostka": "g"
     },
     {
       "nazwa": "Sól kłodawska",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "g"
     },
     {
@@ -68,28 +70,43 @@
   ],
   "etapy": [
     {
-      "nazwa": "Gotowanie dodatków",
-      "minuty": 20,
+      "nazwa": "Przygotowanie składników",
+      "minuty": 10,
       "kroki": [
         {
-          "tresc": "Ziemniaki ugotuj do miękkości. Fasolkę ugotuj tak, aby pozostała lekko jędrna."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+        },
+        {
+          "tresc": "Umyj i obierz ziemniaki, pokrój na kawałki około 2 cm. Umyj fasolkę, odetnij końcówki. Obierz i drobno posiekaj czosnek."
+        },
+        {
+          "tresc": "Umyj cytrynę, przygotuj sok z odmierzonej części. Wymieszaj sok z połową oliwy oraz czosnkiem."
+        },
+        {
+          "tresc": "Osusz stek z tuńczyka grubości około 2 cm, posmaruj pozostałą oliwą, dopraw solą i pieprzem. Umyj przybory po rybie."
         }
       ]
     },
     {
-      "nazwa": "Smażenie tuńczyka",
-      "minuty": 10,
+      "nazwa": "Gotowanie dodatków i smażenie",
+      "minuty": 38,
       "kroki": [
         {
-          "tresc": "Tuńczyka osusz, posmaruj połową oliwy i dopraw solą oraz pieprzem."
+          "tresc": "Zalej ziemniaki wodą, zagotuj przez około 5 minut i gotuj 15–20 minut do miękkości. Odcedź i przykryj."
         },
         {
-          "tresc": "Smaż na mocno rozgrzanej patelni około 2 minuty z każdej strony.",
-          "sygnal": "środek pozostaje różowy i soczysty",
+          "tresc": "Równolegle zagotuj wodę w drugim garnku. Dodaj fasolkę, gotuj 8–12 minut do miękkości, zachowując lekki opór przy gryzieniu; odcedź."
+        },
+        {
+          "tresc": "Gdy zwolni się palnik, rozgrzej patelnię przez 1–2 minuty. Smaż tuńczyka około 3 minuty z każdej strony."
+        },
+        {
+          "tresc": "Sprawdź temperaturę najgrubszego miejsca; w razie potrzeby dosmaż po 1 minucie na mniejszym ogniu.",
+          "sygnal": "ryba ma co najmniej 63°C, bez surowego środka",
           "uwaga": true
         },
         {
-          "tresc": "Pozostałą oliwę połącz z cytryną i czosnkiem. Polej nią fasolkę oraz ziemniaki i podaj z tuńczykiem."
+          "tresc": "Polej ziemniaki oraz fasolkę przygotowaną oliwą z cytryną i czosnkiem, podaj z tuńczykiem."
         }
       ]
     }

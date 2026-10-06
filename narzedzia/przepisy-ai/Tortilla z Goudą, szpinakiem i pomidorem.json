@@ -1,6 +1,6 @@
 {
   "nazwa": "Tortilla z Goudą, szpinakiem i pomidorem",
-  "opis": "Ciepła pełnoziarnista tortilla z roztopioną Goudą, szpinakiem i pomidorem. Przepis na 1 porcję.",
+  "opis": "Ciepła pełnoziarnista tortilla z roztopioną Goudą, szpinakiem i pomidorem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
   "pory": [
     "sniadanie",
     "kolacja"
@@ -8,13 +8,15 @@
   "kuchnie": [
     "inna"
   ],
-  "rodzaje": ["kanapki"],
+  "rodzaje": [
+    "kanapki"
+  ],
   "porcjowanie": "waga",
-  "porcja_g": 336.0,
+  "porcja_g": 336,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 0,
   "czas_przygotowania_min": 7,
-  "czas_obrobki_min": 8,
+  "czas_obrobki_min": 16,
   "sprzet": [
     "Patelnia 24 cm",
     "Nóż szefa kuchni",
@@ -27,35 +29,35 @@
   "skladniki": [
     {
       "nazwa": "Tortilla pełnoziarnista",
-      "ilosc": 60.0,
+      "ilosc": 60,
       "jednostka": "g"
     },
     {
       "nazwa": "Ser Gouda",
-      "ilosc": 60.0,
+      "ilosc": 60,
       "jednostka": "g",
       "stan": "drobno pokrojony"
     },
     {
       "nazwa": "Szpinak, surowy",
-      "ilosc": 80.0,
+      "ilosc": 80,
       "jednostka": "g"
     },
     {
       "nazwa": "Pomidory, surowe",
-      "ilosc": 100.0,
+      "ilosc": 100,
       "jednostka": "g",
       "stan": "pokrojone w kostkę"
     },
     {
       "nazwa": "Cebula, surowa",
-      "ilosc": 30.0,
+      "ilosc": 30,
       "jednostka": "g",
       "stan": "drobno posiekana"
     },
     {
       "nazwa": "Olej rzepakowy",
-      "ilosc": 5.0,
+      "ilosc": 5,
       "jednostka": "g"
     },
     {
@@ -71,26 +73,32 @@
   ],
   "etapy": [
     {
-      "nazwa": "Przygotowanie farszu",
+      "nazwa": "Przygotowanie składników",
       "minuty": 7,
       "kroki": [
         {
-          "tresc": "Na oleju zeszklij cebulę, dodaj pomidora i szpinak. Smaż, aż odparuje nadmiar płynu.",
-          "sygnal": "szpinak jest zwiędnięty, a farsz nie jest wodnisty"
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+        },
+        {
+          "tresc": "Umyj i osusz szpinak, umyj pomidora i pokrój w drobną kostkę. Obierz i posiekaj cebulę. Drobno pokrój Goudę. Przygotuj tortille."
         }
       ]
     },
     {
-      "nazwa": "Składanie i opiekanie",
-      "minuty": 8,
+      "nazwa": "Smażenie farszu i opiekanie",
+      "minuty": 16,
       "kroki": [
         {
-          "tresc": "Na tortilli rozłóż farsz i Goudę, dodaj oregano oraz pieprz.",
-          "uwaga": true
+          "tresc": "Rozgrzej olej przez 1 minutę. Smaż cebulę 3 minuty, dodaj pomidora i smaż 3–4 minuty, odparowując płyn."
         },
         {
-          "tresc": "Zawiń tortillę i opiekaj na suchej patelni po 2–3 minuty z każdej strony.",
-          "sygnal": "tortilla jest rumiana, a ser roztopiony"
+          "tresc": "Dodaj szpinak i smaż 1 minutę do zwiędnięcia. Dopraw oregano i pieprzem. Przełóż farsz na talerz i wytrzyj patelnię."
+        },
+        {
+          "tresc": "Ogrzej tortillę na suchej patelni po 15–20 sekund z każdej strony. Rozłóż farsz i ser, zostawiając brzegi wolne. Jeśli farszu jest za dużo do zawinięcia, podaj nadmiar obok."
+        },
+        {
+          "tresc": "Złóż boki i zwiń. Opiekaj na średnio małym ogniu po 2–3 minuty z każdej strony, aż ser się rozpuści."
         }
       ]
     }

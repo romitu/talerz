@@ -1,6 +1,6 @@
 {
   "nazwa": "Makaron z ciecierzycą, bazylią i orzechami",
-  "opis": "Pełnoziarnisty makaron z ciecierzycą i szybkim sosem z bazylii, orzechów oraz oliwy. Przepis na 1 porcję.",
+  "opis": "Pełnoziarnisty makaron z ciecierzycą i szybkim sosem z bazylii, orzechów oraz oliwy. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
   "pory": [
     "obiad",
     "kolacja"
@@ -8,63 +8,67 @@
   "kuchnie": [
     "srodziemnomorska"
   ],
-  "rodzaje": ["makaron"],
+  "rodzaje": [
+    "makaron"
+  ],
   "porcjowanie": "waga",
-  "porcja_g": 396.0,
+  "porcja_g": 396,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 2,
   "czas_przygotowania_min": 10,
-  "czas_obrobki_min": 15,
+  "czas_obrobki_min": 20,
   "sprzet": [
     "Garnek 3 l",
     "Blender ręczny",
     "Nóż szefa kuchni",
     "Deska do krojenia",
-    "Waga kuchenna"
+    "Waga kuchenna",
+    "Sitko",
+    "Miska"
   ],
-  "przechowywanie": "Przechowuj w lodówce do 2 dni. Przy odgrzewaniu dodaj odrobinę wody.",
+  "przechowywanie": "Przechowuj w lodówce do 2 dni. Przy odgrzewaniu dodaj odrobinę wody. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
   "mozna_mrozic": false,
   "ratunek": "Za gęsty sos rozcieńcz wodą z makaronu. Gorycz bazylii złagodź odrobiną cytryny.",
   "skladniki": [
     {
       "nazwa": "Makaron pełnoziarnisty, suchy",
-      "ilosc": 85.0,
+      "ilosc": 85,
       "jednostka": "g"
     },
     {
       "nazwa": "Ciecierzyca z puszki, odsączona",
-      "ilosc": 140.0,
+      "ilosc": 140,
       "jednostka": "g"
     },
     {
       "nazwa": "Bazylia świeża",
-      "ilosc": 20.0,
+      "ilosc": 20,
       "jednostka": "g"
     },
     {
       "nazwa": "Orzechy włoskie",
-      "ilosc": 20.0,
+      "ilosc": 20,
       "jednostka": "g"
     },
     {
       "nazwa": "Oliwa z oliwek",
-      "ilosc": 12.0,
+      "ilosc": 12,
       "jednostka": "g"
     },
     {
       "nazwa": "Czosnek, surowy",
-      "ilosc": 3.0,
+      "ilosc": 3,
       "jednostka": "g"
     },
     {
       "nazwa": "Cytryna",
-      "ilosc": 15.0,
+      "ilosc": 15,
       "jednostka": "g",
       "stan": "sok"
     },
     {
       "nazwa": "Pomidory, surowe",
-      "ilosc": 100.0,
+      "ilosc": 100,
       "jednostka": "g",
       "stan": "pokrojone"
     },
@@ -81,27 +85,35 @@
   ],
   "etapy": [
     {
-      "nazwa": "Gotowanie",
-      "minuty": 15,
+      "nazwa": "Przygotowanie składników",
+      "minuty": 10,
       "kroki": [
         {
-          "tresc": "Makaron ugotuj al dente. Zachowaj część wody z gotowania."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+        },
+        {
+          "tresc": "Opłucz i odsącz ciecierzycę. Umyj pomidory i bazylię, osusz liście. Pokrój pomidory."
+        },
+        {
+          "tresc": "Obierz czosnek. Posiekaj orzechy. Umyj cytrynę i odmierz sok. Przygotuj makaron i oliwę."
         }
       ]
     },
     {
-      "nazwa": "Przygotowanie sosu",
-      "minuty": 10,
+      "nazwa": "Gotowanie i przygotowanie sosu",
+      "minuty": 20,
       "kroki": [
         {
-          "tresc": "Bazylię, orzechy, oliwę, czosnek, cytrynę, sól i pieprz zblenduj z niewielką ilością wody z makaronu."
+          "tresc": "Ugotuj makaron przez czas z opakowania. Przed odcedzeniem zachowaj nieco wody z gotowania."
         },
         {
-          "tresc": "Makaron połącz z sosem, ciecierzycą i pomidorem.",
-          "uwaga": true
+          "tresc": "Podczas gotowania makaronu zblenduj bazylię, orzechy, oliwę, czosnek, sok z cytryny, sól i pieprz. Rozluźnij sos niewielką ilością ciepłej, nie wrzącej wody z makaronu."
         },
         {
-          "tresc": "Podgrzewaj krótko, tylko do połączenia smaków."
+          "tresc": "Na ostatnie 2 minuty gotowania makaronu dodaj ciecierzycę do garnka. Odcedź całość."
+        },
+        {
+          "tresc": "Poza ogniem wymieszaj makaron i ciecierzycę z sosem oraz pokrojonymi pomidorami. Podaj bez dodatkowego gotowania bazylii."
         }
       ]
     }

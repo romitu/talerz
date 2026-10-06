@@ -1,6 +1,6 @@
 {
   "nazwa": "Chili sin carne z czarną fasolą",
-  "opis": "Jednogarnkowe chili bez mięsa z czarną i czerwoną fasolą, kukurydzą oraz papryką. Przepis na 2 porcje.",
+  "opis": "Jednogarnkowe chili bez mięsa z czarną i czerwoną fasolą, kukurydzą oraz papryką. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
   "pory": [
     "obiad",
     "kolacja"
@@ -8,119 +8,134 @@
   "kuchnie": [
     "inna"
   ],
-  "rodzaje": ["gulasz_curry"],
+  "rodzaje": [
+    "gulasz_curry"
+  ],
   "porcjowanie": "waga",
   "porcja_g": 584.5,
   "liczba_porcji_bazowych": 2,
   "trwalosc_dni": 3,
   "czas_przygotowania_min": 10,
-  "czas_obrobki_min": 28,
+  "czas_obrobki_min": 34,
   "sprzet": [
     "Garnek 3 l",
     "Nóż szefa kuchni",
     "Deska do krojenia",
-    "Waga kuchenna"
+    "Waga kuchenna",
+    "Sitko"
   ],
-  "przechowywanie": "Chili przechowuj w lodówce do 3 dni lub zamroź po ostudzeniu.",
+  "przechowywanie": "Chili przechowuj w lodówce do 3 dni lub zamroź po ostudzeniu. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
   "mozna_mrozic": true,
   "ratunek": "Za ostre chili złagodź dodatkową passatą. Za rzadkie gotuj kilka minut bez przykrycia.",
   "skladniki": [
     {
       "nazwa": "Fasola czarna z puszki, odsączona",
-      "ilosc": 160.0,
+      "ilosc": 160,
       "jednostka": "g"
     },
     {
       "nazwa": "Fasola czerwona z puszki, odsączona",
-      "ilosc": 160.0,
+      "ilosc": 160,
       "jednostka": "g"
     },
     {
       "nazwa": "Kukurydza konserwowa, odsączona",
-      "ilosc": 100.0,
+      "ilosc": 100,
       "jednostka": "g"
     },
     {
       "nazwa": "Pomidory krojone z puszki",
-      "ilosc": 300.0,
+      "ilosc": 300,
       "jednostka": "g"
     },
     {
       "nazwa": "Passata pomidorowa",
-      "ilosc": 160.0,
+      "ilosc": 160,
       "jednostka": "g"
     },
     {
       "nazwa": "Papryka czerwona, surowa",
-      "ilosc": 160.0,
+      "ilosc": 160,
       "jednostka": "g",
       "stan": "pokrojona w kostkę"
     },
     {
       "nazwa": "Cebula, surowa",
-      "ilosc": 100.0,
+      "ilosc": 100,
       "jednostka": "g",
       "stan": "drobno posiekana"
     },
     {
       "nazwa": "Czosnek, surowy",
-      "ilosc": 10.0,
+      "ilosc": 10,
       "jednostka": "g",
       "stan": "posiekany"
     },
     {
       "nazwa": "Olej rzepakowy",
-      "ilosc": 10.0,
+      "ilosc": 10,
       "jednostka": "g"
     },
     {
       "nazwa": "Kmin rzymski mielony",
-      "ilosc": 4.0,
+      "ilosc": 4,
       "jednostka": "g"
     },
     {
       "nazwa": "Papryka wędzona mielona",
-      "ilosc": 2.0,
+      "ilosc": 2,
       "jednostka": "g"
     },
     {
       "nazwa": "Chili suszone",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "g"
     },
     {
       "nazwa": "Sól kłodawska",
-      "ilosc": 2.0,
+      "ilosc": 2,
       "jednostka": "g"
     }
   ],
   "etapy": [
     {
-      "nazwa": "Przygotowanie",
+      "nazwa": "Przygotowanie składników",
       "minuty": 10,
       "kroki": [
         {
-          "tresc": "Cebulę oraz czosnek posiekaj, a paprykę pokrój w kostkę."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+        },
+        {
+          "tresc": "Umyj paprykę, usuń gniazdo nasienne i pokrój w kostkę około 1 cm."
+        },
+        {
+          "tresc": "Obierz i posiekaj cebulę oraz czosnek."
+        },
+        {
+          "tresc": "Obie fasole opłucz i odsącz na sitku. Odsącz kukurydzę. Odmierz pomidory i passatę."
         }
       ]
     },
     {
       "nazwa": "Gotowanie chili",
-      "minuty": 28,
+      "minuty": 34,
       "kroki": [
         {
-          "tresc": "Na oleju zeszklij cebulę. Dodaj czosnek, paprykę, kmin, wędzoną paprykę i chili; smaż 3 minuty."
+          "tresc": "Rozgrzej olej przez 1 minutę. Dodaj cebulę i smaż 4 minuty na średnim ogniu."
         },
         {
-          "tresc": "Dodaj pomidory, passatę, obie fasole i kukurydzę. Wymieszaj i gotuj 20 minut bez przykrycia.",
+          "tresc": "Dodaj paprykę i smaż 3 minuty. Dodaj czosnek, kmin, paprykę wędzoną oraz chili i smaż 30 sekund, mieszając."
+        },
+        {
+          "tresc": "Dodaj pomidory, passatę, obie fasole i kukurydzę. Doprowadź do łagodnego wrzenia przez około 3 minuty."
+        },
+        {
+          "tresc": "Gotuj bez przykrycia na małym ogniu przez 20 minut, mieszając co kilka minut.",
+          "sygnal": "papryka jest miękka, sos gęsty, fasola zachowuje kształt",
           "uwaga": true
         },
         {
-          "tresc": "Dopraw solą.",
-          "sygnal": "sos jest gęsty, a papryka miękka"
-        },
-        {
-          "tresc": "Spróbuj i w razie potrzeby skoryguj ostrość."
+          "tresc": "Spróbuj, dopraw odmierzoną solą i podaj."
         }
       ]
     }

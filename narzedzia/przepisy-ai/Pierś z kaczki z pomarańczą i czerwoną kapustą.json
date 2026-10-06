@@ -1,6 +1,6 @@
 {
   "nazwa": "Pierś z kaczki z pomarańczą i czerwoną kapustą",
-  "opis": "Pierś z kaczki z duszoną czerwoną kapustą, jabłkiem, pomarańczą i ziemniakami. Przepis na 1 porcję.",
+  "opis": "Pierś z kaczki z duszoną czerwoną kapustą, jabłkiem, pomarańczą i ziemniakami. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
   "pory": [
     "obiad"
   ],
@@ -8,31 +8,33 @@
     "inna"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 727.5,
+  "porcja_g": 777.5,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 2,
   "czas_przygotowania_min": 15,
-  "czas_obrobki_min": 35,
+  "czas_obrobki_min": 45,
   "sprzet": [
     "Patelnia 28 cm",
     "Garnek 3 l",
     "Garnek 2 l",
     "Nóż szefa kuchni",
     "Deska do krojenia",
-    "Waga kuchenna"
+    "Waga kuchenna",
+    "Termometr do mięsa",
+    "Durszlak"
   ],
-  "przechowywanie": "Przechowuj w lodówce do 2 dni. Kaczkę odgrzewaj krótko, aby jej nie wysuszyć.",
+  "przechowywanie": "Przechowuj w lodówce do 2 dni. Kaczkę odgrzewaj łagodnie do gorącego środka, najlepiej z sosem. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
   "mozna_mrozic": false,
   "ratunek": "Jeśli mięso jest przesmażone, pokrój je cienko i podaj z większą ilością sosu. Za kwaśną kapustę złagodź jabłkiem.",
   "skladniki": [
     {
       "nazwa": "Kaczka, pierś bez skóry, surowa",
-      "ilosc": 180.0,
+      "ilosc": 180,
       "jednostka": "g"
     },
     {
       "nazwa": "Kapusta czerwona, surowa",
-      "ilosc": 150.0,
+      "ilosc": 150,
       "jednostka": "g",
       "stan": "cienko poszatkowana"
     },
@@ -50,23 +52,23 @@
     },
     {
       "nazwa": "Ziemniaki, surowe",
-      "ilosc": 180.0,
+      "ilosc": 180,
       "jednostka": "g"
     },
     {
       "nazwa": "Cebula czerwona, surowa",
-      "ilosc": 40.0,
+      "ilosc": 40,
       "jednostka": "g",
       "stan": "posiekana"
     },
     {
       "nazwa": "Olej rzepakowy",
-      "ilosc": 5.0,
+      "ilosc": 5,
       "jednostka": "g"
     },
     {
       "nazwa": "Ocet jabłkowy",
-      "ilosc": 10.0,
+      "ilosc": 10,
       "jednostka": "g"
     },
     {
@@ -81,56 +83,66 @@
     },
     {
       "nazwa": "Sól kłodawska",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "g"
     },
     {
       "nazwa": "Czarny pieprz mielony",
       "ilosc": 0.5,
       "jednostka": "g"
+    },
+    {
+      "nazwa": "woda",
+      "ilosc": 50,
+      "jednostka": "ml",
+      "stan": "do duszenia kapusty"
     }
   ],
   "etapy": [
     {
-      "nazwa": "Przygotowanie",
-      "minuty": 10,
-      "kroki": [
-        {
-          "tresc": "Kapustę poszatkuj, ziemniaki przygotuj do gotowania, jabłko pokrój, cebulę posiekaj, a z pomarańczy wyciśnij sok."
-        }
-      ]
-    },
-    {
-      "nazwa": "Gotowanie dodatków",
-      "minuty": 25,
-      "kroki": [
-        {
-          "tresc": "Ziemniaki gotuj w garnku około 15–20 minut.",
-          "sygnal": "są miękkie po nakłuciu widelcem"
-        },
-        {
-          "tresc": "W drugim garnku na oleju zeszklij cebulę. Dodaj kapustę, jabłko, połowę soku, ocet i przyprawy. Duś około 25 minut.",
-          "sygnal": "kapusta jest miękka, ale nie rozpada się"
-        }
-      ]
-    },
-    {
-      "nazwa": "Smażenie kaczki",
+      "nazwa": "Przygotowanie składników",
       "minuty": 15,
       "kroki": [
         {
-          "tresc": "Pierś z kaczki osusz i dopraw solą oraz pieprzem."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
         },
         {
-          "tresc": "Smaż na średnim ogniu po 3–4 minuty z każdej strony, zależnie od grubości.",
-          "sygnal": "mięso jest sprężyste, a środek pozostaje soczysty",
+          "tresc": "Umyj kapustę, usuń twardy głąb i cienko poszatkuj. Umyj jabłko, usuń gniazdo nasienne i pokrój w kostkę. Obierz i posiekaj cebulę."
+        },
+        {
+          "tresc": "Umyj i obierz ziemniaki, pokrój w kawałki około 3 cm. Umyj pomarańczę; część przygotuj w cząstkach bez błon, z pozostałej wyciśnij sok."
+        },
+        {
+          "tresc": "Osusz pierś bez skóry i dopraw częścią soli i pieprzu. Przygotuj cynamon, goździki oraz ocet. Podziel olej między kapustę i smażenie kaczki. Umyj przybory po mięsie."
+        },
+        {
+          "tresc": "Odmierz wodę do duszenia kapusty zgodnie z listą składników."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie dodatków i smażenie kaczki",
+      "minuty": 45,
+      "kroki": [
+        {
+          "tresc": "W garnku rozgrzej połowę oleju przez 1 minutę. Smaż cebulę 4 minuty. Dodaj kapustę, jabłko, połowę soku pomarańczowego, cynamon i goździki. Dodaj odmierzoną wodę do duszenia, i duś pod przykryciem 25–30 minut. Ocet dodaj pod koniec, gdy kapusta jest miękka."
+        },
+        {
+          "tresc": "Równolegle na drugim palniku zagotuj ziemniaki w wodzie, zwykle około 5 minut, a następnie gotuj 15–20 minut do miękkości. Odcedź i trzymaj pod przykryciem."
+        },
+        {
+          "tresc": "Na palniku zwolnionym przez ziemniaki rozgrzej pozostały olej na patelni przez 1 minutę. Smaż pierś przez 3–4 minuty z każdej strony."
+        },
+        {
+          "tresc": "Sprawdź najgrubsze miejsce termometrem. W razie potrzeby zmniejsz ogień i dosmażaj pod przykryciem po 1–2 minuty. Gotową pierś odstaw na 5 minut.",
+          "sygnal": "kaczka ma co najmniej 74°C w środku",
           "uwaga": true
         },
         {
-          "tresc": "Odstaw mięso na 5 minut. Patelnię zdeglasuj pozostałym sokiem pomarańczowym."
+          "tresc": "W tym czasie wlej pozostały sok pomarańczowy na patelnię, dodaj cząstki pomarańczy i gotuj 1–2 minuty, zbierając smaki z dna."
         },
         {
-          "tresc": "Kaczkę pokrój i podaj z kapustą, sosem pomarańczowym oraz ziemniakami."
+          "tresc": "Usuń goździki z kapusty, dopraw resztą soli i pieprzu. Pokrój kaczkę, podaj z sosem, kapustą i ziemniakami."
         }
       ]
     }

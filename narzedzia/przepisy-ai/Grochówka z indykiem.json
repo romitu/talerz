@@ -1,133 +1,149 @@
 {
   "nazwa": "Grochówka z indykiem",
-  "opis": "Treściwa grochówka z mięsem indyka, ziemniakami, warzywami korzeniowymi i majerankiem. Przepis na 2 porcje.",
+  "opis": "Treściwa grochówka z mięsem indyka, ziemniakami, warzywami korzeniowymi i majerankiem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
   "pory": [
     "obiad"
   ],
   "kuchnie": [
     "polska"
   ],
-  "rodzaje": ["zupa"],
+  "rodzaje": [
+    "zupa"
+  ],
   "porcjowanie": "waga",
   "porcja_g": 820.5,
   "liczba_porcji_bazowych": 2,
   "trwalosc_dni": 3,
   "czas_przygotowania_min": 15,
-  "czas_obrobki_min": 55,
+  "czas_obrobki_min": 70,
   "sprzet": [
     "Garnek 3 l",
     "Nóż szefa kuchni",
     "Deska do krojenia",
-    "Waga kuchenna"
+    "Waga kuchenna",
+    "Sitko",
+    "Termometr do mięsa"
   ],
-  "przechowywanie": "Przechowuj w lodówce do 3 dni albo zamroź w porcjach.",
+  "przechowywanie": "Przechowuj w lodówce do 3 dni albo zamroź w porcjach. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
   "mozna_mrozic": true,
   "ratunek": "Jeśli groch pozostaje twardy, gotuj dalej i uzupełniaj wodę. Za gęstą zupę rozcieńcz gorącym bulionem.",
   "skladniki": [
     {
       "nazwa": "Groch łuskany, suchy",
-      "ilosc": 100.0,
+      "ilosc": 100,
       "jednostka": "g",
-      "stan": "opłukany"
+      "stan": "łuskany, połówki, opłukany"
     },
     {
       "nazwa": "Pierś z indyka, surowa",
-      "ilosc": 200.0,
+      "ilosc": 200,
       "jednostka": "g",
       "stan": "pokrojona w kostkę"
     },
     {
       "nazwa": "Ziemniaki, surowe",
-      "ilosc": 200.0,
+      "ilosc": 200,
       "jednostka": "g",
       "stan": "pokrojone w kostkę"
     },
     {
       "nazwa": "Marchew, surowa",
-      "ilosc": 100.0,
+      "ilosc": 100,
       "jednostka": "g",
       "stan": "pokrojona"
     },
     {
       "nazwa": "Pietruszka korzeń",
-      "ilosc": 60.0,
+      "ilosc": 60,
       "jednostka": "g",
       "stan": "pokrojona"
     },
     {
       "nazwa": "Cebula, surowa",
-      "ilosc": 60.0,
+      "ilosc": 60,
       "jednostka": "g",
       "stan": "posiekana"
     },
     {
       "nazwa": "Domowy bulion warzywny",
-      "ilosc": 300.0,
+      "ilosc": 300,
       "jednostka": "g"
     },
     {
       "nazwa": "woda",
-      "ilosc": 600.0,
+      "ilosc": 600,
       "jednostka": "ml"
     },
     {
       "nazwa": "Olej rzepakowy",
-      "ilosc": 10.0,
+      "ilosc": 10,
       "jednostka": "g"
     },
     {
       "nazwa": "Majeranek suszony",
-      "ilosc": 4.0,
+      "ilosc": 4,
       "jednostka": "g"
     },
     {
       "nazwa": "liść laurowy",
-      "ilosc": 2.0,
+      "ilosc": 2,
       "jednostka": "g"
     },
     {
       "nazwa": "ziele angielskie",
-      "ilosc": 2.0,
+      "ilosc": 2,
       "jednostka": "g"
     },
     {
       "nazwa": "Sól kłodawska",
-      "ilosc": 2.0,
+      "ilosc": 2,
       "jednostka": "g"
     },
     {
       "nazwa": "Czarny pieprz mielony",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "g"
     }
   ],
   "etapy": [
     {
-      "nazwa": "Przygotowanie",
+      "nazwa": "Przygotowanie składników",
       "minuty": 15,
       "kroki": [
         {
-          "tresc": "Groch opłucz. Indyka i warzywa pokrój, a cebulę posiekaj."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+        },
+        {
+          "tresc": "Opłucz groch na sitku. Użyj łuskanego grochu dzielonego na połówki; czas całych ziaren może być znacznie dłuższy."
+        },
+        {
+          "tresc": "Umyj i obierz ziemniaki, marchew i pietruszkę. Ziemniaki pokrój w kostkę około 2 cm, korzenie w kostkę około 1 cm. Obierz i posiekaj cebulę."
+        },
+        {
+          "tresc": "Indyka pokrój w kostkę około 2 cm. Umyj przybory i ręce po surowym mięsie. Odmierz bulion oraz wodę."
         }
       ]
     },
     {
-      "nazwa": "Gotowanie",
-      "minuty": 55,
+      "nazwa": "Gotowanie zupy",
+      "minuty": 70,
       "kroki": [
         {
-          "tresc": "Na oleju zeszklij cebulę, dodaj indyka i smaż, aż straci surowy kolor."
+          "tresc": "Rozgrzej olej przez 1 minutę i smaż cebulę 4 minuty."
         },
         {
-          "tresc": "Dodaj groch, marchew, pietruszkę, bulion, wodę, liść laurowy i ziele angielskie. Gotuj 30 minut."
+          "tresc": "Dodaj groch, bulion, wodę, liść laurowy i ziele angielskie. Doprowadź do wrzenia przez około 5 minut. Gotuj pod uchyloną pokrywką 30 minut na małym ogniu."
         },
         {
-          "tresc": "Dodaj ziemniaki i gotuj jeszcze około 20 minut.",
-          "sygnal": "groch się rozpada, a mięso i ziemniaki są miękkie",
+          "tresc": "Dodaj marchew, pietruszkę i ziemniaki. Gotuj 10 minut."
+        },
+        {
+          "tresc": "Dodaj indyka, doprowadź ponownie do łagodnego wrzenia i gotuj 12–15 minut. Jeśli groch jest nadal twardy, wyjmij gotowe mięso i dogotuj zupę po 5 minut.",
+          "sygnal": "groch miękki, ziemniaki bez twardego środka, indyk co najmniej 74°C",
           "uwaga": true
         },
         {
-          "tresc": "Dodaj majeranek, sól i pieprz."
+          "tresc": "Usuń liść laurowy i ziele angielskie. Dodaj majeranek, sól i pieprz; zamieszaj i podaj."
         }
       ]
     }

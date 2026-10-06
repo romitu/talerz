@@ -6,7 +6,7 @@
 --  i generuj ponownie.
 --
 --  Przepisów w tym pliku: 90
---  Wygenerowano: 2026-10-01
+--  Wygenerowano: 2026-10-05
 --
 --  Skrypt najpierw sprawdza katalogi składników i sprzętu. Jeśli czegoś
 --  brakuje, kończy się błędem „IMPORT PRZERWANY — …” z listą braków
@@ -279,6 +279,7 @@ with
     ('Krem z dyni na mleku kokosowym', 'Pasta curry czerwona', false),
     ('Krem z dyni na mleku kokosowym', 'Olej rzepakowy', false),
     ('Krem z dyni na mleku kokosowym', 'Limonka', false),
+    ('Krem z dyni na mleku kokosowym', 'Pietruszka natka', false),
     ('Krem z dyni na mleku kokosowym', 'Sól kłodawska', false),
     ('Krem z kalafiora z pieczoną ciecierzycą', 'Kalafior, surowy', false),
     ('Krem z kalafiora z pieczoną ciecierzycą', 'Ziemniaki, surowe', false),
@@ -555,6 +556,7 @@ with
     ('Pierś z kaczki z pomarańczą i czerwoną kapustą', 'Goździki suszone', false),
     ('Pierś z kaczki z pomarańczą i czerwoną kapustą', 'Sól kłodawska', false),
     ('Pierś z kaczki z pomarańczą i czerwoną kapustą', 'Czarny pieprz mielony', false),
+    ('Pierś z kaczki z pomarańczą i czerwoną kapustą', 'woda', false),
     ('Placuszki bananowo-owsiane', 'Banan', true),
     ('Placuszki bananowo-owsiane', 'Jaja kurze, całe, surowe', true),
     ('Placuszki bananowo-owsiane', 'Mąka owsiana pełnoziarnista', false),
@@ -737,6 +739,7 @@ with
     ('Tofu z brokułem i ryżem', 'Czosnek, surowy', false),
     ('Tofu z brokułem i ryżem', 'Sezam', false),
     ('Tofu z brokułem i ryżem', 'Cebula dymka, surowa', false),
+    ('Tofu z brokułem i ryżem', 'woda', false),
     ('Tofucznica ze szpinakiem i pomidorem', 'Tofu naturalne', false),
     ('Tofucznica ze szpinakiem i pomidorem', 'Szpinak, surowy', false),
     ('Tofucznica ze szpinakiem i pomidorem', 'Pomidory, surowe', false),
@@ -765,6 +768,7 @@ with
     ('Tortilla z hummusem i warzywami', 'Sałata rzymska', false),
     ('Tortilla z hummusem i warzywami', 'Kmin rzymski mielony', false),
     ('Tortilla z hummusem i warzywami', 'Sól kłodawska', false),
+    ('Tortilla z hummusem i warzywami', 'woda', false),
     ('Tortilla z jajkiem i szpinakiem', 'Tortilla pełnoziarnista', false),
     ('Tortilla z jajkiem i szpinakiem', 'Jaja kurze, całe, surowe', true),
     ('Tortilla z jajkiem i szpinakiem', 'Szpinak, surowy', false),
@@ -795,6 +799,7 @@ with
     ('Tortilla z tofu i chrupiącymi warzywami', 'Limonka', false),
     ('Tortilla z tofu i chrupiącymi warzywami', 'Olej rzepakowy', false),
     ('Tortilla z tofu i chrupiącymi warzywami', 'Sezam', false),
+    ('Tortilla z tofu i chrupiącymi warzywami', 'woda', false),
     ('Tosty z Goudą i pieczarkami', 'Chleb żytni razowy', true),
     ('Tosty z Goudą i pieczarkami', 'Ser Gouda', false),
     ('Tosty z Goudą i pieczarkami', 'Pieczarki, surowe', false),
@@ -887,28 +892,37 @@ with
     ('Chili sin carne z czarną fasolą', 'Nóż szefa kuchni'),
     ('Chili sin carne z czarną fasolą', 'Deska do krojenia'),
     ('Chili sin carne z czarną fasolą', 'Waga kuchenna'),
+    ('Chili sin carne z czarną fasolą', 'Sitko'),
     ('Curry z ciecierzycy, pomidorów i szpinaku', 'Garnek 3 l'),
     ('Curry z ciecierzycy, pomidorów i szpinaku', 'Nóż szefa kuchni'),
     ('Curry z ciecierzycy, pomidorów i szpinaku', 'Deska do krojenia'),
     ('Curry z ciecierzycy, pomidorów i szpinaku', 'Waga kuchenna'),
+    ('Curry z ciecierzycy, pomidorów i szpinaku', 'Sitko'),
     ('Curry z czerwonej soczewicy i szpinaku', 'Garnek 3 l'),
     ('Curry z czerwonej soczewicy i szpinaku', 'Nóż szefa kuchni'),
     ('Curry z czerwonej soczewicy i szpinaku', 'Deska do krojenia'),
     ('Curry z czerwonej soczewicy i szpinaku', 'Waga kuchenna'),
+    ('Curry z czerwonej soczewicy i szpinaku', 'Sitko'),
     ('Dorsz w kokosowym curry ze szpinakiem', 'Patelnia 28 cm'),
     ('Dorsz w kokosowym curry ze szpinakiem', 'Garnek 2 l'),
     ('Dorsz w kokosowym curry ze szpinakiem', 'Nóż szefa kuchni'),
     ('Dorsz w kokosowym curry ze szpinakiem', 'Deska do krojenia'),
     ('Dorsz w kokosowym curry ze szpinakiem', 'Waga kuchenna'),
+    ('Dorsz w kokosowym curry ze szpinakiem', 'Sitko'),
+    ('Dorsz w kokosowym curry ze szpinakiem', 'Termometr do mięsa'),
+    ('Dorsz w kokosowym curry ze szpinakiem', 'Widelec'),
     ('Grochówka z indykiem', 'Garnek 3 l'),
     ('Grochówka z indykiem', 'Nóż szefa kuchni'),
     ('Grochówka z indykiem', 'Deska do krojenia'),
     ('Grochówka z indykiem', 'Waga kuchenna'),
+    ('Grochówka z indykiem', 'Sitko'),
+    ('Grochówka z indykiem', 'Termometr do mięsa'),
     ('Gulasz jagnięcy z ciecierzycą i pomidorami', 'Garnek 3 l'),
     ('Gulasz jagnięcy z ciecierzycą i pomidorami', 'Garnek 2 l'),
     ('Gulasz jagnięcy z ciecierzycą i pomidorami', 'Nóż szefa kuchni'),
     ('Gulasz jagnięcy z ciecierzycą i pomidorami', 'Deska do krojenia'),
     ('Gulasz jagnięcy z ciecierzycą i pomidorami', 'Waga kuchenna'),
+    ('Gulasz jagnięcy z ciecierzycą i pomidorami', 'Sitko'),
     ('Gulasz wołowy z warzywami korzeniowymi', 'Garnek 3 l'),
     ('Gulasz wołowy z warzywami korzeniowymi', 'Nóż szefa kuchni'),
     ('Gulasz wołowy z warzywami korzeniowymi', 'Deska do krojenia'),
@@ -917,13 +931,14 @@ with
     ('Gulasz z białej fasoli, jarmużu i pomidorów', 'Nóż szefa kuchni'),
     ('Gulasz z białej fasoli, jarmużu i pomidorów', 'Deska do krojenia'),
     ('Gulasz z białej fasoli, jarmużu i pomidorów', 'Waga kuchenna'),
+    ('Gulasz z białej fasoli, jarmużu i pomidorów', 'Sitko'),
     ('Jaglanka z gruszką i orzechami', 'Rondel'),
     ('Jaglanka z gruszką i orzechami', 'Sitko'),
     ('Jaglanka z gruszką i orzechami', 'Nóż szefa kuchni'),
     ('Jaglanka z gruszką i orzechami', 'Deska do krojenia'),
     ('Jaglanka z gruszką i orzechami', 'Waga kuchenna'),
     ('Jajecznica z pomidorem i szczypiorkiem', 'Patelnia 24 cm'),
-    ('Jajecznica z pomidorem i szczypiorkiem', 'miska'),
+    ('Jajecznica z pomidorem i szczypiorkiem', 'Miska'),
     ('Jajecznica z pomidorem i szczypiorkiem', 'Widelec'),
     ('Jajecznica z pomidorem i szczypiorkiem', 'Nóż szefa kuchni'),
     ('Jajecznica z pomidorem i szczypiorkiem', 'Deska do krojenia'),
@@ -932,10 +947,12 @@ with
     ('Jajka na miękko z pieczywem i warzywami', 'Nóż szefa kuchni'),
     ('Jajka na miękko z pieczywem i warzywami', 'Deska do krojenia'),
     ('Jajka na miękko z pieczywem i warzywami', 'Waga kuchenna'),
+    ('Jajka na miękko z pieczywem i warzywami', 'Łyżka cedzakowa'),
     ('Kanapki z Goudą, jajkiem i szczypiorkiem', 'Garnek 2 l'),
     ('Kanapki z Goudą, jajkiem i szczypiorkiem', 'Nóż szefa kuchni'),
     ('Kanapki z Goudą, jajkiem i szczypiorkiem', 'Deska do krojenia'),
     ('Kanapki z Goudą, jajkiem i szczypiorkiem', 'Waga kuchenna'),
+    ('Kanapki z Goudą, jajkiem i szczypiorkiem', 'Łyżka cedzakowa'),
     ('Kanapki z Goudą, pomidorem i sałatą', 'Nóż szefa kuchni'),
     ('Kanapki z Goudą, pomidorem i sałatą', 'Deska do krojenia'),
     ('Kanapki z Goudą, pomidorem i sałatą', 'Waga kuchenna'),
@@ -944,26 +961,28 @@ with
     ('Kanapki z halloumi, awokado i pomidorem', 'Deska do krojenia'),
     ('Kanapki z halloumi, awokado i pomidorem', 'Waga kuchenna'),
     ('Kanapki z jajkiem, awokado i pomidorem', 'Garnek 2 l'),
-    ('Kanapki z jajkiem, awokado i pomidorem', 'miska'),
+    ('Kanapki z jajkiem, awokado i pomidorem', 'Miska'),
     ('Kanapki z jajkiem, awokado i pomidorem', 'Widelec'),
     ('Kanapki z jajkiem, awokado i pomidorem', 'Nóż szefa kuchni'),
     ('Kanapki z jajkiem, awokado i pomidorem', 'Deska do krojenia'),
     ('Kanapki z jajkiem, awokado i pomidorem', 'Waga kuchenna'),
+    ('Kanapki z jajkiem, awokado i pomidorem', 'Łyżka cedzakowa'),
     ('Kanapki z mozzarellą, pomidorem i bazylią', 'Nóż szefa kuchni'),
     ('Kanapki z mozzarellą, pomidorem i bazylią', 'Deska do krojenia'),
     ('Kanapki z mozzarellą, pomidorem i bazylią', 'Waga kuchenna'),
     ('Kanapki z pastą jajeczną', 'Garnek 2 l'),
-    ('Kanapki z pastą jajeczną', 'miska'),
+    ('Kanapki z pastą jajeczną', 'Miska'),
     ('Kanapki z pastą jajeczną', 'Widelec'),
     ('Kanapki z pastą jajeczną', 'Nóż szefa kuchni'),
     ('Kanapki z pastą jajeczną', 'Deska do krojenia'),
     ('Kanapki z pastą jajeczną', 'Waga kuchenna'),
-    ('Kanapki z ricottą, rzodkiewką i szczypiorkiem', 'miska'),
+    ('Kanapki z pastą jajeczną', 'Łyżka cedzakowa'),
+    ('Kanapki z ricottą, rzodkiewką i szczypiorkiem', 'Miska'),
     ('Kanapki z ricottą, rzodkiewką i szczypiorkiem', 'Widelec'),
     ('Kanapki z ricottą, rzodkiewką i szczypiorkiem', 'Nóż szefa kuchni'),
     ('Kanapki z ricottą, rzodkiewką i szczypiorkiem', 'Deska do krojenia'),
     ('Kanapki z ricottą, rzodkiewką i szczypiorkiem', 'Waga kuchenna'),
-    ('Kanapki z sardynkami, pomidorem i rukolą', 'miska'),
+    ('Kanapki z sardynkami, pomidorem i rukolą', 'Miska'),
     ('Kanapki z sardynkami, pomidorem i rukolą', 'Widelec'),
     ('Kanapki z sardynkami, pomidorem i rukolą', 'Nóż szefa kuchni'),
     ('Kanapki z sardynkami, pomidorem i rukolą', 'Deska do krojenia'),
@@ -976,35 +995,44 @@ with
     ('Kałamarnica z papryką i ryżem', 'Nóż szefa kuchni'),
     ('Kałamarnica z papryką i ryżem', 'Deska do krojenia'),
     ('Kałamarnica z papryką i ryżem', 'Waga kuchenna'),
+    ('Kałamarnica z papryką i ryżem', 'Sitko'),
     ('Klopsiki z indyka w sosie pomidorowym z bulgurem', 'Patelnia 28 cm'),
     ('Klopsiki z indyka w sosie pomidorowym z bulgurem', 'Garnek 2 l'),
-    ('Klopsiki z indyka w sosie pomidorowym z bulgurem', 'miska'),
+    ('Klopsiki z indyka w sosie pomidorowym z bulgurem', 'Miska'),
     ('Klopsiki z indyka w sosie pomidorowym z bulgurem', 'Nóż szefa kuchni'),
     ('Klopsiki z indyka w sosie pomidorowym z bulgurem', 'Deska do krojenia'),
     ('Klopsiki z indyka w sosie pomidorowym z bulgurem', 'Waga kuchenna'),
+    ('Klopsiki z indyka w sosie pomidorowym z bulgurem', 'Sitko'),
+    ('Klopsiki z indyka w sosie pomidorowym z bulgurem', 'Termometr do mięsa'),
     ('Komosa ryżowa z ciecierzycą i pieczonymi warzywami', 'Piekarnik'),
     ('Komosa ryżowa z ciecierzycą i pieczonymi warzywami', 'Blacha do pieczenia'),
     ('Komosa ryżowa z ciecierzycą i pieczonymi warzywami', 'Garnek 2 l'),
     ('Komosa ryżowa z ciecierzycą i pieczonymi warzywami', 'Nóż szefa kuchni'),
     ('Komosa ryżowa z ciecierzycą i pieczonymi warzywami', 'Deska do krojenia'),
     ('Komosa ryżowa z ciecierzycą i pieczonymi warzywami', 'Waga kuchenna'),
+    ('Komosa ryżowa z ciecierzycą i pieczonymi warzywami', 'Sitko'),
+    ('Komosa ryżowa z ciecierzycą i pieczonymi warzywami', 'Miska'),
     ('Kotleciki z czerwonej soczewicy z sosem jogurtowym', 'Garnek 2 l'),
     ('Kotleciki z czerwonej soczewicy z sosem jogurtowym', 'Patelnia 28 cm'),
-    ('Kotleciki z czerwonej soczewicy z sosem jogurtowym', 'miska'),
+    ('Kotleciki z czerwonej soczewicy z sosem jogurtowym', 'Miska'),
     ('Kotleciki z czerwonej soczewicy z sosem jogurtowym', 'Tarka o grubych oczkach'),
     ('Kotleciki z czerwonej soczewicy z sosem jogurtowym', 'Nóż szefa kuchni'),
     ('Kotleciki z czerwonej soczewicy z sosem jogurtowym', 'Deska do krojenia'),
     ('Kotleciki z czerwonej soczewicy z sosem jogurtowym', 'Waga kuchenna'),
+    ('Kotleciki z czerwonej soczewicy z sosem jogurtowym', 'Sitko'),
+    ('Kotleciki z czerwonej soczewicy z sosem jogurtowym', 'Widelec'),
     ('Krem z brokułów z fetą', 'Garnek 3 l'),
     ('Krem z brokułów z fetą', 'Blender ręczny'),
     ('Krem z brokułów z fetą', 'Nóż szefa kuchni'),
     ('Krem z brokułów z fetą', 'Deska do krojenia'),
     ('Krem z brokułów z fetą', 'Waga kuchenna'),
+    ('Krem z brokułów z fetą', 'Miska'),
     ('Krem z dyni na mleku kokosowym', 'Garnek 3 l'),
     ('Krem z dyni na mleku kokosowym', 'Blender ręczny'),
     ('Krem z dyni na mleku kokosowym', 'Nóż szefa kuchni'),
     ('Krem z dyni na mleku kokosowym', 'Deska do krojenia'),
     ('Krem z dyni na mleku kokosowym', 'Waga kuchenna'),
+    ('Krem z dyni na mleku kokosowym', 'Sitko'),
     ('Krem z kalafiora z pieczoną ciecierzycą', 'Piekarnik'),
     ('Krem z kalafiora z pieczoną ciecierzycą', 'Blacha do pieczenia'),
     ('Krem z kalafiora z pieczoną ciecierzycą', 'Garnek 3 l'),
@@ -1012,76 +1040,97 @@ with
     ('Krem z kalafiora z pieczoną ciecierzycą', 'Nóż szefa kuchni'),
     ('Krem z kalafiora z pieczoną ciecierzycą', 'Deska do krojenia'),
     ('Krem z kalafiora z pieczoną ciecierzycą', 'Waga kuchenna'),
+    ('Krem z kalafiora z pieczoną ciecierzycą', 'Sitko'),
+    ('Krem z kalafiora z pieczoną ciecierzycą', 'Miska'),
     ('Krewetki z czosnkiem, cukinią i ryżem', 'Patelnia 28 cm'),
     ('Krewetki z czosnkiem, cukinią i ryżem', 'Garnek 2 l'),
     ('Krewetki z czosnkiem, cukinią i ryżem', 'Nóż szefa kuchni'),
     ('Krewetki z czosnkiem, cukinią i ryżem', 'Deska do krojenia'),
     ('Krewetki z czosnkiem, cukinią i ryżem', 'Waga kuchenna'),
+    ('Krewetki z czosnkiem, cukinią i ryżem', 'Sitko'),
     ('Królik z rozmarynem i warzywami korzeniowymi', 'Piekarnik'),
     ('Królik z rozmarynem i warzywami korzeniowymi', 'Naczynie żaroodporne'),
     ('Królik z rozmarynem i warzywami korzeniowymi', 'Nóż szefa kuchni'),
     ('Królik z rozmarynem i warzywami korzeniowymi', 'Deska do krojenia'),
     ('Królik z rozmarynem i warzywami korzeniowymi', 'Waga kuchenna'),
+    ('Królik z rozmarynem i warzywami korzeniowymi', 'Termometr do mięsa'),
     ('Kurczak pieczony z batatem i brokułem', 'Piekarnik'),
     ('Kurczak pieczony z batatem i brokułem', 'Blacha do pieczenia'),
     ('Kurczak pieczony z batatem i brokułem', 'Nóż szefa kuchni'),
     ('Kurczak pieczony z batatem i brokułem', 'Deska do krojenia'),
     ('Kurczak pieczony z batatem i brokułem', 'Waga kuchenna'),
+    ('Kurczak pieczony z batatem i brokułem', 'Termometr do mięsa'),
     ('Makaron pełnoziarnisty z bolońskim sosem z soczewicy', 'Garnek 3 l'),
     ('Makaron pełnoziarnisty z bolońskim sosem z soczewicy', 'Garnek 2 l'),
     ('Makaron pełnoziarnisty z bolońskim sosem z soczewicy', 'Tarka o grubych oczkach'),
     ('Makaron pełnoziarnisty z bolońskim sosem z soczewicy', 'Nóż szefa kuchni'),
     ('Makaron pełnoziarnisty z bolońskim sosem z soczewicy', 'Deska do krojenia'),
     ('Makaron pełnoziarnisty z bolońskim sosem z soczewicy', 'Waga kuchenna'),
+    ('Makaron pełnoziarnisty z bolońskim sosem z soczewicy', 'Sitko'),
     ('Makaron z brokułem i fetą', 'Garnek 3 l'),
     ('Makaron z brokułem i fetą', 'Patelnia 28 cm'),
     ('Makaron z brokułem i fetą', 'Nóż szefa kuchni'),
     ('Makaron z brokułem i fetą', 'Deska do krojenia'),
     ('Makaron z brokułem i fetą', 'Waga kuchenna'),
+    ('Makaron z brokułem i fetą', 'Durszlak'),
     ('Makaron z ciecierzycą, bazylią i orzechami', 'Garnek 3 l'),
     ('Makaron z ciecierzycą, bazylią i orzechami', 'Blender ręczny'),
     ('Makaron z ciecierzycą, bazylią i orzechami', 'Nóż szefa kuchni'),
     ('Makaron z ciecierzycą, bazylią i orzechami', 'Deska do krojenia'),
     ('Makaron z ciecierzycą, bazylią i orzechami', 'Waga kuchenna'),
+    ('Makaron z ciecierzycą, bazylią i orzechami', 'Sitko'),
+    ('Makaron z ciecierzycą, bazylią i orzechami', 'Miska'),
     ('Makaron z indykiem, pieczarkami i jogurtem', 'Patelnia 28 cm'),
     ('Makaron z indykiem, pieczarkami i jogurtem', 'Garnek 3 l'),
-    ('Makaron z indykiem, pieczarkami i jogurtem', 'miska'),
+    ('Makaron z indykiem, pieczarkami i jogurtem', 'Miska'),
     ('Makaron z indykiem, pieczarkami i jogurtem', 'Nóż szefa kuchni'),
     ('Makaron z indykiem, pieczarkami i jogurtem', 'Deska do krojenia'),
     ('Makaron z indykiem, pieczarkami i jogurtem', 'Waga kuchenna'),
+    ('Makaron z indykiem, pieczarkami i jogurtem', 'Durszlak'),
+    ('Makaron z indykiem, pieczarkami i jogurtem', 'Termometr do mięsa'),
     ('Makaron z kurczakiem, szpinakiem i pomidorami', 'Patelnia 28 cm'),
     ('Makaron z kurczakiem, szpinakiem i pomidorami', 'Garnek 3 l'),
     ('Makaron z kurczakiem, szpinakiem i pomidorami', 'Nóż szefa kuchni'),
     ('Makaron z kurczakiem, szpinakiem i pomidorami', 'Deska do krojenia'),
     ('Makaron z kurczakiem, szpinakiem i pomidorami', 'Waga kuchenna'),
+    ('Makaron z kurczakiem, szpinakiem i pomidorami', 'Durszlak'),
+    ('Makaron z kurczakiem, szpinakiem i pomidorami', 'Termometr do mięsa'),
     ('Makaron z pieczonymi warzywami i mozzarellą', 'Piekarnik'),
     ('Makaron z pieczonymi warzywami i mozzarellą', 'Blacha do pieczenia'),
     ('Makaron z pieczonymi warzywami i mozzarellą', 'Garnek 3 l'),
     ('Makaron z pieczonymi warzywami i mozzarellą', 'Nóż szefa kuchni'),
     ('Makaron z pieczonymi warzywami i mozzarellą', 'Deska do krojenia'),
     ('Makaron z pieczonymi warzywami i mozzarellą', 'Waga kuchenna'),
+    ('Makaron z pieczonymi warzywami i mozzarellą', 'Durszlak'),
+    ('Makaron z pieczonymi warzywami i mozzarellą', 'Miska'),
     ('Makaron z polędwiczką i pieczarkami', 'Patelnia 28 cm'),
     ('Makaron z polędwiczką i pieczarkami', 'Garnek 3 l'),
-    ('Makaron z polędwiczką i pieczarkami', 'miska'),
+    ('Makaron z polędwiczką i pieczarkami', 'Miska'),
     ('Makaron z polędwiczką i pieczarkami', 'Nóż szefa kuchni'),
     ('Makaron z polędwiczką i pieczarkami', 'Deska do krojenia'),
     ('Makaron z polędwiczką i pieczarkami', 'Waga kuchenna'),
+    ('Makaron z polędwiczką i pieczarkami', 'Durszlak'),
+    ('Makaron z polędwiczką i pieczarkami', 'Termometr do mięsa'),
     ('Makaron z ricottą i szpinakiem', 'Patelnia 28 cm'),
     ('Makaron z ricottą i szpinakiem', 'Garnek 3 l'),
     ('Makaron z ricottą i szpinakiem', 'Nóż szefa kuchni'),
     ('Makaron z ricottą i szpinakiem', 'Deska do krojenia'),
     ('Makaron z ricottą i szpinakiem', 'Waga kuchenna'),
+    ('Makaron z ricottą i szpinakiem', 'Durszlak'),
     ('Makaron z tuńczykiem, cytryną i natką pietruszki', 'Garnek 3 l'),
     ('Makaron z tuńczykiem, cytryną i natką pietruszki', 'Patelnia 28 cm'),
     ('Makaron z tuńczykiem, cytryną i natką pietruszki', 'Nóż szefa kuchni'),
     ('Makaron z tuńczykiem, cytryną i natką pietruszki', 'Deska do krojenia'),
     ('Makaron z tuńczykiem, cytryną i natką pietruszki', 'Waga kuchenna'),
+    ('Makaron z tuńczykiem, cytryną i natką pietruszki', 'Durszlak'),
     ('Makaron z wołowiną i sosem pomidorowym', 'Patelnia 28 cm'),
     ('Makaron z wołowiną i sosem pomidorowym', 'Garnek 3 l'),
     ('Makaron z wołowiną i sosem pomidorowym', 'Tarka o grubych oczkach'),
     ('Makaron z wołowiną i sosem pomidorowym', 'Nóż szefa kuchni'),
     ('Makaron z wołowiną i sosem pomidorowym', 'Deska do krojenia'),
     ('Makaron z wołowiną i sosem pomidorowym', 'Waga kuchenna'),
+    ('Makaron z wołowiną i sosem pomidorowym', 'Durszlak'),
+    ('Makaron z wołowiną i sosem pomidorowym', 'Termometr do mięsa'),
     ('Małże w pomidorowym bulionie', 'Garnek 3 l'),
     ('Małże w pomidorowym bulionie', 'Nóż szefa kuchni'),
     ('Małże w pomidorowym bulionie', 'Deska do krojenia'),
@@ -1091,21 +1140,25 @@ with
     ('Morszczuk w sosie pomidorowym z ryżem', 'Nóż szefa kuchni'),
     ('Morszczuk w sosie pomidorowym z ryżem', 'Deska do krojenia'),
     ('Morszczuk w sosie pomidorowym z ryżem', 'Waga kuchenna'),
-    ('Nocna owsianka z bananem i chia', 'miska'),
+    ('Morszczuk w sosie pomidorowym z ryżem', 'Sitko'),
+    ('Morszczuk w sosie pomidorowym z ryżem', 'Termometr do mięsa'),
+    ('Nocna owsianka z bananem i chia', 'Miska'),
     ('Nocna owsianka z bananem i chia', 'Widelec'),
     ('Nocna owsianka z bananem i chia', 'Nóż szefa kuchni'),
     ('Nocna owsianka z bananem i chia', 'Deska do krojenia'),
     ('Nocna owsianka z bananem i chia', 'Waga kuchenna'),
-    ('Nocna owsianka z borówkami i orzechami', 'miska'),
+    ('Nocna owsianka z borówkami i orzechami', 'Miska'),
     ('Nocna owsianka z borówkami i orzechami', 'Waga kuchenna'),
+    ('Nocna owsianka z borówkami i orzechami', 'Nóż szefa kuchni'),
+    ('Nocna owsianka z borówkami i orzechami', 'Deska do krojenia'),
     ('Omlet ze szpinakiem i fetą', 'Patelnia 24 cm'),
-    ('Omlet ze szpinakiem i fetą', 'miska'),
+    ('Omlet ze szpinakiem i fetą', 'Miska'),
     ('Omlet ze szpinakiem i fetą', 'Widelec'),
     ('Omlet ze szpinakiem i fetą', 'Nóż szefa kuchni'),
     ('Omlet ze szpinakiem i fetą', 'Deska do krojenia'),
     ('Omlet ze szpinakiem i fetą', 'Waga kuchenna'),
     ('Owsianka z jabłkiem, cynamonem i orzechami', 'Rondel'),
-    ('Owsianka z jabłkiem, cynamonem i orzechami', 'miska'),
+    ('Owsianka z jabłkiem, cynamonem i orzechami', 'Miska'),
     ('Owsianka z jabłkiem, cynamonem i orzechami', 'Nóż szefa kuchni'),
     ('Owsianka z jabłkiem, cynamonem i orzechami', 'Deska do krojenia'),
     ('Owsianka z jabłkiem, cynamonem i orzechami', 'Waga kuchenna'),
@@ -1115,8 +1168,11 @@ with
     ('Papryka faszerowana soczewicą i kaszą bulgur', 'Nóż szefa kuchni'),
     ('Papryka faszerowana soczewicą i kaszą bulgur', 'Deska do krojenia'),
     ('Papryka faszerowana soczewicą i kaszą bulgur', 'Waga kuchenna'),
+    ('Papryka faszerowana soczewicą i kaszą bulgur', 'Garnek 3 l'),
+    ('Papryka faszerowana soczewicą i kaszą bulgur', 'Patelnia 24 cm'),
+    ('Papryka faszerowana soczewicą i kaszą bulgur', 'Sitko'),
     ('Pełnoziarniste placuszki ze skyrem i owocami', 'Patelnia 24 cm'),
-    ('Pełnoziarniste placuszki ze skyrem i owocami', 'miska'),
+    ('Pełnoziarniste placuszki ze skyrem i owocami', 'Miska'),
     ('Pełnoziarniste placuszki ze skyrem i owocami', 'Widelec'),
     ('Pełnoziarniste placuszki ze skyrem i owocami', 'Waga kuchenna'),
     ('Pieczona makrela z burakami i ziemniakami', 'Piekarnik'),
@@ -1124,6 +1180,7 @@ with
     ('Pieczona makrela z burakami i ziemniakami', 'Nóż szefa kuchni'),
     ('Pieczona makrela z burakami i ziemniakami', 'Deska do krojenia'),
     ('Pieczona makrela z burakami i ziemniakami', 'Waga kuchenna'),
+    ('Pieczona makrela z burakami i ziemniakami', 'Termometr do mięsa'),
     ('Pieczone warzywa korzeniowe z tymiankiem', 'Piekarnik'),
     ('Pieczone warzywa korzeniowe z tymiankiem', 'Blacha do pieczenia'),
     ('Pieczone warzywa korzeniowe z tymiankiem', 'Nóż szefa kuchni'),
@@ -1135,9 +1192,10 @@ with
     ('Pieczony bakłażan z ciecierzycą i fetą', 'Nóż szefa kuchni'),
     ('Pieczony bakłażan z ciecierzycą i fetą', 'Deska do krojenia'),
     ('Pieczony bakłażan z ciecierzycą i fetą', 'Waga kuchenna'),
+    ('Pieczony bakłażan z ciecierzycą i fetą', 'Sitko'),
     ('Pieczony kalafior z ziołowym sosem jogurtowym', 'Piekarnik'),
     ('Pieczony kalafior z ziołowym sosem jogurtowym', 'Blacha do pieczenia'),
-    ('Pieczony kalafior z ziołowym sosem jogurtowym', 'miska'),
+    ('Pieczony kalafior z ziołowym sosem jogurtowym', 'Miska'),
     ('Pieczony kalafior z ziołowym sosem jogurtowym', 'Nóż szefa kuchni'),
     ('Pieczony kalafior z ziołowym sosem jogurtowym', 'Deska do krojenia'),
     ('Pieczony kalafior z ziołowym sosem jogurtowym', 'Waga kuchenna'),
@@ -1146,32 +1204,40 @@ with
     ('Pieczony łosoś z brokułem i ziemniakami', 'Nóż szefa kuchni'),
     ('Pieczony łosoś z brokułem i ziemniakami', 'Deska do krojenia'),
     ('Pieczony łosoś z brokułem i ziemniakami', 'Waga kuchenna'),
+    ('Pieczony łosoś z brokułem i ziemniakami', 'Termometr do mięsa'),
     ('Pierś z kaczki z pomarańczą i czerwoną kapustą', 'Patelnia 28 cm'),
     ('Pierś z kaczki z pomarańczą i czerwoną kapustą', 'Garnek 3 l'),
     ('Pierś z kaczki z pomarańczą i czerwoną kapustą', 'Garnek 2 l'),
     ('Pierś z kaczki z pomarańczą i czerwoną kapustą', 'Nóż szefa kuchni'),
     ('Pierś z kaczki z pomarańczą i czerwoną kapustą', 'Deska do krojenia'),
     ('Pierś z kaczki z pomarańczą i czerwoną kapustą', 'Waga kuchenna'),
+    ('Pierś z kaczki z pomarańczą i czerwoną kapustą', 'Termometr do mięsa'),
+    ('Pierś z kaczki z pomarańczą i czerwoną kapustą', 'Durszlak'),
     ('Placuszki bananowo-owsiane', 'Patelnia 24 cm'),
-    ('Placuszki bananowo-owsiane', 'miska'),
+    ('Placuszki bananowo-owsiane', 'Miska'),
     ('Placuszki bananowo-owsiane', 'Widelec'),
     ('Placuszki bananowo-owsiane', 'Waga kuchenna'),
     ('Polędwiczka w sosie musztardowym z kaszą bulgur', 'Patelnia 28 cm'),
     ('Polędwiczka w sosie musztardowym z kaszą bulgur', 'Garnek 2 l'),
-    ('Polędwiczka w sosie musztardowym z kaszą bulgur', 'miska'),
+    ('Polędwiczka w sosie musztardowym z kaszą bulgur', 'Miska'),
     ('Polędwiczka w sosie musztardowym z kaszą bulgur', 'Nóż szefa kuchni'),
     ('Polędwiczka w sosie musztardowym z kaszą bulgur', 'Deska do krojenia'),
     ('Polędwiczka w sosie musztardowym z kaszą bulgur', 'Waga kuchenna'),
+    ('Polędwiczka w sosie musztardowym z kaszą bulgur', 'Sitko'),
+    ('Polędwiczka w sosie musztardowym z kaszą bulgur', 'Termometr do mięsa'),
     ('Potrawka z kurczaka, kaszy jęczmiennej i warzyw', 'Garnek 3 l'),
     ('Potrawka z kurczaka, kaszy jęczmiennej i warzyw', 'Nóż szefa kuchni'),
     ('Potrawka z kurczaka, kaszy jęczmiennej i warzyw', 'Deska do krojenia'),
     ('Potrawka z kurczaka, kaszy jęczmiennej i warzyw', 'Waga kuchenna'),
+    ('Potrawka z kurczaka, kaszy jęczmiennej i warzyw', 'Sitko'),
+    ('Potrawka z kurczaka, kaszy jęczmiennej i warzyw', 'Termometr do mięsa'),
     ('Pstrąg pieczony z warzywami korzeniowymi', 'Piekarnik'),
     ('Pstrąg pieczony z warzywami korzeniowymi', 'Blacha do pieczenia'),
     ('Pstrąg pieczony z warzywami korzeniowymi', 'Nóż szefa kuchni'),
     ('Pstrąg pieczony z warzywami korzeniowymi', 'Deska do krojenia'),
     ('Pstrąg pieczony z warzywami korzeniowymi', 'Waga kuchenna'),
-    ('Pudding chia z mango i mlekiem kokosowym', 'miska'),
+    ('Pstrąg pieczony z warzywami korzeniowymi', 'Termometr do mięsa'),
+    ('Pudding chia z mango i mlekiem kokosowym', 'Miska'),
     ('Pudding chia z mango i mlekiem kokosowym', 'Widelec'),
     ('Pudding chia z mango i mlekiem kokosowym', 'Nóż szefa kuchni'),
     ('Pudding chia z mango i mlekiem kokosowym', 'Deska do krojenia'),
@@ -1182,63 +1248,70 @@ with
     ('Ryż z pieczarkami, szpinakiem i parmezanem', 'Deska do krojenia'),
     ('Ryż z pieczarkami, szpinakiem i parmezanem', 'Waga kuchenna'),
     ('Sałatka brokułowa z jajkiem i sosem jogurtowym', 'Garnek 3 l'),
-    ('Sałatka brokułowa z jajkiem i sosem jogurtowym', 'miska'),
+    ('Sałatka brokułowa z jajkiem i sosem jogurtowym', 'Miska'),
     ('Sałatka brokułowa z jajkiem i sosem jogurtowym', 'Nóż szefa kuchni'),
     ('Sałatka brokułowa z jajkiem i sosem jogurtowym', 'Deska do krojenia'),
     ('Sałatka brokułowa z jajkiem i sosem jogurtowym', 'Waga kuchenna'),
+    ('Sałatka brokułowa z jajkiem i sosem jogurtowym', 'Garnek 2 l'),
+    ('Sałatka brokułowa z jajkiem i sosem jogurtowym', 'Durszlak'),
+    ('Sałatka brokułowa z jajkiem i sosem jogurtowym', 'Łyżka cedzakowa'),
     ('Sałatka makaronowa z mozzarellą i warzywami', 'Garnek 3 l'),
     ('Sałatka makaronowa z mozzarellą i warzywami', 'Sitko'),
-    ('Sałatka makaronowa z mozzarellą i warzywami', 'miska'),
+    ('Sałatka makaronowa z mozzarellą i warzywami', 'Miska'),
     ('Sałatka makaronowa z mozzarellą i warzywami', 'Nóż szefa kuchni'),
     ('Sałatka makaronowa z mozzarellą i warzywami', 'Deska do krojenia'),
     ('Sałatka makaronowa z mozzarellą i warzywami', 'Waga kuchenna'),
     ('Sałatka makaronowa z tuńczykiem i warzywami', 'Garnek 2 l'),
     ('Sałatka makaronowa z tuńczykiem i warzywami', 'Sitko'),
-    ('Sałatka makaronowa z tuńczykiem i warzywami', 'miska'),
+    ('Sałatka makaronowa z tuńczykiem i warzywami', 'Miska'),
     ('Sałatka makaronowa z tuńczykiem i warzywami', 'Nóż szefa kuchni'),
     ('Sałatka makaronowa z tuńczykiem i warzywami', 'Deska do krojenia'),
     ('Sałatka makaronowa z tuńczykiem i warzywami', 'Waga kuchenna'),
-    ('Sałatka z czarnej fasoli, kukurydzy i pomidora', 'miska'),
+    ('Sałatka z czarnej fasoli, kukurydzy i pomidora', 'Miska'),
     ('Sałatka z czarnej fasoli, kukurydzy i pomidora', 'Nóż szefa kuchni'),
     ('Sałatka z czarnej fasoli, kukurydzy i pomidora', 'Deska do krojenia'),
     ('Sałatka z czarnej fasoli, kukurydzy i pomidora', 'Waga kuchenna'),
+    ('Sałatka z czarnej fasoli, kukurydzy i pomidora', 'Sitko'),
     ('Sałatka z jajkiem, fetą i warzywami', 'Garnek 2 l'),
-    ('Sałatka z jajkiem, fetą i warzywami', 'miska'),
+    ('Sałatka z jajkiem, fetą i warzywami', 'Miska'),
     ('Sałatka z jajkiem, fetą i warzywami', 'Nóż szefa kuchni'),
     ('Sałatka z jajkiem, fetą i warzywami', 'Deska do krojenia'),
     ('Sałatka z jajkiem, fetą i warzywami', 'Waga kuchenna'),
-    ('Sałatka z jarmużu, jabłka i orzechów', 'miska'),
+    ('Sałatka z jajkiem, fetą i warzywami', 'Łyżka cedzakowa'),
+    ('Sałatka z jarmużu, jabłka i orzechów', 'Miska'),
     ('Sałatka z jarmużu, jabłka i orzechów', 'Nóż szefa kuchni'),
     ('Sałatka z jarmużu, jabłka i orzechów', 'Deska do krojenia'),
     ('Sałatka z jarmużu, jabłka i orzechów', 'Waga kuchenna'),
     ('Sałatka z komosy, buraka i koziego sera', 'Piekarnik'),
     ('Sałatka z komosy, buraka i koziego sera', 'Blacha do pieczenia'),
     ('Sałatka z komosy, buraka i koziego sera', 'Garnek 2 l'),
-    ('Sałatka z komosy, buraka i koziego sera', 'miska'),
+    ('Sałatka z komosy, buraka i koziego sera', 'Miska'),
     ('Sałatka z komosy, buraka i koziego sera', 'Nóż szefa kuchni'),
     ('Sałatka z komosy, buraka i koziego sera', 'Deska do krojenia'),
     ('Sałatka z komosy, buraka i koziego sera', 'Waga kuchenna'),
+    ('Sałatka z komosy, buraka i koziego sera', 'Sitko'),
+    ('Sałatka z komosy, buraka i koziego sera', 'Widelec'),
     ('Sałatka z pieczonym burakiem i fetą', 'Piekarnik'),
     ('Sałatka z pieczonym burakiem i fetą', 'Blacha do pieczenia'),
-    ('Sałatka z pieczonym burakiem i fetą', 'miska'),
+    ('Sałatka z pieczonym burakiem i fetą', 'Miska'),
     ('Sałatka z pieczonym burakiem i fetą', 'Nóż szefa kuchni'),
     ('Sałatka z pieczonym burakiem i fetą', 'Deska do krojenia'),
     ('Sałatka z pieczonym burakiem i fetą', 'Waga kuchenna'),
-    ('Serek wiejski z owocami i orzechami', 'miska'),
+    ('Serek wiejski z owocami i orzechami', 'Miska'),
     ('Serek wiejski z owocami i orzechami', 'Nóż szefa kuchni'),
     ('Serek wiejski z owocami i orzechami', 'Deska do krojenia'),
     ('Serek wiejski z owocami i orzechami', 'Waga kuchenna'),
-    ('Serek wiejski z pomidorem, ogórkiem i pestkami dyni', 'miska'),
+    ('Serek wiejski z pomidorem, ogórkiem i pestkami dyni', 'Miska'),
     ('Serek wiejski z pomidorem, ogórkiem i pestkami dyni', 'Widelec'),
     ('Serek wiejski z pomidorem, ogórkiem i pestkami dyni', 'Nóż szefa kuchni'),
     ('Serek wiejski z pomidorem, ogórkiem i pestkami dyni', 'Deska do krojenia'),
     ('Serek wiejski z pomidorem, ogórkiem i pestkami dyni', 'Waga kuchenna'),
-    ('Skyr kakaowy z bananem i masłem orzechowym', 'miska'),
+    ('Skyr kakaowy z bananem i masłem orzechowym', 'Miska'),
     ('Skyr kakaowy z bananem i masłem orzechowym', 'Widelec'),
     ('Skyr kakaowy z bananem i masłem orzechowym', 'Nóż szefa kuchni'),
     ('Skyr kakaowy z bananem i masłem orzechowym', 'Deska do krojenia'),
     ('Skyr kakaowy z bananem i masłem orzechowym', 'Waga kuchenna'),
-    ('Skyr z owocami, płatkami owsianymi i orzechami', 'miska'),
+    ('Skyr z owocami, płatkami owsianymi i orzechami', 'Miska'),
     ('Skyr z owocami, płatkami owsianymi i orzechami', 'Nóż szefa kuchni'),
     ('Skyr z owocami, płatkami owsianymi i orzechami', 'Deska do krojenia'),
     ('Skyr z owocami, płatkami owsianymi i orzechami', 'Waga kuchenna'),
@@ -1248,9 +1321,11 @@ with
     ('Stek z tuńczyka z fasolką szparagową i ziemniakami', 'Nóż szefa kuchni'),
     ('Stek z tuńczyka z fasolką szparagową i ziemniakami', 'Deska do krojenia'),
     ('Stek z tuńczyka z fasolką szparagową i ziemniakami', 'Waga kuchenna'),
+    ('Stek z tuńczyka z fasolką szparagową i ziemniakami', 'Durszlak'),
+    ('Stek z tuńczyka z fasolką szparagową i ziemniakami', 'Termometr do mięsa'),
     ('Tabbouleh z kaszy bulgur i ciecierzycy', 'Garnek 2 l'),
     ('Tabbouleh z kaszy bulgur i ciecierzycy', 'Sitko'),
-    ('Tabbouleh z kaszy bulgur i ciecierzycy', 'miska'),
+    ('Tabbouleh z kaszy bulgur i ciecierzycy', 'Miska'),
     ('Tabbouleh z kaszy bulgur i ciecierzycy', 'Nóż szefa kuchni'),
     ('Tabbouleh z kaszy bulgur i ciecierzycy', 'Deska do krojenia'),
     ('Tabbouleh z kaszy bulgur i ciecierzycy', 'Waga kuchenna'),
@@ -1260,8 +1335,9 @@ with
     ('Tofu z brokułem i ryżem', 'Nóż szefa kuchni'),
     ('Tofu z brokułem i ryżem', 'Deska do krojenia'),
     ('Tofu z brokułem i ryżem', 'Waga kuchenna'),
+    ('Tofu z brokułem i ryżem', 'Sitko'),
     ('Tofucznica ze szpinakiem i pomidorem', 'Patelnia 24 cm'),
-    ('Tofucznica ze szpinakiem i pomidorem', 'miska'),
+    ('Tofucznica ze szpinakiem i pomidorem', 'Miska'),
     ('Tofucznica ze szpinakiem i pomidorem', 'Widelec'),
     ('Tofucznica ze szpinakiem i pomidorem', 'Nóż szefa kuchni'),
     ('Tofucznica ze szpinakiem i pomidorem', 'Deska do krojenia'),
@@ -1271,23 +1347,25 @@ with
     ('Tortilla z Goudą, szpinakiem i pomidorem', 'Deska do krojenia'),
     ('Tortilla z Goudą, szpinakiem i pomidorem', 'Waga kuchenna'),
     ('Tortilla z hummusem i warzywami', 'Blender ręczny'),
-    ('Tortilla z hummusem i warzywami', 'miska'),
+    ('Tortilla z hummusem i warzywami', 'Miska'),
     ('Tortilla z hummusem i warzywami', 'Nóż szefa kuchni'),
     ('Tortilla z hummusem i warzywami', 'Deska do krojenia'),
     ('Tortilla z hummusem i warzywami', 'Waga kuchenna'),
+    ('Tortilla z hummusem i warzywami', 'Sitko'),
     ('Tortilla z jajkiem i szpinakiem', 'Patelnia 24 cm'),
-    ('Tortilla z jajkiem i szpinakiem', 'miska'),
+    ('Tortilla z jajkiem i szpinakiem', 'Miska'),
     ('Tortilla z jajkiem i szpinakiem', 'Widelec'),
     ('Tortilla z jajkiem i szpinakiem', 'Nóż szefa kuchni'),
     ('Tortilla z jajkiem i szpinakiem', 'Deska do krojenia'),
     ('Tortilla z jajkiem i szpinakiem', 'Waga kuchenna'),
     ('Tortilla z kurczakiem, awokado i warzywami', 'Patelnia 24 cm'),
-    ('Tortilla z kurczakiem, awokado i warzywami', 'miska'),
+    ('Tortilla z kurczakiem, awokado i warzywami', 'Miska'),
     ('Tortilla z kurczakiem, awokado i warzywami', 'Nóż szefa kuchni'),
     ('Tortilla z kurczakiem, awokado i warzywami', 'Deska do krojenia'),
     ('Tortilla z kurczakiem, awokado i warzywami', 'Waga kuchenna'),
+    ('Tortilla z kurczakiem, awokado i warzywami', 'Termometr do mięsa'),
     ('Tortilla z tofu i chrupiącymi warzywami', 'Patelnia 24 cm'),
-    ('Tortilla z tofu i chrupiącymi warzywami', 'miska'),
+    ('Tortilla z tofu i chrupiącymi warzywami', 'Miska'),
     ('Tortilla z tofu i chrupiącymi warzywami', 'Tarka o grubych oczkach'),
     ('Tortilla z tofu i chrupiącymi warzywami', 'Nóż szefa kuchni'),
     ('Tortilla z tofu i chrupiącymi warzywami', 'Deska do krojenia'),
@@ -1305,7 +1383,7 @@ with
     ('Tosty z serem salami i papryką', 'Nóż szefa kuchni'),
     ('Tosty z serem salami i papryką', 'Deska do krojenia'),
     ('Tosty z serem salami i papryką', 'Waga kuchenna'),
-    ('Twarożek ze szczypiorkiem, rzodkiewką i pieczywem', 'miska'),
+    ('Twarożek ze szczypiorkiem, rzodkiewką i pieczywem', 'Miska'),
     ('Twarożek ze szczypiorkiem, rzodkiewką i pieczywem', 'Widelec'),
     ('Twarożek ze szczypiorkiem, rzodkiewką i pieczywem', 'Nóż szefa kuchni'),
     ('Twarożek ze szczypiorkiem, rzodkiewką i pieczywem', 'Deska do krojenia'),
@@ -1316,6 +1394,8 @@ with
     ('Wieprzowina z kapustą pekińską i ryżem', 'Nóż szefa kuchni'),
     ('Wieprzowina z kapustą pekińską i ryżem', 'Deska do krojenia'),
     ('Wieprzowina z kapustą pekińską i ryżem', 'Waga kuchenna'),
+    ('Wieprzowina z kapustą pekińską i ryżem', 'Sitko'),
+    ('Wieprzowina z kapustą pekińską i ryżem', 'Termometr do mięsa'),
     ('Zupa - Tajskie żółte curry z kurczakiem', 'Garnek 3 l'),
     ('Zupa - Tajskie żółte curry z kurczakiem', 'Garnek 2 l'),
     ('Zupa - Tajskie żółte curry z kurczakiem', 'Patelnia 24 cm'),
@@ -1330,15 +1410,20 @@ with
     ('Zupa z białej fasoli i jarmużu', 'Nóż szefa kuchni'),
     ('Zupa z białej fasoli i jarmużu', 'Deska do krojenia'),
     ('Zupa z białej fasoli i jarmużu', 'Waga kuchenna'),
+    ('Zupa z białej fasoli i jarmużu', 'Sitko'),
     ('Zupa z czerwonej soczewicy i pomidorów', 'Garnek 3 l'),
     ('Zupa z czerwonej soczewicy i pomidorów', 'Nóż szefa kuchni'),
     ('Zupa z czerwonej soczewicy i pomidorów', 'Deska do krojenia'),
     ('Zupa z czerwonej soczewicy i pomidorów', 'Waga kuchenna'),
+    ('Zupa z czerwonej soczewicy i pomidorów', 'Sitko'),
     ('Łosoś ze szpinakiem i kaszą bulgur', 'Patelnia 24 cm'),
     ('Łosoś ze szpinakiem i kaszą bulgur', 'Garnek 2 l'),
     ('Łosoś ze szpinakiem i kaszą bulgur', 'Nóż szefa kuchni'),
     ('Łosoś ze szpinakiem i kaszą bulgur', 'Deska do krojenia'),
-    ('Łosoś ze szpinakiem i kaszą bulgur', 'Waga kuchenna')
+    ('Łosoś ze szpinakiem i kaszą bulgur', 'Waga kuchenna'),
+    ('Łosoś ze szpinakiem i kaszą bulgur', 'Sitko'),
+    ('Łosoś ze szpinakiem i kaszą bulgur', 'Miska'),
+    ('Łosoś ze szpinakiem i kaszą bulgur', 'Termometr do mięsa')
   ),
   braki(opis) as (
     -- Bez konta autora przepisy weszłyby bez właściciela i nikt poza
@@ -1382,16 +1467,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Chili sin carne z czarną fasolą', 'Jednogarnkowe chili bez mięsa z czarną i czerwoną fasolą, kukurydzą oraz papryką. Przepis na 2 porcje.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Chili sin carne z czarną fasolą', 'Jednogarnkowe chili bez mięsa z czarną i czerwoną fasolą, kukurydzą oraz papryką. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['gulasz_curry']::rodzaj_dania[],
   3, 'prywatna',
   'waga', 585, 1, 2,
-  10, 28,
+  10, 34,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Garnek 3 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Garnek 3 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna', 'Sitko']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Chili przechowuj w lodówce do 3 dni lub zamroź po ostudzeniu.',
+  'Chili przechowuj w lodówce do 3 dni lub zamroź po ostudzeniu. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
   true, 'Za ostre chili złagodź dodatkową passatą. Za rzadkie gotuj kilka minut bez przykrycia.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -1481,27 +1566,31 @@ select p.id, sk.id, 2, 'g'::jednostka_miary, 2,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Chili sin carne z czarną fasolą') and sk.nazwa = 'Sól kłodawska';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie', 10 from przepisy p where lower(p.nazwa) = lower('Chili sin carne z czarną fasolą');
+select p.id, 1, 'Przygotowanie składników', 10 from przepisy p where lower(p.nazwa) = lower('Chili sin carne z czarną fasolą');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Cebulę oraz czosnek posiekaj, a paprykę pokrój w kostkę.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj paprykę, usuń gniazdo nasienne i pokrój w kostkę około 1 cm.', null::text, false),
+         (3::smallint, 'Obierz i posiekaj cebulę oraz czosnek.', null::text, false),
+         (4::smallint, 'Obie fasole opłucz i odsącz na sitku. Odsącz kukurydzę. Odmierz pomidory i passatę.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Chili sin carne z czarną fasolą') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Gotowanie chili', 28 from przepisy p where lower(p.nazwa) = lower('Chili sin carne z czarną fasolą');
+select p.id, 2, 'Gotowanie chili', 34 from przepisy p where lower(p.nazwa) = lower('Chili sin carne z czarną fasolą');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Na oleju zeszklij cebulę. Dodaj czosnek, paprykę, kmin, wędzoną paprykę i chili; smaż 3 minuty.', null::text, false),
-         (2::smallint, 'Dodaj pomidory, passatę, obie fasole i kukurydzę. Wymieszaj i gotuj 20 minut bez przykrycia.', null::text, true),
-         (3::smallint, 'Dopraw solą.', 'sos jest gęsty, a papryka miękka'::text, false),
-         (4::smallint, 'Spróbuj i w razie potrzeby skoryguj ostrość.', null::text, false)
+         (1::smallint, 'Rozgrzej olej przez 1 minutę. Dodaj cebulę i smaż 4 minuty na średnim ogniu.', null::text, false),
+         (2::smallint, 'Dodaj paprykę i smaż 3 minuty. Dodaj czosnek, kmin, paprykę wędzoną oraz chili i smaż 30 sekund, mieszając.', null::text, false),
+         (3::smallint, 'Dodaj pomidory, passatę, obie fasole i kukurydzę. Doprowadź do łagodnego wrzenia przez około 3 minuty.', null::text, false),
+         (4::smallint, 'Gotuj bez przykrycia na małym ogniu przez 20 minut, mieszając co kilka minut.', 'papryka jest miękka, sos gęsty, fasola zachowuje kształt'::text, true),
+         (5::smallint, 'Spróbuj, dopraw odmierzoną solą i podaj.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Chili sin carne z czarną fasolą') and e.kolejnosc = 2;
 
@@ -1514,16 +1603,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Curry z ciecierzycy, pomidorów i szpinaku', 'Łagodne jednogarnkowe curry z ciecierzycą, szpinakiem i pomidorami. Przepis na 2 porcje.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Curry z ciecierzycy, pomidorów i szpinaku', 'Łagodne jednogarnkowe curry z ciecierzycą, szpinakiem i pomidorami. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['azjatycka']::rodzaj_kuchni[],
   array['gulasz_curry']::rodzaj_dania[],
   3, 'prywatna',
   'waga', 662, 1, 2,
-  8, 22,
+  10, 27,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Garnek 3 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Garnek 3 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna', 'Sitko']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Curry przechowuj w lodówce do 3 dni lub zamroź po ostudzeniu.',
+  'Curry przechowuj w lodówce do 3 dni lub zamroź po ostudzeniu. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
   true, 'Za gęste curry rozcieńcz wodą. Jeśli jest mdłe, dodaj odrobinę soli, kminu i soku z cytryny.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -1608,27 +1697,31 @@ select p.id, sk.id, 20, 'g'::jednostka_miary, 20,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Curry z ciecierzycy, pomidorów i szpinaku') and sk.nazwa = 'Cytryna';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie', 8 from przepisy p where lower(p.nazwa) = lower('Curry z ciecierzycy, pomidorów i szpinaku');
+select p.id, 1, 'Przygotowanie składników', 10 from przepisy p where lower(p.nazwa) = lower('Curry z ciecierzycy, pomidorów i szpinaku');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Cebulę, czosnek i imbir drobno posiekaj.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Obierz i posiekaj cebulę, czosnek i imbir.', null::text, false),
+         (3::smallint, 'Opłucz i odsącz ciecierzycę. Umyj szpinak, odsącz i usuń grube łodygi.', null::text, false),
+         (4::smallint, 'Umyj cytrynę, wyciśnij sok i odmierz ilość z listy. Odmierz pomidory i mleko kokosowe.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Curry z ciecierzycy, pomidorów i szpinaku') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Gotowanie curry', 22 from przepisy p where lower(p.nazwa) = lower('Curry z ciecierzycy, pomidorów i szpinaku');
+select p.id, 2, 'Gotowanie curry', 27 from przepisy p where lower(p.nazwa) = lower('Curry z ciecierzycy, pomidorów i szpinaku');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Na oleju smaż cebulę 4 minuty. Dodaj czosnek, imbir, garam masala oraz kmin.', null::text, false),
-         (2::smallint, 'Dodaj pomidory, mleko kokosowe i ciecierzycę. Gotuj 15 minut.', null::text, false),
-         (3::smallint, 'Dodaj szpinak, sól i sok z cytryny. Gotuj jeszcze 2 minuty.', 'szpinak zwiędł, a sos lekko zgęstniał'::text, true),
-         (4::smallint, 'Spróbuj i w razie potrzeby skoryguj sól oraz kwaśność.', null::text, false)
+         (1::smallint, 'Rozgrzej olej przez 1 minutę. Smaż cebulę 4 minuty.', null::text, false),
+         (2::smallint, 'Dodaj czosnek, imbir, garam masala i kmin; smaż 1 minutę, mieszając.', null::text, false),
+         (3::smallint, 'Dodaj pomidory, mleko kokosowe i ciecierzycę. Doprowadź do wrzenia przez około 2 minuty, następnie gotuj łagodnie bez przykrycia 15 minut.', null::text, false),
+         (4::smallint, 'Dodaj szpinak i gotuj jeszcze 1–2 minuty.', 'liście właśnie zwiędły, a sos zgęstniał'::text, true),
+         (5::smallint, 'Zdejmij z ognia. Dodaj przygotowany sok z cytryny, dopraw solą i podaj.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Curry z ciecierzycy, pomidorów i szpinaku') and e.kolejnosc = 2;
 
@@ -1641,17 +1734,17 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Curry z czerwonej soczewicy i szpinaku', 'Kremowe jednogarnkowe curry z czerwonej soczewicy, szpinaku i pomidorów. Przepis na 2 porcje.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Curry z czerwonej soczewicy i szpinaku', 'Kremowe jednogarnkowe curry z czerwonej soczewicy, szpinaku i pomidorów. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['azjatycka']::rodzaj_kuchni[],
   array['gulasz_curry']::rodzaj_dania[],
   3, 'prywatna',
   'waga', 747, 1, 2,
-  8, 25,
+  10, 35,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Garnek 3 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Garnek 3 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna', 'Sitko']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Curry przechowuj w zamkniętym pojemniku w lodówce do 3 dni.',
-  true, 'Za gęste curry rozprowadź niewielką ilością wody. Zbyt łagodny smak popraw odrobiną pasty curry i soku z cytryny.'
+  'Curry przechowuj w zamkniętym pojemniku w lodówce do 3 dni. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
+  true, 'Jeżeli curry zbyt mocno gęstnieje przed zmięknięciem soczewicy, dolewaj gorącą wodę małymi porcjami i mieszaj. Ostrość pasty oceń przed dodaniem całej odmierzonej ilości.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
@@ -1730,27 +1823,29 @@ select p.id, sk.id, 2, 'g'::jednostka_miary, 2,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Curry z czerwonej soczewicy i szpinaku') and sk.nazwa = 'Sól kłodawska';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie', 8 from przepisy p where lower(p.nazwa) = lower('Curry z czerwonej soczewicy i szpinaku');
+select p.id, 1, 'Przygotowanie składników', 10 from przepisy p where lower(p.nazwa) = lower('Curry z czerwonej soczewicy i szpinaku');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Cebulę i czosnek drobno posiekaj, a soczewicę opłucz.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Obierz i posiekaj cebulę oraz czosnek. Opłucz soczewicę na sitku.', null::text, false),
+         (3::smallint, 'Umyj szpinak, odsącz i usuń grube łodygi. Odmierz pomidory, mleko kokosowe i wodę z listy.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Curry z czerwonej soczewicy i szpinaku') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Gotowanie curry', 25 from przepisy p where lower(p.nazwa) = lower('Curry z czerwonej soczewicy i szpinaku');
+select p.id, 2, 'Gotowanie curry', 35 from przepisy p where lower(p.nazwa) = lower('Curry z czerwonej soczewicy i szpinaku');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'W garnku rozgrzej olej. Dodaj cebulę i smaż 3 minuty, następnie dodaj czosnek, pastę curry i kurkumę.', null::text, false),
-         (2::smallint, 'Dodaj soczewicę, pomidory, mleko kokosowe i wodę. Gotuj na małym ogniu około 18 minut, często mieszając.', null::text, true),
-         (3::smallint, 'Dodaj szpinak i sól. Gotuj jeszcze 2–3 minuty.', 'soczewica jest miękka, a sos kremowy'::text, false),
-         (4::smallint, 'Spróbuj i w razie potrzeby skoryguj ostrość oraz sól.', null::text, false)
+         (1::smallint, 'Rozgrzej olej przez 1 minutę. Smaż cebulę 4 minuty. Dodaj czosnek, pastę curry i kurkumę; smaż 1 minutę, mieszając.', null::text, false),
+         (2::smallint, 'Dodaj soczewicę, odmierzoną wodę i mleko kokosowe. Doprowadź do wrzenia przez około 3 minuty i gotuj na małym ogniu 12–15 minut pod uchyloną pokrywką. Mieszaj co kilka minut.', null::text, false),
+         (3::smallint, 'Gdy soczewica zmięknie, dodaj pomidory i gotuj bez przykrycia jeszcze 6–8 minut. Jeśli soczewica jest twarda, przed dodaniem pomidorów dogotuj ją po 3 minuty, uzupełniając odparowaną wodę.', 'soczewica jest miękka i częściowo się rozpada'::text, true),
+         (4::smallint, 'Dodaj szpinak i gotuj 1–2 minuty, tylko do zwiędnięcia. Dopraw solą i podaj.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Curry z czerwonej soczewicy i szpinaku') and e.kolejnosc = 2;
 
@@ -1763,17 +1858,17 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Dorsz w kokosowym curry ze szpinakiem', 'Delikatny dorsz w kokosowym sosie curry ze szpinakiem, podany z ryżem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Dorsz w kokosowym curry ze szpinakiem', 'Delikatny dorsz w kokosowym sosie curry ze szpinakiem, podany z ryżem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Najpierw przygotuj wszystkie składniki, następnie gotuj ryż i curry równolegle na dwóch palnikach. Czasy etapów są orientacyjne dla porcji bazowej; zależą od czasu gotowania ryżu, grubości ryby i ilości przygotowywanego jedzenia.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['azjatycka']::rodzaj_kuchni[],
   array['gulasz_curry', 'kasza_ryz']::rodzaj_dania[],
-  2, 'prywatna',
+  1, 'prywatna',
   'waga', 749, 1, 1,
-  10, 20,
+  10, 28,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Patelnia 28 cm', 'Garnek 2 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Patelnia 28 cm', 'Garnek 2 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna', 'Sitko', 'Termometr do mięsa', 'Widelec']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Przechowuj w lodówce do 2 dni. Podgrzewaj delikatnie, aby ryba się nie rozpadła.',
-  false, 'Za rzadki sos odparuj przed dodaniem ryby. Jeśli dorsz się rozpadnie, podaj całość jako gęste curry.'
+  'Porcję z ugotowanym ryżem szybko schłodź w płytkim pojemniku i wstaw do lodówki, najlepiej w ciągu godziny. Przechowuj do 24 godzin. Odgrzewaj tylko raz, do gorącego środka całej porcji. Lodówka: do 4°C.',
+  false, 'Jeśli sos jest za rzadki, odparuj go bez przykrycia przez dodatkowe 2–3 minuty przed dodaniem dorsza. Jeśli zbytnio zgęstnieje, dolewaj niewielkie ilości gorącej wody. Ryby nie mieszaj energicznie; delikatnie poruszaj patelnią. Jeśli po wskazanym czasie środek ryby nie jest gotowy, dogotowuj po 1 minucie i sprawdzaj ponownie.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
@@ -1798,7 +1893,7 @@ delete from etapy            where przepis_id in (select id from przepisy where 
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 180, 'g'::jednostka_miary, 180,
-       'pokrojony na duże kawałki', null, sk.rola, sk.mozna_dzielic, 1
+       'świeży lub wcześniej rozmrożony w lodówce, bez ości; kawałki szerokości około 3–4 cm i grubości do około 3 cm', null, sk.rola, sk.mozna_dzielic, 1
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Dorsz w kokosowym curry ze szpinakiem') and sk.nazwa = 'Filet z dorsza atlantyckiego';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
@@ -1857,30 +1952,54 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Dorsz w kokosowym curry ze szpinakiem') and sk.nazwa = 'Sól kłodawska';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie', 10 from przepisy p where lower(p.nazwa) = lower('Dorsz w kokosowym curry ze szpinakiem');
+select p.id, 1, 'Przygotowanie składników', 10 from przepisy p where lower(p.nazwa) = lower('Dorsz w kokosowym curry ze szpinakiem');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Ryż ugotuj. Cebulę, czosnek i imbir posiekaj, a dorsza pokrój na duże kawałki.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach wskazanych na liście dla przygotowywanej liczby porcji. Odmierz mleko kokosowe, pomidory, pastę curry, olej i sól. Woda do gotowania ryżu jest dodatkowa; jej nadmiar zostanie odcedzony.', null::text, false),
+         (2::smallint, 'Obierz cebulę i drobno ją posiekaj.', null::text, false),
+         (3::smallint, 'Obierz czosnek i imbir, następnie drobno je posiekaj.', null::text, false),
+         (4::smallint, 'Umyj szpinak, odsącz go i usuń grube łodyżki. Duże liście porwij na mniejsze kawałki.', null::text, false),
+         (5::smallint, 'Umyj limonkę, wyciśnij sok i odmierz ilość wskazaną na liście składników. Odstaw sok do końcowego doprawienia.', null::text, false),
+         (6::smallint, 'Przepłucz ryż na sitku pod zimną wodą i odstaw do gotowania.', null::text, false),
+         (7::smallint, 'Dorsza osusz, sprawdź, czy nie ma ości, i usuń je, jeśli są. Pokrój filet na kawałki szerokości około 3–4 cm, zachowując podobną grubość. Jeśli ryba była mrożona, użyj wcześniej rozmrożonej w lodówce.', null::text, false),
+         (8::smallint, 'Po przygotowaniu surowej ryby umyj ręce, deskę, nóż i powierzchnie, które miały z nią kontakt.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Dorsz w kokosowym curry ze szpinakiem') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Gotowanie curry', 20 from przepisy p where lower(p.nazwa) = lower('Dorsz w kokosowym curry ze szpinakiem');
+select p.id, 2, 'Gotowanie ryżu i curry', 26 from przepisy p where lower(p.nazwa) = lower('Dorsz w kokosowym curry ze szpinakiem');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Na oleju zeszklij cebulę. Dodaj czosnek, imbir i pastę curry.', null::text, false),
-         (2::smallint, 'Dodaj pomidory oraz mleko kokosowe i gotuj 8 minut.', null::text, false),
-         (3::smallint, 'Dodaj dorsza i gotuj na małym ogniu 6–8 minut bez intensywnego mieszania.', null::text, true),
-         (4::smallint, 'Dodaj szpinak, sok z limonki i sól.', 'ryba jest ścięta, a szpinak zwiędł'::text, false),
-         (5::smallint, 'Podaj curry z ryżem.', null::text, false)
+         (1::smallint, 'Na pierwszym palniku zagotuj w garnku większą ilość wody. Wsyp opłukany ryż i gotuj przez czas podany na opakowaniu. Ryż ma być zanurzony i mieć miejsce do swobodnego gotowania. Nastaw minutnik; podczas podgrzewania wody i gotowania ryżu wykonuj kolejne kroki na drugim palniku.', null::text, false),
+         (2::smallint, 'Na drugim palniku rozgrzewaj odmierzony olej na patelni przez około 1 minutę na średnim ogniu. Dobierz patelnię tak, aby później kawałki dorsza zmieściły się w jednej warstwie.', null::text, false),
+         (3::smallint, 'Dodaj cebulę i smaż przez 4 minuty na średnim ogniu, mieszając.', 'cebula zmiękła i jest szklista, bez przypalonych brzegów'::text, false),
+         (4::smallint, 'Dodaj czosnek oraz imbir i smaż przez 1 minutę, mieszając.', null::text, false),
+         (5::smallint, 'Dodaj odmierzoną pastę curry i smaż przez 1 minutę, stale mieszając.', 'pasta intensywnie pachnie, ale nie przypala się'::text, false),
+         (6::smallint, 'Wlej mleko kokosowe, dodaj odmierzone pomidory i wymieszaj. Podgrzewaj do łagodnego wrzenia przez około 2 minuty.', null::text, false),
+         (7::smallint, 'Gotuj sos bez przykrycia na małym ogniu przez 8 minut, od czasu do czasu mieszając.', 'sos lekko zgęstniał, ale pozostaje płynny i nie przywiera do dna'::text, false),
+         (8::smallint, 'Gdy upłynie czas gotowania ryżu, sprawdź, czy jest miękki. Odcedź go na sitku, przełóż z powrotem do garnka i przykryj. Odstaw poza palnik do podania. Wykonaj ten krok po sygnale minutnika, niezależnie od postępu gotowania curry.', null::text, false),
+         (9::smallint, 'Ułóż kawałki dorsza w sosie w jednej warstwie i polej je sosem. Gotuj na małym ogniu przez 5–6 minut, licząc od ponownego łagodnego wrzenia. Po około 3 minutach ostrożnie odwróć kawałki; nie mieszaj energicznie. Ryba dokończy gotowanie po dodaniu szpinaku.', null::text, true),
+         (10::smallint, 'Dodaj szpinak między kawałki dorsza i delikatnie zanurz liście w sosie. Gotuj jeszcze przez 1–2 minuty, aż liście zwiędną. Łączny czas gotowania dorsza wynosi około 6–8 minut. Sprawdź najgrubszy kawałek ryby; jeśli nie jest gotowy, dogotowuj po 1 minucie i sprawdzaj ponownie. Zakończ gotowanie, gdy ryba jest gotowa, aby jej nie przesuszyć.', 'szpinak właśnie zwiędł; temperatura w środku najgrubszego kawałka dorsza wynosi co najmniej 63°C, a mięso jest nieprzezroczyste i łatwo rozdziela się widelcem'::text, true)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Dorsz w kokosowym curry ze szpinakiem') and e.kolejnosc = 2;
+
+insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
+select p.id, 3, 'Doprawienie i podanie', 2 from przepisy p where lower(p.nazwa) = lower('Dorsz w kokosowym curry ze szpinakiem');
+
+insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
+select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
+  from etapy e join przepisy p on p.id = e.przepis_id,
+       (values
+         (1::smallint, 'Zdejmij patelnię z ognia. Dodaj przygotowany sok z limonki i delikatnie rozprowadź go w sosie. Spróbuj sosu i dopraw odmierzoną solą według smaku; pasta curry może już być słona.', null::text, true),
+         (2::smallint, 'Rozdziel ryż oraz curry na przygotowywaną liczbę porcji. Przekładaj rybę ostrożnie, aby kawałki zachowały kształt. Podaj od razu.', null::text, false)
+       ) as v(nr, tresc, sygnal, uwaga)
+ where lower(p.nazwa) = lower('Dorsz w kokosowym curry ze szpinakiem') and e.kolejnosc = 3;
 
 -- -------------------------------------------------------------------------
 --  Grochówka z indykiem
@@ -1891,16 +2010,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Grochówka z indykiem', 'Treściwa grochówka z mięsem indyka, ziemniakami, warzywami korzeniowymi i majerankiem. Przepis na 2 porcje.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Grochówka z indykiem', 'Treściwa grochówka z mięsem indyka, ziemniakami, warzywami korzeniowymi i majerankiem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad']::pora_posilku[], array['polska']::rodzaj_kuchni[],
   array['zupa']::rodzaj_dania[],
   3, 'prywatna',
   'waga', 821, 1, 2,
-  15, 55,
+  15, 70,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Garnek 3 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Garnek 3 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna', 'Sitko', 'Termometr do mięsa']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Przechowuj w lodówce do 3 dni albo zamroź w porcjach.',
+  'Przechowuj w lodówce do 3 dni albo zamroź w porcjach. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
   true, 'Jeśli groch pozostaje twardy, gotuj dalej i uzupełniaj wodę. Za gęstą zupę rozcieńcz gorącym bulionem.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -1926,7 +2045,7 @@ delete from etapy            where przepis_id in (select id from przepisy where 
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 100, 'g'::jednostka_miary, 100,
-       'opłukany', null, sk.rola, sk.mozna_dzielic, 1
+       'łuskany, połówki, opłukany', null, sk.rola, sk.mozna_dzielic, 1
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Grochówka z indykiem') and sk.nazwa = 'Groch łuskany, suchy';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
@@ -1995,27 +2114,31 @@ select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Grochówka z indykiem') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie', 15 from przepisy p where lower(p.nazwa) = lower('Grochówka z indykiem');
+select p.id, 1, 'Przygotowanie składników', 15 from przepisy p where lower(p.nazwa) = lower('Grochówka z indykiem');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Groch opłucz. Indyka i warzywa pokrój, a cebulę posiekaj.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Opłucz groch na sitku. Użyj łuskanego grochu dzielonego na połówki; czas całych ziaren może być znacznie dłuższy.', null::text, false),
+         (3::smallint, 'Umyj i obierz ziemniaki, marchew i pietruszkę. Ziemniaki pokrój w kostkę około 2 cm, korzenie w kostkę około 1 cm. Obierz i posiekaj cebulę.', null::text, false),
+         (4::smallint, 'Indyka pokrój w kostkę około 2 cm. Umyj przybory i ręce po surowym mięsie. Odmierz bulion oraz wodę.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Grochówka z indykiem') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Gotowanie', 55 from przepisy p where lower(p.nazwa) = lower('Grochówka z indykiem');
+select p.id, 2, 'Gotowanie zupy', 70 from przepisy p where lower(p.nazwa) = lower('Grochówka z indykiem');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Na oleju zeszklij cebulę, dodaj indyka i smaż, aż straci surowy kolor.', null::text, false),
-         (2::smallint, 'Dodaj groch, marchew, pietruszkę, bulion, wodę, liść laurowy i ziele angielskie. Gotuj 30 minut.', null::text, false),
-         (3::smallint, 'Dodaj ziemniaki i gotuj jeszcze około 20 minut.', 'groch się rozpada, a mięso i ziemniaki są miękkie'::text, true),
-         (4::smallint, 'Dodaj majeranek, sól i pieprz.', null::text, false)
+         (1::smallint, 'Rozgrzej olej przez 1 minutę i smaż cebulę 4 minuty.', null::text, false),
+         (2::smallint, 'Dodaj groch, bulion, wodę, liść laurowy i ziele angielskie. Doprowadź do wrzenia przez około 5 minut. Gotuj pod uchyloną pokrywką 30 minut na małym ogniu.', null::text, false),
+         (3::smallint, 'Dodaj marchew, pietruszkę i ziemniaki. Gotuj 10 minut.', null::text, false),
+         (4::smallint, 'Dodaj indyka, doprowadź ponownie do łagodnego wrzenia i gotuj 12–15 minut. Jeśli groch jest nadal twardy, wyjmij gotowe mięso i dogotuj zupę po 5 minut.', 'groch miękki, ziemniaki bez twardego środka, indyk co najmniej 74°C'::text, true),
+         (5::smallint, 'Usuń liść laurowy i ziele angielskie. Dodaj majeranek, sól i pieprz; zamieszaj i podaj.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Grochówka z indykiem') and e.kolejnosc = 2;
 
@@ -2028,16 +2151,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Gulasz jagnięcy z ciecierzycą i pomidorami', 'Aromatyczny gulasz jagnięcy z ciecierzycą, pomidorami i korzennymi przyprawami, podany z bulgurem. Przepis na 2 porcje.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Gulasz jagnięcy z ciecierzycą i pomidorami', 'Aromatyczny gulasz jagnięcy z ciecierzycą, pomidorami i korzennymi przyprawami, podany z bulgurem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['gulasz_curry']::rodzaj_dania[],
   3, 'prywatna',
   'waga', 738, 1, 2,
-  15, 80,
+  15, 120,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Garnek 3 l', 'Garnek 2 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Garnek 3 l', 'Garnek 2 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna', 'Sitko']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Przechowuj w lodówce do 3 dni albo zamroź. Kaszę trzymaj osobno.',
+  'Przechowuj w lodówce do 3 dni albo zamroź. Kaszę trzymaj osobno. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
   true, 'Twardą jagnięcinę duś dalej na małym ogniu. Za rzadki sos odparuj bez przykrycia.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -2127,28 +2250,33 @@ select p.id, sk.id, 2, 'g'::jednostka_miary, 2,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Gulasz jagnięcy z ciecierzycą i pomidorami') and sk.nazwa = 'Sól kłodawska';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie', 15 from przepisy p where lower(p.nazwa) = lower('Gulasz jagnięcy z ciecierzycą i pomidorami');
+select p.id, 1, 'Przygotowanie składników', 15 from przepisy p where lower(p.nazwa) = lower('Gulasz jagnięcy z ciecierzycą i pomidorami');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Jagnięcinę pokrój i osusz. Marchew pokrój, cebulę i czosnek posiekaj.', null::text, false),
-         (2::smallint, 'Kaszę bulgur ugotuj.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Mięso osusz i pokrój w kostkę około 3 cm. Po kontakcie z nim umyj przybory i ręce.', null::text, false),
+         (3::smallint, 'Obierz i posiekaj cebulę oraz czosnek. Umyj i obierz marchew, pokrój w grube półplasterki.', null::text, false),
+         (4::smallint, 'Opłucz i odsącz ciecierzycę. Odmierz bulgur, bulion oraz pomidory.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Gulasz jagnięcy z ciecierzycą i pomidorami') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Duszenie', 80 from przepisy p where lower(p.nazwa) = lower('Gulasz jagnięcy z ciecierzycą i pomidorami');
+select p.id, 2, 'Duszenie i gotowanie kaszy', 120 from przepisy p where lower(p.nazwa) = lower('Gulasz jagnięcy z ciecierzycą i pomidorami');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Na oliwie obsmaż jagnięcinę partiami. Dodaj cebulę i marchew.', null::text, false),
-         (2::smallint, 'Dodaj czosnek, przyprawy, pomidory i bulion. Duś pod przykryciem około 60 minut.', null::text, false),
-         (3::smallint, 'Dodaj ciecierzycę i duś kolejne 15 minut.', 'mięso jest miękkie, a sos gęsty'::text, true),
-         (4::smallint, 'Podaj z kaszą bulgur.', null::text, false)
+         (1::smallint, 'Rozgrzej oliwę przez 1 minutę. Obsmaż jagnięcinę partiami po 4–5 minut, obracając; dla porcji bazowej przeznacz około 10 minut. Przełóż na talerz.', null::text, false),
+         (2::smallint, 'W tym samym garnku smaż cebulę 4 minuty. Dodaj czosnek, kmin, cynamon i paprykę; smaż 30 sekund.', null::text, false),
+         (3::smallint, 'Włóż mięso, dodaj pomidory i bulion. Doprowadź do łagodnego wrzenia przez około 4 minuty. Duś pod przykryciem 60 minut; kontroluj płyn co 20 minut.', null::text, false),
+         (4::smallint, 'Dodaj marchew i duś 20 minut. Jeśli jagnięcina nadal jest twarda, przed kolejnym krokiem duś po 15 minut, w razie potrzeby uzupełniając gorącą wodę.', null::text, false),
+         (5::smallint, 'Gdy mięso jest już prawie miękkie, ugotuj bulgur na drugim palniku przez czas z opakowania. Wodę do kaszy traktuj jako wodę do gotowania i odcedź jej nadmiar.', null::text, false),
+         (6::smallint, 'Dodaj do gulaszu ciecierzycę i gotuj 10 minut, w razie potrzeby bez pokrywki, aby zagęścić sos.', 'mięso łatwo rozdziela się widelcem, marchew miękka'::text, true),
+         (7::smallint, 'Dopraw solą i podaj z kaszą.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Gulasz jagnięcy z ciecierzycą i pomidorami') and e.kolejnosc = 2;
 
@@ -2161,16 +2289,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Gulasz wołowy z warzywami korzeniowymi', 'Długo duszony gulasz wołowy z ziemniakami, marchewką, pasternakiem i selerem. Przepis na 2 porcje.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Gulasz wołowy z warzywami korzeniowymi', 'Długo duszony gulasz wołowy z ziemniakami, marchewką, pasternakiem i selerem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad']::pora_posilku[], array['polska']::rodzaj_kuchni[],
   array['gulasz_curry']::rodzaj_dania[],
   3, 'prywatna',
   'waga', 954, 1, 2,
-  18, 130,
+  18, 150,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Garnek 3 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Przechowuj w lodówce do 3 dni albo zamroź po ostudzeniu.',
+  'Przechowuj w lodówce do 3 dni albo zamroź po ostudzeniu. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
   true, 'Twarde mięso duś dalej na małym ogniu, uzupełniając gorącą wodę. Za rzadki sos odparuj bez przykrycia.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -2270,27 +2398,31 @@ select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Gulasz wołowy z warzywami korzeniowymi') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie', 18 from przepisy p where lower(p.nazwa) = lower('Gulasz wołowy z warzywami korzeniowymi');
+select p.id, 1, 'Przygotowanie składników', 18 from przepisy p where lower(p.nazwa) = lower('Gulasz wołowy z warzywami korzeniowymi');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Mięso osusz i pokrój w kostkę. Warzywa pokrój na podobnej wielkości kawałki.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Wołowinę osusz i pokrój w kostkę około 3 cm. Umyj przybory i ręce po surowym mięsie.', null::text, false),
+         (3::smallint, 'Umyj i obierz ziemniaki, marchew, pasternak oraz seler. Pokrój korzenie w kostkę około 1,5 cm, ziemniaki około 2 cm. Obierz i posiekaj cebulę.', null::text, false),
+         (4::smallint, 'Odmierz passatę, bulion i wodę.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Gulasz wołowy z warzywami korzeniowymi') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Duszenie', 130 from przepisy p where lower(p.nazwa) = lower('Gulasz wołowy z warzywami korzeniowymi');
+select p.id, 2, 'Duszenie', 150 from przepisy p where lower(p.nazwa) = lower('Gulasz wołowy z warzywami korzeniowymi');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Na mocno rozgrzanym oleju obsmaż mięso partiami. Dodaj cebulę.', null::text, false),
-         (2::smallint, 'Dodaj passatę, bulion, wodę, paprykę, majeranek i liść laurowy. Duś pod przykryciem około 90 minut; co pewien czas sprawdzaj ilość płynu.', null::text, false),
-         (3::smallint, 'Dodaj warzywa i duś jeszcze 30–35 minut.', 'wołowina daje się łatwo rozdzielić widelcem, a warzywa są miękkie'::text, true),
-         (4::smallint, 'Dopraw solą i pieprzem.', null::text, false)
+         (1::smallint, 'Rozgrzej olej przez 1 minutę. Obsmaż wołowinę partiami po 4–5 minut, obracając; dla bazy przeznacz około 10 minut. Przełóż na talerz.', null::text, false),
+         (2::smallint, 'Smaż cebulę 4 minuty, dodaj paprykę mieloną i mieszaj 20 sekund. Włóż mięso, dodaj passatę, bulion, wodę oraz liść laurowy.', null::text, false),
+         (3::smallint, 'Doprowadź do łagodnego wrzenia przez około 5 minut i duś pod przykryciem 90 minut. Co 20–30 minut sprawdź płyn; ubytek uzupełniaj gorącą wodą.', null::text, false),
+         (4::smallint, 'Gdy mięso zaczyna mięknąć, dodaj marchew, pasternak, seler oraz ziemniaki. Duś 30–35 minut. Jeśli wołowina po pierwszym duszeniu jest nadal twarda, przed dodaniem warzyw wydłuż duszenie o 15–30 minut.', 'mięso łatwo rozdziela się widelcem; warzywa miękkie, ale nie rozpadają się'::text, true),
+         (5::smallint, 'Usuń liść laurowy, dodaj majeranek, sól i pieprz. Wymieszaj i podaj.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Gulasz wołowy z warzywami korzeniowymi') and e.kolejnosc = 2;
 
@@ -2303,17 +2435,17 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Gulasz z białej fasoli, jarmużu i pomidorów', 'Gęsty roślinny gulasz z białej fasoli, jarmużu i pomidorów, podany z pieczywem. Przepis na 2 porcje.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Gulasz z białej fasoli, jarmużu i pomidorów', 'Gęsty roślinny gulasz z białej fasoli, jarmużu i pomidorów, podany z pieczywem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['gulasz_curry']::rodzaj_dania[],
   3, 'prywatna',
   'waga', 748, 1, 2,
-  12, 30,
+  12, 37,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Garnek 3 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Garnek 3 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna', 'Sitko']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Gulasz przechowuj w lodówce do 3 dni albo zamroź po całkowitym ostudzeniu. Pieczywo trzymaj osobno.',
-  true, 'Za rzadki gulasz odparuj bez przykrycia lub rozgnieć część fasoli. Za kwaśny dodaj trochę marchewki i pogotuj.'
+  'Gulasz przechowuj w lodówce do 3 dni albo zamroź po szybkim schłodzeniu. Pieczywo trzymaj osobno. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
+  true, 'Za rzadki gulasz zagęść, rozgniatając część fasoli w sosie. Jeśli zbytnio zgęstnieje, dodaj niewielką ilość gorącej wody.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
@@ -2402,27 +2534,30 @@ select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Gulasz z białej fasoli, jarmużu i pomidorów') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie', 12 from przepisy p where lower(p.nazwa) = lower('Gulasz z białej fasoli, jarmużu i pomidorów');
+select p.id, 1, 'Przygotowanie składników', 12 from przepisy p where lower(p.nazwa) = lower('Gulasz z białej fasoli, jarmużu i pomidorów');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Marchew pokrój w kostkę, cebulę i czosnek posiekaj, a z jarmużu usuń twarde łodygi.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Opłucz i odsącz fasolę. Umyj jarmuż, usuń twarde łodygi i porwij liście.', null::text, false),
+         (3::smallint, 'Umyj i obierz marchew i pokrój w kostkę około 1 cm. Obierz i posiekaj cebulę oraz czosnek. Przygotuj pieczywo oraz odmierz bulion i pomidory.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Gulasz z białej fasoli, jarmużu i pomidorów') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Gotowanie', 30 from przepisy p where lower(p.nazwa) = lower('Gulasz z białej fasoli, jarmużu i pomidorów');
+select p.id, 2, 'Gotowanie', 37 from przepisy p where lower(p.nazwa) = lower('Gulasz z białej fasoli, jarmużu i pomidorów');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Na oliwie smaż cebulę i marchew przez 5 minut. Dodaj czosnek i przyprawy.', null::text, false),
-         (2::smallint, 'Dodaj pomidory, bulion i fasolę. Gotuj 20 minut na małym ogniu.', null::text, false),
-         (3::smallint, 'Dodaj jarmuż i gotuj jeszcze 5 minut.', 'jarmuż jest miękki, a sos gęsty'::text, true),
-         (4::smallint, 'Spróbuj, skoryguj sól oraz pieprz i podaj z pieczywem.', null::text, false)
+         (1::smallint, 'Rozgrzej oliwę przez 1 minutę. Dodaj cebulę i marchew, smaż 5 minut.', null::text, false),
+         (2::smallint, 'Dodaj czosnek, tymianek i paprykę wędzoną; smaż 30 sekund. Wlej bulion i dodaj pomidory. Doprowadź do wrzenia przez około 3 minuty.', null::text, false),
+         (3::smallint, 'Gotuj pod uchyloną pokrywką przez 15 minut, aż marchew będzie prawie miękka. Dodaj fasolę i gotuj 5 minut.', null::text, false),
+         (4::smallint, 'Dodaj jarmuż i gotuj jeszcze 5 minut.', 'liście jarmużu są miękkie, marchew bez twardego środka'::text, true),
+         (5::smallint, 'Dopraw solą i pieprzem, podaj z przygotowanym pieczywem.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Gulasz z białej fasoli, jarmużu i pomidorów') and e.kolejnosc = 2;
 
@@ -2435,17 +2570,17 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Jaglanka z gruszką i orzechami', 'Kremowa kasza jaglana na mleku z gruszką, cynamonem i orzechami włoskimi. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Jaglanka z gruszką i orzechami', 'Kremowa kasza jaglana na mleku z gruszką, cynamonem i orzechami włoskimi. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['na_slodko']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 432, 1, 1,
-  7, 18,
+  7, 25,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Rondel', 'Sitko', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Przechowuj w lodówce do 2 dni. Przy odgrzewaniu dodaj trochę mleka.',
-  false, 'Gorycz kaszy oznacza niedokładne wypłukanie — złagodź ją cynamonem i gruszką. Za gęstą jaglankę rozcieńcz mlekiem.'
+  'Przechowuj w lodówce do 2 dni. Przy odgrzewaniu dodaj trochę mleka. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
+  false, 'Jeżeli kasza jest nadal twarda, dodaj trochę gorącej wody i gotuj po 3 minuty, mieszając. Kaszy lub orzechów o zjełczałym zapachu nie używaj; cynamon nie usunie przyczyny takiej goryczy.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
@@ -2504,26 +2639,29 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Jaglanka z gruszką i orzechami') and sk.nazwa = 'Sól kłodawska';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie', 7 from przepisy p where lower(p.nazwa) = lower('Jaglanka z gruszką i orzechami');
+select p.id, 1, 'Przygotowanie składników', 7 from przepisy p where lower(p.nazwa) = lower('Jaglanka z gruszką i orzechami');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Kaszę płucz najpierw gorącą, potem zimną wodą. Gruszkę pokrój w kostkę.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Kaszę przepłucz na sitku pod bieżącą wodą i przelej wrzątkiem.', null::text, false),
+         (3::smallint, 'Umyj gruszkę, usuń gniazdo nasienne i pokrój w kostkę. Posiekaj orzechy. Odmierz mleko, miód, cynamon i sól.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Jaglanka z gruszką i orzechami') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Gotowanie', 18 from przepisy p where lower(p.nazwa) = lower('Jaglanka z gruszką i orzechami');
+select p.id, 2, 'Gotowanie', 25 from przepisy p where lower(p.nazwa) = lower('Jaglanka z gruszką i orzechami');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Kaszę zalej mlekiem, dodaj sól i gotuj na małym ogniu około 15 minut, często mieszając.', null::text, true),
-         (2::smallint, 'Dodaj gruszkę i cynamon, gotuj jeszcze 2–3 minuty.', 'kasza jest miękka i kremowa'::text, false),
-         (3::smallint, 'Podaj z miodem i orzechami.', null::text, false)
+         (1::smallint, 'Wlej mleko do rondla, dodaj kaszę i sól. Doprowadź do łagodnego wrzenia przez około 3 minuty.', null::text, false),
+         (2::smallint, 'Gotuj na małym ogniu pod uchyloną pokrywką przez 15–18 minut lub czas wskazany na opakowaniu, często mieszając przy dnie. W razie potrzeby uzupełnij odparowany płyn gorącą wodą.', null::text, false),
+         (3::smallint, 'Dodaj gruszkę i cynamon, gotuj jeszcze 2 minuty.', 'kasza jest miękka i kremowa'::text, true),
+         (4::smallint, 'Zdejmij z ognia, dodaj miód i orzechy, podaj.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Jaglanka z gruszką i orzechami') and e.kolejnosc = 2;
 
@@ -2536,17 +2674,17 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Jajecznica z pomidorem i szczypiorkiem', 'Kremowa jajecznica z pomidorem i świeżym szczypiorkiem, podana z dwiema kromkami chleba żytniego. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Jajecznica z pomidorem i szczypiorkiem', 'Kremowa jajecznica z pomidorem i świeżym szczypiorkiem, podana z dwiema kromkami chleba żytniego. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['polska']::rodzaj_kuchni[],
   array['jajka']::rodzaj_dania[],
   0, 'prywatna',
   'waga', 267, 1, 1,
-  6, 5,
+  6, 7,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Patelnia 24 cm', 'miska', 'Widelec', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Patelnia 24 cm', 'Miska', 'Widelec', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
   'Jajecznicę zjedz bezpośrednio po przygotowaniu.',
-  false, 'Jeśli jajecznica wyszła zbyt sucha, zdejmij ją z ognia i wmieszaj mały kawałek masła. Jeśli pomidor puścił dużo wody, smaż chwilę dłużej bez przykrycia.'
+  false, 'Płyn z pomidora odparuj przed dodaniem jajek. Gdy jajecznica się zetnie, natychmiast zdejmij ją z ognia, aby nie wyschła.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
@@ -2611,21 +2749,22 @@ insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Pomidora pokrój w kostkę, a szczypiorek drobno posiekaj.', null::text, false),
-         (2::smallint, 'Jajka wbij do miski, dopraw solą i pieprzem, po czym roztrzep widelcem.', null::text, true)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj pomidora i szczypiorek. Pomidora pokrój w kostkę, szczypiorek posiekaj. Przygotuj pieczywo.', null::text, false),
+         (3::smallint, 'Wbij jajka do miski, dodaj sól i pieprz, roztrzep widelcem.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Jajecznica z pomidorem i szczypiorkiem') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Smażenie', 5 from przepisy p where lower(p.nazwa) = lower('Jajecznica z pomidorem i szczypiorkiem');
+select p.id, 2, 'Smażenie', 7 from przepisy p where lower(p.nazwa) = lower('Jajecznica z pomidorem i szczypiorkiem');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Na patelni rozpuść masło, dodaj pomidora i smaż około 2 minut, aż odparuje część soku.', null::text, false),
-         (2::smallint, 'Wlej jajka i smaż na małym ogniu, mieszając, aż będą miękko ścięte.', 'jajka są kremowe i nie ma na patelni płynnego białka'::text, false),
-         (3::smallint, 'Zdejmij patelnię z ognia, dodaj szczypiorek i wymieszaj. Podaj jajecznicę z dwiema kromkami chleba.', null::text, false)
+         (1::smallint, 'Rozpuść masło na patelni przez około 1 minutę na średnim ogniu. Dodaj pomidora i smaż 2 minuty; przed dodaniem jajek odparuj nadmiar płynu.', null::text, false),
+         (2::smallint, 'Wlej jajka, zmniejsz ogień i smaż 2–3 minuty, łagodnie mieszając.', 'jajka są ścięte, bez płynnego białka; pozostają wilgotne'::text, true),
+         (3::smallint, 'Zdejmij z ognia, dodaj szczypiorek i podaj z pieczywem w ilości wskazanej na liście.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Jajecznica z pomidorem i szczypiorkiem') and e.kolejnosc = 2;
 
@@ -2638,17 +2777,17 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Jajka na miękko z pieczywem i warzywami', 'Jajka z płynnym żółtkiem, podane z pieczywem posmarowanym masłem, pomidorem i ogórkiem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Jajka na miękko z pieczywem i warzywami', 'Jajka z płynnym żółtkiem, podane z pieczywem posmarowanym masłem, pomidorem i ogórkiem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['polska']::rodzaj_kuchni[],
   array['jajka']::rodzaj_dania[],
   0, 'prywatna',
   'waga', 307, 1, 1,
   5, 12,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Garnek 2 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Garnek 2 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna', 'Łyżka cedzakowa']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
   'Danie najlepiej zjedz od razu po przygotowaniu. Jajek ugotowanych na miękko nie przechowuj na później.',
-  false, 'Jeśli nieotwarte jajka gotowały się krócej niż 6 minut, pozostaw je w gorącej wodzie jeszcze 30–60 sekund. Jeśli po otwarciu okażą się zbyt twarde, rozgnieć je na pieczywie z masłem.'
+  false, 'Jeśli po otwarciu białko jest płynne, przełóż zawartość do małego naczynia i dogotuj do ścięcia. Jajka z twardym żółtkiem możesz rozgnieść na pieczywie z masłem.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
@@ -2713,8 +2852,9 @@ insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Pomidora pokrój w cząstki, a ogórek w plasterki.', null::text, false),
-         (2::smallint, 'Kromki chleba posmaruj masłem. Pieczywo i warzywa ułóż na talerzu.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj pomidora i ogórek. Pomidora pokrój w cząstki, a ogórek w plasterki.', null::text, false),
+         (3::smallint, 'Kromki chleba posmaruj masłem. Pieczywo i warzywa ułóż na talerzu.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Jajka na miękko z pieczywem i warzywami') and e.kolejnosc = 1;
 
@@ -2726,7 +2866,7 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
          (1::smallint, 'W garnku zagotuj tyle wody, aby po włożeniu całkowicie przykryła jajka.', null::text, false),
-         (2::smallint, 'Ostrożnie włóż zimne jajka do wrzątku i gotuj 6 minut od zanurzenia, utrzymując łagodne wrzenie.', null::text, true),
+         (2::smallint, 'Ostrożnie włóż zimne jajka do wrzątku i gotuj około 6 minut od zanurzenia; dla dużych jajek czas może wynieść 7 minut, utrzymując łagodne wrzenie.', null::text, true),
          (3::smallint, 'Wyjmij jajka, schładzaj je pod zimną wodą przez około 30 sekund i od razu podaj z pieczywem oraz warzywami. Dopraw solą i pieprzem.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Jajka na miękko z pieczywem i warzywami') and e.kolejnosc = 2;
@@ -2740,14 +2880,14 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Kanapki z Goudą, jajkiem i szczypiorkiem', 'Syte kanapki z serem Gouda, jajkiem na twardo, pomidorem i szczypiorkiem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Kanapki z Goudą, jajkiem i szczypiorkiem', 'Syte kanapki z serem Gouda, jajkiem na twardo, pomidorem i szczypiorkiem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['polska']::rodzaj_kuchni[],
   array['kanapki']::rodzaj_dania[],
   0, 'prywatna',
   'waga', 286, 1, 1,
-  8, 9,
+  5, 20,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Garnek 2 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Garnek 2 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna', 'Łyżka cedzakowa']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
   'Kanapki zjedz od razu. Ugotowane jajko możesz przechować osobno w lodówce do następnego dnia.',
   false, 'Jeśli kanapki są suche, dodaj odrobinę jogurtu. Nie dosalaj przed spróbowaniem sera.'
@@ -2809,27 +2949,39 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Kanapki z Goudą, jajkiem i szczypiorkiem') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Gotowanie jajka', 9 from przepisy p where lower(p.nazwa) = lower('Kanapki z Goudą, jajkiem i szczypiorkiem');
+select p.id, 1, 'Przygotowanie składników', 5 from przepisy p where lower(p.nazwa) = lower('Kanapki z Goudą, jajkiem i szczypiorkiem');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Jajko ugotuj na twardo, schłodź, obierz i pokrój w plastry.', 'żółtko jest całkowicie ścięte'::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj pomidora i szczypiorek, pokrój pomidora w plastry, szczypiorek posiekaj. Pokrój Goudę w plastry, przygotuj pieczywo i jogurt.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Kanapki z Goudą, jajkiem i szczypiorkiem') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Składanie kanapek', 8 from przepisy p where lower(p.nazwa) = lower('Kanapki z Goudą, jajkiem i szczypiorkiem');
+select p.id, 2, 'Gotowanie jajek', 18 from przepisy p where lower(p.nazwa) = lower('Kanapki z Goudą, jajkiem i szczypiorkiem');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Pieczywo cienko posmaruj jogurtem.', null::text, false),
-         (2::smallint, 'Ułóż Goudę, pomidora i jajko. Posyp szczypiorkiem i pieprzem.', null::text, true)
+         (1::smallint, 'Zagotuj w garnku wodę przykrywającą jajka. Włóż je ostrożnie i gotuj przez 9–10 minut przy łagodnym wrzeniu, licząc od włożenia. Schłodź zimną wodą i obierz.', null::text, false),
+         (2::smallint, 'Pokrój obrane jajka w plastry.', 'żółtka i białka są całkowicie ścięte'::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Kanapki z Goudą, jajkiem i szczypiorkiem') and e.kolejnosc = 2;
+
+insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
+select p.id, 3, 'Składanie kanapek', 2 from przepisy p where lower(p.nazwa) = lower('Kanapki z Goudą, jajkiem i szczypiorkiem');
+
+insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
+select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
+  from etapy e join przepisy p on p.id = e.przepis_id,
+       (values
+         (1::smallint, 'Posmaruj pieczywo jogurtem. Ułóż Goudę, pomidora i jajka. Posyp szczypiorkiem i pieprzem.', null::text, false)
+       ) as v(nr, tresc, sygnal, uwaga)
+ where lower(p.nazwa) = lower('Kanapki z Goudą, jajkiem i szczypiorkiem') and e.kolejnosc = 3;
 
 -- -------------------------------------------------------------------------
 --  Kanapki z Goudą, pomidorem i sałatą
@@ -2840,7 +2992,7 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Kanapki z Goudą, pomidorem i sałatą', 'Klasyczne kanapki z serem Gouda, pomidorem, ogórkiem i sałatą. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Kanapki z Goudą, pomidorem i sałatą', 'Klasyczne kanapki z serem Gouda, pomidorem, ogórkiem i sałatą. Ilości składników dobierz z listy dla przygotowywanej liczby porcji.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['kanapki']::rodzaj_dania[],
   0, 'prywatna',
@@ -2909,17 +3061,27 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Kanapki z Goudą, pomidorem i sałatą') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie kanapek', 7 from przepisy p where lower(p.nazwa) = lower('Kanapki z Goudą, pomidorem i sałatą');
+select p.id, 1, 'Przygotowanie składników', 5 from przepisy p where lower(p.nazwa) = lower('Kanapki z Goudą, pomidorem i sałatą');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Pomidora i ogórek pokrój w plastry, a sałatę umyj i osusz.', null::text, false),
-         (2::smallint, 'Pieczywo cienko posmaruj musztardą.', null::text, false),
-         (3::smallint, 'Ułóż sałatę, Goudę, pomidora i ogórek. Dopraw pieprzem.', null::text, true)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj i osusz pomidora, ogórek oraz sałatę. Pomidora, ogórek i Goudę pokrój w plastry. Przygotuj pieczywo, musztardę i pieprz.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Kanapki z Goudą, pomidorem i sałatą') and e.kolejnosc = 1;
+
+insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
+select p.id, 2, 'Składanie kanapek', 2 from przepisy p where lower(p.nazwa) = lower('Kanapki z Goudą, pomidorem i sałatą');
+
+insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
+select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
+  from etapy e join przepisy p on p.id = e.przepis_id,
+       (values
+         (1::smallint, 'Posmaruj pieczywo musztardą. Ułóż sałatę, Goudę, pomidora i ogórek. Dopraw pieprzem.', null::text, false)
+       ) as v(nr, tresc, sygnal, uwaga)
+ where lower(p.nazwa) = lower('Kanapki z Goudą, pomidorem i sałatą') and e.kolejnosc = 2;
 
 -- -------------------------------------------------------------------------
 --  Kanapki z halloumi, awokado i pomidorem
@@ -2930,12 +3092,12 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Kanapki z halloumi, awokado i pomidorem', 'Kanapki z grillowanym halloumi, awokado, pomidorem i rukolą. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Kanapki z halloumi, awokado i pomidorem', 'Kanapki z grillowanym halloumi, awokado, pomidorem i rukolą. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['kanapki']::rodzaj_dania[],
   0, 'prywatna',
   'waga', 326, 1, 1,
-  8, 6,
+  8, 7,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Patelnia 24 cm', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
@@ -2999,25 +3161,28 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Kanapki z halloumi, awokado i pomidorem') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie', 8 from przepisy p where lower(p.nazwa) = lower('Kanapki z halloumi, awokado i pomidorem');
+select p.id, 1, 'Przygotowanie składników', 8 from przepisy p where lower(p.nazwa) = lower('Kanapki z halloumi, awokado i pomidorem');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Awokado i pomidora pokrój, a awokado skrop cytryną.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj pomidora, rukolę i cytrynę; osusz rukolę. Odmierz sok z cytryny.', null::text, false),
+         (3::smallint, 'Umyj awokado, usuń pestkę i skórkę, pokrój miąższ i skrop sokiem. Pomidora oraz halloumi pokrój w plastry; ser osusz. Przygotuj pieczywo.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Kanapki z halloumi, awokado i pomidorem') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Grillowanie i składanie', 6 from przepisy p where lower(p.nazwa) = lower('Kanapki z halloumi, awokado i pomidorem');
+select p.id, 2, 'Smażenie i składanie kanapek', 7 from przepisy p where lower(p.nazwa) = lower('Kanapki z halloumi, awokado i pomidorem');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Halloumi smaż na suchej patelni po około 2 minuty z każdej strony.', 'ser jest złoty z zewnątrz'::text, true),
-         (2::smallint, 'Na pieczywie ułóż rukolę, awokado, pomidora i ciepłe halloumi. Dopraw pieprzem.', null::text, false)
+         (1::smallint, 'Rozgrzej suchą patelnię nieprzywierającą przez 1 minutę.', null::text, false),
+         (2::smallint, 'Smaż halloumi po około 2 minuty z każdej strony na średnim ogniu.', 'ser jest złoty na powierzchni'::text, true),
+         (3::smallint, 'Na pieczywie ułóż rukolę, awokado, pomidora i ciepły ser. Dopraw pieprzem i od razu podaj.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Kanapki z halloumi, awokado i pomidorem') and e.kolejnosc = 2;
 
@@ -3030,14 +3195,14 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Kanapki z jajkiem, awokado i pomidorem', 'Syte kanapki z dwoma jajkami na twardo, kremowym awokado i świeżym pomidorem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Kanapki z jajkiem, awokado i pomidorem', 'Syte kanapki z dwoma jajkami na twardo, kremowym awokado i świeżym pomidorem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['kanapki']::rodzaj_dania[],
   0, 'prywatna',
   'waga', 317, 1, 1,
-  6, 18,
+  6, 20,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Garnek 2 l', 'miska', 'Widelec', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Garnek 2 l', 'Miska', 'Widelec', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna', 'Łyżka cedzakowa']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
   'Kanapki zjedz od razu po przygotowaniu. Ugotowane jajko możesz przechować osobno w lodówce do następnego dnia.',
   false, 'Jeśli awokado jest zbyt twarde, pokrój je w cienkie plasterki zamiast rozgniatać. Jeśli pasta ciemnieje, przygotuj ją bezpośrednio przed podaniem.'
@@ -3100,22 +3265,21 @@ insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Pomidora pokrój w plastry.', null::text, false),
-         (2::smallint, 'Miąższ awokado rozgnieć w misce widelcem i dopraw połową soli oraz pieprzu.', null::text, true)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj pomidora i awokado. Pomidora pokrój w plastry.', null::text, false),
+         (3::smallint, 'Usuń pestkę i skórkę awokado. Rozgnieć miąższ widelcem z częścią odmierzonej soli i pieprzu; przykryj miskę, aby ograniczyć ciemnienie. Przygotuj pieczywo.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Kanapki z jajkiem, awokado i pomidorem') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Gotowanie jajek i składanie kanapek', 18 from przepisy p where lower(p.nazwa) = lower('Kanapki z jajkiem, awokado i pomidorem');
+select p.id, 2, 'Gotowanie jajek i składanie', 20 from przepisy p where lower(p.nazwa) = lower('Kanapki z jajkiem, awokado i pomidorem');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'W garnku zagotuj tyle wody, aby przykryła jajka.', null::text, false),
-         (2::smallint, 'Ostrożnie włóż jajka do wrzątku i gotuj 9 minut od zanurzenia.', null::text, false),
-         (3::smallint, 'Schłodź jajka pod zimną wodą, obierz i pokrój w plastry.', 'żółtka są całkowicie ścięte'::text, false),
-         (4::smallint, 'Pastę z awokado rozsmaruj na chlebie, ułóż pomidora i jajka, a następnie dopraw pozostałą solą oraz pieprzem.', null::text, false)
+         (1::smallint, 'Zagotuj w garnku wodę przykrywającą jajka. Włóż je ostrożnie i gotuj przez 9–10 minut przy łagodnym wrzeniu, licząc od włożenia. Schłodź zimną wodą i obierz.', null::text, false),
+         (2::smallint, 'Pokrój jajka w plastry. Posmaruj pieczywo awokado, ułóż pomidora i jajka. Dopraw pozostałą solą i pieprzem.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Kanapki z jajkiem, awokado i pomidorem') and e.kolejnosc = 2;
 
@@ -3128,7 +3292,7 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Kanapki z mozzarellą, pomidorem i bazylią', 'Kanapki z mozzarellą, świeżym pomidorem i bazylią, skropione oliwą. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Kanapki z mozzarellą, pomidorem i bazylią', 'Kanapki z mozzarellą, świeżym pomidorem i bazylią, skropione oliwą. Ilości składników dobierz z listy dla przygotowywanej liczby porcji.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['kanapki']::rodzaj_dania[],
   0, 'prywatna',
@@ -3197,17 +3361,27 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Kanapki z mozzarellą, pomidorem i bazylią') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie składników', 7 from przepisy p where lower(p.nazwa) = lower('Kanapki z mozzarellą, pomidorem i bazylią');
+select p.id, 1, 'Przygotowanie składników', 5 from przepisy p where lower(p.nazwa) = lower('Kanapki z mozzarellą, pomidorem i bazylią');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Mozzarellę i pomidora pokrój w plastry.', null::text, false),
-         (2::smallint, 'Na kromkach chleba ułóż mozzarellę, pomidora i liście bazylii.', null::text, false),
-         (3::smallint, 'Skrop oliwą, dopraw niewielką ilością soli oraz pieprzem i podaj.', null::text, true)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj pomidora i bazylię, osusz. Mozzarellę odsącz. Pokrój ser i pomidora w plastry. Przygotuj pieczywo.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Kanapki z mozzarellą, pomidorem i bazylią') and e.kolejnosc = 1;
+
+insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
+select p.id, 2, 'Składanie kanapek', 2 from przepisy p where lower(p.nazwa) = lower('Kanapki z mozzarellą, pomidorem i bazylią');
+
+insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
+select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
+  from etapy e join przepisy p on p.id = e.przepis_id,
+       (values
+         (1::smallint, 'Na pieczywie ułóż mozzarellę, pomidora i bazylię. Skrop odmierzoną oliwą, dopraw solą i pieprzem, podaj.', null::text, false)
+       ) as v(nr, tresc, sygnal, uwaga)
+ where lower(p.nazwa) = lower('Kanapki z mozzarellą, pomidorem i bazylią') and e.kolejnosc = 2;
 
 -- -------------------------------------------------------------------------
 --  Kanapki z pastą jajeczną
@@ -3218,16 +3392,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Kanapki z pastą jajeczną', 'Trzy kromki chleba żytniego z kremową pastą z jajek, jogurtu, musztardy i szczypiorku. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Kanapki z pastą jajeczną', 'Trzy kromki chleba żytniego z kremową pastą z jajek, jogurtu, musztardy i szczypiorku. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['polska']::rodzaj_kuchni[],
   array['kanapki']::rodzaj_dania[],
   1, 'prywatna',
   'waga', 261, 1, 1,
-  5, 18,
+  5, 21,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Garnek 2 l', 'miska', 'Widelec', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Garnek 2 l', 'Miska', 'Widelec', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna', 'Łyżka cedzakowa']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Pastę przechowuj w zamkniętym pojemniku w lodówce do 1 dnia. Pieczywo smaruj dopiero przed podaniem.',
+  'Pastę przechowuj w zamkniętym pojemniku w lodówce do 1 dnia. Pieczywo smaruj dopiero przed podaniem. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
   false, 'Jeśli pasta jest zbyt gęsta, dodaj odrobinę jogurtu. Jeśli jest za rzadka, dodaj więcej rozgniecionego jajka.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -3293,23 +3467,21 @@ insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Szczypiorek drobno posiekaj, odmierz jogurt i musztardę oraz przygotuj trzy kromki chleba.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj i posiekaj szczypiorek. Odmierz jogurt oraz musztardę, przygotuj pieczywo w ilości z listy.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Kanapki z pastą jajeczną') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Gotowanie jajek i przygotowanie pasty', 18 from przepisy p where lower(p.nazwa) = lower('Kanapki z pastą jajeczną');
+select p.id, 2, 'Gotowanie jajek i przygotowanie pasty', 21 from przepisy p where lower(p.nazwa) = lower('Kanapki z pastą jajeczną');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'W garnku zagotuj tyle wody, aby przykryła jajka.', null::text, false),
-         (2::smallint, 'Ostrożnie włóż jajka do wrzątku i gotuj 9 minut od zanurzenia.', null::text, false),
-         (3::smallint, 'Schłodź jajka pod zimną wodą, obierz i przekrój.', 'żółtka są całkowicie ścięte'::text, false),
-         (4::smallint, 'Jajka przełóż do miski i rozgnieć widelcem.', null::text, false),
-         (5::smallint, 'Dodaj jogurt, musztardę i szczypiorek. Dopraw solą oraz pieprzem i wymieszaj.', null::text, true),
-         (6::smallint, 'Pastę rozsmaruj na trzech kromkach chleba.', null::text, false)
+         (1::smallint, 'Zagotuj w garnku wodę przykrywającą jajka. Włóż je ostrożnie i gotuj przez 9–10 minut przy łagodnym wrzeniu, licząc od włożenia. Schłodź zimną wodą i obierz.', null::text, false),
+         (2::smallint, 'Rozgnieć jajka widelcem w misce. Dodaj jogurt, musztardę i szczypiorek. Dopraw solą oraz pieprzem, wymieszaj.', null::text, false),
+         (3::smallint, 'Posmaruj przygotowane pieczywo pastą i podaj.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Kanapki z pastą jajeczną') and e.kolejnosc = 2;
 
@@ -3322,16 +3494,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Kanapki z ricottą, rzodkiewką i szczypiorkiem', 'Delikatne kanapki z ricottą, chrupiącą rzodkiewką i świeżym szczypiorkiem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Kanapki z ricottą, rzodkiewką i szczypiorkiem', 'Delikatne kanapki z ricottą, chrupiącą rzodkiewką i świeżym szczypiorkiem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['kanapki']::rodzaj_dania[],
   0, 'prywatna',
   'waga', 251, 1, 1,
   10, 0,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['miska', 'Widelec', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Miska', 'Widelec', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Pastę z ricotty przechowuj w lodówce do 1 dnia. Pieczywo smaruj przed podaniem.',
+  'Gotowe kanapki zjedz od razu. Samą pastę z ricotty przechowuj w lodówce do 1 dnia; pieczywo smaruj przed podaniem.',
   false, 'Jeśli ricotta jest zbyt gęsta, dodaj odrobinę jogurtu. Za łagodny smak popraw pieprzem i szczypiorkiem.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -3391,17 +3563,27 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Kanapki z ricottą, rzodkiewką i szczypiorkiem') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie kanapek', 10 from przepisy p where lower(p.nazwa) = lower('Kanapki z ricottą, rzodkiewką i szczypiorkiem');
+select p.id, 1, 'Przygotowanie składników', 6 from przepisy p where lower(p.nazwa) = lower('Kanapki z ricottą, rzodkiewką i szczypiorkiem');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Ricottę wymieszaj z jogurtem, szczypiorkiem, solą i pieprzem.', null::text, true),
-         (2::smallint, 'Rzodkiewki pokrój w cienkie plasterki.', null::text, false),
-         (3::smallint, 'Pieczywo posmaruj ricottą i ułóż na nim rzodkiewkę.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj rzodkiewki i szczypiorek. Odetnij końcówki rzodkiewek, pokrój w cienkie plasterki. Posiekaj szczypiorek. Przygotuj pieczywo i odmierz ricottę oraz jogurt.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Kanapki z ricottą, rzodkiewką i szczypiorkiem') and e.kolejnosc = 1;
+
+insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
+select p.id, 2, 'Składanie kanapek', 4 from przepisy p where lower(p.nazwa) = lower('Kanapki z ricottą, rzodkiewką i szczypiorkiem');
+
+insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
+select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
+  from etapy e join przepisy p on p.id = e.przepis_id,
+       (values
+         (1::smallint, 'Wymieszaj ricottę z jogurtem, szczypiorkiem, solą i pieprzem. Posmaruj pieczywo i ułóż rzodkiewkę. Podaj od razu.', null::text, false)
+       ) as v(nr, tresc, sygnal, uwaga)
+ where lower(p.nazwa) = lower('Kanapki z ricottą, rzodkiewką i szczypiorkiem') and e.kolejnosc = 2;
 
 -- -------------------------------------------------------------------------
 --  Kanapki z sardynkami, pomidorem i rukolą
@@ -3412,14 +3594,14 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Kanapki z sardynkami, pomidorem i rukolą', 'Szybkie kanapki z sardynkami, pomidorem, rukolą i cytryną. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Kanapki z sardynkami, pomidorem i rukolą', 'Szybkie kanapki z sardynkami, pomidorem, rukolą i cytryną. Ilości składników dobierz z listy dla przygotowywanej liczby porcji.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['kanapki']::rodzaj_dania[],
   0, 'prywatna',
   'waga', 356, 1, 1,
   10, 0,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['miska', 'Widelec', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Miska', 'Widelec', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
   'Kanapki zjedz od razu. Otwarte sardynki przechowuj zgodnie z informacją na opakowaniu.',
   false, 'Jeśli pasta jest sucha, dodaj odrobinę oliwy. Zbyt intensywny smak sardynek złagodź pomidorem i cytryną.'
@@ -3481,18 +3663,28 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Kanapki z sardynkami, pomidorem i rukolą') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie kanapek', 10 from przepisy p where lower(p.nazwa) = lower('Kanapki z sardynkami, pomidorem i rukolą');
+select p.id, 1, 'Przygotowanie składników', 6 from przepisy p where lower(p.nazwa) = lower('Kanapki z sardynkami, pomidorem i rukolą');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Sardynki rozgnieć widelcem z sokiem z cytryny, oliwą i pieprzem.', null::text, false),
-         (2::smallint, 'Pomidora pokrój w plastry.', null::text, false),
-         (3::smallint, 'Na chlebie rozłóż rukolę, pastę z sardynek i pomidora.', null::text, true),
-         (4::smallint, 'Podaj bezpośrednio po przygotowaniu.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Odsącz sardynki. Umyj pomidora, rukolę i cytrynę. Osusz rukolę, pokrój pomidora, wyciśnij i odmierz sok z cytryny. Przygotuj pieczywo.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Kanapki z sardynkami, pomidorem i rukolą') and e.kolejnosc = 1;
+
+insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
+select p.id, 2, 'Składanie kanapek', 4 from przepisy p where lower(p.nazwa) = lower('Kanapki z sardynkami, pomidorem i rukolą');
+
+insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
+select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
+  from etapy e join przepisy p on p.id = e.przepis_id,
+       (values
+         (1::smallint, 'Rozgnieć sardynki widelcem z odmierzoną oliwą, sokiem z cytryny i pieprzem.', null::text, false),
+         (2::smallint, 'Na pieczywie ułóż rukolę, pastę oraz pomidora. Podaj od razu.', null::text, false)
+       ) as v(nr, tresc, sygnal, uwaga)
+ where lower(p.nazwa) = lower('Kanapki z sardynkami, pomidorem i rukolą') and e.kolejnosc = 2;
 
 -- -------------------------------------------------------------------------
 --  Kanapki z serem salami, ogórkiem kiszonym i musztardą
@@ -3503,7 +3695,7 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Kanapki z serem salami, ogórkiem kiszonym i musztardą', 'Wyraziste kanapki z serem salami, ogórkiem kiszonym, musztardą i czerwoną cebulą. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Kanapki z serem salami, ogórkiem kiszonym i musztardą', 'Wyraziste kanapki z serem salami, ogórkiem kiszonym, musztardą i czerwoną cebulą. Ilości składników dobierz z listy dla przygotowywanej liczby porcji.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['polska']::rodzaj_kuchni[],
   array['kanapki']::rodzaj_dania[],
   0, 'prywatna',
@@ -3572,17 +3764,27 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Kanapki z serem salami, ogórkiem kiszonym i musztardą') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie kanapek', 7 from przepisy p where lower(p.nazwa) = lower('Kanapki z serem salami, ogórkiem kiszonym i musztardą');
+select p.id, 1, 'Przygotowanie składników', 5 from przepisy p where lower(p.nazwa) = lower('Kanapki z serem salami, ogórkiem kiszonym i musztardą');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Ogórka i cebulę cienko pokrój, a sałatę osusz.', null::text, false),
-         (2::smallint, 'Pieczywo posmaruj musztardą.', null::text, false),
-         (3::smallint, 'Ułóż sałatę, ser salami, ogórka i cebulę. Dopraw pieprzem.', null::text, true)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj i osusz sałatę. Obierz cebulę, pokrój ją w cienkie piórka. Odsącz ogórki i pokrój w plastry. Pokrój ser salami w plastry, przygotuj pieczywo.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Kanapki z serem salami, ogórkiem kiszonym i musztardą') and e.kolejnosc = 1;
+
+insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
+select p.id, 2, 'Składanie kanapek', 2 from przepisy p where lower(p.nazwa) = lower('Kanapki z serem salami, ogórkiem kiszonym i musztardą');
+
+insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
+select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
+  from etapy e join przepisy p on p.id = e.przepis_id,
+       (values
+         (1::smallint, 'Posmaruj pieczywo musztardą, ułóż sałatę, ser, ogórki i cebulę. Dopraw pieprzem i podaj.', null::text, false)
+       ) as v(nr, tresc, sygnal, uwaga)
+ where lower(p.nazwa) = lower('Kanapki z serem salami, ogórkiem kiszonym i musztardą') and e.kolejnosc = 2;
 
 -- -------------------------------------------------------------------------
 --  Kałamarnica z papryką i ryżem
@@ -3593,17 +3795,17 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Kałamarnica z papryką i ryżem', 'Krótko smażona kałamarnica z papryką, pomidorami i ziołami, podana z ryżem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Kałamarnica z papryką i ryżem', 'Krótko smażona kałamarnica z papryką, pomidorami i ziołami, podana z ryżem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['kasza_ryz']::rodzaj_dania[],
   1, 'prywatna',
   'waga', 600, 1, 1,
-  12, 15,
+  12, 25,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Patelnia 28 cm', 'Garnek 2 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Patelnia 28 cm', 'Garnek 2 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna', 'Sitko']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Przechowuj w lodówce do 1 dnia. Odgrzewaj krótko, aby kałamarnica nie stwardniała.',
-  false, 'Twardą kałamarnicę duś dalej w sosie około 25 minut. Wodnisty sos odparuj na dużym ogniu.'
+  'Porcję z ugotowanym ryżem szybko schłodź w płytkim pojemniku i wstaw do lodówki, najlepiej w ciągu godziny. Przechowuj do 24 godzin. Odgrzewaj tylko raz, do gorącego środka całej porcji. Lodówka: do 4°C.',
+  false, 'Jeżeli kałamarnica jest gumowata, krótkie dodatkowe smażenie jej nie zmiękczy. Możesz przejść na dłuższe duszenie w sosie przez około 30–40 minut, kontrolując miękkość co 10 minut i uzupełniając gorącą wodę. Wydłuży to przygotowanie.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
@@ -3682,27 +3884,31 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Kałamarnica z papryką i ryżem') and sk.nazwa = 'Sól kłodawska';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie', 12 from przepisy p where lower(p.nazwa) = lower('Kałamarnica z papryką i ryżem');
+select p.id, 1, 'Przygotowanie składników', 12 from przepisy p where lower(p.nazwa) = lower('Kałamarnica z papryką i ryżem');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Ryż ugotuj. Kałamarnicę osusz, paprykę pokrój w paski, a cebulę w piórka.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj paprykę, usuń nasiona i pokrój w cienkie paski. Obierz cebulę i czosnek; cebulę pokrój w piórka, czosnek posiekaj.', null::text, false),
+         (3::smallint, 'Umyj i posiekaj natkę. Umyj cytrynę i przygotuj sok z odmierzonej części. Opłucz ryż na sitku.', null::text, false),
+         (4::smallint, 'Oczyszczoną, rozmrożoną kałamarnicę osusz i pokrój w krążki około 1 cm. Po surowych owocach morza umyj przybory i ręce. Odmierz passatę.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Kałamarnica z papryką i ryżem') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Smażenie', 15 from przepisy p where lower(p.nazwa) = lower('Kałamarnica z papryką i ryżem');
+select p.id, 2, 'Gotowanie ryżu i sosu', 25 from przepisy p where lower(p.nazwa) = lower('Kałamarnica z papryką i ryżem');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Na oliwie smaż cebulę i paprykę przez 5 minut. Dodaj czosnek oraz wędzoną paprykę.', null::text, false),
-         (2::smallint, 'Dodaj kałamarnicę i smaż na dużym ogniu 2–3 minuty.', 'krążki są nieprzezroczyste, ale nadal miękkie'::text, true),
-         (3::smallint, 'Dodaj passatę, zagotuj i zdejmij z ognia. Dopraw cytryną oraz solą.', null::text, false),
-         (4::smallint, 'Podaj z ryżem i natką pietruszki.', null::text, false)
+         (1::smallint, 'Na pierwszym palniku zagotuj wodę w garnku. Dodaj ryż i gotuj przez czas wskazany na opakowaniu; po ugotowaniu odcedź. Wody użyj tyle, by ziarna były zanurzone i swobodnie się gotowały. Nastaw minutnik; równolegle wykonuj kolejne czynności na drugim palniku. Woda do gotowania jest dodatkowa i zostanie odlana.', null::text, false),
+         (2::smallint, 'Na drugim palniku rozgrzej oliwę przez 1 minutę. Dodaj cebulę i paprykę, smaż 5–6 minut.', null::text, false),
+         (3::smallint, 'Dodaj czosnek oraz wędzoną paprykę i smaż 30 sekund. Wlej passatę, zagotuj przez około 2 minuty i gotuj łagodnie jeszcze 5 minut. Zakończ gotowanie ryżu przed dodaniem kałamarnicy.', null::text, false),
+         (4::smallint, 'Do gorącego sosu dodaj krążki kałamarnicy i gotuj 2–3 minuty, delikatnie mieszając.', 'krążki są nieprzezroczyste i jędrne, ale nie gumowate'::text, true),
+         (5::smallint, 'Zdejmij z ognia, dodaj przygotowany sok z cytryny, sól i natkę. Podaj od razu z ryżem.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Kałamarnica z papryką i ryżem') and e.kolejnosc = 2;
 
@@ -3715,17 +3921,17 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Klopsiki z indyka w sosie pomidorowym z bulgurem', 'Delikatne klopsiki z indyka duszone w sosie pomidorowym, podane z kaszą bulgur. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Klopsiki z indyka w sosie pomidorowym z bulgurem', 'Delikatne klopsiki z indyka duszone w sosie pomidorowym, podane z kaszą bulgur. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['kasza_ryz']::rodzaj_dania[],
   3, 'prywatna',
   'waga', 652, 1, 1,
-  15, 30,
+  18, 32,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Patelnia 28 cm', 'Garnek 2 l', 'miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Patelnia 28 cm', 'Garnek 2 l', 'Miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna', 'Sitko', 'Termometr do mięsa']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Klopsiki z sosem przechowuj w lodówce do 3 dni albo zamroź. Kaszę trzymaj osobno.',
-  true, 'Jeśli klopsiki się rozpadają, dodaj trochę bułki tartej. Za kwaśny sos gotuj dłużej z odrobiną startej marchewki.'
+  'Klopsiki z sosem przechowuj w lodówce do 3 dni albo zamroź. Kaszę trzymaj osobno. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
+  true, 'Jeśli masa jest miękka, schłódź ją przez 15 minut i formuj niewielkie klopsiki mokrymi dłońmi. Nie obracaj ich, zanim spód się zetnie. Gęstniejący sos rozrzedzaj niewielką ilością gorącej wody.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
@@ -3809,29 +4015,32 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Klopsiki z indyka w sosie pomidorowym z bulgurem') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Formowanie klopsików', 15 from przepisy p where lower(p.nazwa) = lower('Klopsiki z indyka w sosie pomidorowym z bulgurem');
+select p.id, 1, 'Przygotowanie składników', 18 from przepisy p where lower(p.nazwa) = lower('Klopsiki z indyka w sosie pomidorowym z bulgurem');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Mięso połącz z bułką tartą, jajkiem, połową cebuli, solą i pieprzem.', null::text, false),
-         (2::smallint, 'Uformuj niewielkie, równe klopsiki.', null::text, true),
-         (3::smallint, 'Kaszę bulgur ugotuj.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Obierz i drobno posiekaj cebulę oraz czosnek. Odmierz passatę i kaszę.', null::text, false),
+         (3::smallint, 'Roztrzep jajko w misce. Połącz mięso z jajkiem, bułką tartą, połową cebuli oraz częścią soli i pieprzu. Odstaw na 5 minut, aby bułka wchłonęła wilgoć.', null::text, false),
+         (4::smallint, 'Wilgotnymi dłońmi uformuj klopsiki o średnicy około 3 cm. Umyj przybory i ręce po surowym mięsie.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Klopsiki z indyka w sosie pomidorowym z bulgurem') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Smażenie i duszenie', 30 from przepisy p where lower(p.nazwa) = lower('Klopsiki z indyka w sosie pomidorowym z bulgurem');
+select p.id, 2, 'Gotowanie kaszy i duszenie klopsików', 32 from przepisy p where lower(p.nazwa) = lower('Klopsiki z indyka w sosie pomidorowym z bulgurem');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Na oleju obsmaż klopsiki ze wszystkich stron i przełóż je na bok.', null::text, false),
-         (2::smallint, 'Na patelni zeszklij pozostałą cebulę, dodaj czosnek, passatę i przyprawy.', null::text, false),
-         (3::smallint, 'Włóż klopsiki do sosu i duś pod przykryciem 15 minut.', 'klopsiki są całkowicie ścięte w środku'::text, false),
-         (4::smallint, 'Podaj z kaszą bulgur.', null::text, false)
+         (1::smallint, 'Na pierwszym palniku zagotuj wodę w garnku. Dodaj kaszę bulgur i gotuj przez czas wskazany na opakowaniu; po ugotowaniu odcedź. Wody użyj tyle, by ziarna były zanurzone i swobodnie się gotowały. Nastaw minutnik; równolegle wykonuj kolejne czynności na drugim palniku. Woda do gotowania jest dodatkowa i zostanie odlana.', null::text, false),
+         (2::smallint, 'Na drugim palniku rozgrzej olej przez 1 minutę. Obsmaż klopsiki przez 5–6 minut, ostrożnie obracając. Przełóż na talerz.', null::text, false),
+         (3::smallint, 'Na tej samej patelni smaż pozostałą cebulę przez 4 minuty. Dodaj czosnek, oregano i paprykę; smaż 30 sekund.', null::text, false),
+         (4::smallint, 'Dodaj passatę i doprowadź do łagodnego wrzenia przez około 2 minuty.', null::text, false),
+         (5::smallint, 'Włóż klopsiki i duś pod przykryciem przez 15 minut na małym ogniu. Obróć je w połowie; w razie gęstnienia sosu dodaj trochę gorącej wody.', 'temperatura w środku największego klopsika wynosi co najmniej 74°C'::text, true),
+         (6::smallint, 'Dopraw sos pozostałą solą i pieprzem. Podaj z odcedzoną kaszą.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Klopsiki z indyka w sosie pomidorowym z bulgurem') and e.kolejnosc = 2;
 
@@ -3844,16 +4053,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Komosa ryżowa z ciecierzycą i pieczonymi warzywami', 'Miska z komosą ryżową, ciecierzycą, cukinią, papryką i pomidorem, doprawiona cytryną. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Komosa ryżowa z ciecierzycą i pieczonymi warzywami', 'Miska z komosą ryżową, ciecierzycą, cukinią, papryką i pomidorem, doprawiona cytryną. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['kasza_ryz', 'z_piekarnika']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 658, 1, 1,
-  12, 30,
+  12, 42,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Piekarnik', 'Blacha do pieczenia', 'Garnek 2 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Piekarnik', 'Blacha do pieczenia', 'Garnek 2 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna', 'Sitko', 'Miska']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Przechowuj w zamkniętym pojemniku w lodówce do 2 dni.',
+  'Przechowuj w zamkniętym pojemniku w lodówce do 2 dni. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
   false, 'Jeśli warzywa są wodniste, rozłóż je luźniej i dopiecz. Za suchą komosę skrop dodatkowym sokiem z cytryny.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -3938,26 +4147,30 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Komosa ryżowa z ciecierzycą i pieczonymi warzywami') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie', 12 from przepisy p where lower(p.nazwa) = lower('Komosa ryżowa z ciecierzycą i pieczonymi warzywami');
+select p.id, 1, 'Przygotowanie składników', 12 from przepisy p where lower(p.nazwa) = lower('Komosa ryżowa z ciecierzycą i pieczonymi warzywami');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Piekarnik rozgrzej do 210°C. Warzywa pokrój, a komosę dokładnie opłucz.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj cukinię, paprykę i pomidory; usuń gniazdo nasienne papryki. Cukinię i paprykę pokrój na kawałki około 2 cm, pomidory w ćwiartki. Obierz cebulę i pokrój w piórka.', null::text, false),
+         (3::smallint, 'Opłucz komosę na sitku. Opłucz, odsącz i osusz ciecierzycę. Umyj i posiekaj natkę; przygotuj odmierzoną ilość soku z cytryny.', null::text, false),
+         (4::smallint, 'Warzywa oraz ciecierzycę wymieszaj z oliwą, oregano, solą i pieprzem.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Komosa ryżowa z ciecierzycą i pieczonymi warzywami') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Pieczenie i gotowanie', 30 from przepisy p where lower(p.nazwa) = lower('Komosa ryżowa z ciecierzycą i pieczonymi warzywami');
+select p.id, 2, 'Pieczenie i gotowanie', 42 from przepisy p where lower(p.nazwa) = lower('Komosa ryżowa z ciecierzycą i pieczonymi warzywami');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Warzywa i ciecierzycę wymieszaj z oliwą, oregano, solą oraz pieprzem. Piecz 25 minut.', 'warzywa są miękkie i rumiane na brzegach'::text, false),
-         (2::smallint, 'Komosę ugotuj do miękkości i odstaw pod przykryciem na 5 minut.', 'ziarna są miękkie i sypkie'::text, false),
-         (3::smallint, 'Połącz komosę z pieczonymi warzywami, sokiem z cytryny i natką.', null::text, true)
+         (1::smallint, 'Rozgrzej piekarnik do 210°C, grzanie góra–dół; zwykle około 10 minut.', null::text, false),
+         (2::smallint, 'Rozłóż warzywa i ciecierzycę luźno na blasze. Piecz 25–30 minut, obracając w połowie.', null::text, false),
+         (3::smallint, 'Podczas pieczenia ugotuj komosę przez czas z opakowania w dodatkowej wodzie. Odcedź i odstaw pod przykryciem na 5 minut.', null::text, false),
+         (4::smallint, 'Połącz komosę, upieczone warzywa i ciecierzycę. Dodaj sok z cytryny oraz natkę.', 'warzywa są miękkie i zarumienione, ziarna komosy miękkie'::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Komosa ryżowa z ciecierzycą i pieczonymi warzywami') and e.kolejnosc = 2;
 
@@ -3970,15 +4183,15 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Kotleciki z czerwonej soczewicy z sosem jogurtowym', 'Rumiane kotleciki z czerwonej soczewicy i płatków owsianych, podane z ogórkowym sosem jogurtowym. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Kotleciki z czerwonej soczewicy z sosem jogurtowym', 'Rumiane kotleciki z czerwonej soczewicy i płatków owsianych, podane z ogórkowym sosem jogurtowym. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   2, 'prywatna',
   'waga', 407, 1, 1,
-  18, 20,
+  12, 57,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Garnek 2 l', 'Patelnia 28 cm', 'miska', 'Tarka o grubych oczkach', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Garnek 2 l', 'Patelnia 28 cm', 'Miska', 'Tarka o grubych oczkach', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna', 'Sitko', 'Widelec']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Kotleciki przechowuj w lodówce do 2 dni. Sos trzymaj osobno.',
+  'Kotleciki przechowuj w lodówce do 2 dni albo zamroź po ostudzeniu. Sos jogurtowy przechowuj osobno w lodówce, bez mrożenia. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
   true, 'Jeśli masa się rozpada, dodaj płatki owsiane i odczekaj 5 minut. Za gęsty sos rozrzedź wodą.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -4067,30 +4280,44 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Kotleciki z czerwonej soczewicy z sosem jogurtowym') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie masy i sosu', 18 from przepisy p where lower(p.nazwa) = lower('Kotleciki z czerwonej soczewicy z sosem jogurtowym');
+select p.id, 1, 'Przygotowanie składników', 12 from przepisy p where lower(p.nazwa) = lower('Kotleciki z czerwonej soczewicy z sosem jogurtowym');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Soczewicę ugotuj do miękkości i dokładnie odcedź.', null::text, false),
-         (2::smallint, 'Połącz ją z marchewką, cebulą, czosnkiem, płatkami i przyprawami. Rozgnieć widelcem.', null::text, false),
-         (3::smallint, 'Jogurt wymieszaj z ogórkiem, sokiem z cytryny i częścią soli.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Opłucz soczewicę na sitku. Obierz marchew i zetrzyj; obierz i drobno posiekaj cebulę oraz czosnek.', null::text, false),
+         (3::smallint, 'Umyj ogórek, zetrzyj go i odciśnij nadmiar soku. Przygotuj sok z cytryny oraz odmierz jogurt i płatki.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Kotleciki z czerwonej soczewicy z sosem jogurtowym') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Smażenie', 20 from przepisy p where lower(p.nazwa) = lower('Kotleciki z czerwonej soczewicy z sosem jogurtowym');
+select p.id, 2, 'Gotowanie soczewicy i przygotowanie masy', 42 from przepisy p where lower(p.nazwa) = lower('Kotleciki z czerwonej soczewicy z sosem jogurtowym');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Z masy uformuj małe, zwarte kotleciki.', null::text, true),
-         (2::smallint, 'Smaż je na oleju po 4–5 minut z każdej strony.', 'kotleciki są rumiane i łatwo odchodzą od patelni'::text, false),
-         (3::smallint, 'Podaj z sosem jogurtowym.', null::text, false)
+         (1::smallint, 'Zagotuj wodę, co zwykle trwa około 5 minut, i gotuj soczewicę 12–15 minut, do miękkości. Dokładnie odcedź na sitku i odstaw na 10 minut do odparowania.', null::text, false),
+         (2::smallint, 'Równolegle rozgrzej połowę oleju na patelni przez 1 minutę. Smaż cebulę i marchew 5 minut, dodaj czosnek, kmin i paprykę; smaż jeszcze 30 sekund.', null::text, false),
+         (3::smallint, 'Rozgnieć soczewicę widelcem. Dodaj podsmażone warzywa, płatki oraz część soli i pieprzu. Wymieszaj i odstaw na 10 minut, żeby płatki wchłonęły wilgoć.', null::text, false),
+         (4::smallint, 'W tym czasie wymieszaj jogurt z ogórkiem, sokiem z cytryny i pozostałą solą oraz pieprzem.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Kotleciki z czerwonej soczewicy z sosem jogurtowym') and e.kolejnosc = 2;
+
+insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
+select p.id, 3, 'Formowanie i smażenie', 15 from przepisy p where lower(p.nazwa) = lower('Kotleciki z czerwonej soczewicy z sosem jogurtowym');
+
+insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
+select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
+  from etapy e join przepisy p on p.id = e.przepis_id,
+       (values
+         (1::smallint, 'Uformuj kotleciki grubości około 1,5 cm. Rozgrzej pozostały olej na patelni nieprzywierającej przez 1 minutę.', null::text, false),
+         (2::smallint, 'Smaż po 4–5 minut z każdej strony na średnim ogniu. Obracaj dopiero po zrumienieniu spodu. Przy większej ilości smaż partiami, doliczając czas kolejnej partii.', 'kotleciki utrzymują kształt i mają rumianą powierzchnię'::text, true),
+         (3::smallint, 'Podaj z sosem jogurtowym.', null::text, false)
+       ) as v(nr, tresc, sygnal, uwaga)
+ where lower(p.nazwa) = lower('Kotleciki z czerwonej soczewicy z sosem jogurtowym') and e.kolejnosc = 3;
 
 -- -------------------------------------------------------------------------
 --  Krem z brokułów z fetą
@@ -4101,16 +4328,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Krem z brokułów z fetą', 'Kremowa zupa brokułowa z ziemniakiem, jogurtem i fetą, podana z pieczywem. Przepis na 2 porcje.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Krem z brokułów z fetą', 'Kremowa zupa brokułowa z ziemniakiem, jogurtem i fetą, podana z pieczywem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['zupa']::rodzaj_dania[],
   3, 'prywatna',
   'waga', 771, 1, 2,
-  10, 25,
+  10, 35,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Garnek 3 l', 'Blender ręczny', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Garnek 3 l', 'Blender ręczny', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna', 'Miska']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Przechowuj w lodówce do 3 dni. Jeśli planujesz mrożenie, odłóż porcję przed dodaniem jogurtu i fety; dodaj je dopiero po rozmrożeniu i podgrzaniu. Pieczywo trzymaj osobno.',
+  'Przechowuj w lodówce do 3 dni. Jeśli planujesz mrożenie, odłóż porcję przed dodaniem jogurtu i fety; dodaj je dopiero po rozmrożeniu i podgrzaniu. Pieczywo trzymaj osobno. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
   true, 'Za gęsty krem rozcieńcz bulionem. Jeśli feta mocno zasoliła zupę, dodaj więcej brokułu lub ziemniaka.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -4190,27 +4417,30 @@ select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Krem z brokułów z fetą') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie', 10 from przepisy p where lower(p.nazwa) = lower('Krem z brokułów z fetą');
+select p.id, 1, 'Przygotowanie składników', 10 from przepisy p where lower(p.nazwa) = lower('Krem z brokułów z fetą');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Brokuł podziel na różyczki, ziemniaka pokrój, a cebulę i czosnek posiekaj.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj brokuł i podziel na małe różyczki; obrany miękki środek łodygi pokrój drobno. Umyj i obierz ziemniaki, pokrój w kostkę około 1 cm.', null::text, false),
+         (3::smallint, 'Obierz i posiekaj cebulę oraz czosnek. Pokrusz fetę, odmierz bulion i jogurt, przygotuj pieczywo.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Krem z brokułów z fetą') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Gotowanie i blendowanie', 25 from przepisy p where lower(p.nazwa) = lower('Krem z brokułów z fetą');
+select p.id, 2, 'Gotowanie i blendowanie', 35 from przepisy p where lower(p.nazwa) = lower('Krem z brokułów z fetą');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Na oliwie zeszklij cebulę. Dodaj czosnek, ziemniaki i bulion; gotuj 12 minut.', null::text, false),
-         (2::smallint, 'Dodaj brokuł i gotuj kolejne 7–8 minut.', 'brokuł i ziemniaki są miękkie'::text, false),
-         (3::smallint, 'Zblenduj zupę, dodaj gałkę i pieprz. Jeśli część zupy mrozisz, odłóż ją teraz; do pozostałej po lekkim przestudzeniu wmieszaj jogurt.', null::text, true),
-         (4::smallint, 'Podaj z pokruszoną fetą i pieczywem.', null::text, false)
+         (1::smallint, 'Rozgrzej oliwę 1 minutę, smaż cebulę 4 minuty. Dodaj czosnek i smaż 30 sekund.', null::text, false),
+         (2::smallint, 'Dodaj ziemniaki, pokrojoną łodygę brokułu i bulion. Doprowadź do wrzenia przez około 4 minuty; gotuj pod przykryciem 12 minut.', null::text, false),
+         (3::smallint, 'Dodaj różyczki i gotuj 6–8 minut, aż ziemniaki i brokuł będą miękkie.', null::text, false),
+         (4::smallint, 'Zdejmij garnek z ognia. Zblenduj zupę, trzymając końcówkę blendera zanurzoną. Dodaj gałkę oraz pieprz. Jeśli część mrozisz, odłóż ją teraz.', null::text, false),
+         (5::smallint, 'Wymieszaj jogurt z odrobiną ciepłej zupy, następnie wmieszaj do garnka. Nie zagotowuj ponownie. Podaj z fetą i pieczywem.', 'krem jest gładki, bez grudek jogurtu'::text, true)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Krem z brokułów z fetą') and e.kolejnosc = 2;
 
@@ -4223,16 +4453,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Krem z dyni na mleku kokosowym', 'Aromatyczny krem z dyni, czerwonej soczewicy, imbiru i mleka kokosowego. Przepis na 2 porcje.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Krem z dyni na mleku kokosowym', 'Aromatyczny krem z dyni, czerwonej soczewicy, imbiru i mleka kokosowego. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['azjatycka']::rodzaj_kuchni[],
   array['zupa']::rodzaj_dania[],
   3, 'prywatna',
-  'waga', 792, 1, 2,
-  12, 28,
+  'waga', 797, 1, 2,
+  13, 35,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Garnek 3 l', 'Blender ręczny', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Garnek 3 l', 'Blender ręczny', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna', 'Sitko']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Przechowuj w lodówce do 3 dni albo zamroź po całkowitym ostudzeniu.',
+  'Przechowuj w lodówce do 3 dni albo zamroź po szybkim schłodzeniu. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
   true, 'Za gęsty krem rozcieńcz bulionem. Za ostry złagodź dodatkowym mlekiem kokosowym.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -4317,32 +4547,39 @@ select p.id, sk.id, 30, 'g'::jednostka_miary, 30,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Krem z dyni na mleku kokosowym') and sk.nazwa = 'Limonka';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
+select p.id, sk.id, 10, 'g'::jednostka_miary, 10,
+       'umyta, osuszona i posiekana; do posypania przed podaniem', null, sk.rola, sk.mozna_dzielic, 13
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Krem z dyni na mleku kokosowym') and sk.nazwa = 'Pietruszka natka';
+insert into przepis_skladniki
+  (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 2, 'g'::jednostka_miary, 2,
-       null, null, sk.rola, sk.mozna_dzielic, 13
+       null, null, sk.rola, sk.mozna_dzielic, 14
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Krem z dyni na mleku kokosowym') and sk.nazwa = 'Sól kłodawska';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie', 12 from przepisy p where lower(p.nazwa) = lower('Krem z dyni na mleku kokosowym');
+select p.id, 1, 'Przygotowanie składników', 13 from przepisy p where lower(p.nazwa) = lower('Krem z dyni na mleku kokosowym');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Dynię i marchew pokrój, cebulę, czosnek oraz imbir posiekaj, a soczewicę opłucz.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj dynię, usuń nasiona i twardą skórę; pokrój miąższ w kostkę około 2 cm. Umyj i obierz marchew, pokrój w cienkie plasterki.', null::text, false),
+         (3::smallint, 'Obierz i posiekaj cebulę, czosnek oraz imbir. Opłucz soczewicę. Umyj limonkę, wyciśnij i odmierz sok. Odmierz bulion, wodę i mleko kokosowe. Umyj i osusz natkę pietruszki, drobno posiekaj i odłóż do podania.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Krem z dyni na mleku kokosowym') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Gotowanie i blendowanie', 28 from przepisy p where lower(p.nazwa) = lower('Krem z dyni na mleku kokosowym');
+select p.id, 2, 'Gotowanie i blendowanie', 35 from przepisy p where lower(p.nazwa) = lower('Krem z dyni na mleku kokosowym');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Na oleju smaż cebulę 3 minuty. Dodaj czosnek, imbir i pastę curry.', null::text, false),
-         (2::smallint, 'Dodaj dynię, marchew, soczewicę, bulion oraz wodę. Gotuj około 20 minut.', 'warzywa i soczewica są całkowicie miękkie'::text, false),
-         (3::smallint, 'Dodaj mleko kokosowe i zblenduj na gładko.', null::text, true),
-         (4::smallint, 'Dopraw limonką i solą.', null::text, false)
+         (1::smallint, 'Rozgrzej olej 1 minutę, smaż cebulę 4 minuty. Dodaj czosnek, imbir i pastę curry, smaż 1 minutę.', null::text, false),
+         (2::smallint, 'Dodaj dynię, marchew, soczewicę, bulion i wodę. Doprowadź do wrzenia przez około 4 minuty. Gotuj pod uchyloną pokrywką przez 20 minut, mieszając co kilka minut.', null::text, false),
+         (3::smallint, 'Sprawdź miękkość warzyw i soczewicy; w razie potrzeby gotuj kolejne 3–5 minut. Dodaj mleko kokosowe i podgrzewaj 2 minuty.', 'warzywa dają się łatwo rozgnieść, soczewica miękka'::text, true),
+         (4::smallint, 'Zdejmij z ognia i zblenduj z zanurzoną końcówką blendera. Dodaj sok z limonki oraz sól i wymieszaj. Rozlej krem do talerzy, posyp przygotowaną natką pietruszki i podaj.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Krem z dyni na mleku kokosowym') and e.kolejnosc = 2;
 
@@ -4355,16 +4592,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Krem z kalafiora z pieczoną ciecierzycą', 'Krem z kalafiora i ziemniaka podany z pieczoną ciecierzycą oraz pieczywem. Przepis na 2 porcje.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Krem z kalafiora z pieczoną ciecierzycą', 'Krem z kalafiora i ziemniaka podany z pieczoną ciecierzycą oraz pieczywem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['zupa']::rodzaj_dania[],
   3, 'prywatna',
   'waga', 797, 1, 2,
-  12, 30,
+  12, 42,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Piekarnik', 'Blacha do pieczenia', 'Garnek 3 l', 'Blender ręczny', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Piekarnik', 'Blacha do pieczenia', 'Garnek 3 l', 'Blender ręczny', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna', 'Sitko', 'Miska']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Krem przechowuj w lodówce do 3 dni lub zamroź. Ciecierzycę i pieczywo trzymaj osobno.',
+  'Krem przechowuj w lodówce do 3 dni lub zamroź. Ciecierzycę i pieczywo trzymaj osobno. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
   true, 'Za rzadki krem gotuj chwilę bez przykrycia. Miękką ciecierzycę dopiecz w wyższej temperaturze.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -4449,28 +4686,30 @@ select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Krem z kalafiora z pieczoną ciecierzycą') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie', 12 from przepisy p where lower(p.nazwa) = lower('Krem z kalafiora z pieczoną ciecierzycą');
+select p.id, 1, 'Przygotowanie składników', 12 from przepisy p where lower(p.nazwa) = lower('Krem z kalafiora z pieczoną ciecierzycą');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Piekarnik rozgrzej do 210°C. Kalafior podziel na różyczki, ziemniaka pokrój, cebulę posiekaj.', null::text, false),
-         (2::smallint, 'Ciecierzycę wymieszaj z połową oliwy, kminem i wędzoną papryką.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Opłucz ciecierzycę, odsącz i dokładnie osusz. Wymieszaj z połową oliwy, kminem i wędzoną papryką.', null::text, false),
+         (3::smallint, 'Umyj kalafior, podziel na różyczki. Umyj i obierz ziemniaki, pokrój w kostkę około 1 cm. Obierz i posiekaj cebulę oraz czosnek. Odmierz bulion, przygotuj pieczywo.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Krem z kalafiora z pieczoną ciecierzycą') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Gotowanie i pieczenie', 30 from przepisy p where lower(p.nazwa) = lower('Krem z kalafiora z pieczoną ciecierzycą');
+select p.id, 2, 'Gotowanie i pieczenie', 42 from przepisy p where lower(p.nazwa) = lower('Krem z kalafiora z pieczoną ciecierzycą');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Ciecierzycę piecz około 25 minut, mieszając w połowie.', 'jest sucha i chrupiąca'::text, false),
-         (2::smallint, 'Na pozostałej oliwie zeszklij cebulę, dodaj czosnek, ziemniaki, kalafior i bulion. Gotuj 20 minut.', null::text, false),
-         (3::smallint, 'Zblenduj zupę i dopraw.', null::text, true),
-         (4::smallint, 'Podaj krem z pieczoną ciecierzycą i pieczywem.', null::text, false)
+         (1::smallint, 'Rozgrzej piekarnik do 210°C, grzanie góra–dół, zwykle około 10 minut. Rozłóż ciecierzycę na blasze i piecz 25–30 minut, mieszając w połowie.', null::text, false),
+         (2::smallint, 'Już podczas rozgrzewania piekarnika rozgrzej pozostałą oliwę w garnku przez 1 minutę. Smaż cebulę 4 minuty, dodaj czosnek i smaż 30 sekund.', null::text, false),
+         (3::smallint, 'Dodaj ziemniaki, kalafior i bulion. Doprowadź do wrzenia przez około 4 minuty, gotuj pod przykryciem 18–20 minut.', null::text, false),
+         (4::smallint, 'Zdejmij garnek z ognia i sprawdź miękkość warzyw. Zblenduj z zanurzoną końcówką, dopraw solą i pieprzem.', null::text, false),
+         (5::smallint, 'Podaj krem z upieczoną ciecierzycą i pieczywem; ciecierzycę dodawaj dopiero na talerzu.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Krem z kalafiora z pieczoną ciecierzycą') and e.kolejnosc = 2;
 
@@ -4483,16 +4722,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Krewetki z czosnkiem, cukinią i ryżem', 'Krewetki smażone z czosnkiem, cukinią, chili i cytryną, podane z ryżem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Krewetki z czosnkiem, cukinią i ryżem', 'Krewetki smażone z czosnkiem, cukinią, chili i cytryną, podane z ryżem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['kasza_ryz']::rodzaj_dania[],
   1, 'prywatna',
   'waga', 442, 1, 1,
-  10, 15,
+  10, 25,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Patelnia 28 cm', 'Garnek 2 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Patelnia 28 cm', 'Garnek 2 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna', 'Sitko']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Przechowuj w lodówce do 1 dnia. Podgrzewaj bardzo krótko.',
+  'Porcję z ugotowanym ryżem szybko schłodź w płytkim pojemniku i wstaw do lodówki, najlepiej w ciągu godziny. Przechowuj do 24 godzin. Odgrzewaj tylko raz, do gorącego środka całej porcji. Lodówka: do 4°C.',
   false, 'Gumowate krewetki były smażone za długo. Jeśli cukinia puściła wodę, zwiększ ogień i szybko ją odparuj.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -4562,26 +4801,30 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Krewetki z czosnkiem, cukinią i ryżem') and sk.nazwa = 'Sól kłodawska';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie', 10 from przepisy p where lower(p.nazwa) = lower('Krewetki z czosnkiem, cukinią i ryżem');
+select p.id, 1, 'Przygotowanie składników', 10 from przepisy p where lower(p.nazwa) = lower('Krewetki z czosnkiem, cukinią i ryżem');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Ryż ugotuj. Krewetki dokładnie osusz, a cukinię pokrój.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Opłucz ryż. Umyj cukinię i pokrój w półplasterki około 5 mm. Obierz i posiekaj czosnek.', null::text, false),
+         (3::smallint, 'Umyj natkę i cytrynę, posiekaj natkę i odmierz sok. Krewetki obierz, usuń przewód pokarmowy, jeśli pozostał, i osusz; mrożone wcześniej rozmroź w lodówce. Umyj ręce i przybory po surowych krewetkach.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Krewetki z czosnkiem, cukinią i ryżem') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Smażenie', 15 from przepisy p where lower(p.nazwa) = lower('Krewetki z czosnkiem, cukinią i ryżem');
+select p.id, 2, 'Gotowanie ryżu i smażenie', 25 from przepisy p where lower(p.nazwa) = lower('Krewetki z czosnkiem, cukinią i ryżem');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Na połowie oliwy smaż cukinię na dużym ogniu przez 4–5 minut. Przełóż ją na bok.', null::text, false),
-         (2::smallint, 'Dodaj resztę oliwy, czosnek, chili i krewetki. Smaż 2–3 minuty.', 'krewetki są różowe i sprężyste'::text, true),
-         (3::smallint, 'Dodaj cukinię, sok z cytryny, sól oraz natkę. Wymieszaj i podaj z ryżem.', null::text, false)
+         (1::smallint, 'Na pierwszym palniku zagotuj wodę w garnku. Dodaj ryż i gotuj przez czas wskazany na opakowaniu; po ugotowaniu odcedź. Wody użyj tyle, by ziarna były zanurzone i swobodnie się gotowały. Nastaw minutnik; równolegle wykonuj kolejne czynności na drugim palniku. Woda do gotowania jest dodatkowa i zostanie odlana.', null::text, false),
+         (2::smallint, 'Gdy do końca gotowania ryżu pozostaje około 10 minut, rozgrzej połowę oliwy na patelni przez 1 minutę. Smaż cukinię na średnio dużym ogniu 4–5 minut i przełóż na talerz. Nadmiar wody odparuj teraz, przed dodaniem krewetek.', null::text, false),
+         (3::smallint, 'Wlej pozostałą oliwę i zmniejsz ogień do średniego. Dodaj czosnek i chili, smaż 20–30 sekund.', null::text, false),
+         (4::smallint, 'Dodaj krewetki i smaż łącznie 3–4 minuty, obracając w połowie; większe mogą wymagać nieco dłużej.', 'mięso jest nieprzezroczyste i perłowe także w środku'::text, true),
+         (5::smallint, 'Dodaj cukinię, wymieszaj i zdejmij z ognia. Dopraw przygotowanym sokiem z cytryny, solą i natką. Podaj z ryżem.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Krewetki z czosnkiem, cukinią i ryżem') and e.kolejnosc = 2;
 
@@ -4594,16 +4837,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Królik z rozmarynem i warzywami korzeniowymi', 'Królik pieczony z ziemniakami, marchewką, pasternakiem, selerem i rozmarynem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Królik z rozmarynem i warzywami korzeniowymi', 'Królik pieczony z ziemniakami, marchewką, pasternakiem, selerem i rozmarynem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad']::pora_posilku[], array['polska']::rodzaj_kuchni[],
   array['z_piekarnika']::rodzaj_dania[],
   3, 'prywatna',
   'waga', 732, 1, 1,
-  18, 70,
+  18, 90,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Piekarnik', 'Naczynie żaroodporne', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Piekarnik', 'Naczynie żaroodporne', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna', 'Termometr do mięsa']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Przechowuj w zamkniętym pojemniku w lodówce do 3 dni.',
+  'Przechowuj w zamkniętym pojemniku w lodówce do 3 dni. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
   true, 'Jeśli mięso jest twarde, przykryj naczynie i piecz dłużej z dodatkiem bulionu. Suche mięso polej płynem z pieczenia.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -4688,27 +4931,30 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Królik z rozmarynem i warzywami korzeniowymi') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie', 18 from przepisy p where lower(p.nazwa) = lower('Królik z rozmarynem i warzywami korzeniowymi');
+select p.id, 1, 'Przygotowanie składników', 18 from przepisy p where lower(p.nazwa) = lower('Królik z rozmarynem i warzywami korzeniowymi');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Piekarnik rozgrzej do 190°C. Warzywa pokrój na podobnej wielkości kawałki.', null::text, false),
-         (2::smallint, 'Królika natrzyj oliwą, czosnkiem, rozmarynem, solą i pieprzem.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj i obierz ziemniaki, marchew, pasternak i seler, pokrój w kawałki około 2 cm. Obierz cebulę i pokrój w ósemki.', null::text, false),
+         (3::smallint, 'Obierz i posiekaj czosnek. Umyj rozmaryn. Mięso królika osusz i podziel na kawałki około 4 cm; podana ilość dotyczy mięsa bez kości.', null::text, false),
+         (4::smallint, 'Natrzyj mięso połową oliwy, czosnkiem, rozmarynem, częścią soli i pieprzu. Warzywa wymieszaj z pozostałą oliwą i przyprawami. Umyj przybory po mięsie; odmierz bulion.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Królik z rozmarynem i warzywami korzeniowymi') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Pieczenie', 70 from przepisy p where lower(p.nazwa) = lower('Królik z rozmarynem i warzywami korzeniowymi');
+select p.id, 2, 'Pieczenie pod przykryciem', 90 from przepisy p where lower(p.nazwa) = lower('Królik z rozmarynem i warzywami korzeniowymi');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Królika i warzywa ułóż w naczyniu, wlej bulion i przykryj.', null::text, false),
-         (2::smallint, 'Piecz 50 minut, następnie odkryj i piecz jeszcze około 20 minut.', 'mięso jest miękkie i łatwo odchodzi od kości'::text, true),
-         (3::smallint, 'Przed podaniem polej mięso płynem z pieczenia.', null::text, false)
+         (1::smallint, 'Rozgrzej piekarnik do 180°C, grzanie góra–dół, zwykle około 10 minut. Ułóż mięso z cebulą w naczyniu, wlej bulion i przykryj naczynie pokrywą.', null::text, false),
+         (2::smallint, 'Piecz pod przykryciem 35 minut. Dodaj ziemniaki, marchew, pasternak i seler; polej płynem i ponownie przykryj.', null::text, false),
+         (3::smallint, 'Piecz kolejne 35–40 minut. Jeśli mięso jest nadal twarde, piecz dalej po 10 minut pod przykryciem, kontrolując ilość płynu.', 'królik jest miękki, ma co najmniej 71°C w środku; warzywa miękkie'::text, true),
+         (4::smallint, 'Podaj, polewając mięso i warzywa płynem z pieczenia.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Królik z rozmarynem i warzywami korzeniowymi') and e.kolejnosc = 2;
 
@@ -4721,17 +4967,17 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Kurczak pieczony z batatem i brokułem', 'Pierś kurczaka pieczona na jednej blasze z batatem, brokułem i czerwoną cebulą. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Kurczak pieczony z batatem i brokułem', 'Pierś kurczaka pieczona na jednej blasze z batatem, brokułem i czerwoną cebulą. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['z_piekarnika']::rodzaj_dania[],
   3, 'prywatna',
   'waga', 709, 1, 1,
-  12, 35,
+  12, 47,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Piekarnik', 'Blacha do pieczenia', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Piekarnik', 'Blacha do pieczenia', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna', 'Termometr do mięsa']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Przechowuj w zamkniętym pojemniku w lodówce do 3 dni.',
-  false, 'Jeśli kurczak jest suchy, pokrój go i podaj z jogurtem. Twardego batata dopiekaj osobno.'
+  'Przechowuj w zamkniętym pojemniku w lodówce do 3 dni. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
+  false, 'Jeżeli kurczak jest gotowy wcześniej niż batat, wyjmij go i dopiecz sam batat. Brokuł mocno rumieniący się na brzegach również zdejmij wcześniej.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
@@ -4805,27 +5051,31 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Kurczak pieczony z batatem i brokułem') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie', 12 from przepisy p where lower(p.nazwa) = lower('Kurczak pieczony z batatem i brokułem');
+select p.id, 1, 'Przygotowanie składników', 12 from przepisy p where lower(p.nazwa) = lower('Kurczak pieczony z batatem i brokułem');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Piekarnik rozgrzej do 210°C. Batata pokrój w małą kostkę, brokuł podziel, a cebulę pokrój.', null::text, false),
-         (2::smallint, 'Warzywa wymieszaj z połową oliwy i przyprawami.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj i obierz batata, pokrój w kostkę około 2 cm. Umyj brokuł i podziel na małe różyczki. Obierz cebulę i pokrój w piórka, czosnek posiekaj.', null::text, false),
+         (3::smallint, 'Podziel oliwę między warzywa i mięso. Batata, cebulę i brokuł wymieszaj oddzielnie z oliwą oraz częścią tymianku, papryki wędzonej, soli i pieprzu.', null::text, false),
+         (4::smallint, 'Pierś osusz i wyrównaj grubość do około 2–3 cm. Natrzyj oliwą, czosnkiem i pozostałymi przyprawami. Umyj ręce i przybory po mięsie.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Kurczak pieczony z batatem i brokułem') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Pieczenie', 35 from przepisy p where lower(p.nazwa) = lower('Kurczak pieczony z batatem i brokułem');
+select p.id, 2, 'Pieczenie', 47 from przepisy p where lower(p.nazwa) = lower('Kurczak pieczony z batatem i brokułem');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Batata i cebulę piecz 15 minut. Następnie dodaj brokuł.', null::text, false),
-         (2::smallint, 'Kurczaka natrzyj pozostałą oliwą, czosnkiem, solą i pieprzem. Ułóż na blasze.', null::text, true),
-         (3::smallint, 'Piecz jeszcze około 18–20 minut.', 'kurczak jest całkowicie ścięty, ale soczysty'::text, false)
+         (1::smallint, 'Rozgrzej piekarnik do 210°C, grzanie góra–dół, zwykle około 10 minut.', null::text, false),
+         (2::smallint, 'Rozłóż batata i cebulę na blasze. Piecz 15 minut.', null::text, false),
+         (3::smallint, 'Dodaj kurczaka i brokuł, układając luźno. Piecz 18–22 minuty.', null::text, false),
+         (4::smallint, 'Sprawdź mięso termometrem w najgrubszym miejscu; gotowego kurczaka zdejmij. Niedopieczone warzywa dopiekaj osobno przez kolejne 5 minut.', 'kurczak ma co najmniej 74°C, batat miękki, brokuł lekko rumiany'::text, true),
+         (5::smallint, 'Podaj mięso z warzywami.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Kurczak pieczony z batatem i brokułem') and e.kolejnosc = 2;
 
@@ -4838,16 +5088,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Makaron pełnoziarnisty z bolońskim sosem z soczewicy', 'Pełnoziarnisty makaron z gęstym pomidorowym sosem z czerwonej soczewicy i warzyw. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Makaron pełnoziarnisty z bolońskim sosem z soczewicy', 'Pełnoziarnisty makaron z gęstym pomidorowym sosem z czerwonej soczewicy i warzyw. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['makaron']::rodzaj_dania[],
   3, 'prywatna',
   'waga', 711, 1, 1,
-  10, 28,
+  10, 35,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Garnek 3 l', 'Garnek 2 l', 'Tarka o grubych oczkach', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Garnek 3 l', 'Garnek 2 l', 'Tarka o grubych oczkach', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna', 'Sitko']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Sos przechowuj w lodówce do 3 dni lub zamroź. Makaron najlepiej ugotować świeży.',
+  'Sos przechowuj w lodówce do 3 dni lub zamroź. Makaron najlepiej ugotować świeży. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
   true, 'Za kwaśny sos złagodź dłuższym gotowaniem i dodatkową marchewką. Za gęsty rozcieńcz wodą z makaronu.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -4937,26 +5187,29 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Makaron pełnoziarnisty z bolońskim sosem z soczewicy') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie', 10 from przepisy p where lower(p.nazwa) = lower('Makaron pełnoziarnisty z bolońskim sosem z soczewicy');
+select p.id, 1, 'Przygotowanie składników', 10 from przepisy p where lower(p.nazwa) = lower('Makaron pełnoziarnisty z bolońskim sosem z soczewicy');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Marchew zetrzyj, a cebulę i czosnek posiekaj. Soczewicę opłucz.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj i obierz marchew, zetrzyj na tarce. Obierz i posiekaj cebulę oraz czosnek.', null::text, false),
+         (3::smallint, 'Opłucz soczewicę na sitku. Odmierz wodę z listy, passatę i makaron.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Makaron pełnoziarnisty z bolońskim sosem z soczewicy') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Gotowanie', 28 from przepisy p where lower(p.nazwa) = lower('Makaron pełnoziarnisty z bolońskim sosem z soczewicy');
+select p.id, 2, 'Gotowanie sosu i makaronu', 35 from przepisy p where lower(p.nazwa) = lower('Makaron pełnoziarnisty z bolońskim sosem z soczewicy');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Na oliwie smaż cebulę i marchew 5 minut. Dodaj czosnek oraz przyprawy.', null::text, false),
-         (2::smallint, 'Dodaj passatę, soczewicę i 150 ml wody. Gotuj około 20 minut.', 'soczewica jest miękka, a sos gęsty'::text, true),
-         (3::smallint, 'Makaron ugotuj al dente i połącz z sosem.', null::text, false)
+         (1::smallint, 'Rozgrzej oliwę w garnku przez 1 minutę, smaż cebulę i marchew 5 minut. Dodaj czosnek, oregano, bazylię i paprykę; smaż 30 sekund.', null::text, false),
+         (2::smallint, 'Dodaj soczewicę oraz odmierzoną wodę. Doprowadź do wrzenia przez około 2 minuty i gotuj pod uchyloną pokrywką 12–15 minut, często mieszając. Uzupełnij odparowaną wodę, jeżeli soczewica jeszcze nie zmiękła.', null::text, false),
+         (3::smallint, 'Już podczas gotowania soczewicy nastaw wodę na makaron na drugim palniku. Ugotuj go przez czas z opakowania tak, aby był gotowy pod koniec gotowania sosu; zachowaj nieco wody przed odcedzeniem. Do miękkiej soczewicy dodaj passatę i gotuj sos 10 minut bez przykrycia.', null::text, false),
+         (4::smallint, 'Wymieszaj sos z makaronem, dopraw solą i pieprzem. W razie potrzeby rozluźnij wodą z makaronu.', 'soczewica miękka, sos oblepia makaron'::text, true)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Makaron pełnoziarnisty z bolońskim sosem z soczewicy') and e.kolejnosc = 2;
 
@@ -4969,16 +5222,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Makaron z brokułem i fetą', 'Pełnoziarnisty makaron z brokułem, fetą, czosnkiem i cytryną. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Makaron z brokułem i fetą', 'Pełnoziarnisty makaron z brokułem, fetą, czosnkiem i cytryną. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['makaron']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 406, 1, 1,
-  8, 18,
+  8, 20,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Garnek 3 l', 'Patelnia 28 cm', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Garnek 3 l', 'Patelnia 28 cm', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna', 'Durszlak']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Przechowuj w lodówce do 2 dni.',
+  'Przechowuj w lodówce do 2 dni. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
   false, 'Twardy brokuł gotuj minutę dłużej. Za słone danie złagodź dodatkowym makaronem lub brokułem.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -5043,27 +5296,29 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Makaron z brokułem i fetą') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Gotowanie', 18 from przepisy p where lower(p.nazwa) = lower('Makaron z brokułem i fetą');
+select p.id, 1, 'Przygotowanie składników', 8 from przepisy p where lower(p.nazwa) = lower('Makaron z brokułem i fetą');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Makaron gotuj zgodnie z instrukcją. Na 4 minuty przed końcem dodaj do garnka brokuł.', null::text, false),
-         (2::smallint, 'Odcedź, zachowując niewielką ilość wody z gotowania.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj brokuł i podziel na małe różyczki; obraną łodygę pokrój cienko. Obierz i posiekaj czosnek.', null::text, false),
+         (3::smallint, 'Pokrusz fetę. Umyj cytrynę, wyciśnij i odmierz sok. Odmierz makaron.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Makaron z brokułem i fetą') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Łączenie', 8 from przepisy p where lower(p.nazwa) = lower('Makaron z brokułem i fetą');
+select p.id, 2, 'Gotowanie i łączenie', 20 from przepisy p where lower(p.nazwa) = lower('Makaron z brokułem i fetą');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Na oliwie krótko podgrzej czosnek i ostrą paprykę.', null::text, false),
-         (2::smallint, 'Dodaj makaron z brokułem, fetę, cytrynę i odrobinę wody z gotowania.', null::text, true),
-         (3::smallint, 'Wymieszaj i dopraw pieprzem.', 'feta częściowo się rozpuszcza i tworzy lekki sos'::text, false)
+         (1::smallint, 'Zagotuj wodę i gotuj makaron przez czas z opakowania. Na ostatnie 4 minuty dodaj małe różyczki i cienko pokrojoną łodygę brokułu.', null::text, false),
+         (2::smallint, 'Zachowaj trochę wody z gotowania i odcedź makaron z brokułem.', null::text, false),
+         (3::smallint, 'Pod koniec gotowania makaronu rozgrzej oliwę na patelni przez 1 minutę. Dodaj czosnek i ostrą paprykę, smaż 20–30 sekund.', null::text, false),
+         (4::smallint, 'Dodaj makaron z brokułem, fetę i odrobinę zachowanej wody. Mieszaj na małym ogniu przez 1 minutę. Zdejmij z ognia i dodaj sok z cytryny oraz pieprz.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Makaron z brokułem i fetą') and e.kolejnosc = 2;
 
@@ -5076,16 +5331,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Makaron z ciecierzycą, bazylią i orzechami', 'Pełnoziarnisty makaron z ciecierzycą i szybkim sosem z bazylii, orzechów oraz oliwy. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Makaron z ciecierzycą, bazylią i orzechami', 'Pełnoziarnisty makaron z ciecierzycą i szybkim sosem z bazylii, orzechów oraz oliwy. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['makaron']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 396, 1, 1,
-  10, 15,
+  10, 20,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Garnek 3 l', 'Blender ręczny', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Garnek 3 l', 'Blender ręczny', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna', 'Sitko', 'Miska']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Przechowuj w lodówce do 2 dni. Przy odgrzewaniu dodaj odrobinę wody.',
+  'Przechowuj w lodówce do 2 dni. Przy odgrzewaniu dodaj odrobinę wody. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
   false, 'Za gęsty sos rozcieńcz wodą z makaronu. Gorycz bazylii złagodź odrobiną cytryny.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -5160,26 +5415,29 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Makaron z ciecierzycą, bazylią i orzechami') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Gotowanie', 15 from przepisy p where lower(p.nazwa) = lower('Makaron z ciecierzycą, bazylią i orzechami');
+select p.id, 1, 'Przygotowanie składników', 10 from przepisy p where lower(p.nazwa) = lower('Makaron z ciecierzycą, bazylią i orzechami');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Makaron ugotuj al dente. Zachowaj część wody z gotowania.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Opłucz i odsącz ciecierzycę. Umyj pomidory i bazylię, osusz liście. Pokrój pomidory.', null::text, false),
+         (3::smallint, 'Obierz czosnek. Posiekaj orzechy. Umyj cytrynę i odmierz sok. Przygotuj makaron i oliwę.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Makaron z ciecierzycą, bazylią i orzechami') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Przygotowanie sosu', 10 from przepisy p where lower(p.nazwa) = lower('Makaron z ciecierzycą, bazylią i orzechami');
+select p.id, 2, 'Gotowanie i przygotowanie sosu', 20 from przepisy p where lower(p.nazwa) = lower('Makaron z ciecierzycą, bazylią i orzechami');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Bazylię, orzechy, oliwę, czosnek, cytrynę, sól i pieprz zblenduj z niewielką ilością wody z makaronu.', null::text, false),
-         (2::smallint, 'Makaron połącz z sosem, ciecierzycą i pomidorem.', null::text, true),
-         (3::smallint, 'Podgrzewaj krótko, tylko do połączenia smaków.', null::text, false)
+         (1::smallint, 'Ugotuj makaron przez czas z opakowania. Przed odcedzeniem zachowaj nieco wody z gotowania.', null::text, false),
+         (2::smallint, 'Podczas gotowania makaronu zblenduj bazylię, orzechy, oliwę, czosnek, sok z cytryny, sól i pieprz. Rozluźnij sos niewielką ilością ciepłej, nie wrzącej wody z makaronu.', null::text, false),
+         (3::smallint, 'Na ostatnie 2 minuty gotowania makaronu dodaj ciecierzycę do garnka. Odcedź całość.', null::text, false),
+         (4::smallint, 'Poza ogniem wymieszaj makaron i ciecierzycę z sosem oraz pokrojonymi pomidorami. Podaj bez dodatkowego gotowania bazylii.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Makaron z ciecierzycą, bazylią i orzechami') and e.kolejnosc = 2;
 
@@ -5192,17 +5450,17 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Makaron z indykiem, pieczarkami i jogurtem', 'Pełnoziarnisty makaron z indykiem i pieczarkami w lekkim sosie jogurtowym. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Makaron z indykiem, pieczarkami i jogurtem', 'Pełnoziarnisty makaron z indykiem i pieczarkami w lekkim sosie jogurtowym. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['makaron']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 561, 1, 1,
-  10, 20,
+  10, 25,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Patelnia 28 cm', 'Garnek 3 l', 'miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Patelnia 28 cm', 'Garnek 3 l', 'Miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna', 'Durszlak', 'Termometr do mięsa']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Przechowuj w lodówce do 2 dni. Odgrzewaj łagodnie, aby jogurt się nie zwarzył.',
-  false, 'Jeśli sos się zwarzył, zdejmij patelnię z ognia i energicznie wymieszaj z łyżką zimnego jogurtu. Za gęsty sos rozcieńcz wodą z makaronu.'
+  'Przechowuj w lodówce do 2 dni. Odgrzewaj łagodnie, do gorącego środka całej porcji. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
+  false, 'Jogurt dodawaj poza ogniem po zahartowaniu. Jeśli sos się zwarzył, łagodne mieszanie może poprawić konsystencję, ale nie cofnie całkowicie zwarzenia. Za gęsty sos rozluźnij ciepłą wodą.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
@@ -5276,27 +5534,30 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Makaron z indykiem, pieczarkami i jogurtem') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie', 10 from przepisy p where lower(p.nazwa) = lower('Makaron z indykiem, pieczarkami i jogurtem');
+select p.id, 1, 'Przygotowanie składników', 10 from przepisy p where lower(p.nazwa) = lower('Makaron z indykiem, pieczarkami i jogurtem');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Makaron ugotuj al dente. Indyka pokrój w paski, pieczarki w plasterki, a cebulę posiekaj.', null::text, false),
-         (2::smallint, 'Jogurt zahartuj dwiema łyżkami ciepłej wody z makaronu.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Oczyść pieczarki i pokrój w plasterki. Obierz i posiekaj cebulę oraz czosnek. Odmierz makaron i jogurt.', null::text, false),
+         (3::smallint, 'Indyka osusz i pokrój w paski grubości około 1 cm. Umyj przybory i ręce po surowym mięsie.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Makaron z indykiem, pieczarkami i jogurtem') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Smażenie', 20 from przepisy p where lower(p.nazwa) = lower('Makaron z indykiem, pieczarkami i jogurtem');
+select p.id, 2, 'Gotowanie i smażenie', 25 from przepisy p where lower(p.nazwa) = lower('Makaron z indykiem, pieczarkami i jogurtem');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Na oleju smaż indyka 5 minut. Dodaj cebulę, pieczarki, czosnek i tymianek.', null::text, false),
-         (2::smallint, 'Smaż, aż odparuje woda z pieczarek, a indyk będzie gotowy.', 'mięso jest całkowicie ścięte'::text, true),
-         (3::smallint, 'Zmniejsz ogień, dodaj makaron i jogurt. Wymieszaj bez zagotowywania.', null::text, false)
+         (1::smallint, 'Zagotuj wodę w garnku i ugotuj makaron przez czas wskazany na opakowaniu. Nastaw minutnik; w tym czasie przygotowuj sos na drugim palniku. Przed odcedzeniem zachowaj nieco wody z gotowania. Woda do gotowania jest dodatkowa i zostanie odlana.', null::text, false),
+         (2::smallint, 'Na drugim palniku rozgrzej połowę oleju przez 1 minutę. Smaż indyka 5–6 minut, obracając, do temperatury co najmniej 74°C. Zdejmij na czysty talerz.', null::text, false),
+         (3::smallint, 'Dodaj pozostały olej, cebulę i pieczarki; smaż 7–9 minut, aż woda odparuje. Dodaj czosnek i tymianek, smaż 30 sekund.', null::text, false),
+         (4::smallint, 'W misce połącz jogurt z niewielką ilością ciepłej wody z makaronu, dodawanej stopniowo.', null::text, false),
+         (5::smallint, 'Do patelni dodaj makaron i indyka, podgrzej przez 1 minutę. Zdejmij z ognia, odczekaj około 1 minuty, wmieszaj jogurt i dopraw solą oraz pieprzem. Nie zagotowuj.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Makaron z indykiem, pieczarkami i jogurtem') and e.kolejnosc = 2;
 
@@ -5309,16 +5570,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Makaron z kurczakiem, szpinakiem i pomidorami', 'Pełnoziarnisty makaron z kurczakiem, szpinakiem i pomidorowym sosem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Makaron z kurczakiem, szpinakiem i pomidorami', 'Pełnoziarnisty makaron z kurczakiem, szpinakiem i pomidorowym sosem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['makaron']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 642, 1, 1,
-  10, 20,
+  10, 25,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Patelnia 28 cm', 'Garnek 3 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Patelnia 28 cm', 'Garnek 3 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna', 'Durszlak', 'Termometr do mięsa']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Przechowuj w zamkniętym pojemniku w lodówce do 2 dni.',
+  'Przechowuj w zamkniętym pojemniku w lodówce do 2 dni. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
   false, 'Jeśli sos jest zbyt gęsty, dodaj wodę z gotowania makaronu. Suchego kurczaka pokrój drobniej i wymieszaj z sosem.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -5403,26 +5664,30 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Makaron z kurczakiem, szpinakiem i pomidorami') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie', 10 from przepisy p where lower(p.nazwa) = lower('Makaron z kurczakiem, szpinakiem i pomidorami');
+select p.id, 1, 'Przygotowanie składników', 10 from przepisy p where lower(p.nazwa) = lower('Makaron z kurczakiem, szpinakiem i pomidorami');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Makaron ugotuj al dente. Kurczaka pokrój w paski, a cebulę i czosnek posiekaj.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj i odsącz szpinak, usuń grube łodygi. Obierz i posiekaj cebulę oraz czosnek. Odmierz makaron, pomidory i passatę.', null::text, false),
+         (3::smallint, 'Kurczaka osusz i pokrój w paski około 1 cm. Umyj przybory i ręce po mięsie.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Makaron z kurczakiem, szpinakiem i pomidorami') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Przygotowanie sosu', 20 from przepisy p where lower(p.nazwa) = lower('Makaron z kurczakiem, szpinakiem i pomidorami');
+select p.id, 2, 'Gotowanie makaronu i sosu', 25 from przepisy p where lower(p.nazwa) = lower('Makaron z kurczakiem, szpinakiem i pomidorami');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Na oliwie obsmaż kurczaka przez 5–6 minut. Dodaj cebulę i czosnek.', null::text, false),
-         (2::smallint, 'Dodaj pomidory, passatę oraz zioła i gotuj 8 minut.', null::text, false),
-         (3::smallint, 'Dodaj szpinak i ugotowany makaron. Wymieszaj i dopraw.', 'kurczak jest ścięty w środku, a szpinak zwiędł'::text, true)
+         (1::smallint, 'Zagotuj wodę w garnku i ugotuj makaron przez czas wskazany na opakowaniu. Nastaw minutnik; w tym czasie przygotowuj sos na drugim palniku. Przed odcedzeniem zachowaj nieco wody z gotowania. Woda do gotowania jest dodatkowa i zostanie odlana.', null::text, false),
+         (2::smallint, 'Rozgrzej oliwę na drugim palniku przez 1 minutę. Smaż kurczaka 5–6 minut do temperatury co najmniej 74°C, obracając. Zdejmij na czysty talerz.', null::text, false),
+         (3::smallint, 'Na tej samej patelni smaż cebulę 4 minuty; gdy przywiera, dodaj odrobinę wody z makaronu. Dodaj czosnek, smaż 30 sekund.', null::text, false),
+         (4::smallint, 'Dodaj pomidory, passatę, oregano i bazylię suszoną. Doprowadź do łagodnego wrzenia i gotuj przez 8 minut.', null::text, false),
+         (5::smallint, 'Dodaj szpinak, gotuj 1–2 minuty do zwiędnięcia. Włóż kurczaka oraz odcedzony makaron, podgrzej przez 1 minutę. Dopraw solą i pieprzem.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Makaron z kurczakiem, szpinakiem i pomidorami') and e.kolejnosc = 2;
 
@@ -5435,16 +5700,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Makaron z pieczonymi warzywami i mozzarellą', 'Pełnoziarnisty makaron z pieczoną cukinią, papryką, pomidorem i mozzarellą. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Makaron z pieczonymi warzywami i mozzarellą', 'Pełnoziarnisty makaron z pieczoną cukinią, papryką, pomidorem i mozzarellą. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['makaron']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 625, 1, 1,
-  12, 30,
+  12, 42,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Piekarnik', 'Blacha do pieczenia', 'Garnek 3 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Piekarnik', 'Blacha do pieczenia', 'Garnek 3 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna', 'Durszlak', 'Miska']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Przechowuj w lodówce do 2 dni.',
+  'Przechowuj w lodówce do 2 dni. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
   false, 'Jeśli warzywa puściły wodę, dopiekaj je kilka minut na wyższej temperaturze. Za suchy makaron skrop oliwą.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -5524,27 +5789,29 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Makaron z pieczonymi warzywami i mozzarellą') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Pieczenie warzyw', 30 from przepisy p where lower(p.nazwa) = lower('Makaron z pieczonymi warzywami i mozzarellą');
+select p.id, 1, 'Przygotowanie składników', 12 from przepisy p where lower(p.nazwa) = lower('Makaron z pieczonymi warzywami i mozzarellą');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Piekarnik rozgrzej do 210°C. Warzywa pokrój i wymieszaj z oliwą, oregano, solą oraz pieprzem.', null::text, false),
-         (2::smallint, 'Piecz warzywa około 25 minut.', 'są miękkie i lekko zrumienione'::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj cukinię, paprykę, pomidory i bazylię. Usuń nasiona papryki. Pokrój warzywa w kawałki około 2 cm, obraną cebulę w piórka.', null::text, false),
+         (3::smallint, 'Mozzarellę odsącz i porwij. Warzywa wymieszaj z oliwą, oregano, solą i pieprzem. Odmierz makaron.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Makaron z pieczonymi warzywami i mozzarellą') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Łączenie makaronu', 12 from przepisy p where lower(p.nazwa) = lower('Makaron z pieczonymi warzywami i mozzarellą');
+select p.id, 2, 'Pieczenie i gotowanie', 42 from przepisy p where lower(p.nazwa) = lower('Makaron z pieczonymi warzywami i mozzarellą');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Makaron ugotuj al dente i odcedź.', null::text, false),
-         (2::smallint, 'Gorący makaron połącz z warzywami i mozzarellą.', null::text, true),
-         (3::smallint, 'Dodaj świeżą bazylię i podaj.', null::text, false)
+         (1::smallint, 'Rozgrzej piekarnik do 210°C, grzanie góra–dół, zwykle około 10 minut.', null::text, false),
+         (2::smallint, 'Rozłóż warzywa luźno na blasze i piecz 25–30 minut, obracając w połowie.', null::text, false),
+         (3::smallint, 'W czasie pieczenia ugotuj makaron przez czas z opakowania. Zachowaj nieco wody i odcedź. Zakończ gotowanie makaronu możliwie blisko końca pieczenia.', null::text, false),
+         (4::smallint, 'Połącz gorący makaron z warzywami, płynem z blachy i mozzarellą. Dodaj bazylię. W razie potrzeby rozluźnij zachowaną wodą.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Makaron z pieczonymi warzywami i mozzarellą') and e.kolejnosc = 2;
 
@@ -5557,17 +5824,17 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Makaron z polędwiczką i pieczarkami', 'Pełnoziarnisty makaron z polędwiczką wieprzową i pieczarkami w lekkim sosie jogurtowym. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Makaron z polędwiczką i pieczarkami', 'Pełnoziarnisty makaron z polędwiczką wieprzową i pieczarkami w lekkim sosie jogurtowym. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['makaron']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 556, 1, 1,
-  12, 18,
+  12, 25,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Patelnia 28 cm', 'Garnek 3 l', 'miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Patelnia 28 cm', 'Garnek 3 l', 'Miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna', 'Durszlak', 'Termometr do mięsa']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Przechowuj w lodówce do 2 dni. Odgrzewaj na małym ogniu.',
-  false, 'Twarde mięso pokrój cieniej i duś chwilę w sosie. Zwarzony jogurt wyrównaj energicznym mieszaniem po zdjęciu z ognia.'
+  'Przechowuj w lodówce do 2 dni. Odgrzewaj łagodnie, do gorącego środka całej porcji. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
+  false, 'Polędwiczki nie duś długo po usmażeniu, bo wyschnie. Jogurt dodaj poza ogniem; gęsty sos rozluźnij ciepłą wodą z makaronu.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
@@ -5646,27 +5913,30 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Makaron z polędwiczką i pieczarkami') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie', 12 from przepisy p where lower(p.nazwa) = lower('Makaron z polędwiczką i pieczarkami');
+select p.id, 1, 'Przygotowanie składników', 12 from przepisy p where lower(p.nazwa) = lower('Makaron z polędwiczką i pieczarkami');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Makaron ugotuj al dente. Mięso pokrój w cienkie paski, a pieczarki w plasterki.', null::text, false),
-         (2::smallint, 'Jogurt wymieszaj z musztardą i odrobiną ciepłej wody z makaronu.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Oczyść pieczarki i pokrój w plasterki. Obierz i posiekaj cebulę oraz czosnek.', null::text, false),
+         (3::smallint, 'Mięso osusz, usuń twardą błonę, pokrój w paski około 1 cm. Umyj przybory i ręce. Odmierz makaron, jogurt i musztardę.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Makaron z polędwiczką i pieczarkami') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Smażenie', 18 from przepisy p where lower(p.nazwa) = lower('Makaron z polędwiczką i pieczarkami');
+select p.id, 2, 'Gotowanie i smażenie', 25 from przepisy p where lower(p.nazwa) = lower('Makaron z polędwiczką i pieczarkami');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Na mocno rozgrzanym oleju smaż mięso 3–4 minuty. Odłóż je na bok.', null::text, false),
-         (2::smallint, 'Na tej samej patelni smaż cebulę i pieczarki, aż odparuje woda. Dodaj czosnek i tymianek.', null::text, false),
-         (3::smallint, 'Zmniejsz ogień, dodaj mięso, makaron i sos jogurtowy. Wymieszaj bez gotowania.', 'mięso jest soczyste, a sos gładki'::text, true)
+         (1::smallint, 'Zagotuj wodę w garnku i ugotuj makaron przez czas wskazany na opakowaniu. Nastaw minutnik; w tym czasie przygotowuj sos na drugim palniku. Przed odcedzeniem zachowaj nieco wody z gotowania. Woda do gotowania jest dodatkowa i zostanie odlana.', null::text, false),
+         (2::smallint, 'Na drugim palniku rozgrzej połowę oleju przez 1 minutę. Smaż mięso przez 4–5 minut, obracając. Sprawdź temperaturę: co najmniej 63°C. Przełóż na czysty talerz i pozostaw na co najmniej 3 minuty.', null::text, false),
+         (3::smallint, 'Dodaj pozostały olej, cebulę i pieczarki. Smaż 7–9 minut, aż woda odparuje. Dodaj czosnek i tymianek, smaż 30 sekund.', null::text, false),
+         (4::smallint, 'W misce wymieszaj jogurt, musztardę i niewielką ilość ciepłej wody z makaronu.', null::text, false),
+         (5::smallint, 'Do patelni dodaj makaron i mięso, podgrzej 1 minutę. Zdejmij z ognia, odczekaj około 1 minuty i dodaj sos jogurtowy. Dopraw solą i pieprzem; nie zagotowuj.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Makaron z polędwiczką i pieczarkami') and e.kolejnosc = 2;
 
@@ -5679,16 +5949,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Makaron z ricottą i szpinakiem', 'Szybki pełnoziarnisty makaron z kremową ricottą, szpinakiem, czosnkiem i cytryną. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Makaron z ricottą i szpinakiem', 'Szybki pełnoziarnisty makaron z kremową ricottą, szpinakiem, czosnkiem i cytryną. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['makaron']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 355, 1, 1,
-  7, 15,
+  7, 20,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Patelnia 28 cm', 'Garnek 3 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Patelnia 28 cm', 'Garnek 3 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna', 'Durszlak']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Przechowuj w lodówce do 2 dni. Przy odgrzewaniu dodaj odrobinę wody.',
+  'Przechowuj w lodówce do 2 dni. Przy odgrzewaniu dodaj odrobinę wody. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
   false, 'Za gęsty sos rozcieńcz wodą z makaronu. Jeśli ricotta jest mdła, dodaj cytrynę i pieprz.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -5758,26 +6028,28 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Makaron z ricottą i szpinakiem') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Gotowanie makaronu', 15 from przepisy p where lower(p.nazwa) = lower('Makaron z ricottą i szpinakiem');
+select p.id, 1, 'Przygotowanie składników', 7 from przepisy p where lower(p.nazwa) = lower('Makaron z ricottą i szpinakiem');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Makaron ugotuj al dente. Zachowaj trochę wody z gotowania.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj i odsącz szpinak. Obierz i posiekaj czosnek. Umyj cytrynę i odmierz sok. Przygotuj ricottę oraz makaron.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Makaron z ricottą i szpinakiem') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Przygotowanie sosu', 7 from przepisy p where lower(p.nazwa) = lower('Makaron z ricottą i szpinakiem');
+select p.id, 2, 'Gotowanie i łączenie', 20 from przepisy p where lower(p.nazwa) = lower('Makaron z ricottą i szpinakiem');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Na oliwie krótko podsmaż czosnek, dodaj szpinak i poczekaj, aż zwiędnie.', null::text, false),
-         (2::smallint, 'Dodaj ricottę, cytrynę, gałkę muszkatołową oraz niewielką ilość wody z makaronu.', null::text, false),
-         (3::smallint, 'Dodaj makaron, dopraw i dokładnie wymieszaj.', 'sos równomiernie pokrywa makaron'::text, true)
+         (1::smallint, 'Zagotuj wodę w garnku i ugotuj makaron przez czas wskazany na opakowaniu. Nastaw minutnik; w tym czasie przygotowuj sos na drugim palniku. Przed odcedzeniem zachowaj nieco wody z gotowania. Woda do gotowania jest dodatkowa i zostanie odlana.', null::text, false),
+         (2::smallint, 'Na ostatnie minuty gotowania makaronu rozgrzej oliwę na patelni przez 1 minutę. Dodaj czosnek, smaż 20–30 sekund.', null::text, false),
+         (3::smallint, 'Dodaj szpinak i smaż 1–2 minuty, tylko do zwiędnięcia. Zmniejsz ogień, dodaj ricottę, gałkę i trochę wody z makaronu.', null::text, false),
+         (4::smallint, 'Dodaj makaron, wymieszaj na małym ogniu przez 1 minutę. Zdejmij z ognia, dodaj sok z cytryny, sól i pieprz.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Makaron z ricottą i szpinakiem') and e.kolejnosc = 2;
 
@@ -5790,16 +6062,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Makaron z tuńczykiem, cytryną i natką pietruszki', 'Szybki pełnoziarnisty makaron z tuńczykiem, cytryną, czosnkiem i natką pietruszki. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Makaron z tuńczykiem, cytryną i natką pietruszki', 'Szybki pełnoziarnisty makaron z tuńczykiem, cytryną, czosnkiem i natką pietruszki. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['makaron']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 267, 1, 1,
-  7, 15,
+  7, 20,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Garnek 3 l', 'Patelnia 28 cm', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Garnek 3 l', 'Patelnia 28 cm', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna', 'Durszlak']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Przechowuj w lodówce do 2 dni. Przy odgrzewaniu dodaj niewielką ilość wody.',
+  'Przechowuj w lodówce do 2 dni. Przy odgrzewaniu dodaj niewielką ilość wody. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
   false, 'Za suchy makaron rozluźnij wodą z gotowania i oliwą. Zbyt kwaśny smak złagodź dodatkowym makaronem.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -5869,26 +6141,28 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Makaron z tuńczykiem, cytryną i natką pietruszki') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Gotowanie makaronu', 15 from przepisy p where lower(p.nazwa) = lower('Makaron z tuńczykiem, cytryną i natką pietruszki');
+select p.id, 1, 'Przygotowanie składników', 7 from przepisy p where lower(p.nazwa) = lower('Makaron z tuńczykiem, cytryną i natką pietruszki');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Makaron ugotuj al dente. Zachowaj około pół szklanki wody z gotowania.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Odsącz tuńczyka. Obierz i posiekaj czosnek. Umyj i posiekaj natkę. Umyj cytrynę i odmierz sok. Przygotuj makaron.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Makaron z tuńczykiem, cytryną i natką pietruszki') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Łączenie', 7 from przepisy p where lower(p.nazwa) = lower('Makaron z tuńczykiem, cytryną i natką pietruszki');
+select p.id, 2, 'Gotowanie i łączenie', 20 from przepisy p where lower(p.nazwa) = lower('Makaron z tuńczykiem, cytryną i natką pietruszki');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Na oliwie krótko podgrzej czosnek i chili.', null::text, false),
-         (2::smallint, 'Dodaj tuńczyka, makaron, sok z cytryny i część wody z gotowania.', null::text, true),
-         (3::smallint, 'Wymieszaj, dopraw i posyp natką pietruszki.', null::text, false)
+         (1::smallint, 'Zagotuj wodę w garnku i ugotuj makaron przez czas wskazany na opakowaniu. Nastaw minutnik; w tym czasie przygotowuj sos na drugim palniku. Przed odcedzeniem zachowaj nieco wody z gotowania. Woda do gotowania jest dodatkowa i zostanie odlana.', null::text, false),
+         (2::smallint, 'Gdy do końca gotowania makaronu pozostaje około 4 minut, rozgrzej oliwę na drugim palniku przez 1 minutę. Dodaj czosnek i chili; podgrzewaj 20–30 sekund.', null::text, false),
+         (3::smallint, 'Dodaj tuńczyka, makaron i niewielką ilość zachowanej wody. Podgrzewaj na małym ogniu przez 1–2 minuty, delikatnie mieszając.', null::text, false),
+         (4::smallint, 'Zdejmij z ognia. Dodaj sok z cytryny, natkę, sól i pieprz. Podaj.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Makaron z tuńczykiem, cytryną i natką pietruszki') and e.kolejnosc = 2;
 
@@ -5901,16 +6175,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Makaron z wołowiną i sosem pomidorowym', 'Pełnoziarnisty makaron z mieloną wołowiną i warzywnym sosem pomidorowym. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Makaron z wołowiną i sosem pomidorowym', 'Pełnoziarnisty makaron z mieloną wołowiną i warzywnym sosem pomidorowym. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['makaron']::rodzaj_dania[],
   3, 'prywatna',
   'waga', 649, 1, 1,
-  12, 30,
+  12, 37,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Patelnia 28 cm', 'Garnek 3 l', 'Tarka o grubych oczkach', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Patelnia 28 cm', 'Garnek 3 l', 'Tarka o grubych oczkach', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna', 'Durszlak', 'Termometr do mięsa']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Sos przechowuj w lodówce do 3 dni albo zamroź. Makaron najlepiej trzymaj osobno.',
+  'Sos przechowuj w lodówce do 3 dni albo zamroź. Makaron najlepiej trzymaj osobno. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
   true, 'Jeśli sos jest tłusty, zbierz nadmiar tłuszczu. Za kwaśny sos złagodź marchewką i dłuższym gotowaniem.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -5990,27 +6264,29 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Makaron z wołowiną i sosem pomidorowym') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie', 12 from przepisy p where lower(p.nazwa) = lower('Makaron z wołowiną i sosem pomidorowym');
+select p.id, 1, 'Przygotowanie składników', 12 from przepisy p where lower(p.nazwa) = lower('Makaron z wołowiną i sosem pomidorowym');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Marchew zetrzyj, cebulę i czosnek posiekaj. Makaron ugotuj al dente.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj i obierz marchew, zetrzyj na tarce. Obierz i posiekaj cebulę oraz czosnek. Odmierz passatę i makaron. Przygotuj mięso.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Makaron z wołowiną i sosem pomidorowym') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Gotowanie sosu', 30 from przepisy p where lower(p.nazwa) = lower('Makaron z wołowiną i sosem pomidorowym');
+select p.id, 2, 'Gotowanie sosu i makaronu', 37 from przepisy p where lower(p.nazwa) = lower('Makaron z wołowiną i sosem pomidorowym');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Na oliwie smaż cebulę i marchew 4 minuty. Dodaj wołowinę i rozdrobnij ją.', null::text, false),
-         (2::smallint, 'Smaż, aż mięso straci surowy kolor. Dodaj czosnek, passatę i zioła.', null::text, true),
-         (3::smallint, 'Gotuj sos 18–20 minut.', 'sos jest gęsty, a mięso całkowicie ścięte'::text, false),
-         (4::smallint, 'Podaj z makaronem.', null::text, false)
+         (1::smallint, 'Rozgrzej oliwę przez 1 minutę, smaż cebulę i marchew 4 minuty.', null::text, false),
+         (2::smallint, 'Dodaj mięso i smaż 6–7 minut, rozdzielając grudki. Dodaj czosnek i smaż 30 sekund.', null::text, false),
+         (3::smallint, 'Dodaj passatę, oregano oraz bazylię suszoną. Doprowadź do wrzenia i gotuj łagodnie przez 18–20 minut, mieszając.', null::text, false),
+         (4::smallint, 'W czasie gotowania sosu ugotuj makaron przez czas z opakowania na drugim palniku, następnie odcedź.', null::text, false),
+         (5::smallint, 'Sprawdź sos, dopraw solą i pieprzem i podaj z makaronem.', 'wołowina jest rozdrobniona i ugotowana, sos gęsty; mięso co najmniej 71°C'::text, true)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Makaron z wołowiną i sosem pomidorowym') and e.kolejnosc = 2;
 
@@ -6023,16 +6299,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Małże w pomidorowym bulionie', 'Małże gotowane w aromatycznym bulionie pomidorowym z czosnkiem, selerem naciowym i natką. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Małże w pomidorowym bulionie', 'Małże gotowane w aromatycznym bulionie pomidorowym z czosnkiem, selerem naciowym i natką. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   0, 'prywatna',
   'waga', 677, 1, 1,
-  15, 15,
+  10, 22,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Garnek 3 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Danie zjedz bezpośrednio po ugotowaniu. Nie przechowuj małży, które nie otworzyły się podczas gotowania.',
-  false, 'Jeśli bulion jest zbyt kwaśny, dodaj nieco więcej bulionu warzywnego. Nieotwarte małże wyrzuć.'
+  'Danie najlepiej zjedz bezpośrednio po przygotowaniu.',
+  false, 'Jeśli bulion za bardzo zgęstnieje, rozrzedź go gorącą wodą. Małże dodawaj dopiero do gotowej bazy, aby nie gotować ich nadmiernie.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
@@ -6056,7 +6332,7 @@ delete from etapy            where przepis_id in (select id from przepisy where 
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 250, 'g'::jednostka_miary, 250,
-       'oczyszczone', null, sk.rola, sk.mozna_dzielic, 1
+       'surowe mięso małży bez muszli; podana masa dotyczy części jadalnej, nie muszli', null, sk.rola, sk.mozna_dzielic, 1
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Małże w pomidorowym bulionie') and sk.nazwa = 'Małże, surowe';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
@@ -6105,28 +6381,29 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Małże w pomidorowym bulionie') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie', 15 from przepisy p where lower(p.nazwa) = lower('Małże w pomidorowym bulionie');
+select p.id, 1, 'Przygotowanie składników', 10 from przepisy p where lower(p.nazwa) = lower('Małże w pomidorowym bulionie');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Małże dokładnie oczyść. Usuń sztuki pęknięte oraz takie, które nie zamykają się po dotknięciu.', null::text, true),
-         (2::smallint, 'Cebulę, czosnek i seler naciowy posiekaj.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Przygotuj surowe mięso małży bez muszli; jeśli jest mrożone, wcześniej rozmroź w lodówce i odsącz. Usuń ewentualne fragmenty muszli.', null::text, false),
+         (3::smallint, 'Umyj seler naciowy i natkę. Pokrój seler cienko, natkę posiekaj. Obierz i posiekaj cebulę oraz czosnek. Odmierz pomidory i bulion, przygotuj pieczywo.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Małże w pomidorowym bulionie') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Gotowanie', 15 from przepisy p where lower(p.nazwa) = lower('Małże w pomidorowym bulionie');
+select p.id, 2, 'Gotowanie', 22 from przepisy p where lower(p.nazwa) = lower('Małże w pomidorowym bulionie');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Na oliwie smaż cebulę i seler przez 4 minuty. Dodaj czosnek, pomidory oraz bulion.', null::text, false),
-         (2::smallint, 'Doprowadź do wrzenia, dodaj małże i przykryj garnek.', null::text, false),
-         (3::smallint, 'Gotuj 5–7 minut, potrząsając garnkiem.', 'muszle się otworzyły'::text, false),
-         (4::smallint, 'Wyrzuć nieotwarte małże. Posyp natką i podaj z pieczywem.', null::text, false)
+         (1::smallint, 'Rozgrzej oliwę przez 1 minutę. Smaż cebulę i seler 4 minuty. Dodaj czosnek i smaż 30 sekund.', null::text, false),
+         (2::smallint, 'Dodaj pomidory i bulion. Doprowadź do wrzenia przez około 3 minuty i gotuj łagodnie 5 minut.', null::text, false),
+         (3::smallint, 'Dodaj mięso małży, ponownie doprowadź do łagodnego wrzenia i od tego momentu gotuj przez 4–5 minut. W razie potrzeby dogotuj przez kolejną minutę.', 'mięso jest nieprzezroczyste i jędrne, gorące w środku'::text, true),
+         (4::smallint, 'Dodaj pieprz i natkę, podaj od razu z pieczywem.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Małże w pomidorowym bulionie') and e.kolejnosc = 2;
 
@@ -6139,16 +6416,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Morszczuk w sosie pomidorowym z ryżem', 'Morszczuk duszony w ziołowym sosie pomidorowym, podany z ryżem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Morszczuk w sosie pomidorowym z ryżem', 'Morszczuk duszony w ziołowym sosie pomidorowym, podany z ryżem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['kasza_ryz']::rodzaj_dania[],
-  2, 'prywatna',
+  1, 'prywatna',
   'waga', 557, 1, 1,
-  10, 25,
+  10, 30,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Patelnia 28 cm', 'Garnek 2 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Patelnia 28 cm', 'Garnek 2 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna', 'Sitko', 'Termometr do mięsa']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Przechowuj w lodówce do 2 dni. Ryż trzymaj osobno.',
+  'Porcję z ugotowanym ryżem szybko schłodź w płytkim pojemniku i wstaw do lodówki, najlepiej w ciągu godziny. Przechowuj do 24 godzin. Odgrzewaj tylko raz, do gorącego środka całej porcji. Lodówka: do 4°C.',
   false, 'Jeśli sos jest kwaśny, dodaj odrobinę startej marchewki. Jeśli ryba się rozpada, ogranicz mieszanie.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -6228,27 +6505,30 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Morszczuk w sosie pomidorowym z ryżem') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie', 10 from przepisy p where lower(p.nazwa) = lower('Morszczuk w sosie pomidorowym z ryżem');
+select p.id, 1, 'Przygotowanie składników', 10 from przepisy p where lower(p.nazwa) = lower('Morszczuk w sosie pomidorowym z ryżem');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Ryż ugotuj. Cebulę i czosnek posiekaj, a rybę osusz i dopraw.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Opłucz ryż. Obierz i posiekaj cebulę oraz czosnek. Umyj i posiekaj natkę. Odmierz passatę.', null::text, false),
+         (3::smallint, 'Osusz rozmrożony filet morszczuka, usuń ości i podziel na podobne kawałki grubości około 2–3 cm. Dopraw częścią soli i pieprzu. Umyj przybory po rybie.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Morszczuk w sosie pomidorowym z ryżem') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Duszenie', 25 from przepisy p where lower(p.nazwa) = lower('Morszczuk w sosie pomidorowym z ryżem');
+select p.id, 2, 'Gotowanie ryżu i duszenie ryby', 30 from przepisy p where lower(p.nazwa) = lower('Morszczuk w sosie pomidorowym z ryżem');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Na oliwie zeszklij cebulę. Dodaj czosnek, passatę, paprykę i oregano.', null::text, false),
-         (2::smallint, 'Sos gotuj 10 minut, następnie włóż morszczuka.', null::text, false),
-         (3::smallint, 'Duś pod przykryciem 8–10 minut.', 'ryba jest nieprzezroczysta i łatwo dzieli się na płatki'::text, true),
-         (4::smallint, 'Posyp natką i podaj z ryżem.', null::text, false)
+         (1::smallint, 'Na pierwszym palniku zagotuj wodę w garnku. Dodaj ryż i gotuj przez czas wskazany na opakowaniu; po ugotowaniu odcedź. Wody użyj tyle, by ziarna były zanurzone i swobodnie się gotowały. Nastaw minutnik; równolegle wykonuj kolejne czynności na drugim palniku. Woda do gotowania jest dodatkowa i zostanie odlana.', null::text, false),
+         (2::smallint, 'Rozgrzej oliwę na drugim palniku przez 1 minutę. Smaż cebulę 4 minuty. Dodaj czosnek, paprykę i oregano, smaż 30 sekund.', null::text, false),
+         (3::smallint, 'Dodaj passatę, doprowadź do łagodnego wrzenia przez około 2 minuty i gotuj 10 minut.', null::text, false),
+         (4::smallint, 'Włóż rybę do sosu, polej sosem i duś pod przykryciem przez 8–10 minut, bez energicznego mieszania.', 'ryba ma co najmniej 63°C, jest nieprzezroczysta i rozdziela się na płatki'::text, true),
+         (5::smallint, 'Dodaj natkę, dopraw pozostałą solą i pieprzem. Podaj z ryżem.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Morszczuk w sosie pomidorowym z ryżem') and e.kolejnosc = 2;
 
@@ -6261,16 +6541,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Nocna owsianka z bananem i chia', 'Nocna owsianka z bananem, nasionami chia i masłem orzechowym. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Nocna owsianka z bananem i chia', 'Owsianka przygotowywana wieczorem. Wymaga co najmniej 6 godzin chłodzenia; praca zajmuje około 7 minut. Podany czas przygotowania obejmuje również oczekiwanie w lodówce. Ilości składników dobierz z listy dla przygotowywanej liczby porcji.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['na_slodko']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 386, 1, 1,
-  7, 0,
+  367, 0,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['miska', 'Widelec', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Miska', 'Widelec', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Przechowuj pod przykryciem w lodówce do 2 dni. Banana najlepiej dodaj przed jedzeniem.',
+  'Przechowuj pod przykryciem w lodówce do 2 dni. Banana najlepiej dodaj przed jedzeniem. Lodówka: do 4°C.',
   false, 'Za gęstą owsiankę rozcieńcz mlekiem. Zbyt rzadka zgęstnieje po dodaniu chia i kolejnych 15 minutach chłodzenia.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -6330,27 +6610,49 @@ select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Nocna owsianka z bananem i chia') and sk.nazwa = 'Cynamon mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie wieczorem', 5 from przepisy p where lower(p.nazwa) = lower('Nocna owsianka z bananem i chia');
+select p.id, 1, 'Przygotowanie składników', 4 from przepisy p where lower(p.nazwa) = lower('Nocna owsianka z bananem i chia');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Płatki wymieszaj z mlekiem, jogurtem, chia i cynamonem.', null::text, false),
-         (2::smallint, 'Przykryj i wstaw do lodówki na co najmniej 6 godzin.', 'po schłodzeniu płatki są miękkie, a masa kremowa'::text, true)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Odmierz płatki, mleko, jogurt, chia, cynamon i masło orzechowe. Banana obierz i pokrój; przechowaj osobno w szczelnym pojemniku w lodówce do podania.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Nocna owsianka z bananem i chia') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Podanie', 2 from przepisy p where lower(p.nazwa) = lower('Nocna owsianka z bananem i chia');
+select p.id, 2, 'Mieszanie', 2 from przepisy p where lower(p.nazwa) = lower('Nocna owsianka z bananem i chia');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Rano wymieszaj owsiankę. Dodaj plasterki banana i masło orzechowe.', null::text, false)
+         (1::smallint, 'Wymieszaj płatki, mleko, jogurt, chia i cynamon. Przykryj naczynie.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Nocna owsianka z bananem i chia') and e.kolejnosc = 2;
+
+insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
+select p.id, 3, 'Chłodzenie', 360 from przepisy p where lower(p.nazwa) = lower('Nocna owsianka z bananem i chia');
+
+insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
+select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
+  from etapy e join przepisy p on p.id = e.przepis_id,
+       (values
+         (1::smallint, 'Wstaw do lodówki na co najmniej 6 godzin. Po około 10 minutach ponownie wymieszaj, żeby rozbić skupiska chia.', 'płatki są miękkie, chia napęczniały'::text, true)
+       ) as v(nr, tresc, sygnal, uwaga)
+ where lower(p.nazwa) = lower('Nocna owsianka z bananem i chia') and e.kolejnosc = 3;
+
+insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
+select p.id, 4, 'Podanie', 1 from przepisy p where lower(p.nazwa) = lower('Nocna owsianka z bananem i chia');
+
+insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
+select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
+  from etapy e join przepisy p on p.id = e.przepis_id,
+       (values
+         (1::smallint, 'Wymieszaj owsiankę, dodaj przygotowanego banana i masło orzechowe.', null::text, false)
+       ) as v(nr, tresc, sygnal, uwaga)
+ where lower(p.nazwa) = lower('Nocna owsianka z bananem i chia') and e.kolejnosc = 4;
 
 -- -------------------------------------------------------------------------
 --  Nocna owsianka z borówkami i orzechami
@@ -6361,16 +6663,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Nocna owsianka z borówkami i orzechami', 'Nocna owsianka z borówkami, jogurtem, chia i orzechami włoskimi. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Nocna owsianka z borówkami i orzechami', 'Owsianka przygotowywana wieczorem. Wymaga co najmniej 6 godzin chłodzenia; praca zajmuje około 7 minut. Podany czas przygotowania obejmuje również oczekiwanie w lodówce. Ilości składników dobierz z listy dla przygotowywanej liczby porcji.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['na_slodko']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 435, 1, 1,
-  7, 0,
+  367, 0,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['miska', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Miska', 'Waga kuchenna', 'Nóż szefa kuchni', 'Deska do krojenia']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Przechowuj pod przykryciem w lodówce do 2 dni. Orzechy dodaj tuż przed jedzeniem.',
+  'Przechowuj pod przykryciem w lodówce do 2 dni. Orzechy dodaj tuż przed jedzeniem. Lodówka: do 4°C.',
   false, 'Za gęstą owsiankę rozcieńcz mlekiem. Jeśli jest mało słodka, rozgnieć część borówek i wymieszaj.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -6425,27 +6727,49 @@ select p.id, sk.id, 20, 'g'::jednostka_miary, 20,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Nocna owsianka z borówkami i orzechami') and sk.nazwa = 'Orzechy włoskie';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie wieczorem', 5 from przepisy p where lower(p.nazwa) = lower('Nocna owsianka z borówkami i orzechami');
+select p.id, 1, 'Przygotowanie składników', 4 from przepisy p where lower(p.nazwa) = lower('Nocna owsianka z borówkami i orzechami');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Płatki wymieszaj z mlekiem, jogurtem, chia i połową borówek.', null::text, false),
-         (2::smallint, 'Przykryj i wstaw do lodówki na co najmniej 6 godzin.', 'po schłodzeniu płatki są miękkie, a masa zgęstniała'::text, true)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Odmierz płatki, mleko, jogurt i chia. Umyj i osusz borówki; orzechy posiekaj i odłóż do podania.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Nocna owsianka z borówkami i orzechami') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Podanie', 2 from przepisy p where lower(p.nazwa) = lower('Nocna owsianka z borówkami i orzechami');
+select p.id, 2, 'Mieszanie', 2 from przepisy p where lower(p.nazwa) = lower('Nocna owsianka z borówkami i orzechami');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Dodaj pozostałe borówki i orzechy.', null::text, false)
+         (1::smallint, 'Wymieszaj płatki z mlekiem, jogurtem, chia i połową borówek. Pozostałe borówki przechowaj osobno pod przykryciem w lodówce.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Nocna owsianka z borówkami i orzechami') and e.kolejnosc = 2;
+
+insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
+select p.id, 3, 'Chłodzenie', 360 from przepisy p where lower(p.nazwa) = lower('Nocna owsianka z borówkami i orzechami');
+
+insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
+select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
+  from etapy e join przepisy p on p.id = e.przepis_id,
+       (values
+         (1::smallint, 'Przykryj owsiankę i wstaw do lodówki na co najmniej 6 godzin. Po 10 minutach wymieszaj ponownie, aby chia nie zbiły się w grudki.', 'płatki miękkie, masa kremowa'::text, true)
+       ) as v(nr, tresc, sygnal, uwaga)
+ where lower(p.nazwa) = lower('Nocna owsianka z borówkami i orzechami') and e.kolejnosc = 3;
+
+insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
+select p.id, 4, 'Podanie', 1 from przepisy p where lower(p.nazwa) = lower('Nocna owsianka z borówkami i orzechami');
+
+insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
+select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
+  from etapy e join przepisy p on p.id = e.przepis_id,
+       (values
+         (1::smallint, 'Wymieszaj owsiankę, dodaj pozostałe borówki oraz orzechy.', null::text, false)
+       ) as v(nr, tresc, sygnal, uwaga)
+ where lower(p.nazwa) = lower('Nocna owsianka z borówkami i orzechami') and e.kolejnosc = 4;
 
 -- -------------------------------------------------------------------------
 --  Omlet ze szpinakiem i fetą
@@ -6456,16 +6780,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Omlet ze szpinakiem i fetą', 'Delikatny omlet ze szpinakiem i fetą, podany z kromką chleba żytniego. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Omlet ze szpinakiem i fetą', 'Delikatny omlet ze szpinakiem i fetą, podany z kromką chleba żytniego. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['jajka']::rodzaj_dania[],
   1, 'prywatna',
   'waga', 241, 1, 1,
-  7, 8,
+  7, 9,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Patelnia 24 cm', 'miska', 'Widelec', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Patelnia 24 cm', 'Miska', 'Widelec', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Po ostudzeniu przechowuj omlet w zamkniętym pojemniku w lodówce do 1 dnia. Odgrzej na patelni na małym ogniu, a pieczywo przechowuj osobno.',
+  'Po ostudzeniu przechowuj omlet w zamkniętym pojemniku w lodówce do 1 dnia. Odgrzej na patelni na małym ogniu do gorącego środka, a pieczywo przechowuj osobno. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
   false, 'Jeśli omlet przywiera, zmniejsz ogień i delikatnie podważ brzegi. Jeśli wierzch pozostaje płynny, przykryj patelnię na 1–2 minuty.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -6531,22 +6855,23 @@ insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Jajka wbij do miski, dopraw solą i pieprzem, a następnie roztrzep widelcem.', null::text, false),
-         (2::smallint, 'Fetę pokrusz, a większe liście szpinaku posiekaj.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj i osusz szpinak, duże liście posiekaj. Pokrusz fetę i przygotuj pieczywo.', null::text, false),
+         (3::smallint, 'Wbij jajka do miski i roztrzep widelcem z pieprzem oraz odmierzoną solą.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Omlet ze szpinakiem i fetą') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Smażenie omletu', 8 from przepisy p where lower(p.nazwa) = lower('Omlet ze szpinakiem i fetą');
+select p.id, 2, 'Smażenie omletu', 9 from przepisy p where lower(p.nazwa) = lower('Omlet ze szpinakiem i fetą');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Rozgrzej olej na patelni, dodaj szpinak i smaż około 1 minuty, aż zwiędnie.', null::text, false),
-         (2::smallint, 'Wlej jajka, rozłóż fetę na wierzchu i smaż na małym ogniu.', null::text, true),
-         (3::smallint, 'Gdy spód się zetnie, złóż omlet na pół i smaż jeszcze 1–2 minuty.', 'środek jest ścięty, ale pozostaje miękki'::text, false),
-         (4::smallint, 'Podaj omlet od razu z kromką chleba.', null::text, false)
+         (1::smallint, 'Rozgrzej olej przez 1 minutę. Dodaj szpinak i smaż 1 minutę.', null::text, false),
+         (2::smallint, 'Wlej jajka i rozłóż fetę. Smaż na małym ogniu pod pokrywką przez 4–5 minut.', null::text, false),
+         (3::smallint, 'Gdy masa się zetnie, złóż omlet i podgrzewaj jeszcze 1 minutę. Jeśli środek nadal jest płynny, smaż pod pokrywką kolejną minutę.', 'środek ścięty, bez surowej masy jajecznej'::text, true),
+         (4::smallint, 'Podaj z pieczywem w ilości z listy.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Omlet ze szpinakiem i fetą') and e.kolejnosc = 2;
 
@@ -6559,16 +6884,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Owsianka z jabłkiem, cynamonem i orzechami', 'Kremowa owsianka na mleku z jabłkiem, cynamonem i orzechami włoskimi. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Owsianka z jabłkiem, cynamonem i orzechami', 'Kremowa owsianka na mleku z jabłkiem, cynamonem i orzechami włoskimi. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['na_slodko']::rodzaj_dania[],
   1, 'prywatna',
   'waga', 423, 1, 1,
-  5, 10,
+  5, 12,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Rondel', 'miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Rondel', 'Miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Po ostudzeniu przechowuj w zamkniętym pojemniku w lodówce do 1 dnia. Przy odgrzewaniu dodaj odrobinę mleka.',
+  'Po ostudzeniu przechowuj w zamkniętym pojemniku w lodówce do 1 dnia. Przy odgrzewaniu dodaj odrobinę mleka. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
   false, 'Jeśli owsianka jest za gęsta, dolej trochę mleka. Jeśli jest zbyt rzadka, gotuj jeszcze 1–2 minuty, często mieszając.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -6629,21 +6954,21 @@ insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Jabłko pokrój w małą kostkę, a orzechy grubo posiekaj.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj jabłko, usuń gniazdo nasienne i pokrój w małą kostkę. Posiekaj orzechy. Odmierz mleko oraz płatki.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Owsianka z jabłkiem, cynamonem i orzechami') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Gotowanie owsianki', 10 from przepisy p where lower(p.nazwa) = lower('Owsianka z jabłkiem, cynamonem i orzechami');
+select p.id, 2, 'Gotowanie owsianki', 12 from przepisy p where lower(p.nazwa) = lower('Owsianka z jabłkiem, cynamonem i orzechami');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Do rondla wsyp płatki, wlej mleko i dodaj sól.', null::text, false),
-         (2::smallint, 'Podgrzewaj, mieszając. Gdy mleko zacznie lekko wrzeć, zmniejsz ogień i gotuj 5–7 minut.', 'płatki są miękkie, a owsianka kremowa'::text, true),
-         (3::smallint, 'Dodaj jabłko i cynamon, wymieszaj i podgrzewaj jeszcze około minuty.', null::text, false),
-         (4::smallint, 'Przełóż do miski i posyp orzechami.', null::text, false)
+         (1::smallint, 'Wsyp płatki do rondla, wlej mleko, dodaj sól. Podgrzewaj około 3 minut do łagodnego wrzenia, mieszając.', null::text, false),
+         (2::smallint, 'Gotuj na małym ogniu przez 5–7 minut lub czas z opakowania płatków, często mieszając.', null::text, false),
+         (3::smallint, 'Dodaj jabłko i cynamon, podgrzewaj jeszcze 1 minutę. Podaj z orzechami; jabłko pozostanie lekko chrupiące.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Owsianka z jabłkiem, cynamonem i orzechami') and e.kolejnosc = 2;
 
@@ -6656,16 +6981,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Papryka faszerowana soczewicą i kaszą bulgur', 'Pieczona papryka wypełniona soczewicą, kaszą bulgur i pomidorowym farszem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Papryka faszerowana soczewicą i kaszą bulgur', 'Pieczona papryka wypełniona soczewicą, kaszą bulgur i pomidorowym farszem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['z_piekarnika']::rodzaj_dania[],
   3, 'prywatna',
   'waga', 644, 1, 1,
-  15, 40,
+  15, 85,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Piekarnik', 'Naczynie żaroodporne', 'Garnek 2 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Piekarnik', 'Naczynie żaroodporne', 'Garnek 2 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna', 'Garnek 3 l', 'Patelnia 24 cm', 'Sitko']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Po ostudzeniu przechowuj w lodówce do 3 dni. Upieczoną paprykę można zamrozić.',
+  'Po ostudzeniu przechowuj w lodówce do 3 dni. Upieczoną paprykę można zamrozić. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
   true, 'Jeśli farsz jest suchy, dodaj passatę. Jeśli papryka pozostaje twarda, przykryj naczynie i piecz 10 minut dłużej.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -6745,30 +7070,44 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Papryka faszerowana soczewicą i kaszą bulgur') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie farszu', 15 from przepisy p where lower(p.nazwa) = lower('Papryka faszerowana soczewicą i kaszą bulgur');
+select p.id, 1, 'Przygotowanie składników', 15 from przepisy p where lower(p.nazwa) = lower('Papryka faszerowana soczewicą i kaszą bulgur');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Soczewicę i bulgur ugotuj osobno do miękkości.', null::text, false),
-         (2::smallint, 'Papryki przekrój wzdłuż i usuń gniazda nasienne.', null::text, false),
-         (3::smallint, 'Na oliwie zeszklij cebulę i czosnek. Dodaj passatę, kmin, soczewicę, bulgur oraz przyprawy.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj paprykę, przekrój wzdłuż i usuń nasiona. Obierz i posiekaj cebulę oraz czosnek. Umyj i posiekaj natkę.', null::text, false),
+         (3::smallint, 'Opłucz soczewicę, odmierz bulgur i passatę.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Papryka faszerowana soczewicą i kaszą bulgur') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Pieczenie', 40 from przepisy p where lower(p.nazwa) = lower('Papryka faszerowana soczewicą i kaszą bulgur');
+select p.id, 2, 'Gotowanie farszu', 40 from przepisy p where lower(p.nazwa) = lower('Papryka faszerowana soczewicą i kaszą bulgur');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Napełnij połówki papryki farszem i ułóż je w naczyniu żaroodpornym.', null::text, true),
-         (2::smallint, 'Piecz w 190°C przez około 35–40 minut.', 'papryka jest miękka, a farsz gorący w środku'::text, false),
-         (3::smallint, 'Przed podaniem posyp natką pietruszki.', null::text, false)
+         (1::smallint, 'Soczewicę ugotuj w dodatkowej wodzie przez czas z opakowania, zwykle 25–30 minut od zagotowania; odcedź.', null::text, false),
+         (2::smallint, 'Równolegle ugotuj bulgur w osobnym garnku przez czas z opakowania i odcedź. Woda do gotowania jest dodatkowa.', null::text, false),
+         (3::smallint, 'Po odcedzeniu bulguru odstaw go pod przykryciem. Na zwolnionym palniku na patelni rozgrzej oliwę przez 1 minutę. Smaż cebulę 4 minuty, dodaj czosnek oraz kmin i smaż 30 sekund. Wlej passatę i gotuj 3 minuty.', null::text, false),
+         (4::smallint, 'Połącz sos z ugotowaną soczewicą i bulgurem. Dopraw solą i pieprzem. W ostatnich 10 minutach gotowania farszu rozgrzej piekarnik do 190°C, grzanie góra–dół.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Papryka faszerowana soczewicą i kaszą bulgur') and e.kolejnosc = 2;
+
+insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
+select p.id, 3, 'Nadziewanie i pieczenie', 45 from przepisy p where lower(p.nazwa) = lower('Papryka faszerowana soczewicą i kaszą bulgur');
+
+insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
+select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
+  from etapy e join przepisy p on p.id = e.przepis_id,
+       (values
+         (1::smallint, 'Napełnij połówki papryki farszem, ułóż w naczyniu. Jeśli farszu jest więcej, rozłóż resztę między paprykami.', null::text, false),
+         (2::smallint, 'Przykryj naczynie i piecz 25 minut, następnie odkryj i piecz 10–15 minut.', null::text, false),
+         (3::smallint, 'Sprawdź paprykę i podaj z natką.', 'papryka daje się łatwo nakłuć, farsz gorący w środku'::text, true)
+       ) as v(nr, tresc, sygnal, uwaga)
+ where lower(p.nazwa) = lower('Papryka faszerowana soczewicą i kaszą bulgur') and e.kolejnosc = 3;
 
 -- -------------------------------------------------------------------------
 --  Pełnoziarniste placuszki ze skyrem i owocami
@@ -6779,17 +7118,17 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Pełnoziarniste placuszki ze skyrem i owocami', 'Pełnoziarniste placuszki podane ze skyrem i borówkami. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Pełnoziarniste placuszki ze skyrem i owocami', 'Pełnoziarniste placuszki podane ze skyrem i borówkami. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['na_slodko']::rodzaj_dania[],
   1, 'prywatna',
   'waga', 521, 1, 1,
-  10, 15,
+  10, 18,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Patelnia 24 cm', 'miska', 'Widelec', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Patelnia 24 cm', 'Miska', 'Widelec', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Placuszki przechowuj w lodówce do 1 dnia. Skyr i owoce trzymaj osobno.',
-  false, 'Jeśli ciasto jest za gęste, dolej mleka. Jeśli placuszki przywierają, patelnia jest za chłodna albo ma za mało oleju.'
+  'Placuszki przechowuj w lodówce do 1 dnia. Skyr i owoce trzymaj osobno. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
+  false, 'Jeśli spód ciemnieje, a środek jest surowy, zmniejsz ogień i nakładaj cieńsze placuszki. Przywieranie może wynikać z uszkodzonej powierzchni patelni lub zbyt wczesnego obracania.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
@@ -6853,26 +7192,27 @@ select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Pełnoziarniste placuszki ze skyrem i owocami') and sk.nazwa = 'Cynamon mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie ciasta', 10 from przepisy p where lower(p.nazwa) = lower('Pełnoziarniste placuszki ze skyrem i owocami');
+select p.id, 1, 'Przygotowanie składników', 10 from przepisy p where lower(p.nazwa) = lower('Pełnoziarniste placuszki ze skyrem i owocami');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Jajko roztrzep z mlekiem. Dodaj mąkę i cynamon, a następnie wymieszaj na gładkie ciasto.', null::text, false),
-         (2::smallint, 'Odstaw ciasto na 5 minut.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj i osusz borówki. Odmierz mąkę, mleko, skyr, miód, cynamon i olej.', null::text, false),
+         (3::smallint, 'Roztrzep jajko z mlekiem, dodaj mąkę i cynamon. Wymieszaj na jednolite ciasto i odstaw na 5 minut.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Pełnoziarniste placuszki ze skyrem i owocami') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Smażenie', 15 from przepisy p where lower(p.nazwa) = lower('Pełnoziarniste placuszki ze skyrem i owocami');
+select p.id, 2, 'Smażenie', 18 from przepisy p where lower(p.nazwa) = lower('Pełnoziarniste placuszki ze skyrem i owocami');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Patelnię posmaruj olejem i smaż niewielkie placuszki na średnim ogniu.', null::text, false),
-         (2::smallint, 'Odwracaj, gdy na powierzchni pojawią się pęcherzyki.', 'obie strony są złote'::text, true),
+         (1::smallint, 'Rozgrzej patelnię nieprzywierającą przez 1 minutę na średnim ogniu. Rozdziel odmierzony olej między partie.', null::text, false),
+         (2::smallint, 'Nakładaj małe porcje ciasta i smaż 2–3 minuty, aż brzegi się zetną i spód zrumieni. Odwróć i smaż jeszcze 1–2 minuty. Powtarzaj z resztą ciasta; etap obejmuje około 3 partie dla bazy.', 'placuszki mają rumiane strony i nie mają surowego ciasta w środku'::text, true),
          (3::smallint, 'Podaj ze skyrem, borówkami i miodem.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Pełnoziarniste placuszki ze skyrem i owocami') and e.kolejnosc = 2;
@@ -6886,16 +7226,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Pieczona makrela z burakami i ziemniakami', 'Pieczona makrela z burakami, ziemniakami, czerwoną cebulą i koperkiem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Pieczona makrela z burakami i ziemniakami', 'Pieczona makrela z burakami, ziemniakami, czerwoną cebulą i koperkiem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['polska']::rodzaj_kuchni[],
   array['z_piekarnika']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 717, 1, 1,
-  15, 45,
+  15, 58,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Piekarnik', 'Blacha do pieczenia', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Piekarnik', 'Blacha do pieczenia', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna', 'Termometr do mięsa']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Przechowuj w lodówce do 2 dni. Ze względu na intensywny aromat użyj szczelnego pojemnika.',
+  'Przechowuj w lodówce do 2 dni. Ze względu na intensywny aromat użyj szczelnego pojemnika. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
   false, 'Jeśli buraki są twarde, pokrój je drobniej i dopiecz bez ryby. Suchą makrelę skrop cytryną.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -6965,27 +7305,30 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Pieczona makrela z burakami i ziemniakami') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie', 15 from przepisy p where lower(p.nazwa) = lower('Pieczona makrela z burakami i ziemniakami');
+select p.id, 1, 'Przygotowanie składników', 15 from przepisy p where lower(p.nazwa) = lower('Pieczona makrela z burakami i ziemniakami');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Piekarnik rozgrzej do 200°C. Buraki i ziemniaki pokrój w małą kostkę, cebulę w piórka.', null::text, false),
-         (2::smallint, 'Warzywa wymieszaj z oliwą, solą oraz pieprzem.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj i obierz buraki oraz ziemniaki. Buraki pokrój w kostkę około 1 cm, ziemniaki około 2 cm. Obierz cebulę, pokrój w piórka.', null::text, false),
+         (3::smallint, 'Umyj cytrynę i koperek. Przygotuj sok z odmierzonej części cytryny, posiekaj koperek.', null::text, false),
+         (4::smallint, 'Przygotuj filety makreli bez ości, osusz. Podana masa dotyczy jadalnej części ryby. Warzywa wymieszaj z oliwą i częścią soli oraz pieprzu, rybę dopraw resztą. Umyj przybory po rybie.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Pieczona makrela z burakami i ziemniakami') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Pieczenie', 45 from przepisy p where lower(p.nazwa) = lower('Pieczona makrela z burakami i ziemniakami');
+select p.id, 2, 'Pieczenie', 58 from przepisy p where lower(p.nazwa) = lower('Pieczona makrela z burakami i ziemniakami');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Warzywa piecz 30 minut, mieszając je po 15 minutach.', null::text, false),
-         (2::smallint, 'Dodaj makrelę, skrop ją cytryną i piecz jeszcze 12–15 minut.', 'mięso ryby łatwo odchodzi od ości'::text, true),
-         (3::smallint, 'Przed podaniem posyp koperkiem.', null::text, false)
+         (1::smallint, 'Rozgrzej piekarnik do 200°C, grzanie góra–dół, zwykle około 10 minut.', null::text, false),
+         (2::smallint, 'Piecz warzywa przez 30 minut, mieszając po 15 minutach. Sprawdź buraki; jeśli są nadal twarde, dopiekaj same warzywa przez 5–10 minut przed dodaniem ryby.', null::text, false),
+         (3::smallint, 'Do prawie miękkich warzyw dodaj filety makreli i piecz przez 12–15 minut, zależnie od grubości.', 'ryba ma co najmniej 63°C, warzywa miękkie'::text, true),
+         (4::smallint, 'Po wyjęciu skrop rybę przygotowanym sokiem z cytryny i posyp koperkiem.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Pieczona makrela z burakami i ziemniakami') and e.kolejnosc = 2;
 
@@ -6998,16 +7341,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Pieczone warzywa korzeniowe z tymiankiem', 'Mieszanka pieczonych ziemniaków, buraków, marchewki, pasternaku i selera z tymiankiem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Pieczone warzywa korzeniowe z tymiankiem', 'Mieszanka pieczonych ziemniaków, buraków, marchewki, pasternaku i selera z tymiankiem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['dodatek']::pora_posilku[], array['polska']::rodzaj_kuchni[],
   array['z_piekarnika']::rodzaj_dania[],
   3, 'prywatna',
   'waga', 343, 1, 1,
-  15, 40,
+  15, 50,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Piekarnik', 'Blacha do pieczenia', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Przechowuj w lodówce do 3 dni. Odgrzewaj w piekarniku lub na patelni.',
+  'Przechowuj w lodówce do 3 dni. Odgrzewaj w piekarniku lub na patelni. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
   true, 'Jeśli warzywa są blade i miękkie, rozłóż je luźniej i zwiększ temperaturę. Twarde kawałki pokrój drobniej i dopiecz.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -7087,26 +7430,28 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Pieczone warzywa korzeniowe z tymiankiem') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie', 15 from przepisy p where lower(p.nazwa) = lower('Pieczone warzywa korzeniowe z tymiankiem');
+select p.id, 1, 'Przygotowanie składników', 15 from przepisy p where lower(p.nazwa) = lower('Pieczone warzywa korzeniowe z tymiankiem');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Piekarnik rozgrzej do 210°C. Warzywa pokrój na podobnej wielkości kawałki.', null::text, false),
-         (2::smallint, 'Wymieszaj je z oliwą, tymiankiem, rozmarynem, solą i pieprzem.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj i obierz ziemniaki, buraki, marchew, pasternak oraz seler. Buraki pokrój w kostkę około 1 cm, pozostałe korzenie około 2 cm. Obierz cebulę i pokrój w ósemki.', null::text, false),
+         (3::smallint, 'Wymieszaj warzywa z odmierzoną oliwą, tymiankiem, rozmarynem, solą i pieprzem.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Pieczone warzywa korzeniowe z tymiankiem') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Pieczenie', 40 from przepisy p where lower(p.nazwa) = lower('Pieczone warzywa korzeniowe z tymiankiem');
+select p.id, 2, 'Pieczenie', 50 from przepisy p where lower(p.nazwa) = lower('Pieczone warzywa korzeniowe z tymiankiem');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Warzywa rozłóż luźno na blasze i piecz około 40 minut.', null::text, false),
-         (2::smallint, 'Po 20 minutach dokładnie je przemieszaj i piecz dalej do końca podanego czasu.', 'warzywa są miękkie w środku i rumiane na brzegach'::text, true)
+         (1::smallint, 'Rozgrzej piekarnik do 210°C, grzanie góra–dół, zwykle około 10 minut.', null::text, false),
+         (2::smallint, 'Rozłóż warzywa luźno na blasze i piecz 35–40 minut. Przemieszaj po 20 minutach. Jeśli najtwardsze kawałki nie są miękkie, dopiekaj po 5 minut, zdejmując wcześniej gotowe.', 'warzywa są miękkie w środku i zarumienione na brzegach'::text, true),
+         (3::smallint, 'Podaj jako dodatek.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Pieczone warzywa korzeniowe z tymiankiem') and e.kolejnosc = 2;
 
@@ -7119,16 +7464,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Pieczony bakłażan z ciecierzycą i fetą', 'Pieczony bakłażan z ciecierzycą, pomidorami, fetą i kaszą bulgur. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Pieczony bakłażan z ciecierzycą i fetą', 'Pieczony bakłażan z ciecierzycą, pomidorami, fetą i kaszą bulgur. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['z_piekarnika']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 728, 1, 1,
-  12, 35,
+  12, 48,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Piekarnik', 'Naczynie żaroodporne', 'Garnek 2 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Piekarnik', 'Naczynie żaroodporne', 'Garnek 2 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna', 'Sitko']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Danie przechowuj w zamkniętym pojemniku w lodówce do 2 dni.',
+  'Danie przechowuj w zamkniętym pojemniku w lodówce do 2 dni. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
   false, 'Jeśli bakłażan jest twardy, piecz go dłużej pod przykryciem. Za słone danie złagodź dodatkową porcją pomidorów.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -7208,28 +7553,30 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Pieczony bakłażan z ciecierzycą i fetą') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie', 12 from przepisy p where lower(p.nazwa) = lower('Pieczony bakłażan z ciecierzycą i fetą');
+select p.id, 1, 'Przygotowanie składników', 12 from przepisy p where lower(p.nazwa) = lower('Pieczony bakłażan z ciecierzycą i fetą');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Piekarnik rozgrzej do 210°C. Bakłażana i pomidora pokrój, a cebulę pokrój w piórka.', null::text, false),
-         (2::smallint, 'Kaszę bulgur ugotuj.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj bakłażana i pomidora. Pokrój bakłażana w kostkę około 2 cm, pomidora na kawałki. Obierz cebulę i czosnek, pokrój cebulę w piórka, czosnek posiekaj.', null::text, false),
+         (3::smallint, 'Opłucz i odsącz ciecierzycę. Pokrusz fetę i odmierz kaszę. Wymieszaj bakłażana, cebulę oraz ciecierzycę z oliwą, czosnkiem, oregano i pieprzem.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Pieczony bakłażan z ciecierzycą i fetą') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Pieczenie', 35 from przepisy p where lower(p.nazwa) = lower('Pieczony bakłażan z ciecierzycą i fetą');
+select p.id, 2, 'Pieczenie i gotowanie kaszy', 48 from przepisy p where lower(p.nazwa) = lower('Pieczony bakłażan z ciecierzycą i fetą');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Bakłażana, cebulę i ciecierzycę wymieszaj w naczyniu z oliwą, czosnkiem, oregano, solą i pieprzem.', null::text, false),
-         (2::smallint, 'Piecz 25 minut, następnie dodaj pomidora i fetę.', null::text, true),
-         (3::smallint, 'Piecz jeszcze 8–10 minut.', 'bakłażan jest miękki, a feta lekko zrumieniona'::text, false),
-         (4::smallint, 'Podaj z kaszą bulgur.', null::text, false)
+         (1::smallint, 'Rozgrzej piekarnik do 210°C, grzanie góra–dół, zwykle około 10 minut.', null::text, false),
+         (2::smallint, 'Rozłóż przygotowaną mieszankę w szerokim naczyniu i piecz 25 minut, mieszając w połowie.', null::text, false),
+         (3::smallint, 'Podczas pieczenia ugotuj bulgur w dodatkowej wodzie przez czas z opakowania i odcedź.', null::text, false),
+         (4::smallint, 'Do naczynia dodaj pomidora oraz fetę. Piecz 8–10 minut; bakłażan powinien być zupełnie miękki. Jeśli nadal jest twardy, dopiekaj pod przykryciem po 5 minut.', null::text, false),
+         (5::smallint, 'Spróbuj, dopraw odmierzoną solą i podaj z kaszą.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Pieczony bakłażan z ciecierzycą i fetą') and e.kolejnosc = 2;
 
@@ -7242,16 +7589,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Pieczony kalafior z ziołowym sosem jogurtowym', 'Rumiany pieczony kalafior podany z lekkim sosem jogurtowym, cytryną i natką pietruszki. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Pieczony kalafior z ziołowym sosem jogurtowym', 'Rumiany pieczony kalafior podany z lekkim sosem jogurtowym, cytryną i natką pietruszki. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['dodatek']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['z_piekarnika']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 372, 1, 1,
-  10, 30,
+  10, 42,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Piekarnik', 'Blacha do pieczenia', 'miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Piekarnik', 'Blacha do pieczenia', 'Miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Kalafior i sos przechowuj osobno w lodówce do 2 dni.',
+  'Kalafior i sos przechowuj osobno w lodówce do 2 dni. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
   false, 'Jeśli kalafior jest miękki, ale blady, dopiecz go kilka minut w wyższej temperaturze. Za gęsty sos rozcieńcz wodą.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -7326,26 +7673,29 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Pieczony kalafior z ziołowym sosem jogurtowym') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Pieczenie kalafiora', 30 from przepisy p where lower(p.nazwa) = lower('Pieczony kalafior z ziołowym sosem jogurtowym');
+select p.id, 1, 'Przygotowanie składników', 10 from przepisy p where lower(p.nazwa) = lower('Pieczony kalafior z ziołowym sosem jogurtowym');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Piekarnik rozgrzej do 220°C. Kalafior wymieszaj z oliwą, kminem, papryką, solą i pieprzem.', null::text, false),
-         (2::smallint, 'Rozłóż różyczki w jednej warstwie i piecz około 25–30 minut.', 'brzegi są mocno zrumienione, a środek miękki'::text, true)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj kalafior, podziel na podobne różyczki około 3 cm. Obierz i posiekaj czosnek. Umyj natkę i cytrynę, posiekaj natkę i odmierz sok.', null::text, false),
+         (3::smallint, 'Wymieszaj kalafior z oliwą, kminem, papryką i częścią soli oraz pieprzu.', null::text, false),
+         (4::smallint, 'Wymieszaj jogurt z czosnkiem, natką, sokiem z cytryny i resztą przypraw; przykryj i odstaw do lodówki.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Pieczony kalafior z ziołowym sosem jogurtowym') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Przygotowanie sosu', 5 from przepisy p where lower(p.nazwa) = lower('Pieczony kalafior z ziołowym sosem jogurtowym');
+select p.id, 2, 'Pieczenie i podanie', 42 from przepisy p where lower(p.nazwa) = lower('Pieczony kalafior z ziołowym sosem jogurtowym');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Jogurt wymieszaj z cytryną, czosnkiem i natką.', null::text, false),
-         (2::smallint, 'Podaj sos obok gorącego kalafiora.', null::text, false)
+         (1::smallint, 'Rozgrzej piekarnik do 220°C, grzanie góra–dół, zwykle około 10 minut.', null::text, false),
+         (2::smallint, 'Rozłóż kalafior w jednej warstwie i piecz 25–30 minut, obracając w połowie.', 'różyczki miękkie w środku i rumiane na brzegach'::text, true),
+         (3::smallint, 'Podaj jako dodatek, z sosem jogurtowym obok.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Pieczony kalafior z ziołowym sosem jogurtowym') and e.kolejnosc = 2;
 
@@ -7358,16 +7708,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Pieczony łosoś z brokułem i ziemniakami', 'Łosoś pieczony na jednej blasze z brokułem i ziemniakami, doprawiony cytryną oraz czosnkiem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Pieczony łosoś z brokułem i ziemniakami', 'Łosoś pieczony na jednej blasze z brokułem i ziemniakami, doprawiony cytryną oraz czosnkiem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['z_piekarnika']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 668, 1, 1,
-  12, 30,
+  12, 49,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Piekarnik', 'Blacha do pieczenia', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Piekarnik', 'Blacha do pieczenia', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna', 'Termometr do mięsa']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Po ostudzeniu przechowuj w zamkniętym pojemniku w lodówce do 2 dni.',
+  'Po ostudzeniu przechowuj w zamkniętym pojemniku w lodówce do 2 dni. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
   false, 'Jeśli łosoś jest suchy, podaj go z jogurtem i cytryną. Twarde ziemniaki dopiekaj osobno jeszcze kilka minut.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -7437,27 +7787,30 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Pieczony łosoś z brokułem i ziemniakami') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie', 12 from przepisy p where lower(p.nazwa) = lower('Pieczony łosoś z brokułem i ziemniakami');
+select p.id, 1, 'Przygotowanie składników', 12 from przepisy p where lower(p.nazwa) = lower('Pieczony łosoś z brokułem i ziemniakami');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Piekarnik rozgrzej do 210°C. Ziemniaki pokrój w małe cząstki, a brokuł podziel na różyczki.', null::text, false),
-         (2::smallint, 'Ziemniaki wymieszaj z połową oliwy, tymiankiem i częścią soli.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj i obierz ziemniaki, pokrój w kawałki około 1,5–2 cm. Umyj brokuł i podziel na małe różyczki. Obierz i posiekaj czosnek. Umyj cytrynę, przygotuj sok i cząstki z odmierzonej części.', null::text, false),
+         (3::smallint, 'Podziel oliwę między ziemniaki, brokuł i rybę. Wymieszaj ziemniaki z oliwą, tymiankiem i częścią soli. Brokuł skrop oliwą.', null::text, false),
+         (4::smallint, 'Łososia osusz i usuń ości. Natrzyj pozostałą oliwą, czosnkiem, solą oraz pieprzem. Umyj przybory i ręce po rybie.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Pieczony łosoś z brokułem i ziemniakami') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Pieczenie', 30 from przepisy p where lower(p.nazwa) = lower('Pieczony łosoś z brokułem i ziemniakami');
+select p.id, 2, 'Pieczenie', 49 from przepisy p where lower(p.nazwa) = lower('Pieczony łosoś z brokułem i ziemniakami');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Ziemniaki piecz 15 minut. Następnie dodaj brokuł i piecz kolejne 5 minut.', null::text, false),
-         (2::smallint, 'Na blasze ułóż łososia. Skrop wszystko pozostałą oliwą i cytryną, dodaj czosnek, sól oraz pieprz.', null::text, true),
-         (3::smallint, 'Piecz jeszcze 10–12 minut.', 'łosoś łatwo rozdziela się widelcem, ale pozostaje soczysty'::text, false)
+         (1::smallint, 'Rozgrzej piekarnik do 210°C, grzanie góra–dół, zwykle około 10 minut.', null::text, false),
+         (2::smallint, 'Piecz ziemniaki 20 minut. Dodaj brokuł i piecz 5 minut.', null::text, false),
+         (3::smallint, 'Dodaj łososia grubości około 2–3 cm i piecz jeszcze 10–12 minut. Grubszy kawałek może wymagać dłużej; gotowe warzywa zdejmij wcześniej.', 'ryba ma co najmniej 63°C, ziemniaki miękkie'::text, true),
+         (4::smallint, 'Skrop rybę przygotowanym sokiem z cytryny i podaj z warzywami oraz cząstkami cytryny.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Pieczony łosoś z brokułem i ziemniakami') and e.kolejnosc = 2;
 
@@ -7470,15 +7823,15 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Pierś z kaczki z pomarańczą i czerwoną kapustą', 'Pierś z kaczki z duszoną czerwoną kapustą, jabłkiem, pomarańczą i ziemniakami. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Pierś z kaczki z pomarańczą i czerwoną kapustą', 'Pierś z kaczki z duszoną czerwoną kapustą, jabłkiem, pomarańczą i ziemniakami. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   2, 'prywatna',
-  'waga', 728, 1, 1,
-  15, 35,
+  'waga', 778, 1, 1,
+  15, 45,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Patelnia 28 cm', 'Garnek 3 l', 'Garnek 2 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Patelnia 28 cm', 'Garnek 3 l', 'Garnek 2 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna', 'Termometr do mięsa', 'Durszlak']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Przechowuj w lodówce do 2 dni. Kaczkę odgrzewaj krótko, aby jej nie wysuszyć.',
+  'Przechowuj w lodówce do 2 dni. Kaczkę odgrzewaj łagodnie do gorącego środka, najlepiej z sosem. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
   false, 'Jeśli mięso jest przesmażone, pokrój je cienko i podaj z większą ilością sosu. Za kwaśną kapustę złagodź jabłkiem.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -7560,43 +7913,42 @@ insert into przepis_skladniki
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
        null, null, sk.rola, sk.mozna_dzielic, 12
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Pierś z kaczki z pomarańczą i czerwoną kapustą') and sk.nazwa = 'Czarny pieprz mielony';
+insert into przepis_skladniki
+  (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
+select p.id, sk.id, 50, 'ml'::jednostka_miary, 50,
+       'do duszenia kapusty', null, sk.rola, sk.mozna_dzielic, 13
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Pierś z kaczki z pomarańczą i czerwoną kapustą') and sk.nazwa = 'woda';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie', 10 from przepisy p where lower(p.nazwa) = lower('Pierś z kaczki z pomarańczą i czerwoną kapustą');
+select p.id, 1, 'Przygotowanie składników', 15 from przepisy p where lower(p.nazwa) = lower('Pierś z kaczki z pomarańczą i czerwoną kapustą');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Kapustę poszatkuj, ziemniaki przygotuj do gotowania, jabłko pokrój, cebulę posiekaj, a z pomarańczy wyciśnij sok.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj kapustę, usuń twardy głąb i cienko poszatkuj. Umyj jabłko, usuń gniazdo nasienne i pokrój w kostkę. Obierz i posiekaj cebulę.', null::text, false),
+         (3::smallint, 'Umyj i obierz ziemniaki, pokrój w kawałki około 3 cm. Umyj pomarańczę; część przygotuj w cząstkach bez błon, z pozostałej wyciśnij sok.', null::text, false),
+         (4::smallint, 'Osusz pierś bez skóry i dopraw częścią soli i pieprzu. Przygotuj cynamon, goździki oraz ocet. Podziel olej między kapustę i smażenie kaczki. Umyj przybory po mięsie.', null::text, false),
+         (5::smallint, 'Odmierz wodę do duszenia kapusty zgodnie z listą składników.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Pierś z kaczki z pomarańczą i czerwoną kapustą') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Gotowanie dodatków', 25 from przepisy p where lower(p.nazwa) = lower('Pierś z kaczki z pomarańczą i czerwoną kapustą');
+select p.id, 2, 'Gotowanie dodatków i smażenie kaczki', 45 from przepisy p where lower(p.nazwa) = lower('Pierś z kaczki z pomarańczą i czerwoną kapustą');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Ziemniaki gotuj w garnku około 15–20 minut.', 'są miękkie po nakłuciu widelcem'::text, false),
-         (2::smallint, 'W drugim garnku na oleju zeszklij cebulę. Dodaj kapustę, jabłko, połowę soku, ocet i przyprawy. Duś około 25 minut.', 'kapusta jest miękka, ale nie rozpada się'::text, false)
+         (1::smallint, 'W garnku rozgrzej połowę oleju przez 1 minutę. Smaż cebulę 4 minuty. Dodaj kapustę, jabłko, połowę soku pomarańczowego, cynamon i goździki. Dodaj odmierzoną wodę do duszenia, i duś pod przykryciem 25–30 minut. Ocet dodaj pod koniec, gdy kapusta jest miękka.', null::text, false),
+         (2::smallint, 'Równolegle na drugim palniku zagotuj ziemniaki w wodzie, zwykle około 5 minut, a następnie gotuj 15–20 minut do miękkości. Odcedź i trzymaj pod przykryciem.', null::text, false),
+         (3::smallint, 'Na palniku zwolnionym przez ziemniaki rozgrzej pozostały olej na patelni przez 1 minutę. Smaż pierś przez 3–4 minuty z każdej strony.', null::text, false),
+         (4::smallint, 'Sprawdź najgrubsze miejsce termometrem. W razie potrzeby zmniejsz ogień i dosmażaj pod przykryciem po 1–2 minuty. Gotową pierś odstaw na 5 minut.', 'kaczka ma co najmniej 74°C w środku'::text, true),
+         (5::smallint, 'W tym czasie wlej pozostały sok pomarańczowy na patelnię, dodaj cząstki pomarańczy i gotuj 1–2 minuty, zbierając smaki z dna.', null::text, false),
+         (6::smallint, 'Usuń goździki z kapusty, dopraw resztą soli i pieprzu. Pokrój kaczkę, podaj z sosem, kapustą i ziemniakami.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Pierś z kaczki z pomarańczą i czerwoną kapustą') and e.kolejnosc = 2;
-
-insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 3, 'Smażenie kaczki', 15 from przepisy p where lower(p.nazwa) = lower('Pierś z kaczki z pomarańczą i czerwoną kapustą');
-
-insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
-select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
-  from etapy e join przepisy p on p.id = e.przepis_id,
-       (values
-         (1::smallint, 'Pierś z kaczki osusz i dopraw solą oraz pieprzem.', null::text, false),
-         (2::smallint, 'Smaż na średnim ogniu po 3–4 minuty z każdej strony, zależnie od grubości.', 'mięso jest sprężyste, a środek pozostaje soczysty'::text, true),
-         (3::smallint, 'Odstaw mięso na 5 minut. Patelnię zdeglasuj pozostałym sokiem pomarańczowym.', null::text, false),
-         (4::smallint, 'Kaczkę pokrój i podaj z kapustą, sosem pomarańczowym oraz ziemniakami.', null::text, false)
-       ) as v(nr, tresc, sygnal, uwaga)
- where lower(p.nazwa) = lower('Pierś z kaczki z pomarańczą i czerwoną kapustą') and e.kolejnosc = 3;
 
 -- -------------------------------------------------------------------------
 --  Placuszki bananowo-owsiane
@@ -7607,16 +7959,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Placuszki bananowo-owsiane', 'Miękkie placuszki z banana, jajka i mąki owsianej, podane z jogurtem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Placuszki bananowo-owsiane', 'Miękkie placuszki z banana, jajka i mąki owsianej, podane z jogurtem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['na_slodko']::rodzaj_dania[],
   1, 'prywatna',
   'waga', 381, 1, 1,
-  8, 12,
+  10, 18,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Patelnia 24 cm', 'miska', 'Widelec', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Patelnia 24 cm', 'Miska', 'Widelec', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Placuszki przechowuj w lodówce do 1 dnia. Jogurt trzymaj osobno.',
+  'Placuszki przechowuj w lodówce do 1 dnia. Jogurt trzymaj osobno. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
   false, 'Jeśli placuszki się rozpadają, dodaj odrobinę mąki. Jeśli zbyt szybko ciemnieją, zmniejsz ogień.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -7676,27 +8028,28 @@ select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Placuszki bananowo-owsiane') and sk.nazwa = 'Cynamon mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie ciasta', 8 from przepisy p where lower(p.nazwa) = lower('Placuszki bananowo-owsiane');
+select p.id, 1, 'Przygotowanie składników', 10 from przepisy p where lower(p.nazwa) = lower('Placuszki bananowo-owsiane');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Banana dokładnie rozgnieć widelcem.', null::text, false),
-         (2::smallint, 'Dodaj jajko, mleko, mąkę i cynamon. Wymieszaj na jednolitą masę.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Obierz banana i rozgnieć widelcem. Odmierz mleko, mąkę, jogurt, cynamon i olej.', null::text, false),
+         (3::smallint, 'Połącz banana z jajkiem, mlekiem, mąką i cynamonem. Wymieszaj i odstaw na 5 minut, aby mąka wchłonęła płyn.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Placuszki bananowo-owsiane') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Smażenie', 12 from przepisy p where lower(p.nazwa) = lower('Placuszki bananowo-owsiane');
+select p.id, 2, 'Smażenie', 18 from przepisy p where lower(p.nazwa) = lower('Placuszki bananowo-owsiane');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Patelnię lekko posmaruj olejem. Nakładaj małe porcje ciasta.', null::text, false),
-         (2::smallint, 'Smaż po około 2 minuty z każdej strony.', 'na powierzchni pojawiają się pęcherzyki, a spód jest rumiany'::text, true),
-         (3::smallint, 'Podaj z jogurtem.', null::text, false)
+         (1::smallint, 'Rozgrzej patelnię nieprzywierającą przez 1 minutę na średnim ogniu. Podziel olej między partie.', null::text, false),
+         (2::smallint, 'Nakładaj małe porcje ciasta i smaż około 2–3 minut z pierwszej strony oraz 1–2 minuty z drugiej. Etap obejmuje około 3 partie dla bazy; przy większej ilości dolicz kolejne partie.', 'spód rumiany, brzegi ścięte, środek bez surowego ciasta'::text, true),
+         (3::smallint, 'Podaj z odmierzoną ilością jogurtu.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Placuszki bananowo-owsiane') and e.kolejnosc = 2;
 
@@ -7709,17 +8062,17 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Polędwiczka w sosie musztardowym z kaszą bulgur', 'Polędwiczka wieprzowa w lekkim sosie musztardowo-jogurtowym z pieczarkami i kaszą bulgur. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Polędwiczka w sosie musztardowym z kaszą bulgur', 'Polędwiczka wieprzowa w lekkim sosie musztardowo-jogurtowym z pieczarkami i kaszą bulgur. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad']::pora_posilku[], array['polska']::rodzaj_kuchni[],
   array['kasza_ryz']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 656, 1, 1,
-  12, 23,
+  12, 28,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Patelnia 28 cm', 'Garnek 2 l', 'miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Patelnia 28 cm', 'Garnek 2 l', 'Miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna', 'Sitko', 'Termometr do mięsa']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Przechowuj w lodówce do 2 dni. Odgrzewaj na małym ogniu.',
-  false, 'Twardą polędwiczkę pokrój cieniej i duś chwilę w sosie. Za ostry sos złagodź jogurtem.'
+  'Przechowuj w lodówce do 2 dni. Odgrzewaj łagodnie, do gorącego środka całej porcji. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
+  false, 'Mięso wyjmij z patelni na czas smażenia pieczarek. Sos jogurtowy dodawaj poza ogniem po zahartowaniu. Długie duszenie gotowej polędwiczki ją wysuszy.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
@@ -7798,28 +8151,31 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Polędwiczka w sosie musztardowym z kaszą bulgur') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie', 12 from przepisy p where lower(p.nazwa) = lower('Polędwiczka w sosie musztardowym z kaszą bulgur');
+select p.id, 1, 'Przygotowanie składników', 12 from przepisy p where lower(p.nazwa) = lower('Polędwiczka w sosie musztardowym z kaszą bulgur');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Kaszę bulgur ugotuj. Polędwiczkę pokrój w plastry, pieczarki pokrój, a cebulę posiekaj.', null::text, false),
-         (2::smallint, 'Jogurt wymieszaj z musztardą.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Oczyść i pokrój pieczarki, obierz i posiekaj cebulę. Odmierz bulion oraz kaszę.', null::text, false),
+         (3::smallint, 'Usuń błonę z polędwiczki i pokrój na medaliony grubości około 1,5 cm. Dopraw częścią soli i pieprzu; umyj przybory po mięsie.', null::text, false),
+         (4::smallint, 'Wymieszaj jogurt z musztardą.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Polędwiczka w sosie musztardowym z kaszą bulgur') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Smażenie i sos', 23 from przepisy p where lower(p.nazwa) = lower('Polędwiczka w sosie musztardowym z kaszą bulgur');
+select p.id, 2, 'Gotowanie kaszy i smażenie', 28 from przepisy p where lower(p.nazwa) = lower('Polędwiczka w sosie musztardowym z kaszą bulgur');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Na mocno rozgrzanym oleju smaż mięso partiami po około 2 minuty z każdej strony. Odłóż.', null::text, false),
-         (2::smallint, 'Na patelni smaż cebulę i pieczarki, aż odparuje woda. Dodaj bulion i tymianek.', null::text, false),
-         (3::smallint, 'Zmniejsz ogień, dodaj mięso oraz jogurt z musztardą. Podgrzej bez zagotowywania.', 'mięso jest soczyste, a sos gładki'::text, true),
-         (4::smallint, 'Podaj z kaszą bulgur.', null::text, false)
+         (1::smallint, 'Na pierwszym palniku zagotuj wodę w garnku. Dodaj kaszę bulgur i gotuj przez czas wskazany na opakowaniu; po ugotowaniu odcedź. Wody użyj tyle, by ziarna były zanurzone i swobodnie się gotowały. Nastaw minutnik; równolegle wykonuj kolejne czynności na drugim palniku. Woda do gotowania jest dodatkowa i zostanie odlana.', null::text, false),
+         (2::smallint, 'Na drugim palniku rozgrzej połowę oleju przez 1 minutę. Smaż medaliony po 2–3 minuty z każdej strony. Sprawdź temperaturę co najmniej 63°C i w razie potrzeby dosmaż po 1 minucie. Odstaw na czysty talerz na co najmniej 3 minuty.', null::text, false),
+         (3::smallint, 'Dodaj pozostały olej, cebulę i pieczarki. Smaż 7–9 minut, aby odparować wodę.', null::text, false),
+         (4::smallint, 'Dodaj bulion oraz tymianek, gotuj 3–4 minuty, aby sos nieco zgęstniał. Dodaj mięso, podgrzej 1 minutę i zdejmij z ognia.', null::text, false),
+         (5::smallint, 'Jogurt zahartuj niewielką ilością ciepłego sosu, następnie wmieszaj do patelni. Nie zagotowuj. Dopraw pozostałą solą i pieprzem, podaj z kaszą.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Polędwiczka w sosie musztardowym z kaszą bulgur') and e.kolejnosc = 2;
 
@@ -7832,16 +8188,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Potrawka z kurczaka, kaszy jęczmiennej i warzyw', 'Jednogarnkowa potrawka z kurczaka, kaszy jęczmiennej, marchewki, pora i groszku. Przepis na 2 porcje.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Potrawka z kurczaka, kaszy jęczmiennej i warzyw', 'Jednogarnkowa potrawka z kurczaka, kaszy jęczmiennej, marchewki, pora i groszku. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['polska']::rodzaj_kuchni[],
   array['gulasz_curry', 'kasza_ryz']::rodzaj_dania[],
   3, 'prywatna',
   'waga', 738, 1, 2,
-  12, 35,
+  12, 50,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Garnek 3 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Garnek 3 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna', 'Sitko', 'Termometr do mięsa']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Przechowuj w lodówce do 3 dni. Potrawkę można zamrozić.',
+  'Przechowuj w lodówce do 3 dni. Potrawkę można zamrozić. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
   true, 'Za gęstą potrawkę rozcieńcz bulionem. Jeśli kasza jest twarda, gotuj dłużej i uzupełnij płyn.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -7921,27 +8277,29 @@ select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Potrawka z kurczaka, kaszy jęczmiennej i warzyw') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie', 12 from przepisy p where lower(p.nazwa) = lower('Potrawka z kurczaka, kaszy jęczmiennej i warzyw');
+select p.id, 1, 'Przygotowanie składników', 12 from przepisy p where lower(p.nazwa) = lower('Potrawka z kurczaka, kaszy jęczmiennej i warzyw');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Kurczaka i warzywa pokrój, a kaszę opłucz.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Opłucz kaszę. Umyj i obierz marchew, pokrój w kostkę około 1 cm. Dokładnie wypłucz por między warstwami i pokrój. Umyj seler naciowy, pokrój cienko.', null::text, false),
+         (3::smallint, 'Udo bez skóry i kości pokrój w kostkę około 2 cm; podana masa dotyczy mięsa bez kości. Umyj ręce i przybory. Odmierz bulion i groszek.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Potrawka z kurczaka, kaszy jęczmiennej i warzyw') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Gotowanie', 35 from przepisy p where lower(p.nazwa) = lower('Potrawka z kurczaka, kaszy jęczmiennej i warzyw');
+select p.id, 2, 'Gotowanie potrawki', 50 from przepisy p where lower(p.nazwa) = lower('Potrawka z kurczaka, kaszy jęczmiennej i warzyw');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Na oleju obsmaż kurczaka, aż straci surowy kolor. Dodaj por, marchew i seler.', null::text, false),
-         (2::smallint, 'Wsyp kaszę, dodaj bulion i tymianek. Gotuj pod przykryciem 25 minut.', null::text, false),
-         (3::smallint, 'Dodaj groszek i gotuj jeszcze 5 minut.', 'kasza i mięso są miękkie, a płyn częściowo wchłonięty'::text, true),
-         (4::smallint, 'Dopraw solą oraz pieprzem.', null::text, false)
+         (1::smallint, 'Rozgrzej olej przez 1 minutę, smaż kurczaka 5 minut, obracając. Dodaj por, marchew i seler; smaż 3 minuty.', null::text, false),
+         (2::smallint, 'Dodaj kaszę, bulion i tymianek. Doprowadź do wrzenia przez około 4 minuty. Gotuj pod uchyloną pokrywką przez czas wskazany na opakowaniu kaszy, orientacyjnie 20–30 minut, mieszając. Kolejny krok wykonaj na ostatnie 5 minut tego czasu. Ubytki płynu uzupełniaj gorącą wodą.', null::text, false),
+         (3::smallint, 'Gdy kasza jest prawie miękka, dodaj groszek i gotuj 5 minut.', 'kasza miękka, kurczak co najmniej 74°C, potrawka wilgotna'::text, true),
+         (4::smallint, 'Dopraw solą i pieprzem i podaj.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Potrawka z kurczaka, kaszy jęczmiennej i warzyw') and e.kolejnosc = 2;
 
@@ -7954,16 +8312,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Pstrąg pieczony z warzywami korzeniowymi', 'Pstrąg pieczony z ziemniakami, marchewką, pasternakiem i selerem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Pstrąg pieczony z warzywami korzeniowymi', 'Pstrąg pieczony z ziemniakami, marchewką, pasternakiem i selerem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad']::pora_posilku[], array['polska']::rodzaj_kuchni[],
   array['z_piekarnika']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 673, 1, 1,
-  15, 40,
+  15, 55,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Piekarnik', 'Blacha do pieczenia', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Piekarnik', 'Blacha do pieczenia', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna', 'Termometr do mięsa']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Gotowe danie przechowuj w lodówce do 2 dni.',
+  'Gotowe danie przechowuj w lodówce do 2 dni. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
   false, 'Jeśli warzywa są twarde, zdejmij rybę i dopiekaj warzywa osobno. Suchą rybę skrop cytryną i oliwą.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -8038,27 +8396,29 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Pstrąg pieczony z warzywami korzeniowymi') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie', 15 from przepisy p where lower(p.nazwa) = lower('Pstrąg pieczony z warzywami korzeniowymi');
+select p.id, 1, 'Przygotowanie składników', 15 from przepisy p where lower(p.nazwa) = lower('Pstrąg pieczony z warzywami korzeniowymi');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Piekarnik rozgrzej do 200°C. Warzywa pokrój na podobnej wielkości kawałki.', null::text, false),
-         (2::smallint, 'Warzywa wymieszaj z oliwą, rozmarynem, solą i pieprzem.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj i obierz ziemniaki, marchew, pasternak i seler. Pokrój w kawałki około 1,5–2 cm, wymieszaj z większością oliwy, rozmarynem i częścią przypraw.', null::text, false),
+         (3::smallint, 'Przygotuj filety pstrąga, usuń ości, osusz; podana masa dotyczy części jadalnej bez ości. Natrzyj pozostałą oliwą i przyprawami. Umyj cytrynę i przygotuj sok z odmierzonej części. Umyj przybory po rybie.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Pstrąg pieczony z warzywami korzeniowymi') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Pieczenie', 40 from przepisy p where lower(p.nazwa) = lower('Pstrąg pieczony z warzywami korzeniowymi');
+select p.id, 2, 'Pieczenie', 55 from przepisy p where lower(p.nazwa) = lower('Pstrąg pieczony z warzywami korzeniowymi');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Warzywa piecz 20 minut, następnie przesuń je na boki i dodaj pstrąga.', null::text, false),
-         (2::smallint, 'Rybę skrop cytryną i lekko dopraw.', null::text, true),
-         (3::smallint, 'Piecz jeszcze około 18–20 minut.', 'mięso ryby jest nieprzezroczyste i łatwo odchodzi od ości'::text, false)
+         (1::smallint, 'Rozgrzej piekarnik do 200°C, grzanie góra–dół, zwykle około 10 minut.', null::text, false),
+         (2::smallint, 'Rozłóż warzywa na blasze, piecz 25–30 minut i przemieszaj w połowie. Powinny być prawie miękkie przed dodaniem ryby.', null::text, false),
+         (3::smallint, 'Dodaj filety i piecz 12–15 minut, zależnie od ich grubości. Gotową rybę zdejmij; twarde warzywa dopiecz osobno.', 'ryba ma co najmniej 63°C, mięso rozdziela się widelcem'::text, true),
+         (4::smallint, 'Skrop przygotowanym sokiem z cytryny i podaj.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Pstrąg pieczony z warzywami korzeniowymi') and e.kolejnosc = 2;
 
@@ -8071,16 +8431,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Pudding chia z mango i mlekiem kokosowym', 'Wegański pudding chia na mleku kokosowym z mango, migdałami i daktylami. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Pudding chia z mango i mlekiem kokosowym', 'Pudding kokosowy z mango, daktylami i migdałami. Wymaga co najmniej 4 godzin chłodzenia; czas przygotowania obejmuje oczekiwanie, sama praca zajmuje około 10 minut. Ilości składników dobierz z listy dla przygotowywanej liczby porcji.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'dodatek']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['na_slodko']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 435, 1, 1,
-  8, 0,
+  250, 0,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['miska', 'Widelec', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Miska', 'Widelec', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Przechowuj pod przykryciem w lodówce do 2 dni. Migdały dodaj przed jedzeniem.',
+  'Przechowuj pod przykryciem w lodówce do 2 dni. Migdały dodaj przed jedzeniem. Lodówka: do 4°C.',
   false, 'Jeśli pudding jest zbyt rzadki, dodaj łyżeczkę chia i odstaw na 20 minut. Za gęsty rozcieńcz mlekiem kokosowym.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -8130,27 +8490,50 @@ select p.id, sk.id, 20, 'g'::jednostka_miary, 20,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Pudding chia z mango i mlekiem kokosowym') and sk.nazwa = 'Daktyle suszone';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie', 6 from przepisy p where lower(p.nazwa) = lower('Pudding chia z mango i mlekiem kokosowym');
+select p.id, 1, 'Przygotowanie składników', 6 from przepisy p where lower(p.nazwa) = lower('Pudding chia z mango i mlekiem kokosowym');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Chia wymieszaj z mlekiem kokosowym i daktylami.', null::text, false),
-         (2::smallint, 'Po 10 minutach wymieszaj ponownie, przykryj i wstaw do lodówki na co najmniej 4 godziny.', 'po schłodzeniu pudding jest gęsty, a nasiona równomiernie rozłożone'::text, true)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj mango, usuń skórkę i pestkę, pokrój miąższ; przechowaj pod przykryciem w lodówce. Posiekaj migdały.', null::text, false),
+         (3::smallint, 'Usuń pestki daktyli, jeśli są, i drobno je posiekaj. Odmierz chia i mleko kokosowe.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Pudding chia z mango i mlekiem kokosowym') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Podanie', 2 from przepisy p where lower(p.nazwa) = lower('Pudding chia z mango i mlekiem kokosowym');
+select p.id, 2, 'Mieszanie', 2 from przepisy p where lower(p.nazwa) = lower('Pudding chia z mango i mlekiem kokosowym');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Dodaj mango i posyp migdałami.', null::text, false)
+         (1::smallint, 'Dokładnie wymieszaj chia z mlekiem kokosowym i daktylami.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Pudding chia z mango i mlekiem kokosowym') and e.kolejnosc = 2;
+
+insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
+select p.id, 3, 'Chłodzenie', 240 from przepisy p where lower(p.nazwa) = lower('Pudding chia z mango i mlekiem kokosowym');
+
+insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
+select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
+  from etapy e join przepisy p on p.id = e.przepis_id,
+       (values
+         (1::smallint, 'Przykryj i wstaw do lodówki na co najmniej 4 godziny. Po pierwszych 10 minutach wymieszaj ponownie, aby rozbić grudki.', 'nasiona napęczniały, masa jest gęsta i jednolita'::text, true)
+       ) as v(nr, tresc, sygnal, uwaga)
+ where lower(p.nazwa) = lower('Pudding chia z mango i mlekiem kokosowym') and e.kolejnosc = 3;
+
+insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
+select p.id, 4, 'Podanie', 2 from przepisy p where lower(p.nazwa) = lower('Pudding chia z mango i mlekiem kokosowym');
+
+insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
+select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
+  from etapy e join przepisy p on p.id = e.przepis_id,
+       (values
+         (1::smallint, 'Wymieszaj pudding, dodaj przygotowane mango i migdały.', null::text, false)
+       ) as v(nr, tresc, sygnal, uwaga)
+ where lower(p.nazwa) = lower('Pudding chia z mango i mlekiem kokosowym') and e.kolejnosc = 4;
 
 -- -------------------------------------------------------------------------
 --  Ryż z pieczarkami, szpinakiem i parmezanem
@@ -8161,16 +8544,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Ryż z pieczarkami, szpinakiem i parmezanem', 'Kremowy ryż z pieczarkami, szpinakiem i parmezanem przygotowany w jednym garnku. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Ryż z pieczarkami, szpinakiem i parmezanem', 'Ryż parboiled z pieczarkami, szpinakiem i parmezanem przygotowany w jednym garnku. Ziarna pozostają wyraźnie oddzielne; ser nadaje sosowi kremowość. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['kasza_ryz']::rodzaj_dania[],
-  2, 'prywatna',
+  1, 'prywatna',
   'waga', 739, 1, 1,
-  10, 25,
+  10, 38,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Garnek 3 l', 'Tarka o drobnych oczkach', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Przechowuj w lodówce do 2 dni. Odgrzewaj z niewielką ilością wody.',
+  'Porcję z ugotowanym ryżem szybko schłodź w płytkim pojemniku i wstaw do lodówki, najlepiej w ciągu godziny. Przechowuj do 24 godzin. Odgrzewaj tylko raz, do gorącego środka całej porcji. Lodówka: do 4°C.',
   false, 'Za suchy ryż podlej gorącym bulionem. Jeśli ryż jest twardy, gotuj dłużej na małym ogniu.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -8211,7 +8594,7 @@ select p.id, sk.id, 80, 'g'::jednostka_miary, 80,
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 25, 'g'::jednostka_miary, 25,
-       'drobno starty; wybierz wersję z podpuszczką mikrobiologiczną', null, sk.rola, sk.mozna_dzielic, 4
+       'drobno starty', null, sk.rola, sk.mozna_dzielic, 4
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Ryż z pieczarkami, szpinakiem i parmezanem') and sk.nazwa = 'Parmezan';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
@@ -8245,27 +8628,29 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Ryż z pieczarkami, szpinakiem i parmezanem') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie', 10 from przepisy p where lower(p.nazwa) = lower('Ryż z pieczarkami, szpinakiem i parmezanem');
+select p.id, 1, 'Przygotowanie składników', 10 from przepisy p where lower(p.nazwa) = lower('Ryż z pieczarkami, szpinakiem i parmezanem');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Pieczarki pokrój w plasterki, a cebulę i czosnek posiekaj.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Oczyść pieczarki i pokrój w plastry. Obierz i posiekaj cebulę oraz czosnek. Umyj i osusz szpinak.', null::text, false),
+         (3::smallint, 'Zetrzyj parmezan, odmierz ryż oraz bulion.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Ryż z pieczarkami, szpinakiem i parmezanem') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Gotowanie', 25 from przepisy p where lower(p.nazwa) = lower('Ryż z pieczarkami, szpinakiem i parmezanem');
+select p.id, 2, 'Gotowanie ryżu z warzywami', 38 from przepisy p where lower(p.nazwa) = lower('Ryż z pieczarkami, szpinakiem i parmezanem');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Na oliwie smaż cebulę i pieczarki, aż odparuje większość wody.', null::text, false),
-         (2::smallint, 'Dodaj czosnek i ryż, wymieszaj, a następnie stopniowo wlewaj gorący bulion.', null::text, true),
-         (3::smallint, 'Gotuj na małym ogniu do miękkości ryżu. Dodaj szpinak i parmezan.', 'ryż jest miękki i kremowy'::text, false),
-         (4::smallint, 'Dopraw solą oraz pieprzem i podaj.', null::text, false)
+         (1::smallint, 'Rozgrzej oliwę przez 1 minutę. Smaż cebulę i pieczarki 7–9 minut, aż płyn odparuje.', null::text, false),
+         (2::smallint, 'Dodaj czosnek i smaż 30 sekund. Dodaj ryż, wymieszaj przez 1 minutę. Wlej bulion i doprowadź do wrzenia przez około 3 minuty.', null::text, false),
+         (3::smallint, 'Gotuj na małym ogniu pod uchyloną pokrywką przez czas z opakowania ryżu, orientacyjnie 15–20 minut, mieszając co kilka minut. Jeśli ryż jeszcze twardy, uzupełniaj odparowany płyn gorącą wodą.', null::text, false),
+         (4::smallint, 'Na ostatnie 1–2 minuty dodaj szpinak. Gdy zwiędnie, zdejmij z ognia i wmieszaj parmezan. Dopraw solą i pieprzem.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Ryż z pieczarkami, szpinakiem i parmezanem') and e.kolejnosc = 2;
 
@@ -8278,16 +8663,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Sałatka brokułowa z jajkiem i sosem jogurtowym', 'Sałatka z brokułem, jajkami na twardo, kukurydzą i szczypiorkiem w sosie jogurtowo-musztardowym. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Sałatka brokułowa z jajkiem i sosem jogurtowym', 'Sałatka z brokułem, jajkami na twardo, kukurydzą i szczypiorkiem w sosie jogurtowo-musztardowym. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['salatka']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 586, 1, 1,
-  12, 10,
+  10, 23,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Garnek 3 l', 'miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Garnek 3 l', 'Miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna', 'Garnek 2 l', 'Durszlak', 'Łyżka cedzakowa']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Przechowuj w zamkniętym pojemniku w lodówce do 2 dni.',
+  'Przechowuj w zamkniętym pojemniku w lodówce do 2 dni. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
   false, 'Jeśli brokuł jest rozgotowany, ostudź go szybko i delikatnie mieszaj. Za gęsty sos rozcieńcz wodą.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -8357,29 +8742,41 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Sałatka brokułowa z jajkiem i sosem jogurtowym') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Gotowanie', 10 from przepisy p where lower(p.nazwa) = lower('Sałatka brokułowa z jajkiem i sosem jogurtowym');
+select p.id, 1, 'Przygotowanie składników', 10 from przepisy p where lower(p.nazwa) = lower('Sałatka brokułowa z jajkiem i sosem jogurtowym');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Jajka ugotuj na twardo, schłodź i obierz.', null::text, false),
-         (2::smallint, 'Brokuł gotuj 4–5 minut, aby pozostał lekko jędrny, następnie ostudź.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj brokuł i podziel na małe różyczki. Obierz i posiekaj cebulę. Umyj i posiekaj szczypiorek. Odsącz kukurydzę.', null::text, false),
+         (3::smallint, 'Wymieszaj jogurt z musztardą, solą i pieprzem; odstaw do lodówki.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Sałatka brokułowa z jajkiem i sosem jogurtowym') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Przygotowanie sałatki', 12 from przepisy p where lower(p.nazwa) = lower('Sałatka brokułowa z jajkiem i sosem jogurtowym');
+select p.id, 2, 'Gotowanie i studzenie', 20 from przepisy p where lower(p.nazwa) = lower('Sałatka brokułowa z jajkiem i sosem jogurtowym');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Jajka pokrój. Jogurt wymieszaj z musztardą, solą i pieprzem.', null::text, false),
-         (2::smallint, 'Połącz brokuł, jajka, kukurydzę, cebulę i sos.', null::text, true),
-         (3::smallint, 'Posyp szczypiorkiem.', null::text, false)
+         (1::smallint, 'Zagotuj w garnku wodę przykrywającą jajka. Włóż je ostrożnie i gotuj przez 9–10 minut przy łagodnym wrzeniu, licząc od włożenia. Schłodź zimną wodą i obierz.', null::text, false),
+         (2::smallint, 'Równolegle w drugim garnku zagotuj wodę. Gotuj brokuł 4–5 minut, odcedź, krótko schłodź zimną wodą i dokładnie odsącz.', null::text, false),
+         (3::smallint, 'Pokrój schłodzone jajka.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Sałatka brokułowa z jajkiem i sosem jogurtowym') and e.kolejnosc = 2;
+
+insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
+select p.id, 3, 'Łączenie sałatki', 3 from przepisy p where lower(p.nazwa) = lower('Sałatka brokułowa z jajkiem i sosem jogurtowym');
+
+insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
+select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
+  from etapy e join przepisy p on p.id = e.przepis_id,
+       (values
+         (1::smallint, 'Wymieszaj brokuł, jajka, kukurydzę, cebulę oraz sos. Posyp szczypiorkiem i podaj.', null::text, false)
+       ) as v(nr, tresc, sygnal, uwaga)
+ where lower(p.nazwa) = lower('Sałatka brokułowa z jajkiem i sosem jogurtowym') and e.kolejnosc = 3;
 
 -- -------------------------------------------------------------------------
 --  Sałatka makaronowa z mozzarellą i warzywami
@@ -8390,16 +8787,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Sałatka makaronowa z mozzarellą i warzywami', 'Sałatka z pełnoziarnistym makaronem, mozzarellą, pomidorem, ogórkiem, papryką i bazylią. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Sałatka makaronowa z mozzarellą i warzywami', 'Sałatka z pełnoziarnistym makaronem, mozzarellą, pomidorem, ogórkiem, papryką i bazylią. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['salatka']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 559, 1, 1,
-  12, 12,
+  12, 23,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Garnek 3 l', 'Sitko', 'miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Garnek 3 l', 'Sitko', 'Miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Przechowuj w zamkniętym pojemniku w lodówce do 2 dni. Oliwę najlepiej dodaj przed jedzeniem.',
+  'Przechowuj w zamkniętym pojemniku w lodówce do 2 dni. Oliwę najlepiej dodaj przed jedzeniem. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
   false, 'Jeśli sałatka puściła wodę, odlej płyn i dopraw ponownie. Za suchą sałatkę skrop dodatkową oliwą.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -8479,28 +8876,40 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Sałatka makaronowa z mozzarellą i warzywami') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Gotowanie makaronu', 12 from przepisy p where lower(p.nazwa) = lower('Sałatka makaronowa z mozzarellą i warzywami');
+select p.id, 1, 'Przygotowanie składników', 12 from przepisy p where lower(p.nazwa) = lower('Sałatka makaronowa z mozzarellą i warzywami');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Makaron ugotuj al dente, odcedź i całkowicie ostudź.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj pomidora, ogórek, paprykę i bazylię; osusz. Usuń nasiona papryki i pokrój warzywa w kostkę.', null::text, false),
+         (3::smallint, 'Odsącz mozzarellę i oliwki, pokrój ser. Umyj cytrynę, odmierz sok. Przygotuj makaron i oliwę.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Sałatka makaronowa z mozzarellą i warzywami') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Przygotowanie sałatki', 12 from przepisy p where lower(p.nazwa) = lower('Sałatka makaronowa z mozzarellą i warzywami');
+select p.id, 2, 'Gotowanie i chłodzenie makaronu', 20 from przepisy p where lower(p.nazwa) = lower('Sałatka makaronowa z mozzarellą i warzywami');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Mozzarellę i warzywa pokrój na podobnej wielkości kawałki.', null::text, false),
-         (2::smallint, 'Połącz makaron, mozzarellę, warzywa, oliwki i bazylię.', null::text, false),
-         (3::smallint, 'Skrop oliwą oraz cytryną, dopraw i wymieszaj.', null::text, true)
+         (1::smallint, 'Zagotuj wodę i ugotuj makaron przez czas podany na opakowaniu. Odcedź na sitku, krótko przelej zimną wodą i dokładnie odsącz.', null::text, false),
+         (2::smallint, 'Przed dodaniem sera i surowych warzyw upewnij się, że makaron jest chłodny.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Sałatka makaronowa z mozzarellą i warzywami') and e.kolejnosc = 2;
+
+insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
+select p.id, 3, 'Łączenie sałatki', 3 from przepisy p where lower(p.nazwa) = lower('Sałatka makaronowa z mozzarellą i warzywami');
+
+insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
+select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
+  from etapy e join przepisy p on p.id = e.przepis_id,
+       (values
+         (1::smallint, 'Połącz makaron, mozzarellę, pokrojone warzywa, oliwki i bazylię. Skrop oliwą oraz przygotowanym sokiem z cytryny, dopraw solą i pieprzem.', null::text, false)
+       ) as v(nr, tresc, sygnal, uwaga)
+ where lower(p.nazwa) = lower('Sałatka makaronowa z mozzarellą i warzywami') and e.kolejnosc = 3;
 
 -- -------------------------------------------------------------------------
 --  Sałatka makaronowa z tuńczykiem i warzywami
@@ -8511,16 +8920,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Sałatka makaronowa z tuńczykiem i warzywami', 'Sałatka z pełnoziarnistym makaronem, tuńczykiem, pomidorem, ogórkiem i kukurydzą. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Sałatka makaronowa z tuńczykiem i warzywami', 'Sałatka z pełnoziarnistym makaronem, tuńczykiem, pomidorem, ogórkiem i kukurydzą. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['salatka']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 576, 1, 1,
-  12, 12,
+  12, 23,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Garnek 2 l', 'Sitko', 'miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Garnek 2 l', 'Sitko', 'Miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Przechowuj w zamkniętym pojemniku w lodówce do 2 dni.',
+  'Przechowuj w zamkniętym pojemniku w lodówce do 2 dni. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
   false, 'Jeśli sałatka jest sucha, dodaj trochę jogurtu. Jeśli puściła wodę, odlej płyn i dopraw ponownie.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -8595,28 +9004,40 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Sałatka makaronowa z tuńczykiem i warzywami') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Gotowanie makaronu', 12 from przepisy p where lower(p.nazwa) = lower('Sałatka makaronowa z tuńczykiem i warzywami');
+select p.id, 1, 'Przygotowanie składników', 12 from przepisy p where lower(p.nazwa) = lower('Sałatka makaronowa z tuńczykiem i warzywami');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Makaron ugotuj al dente, odcedź i całkowicie ostudź.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj i pokrój pomidora i ogórek. Umyj i posiekaj szczypiorek. Odsącz tuńczyka oraz kukurydzę.', null::text, false),
+         (3::smallint, 'Wymieszaj jogurt z musztardą, solą i pieprzem. Odmierz makaron.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Sałatka makaronowa z tuńczykiem i warzywami') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Łączenie sałatki', 12 from przepisy p where lower(p.nazwa) = lower('Sałatka makaronowa z tuńczykiem i warzywami');
+select p.id, 2, 'Gotowanie i chłodzenie makaronu', 20 from przepisy p where lower(p.nazwa) = lower('Sałatka makaronowa z tuńczykiem i warzywami');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Ogórek i pomidora pokrój. Jogurt wymieszaj z musztardą, solą oraz pieprzem.', null::text, false),
-         (2::smallint, 'Połącz makaron z tuńczykiem, warzywami, kukurydzą i sosem.', null::text, true),
-         (3::smallint, 'Posyp szczypiorkiem i podaj lub schłodź.', null::text, false)
+         (1::smallint, 'Zagotuj wodę i ugotuj makaron przez czas z opakowania. Odcedź, krótko przelej zimną wodą i dokładnie odsącz.', null::text, false),
+         (2::smallint, 'Sprawdź, czy makaron jest chłodny przed połączeniem z sosem jogurtowym.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Sałatka makaronowa z tuńczykiem i warzywami') and e.kolejnosc = 2;
+
+insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
+select p.id, 3, 'Łączenie sałatki', 3 from przepisy p where lower(p.nazwa) = lower('Sałatka makaronowa z tuńczykiem i warzywami');
+
+insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
+select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
+  from etapy e join przepisy p on p.id = e.przepis_id,
+       (values
+         (1::smallint, 'Wymieszaj makaron z tuńczykiem, warzywami, kukurydzą i sosem. Posyp szczypiorkiem i podaj.', null::text, false)
+       ) as v(nr, tresc, sygnal, uwaga)
+ where lower(p.nazwa) = lower('Sałatka makaronowa z tuńczykiem i warzywami') and e.kolejnosc = 3;
 
 -- -------------------------------------------------------------------------
 --  Sałatka z czarnej fasoli, kukurydzy i pomidora
@@ -8627,16 +9048,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Sałatka z czarnej fasoli, kukurydzy i pomidora', 'Kolorowa sałatka z czarnej fasoli, kukurydzy, pomidora, papryki i awokado. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Sałatka z czarnej fasoli, kukurydzy i pomidora', 'Kolorowa sałatka z czarnej fasoli, kukurydzy, pomidora, papryki i awokado. Ilości składników dobierz z listy dla przygotowywanej liczby porcji.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['salatka']::rodzaj_dania[],
   1, 'prywatna',
   'waga', 632, 1, 1,
   15, 0,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna', 'Sitko']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Przechowuj w lodówce do 1 dnia. Awokado najlepiej dodaj przed jedzeniem.',
+  'Przechowuj w lodówce do 1 dnia. Awokado najlepiej dodaj przed jedzeniem. Lodówka: do 4°C.',
   false, 'Jeśli sałatka puściła wodę, odlej płyn. Za kwaśny dressing złagodź większą ilością awokado.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -8716,18 +9137,30 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Sałatka z czarnej fasoli, kukurydzy i pomidora') and sk.nazwa = 'Sól kłodawska';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie', 15 from przepisy p where lower(p.nazwa) = lower('Sałatka z czarnej fasoli, kukurydzy i pomidora');
+select p.id, 1, 'Przygotowanie składników', 12 from przepisy p where lower(p.nazwa) = lower('Sałatka z czarnej fasoli, kukurydzy i pomidora');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Warzywa i awokado pokrój, a kolendrę posiekaj.', null::text, false),
-         (2::smallint, 'Limonkę wymieszaj z oliwą, kminem i solą.', null::text, false),
-         (3::smallint, 'Połącz fasolę, kukurydzę, warzywa i dressing.', null::text, true),
-         (4::smallint, 'Dodaj awokado oraz kolendrę i delikatnie wymieszaj.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Opłucz i odsącz fasolę, odsącz kukurydzę. Umyj pomidora, paprykę, awokado, limonkę oraz kolendrę.', null::text, false),
+         (3::smallint, 'Usuń nasiona papryki, pokrój paprykę i pomidora. Obierz i posiekaj cebulę, posiekaj kolendrę.', null::text, false),
+         (4::smallint, 'Obierz awokado, usuń pestkę i pokrój miąższ. Wyciśnij i odmierz sok z limonki, skrop nim awokado.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Sałatka z czarnej fasoli, kukurydzy i pomidora') and e.kolejnosc = 1;
+
+insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
+select p.id, 2, 'Łączenie sałatki', 3 from przepisy p where lower(p.nazwa) = lower('Sałatka z czarnej fasoli, kukurydzy i pomidora');
+
+insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
+select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
+  from etapy e join przepisy p on p.id = e.przepis_id,
+       (values
+         (1::smallint, 'Wymieszaj fasolę, kukurydzę, paprykę, pomidora oraz cebulę.', null::text, false),
+         (2::smallint, 'Dodaj oliwę, kmin, sól i awokado wraz z sokiem z limonki. Delikatnie wymieszaj i posyp kolendrą.', null::text, false)
+       ) as v(nr, tresc, sygnal, uwaga)
+ where lower(p.nazwa) = lower('Sałatka z czarnej fasoli, kukurydzy i pomidora') and e.kolejnosc = 2;
 
 -- -------------------------------------------------------------------------
 --  Sałatka z jajkiem, fetą i warzywami
@@ -8738,16 +9171,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Sałatka z jajkiem, fetą i warzywami', 'Sałatka z jajkami na twardo, fetą, pomidorem, ogórkiem i sałatą, skropiona oliwą. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Sałatka z jajkiem, fetą i warzywami', 'Sałatka z jajkami na twardo, fetą, pomidorem, ogórkiem i sałatą, skropiona oliwą. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['salatka']::rodzaj_dania[],
   1, 'prywatna',
   'waga', 386, 1, 1,
-  10, 17,
+  10, 20,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Garnek 2 l', 'miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Garnek 2 l', 'Miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna', 'Łyżka cedzakowa']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Przechowuj w zamkniętym pojemniku w lodówce do 1 dnia. Oliwę i przyprawy najlepiej dodaj przed jedzeniem.',
+  'Przechowuj w zamkniętym pojemniku w lodówce do 1 dnia. Oliwę i przyprawy najlepiej dodaj przed jedzeniem. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
   false, 'Jeśli sałatka puściła wodę, odlej płyn i dodaj świeżą sałatę. Jeśli feta jest bardzo słona, ogranicz ilość dodatkowej soli.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -8818,24 +9251,34 @@ insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Pomidora pokrój w cząstki, ogórek w półplasterki, a sałatę porwij na mniejsze kawałki.', null::text, false),
-         (2::smallint, 'Fetę pokrusz, a warzywa przełóż do miski.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj pomidora, ogórek i sałatę. Osusz sałatę i porwij. Pokrój pomidora w cząstki, ogórek w półplasterki.', null::text, false),
+         (3::smallint, 'Pokrusz fetę i odmierz oliwę, sól oraz pieprz.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Sałatka z jajkiem, fetą i warzywami') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Gotowanie jajek i wykończenie sałatki', 17 from przepisy p where lower(p.nazwa) = lower('Sałatka z jajkiem, fetą i warzywami');
+select p.id, 2, 'Gotowanie jajek', 18 from przepisy p where lower(p.nazwa) = lower('Sałatka z jajkiem, fetą i warzywami');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'W garnku zagotuj tyle wody, aby przykryła jajka.', null::text, false),
-         (2::smallint, 'Ostrożnie włóż jajka do wrzątku i gotuj 9 minut od zanurzenia.', null::text, false),
-         (3::smallint, 'Schłodź jajka pod zimną wodą, obierz i pokrój w ćwiartki.', 'żółtka są całkowicie ścięte'::text, false),
-         (4::smallint, 'Dodaj jajka i fetę do warzyw. Skrop oliwą, dopraw solą oraz pieprzem i delikatnie wymieszaj.', null::text, true)
+         (1::smallint, 'Zagotuj w garnku wodę przykrywającą jajka. Włóż je ostrożnie i gotuj przez 9–10 minut przy łagodnym wrzeniu, licząc od włożenia. Schłodź zimną wodą i obierz.', null::text, false),
+         (2::smallint, 'Pokrój jajka w ćwiartki.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Sałatka z jajkiem, fetą i warzywami') and e.kolejnosc = 2;
+
+insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
+select p.id, 3, 'Łączenie sałatki', 2 from przepisy p where lower(p.nazwa) = lower('Sałatka z jajkiem, fetą i warzywami');
+
+insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
+select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
+  from etapy e join przepisy p on p.id = e.przepis_id,
+       (values
+         (1::smallint, 'Połącz warzywa, jajka i fetę. Skrop oliwą, spróbuj i dopraw odmierzoną solą oraz pieprzem; feta jest słona. Delikatnie wymieszaj.', null::text, false)
+       ) as v(nr, tresc, sygnal, uwaga)
+ where lower(p.nazwa) = lower('Sałatka z jajkiem, fetą i warzywami') and e.kolejnosc = 3;
 
 -- -------------------------------------------------------------------------
 --  Sałatka z jarmużu, jabłka i orzechów
@@ -8846,16 +9289,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Sałatka z jarmużu, jabłka i orzechów', 'Chrupiąca sałatka z jarmużu, jabłka, pomarańczy i orzechów w cytrynowo-musztardowym dressingu. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Sałatka z jarmużu, jabłka i orzechów', 'Chrupiąca sałatka z jarmużu, jabłka, pomarańczy i orzechów w cytrynowo-musztardowym dressingu. Ilości składników dobierz z listy dla przygotowywanej liczby porcji.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['kolacja', 'dodatek']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['salatka']::rodzaj_dania[],
   1, 'prywatna',
   'waga', 406, 1, 1,
   15, 0,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Przechowuj w lodówce do 1 dnia. Orzechy dodaj przed podaniem.',
+  'Przechowuj w lodówce do 1 dnia. Orzechy dodaj przed podaniem. Lodówka: do 4°C.',
   false, 'Twardy jarmuż masuj dłużej z dressingiem. Zbyt kwaśny sos złagodź sokiem z pomarańczy.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -8925,18 +9368,30 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Sałatka z jarmużu, jabłka i orzechów') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie', 15 from przepisy p where lower(p.nazwa) = lower('Sałatka z jarmużu, jabłka i orzechów');
+select p.id, 1, 'Przygotowanie składników', 10 from przepisy p where lower(p.nazwa) = lower('Sałatka z jarmużu, jabłka i orzechów');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Usuń twarde łodygi jarmużu i porwij liście. Jabłko pokrój, a pomarańczę podziel na cząstki.', null::text, false),
-         (2::smallint, 'Oliwę wymieszaj z cytryną, sokiem z pomarańczy, musztardą, solą i pieprzem.', null::text, false),
-         (3::smallint, 'Jarmuż masuj z dressingiem przez 2–3 minuty.', 'liście stają się ciemniejsze i delikatniejsze'::text, true),
-         (4::smallint, 'Dodaj owoce i orzechy.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj jarmuż, jabłko, pomarańczę i cytrynę. Usuń łodygi jarmużu i porwij liście; usuń gniazdo nasienne jabłka i pokrój miąższ.', null::text, false),
+         (3::smallint, 'Obierz pomarańczę i podziel na cząstki, zachowaj wypływający sok. Wyciśnij i odmierz sok z cytryny. Posiekaj orzechy.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Sałatka z jarmużu, jabłka i orzechów') and e.kolejnosc = 1;
+
+insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
+select p.id, 2, 'Łączenie sałatki', 5 from przepisy p where lower(p.nazwa) = lower('Sałatka z jarmużu, jabłka i orzechów');
+
+insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
+select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
+  from etapy e join przepisy p on p.id = e.przepis_id,
+       (values
+         (1::smallint, 'Wymieszaj oliwę z sokiem z cytryny, zachowanym sokiem pomarańczowym, musztardą, solą i pieprzem.', null::text, false),
+         (2::smallint, 'Masuj liście jarmużu z dressingiem przez 2–3 minuty.', 'liście ciemnieją i stają się delikatniejsze'::text, true),
+         (3::smallint, 'Dodaj jabłko, cząstki pomarańczy i orzechy. Wymieszaj i podaj.', null::text, false)
+       ) as v(nr, tresc, sygnal, uwaga)
+ where lower(p.nazwa) = lower('Sałatka z jarmużu, jabłka i orzechów') and e.kolejnosc = 2;
 
 -- -------------------------------------------------------------------------
 --  Sałatka z komosy, buraka i koziego sera
@@ -8947,16 +9402,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Sałatka z komosy, buraka i koziego sera', 'Sałatka z komosy ryżowej, pieczonego buraka, koziego sera, rukoli i orzechów. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Sałatka z komosy, buraka i koziego sera', 'Sałatka z komosy ryżowej, pieczonego buraka, koziego sera, rukoli i orzechów. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['salatka']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 502, 1, 1,
-  12, 35,
+  12, 63,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Piekarnik', 'Blacha do pieczenia', 'Garnek 2 l', 'miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Piekarnik', 'Blacha do pieczenia', 'Garnek 2 l', 'Miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna', 'Sitko', 'Widelec']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Przechowuj w lodówce do 2 dni. Rukolę i dressing najlepiej trzymaj osobno.',
+  'Przechowuj w lodówce do 2 dni. Rukolę i dressing najlepiej trzymaj osobno. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
   false, 'Jeśli burak pozostaje twardy, pokrój go drobniej i dopiecz. Za słony ser zrównoważ dodatkową komosą.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -9036,28 +9491,42 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Sałatka z komosy, buraka i koziego sera') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Pieczenie i gotowanie', 35 from przepisy p where lower(p.nazwa) = lower('Sałatka z komosy, buraka i koziego sera');
+select p.id, 1, 'Przygotowanie składników', 12 from przepisy p where lower(p.nazwa) = lower('Sałatka z komosy, buraka i koziego sera');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Piekarnik rozgrzej do 200°C. Buraka wymieszaj z połową oliwy i tymiankiem, piecz około 30 minut.', null::text, false),
-         (2::smallint, 'Komosę opłucz, ugotuj i ostudź.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj i obierz buraki, pokrój w kostkę około 1 cm, wymieszaj z połową oliwy oraz tymiankiem. Opłucz komosę na sitku.', null::text, false),
+         (3::smallint, 'Umyj i osusz rukolę. Umyj jabłko, usuń gniazdo nasienne i pokrój. Posiekaj orzechy, podziel kozi ser. Odmierz ocet oraz pozostałą oliwę.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Sałatka z komosy, buraka i koziego sera') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Składanie sałatki', 12 from przepisy p where lower(p.nazwa) = lower('Sałatka z komosy, buraka i koziego sera');
+select p.id, 2, 'Pieczenie i gotowanie', 50 from przepisy p where lower(p.nazwa) = lower('Sałatka z komosy, buraka i koziego sera');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Połącz komosę, buraka, rukolę, jabłko i orzechy.', null::text, false),
-         (2::smallint, 'Dodaj kozi ser. Skrop pozostałą oliwą i octem, dopraw i delikatnie wymieszaj.', null::text, true)
+         (1::smallint, 'Rozgrzej piekarnik do 200°C, grzanie góra–dół, zwykle około 10 minut. Rozłóż buraki na blasze i piecz 30–40 minut, mieszając w połowie.', null::text, false),
+         (2::smallint, 'Równolegle ugotuj komosę przez czas z opakowania, w dodatkowej wodzie. Odcedź, rozsyp cienko na talerzu do przestudzenia.', null::text, false),
+         (3::smallint, 'Sprawdź buraki widelcem; muszą być miękkie.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Sałatka z komosy, buraka i koziego sera') and e.kolejnosc = 2;
+
+insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
+select p.id, 3, 'Studzenie i łączenie', 13 from przepisy p where lower(p.nazwa) = lower('Sałatka z komosy, buraka i koziego sera');
+
+insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
+select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
+  from etapy e join przepisy p on p.id = e.przepis_id,
+       (values
+         (1::smallint, 'Przestudź buraki rozłożone na talerzu przez około 10 minut, aby nie zwiędła rukola.', null::text, false),
+         (2::smallint, 'Połącz letnią lub chłodną komosę i buraki z rukolą, jabłkiem, orzechami oraz kozim serem. Dodaj pozostałą oliwę, ocet, sól i pieprz.', null::text, false)
+       ) as v(nr, tresc, sygnal, uwaga)
+ where lower(p.nazwa) = lower('Sałatka z komosy, buraka i koziego sera') and e.kolejnosc = 3;
 
 -- -------------------------------------------------------------------------
 --  Sałatka z pieczonym burakiem i fetą
@@ -9068,16 +9537,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Sałatka z pieczonym burakiem i fetą', 'Sałatka z pieczonym burakiem, fetą, rukolą, orzechami i czerwoną cebulą. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Sałatka z pieczonym burakiem i fetą', 'Sałatka z pieczonym burakiem, fetą, rukolą, orzechami i czerwoną cebulą. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['salatka']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 432, 1, 1,
-  10, 35,
+  10, 63,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Piekarnik', 'Blacha do pieczenia', 'miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Piekarnik', 'Blacha do pieczenia', 'Miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Pieczone buraki przechowuj w lodówce do 2 dni. Rukolę i dressing dodaj przed jedzeniem.',
+  'Pieczone buraki przechowuj w lodówce do 2 dni. Rukolę i dressing dodaj przed jedzeniem. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
   false, 'Twardego buraka dopiecz pod przykryciem. Za słoną sałatkę zrównoważ większą ilością rukoli i buraka.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -9147,28 +9616,41 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Sałatka z pieczonym burakiem i fetą') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Pieczenie buraka', 35 from przepisy p where lower(p.nazwa) = lower('Sałatka z pieczonym burakiem i fetą');
+select p.id, 1, 'Przygotowanie składników', 10 from przepisy p where lower(p.nazwa) = lower('Sałatka z pieczonym burakiem i fetą');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Piekarnik rozgrzej do 200°C. Buraka wymieszaj z połową oliwy i tymiankiem.', null::text, false),
-         (2::smallint, 'Piecz około 30–35 minut, a następnie lekko ostudź.', 'burak jest miękki i lekko zrumieniony'::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj i obierz buraki, pokrój w kostkę około 1 cm. Wymieszaj z połową oliwy i tymiankiem.', null::text, false),
+         (3::smallint, 'Umyj i osusz rukolę. Obierz i cienko pokrój cebulę. Pokrusz fetę i posiekaj orzechy. Odmierz ocet i pozostałą oliwę.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Sałatka z pieczonym burakiem i fetą') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Składanie sałatki', 10 from przepisy p where lower(p.nazwa) = lower('Sałatka z pieczonym burakiem i fetą');
+select p.id, 2, 'Pieczenie', 50 from przepisy p where lower(p.nazwa) = lower('Sałatka z pieczonym burakiem i fetą');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Połącz rukolę, buraka, cebulę i orzechy.', null::text, false),
-         (2::smallint, 'Dodaj fetę, pozostałą oliwę, ocet i pieprz. Delikatnie wymieszaj.', null::text, true)
+         (1::smallint, 'Rozgrzej piekarnik do 200°C, grzanie góra–dół, zwykle około 10 minut.', null::text, false),
+         (2::smallint, 'Rozłóż buraki na blasze, piecz 30–40 minut, obracając w połowie.', 'buraki łatwo dają się nakłuć widelcem'::text, true)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Sałatka z pieczonym burakiem i fetą') and e.kolejnosc = 2;
+
+insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
+select p.id, 3, 'Studzenie i łączenie', 13 from przepisy p where lower(p.nazwa) = lower('Sałatka z pieczonym burakiem i fetą');
+
+insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
+select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
+  from etapy e join przepisy p on p.id = e.przepis_id,
+       (values
+         (1::smallint, 'Przestudź buraki przez około 10 minut na talerzu; nie dodawaj gorących do rukoli.', null::text, false),
+         (2::smallint, 'Połącz rukolę, buraki, cebulę, orzechy i fetę. Skrop pozostałą oliwą i octem, dopraw pieprzem.', null::text, false)
+       ) as v(nr, tresc, sygnal, uwaga)
+ where lower(p.nazwa) = lower('Sałatka z pieczonym burakiem i fetą') and e.kolejnosc = 3;
 
 -- -------------------------------------------------------------------------
 --  Serek wiejski z owocami i orzechami
@@ -9179,16 +9661,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Serek wiejski z owocami i orzechami', 'Serek wiejski z bananem, borówkami, orzechami i cynamonem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Serek wiejski z owocami i orzechami', 'Serek wiejski z bananem, borówkami, orzechami i cynamonem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'dodatek']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['na_slodko']::rodzaj_dania[],
   1, 'prywatna',
   'waga', 361, 1, 1,
   5, 0,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Przechowuj w lodówce do 1 dnia. Orzechy dodaj tuż przed jedzeniem.',
+  'Przechowuj w lodówce do 1 dnia. Orzechy dodaj tuż przed jedzeniem. Lodówka: do 4°C.',
   false, 'Jeśli serek jest zbyt rzadki, odlej część płynu. Mało słodki smak popraw bardziej dojrzałym bananem.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -9238,17 +9720,27 @@ select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Serek wiejski z owocami i orzechami') and sk.nazwa = 'Cynamon mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie', 5 from przepisy p where lower(p.nazwa) = lower('Serek wiejski z owocami i orzechami');
+select p.id, 1, 'Przygotowanie składników', 3 from przepisy p where lower(p.nazwa) = lower('Serek wiejski z owocami i orzechami');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Banana pokrój w plasterki, a orzechy grubo posiekaj.', null::text, false),
-         (2::smallint, 'Serek przełóż do miski i dodaj owoce.', null::text, false),
-         (3::smallint, 'Posyp cynamonem i orzechami tuż przed podaniem.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj i osusz borówki. Obierz i pokrój banana. Posiekaj orzechy. Odmierz serek oraz cynamon.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Serek wiejski z owocami i orzechami') and e.kolejnosc = 1;
+
+insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
+select p.id, 2, 'Podanie', 2 from przepisy p where lower(p.nazwa) = lower('Serek wiejski z owocami i orzechami');
+
+insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
+select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
+  from etapy e join przepisy p on p.id = e.przepis_id,
+       (values
+         (1::smallint, 'Przełóż serek do miski, dodaj owoce. Posyp orzechami i cynamonem.', null::text, false)
+       ) as v(nr, tresc, sygnal, uwaga)
+ where lower(p.nazwa) = lower('Serek wiejski z owocami i orzechami') and e.kolejnosc = 2;
 
 -- -------------------------------------------------------------------------
 --  Serek wiejski z pomidorem, ogórkiem i pestkami dyni
@@ -9259,16 +9751,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Serek wiejski z pomidorem, ogórkiem i pestkami dyni', 'Serek wiejski ze świeżym pomidorem, ogórkiem i pestkami dyni, podany z dwiema kromkami chleba żytniego. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Serek wiejski z pomidorem, ogórkiem i pestkami dyni', 'Serek wiejski ze świeżym pomidorem, ogórkiem i pestkami dyni, podany z dwiema kromkami chleba żytniego. Ilości składników dobierz z listy dla przygotowywanej liczby porcji.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['salatka']::rodzaj_dania[],
   1, 'prywatna',
   'waga', 516, 1, 1,
   7, 0,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['miska', 'Widelec', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Miska', 'Widelec', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Serek z warzywami przechowuj w zamkniętym pojemniku w lodówce do 1 dnia. Pestki dyni i pieczywo dodaj dopiero przed jedzeniem.',
+  'Serek z warzywami przechowuj w zamkniętym pojemniku w lodówce do 1 dnia. Pestki dyni i pieczywo dodaj dopiero przed jedzeniem. Lodówka: do 4°C.',
   false, 'Jeśli całość puściła dużo wody, odlej nadmiar płynu. Jeśli smak jest zbyt łagodny, dodaj odrobinę soli i pieprzu.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -9328,17 +9820,28 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Serek wiejski z pomidorem, ogórkiem i pestkami dyni') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie składników', 7 from przepisy p where lower(p.nazwa) = lower('Serek wiejski z pomidorem, ogórkiem i pestkami dyni');
+select p.id, 1, 'Przygotowanie składników', 5 from przepisy p where lower(p.nazwa) = lower('Serek wiejski z pomidorem, ogórkiem i pestkami dyni');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Pomidora i ogórek pokrój w kostkę.', null::text, false),
-         (2::smallint, 'Serek wiejski przełóż do miski, dodaj warzywa, dopraw solą oraz pieprzem i delikatnie wymieszaj widelcem.', null::text, true),
-         (3::smallint, 'Posyp pestkami dyni i podaj od razu z dwiema kromkami chleba.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj pomidora i ogórek, pokrój w kostkę. Przygotuj pieczywo, serek i pestki dyni.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Serek wiejski z pomidorem, ogórkiem i pestkami dyni') and e.kolejnosc = 1;
+
+insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
+select p.id, 2, 'Łączenie i podanie', 2 from przepisy p where lower(p.nazwa) = lower('Serek wiejski z pomidorem, ogórkiem i pestkami dyni');
+
+insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
+select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
+  from etapy e join przepisy p on p.id = e.przepis_id,
+       (values
+         (1::smallint, 'Przełóż serek do miski, dodaj warzywa i delikatnie wymieszaj. Dopraw odmierzoną solą i pieprzem.', null::text, false),
+         (2::smallint, 'Posyp pestkami dyni i podaj z pieczywem w ilości wskazanej na liście.', null::text, false)
+       ) as v(nr, tresc, sygnal, uwaga)
+ where lower(p.nazwa) = lower('Serek wiejski z pomidorem, ogórkiem i pestkami dyni') and e.kolejnosc = 2;
 
 -- -------------------------------------------------------------------------
 --  Skyr kakaowy z bananem i masłem orzechowym
@@ -9349,16 +9852,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Skyr kakaowy z bananem i masłem orzechowym', 'Kakaowy skyr z bananem i masłem orzechowym, przygotowany bez gotowania. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Skyr kakaowy z bananem i masłem orzechowym', 'Kakaowy skyr z bananem i masłem orzechowym, przygotowany bez gotowania. Ilości składników dobierz z listy dla przygotowywanej liczby porcji.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'dodatek']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['na_slodko']::rodzaj_dania[],
   1, 'prywatna',
   'waga', 380, 1, 1,
   5, 0,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['miska', 'Widelec', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Miska', 'Widelec', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Przechowuj w zamkniętym pojemniku w lodówce do 1 dnia.',
+  'Przechowuj w zamkniętym pojemniku w lodówce do 1 dnia. Lodówka: do 4°C.',
   false, 'Za gęsty skyr rozcieńcz mlekiem. Jeśli kakao jest zbyt gorzkie, wmieszaj część rozgniecionego banana.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -9408,17 +9911,28 @@ select p.id, sk.id, 30, 'g'::jednostka_miary, 30,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Skyr kakaowy z bananem i masłem orzechowym') and sk.nazwa = 'Mleko 2%';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie', 5 from przepisy p where lower(p.nazwa) = lower('Skyr kakaowy z bananem i masłem orzechowym');
+select p.id, 1, 'Przygotowanie składników', 3 from przepisy p where lower(p.nazwa) = lower('Skyr kakaowy z bananem i masłem orzechowym');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Połowę banana rozgnieć, a połowę pokrój w plasterki.', null::text, false),
-         (2::smallint, 'Skyr wymieszaj z kakao, mlekiem i rozgniecionym bananem.', null::text, true),
-         (3::smallint, 'Dodaj masło orzechowe i plasterki banana.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Obierz przygotowanego banana. Połowę odmierzonego miąższu rozgnieć, pozostałą część pokrój w plasterki. Odmierz skyr, kakao, mleko i masło orzechowe.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Skyr kakaowy z bananem i masłem orzechowym') and e.kolejnosc = 1;
+
+insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
+select p.id, 2, 'Łączenie i podanie', 2 from przepisy p where lower(p.nazwa) = lower('Skyr kakaowy z bananem i masłem orzechowym');
+
+insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
+select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
+  from etapy e join przepisy p on p.id = e.przepis_id,
+       (values
+         (1::smallint, 'Rozprowadź kakao w mleku, dodaj skyr i rozgniecionego banana, wymieszaj.', null::text, false),
+         (2::smallint, 'Dodaj masło orzechowe oraz plasterki banana.', null::text, false)
+       ) as v(nr, tresc, sygnal, uwaga)
+ where lower(p.nazwa) = lower('Skyr kakaowy z bananem i masłem orzechowym') and e.kolejnosc = 2;
 
 -- -------------------------------------------------------------------------
 --  Skyr z owocami, płatkami owsianymi i orzechami
@@ -9429,16 +9943,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Skyr z owocami, płatkami owsianymi i orzechami', 'Skyr z bananem, borówkami, płatkami owsianymi i orzechami włoskimi. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Skyr z owocami, płatkami owsianymi i orzechami', 'Skyr z bananem, borówkami, płatkami owsianymi i orzechami włoskimi. Ilości składników dobierz z listy dla przygotowywanej liczby porcji.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['na_slodko']::rodzaj_dania[],
   1, 'prywatna',
   'waga', 385, 1, 1,
   5, 0,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Przechowuj w zamkniętym pojemniku w lodówce do 1 dnia. Orzechy i płatki dodaj przed jedzeniem, aby pozostały chrupiące.',
+  'Przechowuj w zamkniętym pojemniku w lodówce do 1 dnia. Orzechy i płatki dodaj przed jedzeniem, aby pozostały chrupiące. Lodówka: do 4°C.',
   false, 'Jeśli skyr jest zbyt gęsty, dodaj łyżeczkę wody. Jeśli owoce są kwaśne, rozgnieć część banana i wymieszaj ze skyrem.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -9488,17 +10002,27 @@ select p.id, sk.id, 15, 'g'::jednostka_miary, 15,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Skyr z owocami, płatkami owsianymi i orzechami') and sk.nazwa = 'Orzechy włoskie';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie składników', 5 from przepisy p where lower(p.nazwa) = lower('Skyr z owocami, płatkami owsianymi i orzechami');
+select p.id, 1, 'Przygotowanie składników', 3 from przepisy p where lower(p.nazwa) = lower('Skyr z owocami, płatkami owsianymi i orzechami');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Banana pokrój w plasterki, a orzechy grubo posiekaj.', null::text, false),
-         (2::smallint, 'Skyr przełóż do miski i ułóż na nim banana oraz borówki.', null::text, false),
-         (3::smallint, 'Posyp płatkami owsianymi i orzechami tuż przed podaniem.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj i osusz borówki. Obierz i pokrój banana. Posiekaj orzechy. Odmierz skyr i płatki.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Skyr z owocami, płatkami owsianymi i orzechami') and e.kolejnosc = 1;
+
+insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
+select p.id, 2, 'Podanie', 2 from przepisy p where lower(p.nazwa) = lower('Skyr z owocami, płatkami owsianymi i orzechami');
+
+insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
+select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
+  from etapy e join przepisy p on p.id = e.przepis_id,
+       (values
+         (1::smallint, 'Przełóż skyr do miski, dodaj owoce. Posyp płatkami i orzechami bezpośrednio przed jedzeniem.', null::text, false)
+       ) as v(nr, tresc, sygnal, uwaga)
+ where lower(p.nazwa) = lower('Skyr z owocami, płatkami owsianymi i orzechami') and e.kolejnosc = 2;
 
 -- -------------------------------------------------------------------------
 --  Stek z tuńczyka z fasolką szparagową i ziemniakami
@@ -9509,15 +10033,15 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Stek z tuńczyka z fasolką szparagową i ziemniakami', 'Krótko smażony stek z tuńczyka z fasolką szparagową i gotowanymi ziemniakami. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Stek z tuńczyka z fasolką szparagową i ziemniakami', 'Krótko smażony stek z tuńczyka z fasolką szparagową i gotowanymi ziemniakami. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   1, 'prywatna',
   'waga', 642, 1, 1,
-  10, 20,
+  10, 38,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Patelnia 28 cm', 'Garnek 3 l', 'Garnek 2 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Patelnia 28 cm', 'Garnek 3 l', 'Garnek 2 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna', 'Durszlak', 'Termometr do mięsa']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Najlepiej zjedz od razu. Ewentualną pozostałość przechowuj w lodówce do 1 dnia.',
+  'Najlepiej zjedz od razu. Ewentualną pozostałość przechowuj w lodówce do 1 dnia. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
   false, 'Jeśli tuńczyk jest przesmażony, pokrój go cienko i skrop oliwą z cytryną. Twardą fasolkę gotuj dłużej.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -9581,26 +10105,31 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Stek z tuńczyka z fasolką szparagową i ziemniakami') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Gotowanie dodatków', 20 from przepisy p where lower(p.nazwa) = lower('Stek z tuńczyka z fasolką szparagową i ziemniakami');
+select p.id, 1, 'Przygotowanie składników', 10 from przepisy p where lower(p.nazwa) = lower('Stek z tuńczyka z fasolką szparagową i ziemniakami');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Ziemniaki ugotuj do miękkości. Fasolkę ugotuj tak, aby pozostała lekko jędrna.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj i obierz ziemniaki, pokrój na kawałki około 2 cm. Umyj fasolkę, odetnij końcówki. Obierz i drobno posiekaj czosnek.', null::text, false),
+         (3::smallint, 'Umyj cytrynę, przygotuj sok z odmierzonej części. Wymieszaj sok z połową oliwy oraz czosnkiem.', null::text, false),
+         (4::smallint, 'Osusz stek z tuńczyka grubości około 2 cm, posmaruj pozostałą oliwą, dopraw solą i pieprzem. Umyj przybory po rybie.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Stek z tuńczyka z fasolką szparagową i ziemniakami') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Smażenie tuńczyka', 10 from przepisy p where lower(p.nazwa) = lower('Stek z tuńczyka z fasolką szparagową i ziemniakami');
+select p.id, 2, 'Gotowanie dodatków i smażenie', 38 from przepisy p where lower(p.nazwa) = lower('Stek z tuńczyka z fasolką szparagową i ziemniakami');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Tuńczyka osusz, posmaruj połową oliwy i dopraw solą oraz pieprzem.', null::text, false),
-         (2::smallint, 'Smaż na mocno rozgrzanej patelni około 2 minuty z każdej strony.', 'środek pozostaje różowy i soczysty'::text, true),
-         (3::smallint, 'Pozostałą oliwę połącz z cytryną i czosnkiem. Polej nią fasolkę oraz ziemniaki i podaj z tuńczykiem.', null::text, false)
+         (1::smallint, 'Zalej ziemniaki wodą, zagotuj przez około 5 minut i gotuj 15–20 minut do miękkości. Odcedź i przykryj.', null::text, false),
+         (2::smallint, 'Równolegle zagotuj wodę w drugim garnku. Dodaj fasolkę, gotuj 8–12 minut do miękkości, zachowując lekki opór przy gryzieniu; odcedź.', null::text, false),
+         (3::smallint, 'Gdy zwolni się palnik, rozgrzej patelnię przez 1–2 minuty. Smaż tuńczyka około 3 minuty z każdej strony.', null::text, false),
+         (4::smallint, 'Sprawdź temperaturę najgrubszego miejsca; w razie potrzeby dosmaż po 1 minucie na mniejszym ogniu.', 'ryba ma co najmniej 63°C, bez surowego środka'::text, true),
+         (5::smallint, 'Polej ziemniaki oraz fasolkę przygotowaną oliwą z cytryną i czosnkiem, podaj z tuńczykiem.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Stek z tuńczyka z fasolką szparagową i ziemniakami') and e.kolejnosc = 2;
 
@@ -9613,16 +10142,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Tabbouleh z kaszy bulgur i ciecierzycy', 'Świeża sałatka z kaszy bulgur, ciecierzycy, pomidora, ogórka, natki i mięty. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Tabbouleh z kaszy bulgur i ciecierzycy', 'Świeża sałatka z kaszy bulgur, ciecierzycy, pomidora, ogórka, natki i mięty. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['salatka']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 546, 1, 1,
-  15, 12,
+  15, 23,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Garnek 2 l', 'Sitko', 'miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Garnek 2 l', 'Sitko', 'Miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Przechowuj w zamkniętym pojemniku w lodówce do 2 dni.',
+  'Przechowuj w zamkniętym pojemniku w lodówce do 2 dni. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
   false, 'Jeśli sałatka puściła wodę, odlej ją i dodaj świeże zioła. Za suchą sałatkę skrop cytryną i oliwą.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -9702,28 +10231,39 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Tabbouleh z kaszy bulgur i ciecierzycy') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Gotowanie kaszy', 12 from przepisy p where lower(p.nazwa) = lower('Tabbouleh z kaszy bulgur i ciecierzycy');
+select p.id, 1, 'Przygotowanie składników', 15 from przepisy p where lower(p.nazwa) = lower('Tabbouleh z kaszy bulgur i ciecierzycy');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Kaszę bulgur ugotuj, odcedź i całkowicie ostudź.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Opłucz i odsącz ciecierzycę. Umyj pomidora, ogórek, natkę, miętę i cytrynę.', null::text, false),
+         (3::smallint, 'Pokrój pomidora i ogórek w drobną kostkę. Obierz i posiekaj cebulę. Posiekaj osuszone zioła. Wyciśnij i odmierz sok z cytryny, odmierz kaszę.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Tabbouleh z kaszy bulgur i ciecierzycy') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Przygotowanie sałatki', 15 from przepisy p where lower(p.nazwa) = lower('Tabbouleh z kaszy bulgur i ciecierzycy');
+select p.id, 2, 'Gotowanie i chłodzenie kaszy', 20 from przepisy p where lower(p.nazwa) = lower('Tabbouleh z kaszy bulgur i ciecierzycy');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Warzywa pokrój w drobną kostkę, a zioła posiekaj.', null::text, false),
-         (2::smallint, 'Połącz kaszę z ciecierzycą, warzywami i ziołami.', null::text, false),
-         (3::smallint, 'Dodaj cytrynę, oliwę, sól oraz pieprz i wymieszaj.', null::text, true)
+         (1::smallint, 'Zagotuj wodę i gotuj bulgur przez czas z opakowania. Odcedź, krótko przepłucz chłodną wodą i dokładnie odsącz. Upewnij się, że kasza nie jest gorąca.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Tabbouleh z kaszy bulgur i ciecierzycy') and e.kolejnosc = 2;
+
+insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
+select p.id, 3, 'Łączenie sałatki', 3 from przepisy p where lower(p.nazwa) = lower('Tabbouleh z kaszy bulgur i ciecierzycy');
+
+insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
+select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
+  from etapy e join przepisy p on p.id = e.przepis_id,
+       (values
+         (1::smallint, 'Połącz kaszę, ciecierzycę, warzywa i zioła. Dodaj sok z cytryny, oliwę, sól i pieprz. Wymieszaj.', null::text, false)
+       ) as v(nr, tresc, sygnal, uwaga)
+ where lower(p.nazwa) = lower('Tabbouleh z kaszy bulgur i ciecierzycy') and e.kolejnosc = 3;
 
 -- -------------------------------------------------------------------------
 --  Tofu z brokułem i ryżem
@@ -9734,16 +10274,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Tofu z brokułem i ryżem', 'Smażone tofu z brokułem, imbirem, czosnkiem i sezamem, podane z ryżem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Tofu z brokułem i ryżem', 'Smażone tofu z brokułem, imbirem, czosnkiem i sezamem, podane z ryżem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['azjatycka']::rodzaj_kuchni[],
   array['kasza_ryz']::rodzaj_dania[],
-  2, 'prywatna',
-  'waga', 518, 1, 1,
-  12, 18,
+  1, 'prywatna',
+  'waga', 548, 1, 1,
+  12, 25,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Patelnia 28 cm', 'Garnek 2 l', 'Tarka o drobnych oczkach', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Patelnia 28 cm', 'Garnek 2 l', 'Tarka o drobnych oczkach', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna', 'Sitko']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Tofu z brokułem i ryż przechowuj w lodówce do 2 dni. Odgrzewaj krótko na patelni.',
+  'Porcję z ugotowanym ryżem szybko schłodź w płytkim pojemniku i wstaw do lodówki, najlepiej w ciągu godziny. Przechowuj do 24 godzin. Odgrzewaj tylko raz, do gorącego środka całej porcji. Lodówka: do 4°C.',
   false, 'Jeśli tofu nie rumieni się, osusz je i smaż partiami. Za słony sos złagodź niewielką ilością wody.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -9811,30 +10351,38 @@ insert into przepis_skladniki
 select p.id, sk.id, 15, 'g'::jednostka_miary, 15,
        'pokrojona', null, sk.rola, sk.mozna_dzielic, 9
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Tofu z brokułem i ryżem') and sk.nazwa = 'Cebula dymka, surowa';
+insert into przepis_skladniki
+  (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
+select p.id, sk.id, 30, 'ml'::jednostka_miary, 30,
+       'do krótkiego duszenia brokułu', null, sk.rola, sk.mozna_dzielic, 10
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Tofu z brokułem i ryżem') and sk.nazwa = 'woda';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie', 12 from przepisy p where lower(p.nazwa) = lower('Tofu z brokułem i ryżem');
+select p.id, 1, 'Przygotowanie składników', 12 from przepisy p where lower(p.nazwa) = lower('Tofu z brokułem i ryżem');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Ryż ugotuj. Tofu dokładnie osusz i pokrój w kostkę.', null::text, false),
-         (2::smallint, 'Brokuł podziel na małe różyczki, czosnek posiekaj, a imbir zetrzyj.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Opłucz ryż. Odsącz i osusz tofu, pokrój w kostkę około 2 cm.', null::text, false),
+         (3::smallint, 'Umyj brokuł, podziel na małe różyczki około 2 cm. Obierz czosnek i imbir, posiekaj czosnek, zetrzyj imbir. Umyj i pokrój dymkę. Odmierz sos sojowy oraz sezam.', null::text, false),
+         (4::smallint, 'Odmierz wodę do brokułu z listy składników; woda do gotowania ryżu jest dodatkowa i zostanie odlana.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Tofu z brokułem i ryżem') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Smażenie', 18 from przepisy p where lower(p.nazwa) = lower('Tofu z brokułem i ryżem');
+select p.id, 2, 'Gotowanie ryżu i smażenie', 25 from przepisy p where lower(p.nazwa) = lower('Tofu z brokułem i ryżem');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Na połowie oleju smaż tofu przez 6–8 minut, obracając je, aż będzie rumiane. Przełóż je na bok.', 'kostki mają złote krawędzie'::text, false),
-         (2::smallint, 'Dodaj resztę oleju i brokuł. Smaż 5 minut, następnie dodaj czosnek oraz imbir.', null::text, false),
-         (3::smallint, 'Włóż tofu z powrotem, dodaj sos sojowy i wymieszaj.', null::text, true),
-         (4::smallint, 'Podaj z ryżem, sezamem i cebulą dymką.', null::text, false)
+         (1::smallint, 'Na pierwszym palniku zagotuj wodę w garnku. Dodaj ryż i gotuj przez czas wskazany na opakowaniu; po ugotowaniu odcedź. Wody użyj tyle, by ziarna były zanurzone i swobodnie się gotowały. Nastaw minutnik; równolegle wykonuj kolejne czynności na drugim palniku. Woda do gotowania jest dodatkowa i zostanie odlana.', null::text, false),
+         (2::smallint, 'Na drugim palniku rozgrzej połowę oleju przez 1 minutę. Smaż tofu przez 6–8 minut, obracając; przełóż na talerz.', null::text, false),
+         (3::smallint, 'Dodaj pozostały olej i brokuł, smaż 2 minuty. Dolej odmierzoną wodę do brokułu i przykryj; duś 3–4 minuty. Odkryj i odparuj resztę płynu.', null::text, false),
+         (4::smallint, 'Dodaj czosnek oraz imbir, smaż 30 sekund. Włóż tofu, dodaj sos sojowy i podgrzewaj 1 minutę.', null::text, false),
+         (5::smallint, 'Podaj z ryżem, sezamem i dymką.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Tofu z brokułem i ryżem') and e.kolejnosc = 2;
 
@@ -9847,15 +10395,15 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Tofucznica ze szpinakiem i pomidorem', 'Szybka tofucznica ze szpinakiem, pomidorem, cebulą i kurkumą, podana z pieczywem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Tofucznica ze szpinakiem i pomidorem', 'Szybka tofucznica ze szpinakiem, pomidorem, cebulą i kurkumą, podana z pieczywem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   1, 'prywatna',
   'waga', 488, 1, 1,
-  7, 8,
+  7, 11,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Patelnia 24 cm', 'miska', 'Widelec', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Patelnia 24 cm', 'Miska', 'Widelec', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Najlepiej zjedz od razu. Pozostałość można przechować w lodówce do 1 dnia.',
+  'Najlepiej zjedz od razu. Pozostałość można przechować w lodówce do 1 dnia. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
   false, 'Jeśli tofucznica jest sucha, dodaj łyżkę wody. Jeżeli pomidor puścił dużo soku, smaż chwilę bez przykrycia.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -9924,26 +10472,29 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Tofucznica ze szpinakiem i pomidorem') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie', 7 from przepisy p where lower(p.nazwa) = lower('Tofucznica ze szpinakiem i pomidorem');
+select p.id, 1, 'Przygotowanie składników', 7 from przepisy p where lower(p.nazwa) = lower('Tofucznica ze szpinakiem i pomidorem');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Tofu rozgnieć widelcem. Pomidora pokrój w kostkę, a cebulę posiekaj.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Odsącz tofu i rozgnieć widelcem w misce. Umyj szpinak i pomidora; osusz szpinak, pokrój pomidora w kostkę.', null::text, false),
+         (3::smallint, 'Obierz i posiekaj cebulę. Przygotuj pieczywo.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Tofucznica ze szpinakiem i pomidorem') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Smażenie', 8 from przepisy p where lower(p.nazwa) = lower('Tofucznica ze szpinakiem i pomidorem');
+select p.id, 2, 'Smażenie', 11 from przepisy p where lower(p.nazwa) = lower('Tofucznica ze szpinakiem i pomidorem');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Na oleju smaż cebulę 2 minuty. Dodaj tofu, kurkumę, sól i pieprz.', null::text, false),
-         (2::smallint, 'Dodaj pomidora i szpinak. Smaż, mieszając, jeszcze 4–5 minut.', 'szpinak zwiędł, a tofu jest gorące'::text, true),
-         (3::smallint, 'Podaj bezpośrednio po przygotowaniu z kromkami chleba żytniego.', null::text, false)
+         (1::smallint, 'Rozgrzej olej przez 1 minutę. Smaż cebulę 3 minuty.', null::text, false),
+         (2::smallint, 'Dodaj pomidora i smaż 2–3 minuty, odparowując nadmiar płynu. Dodaj tofu i kurkumę, podgrzewaj 2 minuty.', null::text, false),
+         (3::smallint, 'Dodaj szpinak i smaż 1–2 minuty, tylko do zwiędnięcia.', 'tofu jest gorące, szpinak zwiędł, bez kałuży płynu'::text, true),
+         (4::smallint, 'Dopraw solą i pieprzem, podaj z pieczywem.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Tofucznica ze szpinakiem i pomidorem') and e.kolejnosc = 2;
 
@@ -9956,12 +10507,12 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Tortilla z Goudą, szpinakiem i pomidorem', 'Ciepła pełnoziarnista tortilla z roztopioną Goudą, szpinakiem i pomidorem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Tortilla z Goudą, szpinakiem i pomidorem', 'Ciepła pełnoziarnista tortilla z roztopioną Goudą, szpinakiem i pomidorem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['kanapki']::rodzaj_dania[],
   0, 'prywatna',
   'waga', 336, 1, 1,
-  7, 8,
+  7, 16,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Patelnia 24 cm', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
@@ -10030,25 +10581,28 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Tortilla z Goudą, szpinakiem i pomidorem') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie farszu', 7 from przepisy p where lower(p.nazwa) = lower('Tortilla z Goudą, szpinakiem i pomidorem');
+select p.id, 1, 'Przygotowanie składników', 7 from przepisy p where lower(p.nazwa) = lower('Tortilla z Goudą, szpinakiem i pomidorem');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Na oleju zeszklij cebulę, dodaj pomidora i szpinak. Smaż, aż odparuje nadmiar płynu.', 'szpinak jest zwiędnięty, a farsz nie jest wodnisty'::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj i osusz szpinak, umyj pomidora i pokrój w drobną kostkę. Obierz i posiekaj cebulę. Drobno pokrój Goudę. Przygotuj tortille.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Tortilla z Goudą, szpinakiem i pomidorem') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Składanie i opiekanie', 8 from przepisy p where lower(p.nazwa) = lower('Tortilla z Goudą, szpinakiem i pomidorem');
+select p.id, 2, 'Smażenie farszu i opiekanie', 16 from przepisy p where lower(p.nazwa) = lower('Tortilla z Goudą, szpinakiem i pomidorem');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Na tortilli rozłóż farsz i Goudę, dodaj oregano oraz pieprz.', null::text, true),
-         (2::smallint, 'Zawiń tortillę i opiekaj na suchej patelni po 2–3 minuty z każdej strony.', 'tortilla jest rumiana, a ser roztopiony'::text, false)
+         (1::smallint, 'Rozgrzej olej przez 1 minutę. Smaż cebulę 3 minuty, dodaj pomidora i smaż 3–4 minuty, odparowując płyn.', null::text, false),
+         (2::smallint, 'Dodaj szpinak i smaż 1 minutę do zwiędnięcia. Dopraw oregano i pieprzem. Przełóż farsz na talerz i wytrzyj patelnię.', null::text, false),
+         (3::smallint, 'Ogrzej tortillę na suchej patelni po 15–20 sekund z każdej strony. Rozłóż farsz i ser, zostawiając brzegi wolne. Jeśli farszu jest za dużo do zawinięcia, podaj nadmiar obok.', null::text, false),
+         (4::smallint, 'Złóż boki i zwiń. Opiekaj na średnio małym ogniu po 2–3 minuty z każdej strony, aż ser się rozpuści.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Tortilla z Goudą, szpinakiem i pomidorem') and e.kolejnosc = 2;
 
@@ -10061,16 +10615,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Tortilla z hummusem i warzywami', 'Pełnoziarnista tortilla z domowym hummusem, pomidorem, ogórkiem i sałatą. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Tortilla z hummusem i warzywami', 'Pełnoziarnista tortilla z domowym hummusem, pomidorem, ogórkiem i sałatą. Ilości składników dobierz z listy dla przygotowywanej liczby porcji.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['kanapki']::rodzaj_dania[],
   1, 'prywatna',
-  'waga', 475, 1, 1,
-  15, 0,
+  'waga', 505, 1, 1,
+  17, 0,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Blender ręczny', 'miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Blender ręczny', 'Miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna', 'Sitko']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Hummus przechowuj w lodówce do 2 dni. Tortillę złóż bezpośrednio przed jedzeniem.',
+  'Złożoną tortillę przechowuj w lodówce do 1 dnia; najlepiej zjedz od razu. Sam hummus przechowuj do 2 dni i składaj tortillę przed podaniem. Lodówka: do 4°C.',
   false, 'Za gęsty hummus rozcieńcz wodą. Jeśli tortilla mięknie, osusz warzywa i składaj ją tuż przed podaniem.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -10148,27 +10702,34 @@ insert into przepis_skladniki
 select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
        null, null, sk.rola, sk.mozna_dzielic, 11
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Tortilla z hummusem i warzywami') and sk.nazwa = 'Sól kłodawska';
+insert into przepis_skladniki
+  (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
+select p.id, sk.id, 30, 'ml'::jednostka_miary, 30,
+       'do rozluźnienia hummusu; dodawana stopniowo', null, sk.rola, sk.mozna_dzielic, 12
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Tortilla z hummusem i warzywami') and sk.nazwa = 'woda';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie hummusu', 10 from przepisy p where lower(p.nazwa) = lower('Tortilla z hummusem i warzywami');
+select p.id, 1, 'Przygotowanie składników', 10 from przepisy p where lower(p.nazwa) = lower('Tortilla z hummusem i warzywami');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Ciecierzycę, sezam, oliwę, cytrynę, czosnek, kmin i sól zblenduj z odrobiną wody.', 'pasta jest gładka i łatwo się rozsmarowuje'::text, true)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Opłucz i odsącz ciecierzycę. Umyj pomidora, ogórek, sałatę i cytrynę. Osusz sałatę, pokrój warzywa w cienkie paski.', null::text, false),
+         (3::smallint, 'Obierz czosnek, wyciśnij i odmierz sok z cytryny. Odmierz sezam, oliwę i wodę do hummusu. Przygotuj tortille.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Tortilla z hummusem i warzywami') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Składanie tortilli', 5 from przepisy p where lower(p.nazwa) = lower('Tortilla z hummusem i warzywami');
+select p.id, 2, 'Przygotowanie hummusu i zwijanie', 7 from przepisy p where lower(p.nazwa) = lower('Tortilla z hummusem i warzywami');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Warzywa pokrój, a sałatę osusz.', null::text, false),
-         (2::smallint, 'Tortillę posmaruj hummusem, ułóż warzywa i ciasno zawiń.', null::text, false)
+         (1::smallint, 'W wąskim naczyniu zblenduj sezam z oliwą, sokiem z cytryny i częścią wody. Dodaj ciecierzycę, czosnek, kmin i sól; blenduj 2–3 minuty, dodając stopniowo resztę wody. Pasta ma się łatwo rozsmarowywać; drobinki sezamu mogą pozostać.', null::text, false),
+         (2::smallint, 'Posmaruj tortillę hummusem, ułóż sałatę i warzywa, zostawiając wolne brzegi. Zawiń boki i zroluj. Nadmiar hummusu i warzyw, który nie mieści się w tortilli, podaj obok.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Tortilla z hummusem i warzywami') and e.kolejnosc = 2;
 
@@ -10181,14 +10742,14 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Tortilla z jajkiem i szpinakiem', 'Ciepła pełnoziarnista tortilla z jajkiem, szpinakiem, pomidorem i fetą. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Tortilla z jajkiem i szpinakiem', 'Ciepła pełnoziarnista tortilla z jajkiem, szpinakiem, pomidorem i fetą. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['kanapki']::rodzaj_dania[],
   0, 'prywatna',
   'waga', 366, 1, 1,
-  8, 8,
+  8, 12,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Patelnia 24 cm', 'miska', 'Widelec', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Patelnia 24 cm', 'Miska', 'Widelec', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
   'Najlepiej zjedz bezpośrednio po przygotowaniu.',
   false, 'Jeśli tortilla pęka, ogrzej ją chwilę na suchej patelni. Zbyt mokry farsz smaż dłużej bez przykrycia.'
@@ -10255,26 +10816,29 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Tortilla z jajkiem i szpinakiem') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie', 8 from przepisy p where lower(p.nazwa) = lower('Tortilla z jajkiem i szpinakiem');
+select p.id, 1, 'Przygotowanie składników', 8 from przepisy p where lower(p.nazwa) = lower('Tortilla z jajkiem i szpinakiem');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Jajka roztrzep z solą i pieprzem. Pomidora pokrój, a fetę pokrusz.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj i osusz szpinak. Umyj pomidora i pokrój drobno. Pokrusz fetę.', null::text, false),
+         (3::smallint, 'Roztrzep jajka w misce z pieprzem i odmierzoną solą. Przygotuj tortille.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Tortilla z jajkiem i szpinakiem') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Smażenie i zwijanie', 8 from przepisy p where lower(p.nazwa) = lower('Tortilla z jajkiem i szpinakiem');
+select p.id, 2, 'Smażenie i zwijanie', 12 from przepisy p where lower(p.nazwa) = lower('Tortilla z jajkiem i szpinakiem');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Na oleju podsmaż szpinak i pomidora. Dodaj jajka i mieszaj do ścięcia.', null::text, false),
-         (2::smallint, 'Tortillę krótko ogrzej, nałóż farsz i dodaj fetę.', null::text, true),
-         (3::smallint, 'Zawiń boki do środka, zroluj i opiekaj na suchej patelni po około 1 minucie z każdej strony.', 'tortilla trzyma farsz i jest lekko zrumieniona'::text, false)
+         (1::smallint, 'Rozgrzej olej przez 1 minutę. Smaż pomidora 2–3 minuty, aby odparować płyn. Dodaj szpinak i smaż 1 minutę.', null::text, false),
+         (2::smallint, 'Wlej jajka, smaż na małym ogniu 2–3 minuty, mieszając do ścięcia bez płynnego białka. Przełóż farsz na talerz.', null::text, false),
+         (3::smallint, 'Ogrzej tortillę na suchej patelni po 15–20 sekund na stronę. Dodaj farsz oraz fetę, zostawiając wolne brzegi. Nadmiar farszu podaj obok.', null::text, false),
+         (4::smallint, 'Zwiń i opiekaj po 1 minucie z każdej strony na średnio małym ogniu. Podaj od razu.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Tortilla z jajkiem i szpinakiem') and e.kolejnosc = 2;
 
@@ -10287,16 +10851,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Tortilla z kurczakiem, awokado i warzywami', 'Pełnoziarnista tortilla z grillowanym kurczakiem, awokado, pomidorem, ogórkiem i sosem jogurtowym. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Tortilla z kurczakiem, awokado i warzywami', 'Pełnoziarnista tortilla z grillowanym kurczakiem, awokado, pomidorem, ogórkiem i sosem jogurtowym. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['kanapki']::rodzaj_dania[],
   1, 'prywatna',
   'waga', 557, 1, 1,
-  12, 10,
+  12, 13,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Patelnia 24 cm', 'miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Patelnia 24 cm', 'Miska', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna', 'Termometr do mięsa']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Składniki przechowuj osobno w lodówce do 1 dnia. Tortillę składaj przed jedzeniem.',
+  'Składniki przechowuj osobno w lodówce do 1 dnia. Tortillę składaj przed jedzeniem. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
   false, 'Jeśli tortilla pęka, ogrzej ją na suchej patelni. Suchą pierś pokrój cienko i wymieszaj z sosem.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -10381,27 +10945,30 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Tortilla z kurczakiem, awokado i warzywami') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie', 12 from przepisy p where lower(p.nazwa) = lower('Tortilla z kurczakiem, awokado i warzywami');
+select p.id, 1, 'Przygotowanie składników', 12 from przepisy p where lower(p.nazwa) = lower('Tortilla z kurczakiem, awokado i warzywami');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Warzywa pokrój, sałatę osusz, a jogurt wymieszaj z cytryną i częścią przypraw.', null::text, false),
-         (2::smallint, 'Kurczaka natrzyj olejem, papryką, solą i pieprzem.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj warzywa i awokado. Osusz sałatę, pokrój pomidora i ogórek w cienkie kawałki. Usuń skórkę i pestkę awokado, pokrój miąższ.', null::text, false),
+         (3::smallint, 'Umyj cytrynę, wyciśnij i odmierz sok. Wymieszaj go z jogurtem i częścią soli oraz pieprzu.', null::text, false),
+         (4::smallint, 'Kurczaka osusz, pokrój w paski około 1 cm i wymieszaj z olejem, papryką oraz resztą przypraw. Umyj przybory i ręce po mięsie. Przygotuj tortille.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Tortilla z kurczakiem, awokado i warzywami') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Smażenie i składanie', 10 from przepisy p where lower(p.nazwa) = lower('Tortilla z kurczakiem, awokado i warzywami');
+select p.id, 2, 'Smażenie i składanie', 13 from przepisy p where lower(p.nazwa) = lower('Tortilla z kurczakiem, awokado i warzywami');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Kurczaka smaż na rozgrzanej patelni przez 6–8 minut.', 'mięso jest całkowicie ścięte, ale nadal soczyste'::text, true),
-         (2::smallint, 'Tortillę ogrzej, posmaruj sosem i ułóż na niej sałatę, warzywa, awokado oraz kurczaka.', null::text, false),
-         (3::smallint, 'Zawiń boki do środka i ciasno zroluj.', null::text, false)
+         (1::smallint, 'Rozgrzej patelnię przez 1 minutę.', null::text, false),
+         (2::smallint, 'Smaż kurczaka przez 6–8 minut na średnio dużym ogniu, obracając.', 'mięso ma co najmniej 74°C w środku'::text, true),
+         (3::smallint, 'Przełóż kurczaka na czysty talerz. Ogrzej tortillę na patelni po 15–20 sekund na stronę.', null::text, false),
+         (4::smallint, 'Posmaruj tortillę sosem, ułóż sałatę, warzywa, awokado i kurczaka. Zostaw wolne brzegi, zwiń boki i zroluj. Nadmiar nadzienia podaj obok jako sałatkę.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Tortilla z kurczakiem, awokado i warzywami') and e.kolejnosc = 2;
 
@@ -10414,16 +10981,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Tortilla z tofu i chrupiącymi warzywami', 'Pełnoziarnista tortilla z rumianym tofu, kapustą pekińską, marchewką i ogórkiem w sosie orzechowo-sojowym. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Tortilla z tofu i chrupiącymi warzywami', 'Pełnoziarnista tortilla z rumianym tofu, kapustą pekińską, marchewką i ogórkiem w sosie orzechowo-sojowym. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['azjatycka']::rodzaj_kuchni[],
   array['kanapki']::rodzaj_dania[],
   1, 'prywatna',
-  'waga', 513, 1, 1,
-  12, 8,
+  'waga', 528, 1, 1,
+  12, 12,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Patelnia 24 cm', 'miska', 'Tarka o grubych oczkach', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Patelnia 24 cm', 'Miska', 'Tarka o grubych oczkach', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Farsz przechowuj w lodówce do 1 dnia. Tortillę składaj bezpośrednio przed jedzeniem.',
+  'Farsz przechowuj w lodówce do 1 dnia. Tortillę składaj bezpośrednio przed jedzeniem. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
   false, 'Jeśli tofu nie rumieni się, dokładnie je osusz. Za gęsty sos rozcieńcz wodą lub sokiem z limonki.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -10496,29 +11063,36 @@ insert into przepis_skladniki
 select p.id, sk.id, 8, 'g'::jednostka_miary, 8,
        null, null, sk.rola, sk.mozna_dzielic, 10
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Tortilla z tofu i chrupiącymi warzywami') and sk.nazwa = 'Sezam';
+insert into przepis_skladniki
+  (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
+select p.id, sk.id, 15, 'ml'::jednostka_miary, 15,
+       'do sosu orzechowego', null, sk.rola, sk.mozna_dzielic, 11
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Tortilla z tofu i chrupiącymi warzywami') and sk.nazwa = 'woda';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie', 12 from przepisy p where lower(p.nazwa) = lower('Tortilla z tofu i chrupiącymi warzywami');
+select p.id, 1, 'Przygotowanie składników', 12 from przepisy p where lower(p.nazwa) = lower('Tortilla z tofu i chrupiącymi warzywami');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Kapustę i ogórek pokrój, marchew zetrzyj. Tofu osusz.', null::text, false),
-         (2::smallint, 'Masło orzechowe wymieszaj z sosem sojowym, limonką i odrobiną wody.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj kapustę i ogórek, osusz i pokrój w cienkie paski. Umyj i obierz marchew, zetrzyj.', null::text, false),
+         (3::smallint, 'Odsącz i dokładnie osusz tofu, pokrój w cienkie paski. Umyj limonkę, wyciśnij i odmierz sok.', null::text, false),
+         (4::smallint, 'Wymieszaj masło orzechowe z sosem sojowym, sokiem z limonki i odmierzoną wodą. Przygotuj tortille oraz sezam.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Tortilla z tofu i chrupiącymi warzywami') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Smażenie i składanie', 8 from przepisy p where lower(p.nazwa) = lower('Tortilla z tofu i chrupiącymi warzywami');
+select p.id, 2, 'Smażenie i składanie', 12 from przepisy p where lower(p.nazwa) = lower('Tortilla z tofu i chrupiącymi warzywami');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Na oleju smaż tofu przez 5–6 minut.', 'tofu ma złote krawędzie'::text, true),
-         (2::smallint, 'Tortillę ogrzej, posmaruj sosem i ułóż tofu oraz warzywa.', null::text, false),
-         (3::smallint, 'Posyp sezamem i ciasno zawiń.', null::text, false)
+         (1::smallint, 'Rozgrzej olej przez 1 minutę. Smaż tofu 6–8 minut, obracając, aż brzegi się zrumienią. Przełóż na talerz.', null::text, false),
+         (2::smallint, 'Ogrzej tortillę na suchej patelni po 15–20 sekund na stronę. Posmaruj sosem, ułóż tofu i warzywa, posyp sezamem.', null::text, false),
+         (3::smallint, 'Zawiń boki i zroluj bez przepełniania. Pozostałe tofu i warzywa podaj obok z resztą sosu.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Tortilla z tofu i chrupiącymi warzywami') and e.kolejnosc = 2;
 
@@ -10531,12 +11105,12 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Tosty z Goudą i pieczarkami', 'Chrupiące tosty z serem Gouda, podsmażonymi pieczarkami i cebulą. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Tosty z Goudą i pieczarkami', 'Chrupiące tosty z serem Gouda, podsmażonymi pieczarkami i cebulą. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['kanapki']::rodzaj_dania[],
   0, 'prywatna',
   'waga', 296, 1, 1,
-  8, 9,
+  6, 17,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Patelnia 24 cm', 'Grill kontaktowy', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
@@ -10600,27 +11174,41 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Tosty z Goudą i pieczarkami') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie nadzienia', 8 from przepisy p where lower(p.nazwa) = lower('Tosty z Goudą i pieczarkami');
+select p.id, 1, 'Przygotowanie składników', 6 from przepisy p where lower(p.nazwa) = lower('Tosty z Goudą i pieczarkami');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Na maśle smaż cebulę i pieczarki, aż odparuje cała woda. Dodaj tymianek i pieprz.', 'pieczarki są rumiane i suche'::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Oczyść pieczarki i pokrój w cienkie plasterki. Obierz i posiekaj cebulę. Pokrój Goudę w plastry, przygotuj pieczywo.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Tosty z Goudą i pieczarkami') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Opiekanie', 5 from przepisy p where lower(p.nazwa) = lower('Tosty z Goudą i pieczarkami');
+select p.id, 2, 'Smażenie nadzienia', 10 from przepisy p where lower(p.nazwa) = lower('Tosty z Goudą i pieczarkami');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Na kromce ułóż połowę Goudy, pieczarki i pozostały ser. Przykryj drugą kromką.', null::text, true),
-         (2::smallint, 'Opiekaj w tosterze lub grillu kontaktowym.', 'pieczywo jest rumiane, a ser całkowicie roztopiony'::text, false)
+         (1::smallint, 'Rozpuść masło na patelni przez 1 minutę. Dodaj cebulę i pieczarki, smaż 7–8 minut na średnim ogniu, aż płyn odparuje.', null::text, false),
+         (2::smallint, 'Dodaj tymianek i pieprz. Pod koniec smażenia włącz grill kontaktowy zgodnie z instrukcją urządzenia.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Tosty z Goudą i pieczarkami') and e.kolejnosc = 2;
+
+insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
+select p.id, 3, 'Składanie i opiekanie', 7 from przepisy p where lower(p.nazwa) = lower('Tosty z Goudą i pieczarkami');
+
+insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
+select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
+  from etapy e join przepisy p on p.id = e.przepis_id,
+       (values
+         (1::smallint, 'Rozdziel połowę odmierzonego sera między dolne kromki, ułóż pieczarki i resztę sera. Przykryj pozostałym pieczywem. Nadmiar farszu podaj obok.', null::text, false),
+         (2::smallint, 'W rozgrzanym grillu kontaktowym opiekaj przez około 3–5 minut, aż ser się rozpuści i chleb zrumieni. Przy większej ilości opiekaj partiami, doliczając czas.', null::text, false),
+         (3::smallint, 'Odczekaj 1 minutę i podaj.', null::text, false)
+       ) as v(nr, tresc, sygnal, uwaga)
+ where lower(p.nazwa) = lower('Tosty z Goudą i pieczarkami') and e.kolejnosc = 3;
 
 -- -------------------------------------------------------------------------
 --  Tosty z mozzarellą i pomidorem
@@ -10631,12 +11219,12 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Tosty z mozzarellą i pomidorem', 'Chrupiące tosty z roztopioną mozzarellą, pomidorem i bazylią. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Tosty z mozzarellą i pomidorem', 'Chrupiące tosty z roztopioną mozzarellą, pomidorem i bazylią. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['kanapki']::rodzaj_dania[],
   0, 'prywatna',
   'waga', 219, 1, 1,
-  5, 6,
+  5, 10,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Grill kontaktowy', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
@@ -10701,21 +11289,22 @@ insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Włącz grill kontaktowy, aby rozgrzał się podczas przygotowywania składników.', null::text, false),
-         (2::smallint, 'Mozzarellę i pomidora pokrój w cienkie plastry.', null::text, false),
-         (3::smallint, 'Na jednej kromce ułóż mozzarellę, pomidora i bazylię. Dopraw solą oraz pieprzem i przykryj drugą kromką.', null::text, true)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj pomidora i bazylię, osusz. Mozzarellę odsącz, pokrój w cienkie plastry. Pokrój pomidora cienko, osusz plasterki. Przygotuj pieczywo.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Tosty z mozzarellą i pomidorem') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Opiekanie', 6 from przepisy p where lower(p.nazwa) = lower('Tosty z mozzarellą i pomidorem');
+select p.id, 2, 'Składanie i opiekanie', 10 from przepisy p where lower(p.nazwa) = lower('Tosty z mozzarellą i pomidorem');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Tost opiekaj w rozgrzanym grillu kontaktowym.', 'pieczywo jest rumiane i chrupiące, a mozzarella się roztopiła'::text, false),
-         (2::smallint, 'Odczekaj minutę, przekrój tost i podaj.', null::text, false)
+         (1::smallint, 'Rozgrzej grill kontaktowy zgodnie z instrukcją urządzenia, zwykle około 3 minut.', null::text, false),
+         (2::smallint, 'Na dolnych kromkach rozłóż mozzarellę, pomidora i bazylię. Dopraw solą oraz pieprzem i przykryj pozostałymi kromkami.', null::text, false),
+         (3::smallint, 'Opiekaj w rozgrzanym grillu przez 3–5 minut, aż ser się roztopi, a chleb zrumieni. Większą ilość opiekaj partiami.', null::text, false),
+         (4::smallint, 'Odczekaj 1 minutę, przekrój i podaj.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Tosty z mozzarellą i pomidorem') and e.kolejnosc = 2;
 
@@ -10728,12 +11317,12 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Tosty z serem salami i papryką', 'Ciepłe tosty z serem salami, papryką i musztardą. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Tosty z serem salami i papryką', 'Ciepłe tosty z serem salami, papryką i musztardą. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['kanapki']::rodzaj_dania[],
   0, 'prywatna',
   'waga', 251, 1, 1,
-  6, 6,
+  6, 11,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Grill kontaktowy', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
@@ -10797,26 +11386,28 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Tosty z serem salami i papryką') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Składanie tostów', 6 from przepisy p where lower(p.nazwa) = lower('Tosty z serem salami i papryką');
+select p.id, 1, 'Przygotowanie składników', 6 from przepisy p where lower(p.nazwa) = lower('Tosty z serem salami i papryką');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Paprykę pokrój w bardzo cienkie paski.', null::text, false),
-         (2::smallint, 'Pieczywo posmaruj musztardą. Ułóż ser, paprykę i przyprawy, a następnie przykryj drugą kromką.', null::text, true),
-         (3::smallint, 'Zewnętrzne strony pieczywa cienko posmaruj masłem.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj paprykę, usuń nasiona i pokrój miąższ w bardzo cienkie paski. Pokrój ser salami w plastry. Przygotuj pieczywo, musztardę i miękkie masło.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Tosty z serem salami i papryką') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Opiekanie', 6 from przepisy p where lower(p.nazwa) = lower('Tosty z serem salami i papryką');
+select p.id, 2, 'Składanie i opiekanie', 11 from przepisy p where lower(p.nazwa) = lower('Tosty z serem salami i papryką');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Opiekaj w tosterze lub grillu kontaktowym.', 'pieczywo jest chrupiące, a ser roztopiony'::text, false)
+         (1::smallint, 'Rozgrzej grill kontaktowy według instrukcji, zwykle około 3 minut.', null::text, false),
+         (2::smallint, 'Wewnętrzne strony pieczywa posmaruj musztardą. Ułóż ser, cienką warstwę papryki i posyp papryką wędzoną oraz pieprzem. Zamknij kanapki, nadmiar papryki podaj obok.', null::text, false),
+         (3::smallint, 'Zewnętrzne strony posmaruj odmierzoną ilością masła. Opiekaj 4–6 minut w grillu, aż chleb się zrumieni i ser stopi.', null::text, false),
+         (4::smallint, 'Odczekaj 1 minutę i podaj.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Tosty z serem salami i papryką') and e.kolejnosc = 2;
 
@@ -10829,16 +11420,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Twarożek ze szczypiorkiem, rzodkiewką i pieczywem', 'Klasyczny twarożek z chrupiącą rzodkiewką i świeżym szczypiorkiem, podany z dwiema kromkami chleba żytniego razowego. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Twarożek ze szczypiorkiem, rzodkiewką i pieczywem', 'Klasyczny twarożek z chrupiącą rzodkiewką i świeżym szczypiorkiem, podany z dwiema kromkami chleba żytniego razowego. Ilości składników dobierz z listy dla przygotowywanej liczby porcji.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['sniadanie', 'kolacja']::pora_posilku[], array['polska']::rodzaj_kuchni[],
   array['kanapki']::rodzaj_dania[],
   1, 'prywatna',
   'waga', 312, 1, 1,
   8, 0,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['miska', 'Widelec', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Miska', 'Widelec', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Twarożek przechowuj w zamkniętym pojemniku w lodówce do 1 dnia. Pieczywo trzymaj osobno i dodaj dopiero przy podaniu.',
+  'Twarożek przechowuj w zamkniętym pojemniku w lodówce do 1 dnia. Pieczywo trzymaj osobno i dodaj dopiero przy podaniu. Lodówka: do 4°C.',
   false, 'Twarożek za gęsty — dodaj łyżkę jogurtu. Zbyt rzadki — dodaj trochę więcej twarogu. Za słony — dołóż kilka plasterków rzodkiewki albo odrobinę jogurtu.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -10898,19 +11489,28 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Twarożek ze szczypiorkiem, rzodkiewką i pieczywem') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie składników', 8 from przepisy p where lower(p.nazwa) = lower('Twarożek ze szczypiorkiem, rzodkiewką i pieczywem');
+select p.id, 1, 'Przygotowanie składników', 5 from przepisy p where lower(p.nazwa) = lower('Twarożek ze szczypiorkiem, rzodkiewką i pieczywem');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Twaróg przełóż do miski i rozgnieć widelcem z jogurtem.', 'masa jest kremowa, ale nadal lekko grudkowata'::text, false),
-         (2::smallint, 'Rzodkiewki pokrój drobno, a szczypiorek posiekaj.', null::text, false),
-         (3::smallint, 'Dodaj rzodkiewkę i szczypiorek do twarogu, dopraw solą oraz pieprzem i wymieszaj.', null::text, true),
-         (4::smallint, 'Spróbuj twarożku i w razie potrzeby skoryguj solą albo pieprzem.', null::text, false),
-         (5::smallint, 'Podaj twarożek z kromkami chleba żytniego razowego.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj rzodkiewki i szczypiorek, osusz. Usuń końcówki rzodkiewek, pokrój drobno; posiekaj szczypiorek. Odmierz twaróg i jogurt, przygotuj pieczywo.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Twarożek ze szczypiorkiem, rzodkiewką i pieczywem') and e.kolejnosc = 1;
+
+insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
+select p.id, 2, 'Łączenie i podanie', 3 from przepisy p where lower(p.nazwa) = lower('Twarożek ze szczypiorkiem, rzodkiewką i pieczywem');
+
+insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
+select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
+  from etapy e join przepisy p on p.id = e.przepis_id,
+       (values
+         (1::smallint, 'Rozgnieć twaróg widelcem z jogurtem.', 'masa kremowa, lekko grudkowata'::text, false),
+         (2::smallint, 'Dodaj rzodkiewki i szczypiorek. Dopraw odmierzoną solą oraz pieprzem, wymieszaj i podaj z pieczywem.', null::text, false)
+       ) as v(nr, tresc, sygnal, uwaga)
+ where lower(p.nazwa) = lower('Twarożek ze szczypiorkiem, rzodkiewką i pieczywem') and e.kolejnosc = 2;
 
 -- -------------------------------------------------------------------------
 --  Wieprzowina z kapustą pekińską i ryżem
@@ -10921,16 +11521,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Wieprzowina z kapustą pekińską i ryżem', 'Szybko smażona wieprzowina z kapustą pekińską, marchewką, imbirem i ryżem. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Wieprzowina z kapustą pekińską i ryżem', 'Szybko smażona wieprzowina z kapustą pekińską, marchewką, imbirem i ryżem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad']::pora_posilku[], array['azjatycka']::rodzaj_kuchni[],
   array['kasza_ryz']::rodzaj_dania[],
-  2, 'prywatna',
+  1, 'prywatna',
   'waga', 621, 1, 1,
-  12, 18,
+  12, 25,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Patelnia 28 cm', 'Garnek 2 l', 'Tarka o drobnych oczkach', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Patelnia 28 cm', 'Garnek 2 l', 'Tarka o drobnych oczkach', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna', 'Sitko', 'Termometr do mięsa']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Przechowuj w lodówce do 2 dni. Ryż najlepiej trzymaj osobno.',
+  'Porcję z ugotowanym ryżem szybko schłodź w płytkim pojemniku i wstaw do lodówki, najlepiej w ciągu godziny. Przechowuj do 24 godzin. Odgrzewaj tylko raz, do gorącego środka całej porcji. Lodówka: do 4°C.',
   false, 'Jeśli danie jest wodniste, smaż na większym ogniu. Za słony sos złagodź dodatkową kapustą i ryżem.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -11005,28 +11605,31 @@ select p.id, sk.id, 8, 'g'::jednostka_miary, 8,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Wieprzowina z kapustą pekińską i ryżem') and sk.nazwa = 'Sezam';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie', 12 from przepisy p where lower(p.nazwa) = lower('Wieprzowina z kapustą pekińską i ryżem');
+select p.id, 1, 'Przygotowanie składników', 12 from przepisy p where lower(p.nazwa) = lower('Wieprzowina z kapustą pekińską i ryżem');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Ryż ugotuj. Mięso i warzywa pokrój w cienkie paski, imbir zetrzyj.', null::text, false),
-         (2::smallint, 'Mięso wymieszaj z połową sosu sojowego.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Opłucz ryż. Umyj kapustę, oddziel grube białe części od liści i cienko pokrój. Umyj i obierz marchew, pokrój w cienkie paski. Obierz i pokrój cebulę.', null::text, false),
+         (3::smallint, 'Obierz czosnek oraz imbir, posiekaj czosnek i zetrzyj imbir. Odmierz sezam i sos sojowy.', null::text, false),
+         (4::smallint, 'Osusz polędwiczkę, usuń twardą błonę i pokrój mięso w paski około 1 cm. Wymieszaj z połową sosu sojowego. Umyj przybory i ręce po mięsie.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Wieprzowina z kapustą pekińską i ryżem') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Smażenie', 18 from przepisy p where lower(p.nazwa) = lower('Wieprzowina z kapustą pekińską i ryżem');
+select p.id, 2, 'Gotowanie i smażenie', 25 from przepisy p where lower(p.nazwa) = lower('Wieprzowina z kapustą pekińską i ryżem');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Na mocno rozgrzanym oleju smaż mięso partiami przez 3–4 minuty. Odłóż.', null::text, false),
-         (2::smallint, 'Dodaj cebulę, marchew, imbir i czosnek, a po 3 minutach kapustę.', null::text, false),
-         (3::smallint, 'Włóż mięso z powrotem, dodaj pozostały sos i smaż jeszcze 2 minuty.', 'kapusta jest lekko chrupiąca, a mięso całkowicie ścięte'::text, true),
-         (4::smallint, 'Podaj z ryżem i sezamem.', null::text, false)
+         (1::smallint, 'Na pierwszym palniku zagotuj wodę w garnku. Dodaj ryż i gotuj przez czas wskazany na opakowaniu; po ugotowaniu odcedź. Wody użyj tyle, by ziarna były zanurzone i swobodnie się gotowały. Nastaw minutnik; równolegle wykonuj kolejne czynności na drugim palniku. Woda do gotowania jest dodatkowa i zostanie odlana.', null::text, false),
+         (2::smallint, 'Rozgrzej połowę oleju przez 1 minutę. Smaż mięso 4–5 minut, obracając, do temperatury co najmniej 63°C. Przełóż na czysty talerz na co najmniej 3 minuty.', null::text, false),
+         (3::smallint, 'Dodaj pozostały olej, cebulę, marchew i białe części kapusty; smaż 4 minuty. Dodaj imbir i czosnek, smaż 30 sekund.', null::text, false),
+         (4::smallint, 'Dodaj liście kapusty, pozostały sos sojowy i smaż 1–2 minuty. Włóż mięso i podgrzewaj 1 minutę, delikatnie mieszając.', null::text, false),
+         (5::smallint, 'Podaj z ryżem i sezamem.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Wieprzowina z kapustą pekińską i ryżem') and e.kolejnosc = 2;
 
@@ -11042,13 +11645,13 @@ select
   'Zupa - Tajskie żółte curry z kurczakiem', 'Kremowa zupa curry z kurczakiem, mlekiem kokosowym, warzywami, imbirem i limonką, podana z ryżem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. W etapie 1 przygotuj wszystkie składniki. Etap 2 rozpocznij od nastawienia kurczaka; podczas jego gotowania ugotuj ryż i przygotuj bazę curry na drugim palniku. Czasy etapów są orientacyjne i uwzględniają pracę równoległą. Dłuższe gotowanie ryżu zgodnie z opakowaniem lub dodatkowe dogotowanie mięsa wydłuży etap gotowania.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['azjatycka']::rodzaj_kuchni[],
   array['zupa']::rodzaj_dania[],
-  3, 'prywatna',
+  1, 'prywatna',
   'waga', 528, 1, 2,
   12, 48,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
      from unnest(array['Garnek 3 l', 'Garnek 2 l', 'Patelnia 24 cm', 'Nóż szefa kuchni', 'Deska do krojenia', 'Sitko', 'Łyżka cedzakowa', 'Widelec', 'Waga kuchenna', 'Termometr do mięsa']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Po ostudzeniu przełóż curry do szczelnego pojemnika i przechowuj w lodówce do 2–3 dni. Ryż najlepiej gotować świeży do każdego podania.',
+  'Porcję z ugotowanym ryżem szybko schłodź w płytkim pojemniku i wstaw do lodówki, najlepiej w ciągu godziny. Przechowuj do 24 godzin. Odgrzewaj tylko raz, do gorącego środka całej porcji. Samo curry bez ryżu możesz przechować do 3 dni; do kolejnych podań ugotuj świeży ryż. Lodówka: do 4°C.',
   false, 'Jeżeli po 32 minutach gotowania pałki nie są miękkie lub nie osiągnęły 74°C w najgrubszym miejscu mięsa, gotuj dalej i sprawdzaj co 5 minut. Gotową bazę curry zdejmij wtedy z ognia, aby nie rozgotować warzyw. Jeśli curry jest zbyt gęste, dodawaj po łyżce wywaru z ugotowanego kurczaka.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -11129,7 +11732,7 @@ select p.id, sk.id, 140, 'g'::jednostka_miary, 140,
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 5, 'g'::jednostka_miary, 5,
-       'posiekany', 'kolendra', sk.rola, sk.mozna_dzielic, 12
+       'posiekany', 'Kolendra świeża', sk.rola, sk.mozna_dzielic, 12
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Zupa - Tajskie żółte curry z kurczakiem') and sk.nazwa = 'Szczypiorek świeży';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
@@ -11174,7 +11777,7 @@ select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
          (4::smallint, 'Gotuj kurczaka na małym ogniu przez 32 minuty. Licz czas od rozpoczęcia łagodnego gotowania po zebraniu szumowin. Woda ma delikatnie bulgotać. Nastaw minutnik. W czasie gotowania mięsa ugotuj ryż i przygotuj bazę curry według kolejnych kroków. Po sygnale minutnika sprawdź mięso, niezależnie od postępu pracy przy curry.', null::text, true),
          (5::smallint, 'Na drugim palniku zagotuj w garnku większą ilość wody, tak aby ryż po wsypaniu był zanurzony i mógł swobodnie się gotować. Wsyp opłukany ryż, zamieszaj i gotuj przez czas podany na opakowaniu. Przed odcedzeniem sprawdź, czy ziarna są miękkie. Kurczak w tym czasie gotuje się na pierwszym palniku.', null::text, false),
          (6::smallint, 'Ugotowany ryż odcedź na sitku, przełóż z powrotem do garnka i przykryj. Odstaw poza palnik do podania. Drugi palnik jest teraz wolny do przygotowania curry.', 'ziarna są miękkie, a nadmiar wody został odcedzony'::text, false),
-         (7::smallint, 'Gdy do końca gotowania kurczaka pozostaje około 12 minut, a drugi palnik jest już wolny, postaw na nim patelnię mieszczącą przygotowywaną ilość curry. Wlej odmierzoną oliwę i rozgrzewaj przez około 1 minutę na średnim ogniu. Jeśli ryż nadal się gotuje, rozpocznij przygotowanie curry zaraz po zdjęciu garnka z palnika.', null::text, false),
+         (7::smallint, 'Gdy do końca gotowania kurczaka pozostaje około 15 minut, a drugi palnik jest już wolny, postaw na nim patelnię mieszczącą przygotowywaną ilość curry. Wlej odmierzoną oliwę i rozgrzewaj przez około 1 minutę na średnim ogniu. Jeśli ryż nadal się gotuje, rozpocznij przygotowanie curry zaraz po zdjęciu garnka z palnika.', null::text, false),
          (8::smallint, 'Dodaj pokrojoną cebulę i smaż przez 3 minuty na średnim ogniu, mieszając.', 'cebula jest szklista, bez przypalonych brzegów'::text, false),
          (9::smallint, 'Dodaj posiekany czosnek i imbir. Smaż przez 1 minutę na średnim ogniu, mieszając.', null::text, false),
          (10::smallint, 'Dodaj odmierzoną pastę curry i smaż przez 1 minutę, stale mieszając.', 'pasta intensywnie pachnie, ale nie przypala się'::text, false),
@@ -11209,16 +11812,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Zupa z białej fasoli i jarmużu', 'Warzywna zupa z białą fasolą, jarmużem i pomidorami, podana z pieczywem. Przepis na 2 porcje.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Zupa z białej fasoli i jarmużu', 'Warzywna zupa z białą fasolą, jarmużem i pomidorami, podana z pieczywem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['zupa']::rodzaj_dania[],
   3, 'prywatna',
   'waga', 826, 1, 2,
-  12, 30,
+  12, 37,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Garnek 3 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Garnek 3 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna', 'Sitko']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Zupę przechowuj w lodówce do 3 dni lub zamroź. Pieczywo trzymaj osobno.',
+  'Zupę przechowuj w lodówce do 3 dni lub zamroź. Pieczywo trzymaj osobno. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
   true, 'Za rzadką zupę zagęść, rozgniatając część fasoli. Twardy jarmuż gotuj kilka minut dłużej.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -11308,26 +11911,28 @@ select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Zupa z białej fasoli i jarmużu') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie', 12 from przepisy p where lower(p.nazwa) = lower('Zupa z białej fasoli i jarmużu');
+select p.id, 1, 'Przygotowanie składników', 12 from przepisy p where lower(p.nazwa) = lower('Zupa z białej fasoli i jarmużu');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Marchew i seler pokrój, cebulę i czosnek posiekaj, a z jarmużu usuń twarde łodygi.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj jarmuż, usuń twarde łodygi i porwij liście. Umyj i obierz marchew, pokrój w kostkę około 1 cm. Umyj i cienko pokrój seler naciowy.', null::text, false),
+         (3::smallint, 'Obierz i posiekaj cebulę oraz czosnek. Opłucz i odsącz fasolę. Odmierz pomidory i bulion, przygotuj pieczywo.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Zupa z białej fasoli i jarmużu') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Gotowanie', 30 from przepisy p where lower(p.nazwa) = lower('Zupa z białej fasoli i jarmużu');
+select p.id, 2, 'Gotowanie zupy', 37 from przepisy p where lower(p.nazwa) = lower('Zupa z białej fasoli i jarmużu');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Na oliwie smaż cebulę, marchew i seler przez 5 minut. Dodaj czosnek i tymianek.', null::text, false),
-         (2::smallint, 'Dodaj pomidory, bulion i fasolę. Gotuj 18 minut.', null::text, false),
-         (3::smallint, 'Dodaj jarmuż i gotuj jeszcze 5–7 minut.', 'warzywa są miękkie, a jarmuż delikatny'::text, true),
+         (1::smallint, 'Rozgrzej oliwę 1 minutę. Smaż cebulę, marchew i seler przez 5 minut. Dodaj czosnek oraz tymianek i smaż 30 sekund.', null::text, false),
+         (2::smallint, 'Dodaj pomidory i bulion, doprowadź do wrzenia przez około 4 minuty. Gotuj pod uchyloną pokrywką 15 minut.', null::text, false),
+         (3::smallint, 'Dodaj fasolę i jarmuż, gotuj jeszcze 7–8 minut, aż marchew i liście będą miękkie.', null::text, false),
          (4::smallint, 'Dopraw solą oraz pieprzem i podaj z pieczywem.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Zupa z białej fasoli i jarmużu') and e.kolejnosc = 2;
@@ -11341,16 +11946,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Zupa z czerwonej soczewicy i pomidorów', 'Gęsta zupa z czerwonej soczewicy, pomidorów i marchewki, podana z pieczywem. Przepis na 2 porcje.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Zupa z czerwonej soczewicy i pomidorów', 'Gęsta zupa z czerwonej soczewicy, pomidorów i marchewki, podana z pieczywem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['zupa']::rodzaj_dania[],
   3, 'prywatna',
   'waga', 704, 1, 2,
-  10, 30,
+  10, 38,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Garnek 3 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Garnek 3 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna', 'Sitko']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Zupę przechowuj w lodówce do 3 dni albo zamroź po ostudzeniu. Pieczywo trzymaj osobno.',
+  'Zupę przechowuj w lodówce do 3 dni albo zamroź po ostudzeniu. Pieczywo trzymaj osobno. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
   true, 'Za gęstą zupę rozcieńcz bulionem. Za kwaśną pogotuj z dodatkową marchewką.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -11440,26 +12045,29 @@ select p.id, sk.id, 1, 'g'::jednostka_miary, 1,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Zupa z czerwonej soczewicy i pomidorów') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie', 10 from przepisy p where lower(p.nazwa) = lower('Zupa z czerwonej soczewicy i pomidorów');
+select p.id, 1, 'Przygotowanie składników', 10 from przepisy p where lower(p.nazwa) = lower('Zupa z czerwonej soczewicy i pomidorów');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Marchew pokrój, cebulę i czosnek posiekaj, a soczewicę opłucz.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj i obierz marchew, pokrój w cienkie plasterki. Obierz i posiekaj cebulę oraz czosnek. Opłucz soczewicę na sitku.', null::text, false),
+         (3::smallint, 'Umyj cytrynę, wyciśnij i odmierz sok. Odmierz bulion i pomidory, przygotuj pieczywo.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Zupa z czerwonej soczewicy i pomidorów') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Gotowanie', 30 from przepisy p where lower(p.nazwa) = lower('Zupa z czerwonej soczewicy i pomidorów');
+select p.id, 2, 'Gotowanie zupy', 38 from przepisy p where lower(p.nazwa) = lower('Zupa z czerwonej soczewicy i pomidorów');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Na oliwie smaż cebulę i marchew przez 5 minut. Dodaj czosnek oraz przyprawy.', null::text, false),
-         (2::smallint, 'Dodaj pomidory, bulion i soczewicę. Gotuj około 22 minut.', 'soczewica całkowicie zmiękła'::text, true),
-         (3::smallint, 'Dopraw cytryną, solą oraz pieprzem i podaj z pieczywem.', null::text, false)
+         (1::smallint, 'Rozgrzej oliwę przez 1 minutę, smaż cebulę i marchew 5 minut. Dodaj czosnek, kmin i paprykę wędzoną, smaż 30 sekund.', null::text, false),
+         (2::smallint, 'Dodaj bulion i soczewicę. Doprowadź do wrzenia przez około 4 minuty. Gotuj pod uchyloną pokrywką 15–18 minut, mieszając co kilka minut.', null::text, false),
+         (3::smallint, 'Gdy soczewica jest miękka, dodaj pomidory i gotuj jeszcze 6–8 minut. Jeśli soczewica jest twarda, dogotuj ją przed dodaniem pomidorów.', null::text, false),
+         (4::smallint, 'Zdejmij z ognia, dodaj sok z cytryny, sól i pieprz. Podaj z pieczywem.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Zupa z czerwonej soczewicy i pomidorów') and e.kolejnosc = 2;
 
@@ -11472,16 +12080,16 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Łosoś ze szpinakiem i kaszą bulgur', 'Smażony łosoś ze szpinakiem, cytryną i kaszą bulgur. Przepis na 1 porcję.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  'Łosoś ze szpinakiem i kaszą bulgur', 'Smażony łosoś ze szpinakiem, cytryną i kaszą bulgur. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
   array['obiad', 'kolacja']::pora_posilku[], array['srodziemnomorska']::rodzaj_kuchni[],
   array['kasza_ryz']::rodzaj_dania[],
   2, 'prywatna',
   'waga', 410, 1, 1,
-  10, 20,
+  10, 25,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Patelnia 24 cm', 'Garnek 2 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Patelnia 24 cm', 'Garnek 2 l', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna', 'Sitko', 'Miska', 'Termometr do mięsa']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Przechowuj w lodówce do 2 dni. Kaszę najlepiej trzymaj osobno.',
+  'Przechowuj w lodówce do 2 dni. Kaszę najlepiej trzymaj osobno. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
   false, 'Jeśli łosoś przywiera, poczekaj aż sam łatwo odejdzie od patelni. Za suchy szpinak podlej odrobiną wody.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
@@ -11551,27 +12159,31 @@ select p.id, sk.id, 0.5, 'g'::jednostka_miary, 0.5,
   from przepisy p, skladniki sk where lower(p.nazwa) = lower('Łosoś ze szpinakiem i kaszą bulgur') and sk.nazwa = 'Czarny pieprz mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie', 10 from przepisy p where lower(p.nazwa) = lower('Łosoś ze szpinakiem i kaszą bulgur');
+select p.id, 1, 'Przygotowanie składników', 10 from przepisy p where lower(p.nazwa) = lower('Łosoś ze szpinakiem i kaszą bulgur');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Kaszę bulgur ugotuj. Łososia osusz i dopraw solą oraz pieprzem.', null::text, false),
-         (2::smallint, 'Jogurt wymieszaj z połową soku z cytryny.', null::text, false)
+         (1::smallint, 'Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście.', null::text, false),
+         (2::smallint, 'Umyj i osusz szpinak. Obierz i posiekaj czosnek. Umyj cytrynę i odmierz sok. Przygotuj kaszę.', null::text, false),
+         (3::smallint, 'Osusz łososia, usuń ości i dopraw częścią soli oraz pieprzu. Po surowej rybie umyj przybory i ręce.', null::text, false),
+         (4::smallint, 'Wymieszaj jogurt z połową odmierzonego soku z cytryny.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Łosoś ze szpinakiem i kaszą bulgur') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Smażenie', 20 from przepisy p where lower(p.nazwa) = lower('Łosoś ze szpinakiem i kaszą bulgur');
+select p.id, 2, 'Gotowanie kaszy i smażenie', 25 from przepisy p where lower(p.nazwa) = lower('Łosoś ze szpinakiem i kaszą bulgur');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, 'Na oliwie smaż łososia po 4–5 minut z każdej strony.', 'środek jest soczysty, a mięso rozdziela się na płatki'::text, true),
-         (2::smallint, 'Zdejmij rybę. Na tej samej patelni krótko podsmaż czosnek i szpinak.', null::text, false),
-         (3::smallint, 'Podaj łososia ze szpinakiem, bulgurem i sosem jogurtowym.', null::text, false)
+         (1::smallint, 'Na pierwszym palniku zagotuj wodę w garnku. Dodaj kaszę bulgur i gotuj przez czas wskazany na opakowaniu; po ugotowaniu odcedź. Wody użyj tyle, by ziarna były zanurzone i swobodnie się gotowały. Nastaw minutnik; równolegle wykonuj kolejne czynności na drugim palniku. Woda do gotowania jest dodatkowa i zostanie odlana.', null::text, false),
+         (2::smallint, 'Gdy do końca gotowania kaszy pozostaje około 11 minut, rozgrzej oliwę na patelni przez 1 minutę.', null::text, false),
+         (3::smallint, 'Smaż filet grubości około 2–3 cm przez 4 minuty z jednej strony i 3–4 minuty z drugiej. Sprawdź środek; grubszy kawałek dosmaż po 1 minucie. Zdejmij na talerz.', 'ryba ma co najmniej 63°C i rozdziela się na płatki'::text, true),
+         (4::smallint, 'Zmniejsz ogień. Na tej samej patelni smaż czosnek 20–30 sekund. Dodaj szpinak i smaż 1–2 minuty do zwiędnięcia. Zdejmij z ognia, dodaj pozostały sok z cytryny i przyprawy.', null::text, false),
+         (5::smallint, 'Podaj łososia z kaszą, szpinakiem i sosem jogurtowym.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
  where lower(p.nazwa) = lower('Łosoś ze szpinakiem i kaszą bulgur') and e.kolejnosc = 2;
 
@@ -11582,96 +12194,96 @@ commit;
 -- =============================================================================
 
 with oczekiwane(nazwa, skladnikow, etapow, krokow) as (values
-  ('Chili sin carne z czarną fasolą', 13, 2, 5),
-  ('Curry z ciecierzycy, pomidorów i szpinaku', 12, 2, 5),
-  ('Curry z czerwonej soczewicy i szpinaku', 11, 2, 5),
-  ('Dorsz w kokosowym curry ze szpinakiem', 12, 2, 6),
-  ('Grochówka z indykiem', 14, 2, 5),
-  ('Gulasz jagnięcy z ciecierzycą i pomidorami', 13, 2, 6),
-  ('Gulasz wołowy z warzywami korzeniowymi', 15, 2, 5),
-  ('Gulasz z białej fasoli, jarmużu i pomidorów', 13, 2, 5),
-  ('Jaglanka z gruszką i orzechami', 7, 2, 4),
-  ('Jajecznica z pomidorem i szczypiorkiem', 7, 2, 5),
-  ('Jajka na miękko z pieczywem i warzywami', 7, 2, 5),
-  ('Kanapki z Goudą, jajkiem i szczypiorkiem', 7, 2, 3),
-  ('Kanapki z Goudą, pomidorem i sałatą', 7, 1, 3),
-  ('Kanapki z halloumi, awokado i pomidorem', 7, 2, 3),
-  ('Kanapki z jajkiem, awokado i pomidorem', 6, 2, 6),
-  ('Kanapki z mozzarellą, pomidorem i bazylią', 7, 1, 3),
-  ('Kanapki z pastą jajeczną', 7, 2, 7),
-  ('Kanapki z ricottą, rzodkiewką i szczypiorkiem', 7, 1, 3),
-  ('Kanapki z sardynkami, pomidorem i rukolą', 7, 1, 4),
-  ('Kanapki z serem salami, ogórkiem kiszonym i musztardą', 7, 1, 3),
-  ('Kałamarnica z papryką i ryżem', 11, 2, 5),
-  ('Klopsiki z indyka w sosie pomidorowym z bulgurem', 12, 2, 7),
-  ('Komosa ryżowa z ciecierzycą i pieczonymi warzywami', 12, 2, 4),
-  ('Kotleciki z czerwonej soczewicy z sosem jogurtowym', 13, 2, 6),
-  ('Krem z brokułów z fetą', 11, 2, 5),
-  ('Krem z dyni na mleku kokosowym', 13, 2, 5),
-  ('Krem z kalafiora z pieczoną ciecierzycą', 12, 2, 6),
-  ('Krewetki z czosnkiem, cukinią i ryżem', 9, 2, 4),
-  ('Królik z rozmarynem i warzywami korzeniowymi', 12, 2, 5),
-  ('Kurczak pieczony z batatem i brokułem', 10, 2, 5),
-  ('Makaron pełnoziarnisty z bolońskim sosem z soczewicy', 13, 2, 4),
-  ('Makaron z brokułem i fetą', 8, 2, 5),
-  ('Makaron z ciecierzycą, bazylią i orzechami', 10, 2, 4),
-  ('Makaron z indykiem, pieczarkami i jogurtem', 10, 2, 5),
-  ('Makaron z kurczakiem, szpinakiem i pomidorami', 12, 2, 4),
-  ('Makaron z pieczonymi warzywami i mozzarellą', 11, 2, 5),
-  ('Makaron z polędwiczką i pieczarkami', 11, 2, 5),
-  ('Makaron z ricottą i szpinakiem', 9, 2, 4),
-  ('Makaron z tuńczykiem, cytryną i natką pietruszki', 9, 2, 4),
-  ('Makaron z wołowiną i sosem pomidorowym', 11, 2, 5),
-  ('Małże w pomidorowym bulionie', 10, 2, 6),
-  ('Morszczuk w sosie pomidorowym z ryżem', 11, 2, 5),
-  ('Nocna owsianka z bananem i chia', 7, 2, 3),
-  ('Nocna owsianka z borówkami i orzechami', 6, 2, 3),
-  ('Omlet ze szpinakiem i fetą', 7, 2, 6),
+  ('Chili sin carne z czarną fasolą', 13, 2, 9),
+  ('Curry z ciecierzycy, pomidorów i szpinaku', 12, 2, 9),
+  ('Curry z czerwonej soczewicy i szpinaku', 11, 2, 7),
+  ('Dorsz w kokosowym curry ze szpinakiem', 12, 3, 20),
+  ('Grochówka z indykiem', 14, 2, 9),
+  ('Gulasz jagnięcy z ciecierzycą i pomidorami', 13, 2, 11),
+  ('Gulasz wołowy z warzywami korzeniowymi', 15, 2, 9),
+  ('Gulasz z białej fasoli, jarmużu i pomidorów', 13, 2, 8),
+  ('Jaglanka z gruszką i orzechami', 7, 2, 7),
+  ('Jajecznica z pomidorem i szczypiorkiem', 7, 2, 6),
+  ('Jajka na miękko z pieczywem i warzywami', 7, 2, 6),
+  ('Kanapki z Goudą, jajkiem i szczypiorkiem', 7, 3, 5),
+  ('Kanapki z Goudą, pomidorem i sałatą', 7, 2, 3),
+  ('Kanapki z halloumi, awokado i pomidorem', 7, 2, 6),
+  ('Kanapki z jajkiem, awokado i pomidorem', 6, 2, 5),
+  ('Kanapki z mozzarellą, pomidorem i bazylią', 7, 2, 3),
+  ('Kanapki z pastą jajeczną', 7, 2, 5),
+  ('Kanapki z ricottą, rzodkiewką i szczypiorkiem', 7, 2, 3),
+  ('Kanapki z sardynkami, pomidorem i rukolą', 7, 2, 4),
+  ('Kanapki z serem salami, ogórkiem kiszonym i musztardą', 7, 2, 3),
+  ('Kałamarnica z papryką i ryżem', 11, 2, 9),
+  ('Klopsiki z indyka w sosie pomidorowym z bulgurem', 12, 2, 10),
+  ('Komosa ryżowa z ciecierzycą i pieczonymi warzywami', 12, 2, 8),
+  ('Kotleciki z czerwonej soczewicy z sosem jogurtowym', 13, 3, 10),
+  ('Krem z brokułów z fetą', 11, 2, 8),
+  ('Krem z dyni na mleku kokosowym', 14, 2, 7),
+  ('Krem z kalafiora z pieczoną ciecierzycą', 12, 2, 8),
+  ('Krewetki z czosnkiem, cukinią i ryżem', 9, 2, 8),
+  ('Królik z rozmarynem i warzywami korzeniowymi', 12, 2, 8),
+  ('Kurczak pieczony z batatem i brokułem', 10, 2, 9),
+  ('Makaron pełnoziarnisty z bolońskim sosem z soczewicy', 13, 2, 7),
+  ('Makaron z brokułem i fetą', 8, 2, 7),
+  ('Makaron z ciecierzycą, bazylią i orzechami', 10, 2, 7),
+  ('Makaron z indykiem, pieczarkami i jogurtem', 10, 2, 8),
+  ('Makaron z kurczakiem, szpinakiem i pomidorami', 12, 2, 8),
+  ('Makaron z pieczonymi warzywami i mozzarellą', 11, 2, 7),
+  ('Makaron z polędwiczką i pieczarkami', 11, 2, 8),
+  ('Makaron z ricottą i szpinakiem', 9, 2, 6),
+  ('Makaron z tuńczykiem, cytryną i natką pietruszki', 9, 2, 6),
+  ('Makaron z wołowiną i sosem pomidorowym', 11, 2, 7),
+  ('Małże w pomidorowym bulionie', 10, 2, 7),
+  ('Morszczuk w sosie pomidorowym z ryżem', 11, 2, 8),
+  ('Nocna owsianka z bananem i chia', 7, 4, 5),
+  ('Nocna owsianka z borówkami i orzechami', 6, 4, 5),
+  ('Omlet ze szpinakiem i fetą', 7, 2, 7),
   ('Owsianka z jabłkiem, cynamonem i orzechami', 6, 2, 5),
-  ('Papryka faszerowana soczewicą i kaszą bulgur', 11, 2, 6),
-  ('Pełnoziarniste placuszki ze skyrem i owocami', 8, 2, 5),
-  ('Pieczona makrela z burakami i ziemniakami', 9, 2, 5),
-  ('Pieczone warzywa korzeniowe z tymiankiem', 11, 2, 4),
-  ('Pieczony bakłażan z ciecierzycą i fetą', 11, 2, 6),
-  ('Pieczony kalafior z ziołowym sosem jogurtowym', 10, 2, 4),
-  ('Pieczony łosoś z brokułem i ziemniakami', 9, 2, 5),
-  ('Pierś z kaczki z pomarańczą i czerwoną kapustą', 12, 3, 7),
-  ('Placuszki bananowo-owsiane', 7, 2, 5),
-  ('Polędwiczka w sosie musztardowym z kaszą bulgur', 11, 2, 6),
-  ('Potrawka z kurczaka, kaszy jęczmiennej i warzyw', 11, 2, 5),
-  ('Pstrąg pieczony z warzywami korzeniowymi', 10, 2, 5),
-  ('Pudding chia z mango i mlekiem kokosowym', 5, 2, 3),
-  ('Ryż z pieczarkami, szpinakiem i parmezanem', 10, 2, 5),
-  ('Sałatka brokułowa z jajkiem i sosem jogurtowym', 9, 2, 5),
-  ('Sałatka makaronowa z mozzarellą i warzywami', 11, 2, 4),
-  ('Sałatka makaronowa z tuńczykiem i warzywami', 10, 2, 4),
-  ('Sałatka z czarnej fasoli, kukurydzy i pomidora', 11, 1, 4),
-  ('Sałatka z jajkiem, fetą i warzywami', 8, 2, 6),
-  ('Sałatka z jarmużu, jabłka i orzechów', 9, 1, 4),
-  ('Sałatka z komosy, buraka i koziego sera', 11, 2, 4),
-  ('Sałatka z pieczonym burakiem i fetą', 9, 2, 4),
-  ('Serek wiejski z owocami i orzechami', 5, 1, 3),
-  ('Serek wiejski z pomidorem, ogórkiem i pestkami dyni', 7, 1, 3),
-  ('Skyr kakaowy z bananem i masłem orzechowym', 5, 1, 3),
-  ('Skyr z owocami, płatkami owsianymi i orzechami', 5, 1, 3),
-  ('Stek z tuńczyka z fasolką szparagową i ziemniakami', 8, 2, 4),
-  ('Tabbouleh z kaszy bulgur i ciecierzycy', 11, 2, 4),
-  ('Tofu z brokułem i ryżem', 9, 2, 6),
-  ('Tofucznica ze szpinakiem i pomidorem', 9, 2, 4),
-  ('Tortilla z Goudą, szpinakiem i pomidorem', 8, 2, 3),
-  ('Tortilla z hummusem i warzywami', 11, 2, 3),
-  ('Tortilla z jajkiem i szpinakiem', 8, 2, 4),
-  ('Tortilla z kurczakiem, awokado i warzywami', 12, 2, 5),
-  ('Tortilla z tofu i chrupiącymi warzywami', 10, 2, 5),
-  ('Tosty z Goudą i pieczarkami', 7, 2, 3),
-  ('Tosty z mozzarellą i pomidorem', 6, 2, 5),
-  ('Tosty z serem salami i papryką', 7, 2, 4),
-  ('Twarożek ze szczypiorkiem, rzodkiewką i pieczywem', 7, 1, 5),
-  ('Wieprzowina z kapustą pekińską i ryżem', 10, 2, 6),
+  ('Papryka faszerowana soczewicą i kaszą bulgur', 11, 3, 10),
+  ('Pełnoziarniste placuszki ze skyrem i owocami', 8, 2, 6),
+  ('Pieczona makrela z burakami i ziemniakami', 9, 2, 8),
+  ('Pieczone warzywa korzeniowe z tymiankiem', 11, 2, 6),
+  ('Pieczony bakłażan z ciecierzycą i fetą', 11, 2, 8),
+  ('Pieczony kalafior z ziołowym sosem jogurtowym', 10, 2, 7),
+  ('Pieczony łosoś z brokułem i ziemniakami', 9, 2, 8),
+  ('Pierś z kaczki z pomarańczą i czerwoną kapustą', 13, 2, 11),
+  ('Placuszki bananowo-owsiane', 7, 2, 6),
+  ('Polędwiczka w sosie musztardowym z kaszą bulgur', 11, 2, 9),
+  ('Potrawka z kurczaka, kaszy jęczmiennej i warzyw', 11, 2, 7),
+  ('Pstrąg pieczony z warzywami korzeniowymi', 10, 2, 7),
+  ('Pudding chia z mango i mlekiem kokosowym', 5, 4, 6),
+  ('Ryż z pieczarkami, szpinakiem i parmezanem', 10, 2, 7),
+  ('Sałatka brokułowa z jajkiem i sosem jogurtowym', 9, 3, 7),
+  ('Sałatka makaronowa z mozzarellą i warzywami', 11, 3, 6),
+  ('Sałatka makaronowa z tuńczykiem i warzywami', 10, 3, 6),
+  ('Sałatka z czarnej fasoli, kukurydzy i pomidora', 11, 2, 6),
+  ('Sałatka z jajkiem, fetą i warzywami', 8, 3, 6),
+  ('Sałatka z jarmużu, jabłka i orzechów', 9, 2, 6),
+  ('Sałatka z komosy, buraka i koziego sera', 11, 3, 8),
+  ('Sałatka z pieczonym burakiem i fetą', 9, 3, 7),
+  ('Serek wiejski z owocami i orzechami', 5, 2, 3),
+  ('Serek wiejski z pomidorem, ogórkiem i pestkami dyni', 7, 2, 4),
+  ('Skyr kakaowy z bananem i masłem orzechowym', 5, 2, 4),
+  ('Skyr z owocami, płatkami owsianymi i orzechami', 5, 2, 3),
+  ('Stek z tuńczyka z fasolką szparagową i ziemniakami', 8, 2, 9),
+  ('Tabbouleh z kaszy bulgur i ciecierzycy', 11, 3, 5),
+  ('Tofu z brokułem i ryżem', 10, 2, 9),
+  ('Tofucznica ze szpinakiem i pomidorem', 9, 2, 7),
+  ('Tortilla z Goudą, szpinakiem i pomidorem', 8, 2, 6),
+  ('Tortilla z hummusem i warzywami', 12, 2, 5),
+  ('Tortilla z jajkiem i szpinakiem', 8, 2, 7),
+  ('Tortilla z kurczakiem, awokado i warzywami', 12, 2, 8),
+  ('Tortilla z tofu i chrupiącymi warzywami', 11, 2, 7),
+  ('Tosty z Goudą i pieczarkami', 7, 3, 7),
+  ('Tosty z mozzarellą i pomidorem', 6, 2, 6),
+  ('Tosty z serem salami i papryką', 7, 2, 6),
+  ('Twarożek ze szczypiorkiem, rzodkiewką i pieczywem', 7, 2, 4),
+  ('Wieprzowina z kapustą pekińską i ryżem', 10, 2, 9),
   ('Zupa - Tajskie żółte curry z kurczakiem', 14, 3, 28),
-  ('Zupa z białej fasoli i jarmużu', 13, 2, 5),
-  ('Zupa z czerwonej soczewicy i pomidorów', 13, 2, 4),
-  ('Łosoś ze szpinakiem i kaszą bulgur', 9, 2, 5)
+  ('Zupa z białej fasoli i jarmużu', 13, 2, 7),
+  ('Zupa z czerwonej soczewicy i pomidorów', 13, 2, 7),
+  ('Łosoś ze szpinakiem i kaszą bulgur', 9, 2, 9)
 ), jest as (
   select p.nazwa,
          (select count(*) from przepis_skladniki ps where ps.przepis_id = p.id) as skladnikow,

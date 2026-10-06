@@ -1,6 +1,6 @@
 {
   "nazwa": "Serek wiejski z owocami i orzechami",
-  "opis": "Serek wiejski z bananem, borówkami, orzechami i cynamonem. Przepis na 1 porcję.",
+  "opis": "Serek wiejski z bananem, borówkami, orzechami i cynamonem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji.",
   "pory": [
     "sniadanie",
     "dodatek"
@@ -8,26 +8,28 @@
   "kuchnie": [
     "inna"
   ],
-  "rodzaje": ["na_slodko"],
+  "rodzaje": [
+    "na_slodko"
+  ],
   "porcjowanie": "waga",
-  "porcja_g": 361.0,
+  "porcja_g": 361,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 1,
   "czas_przygotowania_min": 5,
   "czas_obrobki_min": 0,
   "sprzet": [
-    "miska",
+    "Miska",
     "Nóż szefa kuchni",
     "Deska do krojenia",
     "Waga kuchenna"
   ],
-  "przechowywanie": "Przechowuj w lodówce do 1 dnia. Orzechy dodaj tuż przed jedzeniem.",
+  "przechowywanie": "Przechowuj w lodówce do 1 dnia. Orzechy dodaj tuż przed jedzeniem. Lodówka: do 4°C.",
   "mozna_mrozic": false,
   "ratunek": "Jeśli serek jest zbyt rzadki, odlej część płynu. Mało słodki smak popraw bardziej dojrzałym bananem.",
   "skladniki": [
     {
       "nazwa": "Serek wiejski naturalny",
-      "ilosc": 200.0,
+      "ilosc": 200,
       "jednostka": "g"
     },
     {
@@ -38,34 +40,40 @@
     },
     {
       "nazwa": "Borówki amerykańskie",
-      "ilosc": 80.0,
+      "ilosc": 80,
       "jednostka": "g"
     },
     {
       "nazwa": "Orzechy włoskie",
-      "ilosc": 20.0,
+      "ilosc": 20,
       "jednostka": "g",
       "stan": "grubo posiekane"
     },
     {
       "nazwa": "Cynamon mielony",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "g"
     }
   ],
   "etapy": [
     {
-      "nazwa": "Przygotowanie",
-      "minuty": 5,
+      "nazwa": "Przygotowanie składników",
+      "minuty": 3,
       "kroki": [
         {
-          "tresc": "Banana pokrój w plasterki, a orzechy grubo posiekaj."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
         },
         {
-          "tresc": "Serek przełóż do miski i dodaj owoce."
-        },
+          "tresc": "Umyj i osusz borówki. Obierz i pokrój banana. Posiekaj orzechy. Odmierz serek oraz cynamon."
+        }
+      ]
+    },
+    {
+      "nazwa": "Podanie",
+      "minuty": 2,
+      "kroki": [
         {
-          "tresc": "Posyp cynamonem i orzechami tuż przed podaniem."
+          "tresc": "Przełóż serek do miski, dodaj owoce. Posyp orzechami i cynamonem."
         }
       ]
     }

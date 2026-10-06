@@ -1,6 +1,6 @@
 {
   "nazwa": "Kurczak pieczony z batatem i brokułem",
-  "opis": "Pierś kurczaka pieczona na jednej blasze z batatem, brokułem i czerwoną cebulą. Przepis na 1 porcję.",
+  "opis": "Pierś kurczaka pieczona na jednej blasze z batatem, brokułem i czerwoną cebulą. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
   "pory": [
     "obiad",
     "kolacja"
@@ -8,70 +8,73 @@
   "kuchnie": [
     "inna"
   ],
-  "rodzaje": ["z_piekarnika"],
+  "rodzaje": [
+    "z_piekarnika"
+  ],
   "porcjowanie": "waga",
   "porcja_g": 708.5,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 3,
   "czas_przygotowania_min": 12,
-  "czas_obrobki_min": 35,
+  "czas_obrobki_min": 47,
   "sprzet": [
     "Piekarnik",
     "Blacha do pieczenia",
     "Nóż szefa kuchni",
     "Deska do krojenia",
-    "Waga kuchenna"
+    "Waga kuchenna",
+    "Termometr do mięsa"
   ],
-  "przechowywanie": "Przechowuj w zamkniętym pojemniku w lodówce do 3 dni.",
+  "przechowywanie": "Przechowuj w zamkniętym pojemniku w lodówce do 3 dni. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
   "mozna_mrozic": false,
-  "ratunek": "Jeśli kurczak jest suchy, pokrój go i podaj z jogurtem. Twardego batata dopiekaj osobno.",
+  "ratunek": "Jeżeli kurczak jest gotowy wcześniej niż batat, wyjmij go i dopiecz sam batat. Brokuł mocno rumieniący się na brzegach również zdejmij wcześniej.",
   "skladniki": [
     {
       "nazwa": "Pierś z kurczaka, surowa",
-      "ilosc": 180.0,
+      "ilosc": 180,
       "jednostka": "g"
     },
     {
       "nazwa": "Batat, surowy",
-      "ilosc": 250.0,
+      "ilosc": 250,
       "jednostka": "g",
       "stan": "pokrojony w kostkę"
     },
     {
       "nazwa": "Brokuł, surowy",
-      "ilosc": 200.0,
+      "ilosc": 200,
       "jednostka": "g",
       "stan": "podzielony na różyczki"
     },
     {
       "nazwa": "Cebula czerwona, surowa",
-      "ilosc": 60.0,
+      "ilosc": 60,
       "jednostka": "g",
       "stan": "pokrojona"
     },
     {
       "nazwa": "Oliwa z oliwek",
-      "ilosc": 10.0,
+      "ilosc": 10,
       "jednostka": "g"
     },
     {
       "nazwa": "Papryka wędzona mielona",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "g"
     },
     {
       "nazwa": "Tymianek suszony",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "g"
     },
     {
       "nazwa": "Czosnek, surowy",
-      "ilosc": 5.0,
+      "ilosc": 5,
       "jednostka": "g"
     },
     {
       "nazwa": "Sól kłodawska",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "g"
     },
     {
@@ -82,31 +85,43 @@
   ],
   "etapy": [
     {
-      "nazwa": "Przygotowanie",
+      "nazwa": "Przygotowanie składników",
       "minuty": 12,
       "kroki": [
         {
-          "tresc": "Piekarnik rozgrzej do 210°C. Batata pokrój w małą kostkę, brokuł podziel, a cebulę pokrój."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
         },
         {
-          "tresc": "Warzywa wymieszaj z połową oliwy i przyprawami."
+          "tresc": "Umyj i obierz batata, pokrój w kostkę około 2 cm. Umyj brokuł i podziel na małe różyczki. Obierz cebulę i pokrój w piórka, czosnek posiekaj."
+        },
+        {
+          "tresc": "Podziel oliwę między warzywa i mięso. Batata, cebulę i brokuł wymieszaj oddzielnie z oliwą oraz częścią tymianku, papryki wędzonej, soli i pieprzu."
+        },
+        {
+          "tresc": "Pierś osusz i wyrównaj grubość do około 2–3 cm. Natrzyj oliwą, czosnkiem i pozostałymi przyprawami. Umyj ręce i przybory po mięsie."
         }
       ]
     },
     {
       "nazwa": "Pieczenie",
-      "minuty": 35,
+      "minuty": 47,
       "kroki": [
         {
-          "tresc": "Batata i cebulę piecz 15 minut. Następnie dodaj brokuł."
+          "tresc": "Rozgrzej piekarnik do 210°C, grzanie góra–dół, zwykle około 10 minut."
         },
         {
-          "tresc": "Kurczaka natrzyj pozostałą oliwą, czosnkiem, solą i pieprzem. Ułóż na blasze.",
+          "tresc": "Rozłóż batata i cebulę na blasze. Piecz 15 minut."
+        },
+        {
+          "tresc": "Dodaj kurczaka i brokuł, układając luźno. Piecz 18–22 minuty."
+        },
+        {
+          "tresc": "Sprawdź mięso termometrem w najgrubszym miejscu; gotowego kurczaka zdejmij. Niedopieczone warzywa dopiekaj osobno przez kolejne 5 minut.",
+          "sygnal": "kurczak ma co najmniej 74°C, batat miękki, brokuł lekko rumiany",
           "uwaga": true
         },
         {
-          "tresc": "Piecz jeszcze około 18–20 minut.",
-          "sygnal": "kurczak jest całkowicie ścięty, ale soczysty"
+          "tresc": "Podaj mięso z warzywami."
         }
       ]
     }

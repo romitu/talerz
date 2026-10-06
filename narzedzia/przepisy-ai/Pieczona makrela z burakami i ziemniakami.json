@@ -1,6 +1,6 @@
 {
   "nazwa": "Pieczona makrela z burakami i ziemniakami",
-  "opis": "Pieczona makrela z burakami, ziemniakami, czerwoną cebulą i koperkiem. Przepis na 1 porcję.",
+  "opis": "Pieczona makrela z burakami, ziemniakami, czerwoną cebulą i koperkiem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
   "pory": [
     "obiad",
     "kolacja"
@@ -8,65 +8,68 @@
   "kuchnie": [
     "polska"
   ],
-  "rodzaje": ["z_piekarnika"],
+  "rodzaje": [
+    "z_piekarnika"
+  ],
   "porcjowanie": "waga",
   "porcja_g": 716.5,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 2,
   "czas_przygotowania_min": 15,
-  "czas_obrobki_min": 45,
+  "czas_obrobki_min": 58,
   "sprzet": [
     "Piekarnik",
     "Blacha do pieczenia",
     "Nóż szefa kuchni",
     "Deska do krojenia",
-    "Waga kuchenna"
+    "Waga kuchenna",
+    "Termometr do mięsa"
   ],
-  "przechowywanie": "Przechowuj w lodówce do 2 dni. Ze względu na intensywny aromat użyj szczelnego pojemnika.",
+  "przechowywanie": "Przechowuj w lodówce do 2 dni. Ze względu na intensywny aromat użyj szczelnego pojemnika. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
   "mozna_mrozic": false,
   "ratunek": "Jeśli buraki są twarde, pokrój je drobniej i dopiecz bez ryby. Suchą makrelę skrop cytryną.",
   "skladniki": [
     {
       "nazwa": "Makrela atlantycka, surowa",
-      "ilosc": 180.0,
+      "ilosc": 180,
       "jednostka": "g"
     },
     {
       "nazwa": "Buraki, surowe",
-      "ilosc": 200.0,
+      "ilosc": 200,
       "jednostka": "g",
       "stan": "pokrojone w małą kostkę"
     },
     {
       "nazwa": "Ziemniaki, surowe",
-      "ilosc": 250.0,
+      "ilosc": 250,
       "jednostka": "g",
       "stan": "pokrojone w małą kostkę"
     },
     {
       "nazwa": "Cebula czerwona, surowa",
-      "ilosc": 50.0,
+      "ilosc": 50,
       "jednostka": "g"
     },
     {
       "nazwa": "Oliwa z oliwek",
-      "ilosc": 10.0,
+      "ilosc": 10,
       "jednostka": "g"
     },
     {
       "nazwa": "Cytryna",
-      "ilosc": 15.0,
+      "ilosc": 15,
       "jednostka": "g"
     },
     {
       "nazwa": "koperek świeży",
-      "ilosc": 10.0,
+      "ilosc": 10,
       "jednostka": "g",
       "stan": "posiekany"
     },
     {
       "nazwa": "Sól kłodawska",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "g"
     },
     {
@@ -77,31 +80,40 @@
   ],
   "etapy": [
     {
-      "nazwa": "Przygotowanie",
+      "nazwa": "Przygotowanie składników",
       "minuty": 15,
       "kroki": [
         {
-          "tresc": "Piekarnik rozgrzej do 200°C. Buraki i ziemniaki pokrój w małą kostkę, cebulę w piórka."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
         },
         {
-          "tresc": "Warzywa wymieszaj z oliwą, solą oraz pieprzem."
+          "tresc": "Umyj i obierz buraki oraz ziemniaki. Buraki pokrój w kostkę około 1 cm, ziemniaki około 2 cm. Obierz cebulę, pokrój w piórka."
+        },
+        {
+          "tresc": "Umyj cytrynę i koperek. Przygotuj sok z odmierzonej części cytryny, posiekaj koperek."
+        },
+        {
+          "tresc": "Przygotuj filety makreli bez ości, osusz. Podana masa dotyczy jadalnej części ryby. Warzywa wymieszaj z oliwą i częścią soli oraz pieprzu, rybę dopraw resztą. Umyj przybory po rybie."
         }
       ]
     },
     {
       "nazwa": "Pieczenie",
-      "minuty": 45,
+      "minuty": 58,
       "kroki": [
         {
-          "tresc": "Warzywa piecz 30 minut, mieszając je po 15 minutach."
+          "tresc": "Rozgrzej piekarnik do 200°C, grzanie góra–dół, zwykle około 10 minut."
         },
         {
-          "tresc": "Dodaj makrelę, skrop ją cytryną i piecz jeszcze 12–15 minut.",
-          "sygnal": "mięso ryby łatwo odchodzi od ości",
+          "tresc": "Piecz warzywa przez 30 minut, mieszając po 15 minutach. Sprawdź buraki; jeśli są nadal twarde, dopiekaj same warzywa przez 5–10 minut przed dodaniem ryby."
+        },
+        {
+          "tresc": "Do prawie miękkich warzyw dodaj filety makreli i piecz przez 12–15 minut, zależnie od grubości.",
+          "sygnal": "ryba ma co najmniej 63°C, warzywa miękkie",
           "uwaga": true
         },
         {
-          "tresc": "Przed podaniem posyp koperkiem."
+          "tresc": "Po wyjęciu skrop rybę przygotowanym sokiem z cytryny i posyp koperkiem."
         }
       ]
     }

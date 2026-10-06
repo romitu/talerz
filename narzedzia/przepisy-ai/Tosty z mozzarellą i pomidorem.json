@@ -1,6 +1,6 @@
 {
   "nazwa": "Tosty z mozzarellą i pomidorem",
-  "opis": "Chrupiące tosty z roztopioną mozzarellą, pomidorem i bazylią. Przepis na 1 porcję.",
+  "opis": "Chrupiące tosty z roztopioną mozzarellą, pomidorem i bazylią. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
   "pory": [
     "sniadanie",
     "kolacja"
@@ -16,7 +16,7 @@
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 0,
   "czas_przygotowania_min": 5,
-  "czas_obrobki_min": 6,
+  "czas_obrobki_min": 10,
   "sprzet": [
     "Grill kontaktowy",
     "Nóż szefa kuchni",
@@ -67,27 +67,28 @@
       "minuty": 5,
       "kroki": [
         {
-          "tresc": "Włącz grill kontaktowy, aby rozgrzał się podczas przygotowywania składników."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
         },
         {
-          "tresc": "Mozzarellę i pomidora pokrój w cienkie plastry."
-        },
-        {
-          "tresc": "Na jednej kromce ułóż mozzarellę, pomidora i bazylię. Dopraw solą oraz pieprzem i przykryj drugą kromką.",
-          "uwaga": true
+          "tresc": "Umyj pomidora i bazylię, osusz. Mozzarellę odsącz, pokrój w cienkie plastry. Pokrój pomidora cienko, osusz plasterki. Przygotuj pieczywo."
         }
       ]
     },
     {
-      "nazwa": "Opiekanie",
-      "minuty": 6,
+      "nazwa": "Składanie i opiekanie",
+      "minuty": 10,
       "kroki": [
         {
-          "tresc": "Tost opiekaj w rozgrzanym grillu kontaktowym.",
-          "sygnal": "pieczywo jest rumiane i chrupiące, a mozzarella się roztopiła"
+          "tresc": "Rozgrzej grill kontaktowy zgodnie z instrukcją urządzenia, zwykle około 3 minut."
         },
         {
-          "tresc": "Odczekaj minutę, przekrój tost i podaj."
+          "tresc": "Na dolnych kromkach rozłóż mozzarellę, pomidora i bazylię. Dopraw solą oraz pieprzem i przykryj pozostałymi kromkami."
+        },
+        {
+          "tresc": "Opiekaj w rozgrzanym grillu przez 3–5 minut, aż ser się roztopi, a chleb zrumieni. Większą ilość opiekaj partiami."
+        },
+        {
+          "tresc": "Odczekaj 1 minutę, przekrój i podaj."
         }
       ]
     }

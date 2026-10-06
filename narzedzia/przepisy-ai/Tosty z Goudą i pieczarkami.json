@@ -1,6 +1,6 @@
 {
   "nazwa": "Tosty z Goudą i pieczarkami",
-  "opis": "Chrupiące tosty z serem Gouda, podsmażonymi pieczarkami i cebulą. Przepis na 1 porcję.",
+  "opis": "Chrupiące tosty z serem Gouda, podsmażonymi pieczarkami i cebulą. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
   "pory": [
     "sniadanie",
     "kolacja"
@@ -8,13 +8,15 @@
   "kuchnie": [
     "inna"
   ],
-  "rodzaje": ["kanapki"],
+  "rodzaje": [
+    "kanapki"
+  ],
   "porcjowanie": "waga",
-  "porcja_g": 296.0,
+  "porcja_g": 296,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 0,
-  "czas_przygotowania_min": 8,
-  "czas_obrobki_min": 9,
+  "czas_przygotowania_min": 6,
+  "czas_obrobki_min": 17,
   "sprzet": [
     "Patelnia 24 cm",
     "Grill kontaktowy",
@@ -28,31 +30,31 @@
   "skladniki": [
     {
       "nazwa": "Chleb żytni razowy",
-      "ilosc": 2.0,
+      "ilosc": 2,
       "jednostka": "szt",
       "stan": "kromki"
     },
     {
       "nazwa": "Ser Gouda",
-      "ilosc": 70.0,
+      "ilosc": 70,
       "jednostka": "g",
       "stan": "pokrojony w plastry"
     },
     {
       "nazwa": "Pieczarki, surowe",
-      "ilosc": 120.0,
+      "ilosc": 120,
       "jednostka": "g",
       "stan": "pokrojone w plasterki"
     },
     {
       "nazwa": "Cebula, surowa",
-      "ilosc": 30.0,
+      "ilosc": 30,
       "jednostka": "g",
       "stan": "drobno posiekana"
     },
     {
       "nazwa": "Masło",
-      "ilosc": 5.0,
+      "ilosc": 5,
       "jednostka": "g"
     },
     {
@@ -68,26 +70,41 @@
   ],
   "etapy": [
     {
-      "nazwa": "Przygotowanie nadzienia",
-      "minuty": 8,
+      "nazwa": "Przygotowanie składników",
+      "minuty": 6,
       "kroki": [
         {
-          "tresc": "Na maśle smaż cebulę i pieczarki, aż odparuje cała woda. Dodaj tymianek i pieprz.",
-          "sygnal": "pieczarki są rumiane i suche"
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+        },
+        {
+          "tresc": "Oczyść pieczarki i pokrój w cienkie plasterki. Obierz i posiekaj cebulę. Pokrój Goudę w plastry, przygotuj pieczywo."
         }
       ]
     },
     {
-      "nazwa": "Opiekanie",
-      "minuty": 5,
+      "nazwa": "Smażenie nadzienia",
+      "minuty": 10,
       "kroki": [
         {
-          "tresc": "Na kromce ułóż połowę Goudy, pieczarki i pozostały ser. Przykryj drugą kromką.",
-          "uwaga": true
+          "tresc": "Rozpuść masło na patelni przez 1 minutę. Dodaj cebulę i pieczarki, smaż 7–8 minut na średnim ogniu, aż płyn odparuje."
         },
         {
-          "tresc": "Opiekaj w tosterze lub grillu kontaktowym.",
-          "sygnal": "pieczywo jest rumiane, a ser całkowicie roztopiony"
+          "tresc": "Dodaj tymianek i pieprz. Pod koniec smażenia włącz grill kontaktowy zgodnie z instrukcją urządzenia."
+        }
+      ]
+    },
+    {
+      "nazwa": "Składanie i opiekanie",
+      "minuty": 7,
+      "kroki": [
+        {
+          "tresc": "Rozdziel połowę odmierzonego sera między dolne kromki, ułóż pieczarki i resztę sera. Przykryj pozostałym pieczywem. Nadmiar farszu podaj obok."
+        },
+        {
+          "tresc": "W rozgrzanym grillu kontaktowym opiekaj przez około 3–5 minut, aż ser się rozpuści i chleb zrumieni. Przy większej ilości opiekaj partiami, doliczając czas."
+        },
+        {
+          "tresc": "Odczekaj 1 minutę i podaj."
         }
       ]
     }

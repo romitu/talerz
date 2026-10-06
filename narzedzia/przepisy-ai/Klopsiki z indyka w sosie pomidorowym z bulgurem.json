@@ -1,86 +1,90 @@
 {
   "nazwa": "Klopsiki z indyka w sosie pomidorowym z bulgurem",
-  "opis": "Delikatne klopsiki z indyka duszone w sosie pomidorowym, podane z kaszą bulgur. Przepis na 1 porcję.",
+  "opis": "Delikatne klopsiki z indyka duszone w sosie pomidorowym, podane z kaszą bulgur. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
   "pory": [
     "obiad"
   ],
   "kuchnie": [
     "inna"
   ],
-  "rodzaje": ["kasza_ryz"],
+  "rodzaje": [
+    "kasza_ryz"
+  ],
   "porcjowanie": "waga",
   "porcja_g": 651.5,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 3,
-  "czas_przygotowania_min": 15,
-  "czas_obrobki_min": 30,
+  "czas_przygotowania_min": 18,
+  "czas_obrobki_min": 32,
   "sprzet": [
     "Patelnia 28 cm",
     "Garnek 2 l",
-    "miska",
+    "Miska",
     "Nóż szefa kuchni",
     "Deska do krojenia",
-    "Waga kuchenna"
+    "Waga kuchenna",
+    "Sitko",
+    "Termometr do mięsa"
   ],
-  "przechowywanie": "Klopsiki z sosem przechowuj w lodówce do 3 dni albo zamroź. Kaszę trzymaj osobno.",
+  "przechowywanie": "Klopsiki z sosem przechowuj w lodówce do 3 dni albo zamroź. Kaszę trzymaj osobno. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
   "mozna_mrozic": true,
-  "ratunek": "Jeśli klopsiki się rozpadają, dodaj trochę bułki tartej. Za kwaśny sos gotuj dłużej z odrobiną startej marchewki.",
+  "ratunek": "Jeśli masa jest miękka, schłódź ją przez 15 minut i formuj niewielkie klopsiki mokrymi dłońmi. Nie obracaj ich, zanim spód się zetnie. Gęstniejący sos rozrzedzaj niewielką ilością gorącej wody.",
   "skladniki": [
     {
       "nazwa": "Mięso mielone z indyka, surowe",
-      "ilosc": 170.0,
+      "ilosc": 170,
       "jednostka": "g"
     },
     {
       "nazwa": "Bułka tarta",
-      "ilosc": 20.0,
+      "ilosc": 20,
       "jednostka": "g"
     },
     {
       "nazwa": "Jaja kurze, całe, surowe",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "szt",
       "stan": "roztrzepane"
     },
     {
       "nazwa": "Passata pomidorowa",
-      "ilosc": 250.0,
+      "ilosc": 250,
       "jednostka": "g"
     },
     {
       "nazwa": "Kasza bulgur, sucha",
-      "ilosc": 70.0,
+      "ilosc": 70,
       "jednostka": "g"
     },
     {
       "nazwa": "Cebula, surowa",
-      "ilosc": 70.0,
+      "ilosc": 70,
       "jednostka": "g",
       "stan": "drobno posiekana"
     },
     {
       "nazwa": "Czosnek, surowy",
-      "ilosc": 5.0,
+      "ilosc": 5,
       "jednostka": "g"
     },
     {
       "nazwa": "Olej rzepakowy",
-      "ilosc": 8.0,
+      "ilosc": 8,
       "jednostka": "g"
     },
     {
       "nazwa": "Oregano suszone",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "g"
     },
     {
       "nazwa": "Papryka słodka mielona",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "g"
     },
     {
       "nazwa": "Sól kłodawska",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "g"
     },
     {
@@ -91,37 +95,46 @@
   ],
   "etapy": [
     {
-      "nazwa": "Formowanie klopsików",
-      "minuty": 15,
+      "nazwa": "Przygotowanie składników",
+      "minuty": 18,
       "kroki": [
         {
-          "tresc": "Mięso połącz z bułką tartą, jajkiem, połową cebuli, solą i pieprzem."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
         },
         {
-          "tresc": "Uformuj niewielkie, równe klopsiki.",
-          "uwaga": true
+          "tresc": "Obierz i drobno posiekaj cebulę oraz czosnek. Odmierz passatę i kaszę."
         },
         {
-          "tresc": "Kaszę bulgur ugotuj."
+          "tresc": "Roztrzep jajko w misce. Połącz mięso z jajkiem, bułką tartą, połową cebuli oraz częścią soli i pieprzu. Odstaw na 5 minut, aby bułka wchłonęła wilgoć."
+        },
+        {
+          "tresc": "Wilgotnymi dłońmi uformuj klopsiki o średnicy około 3 cm. Umyj przybory i ręce po surowym mięsie."
         }
       ]
     },
     {
-      "nazwa": "Smażenie i duszenie",
-      "minuty": 30,
+      "nazwa": "Gotowanie kaszy i duszenie klopsików",
+      "minuty": 32,
       "kroki": [
         {
-          "tresc": "Na oleju obsmaż klopsiki ze wszystkich stron i przełóż je na bok."
+          "tresc": "Na pierwszym palniku zagotuj wodę w garnku. Dodaj kaszę bulgur i gotuj przez czas wskazany na opakowaniu; po ugotowaniu odcedź. Wody użyj tyle, by ziarna były zanurzone i swobodnie się gotowały. Nastaw minutnik; równolegle wykonuj kolejne czynności na drugim palniku. Woda do gotowania jest dodatkowa i zostanie odlana."
         },
         {
-          "tresc": "Na patelni zeszklij pozostałą cebulę, dodaj czosnek, passatę i przyprawy."
+          "tresc": "Na drugim palniku rozgrzej olej przez 1 minutę. Obsmaż klopsiki przez 5–6 minut, ostrożnie obracając. Przełóż na talerz."
         },
         {
-          "tresc": "Włóż klopsiki do sosu i duś pod przykryciem 15 minut.",
-          "sygnal": "klopsiki są całkowicie ścięte w środku"
+          "tresc": "Na tej samej patelni smaż pozostałą cebulę przez 4 minuty. Dodaj czosnek, oregano i paprykę; smaż 30 sekund."
         },
         {
-          "tresc": "Podaj z kaszą bulgur."
+          "tresc": "Dodaj passatę i doprowadź do łagodnego wrzenia przez około 2 minuty."
+        },
+        {
+          "tresc": "Włóż klopsiki i duś pod przykryciem przez 15 minut na małym ogniu. Obróć je w połowie; w razie gęstnienia sosu dodaj trochę gorącej wody.",
+          "sygnal": "temperatura w środku największego klopsika wynosi co najmniej 74°C",
+          "uwaga": true
+        },
+        {
+          "tresc": "Dopraw sos pozostałą solą i pieprzem. Podaj z odcedzoną kaszą."
         }
       ]
     }

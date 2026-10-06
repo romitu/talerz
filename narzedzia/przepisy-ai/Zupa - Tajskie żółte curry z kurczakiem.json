@@ -14,7 +14,7 @@
   "porcjowanie": "waga",
   "porcja_g": 527.5,
   "liczba_porcji_bazowych": 2,
-  "trwalosc_dni": 3,
+  "trwalosc_dni": 1,
   "czas_przygotowania_min": 12,
   "czas_obrobki_min": 48,
   "sprzet": [
@@ -29,7 +29,7 @@
     "Waga kuchenna",
     "Termometr do mięsa"
   ],
-  "przechowywanie": "Po ostudzeniu przełóż curry do szczelnego pojemnika i przechowuj w lodówce do 2–3 dni. Ryż najlepiej gotować świeży do każdego podania.",
+  "przechowywanie": "Porcję z ugotowanym ryżem szybko schłodź w płytkim pojemniku i wstaw do lodówki, najlepiej w ciągu godziny. Przechowuj do 24 godzin. Odgrzewaj tylko raz, do gorącego środka całej porcji. Samo curry bez ryżu możesz przechować do 3 dni; do kolejnych podań ugotuj świeży ryż. Lodówka: do 4°C.",
   "mozna_mrozic": false,
   "ratunek": "Jeżeli po 32 minutach gotowania pałki nie są miękkie lub nie osiągnęły 74°C w najgrubszym miejscu mięsa, gotuj dalej i sprawdzaj co 5 minut. Gotową bazę curry zdejmij wtedy z ognia, aby nie rozgotować warzyw. Jeśli curry jest zbyt gęste, dodawaj po łyżce wywaru z ugotowanego kurczaka.",
   "skladniki": [
@@ -99,7 +99,7 @@
       "ilosc": 5,
       "jednostka": "g",
       "stan": "posiekany",
-      "zamiennik": "kolendra"
+      "zamiennik": "Kolendra świeża"
     },
     {
       "nazwa": "woda",
@@ -174,7 +174,7 @@
           "sygnal": "ziarna są miękkie, a nadmiar wody został odcedzony"
         },
         {
-          "tresc": "Gdy do końca gotowania kurczaka pozostaje około 12 minut, a drugi palnik jest już wolny, postaw na nim patelnię mieszczącą przygotowywaną ilość curry. Wlej odmierzoną oliwę i rozgrzewaj przez około 1 minutę na średnim ogniu. Jeśli ryż nadal się gotuje, rozpocznij przygotowanie curry zaraz po zdjęciu garnka z palnika."
+          "tresc": "Gdy do końca gotowania kurczaka pozostaje około 15 minut, a drugi palnik jest już wolny, postaw na nim patelnię mieszczącą przygotowywaną ilość curry. Wlej odmierzoną oliwę i rozgrzewaj przez około 1 minutę na średnim ogniu. Jeśli ryż nadal się gotuje, rozpocznij przygotowanie curry zaraz po zdjęciu garnka z palnika."
         },
         {
           "tresc": "Dodaj pokrojoną cebulę i smaż przez 3 minuty na średnim ogniu, mieszając.",

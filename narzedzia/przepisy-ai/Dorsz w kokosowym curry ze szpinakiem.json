@@ -1,6 +1,6 @@
 {
   "nazwa": "Dorsz w kokosowym curry ze szpinakiem",
-  "opis": "Delikatny dorsz w kokosowym sosie curry ze szpinakiem, podany z ryżem. Przepis na 1 porcję.",
+  "opis": "Delikatny dorsz w kokosowym sosie curry ze szpinakiem, podany z ryżem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Najpierw przygotuj wszystkie składniki, następnie gotuj ryż i curry równolegle na dwóch palnikach. Czasy etapów są orientacyjne dla porcji bazowej; zależą od czasu gotowania ryżu, grubości ryby i ilości przygotowywanego jedzenia.",
   "pory": [
     "obiad",
     "kolacja"
@@ -8,79 +8,85 @@
   "kuchnie": [
     "azjatycka"
   ],
-  "rodzaje": ["gulasz_curry", "kasza_ryz"],
+  "rodzaje": [
+    "gulasz_curry",
+    "kasza_ryz"
+  ],
   "porcjowanie": "waga",
   "porcja_g": 748.5,
   "liczba_porcji_bazowych": 1,
-  "trwalosc_dni": 2,
+  "trwalosc_dni": 1,
   "czas_przygotowania_min": 10,
-  "czas_obrobki_min": 20,
+  "czas_obrobki_min": 28,
   "sprzet": [
     "Patelnia 28 cm",
     "Garnek 2 l",
     "Nóż szefa kuchni",
     "Deska do krojenia",
-    "Waga kuchenna"
+    "Waga kuchenna",
+    "Sitko",
+    "Termometr do mięsa",
+    "Widelec"
   ],
-  "przechowywanie": "Przechowuj w lodówce do 2 dni. Podgrzewaj delikatnie, aby ryba się nie rozpadła.",
+  "przechowywanie": "Porcję z ugotowanym ryżem szybko schłodź w płytkim pojemniku i wstaw do lodówki, najlepiej w ciągu godziny. Przechowuj do 24 godzin. Odgrzewaj tylko raz, do gorącego środka całej porcji. Lodówka: do 4°C.",
   "mozna_mrozic": false,
-  "ratunek": "Za rzadki sos odparuj przed dodaniem ryby. Jeśli dorsz się rozpadnie, podaj całość jako gęste curry.",
+  "ratunek": "Jeśli sos jest za rzadki, odparuj go bez przykrycia przez dodatkowe 2–3 minuty przed dodaniem dorsza. Jeśli zbytnio zgęstnieje, dolewaj niewielkie ilości gorącej wody. Ryby nie mieszaj energicznie; delikatnie poruszaj patelnią. Jeśli po wskazanym czasie środek ryby nie jest gotowy, dogotowuj po 1 minucie i sprawdzaj ponownie.",
   "skladniki": [
     {
       "nazwa": "Filet z dorsza atlantyckiego",
-      "ilosc": 180.0,
+      "ilosc": 180,
       "jednostka": "g",
-      "stan": "pokrojony na duże kawałki"
+      "stan": "świeży lub wcześniej rozmrożony w lodówce, bez ości; kawałki szerokości około 3–4 cm i grubości do około 3 cm"
     },
     {
       "nazwa": "Szpinak, surowy",
-      "ilosc": 100.0,
+      "ilosc": 100,
       "jednostka": "g"
     },
     {
       "nazwa": "Mleko kokosowe light z puszki",
-      "ilosc": 150.0,
+      "ilosc": 150,
       "jednostka": "g"
     },
     {
       "nazwa": "Pomidory krojone z puszki",
-      "ilosc": 150.0,
+      "ilosc": 150,
       "jednostka": "g"
     },
     {
       "nazwa": "Ryż basmati, suchy",
-      "ilosc": 60.0,
+      "ilosc": 60,
       "jednostka": "g"
     },
     {
       "nazwa": "Cebula, surowa",
-      "ilosc": 60.0,
+      "ilosc": 60,
       "jednostka": "g",
       "stan": "posiekana"
     },
     {
       "nazwa": "Pasta curry czerwona",
-      "ilosc": 15.0,
+      "ilosc": 15,
       "jednostka": "g"
     },
     {
       "nazwa": "Imbir korzeń, surowy",
-      "ilosc": 8.0,
+      "ilosc": 8,
       "jednostka": "g"
     },
     {
       "nazwa": "Czosnek, surowy",
-      "ilosc": 5.0,
+      "ilosc": 5,
       "jednostka": "g"
     },
     {
       "nazwa": "Olej rzepakowy",
-      "ilosc": 5.0,
+      "ilosc": 5,
       "jednostka": "g"
     },
     {
       "nazwa": "Limonka",
-      "ilosc": 15.0,
+      "ilosc": 15,
       "jednostka": "g",
       "stan": "sok"
     },
@@ -92,34 +98,87 @@
   ],
   "etapy": [
     {
-      "nazwa": "Przygotowanie",
+      "nazwa": "Przygotowanie składników",
       "minuty": 10,
       "kroki": [
         {
-          "tresc": "Ryż ugotuj. Cebulę, czosnek i imbir posiekaj, a dorsza pokrój na duże kawałki."
+          "tresc": "Przygotuj wszystkie składniki w ilościach wskazanych na liście dla przygotowywanej liczby porcji. Odmierz mleko kokosowe, pomidory, pastę curry, olej i sól. Woda do gotowania ryżu jest dodatkowa; jej nadmiar zostanie odcedzony."
+        },
+        {
+          "tresc": "Obierz cebulę i drobno ją posiekaj."
+        },
+        {
+          "tresc": "Obierz czosnek i imbir, następnie drobno je posiekaj."
+        },
+        {
+          "tresc": "Umyj szpinak, odsącz go i usuń grube łodyżki. Duże liście porwij na mniejsze kawałki."
+        },
+        {
+          "tresc": "Umyj limonkę, wyciśnij sok i odmierz ilość wskazaną na liście składników. Odstaw sok do końcowego doprawienia."
+        },
+        {
+          "tresc": "Przepłucz ryż na sitku pod zimną wodą i odstaw do gotowania."
+        },
+        {
+          "tresc": "Dorsza osusz, sprawdź, czy nie ma ości, i usuń je, jeśli są. Pokrój filet na kawałki szerokości około 3–4 cm, zachowując podobną grubość. Jeśli ryba była mrożona, użyj wcześniej rozmrożonej w lodówce."
+        },
+        {
+          "tresc": "Po przygotowaniu surowej ryby umyj ręce, deskę, nóż i powierzchnie, które miały z nią kontakt."
         }
       ]
     },
     {
-      "nazwa": "Gotowanie curry",
-      "minuty": 20,
+      "nazwa": "Gotowanie ryżu i curry",
+      "minuty": 26,
       "kroki": [
         {
-          "tresc": "Na oleju zeszklij cebulę. Dodaj czosnek, imbir i pastę curry."
+          "tresc": "Na pierwszym palniku zagotuj w garnku większą ilość wody. Wsyp opłukany ryż i gotuj przez czas podany na opakowaniu. Ryż ma być zanurzony i mieć miejsce do swobodnego gotowania. Nastaw minutnik; podczas podgrzewania wody i gotowania ryżu wykonuj kolejne kroki na drugim palniku."
         },
         {
-          "tresc": "Dodaj pomidory oraz mleko kokosowe i gotuj 8 minut."
+          "tresc": "Na drugim palniku rozgrzewaj odmierzony olej na patelni przez około 1 minutę na średnim ogniu. Dobierz patelnię tak, aby później kawałki dorsza zmieściły się w jednej warstwie."
         },
         {
-          "tresc": "Dodaj dorsza i gotuj na małym ogniu 6–8 minut bez intensywnego mieszania.",
+          "tresc": "Dodaj cebulę i smaż przez 4 minuty na średnim ogniu, mieszając.",
+          "sygnal": "cebula zmiękła i jest szklista, bez przypalonych brzegów"
+        },
+        {
+          "tresc": "Dodaj czosnek oraz imbir i smaż przez 1 minutę, mieszając."
+        },
+        {
+          "tresc": "Dodaj odmierzoną pastę curry i smaż przez 1 minutę, stale mieszając.",
+          "sygnal": "pasta intensywnie pachnie, ale nie przypala się"
+        },
+        {
+          "tresc": "Wlej mleko kokosowe, dodaj odmierzone pomidory i wymieszaj. Podgrzewaj do łagodnego wrzenia przez około 2 minuty."
+        },
+        {
+          "tresc": "Gotuj sos bez przykrycia na małym ogniu przez 8 minut, od czasu do czasu mieszając.",
+          "sygnal": "sos lekko zgęstniał, ale pozostaje płynny i nie przywiera do dna"
+        },
+        {
+          "tresc": "Gdy upłynie czas gotowania ryżu, sprawdź, czy jest miękki. Odcedź go na sitku, przełóż z powrotem do garnka i przykryj. Odstaw poza palnik do podania. Wykonaj ten krok po sygnale minutnika, niezależnie od postępu gotowania curry."
+        },
+        {
+          "tresc": "Ułóż kawałki dorsza w sosie w jednej warstwie i polej je sosem. Gotuj na małym ogniu przez 5–6 minut, licząc od ponownego łagodnego wrzenia. Po około 3 minutach ostrożnie odwróć kawałki; nie mieszaj energicznie. Ryba dokończy gotowanie po dodaniu szpinaku.",
           "uwaga": true
         },
         {
-          "tresc": "Dodaj szpinak, sok z limonki i sól.",
-          "sygnal": "ryba jest ścięta, a szpinak zwiędł"
+          "tresc": "Dodaj szpinak między kawałki dorsza i delikatnie zanurz liście w sosie. Gotuj jeszcze przez 1–2 minuty, aż liście zwiędną. Łączny czas gotowania dorsza wynosi około 6–8 minut. Sprawdź najgrubszy kawałek ryby; jeśli nie jest gotowy, dogotowuj po 1 minucie i sprawdzaj ponownie. Zakończ gotowanie, gdy ryba jest gotowa, aby jej nie przesuszyć.",
+          "uwaga": true,
+          "sygnal": "szpinak właśnie zwiędł; temperatura w środku najgrubszego kawałka dorsza wynosi co najmniej 63°C, a mięso jest nieprzezroczyste i łatwo rozdziela się widelcem"
+        }
+      ]
+    },
+    {
+      "nazwa": "Doprawienie i podanie",
+      "minuty": 2,
+      "kroki": [
+        {
+          "tresc": "Zdejmij patelnię z ognia. Dodaj przygotowany sok z limonki i delikatnie rozprowadź go w sosie. Spróbuj sosu i dopraw odmierzoną solą według smaku; pasta curry może już być słona.",
+          "uwaga": true
         },
         {
-          "tresc": "Podaj curry z ryżem."
+          "tresc": "Rozdziel ryż oraz curry na przygotowywaną liczbę porcji. Przekładaj rybę ostrożnie, aby kawałki zachowały kształt. Podaj od razu."
         }
       ]
     }

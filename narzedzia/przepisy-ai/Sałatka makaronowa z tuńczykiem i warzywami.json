@@ -1,6 +1,6 @@
 {
   "nazwa": "Sałatka makaronowa z tuńczykiem i warzywami",
-  "opis": "Sałatka z pełnoziarnistym makaronem, tuńczykiem, pomidorem, ogórkiem i kukurydzą. Przepis na 1 porcję.",
+  "opis": "Sałatka z pełnoziarnistym makaronem, tuńczykiem, pomidorem, ogórkiem i kukurydzą. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
   "pory": [
     "obiad",
     "kolacja"
@@ -8,65 +8,67 @@
   "kuchnie": [
     "srodziemnomorska"
   ],
-  "rodzaje": ["salatka"],
+  "rodzaje": [
+    "salatka"
+  ],
   "porcjowanie": "waga",
-  "porcja_g": 576.0,
+  "porcja_g": 576,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 2,
   "czas_przygotowania_min": 12,
-  "czas_obrobki_min": 12,
+  "czas_obrobki_min": 23,
   "sprzet": [
     "Garnek 2 l",
     "Sitko",
-    "miska",
+    "Miska",
     "Nóż szefa kuchni",
     "Deska do krojenia",
     "Waga kuchenna"
   ],
-  "przechowywanie": "Przechowuj w zamkniętym pojemniku w lodówce do 2 dni.",
+  "przechowywanie": "Przechowuj w zamkniętym pojemniku w lodówce do 2 dni. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
   "mozna_mrozic": false,
   "ratunek": "Jeśli sałatka jest sucha, dodaj trochę jogurtu. Jeśli puściła wodę, odlej płyn i dopraw ponownie.",
   "skladniki": [
     {
       "nazwa": "Makaron pełnoziarnisty, suchy",
-      "ilosc": 80.0,
+      "ilosc": 80,
       "jednostka": "g"
     },
     {
       "nazwa": "Tuńczyk w wodzie, odsączony",
-      "ilosc": 120.0,
+      "ilosc": 120,
       "jednostka": "g"
     },
     {
       "nazwa": "Ogórek, surowy",
-      "ilosc": 100.0,
+      "ilosc": 100,
       "jednostka": "g",
       "stan": "pokrojony w kostkę"
     },
     {
       "nazwa": "Pomidory, surowe",
-      "ilosc": 130.0,
+      "ilosc": 130,
       "jednostka": "g",
       "stan": "pokrojone"
     },
     {
       "nazwa": "Kukurydza konserwowa, odsączona",
-      "ilosc": 80.0,
+      "ilosc": 80,
       "jednostka": "g"
     },
     {
       "nazwa": "Jogurt grecki naturalny 2%",
-      "ilosc": 50.0,
+      "ilosc": 50,
       "jednostka": "g"
     },
     {
       "nazwa": "Musztarda",
-      "ilosc": 5.0,
+      "ilosc": 5,
       "jednostka": "g"
     },
     {
       "nazwa": "Szczypiorek świeży",
-      "ilosc": 10.0,
+      "ilosc": 10,
       "jednostka": "g",
       "stan": "posiekany"
     },
@@ -83,27 +85,38 @@
   ],
   "etapy": [
     {
-      "nazwa": "Gotowanie makaronu",
+      "nazwa": "Przygotowanie składników",
       "minuty": 12,
       "kroki": [
         {
-          "tresc": "Makaron ugotuj al dente, odcedź i całkowicie ostudź."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+        },
+        {
+          "tresc": "Umyj i pokrój pomidora i ogórek. Umyj i posiekaj szczypiorek. Odsącz tuńczyka oraz kukurydzę."
+        },
+        {
+          "tresc": "Wymieszaj jogurt z musztardą, solą i pieprzem. Odmierz makaron."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie i chłodzenie makaronu",
+      "minuty": 20,
+      "kroki": [
+        {
+          "tresc": "Zagotuj wodę i ugotuj makaron przez czas z opakowania. Odcedź, krótko przelej zimną wodą i dokładnie odsącz."
+        },
+        {
+          "tresc": "Sprawdź, czy makaron jest chłodny przed połączeniem z sosem jogurtowym."
         }
       ]
     },
     {
       "nazwa": "Łączenie sałatki",
-      "minuty": 12,
+      "minuty": 3,
       "kroki": [
         {
-          "tresc": "Ogórek i pomidora pokrój. Jogurt wymieszaj z musztardą, solą oraz pieprzem."
-        },
-        {
-          "tresc": "Połącz makaron z tuńczykiem, warzywami, kukurydzą i sosem.",
-          "uwaga": true
-        },
-        {
-          "tresc": "Posyp szczypiorkiem i podaj lub schłodź."
+          "tresc": "Wymieszaj makaron z tuńczykiem, warzywami, kukurydzą i sosem. Posyp szczypiorkiem i podaj."
         }
       ]
     }

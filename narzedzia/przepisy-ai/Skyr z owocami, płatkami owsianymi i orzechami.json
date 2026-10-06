@@ -1,6 +1,6 @@
 {
   "nazwa": "Skyr z owocami, płatkami owsianymi i orzechami",
-  "opis": "Skyr z bananem, borówkami, płatkami owsianymi i orzechami włoskimi. Przepis na 1 porcję.",
+  "opis": "Skyr z bananem, borówkami, płatkami owsianymi i orzechami włoskimi. Ilości składników dobierz z listy dla przygotowywanej liczby porcji.",
   "pory": [
     "sniadanie",
     "kolacja"
@@ -18,12 +18,12 @@
   "czas_przygotowania_min": 5,
   "czas_obrobki_min": 0,
   "sprzet": [
-    "miska",
+    "Miska",
     "Nóż szefa kuchni",
     "Deska do krojenia",
     "Waga kuchenna"
   ],
-  "przechowywanie": "Przechowuj w zamkniętym pojemniku w lodówce do 1 dnia. Orzechy i płatki dodaj przed jedzeniem, aby pozostały chrupiące.",
+  "przechowywanie": "Przechowuj w zamkniętym pojemniku w lodówce do 1 dnia. Orzechy i płatki dodaj przed jedzeniem, aby pozostały chrupiące. Lodówka: do 4°C.",
   "mozna_mrozic": false,
   "ratunek": "Jeśli skyr jest zbyt gęsty, dodaj łyżeczkę wody. Jeśli owoce są kwaśne, rozgnieć część banana i wymieszaj ze skyrem.",
   "skladniki": [
@@ -58,16 +58,22 @@
   "etapy": [
     {
       "nazwa": "Przygotowanie składników",
-      "minuty": 5,
+      "minuty": 3,
       "kroki": [
         {
-          "tresc": "Banana pokrój w plasterki, a orzechy grubo posiekaj."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
         },
         {
-          "tresc": "Skyr przełóż do miski i ułóż na nim banana oraz borówki."
-        },
+          "tresc": "Umyj i osusz borówki. Obierz i pokrój banana. Posiekaj orzechy. Odmierz skyr i płatki."
+        }
+      ]
+    },
+    {
+      "nazwa": "Podanie",
+      "minuty": 2,
+      "kroki": [
         {
-          "tresc": "Posyp płatkami owsianymi i orzechami tuż przed podaniem."
+          "tresc": "Przełóż skyr do miski, dodaj owoce. Posyp płatkami i orzechami bezpośrednio przed jedzeniem."
         }
       ]
     }

@@ -1,6 +1,6 @@
 {
   "nazwa": "Jajka na miękko z pieczywem i warzywami",
-  "opis": "Jajka z płynnym żółtkiem, podane z pieczywem posmarowanym masłem, pomidorem i ogórkiem. Przepis na 1 porcję.",
+  "opis": "Jajka z płynnym żółtkiem, podane z pieczywem posmarowanym masłem, pomidorem i ogórkiem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
   "pory": [
     "sniadanie",
     "kolacja"
@@ -21,11 +21,12 @@
     "Garnek 2 l",
     "Nóż szefa kuchni",
     "Deska do krojenia",
-    "Waga kuchenna"
+    "Waga kuchenna",
+    "Łyżka cedzakowa"
   ],
   "przechowywanie": "Danie najlepiej zjedz od razu po przygotowaniu. Jajek ugotowanych na miękko nie przechowuj na później.",
   "mozna_mrozic": false,
-  "ratunek": "Jeśli nieotwarte jajka gotowały się krócej niż 6 minut, pozostaw je w gorącej wodzie jeszcze 30–60 sekund. Jeśli po otwarciu okażą się zbyt twarde, rozgnieć je na pieczywie z masłem.",
+  "ratunek": "Jeśli po otwarciu białko jest płynne, przełóż zawartość do małego naczynia i dogotuj do ścięcia. Jajka z twardym żółtkiem możesz rozgnieść na pieczywie z masłem.",
   "skladniki": [
     {
       "nazwa": "Jaja kurze, całe, surowe",
@@ -73,7 +74,10 @@
       "minuty": 5,
       "kroki": [
         {
-          "tresc": "Pomidora pokrój w cząstki, a ogórek w plasterki."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+        },
+        {
+          "tresc": "Umyj pomidora i ogórek. Pomidora pokrój w cząstki, a ogórek w plasterki."
         },
         {
           "tresc": "Kromki chleba posmaruj masłem. Pieczywo i warzywa ułóż na talerzu."
@@ -88,7 +92,7 @@
           "tresc": "W garnku zagotuj tyle wody, aby po włożeniu całkowicie przykryła jajka."
         },
         {
-          "tresc": "Ostrożnie włóż zimne jajka do wrzątku i gotuj 6 minut od zanurzenia, utrzymując łagodne wrzenie.",
+          "tresc": "Ostrożnie włóż zimne jajka do wrzątku i gotuj około 6 minut od zanurzenia; dla dużych jajek czas może wynieść 7 minut, utrzymując łagodne wrzenie.",
           "uwaga": true
         },
         {

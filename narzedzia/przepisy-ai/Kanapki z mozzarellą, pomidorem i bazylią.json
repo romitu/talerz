@@ -1,6 +1,6 @@
 {
   "nazwa": "Kanapki z mozzarellą, pomidorem i bazylią",
-  "opis": "Kanapki z mozzarellą, świeżym pomidorem i bazylią, skropione oliwą. Przepis na 1 porcję.",
+  "opis": "Kanapki z mozzarellą, świeżym pomidorem i bazylią, skropione oliwą. Ilości składników dobierz z listy dla przygotowywanej liczby porcji.",
   "pory": [
     "sniadanie",
     "kolacja"
@@ -68,17 +68,22 @@
   "etapy": [
     {
       "nazwa": "Przygotowanie składników",
-      "minuty": 7,
+      "minuty": 5,
       "kroki": [
         {
-          "tresc": "Mozzarellę i pomidora pokrój w plastry."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
         },
         {
-          "tresc": "Na kromkach chleba ułóż mozzarellę, pomidora i liście bazylii."
-        },
+          "tresc": "Umyj pomidora i bazylię, osusz. Mozzarellę odsącz. Pokrój ser i pomidora w plastry. Przygotuj pieczywo."
+        }
+      ]
+    },
+    {
+      "nazwa": "Składanie kanapek",
+      "minuty": 2,
+      "kroki": [
         {
-          "tresc": "Skrop oliwą, dopraw niewielką ilością soli oraz pieprzem i podaj.",
-          "uwaga": true
+          "tresc": "Na pieczywie ułóż mozzarellę, pomidora i bazylię. Skrop odmierzoną oliwą, dopraw solą i pieprzem, podaj."
         }
       ]
     }

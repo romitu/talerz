@@ -1,6 +1,6 @@
 {
   "nazwa": "Makaron z indykiem, pieczarkami i jogurtem",
-  "opis": "Pełnoziarnisty makaron z indykiem i pieczarkami w lekkim sosie jogurtowym. Przepis na 1 porcję.",
+  "opis": "Pełnoziarnisty makaron z indykiem i pieczarkami w lekkim sosie jogurtowym. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
   "pory": [
     "obiad",
     "kolacja"
@@ -8,71 +8,75 @@
   "kuchnie": [
     "inna"
   ],
-  "rodzaje": ["makaron"],
+  "rodzaje": [
+    "makaron"
+  ],
   "porcjowanie": "waga",
   "porcja_g": 560.5,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 2,
   "czas_przygotowania_min": 10,
-  "czas_obrobki_min": 20,
+  "czas_obrobki_min": 25,
   "sprzet": [
     "Patelnia 28 cm",
     "Garnek 3 l",
-    "miska",
+    "Miska",
     "Nóż szefa kuchni",
     "Deska do krojenia",
-    "Waga kuchenna"
+    "Waga kuchenna",
+    "Durszlak",
+    "Termometr do mięsa"
   ],
-  "przechowywanie": "Przechowuj w lodówce do 2 dni. Odgrzewaj łagodnie, aby jogurt się nie zwarzył.",
+  "przechowywanie": "Przechowuj w lodówce do 2 dni. Odgrzewaj łagodnie, do gorącego środka całej porcji. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
   "mozna_mrozic": false,
-  "ratunek": "Jeśli sos się zwarzył, zdejmij patelnię z ognia i energicznie wymieszaj z łyżką zimnego jogurtu. Za gęsty sos rozcieńcz wodą z makaronu.",
+  "ratunek": "Jogurt dodawaj poza ogniem po zahartowaniu. Jeśli sos się zwarzył, łagodne mieszanie może poprawić konsystencję, ale nie cofnie całkowicie zwarzenia. Za gęsty sos rozluźnij ciepłą wodą.",
   "skladniki": [
     {
       "nazwa": "Makaron pełnoziarnisty, suchy",
-      "ilosc": 85.0,
+      "ilosc": 85,
       "jednostka": "g"
     },
     {
       "nazwa": "Pierś z indyka, surowa",
-      "ilosc": 150.0,
+      "ilosc": 150,
       "jednostka": "g",
       "stan": "pokrojona w paski"
     },
     {
       "nazwa": "Pieczarki, surowe",
-      "ilosc": 180.0,
+      "ilosc": 180,
       "jednostka": "g",
       "stan": "pokrojone w plasterki"
     },
     {
       "nazwa": "Jogurt grecki naturalny 2%",
-      "ilosc": 80.0,
+      "ilosc": 80,
       "jednostka": "g"
     },
     {
       "nazwa": "Cebula, surowa",
-      "ilosc": 50.0,
+      "ilosc": 50,
       "jednostka": "g",
       "stan": "posiekana"
     },
     {
       "nazwa": "Czosnek, surowy",
-      "ilosc": 5.0,
+      "ilosc": 5,
       "jednostka": "g"
     },
     {
       "nazwa": "Olej rzepakowy",
-      "ilosc": 8.0,
+      "ilosc": 8,
       "jednostka": "g"
     },
     {
       "nazwa": "Tymianek suszony",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "g"
     },
     {
       "nazwa": "Sól kłodawska",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "g"
     },
     {
@@ -83,31 +87,38 @@
   ],
   "etapy": [
     {
-      "nazwa": "Przygotowanie",
+      "nazwa": "Przygotowanie składników",
       "minuty": 10,
       "kroki": [
         {
-          "tresc": "Makaron ugotuj al dente. Indyka pokrój w paski, pieczarki w plasterki, a cebulę posiekaj."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
         },
         {
-          "tresc": "Jogurt zahartuj dwiema łyżkami ciepłej wody z makaronu."
+          "tresc": "Oczyść pieczarki i pokrój w plasterki. Obierz i posiekaj cebulę oraz czosnek. Odmierz makaron i jogurt."
+        },
+        {
+          "tresc": "Indyka osusz i pokrój w paski grubości około 1 cm. Umyj przybory i ręce po surowym mięsie."
         }
       ]
     },
     {
-      "nazwa": "Smażenie",
-      "minuty": 20,
+      "nazwa": "Gotowanie i smażenie",
+      "minuty": 25,
       "kroki": [
         {
-          "tresc": "Na oleju smaż indyka 5 minut. Dodaj cebulę, pieczarki, czosnek i tymianek."
+          "tresc": "Zagotuj wodę w garnku i ugotuj makaron przez czas wskazany na opakowaniu. Nastaw minutnik; w tym czasie przygotowuj sos na drugim palniku. Przed odcedzeniem zachowaj nieco wody z gotowania. Woda do gotowania jest dodatkowa i zostanie odlana."
         },
         {
-          "tresc": "Smaż, aż odparuje woda z pieczarek, a indyk będzie gotowy.",
-          "sygnal": "mięso jest całkowicie ścięte",
-          "uwaga": true
+          "tresc": "Na drugim palniku rozgrzej połowę oleju przez 1 minutę. Smaż indyka 5–6 minut, obracając, do temperatury co najmniej 74°C. Zdejmij na czysty talerz."
         },
         {
-          "tresc": "Zmniejsz ogień, dodaj makaron i jogurt. Wymieszaj bez zagotowywania."
+          "tresc": "Dodaj pozostały olej, cebulę i pieczarki; smaż 7–9 minut, aż woda odparuje. Dodaj czosnek i tymianek, smaż 30 sekund."
+        },
+        {
+          "tresc": "W misce połącz jogurt z niewielką ilością ciepłej wody z makaronu, dodawanej stopniowo."
+        },
+        {
+          "tresc": "Do patelni dodaj makaron i indyka, podgrzej przez 1 minutę. Zdejmij z ognia, odczekaj około 1 minuty, wmieszaj jogurt i dopraw solą oraz pieprzem. Nie zagotowuj."
         }
       ]
     }

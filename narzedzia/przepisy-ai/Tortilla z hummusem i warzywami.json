@@ -1,6 +1,6 @@
 {
   "nazwa": "Tortilla z hummusem i warzywami",
-  "opis": "Pełnoziarnista tortilla z domowym hummusem, pomidorem, ogórkiem i sałatą. Przepis na 1 porcję.",
+  "opis": "Pełnoziarnista tortilla z domowym hummusem, pomidorem, ogórkiem i sałatą. Ilości składników dobierz z listy dla przygotowywanej liczby porcji.",
   "pory": [
     "sniadanie",
     "kolacja"
@@ -8,104 +8,117 @@
   "kuchnie": [
     "srodziemnomorska"
   ],
-  "rodzaje": ["kanapki"],
+  "rodzaje": [
+    "kanapki"
+  ],
   "porcjowanie": "waga",
-  "porcja_g": 474.5,
+  "porcja_g": 504.5,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 1,
-  "czas_przygotowania_min": 15,
+  "czas_przygotowania_min": 17,
   "czas_obrobki_min": 0,
   "sprzet": [
     "Blender ręczny",
-    "miska",
+    "Miska",
     "Nóż szefa kuchni",
     "Deska do krojenia",
-    "Waga kuchenna"
+    "Waga kuchenna",
+    "Sitko"
   ],
-  "przechowywanie": "Hummus przechowuj w lodówce do 2 dni. Tortillę złóż bezpośrednio przed jedzeniem.",
+  "przechowywanie": "Złożoną tortillę przechowuj w lodówce do 1 dnia; najlepiej zjedz od razu. Sam hummus przechowuj do 2 dni i składaj tortillę przed podaniem. Lodówka: do 4°C.",
   "mozna_mrozic": false,
   "ratunek": "Za gęsty hummus rozcieńcz wodą. Jeśli tortilla mięknie, osusz warzywa i składaj ją tuż przed podaniem.",
   "skladniki": [
     {
       "nazwa": "Tortilla pełnoziarnista",
-      "ilosc": 60.0,
+      "ilosc": 60,
       "jednostka": "g"
     },
     {
       "nazwa": "Ciecierzyca z puszki, odsączona",
-      "ilosc": 150.0,
+      "ilosc": 150,
       "jednostka": "g"
     },
     {
       "nazwa": "Sezam",
-      "ilosc": 15.0,
+      "ilosc": 15,
       "jednostka": "g"
     },
     {
       "nazwa": "Oliwa z oliwek",
-      "ilosc": 10.0,
+      "ilosc": 10,
       "jednostka": "g"
     },
     {
       "nazwa": "Cytryna",
-      "ilosc": 15.0,
+      "ilosc": 15,
       "jednostka": "g",
       "stan": "sok"
     },
     {
       "nazwa": "Czosnek, surowy",
-      "ilosc": 3.0,
+      "ilosc": 3,
       "jednostka": "g"
     },
     {
       "nazwa": "Ogórek, surowy",
-      "ilosc": 80.0,
+      "ilosc": 80,
       "jednostka": "g",
       "stan": "pokrojony"
     },
     {
       "nazwa": "Pomidory, surowe",
-      "ilosc": 100.0,
+      "ilosc": 100,
       "jednostka": "g",
       "stan": "pokrojone"
     },
     {
       "nazwa": "Sałata rzymska",
-      "ilosc": 40.0,
+      "ilosc": 40,
       "jednostka": "g"
     },
     {
       "nazwa": "Kmin rzymski mielony",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "g"
     },
     {
       "nazwa": "Sól kłodawska",
       "ilosc": 0.5,
       "jednostka": "g"
+    },
+    {
+      "nazwa": "woda",
+      "ilosc": 30,
+      "jednostka": "ml",
+      "stan": "do rozluźnienia hummusu; dodawana stopniowo"
     }
   ],
   "etapy": [
     {
-      "nazwa": "Przygotowanie hummusu",
+      "nazwa": "Przygotowanie składników",
       "minuty": 10,
       "kroki": [
         {
-          "tresc": "Ciecierzycę, sezam, oliwę, cytrynę, czosnek, kmin i sól zblenduj z odrobiną wody.",
-          "sygnal": "pasta jest gładka i łatwo się rozsmarowuje",
-          "uwaga": true
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+        },
+        {
+          "tresc": "Opłucz i odsącz ciecierzycę. Umyj pomidora, ogórek, sałatę i cytrynę. Osusz sałatę, pokrój warzywa w cienkie paski."
+        },
+        {
+          "tresc": "Obierz czosnek, wyciśnij i odmierz sok z cytryny. Odmierz sezam, oliwę i wodę do hummusu. Przygotuj tortille."
         }
       ]
     },
     {
-      "nazwa": "Składanie tortilli",
-      "minuty": 5,
+      "nazwa": "Przygotowanie hummusu i zwijanie",
+      "minuty": 7,
       "kroki": [
         {
-          "tresc": "Warzywa pokrój, a sałatę osusz."
+          "tresc": "W wąskim naczyniu zblenduj sezam z oliwą, sokiem z cytryny i częścią wody. Dodaj ciecierzycę, czosnek, kmin i sól; blenduj 2–3 minuty, dodając stopniowo resztę wody. Pasta ma się łatwo rozsmarowywać; drobinki sezamu mogą pozostać."
         },
         {
-          "tresc": "Tortillę posmaruj hummusem, ułóż warzywa i ciasno zawiń."
+          "tresc": "Posmaruj tortillę hummusem, ułóż sałatę i warzywa, zostawiając wolne brzegi. Zawiń boki i zroluj. Nadmiar hummusu i warzyw, który nie mieści się w tortilli, podaj obok."
         }
       ]
     }

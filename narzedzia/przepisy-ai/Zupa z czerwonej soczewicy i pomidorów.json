@@ -1,6 +1,6 @@
 {
   "nazwa": "Zupa z czerwonej soczewicy i pomidorów",
-  "opis": "Gęsta zupa z czerwonej soczewicy, pomidorów i marchewki, podana z pieczywem. Przepis na 2 porcje.",
+  "opis": "Gęsta zupa z czerwonej soczewicy, pomidorów i marchewki, podana z pieczywem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
   "pory": [
     "obiad",
     "kolacja"
@@ -8,118 +8,128 @@
   "kuchnie": [
     "inna"
   ],
-  "rodzaje": ["zupa"],
+  "rodzaje": [
+    "zupa"
+  ],
   "porcjowanie": "waga",
   "porcja_g": 703.5,
   "liczba_porcji_bazowych": 2,
   "trwalosc_dni": 3,
   "czas_przygotowania_min": 10,
-  "czas_obrobki_min": 30,
+  "czas_obrobki_min": 38,
   "sprzet": [
     "Garnek 3 l",
     "Nóż szefa kuchni",
     "Deska do krojenia",
-    "Waga kuchenna"
+    "Waga kuchenna",
+    "Sitko"
   ],
-  "przechowywanie": "Zupę przechowuj w lodówce do 3 dni albo zamroź po ostudzeniu. Pieczywo trzymaj osobno.",
+  "przechowywanie": "Zupę przechowuj w lodówce do 3 dni albo zamroź po ostudzeniu. Pieczywo trzymaj osobno. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
   "mozna_mrozic": true,
   "ratunek": "Za gęstą zupę rozcieńcz bulionem. Za kwaśną pogotuj z dodatkową marchewką.",
   "skladniki": [
     {
       "nazwa": "Soczewica czerwona, sucha",
-      "ilosc": 120.0,
+      "ilosc": 120,
       "jednostka": "g",
       "stan": "opłukana"
     },
     {
       "nazwa": "Pomidory krojone z puszki",
-      "ilosc": 360.0,
+      "ilosc": 360,
       "jednostka": "g"
     },
     {
       "nazwa": "Domowy bulion warzywny",
-      "ilosc": 500.0,
+      "ilosc": 500,
       "jednostka": "g"
     },
     {
       "nazwa": "Marchew, surowa",
-      "ilosc": 140.0,
+      "ilosc": 140,
       "jednostka": "g",
       "stan": "pokrojona"
     },
     {
       "nazwa": "Cebula, surowa",
-      "ilosc": 100.0,
+      "ilosc": 100,
       "jednostka": "g",
       "stan": "posiekana"
     },
     {
       "nazwa": "Czosnek, surowy",
-      "ilosc": 10.0,
+      "ilosc": 10,
       "jednostka": "g"
     },
     {
       "nazwa": "Oliwa z oliwek",
-      "ilosc": 10.0,
+      "ilosc": 10,
       "jednostka": "g"
     },
     {
       "nazwa": "Kmin rzymski mielony",
-      "ilosc": 2.0,
+      "ilosc": 2,
       "jednostka": "g"
     },
     {
       "nazwa": "Papryka wędzona mielona",
-      "ilosc": 2.0,
+      "ilosc": 2,
       "jednostka": "g"
     },
     {
       "nazwa": "Cytryna",
-      "ilosc": 20.0,
+      "ilosc": 20,
       "jednostka": "g",
       "stan": "sok"
     },
     {
       "nazwa": "Chleb żytni razowy",
-      "ilosc": 4.0,
+      "ilosc": 4,
       "jednostka": "szt",
       "stan": "kromki"
     },
     {
       "nazwa": "Sól kłodawska",
-      "ilosc": 2.0,
+      "ilosc": 2,
       "jednostka": "g"
     },
     {
       "nazwa": "Czarny pieprz mielony",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "g"
     }
   ],
   "etapy": [
     {
-      "nazwa": "Przygotowanie",
+      "nazwa": "Przygotowanie składników",
       "minuty": 10,
       "kroki": [
         {
-          "tresc": "Marchew pokrój, cebulę i czosnek posiekaj, a soczewicę opłucz."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+        },
+        {
+          "tresc": "Umyj i obierz marchew, pokrój w cienkie plasterki. Obierz i posiekaj cebulę oraz czosnek. Opłucz soczewicę na sitku."
+        },
+        {
+          "tresc": "Umyj cytrynę, wyciśnij i odmierz sok. Odmierz bulion i pomidory, przygotuj pieczywo."
         }
       ]
     },
     {
-      "nazwa": "Gotowanie",
-      "minuty": 30,
+      "nazwa": "Gotowanie zupy",
+      "minuty": 38,
       "kroki": [
         {
-          "tresc": "Na oliwie smaż cebulę i marchew przez 5 minut. Dodaj czosnek oraz przyprawy."
+          "tresc": "Rozgrzej oliwę przez 1 minutę, smaż cebulę i marchew 5 minut. Dodaj czosnek, kmin i paprykę wędzoną, smaż 30 sekund."
         },
         {
-          "tresc": "Dodaj pomidory, bulion i soczewicę. Gotuj około 22 minut.",
-          "sygnal": "soczewica całkowicie zmiękła",
-          "uwaga": true
+          "tresc": "Dodaj bulion i soczewicę. Doprowadź do wrzenia przez około 4 minuty. Gotuj pod uchyloną pokrywką 15–18 minut, mieszając co kilka minut."
         },
         {
-          "tresc": "Dopraw cytryną, solą oraz pieprzem i podaj z pieczywem."
+          "tresc": "Gdy soczewica jest miękka, dodaj pomidory i gotuj jeszcze 6–8 minut. Jeśli soczewica jest twarda, dogotuj ją przed dodaniem pomidorów."
+        },
+        {
+          "tresc": "Zdejmij z ognia, dodaj sok z cytryny, sól i pieprz. Podaj z pieczywem."
         }
       ]
     }

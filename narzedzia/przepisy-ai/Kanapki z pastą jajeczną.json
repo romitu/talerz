@@ -1,6 +1,6 @@
 {
   "nazwa": "Kanapki z pastą jajeczną",
-  "opis": "Trzy kromki chleba żytniego z kremową pastą z jajek, jogurtu, musztardy i szczypiorku. Przepis na 1 porcję.",
+  "opis": "Trzy kromki chleba żytniego z kremową pastą z jajek, jogurtu, musztardy i szczypiorku. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
   "pory": [
     "sniadanie",
     "kolacja"
@@ -16,16 +16,17 @@
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 1,
   "czas_przygotowania_min": 5,
-  "czas_obrobki_min": 18,
+  "czas_obrobki_min": 21,
   "sprzet": [
     "Garnek 2 l",
-    "miska",
+    "Miska",
     "Widelec",
     "Nóż szefa kuchni",
     "Deska do krojenia",
-    "Waga kuchenna"
+    "Waga kuchenna",
+    "Łyżka cedzakowa"
   ],
-  "przechowywanie": "Pastę przechowuj w zamkniętym pojemniku w lodówce do 1 dnia. Pieczywo smaruj dopiero przed podaniem.",
+  "przechowywanie": "Pastę przechowuj w zamkniętym pojemniku w lodówce do 1 dnia. Pieczywo smaruj dopiero przed podaniem. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
   "mozna_mrozic": false,
   "ratunek": "Jeśli pasta jest zbyt gęsta, dodaj odrobinę jogurtu. Jeśli jest za rzadka, dodaj więcej rozgniecionego jajka.",
   "skladniki": [
@@ -73,33 +74,25 @@
       "minuty": 5,
       "kroki": [
         {
-          "tresc": "Szczypiorek drobno posiekaj, odmierz jogurt i musztardę oraz przygotuj trzy kromki chleba."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+        },
+        {
+          "tresc": "Umyj i posiekaj szczypiorek. Odmierz jogurt oraz musztardę, przygotuj pieczywo w ilości z listy."
         }
       ]
     },
     {
       "nazwa": "Gotowanie jajek i przygotowanie pasty",
-      "minuty": 18,
+      "minuty": 21,
       "kroki": [
         {
-          "tresc": "W garnku zagotuj tyle wody, aby przykryła jajka."
+          "tresc": "Zagotuj w garnku wodę przykrywającą jajka. Włóż je ostrożnie i gotuj przez 9–10 minut przy łagodnym wrzeniu, licząc od włożenia. Schłodź zimną wodą i obierz."
         },
         {
-          "tresc": "Ostrożnie włóż jajka do wrzątku i gotuj 9 minut od zanurzenia."
+          "tresc": "Rozgnieć jajka widelcem w misce. Dodaj jogurt, musztardę i szczypiorek. Dopraw solą oraz pieprzem, wymieszaj."
         },
         {
-          "tresc": "Schłodź jajka pod zimną wodą, obierz i przekrój.",
-          "sygnal": "żółtka są całkowicie ścięte"
-        },
-        {
-          "tresc": "Jajka przełóż do miski i rozgnieć widelcem."
-        },
-        {
-          "tresc": "Dodaj jogurt, musztardę i szczypiorek. Dopraw solą oraz pieprzem i wymieszaj.",
-          "uwaga": true
-        },
-        {
-          "tresc": "Pastę rozsmaruj na trzech kromkach chleba."
+          "tresc": "Posmaruj przygotowane pieczywo pastą i podaj."
         }
       ]
     }

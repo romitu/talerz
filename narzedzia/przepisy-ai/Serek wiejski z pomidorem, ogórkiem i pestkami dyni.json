@@ -1,6 +1,6 @@
 {
   "nazwa": "Serek wiejski z pomidorem, ogórkiem i pestkami dyni",
-  "opis": "Serek wiejski ze świeżym pomidorem, ogórkiem i pestkami dyni, podany z dwiema kromkami chleba żytniego. Przepis na 1 porcję.",
+  "opis": "Serek wiejski ze świeżym pomidorem, ogórkiem i pestkami dyni, podany z dwiema kromkami chleba żytniego. Ilości składników dobierz z listy dla przygotowywanej liczby porcji.",
   "pory": [
     "sniadanie",
     "kolacja"
@@ -18,13 +18,13 @@
   "czas_przygotowania_min": 7,
   "czas_obrobki_min": 0,
   "sprzet": [
-    "miska",
+    "Miska",
     "Widelec",
     "Nóż szefa kuchni",
     "Deska do krojenia",
     "Waga kuchenna"
   ],
-  "przechowywanie": "Serek z warzywami przechowuj w zamkniętym pojemniku w lodówce do 1 dnia. Pestki dyni i pieczywo dodaj dopiero przed jedzeniem.",
+  "przechowywanie": "Serek z warzywami przechowuj w zamkniętym pojemniku w lodówce do 1 dnia. Pestki dyni i pieczywo dodaj dopiero przed jedzeniem. Lodówka: do 4°C.",
   "mozna_mrozic": false,
   "ratunek": "Jeśli całość puściła dużo wody, odlej nadmiar płynu. Jeśli smak jest zbyt łagodny, dodaj odrobinę soli i pieprzu.",
   "skladniki": [
@@ -70,17 +70,25 @@
   "etapy": [
     {
       "nazwa": "Przygotowanie składników",
-      "minuty": 7,
+      "minuty": 5,
       "kroki": [
         {
-          "tresc": "Pomidora i ogórek pokrój w kostkę."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
         },
         {
-          "tresc": "Serek wiejski przełóż do miski, dodaj warzywa, dopraw solą oraz pieprzem i delikatnie wymieszaj widelcem.",
-          "uwaga": true
+          "tresc": "Umyj pomidora i ogórek, pokrój w kostkę. Przygotuj pieczywo, serek i pestki dyni."
+        }
+      ]
+    },
+    {
+      "nazwa": "Łączenie i podanie",
+      "minuty": 2,
+      "kroki": [
+        {
+          "tresc": "Przełóż serek do miski, dodaj warzywa i delikatnie wymieszaj. Dopraw odmierzoną solą i pieprzem."
         },
         {
-          "tresc": "Posyp pestkami dyni i podaj od razu z dwiema kromkami chleba."
+          "tresc": "Posyp pestkami dyni i podaj z pieczywem w ilości wskazanej na liście."
         }
       ]
     }

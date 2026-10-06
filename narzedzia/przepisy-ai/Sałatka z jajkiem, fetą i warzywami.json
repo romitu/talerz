@@ -1,6 +1,6 @@
 {
   "nazwa": "Sałatka z jajkiem, fetą i warzywami",
-  "opis": "Sałatka z jajkami na twardo, fetą, pomidorem, ogórkiem i sałatą, skropiona oliwą. Przepis na 1 porcję.",
+  "opis": "Sałatka z jajkami na twardo, fetą, pomidorem, ogórkiem i sałatą, skropiona oliwą. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
   "pory": [
     "sniadanie",
     "kolacja"
@@ -16,15 +16,16 @@
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 1,
   "czas_przygotowania_min": 10,
-  "czas_obrobki_min": 17,
+  "czas_obrobki_min": 20,
   "sprzet": [
     "Garnek 2 l",
-    "miska",
+    "Miska",
     "Nóż szefa kuchni",
     "Deska do krojenia",
-    "Waga kuchenna"
+    "Waga kuchenna",
+    "Łyżka cedzakowa"
   ],
-  "przechowywanie": "Przechowuj w zamkniętym pojemniku w lodówce do 1 dnia. Oliwę i przyprawy najlepiej dodaj przed jedzeniem.",
+  "przechowywanie": "Przechowuj w zamkniętym pojemniku w lodówce do 1 dnia. Oliwę i przyprawy najlepiej dodaj przed jedzeniem. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
   "mozna_mrozic": false,
   "ratunek": "Jeśli sałatka puściła wodę, odlej płyn i dodaj świeżą sałatę. Jeśli feta jest bardzo słona, ogranicz ilość dodatkowej soli.",
   "skladniki": [
@@ -79,30 +80,34 @@
       "minuty": 10,
       "kroki": [
         {
-          "tresc": "Pomidora pokrój w cząstki, ogórek w półplasterki, a sałatę porwij na mniejsze kawałki."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
         },
         {
-          "tresc": "Fetę pokrusz, a warzywa przełóż do miski."
+          "tresc": "Umyj pomidora, ogórek i sałatę. Osusz sałatę i porwij. Pokrój pomidora w cząstki, ogórek w półplasterki."
+        },
+        {
+          "tresc": "Pokrusz fetę i odmierz oliwę, sól oraz pieprz."
         }
       ]
     },
     {
-      "nazwa": "Gotowanie jajek i wykończenie sałatki",
-      "minuty": 17,
+      "nazwa": "Gotowanie jajek",
+      "minuty": 18,
       "kroki": [
         {
-          "tresc": "W garnku zagotuj tyle wody, aby przykryła jajka."
+          "tresc": "Zagotuj w garnku wodę przykrywającą jajka. Włóż je ostrożnie i gotuj przez 9–10 minut przy łagodnym wrzeniu, licząc od włożenia. Schłodź zimną wodą i obierz."
         },
         {
-          "tresc": "Ostrożnie włóż jajka do wrzątku i gotuj 9 minut od zanurzenia."
-        },
+          "tresc": "Pokrój jajka w ćwiartki."
+        }
+      ]
+    },
+    {
+      "nazwa": "Łączenie sałatki",
+      "minuty": 2,
+      "kroki": [
         {
-          "tresc": "Schłodź jajka pod zimną wodą, obierz i pokrój w ćwiartki.",
-          "sygnal": "żółtka są całkowicie ścięte"
-        },
-        {
-          "tresc": "Dodaj jajka i fetę do warzyw. Skrop oliwą, dopraw solą oraz pieprzem i delikatnie wymieszaj.",
-          "uwaga": true
+          "tresc": "Połącz warzywa, jajka i fetę. Skrop oliwą, spróbuj i dopraw odmierzoną solą oraz pieprzem; feta jest słona. Delikatnie wymieszaj."
         }
       ]
     }

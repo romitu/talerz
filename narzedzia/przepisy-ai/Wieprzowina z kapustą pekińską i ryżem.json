@@ -1,114 +1,125 @@
 {
   "nazwa": "Wieprzowina z kapustą pekińską i ryżem",
-  "opis": "Szybko smażona wieprzowina z kapustą pekińską, marchewką, imbirem i ryżem. Przepis na 1 porcję.",
+  "opis": "Szybko smażona wieprzowina z kapustą pekińską, marchewką, imbirem i ryżem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
   "pory": [
     "obiad"
   ],
   "kuchnie": [
     "azjatycka"
   ],
-  "rodzaje": ["kasza_ryz"],
+  "rodzaje": [
+    "kasza_ryz"
+  ],
   "porcjowanie": "waga",
-  "porcja_g": 621.0,
+  "porcja_g": 621,
   "liczba_porcji_bazowych": 1,
-  "trwalosc_dni": 2,
+  "trwalosc_dni": 1,
   "czas_przygotowania_min": 12,
-  "czas_obrobki_min": 18,
+  "czas_obrobki_min": 25,
   "sprzet": [
     "Patelnia 28 cm",
     "Garnek 2 l",
     "Tarka o drobnych oczkach",
     "Nóż szefa kuchni",
     "Deska do krojenia",
-    "Waga kuchenna"
+    "Waga kuchenna",
+    "Sitko",
+    "Termometr do mięsa"
   ],
-  "przechowywanie": "Przechowuj w lodówce do 2 dni. Ryż najlepiej trzymaj osobno.",
+  "przechowywanie": "Porcję z ugotowanym ryżem szybko schłodź w płytkim pojemniku i wstaw do lodówki, najlepiej w ciągu godziny. Przechowuj do 24 godzin. Odgrzewaj tylko raz, do gorącego środka całej porcji. Lodówka: do 4°C.",
   "mozna_mrozic": false,
   "ratunek": "Jeśli danie jest wodniste, smaż na większym ogniu. Za słony sos złagodź dodatkową kapustą i ryżem.",
   "skladniki": [
     {
       "nazwa": "Polędwiczka wieprzowa, surowa",
-      "ilosc": 170.0,
+      "ilosc": 170,
       "jednostka": "g",
       "stan": "pokrojona w cienkie paski"
     },
     {
       "nazwa": "Kapusta pekińska, surowa",
-      "ilosc": 200.0,
+      "ilosc": 200,
       "jednostka": "g",
       "stan": "pokrojona"
     },
     {
       "nazwa": "Ryż jaśminowy, suchy",
-      "ilosc": 70.0,
+      "ilosc": 70,
       "jednostka": "g"
     },
     {
       "nazwa": "Marchew, surowa",
-      "ilosc": 80.0,
+      "ilosc": 80,
       "jednostka": "g",
       "stan": "pokrojona w cienkie paski"
     },
     {
       "nazwa": "Cebula, surowa",
-      "ilosc": 50.0,
+      "ilosc": 50,
       "jednostka": "g",
       "stan": "pokrojona"
     },
     {
       "nazwa": "Sos sojowy",
-      "ilosc": 20.0,
+      "ilosc": 20,
       "jednostka": "g"
     },
     {
       "nazwa": "Imbir korzeń, surowy",
-      "ilosc": 10.0,
+      "ilosc": 10,
       "jednostka": "g",
       "stan": "starty"
     },
     {
       "nazwa": "Czosnek, surowy",
-      "ilosc": 5.0,
+      "ilosc": 5,
       "jednostka": "g"
     },
     {
       "nazwa": "Olej rzepakowy",
-      "ilosc": 8.0,
+      "ilosc": 8,
       "jednostka": "g"
     },
     {
       "nazwa": "Sezam",
-      "ilosc": 8.0,
+      "ilosc": 8,
       "jednostka": "g"
     }
   ],
   "etapy": [
     {
-      "nazwa": "Przygotowanie",
+      "nazwa": "Przygotowanie składników",
       "minuty": 12,
       "kroki": [
         {
-          "tresc": "Ryż ugotuj. Mięso i warzywa pokrój w cienkie paski, imbir zetrzyj."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
         },
         {
-          "tresc": "Mięso wymieszaj z połową sosu sojowego."
+          "tresc": "Opłucz ryż. Umyj kapustę, oddziel grube białe części od liści i cienko pokrój. Umyj i obierz marchew, pokrój w cienkie paski. Obierz i pokrój cebulę."
+        },
+        {
+          "tresc": "Obierz czosnek oraz imbir, posiekaj czosnek i zetrzyj imbir. Odmierz sezam i sos sojowy."
+        },
+        {
+          "tresc": "Osusz polędwiczkę, usuń twardą błonę i pokrój mięso w paski około 1 cm. Wymieszaj z połową sosu sojowego. Umyj przybory i ręce po mięsie."
         }
       ]
     },
     {
-      "nazwa": "Smażenie",
-      "minuty": 18,
+      "nazwa": "Gotowanie i smażenie",
+      "minuty": 25,
       "kroki": [
         {
-          "tresc": "Na mocno rozgrzanym oleju smaż mięso partiami przez 3–4 minuty. Odłóż."
+          "tresc": "Na pierwszym palniku zagotuj wodę w garnku. Dodaj ryż i gotuj przez czas wskazany na opakowaniu; po ugotowaniu odcedź. Wody użyj tyle, by ziarna były zanurzone i swobodnie się gotowały. Nastaw minutnik; równolegle wykonuj kolejne czynności na drugim palniku. Woda do gotowania jest dodatkowa i zostanie odlana."
         },
         {
-          "tresc": "Dodaj cebulę, marchew, imbir i czosnek, a po 3 minutach kapustę."
+          "tresc": "Rozgrzej połowę oleju przez 1 minutę. Smaż mięso 4–5 minut, obracając, do temperatury co najmniej 63°C. Przełóż na czysty talerz na co najmniej 3 minuty."
         },
         {
-          "tresc": "Włóż mięso z powrotem, dodaj pozostały sos i smaż jeszcze 2 minuty.",
-          "sygnal": "kapusta jest lekko chrupiąca, a mięso całkowicie ścięte",
-          "uwaga": true
+          "tresc": "Dodaj pozostały olej, cebulę, marchew i białe części kapusty; smaż 4 minuty. Dodaj imbir i czosnek, smaż 30 sekund."
+        },
+        {
+          "tresc": "Dodaj liście kapusty, pozostały sos sojowy i smaż 1–2 minuty. Włóż mięso i podgrzewaj 1 minutę, delikatnie mieszając."
         },
         {
           "tresc": "Podaj z ryżem i sezamem."

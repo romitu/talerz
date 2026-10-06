@@ -1,6 +1,6 @@
 {
   "nazwa": "Kotleciki z czerwonej soczewicy z sosem jogurtowym",
-  "opis": "Rumiane kotleciki z czerwonej soczewicy i płatków owsianych, podane z ogórkowym sosem jogurtowym. Przepis na 1 porcję.",
+  "opis": "Rumiane kotleciki z czerwonej soczewicy i płatków owsianych, podane z ogórkowym sosem jogurtowym. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
   "pory": [
     "obiad",
     "kolacja"
@@ -12,83 +12,85 @@
   "porcja_g": 406.5,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 2,
-  "czas_przygotowania_min": 18,
-  "czas_obrobki_min": 20,
+  "czas_przygotowania_min": 12,
+  "czas_obrobki_min": 57,
   "sprzet": [
     "Garnek 2 l",
     "Patelnia 28 cm",
-    "miska",
+    "Miska",
     "Tarka o grubych oczkach",
     "Nóż szefa kuchni",
     "Deska do krojenia",
-    "Waga kuchenna"
+    "Waga kuchenna",
+    "Sitko",
+    "Widelec"
   ],
-  "przechowywanie": "Kotleciki przechowuj w lodówce do 2 dni. Sos trzymaj osobno.",
+  "przechowywanie": "Kotleciki przechowuj w lodówce do 2 dni albo zamroź po ostudzeniu. Sos jogurtowy przechowuj osobno w lodówce, bez mrożenia. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
   "mozna_mrozic": true,
   "ratunek": "Jeśli masa się rozpada, dodaj płatki owsiane i odczekaj 5 minut. Za gęsty sos rozrzedź wodą.",
   "skladniki": [
     {
       "nazwa": "Soczewica czerwona, sucha",
-      "ilosc": 70.0,
+      "ilosc": 70,
       "jednostka": "g"
     },
     {
       "nazwa": "Płatki owsiane",
-      "ilosc": 30.0,
+      "ilosc": 30,
       "jednostka": "g"
     },
     {
       "nazwa": "Marchew, surowa",
-      "ilosc": 60.0,
+      "ilosc": 60,
       "jednostka": "g",
       "stan": "starta"
     },
     {
       "nazwa": "Cebula, surowa",
-      "ilosc": 40.0,
+      "ilosc": 40,
       "jednostka": "g",
       "stan": "drobno posiekana"
     },
     {
       "nazwa": "Czosnek, surowy",
-      "ilosc": 5.0,
+      "ilosc": 5,
       "jednostka": "g"
     },
     {
       "nazwa": "Olej rzepakowy",
-      "ilosc": 8.0,
+      "ilosc": 8,
       "jednostka": "g"
     },
     {
       "nazwa": "Kmin rzymski mielony",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "g"
     },
     {
       "nazwa": "Papryka słodka mielona",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "g"
     },
     {
       "nazwa": "Jogurt grecki naturalny 2%",
-      "ilosc": 80.0,
+      "ilosc": 80,
       "jednostka": "g"
     },
     {
       "nazwa": "Ogórek, surowy",
-      "ilosc": 100.0,
+      "ilosc": 100,
       "jednostka": "g",
       "stan": "starty i odciśnięty"
     },
     {
       "nazwa": "Cytryna",
-      "ilosc": 10.0,
+      "ilosc": 10,
       "jednostka": "g",
       "stan": "sok"
     },
     {
       "nazwa": "Sól kłodawska",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "g"
     },
     {
@@ -99,31 +101,49 @@
   ],
   "etapy": [
     {
-      "nazwa": "Przygotowanie masy i sosu",
-      "minuty": 18,
+      "nazwa": "Przygotowanie składników",
+      "minuty": 12,
       "kroki": [
         {
-          "tresc": "Soczewicę ugotuj do miękkości i dokładnie odcedź."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
         },
         {
-          "tresc": "Połącz ją z marchewką, cebulą, czosnkiem, płatkami i przyprawami. Rozgnieć widelcem."
+          "tresc": "Opłucz soczewicę na sitku. Obierz marchew i zetrzyj; obierz i drobno posiekaj cebulę oraz czosnek."
         },
         {
-          "tresc": "Jogurt wymieszaj z ogórkiem, sokiem z cytryny i częścią soli."
+          "tresc": "Umyj ogórek, zetrzyj go i odciśnij nadmiar soku. Przygotuj sok z cytryny oraz odmierz jogurt i płatki."
         }
       ]
     },
     {
-      "nazwa": "Smażenie",
-      "minuty": 20,
+      "nazwa": "Gotowanie soczewicy i przygotowanie masy",
+      "minuty": 42,
       "kroki": [
         {
-          "tresc": "Z masy uformuj małe, zwarte kotleciki.",
-          "uwaga": true
+          "tresc": "Zagotuj wodę, co zwykle trwa około 5 minut, i gotuj soczewicę 12–15 minut, do miękkości. Dokładnie odcedź na sitku i odstaw na 10 minut do odparowania."
         },
         {
-          "tresc": "Smaż je na oleju po 4–5 minut z każdej strony.",
-          "sygnal": "kotleciki są rumiane i łatwo odchodzą od patelni"
+          "tresc": "Równolegle rozgrzej połowę oleju na patelni przez 1 minutę. Smaż cebulę i marchew 5 minut, dodaj czosnek, kmin i paprykę; smaż jeszcze 30 sekund."
+        },
+        {
+          "tresc": "Rozgnieć soczewicę widelcem. Dodaj podsmażone warzywa, płatki oraz część soli i pieprzu. Wymieszaj i odstaw na 10 minut, żeby płatki wchłonęły wilgoć."
+        },
+        {
+          "tresc": "W tym czasie wymieszaj jogurt z ogórkiem, sokiem z cytryny i pozostałą solą oraz pieprzem."
+        }
+      ]
+    },
+    {
+      "nazwa": "Formowanie i smażenie",
+      "minuty": 15,
+      "kroki": [
+        {
+          "tresc": "Uformuj kotleciki grubości około 1,5 cm. Rozgrzej pozostały olej na patelni nieprzywierającej przez 1 minutę."
+        },
+        {
+          "tresc": "Smaż po 4–5 minut z każdej strony na średnim ogniu. Obracaj dopiero po zrumienieniu spodu. Przy większej ilości smaż partiami, doliczając czas kolejnej partii.",
+          "sygnal": "kotleciki utrzymują kształt i mają rumianą powierzchnię",
+          "uwaga": true
         },
         {
           "tresc": "Podaj z sosem jogurtowym."

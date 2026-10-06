@@ -1,6 +1,6 @@
 {
   "nazwa": "Sałatka makaronowa z mozzarellą i warzywami",
-  "opis": "Sałatka z pełnoziarnistym makaronem, mozzarellą, pomidorem, ogórkiem, papryką i bazylią. Przepis na 1 porcję.",
+  "opis": "Sałatka z pełnoziarnistym makaronem, mozzarellą, pomidorem, ogórkiem, papryką i bazylią. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
   "pory": [
     "obiad",
     "kolacja"
@@ -8,72 +8,74 @@
   "kuchnie": [
     "srodziemnomorska"
   ],
-  "rodzaje": ["salatka"],
+  "rodzaje": [
+    "salatka"
+  ],
   "porcjowanie": "waga",
-  "porcja_g": 559.0,
+  "porcja_g": 559,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 2,
   "czas_przygotowania_min": 12,
-  "czas_obrobki_min": 12,
+  "czas_obrobki_min": 23,
   "sprzet": [
     "Garnek 3 l",
     "Sitko",
-    "miska",
+    "Miska",
     "Nóż szefa kuchni",
     "Deska do krojenia",
     "Waga kuchenna"
   ],
-  "przechowywanie": "Przechowuj w zamkniętym pojemniku w lodówce do 2 dni. Oliwę najlepiej dodaj przed jedzeniem.",
+  "przechowywanie": "Przechowuj w zamkniętym pojemniku w lodówce do 2 dni. Oliwę najlepiej dodaj przed jedzeniem. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
   "mozna_mrozic": false,
   "ratunek": "Jeśli sałatka puściła wodę, odlej płyn i dopraw ponownie. Za suchą sałatkę skrop dodatkową oliwą.",
   "skladniki": [
     {
       "nazwa": "Makaron pełnoziarnisty, suchy",
-      "ilosc": 80.0,
+      "ilosc": 80,
       "jednostka": "g"
     },
     {
       "nazwa": "Ser mozzarella",
-      "ilosc": 90.0,
+      "ilosc": 90,
       "jednostka": "g",
       "stan": "pokrojony"
     },
     {
       "nazwa": "Pomidory, surowe",
-      "ilosc": 130.0,
+      "ilosc": 130,
       "jednostka": "g",
       "stan": "pokrojone"
     },
     {
       "nazwa": "Ogórek, surowy",
-      "ilosc": 100.0,
+      "ilosc": 100,
       "jednostka": "g",
       "stan": "pokrojony"
     },
     {
       "nazwa": "Papryka czerwona, surowa",
-      "ilosc": 100.0,
+      "ilosc": 100,
       "jednostka": "g",
       "stan": "pokrojona"
     },
     {
       "nazwa": "Oliwki czarne",
-      "ilosc": 30.0,
+      "ilosc": 30,
       "jednostka": "g"
     },
     {
       "nazwa": "Oliwa z oliwek",
-      "ilosc": 10.0,
+      "ilosc": 10,
       "jednostka": "g"
     },
     {
       "nazwa": "Bazylia świeża",
-      "ilosc": 8.0,
+      "ilosc": 8,
       "jednostka": "g"
     },
     {
       "nazwa": "Cytryna",
-      "ilosc": 10.0,
+      "ilosc": 10,
       "jednostka": "g",
       "stan": "sok"
     },
@@ -90,27 +92,38 @@
   ],
   "etapy": [
     {
-      "nazwa": "Gotowanie makaronu",
+      "nazwa": "Przygotowanie składników",
       "minuty": 12,
       "kroki": [
         {
-          "tresc": "Makaron ugotuj al dente, odcedź i całkowicie ostudź."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+        },
+        {
+          "tresc": "Umyj pomidora, ogórek, paprykę i bazylię; osusz. Usuń nasiona papryki i pokrój warzywa w kostkę."
+        },
+        {
+          "tresc": "Odsącz mozzarellę i oliwki, pokrój ser. Umyj cytrynę, odmierz sok. Przygotuj makaron i oliwę."
         }
       ]
     },
     {
-      "nazwa": "Przygotowanie sałatki",
-      "minuty": 12,
+      "nazwa": "Gotowanie i chłodzenie makaronu",
+      "minuty": 20,
       "kroki": [
         {
-          "tresc": "Mozzarellę i warzywa pokrój na podobnej wielkości kawałki."
+          "tresc": "Zagotuj wodę i ugotuj makaron przez czas podany na opakowaniu. Odcedź na sitku, krótko przelej zimną wodą i dokładnie odsącz."
         },
         {
-          "tresc": "Połącz makaron, mozzarellę, warzywa, oliwki i bazylię."
-        },
+          "tresc": "Przed dodaniem sera i surowych warzyw upewnij się, że makaron jest chłodny."
+        }
+      ]
+    },
+    {
+      "nazwa": "Łączenie sałatki",
+      "minuty": 3,
+      "kroki": [
         {
-          "tresc": "Skrop oliwą oraz cytryną, dopraw i wymieszaj.",
-          "uwaga": true
+          "tresc": "Połącz makaron, mozzarellę, pokrojone warzywa, oliwki i bazylię. Skrop oliwą oraz przygotowanym sokiem z cytryny, dopraw solą i pieprzem."
         }
       ]
     }

@@ -1,6 +1,6 @@
 {
   "nazwa": "Kanapki z halloumi, awokado i pomidorem",
-  "opis": "Kanapki z grillowanym halloumi, awokado, pomidorem i rukolą. Przepis na 1 porcję.",
+  "opis": "Kanapki z grillowanym halloumi, awokado, pomidorem i rukolą. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
   "pory": [
     "sniadanie",
     "kolacja"
@@ -8,13 +8,15 @@
   "kuchnie": [
     "srodziemnomorska"
   ],
-  "rodzaje": ["kanapki"],
+  "rodzaje": [
+    "kanapki"
+  ],
   "porcjowanie": "waga",
   "porcja_g": 325.5,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 0,
   "czas_przygotowania_min": 8,
-  "czas_obrobki_min": 6,
+  "czas_obrobki_min": 7,
   "sprzet": [
     "Patelnia 24 cm",
     "Nóż szefa kuchni",
@@ -27,13 +29,13 @@
   "skladniki": [
     {
       "nazwa": "Chleb żytni razowy",
-      "ilosc": 2.0,
+      "ilosc": 2,
       "jednostka": "szt",
       "stan": "kromki"
     },
     {
       "nazwa": "Halloumi",
-      "ilosc": 80.0,
+      "ilosc": 80,
       "jednostka": "g",
       "stan": "pokrojone w plastry"
     },
@@ -51,12 +53,12 @@
     },
     {
       "nazwa": "Rukola",
-      "ilosc": 30.0,
+      "ilosc": 30,
       "jednostka": "g"
     },
     {
       "nazwa": "Cytryna",
-      "ilosc": 10.0,
+      "ilosc": 10,
       "jednostka": "g",
       "stan": "sok"
     },
@@ -68,25 +70,34 @@
   ],
   "etapy": [
     {
-      "nazwa": "Przygotowanie",
+      "nazwa": "Przygotowanie składników",
       "minuty": 8,
       "kroki": [
         {
-          "tresc": "Awokado i pomidora pokrój, a awokado skrop cytryną."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+        },
+        {
+          "tresc": "Umyj pomidora, rukolę i cytrynę; osusz rukolę. Odmierz sok z cytryny."
+        },
+        {
+          "tresc": "Umyj awokado, usuń pestkę i skórkę, pokrój miąższ i skrop sokiem. Pomidora oraz halloumi pokrój w plastry; ser osusz. Przygotuj pieczywo."
         }
       ]
     },
     {
-      "nazwa": "Grillowanie i składanie",
-      "minuty": 6,
+      "nazwa": "Smażenie i składanie kanapek",
+      "minuty": 7,
       "kroki": [
         {
-          "tresc": "Halloumi smaż na suchej patelni po około 2 minuty z każdej strony.",
-          "sygnal": "ser jest złoty z zewnątrz",
+          "tresc": "Rozgrzej suchą patelnię nieprzywierającą przez 1 minutę."
+        },
+        {
+          "tresc": "Smaż halloumi po około 2 minuty z każdej strony na średnim ogniu.",
+          "sygnal": "ser jest złoty na powierzchni",
           "uwaga": true
         },
         {
-          "tresc": "Na pieczywie ułóż rukolę, awokado, pomidora i ciepłe halloumi. Dopraw pieprzem."
+          "tresc": "Na pieczywie ułóż rukolę, awokado, pomidora i ciepły ser. Dopraw pieprzem i od razu podaj."
         }
       ]
     }

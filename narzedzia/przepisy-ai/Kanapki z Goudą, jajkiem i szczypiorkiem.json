@@ -1,6 +1,6 @@
 {
   "nazwa": "Kanapki z Goudą, jajkiem i szczypiorkiem",
-  "opis": "Syte kanapki z serem Gouda, jajkiem na twardo, pomidorem i szczypiorkiem. Przepis na 1 porcję.",
+  "opis": "Syte kanapki z serem Gouda, jajkiem na twardo, pomidorem i szczypiorkiem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
   "pory": [
     "sniadanie",
     "kolacja"
@@ -8,18 +8,21 @@
   "kuchnie": [
     "polska"
   ],
-  "rodzaje": ["kanapki"],
+  "rodzaje": [
+    "kanapki"
+  ],
   "porcjowanie": "waga",
   "porcja_g": 285.5,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 0,
-  "czas_przygotowania_min": 8,
-  "czas_obrobki_min": 9,
+  "czas_przygotowania_min": 5,
+  "czas_obrobki_min": 20,
   "sprzet": [
     "Garnek 2 l",
     "Nóż szefa kuchni",
     "Deska do krojenia",
-    "Waga kuchenna"
+    "Waga kuchenna",
+    "Łyżka cedzakowa"
   ],
   "przechowywanie": "Kanapki zjedz od razu. Ugotowane jajko możesz przechować osobno w lodówce do następnego dnia.",
   "mozna_mrozic": false,
@@ -27,35 +30,35 @@
   "skladniki": [
     {
       "nazwa": "Chleb żytni razowy",
-      "ilosc": 2.0,
+      "ilosc": 2,
       "jednostka": "szt",
       "stan": "kromki"
     },
     {
       "nazwa": "Ser Gouda",
-      "ilosc": 50.0,
+      "ilosc": 50,
       "jednostka": "g",
       "stan": "pokrojony w plastry"
     },
     {
       "nazwa": "Jaja kurze, całe, surowe",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "szt"
     },
     {
       "nazwa": "Pomidory, surowe",
-      "ilosc": 80.0,
+      "ilosc": 80,
       "jednostka": "g",
       "stan": "pokrojone w plastry"
     },
     {
       "nazwa": "Jogurt naturalny 2%",
-      "ilosc": 20.0,
+      "ilosc": 20,
       "jednostka": "g"
     },
     {
       "nazwa": "Szczypiorek świeży",
-      "ilosc": 10.0,
+      "ilosc": 10,
       "jednostka": "g",
       "stan": "posiekany"
     },
@@ -67,25 +70,36 @@
   ],
   "etapy": [
     {
-      "nazwa": "Gotowanie jajka",
-      "minuty": 9,
+      "nazwa": "Przygotowanie składników",
+      "minuty": 5,
       "kroki": [
         {
-          "tresc": "Jajko ugotuj na twardo, schłodź, obierz i pokrój w plastry.",
-          "sygnal": "żółtko jest całkowicie ścięte"
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+        },
+        {
+          "tresc": "Umyj pomidora i szczypiorek, pokrój pomidora w plastry, szczypiorek posiekaj. Pokrój Goudę w plastry, przygotuj pieczywo i jogurt."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie jajek",
+      "minuty": 18,
+      "kroki": [
+        {
+          "tresc": "Zagotuj w garnku wodę przykrywającą jajka. Włóż je ostrożnie i gotuj przez 9–10 minut przy łagodnym wrzeniu, licząc od włożenia. Schłodź zimną wodą i obierz."
+        },
+        {
+          "tresc": "Pokrój obrane jajka w plastry.",
+          "sygnal": "żółtka i białka są całkowicie ścięte"
         }
       ]
     },
     {
       "nazwa": "Składanie kanapek",
-      "minuty": 8,
+      "minuty": 2,
       "kroki": [
         {
-          "tresc": "Pieczywo cienko posmaruj jogurtem."
-        },
-        {
-          "tresc": "Ułóż Goudę, pomidora i jajko. Posyp szczypiorkiem i pieprzem.",
-          "uwaga": true
+          "tresc": "Posmaruj pieczywo jogurtem. Ułóż Goudę, pomidora i jajka. Posyp szczypiorkiem i pieprzem."
         }
       ]
     }

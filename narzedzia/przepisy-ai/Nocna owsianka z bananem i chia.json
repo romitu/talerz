@@ -1,43 +1,45 @@
 {
   "nazwa": "Nocna owsianka z bananem i chia",
-  "opis": "Nocna owsianka z bananem, nasionami chia i masłem orzechowym. Przepis na 1 porcję.",
+  "opis": "Owsianka przygotowywana wieczorem. Wymaga co najmniej 6 godzin chłodzenia; praca zajmuje około 7 minut. Podany czas przygotowania obejmuje również oczekiwanie w lodówce. Ilości składników dobierz z listy dla przygotowywanej liczby porcji.",
   "pory": [
     "sniadanie"
   ],
   "kuchnie": [
     "inna"
   ],
-  "rodzaje": ["na_slodko"],
+  "rodzaje": [
+    "na_slodko"
+  ],
   "porcjowanie": "waga",
-  "porcja_g": 386.0,
+  "porcja_g": 386,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 2,
-  "czas_przygotowania_min": 7,
+  "czas_przygotowania_min": 367,
   "czas_obrobki_min": 0,
   "sprzet": [
-    "miska",
+    "Miska",
     "Widelec",
     "Nóż szefa kuchni",
     "Deska do krojenia",
     "Waga kuchenna"
   ],
-  "przechowywanie": "Przechowuj pod przykryciem w lodówce do 2 dni. Banana najlepiej dodaj przed jedzeniem.",
+  "przechowywanie": "Przechowuj pod przykryciem w lodówce do 2 dni. Banana najlepiej dodaj przed jedzeniem. Lodówka: do 4°C.",
   "mozna_mrozic": false,
   "ratunek": "Za gęstą owsiankę rozcieńcz mlekiem. Zbyt rzadka zgęstnieje po dodaniu chia i kolejnych 15 minutach chłodzenia.",
   "skladniki": [
     {
       "nazwa": "Płatki owsiane",
-      "ilosc": 55.0,
+      "ilosc": 55,
       "jednostka": "g"
     },
     {
       "nazwa": "Mleko 2%",
-      "ilosc": 160.0,
+      "ilosc": 160,
       "jednostka": "g"
     },
     {
       "nazwa": "Jogurt naturalny 2%",
-      "ilosc": 80.0,
+      "ilosc": 80,
       "jednostka": "g"
     },
     {
@@ -48,41 +50,59 @@
     },
     {
       "nazwa": "Nasiona chia",
-      "ilosc": 15.0,
+      "ilosc": 15,
       "jednostka": "g"
     },
     {
       "nazwa": "Masło orzechowe bez cukru",
-      "ilosc": 15.0,
+      "ilosc": 15,
       "jednostka": "g"
     },
     {
       "nazwa": "Cynamon mielony",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "g"
     }
   ],
   "etapy": [
     {
-      "nazwa": "Przygotowanie wieczorem",
-      "minuty": 5,
+      "nazwa": "Przygotowanie składników",
+      "minuty": 4,
       "kroki": [
         {
-          "tresc": "Płatki wymieszaj z mlekiem, jogurtem, chia i cynamonem."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
         },
         {
-          "tresc": "Przykryj i wstaw do lodówki na co najmniej 6 godzin.",
-          "sygnal": "po schłodzeniu płatki są miękkie, a masa kremowa",
+          "tresc": "Odmierz płatki, mleko, jogurt, chia, cynamon i masło orzechowe. Banana obierz i pokrój; przechowaj osobno w szczelnym pojemniku w lodówce do podania."
+        }
+      ]
+    },
+    {
+      "nazwa": "Mieszanie",
+      "minuty": 2,
+      "kroki": [
+        {
+          "tresc": "Wymieszaj płatki, mleko, jogurt, chia i cynamon. Przykryj naczynie."
+        }
+      ]
+    },
+    {
+      "nazwa": "Chłodzenie",
+      "minuty": 360,
+      "kroki": [
+        {
+          "tresc": "Wstaw do lodówki na co najmniej 6 godzin. Po około 10 minutach ponownie wymieszaj, żeby rozbić skupiska chia.",
+          "sygnal": "płatki są miękkie, chia napęczniały",
           "uwaga": true
         }
       ]
     },
     {
       "nazwa": "Podanie",
-      "minuty": 2,
+      "minuty": 1,
       "kroki": [
         {
-          "tresc": "Rano wymieszaj owsiankę. Dodaj plasterki banana i masło orzechowe."
+          "tresc": "Wymieszaj owsiankę, dodaj przygotowanego banana i masło orzechowe."
         }
       ]
     }

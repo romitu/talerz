@@ -1,6 +1,6 @@
 {
   "nazwa": "Komosa ryżowa z ciecierzycą i pieczonymi warzywami",
-  "opis": "Miska z komosą ryżową, ciecierzycą, cukinią, papryką i pomidorem, doprawiona cytryną. Przepis na 1 porcję.",
+  "opis": "Miska z komosą ryżową, ciecierzycą, cukinią, papryką i pomidorem, doprawiona cytryną. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
   "pory": [
     "obiad",
     "kolacja"
@@ -8,85 +8,90 @@
   "kuchnie": [
     "srodziemnomorska"
   ],
-  "rodzaje": ["kasza_ryz", "z_piekarnika"],
+  "rodzaje": [
+    "kasza_ryz",
+    "z_piekarnika"
+  ],
   "porcjowanie": "waga",
   "porcja_g": 657.5,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 2,
   "czas_przygotowania_min": 12,
-  "czas_obrobki_min": 30,
+  "czas_obrobki_min": 42,
   "sprzet": [
     "Piekarnik",
     "Blacha do pieczenia",
     "Garnek 2 l",
     "Nóż szefa kuchni",
     "Deska do krojenia",
-    "Waga kuchenna"
+    "Waga kuchenna",
+    "Sitko",
+    "Miska"
   ],
-  "przechowywanie": "Przechowuj w zamkniętym pojemniku w lodówce do 2 dni.",
+  "przechowywanie": "Przechowuj w zamkniętym pojemniku w lodówce do 2 dni. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
   "mozna_mrozic": false,
   "ratunek": "Jeśli warzywa są wodniste, rozłóż je luźniej i dopiecz. Za suchą komosę skrop dodatkowym sokiem z cytryny.",
   "skladniki": [
     {
       "nazwa": "Komosa ryżowa, sucha",
-      "ilosc": 70.0,
+      "ilosc": 70,
       "jednostka": "g",
       "stan": "opłukana"
     },
     {
       "nazwa": "Ciecierzyca z puszki, odsączona",
-      "ilosc": 150.0,
+      "ilosc": 150,
       "jednostka": "g"
     },
     {
       "nazwa": "Cukinia, surowa",
-      "ilosc": 120.0,
+      "ilosc": 120,
       "jednostka": "g",
       "stan": "pokrojona"
     },
     {
       "nazwa": "Papryka czerwona, surowa",
-      "ilosc": 100.0,
+      "ilosc": 100,
       "jednostka": "g",
       "stan": "pokrojona"
     },
     {
       "nazwa": "Pomidory, surowe",
-      "ilosc": 130.0,
+      "ilosc": 130,
       "jednostka": "g",
       "stan": "pokrojone"
     },
     {
       "nazwa": "Cebula czerwona, surowa",
-      "ilosc": 50.0,
+      "ilosc": 50,
       "jednostka": "g",
       "stan": "pokrojona"
     },
     {
       "nazwa": "Oliwa z oliwek",
-      "ilosc": 10.0,
+      "ilosc": 10,
       "jednostka": "g"
     },
     {
       "nazwa": "Cytryna",
-      "ilosc": 15.0,
+      "ilosc": 15,
       "jednostka": "g",
       "stan": "sok"
     },
     {
       "nazwa": "Pietruszka natka",
-      "ilosc": 10.0,
+      "ilosc": 10,
       "jednostka": "g",
       "stan": "posiekana"
     },
     {
       "nazwa": "Oregano suszone",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "g"
     },
     {
       "nazwa": "Sól kłodawska",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "g"
     },
     {
@@ -97,29 +102,39 @@
   ],
   "etapy": [
     {
-      "nazwa": "Przygotowanie",
+      "nazwa": "Przygotowanie składników",
       "minuty": 12,
       "kroki": [
         {
-          "tresc": "Piekarnik rozgrzej do 210°C. Warzywa pokrój, a komosę dokładnie opłucz."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+        },
+        {
+          "tresc": "Umyj cukinię, paprykę i pomidory; usuń gniazdo nasienne papryki. Cukinię i paprykę pokrój na kawałki około 2 cm, pomidory w ćwiartki. Obierz cebulę i pokrój w piórka."
+        },
+        {
+          "tresc": "Opłucz komosę na sitku. Opłucz, odsącz i osusz ciecierzycę. Umyj i posiekaj natkę; przygotuj odmierzoną ilość soku z cytryny."
+        },
+        {
+          "tresc": "Warzywa oraz ciecierzycę wymieszaj z oliwą, oregano, solą i pieprzem."
         }
       ]
     },
     {
       "nazwa": "Pieczenie i gotowanie",
-      "minuty": 30,
+      "minuty": 42,
       "kroki": [
         {
-          "tresc": "Warzywa i ciecierzycę wymieszaj z oliwą, oregano, solą oraz pieprzem. Piecz 25 minut.",
-          "sygnal": "warzywa są miękkie i rumiane na brzegach"
+          "tresc": "Rozgrzej piekarnik do 210°C, grzanie góra–dół; zwykle około 10 minut."
         },
         {
-          "tresc": "Komosę ugotuj do miękkości i odstaw pod przykryciem na 5 minut.",
-          "sygnal": "ziarna są miękkie i sypkie"
+          "tresc": "Rozłóż warzywa i ciecierzycę luźno na blasze. Piecz 25–30 minut, obracając w połowie."
         },
         {
-          "tresc": "Połącz komosę z pieczonymi warzywami, sokiem z cytryny i natką.",
-          "uwaga": true
+          "tresc": "Podczas pieczenia ugotuj komosę przez czas z opakowania w dodatkowej wodzie. Odcedź i odstaw pod przykryciem na 5 minut."
+        },
+        {
+          "tresc": "Połącz komosę, upieczone warzywa i ciecierzycę. Dodaj sok z cytryny oraz natkę.",
+          "sygnal": "warzywa są miękkie i zarumienione, ziarna komosy miękkie"
         }
       ]
     }

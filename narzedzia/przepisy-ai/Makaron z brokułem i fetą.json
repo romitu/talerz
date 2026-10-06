@@ -1,6 +1,6 @@
 {
   "nazwa": "Makaron z brokułem i fetą",
-  "opis": "Pełnoziarnisty makaron z brokułem, fetą, czosnkiem i cytryną. Przepis na 1 porcję.",
+  "opis": "Pełnoziarnisty makaron z brokułem, fetą, czosnkiem i cytryną. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
   "pory": [
     "obiad",
     "kolacja"
@@ -8,54 +8,57 @@
   "kuchnie": [
     "srodziemnomorska"
   ],
-  "rodzaje": ["makaron"],
+  "rodzaje": [
+    "makaron"
+  ],
   "porcjowanie": "waga",
-  "porcja_g": 406.0,
+  "porcja_g": 406,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 2,
   "czas_przygotowania_min": 8,
-  "czas_obrobki_min": 18,
+  "czas_obrobki_min": 20,
   "sprzet": [
     "Garnek 3 l",
     "Patelnia 28 cm",
     "Nóż szefa kuchni",
     "Deska do krojenia",
-    "Waga kuchenna"
+    "Waga kuchenna",
+    "Durszlak"
   ],
-  "przechowywanie": "Przechowuj w lodówce do 2 dni.",
+  "przechowywanie": "Przechowuj w lodówce do 2 dni. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
   "mozna_mrozic": false,
   "ratunek": "Twardy brokuł gotuj minutę dłużej. Za słone danie złagodź dodatkowym makaronem lub brokułem.",
   "skladniki": [
     {
       "nazwa": "Makaron pełnoziarnisty, suchy",
-      "ilosc": 85.0,
+      "ilosc": 85,
       "jednostka": "g"
     },
     {
       "nazwa": "Brokuł, surowy",
-      "ilosc": 220.0,
+      "ilosc": 220,
       "jednostka": "g",
       "stan": "podzielony na małe różyczki"
     },
     {
       "nazwa": "Ser feta",
-      "ilosc": 70.0,
+      "ilosc": 70,
       "jednostka": "g",
       "stan": "pokruszony"
     },
     {
       "nazwa": "Czosnek, surowy",
-      "ilosc": 5.0,
+      "ilosc": 5,
       "jednostka": "g"
     },
     {
       "nazwa": "Oliwa z oliwek",
-      "ilosc": 10.0,
+      "ilosc": 10,
       "jednostka": "g"
     },
     {
       "nazwa": "Cytryna",
-      "ilosc": 15.0,
+      "ilosc": 15,
       "jednostka": "g",
       "stan": "sok"
     },
@@ -72,31 +75,35 @@
   ],
   "etapy": [
     {
-      "nazwa": "Gotowanie",
-      "minuty": 18,
+      "nazwa": "Przygotowanie składników",
+      "minuty": 8,
       "kroki": [
         {
-          "tresc": "Makaron gotuj zgodnie z instrukcją. Na 4 minuty przed końcem dodaj do garnka brokuł."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
         },
         {
-          "tresc": "Odcedź, zachowując niewielką ilość wody z gotowania."
+          "tresc": "Umyj brokuł i podziel na małe różyczki; obraną łodygę pokrój cienko. Obierz i posiekaj czosnek."
+        },
+        {
+          "tresc": "Pokrusz fetę. Umyj cytrynę, wyciśnij i odmierz sok. Odmierz makaron."
         }
       ]
     },
     {
-      "nazwa": "Łączenie",
-      "minuty": 8,
+      "nazwa": "Gotowanie i łączenie",
+      "minuty": 20,
       "kroki": [
         {
-          "tresc": "Na oliwie krótko podgrzej czosnek i ostrą paprykę."
+          "tresc": "Zagotuj wodę i gotuj makaron przez czas z opakowania. Na ostatnie 4 minuty dodaj małe różyczki i cienko pokrojoną łodygę brokułu."
         },
         {
-          "tresc": "Dodaj makaron z brokułem, fetę, cytrynę i odrobinę wody z gotowania.",
-          "uwaga": true
+          "tresc": "Zachowaj trochę wody z gotowania i odcedź makaron z brokułem."
         },
         {
-          "tresc": "Wymieszaj i dopraw pieprzem.",
-          "sygnal": "feta częściowo się rozpuszcza i tworzy lekki sos"
+          "tresc": "Pod koniec gotowania makaronu rozgrzej oliwę na patelni przez 1 minutę. Dodaj czosnek i ostrą paprykę, smaż 20–30 sekund."
+        },
+        {
+          "tresc": "Dodaj makaron z brokułem, fetę i odrobinę zachowanej wody. Mieszaj na małym ogniu przez 1 minutę. Zdejmij z ognia i dodaj sok z cytryny oraz pieprz."
         }
       ]
     }

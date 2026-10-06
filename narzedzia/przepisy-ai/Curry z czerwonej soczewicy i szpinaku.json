@@ -1,6 +1,6 @@
 {
   "nazwa": "Curry z czerwonej soczewicy i szpinaku",
-  "opis": "Kremowe jednogarnkowe curry z czerwonej soczewicy, szpinaku i pomidorów. Przepis na 2 porcje.",
+  "opis": "Kremowe jednogarnkowe curry z czerwonej soczewicy, szpinaku i pomidorów. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
   "pory": [
     "obiad",
     "kolacja"
@@ -8,109 +8,118 @@
   "kuchnie": [
     "azjatycka"
   ],
-  "rodzaje": ["gulasz_curry"],
+  "rodzaje": [
+    "gulasz_curry"
+  ],
   "porcjowanie": "waga",
-  "porcja_g": 747.0,
+  "porcja_g": 747,
   "liczba_porcji_bazowych": 2,
   "trwalosc_dni": 3,
-  "czas_przygotowania_min": 8,
-  "czas_obrobki_min": 25,
+  "czas_przygotowania_min": 10,
+  "czas_obrobki_min": 35,
   "sprzet": [
     "Garnek 3 l",
     "Nóż szefa kuchni",
     "Deska do krojenia",
-    "Waga kuchenna"
+    "Waga kuchenna",
+    "Sitko"
   ],
-  "przechowywanie": "Curry przechowuj w zamkniętym pojemniku w lodówce do 3 dni.",
+  "przechowywanie": "Curry przechowuj w zamkniętym pojemniku w lodówce do 3 dni. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
   "mozna_mrozic": true,
-  "ratunek": "Za gęste curry rozprowadź niewielką ilością wody. Zbyt łagodny smak popraw odrobiną pasty curry i soku z cytryny.",
+  "ratunek": "Jeżeli curry zbyt mocno gęstnieje przed zmięknięciem soczewicy, dolewaj gorącą wodę małymi porcjami i mieszaj. Ostrość pasty oceń przed dodaniem całej odmierzonej ilości.",
   "skladniki": [
     {
       "nazwa": "Soczewica czerwona, sucha",
-      "ilosc": 140.0,
+      "ilosc": 140,
       "jednostka": "g",
       "stan": "opłukana"
     },
     {
       "nazwa": "Szpinak, surowy",
-      "ilosc": 160.0,
+      "ilosc": 160,
       "jednostka": "g"
     },
     {
       "nazwa": "Pomidory krojone z puszki",
-      "ilosc": 400.0,
+      "ilosc": 400,
       "jednostka": "g"
     },
     {
       "nazwa": "Mleko kokosowe light z puszki",
-      "ilosc": 200.0,
+      "ilosc": 200,
       "jednostka": "g"
     },
     {
       "nazwa": "woda",
-      "ilosc": 400.0,
+      "ilosc": 400,
       "jednostka": "ml"
     },
     {
       "nazwa": "Cebula, surowa",
-      "ilosc": 140.0,
+      "ilosc": 140,
       "jednostka": "g",
       "stan": "drobno posiekana"
     },
     {
       "nazwa": "Czosnek, surowy",
-      "ilosc": 10.0,
+      "ilosc": 10,
       "jednostka": "g",
       "stan": "drobno posiekany"
     },
     {
       "nazwa": "Pasta curry czerwona",
-      "ilosc": 30.0,
+      "ilosc": 30,
       "jednostka": "g"
     },
     {
       "nazwa": "Olej rzepakowy",
-      "ilosc": 10.0,
+      "ilosc": 10,
       "jednostka": "g"
     },
     {
       "nazwa": "Kurkuma mielona",
-      "ilosc": 2.0,
+      "ilosc": 2,
       "jednostka": "g"
     },
     {
       "nazwa": "Sól kłodawska",
-      "ilosc": 2.0,
+      "ilosc": 2,
       "jednostka": "g"
     }
   ],
   "etapy": [
     {
-      "nazwa": "Przygotowanie",
-      "minuty": 8,
+      "nazwa": "Przygotowanie składników",
+      "minuty": 10,
       "kroki": [
         {
-          "tresc": "Cebulę i czosnek drobno posiekaj, a soczewicę opłucz."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+        },
+        {
+          "tresc": "Obierz i posiekaj cebulę oraz czosnek. Opłucz soczewicę na sitku."
+        },
+        {
+          "tresc": "Umyj szpinak, odsącz i usuń grube łodygi. Odmierz pomidory, mleko kokosowe i wodę z listy."
         }
       ]
     },
     {
       "nazwa": "Gotowanie curry",
-      "minuty": 25,
+      "minuty": 35,
       "kroki": [
         {
-          "tresc": "W garnku rozgrzej olej. Dodaj cebulę i smaż 3 minuty, następnie dodaj czosnek, pastę curry i kurkumę."
+          "tresc": "Rozgrzej olej przez 1 minutę. Smaż cebulę 4 minuty. Dodaj czosnek, pastę curry i kurkumę; smaż 1 minutę, mieszając."
         },
         {
-          "tresc": "Dodaj soczewicę, pomidory, mleko kokosowe i wodę. Gotuj na małym ogniu około 18 minut, często mieszając.",
+          "tresc": "Dodaj soczewicę, odmierzoną wodę i mleko kokosowe. Doprowadź do wrzenia przez około 3 minuty i gotuj na małym ogniu 12–15 minut pod uchyloną pokrywką. Mieszaj co kilka minut."
+        },
+        {
+          "tresc": "Gdy soczewica zmięknie, dodaj pomidory i gotuj bez przykrycia jeszcze 6–8 minut. Jeśli soczewica jest twarda, przed dodaniem pomidorów dogotuj ją po 3 minuty, uzupełniając odparowaną wodę.",
+          "sygnal": "soczewica jest miękka i częściowo się rozpada",
           "uwaga": true
         },
         {
-          "tresc": "Dodaj szpinak i sól. Gotuj jeszcze 2–3 minuty.",
-          "sygnal": "soczewica jest miękka, a sos kremowy"
-        },
-        {
-          "tresc": "Spróbuj i w razie potrzeby skoryguj ostrość oraz sól."
+          "tresc": "Dodaj szpinak i gotuj 1–2 minuty, tylko do zwiędnięcia. Dopraw solą i podaj."
         }
       ]
     }

@@ -1,6 +1,6 @@
 {
   "nazwa": "Łosoś ze szpinakiem i kaszą bulgur",
-  "opis": "Smażony łosoś ze szpinakiem, cytryną i kaszą bulgur. Przepis na 1 porcję.",
+  "opis": "Smażony łosoś ze szpinakiem, cytryną i kaszą bulgur. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
   "pory": [
     "obiad",
     "kolacja"
@@ -8,63 +8,68 @@
   "kuchnie": [
     "srodziemnomorska"
   ],
-  "rodzaje": ["kasza_ryz"],
+  "rodzaje": [
+    "kasza_ryz"
+  ],
   "porcjowanie": "waga",
   "porcja_g": 409.5,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 2,
   "czas_przygotowania_min": 10,
-  "czas_obrobki_min": 20,
+  "czas_obrobki_min": 25,
   "sprzet": [
     "Patelnia 24 cm",
     "Garnek 2 l",
     "Nóż szefa kuchni",
     "Deska do krojenia",
-    "Waga kuchenna"
+    "Waga kuchenna",
+    "Sitko",
+    "Miska",
+    "Termometr do mięsa"
   ],
-  "przechowywanie": "Przechowuj w lodówce do 2 dni. Kaszę najlepiej trzymaj osobno.",
+  "przechowywanie": "Przechowuj w lodówce do 2 dni. Kaszę najlepiej trzymaj osobno. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
   "mozna_mrozic": false,
   "ratunek": "Jeśli łosoś przywiera, poczekaj aż sam łatwo odejdzie od patelni. Za suchy szpinak podlej odrobiną wody.",
   "skladniki": [
     {
       "nazwa": "Łosoś dziki, surowy",
-      "ilosc": 160.0,
+      "ilosc": 160,
       "jednostka": "g"
     },
     {
       "nazwa": "Szpinak, surowy",
-      "ilosc": 100.0,
+      "ilosc": 100,
       "jednostka": "g"
     },
     {
       "nazwa": "Kasza bulgur, sucha",
-      "ilosc": 70.0,
+      "ilosc": 70,
       "jednostka": "g"
     },
     {
       "nazwa": "Jogurt grecki naturalny 2%",
-      "ilosc": 50.0,
+      "ilosc": 50,
       "jednostka": "g"
     },
     {
       "nazwa": "Cytryna",
-      "ilosc": 15.0,
+      "ilosc": 15,
       "jednostka": "g",
       "stan": "sok"
     },
     {
       "nazwa": "Czosnek, surowy",
-      "ilosc": 5.0,
+      "ilosc": 5,
       "jednostka": "g"
     },
     {
       "nazwa": "Oliwa z oliwek",
-      "ilosc": 8.0,
+      "ilosc": 8,
       "jednostka": "g"
     },
     {
       "nazwa": "Sól kłodawska",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "g"
     },
     {
@@ -75,31 +80,43 @@
   ],
   "etapy": [
     {
-      "nazwa": "Przygotowanie",
+      "nazwa": "Przygotowanie składników",
       "minuty": 10,
       "kroki": [
         {
-          "tresc": "Kaszę bulgur ugotuj. Łososia osusz i dopraw solą oraz pieprzem."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
         },
         {
-          "tresc": "Jogurt wymieszaj z połową soku z cytryny."
+          "tresc": "Umyj i osusz szpinak. Obierz i posiekaj czosnek. Umyj cytrynę i odmierz sok. Przygotuj kaszę."
+        },
+        {
+          "tresc": "Osusz łososia, usuń ości i dopraw częścią soli oraz pieprzu. Po surowej rybie umyj przybory i ręce."
+        },
+        {
+          "tresc": "Wymieszaj jogurt z połową odmierzonego soku z cytryny."
         }
       ]
     },
     {
-      "nazwa": "Smażenie",
-      "minuty": 20,
+      "nazwa": "Gotowanie kaszy i smażenie",
+      "minuty": 25,
       "kroki": [
         {
-          "tresc": "Na oliwie smaż łososia po 4–5 minut z każdej strony.",
-          "sygnal": "środek jest soczysty, a mięso rozdziela się na płatki",
+          "tresc": "Na pierwszym palniku zagotuj wodę w garnku. Dodaj kaszę bulgur i gotuj przez czas wskazany na opakowaniu; po ugotowaniu odcedź. Wody użyj tyle, by ziarna były zanurzone i swobodnie się gotowały. Nastaw minutnik; równolegle wykonuj kolejne czynności na drugim palniku. Woda do gotowania jest dodatkowa i zostanie odlana."
+        },
+        {
+          "tresc": "Gdy do końca gotowania kaszy pozostaje około 11 minut, rozgrzej oliwę na patelni przez 1 minutę."
+        },
+        {
+          "tresc": "Smaż filet grubości około 2–3 cm przez 4 minuty z jednej strony i 3–4 minuty z drugiej. Sprawdź środek; grubszy kawałek dosmaż po 1 minucie. Zdejmij na talerz.",
+          "sygnal": "ryba ma co najmniej 63°C i rozdziela się na płatki",
           "uwaga": true
         },
         {
-          "tresc": "Zdejmij rybę. Na tej samej patelni krótko podsmaż czosnek i szpinak."
+          "tresc": "Zmniejsz ogień. Na tej samej patelni smaż czosnek 20–30 sekund. Dodaj szpinak i smaż 1–2 minuty do zwiędnięcia. Zdejmij z ognia, dodaj pozostały sok z cytryny i przyprawy."
         },
         {
-          "tresc": "Podaj łososia ze szpinakiem, bulgurem i sosem jogurtowym."
+          "tresc": "Podaj łososia z kaszą, szpinakiem i sosem jogurtowym."
         }
       ]
     }

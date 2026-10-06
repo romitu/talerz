@@ -1,6 +1,6 @@
 {
   "nazwa": "Kanapki z Goudą, pomidorem i sałatą",
-  "opis": "Klasyczne kanapki z serem Gouda, pomidorem, ogórkiem i sałatą. Przepis na 1 porcję.",
+  "opis": "Klasyczne kanapki z serem Gouda, pomidorem, ogórkiem i sałatą. Ilości składników dobierz z listy dla przygotowywanej liczby porcji.",
   "pory": [
     "sniadanie",
     "kolacja"
@@ -8,7 +8,9 @@
   "kuchnie": [
     "inna"
   ],
-  "rodzaje": ["kanapki"],
+  "rodzaje": [
+    "kanapki"
+  ],
   "porcjowanie": "waga",
   "porcja_g": 275.5,
   "liczba_porcji_bazowych": 1,
@@ -26,36 +28,36 @@
   "skladniki": [
     {
       "nazwa": "Chleb żytni razowy",
-      "ilosc": 2.0,
+      "ilosc": 2,
       "jednostka": "szt",
       "stan": "kromki"
     },
     {
       "nazwa": "Ser Gouda",
-      "ilosc": 60.0,
+      "ilosc": 60,
       "jednostka": "g",
       "stan": "pokrojony w plastry"
     },
     {
       "nazwa": "Pomidory, surowe",
-      "ilosc": 80.0,
+      "ilosc": 80,
       "jednostka": "g",
       "stan": "pokrojone w plastry"
     },
     {
       "nazwa": "Ogórek, surowy",
-      "ilosc": 40.0,
+      "ilosc": 40,
       "jednostka": "g",
       "stan": "pokrojony w plastry"
     },
     {
       "nazwa": "Sałata masłowa",
-      "ilosc": 20.0,
+      "ilosc": 20,
       "jednostka": "g"
     },
     {
       "nazwa": "Musztarda",
-      "ilosc": 5.0,
+      "ilosc": 5,
       "jednostka": "g"
     },
     {
@@ -66,18 +68,23 @@
   ],
   "etapy": [
     {
-      "nazwa": "Przygotowanie kanapek",
-      "minuty": 7,
+      "nazwa": "Przygotowanie składników",
+      "minuty": 5,
       "kroki": [
         {
-          "tresc": "Pomidora i ogórek pokrój w plastry, a sałatę umyj i osusz."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
         },
         {
-          "tresc": "Pieczywo cienko posmaruj musztardą."
-        },
+          "tresc": "Umyj i osusz pomidora, ogórek oraz sałatę. Pomidora, ogórek i Goudę pokrój w plastry. Przygotuj pieczywo, musztardę i pieprz."
+        }
+      ]
+    },
+    {
+      "nazwa": "Składanie kanapek",
+      "minuty": 2,
+      "kroki": [
         {
-          "tresc": "Ułóż sałatę, Goudę, pomidora i ogórek. Dopraw pieprzem.",
-          "uwaga": true
+          "tresc": "Posmaruj pieczywo musztardą. Ułóż sałatę, Goudę, pomidora i ogórek. Dopraw pieprzem."
         }
       ]
     }

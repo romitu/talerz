@@ -1,6 +1,6 @@
 {
   "nazwa": "Curry z ciecierzycy, pomidorów i szpinaku",
-  "opis": "Łagodne jednogarnkowe curry z ciecierzycą, szpinakiem i pomidorami. Przepis na 2 porcje.",
+  "opis": "Łagodne jednogarnkowe curry z ciecierzycą, szpinakiem i pomidorami. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
   "pory": [
     "obiad",
     "kolacja"
@@ -8,113 +8,128 @@
   "kuchnie": [
     "azjatycka"
   ],
-  "rodzaje": ["gulasz_curry"],
+  "rodzaje": [
+    "gulasz_curry"
+  ],
   "porcjowanie": "waga",
-  "porcja_g": 662.0,
+  "porcja_g": 662,
   "liczba_porcji_bazowych": 2,
   "trwalosc_dni": 3,
-  "czas_przygotowania_min": 8,
-  "czas_obrobki_min": 22,
+  "czas_przygotowania_min": 10,
+  "czas_obrobki_min": 27,
   "sprzet": [
     "Garnek 3 l",
     "Nóż szefa kuchni",
     "Deska do krojenia",
-    "Waga kuchenna"
+    "Waga kuchenna",
+    "Sitko"
   ],
-  "przechowywanie": "Curry przechowuj w lodówce do 3 dni lub zamroź po ostudzeniu.",
+  "przechowywanie": "Curry przechowuj w lodówce do 3 dni lub zamroź po ostudzeniu. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
   "mozna_mrozic": true,
   "ratunek": "Za gęste curry rozcieńcz wodą. Jeśli jest mdłe, dodaj odrobinę soli, kminu i soku z cytryny.",
   "skladniki": [
     {
       "nazwa": "Ciecierzyca z puszki, odsączona",
-      "ilosc": 360.0,
+      "ilosc": 360,
       "jednostka": "g"
     },
     {
       "nazwa": "Szpinak, surowy",
-      "ilosc": 160.0,
+      "ilosc": 160,
       "jednostka": "g"
     },
     {
       "nazwa": "Pomidory krojone z puszki",
-      "ilosc": 400.0,
+      "ilosc": 400,
       "jednostka": "g"
     },
     {
       "nazwa": "Mleko kokosowe light z puszki",
-      "ilosc": 200.0,
+      "ilosc": 200,
       "jednostka": "g"
     },
     {
       "nazwa": "Cebula, surowa",
-      "ilosc": 140.0,
+      "ilosc": 140,
       "jednostka": "g",
       "stan": "posiekana"
     },
     {
       "nazwa": "Czosnek, surowy",
-      "ilosc": 10.0,
+      "ilosc": 10,
       "jednostka": "g"
     },
     {
       "nazwa": "Imbir korzeń, surowy",
-      "ilosc": 16.0,
+      "ilosc": 16,
       "jednostka": "g"
     },
     {
       "nazwa": "Olej rzepakowy",
-      "ilosc": 10.0,
+      "ilosc": 10,
       "jednostka": "g"
     },
     {
       "nazwa": "Garam masala",
-      "ilosc": 4.0,
+      "ilosc": 4,
       "jednostka": "g"
     },
     {
       "nazwa": "Kmin rzymski mielony",
-      "ilosc": 2.0,
+      "ilosc": 2,
       "jednostka": "g"
     },
     {
       "nazwa": "Sól kłodawska",
-      "ilosc": 2.0,
+      "ilosc": 2,
       "jednostka": "g"
     },
     {
       "nazwa": "Cytryna",
-      "ilosc": 20.0,
+      "ilosc": 20,
       "jednostka": "g",
       "stan": "sok"
     }
   ],
   "etapy": [
     {
-      "nazwa": "Przygotowanie",
-      "minuty": 8,
+      "nazwa": "Przygotowanie składników",
+      "minuty": 10,
       "kroki": [
         {
-          "tresc": "Cebulę, czosnek i imbir drobno posiekaj."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+        },
+        {
+          "tresc": "Obierz i posiekaj cebulę, czosnek i imbir."
+        },
+        {
+          "tresc": "Opłucz i odsącz ciecierzycę. Umyj szpinak, odsącz i usuń grube łodygi."
+        },
+        {
+          "tresc": "Umyj cytrynę, wyciśnij sok i odmierz ilość z listy. Odmierz pomidory i mleko kokosowe."
         }
       ]
     },
     {
       "nazwa": "Gotowanie curry",
-      "minuty": 22,
+      "minuty": 27,
       "kroki": [
         {
-          "tresc": "Na oleju smaż cebulę 4 minuty. Dodaj czosnek, imbir, garam masala oraz kmin."
+          "tresc": "Rozgrzej olej przez 1 minutę. Smaż cebulę 4 minuty."
         },
         {
-          "tresc": "Dodaj pomidory, mleko kokosowe i ciecierzycę. Gotuj 15 minut."
+          "tresc": "Dodaj czosnek, imbir, garam masala i kmin; smaż 1 minutę, mieszając."
         },
         {
-          "tresc": "Dodaj szpinak, sól i sok z cytryny. Gotuj jeszcze 2 minuty.",
-          "sygnal": "szpinak zwiędł, a sos lekko zgęstniał",
+          "tresc": "Dodaj pomidory, mleko kokosowe i ciecierzycę. Doprowadź do wrzenia przez około 2 minuty, następnie gotuj łagodnie bez przykrycia 15 minut."
+        },
+        {
+          "tresc": "Dodaj szpinak i gotuj jeszcze 1–2 minuty.",
+          "sygnal": "liście właśnie zwiędły, a sos zgęstniał",
           "uwaga": true
         },
         {
-          "tresc": "Spróbuj i w razie potrzeby skoryguj sól oraz kwaśność."
+          "tresc": "Zdejmij z ognia. Dodaj przygotowany sok z cytryny, dopraw solą i podaj."
         }
       ]
     }

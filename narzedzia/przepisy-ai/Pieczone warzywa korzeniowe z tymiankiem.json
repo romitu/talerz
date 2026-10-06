@@ -1,19 +1,21 @@
 {
   "nazwa": "Pieczone warzywa korzeniowe z tymiankiem",
-  "opis": "Mieszanka pieczonych ziemniaków, buraków, marchewki, pasternaku i selera z tymiankiem. Przepis na 1 porcję.",
+  "opis": "Mieszanka pieczonych ziemniaków, buraków, marchewki, pasternaku i selera z tymiankiem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
   "pory": [
     "dodatek"
   ],
   "kuchnie": [
     "polska"
   ],
-  "rodzaje": ["z_piekarnika"],
+  "rodzaje": [
+    "z_piekarnika"
+  ],
   "porcjowanie": "waga",
   "porcja_g": 342.5,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 3,
   "czas_przygotowania_min": 15,
-  "czas_obrobki_min": 40,
+  "czas_obrobki_min": 50,
   "sprzet": [
     "Piekarnik",
     "Blacha do pieczenia",
@@ -21,64 +23,64 @@
     "Deska do krojenia",
     "Waga kuchenna"
   ],
-  "przechowywanie": "Przechowuj w lodówce do 3 dni. Odgrzewaj w piekarniku lub na patelni.",
+  "przechowywanie": "Przechowuj w lodówce do 3 dni. Odgrzewaj w piekarniku lub na patelni. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
   "mozna_mrozic": true,
   "ratunek": "Jeśli warzywa są blade i miękkie, rozłóż je luźniej i zwiększ temperaturę. Twarde kawałki pokrój drobniej i dopiecz.",
   "skladniki": [
     {
       "nazwa": "Ziemniaki, surowe",
-      "ilosc": 100.0,
+      "ilosc": 100,
       "jednostka": "g",
       "stan": "pokrojone"
     },
     {
       "nazwa": "Buraki, surowe",
-      "ilosc": 60.0,
+      "ilosc": 60,
       "jednostka": "g",
       "stan": "pokrojone"
     },
     {
       "nazwa": "Marchew, surowa",
-      "ilosc": 60.0,
+      "ilosc": 60,
       "jednostka": "g",
       "stan": "pokrojona"
     },
     {
       "nazwa": "Pasternak, surowy",
-      "ilosc": 40.0,
+      "ilosc": 40,
       "jednostka": "g",
       "stan": "pokrojony"
     },
     {
       "nazwa": "Seler korzeń",
-      "ilosc": 30.0,
+      "ilosc": 30,
       "jednostka": "g",
       "stan": "pokrojony"
     },
     {
       "nazwa": "Cebula czerwona, surowa",
-      "ilosc": 40.0,
+      "ilosc": 40,
       "jednostka": "g",
       "stan": "pokrojona"
     },
     {
       "nazwa": "Oliwa z oliwek",
-      "ilosc": 8.0,
+      "ilosc": 8,
       "jednostka": "g"
     },
     {
       "nazwa": "Tymianek suszony",
-      "ilosc": 2.0,
+      "ilosc": 2,
       "jednostka": "g"
     },
     {
       "nazwa": "Rozmaryn suszony",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "g"
     },
     {
       "nazwa": "Sól kłodawska",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "g"
     },
     {
@@ -89,28 +91,34 @@
   ],
   "etapy": [
     {
-      "nazwa": "Przygotowanie",
+      "nazwa": "Przygotowanie składników",
       "minuty": 15,
       "kroki": [
         {
-          "tresc": "Piekarnik rozgrzej do 210°C. Warzywa pokrój na podobnej wielkości kawałki."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
         },
         {
-          "tresc": "Wymieszaj je z oliwą, tymiankiem, rozmarynem, solą i pieprzem."
+          "tresc": "Umyj i obierz ziemniaki, buraki, marchew, pasternak oraz seler. Buraki pokrój w kostkę około 1 cm, pozostałe korzenie około 2 cm. Obierz cebulę i pokrój w ósemki."
+        },
+        {
+          "tresc": "Wymieszaj warzywa z odmierzoną oliwą, tymiankiem, rozmarynem, solą i pieprzem."
         }
       ]
     },
     {
       "nazwa": "Pieczenie",
-      "minuty": 40,
+      "minuty": 50,
       "kroki": [
         {
-          "tresc": "Warzywa rozłóż luźno na blasze i piecz około 40 minut."
+          "tresc": "Rozgrzej piekarnik do 210°C, grzanie góra–dół, zwykle około 10 minut."
         },
         {
-          "tresc": "Po 20 minutach dokładnie je przemieszaj i piecz dalej do końca podanego czasu.",
-          "sygnal": "warzywa są miękkie w środku i rumiane na brzegach",
+          "tresc": "Rozłóż warzywa luźno na blasze i piecz 35–40 minut. Przemieszaj po 20 minutach. Jeśli najtwardsze kawałki nie są miękkie, dopiekaj po 5 minut, zdejmując wcześniej gotowe.",
+          "sygnal": "warzywa są miękkie w środku i zarumienione na brzegach",
           "uwaga": true
+        },
+        {
+          "tresc": "Podaj jako dodatek."
         }
       ]
     }

@@ -1,6 +1,6 @@
 {
   "nazwa": "Kanapki z jajkiem, awokado i pomidorem",
-  "opis": "Syte kanapki z dwoma jajkami na twardo, kremowym awokado i świeżym pomidorem. Przepis na 1 porcję.",
+  "opis": "Syte kanapki z dwoma jajkami na twardo, kremowym awokado i świeżym pomidorem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
   "pory": [
     "sniadanie",
     "kolacja"
@@ -16,14 +16,15 @@
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 0,
   "czas_przygotowania_min": 6,
-  "czas_obrobki_min": 18,
+  "czas_obrobki_min": 20,
   "sprzet": [
     "Garnek 2 l",
-    "miska",
+    "Miska",
     "Widelec",
     "Nóż szefa kuchni",
     "Deska do krojenia",
-    "Waga kuchenna"
+    "Waga kuchenna",
+    "Łyżka cedzakowa"
   ],
   "przechowywanie": "Kanapki zjedz od razu po przygotowaniu. Ugotowane jajko możesz przechować osobno w lodówce do następnego dnia.",
   "mozna_mrozic": false,
@@ -69,30 +70,25 @@
       "minuty": 6,
       "kroki": [
         {
-          "tresc": "Pomidora pokrój w plastry."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
         },
         {
-          "tresc": "Miąższ awokado rozgnieć w misce widelcem i dopraw połową soli oraz pieprzu.",
-          "uwaga": true
+          "tresc": "Umyj pomidora i awokado. Pomidora pokrój w plastry."
+        },
+        {
+          "tresc": "Usuń pestkę i skórkę awokado. Rozgnieć miąższ widelcem z częścią odmierzonej soli i pieprzu; przykryj miskę, aby ograniczyć ciemnienie. Przygotuj pieczywo."
         }
       ]
     },
     {
-      "nazwa": "Gotowanie jajek i składanie kanapek",
-      "minuty": 18,
+      "nazwa": "Gotowanie jajek i składanie",
+      "minuty": 20,
       "kroki": [
         {
-          "tresc": "W garnku zagotuj tyle wody, aby przykryła jajka."
+          "tresc": "Zagotuj w garnku wodę przykrywającą jajka. Włóż je ostrożnie i gotuj przez 9–10 minut przy łagodnym wrzeniu, licząc od włożenia. Schłodź zimną wodą i obierz."
         },
         {
-          "tresc": "Ostrożnie włóż jajka do wrzątku i gotuj 9 minut od zanurzenia."
-        },
-        {
-          "tresc": "Schłodź jajka pod zimną wodą, obierz i pokrój w plastry.",
-          "sygnal": "żółtka są całkowicie ścięte"
-        },
-        {
-          "tresc": "Pastę z awokado rozsmaruj na chlebie, ułóż pomidora i jajka, a następnie dopraw pozostałą solą oraz pieprzem."
+          "tresc": "Pokrój jajka w plastry. Posmaruj pieczywo awokado, ułóż pomidora i jajka. Dopraw pozostałą solą i pieprzem."
         }
       ]
     }

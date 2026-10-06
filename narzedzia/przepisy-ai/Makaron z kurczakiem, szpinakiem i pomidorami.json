@@ -1,6 +1,6 @@
 {
   "nazwa": "Makaron z kurczakiem, szpinakiem i pomidorami",
-  "opis": "Pełnoziarnisty makaron z kurczakiem, szpinakiem i pomidorowym sosem. Przepis na 1 porcję.",
+  "opis": "Pełnoziarnisty makaron z kurczakiem, szpinakiem i pomidorowym sosem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
   "pory": [
     "obiad",
     "kolacja"
@@ -8,79 +8,83 @@
   "kuchnie": [
     "srodziemnomorska"
   ],
-  "rodzaje": ["makaron"],
+  "rodzaje": [
+    "makaron"
+  ],
   "porcjowanie": "waga",
   "porcja_g": 641.5,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 2,
   "czas_przygotowania_min": 10,
-  "czas_obrobki_min": 20,
+  "czas_obrobki_min": 25,
   "sprzet": [
     "Patelnia 28 cm",
     "Garnek 3 l",
     "Nóż szefa kuchni",
     "Deska do krojenia",
-    "Waga kuchenna"
+    "Waga kuchenna",
+    "Durszlak",
+    "Termometr do mięsa"
   ],
-  "przechowywanie": "Przechowuj w zamkniętym pojemniku w lodówce do 2 dni.",
+  "przechowywanie": "Przechowuj w zamkniętym pojemniku w lodówce do 2 dni. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
   "mozna_mrozic": false,
   "ratunek": "Jeśli sos jest zbyt gęsty, dodaj wodę z gotowania makaronu. Suchego kurczaka pokrój drobniej i wymieszaj z sosem.",
   "skladniki": [
     {
       "nazwa": "Makaron pełnoziarnisty, suchy",
-      "ilosc": 85.0,
+      "ilosc": 85,
       "jednostka": "g"
     },
     {
       "nazwa": "Pierś z kurczaka, surowa",
-      "ilosc": 150.0,
+      "ilosc": 150,
       "jednostka": "g",
       "stan": "pokrojona w paski"
     },
     {
       "nazwa": "Szpinak, surowy",
-      "ilosc": 80.0,
+      "ilosc": 80,
       "jednostka": "g"
     },
     {
       "nazwa": "Pomidory krojone z puszki",
-      "ilosc": 180.0,
+      "ilosc": 180,
       "jednostka": "g"
     },
     {
       "nazwa": "Passata pomidorowa",
-      "ilosc": 80.0,
+      "ilosc": 80,
       "jednostka": "g"
     },
     {
       "nazwa": "Cebula, surowa",
-      "ilosc": 50.0,
+      "ilosc": 50,
       "jednostka": "g",
       "stan": "posiekana"
     },
     {
       "nazwa": "Czosnek, surowy",
-      "ilosc": 5.0,
+      "ilosc": 5,
       "jednostka": "g"
     },
     {
       "nazwa": "Oliwa z oliwek",
-      "ilosc": 8.0,
+      "ilosc": 8,
       "jednostka": "g"
     },
     {
       "nazwa": "Oregano suszone",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "g"
     },
     {
       "nazwa": "Bazylia suszona",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "g"
     },
     {
       "nazwa": "Sól kłodawska",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "g"
     },
     {
@@ -91,28 +95,38 @@
   ],
   "etapy": [
     {
-      "nazwa": "Przygotowanie",
+      "nazwa": "Przygotowanie składników",
       "minuty": 10,
       "kroki": [
         {
-          "tresc": "Makaron ugotuj al dente. Kurczaka pokrój w paski, a cebulę i czosnek posiekaj."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+        },
+        {
+          "tresc": "Umyj i odsącz szpinak, usuń grube łodygi. Obierz i posiekaj cebulę oraz czosnek. Odmierz makaron, pomidory i passatę."
+        },
+        {
+          "tresc": "Kurczaka osusz i pokrój w paski około 1 cm. Umyj przybory i ręce po mięsie."
         }
       ]
     },
     {
-      "nazwa": "Przygotowanie sosu",
-      "minuty": 20,
+      "nazwa": "Gotowanie makaronu i sosu",
+      "minuty": 25,
       "kroki": [
         {
-          "tresc": "Na oliwie obsmaż kurczaka przez 5–6 minut. Dodaj cebulę i czosnek."
+          "tresc": "Zagotuj wodę w garnku i ugotuj makaron przez czas wskazany na opakowaniu. Nastaw minutnik; w tym czasie przygotowuj sos na drugim palniku. Przed odcedzeniem zachowaj nieco wody z gotowania. Woda do gotowania jest dodatkowa i zostanie odlana."
         },
         {
-          "tresc": "Dodaj pomidory, passatę oraz zioła i gotuj 8 minut."
+          "tresc": "Rozgrzej oliwę na drugim palniku przez 1 minutę. Smaż kurczaka 5–6 minut do temperatury co najmniej 74°C, obracając. Zdejmij na czysty talerz."
         },
         {
-          "tresc": "Dodaj szpinak i ugotowany makaron. Wymieszaj i dopraw.",
-          "sygnal": "kurczak jest ścięty w środku, a szpinak zwiędł",
-          "uwaga": true
+          "tresc": "Na tej samej patelni smaż cebulę 4 minuty; gdy przywiera, dodaj odrobinę wody z makaronu. Dodaj czosnek, smaż 30 sekund."
+        },
+        {
+          "tresc": "Dodaj pomidory, passatę, oregano i bazylię suszoną. Doprowadź do łagodnego wrzenia i gotuj przez 8 minut."
+        },
+        {
+          "tresc": "Dodaj szpinak, gotuj 1–2 minuty do zwiędnięcia. Włóż kurczaka oraz odcedzony makaron, podgrzej przez 1 minutę. Dopraw solą i pieprzem."
         }
       ]
     }

@@ -1,6 +1,6 @@
 {
   "nazwa": "Kanapki z serem salami, ogórkiem kiszonym i musztardą",
-  "opis": "Wyraziste kanapki z serem salami, ogórkiem kiszonym, musztardą i czerwoną cebulą. Przepis na 1 porcję.",
+  "opis": "Wyraziste kanapki z serem salami, ogórkiem kiszonym, musztardą i czerwoną cebulą. Ilości składników dobierz z listy dla przygotowywanej liczby porcji.",
   "pory": [
     "sniadanie",
     "kolacja"
@@ -8,7 +8,9 @@
   "kuchnie": [
     "polska"
   ],
-  "rodzaje": ["kanapki"],
+  "rodzaje": [
+    "kanapki"
+  ],
   "porcjowanie": "waga",
   "porcja_g": 270.5,
   "liczba_porcji_bazowych": 1,
@@ -26,35 +28,35 @@
   "skladniki": [
     {
       "nazwa": "Chleb żytni razowy",
-      "ilosc": 2.0,
+      "ilosc": 2,
       "jednostka": "szt",
       "stan": "kromki"
     },
     {
       "nazwa": "Ser salami",
-      "ilosc": 60.0,
+      "ilosc": 60,
       "jednostka": "g",
       "stan": "pokrojony w plastry"
     },
     {
       "nazwa": "ogórki kiszone bio",
-      "ilosc": 80.0,
+      "ilosc": 80,
       "jednostka": "g",
       "stan": "pokrojone w plastry"
     },
     {
       "nazwa": "Musztarda",
-      "ilosc": 10.0,
+      "ilosc": 10,
       "jednostka": "g"
     },
     {
       "nazwa": "Sałata masłowa",
-      "ilosc": 30.0,
+      "ilosc": 30,
       "jednostka": "g"
     },
     {
       "nazwa": "Cebula czerwona, surowa",
-      "ilosc": 20.0,
+      "ilosc": 20,
       "jednostka": "g",
       "stan": "cienko pokrojona"
     },
@@ -66,18 +68,23 @@
   ],
   "etapy": [
     {
-      "nazwa": "Przygotowanie kanapek",
-      "minuty": 7,
+      "nazwa": "Przygotowanie składników",
+      "minuty": 5,
       "kroki": [
         {
-          "tresc": "Ogórka i cebulę cienko pokrój, a sałatę osusz."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
         },
         {
-          "tresc": "Pieczywo posmaruj musztardą."
-        },
+          "tresc": "Umyj i osusz sałatę. Obierz cebulę, pokrój ją w cienkie piórka. Odsącz ogórki i pokrój w plastry. Pokrój ser salami w plastry, przygotuj pieczywo."
+        }
+      ]
+    },
+    {
+      "nazwa": "Składanie kanapek",
+      "minuty": 2,
+      "kroki": [
         {
-          "tresc": "Ułóż sałatę, ser salami, ogórka i cebulę. Dopraw pieprzem.",
-          "uwaga": true
+          "tresc": "Posmaruj pieczywo musztardą, ułóż sałatę, ser, ogórki i cebulę. Dopraw pieprzem i podaj."
         }
       ]
     }

@@ -1,82 +1,86 @@
 {
   "nazwa": "Polędwiczka w sosie musztardowym z kaszą bulgur",
-  "opis": "Polędwiczka wieprzowa w lekkim sosie musztardowo-jogurtowym z pieczarkami i kaszą bulgur. Przepis na 1 porcję.",
+  "opis": "Polędwiczka wieprzowa w lekkim sosie musztardowo-jogurtowym z pieczarkami i kaszą bulgur. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
   "pory": [
     "obiad"
   ],
   "kuchnie": [
     "polska"
   ],
-  "rodzaje": ["kasza_ryz"],
+  "rodzaje": [
+    "kasza_ryz"
+  ],
   "porcjowanie": "waga",
   "porcja_g": 655.5,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 2,
   "czas_przygotowania_min": 12,
-  "czas_obrobki_min": 23,
+  "czas_obrobki_min": 28,
   "sprzet": [
     "Patelnia 28 cm",
     "Garnek 2 l",
-    "miska",
+    "Miska",
     "Nóż szefa kuchni",
     "Deska do krojenia",
-    "Waga kuchenna"
+    "Waga kuchenna",
+    "Sitko",
+    "Termometr do mięsa"
   ],
-  "przechowywanie": "Przechowuj w lodówce do 2 dni. Odgrzewaj na małym ogniu.",
+  "przechowywanie": "Przechowuj w lodówce do 2 dni. Odgrzewaj łagodnie, do gorącego środka całej porcji. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
   "mozna_mrozic": false,
-  "ratunek": "Twardą polędwiczkę pokrój cieniej i duś chwilę w sosie. Za ostry sos złagodź jogurtem.",
+  "ratunek": "Mięso wyjmij z patelni na czas smażenia pieczarek. Sos jogurtowy dodawaj poza ogniem po zahartowaniu. Długie duszenie gotowej polędwiczki ją wysuszy.",
   "skladniki": [
     {
       "nazwa": "Polędwiczka wieprzowa, surowa",
-      "ilosc": 170.0,
+      "ilosc": 170,
       "jednostka": "g",
       "stan": "pokrojona w plastry"
     },
     {
       "nazwa": "Kasza bulgur, sucha",
-      "ilosc": 70.0,
+      "ilosc": 70,
       "jednostka": "g"
     },
     {
       "nazwa": "Pieczarki, surowe",
-      "ilosc": 150.0,
+      "ilosc": 150,
       "jednostka": "g",
       "stan": "pokrojone"
     },
     {
       "nazwa": "Jogurt grecki naturalny 2%",
-      "ilosc": 80.0,
+      "ilosc": 80,
       "jednostka": "g"
     },
     {
       "nazwa": "Musztarda",
-      "ilosc": 15.0,
+      "ilosc": 15,
       "jednostka": "g"
     },
     {
       "nazwa": "Cebula, surowa",
-      "ilosc": 60.0,
+      "ilosc": 60,
       "jednostka": "g",
       "stan": "posiekana"
     },
     {
       "nazwa": "Domowy bulion warzywny",
-      "ilosc": 100.0,
+      "ilosc": 100,
       "jednostka": "g"
     },
     {
       "nazwa": "Olej rzepakowy",
-      "ilosc": 8.0,
+      "ilosc": 8,
       "jednostka": "g"
     },
     {
       "nazwa": "Tymianek suszony",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "g"
     },
     {
       "nazwa": "Sól kłodawska",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "g"
     },
     {
@@ -87,34 +91,41 @@
   ],
   "etapy": [
     {
-      "nazwa": "Przygotowanie",
+      "nazwa": "Przygotowanie składników",
       "minuty": 12,
       "kroki": [
         {
-          "tresc": "Kaszę bulgur ugotuj. Polędwiczkę pokrój w plastry, pieczarki pokrój, a cebulę posiekaj."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
         },
         {
-          "tresc": "Jogurt wymieszaj z musztardą."
+          "tresc": "Oczyść i pokrój pieczarki, obierz i posiekaj cebulę. Odmierz bulion oraz kaszę."
+        },
+        {
+          "tresc": "Usuń błonę z polędwiczki i pokrój na medaliony grubości około 1,5 cm. Dopraw częścią soli i pieprzu; umyj przybory po mięsie."
+        },
+        {
+          "tresc": "Wymieszaj jogurt z musztardą."
         }
       ]
     },
     {
-      "nazwa": "Smażenie i sos",
-      "minuty": 23,
+      "nazwa": "Gotowanie kaszy i smażenie",
+      "minuty": 28,
       "kroki": [
         {
-          "tresc": "Na mocno rozgrzanym oleju smaż mięso partiami po około 2 minuty z każdej strony. Odłóż."
+          "tresc": "Na pierwszym palniku zagotuj wodę w garnku. Dodaj kaszę bulgur i gotuj przez czas wskazany na opakowaniu; po ugotowaniu odcedź. Wody użyj tyle, by ziarna były zanurzone i swobodnie się gotowały. Nastaw minutnik; równolegle wykonuj kolejne czynności na drugim palniku. Woda do gotowania jest dodatkowa i zostanie odlana."
         },
         {
-          "tresc": "Na patelni smaż cebulę i pieczarki, aż odparuje woda. Dodaj bulion i tymianek."
+          "tresc": "Na drugim palniku rozgrzej połowę oleju przez 1 minutę. Smaż medaliony po 2–3 minuty z każdej strony. Sprawdź temperaturę co najmniej 63°C i w razie potrzeby dosmaż po 1 minucie. Odstaw na czysty talerz na co najmniej 3 minuty."
         },
         {
-          "tresc": "Zmniejsz ogień, dodaj mięso oraz jogurt z musztardą. Podgrzej bez zagotowywania.",
-          "sygnal": "mięso jest soczyste, a sos gładki",
-          "uwaga": true
+          "tresc": "Dodaj pozostały olej, cebulę i pieczarki. Smaż 7–9 minut, aby odparować wodę."
         },
         {
-          "tresc": "Podaj z kaszą bulgur."
+          "tresc": "Dodaj bulion oraz tymianek, gotuj 3–4 minuty, aby sos nieco zgęstniał. Dodaj mięso, podgrzej 1 minutę i zdejmij z ognia."
+        },
+        {
+          "tresc": "Jogurt zahartuj niewielką ilością ciepłego sosu, następnie wmieszaj do patelni. Nie zagotowuj. Dopraw pozostałą solą i pieprzem, podaj z kaszą."
         }
       ]
     }

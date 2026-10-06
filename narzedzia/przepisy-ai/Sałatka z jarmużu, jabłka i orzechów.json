@@ -1,6 +1,6 @@
 {
   "nazwa": "Sałatka z jarmużu, jabłka i orzechów",
-  "opis": "Chrupiąca sałatka z jarmużu, jabłka, pomarańczy i orzechów w cytrynowo-musztardowym dressingu. Przepis na 1 porcję.",
+  "opis": "Chrupiąca sałatka z jarmużu, jabłka, pomarańczy i orzechów w cytrynowo-musztardowym dressingu. Ilości składników dobierz z listy dla przygotowywanej liczby porcji.",
   "pory": [
     "kolacja",
     "dodatek"
@@ -8,32 +8,34 @@
   "kuchnie": [
     "inna"
   ],
-  "rodzaje": ["salatka"],
+  "rodzaje": [
+    "salatka"
+  ],
   "porcjowanie": "waga",
-  "porcja_g": 406.0,
+  "porcja_g": 406,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 1,
   "czas_przygotowania_min": 15,
   "czas_obrobki_min": 0,
   "sprzet": [
-    "miska",
+    "Miska",
     "Nóż szefa kuchni",
     "Deska do krojenia",
     "Waga kuchenna"
   ],
-  "przechowywanie": "Przechowuj w lodówce do 1 dnia. Orzechy dodaj przed podaniem.",
+  "przechowywanie": "Przechowuj w lodówce do 1 dnia. Orzechy dodaj przed podaniem. Lodówka: do 4°C.",
   "mozna_mrozic": false,
   "ratunek": "Twardy jarmuż masuj dłużej z dressingiem. Zbyt kwaśny sos złagodź sokiem z pomarańczy.",
   "skladniki": [
     {
       "nazwa": "Jarmuż, surowy",
-      "ilosc": 100.0,
+      "ilosc": 100,
       "jednostka": "g",
       "stan": "bez twardych łodyg"
     },
     {
       "nazwa": "Jabłko ze skórką",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "szt",
       "stan": "pokrojone"
     },
@@ -45,24 +47,24 @@
     },
     {
       "nazwa": "Orzechy włoskie",
-      "ilosc": 25.0,
+      "ilosc": 25,
       "jednostka": "g",
       "stan": "posiekane"
     },
     {
       "nazwa": "Oliwa z oliwek",
-      "ilosc": 10.0,
+      "ilosc": 10,
       "jednostka": "g"
     },
     {
       "nazwa": "Cytryna",
-      "ilosc": 15.0,
+      "ilosc": 15,
       "jednostka": "g",
       "stan": "sok"
     },
     {
       "nazwa": "Musztarda",
-      "ilosc": 5.0,
+      "ilosc": 5,
       "jednostka": "g"
     },
     {
@@ -78,22 +80,34 @@
   ],
   "etapy": [
     {
-      "nazwa": "Przygotowanie",
-      "minuty": 15,
+      "nazwa": "Przygotowanie składników",
+      "minuty": 10,
       "kroki": [
         {
-          "tresc": "Usuń twarde łodygi jarmużu i porwij liście. Jabłko pokrój, a pomarańczę podziel na cząstki."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
         },
         {
-          "tresc": "Oliwę wymieszaj z cytryną, sokiem z pomarańczy, musztardą, solą i pieprzem."
+          "tresc": "Umyj jarmuż, jabłko, pomarańczę i cytrynę. Usuń łodygi jarmużu i porwij liście; usuń gniazdo nasienne jabłka i pokrój miąższ."
         },
         {
-          "tresc": "Jarmuż masuj z dressingiem przez 2–3 minuty.",
-          "sygnal": "liście stają się ciemniejsze i delikatniejsze",
+          "tresc": "Obierz pomarańczę i podziel na cząstki, zachowaj wypływający sok. Wyciśnij i odmierz sok z cytryny. Posiekaj orzechy."
+        }
+      ]
+    },
+    {
+      "nazwa": "Łączenie sałatki",
+      "minuty": 5,
+      "kroki": [
+        {
+          "tresc": "Wymieszaj oliwę z sokiem z cytryny, zachowanym sokiem pomarańczowym, musztardą, solą i pieprzem."
+        },
+        {
+          "tresc": "Masuj liście jarmużu z dressingiem przez 2–3 minuty.",
+          "sygnal": "liście ciemnieją i stają się delikatniejsze",
           "uwaga": true
         },
         {
-          "tresc": "Dodaj owoce i orzechy."
+          "tresc": "Dodaj jabłko, cząstki pomarańczy i orzechy. Wymieszaj i podaj."
         }
       ]
     }

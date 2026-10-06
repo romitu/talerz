@@ -1,82 +1,86 @@
 {
   "nazwa": "Makaron z polędwiczką i pieczarkami",
-  "opis": "Pełnoziarnisty makaron z polędwiczką wieprzową i pieczarkami w lekkim sosie jogurtowym. Przepis na 1 porcję.",
+  "opis": "Pełnoziarnisty makaron z polędwiczką wieprzową i pieczarkami w lekkim sosie jogurtowym. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
   "pory": [
     "obiad"
   ],
   "kuchnie": [
     "inna"
   ],
-  "rodzaje": ["makaron"],
+  "rodzaje": [
+    "makaron"
+  ],
   "porcjowanie": "waga",
   "porcja_g": 555.5,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 2,
   "czas_przygotowania_min": 12,
-  "czas_obrobki_min": 18,
+  "czas_obrobki_min": 25,
   "sprzet": [
     "Patelnia 28 cm",
     "Garnek 3 l",
-    "miska",
+    "Miska",
     "Nóż szefa kuchni",
     "Deska do krojenia",
-    "Waga kuchenna"
+    "Waga kuchenna",
+    "Durszlak",
+    "Termometr do mięsa"
   ],
-  "przechowywanie": "Przechowuj w lodówce do 2 dni. Odgrzewaj na małym ogniu.",
+  "przechowywanie": "Przechowuj w lodówce do 2 dni. Odgrzewaj łagodnie, do gorącego środka całej porcji. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
   "mozna_mrozic": false,
-  "ratunek": "Twarde mięso pokrój cieniej i duś chwilę w sosie. Zwarzony jogurt wyrównaj energicznym mieszaniem po zdjęciu z ognia.",
+  "ratunek": "Polędwiczki nie duś długo po usmażeniu, bo wyschnie. Jogurt dodaj poza ogniem; gęsty sos rozluźnij ciepłą wodą z makaronu.",
   "skladniki": [
     {
       "nazwa": "Makaron pełnoziarnisty, suchy",
-      "ilosc": 85.0,
+      "ilosc": 85,
       "jednostka": "g"
     },
     {
       "nazwa": "Polędwiczka wieprzowa, surowa",
-      "ilosc": 150.0,
+      "ilosc": 150,
       "jednostka": "g",
       "stan": "pokrojona w cienkie paski"
     },
     {
       "nazwa": "Pieczarki, surowe",
-      "ilosc": 180.0,
+      "ilosc": 180,
       "jednostka": "g",
       "stan": "pokrojone w plasterki"
     },
     {
       "nazwa": "Jogurt grecki naturalny 2%",
-      "ilosc": 70.0,
+      "ilosc": 70,
       "jednostka": "g"
     },
     {
       "nazwa": "Cebula, surowa",
-      "ilosc": 50.0,
+      "ilosc": 50,
       "jednostka": "g",
       "stan": "posiekana"
     },
     {
       "nazwa": "Czosnek, surowy",
-      "ilosc": 5.0,
+      "ilosc": 5,
       "jednostka": "g"
     },
     {
       "nazwa": "Olej rzepakowy",
-      "ilosc": 8.0,
+      "ilosc": 8,
       "jednostka": "g"
     },
     {
       "nazwa": "Musztarda",
-      "ilosc": 5.0,
+      "ilosc": 5,
       "jednostka": "g"
     },
     {
       "nazwa": "Tymianek suszony",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "g"
     },
     {
       "nazwa": "Sól kłodawska",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "g"
     },
     {
@@ -87,31 +91,38 @@
   ],
   "etapy": [
     {
-      "nazwa": "Przygotowanie",
+      "nazwa": "Przygotowanie składników",
       "minuty": 12,
       "kroki": [
         {
-          "tresc": "Makaron ugotuj al dente. Mięso pokrój w cienkie paski, a pieczarki w plasterki."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
         },
         {
-          "tresc": "Jogurt wymieszaj z musztardą i odrobiną ciepłej wody z makaronu."
+          "tresc": "Oczyść pieczarki i pokrój w plasterki. Obierz i posiekaj cebulę oraz czosnek."
+        },
+        {
+          "tresc": "Mięso osusz, usuń twardą błonę, pokrój w paski około 1 cm. Umyj przybory i ręce. Odmierz makaron, jogurt i musztardę."
         }
       ]
     },
     {
-      "nazwa": "Smażenie",
-      "minuty": 18,
+      "nazwa": "Gotowanie i smażenie",
+      "minuty": 25,
       "kroki": [
         {
-          "tresc": "Na mocno rozgrzanym oleju smaż mięso 3–4 minuty. Odłóż je na bok."
+          "tresc": "Zagotuj wodę w garnku i ugotuj makaron przez czas wskazany na opakowaniu. Nastaw minutnik; w tym czasie przygotowuj sos na drugim palniku. Przed odcedzeniem zachowaj nieco wody z gotowania. Woda do gotowania jest dodatkowa i zostanie odlana."
         },
         {
-          "tresc": "Na tej samej patelni smaż cebulę i pieczarki, aż odparuje woda. Dodaj czosnek i tymianek."
+          "tresc": "Na drugim palniku rozgrzej połowę oleju przez 1 minutę. Smaż mięso przez 4–5 minut, obracając. Sprawdź temperaturę: co najmniej 63°C. Przełóż na czysty talerz i pozostaw na co najmniej 3 minuty."
         },
         {
-          "tresc": "Zmniejsz ogień, dodaj mięso, makaron i sos jogurtowy. Wymieszaj bez gotowania.",
-          "sygnal": "mięso jest soczyste, a sos gładki",
-          "uwaga": true
+          "tresc": "Dodaj pozostały olej, cebulę i pieczarki. Smaż 7–9 minut, aż woda odparuje. Dodaj czosnek i tymianek, smaż 30 sekund."
+        },
+        {
+          "tresc": "W misce wymieszaj jogurt, musztardę i niewielką ilość ciepłej wody z makaronu."
+        },
+        {
+          "tresc": "Do patelni dodaj makaron i mięso, podgrzej 1 minutę. Zdejmij z ognia, odczekaj około 1 minuty i dodaj sos jogurtowy. Dopraw solą i pieprzem; nie zagotowuj."
         }
       ]
     }

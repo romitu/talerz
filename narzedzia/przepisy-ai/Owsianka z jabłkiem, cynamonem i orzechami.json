@@ -1,6 +1,6 @@
 {
   "nazwa": "Owsianka z jabłkiem, cynamonem i orzechami",
-  "opis": "Kremowa owsianka na mleku z jabłkiem, cynamonem i orzechami włoskimi. Przepis na 1 porcję.",
+  "opis": "Kremowa owsianka na mleku z jabłkiem, cynamonem i orzechami włoskimi. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
   "pory": [
     "sniadanie"
   ],
@@ -15,15 +15,15 @@
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 1,
   "czas_przygotowania_min": 5,
-  "czas_obrobki_min": 10,
+  "czas_obrobki_min": 12,
   "sprzet": [
     "Rondel",
-    "miska",
+    "Miska",
     "Nóż szefa kuchni",
     "Deska do krojenia",
     "Waga kuchenna"
   ],
-  "przechowywanie": "Po ostudzeniu przechowuj w zamkniętym pojemniku w lodówce do 1 dnia. Przy odgrzewaniu dodaj odrobinę mleka.",
+  "przechowywanie": "Po ostudzeniu przechowuj w zamkniętym pojemniku w lodówce do 1 dnia. Przy odgrzewaniu dodaj odrobinę mleka. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
   "mozna_mrozic": false,
   "ratunek": "Jeśli owsianka jest za gęsta, dolej trochę mleka. Jeśli jest zbyt rzadka, gotuj jeszcze 1–2 minuty, często mieszając.",
   "skladniki": [
@@ -66,27 +66,25 @@
       "minuty": 5,
       "kroki": [
         {
-          "tresc": "Jabłko pokrój w małą kostkę, a orzechy grubo posiekaj."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+        },
+        {
+          "tresc": "Umyj jabłko, usuń gniazdo nasienne i pokrój w małą kostkę. Posiekaj orzechy. Odmierz mleko oraz płatki."
         }
       ]
     },
     {
       "nazwa": "Gotowanie owsianki",
-      "minuty": 10,
+      "minuty": 12,
       "kroki": [
         {
-          "tresc": "Do rondla wsyp płatki, wlej mleko i dodaj sól."
+          "tresc": "Wsyp płatki do rondla, wlej mleko, dodaj sól. Podgrzewaj około 3 minut do łagodnego wrzenia, mieszając."
         },
         {
-          "tresc": "Podgrzewaj, mieszając. Gdy mleko zacznie lekko wrzeć, zmniejsz ogień i gotuj 5–7 minut.",
-          "uwaga": true,
-          "sygnal": "płatki są miękkie, a owsianka kremowa"
+          "tresc": "Gotuj na małym ogniu przez 5–7 minut lub czas z opakowania płatków, często mieszając."
         },
         {
-          "tresc": "Dodaj jabłko i cynamon, wymieszaj i podgrzewaj jeszcze około minuty."
-        },
-        {
-          "tresc": "Przełóż do miski i posyp orzechami."
+          "tresc": "Dodaj jabłko i cynamon, podgrzewaj jeszcze 1 minutę. Podaj z orzechami; jabłko pozostanie lekko chrupiące."
         }
       ]
     }

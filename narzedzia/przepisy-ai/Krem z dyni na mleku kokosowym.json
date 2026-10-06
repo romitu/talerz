@@ -1,6 +1,6 @@
 {
   "nazwa": "Krem z dyni na mleku kokosowym",
-  "opis": "Aromatyczny krem z dyni, czerwonej soczewicy, imbiru i mleka kokosowego. Przepis na 2 porcje.",
+  "opis": "Aromatyczny krem z dyni, czerwonej soczewicy, imbiru i mleka kokosowego. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
   "pory": [
     "obiad",
     "kolacja"
@@ -8,122 +8,137 @@
   "kuchnie": [
     "azjatycka"
   ],
-  "rodzaje": ["zupa"],
+  "rodzaje": [
+    "zupa"
+  ],
   "porcjowanie": "waga",
-  "porcja_g": 792.0,
+  "porcja_g": 797,
   "liczba_porcji_bazowych": 2,
   "trwalosc_dni": 3,
-  "czas_przygotowania_min": 12,
-  "czas_obrobki_min": 28,
+  "czas_przygotowania_min": 13,
+  "czas_obrobki_min": 35,
   "sprzet": [
     "Garnek 3 l",
     "Blender ręczny",
     "Nóż szefa kuchni",
     "Deska do krojenia",
-    "Waga kuchenna"
+    "Waga kuchenna",
+    "Sitko"
   ],
-  "przechowywanie": "Przechowuj w lodówce do 3 dni albo zamroź po całkowitym ostudzeniu.",
+  "przechowywanie": "Przechowuj w lodówce do 3 dni albo zamroź po szybkim schłodzeniu. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
   "mozna_mrozic": true,
   "ratunek": "Za gęsty krem rozcieńcz bulionem. Za ostry złagodź dodatkowym mlekiem kokosowym.",
   "skladniki": [
     {
       "nazwa": "Dynia, surowa",
-      "ilosc": 500.0,
+      "ilosc": 500,
       "jednostka": "g",
       "stan": "pokrojona w kostkę"
     },
     {
       "nazwa": "Marchew, surowa",
-      "ilosc": 120.0,
+      "ilosc": 120,
       "jednostka": "g",
       "stan": "pokrojona"
     },
     {
       "nazwa": "Mleko kokosowe light z puszki",
-      "ilosc": 200.0,
+      "ilosc": 200,
       "jednostka": "g"
     },
     {
       "nazwa": "Domowy bulion warzywny",
-      "ilosc": 300.0,
+      "ilosc": 300,
       "jednostka": "g"
     },
     {
       "nazwa": "Soczewica czerwona, sucha",
-      "ilosc": 100.0,
+      "ilosc": 100,
       "jednostka": "g",
       "stan": "opłukana"
     },
     {
       "nazwa": "woda",
-      "ilosc": 200.0,
+      "ilosc": 200,
       "jednostka": "ml"
     },
     {
       "nazwa": "Cebula, surowa",
-      "ilosc": 80.0,
+      "ilosc": 80,
       "jednostka": "g",
       "stan": "posiekana"
     },
     {
       "nazwa": "Imbir korzeń, surowy",
-      "ilosc": 16.0,
+      "ilosc": 16,
       "jednostka": "g"
     },
     {
       "nazwa": "Czosnek, surowy",
-      "ilosc": 10.0,
+      "ilosc": 10,
       "jednostka": "g"
     },
     {
       "nazwa": "Pasta curry czerwona",
-      "ilosc": 16.0,
+      "ilosc": 16,
       "jednostka": "g"
     },
     {
       "nazwa": "Olej rzepakowy",
-      "ilosc": 10.0,
+      "ilosc": 10,
       "jednostka": "g"
     },
     {
       "nazwa": "Limonka",
-      "ilosc": 30.0,
+      "ilosc": 30,
       "jednostka": "g",
       "stan": "sok"
     },
     {
+      "nazwa": "Pietruszka natka",
+      "ilosc": 10,
+      "jednostka": "g",
+      "stan": "umyta, osuszona i posiekana; do posypania przed podaniem"
+    },
+    {
       "nazwa": "Sól kłodawska",
-      "ilosc": 2.0,
+      "ilosc": 2,
       "jednostka": "g"
     }
   ],
   "etapy": [
     {
-      "nazwa": "Przygotowanie",
-      "minuty": 12,
+      "nazwa": "Przygotowanie składników",
+      "minuty": 13,
       "kroki": [
         {
-          "tresc": "Dynię i marchew pokrój, cebulę, czosnek oraz imbir posiekaj, a soczewicę opłucz."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+        },
+        {
+          "tresc": "Umyj dynię, usuń nasiona i twardą skórę; pokrój miąższ w kostkę około 2 cm. Umyj i obierz marchew, pokrój w cienkie plasterki."
+        },
+        {
+          "tresc": "Obierz i posiekaj cebulę, czosnek oraz imbir. Opłucz soczewicę. Umyj limonkę, wyciśnij i odmierz sok. Odmierz bulion, wodę i mleko kokosowe. Umyj i osusz natkę pietruszki, drobno posiekaj i odłóż do podania."
         }
       ]
     },
     {
       "nazwa": "Gotowanie i blendowanie",
-      "minuty": 28,
+      "minuty": 35,
       "kroki": [
         {
-          "tresc": "Na oleju smaż cebulę 3 minuty. Dodaj czosnek, imbir i pastę curry."
+          "tresc": "Rozgrzej olej 1 minutę, smaż cebulę 4 minuty. Dodaj czosnek, imbir i pastę curry, smaż 1 minutę."
         },
         {
-          "tresc": "Dodaj dynię, marchew, soczewicę, bulion oraz wodę. Gotuj około 20 minut.",
-          "sygnal": "warzywa i soczewica są całkowicie miękkie"
+          "tresc": "Dodaj dynię, marchew, soczewicę, bulion i wodę. Doprowadź do wrzenia przez około 4 minuty. Gotuj pod uchyloną pokrywką przez 20 minut, mieszając co kilka minut."
         },
         {
-          "tresc": "Dodaj mleko kokosowe i zblenduj na gładko.",
+          "tresc": "Sprawdź miękkość warzyw i soczewicy; w razie potrzeby gotuj kolejne 3–5 minut. Dodaj mleko kokosowe i podgrzewaj 2 minuty.",
+          "sygnal": "warzywa dają się łatwo rozgnieść, soczewica miękka",
           "uwaga": true
         },
         {
-          "tresc": "Dopraw limonką i solą."
+          "tresc": "Zdejmij z ognia i zblenduj z zanurzoną końcówką blendera. Dodaj sok z limonki oraz sól i wymieszaj. Rozlej krem do talerzy, posyp przygotowaną natką pietruszki i podaj."
         }
       ]
     }

@@ -1,6 +1,6 @@
 {
   "nazwa": "Małże w pomidorowym bulionie",
-  "opis": "Małże gotowane w aromatycznym bulionie pomidorowym z czosnkiem, selerem naciowym i natką. Przepis na 1 porcję.",
+  "opis": "Małże gotowane w aromatycznym bulionie pomidorowym z czosnkiem, selerem naciowym i natką. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
   "pory": [
     "obiad",
     "kolacja"
@@ -12,65 +12,65 @@
   "porcja_g": 676.5,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 0,
-  "czas_przygotowania_min": 15,
-  "czas_obrobki_min": 15,
+  "czas_przygotowania_min": 10,
+  "czas_obrobki_min": 22,
   "sprzet": [
     "Garnek 3 l",
     "Nóż szefa kuchni",
     "Deska do krojenia",
     "Waga kuchenna"
   ],
-  "przechowywanie": "Danie zjedz bezpośrednio po ugotowaniu. Nie przechowuj małży, które nie otworzyły się podczas gotowania.",
+  "przechowywanie": "Danie najlepiej zjedz bezpośrednio po przygotowaniu.",
   "mozna_mrozic": false,
-  "ratunek": "Jeśli bulion jest zbyt kwaśny, dodaj nieco więcej bulionu warzywnego. Nieotwarte małże wyrzuć.",
+  "ratunek": "Jeśli bulion za bardzo zgęstnieje, rozrzedź go gorącą wodą. Małże dodawaj dopiero do gotowej bazy, aby nie gotować ich nadmiernie.",
   "skladniki": [
     {
       "nazwa": "Małże, surowe",
-      "ilosc": 250.0,
+      "ilosc": 250,
       "jednostka": "g",
-      "stan": "oczyszczone"
+      "stan": "surowe mięso małży bez muszli; podana masa dotyczy części jadalnej, nie muszli"
     },
     {
       "nazwa": "Pomidory krojone z puszki",
-      "ilosc": 150.0,
+      "ilosc": 150,
       "jednostka": "g"
     },
     {
       "nazwa": "Domowy bulion warzywny",
-      "ilosc": 100.0,
+      "ilosc": 100,
       "jednostka": "g"
     },
     {
       "nazwa": "Seler naciowy, surowy",
-      "ilosc": 40.0,
+      "ilosc": 40,
       "jednostka": "g",
       "stan": "pokrojony"
     },
     {
       "nazwa": "Cebula, surowa",
-      "ilosc": 40.0,
+      "ilosc": 40,
       "jednostka": "g",
       "stan": "posiekana"
     },
     {
       "nazwa": "Czosnek, surowy",
-      "ilosc": 8.0,
+      "ilosc": 8,
       "jednostka": "g"
     },
     {
       "nazwa": "Oliwa z oliwek",
-      "ilosc": 8.0,
+      "ilosc": 8,
       "jednostka": "g"
     },
     {
       "nazwa": "Pietruszka natka",
-      "ilosc": 10.0,
+      "ilosc": 10,
       "jednostka": "g",
       "stan": "posiekana"
     },
     {
       "nazwa": "Chleb żytni razowy",
-      "ilosc": 2.0,
+      "ilosc": 2,
       "jednostka": "szt",
       "stan": "kromki"
     },
@@ -82,34 +82,37 @@
   ],
   "etapy": [
     {
-      "nazwa": "Przygotowanie",
-      "minuty": 15,
+      "nazwa": "Przygotowanie składników",
+      "minuty": 10,
       "kroki": [
         {
-          "tresc": "Małże dokładnie oczyść. Usuń sztuki pęknięte oraz takie, które nie zamykają się po dotknięciu.",
-          "uwaga": true
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
         },
         {
-          "tresc": "Cebulę, czosnek i seler naciowy posiekaj."
+          "tresc": "Przygotuj surowe mięso małży bez muszli; jeśli jest mrożone, wcześniej rozmroź w lodówce i odsącz. Usuń ewentualne fragmenty muszli."
+        },
+        {
+          "tresc": "Umyj seler naciowy i natkę. Pokrój seler cienko, natkę posiekaj. Obierz i posiekaj cebulę oraz czosnek. Odmierz pomidory i bulion, przygotuj pieczywo."
         }
       ]
     },
     {
       "nazwa": "Gotowanie",
-      "minuty": 15,
+      "minuty": 22,
       "kroki": [
         {
-          "tresc": "Na oliwie smaż cebulę i seler przez 4 minuty. Dodaj czosnek, pomidory oraz bulion."
+          "tresc": "Rozgrzej oliwę przez 1 minutę. Smaż cebulę i seler 4 minuty. Dodaj czosnek i smaż 30 sekund."
         },
         {
-          "tresc": "Doprowadź do wrzenia, dodaj małże i przykryj garnek."
+          "tresc": "Dodaj pomidory i bulion. Doprowadź do wrzenia przez około 3 minuty i gotuj łagodnie 5 minut."
         },
         {
-          "tresc": "Gotuj 5–7 minut, potrząsając garnkiem.",
-          "sygnal": "muszle się otworzyły"
+          "tresc": "Dodaj mięso małży, ponownie doprowadź do łagodnego wrzenia i od tego momentu gotuj przez 4–5 minut. W razie potrzeby dogotuj przez kolejną minutę.",
+          "sygnal": "mięso jest nieprzezroczyste i jędrne, gorące w środku",
+          "uwaga": true
         },
         {
-          "tresc": "Wyrzuć nieotwarte małże. Posyp natką i podaj z pieczywem."
+          "tresc": "Dodaj pieprz i natkę, podaj od razu z pieczywem."
         }
       ]
     }

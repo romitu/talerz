@@ -1,6 +1,6 @@
 {
   "nazwa": "Makaron z pieczonymi warzywami i mozzarellą",
-  "opis": "Pełnoziarnisty makaron z pieczoną cukinią, papryką, pomidorem i mozzarellą. Przepis na 1 porcję.",
+  "opis": "Pełnoziarnisty makaron z pieczoną cukinią, papryką, pomidorem i mozzarellą. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
   "pory": [
     "obiad",
     "kolacja"
@@ -8,73 +8,77 @@
   "kuchnie": [
     "srodziemnomorska"
   ],
-  "rodzaje": ["makaron"],
+  "rodzaje": [
+    "makaron"
+  ],
   "porcjowanie": "waga",
-  "porcja_g": 625.0,
+  "porcja_g": 625,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 2,
   "czas_przygotowania_min": 12,
-  "czas_obrobki_min": 30,
+  "czas_obrobki_min": 42,
   "sprzet": [
     "Piekarnik",
     "Blacha do pieczenia",
     "Garnek 3 l",
     "Nóż szefa kuchni",
     "Deska do krojenia",
-    "Waga kuchenna"
+    "Waga kuchenna",
+    "Durszlak",
+    "Miska"
   ],
-  "przechowywanie": "Przechowuj w lodówce do 2 dni.",
+  "przechowywanie": "Przechowuj w lodówce do 2 dni. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
   "mozna_mrozic": false,
   "ratunek": "Jeśli warzywa puściły wodę, dopiekaj je kilka minut na wyższej temperaturze. Za suchy makaron skrop oliwą.",
   "skladniki": [
     {
       "nazwa": "Makaron pełnoziarnisty, suchy",
-      "ilosc": 85.0,
+      "ilosc": 85,
       "jednostka": "g"
     },
     {
       "nazwa": "Ser mozzarella",
-      "ilosc": 90.0,
+      "ilosc": 90,
       "jednostka": "g",
       "stan": "porwany na kawałki"
     },
     {
       "nazwa": "Cukinia, surowa",
-      "ilosc": 130.0,
+      "ilosc": 130,
       "jednostka": "g",
       "stan": "pokrojona"
     },
     {
       "nazwa": "Papryka żółta, surowa",
-      "ilosc": 120.0,
+      "ilosc": 120,
       "jednostka": "g",
       "stan": "pokrojona"
     },
     {
       "nazwa": "Pomidory, surowe",
-      "ilosc": 130.0,
+      "ilosc": 130,
       "jednostka": "g",
       "stan": "pokrojone"
     },
     {
       "nazwa": "Cebula czerwona, surowa",
-      "ilosc": 50.0,
+      "ilosc": 50,
       "jednostka": "g",
       "stan": "pokrojona"
     },
     {
       "nazwa": "Oliwa z oliwek",
-      "ilosc": 10.0,
+      "ilosc": 10,
       "jednostka": "g"
     },
     {
       "nazwa": "Oregano suszone",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "g"
     },
     {
       "nazwa": "Bazylia świeża",
-      "ilosc": 8.0,
+      "ilosc": 8,
       "jednostka": "g"
     },
     {
@@ -90,31 +94,35 @@
   ],
   "etapy": [
     {
-      "nazwa": "Pieczenie warzyw",
-      "minuty": 30,
+      "nazwa": "Przygotowanie składników",
+      "minuty": 12,
       "kroki": [
         {
-          "tresc": "Piekarnik rozgrzej do 210°C. Warzywa pokrój i wymieszaj z oliwą, oregano, solą oraz pieprzem."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
         },
         {
-          "tresc": "Piecz warzywa około 25 minut.",
-          "sygnal": "są miękkie i lekko zrumienione"
+          "tresc": "Umyj cukinię, paprykę, pomidory i bazylię. Usuń nasiona papryki. Pokrój warzywa w kawałki około 2 cm, obraną cebulę w piórka."
+        },
+        {
+          "tresc": "Mozzarellę odsącz i porwij. Warzywa wymieszaj z oliwą, oregano, solą i pieprzem. Odmierz makaron."
         }
       ]
     },
     {
-      "nazwa": "Łączenie makaronu",
-      "minuty": 12,
+      "nazwa": "Pieczenie i gotowanie",
+      "minuty": 42,
       "kroki": [
         {
-          "tresc": "Makaron ugotuj al dente i odcedź."
+          "tresc": "Rozgrzej piekarnik do 210°C, grzanie góra–dół, zwykle około 10 minut."
         },
         {
-          "tresc": "Gorący makaron połącz z warzywami i mozzarellą.",
-          "uwaga": true
+          "tresc": "Rozłóż warzywa luźno na blasze i piecz 25–30 minut, obracając w połowie."
         },
         {
-          "tresc": "Dodaj świeżą bazylię i podaj."
+          "tresc": "W czasie pieczenia ugotuj makaron przez czas z opakowania. Zachowaj nieco wody i odcedź. Zakończ gotowanie makaronu możliwie blisko końca pieczenia."
+        },
+        {
+          "tresc": "Połącz gorący makaron z warzywami, płynem z blachy i mozzarellą. Dodaj bazylię. W razie potrzeby rozluźnij zachowaną wodą."
         }
       ]
     }

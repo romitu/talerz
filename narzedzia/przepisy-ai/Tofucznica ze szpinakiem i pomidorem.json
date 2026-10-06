@@ -1,6 +1,6 @@
 {
   "nazwa": "Tofucznica ze szpinakiem i pomidorem",
-  "opis": "Szybka tofucznica ze szpinakiem, pomidorem, cebulą i kurkumą, podana z pieczywem. Przepis na 1 porcję.",
+  "opis": "Szybka tofucznica ze szpinakiem, pomidorem, cebulą i kurkumą, podana z pieczywem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
   "pory": [
     "sniadanie",
     "kolacja"
@@ -13,61 +13,61 @@
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 1,
   "czas_przygotowania_min": 7,
-  "czas_obrobki_min": 8,
+  "czas_obrobki_min": 11,
   "sprzet": [
     "Patelnia 24 cm",
-    "miska",
+    "Miska",
     "Widelec",
     "Nóż szefa kuchni",
     "Deska do krojenia",
     "Waga kuchenna"
   ],
-  "przechowywanie": "Najlepiej zjedz od razu. Pozostałość można przechować w lodówce do 1 dnia.",
+  "przechowywanie": "Najlepiej zjedz od razu. Pozostałość można przechować w lodówce do 1 dnia. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
   "mozna_mrozic": false,
   "ratunek": "Jeśli tofucznica jest sucha, dodaj łyżkę wody. Jeżeli pomidor puścił dużo soku, smaż chwilę bez przykrycia.",
   "skladniki": [
     {
       "nazwa": "Tofu naturalne",
-      "ilosc": 180.0,
+      "ilosc": 180,
       "jednostka": "g",
       "stan": "rozgniecione widelcem"
     },
     {
       "nazwa": "Szpinak, surowy",
-      "ilosc": 60.0,
+      "ilosc": 60,
       "jednostka": "g"
     },
     {
       "nazwa": "Pomidory, surowe",
-      "ilosc": 130.0,
+      "ilosc": 130,
       "jednostka": "g",
       "stan": "pokrojone w kostkę"
     },
     {
       "nazwa": "Cebula, surowa",
-      "ilosc": 40.0,
+      "ilosc": 40,
       "jednostka": "g",
       "stan": "posiekana"
     },
     {
       "nazwa": "Chleb żytni razowy",
-      "ilosc": 2.0,
+      "ilosc": 2,
       "jednostka": "szt",
       "stan": "kromki"
     },
     {
       "nazwa": "Olej rzepakowy",
-      "ilosc": 5.0,
+      "ilosc": 5,
       "jednostka": "g"
     },
     {
       "nazwa": "Kurkuma mielona",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "g"
     },
     {
       "nazwa": "Sól kłodawska",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "g"
     },
     {
@@ -78,28 +78,37 @@
   ],
   "etapy": [
     {
-      "nazwa": "Przygotowanie",
+      "nazwa": "Przygotowanie składników",
       "minuty": 7,
       "kroki": [
         {
-          "tresc": "Tofu rozgnieć widelcem. Pomidora pokrój w kostkę, a cebulę posiekaj."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+        },
+        {
+          "tresc": "Odsącz tofu i rozgnieć widelcem w misce. Umyj szpinak i pomidora; osusz szpinak, pokrój pomidora w kostkę."
+        },
+        {
+          "tresc": "Obierz i posiekaj cebulę. Przygotuj pieczywo."
         }
       ]
     },
     {
       "nazwa": "Smażenie",
-      "minuty": 8,
+      "minuty": 11,
       "kroki": [
         {
-          "tresc": "Na oleju smaż cebulę 2 minuty. Dodaj tofu, kurkumę, sól i pieprz."
+          "tresc": "Rozgrzej olej przez 1 minutę. Smaż cebulę 3 minuty."
         },
         {
-          "tresc": "Dodaj pomidora i szpinak. Smaż, mieszając, jeszcze 4–5 minut.",
-          "sygnal": "szpinak zwiędł, a tofu jest gorące",
+          "tresc": "Dodaj pomidora i smaż 2–3 minuty, odparowując nadmiar płynu. Dodaj tofu i kurkumę, podgrzewaj 2 minuty."
+        },
+        {
+          "tresc": "Dodaj szpinak i smaż 1–2 minuty, tylko do zwiędnięcia.",
+          "sygnal": "tofu jest gorące, szpinak zwiędł, bez kałuży płynu",
           "uwaga": true
         },
         {
-          "tresc": "Podaj bezpośrednio po przygotowaniu z kromkami chleba żytniego."
+          "tresc": "Dopraw solą i pieprzem, podaj z pieczywem."
         }
       ]
     }

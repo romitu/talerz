@@ -1,6 +1,6 @@
 {
   "nazwa": "Kanapki z ricottą, rzodkiewką i szczypiorkiem",
-  "opis": "Delikatne kanapki z ricottą, chrupiącą rzodkiewką i świeżym szczypiorkiem. Przepis na 1 porcję.",
+  "opis": "Delikatne kanapki z ricottą, chrupiącą rzodkiewką i świeżym szczypiorkiem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji.",
   "pory": [
     "sniadanie",
     "kolacja"
@@ -8,50 +8,52 @@
   "kuchnie": [
     "inna"
   ],
-  "rodzaje": ["kanapki"],
+  "rodzaje": [
+    "kanapki"
+  ],
   "porcjowanie": "waga",
-  "porcja_g": 251.0,
+  "porcja_g": 251,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 0,
   "czas_przygotowania_min": 10,
   "czas_obrobki_min": 0,
   "sprzet": [
-    "miska",
+    "Miska",
     "Widelec",
     "Nóż szefa kuchni",
     "Deska do krojenia",
     "Waga kuchenna"
   ],
-  "przechowywanie": "Pastę z ricotty przechowuj w lodówce do 1 dnia. Pieczywo smaruj przed podaniem.",
+  "przechowywanie": "Gotowe kanapki zjedz od razu. Samą pastę z ricotty przechowuj w lodówce do 1 dnia; pieczywo smaruj przed podaniem.",
   "mozna_mrozic": false,
   "ratunek": "Jeśli ricotta jest zbyt gęsta, dodaj odrobinę jogurtu. Za łagodny smak popraw pieprzem i szczypiorkiem.",
   "skladniki": [
     {
       "nazwa": "Chleb żytni razowy",
-      "ilosc": 2.0,
+      "ilosc": 2,
       "jednostka": "szt",
       "stan": "kromki"
     },
     {
       "nazwa": "Ser ricotta",
-      "ilosc": 100.0,
+      "ilosc": 100,
       "jednostka": "g"
     },
     {
       "nazwa": "Rzodkiewka, surowa",
-      "ilosc": 5.0,
+      "ilosc": 5,
       "jednostka": "szt",
       "stan": "pokrojona w cienkie plasterki"
     },
     {
       "nazwa": "Szczypiorek świeży",
-      "ilosc": 10.0,
+      "ilosc": 10,
       "jednostka": "g",
       "stan": "posiekany"
     },
     {
       "nazwa": "Jogurt naturalny 2%",
-      "ilosc": 20.0,
+      "ilosc": 20,
       "jednostka": "g"
     },
     {
@@ -67,18 +69,23 @@
   ],
   "etapy": [
     {
-      "nazwa": "Przygotowanie kanapek",
-      "minuty": 10,
+      "nazwa": "Przygotowanie składników",
+      "minuty": 6,
       "kroki": [
         {
-          "tresc": "Ricottę wymieszaj z jogurtem, szczypiorkiem, solą i pieprzem.",
-          "uwaga": true
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
         },
         {
-          "tresc": "Rzodkiewki pokrój w cienkie plasterki."
-        },
+          "tresc": "Umyj rzodkiewki i szczypiorek. Odetnij końcówki rzodkiewek, pokrój w cienkie plasterki. Posiekaj szczypiorek. Przygotuj pieczywo i odmierz ricottę oraz jogurt."
+        }
+      ]
+    },
+    {
+      "nazwa": "Składanie kanapek",
+      "minuty": 4,
+      "kroki": [
         {
-          "tresc": "Pieczywo posmaruj ricottą i ułóż na nim rzodkiewkę."
+          "tresc": "Wymieszaj ricottę z jogurtem, szczypiorkiem, solą i pieprzem. Posmaruj pieczywo i ułóż rzodkiewkę. Podaj od razu."
         }
       ]
     }

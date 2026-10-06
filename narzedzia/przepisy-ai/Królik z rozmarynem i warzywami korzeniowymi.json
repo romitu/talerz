@@ -1,88 +1,91 @@
 {
   "nazwa": "Królik z rozmarynem i warzywami korzeniowymi",
-  "opis": "Królik pieczony z ziemniakami, marchewką, pasternakiem, selerem i rozmarynem. Przepis na 1 porcję.",
+  "opis": "Królik pieczony z ziemniakami, marchewką, pasternakiem, selerem i rozmarynem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
   "pory": [
     "obiad"
   ],
   "kuchnie": [
     "polska"
   ],
-  "rodzaje": ["z_piekarnika"],
+  "rodzaje": [
+    "z_piekarnika"
+  ],
   "porcjowanie": "waga",
   "porcja_g": 731.5,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 3,
   "czas_przygotowania_min": 18,
-  "czas_obrobki_min": 70,
+  "czas_obrobki_min": 90,
   "sprzet": [
     "Piekarnik",
     "Naczynie żaroodporne",
     "Nóż szefa kuchni",
     "Deska do krojenia",
-    "Waga kuchenna"
+    "Waga kuchenna",
+    "Termometr do mięsa"
   ],
-  "przechowywanie": "Przechowuj w zamkniętym pojemniku w lodówce do 3 dni.",
+  "przechowywanie": "Przechowuj w zamkniętym pojemniku w lodówce do 3 dni. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
   "mozna_mrozic": true,
   "ratunek": "Jeśli mięso jest twarde, przykryj naczynie i piecz dłużej z dodatkiem bulionu. Suche mięso polej płynem z pieczenia.",
   "skladniki": [
     {
       "nazwa": "Królik, mięso surowe",
-      "ilosc": 180.0,
+      "ilosc": 180,
       "jednostka": "g"
     },
     {
       "nazwa": "Ziemniaki, surowe",
-      "ilosc": 180.0,
+      "ilosc": 180,
       "jednostka": "g",
       "stan": "pokrojone"
     },
     {
       "nazwa": "Marchew, surowa",
-      "ilosc": 70.0,
+      "ilosc": 70,
       "jednostka": "g",
       "stan": "pokrojona"
     },
     {
       "nazwa": "Pasternak, surowy",
-      "ilosc": 50.0,
+      "ilosc": 50,
       "jednostka": "g",
       "stan": "pokrojony"
     },
     {
       "nazwa": "Seler korzeń",
-      "ilosc": 40.0,
+      "ilosc": 40,
       "jednostka": "g",
       "stan": "pokrojony"
     },
     {
       "nazwa": "Cebula, surowa",
-      "ilosc": 40.0,
+      "ilosc": 40,
       "jednostka": "g",
       "stan": "pokrojona"
     },
     {
       "nazwa": "Domowy bulion warzywny",
-      "ilosc": 150.0,
+      "ilosc": 150,
       "jednostka": "g"
     },
     {
       "nazwa": "Oliwa z oliwek",
-      "ilosc": 10.0,
+      "ilosc": 10,
       "jednostka": "g"
     },
     {
       "nazwa": "Czosnek, surowy",
-      "ilosc": 5.0,
+      "ilosc": 5,
       "jednostka": "g"
     },
     {
       "nazwa": "Rozmaryn świeży",
-      "ilosc": 5.0,
+      "ilosc": 5,
       "jednostka": "g"
     },
     {
       "nazwa": "Sól kłodawska",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "g"
     },
     {
@@ -93,31 +96,40 @@
   ],
   "etapy": [
     {
-      "nazwa": "Przygotowanie",
+      "nazwa": "Przygotowanie składników",
       "minuty": 18,
       "kroki": [
         {
-          "tresc": "Piekarnik rozgrzej do 190°C. Warzywa pokrój na podobnej wielkości kawałki."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
         },
         {
-          "tresc": "Królika natrzyj oliwą, czosnkiem, rozmarynem, solą i pieprzem."
+          "tresc": "Umyj i obierz ziemniaki, marchew, pasternak i seler, pokrój w kawałki około 2 cm. Obierz cebulę i pokrój w ósemki."
+        },
+        {
+          "tresc": "Obierz i posiekaj czosnek. Umyj rozmaryn. Mięso królika osusz i podziel na kawałki około 4 cm; podana ilość dotyczy mięsa bez kości."
+        },
+        {
+          "tresc": "Natrzyj mięso połową oliwy, czosnkiem, rozmarynem, częścią soli i pieprzu. Warzywa wymieszaj z pozostałą oliwą i przyprawami. Umyj przybory po mięsie; odmierz bulion."
         }
       ]
     },
     {
-      "nazwa": "Pieczenie",
-      "minuty": 70,
+      "nazwa": "Pieczenie pod przykryciem",
+      "minuty": 90,
       "kroki": [
         {
-          "tresc": "Królika i warzywa ułóż w naczyniu, wlej bulion i przykryj."
+          "tresc": "Rozgrzej piekarnik do 180°C, grzanie góra–dół, zwykle około 10 minut. Ułóż mięso z cebulą w naczyniu, wlej bulion i przykryj naczynie pokrywą."
         },
         {
-          "tresc": "Piecz 50 minut, następnie odkryj i piecz jeszcze około 20 minut.",
-          "sygnal": "mięso jest miękkie i łatwo odchodzi od kości",
+          "tresc": "Piecz pod przykryciem 35 minut. Dodaj ziemniaki, marchew, pasternak i seler; polej płynem i ponownie przykryj."
+        },
+        {
+          "tresc": "Piecz kolejne 35–40 minut. Jeśli mięso jest nadal twarde, piecz dalej po 10 minut pod przykryciem, kontrolując ilość płynu.",
+          "sygnal": "królik jest miękki, ma co najmniej 71°C w środku; warzywa miękkie",
           "uwaga": true
         },
         {
-          "tresc": "Przed podaniem polej mięso płynem z pieczenia."
+          "tresc": "Podaj, polewając mięso i warzywa płynem z pieczenia."
         }
       ]
     }

@@ -1,82 +1,87 @@
 {
   "nazwa": "Papryka faszerowana soczewicą i kaszą bulgur",
-  "opis": "Pieczona papryka wypełniona soczewicą, kaszą bulgur i pomidorowym farszem. Przepis na 1 porcję.",
+  "opis": "Pieczona papryka wypełniona soczewicą, kaszą bulgur i pomidorowym farszem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
   "pory": [
     "obiad"
   ],
   "kuchnie": [
     "srodziemnomorska"
   ],
-  "rodzaje": ["z_piekarnika"],
+  "rodzaje": [
+    "z_piekarnika"
+  ],
   "porcjowanie": "waga",
   "porcja_g": 643.5,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 3,
   "czas_przygotowania_min": 15,
-  "czas_obrobki_min": 40,
+  "czas_obrobki_min": 85,
   "sprzet": [
     "Piekarnik",
     "Naczynie żaroodporne",
     "Garnek 2 l",
     "Nóż szefa kuchni",
     "Deska do krojenia",
-    "Waga kuchenna"
+    "Waga kuchenna",
+    "Garnek 3 l",
+    "Patelnia 24 cm",
+    "Sitko"
   ],
-  "przechowywanie": "Po ostudzeniu przechowuj w lodówce do 3 dni. Upieczoną paprykę można zamrozić.",
+  "przechowywanie": "Po ostudzeniu przechowuj w lodówce do 3 dni. Upieczoną paprykę można zamrozić. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
   "mozna_mrozic": true,
   "ratunek": "Jeśli farsz jest suchy, dodaj passatę. Jeśli papryka pozostaje twarda, przykryj naczynie i piecz 10 minut dłużej.",
   "skladniki": [
     {
       "nazwa": "Papryka czerwona, surowa",
-      "ilosc": 2.0,
+      "ilosc": 2,
       "jednostka": "szt",
       "stan": "przekrojona wzdłuż i oczyszczona"
     },
     {
       "nazwa": "Soczewica brązowa, sucha",
-      "ilosc": 60.0,
+      "ilosc": 60,
       "jednostka": "g"
     },
     {
       "nazwa": "Kasza bulgur, sucha",
-      "ilosc": 50.0,
+      "ilosc": 50,
       "jednostka": "g"
     },
     {
       "nazwa": "Passata pomidorowa",
-      "ilosc": 150.0,
+      "ilosc": 150,
       "jednostka": "g"
     },
     {
       "nazwa": "Cebula, surowa",
-      "ilosc": 60.0,
+      "ilosc": 60,
       "jednostka": "g",
       "stan": "posiekana"
     },
     {
       "nazwa": "Czosnek, surowy",
-      "ilosc": 5.0,
+      "ilosc": 5,
       "jednostka": "g"
     },
     {
       "nazwa": "Oliwa z oliwek",
-      "ilosc": 5.0,
+      "ilosc": 5,
       "jednostka": "g"
     },
     {
       "nazwa": "Kmin rzymski mielony",
-      "ilosc": 2.0,
+      "ilosc": 2,
       "jednostka": "g"
     },
     {
       "nazwa": "Pietruszka natka",
-      "ilosc": 10.0,
+      "ilosc": 10,
       "jednostka": "g",
       "stan": "posiekana"
     },
     {
       "nazwa": "Sól kłodawska",
-      "ilosc": 1.0,
+      "ilosc": 1,
       "jednostka": "g"
     },
     {
@@ -87,34 +92,52 @@
   ],
   "etapy": [
     {
-      "nazwa": "Przygotowanie farszu",
+      "nazwa": "Przygotowanie składników",
       "minuty": 15,
       "kroki": [
         {
-          "tresc": "Soczewicę i bulgur ugotuj osobno do miękkości."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
         },
         {
-          "tresc": "Papryki przekrój wzdłuż i usuń gniazda nasienne."
+          "tresc": "Umyj paprykę, przekrój wzdłuż i usuń nasiona. Obierz i posiekaj cebulę oraz czosnek. Umyj i posiekaj natkę."
         },
         {
-          "tresc": "Na oliwie zeszklij cebulę i czosnek. Dodaj passatę, kmin, soczewicę, bulgur oraz przyprawy."
+          "tresc": "Opłucz soczewicę, odmierz bulgur i passatę."
         }
       ]
     },
     {
-      "nazwa": "Pieczenie",
+      "nazwa": "Gotowanie farszu",
       "minuty": 40,
       "kroki": [
         {
-          "tresc": "Napełnij połówki papryki farszem i ułóż je w naczyniu żaroodpornym.",
+          "tresc": "Soczewicę ugotuj w dodatkowej wodzie przez czas z opakowania, zwykle 25–30 minut od zagotowania; odcedź."
+        },
+        {
+          "tresc": "Równolegle ugotuj bulgur w osobnym garnku przez czas z opakowania i odcedź. Woda do gotowania jest dodatkowa."
+        },
+        {
+          "tresc": "Po odcedzeniu bulguru odstaw go pod przykryciem. Na zwolnionym palniku na patelni rozgrzej oliwę przez 1 minutę. Smaż cebulę 4 minuty, dodaj czosnek oraz kmin i smaż 30 sekund. Wlej passatę i gotuj 3 minuty."
+        },
+        {
+          "tresc": "Połącz sos z ugotowaną soczewicą i bulgurem. Dopraw solą i pieprzem. W ostatnich 10 minutach gotowania farszu rozgrzej piekarnik do 190°C, grzanie góra–dół."
+        }
+      ]
+    },
+    {
+      "nazwa": "Nadziewanie i pieczenie",
+      "minuty": 45,
+      "kroki": [
+        {
+          "tresc": "Napełnij połówki papryki farszem, ułóż w naczyniu. Jeśli farszu jest więcej, rozłóż resztę między paprykami."
+        },
+        {
+          "tresc": "Przykryj naczynie i piecz 25 minut, następnie odkryj i piecz 10–15 minut."
+        },
+        {
+          "tresc": "Sprawdź paprykę i podaj z natką.",
+          "sygnal": "papryka daje się łatwo nakłuć, farsz gorący w środku",
           "uwaga": true
-        },
-        {
-          "tresc": "Piecz w 190°C przez około 35–40 minut.",
-          "sygnal": "papryka jest miękka, a farsz gorący w środku"
-        },
-        {
-          "tresc": "Przed podaniem posyp natką pietruszki."
         }
       ]
     }

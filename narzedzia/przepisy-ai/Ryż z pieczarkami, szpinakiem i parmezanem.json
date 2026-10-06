@@ -1,6 +1,6 @@
 {
   "nazwa": "Ryż z pieczarkami, szpinakiem i parmezanem",
-  "opis": "Kremowy ryż z pieczarkami, szpinakiem i parmezanem przygotowany w jednym garnku. Przepis na 1 porcję.",
+  "opis": "Ryż parboiled z pieczarkami, szpinakiem i parmezanem przygotowany w jednym garnku. Ziarna pozostają wyraźnie oddzielne; ser nadaje sosowi kremowość. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
   "pory": [
     "obiad",
     "kolacja"
@@ -8,13 +8,15 @@
   "kuchnie": [
     "inna"
   ],
-  "rodzaje": ["kasza_ryz"],
+  "rodzaje": [
+    "kasza_ryz"
+  ],
   "porcjowanie": "waga",
-  "porcja_g": 739.0,
+  "porcja_g": 739,
   "liczba_porcji_bazowych": 1,
-  "trwalosc_dni": 2,
+  "trwalosc_dni": 1,
   "czas_przygotowania_min": 10,
-  "czas_obrobki_min": 25,
+  "czas_obrobki_min": 38,
   "sprzet": [
     "Garnek 3 l",
     "Tarka o drobnych oczkach",
@@ -22,52 +24,52 @@
     "Deska do krojenia",
     "Waga kuchenna"
   ],
-  "przechowywanie": "Przechowuj w lodówce do 2 dni. Odgrzewaj z niewielką ilością wody.",
+  "przechowywanie": "Porcję z ugotowanym ryżem szybko schłodź w płytkim pojemniku i wstaw do lodówki, najlepiej w ciągu godziny. Przechowuj do 24 godzin. Odgrzewaj tylko raz, do gorącego środka całej porcji. Lodówka: do 4°C.",
   "mozna_mrozic": false,
   "ratunek": "Za suchy ryż podlej gorącym bulionem. Jeśli ryż jest twardy, gotuj dłużej na małym ogniu.",
   "skladniki": [
     {
       "nazwa": "Ryż parboiled, suchy",
-      "ilosc": 80.0,
+      "ilosc": 80,
       "jednostka": "g"
     },
     {
       "nazwa": "Pieczarki, surowe",
-      "ilosc": 180.0,
+      "ilosc": 180,
       "jednostka": "g",
       "stan": "pokrojone w plasterki"
     },
     {
       "nazwa": "Szpinak, surowy",
-      "ilosc": 80.0,
+      "ilosc": 80,
       "jednostka": "g"
     },
     {
       "nazwa": "Parmezan",
-      "ilosc": 25.0,
+      "ilosc": 25,
       "jednostka": "g",
-      "stan": "drobno starty; wybierz wersję z podpuszczką mikrobiologiczną"
+      "stan": "drobno starty"
     },
     {
       "nazwa": "Cebula, surowa",
-      "ilosc": 60.0,
+      "ilosc": 60,
       "jednostka": "g",
       "stan": "posiekana"
     },
     {
       "nazwa": "Czosnek, surowy",
-      "ilosc": 5.0,
+      "ilosc": 5,
       "jednostka": "g"
     },
     {
       "nazwa": "Domowy bulion warzywny",
-      "ilosc": 300.0,
+      "ilosc": 300,
       "jednostka": "g",
       "stan": "gorący"
     },
     {
       "nazwa": "Oliwa z oliwek",
-      "ilosc": 8.0,
+      "ilosc": 8,
       "jednostka": "g"
     },
     {
@@ -83,31 +85,35 @@
   ],
   "etapy": [
     {
-      "nazwa": "Przygotowanie",
+      "nazwa": "Przygotowanie składników",
       "minuty": 10,
       "kroki": [
         {
-          "tresc": "Pieczarki pokrój w plasterki, a cebulę i czosnek posiekaj."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+        },
+        {
+          "tresc": "Oczyść pieczarki i pokrój w plastry. Obierz i posiekaj cebulę oraz czosnek. Umyj i osusz szpinak."
+        },
+        {
+          "tresc": "Zetrzyj parmezan, odmierz ryż oraz bulion."
         }
       ]
     },
     {
-      "nazwa": "Gotowanie",
-      "minuty": 25,
+      "nazwa": "Gotowanie ryżu z warzywami",
+      "minuty": 38,
       "kroki": [
         {
-          "tresc": "Na oliwie smaż cebulę i pieczarki, aż odparuje większość wody."
+          "tresc": "Rozgrzej oliwę przez 1 minutę. Smaż cebulę i pieczarki 7–9 minut, aż płyn odparuje."
         },
         {
-          "tresc": "Dodaj czosnek i ryż, wymieszaj, a następnie stopniowo wlewaj gorący bulion.",
-          "uwaga": true
+          "tresc": "Dodaj czosnek i smaż 30 sekund. Dodaj ryż, wymieszaj przez 1 minutę. Wlej bulion i doprowadź do wrzenia przez około 3 minuty."
         },
         {
-          "tresc": "Gotuj na małym ogniu do miękkości ryżu. Dodaj szpinak i parmezan.",
-          "sygnal": "ryż jest miękki i kremowy"
+          "tresc": "Gotuj na małym ogniu pod uchyloną pokrywką przez czas z opakowania ryżu, orientacyjnie 15–20 minut, mieszając co kilka minut. Jeśli ryż jeszcze twardy, uzupełniaj odparowany płyn gorącą wodą."
         },
         {
-          "tresc": "Dopraw solą oraz pieprzem i podaj."
+          "tresc": "Na ostatnie 1–2 minuty dodaj szpinak. Gdy zwiędnie, zdejmij z ognia i wmieszaj parmezan. Dopraw solą i pieprzem."
         }
       ]
     }

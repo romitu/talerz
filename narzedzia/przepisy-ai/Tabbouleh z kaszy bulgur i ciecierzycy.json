@@ -1,6 +1,6 @@
 {
   "nazwa": "Tabbouleh z kaszy bulgur i ciecierzycy",
-  "opis": "Świeża sałatka z kaszy bulgur, ciecierzycy, pomidora, ogórka, natki i mięty. Przepis na 1 porcję.",
+  "opis": "Świeża sałatka z kaszy bulgur, ciecierzycy, pomidora, ogórka, natki i mięty. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
   "pory": [
     "obiad",
     "kolacja"
@@ -8,74 +8,76 @@
   "kuchnie": [
     "srodziemnomorska"
   ],
-  "rodzaje": ["salatka"],
+  "rodzaje": [
+    "salatka"
+  ],
   "porcjowanie": "waga",
-  "porcja_g": 546.0,
+  "porcja_g": 546,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 2,
   "czas_przygotowania_min": 15,
-  "czas_obrobki_min": 12,
+  "czas_obrobki_min": 23,
   "sprzet": [
     "Garnek 2 l",
     "Sitko",
-    "miska",
+    "Miska",
     "Nóż szefa kuchni",
     "Deska do krojenia",
     "Waga kuchenna"
   ],
-  "przechowywanie": "Przechowuj w zamkniętym pojemniku w lodówce do 2 dni.",
+  "przechowywanie": "Przechowuj w zamkniętym pojemniku w lodówce do 2 dni. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
   "mozna_mrozic": false,
   "ratunek": "Jeśli sałatka puściła wodę, odlej ją i dodaj świeże zioła. Za suchą sałatkę skrop cytryną i oliwą.",
   "skladniki": [
     {
       "nazwa": "Kasza bulgur, sucha",
-      "ilosc": 70.0,
+      "ilosc": 70,
       "jednostka": "g"
     },
     {
       "nazwa": "Ciecierzyca z puszki, odsączona",
-      "ilosc": 150.0,
+      "ilosc": 150,
       "jednostka": "g"
     },
     {
       "nazwa": "Pomidory, surowe",
-      "ilosc": 130.0,
+      "ilosc": 130,
       "jednostka": "g",
       "stan": "pokrojone w kostkę"
     },
     {
       "nazwa": "Ogórek, surowy",
-      "ilosc": 100.0,
+      "ilosc": 100,
       "jednostka": "g",
       "stan": "pokrojony w kostkę"
     },
     {
       "nazwa": "Cebula czerwona, surowa",
-      "ilosc": 30.0,
+      "ilosc": 30,
       "jednostka": "g",
       "stan": "drobno posiekana"
     },
     {
       "nazwa": "Pietruszka natka",
-      "ilosc": 25.0,
+      "ilosc": 25,
       "jednostka": "g",
       "stan": "posiekana"
     },
     {
       "nazwa": "Mięta świeża",
-      "ilosc": 10.0,
+      "ilosc": 10,
       "jednostka": "g",
       "stan": "posiekana"
     },
     {
       "nazwa": "Cytryna",
-      "ilosc": 20.0,
+      "ilosc": 20,
       "jednostka": "g",
       "stan": "sok"
     },
     {
       "nazwa": "Oliwa z oliwek",
-      "ilosc": 10.0,
+      "ilosc": 10,
       "jednostka": "g"
     },
     {
@@ -91,27 +93,35 @@
   ],
   "etapy": [
     {
-      "nazwa": "Gotowanie kaszy",
-      "minuty": 12,
+      "nazwa": "Przygotowanie składników",
+      "minuty": 15,
       "kroki": [
         {
-          "tresc": "Kaszę bulgur ugotuj, odcedź i całkowicie ostudź."
+          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+        },
+        {
+          "tresc": "Opłucz i odsącz ciecierzycę. Umyj pomidora, ogórek, natkę, miętę i cytrynę."
+        },
+        {
+          "tresc": "Pokrój pomidora i ogórek w drobną kostkę. Obierz i posiekaj cebulę. Posiekaj osuszone zioła. Wyciśnij i odmierz sok z cytryny, odmierz kaszę."
         }
       ]
     },
     {
-      "nazwa": "Przygotowanie sałatki",
-      "minuty": 15,
+      "nazwa": "Gotowanie i chłodzenie kaszy",
+      "minuty": 20,
       "kroki": [
         {
-          "tresc": "Warzywa pokrój w drobną kostkę, a zioła posiekaj."
-        },
+          "tresc": "Zagotuj wodę i gotuj bulgur przez czas z opakowania. Odcedź, krótko przepłucz chłodną wodą i dokładnie odsącz. Upewnij się, że kasza nie jest gorąca."
+        }
+      ]
+    },
+    {
+      "nazwa": "Łączenie sałatki",
+      "minuty": 3,
+      "kroki": [
         {
-          "tresc": "Połącz kaszę z ciecierzycą, warzywami i ziołami."
-        },
-        {
-          "tresc": "Dodaj cytrynę, oliwę, sól oraz pieprz i wymieszaj.",
-          "uwaga": true
+          "tresc": "Połącz kaszę, ciecierzycę, warzywa i zioła. Dodaj sok z cytryny, oliwę, sól i pieprz. Wymieszaj."
         }
       ]
     }
