@@ -99,6 +99,7 @@ const SEKCJE: Sekcja[] = [
       { rodzaj: 'podtytul', tresc: 'Profil' },
       { rodzaj: 'tekst', tresc: 'Z jednego konta może korzystać maksymalnie 4 osoby. Konto jest powiązane z adresem e-mail użytym przy rejestracji pierwszej osoby i wspólnym hasłem, natomiast każda osoba ma własny profil i własne cele.' },
       { rodzaj: 'tekst', tresc: 'W zakładce „Profil” dla każdej osoby uzupełniasz dane potrzebne do obliczeń: płeć, datę urodzenia, wzrost, wagę i poziom aktywności. W tym samym miejscu ustawiasz tryb, proporcje makroskładników, cel błonnika i próg białka na posiłek. Kalorie i gramy są przeliczane na bieżąco, więc po zmianie danych profil nie pozostaje przy starej, sztywnej wartości.' },
+      { rodzaj: 'tekst', tresc: 'W sekcji „Nie jemy” wskazujesz składniki, których ktoś w domu nie je, np. jajka. Każde danie z takim składnikiem znika z automatycznego planowania i z wyboru dania do planu, także przepisy dodane później. Wykluczenie dotyczy całego konta, bo garnek jest wspólny. Na liście przepisów takie dania są schowane pod przełącznikiem „Nie jemy”.' },
       { rodzaj: 'tekst', tresc: 'Administrator ma dodatkowo dostęp do zarządzania użytkownikami/profilami w ramach konta oraz do nadawania roli moderatora.' },
       { rodzaj: 'podtytul', tresc: 'Preferencje przepisów' },
       { rodzaj: 'tekst', tresc: 'Przed pierwszym automatycznym planowaniem warto przejrzeć zakładkę „Przepisy” i oznaczyć swoje preferencje. Dzięki temu automat od początku pracuje na bazie dań, które rzeczywiście chcesz jeść.' },

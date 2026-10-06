@@ -47,12 +47,12 @@ function sprawdz(opis, warunek, dodatek = '') {
 const DNI = ['2026-08-17', '2026-08-18', '2026-08-19', '2026-08-20',
              '2026-08-21', '2026-08-22', '2026-08-23'];
 
-function danie(id, pory, kcal, bialko, porcjeBazowe = 0, preferencja = 'neutralne', skalowalny = false, trwaloscDni = 3, ukryty = false) {
+function danie(id, pory, kcal, bialko, porcjeBazowe = 0, preferencja = 'neutralne', skalowalny = false, trwaloscDni = 3, ukryty = false, zawieraWykluczone = []) {
   return {
     id, nazwa: id, pory, liczba_porcji_bazowych: porcjeBazowe, kcal, bialko_g: bialko,
     // Waga porcji ważna tylko przy skalowaniu — 300 g mieści ×1,5 w każdym limicie.
     gramy_porcji: 300,
-    preferencja, skalowalny, trwalosc_dni: trwaloscDni, ukryty,
+    preferencja, skalowalny, trwalosc_dni: trwaloscDni, ukryty, zawieraWykluczone,
   };
 }
 
@@ -235,6 +235,8 @@ const PRZEPISY = [
           nadajeSieNa(danie('y', ['obiad'], 600, 30, 0, 'lubie'), 'obiad'));
   sprawdz('ukryty przepis wyklucza całkowicie, nawet gdy pasuje i nie ma preferencji',
           !nadajeSieNa(danie('schowany', ['obiad'], 600, 30, 0, 'neutralne', false, 3, true), 'obiad'));
+  sprawdz('przepis z wykluczonym składnikiem wypada, nawet gdy jest lubiany',
+          !nadajeSieNa(danie('jajecznica', ['obiad'], 600, 30, 0, 'lubie', false, 3, false, ['Jaja kurze']), 'obiad'));
   sprawdz('0 porcji bazowych daje jeden dzień',
           dniGotowania(DNI, 0, 'obiad', 0, new Set()).length === 1);
   sprawdz('porcje bazowe nie wykraczają poza koniec tygodnia',

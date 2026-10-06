@@ -138,6 +138,7 @@ wysyłając zapytanie bezpośrednio do bazy:
 | Data przydatności partii z trwałości przepisu | wyzwalacz na `partie` |
 | Nie zostało więcej porcji, niż ugotowano | ograniczenie CHECK |
 | Plan i pomiary widoczne tylko dla właściciela | reguły RLS |
+| Wykluczone składniki widoczne tylko dla właściciela | reguły RLS |
 | Przepis prywatny niewidoczny dla obcych | reguły RLS |
 | Przepis publiczny edytuje tylko moderator | reguły RLS |
 | Konto powstaje automatycznie po rejestracji | wyzwalacz na `auth.users` |

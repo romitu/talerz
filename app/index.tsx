@@ -436,9 +436,20 @@ export default function EkranPlanu() {
         return;
       }
 
-      const zrodlo = await pobierzPozycje(poprzedni.id);
-      if (zrodlo.length === 0) {
+      const wszystkieZrodla = await pobierzPozycje(poprzedni.id);
+      if (wszystkieZrodla.length === 0) {
         setKomunikat('Poprzedni tydzień był pusty — nie ma czego powtarzać.');
+        return;
+      }
+
+      // Danie, którego składnika konto od tamtej pory nie je, nie wraca do
+      // planu. Odpada cały garnek, bo filtrujemy po przepisie, nie po dniu.
+      const wykluczonePrzepisy = new Set(
+        przepisy.filter((p) => p.zawieraWykluczone.length > 0).map((p) => p.id)
+      );
+      const zrodlo = wszystkieZrodla.filter((p) => !wykluczonePrzepisy.has(p.przepis_id));
+      if (zrodlo.length === 0) {
+        setKomunikat('Wszystkie dania z poprzedniego tygodnia zawierają składniki, których nie jecie.');
         return;
       }
 
@@ -609,7 +620,9 @@ export default function EkranPlanu() {
     obiadów z drobiem, nie trzeba ich zaznaczać siedem razy.
   */
   const doWyboru = wybierany
-    ? przepisy.filter((p) => !p.ukryty && pasujeDoPory(p.pory, wybierany.pora))
+    ? przepisy.filter(
+        (p) => !p.ukryty && p.zawieraWykluczone.length === 0 && pasujeDoPory(p.pory, wybierany.pora)
+      )
     : [];
   const filtry = useFiltryPrzepisow(doWyboru);
   // Na tablecie i komputerze dania wybiera się ze zdjęć — kafle mieszczą się

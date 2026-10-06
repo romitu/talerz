@@ -7,6 +7,7 @@
 
 import { supabase } from './supabase';
 import type { RolaSkladnika } from './skladniki';
+import { przepisyZWykluczonymi } from './wykluczenia';
 import type { ZrodloZdjecia } from './zakupy';
 
 /**
@@ -113,6 +114,11 @@ export type PrzepisZMakro = {
   preferencja: Preferencja;
   /** Czy TO konto schowało przepis z listy (migracja 0042, tabela `przepisy_ukryte`). */
   ukryty: boolean;
+  /**
+   * Składniki z przepisu, których TO konto nie je (migracja 0049). Pusta
+   * tablica = przepis dozwolony; niepusta = automat i wybór dania go pomijają.
+   */
+  zawieraWykluczone: string[];
 };
 
 export const OPIS_PREFERENCJI: Record<Preferencja, string> = {
@@ -248,7 +254,7 @@ export async function pobierzPrzepisy(kontoId: string | undefined) {
   // Dwa zapytania zamiast jednego, bo `przepis_makro` jest WIDOKIEM.
   // Widok nie ma klucza obcego, więc Supabase nie potrafi go dołączyć
   // do przepisów automatycznie — łączymy je po stronie aplikacji.
-  const [wynikPrzepisow, wynikMakro, wynikBialka] = await Promise.all([
+  const [wynikPrzepisow, wynikMakro, wynikBialka, wykluczeniaWedlugPrzepisu] = await Promise.all([
     supabase
       .from('przepisy')
       .select(
@@ -265,6 +271,8 @@ export async function pobierzPrzepisy(kontoId: string | undefined) {
         'przepis_id, porcje_wyliczone, gramy_porcji, gramy_calosc, kcal, bialko_g, tluszcz_g, wegle_g, blonnik_g, cukry_wolne_g, kcal_calosc, bialko_g_calosc, nova_max'
       ),
     supabase.from('przepis_bialko').select('przepis_id, glowne_bialko'),
+    // Bez zalogowanego konta nie ma czyich wykluczeń sprawdzać.
+    kontoId ? przepisyZWykluczonymi() : Promise.resolve(new Map<string, string[]>()),
   ]);
 
   if (wynikPrzepisow.error) throw wynikPrzepisow.error;
@@ -338,6 +346,7 @@ export async function pobierzPrzepisy(kontoId: string | undefined) {
       nova_max: makro?.nova_max ?? null,
       preferencja: wlasna?.poziom ?? 'neutralne',
       ukryty,
+      zawieraWykluczone: wykluczeniaWedlugPrzepisu.get(p.id) ?? [],
     };
   });
 }

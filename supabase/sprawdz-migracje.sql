@@ -330,6 +330,11 @@ with sprawdzenia as (
        where table_name = 'przepisy' and column_name = 'skalowalny'
          and column_default = 'true'
     )
+  union all
+  select
+    '0049_wykluczone_skladniki',
+    'skladniki, ktorych konto nie je (tabela wykluczone_skladniki)',
+    to_regclass('public.wykluczone_skladniki') is not null
 )
 select
   migracja,

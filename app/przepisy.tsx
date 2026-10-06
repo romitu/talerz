@@ -89,6 +89,7 @@ export default function EkranPrzepisow() {
 
   /** Domyślnie schowane przepisy nie zaśmiecają listy — ten przełącznik je wraca. */
   const [pokazUkryte, setPokazUkryte] = useState(false);
+  const [pokazWykluczone, setPokazWykluczone] = useState(false);
   /** Przepis, który moderator właśnie odrzuca, i pisane uzasadnienie. */
   const [odrzucany, setOdrzucany] = useState<string | null>(null);
   const [powod, setPowod] = useState('');
@@ -284,7 +285,13 @@ export default function EkranPrzepisow() {
    * akurat schował je sobie z widoku.
    */
   const liczbaUkrytych = poFrazie.filter((p) => p.ukryty).length;
-  const poUkrytych = pokazUkryte ? poFrazie : poFrazie.filter((p) => !p.ukryty);
+  // Dania ze składnikiem, którego konto nie je (migracja 0049) — schowane
+  // tak samo jak ukryte, pod własnym przełącznikiem, żeby było widać, ile ich jest.
+  const liczbaWykluczonych = poFrazie.filter((p) => p.zawieraWykluczone.length > 0).length;
+  const poUkrytych = poFrazie.filter(
+    (p) =>
+      (pokazUkryte || !p.ukryty) && (pokazWykluczone || p.zawieraWykluczone.length === 0)
+  );
 
   /*
     Filtry, tak jak fraza, działają PRZED zakładkami — liczby przy zakładkach
@@ -349,6 +356,17 @@ export default function EkranPrzepisow() {
                 ile: liczbaUkrytych,
                 wybrana: pokazUkryte,
                 onPress: () => setPokazUkryte((x) => !x),
+              },
+            ]
+          : []),
+        ...(liczbaWykluczonych > 0
+          ? [
+              {
+                klucz: 'wykluczone',
+                etykieta: 'Nie jemy',
+                ile: liczbaWykluczonych,
+                wybrana: pokazWykluczone,
+                onPress: () => setPokazWykluczone((x) => !x),
               },
             ]
           : []),
@@ -546,6 +564,15 @@ export default function EkranPrzepisow() {
             <ThemedText type="small" themeColor="textSecondary">
               {p.opis}
             </ThemedText>
+          )}
+
+          {p.zawieraWykluczone.length > 0 && (
+            <View style={styles.wykluczone}>
+              <Ionicons name="ban-outline" size={16} color={motyw.accent} />
+              <ThemedText type="small" themeColor="accent" style={styles.wykluczoneTekst}>
+                Nie jecie: {p.zawieraWykluczone.join(', ')} — automat tego nie zaproponuje.
+              </ThemedText>
+            </View>
           )}
 
           <View style={styles.tagi}>
@@ -1011,6 +1038,12 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     gap: Spacing.one,
   },
+  wykluczone: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.one,
+  },
+  wykluczoneTekst: { flex: 1 },
   tag: {
     flexDirection: 'row',
     alignItems: 'center',

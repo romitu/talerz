@@ -7,6 +7,7 @@ import { Ekran } from '@/components/ekran';
 import { KafleWyniku } from '@/components/kafle-wyniku';
 import { Karta } from '@/components/karta';
 import { NaglowekProfilu } from '@/components/naglowek-profilu';
+import { NieJemy } from '@/components/nie-jemy';
 import { Przycisk } from '@/components/przycisk';
 import { ThemedText } from '@/components/themed-text';
 import { WyborStylu } from '@/components/wybor-stylu';
@@ -252,6 +253,8 @@ export default function EkranProfilu() {
           onPress={() => router.push({ pathname: '/profil-formularz', params: { powrot: '/profil' } })}
         />
       )}
+
+      <NieJemy kontoId={sesja?.user.id} />
 
       <Karta>
         <WyborStylu />

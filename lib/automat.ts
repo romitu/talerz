@@ -84,6 +84,8 @@ export type Kandydat = {
   trwalosc_dni: number;
   /** Schowany przez to konto (migracja 0042) — automat ma go traktować jak „nie proponuj”. */
   ukryty: boolean;
+  /** Składniki, których konto nie je (migracja 0049) — niepusta lista wyklucza danie jak „nie proponuj”. */
+  zawieraWykluczone: string[];
 };
 
 export type Miejsce = { data: string; pora: PoraPosilku };
@@ -179,6 +181,7 @@ const MIN_BIALKA_ODNIESIENIA = 12;
 export function nadajeSieNa(k: Kandydat, pora: PoraPosilku): boolean {
   if (k.preferencja === 'nie_proponuj') return false;
   if (k.ukryty) return false;
+  if (k.zawieraWykluczone.length > 0) return false;
   if (k.kcal === null) return false;
   if (k.pory.length === 0) return false;
   return k.pory.includes(pora);
