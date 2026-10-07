@@ -99,8 +99,20 @@ const SEKCJE: Sekcja[] = [
       { rodzaj: 'podtytul', tresc: 'Profil' },
       { rodzaj: 'tekst', tresc: 'Z jednego konta może korzystać maksymalnie 4 osoby. Konto jest powiązane z adresem e-mail użytym przy rejestracji pierwszej osoby i wspólnym hasłem, natomiast każda osoba ma własny profil i własne cele.' },
       { rodzaj: 'tekst', tresc: 'W zakładce „Profil” dla każdej osoby uzupełniasz dane potrzebne do obliczeń: płeć, datę urodzenia, wzrost, wagę i poziom aktywności. W tym samym miejscu ustawiasz tryb, proporcje makroskładników, cel błonnika i próg białka na posiłek. Kalorie i gramy są przeliczane na bieżąco, więc po zmianie danych profil nie pozostaje przy starej, sztywnej wartości.' },
-      { rodzaj: 'tekst', tresc: 'W sekcji „Nie jemy” wskazujesz składniki, których ktoś w domu nie je, np. jajka. Każde danie z takim składnikiem znika z automatycznego planowania i z wyboru dania do planu, także przepisy dodane później. Wykluczenie dotyczy całego konta, bo garnek jest wspólny. Na liście przepisów takie dania są schowane pod przełącznikiem „Nie jemy”.' },
       { rodzaj: 'tekst', tresc: 'Administrator ma dodatkowo dostęp do zarządzania użytkownikami/profilami w ramach konta oraz do nadawania roli moderatora.' },
+      { rodzaj: 'podtytul', tresc: 'Wykluczanie składników („Nie jemy”)' },
+      { rodzaj: 'tekst', tresc: 'Jeżeli ktoś w domu czegoś nie je – np. jajek, ryb albo grzybów – wskaż ten składnik raz, zamiast oznaczać po kolei każdy przepis, w którym występuje.' },
+      {
+        rodzaj: 'kroki',
+        pozycje: [
+          'Wejdź w zakładkę „Profil” i znajdź sekcję „Nie jemy”.',
+          'Kliknij „Dodaj składnik” i wpisz w wyszukiwarkę nazwę, np. „jaja”.',
+          'Zaznacz na liście składnik, którego nie jecie. Możesz zaznaczyć kilka.',
+          'Kliknij „Gotowe”. Wykluczone składniki pojawią się jako pigułki nad przyciskiem.',
+        ],
+      },
+      { rodzaj: 'tekst', tresc: 'Od tej chwili danie z takim składnikiem nie trafi do planu: nie zaproponuje go automat, nie pojawi się w ręcznym wyborze dania i nie zostanie przeniesione przy „Powtórz poprzedni tydzień”. Dotyczy to także przepisów dodanych później. Wykluczenie obejmuje całe konto, bo garnek jest wspólny dla wszystkich profili.' },
+      { rodzaj: 'tekst', tresc: 'Na liście przepisów takie dania są domyślnie schowane. Przełącznik „Nie jemy” pokazuje je z powrotem, z dopiskiem, który składnik je wyklucza. Żeby cofnąć wykluczenie, kliknij pigułkę ze składnikiem w sekcji „Nie jemy” w Profilu.' },
       { rodzaj: 'podtytul', tresc: 'Preferencje przepisów' },
       { rodzaj: 'tekst', tresc: 'Przed pierwszym automatycznym planowaniem warto przejrzeć zakładkę „Przepisy” i oznaczyć swoje preferencje. Dzięki temu automat od początku pracuje na bazie dań, które rzeczywiście chcesz jeść.' },
       {
@@ -249,6 +261,13 @@ const PYTANIA: Pytanie[] = [
         ],
       },
       { rodzaj: 'tekst', tresc: 'Ponowne wybranie aktywnego oznaczenia przywraca stan neutralny. Gdy istnieją ukryte przepisy, pojawia się zakładka „Ukryte”, która pozwala je ponownie wyświetlić. Preferencje są indywidualne dla użytkownika – nie wynikają z ocen innych osób.' },
+    ],
+  },
+  {
+    pytanie: 'Czym „Nie jemy” różni się od „Ukryj” i „Nie proponuj”?',
+    bloki: [
+      { rodzaj: 'tekst', tresc: '„Ukryj” i „Nie proponuj” dotyczą jednego, konkretnego przepisu. „Nie jemy” dotyczy składnika – wyklucza naraz wszystkie dania, w których on występuje, także te, które zostaną dodane do bazy w przyszłości.' },
+      { rodzaj: 'tekst', tresc: 'Danie oznaczone „Nie proponuj” nadal możesz wybrać ręcznie. Danie ze składnikiem z listy „Nie jemy” nie trafi do planu w żaden sposób, dopóki nie usuniesz tego składnika z listy w Profilu.' },
     ],
   },
   {
