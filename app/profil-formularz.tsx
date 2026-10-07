@@ -1,6 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
-import { useLocalSearchParams } from 'expo-router';
-import { useCallback, useEffect, useState } from 'react';
+import { useFocusEffect, useLocalSearchParams } from 'expo-router';
+import { useCallback, useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 
 import { komunikatBledu } from '@/lib/blad';
@@ -220,26 +220,53 @@ function KartyCelu({
 }
 
 
+/** Dane, od których startuje formularz nowego profilu. */
+const DOMYSLNY_PROFIL = {
+  imie: 'Jarosław',
+  plec: 'M' as Plec,
+  wiek: '77',
+  wzrost: '167',
+  aktywnosc: 'nieaktywny' as PalNasem,
+  tryb: 'utrzymanie' as TrybCelu,
+};
+
 export default function FormularzProfilu() {
   const { profil: profilId, powrot } = useLocalSearchParams<{ profil?: string; powrot?: string }>();
   const { sesja } = useSesja();
   const trybEdycji = Boolean(profilId);
 
-  // Domyślne dane nowego profilu; w trybie edycji nadpisuje je `pobierz`.
-  const [imie, setImie] = useState('Jarosław');
-  const [plec, setPlec] = useState<Plec | null>('M');
-  const [wiek, setWiek] = useState('77');
-  const [wzrost, setWzrost] = useState('167');
+  const [imie, setImie] = useState(DOMYSLNY_PROFIL.imie);
+  const [plec, setPlec] = useState<Plec | null>(DOMYSLNY_PROFIL.plec);
+  const [wiek, setWiek] = useState(DOMYSLNY_PROFIL.wiek);
+  const [wzrost, setWzrost] = useState(DOMYSLNY_PROFIL.wzrost);
   const [waga, setWaga] = useState('');
-  const [aktywnosc, setAktywnosc] = useState<PalNasem>('nieaktywny');
-  const [celeTryb, setCeleTryb] = useState<TrybCelu>('utrzymanie');
+  const [aktywnosc, setAktywnosc] = useState<PalNasem>(DOMYSLNY_PROFIL.aktywnosc);
+  const [celeTryb, setCeleTryb] = useState<TrybCelu>(DOMYSLNY_PROFIL.tryb);
 
   const [wczytywanie, setWczytywanie] = useState(trybEdycji);
   const [nieZnaleziono, setNieZnaleziono] = useState(false);
   const [zajety, setZajety] = useState(false);
   const [blad, setBlad] = useState<string | null>(null);
 
+  /**
+   * Ekran nie znika z pamięci po wyjściu, więc bez tego „Dodaj profil”
+   * otwierałby się z danymi ostatnio edytowanej osoby.
+   */
+  const wyczyscFormularz = useCallback(() => {
+    setImie(DOMYSLNY_PROFIL.imie);
+    setPlec(DOMYSLNY_PROFIL.plec);
+    setWiek(DOMYSLNY_PROFIL.wiek);
+    setWzrost(DOMYSLNY_PROFIL.wzrost);
+    setWaga('');
+    setAktywnosc(DOMYSLNY_PROFIL.aktywnosc);
+    setCeleTryb(DOMYSLNY_PROFIL.tryb);
+    setNieZnaleziono(false);
+    setBlad(null);
+    setWczytywanie(false);
+  }, []);
+
   const pobierz = useCallback(async () => {
+    wyczyscFormularz();
     if (!profilId) return;
     setWczytywanie(true);
 
@@ -275,11 +302,14 @@ export default function FormularzProfilu() {
     if (wynikCelu.data) setCeleTryb((wynikCelu.data as ZapisanyCel).tryb);
 
     setWczytywanie(false);
-  }, [profilId]);
+  }, [profilId, wyczyscFormularz]);
 
-  useEffect(() => {
-    pobierz();
-  }, [pobierz]);
+  // Przy każdym wejściu na ekran, nie tylko przy pierwszym.
+  useFocusEffect(
+    useCallback(() => {
+      pobierz();
+    }, [pobierz])
+  );
 
   const wiekL = liczba(wiek);
   const wzrostL = liczba(wzrost);
