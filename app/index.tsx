@@ -1,6 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
-import { router, useFocusEffect } from 'expo-router';
-import { useCallback, useMemo, useRef, useState } from 'react';
+import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ActivityIndicator, Pressable, ScrollView, StyleSheet, useWindowDimensions, View } from 'react-native';
 
 import { Ekran } from '@/components/ekran';
@@ -196,6 +196,29 @@ export default function EkranPlanu() {
   const przewijanie = useRef<ScrollView>(null);
   const pozycja = useRef(0);
   const doPrzywrocenia = useRef(false);
+
+  /** Dzień, na który przewinąć po wejściu — ustawia go start po zalogowaniu (app/_layout.tsx). */
+  const { dzien: dzienDoPokazania } = useLocalSearchParams<{ dzien?: string }>();
+  const yDniaDoPokazania = useRef<number | null>(null);
+
+  /*
+    Przewijamy dopiero po wczytaniu — napis „Wczytywanie…” nad kartami znika
+    później niż same karty się pojawiają i przesunąłby je pod nami.
+    Parametr czyścimy od razu: powrót na zakładkę ma zostawić ekran tam,
+    gdzie go zostawiłeś.
+  */
+  const przewinNaDzien = useCallback(() => {
+    if (yDniaDoPokazania.current === null) return;
+    przewijanie.current?.scrollTo({ y: yDniaDoPokazania.current, animated: true });
+    yDniaDoPokazania.current = null;
+    router.setParams({ dzien: undefined });
+  }, []);
+
+  useEffect(() => {
+    if (wczytywanie || !dzienDoPokazania) return;
+    const klatka = requestAnimationFrame(przewinNaDzien);
+    return () => cancelAnimationFrame(klatka);
+  }, [wczytywanie, dzienDoPokazania, przewinNaDzien]);
 
   const pobierz = useCallback(async () => {
     setWczytywanie(true);
@@ -1010,6 +1033,15 @@ export default function EkranPlanu() {
           return (
             <Karta
               key={data}
+              // Karta leży wprost w treści przewijania, więc jej `y` to gotowe przesunięcie.
+              onLayout={
+                data === dzienDoPokazania
+                  ? (e) => {
+                      yDniaDoPokazania.current = e.nativeEvent.layout.y;
+                      if (!wczytywanie) przewinNaDzien();
+                    }
+                  : undefined
+              }
               style={
                 dzisiaj
                   ? { marginTop: Spacing.three, borderWidth: 2, borderColor: motyw.accent }

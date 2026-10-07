@@ -14,6 +14,7 @@ import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { PALETY, type Paleta } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
+import { dniPlanu, naDate, pobierzPlany } from '@/lib/plan';
 import { DostawcaSesji, useSesja } from '@/lib/sesja';
 import { supabase } from '@/lib/supabase';
 import { czyMojeKontoCzynne } from '@/lib/uzytkownicy';
@@ -181,6 +182,30 @@ function Zakladki({ kolory }: { kolory: Paleta }) {
       .single()
       .then(({ data }) => setRola(data?.rola ?? null));
   }, [sesja?.user.id]);
+
+  /*
+    Start na dzisiejszym dniu planu.
+
+    Zakładki montują się raz na zalogowanie (po powitaniu), więc to sprawdzenie
+    odpala się tylko wtedy — dalsze chodzenie po aplikacji go nie powtarza.
+    Patrzymy na najnowszy plan, bo tylko ten pokazuje ekran Planu; parametr
+    `dzien` mówi mu, dokąd przewinąć.
+  */
+  useEffect(() => {
+    let aktualne = true;
+    pobierzPlany(1)
+      .then(([plan]) => {
+        const dzis = naDate(new Date());
+        if (aktualne && plan && dniPlanu(plan).includes(dzis)) {
+          router.navigate({ pathname: '/', params: { dzien: dzis } });
+        }
+      })
+      // Bez planu albo bez sieci zostajemy tam, gdzie jesteśmy.
+      .catch(() => {});
+    return () => {
+      aktualne = false;
+    };
+  }, []);
 
   const jestModeratorem = rola === 'moderator' || rola === 'administrator';
   const pozycjeMenu = POZYCJE_WIECEJ.filter((p) => !p.wymagaModeratora || jestModeratorem);

@@ -1,14 +1,22 @@
 import type { ReactNode } from 'react';
-import { StyleSheet, type ViewStyle } from 'react-native';
+import { StyleSheet, type ViewProps, type ViewStyle } from 'react-native';
 
 import { ThemedView } from './themed-view';
 
 import { Spacing } from '@/constants/theme';
 
 /** Biały (lub ciemny) prostokąt z zaokrąglonymi rogami — podstawowy klocek interfejsu. */
-export function Karta({ children, style }: { children: ReactNode; style?: ViewStyle }) {
+export function Karta({
+  children,
+  style,
+  onLayout,
+}: {
+  children: ReactNode;
+  style?: ViewStyle;
+  onLayout?: ViewProps['onLayout'];
+}) {
   return (
-    <ThemedView type="backgroundElement" style={[styles.karta, style]}>
+    <ThemedView type="backgroundElement" style={[styles.karta, style]} onLayout={onLayout}>
       {children}
     </ThemedView>
   );
