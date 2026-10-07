@@ -74,7 +74,7 @@ function liczba(tekst: string): number | null {
 }
 
 /** Płeć jako dwa przyciski obok siebie, nie lista — jak w makiecie. */
-function SegmentPlci({ wartosc, onZmiana }: { wartosc: Plec; onZmiana: (p: Plec) => void }) {
+function SegmentPlci({ wartosc, onZmiana }: { wartosc: Plec | null; onZmiana: (p: Plec) => void }) {
   const motyw = useTheme();
   const opcje: { wartosc: Plec; etykieta: string; ikona: 'female' | 'male' }[] = [
     { wartosc: 'K', etykieta: 'Kobieta', ikona: 'female' },
@@ -225,12 +225,13 @@ export default function FormularzProfilu() {
   const { sesja } = useSesja();
   const trybEdycji = Boolean(profilId);
 
-  const [imie, setImie] = useState('');
-  const [plec, setPlec] = useState<Plec>('M');
-  const [wiek, setWiek] = useState('');
-  const [wzrost, setWzrost] = useState('');
+  // Domyślne dane nowego profilu; w trybie edycji nadpisuje je `pobierz`.
+  const [imie, setImie] = useState('Jarosław');
+  const [plec, setPlec] = useState<Plec | null>('M');
+  const [wiek, setWiek] = useState('77');
+  const [wzrost, setWzrost] = useState('167');
   const [waga, setWaga] = useState('');
-  const [aktywnosc, setAktywnosc] = useState<PalNasem>('aktywny');
+  const [aktywnosc, setAktywnosc] = useState<PalNasem>('nieaktywny');
   const [celeTryb, setCeleTryb] = useState<TrybCelu>('utrzymanie');
 
   const [wczytywanie, setWczytywanie] = useState(trybEdycji);
@@ -284,13 +285,13 @@ export default function FormularzProfilu() {
   const wzrostL = liczba(wzrost);
   const wagaL = liczba(waga);
 
-  const komplet = Boolean(imie.trim() && wiekL !== null && wzrostL && wagaL);
+  const komplet = Boolean(imie.trim() && plec && wiekL !== null && wzrostL && wagaL);
 
   // Kcal i gramy liczą się na bieżąco z pól formularza — podgląd jest zawsze
   // aktualny, nawet zanim cokolwiek zapiszesz, i nigdy nie jest zamrożoną
   // liczbą z chwili zapisu.
   const podglad =
-    komplet && wiekL !== null && wzrostL && wagaL
+    komplet && plec && wiekL !== null && wzrostL && wagaL
       ? {
           przemiana: przemianaPodstawowa(plec, wagaL, wzrostL, wiekL),
           zapotrzebowanie: calkowityWydatekNASEM(plec, wiekL, wzrostL, wagaL, aktywnosc),
@@ -298,7 +299,7 @@ export default function FormularzProfilu() {
       : null;
 
   const cel =
-    podglad && wiekL !== null && wzrostL && wagaL
+    podglad && plec && wiekL !== null && wzrostL && wagaL
       ? celZywieniowyNASEM(plec, wiekL, wzrostL, wagaL, aktywnosc, celeTryb)
       : null;
   const ocena = podglad && cel ? oceniaCele(cel, podglad.przemiana, podglad.zapotrzebowanie) : null;
@@ -320,6 +321,10 @@ export default function FormularzProfilu() {
     }
     if (!imie.trim()) {
       setBlad('Podaj imię — odróżnia profile na tym samym koncie.');
+      return;
+    }
+    if (!plec) {
+      setBlad('Wybierz płeć — od niej zależy wyliczenie zapotrzebowania.');
       return;
     }
     if (wiekL === null || wiekL < 18 || wiekL > 120) {
@@ -456,19 +461,19 @@ export default function FormularzProfilu() {
           DANE PODSTAWOWE
         </ThemedText>
 
-        <Pole etykieta="Imię" value={imie} onChangeText={setImie} placeholder="Roman" />
+        <Pole etykieta="Imię" value={imie} onChangeText={setImie} placeholder="np. Anna" />
 
         <SegmentPlci wartosc={plec} onZmiana={setPlec} />
 
         <View style={styles.wierszPol}>
           <View style={styles.pole3}>
-            <Pole etykieta="Wiek (lat)" value={wiek} onChangeText={setWiek} placeholder="59" inputMode="numeric" />
+            <Pole etykieta="Wiek (lat)" value={wiek} onChangeText={setWiek} placeholder="np. 35" inputMode="numeric" />
           </View>
           <View style={styles.pole3}>
-            <Pole etykieta="Wzrost (cm)" value={wzrost} onChangeText={setWzrost} placeholder="189" inputMode="numeric" />
+            <Pole etykieta="Wzrost (cm)" value={wzrost} onChangeText={setWzrost} placeholder="np. 170" inputMode="numeric" />
           </View>
           <View style={styles.pole3}>
-            <Pole etykieta="Waga (kg)" value={waga} onChangeText={setWaga} placeholder="90" inputMode="decimal" />
+            <Pole etykieta="Waga (kg)" value={waga} onChangeText={setWaga} placeholder="np. 70" inputMode="decimal" />
           </View>
         </View>
       </Karta>

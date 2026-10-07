@@ -7,6 +7,7 @@ import { Ekran } from '@/components/ekran';
 import { FiltryPrzepisow } from '@/components/filtry-przepisow';
 import { Karta } from '@/components/karta';
 import { NaglowekPlanu } from '@/components/naglowek-planu';
+import { PierwszeKroki, type KrokStartu } from '@/components/pierwsze-kroki';
 import { PrzelacznikWidoku } from '@/components/przelacznik-widoku';
 import { Przycisk } from '@/components/przycisk';
 import { TabelaWyboru } from '@/components/tabela-wyboru';
@@ -169,6 +170,9 @@ export default function EkranPlanu() {
   const [przepisy, setPrzepisy] = useState<PrzepisZMakro[]>([]);
   const [cel, setCel] = useState<Cel | null>(null);
   const [osoby, setOsoby] = useState(1);
+  /** Do „Pierwszych kroków” — `osoby` nie odróżnia zera profili od jednego. */
+  const [maProfil, setMaProfil] = useState(false);
+  const [liczbaPlanow, setLiczbaPlanow] = useState(0);
   const [wybierany, setWybierany] = useState<Wolne>(null);
   const [wczytywanie, setWczytywanie] = useState(true);
   const [blad, setBlad] = useState<string | null>(null);
@@ -204,6 +208,7 @@ export default function EkranPlanu() {
       const p = wszystkie[0] ?? null;
 
       setPlan(p);
+      setLiczbaPlanow(wszystkie.length);
       setPrzepisy(lista);
       setPozycje(p ? await pobierzPozycje(p.id) : []);
     } catch (e) {
@@ -234,6 +239,7 @@ export default function EkranPlanu() {
 
       const listaProfili = (wynikProfili.data ?? []) as ProfilZCelem[];
       setOsoby(Math.max(1, listaProfili.length));
+      setMaProfil(listaProfili.length > 0);
 
       // Bilans dnia liczy cel PIERWSZEGO profilu na koncie — apka nie ma
       // jeszcze pojęcia "dla kogo jest ten tydzień" przy kilku profilach.
@@ -649,25 +655,59 @@ export default function EkranPlanu() {
     );
   }
 
+  /*
+    Pierwsze kroki — liczone z danych, nie z flagi „przeszedł kreator”.
+
+    Lista widnieje, dopóki konto nie ma celu albo planu, a także przy PIERWSZYM
+    planie, dopóki jest pusty. Przy kolejnym, nowym tygodniu już nie wraca —
+    pusty plan to wtedy zwykły początek tygodnia, a nie zagubiony nowicjusz.
+  */
+  const pokazKroki = !wczytywanie && (!cel || !plan || (pozycje.length === 0 && liczbaPlanow <= 1));
+  const krokiStartu: KrokStartu[] = [
+    {
+      tytul: 'Uzupełnij profil',
+      opis:
+        'Płeć, wiek, wzrost, waga i aktywność. Z nich liczymy dzienne kalorie i białko — bez tego plan nie ma się do czego odnieść.',
+      zrobiony: cel !== null,
+      akcja: {
+        tytul: maProfil ? 'Przejdź do profilu' : 'Uzupełnij profil',
+        onPress: () =>
+          maProfil
+            ? router.push('/profil')
+            : router.push({ pathname: '/profil-formularz', params: { powrot: '/' } }),
+      },
+    },
+    {
+      tytul: 'Utwórz plan tygodnia',
+      opis:
+        'Plan obejmuje siedem dni po trzy posiłki. Do każdego miejsca trafi przepis, a aplikacja zsumuje wartości i porówna je z Twoim celem.',
+      zrobiony: plan !== null,
+      akcja: {
+        tytul: 'Utwórz plan od dzisiaj',
+        onPress: () =>
+          zDbem(async () => {
+            if (sesja) await utworzPlan(sesja.user.id, naDate(new Date()));
+          }),
+      },
+    },
+    {
+      tytul: 'Wypełnij tydzień',
+      opis:
+        'Automat dobierze dania tak, żeby domknąć kalorie i białko. Każde możesz potem zmienić, a puste miejsce uzupełnić ręcznie. Jeśli czegoś nie jecie, najpierw wskaż to w Profilu, w sekcji „Nie jemy”.',
+      zrobiony: pozycje.length > 0,
+      akcja:
+        przepisy.length > 0
+          ? { tytul: 'Wypełnij automatycznie', onPress: wypelnijAutomatem, zajety: pracuje }
+          : undefined,
+    },
+  ];
+  const stopkaKrokow = 'Lista zakupów ułoży się sama z planu — znajdziesz ją w zakładce Zakupy.';
+
   // --- brak planu ---
   if (!wczytywanie && !plan) {
     return (
       <Ekran tytul="Plan dnia" podtytul="Nie masz jeszcze planu">
-        <Karta>
-          <ThemedText type="default">Zacznijmy od tygodnia</ThemedText>
-          <ThemedText type="small" themeColor="textSecondary">
-            Plan obejmuje siedem dni po trzy posiłki. Do każdego miejsca przypiszesz przepis,
-            a aplikacja zsumuje wartości i porówna je z Twoimi celami.
-          </ThemedText>
-          <Przycisk
-            tytul="Utwórz plan od dzisiaj"
-            onPress={() =>
-              zDbem(async () => {
-                if (sesja) await utworzPlan(sesja.user.id, naDate(new Date()));
-              })
-            }
-          />
-        </Karta>
+        <PierwszeKroki kroki={krokiStartu} stopka={stopkaKrokow} />
       </Ekran>
     );
   }
@@ -844,14 +884,8 @@ export default function EkranPlanu() {
         </ThemedText>
       )}
 
-      {!cel && !wczytywanie && (
-        <Karta>
-          <ThemedText type="small" themeColor="accent">
-            Nie masz ustalonych celów dziennych — nie będzie do czego porównywać sum.
-            Ustawisz je w zakładce Profil.
-          </ThemedText>
-        </Karta>
-      )}
+      {/* Brak celu też tu trafia — pierwszy krok mówi wprost, co zrobić i prowadzi do profilu. */}
+      {pokazKroki && <PierwszeKroki kroki={krokiStartu} stopka={stopkaKrokow} />}
 
       {plan && (
         <Karta style={styles.narzedzia}>
