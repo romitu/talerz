@@ -35,6 +35,7 @@ const SEKCJE = [
   { id: 'system', skrot: 'Nie dieta' },
   { id: 'podstawy', skrot: 'Pod spodem' },
   { id: 'wazne', skrot: 'Znaczenie' },
+  { id: 'dla-kogo', skrot: 'Dla kogo' },
   { id: 'efekt', skrot: 'Po co' },
 ];
 
@@ -223,6 +224,38 @@ export default function EkranDlaczegoTalerz() {
       <Karta>
         <OsKrokow kroki={DLACZEGO_WAZNE} />
       </Karta>
+
+      <NaglowekSekcji
+        nadtytul="Dla kogo"
+        tytul="Dla kogo jest Talerz?"
+        onUklad={zapiszUklad('dla-kogo')}
+      />
+      <ThemedText type="small" themeColor="textSecondary">
+        Talerz jest dla osób, które chcą planować swoje jedzenie i na co dzień korzystać
+        z przygotowanego jadłospisu. Ustala cele żywieniowe na cały tydzień i dobiera do nich
+        posiłki, porcje oraz listę zakupów. Żeby ten plan był użyteczny, powinien możliwie dobrze
+        odpowiadać temu, co rzeczywiście jesz.
+      </ThemedText>
+      <ThemedText type="small" themeColor="textSecondary">
+        Jeżeli regularnie jesz posiłki poza planem — w pracy, szkole czy restauracji — albo
+        pomijasz część zaplanowanego jedzenia i później dojesz coś innego, wyliczenia coraz mniej
+        odzwierciedlają Twój sposób odżywiania. Trudniej wtedy ocenić realizację celów, zaplanować
+        zakupy i wykorzystać kupione produkty.
+      </ThemedText>
+      <ThemedText type="small" themeColor="textSecondary">
+        Wyjście na pizzę zamiast zaplanowanej kolacji od czasu do czasu nie przekreśla korzystania
+        z Talerza. Jeśli jednak takie zmiany są codziennością, korzyści z dokładnego planowania
+        będą mniejsze.
+      </ThemedText>
+      <ThemedText type="small" themeColor="textSecondary">
+        Nie chodzi o jedzenie na siłę. Jeśli porcje regularnie są dla Ciebie za duże albo po
+        posiłkach nadal odczuwasz głód, plan wymaga dopasowania.
+      </ThemedText>
+      <ThemedText type="small" themeColor="textSecondary">
+        Sposób odżywiania jest jednym z czynników wpływających na zdrowie, sprawność
+        i samopoczucie. Talerz pomaga uporządkować tę część codzienności. Najwięcej daje wtedy, gdy
+        jego plan staje się podstawą Twojego jedzenia.
+      </ThemedText>
 
       <NaglowekSekcji
         nadtytul="Po co to wszystko"
