@@ -83,17 +83,17 @@ sprawdz('plan Romana: brak blokad', romanOcena.blokady.length, 0);
 // Cel poniżej przemiany podstawowej — blokada.
 const zaMalo = oceniaCele({ kcal: 0, bialko: 80, tluszcz: 40, wegle: 100 }, 1791, 2776);
 sprawdz('cel poniżej przemiany podstawowej: zablokowany',
-  zaMalo.blokady.some((b) => b.includes('przemiany podstawowej')), true);
+  zaMalo.blokady.some((b) => b.kod === 'ponizejPrzemiany'), true);
 
 // Zbyt duży deficyt — blokada.
 const duzyDeficyt = oceniaCele({ kcal: 0, bialko: 90, tluszcz: 45, wegle: 130 }, 1200, 2900);
 sprawdz('deficyt ponad 1000 kcal: zablokowany',
-  duzyDeficyt.blokady.some((b) => b.includes('Deficyt')), true);
+  duzyDeficyt.blokady.some((b) => b.kod === 'deficyt'), true);
 
 // Białko powyżej 35% energii — blokada.
 const zaDuzoBialka = oceniaCele({ kcal: 0, bialko: 200, tluszcz: 50, wegle: 100 }, 1500, 2500);
 sprawdz('białko powyżej 35% energii: zablokowane',
-  zaDuzoBialka.blokady.some((b) => b.includes('Białko')), true);
+  zaDuzoBialka.blokady.some((b) => b.kod === 'zaDuzoBialka'), true);
 
 // Plan mieszczący się w całości w AMDR — zero uwag.
 // 100 g białka (400 kcal), 60 g tłuszczu (540 kcal), 250 g węglowodanów (1000 kcal) = 1940 kcal

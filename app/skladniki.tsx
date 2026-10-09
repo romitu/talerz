@@ -1,6 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Pressable, ScrollView, StyleSheet, useWindowDimensions, View } from 'react-native';
 
 import { Ekran } from '@/components/ekran';
@@ -14,11 +15,11 @@ import { ThemedText } from '@/components/themed-text';
 import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import { komunikatBledu } from '@/lib/blad';
+import { jezyk } from '@/lib/jezyk';
 import { ROLA_SKLADNIKA_WEDLUG_ETYKIETY } from '@/lib/import-eksport-wspolne';
 import { wroc } from '@/lib/nawigacja';
 import { useSesja } from '@/lib/sesja';
 import {
-  OPIS_ROLI_SKLADNIKA,
   pobierzSkladniki,
   pobierzUzycia,
   ROLE_SKLADNIKA,
@@ -36,20 +37,20 @@ import { supabase } from '@/lib/supabase';
 const SZEROKOSC_ROZWIJANIA = 36;
 
 const KOLUMNY = [
-  { klucz: 'nazwa', tytul: 'Nazwa', szerokosc: 240, liczba: false },
-  { klucz: 'kcal_100g', tytul: 'kcal', szerokosc: 58, liczba: true },
-  { klucz: 'bialko_100g', tytul: 'B', szerokosc: 50, liczba: true },
-  { klucz: 'tluszcz_100g', tytul: 'T', szerokosc: 50, liczba: true },
-  { klucz: 'wegle_100g', tytul: 'W', szerokosc: 50, liczba: true },
-  { klucz: 'blonnik_100g', tytul: 'błonnik', szerokosc: 62, liczba: true },
-  { klucz: 'cukry_wolne_100g', tytul: 'c. wolne', szerokosc: 66, liczba: true },
-  { klucz: 'nova', tytul: 'NOVA', szerokosc: 54, liczba: true },
-  { klucz: 'gramatura_opakowania_g', tytul: 'opak.', szerokosc: 58, liczba: true },
-  { klucz: 'masa_sztuki_g', tytul: 'szt. waży', szerokosc: 66, liczba: true },
-  { klucz: 'mozna_dzielic', tytul: 'kwant.', szerokosc: 62, liczba: false },
-  { klucz: 'rola', tytul: 'rola', szerokosc: 90, liczba: false },
-  { klucz: 'uzycia', tytul: 'w daniach', szerokosc: 72, liczba: true },
-] as const;
+  { klucz: 'nazwa', szerokosc: 240, liczba: false },
+  { klucz: 'kcal_100g', szerokosc: 58, liczba: true },
+  { klucz: 'bialko_100g', szerokosc: 50, liczba: true },
+  { klucz: 'tluszcz_100g', szerokosc: 50, liczba: true },
+  { klucz: 'wegle_100g', szerokosc: 50, liczba: true },
+  { klucz: 'blonnik_100g', szerokosc: 62, liczba: true },
+  { klucz: 'cukry_wolne_100g', szerokosc: 66, liczba: true },
+  { klucz: 'nova', szerokosc: 54, liczba: true },
+  { klucz: 'gramatura_opakowania_g', szerokosc: 58, liczba: true },
+  { klucz: 'masa_sztuki_g', szerokosc: 66, liczba: true },
+  { klucz: 'mozna_dzielic', szerokosc: 62, liczba: false },
+  { klucz: 'rola', szerokosc: 90, liczba: false },
+  { klucz: 'uzycia', szerokosc: 72, liczba: true },
+] as const; // nagłówki: `skladniki.kolumna.<klucz>` w tłumaczeniach
 
 type KluczKolumny = (typeof KOLUMNY)[number]['klucz'];
 
@@ -59,18 +60,22 @@ const SZEROKOSC_TABELI =
 /** Kolumna nazwy nie schodzi poniżej tej szerokości, gdy się rozciąga. */
 const MIN_NAZWY = 200;
 
-/** Opcje komórki-wyboru dla roli. Pusta lista możliwości nie istnieje — rola zawsze jest jakaś. */
-const OPCJE_ROLI = ROLE_SKLADNIKA.map((r) => ({ wartosc: r, etykieta: OPIS_ROLI_SKLADNIKA[r] }));
-
-/** Opcje komórki-wyboru dla kwantyzacji — w przeciwieństwie do roli, nieobowiązkowa. */
-const OPCJE_MOZNA_DZIELIC: { wartosc: 'nie' | 'tak'; etykieta: string }[] = [
-  { wartosc: 'nie', etykieta: 'Nie można podzielić' },
-  { wartosc: 'tak', etykieta: 'Można podzielić' },
-];
-
 export default function EkranSkladnikow() {
   const { powrot } = useLocalSearchParams<{ powrot?: string }>();
   const motyw = useTheme();
+  const { t } = useTranslation();
+
+  const nazwaRoli = (r: RolaSkladnika) => t(`rolaSkladnika.${r}.nazwa`);
+  const listaRol = ROLE_SKLADNIKA.map(nazwaRoli).join(', ');
+
+  /** Opcje komórki-wyboru dla roli. Pusta lista możliwości nie istnieje — rola zawsze jest jakaś. */
+  const OPCJE_ROLI = ROLE_SKLADNIKA.map((r) => ({ wartosc: r, etykieta: nazwaRoli(r) }));
+
+  /** Opcje komórki-wyboru dla kwantyzacji — w przeciwieństwie do roli, nieobowiązkowa. */
+  const OPCJE_MOZNA_DZIELIC: { wartosc: 'nie' | 'tak'; etykieta: string }[] = [
+    { wartosc: 'nie', etykieta: t('skladniki.niepodzielny') },
+    { wartosc: 'tak', etykieta: t('skladniki.podzielny') },
+  ];
   const { sesja } = useSesja();
   const { width: szerokoscOkna } = useWindowDimensions();
 
@@ -170,7 +175,7 @@ export default function EkranSkladnikow() {
       if (sortujPo === 'nazwa') {
         wynik = a.nazwa.localeCompare(b.nazwa, 'pl');
       } else if (sortujPo === 'rola') {
-        wynik = OPIS_ROLI_SKLADNIKA[a.rola].localeCompare(OPIS_ROLI_SKLADNIKA[b.rola], 'pl');
+        wynik = t(`rolaSkladnika.${a.rola}.nazwa`).localeCompare(t(`rolaSkladnika.${b.rola}.nazwa`), jezyk());
       } else if (sortujPo === 'uzycia') {
         wynik = liczbaUzyc(a.id) - liczbaUzyc(b.id);
       } else if (sortujPo === 'mozna_dzielic') {
@@ -181,7 +186,7 @@ export default function EkranSkladnikow() {
 
       return malejaco ? -wynik : wynik;
     });
-  }, [skladniki, szukaj, sortujPo, malejaco, liczbaUzyc]);
+  }, [skladniki, szukaj, sortujPo, malejaco, liczbaUzyc, t]);
 
   function przelaczRozwiniecie(id: string) {
     setRozwiniete((poprzednie) => {
@@ -216,22 +221,20 @@ export default function EkranSkladnikow() {
     if (pole === 'rola') {
       const rolaWpisana = ROLA_SKLADNIKA_WEDLUG_ETYKIETY.get(tekst.trim().toLowerCase());
       if (!rolaWpisana) {
-        setBlad(
-          `Rola musi być jedną z: ${ROLE_SKLADNIKA.map((r) => OPIS_ROLI_SKLADNIKA[r]).join(', ')}.`
-        );
+        setBlad(t('skladniki.zlaRola', { role: listaRol }));
         return;
       }
       wartosc = rolaWpisana;
     } else if (pole === 'mozna_dzielic') {
       wartosc = tekst === 'tak' ? true : tekst === 'nie' ? false : null;
     } else if (liczbowe) {
-      const t = tekst.replace(',', '.').trim();
-      if (t === '' || t === '—') {
+      const oczyszczony = tekst.replace(',', '.').trim();
+      if (oczyszczony === '' || oczyszczony === '—') {
         wartosc = pole === 'nova' || pole === 'gramatura_opakowania_g' ? null : 0;
       } else {
-        const n = Number(t);
+        const n = Number(oczyszczony);
         if (!Number.isFinite(n)) {
-          setBlad(`„${tekst}” nie jest liczbą.`);
+          setBlad(t('skladniki.nieLiczba', { tekst }));
           return;
         }
         wartosc = n;
@@ -282,7 +285,7 @@ export default function EkranSkladnikow() {
 
     const rolaNowa = rolaZKomorki(nowyWiersz.rola ?? '');
     if (rolaNowa === 'BLAD') {
-      setBlad(`Rola musi być jedną z: ${ROLE_SKLADNIKA.map((r) => OPIS_ROLI_SKLADNIKA[r]).join(', ')}.`);
+      setBlad(t('skladniki.zlaRola', { role: listaRol }));
       return;
     }
 
@@ -340,10 +343,10 @@ export default function EkranSkladnikow() {
 
   function wartoscKomorki(s: Skladnik, klucz: KluczKolumny): string {
     if (klucz === 'nazwa') return s.nazwa;
-    if (klucz === 'rola') return OPIS_ROLI_SKLADNIKA[s.rola];
+    if (klucz === 'rola') return nazwaRoli(s.rola);
     if (klucz === 'mozna_dzielic') {
       if (s.mozna_dzielic === null || s.mozna_dzielic === undefined) return trybEdycji ? '' : '—';
-      return s.mozna_dzielic ? 'tak' : 'nie';
+      return s.mozna_dzielic ? t('wspolne.tak') : t('wspolne.nie');
     }
     if (klucz === 'uzycia') {
       const n = liczbaUzyc(s.id);
@@ -357,7 +360,7 @@ export default function EkranSkladnikow() {
   // --- ekran edycji zamiast tabeli ---
   if (edytowany || dodawanie) {
     return (
-      <Ekran tytul={edytowany ? edytowany.nazwa : 'Nowy składnik'}>
+      <Ekran tytul={edytowany ? edytowany.nazwa : t('skladniki.nowy')}>
         <FormularzSkladnika
           skladnik={edytowany ?? undefined}
           onZapisano={() => {
@@ -377,24 +380,26 @@ export default function EkranSkladnikow() {
   return (
     <Ekran
       pelnaSzerokosc
-      tytul="Składniki"
+      tytul={t('menu.skladniki')}
       podtytul={
         wczytywanie
-          ? 'wczytywanie…'
-          : `${widoczne.length} z ${skladniki.length}${szukaj.trim() ? ' (filtr)' : ''}`
+          ? t('naglowekProfilu.wczytywanie')
+          : szukaj.trim()
+            ? t('skladniki.licznikFiltr', { widoczne: widoczne.length, wszystkie: skladniki.length })
+            : t('skladniki.licznik', { widoczne: widoczne.length, wszystkie: skladniki.length })
       }>
       <Pole
-        etykieta="Filtruj po nazwie lub etykiecie"
+        etykieta={t('skladniki.filtruj')}
         value={szukaj}
         onChangeText={setSzukaj}
-        placeholder="dorsz, warzywo, orzechy…"
+        placeholder={t('skladniki.przyklad')}
       />
 
       <View style={styles.paskiNarzedzi}>
-        <Przycisk tytul="Dodaj składnik" onPress={() => setDodawanie(true)} style={styles.przyciskPaska} />
+        <Przycisk tytul={t('nieJemy.dodaj')} onPress={() => setDodawanie(true)} style={styles.przyciskPaska} />
         {mozeModerowac && (
           <Przycisk
-            tytul={trybEdycji ? 'Zakończ edycję' : 'Edytuj w tabeli'}
+            tytul={trybEdycji ? t('skladniki.zakonczEdycje') : t('skladniki.edytujWTabeli')}
             wariant={trybEdycji ? 'glowny' : 'poboczny'}
             onPress={() => setTrybEdycji((p) => !p)}
             style={styles.przyciskPaska}
@@ -402,7 +407,7 @@ export default function EkranSkladnikow() {
         )}
         {mozeModerowac && (
           <Przycisk
-            tytul="Zdjęcia"
+            tytul={t('skladniki.zdjecia')}
             ikona="images-outline"
             wariant="poboczny"
             onPress={() =>
@@ -415,21 +420,17 @@ export default function EkranSkladnikow() {
 
       {!mozeModerowac && (
         <ThemedText type="small" themeColor="textSecondary">
-          Dopisany składnik trafia od razu do wspólnego katalogu. Poprawianie i kasowanie
-          istniejących składników wymaga uprawnień moderatora.
+          {t('skladniki.wspolnyKatalog')}
         </ThemedText>
       )}
 
       {trybEdycji && (
         <Karta>
           <ThemedText type="smallBold" themeColor="accent">
-            Tryb edycji w tabeli
+            {t('skladniki.trybEdycji')}
           </ThemedText>
           <ThemedText type="small" themeColor="textSecondary">
-            Dotknij komórki i wpisz wartość. Zapis następuje po opuszczeniu pola albo
-            po naciśnięciu Enter. Nazwy etykiet i grupy NOVA edytujesz tak samo.
-            Pełny formularz — z etykietami i źródłem danych — otworzysz po wyłączeniu
-            tego trybu.
+            {t('skladniki.trybEdycjiOpis')}
           </ThemedText>
         </Karta>
       )}
@@ -448,12 +449,10 @@ export default function EkranSkladnikow() {
           {liczbaUzyc(doUsuniecia.id) > 0 ? (
             <>
               <ThemedText type="smallBold" themeColor="accent">
-                Nie można usunąć: „{doUsuniecia.nazwa}”
+                {t('skladniki.nieMoznaUsunac', { nazwa: doUsuniecia.nazwa })}
               </ThemedText>
               <ThemedText type="small" themeColor="textSecondary">
-                Składnik jest używany w {liczbaUzyc(doUsuniecia.id)}{' '}
-                {liczbaUzyc(doUsuniecia.id) === 1 ? 'przepisie' : 'przepisach'}. Usunięcie
-                zmieniłoby makro tych dań, więc baza na to nie pozwoli.
+                {t('skladniki.uzywanyW', { count: liczbaUzyc(doUsuniecia.id) })}
               </ThemedText>
               {uzycia.get(doUsuniecia.id)?.przepisy.map((p) => (
                 <ThemedText key={p.id} type="small">
@@ -461,18 +460,18 @@ export default function EkranSkladnikow() {
                 </ThemedText>
               ))}
               <ThemedText type="small" themeColor="textSecondary">
-                Najpierw usuń składnik z tych przepisów albo podmień go na inny.
+                {t('skladniki.najpierwUsun')}
               </ThemedText>
-              <Przycisk tytul="Rozumiem" wariant="poboczny" onPress={() => setDoUsuniecia(null)} />
+              <Przycisk tytul={t('skladniki.rozumiem')} wariant="poboczny" onPress={() => setDoUsuniecia(null)} />
             </>
           ) : (
             <>
-              <ThemedText type="smallBold">Usunąć „{doUsuniecia.nazwa}”?</ThemedText>
+              <ThemedText type="smallBold">{t('przepisy.usunPytanie', { nazwa: doUsuniecia.nazwa })}</ThemedText>
               <ThemedText type="small" themeColor="textSecondary">
-                Składnik nie występuje w żadnym przepisie. Tej operacji nie da się cofnąć.
+                {t('skladniki.usunNieuzywany')}
               </ThemedText>
-              <Przycisk tytul="Usuń" onPress={() => usun(doUsuniecia)} />
-              <Przycisk tytul="Anuluj" wariant="poboczny" onPress={() => setDoUsuniecia(null)} />
+              <Przycisk tytul={t('wspolne.usun')} onPress={() => usun(doUsuniecia)} />
+              <Przycisk tytul={t('wspolne.anuluj')} wariant="poboczny" onPress={() => setDoUsuniecia(null)} />
             </>
           )}
         </Karta>
@@ -498,7 +497,7 @@ export default function EkranSkladnikow() {
                     themeColor={aktywna ? 'accent' : 'textSecondary'}
                     style={k.liczba ? styles.doPrawej : undefined}
                     numberOfLines={1}>
-                    {k.tytul}
+                    {t(`skladniki.kolumna.${k.klucz}`)}
                     {aktywna ? (malejaco ? ' ↓' : ' ↑') : ''}
                   </ThemedText>
                 </Pressable>
@@ -521,7 +520,7 @@ export default function EkranSkladnikow() {
                     disabled={!uzyty}
                     hitSlop={6}
                     accessibilityLabel={
-                      uzyty ? `Pokaż dania z „${s.nazwa}”` : `${s.nazwa} nie występuje w żadnym daniu`
+                      uzyty ? t('skladniki.pokazDania', { nazwa: s.nazwa }) : t('skladniki.nieWDaniach', { nazwa: s.nazwa })
                     }
                     style={styles.komorkaRozwijania}>
                     {uzyty && (
@@ -541,7 +540,7 @@ export default function EkranSkladnikow() {
                             <KomorkaWyboru
                               key={k.klucz}
                               wartosc={s.rola}
-                              etykieta={OPIS_ROLI_SKLADNIKA[s.rola]}
+                              etykieta={nazwaRoli(s.rola)}
                               opcje={OPCJE_ROLI}
                               szerokosc={k.szerokosc}
                               edytowalna
@@ -622,7 +621,7 @@ export default function EkranSkladnikow() {
                       <Pressable
                         onPress={() => setDoUsuniecia(s)}
                         hitSlop={8}
-                        accessibilityLabel={`Usuń ${s.nazwa}`}
+                        accessibilityLabel={t('przepisy.usunNazwe', { nazwa: s.nazwa })}
                         style={styles.komorkaKosza}>
                         <Ionicons
                           name="trash-outline"
@@ -640,7 +639,7 @@ export default function EkranSkladnikow() {
                       { borderColor: motyw.border, backgroundColor: motyw.backgroundSelected },
                     ]}>
                     <ThemedText type="smallBold" themeColor="textSecondary">
-                      UŻYTY W DANIACH
+                      {t('skladniki.uzytyWDaniach')}
                     </ThemedText>
                     {uzycia.get(s.id)?.przepisy.map((p) => (
                       <ThemedText key={p.id} type="small">
@@ -673,7 +672,7 @@ export default function EkranSkladnikow() {
                       <KomorkaWyboru
                         key={k.klucz}
                         wartosc={wybrana}
-                        etykieta={OPIS_ROLI_SKLADNIKA[wybrana]}
+                        etykieta={nazwaRoli(wybrana)}
                         opcje={OPCJE_ROLI}
                         szerokosc={k.szerokosc}
                         edytowalna
@@ -690,7 +689,7 @@ export default function EkranSkladnikow() {
                       <KomorkaWyboru
                         key={k.klucz}
                         wartosc={wybrana}
-                        etykieta={wybrana === 'tak' ? 'tak' : wybrana === 'nie' ? 'nie' : '—'}
+                        etykieta={wybrana === 'tak' ? t('wspolne.tak') : wybrana === 'nie' ? t('wspolne.nie') : '—'}
                         opcje={OPCJE_MOZNA_DZIELIC}
                         szerokosc={k.szerokosc}
                         edytowalna
@@ -718,7 +717,7 @@ export default function EkranSkladnikow() {
                 onPress={dopiszWiersz}
                 disabled={!nowyWierszWypelniony || dopisywanie}
                 hitSlop={8}
-                accessibilityLabel="Dopisz składnik"
+                accessibilityLabel={t('skladniki.dopisz')}
                 style={styles.komorkaKosza}>
                 <Ionicons
                   name={dopisywanie ? 'sync' : 'checkmark-circle'}
@@ -733,28 +732,24 @@ export default function EkranSkladnikow() {
 
       {trybEdycji && (
         <ThemedText type="small" themeColor="textSecondary">
-          Ostatni wiersz z ramką służy do dopisywania. Wypełnij co najmniej nazwę
-          i kalorie, potem dotknij znaku po prawej stronie wiersza.
+          {t('skladniki.ostatniWiersz')}
         </ThemedText>
       )}
 
       {!wczytywanie && widoczne.length === 0 && (
         <ThemedText type="small" themeColor="textSecondary">
-          Nic nie pasuje do wpisanej frazy.
+          {t('tabelaWyboru.brakWynikow')}
         </ThemedText>
       )}
 
       <ThemedText type="small" themeColor="textSecondary">
-        Wszystkie wartości na 100 g. Dotknij nagłówka, aby posortować; znaku plus — aby
-        zobaczyć dania, w których składnik występuje.
-        {trybEdycji
-          ? ' Komórki są teraz polami do wpisywania.'
-          : ' Dotknij wiersza, aby otworzyć pełny formularz.'}
-        {' '}B — białko, T — tłuszcz, W — węglowodany, kwant. — czy można podzielić,
-        rola — rola przy skalowaniu porcji ({ROLE_SKLADNIKA.map((r) => OPIS_ROLI_SKLADNIKA[r]).join(', ')}).
+        {t('skladniki.legenda', {
+          tryb: trybEdycji ? t('skladniki.legendaEdycja') : t('skladniki.legendaPodglad'),
+          role: listaRol,
+        })}
       </ThemedText>
 
-      <Przycisk tytul="Wróć" wariant="poboczny" onPress={() => wroc(powrot, '/przepisy')} />
+      <Przycisk tytul={t('wspolne.wroc')} wariant="poboczny" onPress={() => wroc(powrot, '/przepisy')} />
     </Ekran>
   );
 }

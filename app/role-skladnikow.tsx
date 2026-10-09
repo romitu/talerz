@@ -1,5 +1,6 @@
 import { useLocalSearchParams } from 'expo-router';
 import { useCallback, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 
 import { Ekran } from '@/components/ekran';
@@ -39,6 +40,7 @@ function domyslneWzory(role: RolaSkladnika[]): Record<string, string> {
 export default function EkranRoleSkladnikow() {
   const { powrot } = useLocalSearchParams<{ powrot?: string }>();
   const { sesja } = useSesja();
+  const { t } = useTranslation();
 
   const [role, setRole] = useState<RolaSkladnika[]>([]);
   const [wzory, setWzory] = useState<Record<string, string>>({});
@@ -95,8 +97,8 @@ export default function EkranRoleSkladnikow() {
       await pobierz();
       setStatus(
         doZapisania.length === 0
-          ? 'Nie było żadnych zmian do zapisania.'
-          : `Zapisano ${doZapisania.length} ${doZapisania.length === 1 ? 'wzór' : 'wzory'}.`
+          ? t('roleSkladnikow.bezZmian')
+          : t('roleSkladnikow.zapisano', { count: doZapisania.length })
       );
     } catch (e) {
       setBlad(komunikatBledu(e));
@@ -114,35 +116,32 @@ export default function EkranRoleSkladnikow() {
 
   if (rola !== null && !jestModeratorem) {
     return (
-      <Ekran tytul="Role składników">
+      <Ekran tytul={t('roleSkladnikow.tytul')}>
         <Karta>
-          <ThemedText type="default">Ten ekran jest dla moderatora i administratora</ThemedText>
+          <ThemedText type="default">{t('wspolne.tylkoModerator')}</ThemedText>
           <ThemedText type="small" themeColor="textSecondary">
-            Role składników wpływają na skalowanie WSZYSTKICH przepisów, więc zmienia je
-            tylko osoba z odpowiednimi uprawnieniami.
+            {t('roleSkladnikow.tylkoModeratorOpis')}
           </ThemedText>
         </Karta>
-        <Przycisk tytul="Wróć" wariant="poboczny" onPress={() => wroc(powrot, '/przepisy')} />
+        <Przycisk tytul={t('wspolne.wroc')} wariant="poboczny" onPress={() => wroc(powrot, '/przepisy')} />
       </Ekran>
     );
   }
 
   return (
     <Ekran
-      tytul="Role składników"
-      podtytul="Sposób skalowania składników przy zmianie liczby porcji">
+      tytul={t('roleSkladnikow.tytul')}
+      podtytul={t('roleSkladnikow.podtytul')}>
       <Karta>
         <ThemedText type="small" themeColor="textSecondary">
-          <ThemedText type="smallBold" themeColor="accent">Założenie: </ThemedText>
-          k = liczba porcji przygotowywanych / liczba porcji bazowych. Dla zmniejszania
-          przepisu można przyjąć skalowanie liniowe. Kwantyzacja jest osobną cechą
-          składnika i nie wynika z roli.
+          <ThemedText type="smallBold" themeColor="accent">{t('roleSkladnikow.zalozenie')} </ThemedText>
+          {t('roleSkladnikow.zalozenieOpis')}
         </ThemedText>
       </Karta>
 
       {wczytywanie && (
         <ThemedText type="small" themeColor="textSecondary">
-          wczytywanie…
+          {t('naglowekProfilu.wczytywanie')}
         </ThemedText>
       )}
 
@@ -164,14 +163,14 @@ export default function EkranRoleSkladnikow() {
           </View>
 
           <Pole
-            etykieta="Wzór"
+            etykieta={t('roleSkladnikow.wzor')}
             value={wzory[r.klucz] ?? ''}
-            onChangeText={(t) => setWzory((p) => ({ ...p, [r.klucz]: t }))}
+            onChangeText={(tekst) => setWzory((p) => ({ ...p, [r.klucz]: tekst }))}
             multiline
           />
 
           <ThemedText type="small" themeColor="textSecondary">
-            <ThemedText type="smallBold" themeColor="textSecondary">Kiedy używać: </ThemedText>
+            <ThemedText type="smallBold" themeColor="textSecondary">{t('roleSkladnikow.kiedyUzywac')} </ThemedText>
             {r.kiedy_uzywac}
           </ThemedText>
 
@@ -201,19 +200,19 @@ export default function EkranRoleSkladnikow() {
       )}
 
       <Przycisk
-        tytul="Cofnij niezapisane zmiany"
+        tytul={t('roleSkladnikow.cofnij')}
         wariant="poboczny"
         onPress={cofnijZmiany}
         wylaczony={!zmieniono || zapisywanie}
       />
       <Przycisk
-        tytul="Zapisz wzory"
+        tytul={t('roleSkladnikow.zapisz')}
         onPress={zapisz}
         zajety={zapisywanie}
         wylaczony={!zmieniono || wczytywanie}
       />
 
-      <Przycisk tytul="Wróć" wariant="poboczny" onPress={() => wroc(powrot, '/przepisy')} />
+      <Przycisk tytul={t('wspolne.wroc')} wariant="poboczny" onPress={() => wroc(powrot, '/przepisy')} />
     </Ekran>
   );
 }

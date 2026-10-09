@@ -1,4 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
+import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 
 import { PrzelacznikWidoku } from './przelacznik-widoku';
@@ -28,6 +29,7 @@ export function NaglowekZakupow({
   onZmianaWidoku: (widok: WidokListy) => void;
 }) {
   const motyw = useTheme();
+  const { t } = useTranslation();
   const zielony = KOLOR_MAKRO.bialko;
   const pomaranczowy = KOLOR_MAKRO.tluszcz;
 
@@ -40,7 +42,7 @@ export function NaglowekZakupow({
 
         <View style={styles.tytulOpis}>
           <ThemedText type="subtitle" numberOfLines={1}>
-            Lista zakupów
+            {t('naglowekZakupow.tytul')}
           </ThemedText>
           {data ? (
             <ThemedText
@@ -60,7 +62,7 @@ export function NaglowekZakupow({
             <Ionicons name="checkmark" size={12} color="#fff" />
           </View>
           <ThemedText type="smallBold" style={{ color: zielony }} numberOfLines={1}>
-            {zrealizowane} zrealizowane
+            {t('naglowekZakupow.zrealizowane', { ile: zrealizowane })}
           </ThemedText>
         </View>
 
@@ -69,7 +71,7 @@ export function NaglowekZakupow({
         <View style={styles.licznik}>
           <View style={[styles.kolkoIkony, styles.kolkoPuste, { borderColor: pomaranczowy }]} />
           <ThemedText type="smallBold" style={{ color: pomaranczowy }} numberOfLines={1}>
-            {niezrealizowane} niezrealizowane
+            {t('naglowekZakupow.niezrealizowane', { ile: niezrealizowane })}
           </ThemedText>
         </View>
       </View>

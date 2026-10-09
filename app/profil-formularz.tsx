@@ -1,6 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useFocusEffect, useLocalSearchParams } from 'expo-router';
 import { useCallback, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Pressable, StyleSheet, View } from 'react-native';
 
 import { komunikatBledu } from '@/lib/blad';
@@ -14,7 +15,7 @@ import { Przycisk } from '@/components/przycisk';
 import { ThemedText } from '@/components/themed-text';
 import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
-import { calkowityWydatekNASEM, celZywieniowyNASEM, OPIS_PAL, type PalNasem } from '@/lib/nasem';
+import { calkowityWydatekNASEM, celZywieniowyNASEM, POZIOMY_PAL, type PalNasem } from '@/lib/nasem';
 import { useSesja } from '@/lib/sesja';
 import { supabase } from '@/lib/supabase';
 import {
@@ -26,6 +27,7 @@ import {
   przemianaPodstawowa,
   wiekZDaty,
   wskazowkaWodna,
+  type Blokada,
   type Plec,
   type TrybCelu,
 } from '@/lib/zywienie';
@@ -77,15 +79,16 @@ function liczba(tekst: string): number | null {
 /** Płeć jako dwa przyciski obok siebie, nie lista — jak w makiecie. */
 function SegmentPlci({ wartosc, onZmiana }: { wartosc: Plec | null; onZmiana: (p: Plec) => void }) {
   const motyw = useTheme();
+  const { t } = useTranslation();
   const opcje: { wartosc: Plec; etykieta: string; ikona: 'female' | 'male' }[] = [
-    { wartosc: 'K', etykieta: 'Kobieta', ikona: 'female' },
-    { wartosc: 'M', etykieta: 'Mężczyzna', ikona: 'male' },
+    { wartosc: 'K', etykieta: t('profilFormularz.kobieta'), ikona: 'female' },
+    { wartosc: 'M', etykieta: t('profilFormularz.mezczyzna'), ikona: 'male' },
   ];
 
   return (
     <View style={styleWyboru.grupa}>
       <ThemedText type="smallBold" themeColor="textSecondary">
-        Płeć
+        {t('profilFormularz.plec')}
       </ThemedText>
       <View style={[styleWyboru.segmenty, { borderColor: motyw.border }]}>
         {opcje.map((o, i) => {
@@ -123,14 +126,15 @@ const IKONY_PAL: Record<PalNasem, keyof typeof Ionicons.glyphMap> = {
 /** Cztery kafle aktywności w siatce 2x2 — jak w makiecie, zamiast listy. */
 function SiatkaAktywnosci({ wartosc, onZmiana }: { wartosc: PalNasem; onZmiana: (p: PalNasem) => void }) {
   const motyw = useTheme();
+  const { t } = useTranslation();
 
   return (
     <View style={styleWyboru.grupa}>
       <ThemedText type="smallBold" themeColor="textSecondary">
-        Aktywność
+        {t('profilFormularz.aktywnosc')}
       </ThemedText>
       <View style={styleWyboru.siatka}>
-        {(Object.keys(OPIS_PAL) as PalNasem[]).map((k) => {
+        {POZIOMY_PAL.map((k) => {
           const aktywna = k === wartosc;
           return (
             <Pressable
@@ -138,7 +142,7 @@ function SiatkaAktywnosci({ wartosc, onZmiana }: { wartosc: PalNasem; onZmiana: 
               onPress={() => onZmiana(k)}
               accessibilityRole="radio"
               accessibilityState={{ selected: aktywna }}
-              accessibilityLabel={`${OPIS_PAL[k].nazwa}. ${OPIS_PAL[k].opis}`}
+              accessibilityLabel={`${t(`pal.${k}.nazwa`)}. ${t(`pal.${k}.opis`)}`}
               style={[
                 styleWyboru.kafelAktywnosci,
                 {
@@ -148,7 +152,7 @@ function SiatkaAktywnosci({ wartosc, onZmiana }: { wartosc: PalNasem; onZmiana: 
               ]}>
               <Ionicons name={IKONY_PAL[k]} size={26} color={aktywna ? motyw.accent : motyw.textSecondary} />
               <ThemedText type={aktywna ? 'smallBold' : 'small'} themeColor={aktywna ? 'accent' : 'text'}>
-                {OPIS_PAL[k].nazwa}
+                {t(`pal.${k}.nazwa`)}
               </ThemedText>
             </Pressable>
           );
@@ -169,20 +173,21 @@ function KartyCelu({
   opisRedukcji: string;
 }) {
   const motyw = useTheme();
+  const { t } = useTranslation();
   const opcje: { wartosc: TrybCelu; tytul: string; opis: string; ikona: keyof typeof Ionicons.glyphMap }[] = [
     {
       wartosc: 'utrzymanie',
-      tytul: 'Utrzymanie wagi',
-      opis: 'Cel = pełne zapotrzebowanie dzienne, bez deficytu.',
+      tytul: t('profilFormularz.utrzymanie'),
+      opis: t('profilFormularz.utrzymanieOpis'),
       ikona: 'shield-checkmark-outline',
     },
-    { wartosc: 'redukcja', tytul: 'Redukcja wagi', opis: opisRedukcji, ikona: 'trending-down-outline' },
+    { wartosc: 'redukcja', tytul: t('profilFormularz.redukcja'), opis: opisRedukcji, ikona: 'trending-down-outline' },
   ];
 
   return (
     <View style={styleWyboru.grupa}>
       <ThemedText type="smallBold" themeColor="textSecondary">
-        Cel
+        {t('profilFormularz.cel')}
       </ThemedText>
       <View style={styleWyboru.karyCelu}>
         {opcje.map((o) => {
@@ -234,6 +239,7 @@ const DOMYSLNY_PROFIL = {
 export default function FormularzProfilu() {
   const { profil: profilId, powrot } = useLocalSearchParams<{ profil?: string; powrot?: string }>();
   const { sesja } = useSesja();
+  const { t } = useTranslation();
   const trybEdycji = Boolean(profilId);
 
   const [imie, setImie] = useState(DOMYSLNY_PROFIL.imie);
@@ -340,38 +346,40 @@ export default function FormularzProfilu() {
   const deficyt = podglad ? Math.min(DEFICYT_REDUKCJI_KCAL, podglad.zapotrzebowanie - podglad.przemiana) : null;
   const opisRedukcji =
     deficyt !== null
-      ? `Cel = zapotrzebowanie minus ${deficyt} kcal (nie mniej niż przemiana podstawowa).`
-      : 'Cel = zapotrzebowanie minus deficyt (nie mniej niż przemiana podstawowa).';
+      ? t('profilFormularz.redukcjaOpisKcal', { deficyt })
+      : t('profilFormularz.redukcjaOpis');
+
+  const opisBlokady = (b: Blokada) => t(`profilFormularz.blokada.${b.kod}`, b);
 
   async function zapisz() {
     setBlad(null);
 
     if (!sesja) {
-      setBlad('Brak zalogowanego użytkownika.');
+      setBlad(t('profilFormularz.brakSesji'));
       return;
     }
     if (!imie.trim()) {
-      setBlad('Podaj imię — odróżnia profile na tym samym koncie.');
+      setBlad(t('profilFormularz.podajImie'));
       return;
     }
     if (!plec) {
-      setBlad('Wybierz płeć — od niej zależy wyliczenie zapotrzebowania.');
+      setBlad(t('profilFormularz.wybierzPlec'));
       return;
     }
     if (wiekL === null || wiekL < 18 || wiekL > 120) {
-      setBlad('Wiek podaj w pełnych latach, w zakresie 18–120. Talerz jest przeznaczony wyłącznie dla osób pełnoletnich.');
+      setBlad(t('profilFormularz.zlyWiek'));
       return;
     }
     if (!wzrostL || wzrostL < 120 || wzrostL > 230) {
-      setBlad('Wzrost podaj w centymetrach, w zakresie 120–230.');
+      setBlad(t('profilFormularz.zlyWzrost'));
       return;
     }
     if (!wagaL || wagaL < 30 || wagaL > 300) {
-      setBlad('Wagę podaj w kilogramach, w zakresie 30–300.');
+      setBlad(t('profilFormularz.zlaWaga'));
       return;
     }
     if (ocena && ocena.blokady.length > 0) {
-      setBlad(ocena.blokady[0]);
+      setBlad(opisBlokady(ocena.blokady[0]));
       return;
     }
     if (!cel) return;
@@ -450,9 +458,9 @@ export default function FormularzProfilu() {
       const tresc = komunikatBledu(e);
       setBlad(
         tresc.includes('najwyżej 4 profile')
-          ? 'Konto może mieć najwyżej 4 profile.'
+          ? t('profilFormularz.limitProfili')
           : tresc.includes('pełnoletnich')
-            ? 'Talerz jest przeznaczony wyłącznie dla osób pełnoletnich.'
+            ? t('profilFormularz.tylkoDorosli')
             : tresc
       );
     } finally {
@@ -462,9 +470,9 @@ export default function FormularzProfilu() {
 
   if (wczytywanie) {
     return (
-      <Ekran tytul="Profil">
+      <Ekran tytul={t('profil.tytul')}>
         <ThemedText type="small" themeColor="textSecondary">
-          Wczytywanie…
+          {t('wspolne.wczytywanieKrotko')}
         </ThemedText>
       </Ekran>
     );
@@ -472,39 +480,39 @@ export default function FormularzProfilu() {
 
   if (nieZnaleziono) {
     return (
-      <Ekran tytul="Profil">
+      <Ekran tytul={t('profil.tytul')}>
         <Karta>
           <ThemedText type="small" themeColor="accent">
-            Nie znaleziono profilu.
+            {t('profilFormularz.nieZnaleziono')}
           </ThemedText>
         </Karta>
-        <Przycisk tytul="Wróć" wariant="poboczny" onPress={() => wroc(powrot, '/profil')} />
+        <Przycisk tytul={t('wspolne.wroc')} wariant="poboczny" onPress={() => wroc(powrot, '/profil')} />
       </Ekran>
     );
   }
 
   return (
     <Ekran
-      tytul={trybEdycji ? 'Edytuj profil' : 'Nowy profil'}
-      podtytul="Podaj kilka informacji, a wyliczymy Twoje dzienne kalorie i makroskładniki.">
+      tytul={trybEdycji ? t('profil.edytuj') : t('profilFormularz.nowy')}
+      podtytul={t('profilFormularz.podtytul')}>
       <Karta style={styles.formularz}>
         <ThemedText type="smallBold" themeColor="textSecondary">
-          DANE PODSTAWOWE
+          {t('profilFormularz.danePodstawowe')}
         </ThemedText>
 
-        <Pole etykieta="Imię" value={imie} onChangeText={setImie} placeholder="np. Anna" />
+        <Pole etykieta={t('profilFormularz.imie')} value={imie} onChangeText={setImie} placeholder={t('profilFormularz.imiePrzyklad')} />
 
         <SegmentPlci wartosc={plec} onZmiana={setPlec} />
 
         <View style={styles.wierszPol}>
           <View style={styles.pole3}>
-            <Pole etykieta="Wiek (lat)" value={wiek} onChangeText={setWiek} placeholder="np. 35" inputMode="numeric" />
+            <Pole etykieta={t('profilFormularz.wiek')} value={wiek} onChangeText={setWiek} placeholder={t('profilFormularz.np', { wartosc: 35 })} inputMode="numeric" />
           </View>
           <View style={styles.pole3}>
-            <Pole etykieta="Wzrost (cm)" value={wzrost} onChangeText={setWzrost} placeholder="np. 170" inputMode="numeric" />
+            <Pole etykieta={t('profilFormularz.wzrost')} value={wzrost} onChangeText={setWzrost} placeholder={t('profilFormularz.np', { wartosc: 170 })} inputMode="numeric" />
           </View>
           <View style={styles.pole3}>
-            <Pole etykieta="Waga (kg)" value={waga} onChangeText={setWaga} placeholder="np. 70" inputMode="decimal" />
+            <Pole etykieta={t('profilFormularz.waga')} value={waga} onChangeText={setWaga} placeholder={t('profilFormularz.np', { wartosc: 70 })} inputMode="decimal" />
           </View>
         </View>
       </Karta>
@@ -520,21 +528,23 @@ export default function FormularzProfilu() {
       {cel && podglad && (
         <Karta style={styles.kartaWyniku}>
           <ThemedText type="smallBold" themeColor="textSecondary">
-            TWÓJ WYNIK
+            {t('profilFormularz.wynik')}
           </ThemedText>
           <KafleWyniku cel={cel} />
           <ThemedText type="small" themeColor="textSecondary">
-            Na podstawie płci, wieku, wzrostu, wagi, aktywności i celu — wg równań NASEM 2023
-            (Dietary Reference Intakes for Energy). Przemiana podstawowa: {podglad.przemiana} kcal
-            · zapotrzebowanie dzienne: {podglad.zapotrzebowanie} kcal.
+            {t('profilFormularz.wynikOpis', {
+              przemiana: podglad.przemiana,
+              zapotrzebowanie: podglad.zapotrzebowanie,
+            })}
           </ThemedText>
           <ThemedText type="small" themeColor="textSecondary">
-            Automatycznie zapisze się też próg białka na posiłek ({podpowiedzProguBialka(wagaL!)} g)
-            i cel błonnikowy ({podpowiedzBlonnika(cel.kcal)} g dziennie) — widoczne w zakładce Plan.
+            {t('profilFormularz.autozapis', {
+              prog: podpowiedzProguBialka(wagaL!),
+              blonnik: podpowiedzBlonnika(cel.kcal),
+            })}
           </ThemedText>
           <ThemedText type="small" themeColor="textSecondary">
-            Płyny: około {liczbaNaTekst(wskazowkaWodna(wagaL!) / 1000, 1, true)} l dziennie
-            (30 ml na kilogram). To wskazówka, nie cel.
+            {t('profilFormularz.plyny', { litry: liczbaNaTekst(wskazowkaWodna(wagaL!) / 1000, 1, true) })}
           </ThemedText>
         </Karta>
       )}
@@ -542,11 +552,11 @@ export default function FormularzProfilu() {
       {ocena && ocena.blokady.length > 0 && (
         <Karta>
           <ThemedText type="smallBold" themeColor="accent">
-            NIE MOŻNA ZAPISAĆ
+            {t('profilFormularz.nieMoznaZapisac')}
           </ThemedText>
-          {ocena.blokady.map((tresc) => (
-            <ThemedText key={tresc} type="small">
-              {tresc}
+          {ocena.blokady.map((b) => (
+            <ThemedText key={b.kod} type="small">
+              {opisBlokady(b)}
             </ThemedText>
           ))}
         </Karta>
@@ -559,8 +569,8 @@ export default function FormularzProfilu() {
         </ThemedText>
       )}
 
-      <Przycisk tytul="Oblicz i zapisz cele" onPress={zapisz} zajety={zajety} wylaczony={!wolnoZapisac} />
-      <Przycisk tytul="Anuluj" wariant="poboczny" onPress={() => wroc(powrot, '/profil')} />
+      <Przycisk tytul={t('profilFormularz.zapisz')} onPress={zapisz} zajety={zajety} wylaczony={!wolnoZapisac} />
+      <Przycisk tytul={t('wspolne.anuluj')} wariant="poboczny" onPress={() => wroc(powrot, '/profil')} />
     </Ekran>
   );
 }

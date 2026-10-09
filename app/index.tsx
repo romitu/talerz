@@ -1,6 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ActivityIndicator, Pressable, ScrollView, StyleSheet, useWindowDimensions, View } from 'react-native';
 
 import { Ekran } from '@/components/ekran';
@@ -17,6 +18,7 @@ import { KOLOR_MAKRO, Spacing } from '@/constants/theme';
 import { useFiltryPrzepisow } from '@/hooks/use-filtry-przepisow';
 import { useTheme } from '@/hooks/use-theme';
 import { komunikatBledu } from '@/lib/blad';
+import i18n, { liczbaNaTekst } from '@/lib/jezyk';
 import { dniZLimitem, mnoznikWzrostu, powtorzTydzien, zaplanuj, type Wstawienie } from '@/lib/automat';
 import {
   czyDzisiaj,
@@ -40,7 +42,6 @@ import {
   type PozycjaPlanu,
 } from '@/lib/plan';
 import {
-  OPIS_PORY,
   pasujeDoPory,
   pobierzPelnyPrzepis,
   pobierzPrzepisy,
@@ -98,17 +99,20 @@ function opisBilansu(
   const k = Math.round(suma.kcal - cel.kcal);
 
   const bialko =
-    b === 0 ? 'Białko w punkt' : b < 0 ? `Brakuje ${-b} g białka` : `${b} g białka ponad cel`;
+    b === 0
+      ? i18n.t('plan.bilans.bialkoWPunkt')
+      : b < 0
+        ? i18n.t('plan.bilans.bialkoBrak', { gramy: -b })
+        : i18n.t('plan.bilans.bialkoPonad', { gramy: b });
 
   const kalorie =
-    k === 0 ? 'kalorie w punkt' : k < 0 ? `brakuje ${-k} kcal` : `${k} kcal ponad cel`;
+    k === 0
+      ? i18n.t('plan.bilans.kcalWPunkt')
+      : k < 0
+        ? i18n.t('plan.bilans.kcalBrak', { kcal: -k })
+        : i18n.t('plan.bilans.kcalPonad', { kcal: k });
 
   return `${bialko} · ${kalorie}`;
-}
-
-/** Odmiana słowa „dzień” w komunikatach — 1 = dzień, każda inna liczba = dni. */
-function odmianaDni(n: number): string {
-  return n === 1 ? 'dzień' : 'dni';
 }
 
 /** Ikona przy nazwie posiłku w karcie dnia. */
@@ -164,6 +168,7 @@ function PrzelacznikAutomatu({
 export default function EkranPlanu() {
   const { sesja } = useSesja();
   const motyw = useTheme();
+  const { t } = useTranslation();
 
   const [plan, setPlan] = useState<Plan | null>(null);
   const [pozycje, setPozycje] = useState<PozycjaPlanu[]>([]);
@@ -423,14 +428,16 @@ export default function EkranPlanu() {
       if (wstawienia.length === 0) {
         komunikatWypelnienia =
           bezObsady.length > 0
-            ? 'Nie ma przepisów pasujących do pustych miejsc. Sprawdź, czy przepisy mają ustawioną kategorię.'
-            : 'Wszystkie miejsca są już zajęte.';
+            ? t('plan.brakPasujacych')
+            : t('plan.wszystkoZajete');
       } else {
         await zapiszWstawienia(plan, wstawienia);
         const posilkow = wstawienia.reduce((s, w) => s + w.dni.length, 0);
         komunikatWypelnienia =
-          `Dołożono ${posilkow} posiłków z ${wstawienia.length} gotowań.` +
-          (bezObsady.length > 0 ? ` Bez obsady zostało ${bezObsady.length} miejsc.` : '');
+          t('plan.dolozono', {
+            posilki: t('plan.posilki', { count: posilkow }),
+            gotowania: t('plan.zGotowan', { count: wstawienia.length }),
+          }) + (bezObsady.length > 0 ? ` ${t('plan.bezObsady', { count: bezObsady.length })}` : '');
       }
 
       // Porcje przeliczają się zawsze — także przy pełnym planie, żeby
@@ -439,8 +446,12 @@ export default function EkranPlanu() {
       await pobierz();
       if (szczegoly.length > 0) {
         komunikatWypelnienia +=
-          `\n\nPowiększono ${szczegoly.length} ${szczegoly.length === 1 ? 'danie' : 'dania'} ` +
-          `w ${dniZmienione.size} ${odmianaDni(dniZmienione.size)}:\n` +
+          '\n\n' +
+          t('plan.powiekszono', {
+            dania: t('plan.dania', { count: szczegoly.length }),
+            dni: t('plan.wDniach', { count: dniZmienione.size }),
+          }) +
+          '\n' +
           szczegoly.join('\n');
       }
 
@@ -459,15 +470,13 @@ export default function EkranPlanu() {
     try {
       const poprzedni = await pobierzPoprzedniPlan(plan.id);
       if (!poprzedni) {
-        setKomunikat(
-          'Nie ma wcześniejszego tygodnia do powtórzenia. Powstanie, gdy założysz kolejny.'
-        );
+        setKomunikat(t('plan.brakPoprzedniego'));
         return;
       }
 
       const wszystkieZrodla = await pobierzPozycje(poprzedni.id);
       if (wszystkieZrodla.length === 0) {
-        setKomunikat('Poprzedni tydzień był pusty — nie ma czego powtarzać.');
+        setKomunikat(t('plan.poprzedniPusty'));
         return;
       }
 
@@ -478,7 +487,7 @@ export default function EkranPlanu() {
       );
       const zrodlo = wszystkieZrodla.filter((p) => !wykluczonePrzepisy.has(p.przepis_id));
       if (zrodlo.length === 0) {
-        setKomunikat('Wszystkie dania z poprzedniego tygodnia zawierają składniki, których nie jecie.');
+        setKomunikat(t('plan.poprzedniWykluczony'));
         return;
       }
 
@@ -491,7 +500,7 @@ export default function EkranPlanu() {
       });
 
       if (wstawienia.length === 0) {
-        setKomunikat('Wszystkie miejsca z poprzedniego tygodnia są już zajęte.');
+        setKomunikat(t('plan.poprzedniZajete'));
         return;
       }
 
@@ -503,8 +512,10 @@ export default function EkranPlanu() {
       // ktoś chce znać odpowiedź: „ile dni tygodnia mam już z głowy".
       const dniWypelnione = new Set(wstawienia.flatMap((w) => w.dni)).size;
       setKomunikat(
-        `Uzupełniono ${dniWypelnione} ${odmianaDni(dniWypelnione)} z tygodnia od ${opisDnia(poprzedni.data_start)}.` +
-          (bezObsady.length > 0 ? ` Pominięto ${bezObsady.length} zajętych miejsc.` : '')
+        t('plan.uzupelniono', {
+          dni: t('plan.dni', { count: dniWypelnione }),
+          data: opisDnia(poprzedni.data_start),
+        }) + (bezObsady.length > 0 ? ` ${t('plan.pominieto', { count: bezObsady.length })}` : '')
       );
     } catch (e) {
       setBlad(komunikatBledu(e));
@@ -632,10 +643,13 @@ export default function EkranPlanu() {
       }
 
       szczegoly.push(
-        `${pierwsza.nazwa}: ${Math.round(kcalBazowe(pierwsza))}→${wynik.kcal} kcal (cel ${Math.round(celGarnka)}` +
-          (dniGarnka.length > 1 ? `, średnio z ${dniGarnka.length} dni jednego garnka` : '') +
-          ')' +
-          (wynik.kOgraniczone ? ' — porcja doszła do granicy, reszta zostaje brakiem' : '')
+        t(dniGarnka.length > 1 ? 'plan.szczegolGarnek' : 'plan.szczegol', {
+          nazwa: pierwsza.nazwa,
+          przed: Math.round(kcalBazowe(pierwsza)),
+          po: wynik.kcal,
+          cel: Math.round(celGarnka),
+          dni: dniGarnka.length,
+        }) + (wynik.kOgraniczone ? ` ${t('plan.szczegolGranica')}` : '')
       );
     }
 
@@ -668,10 +682,10 @@ export default function EkranPlanu() {
   // nie wczytał.
   if (!wczytywanie && !plan && blad) {
     return (
-      <Ekran tytul="Plan dnia">
+      <Ekran tytul={t('naglowekPlanu.tytul')}>
         <Karta>
           <ThemedText type="small" themeColor="accent">
-            Nie udało się wczytać: {blad}
+            {t('wspolne.bladWczytania', { blad })}
           </ThemedText>
         </Karta>
       </Ekran>
@@ -688,12 +702,11 @@ export default function EkranPlanu() {
   const pokazKroki = !wczytywanie && (!cel || !plan || (pozycje.length === 0 && liczbaPlanow <= 1));
   const krokiStartu: KrokStartu[] = [
     {
-      tytul: 'Uzupełnij profil',
-      opis:
-        'Płeć, wiek, wzrost, waga i aktywność. Z nich liczymy dzienne kalorie i białko — bez tego plan nie ma się do czego odnieść.',
+      tytul: t('plan.krok.profil'),
+      opis: t('plan.krok.profilOpis'),
       zrobiony: cel !== null,
       akcja: {
-        tytul: maProfil ? 'Przejdź do profilu' : 'Uzupełnij profil',
+        tytul: maProfil ? t('plan.krok.doProfilu') : t('plan.krok.profil'),
         onPress: () =>
           maProfil
             ? router.push('/profil')
@@ -701,12 +714,11 @@ export default function EkranPlanu() {
       },
     },
     {
-      tytul: 'Utwórz plan tygodnia',
-      opis:
-        'Plan obejmuje siedem dni po trzy posiłki. Do każdego miejsca trafi przepis, a aplikacja zsumuje wartości i porówna je z Twoim celem.',
+      tytul: t('plan.krok.plan'),
+      opis: t('plan.krok.planOpis'),
       zrobiony: plan !== null,
       akcja: {
-        tytul: 'Utwórz plan od dzisiaj',
+        tytul: t('plan.krok.planAkcja'),
         onPress: () =>
           zDbem(async () => {
             if (sesja) await utworzPlan(sesja.user.id, naDate(new Date()));
@@ -714,22 +726,21 @@ export default function EkranPlanu() {
       },
     },
     {
-      tytul: 'Wypełnij tydzień',
-      opis:
-        'Automat dobierze dania tak, żeby domknąć kalorie i białko. Każde możesz potem zmienić, a puste miejsce uzupełnić ręcznie. Jeśli czegoś nie jecie, najpierw wskaż to w Profilu, w sekcji „Nie jemy”.',
+      tytul: t('plan.krok.wypelnij'),
+      opis: t('plan.krok.wypelnijOpis'),
       zrobiony: pozycje.length > 0,
       akcja:
         przepisy.length > 0
-          ? { tytul: 'Wypełnij automatycznie', onPress: wypelnijAutomatem, zajety: pracuje }
+          ? { tytul: t('plan.krok.wypelnijAkcja'), onPress: wypelnijAutomatem, zajety: pracuje }
           : undefined,
     },
   ];
-  const stopkaKrokow = 'Lista zakupów ułoży się sama z planu — znajdziesz ją w zakładce Zakupy.';
+  const stopkaKrokow = t('plan.krok.stopka');
 
   // --- brak planu ---
   if (!wczytywanie && !plan) {
     return (
-      <Ekran tytul="Plan dnia" podtytul="Nie masz jeszcze planu">
+      <Ekran tytul={t('naglowekPlanu.tytul')} podtytul={t('plan.brakPlanu')}>
         <PierwszeKroki kroki={krokiStartu} stopka={stopkaKrokow} />
       </Ekran>
     );
@@ -786,7 +797,7 @@ export default function EkranPlanu() {
     return (
       <Ekran
         pelnaSzerokosc
-        tytul={OPIS_PORY[wybierany.pora]}
+        tytul={t(`pora.${wybierany.pora}`)}
         podtytul={opisDnia(wybierany.data)}>
         {blad && (
           <Karta>
@@ -804,13 +815,12 @@ export default function EkranPlanu() {
         {doWyboru.length > 0 && !doWyboru.some(filtry.pasuje) && (
           <Karta>
             <ThemedText type="default">
-              Żadne danie nie pasuje do wybranych filtrów
+              {t('plan.brakDlaFiltrow')}
             </ThemedText>
             <ThemedText type="small" themeColor="textSecondary">
-              Filtry zostają włączone między kolejnymi wyborami — zdejmij te, które
-              zostały z poprzedniego posiłku.
+              {t('plan.brakDlaFiltrowOpis')}
             </ThemedText>
-            <Przycisk tytul="Wyczyść filtry" wariant="poboczny" onPress={filtry.wyczysc} />
+            <Przycisk tytul={t('przepisy.wyczyscFiltry')} wariant="poboczny" onPress={filtry.wyczysc} />
           </Karta>
         )}
 
@@ -822,15 +832,15 @@ export default function EkranPlanu() {
               dane={doWyboru.filter(filtry.pasuje)}
               klucz={(p) => p.id}
               tekstDoFiltra={(p) => p.nazwa}
-              etykietaFiltra="Filtruj przepisy"
-              placeholderFiltra="zupa, dorsz, owsianka…"
+              etykietaFiltra={t('wyborDania.filtruj')}
+              placeholderFiltra={t('wyborDania.przyklad')}
               wybrane={[]}
               onPrzelacz={wybierzDanie}
               kolumny={[
-                { tytul: 'Nazwa', elastyczna: true, wartosc: (p) => p.nazwa },
-                { tytul: 'kcal', szerokosc: 60, liczba: true, wartosc: (p) => String(p.kcal ?? '—') },
-                { tytul: 'białko', szerokosc: 64, liczba: true, wartosc: (p) => String(p.bialko_g ?? '—') },
-                { tytul: 'porcja', szerokosc: 68, liczba: true, wartosc: (p) => (p.gramy_porcji ? `${p.gramy_porcji} g` : '—') },
+                { tytul: t('wspolne.nazwa'), elastyczna: true, wartosc: (p) => p.nazwa },
+                { tytul: t('makro.kcal'), szerokosc: 60, liczba: true, wartosc: (p) => String(p.kcal ?? '—') },
+                { tytul: t('makro.bialko'), szerokosc: 64, liczba: true, wartosc: (p) => String(p.bialko_g ?? '—') },
+                { tytul: t('plan.kolumnaPorcja'), szerokosc: 68, liczba: true, wartosc: (p) => (p.gramy_porcji ? `${p.gramy_porcji} g` : '—') },
               ]}
             />
           ) : (
@@ -844,12 +854,12 @@ export default function EkranPlanu() {
 
         {przepisy.length === 0 && (
           <ThemedText type="small" themeColor="textSecondary">
-            Baza przepisów jest pusta. Dodaj przepis w zakładce Przepisy.
+            {t('plan.brakPrzepisow')}
           </ThemedText>
         )}
 
         <Przycisk
-          tytul="Anuluj"
+          tytul={t('wspolne.anuluj')}
           wariant="poboczny"
           onPress={() => {
             doPrzywrocenia.current = true;
@@ -881,8 +891,8 @@ export default function EkranPlanu() {
         doPrzywrocenia.current = false;
         przewijanie.current?.scrollTo({ y: pozycja.current, animated: false });
       }}
-      tytul="Plan dnia"
-      podtytul={wczytywanie ? 'wczytywanie…' : undefined}
+      tytul={t('naglowekPlanu.tytul')}
+      podtytul={wczytywanie ? t('naglowekProfilu.wczytywanie') : undefined}
       naglowekStaly={
         plan ? (
           <NaglowekPlanu
@@ -903,7 +913,7 @@ export default function EkranPlanu() {
 
       {wczytywanie && (
         <ThemedText type="small" themeColor="textSecondary">
-          Wczytywanie…
+          {t('wspolne.wczytywanieKrotko')}
         </ThemedText>
       )}
 
@@ -917,7 +927,7 @@ export default function EkranPlanu() {
               <Ionicons name="layers-outline" size={26} color={motyw.accent} />
             </View>
             <ThemedText type="smallBold" themeColor="textSecondary">
-              UKŁADANIE TYGODNIA
+              {t('plan.ukladanie')}
             </ThemedText>
           </View>
 
@@ -937,11 +947,10 @@ export default function EkranPlanu() {
                 <Ionicons name="sparkles-outline" size={26} color="#fff" />
                 <View style={styles.wypelnijTresc}>
                   <ThemedText type="smallBold" style={styles.bialyTekst}>
-                    Wypełnij wolne miejsca
+                    {t('plan.wypelnijWolne')}
                   </ThemedText>
                   <ThemedText type="small" style={[styles.bialyTekst, styles.wypelnijOpis]}>
-                    Dobiera z ulubionych tak, żeby domknąć dzienne białko i kalorie.
-                    Tego, co już wybrałeś, nie rusza.
+                    {t('plan.wypelnijWolneOpis')}
                   </ThemedText>
                 </View>
               </>
@@ -951,14 +960,14 @@ export default function EkranPlanu() {
           <PrzelacznikAutomatu
             zaznaczone={uwzglednijTrwalosc}
             onZmiana={setUwzglednijTrwalosc}
-            etykieta="Uwzględnij ile dni wytrzyma w lodówce"
-            opis="Kopiuje danie na tyle kolejnych dni, ile wytrzyma w lodówce, zamiast na jego liczbę porcji bazowych."
+            etykieta={t('plan.trwalosc')}
+            opis={t('plan.trwaloscOpis')}
             ikona="archive-outline"
           />
 
           <View style={styles.akcjeSiatka}>
             <Przycisk
-              tytul="Powtórz poprzedni tydzień"
+              tytul={t('plan.powtorz')}
               wariant="poboczny"
               ikona="refresh-outline"
               onPress={powtorzPoprzedni}
@@ -968,7 +977,7 @@ export default function EkranPlanu() {
             />
 
             <Przycisk
-              tytul="Wyczyść wszystko"
+              tytul={t('plan.wyczyscWszystko')}
               wariant="poboczny"
               ikona="trash-outline"
               onPress={() => setCzyscic(true)}
@@ -978,9 +987,7 @@ export default function EkranPlanu() {
           </View>
 
           <ThemedText type="small" themeColor="textSecondary">
-            „Powtórz poprzedni tydzień” bierze układ z poprzedniego tygodnia. Dania
-            skalowalne — zarówno z automatu, jak i wybrane ręcznie — przeliczają się
-            pod dzienny cel kaloryczny od razu, bez osobnego kroku.
+            {t('plan.powtorzOpis')}
           </ThemedText>
 
           {/*
@@ -991,11 +998,10 @@ export default function EkranPlanu() {
           {czyscic && (
             <>
               <ThemedText type="small" themeColor="accent">
-                Skasować wszystkie {pozycje.length} posiłków tego tygodnia razem
-                z zaplanowanymi gotowaniami? Tego nie da się cofnąć.
+                {t('plan.wyczyscPytanie', { posilki: t('plan.posilki', { count: pozycje.length }) })}
               </ThemedText>
               <Przycisk
-                tytul="Tak, wyczyść tydzień"
+                tytul={t('plan.takWyczysc')}
                 onPress={() =>
                   zDbem(async () => {
                     await wyczyscPlan(plan.id);
@@ -1007,7 +1013,7 @@ export default function EkranPlanu() {
                   })
                 }
               />
-              <Przycisk tytul="Zostaw" wariant="poboczny" onPress={() => setCzyscic(false)} />
+              <Przycisk tytul={t('uzytkownicy.zostaw')} wariant="poboczny" onPress={() => setCzyscic(false)} />
             </>
           )}
 
@@ -1065,7 +1071,7 @@ export default function EkranPlanu() {
                   </View>
                   <ThemedText type="default" themeColor={dzisiaj ? 'accent' : 'text'}>
                     {opisDnia(data)}
-                    {dzisiaj ? ' · dzisiaj' : ''}
+                    {dzisiaj ? ` · ${t('naglowekPlanu.dzisiaj')}` : ''}
                   </ThemedText>
                 </View>
 
@@ -1090,7 +1096,7 @@ export default function EkranPlanu() {
 
                   {dzien.length > 0 && (
                     <ThemedText type="small" themeColor="textSecondary">
-                      {Math.round(suma.kcal)} kcal
+                      {t('makro.ileKcal', { kcal: Math.round(suma.kcal) })}
                     </ThemedText>
                   )}
                 </View>
@@ -1120,7 +1126,7 @@ export default function EkranPlanu() {
 
                       <View style={styles.posilekTresc}>
                         <ThemedText type="smallBold" themeColor="accent">
-                          {OPIS_PORY[pora].toUpperCase()}
+                          {t(`pora.${pora}`).toUpperCase()}
                         </ThemedText>
 
                         {dania.map((pozycja) => (
@@ -1153,11 +1159,11 @@ export default function EkranPlanu() {
                                   });
                                 }}
                                 accessibilityRole="link"
-                                accessibilityLabel={`Otwórz przepis: ${pozycja.nazwa}`}
+                                accessibilityLabel={t('plan.otworzPrzepis', { nazwa: pozycja.nazwa })}
                                 style={({ pressed }) => [styles.otworzPrzepis, pressed && styles.wcisniete]}>
                                 <ThemedText type="small" style={styles.nazwaDania} numberOfLines={2}>
                                   {pozycja.nazwa}
-                                  {dania.length > 1 ? ` · danie ${pozycja.kolejnosc}` : ''}
+                                  {dania.length > 1 ? ` · ${t('plan.danieNr', { nr: pozycja.kolejnosc })}` : ''}
                                 </ThemedText>
                                 <Ionicons name="chevron-forward" size={18} color={motyw.textSecondary} />
                               </Pressable>
@@ -1173,7 +1179,7 @@ export default function EkranPlanu() {
                                   }
                                   hitSlop={8}
                                   accessibilityLabel={
-                                    pozycja.partia_id ? 'Usuń całą partię' : 'Usuń danie'
+                                    pozycja.partia_id ? t('plan.usunPartie') : t('plan.usunDanie')
                                   }>
                                   <Ionicons name="close" size={18} color={motyw.textSecondary} />
                                 </Pressable>
@@ -1187,8 +1193,7 @@ export default function EkranPlanu() {
                                 Zmiana pojedynczego dnia rozjechałaby się z garnkiem.
                               */}
                               <ThemedText type="smallBold">
-                                {pozycja.porcje}{' '}
-                                {pozycja.porcje === 1 ? 'porcja' : 'porcje'}
+                                {t('plan.porcje', { count: pozycja.porcje })}
                               </ThemedText>
 
                               {pozycja.gramy_porcji > 0 && (
@@ -1198,8 +1203,9 @@ export default function EkranPlanu() {
                               )}
 
                               <ThemedText type="small" themeColor="textSecondary">
-                                {Math.round(pozycja.kcal * pozycja.porcje)} kcal{' · '}
-                                {Math.round(pozycja.bialko_g * pozycja.porcje * 10) / 10} g białka
+                                {t('makro.ileKcal', { kcal: Math.round(pozycja.kcal * pozycja.porcje) })}
+                                {' · '}
+                                {t('makro.gBialka', { gramy: liczbaNaTekst(pozycja.bialko_g * pozycja.porcje, 1) })}
                               </ThemedText>
                             </View>
                           </View>
@@ -1217,8 +1223,8 @@ export default function EkranPlanu() {
                       <Ionicons name="add-circle-outline" size={18} color={motyw.textSecondary} />
                       <ThemedText type="small" themeColor="textSecondary">
                         {dania.length === 0
-                          ? `${OPIS_PORY[pora]} — wybierz danie`
-                          : `Dołóż danie do ${OPIS_PORY[pora].toLowerCase()}`}
+                          ? t('plan.wybierzDanie', { pora: t(`pora.${pora}`) })
+                          : t(`plan.dolozDo.${pora}`)}
                       </ThemedText>
                     </Pressable>
 
@@ -1233,9 +1239,11 @@ export default function EkranPlanu() {
                           type="small"
                           themeColor="textSecondary"
                           style={styles.infoBialkoTekst}>
-                          {OPIS_PORY[pora]}: {Math.round(bialko * 10) / 10} g białka,
-                          próg {progBialka} g. Lekki posiłek — jeśli reszta dnia to nadrobi,
-                          nic się nie dzieje.
+                          {t('plan.lekkiPosilek', {
+                            pora: t(`pora.${pora}`),
+                            bialko: liczbaNaTekst(bialko, 1),
+                            prog: progBialka,
+                          })}
                         </ThemedText>
                       </View>
                     )}
@@ -1254,7 +1262,7 @@ export default function EkranPlanu() {
                     {(
                       [
                         {
-                          etykieta: 'kcal',
+                          etykieta: t('makro.kcal'),
                           wartosc: Math.round(suma.kcal),
                           jednostka: '',
                           cel: cel?.kcal,
@@ -1262,7 +1270,7 @@ export default function EkranPlanu() {
                           kolor: KOLOR_MAKRO.bialko,
                         },
                         {
-                          etykieta: 'białko',
+                          etykieta: t('makro.bialko'),
                           wartosc: Math.round(suma.bialko),
                           jednostka: ' g',
                           cel: cel?.bialko_g,
@@ -1270,7 +1278,7 @@ export default function EkranPlanu() {
                           kolor: KOLOR_MAKRO.bialko,
                         },
                         {
-                          etykieta: 'tłuszcz',
+                          etykieta: t('makro.tluszcz'),
                           wartosc: Math.round(suma.tluszcz),
                           jednostka: ' g',
                           cel: cel?.tluszcz_g,
@@ -1278,7 +1286,7 @@ export default function EkranPlanu() {
                           kolor: KOLOR_MAKRO.tluszcz,
                         },
                         {
-                          etykieta: 'węgle',
+                          etykieta: t('makro.wegle'),
                           wartosc: Math.round(suma.wegle),
                           jednostka: ' g',
                           cel: cel?.wegle_g,
@@ -1286,7 +1294,7 @@ export default function EkranPlanu() {
                           kolor: KOLOR_MAKRO.wegle,
                         },
                         {
-                          etykieta: 'błonnik',
+                          etykieta: t('makro.blonnik'),
                           wartosc: Math.round(suma.blonnik),
                           jednostka: ' g',
                           cel: cel?.blonnik_g ?? undefined,
@@ -1295,7 +1303,7 @@ export default function EkranPlanu() {
                         },
                       ]
                     ).map((p) => (
-                      <View key={p.etykieta} style={styles.summaryPozycja}>
+                      <View key={p.ikona} style={styles.summaryPozycja}>
                         <View style={[styles.summaryIkona, { backgroundColor: `${p.kolor}22` }]}>
                           <Ionicons name={p.ikona} size={18} color={p.kolor} />
                         </View>
@@ -1306,8 +1314,7 @@ export default function EkranPlanu() {
                           </ThemedText>
                           {p.cel !== undefined && (
                             <ThemedText type="small" themeColor="textSecondary" numberOfLines={1}>
-                              z {p.cel}
-                              {p.jednostka}
+                              {t('plan.zCelu', { cel: `${p.cel}${p.jednostka}` })}
                             </ThemedText>
                           )}
                           <ThemedText type="small" themeColor="textSecondary" numberOfLines={1}>

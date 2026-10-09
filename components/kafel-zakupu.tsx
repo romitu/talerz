@@ -1,6 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { Image } from 'expo-image';
 import { Children, createContext, useContext, useEffect, useState, type ReactNode } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Pressable, StyleSheet, View } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
@@ -31,11 +32,6 @@ export function SiatkaKafli({ children }: { children: ReactNode }) {
   );
 }
 
-export const OPIS_ZRODLA: Record<ZrodloZdjecia, { tytul: string; opis: string }> = {
-  ai: { tytul: 'Grafika AI', opis: 'Wygenerowana, poglądowa' },
-  wlasne: { tytul: 'Zdjęcie własne', opis: 'Dodane przez użytkownika' },
-};
-
 /**
  * Znaczek pochodzenia zdjęcia w rogu kafla.
  *
@@ -47,15 +43,17 @@ export const OPIS_ZRODLA: Record<ZrodloZdjecia, { tytul: string; opis: string }>
  * kafel jest przyciskiem: przycisk w przycisku to błąd HTML w przeglądarce.
  */
 export function ZnaczekZrodla({ zrodlo, staly = false }: { zrodlo: ZrodloZdjecia; staly?: boolean }) {
+  const { t } = useTranslation();
   const [widoczny, setWidoczny] = useState(false);
 
   useEffect(() => {
     if (!widoczny) return;
-    const t = setTimeout(() => setWidoczny(false), 2500);
-    return () => clearTimeout(t);
+    const minutnik = setTimeout(() => setWidoczny(false), 2500);
+    return () => clearTimeout(minutnik);
   }, [widoczny]);
 
-  const { tytul, opis } = OPIS_ZRODLA[zrodlo];
+  const tytul = t(`zrodloZdjecia.${zrodlo}.tytul`);
+  const opis = t(`zrodloZdjecia.${zrodlo}.opis`);
   const ikona =
     zrodlo === 'ai' ? (
       <ThemedText style={styles.znaczekTekst}>AI</ThemedText>
@@ -116,6 +114,7 @@ export function KafelZakupu(props: Props) {
 
 function Kafel({ nazwa, ilosc, zdjecie, zrodlo, zaznaczona, onPress, onUsun }: Props) {
   const motyw = useTheme();
+  const { t } = useTranslation();
   const podpis = ilosc ? `${nazwa} — ${ilosc}` : nazwa;
   const wyciszony = zaznaczona ? styles.wyciszony : null;
 
@@ -125,7 +124,7 @@ function Kafel({ nazwa, ilosc, zdjecie, zrodlo, zaznaczona, onPress, onUsun }: P
       disabled={!onPress}
       accessibilityRole="checkbox"
       accessibilityState={{ checked: zaznaczona, disabled: !onPress }}
-      accessibilityLabel={`Kupione: ${podpis}`}
+      accessibilityLabel={t('kafelZakupu.kupione', { podpis })}
       style={({ pressed }) => [
         styles.kafel,
         {
@@ -146,7 +145,7 @@ function Kafel({ nazwa, ilosc, zdjecie, zrodlo, zaznaczona, onPress, onUsun }: P
         ) : (
           <View style={[styles.brak, wyciszony]}>
             <Ionicons name="image-outline" size={26} color="#8a96a3" />
-            <ThemedText style={styles.brakTekst}>Brak zdjęcia</ThemedText>
+            <ThemedText style={styles.brakTekst}>{t('wspolne.brakZdjecia')}</ThemedText>
           </View>
         )}
 
@@ -176,7 +175,7 @@ function Kafel({ nazwa, ilosc, zdjecie, zrodlo, zaznaczona, onPress, onUsun }: P
             onPress={onUsun}
             hitSlop={8}
             accessibilityRole="button"
-            accessibilityLabel={`Usuń ${nazwa} z listy`}>
+            accessibilityLabel={t('kafelZakupu.usun', { nazwa })}>
             <Ionicons name="close" size={16} color={motyw.textSecondary} />
           </Pressable>
         )}
@@ -200,6 +199,7 @@ function WierszZakupu({
   miniatura,
 }: Props & { miniatura: boolean }) {
   const motyw = useTheme();
+  const { t } = useTranslation();
   const podpis = ilosc ? `${nazwa} — ${ilosc}` : nazwa;
   const wyciszony = zaznaczona ? styles.wyciszony : null;
 
@@ -209,7 +209,7 @@ function WierszZakupu({
       disabled={!onPress}
       accessibilityRole="checkbox"
       accessibilityState={{ checked: zaznaczona, disabled: !onPress }}
-      accessibilityLabel={`Kupione: ${podpis}`}
+      accessibilityLabel={t('kafelZakupu.kupione', { podpis })}
       style={({ pressed }) => [
         styles.wiersz,
         miniatura && styles.wierszZMiniatura,
@@ -257,7 +257,7 @@ function WierszZakupu({
           onPress={onUsun}
           hitSlop={8}
           accessibilityRole="button"
-          accessibilityLabel={`Usuń ${nazwa} z listy`}>
+          accessibilityLabel={t('kafelZakupu.usun', { nazwa })}>
           <Ionicons name="close" size={18} color={motyw.textSecondary} />
         </Pressable>
       )}

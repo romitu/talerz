@@ -1,4 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
+import { useTranslation } from 'react-i18next';
 import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 
 import { ThemedText } from './themed-text';
@@ -44,6 +45,7 @@ export function FiltryPrzepisow({
   onWyczysc: () => void;
 }) {
   const motyw = useTheme();
+  const { t } = useTranslation();
   const aktywne = grupy.flatMap((g) => g.opcje.filter((o) => o.wybrana));
 
   return (
@@ -53,7 +55,9 @@ export function FiltryPrzepisow({
           onPress={onPrzelaczOtwarte}
           accessibilityRole="button"
           accessibilityState={{ expanded: otwarte }}
-          accessibilityLabel={`Filtry${aktywne.length > 0 ? `, włączone: ${aktywne.length}` : ''}`}
+          accessibilityLabel={
+            aktywne.length > 0 ? t('filtry.filtryWlaczone', { ile: aktywne.length }) : t('filtry.filtry')
+          }
           style={[
             styles.pigulka,
             aktywne.length > 0
@@ -62,7 +66,8 @@ export function FiltryPrzepisow({
           ]}>
           <Ionicons name="options-outline" size={16} color={motyw.accent} />
           <ThemedText type="smallBold" style={{ color: motyw.accent }}>
-            Filtry{aktywne.length > 0 ? ` ${aktywne.length}` : ''}
+            {t('filtry.filtry')}
+            {aktywne.length > 0 ? ` ${aktywne.length}` : ''}
           </ThemedText>
           <Ionicons name={otwarte ? 'chevron-up' : 'chevron-down'} size={14} color={motyw.accent} />
         </Pressable>
@@ -73,7 +78,7 @@ export function FiltryPrzepisow({
               key={o.klucz}
               onPress={o.onPress}
               accessibilityRole="button"
-              accessibilityLabel={`Zdejmij filtr ${o.etykieta}`}
+              accessibilityLabel={t('filtry.zdejmij', { filtr: o.etykieta })}
               style={[styles.pigulka, { backgroundColor: motyw.accent, borderColor: motyw.accent }]}>
               <ThemedText type="smallBold" style={styles.tekstWybrany} numberOfLines={1}>
                 {o.etykieta}
@@ -86,11 +91,11 @@ export function FiltryPrzepisow({
           <Pressable
             onPress={onWyczysc}
             accessibilityRole="button"
-            accessibilityLabel="Wyczyść wszystkie filtry"
+            accessibilityLabel={t('filtry.wyczyscWszystkie')}
             hitSlop={6}
             style={styles.wyczysc}>
             <ThemedText type="small" themeColor="textSecondary">
-              Wyczyść
+              {t('filtry.wyczysc')}
             </ThemedText>
           </Pressable>
         )}

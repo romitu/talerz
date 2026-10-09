@@ -1,5 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 
 import { ThemedText } from './themed-text';
@@ -67,10 +68,12 @@ export function ListaRozwijana<T extends string>({
   opcje,
   wybrana,
   onZmiana,
-  placeholder = 'wybierz…',
+  placeholder: placeholderPodany,
   widocznychOpcji = 6,
 }: Props<T>) {
   const motyw = useTheme();
+  const { t } = useTranslation();
+  const placeholder = placeholderPodany ?? t('listaRozwijana.wybierz');
   const [otwarta, setOtwarta] = useState(false);
 
   const aktualna = opcje.find((o) => o.wartosc === wybrana);

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -9,6 +10,7 @@ import { ThemedText } from './themed-text';
 import { ThemedView } from './themed-view';
 
 import { komunikatBledu } from '@/lib/blad';
+import i18n from '@/lib/jezyk';
 import { MaxContentWidth, Spacing } from '@/constants/theme';
 import { baza_skonfigurowana, supabase } from '@/lib/supabase';
 
@@ -35,17 +37,18 @@ const REJESTRACJA_OTWARTA = true;
 
 /** Tłumaczy komunikaty Supabase na zrozumiały polski. */
 function komunikat(tresc: string): string {
-  const t = tresc.toLowerCase();
-  if (t.includes('invalid login credentials')) return 'Nieprawidłowy adres e-mail lub hasło.';
-  if (t.includes('email not confirmed')) return 'Potwierdź adres e-mail — sprawdź skrzynkę.';
-  if (t.includes('user already registered')) return 'Konto o tym adresie już istnieje.';
-  if (t.includes('password should be')) return 'Hasło musi mieć co najmniej 6 znaków.';
-  if (t.includes('unable to validate email')) return 'Adres e-mail wygląda na nieprawidłowy.';
-  if (t.includes('network') || t.includes('fetch')) return 'Brak połączenia z bazą danych.';
+  const m = tresc.toLowerCase();
+  if (m.includes('invalid login credentials')) return i18n.t('logowanie.bladDanych');
+  if (m.includes('email not confirmed')) return i18n.t('logowanie.bladNiepotwierdzony');
+  if (m.includes('user already registered')) return i18n.t('logowanie.bladIstnieje');
+  if (m.includes('password should be')) return i18n.t('logowanie.bladHaslo');
+  if (m.includes('unable to validate email')) return i18n.t('logowanie.bladEmail');
+  if (m.includes('network') || m.includes('fetch')) return i18n.t('logowanie.bladPolaczenia');
   return tresc;
 }
 
 export function EkranLogowania() {
+  const { t } = useTranslation();
   const [tryb, setTryb] = useState<Tryb>('logowanie');
   const [email, setEmail] = useState('');
   const [haslo, setHaslo] = useState('');
@@ -60,7 +63,7 @@ export function EkranLogowania() {
     setInformacja(null);
 
     if (!email.trim() || !haslo) {
-      setBlad('Podaj adres e-mail i hasło.');
+      setBlad(t('logowanie.podajDane'));
       return;
     }
 
@@ -75,7 +78,7 @@ export function EkranLogowania() {
 
         // Gdy w Supabase włączone jest potwierdzanie adresu, sesja nie powstaje od razu.
         if (!data.session) {
-          setInformacja('Konto założone. Otwórz link potwierdzający, który wysłaliśmy na podany adres.');
+          setInformacja(t('logowanie.kontoZalozone'));
           setTryb('logowanie');
         }
       } else {
@@ -102,46 +105,45 @@ export function EkranLogowania() {
             <View style={styles.naglowek}>
               <ThemedText type="title">Talerz</ThemedText>
               <ThemedText type="small" themeColor="textSecondary">
-                Gotujesz raz, jesz trzy dni
+                {t('logowanie.slogan')}
               </ThemedText>
             </View>
 
             {!baza_skonfigurowana && (
               <Karta>
                 <ThemedText type="smallBold" themeColor="accent">
-                  Brak połączenia z bazą
+                  {t('logowanie.brakBazy')}
                 </ThemedText>
                 <ThemedText type="small" themeColor="textSecondary">
-                  Utwórz plik .env według wzoru z .env.example i uruchom ponownie komendą
-                  npx.cmd expo start --clear
+                  {t('logowanie.brakBazyOpis')}
                 </ThemedText>
               </Karta>
             )}
 
             <Karta style={styles.formularz}>
               <ThemedText type="default">
-                {rejestracja ? 'Załóż konto' : 'Zaloguj się'}
+                {rejestracja ? t('logowanie.zalozKonto') : t('logowanie.zaloguj')}
               </ThemedText>
 
               <Pole
-                etykieta="Adres e-mail"
+                etykieta={t('logowanie.email')}
                 value={email}
                 onChangeText={setEmail}
                 autoCapitalize="none"
                 autoComplete="email"
                 keyboardType="email-address"
                 inputMode="email"
-                placeholder="jan@przyklad.pl"
+                placeholder={t('logowanie.przykladEmail')}
               />
 
               <Pole
-                etykieta="Hasło"
+                etykieta={t('logowanie.hasloPole')}
                 value={haslo}
                 onChangeText={setHaslo}
                 secureTextEntry
                 autoCapitalize="none"
                 autoComplete={rejestracja ? 'new-password' : 'current-password'}
-                placeholder={rejestracja ? 'co najmniej 6 znaków' : ''}
+                placeholder={rejestracja ? t('logowanie.min6') : ''}
               />
 
               {blad && (
@@ -157,7 +159,7 @@ export function EkranLogowania() {
               )}
 
               <Przycisk
-                tytul={rejestracja ? 'Załóż konto' : 'Zaloguj się'}
+                tytul={rejestracja ? t('logowanie.zalozKonto') : t('logowanie.zaloguj')}
                 onPress={wyslij}
                 zajety={zajety}
                 wylaczony={!baza_skonfigurowana}
@@ -165,7 +167,7 @@ export function EkranLogowania() {
 
               {REJESTRACJA_OTWARTA ? (
                 <Przycisk
-                  tytul={rejestracja ? 'Mam już konto' : 'Nie mam jeszcze konta'}
+                  tytul={rejestracja ? t('logowanie.mamKonto') : t('logowanie.nieMamKonta')}
                   wariant="poboczny"
                   onPress={() => {
                     setTryb(rejestracja ? 'logowanie' : 'rejestracja');
@@ -175,15 +177,13 @@ export function EkranLogowania() {
                 />
               ) : (
                 <ThemedText type="small" themeColor="textSecondary">
-                  Konta zakłada administrator. Jeśli masz dostać dostęp, poproś o założenie
-                  konta na swój adres.
+                  {t('logowanie.rejestracjaZamknieta')}
                 </ThemedText>
               )}
             </Karta>
 
             <ThemedText type="small" themeColor="textSecondary" style={styles.stopka}>
-              Talerz jest przeznaczony wyłącznie dla osób pełnoletnich i nie udziela porad
-              medycznych.
+              {t('logowanie.stopka')}
             </ThemedText>
           </ScrollView>
         </KeyboardAvoidingView>

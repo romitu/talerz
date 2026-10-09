@@ -1,4 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
+import { useTranslation } from 'react-i18next';
 import { Pressable, StyleSheet, View } from 'react-native';
 
 import { ThemedText } from './themed-text';
@@ -16,12 +17,13 @@ export function PrzelacznikWidoku({
   onZmiana: (widok: WidokListy) => void;
 }) {
   const motyw = useTheme();
+  const { t } = useTranslation();
 
   return (
     <View
       style={[styles.przelacznik, { backgroundColor: motyw.background, borderColor: motyw.border }]}
       accessibilityRole="radiogroup"
-      accessibilityLabel="Widok listy">
+      accessibilityLabel={t('widokListy.etykieta')}>
       {WIDOKI_LISTY.map((w) => {
         const wybrany = w.wartosc === widok;
         return (
@@ -36,7 +38,7 @@ export function PrzelacznikWidoku({
               type={wybrany ? 'smallBold' : 'small'}
               themeColor={wybrany ? 'accent' : 'textSecondary'}
               numberOfLines={1}>
-              {w.etykieta}
+              {t(`widokListy.${w.wartosc}`)}
             </ThemedText>
           </Pressable>
         );

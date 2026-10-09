@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import type { GrupaFiltrow } from '@/components/filtry-przepisow';
 import {
@@ -6,9 +7,6 @@ import {
   GLOWNE_BIALKA,
   KUCHNIE,
   RODZAJE_DAN,
-  SKROT_BIALKA,
-  SKROT_KUCHNI,
-  SKROT_RODZAJU,
   type GlowneBialko,
   type Kuchnia,
   type PrzepisZMakro,
@@ -22,9 +20,9 @@ import {
  */
 type Przelacznik = 'szybkie' | 'na_zapas' | 'bez_gotowania';
 
-const PRZELACZNIKI: Record<Przelacznik, { etykieta: string; pasuje: (p: PrzepisZMakro) => boolean }> = {
+/** Nazwy przełączników są w tłumaczeniach: `filtry.przelacznik.*`. */
+const PRZELACZNIKI: Record<Przelacznik, { pasuje: (p: PrzepisZMakro) => boolean }> = {
   szybkie: {
-    etykieta: 'Do 20 min',
     pasuje: (p) => {
       const razem = czasRazem(p.czas_przygotowania_min, p.czas_obrobki_min);
       return razem !== null && razem <= 20;
@@ -33,13 +31,11 @@ const PRZELACZNIKI: Record<Przelacznik, { etykieta: string; pasuje: (p: PrzepisZ
   // Trwałość efektywna, czyli z własnym skróceniem tego konta — liczy się to,
   // ile danie wytrzyma u TEGO użytkownika.
   na_zapas: {
-    etykieta: 'Na zapas',
     pasuje: (p) => p.trwalosc_dni >= 3 || p.mozna_mrozic === true,
   },
   // Formularz przepisu zapisuje zero minut obróbki jako puste pole, a import
   // jako 0 — oba znaczą to samo: danie składane na zimno (migracja 0013).
   bez_gotowania: {
-    etykieta: 'Bez gotowania',
     pasuje: (p) => (p.czas_obrobki_min ?? 0) === 0,
   },
 };
@@ -62,6 +58,7 @@ function przelaczNaLiscie<T>(lista: T[], wartosc: T): T[] {
  * grupy — inaczej przy zaznaczonych „Zupach” „Sałatki” pokazywałyby zero.
  */
 export function useFiltryPrzepisow(bazaLicznikow: PrzepisZMakro[]) {
+  const { t } = useTranslation();
   /**
    * `brak` to przepisy bez rodzaju / bez wyraźnego głównego białka — osobna
    * opcja, żeby luki w danych było widać, a nie żeby znikały z listy.
@@ -99,11 +96,11 @@ export function useFiltryPrzepisow(bazaLicznikow: PrzepisZMakro[]) {
   const grupy: GrupaFiltrow[] = [
     {
       klucz: 'rodzaj',
-      tytul: 'Rodzaj dania',
+      tytul: t('filtry.grupaRodzaj'),
       opcje: [
         ...RODZAJE_DAN.map((r) => ({
           klucz: `rodzaj-${r}`,
-          etykieta: SKROT_RODZAJU[r],
+          etykieta: t(`rodzajSkrot.${r}`),
           ile: bazaRodzaju.filter((p) => p.rodzaje.includes(r)).length,
           wybrana: rodzaje.includes(r),
           onPress: () => setRodzaje((f) => przelaczNaLiscie(f, r)),
@@ -112,7 +109,7 @@ export function useFiltryPrzepisow(bazaLicznikow: PrzepisZMakro[]) {
           ? [
               {
                 klucz: 'rodzaj-brak',
-                etykieta: 'Bez rodzaju',
+                etykieta: t('filtry.bezRodzaju'),
                 ile: bezRodzaju,
                 wybrana: rodzaje.includes('brak'),
                 onPress: () => setRodzaje((f) => przelaczNaLiscie(f, 'brak' as const)),
@@ -123,11 +120,11 @@ export function useFiltryPrzepisow(bazaLicznikow: PrzepisZMakro[]) {
     },
     {
       klucz: 'kuchnia',
-      tytul: 'Kuchnia',
+      tytul: t('filtry.grupaKuchnia'),
       opcje: [
         ...KUCHNIE.map((k) => ({
           klucz: `kuchnia-${k}`,
-          etykieta: SKROT_KUCHNI[k],
+          etykieta: t(`kuchniaSkrot.${k}`),
           ile: bazaKuchni.filter((p) => p.kuchnie.includes(k)).length,
           wybrana: kuchnie.includes(k),
           onPress: () => setKuchnie((f) => przelaczNaLiscie(f, k)),
@@ -136,7 +133,7 @@ export function useFiltryPrzepisow(bazaLicznikow: PrzepisZMakro[]) {
           ? [
               {
                 klucz: 'kuchnia-brak',
-                etykieta: 'Bez kuchni',
+                etykieta: t('filtry.bezKuchni'),
                 ile: bezKuchni,
                 wybrana: kuchnie.includes('brak'),
                 onPress: () => setKuchnie((f) => przelaczNaLiscie(f, 'brak' as const)),
@@ -147,11 +144,11 @@ export function useFiltryPrzepisow(bazaLicznikow: PrzepisZMakro[]) {
     },
     {
       klucz: 'bialko',
-      tytul: 'Główne białko — wyliczone ze składników',
+      tytul: t('filtry.grupaBialko'),
       opcje: [
         ...GLOWNE_BIALKA.map((b) => ({
           klucz: `bialko-${b}`,
-          etykieta: SKROT_BIALKA[b],
+          etykieta: t(`glowneBialkoSkrot.${b}`),
           ile: bazaBialka.filter((p) => p.glowne_bialko === b).length,
           wybrana: bialka.includes(b),
           onPress: () => setBialka((f) => przelaczNaLiscie(f, b)),
@@ -160,7 +157,7 @@ export function useFiltryPrzepisow(bazaLicznikow: PrzepisZMakro[]) {
           ? [
               {
                 klucz: 'bialko-brak',
-                etykieta: 'Bez wyraźnego',
+                etykieta: t('filtry.bezBialka'),
                 ile: bezBialka,
                 wybrana: bialka.includes('brak'),
                 onPress: () => setBialka((f) => przelaczNaLiscie(f, 'brak' as const)),
@@ -171,10 +168,10 @@ export function useFiltryPrzepisow(bazaLicznikow: PrzepisZMakro[]) {
     },
     {
       klucz: 'przelaczniki',
-      tytul: 'Szybki wybór',
+      tytul: t('filtry.grupaSzybki'),
       opcje: KOLEJNOSC_PRZELACZNIKOW.map((k) => ({
         klucz: `przelacznik-${k}`,
-        etykieta: PRZELACZNIKI[k].etykieta,
+        etykieta: t(`filtry.przelacznik.${k}`),
         ile: bazaPrzelacznikow.filter((p) => PRZELACZNIKI[k].pasuje(p)).length,
         wybrana: przelaczniki.includes(k),
         onPress: () => setPrzelaczniki((f) => przelaczNaLiscie(f, k)),

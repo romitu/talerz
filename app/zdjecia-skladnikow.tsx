@@ -2,11 +2,12 @@ import { Ionicons } from '@expo/vector-icons';
 import { Image } from 'expo-image';
 import { useLocalSearchParams } from 'expo-router';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ActivityIndicator, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 
 import { Ekran } from '@/components/ekran';
 import { Karta } from '@/components/karta';
-import { OPIS_ZRODLA, SiatkaKafli, ZnaczekZrodla } from '@/components/kafel-zakupu';
+import { SiatkaKafli, ZnaczekZrodla } from '@/components/kafel-zakupu';
 import { Pole } from '@/components/pole';
 import { Przycisk } from '@/components/przycisk';
 import { ThemedText } from '@/components/themed-text';
@@ -46,12 +47,8 @@ import {
 
 type Filtr = 'wszystkie' | 'bez' | 'ai' | 'wlasne';
 
-const FILTRY: { klucz: Filtr; etykieta: string }[] = [
-  { klucz: 'wszystkie', etykieta: 'Wszystkie' },
-  { klucz: 'bez', etykieta: 'Bez zdjęcia' },
-  { klucz: 'ai', etykieta: 'AI' },
-  { klucz: 'wlasne', etykieta: 'Własne' },
-];
+/** Nazwy filtrów są w tłumaczeniach: `zdjeciaSkladnikow.filtr.<klucz>`. */
+const FILTRY: { klucz: Filtr }[] = [{ klucz: 'wszystkie' }, { klucz: 'bez' }, { klucz: 'ai' }, { klucz: 'wlasne' }];
 
 function pasuje(s: ZdjecieSkladnika, filtr: Filtr): boolean {
   if (filtr === 'bez') return !s.zdjecie;
@@ -70,6 +67,7 @@ export default function EkranZdjecSkladnikow() {
   const { powrot } = useLocalSearchParams<{ powrot?: string }>();
   const { sesja } = useSesja();
   const motyw = useTheme();
+  const { t } = useTranslation();
   const przewijanie = useRef<ScrollView>(null);
 
   const [skladniki, setSkladniki] = useState<ZdjecieSkladnika[]>([]);
@@ -144,7 +142,7 @@ export default function EkranZdjecSkladnikow() {
     liczbaStron > 1 ? (
       <View style={styles.strony}>
         <Przycisk
-          tytul="Poprzednia"
+          tytul={t('zdjeciaSkladnikow.poprzednia')}
           ikona="chevron-back"
           wariant="poboczny"
           onPress={() => idzDoStrony(biezaca - 1)}
@@ -155,7 +153,7 @@ export default function EkranZdjecSkladnikow() {
           {biezaca + 1} / {liczbaStron}
         </ThemedText>
         <Przycisk
-          tytul="Następna"
+          tytul={t('zdjeciaSkladnikow.nastepna')}
           ikona="chevron-forward"
           wariant="poboczny"
           onPress={() => idzDoStrony(biezaca + 1)}
@@ -233,15 +231,14 @@ export default function EkranZdjecSkladnikow() {
 
   if (rola !== null && !jestModeratorem) {
     return (
-      <Ekran tytul="Zdjęcia składników">
+      <Ekran tytul={t('menu.zdjeciaSkladnikow')}>
         <Karta>
-          <ThemedText type="default">Ten ekran jest dla moderatora i administratora</ThemedText>
+          <ThemedText type="default">{t('wspolne.tylkoModerator')}</ThemedText>
           <ThemedText type="small" themeColor="textSecondary">
-            Zdjęcia składników widzą wszyscy na liście zakupów, więc zmienia je tylko osoba
-            z odpowiednimi uprawnieniami.
+            {t('zdjeciaSkladnikow.tylkoModeratorOpis')}
           </ThemedText>
         </Karta>
-        <Przycisk tytul="Wróć" wariant="poboczny" onPress={() => wroc(powrot, '/skladniki')} />
+        <Przycisk tytul={t('wspolne.wroc')} wariant="poboczny" onPress={() => wroc(powrot, '/skladniki')} />
       </Ekran>
     );
   }
@@ -250,8 +247,8 @@ export default function EkranZdjecSkladnikow() {
 
   return (
     <Ekran
-      tytul="Zdjęcia składników"
-      podtytul="Grafiki pokazywane na liście zakupów"
+      tytul={t('menu.zdjeciaSkladnikow')}
+      podtytul={t('zdjeciaSkladnikow.podtytul')}
       refPrzewijania={przewijanie}>
       {wybrany && (
         <Karta>
@@ -263,7 +260,7 @@ export default function EkranZdjecSkladnikow() {
               onPress={() => setWybranyId(null)}
               hitSlop={10}
               accessibilityRole="button"
-              accessibilityLabel="Zamknij edycję zdjęcia">
+              accessibilityLabel={t('zdjeciaSkladnikow.zamknij')}>
               <Ionicons name="close" size={22} color={motyw.textSecondary} />
             </Pressable>
           </View>
@@ -274,7 +271,7 @@ export default function EkranZdjecSkladnikow() {
             ) : (
               <View style={styles.brak}>
                 <Ionicons name="image-outline" size={40} color="#8a96a3" />
-                <ThemedText style={styles.brakTekst}>Brak zdjęcia</ThemedText>
+                <ThemedText style={styles.brakTekst}>{t('wspolne.brakZdjecia')}</ThemedText>
               </View>
             )}
             {pracuje && (
@@ -287,7 +284,7 @@ export default function EkranZdjecSkladnikow() {
           {wybrany.zdjecie && (
             <View style={styles.grupa}>
               <ThemedText type="smallBold" themeColor="textSecondary">
-                POCHODZENIE ZDJĘCIA
+                {t('zdjeciePrzepisu.pochodzenie')}
               </ThemedText>
               <View style={styles.przelacznik}>
                 {(['ai', 'wlasne'] as const).map((z) => {
@@ -306,10 +303,10 @@ export default function EkranZdjecSkladnikow() {
                         },
                       ]}>
                       <ThemedText type="smallBold" themeColor={aktywny ? 'accent' : undefined}>
-                        {OPIS_ZRODLA[z].tytul}
+                        {t(`zrodloZdjecia.${z}.tytul`)}
                       </ThemedText>
                       <ThemedText type="small" themeColor="textSecondary">
-                        {OPIS_ZRODLA[z].opis}
+                        {t(`zrodloZdjecia.${z}.opis`)}
                       </ThemedText>
                     </Pressable>
                   );
@@ -322,7 +319,7 @@ export default function EkranZdjecSkladnikow() {
             {moznaWybrac && (
               <View style={styles.przycisk}>
                 <Przycisk
-                  tytul={wybrany.zdjecie ? 'Wymień zdjęcie' : 'Dodaj zdjęcie'}
+                  tytul={wybrany.zdjecie ? t('zdjeciePrzepisu.wymien') : t('zdjeciePrzepisu.dodaj')}
                   ikona="image-outline"
                   onPress={() => wymien(wybrany)}
                   zajety={pracuje}
@@ -332,7 +329,7 @@ export default function EkranZdjecSkladnikow() {
             {wybrany.zdjecie && (
               <View style={styles.przycisk}>
                 <Przycisk
-                  tytul="Usuń zdjęcie"
+                  tytul={t('zdjeciePrzepisu.usun')}
                   ikona="trash-outline"
                   wariant="poboczny"
                   onPress={() => usun(wybrany)}
@@ -344,8 +341,8 @@ export default function EkranZdjecSkladnikow() {
 
           <ThemedText type="small" themeColor="textSecondary">
             {moznaWybrac
-              ? `Zdjęcie jest przycinane do kwadratu ${BOK_ZDJECIA_SKLADNIKA}×${BOK_ZDJECIA_SKLADNIKA} i zapisuje się od razu. Nowe zdjęcie dostaje oznaczenie „Zdjęcie własne” — zmień je wyżej, jeśli to grafika AI.`
-              : 'Nowe zdjęcia dodajesz z przeglądarki — na telefonie możesz zmienić oznaczenie albo usunąć zdjęcie.'}
+              ? t('zdjeciaSkladnikow.wskazowka', { bok: BOK_ZDJECIA_SKLADNIKA })
+              : t('zdjeciaSkladnikow.tylkoPrzegladarka')}
           </ThemedText>
         </Karta>
       )}
@@ -360,10 +357,10 @@ export default function EkranZdjecSkladnikow() {
 
       <Karta>
         <Pole
-          etykieta="Szukaj składnika"
+          etykieta={t('nieJemy.szukaj')}
           value={szukaj}
           onChangeText={setSzukaj}
-          placeholder="np. cebula"
+          placeholder={t('zdjeciaSkladnikow.przyklad')}
           autoCorrect={false}
         />
         <View style={styles.filtry}>
@@ -383,7 +380,7 @@ export default function EkranZdjecSkladnikow() {
                   },
                 ]}>
                 <ThemedText type="small" themeColor={aktywny ? 'accent' : undefined}>
-                  {f.etykieta} ({liczby[f.klucz]})
+                  {t(`zdjeciaSkladnikow.filtr.${f.klucz}`)} ({liczby[f.klucz]})
                 </ThemedText>
               </Pressable>
             );
@@ -393,13 +390,13 @@ export default function EkranZdjecSkladnikow() {
 
       {wczytywanie && (
         <ThemedText type="small" themeColor="textSecondary">
-          wczytywanie…
+          {t('naglowekProfilu.wczytywanie')}
         </ThemedText>
       )}
 
       {!wczytywanie && widoczne.length === 0 && (
         <ThemedText type="small" themeColor="textSecondary">
-          Nic nie pasuje do wyszukiwania.
+          {t('zdjeciaSkladnikow.brakWynikow')}
         </ThemedText>
       )}
 
@@ -414,7 +411,7 @@ export default function EkranZdjecSkladnikow() {
               key={s.id}
               onPress={() => otworz(s.id)}
               accessibilityRole="button"
-              accessibilityLabel={`Edytuj zdjęcie: ${s.nazwa}`}
+              accessibilityLabel={t('zdjeciaSkladnikow.edytujZdjecie', { nazwa: s.nazwa })}
               style={({ pressed }) => [
                 styles.kafel,
                 {
@@ -434,7 +431,7 @@ export default function EkranZdjecSkladnikow() {
                 ) : (
                   <View style={styles.brak}>
                     <Ionicons name="image-outline" size={26} color="#8a96a3" />
-                    <ThemedText style={styles.brakTekst}>Brak zdjęcia</ThemedText>
+                    <ThemedText style={styles.brakTekst}>{t('wspolne.brakZdjecia')}</ThemedText>
                   </View>
                 )}
                 {s.zdjecie && s.zdjecie_zrodlo && <ZnaczekZrodla zrodlo={s.zdjecie_zrodlo} staly />}
@@ -449,7 +446,7 @@ export default function EkranZdjecSkladnikow() {
 
       {stronicowanie}
 
-      <Przycisk tytul="Wróć" wariant="poboczny" onPress={() => wroc(powrot, '/skladniki')} />
+      <Przycisk tytul={t('wspolne.wroc')} wariant="poboczny" onPress={() => wroc(powrot, '/skladniki')} />
     </Ekran>
   );
 }

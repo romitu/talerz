@@ -1,9 +1,10 @@
 import { Ionicons } from '@expo/vector-icons';
+import { useTranslation } from 'react-i18next';
 import { Pressable, StyleSheet, View } from 'react-native';
 
 import { ThemedText } from './themed-text';
 
-import { OPIS_STYLU, PALETY, Spacing, STYLE } from '@/constants/theme';
+import { PALETY, Spacing, STYLE } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { useTheme } from '@/hooks/use-theme';
 import { useStyl } from '@/lib/wyglad';
@@ -21,13 +22,14 @@ import { useStyl } from '@/lib/wyglad';
 export function WyborStylu() {
   const { styl, ustawStyl } = useStyl();
   const motyw = useTheme();
+  const { t } = useTranslation();
   const schemat = useColorScheme();
   const tryb = schemat === 'dark' ? 'dark' : 'light';
 
   return (
     <View style={styles.grupa}>
       <ThemedText type="smallBold" themeColor="textSecondary">
-        WYGLĄD
+        {t('wyborStylu.naglowek')}
       </ThemedText>
 
       {STYLE.map((s) => {
@@ -39,7 +41,7 @@ export function WyborStylu() {
             onPress={() => ustawStyl(s)}
             accessibilityRole="radio"
             accessibilityState={{ selected: wybrany }}
-            accessibilityLabel={`${OPIS_STYLU[s].nazwa}. ${OPIS_STYLU[s].opis}`}
+            accessibilityLabel={`${t(`styl.${s}.nazwa`)}. ${t(`styl.${s}.opis`)}`}
             style={({ pressed }) => [
               styles.pozycja,
               {
@@ -62,10 +64,10 @@ export function WyborStylu() {
 
             <View style={styles.opis}>
               <ThemedText type="default" themeColor={wybrany ? 'accent' : 'text'}>
-                {OPIS_STYLU[s].nazwa}
+                {t(`styl.${s}.nazwa`)}
               </ThemedText>
               <ThemedText type="small" themeColor="textSecondary">
-                {OPIS_STYLU[s].opis}
+                {t(`styl.${s}.opis`)}
               </ThemedText>
             </View>
 
@@ -75,9 +77,7 @@ export function WyborStylu() {
       })}
 
       <ThemedText type="small" themeColor="textSecondary">
-        Jasny czy ciemny wybiera system — styl działa w obu. Ustawienie jest
-        zapamiętane na tym urządzeniu, więc na telefonie możesz mieć inne
-        niż na komputerze.
+        {t('wyborStylu.wskazowka')}
       </ThemedText>
     </View>
   );

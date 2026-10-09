@@ -1,5 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useMemo, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Pressable, StyleSheet, TextInput, View } from 'react-native';
 
 import { Pole } from './pole';
@@ -41,6 +42,7 @@ function doPorownania(tekst: string): string {
  */
 export function DopiszProdukt({ historia, juzNaLiscie, onDodaj }: Props) {
   const motyw = useTheme();
+  const { t } = useTranslation();
   const [nazwa, setNazwa] = useState('');
   const [ilosc, setIlosc] = useState('');
   const [zajety, setZajety] = useState(false);
@@ -79,7 +81,7 @@ export function DopiszProdukt({ historia, juzNaLiscie, onDodaj }: Props) {
       setNazwa('');
       setIlosc('');
     } catch (e) {
-      setBlad(e instanceof Error ? e.message : 'Nie udało się dopisać produktu.');
+      setBlad(e instanceof Error ? e.message : t('dopiszProdukt.blad'));
     } finally {
       setZajety(false);
     }
@@ -90,10 +92,10 @@ export function DopiszProdukt({ historia, juzNaLiscie, onDodaj }: Props) {
       <View style={styles.wiersz}>
         <View style={styles.poleNazwy}>
           <Pole
-            etykieta="Dopisz produkt"
+            etykieta={t('dopiszProdukt.etykieta')}
             value={nazwa}
             onChangeText={setNazwa}
-            placeholder="Worki na śmieci"
+            placeholder={t('dopiszProdukt.przykladNazwy')}
             autoCorrect={false}
             onSubmitEditing={() => dodaj(nazwa)}
             returnKeyType="done"
@@ -102,10 +104,10 @@ export function DopiszProdukt({ historia, juzNaLiscie, onDodaj }: Props) {
         <View style={styles.poleIlosci}>
           <Pole
             ref={poleIlosci}
-            etykieta="Ile"
+            etykieta={t('dopiszProdukt.ile')}
             value={ilosc}
             onChangeText={setIlosc}
-            placeholder="1 opak."
+            placeholder={t('dopiszProdukt.przykladIlosci')}
             autoCorrect={false}
             onSubmitEditing={() => dodaj(nazwa)}
             returnKeyType="done"
@@ -121,7 +123,7 @@ export function DopiszProdukt({ historia, juzNaLiscie, onDodaj }: Props) {
               onPress={() => wybierz(h)}
               disabled={zajety}
               accessibilityRole="button"
-              accessibilityLabel={`Wybierz ${h}`}
+              accessibilityLabel={t('wspolne.wybierzNazwe', { nazwa: h })}
               style={({ pressed }) => [
                 styles.podpowiedz,
                 { borderColor: motyw.border, backgroundColor: motyw.backgroundElement },
@@ -135,7 +137,7 @@ export function DopiszProdukt({ historia, juzNaLiscie, onDodaj }: Props) {
       )}
 
       <Przycisk
-        tytul="Dopisz do listy"
+        tytul={t('dopiszProdukt.dopisz')}
         wariant="poboczny"
         onPress={() => dodaj(nazwa)}
         zajety={zajety}

@@ -1,4 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
+import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 
 import { ListaRozwijana } from './lista-rozwijana';
@@ -34,25 +35,26 @@ export function NaglowekPlanu({
   onZmianaPierwszegoDnia: (data: string) => void;
 }) {
   const motyw = useTheme();
+  const { t } = useTranslation();
 
   return (
     <ThemedView type="backgroundElement" style={[styles.karta, { borderColor: motyw.border }]}>
       <View style={styles.gorny}>
         <ThemedText type="subtitle" numberOfLines={1}>
-          Plan dnia
+          {t('naglowekPlanu.tytul')}
         </ThemedText>
 
         <View style={styles.osoby}>
           <Ionicons name="people-outline" size={14} color={motyw.textSecondary} />
           <ThemedText type="small" themeColor="textSecondary" numberOfLines={1}>
-            {osoby} {osoby === 1 ? 'osoba' : 'osoby'}
+            {t('wspolne.osoby', { count: osoby })}
           </ThemedText>
         </View>
       </View>
 
       <View style={[styles.dolny, { backgroundColor: motyw.background, borderColor: motyw.border }]}>
         <ThemedText type="small" themeColor="textSecondary">
-          Start od:
+          {t('naglowekPlanu.startOd')}
         </ThemedText>
 
         <View style={styles.poleDaty}>
@@ -64,7 +66,11 @@ export function NaglowekPlanu({
             opcje={mozliweDaty.map((d) => ({
               wartosc: d,
               etykieta: opisDnia(d),
-              opis: czyDzisiaj(d) ? 'dzisiaj' : czyPrzeszly(d) ? 'data wsteczna — do testów' : undefined,
+              opis: czyDzisiaj(d)
+                ? t('naglowekPlanu.dzisiaj')
+                : czyPrzeszly(d)
+                  ? t('naglowekPlanu.dataWsteczna')
+                  : undefined,
               nietypowa: czyPrzeszly(d),
             }))}
           />

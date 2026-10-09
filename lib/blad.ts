@@ -6,6 +6,8 @@
  * „[object Object]”, dlatego rozpakowujemy je tutaj, w jednym miejscu.
  */
 
+import i18n from './jezyk';
+
 type BladBazy = {
   message?: string;
   details?: string;
@@ -21,12 +23,12 @@ export function komunikatBledu(e: unknown): string {
     const b = e as BladBazy;
     const czesci = [b.message, b.details, b.hint].filter(Boolean);
     if (czesci.length > 0) {
-      return czesci.join(' — ') + (b.code ? ` (kod ${b.code})` : '');
+      return czesci.join(' — ') + (b.code ? ` ${i18n.t('blad.kod', { kod: b.code })}` : '');
     }
     try {
       return JSON.stringify(e);
     } catch {
-      return 'Nieznany błąd.';
+      return i18n.t('blad.nieznany');
     }
   }
 

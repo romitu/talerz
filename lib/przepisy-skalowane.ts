@@ -16,6 +16,7 @@ import {
 } from './skalowanie-kalorii';
 import type { PelnyPrzepis, PoraPosilku } from './przepisy';
 import type { Skladnik } from './skladniki';
+import i18n from './jezyk';
 import { supabase } from './supabase';
 
 export type WynikZapisuSkalowania = {
@@ -73,9 +74,7 @@ export async function utworzPrzeskalowanyPrzepis(opcje: {
   const wejscie: SkladnikPrzepisu[] = przepis.skladniki.map((s) => {
     const bazowy = skladnikiWedlugId.get(s.skladnik_id);
     if (!bazowy) {
-      throw new Error(
-        `Składnik „${s.nazwa}” nie występuje już w katalogu składników — nie da się przeliczyć skalowania.`
-      );
+      throw new Error(i18n.t('przepisySkalowane.brakSkladnika', { nazwa: s.nazwa }));
     }
     return {
       id: s.skladnik_id,

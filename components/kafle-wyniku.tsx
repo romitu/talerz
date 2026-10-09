@@ -1,4 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
+import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 
 import { ThemedText } from './themed-text';
@@ -18,17 +19,18 @@ import type { Makro } from '@/lib/zywienie';
  */
 export function KafleWyniku({ cel }: { cel: Makro }) {
   const motyw = useTheme();
+  const { t } = useTranslation();
   const kafle: { etykieta: string; wartosc: number; jednostka: string; ikona: keyof typeof Ionicons.glyphMap; kolor: string }[] = [
-    { etykieta: 'kcal', wartosc: cel.kcal, jednostka: '', ikona: 'flame', kolor: motyw.accent },
-    { etykieta: 'białko', wartosc: cel.bialko, jednostka: 'g', ikona: 'nutrition-outline', kolor: KOLOR_MAKRO.bialko },
-    { etykieta: 'tłuszcz', wartosc: cel.tluszcz, jednostka: 'g', ikona: 'water-outline', kolor: KOLOR_MAKRO.tluszcz },
-    { etykieta: 'węgle', wartosc: cel.wegle, jednostka: 'g', ikona: 'leaf-outline', kolor: KOLOR_MAKRO.wegle },
+    { etykieta: t('makro.kcal'), wartosc: cel.kcal, jednostka: '', ikona: 'flame', kolor: motyw.accent },
+    { etykieta: t('makro.bialko'), wartosc: cel.bialko, jednostka: 'g', ikona: 'nutrition-outline', kolor: KOLOR_MAKRO.bialko },
+    { etykieta: t('makro.tluszcz'), wartosc: cel.tluszcz, jednostka: 'g', ikona: 'water-outline', kolor: KOLOR_MAKRO.tluszcz },
+    { etykieta: t('makro.wegle'), wartosc: cel.wegle, jednostka: 'g', ikona: 'leaf-outline', kolor: KOLOR_MAKRO.wegle },
   ];
 
   return (
     <View style={styles.rzad}>
       {kafle.map((k) => (
-        <View key={k.etykieta} style={styles.kafel}>
+        <View key={k.ikona} style={styles.kafel}>
           <View style={[styles.kolko, { backgroundColor: `${k.kolor}22` }]}>
             <Ionicons name={k.ikona} size={22} color={k.kolor} />
           </View>

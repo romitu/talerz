@@ -2,6 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { DarkTheme, DefaultTheme, router, Tabs, ThemeProvider } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useCallback, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ActivityIndicator, Pressable, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import 'react-native-reanimated';
@@ -22,6 +23,7 @@ import { DostawcaSesji, useSesja } from '@/lib/sesja';
 import { supabase } from '@/lib/supabase';
 import { czyMojeKontoCzynne } from '@/lib/uzytkownicy';
 import { DostawcaWygladu, useStyl } from '@/lib/wyglad';
+import type pl from '@/lokalizacja/pl.json';
 
 /**
  * Układ główny. Najpierw sprawdza, kto jest zalogowany:
@@ -50,6 +52,7 @@ export default function UkladGlowny() {
 function BramkaSesji({ tryb }: { tryb: 'light' | 'dark' }) {
   const { sesja, ladowanie } = useSesja();
   const { styl } = useStyl();
+  const { t } = useTranslation();
   const kolory = PALETY[styl][tryb];
 
   /*
@@ -116,18 +119,15 @@ function BramkaSesji({ tryb }: { tryb: 'light' | 'dark' }) {
       <ThemedView style={{ flex: 1, justifyContent: 'center', padding: 24 }}>
         <Karta>
           <ThemedText type="subtitle" themeColor="accent">
-            To konto zostało wyłączone
+            {t('kontoWylaczone.tytul')}
           </ThemedText>
           <ThemedText type="default">
-            Dostęp do Talerza został wstrzymany przez administratora. Twoje dane —
-            plany, przepisy i listy zakupów — są nietknięte i wrócą, gdy konto
-            zostanie włączone z powrotem.
+            {t('kontoWylaczone.opis')}
           </ThemedText>
           <ThemedText type="small" themeColor="textSecondary">
-            Hasło jest poprawne, więc nie ma potrzeby go zmieniać ani zakładać nowego
-            konta. Skontaktuj się z administratorem.
+            {t('kontoWylaczone.haslo')}
           </ThemedText>
-          <Przycisk tytul="Wyloguj się" onPress={wyloguj} />
+          <Przycisk tytul={t('profil.wyloguj')} onPress={wyloguj} />
         </Karta>
       </ThemedView>
     );
@@ -142,13 +142,13 @@ function BramkaSesji({ tryb }: { tryb: 'light' | 'dark' }) {
 
 /** Ekrany schowane pod zębatką — nazwa zakładki, ikona i tytuł menu. */
 const POZYCJE_WIECEJ = [
-  { trasa: '/przepisy-import-eksport', ikona: 'swap-vertical' as const, tytul: 'Import / eksport przepisów' },
-  { trasa: '/skladniki', ikona: 'nutrition' as const, tytul: 'Składniki' },
-  { trasa: '/przepisy-makro', ikona: 'stats-chart' as const, tytul: 'Makro przepisów' },
+  { trasa: '/przepisy-import-eksport', ikona: 'swap-vertical' as const, tytul: 'importEksport' },
+  { trasa: '/skladniki', ikona: 'nutrition' as const, tytul: 'skladniki' },
+  { trasa: '/przepisy-makro', ikona: 'stats-chart' as const, tytul: 'makroPrzepisow' },
   {
     trasa: '/role-skladnikow',
     ikona: 'options' as const,
-    tytul: 'Role składników – skalowanie porcji',
+    tytul: 'roleSkladnikow',
     // Baza i tak odmówi odczytu spoza tej roli (migracja 0043) — pozycja
     // menu znika tylko po to, żeby nie kusić przyciskiem, który i tak nic
     // nie pokaże.
@@ -157,17 +157,24 @@ const POZYCJE_WIECEJ = [
   {
     trasa: '/zdjecia-skladnikow',
     ikona: 'images' as const,
-    tytul: 'Zdjęcia składników',
+    tytul: 'zdjeciaSkladnikow',
     // Zapis chronią reguły w bazie (migracja 0045) — zwykłe konto i tak nic tu nie zmieni.
     wymagaModeratora: true,
   },
-  { trasa: '/makroskladniki', ikona: 'pie-chart' as const, tytul: 'Podstawa żywieniowa przepisów' },
-  { trasa: '/dlaczego-talerz', ikona: 'sparkles' as const, tytul: 'Dlaczego Talerz' },
-  { trasa: '/instrukcja', ikona: 'help-circle' as const, tytul: 'Instrukcja' },
-] satisfies { trasa: `/${string}`; ikona: keyof typeof Ionicons.glyphMap; tytul: string; wymagaModeratora?: boolean }[];
+  { trasa: '/makroskladniki', ikona: 'pie-chart' as const, tytul: 'makroskladniki' },
+  { trasa: '/dlaczego-talerz', ikona: 'sparkles' as const, tytul: 'dlaczegoTalerz' },
+  { trasa: '/instrukcja', ikona: 'help-circle' as const, tytul: 'instrukcja' },
+] satisfies {
+  trasa: `/${string}`;
+  ikona: keyof typeof Ionicons.glyphMap;
+  /** Klucz w `menu` w tłumaczeniach. */
+  tytul: keyof (typeof pl)['menu'];
+  wymagaModeratora?: boolean;
+}[];
 
 function Zakladki({ kolory }: { kolory: Paleta }) {
   const { sesja } = useSesja();
+  const { t } = useTranslation();
   const [menuOtwarte, setMenuOtwarte] = useState(false);
   const [rola, setRola] = useState<string | null>(null);
   const wstawki = useSafeAreaInsets();
@@ -240,28 +247,28 @@ function Zakladki({ kolory }: { kolory: Paleta }) {
         <Tabs.Screen
           name="index"
           options={{
-            title: 'Plan',
+            title: t('zakladki.plan'),
             tabBarIcon: ({ color, size }) => <Ionicons name="today" size={size} color={color} />,
           }}
         />
         <Tabs.Screen
           name="zakupy"
           options={{
-            title: 'Zakupy',
+            title: t('zakladki.zakupy'),
             tabBarIcon: ({ color, size }) => <Ionicons name="cart" size={size} color={color} />,
           }}
         />
         <Tabs.Screen
           name="przepisy"
           options={{
-            title: 'Przepisy',
+            title: t('zakladki.przepisy'),
             tabBarIcon: ({ color, size }) => <Ionicons name="restaurant" size={size} color={color} />,
           }}
         />
         <Tabs.Screen
           name="profil"
           options={{
-            title: 'Profil',
+            title: t('zakladki.profil'),
             tabBarIcon: ({ color, size }) => <Ionicons name="person" size={size} color={color} />,
           }}
         />
@@ -273,7 +280,7 @@ function Zakladki({ kolory }: { kolory: Paleta }) {
         <Tabs.Screen
           name="menu"
           options={{
-            title: 'Więcej',
+            title: t('zakladki.wiecej'),
             tabBarIcon: ({ color, size }) => <Ionicons name="settings" size={size} color={color} />,
           }}
           listeners={{
@@ -323,10 +330,10 @@ function Zakladki({ kolory }: { kolory: Paleta }) {
                   router.push(pozycja.trasa);
                 }}
                 accessibilityRole="button"
-                accessibilityLabel={pozycja.tytul}
+                accessibilityLabel={t(`menu.${pozycja.tytul}`)}
                 style={({ pressed }) => [stylePasek.pozycja, pressed && stylePasek.wcisniete]}>
                 <Ionicons name={pozycja.ikona} size={20} color={kolory.text} />
-                <ThemedText type="default">{pozycja.tytul}</ThemedText>
+                <ThemedText type="default">{t(`menu.${pozycja.tytul}`)}</ThemedText>
               </Pressable>
             ))}
           </View>

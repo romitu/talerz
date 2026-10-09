@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 
 import { Karta } from './karta';
@@ -10,7 +11,6 @@ import { Wybor } from './wybor';
 import { Spacing } from '@/constants/theme';
 import { komunikatBledu } from '@/lib/blad';
 import {
-  OPIS_ROLI_SKLADNIKA,
   ostrzezenieOKaloriach,
   ROLE_SKLADNIKA,
   sprawdzSkladnik,
@@ -20,16 +20,7 @@ import {
   type Skladnik,
 } from '@/lib/skladniki';
 
-/** Krótki opis pod nazwą roli w wyborze — z ekranu „Role składników”. */
-const OPIS_ROLI: Record<RolaSkladnika, string> = {
-  baza: 'Domyślna rola większości składników — ilość rośnie proporcjonalnie do porcji.',
-  doprawienie: 'Wpływa głównie na smak i stężenie — przy większej skali lekko tłumione.',
-  aromat: 'Dominuje aromatem lub ostrością — rośnie wolniej niż baza.',
-  smazenie: 'Tłuszcz do smażenia — zależny bardziej od naczynia niż liczby porcji.',
-  duszenie: 'Płyn pracujący technologicznie w garnku — częściowo odparowuje.',
-  woda: 'Woda technologiczna — nie skaluje się automatycznie.',
-  do_smaku: 'Składnik orientacyjny — bez automatycznego przelicznika.',
-};
+// Nazwy i opisy ról są w tłumaczeniach: `rolaSkladnika.<rola>.nazwa` / `.opis`.
 
 type FormularzSkladnikaProps = {
   /** Podany — formularz edytuje istniejący składnik. Pominięty — dodaje nowy. */
@@ -62,6 +53,7 @@ export function FormularzSkladnika({
   onZapisano,
   onAnuluj,
 }: FormularzSkladnikaProps) {
+  const { t } = useTranslation();
   const [nazwa, setNazwa] = useState(skladnik?.nazwa ?? nazwaPoczatkowa ?? '');
   const [kcal, setKcal] = useState(naTekst(skladnik?.kcal_100g));
   const [bialko, setBialko] = useState(naTekst(skladnik?.bialko_100g));
@@ -103,7 +95,7 @@ export function FormularzSkladnika({
     rola,
     tagi: tagi
       .split(',')
-      .map((t) => t.trim())
+      .map((x) => x.trim())
       .filter(Boolean),
   };
 
@@ -131,106 +123,100 @@ export function FormularzSkladnika({
     <View style={styles.calosc}>
       <Karta style={styles.grupa}>
         <ThemedText type="smallBold" themeColor="textSecondary">
-          {skladnik ? 'EDYCJA SKŁADNIKA' : 'NOWY SKŁADNIK'}
+          {skladnik ? t('formularzSkladnika.edycja') : t('formularzSkladnika.nowy')}
         </ThemedText>
 
-        <Pole etykieta="Nazwa" value={nazwa} onChangeText={setNazwa} placeholder="Kasza jaglana, sucha" />
+        <Pole etykieta={t('wspolne.nazwa')} value={nazwa} onChangeText={setNazwa} placeholder={t('formularzSkladnika.przykladNazwy')} />
 
         <ThemedText type="small" themeColor="textSecondary">
-          Wartości podaj zawsze na 100 g produktu — tak jak na etykiecie.
+          {t('formularzSkladnika.na100g')}
         </ThemedText>
 
-        <Pole etykieta="Kalorie (kcal / 100 g)" value={kcal} onChangeText={setKcal} inputMode="decimal" placeholder="378" />
-        <Pole etykieta="Białko (g / 100 g)" value={bialko} onChangeText={setBialko} inputMode="decimal" placeholder="11" />
-        <Pole etykieta="Tłuszcz (g / 100 g)" value={tluszcz} onChangeText={setTluszcz} inputMode="decimal" placeholder="4.2" />
-        <Pole etykieta="Węglowodany (g / 100 g)" value={wegle} onChangeText={setWegle} inputMode="decimal" placeholder="71" />
-        <Pole etykieta="Błonnik (g / 100 g)" value={blonnik} onChangeText={setBlonnik} inputMode="decimal" placeholder="10" />
+        <Pole etykieta={t('formularzSkladnika.kcal')} value={kcal} onChangeText={setKcal} inputMode="decimal" placeholder="378" />
+        <Pole etykieta={t('formularzSkladnika.bialko')} value={bialko} onChangeText={setBialko} inputMode="decimal" placeholder="11" />
+        <Pole etykieta={t('formularzSkladnika.tluszcz')} value={tluszcz} onChangeText={setTluszcz} inputMode="decimal" placeholder="4.2" />
+        <Pole etykieta={t('formularzSkladnika.wegle')} value={wegle} onChangeText={setWegle} inputMode="decimal" placeholder="71" />
+        <Pole etykieta={t('formularzSkladnika.blonnik')} value={blonnik} onChangeText={setBlonnik} inputMode="decimal" placeholder="10" />
         <ThemedText type="small" themeColor="textSecondary">
-          Błonnik zawiera się w węglowodanach, więc nie może ich przekraczać. Na etykiecie
-          bywa podany osobno, pod pozycją „w tym błonnik”.
+          {t('formularzSkladnika.blonnikOpis')}
         </ThemedText>
       </Karta>
 
       <Karta style={styles.grupa}>
         <ThemedText type="smallBold" themeColor="textSecondary">
-          CUKRY
+          {t('formularzSkladnika.cukry')}
         </ThemedText>
         <ThemedText type="small" themeColor="textSecondary">
-          Etykieta podaje „w tym cukry” — to cukry ogółem, razem z tymi z owoców i mleka.
-          Jako wolne wpisz tylko dodane oraz te z miodu, syropów i soków. Przy surowcach
-          zostaw zero.
+          {t('formularzSkladnika.cukryOpis')}
         </ThemedText>
 
-        <Pole etykieta="Cukry ogółem (g / 100 g)" value={cukryOgolem} onChangeText={setCukryOgolem} inputMode="decimal" placeholder="0" />
-        <Pole etykieta="Cukry wolne (g / 100 g)" value={cukryWolne} onChangeText={setCukryWolne} inputMode="decimal" placeholder="0" />
+        <Pole etykieta={t('formularzSkladnika.cukryOgolem')} value={cukryOgolem} onChangeText={setCukryOgolem} inputMode="decimal" placeholder="0" />
+        <Pole etykieta={t('formularzSkladnika.cukryWolne')} value={cukryWolne} onChangeText={setCukryWolne} inputMode="decimal" placeholder="0" />
       </Karta>
 
       <Karta style={styles.grupa}>
         <ThemedText type="smallBold" themeColor="textSecondary">
-          POZOSTAŁE
+          {t('formularzSkladnika.pozostale')}
         </ThemedText>
 
         <Pole
-          etykieta="Grupa NOVA (1–4, nieobowiązkowa)"
+          etykieta={t('formularzSkladnika.nova')}
           value={nova}
           onChangeText={setNova}
           inputMode="numeric"
           placeholder="1"
         />
         <ThemedText type="small" themeColor="textSecondary">
-          1 — surowe, 2 — składniki kuchenne (oliwa, miód), 3 — przetworzone (ser, chleb),
-          4 — wysoko przetworzone.
+          {t('formularzSkladnika.novaOpis')}
         </ThemedText>
 
         <Pole
-          etykieta="Gramatura opakowania (g, nieobowiązkowa)"
+          etykieta={t('formularzSkladnika.opakowanie')}
           value={opakowanie}
           onChangeText={setOpakowanie}
           inputMode="numeric"
           placeholder="400"
         />
         <Pole
-          etykieta="Ile waży jedna sztuka (g, nieobowiązkowe)"
+          etykieta={t('formularzSkladnika.sztuka')}
           value={masaSztuki}
           onChangeText={setMasaSztuki}
           inputMode="decimal"
           placeholder="55"
         />
         <ThemedText type="small" themeColor="textSecondary">
-          Wypełnij, jeśli składnik odmierza się w sztukach: jajko 55 g, liść laurowy 0,2 g,
-          ząbek czosnku 5 g. Wtedy w przepisie można podać „2 szt”, a aplikacja przeliczy
-          to na gramy.
+          {t('formularzSkladnika.sztukaOpis')}
         </ThemedText>
 
         <Wybor
-          etykieta="Rola przy skalowaniu porcji"
+          etykieta={t('formularzSkladnika.rola')}
           wybrana={rola}
           onZmiana={setRola}
           opcje={ROLE_SKLADNIKA.map((r) => ({
             wartosc: r,
-            etykieta: OPIS_ROLI_SKLADNIKA[r],
-            opis: OPIS_ROLI[r],
+            etykieta: t(`rolaSkladnika.${r}.nazwa`),
+            opis: t(`rolaSkladnika.${r}.opis`),
           }))}
         />
 
         <Wybor
-          etykieta="Kwantyzacja (nieobowiązkowa)"
+          etykieta={t('formularzSkladnika.kwantyzacja')}
           wybrana={moznaDzielic}
           onZmiana={setMoznaDzielic}
           opcje={[
-            { wartosc: 'nie', etykieta: 'Nie można podzielić - np. jajko' },
-            { wartosc: 'tak', etykieta: 'Można podzielić - np. sól' },
+            { wartosc: 'nie', etykieta: t('formularzSkladnika.niepodzielny') },
+            { wartosc: 'tak', etykieta: t('formularzSkladnika.podzielny') },
           ]}
         />
 
         <Pole
-          etykieta="Etykiety, oddzielone przecinkami"
+          etykieta={t('formularzSkladnika.tagi')}
           value={tagi}
           onChangeText={setTagi}
-          placeholder="zboze, gluten"
+          placeholder={t('formularzSkladnika.przykladTagow')}
         />
         <ThemedText type="small" themeColor="textSecondary">
-          Etykiety służą preferencjom żywieniowym. Nie są filtrem alergenów.
+          {t('formularzSkladnika.tagiOpis')}
         </ThemedText>
       </Karta>
 
@@ -252,8 +238,8 @@ export function FormularzSkladnika({
         </Karta>
       )}
 
-      <Przycisk tytul={skladnik ? 'Zapisz zmiany' : 'Dodaj składnik'} onPress={zapisz} zajety={zajety} />
-      <Przycisk tytul="Anuluj" wariant="poboczny" onPress={onAnuluj} />
+      <Przycisk tytul={skladnik ? t('wspolne.zapiszZmiany') : t('nieJemy.dodaj')} onPress={zapisz} zajety={zajety} />
+      <Przycisk tytul={t('wspolne.anuluj')} wariant="poboczny" onPress={onAnuluj} />
     </View>
   );
 }

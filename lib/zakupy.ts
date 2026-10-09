@@ -5,6 +5,7 @@
  * Dzięki temu nie może się rozjechać z posiłkami: zmiana planu zmienia listę.
  */
 
+import i18n from './jezyk';
 import { supabase } from './supabase';
 
 /**
@@ -115,30 +116,31 @@ export function skonsolidujSkladniki(pozycje: PozycjaZakupow[]): PozycjaSkonsoli
 }
 
 /** Działy sklepu — kolejność odpowiada typowej trasie po markecie. */
-export const DZIALY: { nazwa: string; tagi: string[] }[] = [
-  { nazwa: 'Warzywa i owoce', tagi: ['warzywo', 'owoc', 'ziola', 'suszone'] },
-  { nazwa: 'Mięso i ryby', tagi: ['mieso', 'drob', 'ryba', 'owoce morza'] },
-  { nazwa: 'Nabiał i jaja', tagi: ['nabial', 'jaja'] },
-  { nazwa: 'Kasze, pieczywo, strączki', tagi: ['zboze', 'straczki'] },
-  { nazwa: 'Orzechy i nasiona', tagi: ['orzechy', 'nasiona'] },
-  { nazwa: 'Tłuszcze i przyprawy', tagi: ['tluszcz', 'przyprawa', 'slodzik', 'kakao'] },
-  { nazwa: 'Pozostałe', tagi: [] },
+export type Dzial = 'warzywa' | 'mieso' | 'nabial' | 'kasze' | 'orzechy' | 'tluszcze' | 'pozostale';
+
+/** Nazwy działów są w tłumaczeniach: `dzial.<klucz>`. */
+export const DZIALY: { klucz: Dzial; tagi: string[] }[] = [
+  { klucz: 'warzywa', tagi: ['warzywo', 'owoc', 'ziola', 'suszone'] },
+  { klucz: 'mieso', tagi: ['mieso', 'drob', 'ryba', 'owoce morza'] },
+  { klucz: 'nabial', tagi: ['nabial', 'jaja'] },
+  { klucz: 'kasze', tagi: ['zboze', 'straczki'] },
+  { klucz: 'orzechy', tagi: ['orzechy', 'nasiona'] },
+  { klucz: 'tluszcze', tagi: ['tluszcz', 'przyprawa', 'slodzik', 'kakao'] },
+  { klucz: 'pozostale', tagi: [] },
 ];
 
 /**
- * Dział produktów dopisywanych ręcznie.
+ * Dział produktów dopisywanych ręcznie (`dzial.reczny` w tłumaczeniach).
  *
  * Celowo POZA tablicą DZIAŁÓW i celowo na końcu listy. Po pierwsze odpowiada
  * to trasie po sklepie — chemia leży przy kasach. Po drugie oddziela wzrokowo
  * to, co wyliczyło się z planu, od tego, co dopisałeś sam.
  */
-export const DZIAL_RECZNY = 'Dom i chemia';
-
-export function dzialDla(tagi: string[]): string {
+export function dzialDla(tagi: string[]): Dzial {
   for (const dzial of DZIALY) {
-    if (dzial.tagi.some((t) => tagi.includes(t))) return dzial.nazwa;
+    if (dzial.tagi.some((t) => tagi.includes(t))) return dzial.klucz;
   }
-  return 'Pozostałe';
+  return 'pozostale';
 }
 
 /**
@@ -372,8 +374,8 @@ export async function pobierzReczne(kontoId: string): Promise<ProduktReczny[]> {
  */
 export async function dodajReczny(kontoId: string, nazwa: string, ilosc: string) {
   const czysta = nazwa.trim().replace(/\s+/g, ' ');
-  if (!czysta) throw new Error('Podaj nazwę produktu.');
-  if (czysta.length > 60) throw new Error('Nazwa może mieć najwyżej 60 znaków.');
+  if (!czysta) throw new Error(i18n.t('zakupy.podajNazwe'));
+  if (czysta.length > 60) throw new Error(i18n.t('zakupy.nazwaZaDluga'));
 
   const { error } = await supabase.from('zakupy_reczne').insert({
     konto_id: kontoId,
@@ -382,7 +384,7 @@ export async function dodajReczny(kontoId: string, nazwa: string, ilosc: string)
   });
 
   if (error) {
-    if (error.code === '23505') throw new Error(`„${czysta}” już jest na liście.`);
+    if (error.code === '23505') throw new Error(i18n.t('zakupy.juzNaLiscie', { nazwa: czysta }));
     throw error;
   }
 }

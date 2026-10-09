@@ -1,6 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useLocalSearchParams } from 'expo-router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Pressable, ScrollView, StyleSheet, useWindowDimensions, View } from 'react-native';
 
 import { Ekran } from '@/components/ekran';
@@ -10,8 +11,9 @@ import { ThemedText } from '@/components/themed-text';
 import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import { komunikatBledu } from '@/lib/blad';
+import i18n from '@/lib/jezyk';
 import { wroc } from '@/lib/nawigacja';
-import { OPIS_KUCHNI, OPIS_PORY, pobierzPrzepisy, type PrzepisZMakro } from '@/lib/przepisy';
+import { pobierzPrzepisy, type PrzepisZMakro } from '@/lib/przepisy';
 import { useSesja } from '@/lib/sesja';
 
 /**
@@ -24,18 +26,18 @@ import { useSesja } from '@/lib/sesja';
  */
 
 const KOLUMNY = [
-  { klucz: 'nazwa', tytul: 'Nazwa', szerokosc: 220, liczba: false },
-  { klucz: 'kategoria', tytul: 'Kategoria', szerokosc: 140, liczba: false },
-  { klucz: 'kuchnia', tytul: 'Kuchnia', szerokosc: 130, liczba: false },
-  { klucz: 'liczba_porcji_bazowych', tytul: 'porcje baz.', szerokosc: 78, liczba: true },
-  { klucz: 'kcal', tytul: 'kcal', szerokosc: 60, liczba: true },
-  { klucz: 'bialko_g', tytul: 'białko', szerokosc: 62, liczba: true },
-  { klucz: 'wegle_g', tytul: 'węgle', szerokosc: 62, liczba: true },
-  { klucz: 'tluszcz_g', tytul: 'tłuszcz', szerokosc: 62, liczba: true },
-  { klucz: 'blonnik_g', tytul: 'błonnik', szerokosc: 62, liczba: true },
-  { klucz: 'trwalosc_dni', tytul: 'dni w lodówce', szerokosc: 90, liczba: true },
-  { klucz: 'skalowalny', tytul: 'skalowalny', szerokosc: 80, liczba: false },
-] as const;
+  { klucz: 'nazwa', szerokosc: 220, liczba: false },
+  { klucz: 'kategoria', szerokosc: 140, liczba: false },
+  { klucz: 'kuchnia', szerokosc: 130, liczba: false },
+  { klucz: 'liczba_porcji_bazowych', szerokosc: 78, liczba: true },
+  { klucz: 'kcal', szerokosc: 60, liczba: true },
+  { klucz: 'bialko_g', szerokosc: 62, liczba: true },
+  { klucz: 'wegle_g', szerokosc: 62, liczba: true },
+  { klucz: 'tluszcz_g', szerokosc: 62, liczba: true },
+  { klucz: 'blonnik_g', szerokosc: 62, liczba: true },
+  { klucz: 'trwalosc_dni', szerokosc: 90, liczba: true },
+  { klucz: 'skalowalny', szerokosc: 80, liczba: false },
+] as const; // nagłówki: `przepisyMakro.kolumna.<klucz>` w tłumaczeniach
 
 type KluczKolumny = (typeof KOLUMNY)[number]['klucz'];
 
@@ -44,12 +46,12 @@ const MIN_NAZWY = 180;
 
 /** Kuchnie przepisu jako tekst — do wyświetlenia i do sortowania. */
 function tekstKuchni(p: PrzepisZMakro): string {
-  return p.kuchnie.map((k) => OPIS_KUCHNI[k]).join(', ');
+  return p.kuchnie.map((k) => i18n.t(`kuchnia.${k}`)).join(', ');
 }
 
 /** Kategorie (pory) przepisu jako tekst — do wyświetlenia i do sortowania. */
 function tekstKategorii(p: PrzepisZMakro): string {
-  return p.pory.map((k) => OPIS_PORY[k]).join(', ');
+  return p.pory.map((k) => i18n.t(`pora.${k}`)).join(', ');
 }
 
 function tekstKomorki(p: PrzepisZMakro, klucz: KluczKolumny): string {
@@ -58,7 +60,7 @@ function tekstKomorki(p: PrzepisZMakro, klucz: KluczKolumny): string {
   if (klucz === 'kuchnia') return tekstKuchni(p) || '—';
   if (klucz === 'liczba_porcji_bazowych') return String(p.liczba_porcji_bazowych);
   if (klucz === 'trwalosc_dni') return String(p.trwalosc_dni_bazowa);
-  if (klucz === 'skalowalny') return p.skalowalny ? 'tak' : 'nie';
+  if (klucz === 'skalowalny') return p.skalowalny ? i18n.t('wspolne.tak') : i18n.t('wspolne.nie');
 
   const w = p[klucz];
   if (w === null || w === undefined) return '—';
@@ -69,6 +71,7 @@ export default function EkranPrzepisyMakro() {
   const { powrot } = useLocalSearchParams<{ powrot?: string }>();
   const { sesja } = useSesja();
   const motyw = useTheme();
+  const { t } = useTranslation();
   const { width: szerokoscOkna } = useWindowDimensions();
 
   const [przepisy, setPrzepisy] = useState<PrzepisZMakro[]>([]);
@@ -133,17 +136,19 @@ export default function EkranPrzepisyMakro() {
   return (
     <Ekran
       pelnaSzerokosc
-      tytul="Makro przepisów"
+      tytul={t('menu.makroPrzepisow')}
       podtytul={
         wczytywanie
-          ? 'wczytywanie…'
-          : `${widoczne.length} z ${przepisy.length}${szukaj.trim() ? ' (filtr)' : ''} — wartości na jedną porcję`
+          ? t('naglowekProfilu.wczytywanie')
+          : szukaj.trim()
+            ? t('przepisyMakro.podtytulFiltr', { widoczne: widoczne.length, wszystkie: przepisy.length })
+            : t('przepisyMakro.podtytul', { widoczne: widoczne.length, wszystkie: przepisy.length })
       }>
       <Pole
-        etykieta="Filtruj po nazwie"
+        etykieta={t('przepisyMakro.filtruj')}
         value={szukaj}
         onChangeText={setSzukaj}
-        placeholder="zupa, kasza, sałatka…"
+        placeholder={t('przepisyMakro.przyklad')}
       />
 
       {blad && (
@@ -170,7 +175,7 @@ export default function EkranPrzepisyMakro() {
                     themeColor={aktywna ? 'accent' : 'textSecondary'}
                     style={k.liczba ? styles.doPrawej : undefined}
                     numberOfLines={1}>
-                    {k.tytul}
+                    {t(`przepisyMakro.kolumna.${k.klucz}`)}
                     {aktywna ? (malejaco ? ' ↓' : ' ↑') : ''}
                   </ThemedText>
                 </Pressable>
@@ -193,7 +198,10 @@ export default function EkranPrzepisyMakro() {
                   <View
                     key={k.klucz}
                     accessible
-                    accessibilityLabel={`Można skalować kalorycznie: ${p.nazwa} — ${p.skalowalny ? 'tak' : 'nie'}`}
+                    accessibilityLabel={t('przepisyMakro.skalowalnyOpis', {
+                      nazwa: p.nazwa,
+                      wartosc: p.skalowalny ? t('wspolne.tak') : t('wspolne.nie'),
+                    })}
                     style={[styles.komorka, styles.komorkaSrodek, stylKolumny(k)]}>
                     <Ionicons
                       name={p.skalowalny ? 'checkbox' : 'square-outline'}
@@ -216,18 +224,15 @@ export default function EkranPrzepisyMakro() {
 
       {!wczytywanie && widoczne.length === 0 && (
         <ThemedText type="small" themeColor="textSecondary">
-          Nic nie pasuje do wpisanej frazy.
+          {t('tabelaWyboru.brakWynikow')}
         </ThemedText>
       )}
 
       <ThemedText type="small" themeColor="textSecondary">
-        Dotknij nagłówka, aby posortować. Wartości puste (—) oznaczają przepis bez policzonego
-        makro — zwykle brak zapisanych składników. Kolumna „skalowalny” jest tylko do
-        odczytu: czy automat wypełniający plan może rozciągać ten przepis pod cel kaloryczny
-        posiłku. Zmienia się ją w formularzu przepisu.
+        {t('przepisyMakro.wskazowka')}
       </ThemedText>
 
-      <Przycisk tytul="Wróć" wariant="poboczny" onPress={() => wroc(powrot, '/przepisy')} />
+      <Przycisk tytul={t('wspolne.wroc')} wariant="poboczny" onPress={() => wroc(powrot, '/przepisy')} />
     </Ekran>
   );
 }

@@ -7,6 +7,7 @@
  * ale próba zapisu skończy się komunikatem z bazy.
  */
 
+import i18n from './jezyk';
 import { supabase } from './supabase';
 
 export type RolaSkladnika = {
@@ -30,7 +31,7 @@ export async function pobierzRoleSkladnikow(): Promise<RolaSkladnika[]> {
 /** Zapisuje wzór jednej roli. Pusty wzór nie ma sensu — rola zawsze coś opisuje. */
 export async function zapiszWzorRoli(klucz: string, wzor: string): Promise<void> {
   const tresc = wzor.trim();
-  if (!tresc) throw new Error('Wzór nie może być pusty.');
+  if (!tresc) throw new Error(i18n.t('roleSkladnikow.pustyWzor'));
 
   const { error } = await supabase.from('role_skladnikow').update({ wzor: tresc }).eq('klucz', klucz);
   if (error) throw error;

@@ -6,7 +6,7 @@
  * nigdy nie są zapisywane osobno, żeby nie rozjechały się z przepisem.
  */
 
-import { data } from './jezyk';
+import i18n, { data } from './jezyk';
 import { supabase } from './supabase';
 import type { PoraPosilku } from './przepisy';
 
@@ -300,7 +300,7 @@ export async function pobierzPozycje(planId: string): Promise<PozycjaPlanu[]> {
       data: p.data,
       pora: p.pora,
       przepis_id: p.przepis_id,
-      nazwa: (Array.isArray(przepis) ? przepis[0]?.nazwa : przepis?.nazwa) ?? '(bez nazwy)',
+      nazwa: (Array.isArray(przepis) ? przepis[0]?.nazwa : przepis?.nazwa) ?? i18n.t('plan.bezNazwy'),
       porcje: p.porcje,
       kolejnosc: p.kolejnosc,
       zjedzone: p.zjedzone,

@@ -3,6 +3,7 @@ import * as DocumentPicker from 'expo-document-picker';
 import * as FileSystem from 'expo-file-system/legacy';
 import * as Sharing from 'expo-sharing';
 import { useCallback, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Platform, Pressable, StyleSheet, View } from 'react-native';
 
 import { Ekran } from '@/components/ekran';
@@ -13,6 +14,7 @@ import { ThemedText } from '@/components/themed-text';
 import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import { komunikatBledu } from '@/lib/blad';
+import i18n from '@/lib/jezyk';
 import {
   sklasyfikujPrzepisy,
   wczytajPlikPrzepisow,
@@ -72,7 +74,7 @@ async function zapiszPlikXlsx(base64: string, nazwa: string, poZapisie: (komunik
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
-    poZapisie(`Pobrano plik ${nazwa}.`);
+    poZapisie(i18n.t('importEksport.pobrano', { nazwa }));
   } else {
     const uri = FileSystem.cacheDirectory + nazwa;
     await FileSystem.writeAsStringAsync(uri, base64, {
@@ -80,9 +82,9 @@ async function zapiszPlikXlsx(base64: string, nazwa: string, poZapisie: (komunik
     });
 
     if (await Sharing.isAvailableAsync()) {
-      await Sharing.shareAsync(uri, { mimeType: TYP_PLIKU_XLSX, dialogTitle: 'Zapisz plik' });
+      await Sharing.shareAsync(uri, { mimeType: TYP_PLIKU_XLSX, dialogTitle: i18n.t('importEksport.zapiszPlik') });
     } else {
-      poZapisie(`Plik zapisany: ${uri}`);
+      poZapisie(i18n.t('importEksport.zapisany', { uri }));
     }
   }
 }
@@ -91,6 +93,7 @@ export default function EkranImportEksportPrzepisow() {
   const { powrot } = useLocalSearchParams<{ powrot?: string }>();
   const { sesja } = useSesja();
   const motyw = useTheme();
+  const { t } = useTranslation();
 
   const [eksportZajety, setEksportZajety] = useState(false);
   const [importZajety, setImportZajety] = useState(false);
@@ -198,7 +201,7 @@ export default function EkranImportEksportPrzepisow() {
             });
 
       if (!base64) {
-        setBlad('Nie udało się odczytać pliku.');
+        setBlad(t('importEksport.nieOdczytano'));
         return;
       }
 
@@ -248,7 +251,7 @@ export default function EkranImportEksportPrzepisow() {
     try {
       const skladniki = await pobierzSkladniki();
       if (skladniki.length === 0) {
-        setBladSkladniki('Katalog składników jest pusty — nie ma czego eksportować.');
+        setBladSkladniki(t('importEksport.pustyKatalog'));
         return;
       }
 
@@ -294,7 +297,7 @@ export default function EkranImportEksportPrzepisow() {
             });
 
       if (!base64) {
-        setBladSkladniki('Nie udało się odczytać pliku.');
+        setBladSkladniki(t('importEksport.nieOdczytano'));
         return;
       }
 
@@ -334,27 +337,24 @@ export default function EkranImportEksportPrzepisow() {
 
   return (
     <Ekran
-      tytul="Import / eksport przepisów i składników"
-      podtytul="Plik Excel — kopia zapasowa albo masowa edycja poza aplikacją">
+      tytul={t('importEksport.tytul')}
+      podtytul={t('importEksport.podtytul')}>
       <Karta style={styles.grupa}>
         <ThemedText type="smallBold" themeColor="textSecondary">
-          EKSPORT PRZEPISU
+          {t('importEksport.eksportPrzepisu')}
         </ThemedText>
         <ThemedText type="small" themeColor="textSecondary">
-          Zapisuje JEDEN przepis do pliku .xlsx w formacie formularzowym — jeden arkusz,
-          pola w tej samej kolejności co w ekranie Edycja przepisu. Ten sam format
-          rozpoznaje import niżej, więc plik da się poprawić ręcznie w Excelu i wczytać
-          z powrotem.
+          {t('importEksport.eksportPrzepisuOpis')}
         </ThemedText>
 
         <Pole
-          etykieta="Znajdź przepis po nazwie"
+          etykieta={t('importEksport.znajdzPrzepis')}
           value={wybranyPrzepis ? wybranyPrzepis.nazwa : szukajPrzepisu}
-          onChangeText={(t) => {
-            setSzukajPrzepisu(t);
+          onChangeText={(tekst) => {
+            setSzukajPrzepisu(tekst);
             setWybranyPrzepisId(null);
           }}
-          placeholder="np. barszcz"
+          placeholder={t('importEksport.przyklad')}
         />
 
         {!wybranyPrzepisId && przepisyPasujace.length > 0 && (
@@ -379,12 +379,16 @@ export default function EkranImportEksportPrzepisow() {
 
         {!wybranyPrzepisId && fraza !== '' && przepisyPasujace.length === 0 && (
           <ThemedText type="small" themeColor="textSecondary">
-            Żaden przepis nie pasuje do „{szukajPrzepisu}”.
+            {t('importEksport.brakPrzepisu', { fraza: szukajPrzepisu })}
           </ThemedText>
         )}
 
         <Przycisk
-          tytul={wybranyPrzepis ? `Eksportuj „${wybranyPrzepis.nazwa}”` : 'Eksportuj do pliku Excel'}
+          tytul={
+            wybranyPrzepis
+              ? t('importEksport.eksportuj', { nazwa: wybranyPrzepis.nazwa })
+              : t('importEksport.eksportujDoExcela')
+          }
           onPress={eksportujJeden}
           zajety={eksportZajety}
           wylaczony={!wybranyPrzepisId}
@@ -393,36 +397,28 @@ export default function EkranImportEksportPrzepisow() {
 
       <Karta style={styles.grupa}>
         <ThemedText type="smallBold" themeColor="textSecondary">
-          IMPORT PRZEPISÓW
+          {t('importEksport.importPrzepisow')}
         </ThemedText>
         <ThemedText type="small" themeColor="textSecondary">
-          Przepis rozpoznawany jest PO NAZWIE, bez względu na wielkość liter. Identyczna
-          nazwa zastępuje treść istniejącego dania — to korekta, nie duplikat. Nowa nazwa
-          zakłada nowy, prywatny przepis. Zdjęcia i stanu publikacji import nie rusza.
-          Rozpoznawane są dwa formaty pliku: formularz — jeden przepis na arkusz, pola
-          w tej samej kolejności co w ekranie edycji przepisu (tak jak z eksportu powyżej,
-          wiele arkuszy naraz też można) — albo starsza płaska tabela (arkusze Przepisy/
-          Składniki/Etapy/Kroki), gdyby trzeba było wczytać dawny plik kopii zapasowej.
+          {t('importEksport.importPrzepisowOpis')}
         </ThemedText>
 
-        <Przycisk tytul="Wybierz plik Excel" wariant="poboczny" onPress={wybierzPlik} />
+        <Przycisk tytul={t('importEksport.wybierzPlik')} wariant="poboczny" onPress={wybierzPlik} />
 
         {nazwaPliku && (
           <ThemedText type="small" themeColor="textSecondary">
-            Plik: {nazwaPliku}
+            {t('importEksport.plik', { nazwa: nazwaPliku })}
           </ThemedText>
         )}
 
         {bledyParsowania.length > 0 && (
           <View style={styles.blok}>
             <ThemedText type="smallBold" themeColor="accent">
-              {bledyParsowania.length}{' '}
-              {bledyParsowania.length === 1 ? 'danie pominięte' : 'dań pominiętych'} — błędy
-              w pliku
+              {t('importEksport.daniaPominiete', { count: bledyParsowania.length })}
             </ThemedText>
             {bledyParsowania.map((b, i) => (
               <ThemedText key={i} type="small" themeColor="textSecondary">
-                {b.przepis ? `„${b.przepis}”: ` : ''}
+                {b.przepis ? t('importEksport.prefiksBledu', { nazwa: b.przepis }) : ''}
                 {b.tresc}
               </ThemedText>
             ))}
@@ -432,48 +428,47 @@ export default function EkranImportEksportPrzepisow() {
         {pozycje && pozycje.length > 0 && (
           <View style={styles.blok}>
             <ThemedText type="small" themeColor="textSecondary">
-              Gotowe do zapisania: {doDodania.length} nowych, {doAktualizacji.length} korekt
-              istniejących.
+              {t('importEksport.gotowePrzepisy', { nowe: doDodania.length, korekty: doAktualizacji.length })}
             </ThemedText>
             {doAktualizacji.length > 0 && (
               <ThemedText type="small" themeColor="textSecondary">
-                Zostaną nadpisane: {doAktualizacji.map((p) => p.dane.nazwa).join(', ')}
+                {t('importEksport.nadpisane', { nazwy: doAktualizacji.map((p) => p.dane.nazwa).join(', ') })}
               </ThemedText>
             )}
             <Przycisk
-              tytul={`Zapisz ${pozycje.length} ${pozycje.length === 1 ? 'przepis' : 'przepisów'}`}
+              tytul={t('importEksport.zapiszPrzepisy', { count: pozycje.length })}
               onPress={potwierdzImport}
               zajety={importZajety}
             />
-            <Przycisk tytul="Anuluj" wariant="poboczny" onPress={wyczyscImport} />
+            <Przycisk tytul={t('wspolne.anuluj')} wariant="poboczny" onPress={wyczyscImport} />
           </View>
         )}
 
         {pozycje && pozycje.length === 0 && bledyParsowania.length === 0 && (
           <ThemedText type="small" themeColor="textSecondary">
-            Plik nie zawiera żadnego przepisu.
+            {t('importEksport.brakPrzepisowWPliku')}
           </ThemedText>
         )}
 
         {postep && importZajety && (
           <ThemedText type="small" themeColor="textSecondary">
-            Zapisywanie: {postep.zrobione} / {postep.razem}
+            {t('importEksport.postep', { zrobione: postep.zrobione, razem: postep.razem })}
           </ThemedText>
         )}
 
         {zaimportowano !== null && (
           <View style={styles.blok}>
             <ThemedText type="smallBold">
-              Zapisano {zaimportowano} {zaimportowano === 1 ? 'przepis' : 'przepisów'}.
+              {t('importEksport.zapisanoPrzepisy', { count: zaimportowano })}
             </ThemedText>
             {bledyZapisu.length > 0 && (
               <>
                 <ThemedText type="smallBold" themeColor="accent">
-                  Nie udało się zapisać {bledyZapisu.length}:
+                  {t('importEksport.nieZapisano', { ile: bledyZapisu.length })}
                 </ThemedText>
                 {bledyZapisu.map((b, i) => (
                   <ThemedText key={i} type="small" themeColor="textSecondary">
-                    {b.przepis ? `„${b.przepis}”: ` : ''}
+                    {b.przepis ? t('importEksport.prefiksBledu', { nazwa: b.przepis }) : ''}
                     {b.tresc}
                   </ThemedText>
                 ))}
@@ -496,14 +491,13 @@ export default function EkranImportEksportPrzepisow() {
 
       <Karta style={styles.grupa}>
         <ThemedText type="smallBold" themeColor="textSecondary">
-          EKSPORT SKŁADNIKÓW
+          {t('importEksport.eksportSkladnikow')}
         </ThemedText>
         <ThemedText type="small" themeColor="textSecondary">
-          Zapisuje cały katalog składników — wartości odżywcze na 100 g, źródło i tagi —
-          do jednego pliku .xlsx z arkuszem instrukcji.
+          {t('importEksport.eksportSkladnikowOpis')}
         </ThemedText>
         <Przycisk
-          tytul="Eksportuj do pliku Excel"
+          tytul={t('importEksport.eksportujDoExcela')}
           onPress={eksportujSkladnikiPlik}
           zajety={eksportZajetySkladniki}
         />
@@ -511,32 +505,28 @@ export default function EkranImportEksportPrzepisow() {
 
       <Karta style={styles.grupa}>
         <ThemedText type="smallBold" themeColor="textSecondary">
-          IMPORT SKŁADNIKÓW
+          {t('importEksport.importSkladnikow')}
         </ThemedText>
         <ThemedText type="small" themeColor="textSecondary">
-          Składnik rozpoznawany jest PO NAZWIE, bez względu na wielkość liter. Identyczna
-          nazwa aktualizuje wartości odżywcze istniejącego składnika. Nowa nazwa zakłada
-          nowy składnik.
+          {t('importEksport.importSkladnikowOpis')}
         </ThemedText>
 
-        <Przycisk tytul="Wybierz plik Excel" wariant="poboczny" onPress={wybierzPlikSkladnikow} />
+        <Przycisk tytul={t('importEksport.wybierzPlik')} wariant="poboczny" onPress={wybierzPlikSkladnikow} />
 
         {nazwaPlikuSkladnikow && (
           <ThemedText type="small" themeColor="textSecondary">
-            Plik: {nazwaPlikuSkladnikow}
+            {t('importEksport.plik', { nazwa: nazwaPlikuSkladnikow })}
           </ThemedText>
         )}
 
         {bledyParsowaniaSkladnikow.length > 0 && (
           <View style={styles.blok}>
             <ThemedText type="smallBold" themeColor="accent">
-              {bledyParsowaniaSkladnikow.length}{' '}
-              {bledyParsowaniaSkladnikow.length === 1 ? 'składnik pominięty' : 'składników pominiętych'}{' '}
-              — błędy w pliku
+              {t('importEksport.skladnikiPominiete', { count: bledyParsowaniaSkladnikow.length })}
             </ThemedText>
             {bledyParsowaniaSkladnikow.map((b, i) => (
               <ThemedText key={i} type="small" themeColor="textSecondary">
-                {b.skladnik ? `„${b.skladnik}”: ` : ''}
+                {b.skladnik ? t('importEksport.prefiksBledu', { nazwa: b.skladnik }) : ''}
                 {b.tresc}
               </ThemedText>
             ))}
@@ -546,22 +536,22 @@ export default function EkranImportEksportPrzepisow() {
         {pozycjeSkladnikow && pozycjeSkladnikow.length > 0 && (
           <View style={styles.blok}>
             <ThemedText type="small" themeColor="textSecondary">
-              Gotowe do zapisania: {doDodaniaSkladnikow.length} nowych,{' '}
-              {doAktualizacjiSkladnikow.length} aktualizacji istniejących.
+              {t('importEksport.gotoweSkladniki', {
+                nowe: doDodaniaSkladnikow.length,
+                aktualizacje: doAktualizacjiSkladnikow.length,
+              })}
             </ThemedText>
             {doAktualizacjiSkladnikow.length > 0 && (
               <ThemedText type="small" themeColor="textSecondary">
-                Zostaną nadpisane: {doAktualizacjiSkladnikow.map((p) => p.dane.nazwa).join(', ')}
+                {t('importEksport.nadpisane', { nazwy: doAktualizacjiSkladnikow.map((p) => p.dane.nazwa).join(', ') })}
               </ThemedText>
             )}
             <Przycisk
-              tytul={`Zapisz ${pozycjeSkladnikow.length} ${
-                pozycjeSkladnikow.length === 1 ? 'składnik' : 'składników'
-              }`}
+              tytul={t('importEksport.zapiszSkladniki', { count: pozycjeSkladnikow.length })}
               onPress={potwierdzImportSkladnikow}
               zajety={importZajetySkladniki}
             />
-            <Przycisk tytul="Anuluj" wariant="poboczny" onPress={wyczyscImportSkladnikow} />
+            <Przycisk tytul={t('wspolne.anuluj')} wariant="poboczny" onPress={wyczyscImportSkladnikow} />
           </View>
         )}
 
@@ -569,30 +559,29 @@ export default function EkranImportEksportPrzepisow() {
           pozycjeSkladnikow.length === 0 &&
           bledyParsowaniaSkladnikow.length === 0 && (
             <ThemedText type="small" themeColor="textSecondary">
-              Plik nie zawiera żadnego składnika.
+              {t('importEksport.brakSkladnikowWPliku')}
             </ThemedText>
           )}
 
         {postepSkladnikow && importZajetySkladniki && (
           <ThemedText type="small" themeColor="textSecondary">
-            Zapisywanie: {postepSkladnikow.zrobione} / {postepSkladnikow.razem}
+            {t('importEksport.postep', { zrobione: postepSkladnikow.zrobione, razem: postepSkladnikow.razem })}
           </ThemedText>
         )}
 
         {zaimportowanoSkladnikow !== null && (
           <View style={styles.blok}>
             <ThemedText type="smallBold">
-              Zapisano {zaimportowanoSkladnikow}{' '}
-              {zaimportowanoSkladnikow === 1 ? 'składnik' : 'składników'}.
+              {t('importEksport.zapisanoSkladniki', { count: zaimportowanoSkladnikow })}
             </ThemedText>
             {bledyZapisuSkladnikow.length > 0 && (
               <>
                 <ThemedText type="smallBold" themeColor="accent">
-                  Nie udało się zapisać {bledyZapisuSkladnikow.length}:
+                  {t('importEksport.nieZapisano', { ile: bledyZapisuSkladnikow.length })}
                 </ThemedText>
                 {bledyZapisuSkladnikow.map((b, i) => (
                   <ThemedText key={i} type="small" themeColor="textSecondary">
-                    {b.skladnik ? `„${b.skladnik}”: ` : ''}
+                    {b.skladnik ? t('importEksport.prefiksBledu', { nazwa: b.skladnik }) : ''}
                     {b.tresc}
                   </ThemedText>
                 ))}
@@ -613,7 +602,7 @@ export default function EkranImportEksportPrzepisow() {
         </ThemedText>
       )}
 
-      <Przycisk tytul="Wróć" wariant="poboczny" onPress={() => wroc(powrot, '/przepisy')} />
+      <Przycisk tytul={t('wspolne.wroc')} wariant="poboczny" onPress={() => wroc(powrot, '/przepisy')} />
     </Ekran>
   );
 }

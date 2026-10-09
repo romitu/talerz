@@ -1,4 +1,5 @@
 import { Image } from 'expo-image';
+import { useTranslation } from 'react-i18next';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -21,6 +22,7 @@ import { MaxContentWidth, Spacing } from '@/constants/theme';
  * zrzutu ekranu powitalnego dostarczona przez Romana.
  */
 export function EkranPowitalny({ onDalej }: { onDalej: () => void }) {
+  const { t } = useTranslation();
   /*
     Ścieżka WZGLĘDNA, nie skrót `@/`.
 
@@ -43,12 +45,12 @@ export function EkranPowitalny({ onDalej }: { onDalej: () => void }) {
             source={grafika}
             style={styles.grafika}
             contentFit="contain"
-            accessibilityLabel="Talerz — powiedz, dla ilu osób planujesz i na ile dni; Talerz zdecyduje co ugotować, ile zrobić, co zjeść jutro i co dokładnie kupić"
+            accessibilityLabel={t('powitanie.opisGrafiki')}
             transition={200}
           />
 
           <View style={styles.bialeTlo}>
-            <Przycisk tytul="Zaczynamy" onPress={onDalej} />
+            <Przycisk tytul={t('powitanie.zaczynamy')} onPress={onDalej} />
           </View>
         </ScrollView>
       </SafeAreaView>

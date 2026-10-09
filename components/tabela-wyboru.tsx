@@ -1,5 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useMemo, useState, type ReactNode } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Pressable, ScrollView, StyleSheet, useWindowDimensions, View } from 'react-native';
 
 import { Pole } from './pole';
@@ -71,13 +72,14 @@ export function TabelaWyboru<T>({
   tekstDoFiltra,
   poWyborze,
   akcjaWiersza,
-  etykietaFiltra = 'Filtruj',
+  etykietaFiltra,
   placeholderFiltra,
   stopka,
   wysokosc = 320,
   trybEdycji = false,
 }: TabelaWyboruProps<T>) {
   const motyw = useTheme();
+  const { t } = useTranslation();
   const [fraza, setFraza] = useState('');
   const [sortujPo, setSortujPo] = useState<string | null>(null);
   const [malejaco, setMalejaco] = useState(false);
@@ -140,7 +142,7 @@ export function TabelaWyboru<T>({
   return (
     <View style={styles.calosc}>
       <Pole
-        etykieta={etykietaFiltra}
+        etykieta={etykietaFiltra ?? t('tabelaWyboru.filtruj')}
         value={fraza}
         onChangeText={setFraza}
         placeholder={placeholderFiltra}
@@ -211,7 +213,7 @@ export function TabelaWyboru<T>({
                       onPress={() => przelacz(element)}
                       hitSlop={6}
                       accessibilityRole="button"
-                      accessibilityLabel={zaznaczony ? 'Usuń z wyboru' : 'Dodaj do wyboru'}
+                      accessibilityLabel={zaznaczony ? t('tabelaWyboru.usunZWyboru') : t('tabelaWyboru.dodajDoWyboru')}
                       style={({ pressed }) => [styles.komorkaZnaku, pressed && styles.wcisniety]}>
                       <Ionicons
                         name={zaznaczony ? 'checkmark-circle' : 'add-circle-outline'}
@@ -265,7 +267,7 @@ export function TabelaWyboru<T>({
 
             {widoczne.length === 0 && (
               <ThemedText type="small" themeColor="textSecondary" style={styles.pusto}>
-                Nic nie pasuje do wpisanej frazy.
+                {t('tabelaWyboru.brakWynikow')}
               </ThemedText>
             )}
           </ScrollView>
@@ -276,8 +278,7 @@ export function TabelaWyboru<T>({
 
       {sortujPo && (
         <ThemedText type="small" themeColor="textSecondary">
-          Sortowanie kolumną „{sortujPo}”. Dotknij nagłówka jeszcze raz, aby odwrócić,
-          i trzeci raz, aby wrócić do kolejności zaznaczania.
+          {t('tabelaWyboru.sortowanie', { kolumna: sortujPo })}
         </ThemedText>
       )}
 

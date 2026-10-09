@@ -28,6 +28,7 @@
 import { Platform } from 'react-native';
 
 import type { ZrodloZdjecia } from './zakupy';
+import i18n from './jezyk';
 import { supabase } from './supabase';
 
 export const ZASOBNIK = 'zdjecia-przepisow';
@@ -104,7 +105,7 @@ export async function zmniejsz(plik: Blob, kwadrat?: number): Promise<WybraneZdj
 
   const plotno = document.createElement('canvas');
   const pedzel = plotno.getContext('2d');
-  if (!pedzel) throw new Error('Przeglądarka nie udostępnia rysowania na płótnie.');
+  if (!pedzel) throw new Error(i18n.t('zdjecia.brakPlotna'));
 
   if (kwadrat) {
     const bok = Math.min(obraz.width, obraz.height);
@@ -131,7 +132,7 @@ export async function zmniejsz(plik: Blob, kwadrat?: number): Promise<WybraneZdj
   }
 
   const dane = await new Promise<Blob | null>((r) => plotno.toBlob(r, 'image/jpeg', JAKOSC));
-  if (!dane) throw new Error('Nie udało się przetworzyć obrazu.');
+  if (!dane) throw new Error(i18n.t('zdjecia.bladPrzetwarzania'));
 
   return { dane, podglad: plotno.toDataURL('image/jpeg', JAKOSC) };
 }
@@ -146,7 +147,7 @@ function wczytajObraz(plik: Blob): Promise<HTMLImageElement> {
     };
     obraz.onerror = () => {
       URL.revokeObjectURL(adres);
-      odrzuc(new Error('To nie jest obraz, który przeglądarka umie otworzyć.'));
+      odrzuc(new Error(i18n.t('zdjecia.toNieObraz')));
     };
     obraz.src = adres;
   });

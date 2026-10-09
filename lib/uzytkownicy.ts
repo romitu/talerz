@@ -13,6 +13,7 @@
  * wywołanie.
  */
 
+import i18n from './jezyk';
 import { supabase } from './supabase';
 
 export type KontoUzytkownika = {
@@ -24,14 +25,8 @@ export type KontoUzytkownika = {
   utworzono: string;
 };
 
-export const OPIS_ROLI: Record<KontoUzytkownika['rola'], string> = {
-  uzytkownik: 'użytkownik',
-  moderator: 'moderator przepisów',
-  administrator: 'administrator',
-};
-
 export function opisRoli(rola: KontoUzytkownika['rola']): string {
-  return OPIS_ROLI[rola] ?? String(rola);
+  return i18n.t(`rolaKonta.${rola}`, { defaultValue: String(rola) });
 }
 
 /**
@@ -63,12 +58,10 @@ export async function ustawAktywnosc(kontoId: string, aktywne: boolean) {
 
   if (error) {
     if (error.message.includes('własnego konta')) {
-      throw new Error(
-        'Nie da się wyłączyć własnego konta — przy jednym administratorze nie miałby kto go włączyć z powrotem.'
-      );
+      throw new Error(i18n.t('uzytkownicy.bladWlasneKonto'));
     }
     if (error.code === '42501') {
-      throw new Error('Włączanie i wyłączanie kont wymaga uprawnień administratora.');
+      throw new Error(i18n.t('uzytkownicy.bladUprawnieniaKont'));
     }
     throw error;
   }
@@ -109,13 +102,13 @@ export async function ustawRole(kontoId: string, rola: 'uzytkownik' | 'moderator
 
   if (error) {
     if (error.message.includes('Własnej roli')) {
-      throw new Error('Własnej roli nie da się zmienić — to zabezpieczenie przed odebraniem sobie dostępu.');
+      throw new Error(i18n.t('uzytkownicy.bladWlasnaRola'));
     }
     if (error.message.includes('administratora nadaje')) {
-      throw new Error('Rolę administratora nadaje się wyłącznie w panelu Supabase.');
+      throw new Error(i18n.t('uzytkownicy.bladRolaAdministratora'));
     }
     if (error.code === '42501') {
-      throw new Error('Zmiana roli wymaga uprawnień administratora.');
+      throw new Error(i18n.t('uzytkownicy.bladUprawnieniaRol'));
     }
     throw error;
   }

@@ -1,9 +1,11 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useFocusEffect, useLocalSearchParams } from 'expo-router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Pressable, StyleSheet, TextInput, View } from 'react-native';
 
 import { komunikatBledu } from '@/lib/blad';
+import { jezyk, liczbaNaTekst } from '@/lib/jezyk';
 import { wroc } from '@/lib/nawigacja';
 import { Ekran } from '@/components/ekran';
 import { Karta } from '@/components/karta';
@@ -24,8 +26,6 @@ import { ROLA_SKLADNIKA_WEDLUG_ETYKIETY } from '@/lib/import-eksport-wspolne';
 import {
   KATEGORIE,
   OPIS_KUCHNI,
-  OPIS_PORY,
-  OPIS_RODZAJU,
   opisTrwalosci,
   pobierzPelnyPrzepis,
   RODZAJE_DAN,
@@ -38,7 +38,6 @@ import {
   type Widocznosc,
 } from '@/lib/przepisy';
 import {
-  OPIS_ROLI_SKLADNIKA,
   pobierzSkladniki,
   pobierzUzycia,
   ROLE_SKLADNIKA,
@@ -51,15 +50,6 @@ import {
 import { useSesja } from '@/lib/sesja';
 import { supabase } from '@/lib/supabase';
 import type { ZrodloZdjecia } from '@/lib/zakupy';
-
-/** Opcje komórki-wyboru dla roli — jak na ekranie Składniki. */
-const OPCJE_ROLI = ROLE_SKLADNIKA.map((r) => ({ wartosc: r, etykieta: OPIS_ROLI_SKLADNIKA[r] }));
-
-/** Opcje komórki-wyboru dla kwantyzacji — nieobowiązkowa, więc `null` znaczy „nie wybrano”. */
-const OPCJE_MOZNA_DZIELIC: { wartosc: 'nie' | 'tak'; etykieta: string }[] = [
-  { wartosc: 'nie', etykieta: 'Nie można podzielić' },
-  { wartosc: 'tak', etykieta: 'Można podzielić' },
-];
 
 type Jednostka = 'g' | 'ml' | 'szt';
 
@@ -128,6 +118,18 @@ export default function FormularzPrzepisu() {
   const tryb = edytowanyId ? 'edycja' : 'nowy';
   const { sesja } = useSesja();
   const motyw = useTheme();
+  const { t } = useTranslation();
+
+  const nazwaRoli = (r: RolaSkladnika) => t(`rolaSkladnika.${r}.nazwa`);
+
+  /** Opcje komórki-wyboru dla roli — jak na ekranie Składniki. */
+  const OPCJE_ROLI = ROLE_SKLADNIKA.map((r) => ({ wartosc: r, etykieta: nazwaRoli(r) }));
+
+  /** Opcje komórki-wyboru dla kwantyzacji — nieobowiązkowa, więc `null` znaczy „nie wybrano”. */
+  const OPCJE_MOZNA_DZIELIC: { wartosc: 'nie' | 'tak'; etykieta: string }[] = [
+    { wartosc: 'nie', etykieta: t('skladniki.niepodzielny') },
+    { wartosc: 'tak', etykieta: t('skladniki.podzielny') },
+  ];
 
   const [dostepne, setDostepne] = useState<Skladnik[]>([]);
   const [wybrane, setWybrane] = useState<WybranySkladnik[]>([]);
@@ -190,10 +192,10 @@ export default function FormularzPrzepisu() {
 
   /** Tekst komórki w tabeli składników — te same reguły co na ekranie Składniki. */
   function wartoscKomorkiSkladnika(s: Skladnik, klucz: string): string {
-    if (klucz === 'rola') return OPIS_ROLI_SKLADNIKA[s.rola];
+    if (klucz === 'rola') return nazwaRoli(s.rola);
     if (klucz === 'mozna_dzielic') {
       if (s.mozna_dzielic === null || s.mozna_dzielic === undefined) return '';
-      return s.mozna_dzielic ? 'tak' : 'nie';
+      return s.mozna_dzielic ? t('wspolne.tak') : t('wspolne.nie');
     }
     if (klucz === 'uzycia') {
       const n = liczbaUzycSkladnika(s.id);
@@ -221,22 +223,20 @@ export default function FormularzPrzepisu() {
     if (pole === 'rola') {
       const rolaWpisana = ROLA_SKLADNIKA_WEDLUG_ETYKIETY.get(tekst.trim().toLowerCase());
       if (!rolaWpisana) {
-        setBlad(
-          `Rola musi być jedną z: ${ROLE_SKLADNIKA.map((r) => OPIS_ROLI_SKLADNIKA[r]).join(', ')}.`
-        );
+        setBlad(t('skladniki.zlaRola', { role: ROLE_SKLADNIKA.map(nazwaRoli).join(', ') }));
         return;
       }
       wartosc = rolaWpisana;
     } else if (pole === 'mozna_dzielic') {
       wartosc = tekst === 'tak' ? true : tekst === 'nie' ? false : null;
     } else if (liczbowe) {
-      const t = tekst.replace(',', '.').trim();
-      if (t === '' || t === '—') {
+      const oczyszczony = tekst.replace(',', '.').trim();
+      if (oczyszczony === '' || oczyszczony === '—') {
         wartosc = pole === 'nova' || pole === 'gramatura_opakowania_g' ? null : 0;
       } else {
-        const n = Number(t);
+        const n = Number(oczyszczony);
         if (!Number.isFinite(n)) {
-          setBlad(`„${tekst}” nie jest liczbą.`);
+          setBlad(t('skladniki.nieLiczba', { tekst }));
           return;
         }
         wartosc = n;
@@ -609,7 +609,7 @@ export default function FormularzPrzepisu() {
   async function zapisz() {
     setBlad(null);
     if (!sesja) {
-      setBlad('Brak zalogowanego użytkownika.');
+      setBlad(t('profilFormularz.brakSesji'));
       return;
     }
 
@@ -681,7 +681,7 @@ export default function FormularzPrzepisu() {
       // wymuszamy to też tutaj, żeby przestawianie/wstawianie etapów nigdy
       // tego nie rozjechało).
       const etapyDoZapisu = etapy.map((e, i) =>
-        i === 0 ? { ...e, nazwa: 'Przygotowanie składników' } : e
+        i === 0 ? { ...e, nazwa: t('przepisFormularz.pierwszyEtap') } : e
       );
       const doZapisu = etapyDoZapisu.filter((e) => e.nazwa.trim());
 
@@ -750,15 +750,15 @@ export default function FormularzPrzepisu() {
   return (
     <Ekran
       pelnaSzerokosc
-      tytul={tryb === 'edycja' ? 'Edycja przepisu' : 'Nowy przepis'}
-      podtytul={tryb === 'edycja' ? nazwa || undefined : 'Makro policzy się ze składników'}>
+      tytul={tryb === 'edycja' ? t('przepisFormularz.edycja') : t('przepisFormularz.nowy')}
+      podtytul={tryb === 'edycja' ? nazwa || undefined : t('przepisFormularz.podtytul')}>
       <Karta style={styles.grupa}>
-        <Pole etykieta="Nazwa" value={nazwa} onChangeText={setNazwa} placeholder="Dorsz z kaszą gryczaną" />
+        <Pole etykieta={t('wspolne.nazwa')} value={nazwa} onChangeText={setNazwa} placeholder={t('przepisFormularz.przykladNazwy')} />
         <Pole
-          etykieta="Krótki opis"
+          etykieta={t('przepisFormularz.opis')}
           value={opis}
           onChangeText={setOpis}
-          placeholder="Pieczony w piekarniku, warzywa na jednej blasze"
+          placeholder={t('przepisFormularz.przykladOpisu')}
           multiline
         />
 
@@ -771,23 +771,23 @@ export default function FormularzPrzepisu() {
         />
 
         <ThemedText type="smallBold" themeColor="textSecondary">
-          METRYCZKA
+          {t('przepisFormularz.metryczka')}
         </ThemedText>
 
         <Wybor
-          etykieta="Jak dzielimy danie na porcje"
+          etykieta={t('przepisFormularz.porcjowanie')}
           wybrana={porcjowanie}
           onZmiana={setPorcjowanie}
           opcje={[
             {
               wartosc: 'sztuki',
-              etykieta: 'Na sztuki',
-              opis: 'kotlety, naleśniki, muffiny — podajesz liczbę',
+              etykieta: t('przepisFormularz.naSztuki'),
+              opis: t('przepisFormularz.naSztukiOpis'),
             },
             {
               wartosc: 'waga',
-              etykieta: 'Na wagę',
-              opis: 'zupy, gulasze, sosy — podajesz wagę jednej porcji',
+              etykieta: t('przepisFormularz.naWage'),
+              opis: t('przepisFormularz.naWageOpis'),
             },
           ]}
         />
@@ -795,15 +795,15 @@ export default function FormularzPrzepisu() {
         {[
           porcjowanie === 'sztuki'
             ? {
-                etykieta: 'Liczba porcji',
+                etykieta: t('przepisFormularz.liczbaPorcji'),
                 wartosc: porcje,
                 ustaw: setPorcje,
-                jednostka: 'sztuk',
-                podpowiedz: 'np. 4',
+                jednostka: t('przepisFormularz.jednostkaSztuk'),
+                podpowiedz: t('profilFormularz.np', { wartosc: 4 }),
                 edytowalne: true,
               }
             : {
-                etykieta: 'Waga jednej porcji',
+                etykieta: t('przepisFormularz.wagaPorcji'),
                 wartosc: wagaPorcjiWyliczona ? String(Math.round(wagaPorcjiWyliczona)) : '',
                 ustaw: () => {},
                 jednostka: 'g',
@@ -811,15 +811,15 @@ export default function FormularzPrzepisu() {
                 edytowalne: false,
               },
           {
-            etykieta: 'Liczba porcji bazowych',
+            etykieta: t('przepisFormularz.porcjeBazowe'),
             wartosc: porcjeBazowe,
             ustaw: setPorcjeBazowe,
-            jednostka: 'porcji',
-            podpowiedz: 'np. 4',
+            jednostka: t('przepisFormularz.jednostkaPorcji'),
+            podpowiedz: t('profilFormularz.np', { wartosc: 4 }),
             edytowalne: true,
           },
           {
-            etykieta: 'Czas przygotowania',
+            etykieta: t('przepisFormularz.czasPrzygotowania'),
             wartosc: czasPrzygotowaniaWyliczony ? String(czasPrzygotowaniaWyliczony) : '',
             ustaw: () => {},
             jednostka: 'min',
@@ -827,7 +827,7 @@ export default function FormularzPrzepisu() {
             edytowalne: false,
           },
           {
-            etykieta: 'Czas obróbki',
+            etykieta: t('przepisFormularz.czasObrobki'),
             wartosc: czasObrobkiWyliczony ? String(czasObrobkiWyliczony) : '',
             ustaw: () => {},
             jednostka: 'min',
@@ -859,28 +859,33 @@ export default function FormularzPrzepisu() {
         ))}
 
         <ThemedText type="small" themeColor="textSecondary">
-          Czas przygotowania i obróbki wynikają z etapów niżej — pierwszy etap to
-          przygotowanie, reszta to obróbka — i nie wpisuje się ich ręcznie.
+          {t('przepisFormularz.czasyOpis')}
         </ThemedText>
 
         {porcjowanie === 'waga' && (
           <ThemedText type="small" themeColor="textSecondary">
-            Waga jednej porcji wynika z podzielenia masy całej potrawy przez liczbę porcji bazowych —
-            nie wpisuje się jej ręcznie.
+            {t('przepisFormularz.wagaPorcjiOpis')}
           </ThemedText>
         )}
 
         {wybrane.length > 0 && podanoPorcjowanie && (
           <ThemedText type="small" themeColor="textSecondary">
             {porcjowanie === 'waga'
-              ? `Z ${Math.round(masaCalosci)} g wychodzi ${liczbaPorcji} porcji po około ${Math.round(wagaPorcjiWyliczona ?? 0)} g.`
-              : `Z ${Math.round(masaCalosci)} g wychodzi ${liczbaPorcji} porcji po około ${Math.round(masaCalosci / liczbaPorcji)} g.`}
+              ? t('przepisFormularz.wychodzi', {
+                  masa: Math.round(masaCalosci),
+                  porcje: liczbaPorcji,
+                  gramy: Math.round(wagaPorcjiWyliczona ?? 0),
+                })
+              : t('przepisFormularz.wychodzi', {
+                  masa: Math.round(masaCalosci),
+                  porcje: liczbaPorcji,
+                  gramy: Math.round(masaCalosci / liczbaPorcji),
+                })}
           </ThemedText>
         )}
 
         <ThemedText type="small" themeColor="textSecondary">
-          Przy daniach dzielonych na wagę podajesz liczbę porcji bazowych, a waga
-          jednej porcji wychodzi z rachunku: masa całej potrawy podzielona przez tę liczbę.
+          {t('przepisFormularz.naWageWyjasnienie')}
         </ThemedText>
 
         <Pressable
@@ -899,101 +904,91 @@ export default function FormularzPrzepisu() {
           />
           <View style={styles.trescZgody}>
             <ThemedText type="default" themeColor={skalowalny ? 'accent' : 'text'}>
-              Można skalować kalorycznie
+              {t('przepisFormularz.skalowalny')}
             </ThemedText>
             <ThemedText type="small" themeColor="textSecondary">
-              Gdy do celu kalorii brakuje, plan może powiększyć porcję — najwyżej o połowę
-              i nie ponad 600 g na śniadanie, kolację i dodatek oraz 900 g na obiad.
-              Porcja nigdy nie jest mniejsza niż w przepisie. Odznacz tylko wtedy, gdy
-              tego dania nie wolno zmieniać.
+              {t('przepisFormularz.skalowalnyOpis')}
             </ThemedText>
           </View>
         </Pressable>
       </Karta>
       <Karta style={styles.grupa}>
         <WyborWielo
-          etykieta="Kategoria"
+          etykieta={t('przepisyMakro.kolumna.kategoria')}
           wybrane={pory}
           onZmiana={setPory}
           opcje={KATEGORIE.map((k) => ({
             wartosc: k,
-            etykieta: OPIS_PORY[k],
+            etykieta: t(`pora.${k}`),
           }))}
         />
         <ThemedText type="small" themeColor="textSecondary">
-          Można zaznaczyć kilka — zupa bywa i obiadem, i kolacją. „Dodatek” to coś,
-          co dokładasz do posiłku: grillowana pierś, surówka, sałatka z ciecierzycy.
-          Dodatki pojawiają się przy wyborze dania do każdego posiłku.
+          {t('przepisFormularz.kategoriaOpis')}
         </ThemedText>
         <WyborWielo
-          etykieta="Rodzaj dania"
+          etykieta={t('filtry.grupaRodzaj')}
           wybrane={rodzaje}
           // Najwyżej dwa (reguła w bazie, migracja 0046) — trzeci wypycha najstarszy.
           onZmiana={(w) => setRodzaje(w.slice(-2))}
           opcje={RODZAJE_DAN.map((r) => ({
             wartosc: r,
-            etykieta: OPIS_RODZAJU[r],
+            etykieta: t(`rodzaj.${r}`),
           }))}
         />
         <ThemedText type="small" themeColor="textSecondary">
-          Jeden albo dwa — potrawka z kaszą jest i gulaszem, i daniem z kaszą. Po tym
-          rodzaju filtruje się listę przepisów. Główne białko (drób, ryba, strączki…)
-          nie jest tu do wyboru, bo wylicza się samo ze składników.
+          {t('przepisFormularz.rodzajOpis')}
         </ThemedText>
         <WyborWielo
-          etykieta="Kuchnia"
+          etykieta={t('filtry.grupaKuchnia')}
           wybrane={kuchnie}
           onZmiana={setKuchnie}
           opcje={(Object.keys(OPIS_KUCHNI) as Kuchnia[]).map((k) => ({
             wartosc: k,
-            etykieta: OPIS_KUCHNI[k],
+            etykieta: t(`kuchnia.${k}`),
           }))}
         />
         <Wybor
-          etykieta="Ile dni wytrzyma w lodówce"
+          etykieta={t('przepisFormularz.trwalosc')}
           wybrana={trwalosc}
           onZmiana={setTrwalosc}
           opcje={[
-            { wartosc: '0', etykieta: opisTrwalosci(0), opis: 'jajecznica, sałatki, dania z grilla' },
-            { wartosc: '1', etykieta: opisTrwalosci(1), opis: 'dania delikatne, z dużą ilością nabiału' },
-            { wartosc: '2', etykieta: opisTrwalosci(2), opis: 'dania rybne, zupy lekkie' },
-            { wartosc: '3', etykieta: opisTrwalosci(3), opis: 'zupy, gulasze, kasze i strączki' },
+            { wartosc: '0', etykieta: opisTrwalosci(0), opis: t('przepisFormularz.trwalosc0') },
+            { wartosc: '1', etykieta: opisTrwalosci(1), opis: t('przepisFormularz.trwalosc1') },
+            { wartosc: '2', etykieta: opisTrwalosci(2), opis: t('przepisFormularz.trwalosc2') },
+            { wartosc: '3', etykieta: opisTrwalosci(3), opis: t('przepisFormularz.trwalosc3') },
           ]}
         />
       </Karta>
 
       <Karta style={styles.grupa}>
         <ThemedText type="smallBold" themeColor="textSecondary">
-          SKŁADNIKI W PRZEPISIE ({wybrane.length})
+          {t('przepisFormularz.skladniki', { ile: wybrane.length })}
         </ThemedText>
         <ThemedText type="small" themeColor="textSecondary">
-          Odfiltruj listę i dotknij wiersza albo znaku plus. Wiersz rozwinie się
-          i poprosi o ilość.
+          {t('przepisFormularz.skladnikiOpis')}
         </ThemedText>
 
         {dostepne.length === 0 ? (
           <ThemedText type="small" themeColor="accent">
-            Baza składników jest pusta albo nie udało się jej wczytać. Sprawdź, czy
-            wszystkie migracje z katalogu supabase/migrations zostały wykonane —
-            zwłaszcza 0004_blonnik.sql, bez którego odczyt składników zwraca błąd.
+            {t('przepisFormularz.brakBazySkladnikow')}
           </ThemedText>
         ) : (
           <ThemedText type="small" themeColor="textSecondary">
-            Do wyboru: {dostepne.length} składników w bazie. W przepisie: {wybrane.length}.
+            {t('przepisFormularz.doWyboru', { wBazie: dostepne.length, wPrzepisie: wybrane.length })}
           </ThemedText>
         )}
 
         <View style={styles.przyciskiSkladnikow}>
           <Przycisk
-            tytul="Odśwież listę składników"
+            tytul={t('przepisFormularz.odswiez')}
             wariant="poboczny"
             onPress={wczytajSkladniki}
           />
           <Przycisk
             tytul={
               trybEdycjiSkladnikow
-                ? 'Zakończ edycję parametrów bazowych'
-                : 'Edytuj parametry składników - bazowe'
+                ? t('przepisFormularz.zakonczEdycjeParametrow')
+                : t('przepisFormularz.edytujParametry')
             }
             wariant="poboczny"
             onPress={() => setTrybEdycjiSkladnikow((p) => !p)}
@@ -1002,10 +997,7 @@ export default function FormularzPrzepisu() {
 
         {trybEdycjiSkladnikow && (
           <ThemedText type="small" themeColor="textSecondary">
-            Komórki są teraz polami do wpisywania — zmiana trafia od razu do bazy i dotyczy
-            składnika wszędzie, nie tylko w tym przepisie. Dodawanie do przepisu działa dalej
-            znakiem plus po lewej. Rolę i kwantyzację TYLKO dla tego przepisu zmienisz niżej,
-            w tabeli wybranych składników.
+            {t('przepisFormularz.trybEdycjiOpis')}
           </ThemedText>
         )}
 
@@ -1013,15 +1005,15 @@ export default function FormularzPrzepisu() {
           dane={dostepne}
           klucz={(s) => s.id}
           tekstDoFiltra={(s) => `${s.nazwa} ${s.tagi.join(' ')}`}
-          etykietaFiltra="Filtruj składniki po nazwie lub etykiecie"
-          placeholderFiltra="dorsz, ryba, warzywo…"
+          etykietaFiltra={t('skladniki.filtruj')}
+          placeholderFiltra={t('przepisFormularz.przykladSkladnika')}
           wybrane={wybraneId}
           onPrzelacz={przelaczSkladnik}
           trybEdycji={trybEdycjiSkladnikow}
           kolumny={[
-            { tytul: 'Nazwa', elastyczna: true, wartosc: (s) => s.nazwa },
+            { tytul: t('wspolne.nazwa'), elastyczna: true, wartosc: (s) => s.nazwa },
             {
-              tytul: 'kcal',
+              tytul: t('skladniki.kolumna.kcal_100g'),
               szerokosc: 56,
               liczba: true,
               wartosc: (s) => String(s.kcal_100g),
@@ -1036,7 +1028,7 @@ export default function FormularzPrzepisu() {
               ),
             },
             {
-              tytul: 'B',
+              tytul: t('skladniki.kolumna.bialko_100g'),
               szerokosc: 48,
               liczba: true,
               wartosc: (s) => String(s.bialko_100g),
@@ -1051,7 +1043,7 @@ export default function FormularzPrzepisu() {
               ),
             },
             {
-              tytul: 'T',
+              tytul: t('skladniki.kolumna.tluszcz_100g'),
               szerokosc: 48,
               liczba: true,
               wartosc: (s) => String(s.tluszcz_100g),
@@ -1066,7 +1058,7 @@ export default function FormularzPrzepisu() {
               ),
             },
             {
-              tytul: 'W',
+              tytul: t('skladniki.kolumna.wegle_100g'),
               szerokosc: 48,
               liczba: true,
               wartosc: (s) => String(s.wegle_100g),
@@ -1081,7 +1073,7 @@ export default function FormularzPrzepisu() {
               ),
             },
             {
-              tytul: 'błonnik',
+              tytul: t('skladniki.kolumna.blonnik_100g'),
               szerokosc: 60,
               liczba: true,
               wartosc: (s) => String(s.blonnik_100g),
@@ -1096,7 +1088,7 @@ export default function FormularzPrzepisu() {
               ),
             },
             {
-              tytul: 'c. wolne',
+              tytul: t('skladniki.kolumna.cukry_wolne_100g'),
               szerokosc: 66,
               liczba: true,
               wartosc: (s) => String(s.cukry_wolne_100g),
@@ -1111,7 +1103,7 @@ export default function FormularzPrzepisu() {
               ),
             },
             {
-              tytul: 'NOVA',
+              tytul: t('skladniki.kolumna.nova'),
               szerokosc: 54,
               liczba: true,
               wartosc: (s) => wartoscKomorkiSkladnika(s, 'nova') || '—',
@@ -1126,7 +1118,7 @@ export default function FormularzPrzepisu() {
               ),
             },
             {
-              tytul: 'opak.',
+              tytul: t('skladniki.kolumna.gramatura_opakowania_g'),
               szerokosc: 58,
               liczba: true,
               wartosc: (s) => wartoscKomorkiSkladnika(s, 'gramatura_opakowania_g') || '—',
@@ -1141,7 +1133,7 @@ export default function FormularzPrzepisu() {
               ),
             },
             {
-              tytul: 'szt. waży',
+              tytul: t('skladniki.kolumna.masa_sztuki_g'),
               szerokosc: 66,
               liczba: true,
               wartosc: (s) => wartoscKomorkiSkladnika(s, 'masa_sztuki_g') || '—',
@@ -1156,7 +1148,7 @@ export default function FormularzPrzepisu() {
               ),
             },
             {
-              tytul: 'kwant.',
+              tytul: t('skladniki.kolumna.mozna_dzielic'),
               szerokosc: 62,
               wartosc: (s) => wartoscKomorkiSkladnika(s, 'mozna_dzielic') || '—',
               komorka: (s) => {
@@ -1179,13 +1171,13 @@ export default function FormularzPrzepisu() {
               },
             },
             {
-              tytul: 'rola',
+              tytul: t('skladniki.kolumna.rola'),
               szerokosc: 90,
-              wartosc: (s) => OPIS_ROLI_SKLADNIKA[s.rola],
+              wartosc: (s) => nazwaRoli(s.rola),
               komorka: (s) => (
                 <KomorkaWyboru
                   wartosc={s.rola}
-                  etykieta={OPIS_ROLI_SKLADNIKA[s.rola]}
+                  etykieta={nazwaRoli(s.rola)}
                   opcje={OPCJE_ROLI}
                   szerokosc={90}
                   edytowalna
@@ -1194,7 +1186,7 @@ export default function FormularzPrzepisu() {
               ),
             },
             {
-              tytul: 'w daniach',
+              tytul: t('skladniki.kolumna.uzycia'),
               szerokosc: 72,
               liczba: true,
               wartosc: (s) => wartoscKomorkiSkladnika(s, 'uzycia') || '—',
@@ -1205,28 +1197,28 @@ export default function FormularzPrzepisu() {
               <View style={[styles.tabelaWybranych, { borderColor: motyw.border }]}>
                 <View style={[styles.wierszWybranego, styles.naglowekWybranych, { borderColor: motyw.border }]}>
                   <ThemedText type="smallBold" themeColor="textSecondary" style={styles.kolNazwa}>
-                    Składnik
+                    {t('przepisFormularz.kol.skladnik')}
                   </ThemedText>
                   <ThemedText type="smallBold" themeColor="textSecondary" style={styles.kolIlosc}>
-                    Ilość
+                    {t('przepisFormularz.kol.ilosc')}
                   </ThemedText>
                   <ThemedText type="smallBold" themeColor="textSecondary" style={styles.kolJednostka}>
-                    Jedn.
+                    {t('przepisFormularz.kol.jednostka')}
                   </ThemedText>
                   <ThemedText type="smallBold" themeColor="textSecondary" style={styles.kolGramy}>
-                    = gramy
+                    {t('przepisFormularz.kol.gramy')}
                   </ThemedText>
                   <ThemedText type="smallBold" themeColor="textSecondary" style={styles.kolStan}>
-                    Stan
+                    {t('przepisFormularz.kol.stan')}
                   </ThemedText>
                   <ThemedText type="smallBold" themeColor="textSecondary" style={styles.kolStan}>
-                    Zamiennik
+                    {t('przepisFormularz.kol.zamiennik')}
                   </ThemedText>
                   <ThemedText type="smallBold" themeColor="textSecondary" style={styles.kolRola}>
-                    Rola
+                    {t('przepisFormularz.kol.rola')}
                   </ThemedText>
                   <ThemedText type="smallBold" themeColor="textSecondary" style={styles.kolKwant}>
-                    Kwant.
+                    {t('przepisFormularz.kol.kwant')}
                   </ThemedText>
                   <View style={styles.kolUsun} />
                 </View>
@@ -1270,19 +1262,19 @@ export default function FormularzPrzepisu() {
                         }}
                         style={styles.kolJednostka}>
                         <ThemedText type="smallBold" themeColor="accent">
-                          {w.jednostka}
+                          {t(`jednostka.${w.jednostka}`)}
                         </ThemedText>
                       </Pressable>
 
                       <ThemedText type="small" themeColor="textSecondary" style={styles.kolGramy}>
-                        {gramyZe(w) ? `${Math.round(gramyZe(w) * 10) / 10} g` : '—'}
+                        {gramyZe(w) ? `${liczbaNaTekst(gramyZe(w), 1)} g` : '—'}
                       </ThemedText>
 
                       <View style={styles.kolStan}>
                         <TextInput
                           value={w.stan}
                           onChangeText={(t) => zmienSkladnik(w.skladnik.id, { stan: t })}
-                          placeholder="obrana, starta"
+                          placeholder={t('przepisFormularz.przykladStanu')}
                           placeholderTextColor={motyw.textSecondary}
                           style={[
                             styles.polePozycji,
@@ -1295,7 +1287,7 @@ export default function FormularzPrzepisu() {
                         <TextInput
                           value={w.zamiennik}
                           onChangeText={(t) => zmienSkladnik(w.skladnik.id, { zamiennik: t })}
-                          placeholder="lub…"
+                          placeholder={t('przepisFormularz.przykladZamiennika')}
                           placeholderTextColor={motyw.textSecondary}
                           style={[
                             styles.polePozycji,
@@ -1306,7 +1298,7 @@ export default function FormularzPrzepisu() {
 
                       <KomorkaWyboru
                         wartosc={w.rola}
-                        etykieta={OPIS_ROLI_SKLADNIKA[w.rola]}
+                        etykieta={nazwaRoli(w.rola)}
                         opcje={OPCJE_ROLI}
                         szerokosc={100}
                         edytowalna
@@ -1315,7 +1307,7 @@ export default function FormularzPrzepisu() {
 
                       <KomorkaWyboru
                         wartosc={w.moznaDzielic === '' ? null : w.moznaDzielic}
-                        etykieta={w.moznaDzielic === 'tak' ? 'tak' : w.moznaDzielic === 'nie' ? 'nie' : '—'}
+                        etykieta={w.moznaDzielic === 'tak' ? t('wspolne.tak') : w.moznaDzielic === 'nie' ? t('wspolne.nie') : '—'}
                         opcje={OPCJE_MOZNA_DZIELIC}
                         szerokosc={90}
                         edytowalna
@@ -1325,7 +1317,7 @@ export default function FormularzPrzepisu() {
                       <Pressable
                         onPress={() => przelaczSkladnik(w.skladnik)}
                         hitSlop={8}
-                        accessibilityLabel={`Usuń ${w.skladnik.nazwa}`}
+                        accessibilityLabel={t('przepisy.usunNazwe', { nazwa: w.skladnik.nazwa })}
                         style={styles.kolUsun}>
                         <Ionicons name="close" size={16} color={motyw.textSecondary} />
                       </Pressable>
@@ -1339,12 +1331,12 @@ export default function FormularzPrzepisu() {
             dodawanieSkladnika ? (
               <View style={styles.okienko}>
                 <ThemedText type="small" themeColor="textSecondary">
-                  Przepis pozostaje wpisany — po zapisaniu składnik od razu do niego wejdzie.
+                  {t('przepisFormularz.przepisZostaje')}
                 </ThemedText>
                 <FormularzSkladnika
                   nazwaPoczatkowa={fraza}
                   onZapisano={(nowy) => {
-                    setDostepne((p) => [...p, nowy].sort((a, b) => a.nazwa.localeCompare(b.nazwa, 'pl')));
+                    setDostepne((p) => [...p, nowy].sort((a, b) => a.nazwa.localeCompare(b.nazwa, jezyk())));
                     dodajSkladnik(nowy);
                     setDodawanieSkladnika(false);
                   }}
@@ -1353,7 +1345,7 @@ export default function FormularzPrzepisu() {
               </View>
             ) : (
               <Przycisk
-                tytul={fraza ? `Nie ma „${fraza}”? Dodaj do bazy` : 'Brakuje składnika? Dodaj go'}
+                tytul={fraza ? t('przepisFormularz.dodajFraze', { fraza }) : t('przepisFormularz.dodajBrakujacy')}
                 wariant="poboczny"
                 onPress={() => setDodawanieSkladnika(true)}
               />
@@ -1364,40 +1356,43 @@ export default function FormularzPrzepisu() {
       {wybrane.length > 0 && (
         <Karta>
           <ThemedText type="smallBold" themeColor="textSecondary">
-            NA JEDNĄ PORCJĘ ({Math.round(makroPorcji.gramy)} g)
+            {t('przepisFormularz.naPorcje', { gramy: Math.round(makroPorcji.gramy) })}
           </ThemedText>
           <WierszMakro
             pozycje={[
-              { etykieta: 'kcal', wartosc: Math.round(makroPorcji.kcal), jednostka: '' },
-              { etykieta: 'białko', wartosc: Math.round(makroPorcji.bialko * 10) / 10, jednostka: ' g' },
-              { etykieta: 'tłuszcz', wartosc: Math.round(makroPorcji.tluszcz * 10) / 10, jednostka: ' g' },
-              { etykieta: 'węgle', wartosc: Math.round(makroPorcji.wegle * 10) / 10, jednostka: ' g' },
+              { etykieta: t('makro.kcal'), wartosc: Math.round(makroPorcji.kcal), jednostka: '' },
+              { etykieta: t('makro.bialko'), wartosc: Math.round(makroPorcji.bialko * 10) / 10, jednostka: ' g' },
+              { etykieta: t('makro.tluszcz'), wartosc: Math.round(makroPorcji.tluszcz * 10) / 10, jednostka: ' g' },
+              { etykieta: t('makro.wegle'), wartosc: Math.round(makroPorcji.wegle * 10) / 10, jednostka: ' g' },
             ]}
           />
 
           <ThemedText type="small" themeColor="textSecondary">
-            Cała potrawa: {Math.round(masaCalosci)} g, {Math.round(makro.kcal)} kcal,{' '}
-            {Math.round(makro.bialko * 10) / 10} g białka
+            {t('przepisy.calaPotrawaZGramami', {
+              gramy: Math.round(masaCalosci),
+              kcal: Math.round(makro.kcal),
+              bialko: liczbaNaTekst(makro.bialko, 1),
+            })}
           </ThemedText>
 
           {makroPorcji.cukryWolne > 0 && (
             <ThemedText type="small" themeColor="textSecondary">
-              Cukry wolne w porcji: {Math.round(makroPorcji.cukryWolne * 10) / 10} g
+              {t('przepisFormularz.cukryWolne', { gramy: liczbaNaTekst(makroPorcji.cukryWolne, 1) })}
             </ThemedText>
           )}
           {makro.nova >= 4 && (
             <ThemedText type="small" themeColor="accent">
-              Przepis zawiera składnik wysoko przetworzony (NOVA 4). Talerz takich nie promuje.
+              {t('przepisFormularz.nova4')}
             </ThemedText>
           )}
         </Karta>
       )}
       <Karta style={styles.grupa}>
         <ThemedText type="smallBold" themeColor="textSecondary">
-          POTRZEBNY SPRZĘT ({sprzet.length})
+          {t('przepisFormularz.sprzet', { ile: sprzet.length })}
         </ThemedText>
         <ThemedText type="small" themeColor="textSecondary">
-          Zapobiega szukaniu blendera w połowie gotowania.
+          {t('przepisFormularz.sprzetOpis')}
         </ThemedText>
 
         {sprzetDoUsuniecia && (
@@ -1405,11 +1400,10 @@ export default function FormularzPrzepisu() {
             {sprzetDoUsuniecia.w_przepisach > 0 ? (
               <>
                 <ThemedText type="smallBold" themeColor="accent">
-                  „{sprzetDoUsuniecia.nazwa}” jest używany
+                  {t('przepisFormularz.sprzetUzywany', { nazwa: sprzetDoUsuniecia.nazwa })}
                 </ThemedText>
                 <ThemedText type="small" themeColor="textSecondary">
-                  Występuje w {sprzetDoUsuniecia.w_przepisach}{' '}
-                  {sprzetDoUsuniecia.w_przepisach === 1 ? 'przepisie' : 'przepisach'}:
+                  {t('przepisFormularz.sprzetWystepuje', { count: sprzetDoUsuniecia.w_przepisach })}
                 </ThemedText>
                 {sprzetDoUsuniecia.przepisy.map((n) => (
                   <ThemedText key={n} type="small">
@@ -1422,7 +1416,7 @@ export default function FormularzPrzepisu() {
                   otwierać każdy przepis po kolei. Robimy to jednym ruchem.
                 */}
                 <Przycisk
-                  tytul="Usuń z tych przepisów i skasuj"
+                  tytul={t('przepisFormularz.sprzetUsunWszedzie')}
                   onPress={async () => {
                     setBlad(null);
                     try {
@@ -1458,7 +1452,7 @@ export default function FormularzPrzepisu() {
                   }}
                 />
                 <Przycisk
-                  tytul="Zostaw"
+                  tytul={t('uzytkownicy.zostaw')}
                   wariant="poboczny"
                   onPress={() => setSprzetDoUsuniecia(null)}
                 />
@@ -1466,13 +1460,13 @@ export default function FormularzPrzepisu() {
             ) : (
               <>
                 <ThemedText type="smallBold">
-                  Usunąć „{sprzetDoUsuniecia.nazwa}” z katalogu?
+                  {t('przepisFormularz.sprzetUsunPytanie', { nazwa: sprzetDoUsuniecia.nazwa })}
                 </ThemedText>
                 <ThemedText type="small" themeColor="textSecondary">
-                  Nie występuje w żadnym przepisie. Tej operacji nie da się cofnąć.
+                  {t('przepisFormularz.sprzetNieuzywany')}
                 </ThemedText>
                 <Przycisk
-                  tytul="Usuń"
+                  tytul={t('wspolne.usun')}
                   onPress={async () => {
                     const { error } = await supabase
                       .from('sprzet')
@@ -1489,7 +1483,7 @@ export default function FormularzPrzepisu() {
                   }}
                 />
                 <Przycisk
-                  tytul="Anuluj"
+                  tytul={t('wspolne.anuluj')}
                   wariant="poboczny"
                   onPress={() => setSprzetDoUsuniecia(null)}
                 />
@@ -1502,16 +1496,16 @@ export default function FormularzPrzepisu() {
           dane={katalogSprzetu}
           klucz={(x) => x.id}
           tekstDoFiltra={(x) => `${x.nazwa} ${x.rodzaj}`}
-          etykietaFiltra="Filtruj sprzęt"
-          placeholderFiltra="garnek, tarka, piekarnik…"
+          etykietaFiltra={t('przepisFormularz.filtrujSprzet')}
+          placeholderFiltra={t('przepisFormularz.przykladSprzetu')}
           wysokosc={220}
           wybrane={sprzetId}
           onPrzelacz={przelaczSprzet}
           kolumny={[
-            { tytul: 'Nazwa', elastyczna: true, wartosc: (x) => x.nazwa },
-            { tytul: 'Rodzaj', szerokosc: 110, wartosc: (x) => x.rodzaj },
+            { tytul: t('wspolne.nazwa'), elastyczna: true, wartosc: (x) => x.nazwa },
+            { tytul: t('przepisFormularz.rodzajSprzetu'), szerokosc: 110, wartosc: (x) => x.rodzaj },
             {
-              tytul: 'w przepisach',
+              tytul: t('przepisFormularz.wPrzepisach'),
               szerokosc: 90,
               liczba: true,
               wartosc: (x) => (x.w_przepisach === 0 ? '—' : String(x.w_przepisach)),
@@ -1521,7 +1515,7 @@ export default function FormularzPrzepisu() {
             <Pressable
               onPress={() => setSprzetDoUsuniecia(x)}
               hitSlop={8}
-              accessibilityLabel={`Usuń ${x.nazwa} z katalogu`}
+              accessibilityLabel={t('przepisFormularz.usunZKatalogu', { nazwa: x.nazwa })}
               style={styles.usunSprzet}>
               <Ionicons
                 name="trash-outline"
@@ -1533,13 +1527,13 @@ export default function FormularzPrzepisu() {
           stopka={(fraza) => (
             <View style={styles.dopisywanieSprzetu}>
               <Pole
-                etykieta="Nie ma na liście? Dopisz do katalogu"
+                etykieta={t('przepisFormularz.dopiszSprzetEtykieta')}
                 value={nowySprzet || fraza}
                 onChangeText={setNowySprzet}
-                placeholder="szybkowar 6 l"
+                placeholder={t('przepisFormularz.przykladNowegoSprzetu')}
               />
               <Przycisk
-                tytul="Dopisz sprzęt"
+                tytul={t('przepisFormularz.dopiszSprzet')}
                 wariant="poboczny"
                 onPress={async () => {
                   const nazwa = (nowySprzet || fraza).trim().replace(/\s+/g, ' ');
@@ -1570,7 +1564,7 @@ export default function FormularzPrzepisu() {
                   }
                   setKatalogSprzetu((p) =>
                     [...p, { ...data, w_przepisach: 0, przepisy: [] }].sort((a, b) =>
-                      a.nazwa.localeCompare(b.nazwa, 'pl')
+                      a.nazwa.localeCompare(b.nazwa, jezyk())
                     )
                   );
                   setSprzet((p) => [...p, data.nazwa]);
@@ -1584,18 +1578,17 @@ export default function FormularzPrzepisu() {
 
       <Karta style={styles.grupa}>
         <ThemedText type="smallBold" themeColor="textSecondary">
-          ETAPY PRZYGOTOWANIA
+          {t('przepisFormularz.etapy')}
         </ThemedText>
         <ThemedText type="small" themeColor="textSecondary">
-          Każdy etap ma nazwę, czas i własne kroki — na przykład „Gotowanie wywaru, 45 minut”.
-          Krok można oznaczyć jako uwagę, gdy ostrzega przed pomyłką.
+          {t('przepisFormularz.etapyOpis')}
         </ThemedText>
 
         {etapy.map((etap, i) => (
           <View key={i} style={[styles.etap, { borderColor: motyw.border }]}>
             <View style={styles.naglowekEtapu}>
               <ThemedText type="smallBold" themeColor="accent">
-                ETAP {i + 1}
+                {t('przepisFormularz.etapNr', { nr: i + 1 })}
               </ThemedText>
 
               <View style={styles.przyciskiEtapu}>
@@ -1603,7 +1596,7 @@ export default function FormularzPrzepisu() {
                   onPress={() => przesunEtap(i, -1)}
                   disabled={i === 0}
                   hitSlop={6}
-                  accessibilityLabel="Przesuń etap wyżej">
+                  accessibilityLabel={t('przepisFormularz.etapWyzej')}>
                   <Ionicons
                     name="arrow-up"
                     size={18}
@@ -1614,7 +1607,7 @@ export default function FormularzPrzepisu() {
                   onPress={() => przesunEtap(i, 1)}
                   disabled={i === etapy.length - 1}
                   hitSlop={6}
-                  accessibilityLabel="Przesuń etap niżej">
+                  accessibilityLabel={t('przepisFormularz.etapNizej')}>
                   <Ionicons
                     name="arrow-down"
                     size={18}
@@ -1624,11 +1617,11 @@ export default function FormularzPrzepisu() {
                 <Pressable
                   onPress={() => wstawEtap(i)}
                   hitSlop={6}
-                  accessibilityLabel="Wstaw etap poniżej">
+                  accessibilityLabel={t('przepisFormularz.etapWstaw')}>
                   <Ionicons name="add-circle-outline" size={18} color={motyw.accent} />
                 </Pressable>
 
-                <Pressable onPress={() => usunEtap(i)} hitSlop={6} accessibilityLabel="Usuń etap">
+                <Pressable onPress={() => usunEtap(i)} hitSlop={6} accessibilityLabel={t('przepisFormularz.etapUsun')}>
                   <Ionicons name="trash-outline" size={18} color={motyw.textSecondary} />
                 </Pressable>
               </View>
@@ -1636,21 +1629,21 @@ export default function FormularzPrzepisu() {
 
             {i === 0 ? (
               <Pole
-                etykieta="Nazwa etapu"
-                value="Przygotowanie składników"
+                etykieta={t('przepisFormularz.nazwaEtapu')}
+                value={t('przepisFormularz.pierwszyEtap')}
                 editable={false}
                 style={styles.poleNieedytowalne}
               />
             ) : (
               <Pole
-                etykieta="Nazwa etapu"
+                etykieta={t('przepisFormularz.nazwaEtapu')}
                 value={etap.nazwa}
-                onChangeText={(t) => zmienEtap(i, 'nazwa', t)}
-                placeholder="Gotowanie wywaru"
+                onChangeText={(tekst) => zmienEtap(i, 'nazwa', tekst)}
+                placeholder={t('przepisFormularz.przykladEtapu')}
               />
             )}
             <Pole
-              etykieta="Czas etapu (min)"
+              etykieta={t('przepisFormularz.czasEtapu')}
               value={etap.minuty}
               onChangeText={(t) => zmienEtap(i, 'minuty', t)}
               inputMode="numeric"
@@ -1661,14 +1654,14 @@ export default function FormularzPrzepisu() {
               <View key={j} style={styles.krok}>
                 <View style={styles.naglowekKroku}>
                   <ThemedText type="small" themeColor="textSecondary">
-                    Krok {j + 1}
+                    {t('przepisFormularz.krokNr', { nr: j + 1 })}
                   </ThemedText>
 
                   <Pressable
                     onPress={() => przesunKrok(i, j, -1)}
                     disabled={j === 0}
                     hitSlop={6}
-                    accessibilityLabel="Przesuń krok wyżej">
+                    accessibilityLabel={t('przepisFormularz.krokWyzej')}>
                     <Ionicons
                       name="arrow-up"
                       size={15}
@@ -1680,7 +1673,7 @@ export default function FormularzPrzepisu() {
                     onPress={() => przesunKrok(i, j, 1)}
                     disabled={j === etap.kroki.length - 1}
                     hitSlop={6}
-                    accessibilityLabel="Przesuń krok niżej">
+                    accessibilityLabel={t('przepisFormularz.krokNizej')}>
                     <Ionicons
                       name="arrow-down"
                       size={15}
@@ -1691,7 +1684,7 @@ export default function FormularzPrzepisu() {
                   <Pressable
                     onPress={() => wstawKrok(i, j)}
                     hitSlop={6}
-                    accessibilityLabel="Wstaw krok poniżej">
+                    accessibilityLabel={t('przepisFormularz.krokWstaw')}>
                     <Ionicons name="add-circle-outline" size={16} color={motyw.accent} />
                   </Pressable>
 
@@ -1707,11 +1700,11 @@ export default function FormularzPrzepisu() {
                       color={krok.uwaga ? motyw.accent : motyw.textSecondary}
                     />
                     <ThemedText type="small" themeColor={krok.uwaga ? 'accent' : 'textSecondary'}>
-                      uwaga
+                      {t('przepisFormularz.uwaga')}
                     </ThemedText>
                   </Pressable>
 
-                  <Pressable onPress={() => usunKrok(i, j)} hitSlop={6} accessibilityLabel="Usuń krok">
+                  <Pressable onPress={() => usunKrok(i, j)} hitSlop={6} accessibilityLabel={t('przepisFormularz.krokUsun')}>
                     <Ionicons name="close" size={16} color={motyw.textSecondary} />
                   </Pressable>
                 </View>
@@ -1720,15 +1713,15 @@ export default function FormularzPrzepisu() {
                   etykieta=""
                   value={krok.tresc}
                   onChangeText={(t) => zmienKrok(i, j, { tresc: t })}
-                  placeholder="Doprowadź do wrzenia i zbierz szumowiny"
+                  placeholder={t('przepisFormularz.przykladKroku')}
                   multiline
                 />
                 {krok.sygnalRozwiniety ? (
                   <Pole
-                    etykieta="Po czym poznać, że gotowe (nieobowiązkowe)"
+                    etykieta={t('przepisFormularz.sygnalPole')}
                     value={krok.sygnal}
-                    onChangeText={(t) => zmienKrok(i, j, { sygnal: t })}
-                    placeholder="aż ziemniaki będą miękkie"
+                    onChangeText={(tekst) => zmienKrok(i, j, { sygnal: tekst })}
+                    placeholder={t('przepisFormularz.przykladSygnalu')}
                   />
                 ) : (
                   <Pressable
@@ -1737,59 +1730,58 @@ export default function FormularzPrzepisu() {
                     style={styles.rozwinSygnal}>
                     <Ionicons name="add" size={14} color={motyw.textSecondary} />
                     <ThemedText type="small" themeColor="textSecondary">
-                      Po czym poznać, że gotowe
+                      {t('przepisFormularz.sygnal')}
                     </ThemedText>
                   </Pressable>
                 )}
               </View>
             ))}
 
-            <Przycisk tytul="Dodaj krok na końcu" wariant="poboczny" onPress={() => wstawKrok(i)} />
+            <Przycisk tytul={t('przepisFormularz.dodajKrok')} wariant="poboczny" onPress={() => wstawKrok(i)} />
           </View>
         ))}
 
         <Przycisk
-          tytul={etapy.length === 0 ? 'Dodaj pierwszy etap' : 'Dodaj etap na końcu'}
+          tytul={etapy.length === 0 ? t('przepisFormularz.dodajPierwszyEtap') : t('przepisFormularz.dodajEtap')}
           wariant="poboczny"
           onPress={() => wstawEtap()}
         />
 
         {czasRazem > 0 && (
           <ThemedText type="small" themeColor="textSecondary">
-            Czas wszystkich etapów: {czasRazem} min. Jeśli etapy się nakładają („w międzyczasie”),
-            faktyczny czas będzie krótszy.
+            {t('przepisFormularz.czasEtapow', { minuty: czasRazem })}
           </ThemedText>
         )}
       </Karta>
       <Karta style={styles.grupa}>
         <ThemedText type="smallBold" themeColor="textSecondary">
-          PRZECHOWYWANIE I WSKAZÓWKI
+          {t('przepisFormularz.przechowywanie')}
         </ThemedText>
 
         <Pole
-          etykieta="Jak przechowywać"
+          etykieta={t('przepisFormularz.jakPrzechowywac')}
           value={przechowywanie}
           onChangeText={setPrzechowywanie}
-          placeholder="W lodówce w zamkniętym pojemniku, odgrzewać pod przykryciem"
+          placeholder={t('przepisFormularz.przykladPrzechowywania')}
           multiline
         />
 
         <Wybor
-          etykieta="Czy nadaje się do mrożenia"
+          etykieta={t('przepisFormularz.mrozenie')}
           wybrana={moznaMrozic}
           onZmiana={setMoznaMrozic}
           opcje={[
-            { wartosc: 'tak', etykieta: 'Tak' },
-            { wartosc: 'nie', etykieta: 'Nie' },
-            { wartosc: 'nie wiem', etykieta: 'Nie wiem' },
+            { wartosc: 'tak', etykieta: t('przepisFormularz.takDuze') },
+            { wartosc: 'nie', etykieta: t('przepisFormularz.nieDuze') },
+            { wartosc: 'nie wiem', etykieta: t('przepisFormularz.nieWiem') },
           ]}
         />
 
         <Pole
-          etykieta="Jak uratować danie w razie wpadki"
+          etykieta={t('przepisFormularz.ratunek')}
           value={ratunek}
           onChangeText={setRatunek}
-          placeholder="Za kwaśne — dodaj ziemniaka i pogotuj. Za słone — dolej wody i śmietany."
+          placeholder={t('przepisFormularz.przykladRatunku')}
           multiline
         />
       </Karta>
@@ -1809,13 +1801,13 @@ export default function FormularzPrzepisu() {
       {widocznosc !== 'publiczna' && (
         <Karta style={styles.grupa}>
           <ThemedText type="smallBold" themeColor="textSecondary">
-            PUBLIKACJA
+            {t('przepisFormularz.publikacja')}
           </ThemedText>
 
           {powodOdrzucenia && (
             <View style={[styles.uwagaModeratora, { borderLeftColor: motyw.accent }]}>
               <ThemedText type="smallBold" themeColor="accent">
-                Moderator odesłał przepis do poprawki
+                {t('przepisFormularz.odeslany')}
               </ThemedText>
               <ThemedText type="small">{powodOdrzucenia}</ThemedText>
             </View>
@@ -1837,19 +1829,17 @@ export default function FormularzPrzepisu() {
             />
             <View style={styles.trescZgody}>
               <ThemedText type="default" themeColor={doPublikacji ? 'accent' : 'text'}>
-                Zgadzam się na upublicznienie tego przepisu
+                {t('przepisFormularz.zgoda')}
               </ThemedText>
               <ThemedText type="small" themeColor="textSecondary">
-                Po zapisaniu trafi do moderatora. Zatwierdzony stanie się widoczny dla
-                wszystkich i od tej chwili zmieni go już tylko moderator. Do tego czasu
-                możesz wycofać zgłoszenie, odznaczając to pole.
+                {t('przepisFormularz.zgodaOpis')}
               </ThemedText>
             </View>
           </Pressable>
 
           {widocznosc === 'zgloszona' && (
             <ThemedText type="small" themeColor="textSecondary">
-              Przepis czeka na rozpatrzenie.
+              {t('przepisFormularz.czeka')}
             </ThemedText>
           )}
         </Karta>
@@ -1858,25 +1848,23 @@ export default function FormularzPrzepisu() {
       {widocznosc === 'publiczna' && (
         <Karta>
           <ThemedText type="small" themeColor="textSecondary">
-            Przepis jest publiczny — widzą go wszyscy. Zmiany w opublikowanym przepisie
-            wprowadza moderator.
+            {t('przepisFormularz.publiczny')}
           </ThemedText>
         </Karta>
       )}
 
       <ThemedText type="small" themeColor="textSecondary">
-        {tryb === 'edycja'
-          ? 'Zmiany nadpiszą dotychczasową treść przepisu.'
-          : 'Przepis zapisze się jako prywatny.'} Publikacja wymaga zgłoszenia i zatwierdzenia.
+        {tryb === 'edycja' ? t('przepisFormularz.nadpisze') : t('przepisFormularz.prywatny')}{' '}
+        {t('przepisFormularz.publikacjaWymaga')}
       </ThemedText>
 
       <Przycisk
-        tytul={tryb === 'edycja' ? 'Zapisz zmiany' : 'Zapisz przepis'}
+        tytul={tryb === 'edycja' ? t('wspolne.zapiszZmiany') : t('przepisFormularz.zapisz')}
         onPress={zapisz}
         zajety={zajety}
         wylaczony={!komplet}
       />
-      <Przycisk tytul="Anuluj" wariant="poboczny" onPress={() => wroc(powrot, '/przepisy')} />
+      <Przycisk tytul={t('wspolne.anuluj')} wariant="poboczny" onPress={() => wroc(powrot, '/przepisy')} />
     </Ekran>
   );
 }

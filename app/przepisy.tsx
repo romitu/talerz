@@ -2,6 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { Image } from 'expo-image';
 import { router, useFocusEffect } from 'expo-router';
 import { useCallback, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Pressable, StyleSheet, View } from 'react-native';
 
 import { komunikatBledu } from '@/lib/blad';
@@ -20,11 +21,6 @@ import { useTheme } from '@/hooks/use-theme';
 import {
   czasRazem,
   KATEGORIE,
-  OPIS_BIALKA,
-  OPIS_KATEGORII,
-  OPIS_KUCHNI,
-  OPIS_PORY,
-  OPIS_RODZAJU,
   opisTrwalosci,
   odrzucPrzepis,
   pobierzPrzepisy,
@@ -59,19 +55,15 @@ function doPorownania(tekst: string): string {
 
 /**
  * Skrócone etykiety zakładek kategorii — tylko na te pigułki w nagłówku.
- * Pełne nazwy (`OPIS_KATEGORII`) zostają wszędzie indziej (komunikaty,
+ * Pełne nazwy (`kategoria.*`) zostają wszędzie indziej (komunikaty,
  * formularz przepisu) — tam nie ma problemu z miejscem w jednej linii.
+ * Skróty są w tłumaczeniach: `przepisy.zakladka.*`.
  */
-const SKROT_KATEGORII: Record<PoraPosilku, string> = {
-  sniadanie: 'Śniad.',
-  obiad: 'Obiad',
-  kolacja: 'Kolacj.',
-  dodatek: 'Dodat.',
-};
 
 export default function EkranPrzepisow() {
   const { sesja } = useSesja();
   const motyw = useTheme();
+  const { t } = useTranslation();
 
   const [przepisy, setPrzepisy] = useState<PrzepisZMakro[]>([]);
   const [rola, setRola] = useState<string | null>(null);
@@ -231,7 +223,7 @@ export default function EkranPrzepisow() {
       const kod = (e as { code?: string })?.code;
       setBlad(
         kod === '23503'
-          ? `Nie można usunąć „${p.nazwa}” — jest użyty w czyimś planie posiłków albo w ugotowanej partii. Usuń go najpierw stamtąd.`
+          ? t('przepisy.nieMoznaUsunac', { nazwa: p.nazwa })
           : komunikatBledu(e)
       );
     } finally {
@@ -271,13 +263,13 @@ export default function EkranPrzepisow() {
       const tekst = [
         p.nazwa,
         p.opis ?? '',
-        ...p.kuchnie.map((x) => OPIS_KUCHNI[x]),
-        ...p.pory.map((x) => OPIS_PORY[x]),
-        ...p.rodzaje.map((x) => OPIS_RODZAJU[x]),
+        ...p.kuchnie.map((x) => t(`kuchnia.${x}`)),
+        ...p.pory.map((x) => t(`pora.${x}`)),
+        ...p.rodzaje.map((x) => t(`rodzaj.${x}`)),
       ].join(' ');
       return doPorownania(tekst).includes(szukane);
     });
-  }, [przepisy, szukane]);
+  }, [przepisy, szukane, t]);
 
   /**
    * Ukryte przepisy znikają PRZED wszystkim innym filtrowaniem — poza kolejką
@@ -328,7 +320,7 @@ export default function EkranPrzepisow() {
     : [
         {
           klucz: 'wszystkie',
-          etykieta: 'Wszyst.',
+          etykieta: t('przepisy.zakladka.wszystkie'),
           ile: poFiltrach.length,
           wybrana: kategoria === null,
           onPress: () => {
@@ -338,7 +330,7 @@ export default function EkranPrzepisow() {
         },
         ...KATEGORIE.map((k) => ({
           klucz: k,
-          etykieta: SKROT_KATEGORII[k],
+          etykieta: t(`przepisy.zakladka.${k}`),
           ile: licznik(k),
           wybrana: kategoria === k,
           onPress: () => {
@@ -352,7 +344,7 @@ export default function EkranPrzepisow() {
           ? [
               {
                 klucz: 'ukryte',
-                etykieta: 'Ukryte',
+                etykieta: t('przepisy.zakladka.ukryte'),
                 ile: liczbaUkrytych,
                 wybrana: pokazUkryte,
                 onPress: () => setPokazUkryte((x) => !x),
@@ -363,7 +355,7 @@ export default function EkranPrzepisow() {
           ? [
               {
                 klucz: 'wykluczone',
-                etykieta: 'Nie jemy',
+                etykieta: t('przepisy.zakladka.nieJemy'),
                 ile: liczbaWykluczonych,
                 wybrana: pokazWykluczone,
                 onPress: () => setPokazWykluczone((x) => !x),
@@ -374,7 +366,7 @@ export default function EkranPrzepisow() {
           ? [
               {
                 klucz: 'kolejka',
-                etykieta: 'Do zatwierdzenia',
+                etykieta: t('przepisy.zakladka.doZatwierdzenia'),
                 ile: doZatwierdzenia.length,
                 wybrana: kolejka,
                 akcent: true,
@@ -386,7 +378,7 @@ export default function EkranPrzepisow() {
 
   return (
     <Ekran
-      tytul="Przepisy"
+      tytul={t('zakladki.przepisy')}
       naglowekStaly={
         <NaglowekPrzepisow
           liczbaWBazie={przepisy.length}
@@ -403,15 +395,14 @@ export default function EkranPrzepisow() {
       }>
       {kategoria !== null && bezKategorii.length > 0 && (
         <ThemedText type="small" themeColor="textSecondary">
-          {bezKategorii.length} {bezKategorii.length === 1 ? 'przepis nie ma' : 'przepisów nie ma'}
-          {' '}przypisanej kategorii — zobaczysz je w „Wszystkie”.
+          {t('przepisy.bezKategorii', { count: bezKategorii.length })}
         </ThemedText>
       )}
 
       {blad && (
         <Karta>
           <ThemedText type="small" themeColor="accent">
-            Nie udało się wczytać: {blad}
+            {t('wspolne.bladWczytania', { blad })}
           </ThemedText>
         </Karta>
       )}
@@ -419,36 +410,34 @@ export default function EkranPrzepisow() {
 
       {!wczytywanie && przepisy.length === 0 && (
         <Karta>
-          <ThemedText type="default">Baza przepisów jest pusta</ThemedText>
+          <ThemedText type="default">{t('przepisy.pusto')}</ThemedText>
           <ThemedText type="small" themeColor="textSecondary">
-            Składniki są już wczytane, więc makro policzy się samo — wystarczy podać, ile
-            czego wchodzi w skład dania.
+            {t('przepisy.pustoOpis')}
           </ThemedText>
         </Karta>
       )}
 
       {!wczytywanie && przepisy.length > 0 && poFrazie.length === 0 && szukane !== '' && (
         <Karta>
-          <ThemedText type="default">Nic nie pasuje do „{fraza.trim()}”</ThemedText>
+          <ThemedText type="default">{t('przepisy.brakDlaFrazy', { fraza: fraza.trim() })}</ThemedText>
           <ThemedText type="small" themeColor="textSecondary">
-            Szukam w nazwie, opisie, kuchni, kategorii i rodzaju dania. Ogonki i wielkość liter nie mają
-            znaczenia.
+            {t('przepisy.gdzieSzukam')}
           </ThemedText>
-          <Przycisk tytul="Wyczyść szukanie" wariant="poboczny" onPress={() => setFraza('')} />
+          <Przycisk tytul={t('naglowekPrzepisow.wyczysc')} wariant="poboczny" onPress={() => setFraza('')} />
         </Karta>
       )}
 
       {!wczytywanie && !kolejka && poUkrytych.length > 0 && widoczne.length === 0 && liczbaFiltrow > 0 && (
         <Karta>
           <ThemedText type="default">
-            Nic nie pasuje do wybranych filtrów
-            {kategoria !== null ? ` w kategorii „${OPIS_KATEGORII[kategoria]}”` : ''}
+            {kategoria !== null
+              ? t('przepisy.brakDlaFiltrowWKategorii', { kategoria: t(`kategoria.${kategoria}`) })
+              : t('przepisy.brakDlaFiltrow')}
           </ThemedText>
           <ThemedText type="small" themeColor="textSecondary">
-            Zdejmij któryś filtr albo zmień zakładkę — liczby przy zakładkach mówią,
-            gdzie coś pasuje.
+            {t('przepisy.brakDlaFiltrowOpis')}
           </ThemedText>
-          <Przycisk tytul="Wyczyść filtry" wariant="poboczny" onPress={wyczyscFiltry} />
+          <Przycisk tytul={t('przepisy.wyczyscFiltry')} wariant="poboczny" onPress={wyczyscFiltry} />
         </Karta>
       )}
 
@@ -459,15 +448,19 @@ export default function EkranPrzepisow() {
         kategoria !== null && (
           <Karta>
             <ThemedText type="default">
-              Brak przepisów w kategorii „{OPIS_KATEGORII[kategoria]}”
-              {szukane ? ` dla frazy „${fraza.trim()}”` : ''}
+              {szukane
+                ? t('przepisy.brakWKategoriiDlaFrazy', {
+                    kategoria: t(`kategoria.${kategoria}`),
+                    fraza: fraza.trim(),
+                  })
+                : t('przepisy.brakWKategorii', { kategoria: t(`kategoria.${kategoria}`) })}
             </ThemedText>
             <ThemedText type="small" themeColor="textSecondary">
               {szukane
-                ? 'Coś pasuje, ale w innej kategorii — sprawdź liczby przy zakładkach powyżej.'
+                ? t('przepisy.innaKategoria')
                 : kategoria === 'dodatek'
-                  ? 'Dodatek to coś, co dokładasz do posiłku — grillowana pierś, surówka, sałatka z ciecierzycy. Przy wyborze dania pojawia się przy każdym posiłku.'
-                  : 'Kategorię ustawiasz w formularzu przepisu, w polu „Kategoria”. Przepis może należeć do kilku naraz.'}
+                  ? t('przepisy.czymJestDodatek')
+                  : t('przepisy.gdzieKategoria')}
             </ThemedText>
           </Karta>
         )}
@@ -480,20 +473,20 @@ export default function EkranPrzepisow() {
           {
             klucz: 'pora',
             ikona: 'restaurant-outline',
-            tekst: p.pory.map((x) => OPIS_PORY[x]).join(', ') || 'bez kategorii',
+            tekst: p.pory.map((x) => t(`pora.${x}`)).join(', ') || t('przepisy.bezKategoriiTag'),
           },
           ...(p.rodzaje.length > 0
-            ? [{ klucz: 'rodzaj', ikona: 'pricetag-outline' as const, tekst: p.rodzaje.map((x) => OPIS_RODZAJU[x]).join(', ') }]
+            ? [{ klucz: 'rodzaj', ikona: 'pricetag-outline' as const, tekst: p.rodzaje.map((x) => t(`rodzaj.${x}`)).join(', ') }]
             : []),
           ...(p.glowne_bialko
-            ? [{ klucz: 'bialko', ikona: 'barbell-outline' as const, tekst: OPIS_BIALKA[p.glowne_bialko] }]
+            ? [{ klucz: 'bialko', ikona: 'barbell-outline' as const, tekst: t(`glowneBialko.${p.glowne_bialko}`) }]
             : []),
           ...(p.kuchnie.length > 0
-            ? [{ klucz: 'kuchnia', ikona: 'earth-outline' as const, tekst: p.kuchnie.map((x) => OPIS_KUCHNI[x]).join(', ') }]
+            ? [{ klucz: 'kuchnia', ikona: 'earth-outline' as const, tekst: p.kuchnie.map((x) => t(`kuchnia.${x}`)).join(', ') }]
             : []),
-          ...(razem ? [{ klucz: 'czas', ikona: 'time-outline' as const, tekst: `${razem} min` }] : []),
+          ...(razem ? [{ klucz: 'czas', ikona: 'time-outline' as const, tekst: t('wspolne.minut', { minuty: razem }) }] : []),
           ...(p.mozna_mrozic
-            ? [{ klucz: 'mrozenie', ikona: 'snow-outline' as const, tekst: 'można mrozić' }]
+            ? [{ klucz: 'mrozenie', ikona: 'snow-outline' as const, tekst: t('przepisy.moznaMrozicTag') }]
             : []),
         ];
 
@@ -516,7 +509,9 @@ export default function EkranPrzepisow() {
                 onPress={() => przelaczWidocznosc(p)}
                 accessibilityRole="button"
                 accessibilityLabel={
-                  p.widocznosc === 'publiczna' ? `Ukryj ${p.nazwa}` : `Opublikuj ${p.nazwa}`
+                  p.widocznosc === 'publiczna'
+                    ? t('przepisy.ukryjPubliczny', { nazwa: p.nazwa })
+                    : t('przepisy.opublikuj', { nazwa: p.nazwa })
                 }
                 style={({ pressed }) => [
                   styles.widocznoscPigulka,
@@ -533,16 +528,12 @@ export default function EkranPrzepisow() {
                 <ThemedText
                   type="small"
                   themeColor={p.widocznosc === 'publiczna' ? 'accent' : 'textSecondary'}>
-                  {p.widocznosc === 'publiczna' ? 'publiczny' : 'prywatny'}
+                  {p.widocznosc === 'publiczna' ? t('widocznosc.publiczna') : t('widocznosc.prywatna')}
                 </ThemedText>
               </Pressable>
             ) : (
               <ThemedText type="small" themeColor="textSecondary">
-                {p.widocznosc === 'publiczna'
-                  ? 'publiczny'
-                  : p.widocznosc === 'prywatna'
-                    ? 'prywatny'
-                    : 'zgłoszony'}
+                {t(`widocznosc.${p.widocznosc}`)}
               </ThemedText>
             )}
           </View>
@@ -570,7 +561,7 @@ export default function EkranPrzepisow() {
             <View style={styles.wykluczone}>
               <Ionicons name="ban-outline" size={16} color={motyw.accent} />
               <ThemedText type="small" themeColor="accent" style={styles.wykluczoneTekst}>
-                Nie jecie: {p.zawieraWykluczone.join(', ')} — automat tego nie zaproponuje.
+                {t('przepisy.nieJecie', { skladniki: p.zawieraWykluczone.join(', ') })}
               </ThemedText>
             </View>
           )}
@@ -597,7 +588,10 @@ export default function EkranPrzepisow() {
                 onPress={() => setTrwaloscOtwarta((x) => (x === p.id ? null : p.id))}
                 accessibilityRole="button"
                 accessibilityState={{ expanded: trwaloscOtwarta === p.id }}
-                accessibilityLabel={`Twoja trwałość w lodówce: ${opisTrwalosci(p.trwalosc_dni)}. Z przepisu wynika najwyżej ${opisTrwalosci(p.trwalosc_dni_bazowa)}.`}
+                accessibilityLabel={t('przepisy.trwaloscEtykieta', {
+                  twoja: opisTrwalosci(p.trwalosc_dni),
+                  przepis: opisTrwalosci(p.trwalosc_dni_bazowa),
+                })}
                 style={({ pressed }) => [
                   styles.tag,
                   {
@@ -626,8 +620,7 @@ export default function EkranPrzepisow() {
           {trwaloscOtwarta === p.id && (
             <View style={[styles.trwaloscLista, { borderColor: motyw.border }]}>
               <ThemedText type="small" themeColor="textSecondary">
-                Twoje ustawienie — nie zmienia przepisu, tylko Twój plan. Przepis pozwala na
-                najwyżej: {opisTrwalosci(p.trwalosc_dni_bazowa)}.
+                {t('przepisy.trwaloscOpis', { przepis: opisTrwalosci(p.trwalosc_dni_bazowa) })}
               </ThemedText>
               {Array.from({ length: p.trwalosc_dni_bazowa + 1 }, (_, dni) => dni).map((dni) => {
                 const zaznaczona = dni === p.trwalosc_dni;
@@ -662,22 +655,22 @@ export default function EkranPrzepisow() {
           {p.kcal !== null ? (
             <>
               <ThemedText type="smallBold" themeColor="accent">
-                NA PORCJĘ
+                {t('przepis.naPorcje')}
                 {p.gramy_porcji ? ` (${p.gramy_porcji} g)` : ''}
-                {p.porcje_wyliczone ? ` · z ${p.porcje_wyliczone} porcji` : ''}
+                {p.porcje_wyliczone ? ` · ${t('przepisy.zPorcji', { porcje: p.porcje_wyliczone })}` : ''}
               </ThemedText>
 
               <View style={[styles.makroBox, { backgroundColor: motyw.background }]}>
                 {(
                   [
-                    { etykieta: 'kcal', wartosc: p.kcal, jednostka: '', ikona: 'flame-outline' as const, kolor: KOLOR_MAKRO.bialko },
-                    { etykieta: 'białko', wartosc: p.bialko_g ?? 0, jednostka: ' g', ikona: 'barbell-outline' as const, kolor: KOLOR_MAKRO.bialko },
-                    { etykieta: 'tłuszcz', wartosc: p.tluszcz_g ?? 0, jednostka: ' g', ikona: 'water-outline' as const, kolor: KOLOR_MAKRO.tluszcz },
-                    { etykieta: 'węgle', wartosc: p.wegle_g ?? 0, jednostka: ' g', ikona: 'nutrition-outline' as const, kolor: KOLOR_MAKRO.wegle },
+                    { etykieta: t('makro.kcal'), wartosc: p.kcal, jednostka: '', ikona: 'flame-outline' as const, kolor: KOLOR_MAKRO.bialko },
+                    { etykieta: t('makro.bialko'), wartosc: p.bialko_g ?? 0, jednostka: ' g', ikona: 'barbell-outline' as const, kolor: KOLOR_MAKRO.bialko },
+                    { etykieta: t('makro.tluszcz'), wartosc: p.tluszcz_g ?? 0, jednostka: ' g', ikona: 'water-outline' as const, kolor: KOLOR_MAKRO.tluszcz },
+                    { etykieta: t('makro.wegle'), wartosc: p.wegle_g ?? 0, jednostka: ' g', ikona: 'nutrition-outline' as const, kolor: KOLOR_MAKRO.wegle },
                   ]
                 ).map((m, i, tablica) => (
                   <View
-                    key={m.etykieta}
+                    key={m.ikona + m.kolor}
                     style={[
                       styles.makroPozycja,
                       i < tablica.length - 1 && { borderRightWidth: 1, borderRightColor: motyw.border },
@@ -700,8 +693,13 @@ export default function EkranPrzepisow() {
                     <View style={styles.podsumowanieWiersz}>
                       <Ionicons name="scale-outline" size={16} color={motyw.accent} />
                       <ThemedText type="small" themeColor="textSecondary">
-                        Cała potrawa: {p.gramy_calosc ? `${p.gramy_calosc} g, ` : ''}
-                        {p.kcal_calosc} kcal, {p.bialko_g_calosc} g białka
+                        {p.gramy_calosc
+                          ? t('przepisy.calaPotrawaZGramami', {
+                              gramy: p.gramy_calosc,
+                              kcal: p.kcal_calosc,
+                              bialko: p.bialko_g_calosc,
+                            })
+                          : t('przepisy.calaPotrawa', { kcal: p.kcal_calosc, bialko: p.bialko_g_calosc })}
                       </ThemedText>
                     </View>
                   )}
@@ -709,7 +707,7 @@ export default function EkranPrzepisow() {
                     <View style={styles.podsumowanieWiersz}>
                       <Ionicons name="diamond-outline" size={16} color={motyw.accent} />
                       <ThemedText type="small" themeColor="textSecondary">
-                        cukry wolne: {p.cukry_wolne_g} g
+                        {t('przepisy.cukryWolne', { gramy: p.cukry_wolne_g })}
                       </ThemedText>
                     </View>
                   )}
@@ -718,7 +716,7 @@ export default function EkranPrzepisow() {
             </>
           ) : (
             <ThemedText type="small" themeColor="accent">
-              Brak składników — nie ma z czego policzyć makro.
+              {t('przepisy.brakSkladnikow')}
             </ThemedText>
           )}
 
@@ -729,23 +727,23 @@ export default function EkranPrzepisow() {
           {mozeDodawac && p.widocznosc === 'zgloszona' && (
             <View style={[styles.moderacja, { borderColor: motyw.accent }]}>
               <ThemedText type="smallBold" themeColor="accent">
-                Czeka na decyzję
+                {t('przepisy.czekaNaDecyzje')}
               </ThemedText>
 
               {odrzucany === p.id ? (
                 <>
                   <Pole
-                    etykieta="Co autor ma poprawić"
+                    etykieta={t('przepisy.coPoprawic')}
                     value={powod}
                     onChangeText={setPowod}
-                    placeholder="Brakuje gramatury przy dwóch składnikach."
+                    placeholder={t('przepisy.coPoprawicPrzyklad')}
                     multiline
                   />
                   <ThemedText type="small" themeColor="textSecondary">
-                    Bez uzasadnienia autor zgłosi to samo drugi raz.
+                    {t('przepisy.bezUzasadnienia')}
                   </ThemedText>
                   <Przycisk
-                    tytul="Odeślij do poprawki"
+                    tytul={t('przepisy.odeslij')}
                     wariant="poboczny"
                     wylaczony={powod.trim().length < 3}
                     onPress={async () => {
@@ -761,7 +759,7 @@ export default function EkranPrzepisow() {
                     }}
                   />
                   <Przycisk
-                    tytul="Anuluj"
+                    tytul={t('wspolne.anuluj')}
                     wariant="poboczny"
                     onPress={() => {
                       setOdrzucany(null);
@@ -773,7 +771,7 @@ export default function EkranPrzepisow() {
                 <View style={styles.decyzje}>
                   <View style={styles.decyzja}>
                     <Przycisk
-                      tytul="Zatwierdź"
+                      tytul={t('przepisy.zatwierdz')}
                       onPress={async () => {
                         setBlad(null);
                         try {
@@ -787,7 +785,7 @@ export default function EkranPrzepisow() {
                   </View>
                   <View style={styles.decyzja}>
                     <Przycisk
-                      tytul="Do poprawki"
+                      tytul={t('przepisy.doPoprawki')}
                       wariant="poboczny"
                       onPress={() => {
                         setOdrzucany(p.id);
@@ -816,7 +814,7 @@ export default function EkranPrzepisow() {
                   })
                 }
                 accessibilityRole="button"
-                accessibilityLabel={`Edytuj ${p.nazwa}`}
+                accessibilityLabel={t('przepisy.edytujNazwe', { nazwa: p.nazwa })}
                 style={({ pressed }) => [
                   styles.akcjaSegment,
                   { borderRightColor: motyw.border },
@@ -824,7 +822,7 @@ export default function EkranPrzepisow() {
                 ]}>
                 <Ionicons name="create-outline" size={18} color={motyw.textSecondary} />
                 <ThemedText type="small" themeColor="textSecondary">
-                  Edytuj
+                  {t('przepisy.edytuj')}
                 </ThemedText>
               </Pressable>
             )}
@@ -833,7 +831,7 @@ export default function EkranPrzepisow() {
               <Pressable
                 onPress={() => setDoUsuniecia(p)}
                 accessibilityRole="button"
-                accessibilityLabel={`Usuń ${p.nazwa}`}
+                accessibilityLabel={t('przepisy.usunNazwe', { nazwa: p.nazwa })}
                 style={({ pressed }) => [
                   styles.akcjaSegment,
                   { borderRightColor: motyw.border },
@@ -841,7 +839,7 @@ export default function EkranPrzepisow() {
                 ]}>
                 <Ionicons name="trash-outline" size={18} color={motyw.textSecondary} />
                 <ThemedText type="small" themeColor="textSecondary">
-                  Usuń
+                  {t('wspolne.usun')}
                 </ThemedText>
               </Pressable>
             )}
@@ -858,7 +856,7 @@ export default function EkranPrzepisow() {
                   type="backgroundElement"
                   style={[styles.dymek, { borderColor: motyw.border }]}>
                   <ThemedText type="small">
-                    {p.ukryty ? 'Ukryty — przywróć na listę' : 'Ukryj — schowaj z listy przepisów'}
+                    {p.ukryty ? t('przepisy.ukrytyDymek') : t('przepisy.ukryjDymek')}
                   </ThemedText>
                 </ThemedView>
               )}
@@ -868,7 +866,9 @@ export default function EkranPrzepisow() {
                 onHoverOut={() => setDymek(null)}
                 accessibilityRole="button"
                 accessibilityState={{ selected: p.ukryty }}
-                accessibilityLabel={p.ukryty ? `Przywróć ${p.nazwa}` : `Ukryj ${p.nazwa}`}
+                accessibilityLabel={
+                  p.ukryty ? t('przepisy.przywroc', { nazwa: p.nazwa }) : t('przepisy.ukryj', { nazwa: p.nazwa })
+                }
                 style={({ pressed }) => [
                   styles.akcjaSegmentIkona,
                   { borderRightWidth: 1, borderRightColor: motyw.border },
@@ -884,8 +884,8 @@ export default function EkranPrzepisow() {
 
             {(
               [
-                { poziom: 'lubie', ikona: 'heart', ikonaPusta: 'heart-outline', etykieta: 'Lubię — wybieraj podczas automatyzacji planu' },
-                { poziom: 'nie_proponuj', ikona: 'close-circle', ikonaPusta: 'close-circle-outline', etykieta: 'Nie proponuj podczas automatyzacji planu' },
+                { poziom: 'lubie', ikona: 'heart', ikonaPusta: 'heart-outline', etykieta: t('przepisy.lubie') },
+                { poziom: 'nie_proponuj', ikona: 'close-circle', ikonaPusta: 'close-circle-outline', etykieta: t('przepisy.nieProponuj') },
               ] as const
             ).map((opcja, i) => {
               const aktywna = p.preferencja === opcja.poziom;
@@ -927,16 +927,14 @@ export default function EkranPrzepisow() {
           {doUsuniecia?.id === p.id && (
             <View style={[styles.potwierdzenieUsuniecia, { borderColor: motyw.accent }]}>
               <ThemedText type="smallBold" themeColor="accent">
-                Usunąć „{p.nazwa}”?
+                {t('przepisy.usunPytanie', { nazwa: p.nazwa })}
               </ThemedText>
               <ThemedText type="small" themeColor="textSecondary">
-                Razem z przepisem znikną jego składniki, etapy i kroki. Tej operacji nie da się
-                cofnąć. Jeśli przepis jest w czyimś planie posiłków albo w ugotowanej partii,
-                usunięcie się nie powiedzie — trzeba go najpierw stamtąd zdjąć.
+                {t('przepisy.usunOstrzezenie')}
               </ThemedText>
-              <Przycisk tytul="Usuń" onPress={() => usunPrzepis(p)} zajety={usuwanie} />
+              <Przycisk tytul={t('wspolne.usun')} onPress={() => usunPrzepis(p)} zajety={usuwanie} />
               <Przycisk
-                tytul="Anuluj"
+                tytul={t('wspolne.anuluj')}
                 wariant="poboczny"
                 onPress={() => setDoUsuniecia(null)}
                 wylaczony={usuwanie}
@@ -949,7 +947,7 @@ export default function EkranPrzepisow() {
 
       {mozeDodawac && (
         <Przycisk
-          tytul="Dodaj przepis"
+          tytul={t('przepisy.dodaj')}
           onPress={() =>
             router.push({
               pathname: '/przepis-formularz',
@@ -966,14 +964,14 @@ export default function EkranPrzepisow() {
         składników sam ukrywa te przyciski dla nie-moderatorów.
       */}
       <Przycisk
-        tytul="Składniki"
+        tytul={t('menu.skladniki')}
         wariant="poboczny"
         onPress={() => router.push({ pathname: '/skladniki', params: { powrot: '/przepisy' } })}
       />
 
       {mozeDodawac && (
         <Przycisk
-          tytul="Import / eksport (Excel)"
+          tytul={t('przepisy.importEksport')}
           wariant="poboczny"
           onPress={() =>
             router.push({
@@ -986,7 +984,7 @@ export default function EkranPrzepisow() {
 
       {!mozeDodawac && !wczytywanie && (
         <ThemedText type="small" themeColor="textSecondary">
-          Dodawanie przepisów wymaga uprawnień moderatora.
+          {t('przepisy.wymagaModeratora')}
         </ThemedText>
       )}
     </Ekran>

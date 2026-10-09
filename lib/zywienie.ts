@@ -157,9 +157,18 @@ export function udzialyProcentowe(makro: Makro) {
   };
 }
 
+/**
+ * Powód, dla którego celów NIE wolno zapisać. Kod i liczby zamiast gotowego
+ * zdania — treść składa ekran w języku aplikacji (`profilFormularz.blokada.*`),
+ * a ten moduł zostaje czystą matematyką, testowaną bez aplikacji.
+ */
+export type Blokada =
+  | { kod: 'ponizejPrzemiany'; kcal: number; przemiana: number }
+  | { kod: 'deficyt'; deficyt: number; maks: number }
+  | { kod: 'zaDuzoBialka'; procent: number; maks: number };
+
 export type Ocena = {
-  /** Powody, dla których celów NIE wolno zapisać. */
-  blokady: string[];
+  blokady: Blokada[];
 };
 
 /**
@@ -170,29 +179,21 @@ export type Ocena = {
  * węglowodany poniżej dolnej granicy i nie jest przez to niebezpieczny.
  */
 export function oceniaCele(makro: Makro, przemiana: number, zapotrzebowanieDzienne: number): Ocena {
-  const blokady: string[] = [];
+  const blokady: Blokada[] = [];
   const kcal = kcalZMakro(makro.bialko, makro.tluszcz, makro.wegle);
   const udzialy = udzialyProcentowe(makro);
 
   if (kcal < przemiana) {
-    blokady.push(
-      `Cel ${kcal} kcal jest poniżej przemiany podstawowej (${przemiana} kcal). ` +
-        'Tyle energii organizm zużywa w samym spoczynku.'
-    );
+    blokady.push({ kod: 'ponizejPrzemiany', kcal, przemiana });
   }
 
   const deficyt = zapotrzebowanieDzienne - kcal;
   if (deficyt > MAKS_DEFICYT_KCAL) {
-    blokady.push(
-      `Deficyt ${deficyt} kcal dziennie oznacza chudnięcie szybsze niż 1 kg tygodniowo. ` +
-        `Największy dopuszczalny to ${MAKS_DEFICYT_KCAL} kcal.`
-    );
+    blokady.push({ kod: 'deficyt', deficyt, maks: MAKS_DEFICYT_KCAL });
   }
 
   if (udzialy.bialko > AMDR.bialko.max) {
-    blokady.push(
-      `Białko stanowi ${udzialy.bialko}% energii, powyżej górnej granicy ${AMDR.bialko.max}%.`
-    );
+    blokady.push({ kod: 'zaDuzoBialka', procent: udzialy.bialko, maks: AMDR.bialko.max });
   }
 
   return { blokady };

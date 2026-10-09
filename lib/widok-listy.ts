@@ -11,10 +11,11 @@ import { useCallback, useEffect, useState } from 'react';
 
 export type WidokListy = 'kafle' | 'miniatury' | 'lista';
 
-export const WIDOKI_LISTY: { wartosc: WidokListy; etykieta: string; ikona: 'grid-outline' | 'list-outline' | 'reorder-four-outline' }[] = [
-  { wartosc: 'kafle', etykieta: 'Kafle', ikona: 'grid-outline' },
-  { wartosc: 'miniatury', etykieta: 'Z miniaturką', ikona: 'list-outline' },
-  { wartosc: 'lista', etykieta: 'Lista', ikona: 'reorder-four-outline' },
+/** Nazwy widoków są w tłumaczeniach: `widokListy.<wartosc>`. */
+export const WIDOKI_LISTY: { wartosc: WidokListy; ikona: 'grid-outline' | 'list-outline' | 'reorder-four-outline' }[] = [
+  { wartosc: 'kafle', ikona: 'grid-outline' },
+  { wartosc: 'miniatury', ikona: 'list-outline' },
+  { wartosc: 'lista', ikona: 'reorder-four-outline' },
 ];
 
 /** Klucze w pamięci urządzenia — po jednym na ekran. */

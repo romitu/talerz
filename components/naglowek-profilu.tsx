@@ -1,4 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
+import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 
 import { ThemedText } from './themed-text';
@@ -6,6 +7,7 @@ import { ThemedView } from './themed-view';
 
 import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
+import { opisRoli, type KontoUzytkownika } from '@/lib/uzytkownicy';
 
 /**
  * Nagłówek ekranu profilu — tytuł, adres konta i pigułka z rolą. Stały (patrz
@@ -20,12 +22,13 @@ export function NaglowekProfilu({
   rola: string | null;
 }) {
   const motyw = useTheme();
+  const { t } = useTranslation();
 
   return (
     <ThemedView type="backgroundElement" style={[styles.karta, { borderColor: motyw.border }]}>
       <View style={styles.wiersz}>
         <ThemedText type="subtitle" numberOfLines={1}>
-          Profil
+          {t('profil.tytul')}
         </ThemedText>
 
         {email && (
@@ -39,8 +42,8 @@ export function NaglowekProfilu({
             <Ionicons name="shield-checkmark-outline" size={15} color={motyw.accent} />
           </View>
           <ThemedText type="small" numberOfLines={1}>
-            <ThemedText type="smallBold">Rola: </ThemedText>
-            {rola ?? 'wczytywanie…'}
+            <ThemedText type="smallBold">{t('naglowekProfilu.rola')} </ThemedText>
+            {rola ? opisRoli(rola as KontoUzytkownika['rola']) : t('naglowekProfilu.wczytywanie')}
           </ThemedText>
         </View>
       </View>

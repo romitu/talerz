@@ -2,6 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { Image } from 'expo-image';
 import { useFocusEffect, useLocalSearchParams } from 'expo-router';
 import { useCallback, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Pressable, StyleSheet, View } from 'react-native';
 
 import { Ekran } from '@/components/ekran';
@@ -14,7 +15,7 @@ import { ThemedText } from '@/components/themed-text';
 import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import { komunikatBledu } from '@/lib/blad';
-import { liczbaNaTekst } from '@/lib/jezyk';
+import i18n, { liczbaNaTekst } from '@/lib/jezyk';
 import { celZywieniowyNASEM, type PalNasem } from '@/lib/nasem';
 import { wroc } from '@/lib/nawigacja';
 import {
@@ -80,6 +81,7 @@ export default function EkranPrzepisu() {
   }>();
   const { sesja } = useSesja();
   const motyw = useTheme();
+  const { t } = useTranslation();
 
   const [przepis, setPrzepis] = useState<PelnyPrzepis | null>(null);
   const [makro, setMakro] = useState<PrzepisZMakro | null>(null);
@@ -193,9 +195,9 @@ export default function EkranPrzepisu() {
 
   if (wczytywanie) {
     return (
-      <Ekran tytul="Przepis">
+      <Ekran tytul={t('przepis.tytul')}>
         <ThemedText type="small" themeColor="textSecondary">
-          Wczytywanie…
+          {t('wspolne.wczytywanieKrotko')}
         </ThemedText>
       </Ekran>
     );
@@ -203,13 +205,13 @@ export default function EkranPrzepisu() {
 
   if (blad || !przepis) {
     return (
-      <Ekran tytul="Przepis">
+      <Ekran tytul={t('przepis.tytul')}>
         <Karta>
           <ThemedText type="small" themeColor="accent">
-            {blad ?? 'Nie znaleziono przepisu.'}
+            {blad ?? t('przepis.nieZnaleziono')}
           </ThemedText>
         </Karta>
-        <Przycisk tytul="Wróć" wariant="poboczny" onPress={() => wroc(powrot, '/')} />
+        <Przycisk tytul={t('wspolne.wroc')} wariant="poboczny" onPress={() => wroc(powrot, '/')} />
       </Ekran>
     );
   }
@@ -295,11 +297,11 @@ export default function EkranPrzepisu() {
     <Ekran
       tytul={przepis.nazwa}
       podtytul={[
-        czas ? `${czas} min` : null,
+        czas ? t('wspolne.minut', { minuty: czas }) : null,
         wariant?.makro
-          ? `porcja ${Math.round(wariant.makro.gramy_porcji)} g (przeliczona)`
+          ? t('przepis.porcjaPrzeliczona', { gramy: Math.round(wariant.makro.gramy_porcji) })
           : przepis.porcja_g
-            ? `porcja ${przepis.porcja_g} g`
+            ? t('makro.porcjaG', { gramy: przepis.porcja_g })
             : null,
         opisTrwalosci(makro?.trwalosc_dni ?? przepis.trwalosc_dni),
       ]
@@ -325,11 +327,13 @@ export default function EkranPrzepisu() {
       {wariant && (
         <Karta>
           <ThemedText type="smallBold" themeColor="accent">
-            PRZELICZONE DLA TEGO POSIŁKU
+            {t('przepis.przeliczoneDlaPosilku')}
           </ThemedText>
           <ThemedText type="small" themeColor="textSecondary">
-            Ilości na osobę są przeskalowane pod cel {wariant.cel_kcal} kcal (współczynnik ×
-            {Math.round(wariant.wspolczynnik_k * 100) / 100}) — inne niż w katalogu przepisów.
+            {t('przepis.przeskalowaneOpis', {
+              kcal: wariant.cel_kcal,
+              wspolczynnik: liczbaNaTekst(wariant.wspolczynnik_k),
+            })}
           </ThemedText>
         </Karta>
       )}
@@ -337,12 +341,19 @@ export default function EkranPrzepisu() {
       {skalujPorcje && (
         <Karta>
           <ThemedText type="smallBold" themeColor="accent">
-            PRZELICZONE NA CAŁĄ PARTIĘ
+            {t('przepis.przeliczoneNaPartie')}
           </ThemedText>
           <ThemedText type="small" themeColor="textSecondary">
             {wariant
-              ? `Ten garnek ma starczyć na ${Math.round(Number(porcjeRazem ?? 0) * 10) / 10} porcji (osoby × dni w lodówce) — ilości niżej są przemnożone ×${Math.round(mnoznikPorcji * 100) / 100} względem jednej porcji wyżej.`
-              : `Ten garnek ma starczyć na ${Math.round(Number(porcjeRazem ?? 0) * 10) / 10} porcji zamiast ${makro?.porcje_wyliczone} bazowych — ilości niżej są przemnożone ×${Math.round(mnoznikPorcji * 100) / 100}.`}
+              ? t('przepis.partiaZWariantem', {
+                  porcje: liczbaNaTekst(Number(porcjeRazem ?? 0), 1),
+                  mnoznik: liczbaNaTekst(mnoznikPorcji),
+                })
+              : t('przepis.partia', {
+                  porcje: liczbaNaTekst(Number(porcjeRazem ?? 0), 1),
+                  bazowe: makro?.porcje_wyliczone,
+                  mnoznik: liczbaNaTekst(mnoznikPorcji),
+                })}
           </ThemedText>
         </Karta>
       )}
@@ -350,21 +361,25 @@ export default function EkranPrzepisu() {
       {makroDoPokazania?.kcal != null && (
         <Karta>
           <ThemedText type="smallBold" themeColor="textSecondary">
-            {wariant ? 'TEN POSIŁEK' : 'NA PORCJĘ'}
+            {wariant ? t('przepis.tenPosilek') : t('przepis.naPorcje')}
           </ThemedText>
           <WierszMakro
             pozycje={[
-              { etykieta: 'kcal', wartosc: makroDoPokazania.kcal, jednostka: '' },
-              { etykieta: 'białko', wartosc: makroDoPokazania.bialko_g ?? 0, jednostka: ' g' },
-              { etykieta: 'tłuszcz', wartosc: makroDoPokazania.tluszcz_g ?? 0, jednostka: ' g' },
-              { etykieta: 'węgle', wartosc: makroDoPokazania.wegle_g ?? 0, jednostka: ' g' },
-              { etykieta: 'błonnik', wartosc: makroDoPokazania.blonnik_g ?? 0, jednostka: ' g' },
+              { etykieta: t('makro.kcal'), wartosc: makroDoPokazania.kcal, jednostka: '' },
+              { etykieta: t('makro.bialko'), wartosc: makroDoPokazania.bialko_g ?? 0, jednostka: ' g' },
+              { etykieta: t('makro.tluszcz'), wartosc: makroDoPokazania.tluszcz_g ?? 0, jednostka: ' g' },
+              { etykieta: t('makro.wegle'), wartosc: makroDoPokazania.wegle_g ?? 0, jednostka: ' g' },
+              { etykieta: t('makro.blonnik'), wartosc: makroDoPokazania.blonnik_g ?? 0, jednostka: ' g' },
             ]}
           />
           {makroDoPokazania.porcje_wyliczone && (
             <ThemedText type="small" themeColor="textSecondary">
-              Z całego garnka wychodzi {Math.round(makroDoPokazania.porcje_wyliczone * 10) / 10} porcji
-              {makroDoPokazania.gramy_calosc ? ` (${makroDoPokazania.gramy_calosc} g razem)` : ''}.
+              {makroDoPokazania.gramy_calosc
+                ? t('przepis.zGarnkaZGramami', {
+                    porcje: liczbaNaTekst(makroDoPokazania.porcje_wyliczone, 1),
+                    gramy: makroDoPokazania.gramy_calosc,
+                  })
+                : t('przepis.zGarnka', { porcje: liczbaNaTekst(makroDoPokazania.porcje_wyliczone, 1) })}
             </ThemedText>
           )}
         </Karta>
@@ -374,7 +389,7 @@ export default function EkranPrzepisu() {
       {przepis.sprzet.length > 0 && (
         <Karta>
           <ThemedText type="smallBold" themeColor="textSecondary">
-            WYJMIJ Z SZAFKI
+            {t('przepis.wyjmij')}
           </ThemedText>
           <ThemedText type="default">{przepis.sprzet.join(' · ')}</ThemedText>
         </Karta>
@@ -383,7 +398,7 @@ export default function EkranPrzepisu() {
       {/* --- składniki ---------------------------------------------------- */}
       <Karta>
         <ThemedText type="smallBold" themeColor="textSecondary">
-          SKŁADNIKI ({skladnikiDoPokazania.length})
+          {t('przepis.skladniki', { ile: skladnikiDoPokazania.length })}
         </ThemedText>
         {skladnikiDoPokazania.map((s) => {
           const klucz = `s:${s.skladnik_id}`;
@@ -425,7 +440,7 @@ export default function EkranPrzepisu() {
         <Karta key={`e${ie}`}>
           <ThemedText type="smallBold" themeColor="textSecondary">
             {etap.nazwa.toUpperCase()}
-            {etap.minuty ? ` · ${etap.minuty} min` : ''}
+            {etap.minuty ? ` · ${t('wspolne.minut', { minuty: etap.minuty })}` : ''}
           </ThemedText>
           {etap.kroki.map((krok, ik) => {
             const klucz = `k:${ie}:${ik}`;
@@ -450,12 +465,12 @@ export default function EkranPrzepisu() {
                   </ThemedText>
                   {krok.sygnal && (
                     <ThemedText type="small" themeColor="textSecondary">
-                      Po czym poznać: {krok.sygnal}
+                      {t('przepis.poCzymPoznac', { sygnal: krok.sygnal })}
                     </ThemedText>
                   )}
                   {krok.uwaga && (
                     <ThemedText type="smallBold" themeColor="accent">
-                      Uwaga — tego kroku nie pomijaj.
+                      {t('przepis.uwaga')}
                     </ThemedText>
                   )}
                 </View>
@@ -469,13 +484,13 @@ export default function EkranPrzepisu() {
       {(przepis.przechowywanie || przepis.mozna_mrozic !== null) && (
         <Karta>
           <ThemedText type="smallBold" themeColor="textSecondary">
-            PO UGOTOWANIU
+            {t('przepis.poUgotowaniu')}
           </ThemedText>
           {przepis.przechowywanie && (
             <ThemedText type="default">{przepis.przechowywanie}</ThemedText>
           )}
           <ThemedText type="small" themeColor="textSecondary">
-            {przepis.mozna_mrozic ? 'Można mrozić.' : 'Nie nadaje się do mrożenia.'}
+            {przepis.mozna_mrozic ? t('przepis.moznaMrozic') : t('przepis.nieMrozic')}
           </ThemedText>
         </Karta>
       )}
@@ -483,7 +498,7 @@ export default function EkranPrzepisu() {
       {przepis.ratunek && (
         <Karta>
           <ThemedText type="smallBold" themeColor="textSecondary">
-            GDY COŚ PÓJDZIE NIE TAK
+            {t('przepis.ratunek')}
           </ThemedText>
           <ThemedText type="default">{przepis.ratunek}</ThemedText>
         </Karta>
@@ -491,13 +506,16 @@ export default function EkranPrzepisu() {
 
       {zrobione.size > 0 && (
         <Przycisk
-          tytul={`Odznacz wszystko (${zrobione.size} z ${skladnikiDoPokazania.length + krokowRazem})`}
+          tytul={t('przepis.odznaczWszystko', {
+            zrobione: zrobione.size,
+            wszystkie: skladnikiDoPokazania.length + krokowRazem,
+          })}
           wariant="poboczny"
           onPress={() => setZrobione(new Set())}
         />
       )}
 
-      <Przycisk tytul="Wróć" wariant="poboczny" onPress={() => wroc(powrot, '/')} />
+      <Przycisk tytul={t('wspolne.wroc')} wariant="poboczny" onPress={() => wroc(powrot, '/')} />
     </Ekran>
   );
 }
@@ -513,8 +531,9 @@ export function opisIlosci(s: {
   jednostka: 'g' | 'ml' | 'szt';
   gramy: number;
 }): string {
-  if (s.jednostka === 'szt') return `${liczbaNaTekst(s.ilosc)} szt (${liczbaNaTekst(s.gramy)} g)`;
-  return `${liczbaNaTekst(s.ilosc)} ${s.jednostka}`;
+  const jednostka = i18n.t(`jednostka.${s.jednostka}`);
+  if (s.jednostka === 'szt') return `${liczbaNaTekst(s.ilosc)} ${jednostka} (${liczbaNaTekst(s.gramy)} g)`;
+  return `${liczbaNaTekst(s.ilosc)} ${jednostka}`;
 }
 
 const styles = StyleSheet.create({

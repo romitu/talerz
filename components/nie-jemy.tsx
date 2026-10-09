@@ -1,5 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Pressable, StyleSheet, View } from 'react-native';
 
 import { Karta } from './karta';
@@ -29,6 +30,7 @@ import {
  */
 export function NieJemy({ kontoId }: { kontoId: string | undefined }) {
   const motyw = useTheme();
+  const { t } = useTranslation();
   const [wykluczone, setWykluczone] = useState<WykluczonySkladnik[]>([]);
   const [skladniki, setSkladniki] = useState<Skladnik[] | null>(null);
   const [wybieranie, setWybieranie] = useState(false);
@@ -79,12 +81,11 @@ export function NieJemy({ kontoId }: { kontoId: string | undefined }) {
       <View style={styles.naglowek}>
         <Ionicons name="ban-outline" size={18} color={motyw.accent} />
         <ThemedText type="smallBold" themeColor="textSecondary">
-          NIE JEMY
+          {t('nieJemy.naglowek')}
         </ThemedText>
       </View>
       <ThemedText type="small" themeColor="textSecondary">
-        Dania z tymi składnikami nie trafią do planu — ani z automatu, ani z ręcznego
-        wyboru. Dotyczy całego konta, bo garnek jest wspólny.
+        {t('nieJemy.opis')}
       </ThemedText>
 
       {blad && (
@@ -94,7 +95,7 @@ export function NieJemy({ kontoId }: { kontoId: string | undefined }) {
       )}
 
       {wykluczone.length === 0 ? (
-        <ThemedText type="small">Nic nie jest wykluczone.</ThemedText>
+        <ThemedText type="small">{t('nieJemy.pusto')}</ThemedText>
       ) : (
         <View style={styles.pigulki}>
           {wykluczone.map((w) => (
@@ -102,7 +103,7 @@ export function NieJemy({ kontoId }: { kontoId: string | undefined }) {
               key={w.skladnik_id}
               onPress={() => przelacz(w.skladnik_id, w.nazwa)}
               accessibilityRole="button"
-              accessibilityLabel={`Usuń z wykluczonych: ${w.nazwa}`}
+              accessibilityLabel={t('nieJemy.usunZWykluczonych', { nazwa: w.nazwa })}
               style={({ pressed }) => [
                 styles.pigulka,
                 { backgroundColor: motyw.backgroundSelected },
@@ -122,22 +123,22 @@ export function NieJemy({ kontoId }: { kontoId: string | undefined }) {
               dane={skladniki}
               klucz={(s) => s.id}
               tekstDoFiltra={(s) => `${s.nazwa} ${s.tagi.join(' ')}`}
-              etykietaFiltra="Szukaj składnika"
-              placeholderFiltra="jaja, ryba, grzyby…"
+              etykietaFiltra={t('nieJemy.szukaj')}
+              placeholderFiltra={t('nieJemy.przyklad')}
               wybrane={wykluczone.map((w) => w.skladnik_id)}
               onPrzelacz={(s) => przelacz(s.id, s.nazwa)}
-              kolumny={[{ tytul: 'Nazwa', elastyczna: true, wartosc: (s) => s.nazwa }]}
+              kolumny={[{ tytul: t('wspolne.nazwa'), elastyczna: true, wartosc: (s) => s.nazwa }]}
             />
           ) : (
             <ThemedText type="small" themeColor="textSecondary">
-              Wczytywanie składników…
+              {t('nieJemy.wczytywanie')}
             </ThemedText>
           )}
-          <Przycisk tytul="Gotowe" wariant="poboczny" onPress={() => setWybieranie(false)} />
+          <Przycisk tytul={t('wspolne.gotowe')} wariant="poboczny" onPress={() => setWybieranie(false)} />
         </>
       ) : (
         <Przycisk
-          tytul="Dodaj składnik"
+          tytul={t('nieJemy.dodaj')}
           ikona="add-circle-outline"
           wariant="poboczny"
           onPress={otworzWybor}

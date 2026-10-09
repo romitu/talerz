@@ -1,8 +1,9 @@
 import { Image } from 'expo-image';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ActivityIndicator, Pressable, StyleSheet, View } from 'react-native';
 
-import { OPIS_ZRODLA, ZnaczekZrodla } from './kafel-zakupu';
+import { ZnaczekZrodla } from './kafel-zakupu';
 import { Przycisk } from './przycisk';
 import { ThemedText } from './themed-text';
 
@@ -44,6 +45,7 @@ type Props = {
  */
 export function ZdjeciePrzepisu({ nazwaPrzepisu, zdjecie, onZmiana, zrodlo, onZmianaZrodla }: Props) {
   const motyw = useTheme();
+  const { t } = useTranslation();
   const [pracuje, setPracuje] = useState(false);
   const [blad, setBlad] = useState<string | null>(null);
 
@@ -75,7 +77,7 @@ export function ZdjeciePrzepisu({ nazwaPrzepisu, zdjecie, onZmiana, zrodlo, onZm
     if (!nazwaGotowa) {
       // Nazwa pliku powstaje z nazwy przepisu. Bez niej zdjęcie trafiłoby pod
       // „przepis.jpg" i nadpisało cudze — lepiej poprosić o nazwę najpierw.
-      setBlad('Najpierw wpisz nazwę przepisu — z niej powstaje nazwa pliku.');
+      setBlad(t('zdjeciePrzepisu.najpierwNazwa'));
       return;
     }
 
@@ -122,7 +124,7 @@ export function ZdjeciePrzepisu({ nazwaPrzepisu, zdjecie, onZmiana, zrodlo, onZm
   return (
     <View style={styles.grupa}>
       <ThemedText type="smallBold" themeColor="textSecondary">
-        ZDJĘCIE
+        {t('zdjeciePrzepisu.naglowek')}
       </ThemedText>
 
       {adres ? (
@@ -140,14 +142,14 @@ export function ZdjeciePrzepisu({ nazwaPrzepisu, zdjecie, onZmiana, zrodlo, onZm
           onPress={mozna ? wybierz : undefined}
           disabled={!mozna || pracuje}
           accessibilityRole="button"
-          accessibilityLabel="Dodaj zdjęcie"
+          accessibilityLabel={t('zdjeciePrzepisu.dodaj')}
           style={({ pressed }) => [
             styles.pusto,
             { borderColor: motyw.border },
             pressed && styles.wcisniete,
           ]}>
           <ThemedText type="small" themeColor="textSecondary">
-            {mozna ? 'Brak zdjęcia — dotknij, żeby wybrać plik' : 'Brak zdjęcia'}
+            {mozna ? t('zdjeciePrzepisu.brakDotknij') : t('wspolne.brakZdjecia')}
           </ThemedText>
         </Pressable>
       )}
@@ -156,7 +158,7 @@ export function ZdjeciePrzepisu({ nazwaPrzepisu, zdjecie, onZmiana, zrodlo, onZm
         <View style={styles.pracuje}>
           <ActivityIndicator color={motyw.accent} />
           <ThemedText type="small" themeColor="textSecondary">
-            Zmniejszam i wysyłam…
+            {t('zdjeciePrzepisu.wysylam')}
           </ThemedText>
         </View>
       )}
@@ -164,7 +166,7 @@ export function ZdjeciePrzepisu({ nazwaPrzepisu, zdjecie, onZmiana, zrodlo, onZm
       {zdjecie && (
         <View style={styles.grupa}>
           <ThemedText type="smallBold" themeColor="textSecondary">
-            POCHODZENIE ZDJĘCIA
+            {t('zdjeciePrzepisu.pochodzenie')}
           </ThemedText>
           <View style={styles.przyciski}>
             {(['ai', 'wlasne'] as const).map((z) => {
@@ -184,10 +186,10 @@ export function ZdjeciePrzepisu({ nazwaPrzepisu, zdjecie, onZmiana, zrodlo, onZm
                     },
                   ]}>
                   <ThemedText type="smallBold" themeColor={aktywny ? 'accent' : undefined}>
-                    {OPIS_ZRODLA[z].tytul}
+                    {t(`zrodloZdjecia.${z}.tytul`)}
                   </ThemedText>
                   <ThemedText type="small" themeColor="textSecondary">
-                    {OPIS_ZRODLA[z].opis}
+                    {t(`zrodloZdjecia.${z}.opis`)}
                   </ThemedText>
                 </Pressable>
               );
@@ -195,7 +197,7 @@ export function ZdjeciePrzepisu({ nazwaPrzepisu, zdjecie, onZmiana, zrodlo, onZm
           </View>
           {!zrodlo && (
             <ThemedText type="small" themeColor="accent">
-              Zdjęcie nie jest oznaczone — wybierz, czy to grafika AI, czy zdjęcie własne.
+              {t('zdjeciePrzepisu.nieoznaczone')}
             </ThemedText>
           )}
         </View>
@@ -205,7 +207,7 @@ export function ZdjeciePrzepisu({ nazwaPrzepisu, zdjecie, onZmiana, zrodlo, onZm
         <View style={styles.przyciski}>
           <View style={styles.przycisk}>
             <Przycisk
-              tytul={zdjecie ? 'Wymień zdjęcie' : 'Dodaj zdjęcie'}
+              tytul={zdjecie ? t('zdjeciePrzepisu.wymien') : t('zdjeciePrzepisu.dodaj')}
               wariant="poboczny"
               onPress={wybierz}
               wylaczony={pracuje}
@@ -213,13 +215,13 @@ export function ZdjeciePrzepisu({ nazwaPrzepisu, zdjecie, onZmiana, zrodlo, onZm
           </View>
           {zdjecie && (
             <View style={styles.przycisk}>
-              <Przycisk tytul="Usuń zdjęcie" wariant="poboczny" onPress={usun} wylaczony={pracuje} />
+              <Przycisk tytul={t('zdjeciePrzepisu.usun')} wariant="poboczny" onPress={usun} wylaczony={pracuje} />
             </View>
           )}
         </View>
       ) : (
         <ThemedText type="small" themeColor="textSecondary">
-          Zdjęcia dodajesz z przeglądarki — na telefonie na razie tylko je oglądasz.
+          {t('zdjeciePrzepisu.tylkoPrzegladarka')}
         </ThemedText>
       )}
 
@@ -230,8 +232,7 @@ export function ZdjeciePrzepisu({ nazwaPrzepisu, zdjecie, onZmiana, zrodlo, onZm
       )}
 
       <ThemedText type="small" themeColor="textSecondary">
-        Zdjęcie jest zmniejszane do 1024 px przed wysłaniem, więc możesz wybrać
-        prosto z aparatu. Zapisuje się od razu, bez czekania na „Zapisz przepis”.
+        {t('zdjeciePrzepisu.wskazowka')}
       </ThemedText>
     </View>
   );

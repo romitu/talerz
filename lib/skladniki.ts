@@ -6,6 +6,7 @@
  * wystąpi. Stąd sprawdzenia przed zapisem.
  */
 
+import i18n from './jezyk';
 import { supabase } from './supabase';
 
 /**
@@ -32,6 +33,10 @@ export const ROLE_SKLADNIKA: RolaSkladnika[] = [
   'do_smaku',
 ];
 
+/**
+ * Nazwy ról w PLIKACH EXCEL (import i eksport czytają je w obie strony) —
+ * nie zależą od języka aplikacji. Na ekranach: `rolaSkladnika.<rola>.nazwa`.
+ */
 export const OPIS_ROLI_SKLADNIKA: Record<RolaSkladnika, string> = {
   baza: 'Baza',
   doprawienie: 'Doprawienie',
@@ -107,43 +112,39 @@ export function sprawdzSkladnik(dane: Partial<DaneSkladnika>): string[] {
   const cukryWolne = dane.cukry_wolne_100g ?? 0;
 
   if (!nazwa || nazwa.trim().length < 2) {
-    bledy.push('Nazwa musi mieć co najmniej 2 znaki.');
+    bledy.push(i18n.t('skladnik.nazwaZaKrotka'));
   }
 
-  for (const [pole, wartosc] of Object.entries({
-    Kalorie: kcal_100g,
-    Białko: bialko_100g,
-    Tłuszcz: tluszcz_100g,
-    Węglowodany: wegle_100g,
-  })) {
+  for (const [pole, wartosc] of [
+    ['kalorie', kcal_100g],
+    ['bialko', bialko_100g],
+    ['tluszcz', tluszcz_100g],
+    ['wegle', wegle_100g],
+  ] as const) {
+    const nazwaPola = i18n.t(`skladnik.pole.${pole}`);
     if (wartosc === undefined || wartosc === null || Number.isNaN(wartosc)) {
-      bledy.push(`${pole}: podaj wartość na 100 g.`);
+      bledy.push(i18n.t('skladnik.podajWartosc', { pole: nazwaPola }));
     } else if (wartosc < 0) {
-      bledy.push(`${pole}: wartość nie może być ujemna.`);
+      bledy.push(i18n.t('skladnik.ujemna', { pole: nazwaPola }));
     }
   }
 
   const blonnik = dane.blonnik_100g ?? 0;
   if (blonnik > (wegle_100g ?? 0)) {
-    bledy.push('Błonnik nie może przekraczać węglowodanów — jest ich częścią.');
+    bledy.push(i18n.t('skladnik.blonnikPonadWegle'));
   }
 
   if (cukryWolne > cukryOgolem) {
-    bledy.push(
-      'Cukry wolne nie mogą przekraczać cukrów ogółem — cukry wolne są ich częścią.'
-    );
+    bledy.push(i18n.t('skladnik.cukryWolnePonadOgolem'));
   }
 
   const suma = (bialko_100g ?? 0) + (tluszcz_100g ?? 0) + (wegle_100g ?? 0);
   if (suma > 100) {
-    bledy.push(
-      `Białko, tłuszcz i węglowodany dają razem ${Math.round(suma)} g na 100 g produktu. ` +
-        'To niemożliwe — sprawdź, czy wartości nie są pomylone.'
-    );
+    bledy.push(i18n.t('skladnik.sumaPonad100', { suma: Math.round(suma) }));
   }
 
   if (dane.nova !== null && dane.nova !== undefined && (dane.nova < 1 || dane.nova > 4)) {
-    bledy.push('Grupa NOVA mieści się w zakresie od 1 do 4.');
+    bledy.push(i18n.t('skladnik.zlaNova'));
   }
 
   return bledy;
@@ -167,7 +168,7 @@ export function ostrzezenieOKaloriach(dane: Partial<DaneSkladnika>): string | nu
     (dane.wegle_100g ?? 0) === 0;
 
   if (wszystkoZero) {
-    return 'Wszystkie wartości są zerowe. Uzupełnij dane z etykiety, inaczej każde danie z tym składnikiem policzy się źle.';
+    return i18n.t('skladnik.sameZera');
   }
 
   if (kcal <= 0) return null;
@@ -178,10 +179,7 @@ export function ostrzezenieOKaloriach(dane: Partial<DaneSkladnika>): string | nu
 
   if (roznica <= 0.25) return null;
 
-  return (
-    `Z podanych makroskładników wychodzi około ${Math.round(zMakro)} kcal, ` +
-    `a wpisano ${kcal}. Sprawdź, czy nie ma pomyłki.`
-  );
+  return i18n.t('skladnik.kcalNiezgodne', { zMakro: Math.round(zMakro), kcal });
 }
 
 /** Danie, w którym użyto składnika. */

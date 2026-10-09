@@ -1,4 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
+import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 
 import { Karta } from './karta';
@@ -39,6 +40,7 @@ const MAKRA: { klucz: keyof Pick<UdzialOsoby, 'bialko_g' | 'tluszcz_g' | 'wegle_
  */
 export function RozkladPosilku({ osoby }: { osoby: UdzialOsoby[] }) {
   const motyw = useTheme();
+  const { t } = useTranslation();
 
   // Cztery odcienie tego samego akcentu — działa w każdym z trzech stylów
   // i obu trybach, bez trzymania osobnej palety kolorów na sztywno.
@@ -49,7 +51,7 @@ export function RozkladPosilku({ osoby }: { osoby: UdzialOsoby[] }) {
       <View style={styles.naglowek}>
         <Ionicons name="people-outline" size={15} color={motyw.textSecondary} />
         <ThemedText type="smallBold" themeColor="textSecondary">
-          ROZKŁAD NA OSOBY
+          {t('rozkladPosilku.naglowek')}
         </ThemedText>
       </View>
 
@@ -68,7 +70,7 @@ export function RozkladPosilku({ osoby }: { osoby: UdzialOsoby[] }) {
 
             <View style={styles.wiersz}>
               <Ionicons name="flame-outline" size={12} color={motyw.accent} />
-              <ThemedText type="small">{o.kcal} kcal</ThemedText>
+              <ThemedText type="small">{t('makro.ileKcal', { kcal: o.kcal })}</ThemedText>
             </View>
 
             <View style={styles.makra}>

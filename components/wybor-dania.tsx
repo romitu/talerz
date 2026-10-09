@@ -1,6 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { Image } from 'expo-image';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Pressable, StyleSheet, View } from 'react-native';
 
 import { ZnaczekZrodla } from './kafel-zakupu';
@@ -9,6 +10,7 @@ import { ThemedText } from './themed-text';
 
 import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
+import i18n from '@/lib/jezyk';
 import type { PrzepisZMakro } from '@/lib/przepisy';
 import { adresZdjecia } from '@/lib/zdjecia';
 
@@ -34,6 +36,7 @@ export function WyborDania({
   kafle: boolean;
   onWybierz: (danie: PrzepisZMakro) => void;
 }) {
+  const { t } = useTranslation();
   const [fraza, setFraza] = useState('');
   const [szerokosc, setSzerokosc] = useState(0);
 
@@ -52,10 +55,10 @@ export function WyborDania({
   return (
     <View style={styles.calosc} onLayout={(e) => setSzerokosc(e.nativeEvent.layout.width)}>
       <Pole
-        etykieta="Filtruj przepisy"
+        etykieta={t('wyborDania.filtruj')}
         value={fraza}
         onChangeText={setFraza}
-        placeholder="zupa, dorsz, owsianka…"
+        placeholder={t('wyborDania.przyklad')}
       />
 
       {kafle ? (
@@ -77,7 +80,7 @@ export function WyborDania({
 
       {widoczne.length === 0 && dania.length > 0 && (
         <ThemedText type="small" themeColor="textSecondary">
-          Żadne danie nie zawiera „{fraza.trim()}” w nazwie.
+          {t('wyborDania.brakWynikow', { fraza: fraza.trim() })}
         </ThemedText>
       )}
     </View>
@@ -87,10 +90,10 @@ export function WyborDania({
 /** „450 kcal · 32 g białka” — to samo, co kolumny tabeli, w jednej linijce. */
 function opisMakro(p: PrzepisZMakro): string {
   const czesci = [
-    p.kcal !== null ? `${p.kcal} kcal` : null,
-    p.bialko_g !== null ? `${p.bialko_g} g białka` : null,
+    p.kcal !== null ? i18n.t('makro.ileKcal', { kcal: p.kcal }) : null,
+    p.bialko_g !== null ? i18n.t('makro.gBialka', { gramy: p.bialko_g }) : null,
   ].filter(Boolean);
-  return czesci.length > 0 ? czesci.join(' · ') : 'brak wartości odżywczych';
+  return czesci.length > 0 ? czesci.join(' · ') : i18n.t('makro.brakWartosci');
 }
 
 /** Zdjęcie przepisu albo neutralne pole z ikoną talerza, gdy go brak. */
@@ -117,11 +120,12 @@ function Obraz({ sciezka, rozmiarIkony }: { sciezka: string | null; rozmiarIkony
 
 function KafelDania({ danie, onPress }: { danie: PrzepisZMakro; onPress: () => void }) {
   const motyw = useTheme();
+  const { t } = useTranslation();
   return (
     <Pressable
       onPress={onPress}
       accessibilityRole="button"
-      accessibilityLabel={`Wybierz: ${danie.nazwa}`}
+      accessibilityLabel={t('wspolne.wybierzNazwe', { nazwa: danie.nazwa })}
       style={({ pressed }) => [
         styles.kafel,
         { backgroundColor: motyw.background, borderColor: motyw.border },
@@ -150,11 +154,12 @@ function KafelDania({ danie, onPress }: { danie: PrzepisZMakro; onPress: () => v
  */
 function WierszDania({ danie, onPress }: { danie: PrzepisZMakro; onPress: () => void }) {
   const motyw = useTheme();
+  const { t } = useTranslation();
   return (
     <Pressable
       onPress={onPress}
       accessibilityRole="button"
-      accessibilityLabel={`Wybierz: ${danie.nazwa}`}
+      accessibilityLabel={t('wspolne.wybierzNazwe', { nazwa: danie.nazwa })}
       style={({ pressed }) => [styles.wiersz, { borderColor: motyw.border }, pressed && styles.wcisniety]}>
       <View style={[styles.miniatura, { backgroundColor: motyw.backgroundSelected }]}>
         <Obraz sciezka={danie.zdjecie} rozmiarIkony={20} />
@@ -166,17 +171,17 @@ function WierszDania({ danie, onPress }: { danie: PrzepisZMakro; onPress: () => 
         </ThemedText>
         {danie.gramy_porcji ? (
           <ThemedText type="small" themeColor="textSecondary">
-            porcja {danie.gramy_porcji} g
+            {t('makro.porcjaG', { gramy: danie.gramy_porcji })}
           </ThemedText>
         ) : null}
       </View>
 
       <View style={styles.wierszMakro}>
         <ThemedText type="smallBold" themeColor="accent" numberOfLines={1}>
-          {danie.kcal !== null ? `${danie.kcal} kcal` : '—'}
+          {danie.kcal !== null ? t('makro.ileKcal', { kcal: danie.kcal }) : '—'}
         </ThemedText>
         <ThemedText type="small" themeColor="textSecondary" numberOfLines={1}>
-          {danie.bialko_g !== null ? `${danie.bialko_g} g białka` : ''}
+          {danie.bialko_g !== null ? t('makro.gBialka', { gramy: danie.bialko_g }) : ''}
         </ThemedText>
       </View>
     </Pressable>

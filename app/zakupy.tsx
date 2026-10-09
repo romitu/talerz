@@ -1,5 +1,6 @@
 import { useFocusEffect, useLocalSearchParams } from 'expo-router';
 import { Fragment, useCallback, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { DopiszProdukt } from '@/components/dopisz-produkt';
 import { Ekran } from '@/components/ekran';
@@ -18,8 +19,8 @@ import { adresZdjeciaSkladnika } from '@/lib/zdjecia';
 import {
   dodajReczny,
   dzialDla,
-  DZIAL_RECZNY,
   DZIALY,
+  type Dzial,
   kluczOdhaczenia,
   kupionoReczny,
   pobierzListeZakupow,
@@ -57,6 +58,7 @@ function czyZrealizowany(p: PozycjaZakupow, przedSesja: Set<string>): boolean {
 export default function EkranZakupow() {
   const { powrot } = useLocalSearchParams<{ powrot?: string }>();
   const { sesja } = useSesja();
+  const { t } = useTranslation();
   const kontoId = sesja?.user.id;
   const { widok, ustawWidok } = useWidokListy(KLUCZ_WIDOKU_ZAKUPOW);
 
@@ -113,9 +115,7 @@ export default function EkranZakupow() {
         setKupione(new Set());
         setKupionePrzedSesja(new Set());
         setOstrzezenie(
-          'Dopisywanie produktów i zapamiętywanie odhaczeń nie działa — wygląda na to, ' +
-            'że migracja 0019_zakupy_reczne.sql nie została jeszcze wykonana w Supabase. ' +
-            `Lista z planu działa normalnie. (${komunikatBledu(e)})`
+          t('zakupy.brakMigracji', { blad: komunikatBledu(e) })
         );
       }
     }
@@ -127,7 +127,7 @@ export default function EkranZakupow() {
     } finally {
       setWczytywanie(false);
     }
-  }, [kontoId]);
+  }, [kontoId, t]);
 
   // Odświeżenie przy KAŻDYM wejściu na zakładkę, nie tylko przy pierwszym.
   //
@@ -163,10 +163,10 @@ export default function EkranZakupow() {
   }
 
   function pogrupujWgDzialow(lista: PozycjaSkonsolidowana[]) {
-    const mapa = new Map<string, PozycjaSkonsolidowana[]>();
+    const mapa = new Map<Dzial, PozycjaSkonsolidowana[]>();
     for (const p of lista) mapa.set(dzialDla(p.tagi), [...(mapa.get(dzialDla(p.tagi)) ?? []), p]);
     return DZIALY.map((dzial) => {
-      const wDziale = mapa.get(dzial.nazwa);
+      const wDziale = mapa.get(dzial.klucz);
       return wDziale && wDziale.length > 0 ? { dzial, pozycje: wDziale } : null;
     }).filter((x): x is NonNullable<typeof x> => x !== null);
   }
@@ -294,13 +294,12 @@ export default function EkranZakupow() {
   const dzialReczny = (
     <Karta>
       <ThemedText type="smallBold" themeColor="textSecondary">
-        {DZIAL_RECZNY.toUpperCase()}
+        {t('dzial.reczny').toUpperCase()}
       </ThemedText>
 
       {reczne.length === 0 ? (
         <ThemedText type="small" themeColor="textSecondary">
-          Rzeczy spoza kuchni: worki na śmieci, papier śniadaniowy, gąbki. Nie wynikają
-          z planu, więc czekają tu, aż je kupisz.
+          {t('zakupy.recznePusto')}
         </ThemedText>
       ) : (
         <SiatkaKafli>
@@ -335,10 +334,10 @@ export default function EkranZakupow() {
   return (
     <KontekstWidokuZakupow.Provider value={widok}>
       <Ekran
-        tytul="Lista zakupów"
+        tytul={t('naglowekZakupow.tytul')}
         naglowekStaly={
           <NaglowekZakupow
-            data={wczytywanie ? 'wczytywanie…' : undefined}
+            data={wczytywanie ? t('naglowekProfilu.wczytywanie') : undefined}
             zrealizowane={zrealizowane}
             niezrealizowane={niezrealizowane}
             widok={widok}
@@ -363,17 +362,16 @@ export default function EkranZakupow() {
 
         {!wczytywanie && pozycje.length === 0 && reczne.length === 0 && (
           <Karta>
-            <ThemedText type="default">Nie ma czego kupować</ThemedText>
+            <ThemedText type="default">{t('zakupy.pusto')}</ThemedText>
             <ThemedText type="small" themeColor="textSecondary">
-              Jedzenie zbiera się tu samo z posiłków wpisanych do planu. Rzeczy spoza
-              kuchni — worki, papier, chemię — dopisujesz na dole tej listy.
+              {t('zakupy.pustoOpis')}
             </ThemedText>
           </Karta>
         )}
 
         {doKupienia.length > 0 && (
           <ThemedText type="smallBold" themeColor="textSecondary">
-            AKTUALNA LISTA ZAKUPÓW
+            {t('zakupy.aktualna')}
           </ThemedText>
         )}
 
@@ -386,12 +384,12 @@ export default function EkranZakupow() {
         */}
         {[
           ...dzialyDoKupienia.map(({ dzial, pozycje: wDziale }) => ({
-            klucz: `do-kupienia-${dzial.nazwa}`,
+            klucz: `do-kupienia-${dzial.klucz}`,
             gotowy: wDziale.every(czyOdhaczonaWSesji),
             element: (
               <Karta>
                 <ThemedText type="smallBold" themeColor="textSecondary">
-                  {dzial.nazwa.toUpperCase()}
+                  {t(`dzial.${dzial.klucz}`).toUpperCase()}
                 </ThemedText>
 
                 <SiatkaKafli>
@@ -419,14 +417,14 @@ export default function EkranZakupow() {
 
         {zrealizowaneSkladniki.length > 0 && (
           <ThemedText type="smallBold" themeColor="textSecondary">
-            ZREALIZOWANE W POPRZEDNIEJ SESJI
+            {t('zakupy.zrealizowanePoprzednio')}
           </ThemedText>
         )}
 
         {dzialyZrealizowane.map(({ dzial, pozycje: wDziale }) => (
-          <Karta key={`zrealizowane-${dzial.nazwa}`}>
+          <Karta key={`zrealizowane-${dzial.klucz}`}>
             <ThemedText type="smallBold" themeColor="textSecondary">
-              {dzial.nazwa.toUpperCase()}
+              {t(`dzial.${dzial.klucz}`).toUpperCase()}
             </ThemedText>
 
             <SiatkaKafli>
@@ -447,18 +445,17 @@ export default function EkranZakupow() {
         {resztyRazem > 0 && (
           <Karta>
             <ThemedText type="smallBold" themeColor="textSecondary">
-              RESZTKI Z OPAKOWAŃ
+              {t('zakupy.resztki')}
             </ThemedText>
             <ThemedText type="small" themeColor="textSecondary">
-              Po ugotowaniu wszystkiego z listy zostanie około {opisIlosci(resztyRazem)} produktów.
-              To one najczęściej lądują w koszu — warto dobrać przepis, który je zużyje.
+              {t('zakupy.resztkiOpis', { ilosc: opisIlosci(resztyRazem) })}
             </ThemedText>
           </Karta>
         )}
 
         {odhaczoneRecznie > 0 && (
           <Przycisk
-            tytul={`Zacznij nowe zakupy (odznacz ${odhaczoneRecznie})`}
+            tytul={t('zakupy.noweZakupy', { ile: odhaczoneRecznie })}
             wariant="poboczny"
             onPress={async () => {
               if (!kontoId) return;
@@ -474,12 +471,10 @@ export default function EkranZakupow() {
         )}
 
         <ThemedText type="small" themeColor="textSecondary">
-          Ptaszki są zapamiętane — możesz wyjść z aplikacji w połowie zakupów i wrócić
-          do tego samego miejsca. Same ilości jedzenia przeliczają się z planu, więc po
-          zmianie posiłków mogą się zmienić.
+          {t('zakupy.wskazowka')}
         </ThemedText>
 
-        <Przycisk tytul="Wróć do planu" wariant="poboczny" onPress={() => wroc(powrot, '/')} />
+        <Przycisk tytul={t('wspolne.wrocDoPlanu')} wariant="poboczny" onPress={() => wroc(powrot, '/')} />
       </Ekran>
     </KontekstWidokuZakupow.Provider>
   );

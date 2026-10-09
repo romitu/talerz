@@ -5,6 +5,7 @@
  * widok `przepis_makro` w bazie, z gramatur składników. Ten plik tylko je czyta.
  */
 
+import i18n from './jezyk';
 import { supabase } from './supabase';
 import type { RolaSkladnika } from './skladniki';
 import { przepisyZWykluczonymi } from './wykluczenia';
@@ -127,19 +128,16 @@ export const OPIS_PREFERENCJI: Record<Preferencja, string> = {
   nie_proponuj: 'Nie proponuj',
 };
 
+/*
+  OPIS_PORY, OPIS_RODZAJU i OPIS_KUCHNI to słownictwo PLIKÓW EXCEL (import
+  i eksport czytają je w obie strony), więc nie zależą od języka aplikacji.
+  Na ekranach nazwy biorą się z tłumaczeń: `pora.*`, `rodzaj.*`, `kuchnia.*`.
+*/
 export const OPIS_PORY: Record<PoraPosilku, string> = {
   sniadanie: 'Śniadanie',
   obiad: 'Obiad',
   kolacja: 'Kolacja',
   dodatek: 'Dodatek',
-};
-
-/** Nazwy kategorii w liczbie mnogiej — do nagłówków i zakładek. */
-export const OPIS_KATEGORII: Record<PoraPosilku, string> = {
-  sniadanie: 'Śniadania',
-  obiad: 'Obiady',
-  kolacja: 'Kolacje',
-  dodatek: 'Dodatki',
 };
 
 /** Kolejność kategorii na ekranie — tak, jak wygląda dzień. */
@@ -184,38 +182,8 @@ export const OPIS_RODZAJU: Record<RodzajDania, string> = {
   na_slodko: 'Na słodko',
 };
 
-/** Krótkie nazwy — na pigułki filtrów, gdzie liczy się szerokość. */
-export const SKROT_RODZAJU: Record<RodzajDania, string> = {
-  zupa: 'Zupy',
-  salatka: 'Sałatki',
-  makaron: 'Makarony',
-  kasza_ryz: 'Kasza, ryż',
-  gulasz_curry: 'Gulasz, curry',
-  z_piekarnika: 'Z piekarnika',
-  kanapki: 'Kanapki',
-  jajka: 'Jajka',
-  na_slodko: 'Na słodko',
-};
-
+/** Nazwy białek są w tłumaczeniach: `glowneBialko.*` i krótkie `glowneBialkoSkrot.*`. */
 export const GLOWNE_BIALKA: GlowneBialko[] = ['drob', 'mieso', 'ryba', 'straczki', 'jaja', 'nabial'];
-
-export const OPIS_BIALKA: Record<GlowneBialko, string> = {
-  drob: 'Drób',
-  mieso: 'Mięso',
-  ryba: 'Ryby i owoce morza',
-  straczki: 'Strączki i tofu',
-  jaja: 'Jajka',
-  nabial: 'Nabiał',
-};
-
-export const SKROT_BIALKA: Record<GlowneBialko, string> = {
-  drob: 'Drób',
-  mieso: 'Mięso',
-  ryba: 'Ryby',
-  straczki: 'Strączki',
-  jaja: 'Jajka',
-  nabial: 'Nabiał',
-};
 
 export const OPIS_KUCHNI: Record<Kuchnia, string> = {
   srodziemnomorska: 'śródziemnomorska',
@@ -226,13 +194,6 @@ export const OPIS_KUCHNI: Record<Kuchnia, string> = {
 
 export const KUCHNIE: Kuchnia[] = ['polska', 'srodziemnomorska', 'azjatycka', 'inna'];
 
-export const SKROT_KUCHNI: Record<Kuchnia, string> = {
-  srodziemnomorska: 'Śródziemnomorska',
-  azjatycka: 'Azjatycka',
-  polska: 'Polska',
-  inna: 'Inna',
-};
-
 /** Łączny czas: przygotowanie plus obróbka termiczna. */
 export function czasRazem(przygotowanie: number | null, obrobka: number | null): number | null {
   if (przygotowanie === null && obrobka === null) return null;
@@ -241,9 +202,8 @@ export function czasRazem(przygotowanie: number | null, obrobka: number | null):
 
 /** Opis trwałości dania w zrozumiałej formie. */
 export function opisTrwalosci(dni: number): string {
-  if (dni === 0) return 'tylko świeże';
-  if (dni === 1) return 'najwyżej 1 dzień';
-  return `najwyżej ${dni} dni`;
+  if (dni === 0) return i18n.t('trwalosc.swieze');
+  return i18n.t('trwalosc.najwyzej', { count: dni });
 }
 
 /**
@@ -730,8 +690,8 @@ export async function ukryjPrzepis(przepisId: string) {
  */
 export async function odrzucPrzepis(przepisId: string, powod: string) {
   const tresc = powod.trim();
-  if (tresc.length < 3) throw new Error('Napisz autorowi, co poprawić.');
-  if (tresc.length > 500) throw new Error('Uzasadnienie może mieć najwyżej 500 znaków.');
+  if (tresc.length < 3) throw new Error(i18n.t('przepisy.powodZaKrotki'));
+  if (tresc.length > 500) throw new Error(i18n.t('przepisy.powodZaDlugi'));
 
   const { error } = await supabase
     .from('przepisy')

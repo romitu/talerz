@@ -2,6 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Ionicons } from '@expo/vector-icons';
 import { useFocusEffect, useLocalSearchParams } from 'expo-router';
 import { useCallback, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 
 import { Ekran } from '@/components/ekran';
@@ -59,6 +60,7 @@ export default function EkranUzytkownikow() {
   const { powrot } = useLocalSearchParams<{ powrot?: string }>();
   const { sesja } = useSesja();
   const motyw = useTheme();
+  const { t } = useTranslation();
 
   const [konta, setKonta] = useState<KontoUzytkownika[]>([]);
   const [wczytywanie, setWczytywanie] = useState(true);
@@ -132,9 +134,11 @@ export default function EkranUzytkownikow() {
 
   return (
     <Ekran
-      tytul="Użytkownicy"
+      tytul={t('profil.uzytkownicy')}
       podtytul={
-        wczytywanie ? 'wczytywanie…' : `${konta.length} kont, w tym ${czynnych} czynnych`
+        wczytywanie
+          ? t('naglowekProfilu.wczytywanie')
+          : `${t('uzytkownicy.konta', { count: konta.length })}, ${t('uzytkownicy.wTymCzynne', { count: czynnych })}`
       }>
       {blad && (
         <Karta>
@@ -151,11 +155,10 @@ export default function EkranUzytkownikow() {
       {nowe.size > 0 && (
         <Karta style={{ borderWidth: 2, borderColor: motyw.accent }}>
           <ThemedText type="smallBold" themeColor="accent">
-            {nowe.size} {nowe.size === 1 ? 'nowe konto' : 'nowych kont'} od ostatniej wizyty
+            {t('uzytkownicy.noweOdWizyty', { count: nowe.size })}
           </ThemedText>
           <ThemedText type="small" themeColor="textSecondary">
-            Zarejestrowały się same i są od razu czynne. Podświetlone niżej — sprawdź
-            i w razie czego wyłącz.
+            {t('uzytkownicy.noweOpis')}
           </ThemedText>
         </Karta>
       )}
@@ -170,12 +173,12 @@ export default function EkranUzytkownikow() {
             <View style={styles.naglowek}>
               <View style={styles.tozsamosc}>
                 <ThemedText type="default" themeColor={k.aktywne ? 'text' : 'textSecondary'}>
-                  {k.email ?? 'konto bez adresu'}
+                  {k.email ?? t('uzytkownicy.bezAdresu')}
                 </ThemedText>
                 <ThemedText type="small" themeColor="textSecondary">
                   {opisRoli(k.rola)}
-                  {toJa ? ' · to Ty' : ''}
-                  {jestNowe ? ' · nowe' : ''}
+                  {toJa ? ` · ${t('uzytkownicy.toTy')}` : ''}
+                  {jestNowe ? ` · ${t('uzytkownicy.nowe')}` : ''}
                 </ThemedText>
               </View>
 
@@ -186,14 +189,14 @@ export default function EkranUzytkownikow() {
                   color={k.aktywne ? motyw.textSecondary : motyw.accent}
                 />
                 <ThemedText type="smallBold" themeColor={k.aktywne ? 'textSecondary' : 'accent'}>
-                  {k.aktywne ? 'czynne' : 'wyłączone'}
+                  {k.aktywne ? t('uzytkownicy.czynne') : t('uzytkownicy.wylaczone')}
                 </ThemedText>
               </View>
             </View>
 
             {!k.aktywne && k.wylaczone_kiedy && (
               <ThemedText type="small" themeColor="textSecondary">
-                Wyłączone {data(k.wylaczone_kiedy)}
+                {t('uzytkownicy.wylaczoneDnia', { data: data(k.wylaczone_kiedy) })}
               </ThemedText>
             )}
 
@@ -205,8 +208,8 @@ export default function EkranUzytkownikow() {
               <Przycisk
                 tytul={
                   k.rola === 'moderator'
-                    ? 'Odbierz rolę moderatora'
-                    : 'Uczyń moderatorem przepisów'
+                    ? t('uzytkownicy.odbierzModeratora')
+                    : t('uzytkownicy.nadajModeratora')
                 }
                 wariant="poboczny"
                 onPress={() => zmienRole(k)}
@@ -220,28 +223,26 @@ export default function EkranUzytkownikow() {
             */}
             {toJa ? (
               <ThemedText type="small" themeColor="textSecondary">
-                Własnego konta nie da się wyłączyć. Przy jednym administratorze byłoby to
-                zatrzaśnięcie drzwi z kluczem w środku.
+                {t('uzytkownicy.niewlasne')}
               </ThemedText>
             ) : k.aktywne ? (
               pytamy ? (
                 <>
                   <ThemedText type="small" themeColor="accent">
-                    Wyłączyć konto {k.email}? Straci dostęp do wszystkiego przy najbliższym
-                    uruchomieniu aplikacji. Dane zostaną nietknięte i wrócą po włączeniu.
+                    {t('uzytkownicy.wylaczPytanie', { email: k.email })}
                   </ThemedText>
-                  <Przycisk tytul="Tak, wyłącz" onPress={() => przelacz(k, false)} />
-                  <Przycisk tytul="Zostaw" wariant="poboczny" onPress={() => setPytanie(null)} />
+                  <Przycisk tytul={t('uzytkownicy.takWylacz')} onPress={() => przelacz(k, false)} />
+                  <Przycisk tytul={t('uzytkownicy.zostaw')} wariant="poboczny" onPress={() => setPytanie(null)} />
                 </>
               ) : (
                 <Przycisk
-                  tytul="Wyłącz konto"
+                  tytul={t('uzytkownicy.wylacz')}
                   wariant="poboczny"
                   onPress={() => setPytanie(k.id)}
                 />
               )
             ) : (
-              <Przycisk tytul="Włącz z powrotem" onPress={() => przelacz(k, true)} />
+              <Przycisk tytul={t('uzytkownicy.wlacz')} onPress={() => przelacz(k, true)} />
             )}
           </Karta>
         );
@@ -249,40 +250,32 @@ export default function EkranUzytkownikow() {
 
       {!wczytywanie && konta.length === 0 && (
         <Karta>
-          <ThemedText type="default">Nie widzę żadnych kont</ThemedText>
+          <ThemedText type="default">{t('uzytkownicy.brakKont')}</ThemedText>
           <ThemedText type="small" themeColor="textSecondary">
-            Ten ekran jest dla administratora. Jeśli jesteś zalogowany jako ktoś inny,
-            baza pokaże wyłącznie Twoje własne konto.
+            {t('uzytkownicy.brakKontOpis')}
           </ThemedText>
         </Karta>
       )}
 
       <Karta>
         <ThemedText type="smallBold" themeColor="textSecondary">
-          CO DAJE ROLA MODERATORA
+          {t('uzytkownicy.rolaModeratora')}
         </ThemedText>
         <ThemedText type="small" themeColor="textSecondary">
-          Moderator zatwierdza przepisy zgłoszone do publikacji, może je poprawiać
-          po opublikowaniu i zarządza wspólną bazą składników. Nie ma dostępu do
-          cudzych planów, celów ani list zakupów — te zostają prywatne.
+          {t('uzytkownicy.rolaModeratoraOpis')}
         </ThemedText>
         <ThemedText type="small" themeColor="textSecondary">
-          Rolę administratora nadaje się wyłącznie w panelu Supabase. Zdarza się to raz
-          na rok, a trzymanie jej poza aplikacją oznacza, że nawet przejęta sesja
-          administratora nie zrobi kolejnego administratora.
+          {t('uzytkownicy.rolaAdministratora')}
         </ThemedText>
       </Karta>
 
       <Karta>
         <ThemedText type="small" themeColor="textSecondary">
-          Rejestracja jest otwarta — każdy z linkiem do aplikacji może sam założyć konto,
-          bez Twojej zgody. Nowe konto jest od razu czynne, z rolą zwykłego użytkownika.
-          Baner na górze tego ekranu pokazuje, co przybyło od Twojej ostatniej wizyty —
-          to jedyne powiadomienie, jakie dostajesz; sprawdź się tu od czasu do czasu.
+          {t('uzytkownicy.rejestracja')}
         </ThemedText>
       </Karta>
 
-      <Przycisk tytul="Wróć" wariant="poboczny" onPress={() => wroc(powrot, '/profil')} />
+      <Przycisk tytul={t('wspolne.wroc')} wariant="poboczny" onPress={() => wroc(powrot, '/profil')} />
     </Ekran>
   );
 }

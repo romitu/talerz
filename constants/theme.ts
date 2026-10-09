@@ -17,20 +17,7 @@ import { Platform } from 'react-native';
 export const STYLE = ['porcelana', 'ziola', 'wyrazisty'] as const;
 export type Styl = (typeof STYLE)[number];
 
-export const OPIS_STYLU: Record<Styl, { nazwa: string; opis: string }> = {
-  porcelana: {
-    nazwa: 'Porcelana',
-    opis: 'Ciepły papier i terakota. Spokojny, domyślny.',
-  },
-  ziola: {
-    nazwa: 'Zioła',
-    opis: 'Chłodna zieleń. Mniej kontrastu, łagodniejszy wieczorem.',
-  },
-  wyrazisty: {
-    nazwa: 'Wyrazisty',
-    opis: 'Mocny kontrast i widoczne ramki. Do czytania przepisu przy garnku.',
-  },
-};
+// Nazwy i opisy stylów są w tłumaczeniach: `styl.<styl>.nazwa` / `.opis`.
 
 /**
  * PORCELANA — pierwotna paleta Talerza.

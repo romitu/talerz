@@ -1,4 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
+import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 
 import { Karta } from './karta';
@@ -32,6 +33,7 @@ export type KrokStartu = {
  */
 export function PierwszeKroki({ kroki, stopka }: { kroki: KrokStartu[]; stopka?: string }) {
   const motyw = useTheme();
+  const { t } = useTranslation();
   const zrobione = kroki.filter((k) => k.zrobiony).length;
   const biezacy = kroki.findIndex((k) => !k.zrobiony);
 
@@ -40,10 +42,10 @@ export function PierwszeKroki({ kroki, stopka }: { kroki: KrokStartu[]; stopka?:
       <View style={styles.naglowek}>
         <Ionicons name="flag-outline" size={20} color={motyw.accent} />
         <ThemedText type="smallBold" themeColor="textSecondary" style={styles.tytul}>
-          PIERWSZE KROKI
+          {t('pierwszeKroki.naglowek')}
         </ThemedText>
         <ThemedText type="small" themeColor="textSecondary">
-          {zrobione} z {kroki.length}
+          {t('pierwszeKroki.postep', { zrobione, wszystkie: kroki.length })}
         </ThemedText>
       </View>
 

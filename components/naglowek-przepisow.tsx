@@ -1,5 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import type { ReactNode } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Pressable, ScrollView, StyleSheet, TextInput, View } from 'react-native';
 
 import { ThemedText } from './themed-text';
@@ -38,6 +39,7 @@ export function NaglowekPrzepisow({
   filtry?: ReactNode;
 }) {
   const motyw = useTheme();
+  const { t } = useTranslation();
 
   return (
     <ThemedView type="backgroundElement" style={[styles.karta, { borderColor: motyw.border }]}>
@@ -51,7 +53,7 @@ export function NaglowekPrzepisow({
           <TextInput
             value={fraza}
             onChangeText={onZmianaFrazy}
-            placeholder="Szukaj przepisu…"
+            placeholder={t('naglowekPrzepisow.szukaj')}
             placeholderTextColor={motyw.textSecondary}
             autoCorrect={false}
             autoCapitalize="none"
@@ -63,7 +65,7 @@ export function NaglowekPrzepisow({
               onPress={() => onZmianaFrazy('')}
               hitSlop={8}
               accessibilityRole="button"
-              accessibilityLabel="Wyczyść szukanie">
+              accessibilityLabel={t('naglowekPrzepisow.wyczysc')}>
               <Ionicons name="close-circle" size={20} color={motyw.textSecondary} />
             </Pressable>
           )}

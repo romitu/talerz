@@ -20,13 +20,11 @@ import { DEFICYT_REDUKCJI_KCAL, KCAL_NA_GRAM, przemianaPodstawowa, type Makro, t
 
 export type PalNasem = 'nieaktywny' | 'malo_aktywny' | 'aktywny' | 'bardzo_aktywny';
 
-/** Etykiety i opisy czterech poziomów aktywności — do wyboru na ekranie Profil. */
-export const OPIS_PAL: Record<PalNasem, { nazwa: string; opis: string }> = {
-  nieaktywny: { nazwa: 'Siedzący', opis: 'Praca siedząca, brak regularnego ruchu.' },
-  malo_aktywny: { nazwa: 'Lekka', opis: 'Codzienny spacer albo lekkie ćwiczenia 1–3 razy w tygodniu.' },
-  aktywny: { nazwa: 'Umiarkowana', opis: 'Regularne ćwiczenia, kilka razy w tygodniu.' },
-  bardzo_aktywny: { nazwa: 'Wysoka', opis: 'Praca fizyczna albo intensywne treningi niemal codziennie.' },
-};
+/**
+ * Cztery poziomy aktywności w kolejności wyboru na ekranie Profil.
+ * Nazwy i opisy są w tłumaczeniach: `pal.<poziom>.nazwa` / `.opis`.
+ */
+export const POZIOMY_PAL: PalNasem[] = ['nieaktywny', 'malo_aktywny', 'aktywny', 'bardzo_aktywny'];
 
 type Wspolczynniki = { stala: number; wiek: number; wzrost: number; waga: number };
 
