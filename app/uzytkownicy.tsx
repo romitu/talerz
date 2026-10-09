@@ -11,6 +11,7 @@ import { ThemedText } from '@/components/themed-text';
 import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import { komunikatBledu } from '@/lib/blad';
+import { data } from '@/lib/jezyk';
 import { wroc } from '@/lib/nawigacja';
 import { useSesja } from '@/lib/sesja';
 import {
@@ -192,7 +193,7 @@ export default function EkranUzytkownikow() {
 
             {!k.aktywne && k.wylaczone_kiedy && (
               <ThemedText type="small" themeColor="textSecondary">
-                Wyłączone {new Date(k.wylaczone_kiedy).toLocaleDateString('pl-PL')}
+                Wyłączone {data(k.wylaczone_kiedy)}
               </ThemedText>
             )}
 

@@ -1,6 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { router, useFocusEffect } from 'expo-router';
 import { useCallback, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 
 import { Ekran } from '@/components/ekran';
@@ -10,6 +11,7 @@ import { NaglowekProfilu } from '@/components/naglowek-profilu';
 import { NieJemy } from '@/components/nie-jemy';
 import { Przycisk } from '@/components/przycisk';
 import { ThemedText } from '@/components/themed-text';
+import { WyborJezyka } from '@/components/wybor-jezyka';
 import { WyborStylu } from '@/components/wybor-stylu';
 import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -41,6 +43,7 @@ type Profil = {
 export default function EkranProfilu() {
   const { sesja } = useSesja();
   const motyw = useTheme();
+  const { t } = useTranslation();
   const [profile, setProfile] = useState<Profil[]>([]);
   const [wagi, setWagi] = useState<Record<string, number>>({});
   const [rola, setRola] = useState<string | null>(null);
@@ -127,29 +130,28 @@ export default function EkranProfilu() {
 
   return (
     <Ekran
-      tytul="Profil"
+      tytul={t('profil.tytul')}
       podtytul={sesja?.user.email ?? undefined}
       naglowekStaly={<NaglowekProfilu email={sesja?.user.email} rola={rola} />}>
       {wczytywanie && (
         <ThemedText type="small" themeColor="textSecondary">
-          Wczytywanie z bazy…
+          {t('wspolne.wczytywanie')}
         </ThemedText>
       )}
 
       {blad && (
         <Karta>
           <ThemedText type="small" themeColor="accent">
-            Nie udało się wczytać: {blad}
+            {t('wspolne.bladWczytania', { blad })}
           </ThemedText>
         </Karta>
       )}
 
       {!wczytywanie && profile.length === 0 && (
         <Karta>
-          <ThemedText type="default">Nie masz jeszcze profilu</ThemedText>
+          <ThemedText type="default">{t('profil.brakProfilu')}</ThemedText>
           <ThemedText type="small" themeColor="textSecondary">
-            Profil zawiera dane potrzebne do wyliczenia zapotrzebowania: wiek, wzrost, wagę
-            i poziom aktywności. Bez niego plan dnia nie ma do czego się odnieść.
+            {t('profil.brakProfiluOpis')}
           </ThemedText>
         </Karta>
       )}
@@ -181,7 +183,7 @@ export default function EkranProfilu() {
               <View>
                 <ThemedText type="subtitle">{p.imie}</ThemedText>
                 <ThemedText type="small" themeColor="textSecondary">
-                  {wiekZDaty(p.data_urodzenia)} lat · {p.wzrost_cm} cm
+                  {t('wspolne.lata', { count: wiekZDaty(p.data_urodzenia) })} · {p.wzrost_cm} cm
                 </ThemedText>
               </View>
             </View>
@@ -200,29 +202,29 @@ export default function EkranProfilu() {
                   </View>
                   <ThemedText type="small" themeColor="accent" style={styles.tekstPigulki}>
                     {zapis!.prog_bialka_posilek
-                      ? `Próg białka: ${zapis!.prog_bialka_posilek} g`
-                      : 'Bez progu posiłkowego'}
-                    {zapis!.blonnik_g ? ` · błonnik: ${zapis!.blonnik_g} g` : ''}
+                      ? t('profil.progBialka', { gramy: zapis!.prog_bialka_posilek })
+                      : t('profil.bezProgu')}
+                    {zapis!.blonnik_g ? ` · ${t('profil.blonnik', { gramy: zapis!.blonnik_g })}` : ''}
                     {' · '}
-                    {zapis!.tryb === 'redukcja' ? 'redukcja' : 'utrzymanie wagi'}
+                    {zapis!.tryb === 'redukcja' ? t('profil.trybRedukcja') : t('profil.trybUtrzymanie')}
                   </ThemedText>
                 </View>
               </>
             ) : (
               <ThemedText type="small" themeColor="accent">
-                {zapis ? 'Brak zapisanej wagi — bez niej nie da się policzyć celu.' : 'Brak ustalonych celów dziennych.'}
+                {zapis ? t('profil.brakWagi') : t('profil.brakCelow')}
               </ThemedText>
             )}
 
             <View style={styles.akcjeProfilu}>
               <Przycisk
-                tytul="Edytuj profil"
+                tytul={t('profil.edytuj')}
                 ikona="pencil-outline"
                 onPress={() => router.push({ pathname: '/profil-formularz', params: { profil: p.id, powrot: '/profil' } })}
                 style={styles.akcjaProfilu}
               />
               <Przycisk
-                tytul="Usuń profil"
+                tytul={t('profil.usunProfil')}
                 ikona="trash-outline"
                 wariant="poboczny"
                 onPress={() => setDoUsuniecia(p)}
@@ -236,19 +238,18 @@ export default function EkranProfilu() {
       {/* Okno potwierdzenia — usunięcie kasuje też cele i pomiary tego profilu. */}
       {doUsuniecia && (
         <Karta>
-          <ThemedText type="smallBold">Usunąć profil „{doUsuniecia.imie}”?</ThemedText>
+          <ThemedText type="smallBold">{t('profil.usunPytanie', { imie: doUsuniecia.imie })}</ThemedText>
           <ThemedText type="small" themeColor="textSecondary">
-            Razem z nim znikną jego cele dzienne oraz historia wagi i talii. Tej operacji nie da
-            się cofnąć.
+            {t('profil.usunOstrzezenie')}
           </ThemedText>
-          <Przycisk tytul="Usuń" ikona="trash-outline" onPress={() => usunProfil(doUsuniecia.id)} zajety={usuwanie} />
-          <Przycisk tytul="Anuluj" wariant="poboczny" onPress={() => setDoUsuniecia(null)} wylaczony={usuwanie} />
+          <Przycisk tytul={t('wspolne.usun')} ikona="trash-outline" onPress={() => usunProfil(doUsuniecia.id)} zajety={usuwanie} />
+          <Przycisk tytul={t('wspolne.anuluj')} wariant="poboczny" onPress={() => setDoUsuniecia(null)} wylaczony={usuwanie} />
         </Karta>
       )}
 
       {profile.length < 4 && (
         <Przycisk
-          tytul="Dodaj profil"
+          tytul={t('profil.dodaj')}
           ikona="add-circle-outline"
           onPress={() => router.push({ pathname: '/profil-formularz', params: { powrot: '/profil' } })}
         />
@@ -260,6 +261,8 @@ export default function EkranProfilu() {
         <WyborStylu />
       </Karta>
 
+      <WyborJezyka />
+
       {/*
         Zarządzanie kontami widzi tylko administrator. Ukrycie przycisku nie
         jest zabezpieczeniem — tym są reguły dostępu w bazie — ale przycisk
@@ -268,13 +271,13 @@ export default function EkranProfilu() {
       {rola === 'administrator' && (
         <Karta>
           <ThemedText type="smallBold" themeColor="textSecondary">
-            ADMINISTRACJA
+            {t('profil.administracja')}
           </ThemedText>
           <ThemedText type="small" themeColor="textSecondary">
-            Wyłączanie i przywracanie dostępu. Konta zakłada się w panelu Supabase.
+            {t('profil.administracjaOpis')}
           </ThemedText>
           <Przycisk
-            tytul="Użytkownicy"
+            tytul={t('profil.uzytkownicy')}
             wariant="poboczny"
             onPress={() =>
               router.push({ pathname: '/uzytkownicy', params: { powrot: '/profil' } })
@@ -284,7 +287,7 @@ export default function EkranProfilu() {
       )}
 
       <Przycisk
-        tytul="Wyloguj się"
+        tytul={t('profil.wyloguj')}
         ikona="log-out-outline"
         wariant="poboczny"
         onPress={() => supabase.auth.signOut()}

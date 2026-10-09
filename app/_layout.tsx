@@ -6,6 +6,9 @@ import { ActivityIndicator, Pressable, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import 'react-native-reanimated';
 
+// Język musi być gotowy, zanim cokolwiek się narysuje — także ekran logowania.
+import '@/lib/jezyk';
+
 import { EkranLogowania } from '@/components/ekran-logowania';
 import { EkranPowitalny } from '@/components/ekran-powitalny';
 import { Karta } from '@/components/karta';

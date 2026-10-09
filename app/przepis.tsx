@@ -14,6 +14,7 @@ import { ThemedText } from '@/components/themed-text';
 import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import { komunikatBledu } from '@/lib/blad';
+import { liczbaNaTekst } from '@/lib/jezyk';
 import { celZywieniowyNASEM, type PalNasem } from '@/lib/nasem';
 import { wroc } from '@/lib/nawigacja';
 import {
@@ -512,11 +513,8 @@ export function opisIlosci(s: {
   jednostka: 'g' | 'ml' | 'szt';
   gramy: number;
 }): string {
-  const liczba = (x: number) =>
-    (Math.round(x * 100) / 100).toString().replace('.', ',');
-
-  if (s.jednostka === 'szt') return `${liczba(s.ilosc)} szt (${liczba(s.gramy)} g)`;
-  return `${liczba(s.ilosc)} ${s.jednostka}`;
+  if (s.jednostka === 'szt') return `${liczbaNaTekst(s.ilosc)} szt (${liczbaNaTekst(s.gramy)} g)`;
+  return `${liczbaNaTekst(s.ilosc)} ${s.jednostka}`;
 }
 
 const styles = StyleSheet.create({

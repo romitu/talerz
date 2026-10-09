@@ -1,0 +1,36 @@
+{
+  "wspolne": {
+    "wczytywanie": "Wczytywanie z bazy…",
+    "bladWczytania": "Nie udało się wczytać: {{blad}}",
+    "anuluj": "Anuluj",
+    "usun": "Usuń",
+    "lata_one": "{{count}} rok",
+    "lata_few": "{{count}} lata",
+    "lata_many": "{{count}} lat",
+    "lata_other": "{{count}} roku"
+  },
+  "profil": {
+    "tytul": "Profil",
+    "brakProfilu": "Nie masz jeszcze profilu",
+    "brakProfiluOpis": "Profil zawiera dane potrzebne do wyliczenia zapotrzebowania: wiek, wzrost, wagę i poziom aktywności. Bez niego plan dnia nie ma do czego się odnieść.",
+    "progBialka": "Próg białka: {{gramy}} g",
+    "bezProgu": "Bez progu posiłkowego",
+    "blonnik": "błonnik: {{gramy}} g",
+    "trybRedukcja": "redukcja",
+    "trybUtrzymanie": "utrzymanie wagi",
+    "brakWagi": "Brak zapisanej wagi — bez niej nie da się policzyć celu.",
+    "brakCelow": "Brak ustalonych celów dziennych.",
+    "edytuj": "Edytuj profil",
+    "usunProfil": "Usuń profil",
+    "usunPytanie": "Usunąć profil „{{imie}}”?",
+    "usunOstrzezenie": "Razem z nim znikną jego cele dzienne oraz historia wagi i talii. Tej operacji nie da się cofnąć.",
+    "dodaj": "Dodaj profil",
+    "administracja": "ADMINISTRACJA",
+    "administracjaOpis": "Wyłączanie i przywracanie dostępu. Konta zakłada się w panelu Supabase.",
+    "uzytkownicy": "Użytkownicy",
+    "wyloguj": "Wyloguj się"
+  },
+  "jezyk": {
+    "naglowek": "JĘZYK"
+  }
+}

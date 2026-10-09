@@ -9,6 +9,7 @@ import { NaglowekZakupow } from '@/components/naglowek-zakupow';
 import { Przycisk } from '@/components/przycisk';
 import { ThemedText } from '@/components/themed-text';
 import { komunikatBledu } from '@/lib/blad';
+import { liczbaNaTekst } from '@/lib/jezyk';
 import { wroc } from '@/lib/nawigacja';
 import { naDate } from '@/lib/plan';
 import { useSesja } from '@/lib/sesja';
@@ -36,7 +37,7 @@ import {
 
 /** Zaokrąglenie do wygodnej postaci: 1250 g → „1,25 kg”. */
 function opisIlosci(gramy: number): string {
-  if (gramy >= 1000) return `${(gramy / 1000).toFixed(2).replace('.', ',')} kg`;
+  if (gramy >= 1000) return `${liczbaNaTekst(gramy / 1000, 2, true)} kg`;
   return `${gramy} g`;
 }
 

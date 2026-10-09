@@ -4,6 +4,7 @@ import { useCallback, useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 
 import { komunikatBledu } from '@/lib/blad';
+import { liczbaNaTekst } from '@/lib/jezyk';
 import { wroc } from '@/lib/nawigacja';
 import { Ekran } from '@/components/ekran';
 import { KafleWyniku } from '@/components/kafle-wyniku';
@@ -532,7 +533,7 @@ export default function FormularzProfilu() {
             i cel błonnikowy ({podpowiedzBlonnika(cel.kcal)} g dziennie) — widoczne w zakładce Plan.
           </ThemedText>
           <ThemedText type="small" themeColor="textSecondary">
-            Płyny: około {(wskazowkaWodna(wagaL!) / 1000).toFixed(1).replace('.', ',')} l dziennie
+            Płyny: około {liczbaNaTekst(wskazowkaWodna(wagaL!) / 1000, 1, true)} l dziennie
             (30 ml na kilogram). To wskazówka, nie cel.
           </ThemedText>
         </Karta>

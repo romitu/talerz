@@ -6,6 +6,7 @@
  * nigdy nie są zapisywane osobno, żeby nie rozjechały się z przepisem.
  */
 
+import { data } from './jezyk';
 import { supabase } from './supabase';
 import type { PoraPosilku } from './przepisy';
 
@@ -63,13 +64,9 @@ export function dniPlanu(plan: Plan): string[] {
   });
 }
 
-/** Opis dnia po polsku: „środa, 13 sierpnia”. */
-export function opisDnia(data: string): string {
-  return new Date(data).toLocaleDateString('pl-PL', {
-    weekday: 'long',
-    day: 'numeric',
-    month: 'long',
-  });
+/** Opis dnia w języku aplikacji: „środa, 13 sierpnia”. */
+export function opisDnia(dzien: string): string {
+  return data(dzien, { weekday: 'long', day: 'numeric', month: 'long' });
 }
 
 export function czyDzisiaj(data: string): boolean {
