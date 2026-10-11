@@ -1,0 +1,209 @@
+{
+  "nazwa": "Tortille z kurczakiem i warzywami z sosem czosnkowo-koperkowym",
+  "opis": "Pełnoziarniste tortille z soczystym kurczakiem, papryką, pomidorem, ogórkiem i sałatą oraz jogurtowym sosem czosnkowo-koperkowym. Porcja bazowa obejmuje cały posiłek z ilości składników podanych na liście. Czasy etapów dotyczą jednej porcji bazowej; przy większej ilości dolicz czas podgrzewania placków i smażenia mięsa partiami.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "inna"
+  ],
+  "rodzaje": [
+    "kanapki"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 480.5,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 1,
+  "czas_przygotowania_min": 12,
+  "czas_obrobki_min": 16,
+  "sprzet": [
+    "Patelnia 28 cm",
+    "Miska",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Widelec",
+    "Waga kuchenna",
+    "Termometr do mięsa"
+  ],
+  "przechowywanie": "Najlepiej składaj tortille bezpośrednio przed jedzeniem. Kurczaka, sos i osuszone warzywa przechowuj osobno, w zamkniętych pojemnikach w lodówce do 4°C, do 1 dnia. Usmażone mięso szybko schłodź w płytkim pojemniku i wstaw do lodówki najpóźniej w ciągu 2 godzin. Przed podaniem odgrzej mięso do gorącego środka, ogrzej placki i dodaj chłodny sos oraz warzywa. Placki przechowuj zgodnie z opakowaniem.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli placek pęka podczas zwijania, ogrzej go ponownie na suchej patelni przez 10–15 sekund z każdej strony i zawiń od razu. Mokre warzywa dokładnie osusz przed składaniem. Jeżeli placek jest zbyt mały na całe nadzienie, pozostałą część podaj obok z resztą sosu, zamiast rozrywać tortillę.",
+  "skladniki": [
+    {
+      "nazwa": "Tortilla pełnoziarnista",
+      "ilosc": 2,
+      "jednostka": "szt",
+      "stan": "duże, elastyczne placki do zawijania"
+    },
+    {
+      "nazwa": "Pierś z kurczaka, surowa",
+      "ilosc": 130,
+      "jednostka": "g",
+      "stan": "bez skóry i kości; paski grubości około 1 cm"
+    },
+    {
+      "nazwa": "Papryka czerwona, surowa",
+      "ilosc": 50,
+      "jednostka": "g",
+      "stan": "bez gniazda nasiennego, w cienkich paskach"
+    },
+    {
+      "nazwa": "Pomidory, surowe",
+      "ilosc": 40,
+      "jednostka": "g",
+      "stan": "w cienkich półplasterkach, osuszone z nadmiaru wilgoci"
+    },
+    {
+      "nazwa": "Ogórek, surowy",
+      "ilosc": 40,
+      "jednostka": "g",
+      "stan": "w cienkich słupkach"
+    },
+    {
+      "nazwa": "Sałata rzymska",
+      "ilosc": 20,
+      "jednostka": "g",
+      "stan": "umyta, dokładnie osuszona, porwana"
+    },
+    {
+      "nazwa": "Jogurt grecki naturalny 2%",
+      "ilosc": 60,
+      "jednostka": "g",
+      "stan": "do sosu"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 3,
+      "jednostka": "g",
+      "stan": "obrany, bardzo drobno posiekany i roztarty; do sosu"
+    },
+    {
+      "nazwa": "koperek świeży",
+      "ilosc": 5,
+      "jednostka": "g",
+      "stan": "umyte, osuszone i drobno posiekane delikatne gałązki; do sosu"
+    },
+    {
+      "nazwa": "Cytryna",
+      "ilosc": 5,
+      "jednostka": "g",
+      "stan": "sok, do sosu"
+    },
+    {
+      "nazwa": "Olej rzepakowy",
+      "ilosc": 5,
+      "jednostka": "g",
+      "stan": "do smażenia kurczaka"
+    },
+    {
+      "nazwa": "Papryka słodka mielona",
+      "ilosc": 1,
+      "jednostka": "g",
+      "stan": "do kurczaka"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 1,
+      "jednostka": "g",
+      "stan": "podzielona między sos i kurczaka"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g",
+      "stan": "podzielony między sos i kurczaka"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 12,
+      "kroki": [
+        {
+          "tresc": "**Papryka.** Umyj paprykę, usuń gniazdo nasienne i pokrój miąższ w cienkie paski."
+        },
+        {
+          "tresc": "**Pomidor.** Umyj pomidora i pokrój w cienkie półplasterki. Osusz plasterki z nadmiaru wilgoci."
+        },
+        {
+          "tresc": "**Ogórek.** Umyj i osusz ogórek. Pokrój w cienkie słupki."
+        },
+        {
+          "tresc": "**Sałata.** Umyj liście, dokładnie osusz i porwij na mniejsze kawałki."
+        },
+        {
+          "tresc": "**Koperek.** Umyj i osusz koperek, usuń grube łodygi i drobno posiekaj delikatne gałązki."
+        },
+        {
+          "tresc": "**Czosnek.** Obierz czosnek, bardzo drobno posiekaj i rozetrzyj płaską stroną noża."
+        },
+        {
+          "tresc": "**Cytryna.** Umyj cytrynę, wyciśnij sok i odmierz ilość wskazaną na liście składników."
+        },
+        {
+          "tresc": "**Sól i pieprz.** Odmierz sól oraz pieprz. Każdą z przypraw podziel na połowę: jedną część do sosu, drugą do kurczaka."
+        },
+        {
+          "tresc": "**Sos.** Odmierz jogurt do miski. Dodaj czosnek, koperek, sok z cytryny oraz przyprawy przeznaczone do sosu. Wymieszaj, przykryj i odstaw do lodówki."
+        },
+        {
+          "tresc": "**Kurczak.** Osusz mięso, usuń twarde błony i pokrój w paski grubości około 1 cm. Dopraw odmierzoną papryką mieloną oraz pozostałą solą i pieprzem."
+        },
+        {
+          "tresc": "**Po przygotowaniu mięsa.** Umyj ręce, nóż, deskę i powierzchnię roboczą, które miały kontakt z surowym kurczakiem."
+        },
+        {
+          "tresc": "**Olej.** Odmierz olej do smażenia i odstaw przy kuchence."
+        },
+        {
+          "tresc": "**Placki tortilli.** Wyjmij potrzebne placki z opakowania. Przykryj, żeby nie wysychały."
+        }
+      ]
+    },
+    {
+      "nazwa": "Podgrzewanie tortilli i smażenie kurczaka",
+      "minuty": 12,
+      "kroki": [
+        {
+          "tresc": "**Rozgrzanie patelni.** Rozgrzej suchą patelnię na średnim ogniu przez około 1 minutę."
+        },
+        {
+          "tresc": "**Podgrzanie placków.** Ogrzewaj tortille kolejno po **15–20 sekund z każdej strony**, tylko do zmięknięcia. Odkładaj na talerz i przykrywaj czystą ściereczką."
+        },
+        {
+          "tresc": "**Olej na patelnię.** Wlej odmierzony olej na tę samą patelnię. Rozgrzewaj przez około 30 sekund. Jeśli smażysz mięso partiami, podziel olej między partie."
+        },
+        {
+          "tresc": "**Smażenie kurczaka.** Rozłóż paski w jednej warstwie. Smaż przez **6–8 minut na średnim ogniu**, obracając co około 2 minuty. Przy większej ilości smaż partiami."
+        },
+        {
+          "tresc": "**Sprawdzenie kurczaka.** Zmierz temperaturę w środku najgrubszego kawałka: powinna wynosić **co najmniej 74°C**. Jeśli jest niższa, dosmażaj **po 1 minucie** i ponawiaj pomiar.",
+          "uwaga": true,
+          "sygnal": "temperatura w środku najgrubszego kawałka wynosi co najmniej 74°C"
+        },
+        {
+          "tresc": "**Zdjęcie mięsa.** Gotowego kurczaka od razu przełóż na czysty talerz, żeby nie wysychał na gorącej patelni."
+        }
+      ]
+    },
+    {
+      "nazwa": "Składanie i podanie",
+      "minuty": 4,
+      "kroki": [
+        {
+          "tresc": "**Sos na placki.** Wyjmij sos z lodówki i rozdziel między tortille. Rozsmaruj, pozostawiając przy brzegach około 3 cm wolnego miejsca."
+        },
+        {
+          "tresc": "**Nadzienie.** Rozdziel sałatę, paprykę, ogórek, pomidora i kurczaka między placki. Układaj nadzienie na środku."
+        },
+        {
+          "tresc": "**Zwijanie.** Złóż boczne brzegi do środka. Zwiń tortillę od dołu, przytrzymując nadzienie, i ułóż łączeniem w dół. Jeśli część nadzienia się nie mieści, podaj ją obok jako część tego samego posiłku."
+        },
+        {
+          "tresc": "**Podanie.** Przekrój tortille na skos i podaj od razu. Rozdziel całość na przygotowywaną liczbę porcji."
+        }
+      ]
+    }
+  ]
+}

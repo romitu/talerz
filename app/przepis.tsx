@@ -11,6 +11,7 @@ import { Karta } from '@/components/karta';
 import { RozkladPosilku, type UdzialOsoby } from '@/components/rozklad-posilku';
 import { WierszMakro } from '@/components/wiersz-makro';
 import { Przycisk } from '@/components/przycisk';
+import { TekstFormatowany } from '@/components/tekst-formatowany';
 import { ThemedText } from '@/components/themed-text';
 import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -318,9 +319,9 @@ export default function EkranPrzepisu() {
 
       {przepis.opis && (
         <Karta>
-          <ThemedText type="small" themeColor="textSecondary">
+          <TekstFormatowany type="small" themeColor="textSecondary">
             {przepis.opis}
-          </ThemedText>
+          </TekstFormatowany>
         </Karta>
       )}
 
@@ -422,9 +423,9 @@ export default function EkranPrzepisu() {
                   {s.nazwa}
                 </ThemedText>
                 {(s.stan || s.zamiennik) && (
-                  <ThemedText type="small" themeColor="textSecondary">
+                  <TekstFormatowany type="small" themeColor="textSecondary">
                     {[s.stan, s.zamiennik].filter(Boolean).join(' · ')}
-                  </ThemedText>
+                  </TekstFormatowany>
                 )}
               </View>
               <ThemedText type="smallBold" themeColor="textSecondary" style={styles.ilosc}>
@@ -458,15 +459,15 @@ export default function EkranPrzepisu() {
                   color={odhaczony ? motyw.accent : motyw.textSecondary}
                 />
                 <View style={styles.trescPozycji}>
-                  <ThemedText
+                  <TekstFormatowany
                     type="default"
                     themeColor={odhaczony ? 'textSecondary' : 'text'}>
                     {krok.tresc}
-                  </ThemedText>
+                  </TekstFormatowany>
                   {krok.sygnal && (
-                    <ThemedText type="small" themeColor="textSecondary">
+                    <TekstFormatowany type="small" themeColor="textSecondary">
                       {t('przepis.poCzymPoznac', { sygnal: krok.sygnal })}
-                    </ThemedText>
+                    </TekstFormatowany>
                   )}
                   {krok.uwaga && (
                     <ThemedText type="smallBold" themeColor="accent">
@@ -487,7 +488,7 @@ export default function EkranPrzepisu() {
             {t('przepis.poUgotowaniu')}
           </ThemedText>
           {przepis.przechowywanie && (
-            <ThemedText type="default">{przepis.przechowywanie}</ThemedText>
+            <TekstFormatowany type="default">{przepis.przechowywanie}</TekstFormatowany>
           )}
           <ThemedText type="small" themeColor="textSecondary">
             {przepis.mozna_mrozic ? t('przepis.moznaMrozic') : t('przepis.nieMrozic')}
@@ -500,7 +501,7 @@ export default function EkranPrzepisu() {
           <ThemedText type="smallBold" themeColor="textSecondary">
             {t('przepis.ratunek')}
           </ThemedText>
-          <ThemedText type="default">{przepis.ratunek}</ThemedText>
+          <TekstFormatowany type="default">{przepis.ratunek}</TekstFormatowany>
         </Karta>
       )}
 

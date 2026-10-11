@@ -14,6 +14,7 @@ import { NaglowekPrzepisow, type ZakladkaPrzepisow } from '@/components/naglowek
 import { ThemedView } from '@/components/themed-view';
 import { Pole } from '@/components/pole';
 import { Przycisk } from '@/components/przycisk';
+import { TekstFormatowany } from '@/components/tekst-formatowany';
 import { ThemedText } from '@/components/themed-text';
 import { KOLOR_MAKRO, Spacing } from '@/constants/theme';
 import { useFiltryPrzepisow } from '@/hooks/use-filtry-przepisow';
@@ -33,6 +34,7 @@ import {
   type Preferencja,
   type PrzepisZMakro,
 } from '@/lib/przepisy';
+import { bezZnacznikow } from '@/lib/formatowanie';
 import { useSesja } from '@/lib/sesja';
 import { adresZdjecia } from '@/lib/zdjecia';
 import { supabase } from '@/lib/supabase';
@@ -262,7 +264,7 @@ export default function EkranPrzepisow() {
     return przepisy.filter((p) => {
       const tekst = [
         p.nazwa,
-        p.opis ?? '',
+        bezZnacznikow(p.opis ?? ''),
         ...p.kuchnie.map((x) => t(`kuchnia.${x}`)),
         ...p.pory.map((x) => t(`pora.${x}`)),
         ...p.rodzaje.map((x) => t(`rodzaj.${x}`)),
@@ -552,9 +554,9 @@ export default function EkranPrzepisow() {
           )}
 
           {p.opis && (
-            <ThemedText type="small" themeColor="textSecondary">
+            <TekstFormatowany type="small" themeColor="textSecondary">
               {p.opis}
-            </ThemedText>
+            </TekstFormatowany>
           )}
 
           {p.zawieraWykluczone.length > 0 && (
