@@ -467,19 +467,23 @@ export async function przeniesPosilek(id: string, data: string, pora: PoraPosilk
 }
 
 /**
- * Podmienia wariant skalowany JUŻ ISTNIEJĄCEJ pozycji planu — bez usuwania
+ * Podmienia wariant skalowany JUŻ ISTNIEJĄCYCH pozycji planu — bez usuwania
  * i wstawiania od nowa. `przepis_id` (przepis źródłowy) zostaje bez zmian,
- * zmienia się tylko to, skąd bierze się makro tego jednego posiłku.
+ * zmienia się tylko to, skąd bierze się makro tych posiłków.
+ *
+ * Kilka pozycji naraz (cały garnek) jednym zapytaniem — po jednym na pozycję
+ * każda zmiana planu czekała na kilkanaście kolejnych rozmów z bazą.
  */
 export async function ustawPrzepisSkalowanyPozycji(
-  pozycjaId: string,
-  /** `null` — pozycja wraca do przepisu źródłowego, bez wariantu. */
+  pozycjeId: string[],
+  /** `null` — pozycje wracają do przepisu źródłowego, bez wariantu. */
   przepisSkalowanyId: string | null
 ): Promise<void> {
+  if (pozycjeId.length === 0) return;
   const { error } = await supabase
     .from('plan_pozycje')
     .update({ przepis_skalowany_id: przepisSkalowanyId })
-    .eq('id', pozycjaId);
+    .in('id', pozycjeId);
   if (error) throw error;
 }
 

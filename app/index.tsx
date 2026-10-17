@@ -48,7 +48,7 @@ import {
   type PoraPosilku,
   type PrzepisZMakro,
 } from '@/lib/przepisy';
-import { utworzPrzeskalowanyPrzepis } from '@/lib/przepisy-skalowane';
+import { pobierzCeleWariantow, utworzPrzeskalowanyPrzepis } from '@/lib/przepisy-skalowane';
 import { celZywieniowyNASEM, type PalNasem } from '@/lib/nasem';
 import { useSesja } from '@/lib/sesja';
 import { pobierzSkladniki } from '@/lib/skladniki';
@@ -348,13 +348,29 @@ export default function EkranPlanu() {
     return mapa;
   }, [pozycje]);
 
+  /**
+   * Odświeżenie po zmianie planu — tylko tydzień i jego posiłki.
+   *
+   * Pełne `pobierz` ściągało jeszcze cały katalog przepisów z makro i profile,
+   * choć zmiana w planie nie rusza ani jednego, ani drugiego. Przy każdym
+   * wybraniu czy usunięciu dania to była większość czekania.
+   */
+  async function odswiezPlan() {
+    const wszystkie = await pobierzPlany();
+    const p = wszystkie[0] ?? null;
+    const nowePozycje = p ? await pobierzPozycje(p.id) : [];
+    setPlan(p);
+    setLiczbaPlanow(wszystkie.length);
+    setPozycje(nowePozycje);
+  }
+
   /** Zmiana planu: operacja, przeliczenie porcji pod cel i odświeżenie ekranu. */
   async function zDbem(operacja: () => Promise<void>) {
     setBlad(null);
     try {
       await operacja();
       await przeliczSkalowalneWTygodniu();
-      await pobierz();
+      await odswiezPlan();
     } catch (e) {
       setBlad(komunikatBledu(e));
     }
@@ -442,8 +458,8 @@ export default function EkranPlanu() {
 
       // Porcje przeliczają się zawsze — także przy pełnym planie, żeby
       // przycisk dopasował do celu plan ułożony wcześniej albo ręcznie.
-      const { szczegoly, dniZmienione } = await przeliczSkalowalneWTygodniu();
-      await pobierz();
+      const { szczegoly, dniZmienione } = await przeliczSkalowalneWTygodniu({ odNowa: true });
+      await odswiezPlan();
       if (szczegoly.length > 0) {
         komunikatWypelnienia +=
           '\n\n' +
@@ -506,7 +522,7 @@ export default function EkranPlanu() {
 
       await zapiszWstawienia(plan, wstawienia);
       await przeliczSkalowalneWTygodniu();
-      await pobierz();
+      await odswiezPlan();
 
       // Komunikat liczy DNI, nie posiłków — to pytanie, na które faktycznie
       // ktoś chce znać odpowiedź: „ile dni tygodnia mam już z głowy".
@@ -557,10 +573,19 @@ export default function EkranPlanu() {
    * z bazy — stan ekranu w tej chwili jeszcze nie zna właśnie zapisanej
    * zmiany. Bez celu kalorii nic nie robi.
    *
+   * Garnek, którego wariant powstał już pod ten sam cel z tego samego
+   * przepisu, zostaje z nim — zapisanie identycznej kopii nic nie zmienia,
+   * a przy każdym wybraniu czy usunięciu dania przeliczało cały tydzień od
+   * zera i to na nie się czekało. `odNowa` (przycisk „Wypełnij wolne
+   * miejsca”) liczy wszystko jeszcze raz — tamtędy wchodzą zmiany składników
+   * w samych przepisach i stamtąd pochodzi pełna lista szczegółów.
+   *
    * Czysta praca z bazą, bez `setKomunikat`/`setPracuje` — wołający sam
    * decyduje, czy pokazać szczegóły, i sam odświeża ekran.
    */
-  async function przeliczSkalowalneWTygodniu(): Promise<{ szczegoly: string[]; dniZmienione: Set<string> }> {
+  async function przeliczSkalowalneWTygodniu(
+    { odNowa = false }: { odNowa?: boolean } = {}
+  ): Promise<{ szczegoly: string[]; dniZmienione: Set<string> }> {
     if (!sesja || !cel) return { szczegoly: [], dniZmienione: new Set() };
     const aktualnyPlan = (await pobierzPlany())[0];
     if (!aktualnyPlan) return { szczegoly: [], dniZmienione: new Set() };
@@ -580,10 +605,12 @@ export default function EkranPlanu() {
       return !!przepis && (przepis.kcal ?? 0) > 0 && mnoznikWzrostu(przepis, p.pora) > 1;
     };
 
-    // Pozycja bez potrzeby wariantu wraca do przepisu — zdejmujemy stary.
-    async function zdejmijWariant(pozycja: PozycjaPlanu) {
+    // Pozycje bez potrzeby wariantu wracają do przepisu — stary wariant
+    // zdejmujemy na końcu, wszystkie jednym zapytaniem.
+    const doZdjecia: PozycjaPlanu[] = [];
+    function zdejmijWariant(pozycja: PozycjaPlanu) {
       if (!pozycja.przepis_skalowany_id) return;
-      await ustawPrzepisSkalowanyPozycji(pozycja.id, null);
+      doZdjecia.push(pozycja);
       dniZmienione.add(pozycja.data);
     }
 
@@ -593,7 +620,7 @@ export default function EkranPlanu() {
       const dniowe = aktualnePozycje.filter((p) => p.data === data);
       const rosnace = dniowe.filter(mozeRosnac);
       const stale = dniowe.filter((p) => !rosnace.includes(p));
-      for (const pozycja of stale) await zdejmijWariant(pozycja);
+      stale.forEach(zdejmijWariant);
       if (rosnace.length === 0) continue;
 
       // Puste posiłki zatrzymują swoją część — liczą się jak kolejne „miejsca”
@@ -607,7 +634,6 @@ export default function EkranPlanu() {
         celePozycji.push({ pozycja, celKcal: docelowoNaJedno / Math.max(1, pozycja.porcje) });
       }
     }
-    if (celePozycji.length === 0) return { szczegoly, dniZmienione };
 
     // Krok 2: jeden wariant na garnek. Pozycja bez partii (starsze wpisy)
     // to osobne gotowanie, więc tworzy własną grupę.
@@ -617,30 +643,71 @@ export default function EkranPlanu() {
       garnki.set(klucz, [...(garnki.get(klucz) ?? []), c]);
     }
 
-    const dostepneSkladniki = await pobierzSkladniki();
-
-    for (const dniGarnka of garnki.values()) {
-      const pierwsza = dniGarnka[0].pozycja;
-      const celGarnka = dniGarnka.reduce((s, c) => s + c.celKcal, 0) / dniGarnka.length;
+    const doPrzeliczenia: { dniGarnka: PozycjaPlanu[]; celGarnka: number }[] = [];
+    for (const lista of garnki.values()) {
+      const dniGarnka = lista.map((c) => c.pozycja);
+      const pierwsza = dniGarnka[0];
+      const celGarnka = lista.reduce((s, c) => s + c.celKcal, 0) / lista.length;
 
       // Porcja z przepisu wystarcza — nic nie dokładamy, wariant byłby kopią.
       if (celGarnka <= kcalBazowe(pierwsza)) {
-        for (const { pozycja } of dniGarnka) await zdejmijWariant(pozycja);
+        dniGarnka.forEach(zdejmijWariant);
         continue;
       }
+      doPrzeliczenia.push({ dniGarnka, celGarnka });
+    }
 
-      const pelny = await pobierzPelnyPrzepis(pierwsza.przepis_id);
-      const wynik = await utworzPrzeskalowanyPrzepis({
-        kontoId: sesja.user.id,
-        przepis: pelny,
-        dostepneSkladniki,
-        celKcal: celGarnka,
-        pora: pierwsza.pora,
-      });
-      for (const { pozycja } of dniGarnka) {
-        await ustawPrzepisSkalowanyPozycji(pozycja.id, wynik.id);
-        dniZmienione.add(pozycja.data);
+    // Garnek z jednym wariantem, który powstał pod ten sam cel z tego samego
+    // przepisu, nie potrzebuje nowego — zostaje, jak jest.
+    if (!odNowa) {
+      const obecne = await pobierzCeleWariantow([
+        ...new Set(
+          doPrzeliczenia.flatMap(({ dniGarnka }) =>
+            dniGarnka.map((p) => p.przepis_skalowany_id).filter((x): x is string => x !== null)
+          )
+        ),
+      ]);
+      for (let i = doPrzeliczenia.length - 1; i >= 0; i--) {
+        const { dniGarnka, celGarnka } = doPrzeliczenia[i];
+        const id = dniGarnka[0].przepis_skalowany_id;
+        const wariant = id ? obecne.get(id) : undefined;
+        const pasuje =
+          !!wariant &&
+          dniGarnka.every((p) => p.przepis_skalowany_id === id) &&
+          wariant.przepis_zrodlowy_id === dniGarnka[0].przepis_id &&
+          wariant.cel_kcal === Math.max(1, Math.round(celGarnka));
+        if (pasuje) doPrzeliczenia.splice(i, 1);
       }
+    }
+
+    // Garnki są od siebie niezależne — liczą się i zapisują równolegle.
+    const dostepneSkladniki = doPrzeliczenia.length > 0 ? await pobierzSkladniki() : [];
+    const [, ...wyniki] = await Promise.all([
+      ustawPrzepisSkalowanyPozycji(
+        doZdjecia.map((p) => p.id),
+        null
+      ),
+      ...doPrzeliczenia.map(async ({ dniGarnka, celGarnka }) => {
+        const pierwsza = dniGarnka[0];
+        const pelny = await pobierzPelnyPrzepis(pierwsza.przepis_id);
+        const wynik = await utworzPrzeskalowanyPrzepis({
+          kontoId: sesja.user.id,
+          przepis: pelny,
+          dostepneSkladniki,
+          celKcal: celGarnka,
+          pora: pierwsza.pora,
+        });
+        await ustawPrzepisSkalowanyPozycji(
+          dniGarnka.map((p) => p.id),
+          wynik.id
+        );
+        return { dniGarnka, celGarnka, wynik };
+      }),
+    ]);
+
+    for (const { dniGarnka, celGarnka, wynik } of wyniki) {
+      const pierwsza = dniGarnka[0];
+      for (const pozycja of dniGarnka) dniZmienione.add(pozycja.data);
 
       szczegoly.push(
         t(dniGarnka.length > 1 ? 'plan.szczegolGarnek' : 'plan.szczegol', {

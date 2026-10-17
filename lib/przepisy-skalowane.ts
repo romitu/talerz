@@ -129,6 +129,28 @@ export async function utworzPrzeskalowanyPrzepis(opcje: {
   };
 }
 
+/**
+ * Pod jaki cel i z jakiego przepisu powstały wskazane warianty — żeby
+ * przeliczenie planu mogło zostawić wariant, który już pasuje, zamiast
+ * zapisywać jego kopię przy każdej zmianie planu.
+ */
+export async function pobierzCeleWariantow(
+  ids: string[]
+): Promise<Map<string, { cel_kcal: number; przepis_zrodlowy_id: string }>> {
+  if (ids.length === 0) return new Map();
+  const { data, error } = await supabase
+    .from('przepisy_skalowane')
+    .select('id, cel_kcal, przepis_zrodlowy_id')
+    .in('id', ids);
+  if (error) throw error;
+  return new Map(
+    (data ?? []).map((w) => [
+      w.id as string,
+      { cel_kcal: w.cel_kcal as number, przepis_zrodlowy_id: w.przepis_zrodlowy_id as string },
+    ])
+  );
+}
+
 export type SkladnikSkalowany = {
   skladnik_id: string;
   ilosc: number;
