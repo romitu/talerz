@@ -61,7 +61,7 @@
  */
 
 import { gornaMasaPorcji, limitPorcjiG } from './skalowanie-kalorii';
-import type { PoraPosilku, Preferencja } from './przepisy';
+import type { PoraPosilku, Preferencja, RodzajDania } from './przepisy';
 
 /** Kolejność wypełniania w obrębie dnia. */
 export const PORY_AUTOMATU: PoraPosilku[] = ['sniadanie', 'obiad', 'kolacja'];
@@ -71,6 +71,8 @@ export type Kandydat = {
   id: string;
   nazwa: string;
   pory: PoraPosilku[];
+  /** Zupa nie da się przyciąć do mniejszej liczby dni — patrz `garnekNiepodzielny`. */
+  rodzaje: RodzajDania[];
   liczba_porcji_bazowych: number;
   kcal: number | null;
   bialko_g: number | null;
@@ -160,6 +162,19 @@ const LIMIT_PORCJI = 4;
 export function dniZLimitem(trwaloscDni: number, osoby: number): number {
   const dniWLimicie = Math.max(1, Math.floor(LIMIT_PORCJI / Math.max(1, osoby)));
   return Math.max(1, Math.min(trwaloscDni, dniWLimicie));
+}
+
+/**
+ * Czy garnek trzeba ugotować w całości — bez przycinania do mniejszej liczby
+ * dni. Zupy z połowy przepisu nie robi się: wywar, ilość wody i czas gotowania
+ * są pod pełny garnek. Takie danie wchodzi do planu tylko wtedy, gdy zmieści
+ * się na tyle kolejnych dni, ile ma porcji bazowych — inaczej plan je pomija
+ * (automat) albo odrzuca z komunikatem (ręczny wybór), zamiast po cichu
+ * zmniejszyć przepis: lista zakupów liczy składniki z liczby dni w partii.
+ * Współdzielone przez `zaplanuj` i ręczne wstawianie w `app/index.tsx`.
+ */
+export function garnekNiepodzielny(p: { rodzaje: RodzajDania[] }): boolean {
+  return p.rodzaje.includes('zupa');
 }
 
 /**
@@ -351,7 +366,15 @@ export function zaplanuj(opcje: {
     for (const pora of PORY_AUTOMATU) {
       if (zajeteKlucze.has(klucz(data, pora))) continue;
 
-      const kandydaci = przepisy.filter((k) => nadajeSieNa(k, pora));
+      // Zupa wchodzi tylko w całości: odpada, gdy do końca planu albo do
+      // następnego zajętego miejsca nie zmieści się jej pełny garnek.
+      const kandydaci = przepisy.filter(
+        (k) =>
+          nadajeSieNa(k, pora) &&
+          (!garnekNiepodzielny(k) ||
+            dniGotowania(dni, i, pora, k.liczba_porcji_bazowych, zajeteKlucze).length >=
+              Math.max(1, k.liczba_porcji_bazowych))
+      );
       if (kandydaci.length === 0) {
         bezObsady.push({ data, pora });
         continue;
@@ -404,11 +427,15 @@ export function zaplanuj(opcje: {
       const wzrost = mnoznikWzrostu(najlepszy, pora);
       const uzyjSkalowania =
         celKcal !== null && bazowyKcal > 0 && wzrost > 1 && docelowoKcal > bazowyKcal;
-      const liczbaDni = uwzglednijTrwalosc
+      const liczbaDniWgZasad = uwzglednijTrwalosc
         ? dniZLimitem(najlepszy.trwalosc_dni, osoby)
         : uzyjSkalowania
           ? 1
           : najlepszy.liczba_porcji_bazowych;
+      // Ani skalowanie, ani limit porcji nie przytną zupy poniżej pełnego garnka.
+      const liczbaDni = garnekNiepodzielny(najlepszy)
+        ? Math.max(liczbaDniWgZasad, najlepszy.liczba_porcji_bazowych)
+        : liczbaDniWgZasad;
       const objete = dniGotowania(dni, i, pora, liczbaDni, zajeteKlucze);
       if (objete.length === 0) continue; // nie powinno się zdarzyć: miejsce jest wolne
 

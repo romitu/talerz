@@ -19,7 +19,14 @@ import { useFiltryPrzepisow } from '@/hooks/use-filtry-przepisow';
 import { useTheme } from '@/hooks/use-theme';
 import { komunikatBledu } from '@/lib/blad';
 import i18n, { liczbaNaTekst } from '@/lib/jezyk';
-import { dniZLimitem, mnoznikWzrostu, powtorzTydzien, zaplanuj, type Wstawienie } from '@/lib/automat';
+import {
+  dniZLimitem,
+  garnekNiepodzielny,
+  mnoznikWzrostu,
+  powtorzTydzien,
+  zaplanuj,
+  type Wstawienie,
+} from '@/lib/automat';
 import {
   czyDzisiaj,
   dniPlanu,
@@ -836,6 +843,35 @@ export default function EkranPlanu() {
           urosnie = brakKcal / Math.max(1, wolnychWDniu) > (p.kcal ?? 0);
         }
 
+        // Ten sam checkbox „Uwzględnij ile dni wytrzyma w lodówce” co przy
+        // automacie (patrz `wypelnijAutomatem`) — inaczej ręczne wstawienie
+        // dania z ustawioną trwałością nigdy by jej nie uwzględniało. Danie
+        // skalowalne bez tego checkboxa zostaje na jeden dzień — przeliczone
+        // jest pod cel TEGO dnia, więc kopiowanie go na kolejne nie ma sensu
+        // (tak samo jak w automacie, patrz `dniZLimitem`/`uzyjSkalowania`).
+        let liczbaDni = uwzglednijTrwalosc
+          ? dniZLimitem(p.trwalosc_dni, osoby)
+          : urosnie
+            ? 1
+            : p.liczba_porcji_bazowych;
+
+        // Zupy nie przycinamy — ani do końca planu, ani przez skalowanie czy
+        // limit porcji. Gdy pełny garnek się nie mieści, mówimy to wprost.
+        if (garnekNiepodzielny(p)) {
+          const potrzeba = Math.max(1, p.liczba_porcji_bazowych);
+          const zostalo = dniPlanu(plan).filter((d) => d >= wybierany.data).length;
+          if (zostalo < potrzeba) {
+            throw new Error(
+              t('plan.zupaNieMiesci', {
+                count: zostalo,
+                nazwa: p.nazwa,
+                potrzeba: t('plan.dni', { count: potrzeba }),
+              })
+            );
+          }
+          liczbaDni = Math.max(liczbaDni, potrzeba);
+        }
+
         await dodajPartie({
           kontoId: sesja.user.id,
           planId: plan.id,
@@ -844,17 +880,7 @@ export default function EkranPlanu() {
           przepisId: p.id,
           kolejnosc: juz + 1,
           osoby,
-          // Ten sam checkbox „Uwzględnij ile dni wytrzyma w lodówce” co przy
-          // automacie (patrz `wypelnijAutomatem`) — inaczej ręczne wstawienie
-          // dania z ustawioną trwałością nigdy by jej nie uwzględniało. Danie
-          // skalowalne bez tego checkboxa zostaje na jeden dzień — przeliczone
-          // jest pod cel TEGO dnia, więc kopiowanie go na kolejne nie ma sensu
-          // (tak samo jak w automacie, patrz `dniZLimitem`/`uzyjSkalowania`).
-          liczbaPorcjiBazowych: uwzglednijTrwalosc
-            ? dniZLimitem(p.trwalosc_dni, osoby)
-            : urosnie
-              ? 1
-              : p.liczba_porcji_bazowych,
+          liczbaPorcjiBazowych: liczbaDni,
           dostepneDni: dniPlanu(plan),
         });
         doPrzywrocenia.current = true;
