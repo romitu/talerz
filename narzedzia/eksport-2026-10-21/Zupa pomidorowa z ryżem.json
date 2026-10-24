@@ -1,0 +1,182 @@
+{
+  "nazwa": "Zupa pomidorowa z ryżem",
+  "opis": "Domowa zupa pomidorowa na wywarze z kurczaka i warzyw, podawana z ryżem, kawałkami mięsa, jogurtem greckim i świeżą natką pietruszki.",
+  "pory": [
+    "kolacja",
+    "obiad"
+  ],
+  "kuchnie": [
+    "polska"
+  ],
+  "rodzaje": [
+    "zupa"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 1107,
+  "liczba_porcji_bazowych": 2,
+  "trwalosc_dni": 3,
+  "czas_przygotowania_min": 10,
+  "czas_obrobki_min": 45,
+  "sprzet": [
+    "Garnek 3 l",
+    "Sitko",
+    "Nóż szefa kuchni",
+    "Deska do krojenia"
+  ],
+  "przechowywanie": "Zupę przechowuj w szczelnym pojemniku w lodówce do 3 dni. Ryż przechowuj osobno i dodawaj dopiero podczas podawania. Dzięki temu nie rozmięknie i nie wchłonie dużej części zupy. Zupę bez ryżu można również zamrozić.",
+  "mozna_mrozic": true,
+  "ratunek": "Za kwaśna od passaty — dodaj startą marchewkę i pogotuj 10 minut. Za rzadka — odparuj bez przykrycia. Za mało wyrazista — dosól i dodaj łyżkę passaty, nie kostkę rosołową.",
+  "skladniki": [
+    {
+      "nazwa": "Udo z kurczaka bez skóry, surowe",
+      "ilosc": 280,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "woda",
+      "ilosc": 1000,
+      "jednostka": "g",
+      "stan": "zimna, na wywar; podana ilość dotyczy wody pozostającej po gotowaniu — uzupełniaj odparowany płyn"
+    },
+    {
+      "nazwa": "Marchew, surowa",
+      "ilosc": 120,
+      "jednostka": "g",
+      "zamiennik": "włoszczyzna"
+    },
+    {
+      "nazwa": "Pietruszka korzeń",
+      "ilosc": 60,
+      "jednostka": "g",
+      "zamiennik": "włoszczyzna"
+    },
+    {
+      "nazwa": "Seler korzeń",
+      "ilosc": 80,
+      "jednostka": "g",
+      "zamiennik": "włoszczyzna"
+    },
+    {
+      "nazwa": "Por, surowy",
+      "ilosc": 80,
+      "jednostka": "g",
+      "stan": "część biała i jasnozielona, w plastrach",
+      "zamiennik": "włoszczyzna"
+    },
+    {
+      "nazwa": "Passata pomidorowa",
+      "ilosc": 400,
+      "jednostka": "ml"
+    },
+    {
+      "nazwa": "Ryż basmati, suchy",
+      "ilosc": 80,
+      "jednostka": "g",
+      "stan": "suchy, ugotowany osobno"
+    },
+    {
+      "nazwa": "Jogurt grecki naturalny 2%",
+      "ilosc": 100,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Pietruszka natka",
+      "ilosc": 10,
+      "jednostka": "g",
+      "stan": "posiekana"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 2,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 1,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 10,
+      "kroki": [
+        {
+          "tresc": "**Marchew.** Umyj i obierz marchew, pokrój na większe kawałki."
+        },
+        {
+          "tresc": "**Pietruszka korzeń.** Umyj i obierz korzeń pietruszki, pokrój na większe kawałki."
+        },
+        {
+          "tresc": "**Seler.** Umyj i obierz seler, pokrój na większe kawałki."
+        },
+        {
+          "tresc": "**Por.** Przekrój por wzdłuż, dokładnie wypłucz ziemię spomiędzy warstw i pokrój w plasterki."
+        },
+        {
+          "tresc": "**Natka pietruszki.** Umyj i osusz natkę, usuń grube łodygi i drobno posiekaj liście."
+        },
+        {
+          "tresc": "**Ryż.** Odmierz suchy ryż i przepłucz na sitku pod zimną wodą."
+        },
+        {
+          "tresc": "**Kurczak.** Przygotuj mięso z uda bez skóry. Jeśli ma kość, podana masa dotyczy części jadalnej."
+        },
+        {
+          "tresc": "**Po przygotowaniu mięsa.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surowym mięsem."
+        },
+        {
+          "tresc": "**Płynna baza.** Odmierz passatę i wodę z listy składników."
+        },
+        {
+          "tresc": "**Jogurt.** Odmierz jogurt."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól i pieprz."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie wywaru i ryżu",
+      "minuty": 40,
+      "kroki": [
+        {
+          "tresc": "**Kurczak do garnka.** Kurczaka włóż do garnka i zalej zimną wodą przewidzianą w składnikach. Powoli doprowadź do wrzenia."
+        },
+        {
+          "tresc": "**Zebranie szumowin.** Jeżeli na powierzchni pojawią się szumowiny, zbierz je łyżką lub małym sitkiem."
+        },
+        {
+          "tresc": "**Gotowanie wywaru.** Dodaj marchew, pietruszkę, seler i por. Dodaj około połowę soli. Zmniejsz ogień i gotuj pod lekko uchyloną pokrywką około **35–40 minut**. Wywar powinien tylko delikatnie pyrkać."
+        },
+        {
+          "tresc": "**Ryż — równolegle.** W czasie gotowania wywaru ugotuj ryż zgodnie z instrukcją na opakowaniu. Po ugotowaniu odcedź go i pozostaw pod przykryciem."
+        },
+        {
+          "tresc": "**Wyjęcie kurczaka.** Wyjmij kurczaka z wywaru. Jeśli używasz udek z kością, oddziel mięso od kości. Mięso podziel na niewielkie kawałki."
+        }
+      ]
+    },
+    {
+      "nazwa": "Przygotowanie zupy pomidorowej",
+      "minuty": 5,
+      "kroki": [
+        {
+          "tresc": "**Passata.** Do gorącego wywaru wlej passatę. Dokładnie wymieszaj i doprowadź do lekkiego wrzenia."
+        },
+        {
+          "tresc": "**Gotowanie zupy.** Gotuj na małym ogniu około **3–5 minut**."
+        },
+        {
+          "tresc": "**Doprawienie.** Dodaj pieprz i spróbuj zupy. Stopniowo dodawaj pozostałą sól, aż smak będzie odpowiedni. Nie dodawaj całej soli automatycznie — jej potrzebna ilość zależy również od smaku passaty."
+        },
+        {
+          "tresc": "**Ryż i kurczak do misek.** Do misek nałóż ugotowany ryż oraz kawałki kurczaka."
+        },
+        {
+          "tresc": "**Jogurt i podanie.** Zalej gorącą zupą. Rozdziel odmierzony jogurt grecki między przygotowywane porcje i posyp natką pietruszki."
+        }
+      ]
+    }
+  ]
+}

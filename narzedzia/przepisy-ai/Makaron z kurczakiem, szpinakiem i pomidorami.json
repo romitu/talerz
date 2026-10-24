@@ -12,7 +12,7 @@
     "makaron"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 641.5,
+  "porcja_g": 642,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 2,
   "czas_przygotowania_min": 10,
@@ -99,13 +99,31 @@
       "minuty": 10,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Szpinak.** Umyj i odsącz szpinak. Usuń grube łodygi, duże liście porwij na mniejsze kawałki."
         },
         {
-          "tresc": "Umyj i odsącz szpinak, usuń grube łodygi. Obierz i posiekaj cebulę oraz czosnek. Odmierz makaron, pomidory i passatę."
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
         },
         {
-          "tresc": "Kurczaka osusz i pokrój w paski około 1 cm. Umyj przybory i ręce po mięsie."
+          "tresc": "**Czosnek.** Obierz czosnek i drobno posiekaj."
+        },
+        {
+          "tresc": "**Kurczak.** Osusz kurczaka i pokrój w paski grubości około 1 cm."
+        },
+        {
+          "tresc": "**Po przygotowaniu mięsa.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surowym mięsem."
+        },
+        {
+          "tresc": "**Makaron.** Odmierz makaron."
+        },
+        {
+          "tresc": "**Płynna baza.** Odmierz passatę i pomidory z puszki."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól, pieprz, oregano i suszoną bazylię."
         }
       ]
     },
@@ -114,19 +132,34 @@
       "minuty": 25,
       "kroki": [
         {
-          "tresc": "Zagotuj wodę w garnku i ugotuj makaron przez czas wskazany na opakowaniu. Nastaw minutnik; w tym czasie przygotowuj sos na drugim palniku. Przed odcedzeniem zachowaj nieco wody z gotowania. Woda do gotowania jest dodatkowa i zostanie odlana."
+          "tresc": "**Makaron — równolegle.** Zagotuj wodę i wsyp makaron. Gotuj przez czas z opakowania. Nastaw minutnik; w tym czasie przygotowuj sos na drugim palniku."
         },
         {
-          "tresc": "Rozgrzej oliwę na drugim palniku przez 1 minutę. Smaż kurczaka 5–6 minut do temperatury co najmniej 74°C, obracając. Zdejmij na czysty talerz."
+          "tresc": "**Makaron — po minutniku.** Sprawdź, czy makaron jest gotowy. Zachowaj trochę wody z gotowania, a następnie odcedź makaron. Zrób to po minutniku, niezależnie od postępu przygotowania sosu."
         },
         {
-          "tresc": "Na tej samej patelni smaż cebulę 4 minuty; gdy przywiera, dodaj odrobinę wody z makaronu. Dodaj czosnek, smaż 30 sekund."
+          "tresc": "**Rozgrzanie oliwy.** Rozgrzej oliwę na drugim palniku przez **1 minutę**."
         },
         {
-          "tresc": "Dodaj pomidory, passatę, oregano i bazylię suszoną. Doprowadź do łagodnego wrzenia i gotuj przez 8 minut."
+          "tresc": "**Smażenie kurczaka.** Smaż kurczaka **5–6 minut** do temperatury co najmniej **74°C**, obracając."
         },
         {
-          "tresc": "Dodaj szpinak, gotuj 1–2 minuty do zwiędnięcia. Włóż kurczaka oraz odcedzony makaron, podgrzej przez 1 minutę. Dopraw solą i pieprzem."
+          "tresc": "**Zdjęcie kurczaka.** Zdejmij na czysty talerz."
+        },
+        {
+          "tresc": "**Cebula.** Na tej samej patelni smaż cebulę **4 minuty**; gdy przywiera, dodaj odrobinę wody z makaronu."
+        },
+        {
+          "tresc": "**Czosnek.** Dodaj czosnek, smaż **30 sekund**."
+        },
+        {
+          "tresc": "**Sos pomidorowy.** Dodaj pomidory, passatę, oregano i bazylię suszoną. Doprowadź do łagodnego wrzenia i gotuj przez **8 minut**."
+        },
+        {
+          "tresc": "**Szpinak.** Dodaj szpinak, gotuj **1–2 minuty** do zwiędnięcia."
+        },
+        {
+          "tresc": "**Połączenie makaronu.** Włóż kurczaka oraz odcedzony makaron, podgrzej przez **1 minutę**. Dopraw solą i pieprzem."
         }
       ]
     }

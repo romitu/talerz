@@ -12,7 +12,7 @@
     "jajka"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 306.5,
+  "porcja_g": 307,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 0,
   "czas_przygotowania_min": 5,
@@ -74,13 +74,16 @@
       "minuty": 5,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Pomidor.** Umyj pomidory i pokrój w cząstki."
         },
         {
-          "tresc": "Umyj pomidora i ogórek. Pomidora pokrój w cząstki, a ogórek w plasterki."
+          "tresc": "**Ogórek.** Umyj ogórek i pokrój w plasterki."
         },
         {
-          "tresc": "Kromki chleba posmaruj masłem. Pieczywo i warzywa ułóż na talerzu."
+          "tresc": "**Pieczywo.** Posmaruj kromki odmierzoną ilością masła. Ułóż na talerzu obok przygotowanych warzyw."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól i pieprz."
         }
       ]
     },
@@ -89,14 +92,17 @@
       "minuty": 12,
       "kroki": [
         {
-          "tresc": "W garnku zagotuj tyle wody, aby po włożeniu całkowicie przykryła jajka."
+          "tresc": "**Zagotowanie wody.** W garnku zagotuj tyle wody, aby po włożeniu całkowicie przykryła jajka."
         },
         {
-          "tresc": "Ostrożnie włóż zimne jajka do wrzątku i gotuj około 6 minut od zanurzenia; dla dużych jajek czas może wynieść 7 minut, utrzymując łagodne wrzenie.",
+          "tresc": "**Gotowanie jajek.** Ostrożnie włóż zimne jajka do wrzątku i gotuj około **6 minut** od zanurzenia; dla dużych jajek czas może wynieść **7 minut**, utrzymując łagodne wrzenie.",
           "uwaga": true
         },
         {
-          "tresc": "Wyjmij jajka, schładzaj je pod zimną wodą przez około 30 sekund i od razu podaj z pieczywem oraz warzywami. Dopraw solą i pieprzem."
+          "tresc": "**Schłodzenie jajek.** Wyjmij jajka, schładzaj je pod zimną wodą przez około **30 sekund**."
+        },
+        {
+          "tresc": "**Podanie.** Od razu podaj z pieczywem oraz warzywami. Dopraw solą i pieprzem."
         }
       ]
     }

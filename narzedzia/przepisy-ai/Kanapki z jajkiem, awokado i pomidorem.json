@@ -12,7 +12,7 @@
     "kanapki"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 316.5,
+  "porcja_g": 317,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 0,
   "czas_przygotowania_min": 6,
@@ -70,13 +70,13 @@
       "minuty": 6,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Pomidor.** Umyj pomidory i pokrój w cienkie plastry. Osusz plasterki z nadmiaru wilgoci."
         },
         {
-          "tresc": "Umyj pomidora i awokado. Pomidora pokrój w plastry."
+          "tresc": "**Awokado.** Umyj awokado, usuń pestkę i skórkę. Rozgnieć miąższ z częścią soli i pieprzu. Przykryj miskę, aby ograniczyć ciemnienie."
         },
         {
-          "tresc": "Usuń pestkę i skórkę awokado. Rozgnieć miąższ widelcem z częścią odmierzonej soli i pieprzu; przykryj miskę, aby ograniczyć ciemnienie. Przygotuj pieczywo."
+          "tresc": "**Pieczywo.** Przygotuj pieczywo w ilości wskazanej na liście składników."
         }
       ]
     },
@@ -85,10 +85,16 @@
       "minuty": 20,
       "kroki": [
         {
-          "tresc": "Zagotuj w garnku wodę przykrywającą jajka. Włóż je ostrożnie i gotuj przez 9–10 minut przy łagodnym wrzeniu, licząc od włożenia. Schłodź zimną wodą i obierz."
+          "tresc": "**Gotowanie jajek.** Zagotuj tyle wody, aby przykryła jajka. Ostrożnie włóż jajka i gotuj przy łagodnym wrzeniu przez **9–10 minut**, licząc od włożenia."
         },
         {
-          "tresc": "Pokrój jajka w plastry. Posmaruj pieczywo awokado, ułóż pomidora i jajka. Dopraw pozostałą solą i pieprzem."
+          "tresc": "**Schłodzenie jajek.** Przełóż jajka do zimnej wody. Po schłodzeniu obierz."
+        },
+        {
+          "tresc": "**Krojenie jajek.** Pokrój jajka w plastry."
+        },
+        {
+          "tresc": "**Składanie kanapek.** Posmaruj pieczywo awokado, ułóż pomidora i jajka. Dopraw pozostałą solą i pieprzem."
         }
       ]
     }

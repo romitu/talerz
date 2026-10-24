@@ -1,6 +1,6 @@
 {
   "nazwa": "Gulasz z białej fasoli, jarmużu i pomidorów",
-  "opis": "Gęsty roślinny gulasz z białej fasoli, jarmużu i pomidorów, podany z pieczywem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
+  "opis": "Gęsty roślinny gulasz z białej fasoli, jarmużu i pomidorów, podany z pieczywem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami. Smak sosu lub płynu do gotowania powstaje z przygotowywanych składników w tym samym naczyniu. Podana ilość wody jest początkowa; ewentualne dolewanie zależy od konsystencji i miękkości składników. Warzywna baza obejmuje korzeń pietruszki, seler korzeniowy, przygotowane razem z pozostałymi składnikami; wszystkie warzywa pozostają w posiłku.",
   "pory": [
     "obiad",
     "kolacja"
@@ -12,11 +12,11 @@
     "gulasz_curry"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 747.5,
+  "porcja_g": 678,
   "liczba_porcji_bazowych": 2,
   "trwalosc_dni": 3,
-  "czas_przygotowania_min": 12,
-  "czas_obrobki_min": 37,
+  "czas_przygotowania_min": 15,
+  "czas_obrobki_min": 42,
   "sprzet": [
     "Garnek 3 l",
     "Nóż szefa kuchni",
@@ -48,7 +48,7 @@
       "nazwa": "Marchew, surowa",
       "ilosc": 120,
       "jednostka": "g",
-      "stan": "pokrojona w kostkę"
+      "stan": "kostka około 7–8 mm; podsmażona z cebulą tworzy bazę sosu"
     },
     {
       "nazwa": "Cebula, surowa",
@@ -62,9 +62,10 @@
       "jednostka": "g"
     },
     {
-      "nazwa": "Domowy bulion warzywny",
-      "ilosc": 300,
-      "jednostka": "g"
+      "nazwa": "woda",
+      "ilosc": 100,
+      "jednostka": "ml",
+      "stan": "ilość początkowa do potrawy; w trakcie gotowania uzupełniaj tylko w razie potrzeby, zgodnie z instrukcją"
     },
     {
       "nazwa": "Oliwa z oliwek",
@@ -96,44 +97,94 @@
       "nazwa": "Czarny pieprz mielony",
       "ilosc": 1,
       "jednostka": "g"
+    },
+    {
+      "nazwa": "Pietruszka korzeń",
+      "ilosc": 20,
+      "jednostka": "g",
+      "stan": "obrany korzeń, drobna kostka około 3–4 mm; do warzywnej bazy"
+    },
+    {
+      "nazwa": "Seler korzeń",
+      "ilosc": 40,
+      "jednostka": "g",
+      "stan": "obrany korzeń, drobna kostka około 3–4 mm; do warzywnej bazy"
     }
   ],
   "etapy": [
     {
       "nazwa": "Przygotowanie składników",
-      "minuty": 12,
+      "minuty": 15,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Korzeń pietruszki.** Umyj, obierz i pokrój w drobną kostkę około 3–4 mm. Odłóż do przygotowania warzywnej bazy."
         },
         {
-          "tresc": "Opłucz i odsącz fasolę. Umyj jarmuż, usuń twarde łodygi i porwij liście."
+          "tresc": "**Korzeń selera.** Umyj, obierz i pokrój w drobną kostkę około 3–4 mm. Odłóż do przygotowania warzywnej bazy."
         },
         {
-          "tresc": "Umyj i obierz marchew i pokrój w kostkę około 1 cm. Obierz i posiekaj cebulę oraz czosnek. Przygotuj pieczywo oraz odmierz bulion i pomidory."
+          "tresc": "**Fasola.** Przełóż fasolę z puszki na sitko, opłucz i odsącz. Odmierz po odsączeniu."
+        },
+        {
+          "tresc": "**Jarmuż.** Umyj jarmuż, usuń twarde łodygi i porwij liście na mniejsze kawałki."
+        },
+        {
+          "tresc": "**Marchew.** Umyj i obierz marchew, pokrój w kostkę około 7–8 mm."
+        },
+        {
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
+        },
+        {
+          "tresc": "**Czosnek.** Obierz czosnek i drobno posiekaj."
+        },
+        {
+          "tresc": "**Woda.** Odmierz wodę z listy składników do przygotowania potrawy."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól, pieprz, wędzoną paprykę i tymianek."
+        },
+        {
+          "tresc": "**Pieczywo.** Przygotuj pieczywo w ilości wskazanej na liście składników."
+        },
+        {
+          "tresc": "**Pomidory.** Otwórz puszkę i odmierz pomidory."
         }
       ]
     },
     {
       "nazwa": "Gotowanie",
-      "minuty": 37,
+      "minuty": 42,
       "kroki": [
         {
-          "tresc": "Rozgrzej oliwę przez 1 minutę. Dodaj cebulę i marchew, smaż 5 minut."
+          "tresc": "**Rozgrzanie oliwy.** Rozgrzej oliwę przez **1 minutę**."
         },
         {
-          "tresc": "Dodaj czosnek, tymianek i paprykę wędzoną; smaż 30 sekund. Wlej bulion i dodaj pomidory. Doprowadź do wrzenia przez około 3 minuty."
+          "tresc": "**Warzywna baza.** Dodaj cebulę, marchew, korzeń pietruszki i seler korzeniowy. Smaż przez **5–6 minut**, mieszając, aż cebula zmięknie i lekko się zezłoci."
         },
         {
-          "tresc": "Gotuj pod uchyloną pokrywką przez 15 minut, aż marchew będzie prawie miękka. Dodaj fasolę i gotuj 5 minut."
+          "tresc": "**Czosnek i przyprawy.** Dodaj czosnek, tymianek i paprykę wędzoną; smaż **30 sekund**."
         },
         {
-          "tresc": "Dodaj jarmuż i gotuj jeszcze 5 minut.",
+          "tresc": "**Baza sosu.** Wlej odmierzoną wodę i mieszaj przez **1–2 minuty**, delikatnie odrywając z dna zrumienione pozostałości po smażeniu. Nie zeskrobuj czarnych, przypalonych fragmentów. Dodaj pomidory i doprowadź do łagodnego wrzenia przez około **2 minuty**."
+        },
+        {
+          "tresc": "**Gotowanie warzyw.** Gotuj pod przykryciem przez **15 minut**, mieszając kilka razy. Sprawdź marchew, pietruszkę i seler. Jeśli mają twardy środek, dogotowuj po **3 minuty** przed dodaniem fasoli. Dolej trochę gorącej wody, gdy sos nadmiernie gęstnieje.",
+          "sygnal": "warzywa korzeniowe są miękkie przed dodaniem fasoli",
+          "uwaga": true
+        },
+        {
+          "tresc": "**Fasola.** Dodaj fasolę i gotuj **5 minut**."
+        },
+        {
+          "tresc": "**Jarmuż.** Dodaj jarmuż i gotuj jeszcze **5 minut**.",
           "sygnal": "liście jarmużu są miękkie, marchew bez twardego środka",
           "uwaga": true
         },
         {
-          "tresc": "Dopraw solą i pieprzem, podaj z przygotowanym pieczywem."
+          "tresc": "**Doprawienie i podanie.** Dopraw solą i pieprzem, podaj z przygotowanym pieczywem."
         }
       ]
     }

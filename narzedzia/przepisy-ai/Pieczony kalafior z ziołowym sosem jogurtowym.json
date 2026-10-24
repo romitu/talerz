@@ -11,7 +11,7 @@
     "z_piekarnika"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 371.5,
+  "porcja_g": 372,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 2,
   "czas_przygotowania_min": 10,
@@ -89,16 +89,25 @@
       "minuty": 10,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Kalafior.** Umyj kalafior i podziel na podobnej wielkości różyczki, około 3 cm."
         },
         {
-          "tresc": "Umyj kalafior, podziel na podobne różyczki około 3 cm. Obierz i posiekaj czosnek. Umyj natkę i cytrynę, posiekaj natkę i odmierz sok."
+          "tresc": "**Czosnek.** Obierz czosnek i drobno posiekaj."
         },
         {
-          "tresc": "Wymieszaj kalafior z oliwą, kminem, papryką i częścią soli oraz pieprzu."
+          "tresc": "**Natka pietruszki.** Umyj i osusz natkę, usuń grube łodygi i drobno posiekaj liście."
         },
         {
-          "tresc": "Wymieszaj jogurt z czosnkiem, natką, sokiem z cytryny i resztą przypraw; przykryj i odstaw do lodówki."
+          "tresc": "**Cytryna.** Umyj cytrynę, wyciśnij sok i odmierz ilość wskazaną na liście składników."
+        },
+        {
+          "tresc": "**Kalafior do pieczenia.** Wymieszaj różyczki z oliwą, kminem, papryką oraz częścią soli i pieprzu."
+        },
+        {
+          "tresc": "**Sos jogurtowy.** Wymieszaj jogurt z czosnkiem, natką, sokiem z cytryny oraz resztą soli i pieprzu. Przykryj i odstaw do lodówki."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz wędzoną paprykę."
         }
       ]
     },
@@ -107,15 +116,15 @@
       "minuty": 42,
       "kroki": [
         {
-          "tresc": "Rozgrzej piekarnik do 220°C, grzanie góra–dół, zwykle około 10 minut."
+          "tresc": "**Rozgrzanie piekarnika.** Rozgrzej piekarnik do **220°C**, grzanie góra–dół, zwykle około **10 minut**."
         },
         {
-          "tresc": "Rozłóż kalafior w jednej warstwie i piecz 25–30 minut, obracając w połowie.",
+          "tresc": "**Pieczenie kalafiora.** Rozłóż kalafior w jednej warstwie i piecz **25–30 minut**, obracając w połowie.",
           "sygnal": "różyczki miękkie w środku i rumiane na brzegach",
           "uwaga": true
         },
         {
-          "tresc": "Podaj jako dodatek, z sosem jogurtowym obok."
+          "tresc": "**Podanie.** Podaj jako dodatek, z sosem jogurtowym obok."
         }
       ]
     }

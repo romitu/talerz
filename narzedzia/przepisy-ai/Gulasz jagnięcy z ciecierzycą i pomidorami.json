@@ -1,6 +1,6 @@
 {
   "nazwa": "Gulasz jagnięcy z ciecierzycą i pomidorami",
-  "opis": "Aromatyczny gulasz jagnięcy z ciecierzycą, pomidorami i korzennymi przyprawami, podany z bulgurem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
+  "opis": "Aromatyczny gulasz jagnięcy z ciecierzycą, pomidorami i korzennymi przyprawami, podany z bulgurem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami. Smak sosu lub płynu do gotowania powstaje z przygotowywanych składników w tym samym naczyniu. Podana ilość wody jest początkowa; ewentualne dolewanie zależy od konsystencji i miękkości składników. Warzywna baza obejmuje korzeń pietruszki, seler korzeniowy, przygotowane razem z pozostałymi składnikami; wszystkie warzywa pozostają w posiłku.",
   "pory": [
     "obiad"
   ],
@@ -11,11 +11,11 @@
     "gulasz_curry"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 737.5,
+  "porcja_g": 713,
   "liczba_porcji_bazowych": 2,
   "trwalosc_dni": 3,
-  "czas_przygotowania_min": 15,
-  "czas_obrobki_min": 120,
+  "czas_przygotowania_min": 20,
+  "czas_obrobki_min": 127,
   "sprzet": [
     "Garnek 3 l",
     "Garnek 2 l",
@@ -53,7 +53,7 @@
       "nazwa": "Marchew, surowa",
       "ilosc": 120,
       "jednostka": "g",
-      "stan": "pokrojona"
+      "stan": "jedna trzecia drobno posiekana do sosu; reszta w półplasterkach około 5 mm"
     },
     {
       "nazwa": "Cebula, surowa",
@@ -62,9 +62,10 @@
       "stan": "posiekana"
     },
     {
-      "nazwa": "Domowy bulion warzywny",
-      "ilosc": 240,
-      "jednostka": "g"
+      "nazwa": "woda",
+      "ilosc": 150,
+      "jednostka": "ml",
+      "stan": "ilość początkowa do potrawy; w trakcie gotowania uzupełniaj tylko w razie potrzeby, zgodnie z instrukcją"
     },
     {
       "nazwa": "Czosnek, surowy",
@@ -95,53 +96,110 @@
       "nazwa": "Sól kłodawska",
       "ilosc": 2,
       "jednostka": "g"
+    },
+    {
+      "nazwa": "Pietruszka korzeń",
+      "ilosc": 20,
+      "jednostka": "g",
+      "stan": "obrany korzeń, drobna kostka około 3–4 mm; do warzywnej bazy"
+    },
+    {
+      "nazwa": "Seler korzeń",
+      "ilosc": 20,
+      "jednostka": "g",
+      "stan": "obrany korzeń, drobna kostka około 3–4 mm; do warzywnej bazy"
     }
   ],
   "etapy": [
     {
       "nazwa": "Przygotowanie składników",
-      "minuty": 15,
+      "minuty": 20,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Korzeń pietruszki.** Umyj, obierz i pokrój w drobną kostkę około 3–4 mm. Odłóż do przygotowania warzywnej bazy."
         },
         {
-          "tresc": "Mięso osusz i pokrój w kostkę około 3 cm. Po kontakcie z nim umyj przybory i ręce."
+          "tresc": "**Korzeń selera.** Umyj, obierz i pokrój w drobną kostkę około 3–4 mm. Odłóż do przygotowania warzywnej bazy."
         },
         {
-          "tresc": "Obierz i posiekaj cebulę oraz czosnek. Umyj i obierz marchew, pokrój w grube półplasterki."
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
         },
         {
-          "tresc": "Opłucz i odsącz ciecierzycę. Odmierz bulgur, bulion oraz pomidory."
+          "tresc": "**Czosnek.** Obierz czosnek i drobno posiekaj."
+        },
+        {
+          "tresc": "**Marchew.** Umyj i obierz marchew. Jedną trzecią drobno posiekaj do bazy sosu, a pozostałą część pokrój w półplasterki grubości około 5 mm i odłóż osobno."
+        },
+        {
+          "tresc": "**Ciecierzyca.** Przełóż ciecierzycę z puszki na sitko, opłucz i odsącz. Odmierz po odsączeniu."
+        },
+        {
+          "tresc": "**Jagnięcina.** Osusz mięso i pokrój w kostkę około 3 cm."
+        },
+        {
+          "tresc": "**Po przygotowaniu mięsa.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surowym mięsem."
+        },
+        {
+          "tresc": "**Bulgur.** Odmierz kaszę bulgur."
+        },
+        {
+          "tresc": "**Woda.** Odmierz wodę z listy składników do przygotowania potrawy."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól, słodką paprykę, kmin rzymski i cynamon."
+        },
+        {
+          "tresc": "**Pomidory.** Otwórz puszkę i odmierz pomidory."
         }
       ]
     },
     {
       "nazwa": "Duszenie i gotowanie kaszy",
-      "minuty": 120,
+      "minuty": 127,
       "kroki": [
         {
-          "tresc": "Rozgrzej oliwę przez 1 minutę. Obsmaż jagnięcinę partiami po 4–5 minut, obracając; dla porcji bazowej przeznacz około 10 minut. Przełóż na talerz."
+          "tresc": "**Rozgrzanie oliwy.** Rozgrzej oliwę przez **1 minutę**."
         },
         {
-          "tresc": "W tym samym garnku smaż cebulę 4 minuty. Dodaj czosnek, kmin, cynamon i paprykę; smaż 30 sekund."
+          "tresc": "**Obsmażenie jagnięciny.** Obsmaż jagnięcinę partiami po **4–5 minut**, obracając; dla porcji bazowej przeznacz około **10 minut**."
         },
         {
-          "tresc": "Włóż mięso, dodaj pomidory i bulion. Doprowadź do łagodnego wrzenia przez około 4 minuty. Duś pod przykryciem 60 minut; kontroluj płyn co 20 minut."
+          "tresc": "**Zdjęcie mięsa.** Przełóż na talerz."
         },
         {
-          "tresc": "Dodaj marchew i duś 20 minut. Jeśli jagnięcina nadal jest twarda, przed kolejnym krokiem duś po 15 minut, w razie potrzeby uzupełniając gorącą wodę."
+          "tresc": "**Cebula.** W tym samym garnku smaż cebulę **4 minuty**."
         },
         {
-          "tresc": "Gdy mięso jest już prawie miękkie, ugotuj bulgur na drugim palniku przez czas z opakowania. Wodę do kaszy traktuj jako wodę do gotowania i odcedź jej nadmiar."
+          "tresc": "**Warzywa do sosu.** Dodaj drobno posiekaną część marchwi, cały korzeń pietruszki i seler korzeniowy. Smaż przez **3–4 minuty**, mieszając. Warzywa będą dusiły się z mięsem od początku."
         },
         {
-          "tresc": "Dodaj do gulaszu ciecierzycę i gotuj 10 minut, w razie potrzeby bez pokrywki, aby zagęścić sos.",
-          "sygnal": "mięso łatwo rozdziela się widelcem, marchew miękka",
+          "tresc": "**Przyprawy.** Dodaj czosnek, kmin, cynamon i paprykę; smaż **30 sekund**."
+        },
+        {
+          "tresc": "**Sos z warzyw.** Wlej odmierzoną wodę i mieszaj przez **1–2 minuty**, delikatnie odrywając z dna zrumienione pozostałości po smażeniu. Nie zeskrobuj czarnych, przypalonych fragmentów. Dodaj pomidory, obsmażoną jagnięcinę oraz soki z talerza."
+        },
+        {
+          "tresc": "**Duszenie jagnięciny.** Doprowadź do łagodnego wrzenia przez około **3 minuty**. Duś pod przykryciem przez **80 minut**. Sprawdzaj płyn co **20 minut**. Dolewaj niewielką ilość gorącej wody tylko wtedy, gdy sos nadmiernie gęstnieje lub zaczyna przywierać; nie uzupełniaj automatycznie każdego ubytku."
+        },
+        {
+          "tresc": "**Kontrola mięsa.** Sprawdź jagnięcinę. Powinna być prawie miękka, zanim dodasz pozostałą marchew. Jeżeli jest nadal twarda, duś dalej po **15 minut**, kontrolując sos."
+        },
+        {
+          "tresc": "**Pozostała marchew.** Dodaj półplasterki marchwi i duś przez **8 minut**."
+        },
+        {
+          "tresc": "**Kasza — równolegle.** Gdy mięso jest już prawie miękkie, ugotuj bulgur na drugim palniku przez czas z opakowania. Wodę do kaszy traktuj jako wodę do gotowania i odcedź jej nadmiar."
+        },
+        {
+          "tresc": "**Ciecierzyca.** Dodaj ciecierzycę i gotuj przez **10 minut**. Sprawdź miękkość mięsa i marchwi. Jeśli sos jest zbyt rzadki, pod koniec zdejmij pokrywkę; przy zbyt gęstym dolej niewielką ilość gorącej wody.",
+          "sygnal": "mięso łatwo rozdziela się widelcem, marchew jest miękka, ale zachowuje kształt",
           "uwaga": true
         },
         {
-          "tresc": "Dopraw solą i podaj z kaszą."
+          "tresc": "**Doprawienie i podanie.** Dopraw solą i podaj z kaszą."
         }
       ]
     }

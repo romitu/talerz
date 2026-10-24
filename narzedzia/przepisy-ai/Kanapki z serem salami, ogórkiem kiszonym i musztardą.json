@@ -12,7 +12,7 @@
     "kanapki"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 270.5,
+  "porcja_g": 271,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 0,
   "czas_przygotowania_min": 7,
@@ -72,10 +72,25 @@
       "minuty": 5,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Sałata.** Umyj liście sałaty, dokładnie osusz i porwij na mniejsze kawałki."
         },
         {
-          "tresc": "Umyj i osusz sałatę. Obierz cebulę, pokrój ją w cienkie piórka. Odsącz ogórki i pokrój w plastry. Pokrój ser salami w plastry, przygotuj pieczywo."
+          "tresc": "**Cebula.** Obierz cebulę i pokrój w cienkie piórka."
+        },
+        {
+          "tresc": "**Ogórek kiszony.** Odsącz ogórki kiszone i pokrój w plasterki."
+        },
+        {
+          "tresc": "**Ser salami.** Odmierz ser salami i pokrój w plastry."
+        },
+        {
+          "tresc": "**Musztarda.** Odmierz musztardę."
+        },
+        {
+          "tresc": "**Pieprz.** Odmierz pieprz."
+        },
+        {
+          "tresc": "**Pieczywo.** Przygotuj pieczywo w ilości wskazanej na liście składników."
         }
       ]
     },
@@ -84,7 +99,7 @@
       "minuty": 2,
       "kroki": [
         {
-          "tresc": "Posmaruj pieczywo musztardą, ułóż sałatę, ser, ogórki i cebulę. Dopraw pieprzem i podaj."
+          "tresc": "**Składanie kanapek.** Posmaruj pieczywo musztardą, ułóż sałatę, ser, ogórki i cebulę. Dopraw pieprzem i podaj."
         }
       ]
     }

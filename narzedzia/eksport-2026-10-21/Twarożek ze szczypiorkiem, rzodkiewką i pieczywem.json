@@ -1,0 +1,111 @@
+{
+  "nazwa": "Twarożek ze szczypiorkiem, rzodkiewką i pieczywem",
+  "opis": "Klasyczny twarożek z chrupiącą rzodkiewką i świeżym szczypiorkiem, podany z dwiema kromkami chleba żytniego razowego. Ilości składników dobierz z listy dla przygotowywanej liczby porcji.",
+  "pory": [
+    "sniadanie",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "polska"
+  ],
+  "rodzaje": [
+    "kanapki"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 312,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 1,
+  "czas_przygotowania_min": 8,
+  "czas_obrobki_min": 0,
+  "sprzet": [
+    "Miska",
+    "Widelec",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Twarożek przechowuj w zamkniętym pojemniku w lodówce do 1 dnia. Pieczywo trzymaj osobno i dodaj dopiero przy podaniu. Lodówka: do 4°C.",
+  "mozna_mrozic": false,
+  "ratunek": "Twarożek za gęsty — dodaj łyżkę jogurtu. Zbyt rzadki — dodaj trochę więcej twarogu. Za słony — dołóż kilka plasterków rzodkiewki albo odrobinę jogurtu.",
+  "skladniki": [
+    {
+      "nazwa": "Twaróg półtłusty",
+      "ilosc": 150,
+      "jednostka": "g",
+      "stan": "rozgnieciony widelcem"
+    },
+    {
+      "nazwa": "Jogurt naturalny 2%",
+      "ilosc": 30,
+      "jednostka": "g",
+      "stan": "do rozluźnienia twarogu"
+    },
+    {
+      "nazwa": "Rzodkiewka, surowa",
+      "ilosc": 5,
+      "jednostka": "szt",
+      "stan": "pokrojona w drobną kostkę lub cienkie półplasterki"
+    },
+    {
+      "nazwa": "Szczypiorek świeży",
+      "ilosc": 10,
+      "jednostka": "g",
+      "stan": "drobno posiekany"
+    },
+    {
+      "nazwa": "Chleb żytni razowy",
+      "ilosc": 2,
+      "jednostka": "szt",
+      "stan": "kromki"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 1,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 5,
+      "kroki": [
+        {
+          "tresc": "**Rzodkiewka.** Umyj rzodkiewki, usuń końcówki i pokrój w cienkie półplasterki."
+        },
+        {
+          "tresc": "**Szczypiorek.** Umyj i osusz szczypiorek, następnie drobno posiekaj."
+        },
+        {
+          "tresc": "**Twarożek.** Odmierz twaróg i jogurt do miski."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól i pieprz."
+        },
+        {
+          "tresc": "**Pieczywo.** Przygotuj pieczywo w ilości wskazanej na liście składników."
+        }
+      ]
+    },
+    {
+      "nazwa": "Łączenie i podanie",
+      "minuty": 3,
+      "kroki": [
+        {
+          "tresc": "**Rozgniecenie twarogu.** Rozgnieć twaróg widelcem z jogurtem.",
+          "sygnal": "masa kremowa, lekko grudkowata"
+        },
+        {
+          "tresc": "**Warzywa i doprawienie.** Dodaj rzodkiewki i szczypiorek. Dopraw odmierzoną solą oraz pieprzem, wymieszaj."
+        },
+        {
+          "tresc": "**Podanie.** Podaj z pieczywem."
+        }
+      ]
+    }
+  ]
+}

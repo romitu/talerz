@@ -93,16 +93,31 @@
       "minuty": 12,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Ryż.** Odmierz suchy ryż i przepłucz na sitku pod zimną wodą."
         },
         {
-          "tresc": "Opłucz ryż. Odsącz i osusz tofu, pokrój w kostkę około 2 cm."
+          "tresc": "**Tofu.** Odsącz i dokładnie osusz tofu. Pokrój w kostkę około 2 cm."
         },
         {
-          "tresc": "Umyj brokuł, podziel na małe różyczki około 2 cm. Obierz czosnek i imbir, posiekaj czosnek, zetrzyj imbir. Umyj i pokrój dymkę. Odmierz sos sojowy oraz sezam."
+          "tresc": "**Brokuł.** Umyj brokuł i podziel na małe różyczki około 2 cm."
         },
         {
-          "tresc": "Odmierz wodę do brokułu z listy składników; woda do gotowania ryżu jest dodatkowa i zostanie odlana."
+          "tresc": "**Czosnek.** Obierz czosnek i drobno posiekaj."
+        },
+        {
+          "tresc": "**Imbir.** Obierz imbir i zetrzyj na drobnej tarce."
+        },
+        {
+          "tresc": "**Dymka.** Umyj dymkę i pokrój w cienkie plasterki."
+        },
+        {
+          "tresc": "**Woda do brokułu.** Odmierz wodę z listy do krótkiego duszenia brokułu. Woda do gotowania ryżu jest dodatkowa i zostanie odlana."
+        },
+        {
+          "tresc": "**Dodatki.** Odmierz sezam i sos sojowy."
+        },
+        {
+          "tresc": "**Olej.** Odmierz olej."
         }
       ]
     },
@@ -111,19 +126,37 @@
       "minuty": 25,
       "kroki": [
         {
-          "tresc": "Na pierwszym palniku zagotuj wodę w garnku. Dodaj ryż i gotuj przez czas wskazany na opakowaniu; po ugotowaniu odcedź. Wody użyj tyle, by ziarna były zanurzone i swobodnie się gotowały. Nastaw minutnik; równolegle wykonuj kolejne czynności na drugim palniku. Woda do gotowania jest dodatkowa i zostanie odlana."
+          "tresc": "**Ryż — równolegle.** Zagotuj na pierwszym palniku tyle wody, aby ziarna swobodnie się gotowały. Wsyp ryż i gotuj przez czas z opakowania. Nastaw minutnik; w tym czasie wykonuj kolejne kroki na drugim palniku."
         },
         {
-          "tresc": "Na drugim palniku rozgrzej połowę oleju przez 1 minutę. Smaż tofu przez 6–8 minut, obracając; przełóż na talerz."
+          "tresc": "**Ryż — po minutniku.** Po upływie czasu sprawdź miękkość ziaren i odcedź nadmiar wody. Przykryj garnek i odstaw poza palnik. Zrób to niezależnie od postępu pracy przy pozostałych składnikach."
         },
         {
-          "tresc": "Dodaj pozostały olej i brokuł, smaż 2 minuty. Dolej odmierzoną wodę do brokułu i przykryj; duś 3–4 minuty. Odkryj i odparuj resztę płynu."
+          "tresc": "**Rozgrzanie oleju.** Na drugim palniku rozgrzej połowę oleju przez **1 minutę**."
         },
         {
-          "tresc": "Dodaj czosnek oraz imbir, smaż 30 sekund. Włóż tofu, dodaj sos sojowy i podgrzewaj 1 minutę."
+          "tresc": "**Smażenie tofu.** Smaż tofu przez **6–8 minut**, obracając."
         },
         {
-          "tresc": "Podaj z ryżem, sezamem i dymką."
+          "tresc": "**Zdjęcie tofu.** Przełóż na talerz."
+        },
+        {
+          "tresc": "**Obsmażenie brokułu.** Dodaj pozostały olej i brokuł, smaż **2 minuty**."
+        },
+        {
+          "tresc": "**Duszenie brokułu.** Dolej odmierzoną wodę do brokułu i przykryj; duś **3–4 minuty**."
+        },
+        {
+          "tresc": "**Odparowanie.** Odkryj i odparuj resztę płynu."
+        },
+        {
+          "tresc": "**Czosnek i imbir.** Dodaj czosnek oraz imbir, smaż **30 sekund**."
+        },
+        {
+          "tresc": "**Połączenie z tofu.** Włóż tofu, dodaj sos sojowy i podgrzewaj **1 minutę**."
+        },
+        {
+          "tresc": "**Podanie.** Podaj z ryżem, sezamem i dymką."
         }
       ]
     }

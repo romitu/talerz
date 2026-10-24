@@ -1,0 +1,154 @@
+{
+  "nazwa": "Jajka w koszulkach z pastą twarogową",
+  "opis": "Jajka w koszulkach z kremową pastą twarogową — delikatne, sycące śniadanie z miękkim żółtkiem i świeżym, lekko wytrawnym smakiem.",
+  "pory": [
+    "sniadanie",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "polska"
+  ],
+  "rodzaje": [
+    "jajka"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 448,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 0,
+  "czas_przygotowania_min": 7,
+  "czas_obrobki_min": 13,
+  "sprzet": [
+    "Garnek 2 l",
+    "Miska",
+    "Sitko",
+    "Łyżka cedzakowa",
+    "Patelnia 24 cm"
+  ],
+  "przechowywanie": "Pasta twarogowa w lodówce do 2 dni. Jajka rób na świeżo.",
+  "mozna_mrozic": false,
+  "ratunek": "Białko się rozeszło po wodzie — jajko było za stare albo woda za mocno wrzała. Ma ledwo drgać, nie bulgotać.",
+  "skladniki": [
+    {
+      "nazwa": "Jaja kurze, całe, surowe",
+      "ilosc": 3,
+      "jednostka": "szt"
+    },
+    {
+      "nazwa": "Twaróg półtłusty",
+      "ilosc": 100,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Mleko 2%",
+      "ilosc": 40,
+      "jednostka": "ml"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 3,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 6,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Chleb żytni razowy",
+      "ilosc": 3,
+      "jednostka": "szt"
+    },
+    {
+      "nazwa": "Papryka słodka mielona",
+      "ilosc": 3,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "koperek świeży",
+      "ilosc": 8,
+      "jednostka": "g",
+      "stan": "posiekany"
+    },
+    {
+      "nazwa": "Ocet jabłkowy",
+      "ilosc": 15,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 3,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 7,
+      "kroki": [
+        {
+          "tresc": "**Koperek.** Umyj i osusz koperek, usuń grube łodygi i drobno posiekaj delikatne gałązki."
+        },
+        {
+          "tresc": "**Czosnek.** Obierz czosnek i przeciśnij przez praskę lub bardzo drobno posiekaj."
+        },
+        {
+          "tresc": "**Jajka.** Wybij jajka pojedynczo do osobnych miseczek lub filiżanek."
+        },
+        {
+          "tresc": "**Nabiał.** Odmierz twaróg i mleko."
+        },
+        {
+          "tresc": "**Dodatki.** Odmierz ocet jabłkowy."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól i słodką paprykę."
+        },
+        {
+          "tresc": "**Pieczywo.** Przygotuj pieczywo w ilości wskazanej na liście składników."
+        }
+      ]
+    },
+    {
+      "nazwa": "Pasta twarogowa i pieczywo",
+      "minuty": 6,
+      "kroki": [
+        {
+          "tresc": "**Pasta twarogowa.** Twaróg rozgnieć widelcem. Dodaj mleko i czosnek, a następnie dokładnie wymieszaj na kremową pastę. Dopraw niewielką ilością soli."
+        },
+        {
+          "tresc": "**Oliwa z papryką.** Oliwę wymieszaj ze słodką papryką i odstaw."
+        },
+        {
+          "tresc": "**Opiekanie pieczywa.** Opiekaj chleb na suchej patelni przez około **1–2 minuty** z każdej strony, aż będzie lekko chrupiący."
+        },
+        {
+          "tresc": "**Pasta na pieczywo.** Podpieczone kromki posmaruj przygotowaną pastą twarogową."
+        }
+      ]
+    },
+    {
+      "nazwa": "Jajka w koszulkach i podanie",
+      "minuty": 7,
+      "kroki": [
+        {
+          "tresc": "**Woda z octem.** W garnku zagotuj wodę. Dodaj odmierzony ocet jabłkowy, następnie zmniejsz ogień — woda powinna jedynie delikatnie drgać, a nie intensywnie wrzeć."
+        },
+        {
+          "tresc": "**Gotowanie jajek.** Wprowadzaj jajka pojedynczo do wody i gotuj około **3 minut**, aby białko się ścięło, a żółtko pozostało płynne."
+        },
+        {
+          "tresc": "**Odcedzenie jajek.** Jajka wyjmij łyżką cedzakową i pozostaw na chwilę do odsączenia z nadmiaru wody."
+        },
+        {
+          "tresc": "**Jajka na pieczywo.** Jajka ułóż na pieczywie z pastą twarogową."
+        },
+        {
+          "tresc": "**Doprawienie i podanie.** Polej oliwą ze słodką papryką, posyp koperkiem i podawaj od razu."
+        }
+      ]
+    }
+  ]
+}

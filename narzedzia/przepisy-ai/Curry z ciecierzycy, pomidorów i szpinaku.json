@@ -97,16 +97,31 @@
       "minuty": 10,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
         },
         {
-          "tresc": "Obierz i posiekaj cebulę, czosnek i imbir."
+          "tresc": "**Czosnek.** Obierz czosnek i drobno posiekaj."
         },
         {
-          "tresc": "Opłucz i odsącz ciecierzycę. Umyj szpinak, odsącz i usuń grube łodygi."
+          "tresc": "**Imbir.** Obierz imbir i drobno posiekaj."
         },
         {
-          "tresc": "Umyj cytrynę, wyciśnij sok i odmierz ilość z listy. Odmierz pomidory i mleko kokosowe."
+          "tresc": "**Ciecierzyca.** Przełóż ciecierzycę z puszki na sitko, opłucz i odsącz. Odmierz po odsączeniu."
+        },
+        {
+          "tresc": "**Szpinak.** Umyj i odsącz szpinak. Usuń grube łodygi, duże liście porwij na mniejsze kawałki."
+        },
+        {
+          "tresc": "**Cytryna.** Umyj cytrynę, wyciśnij sok i odmierz ilość wskazaną na liście składników."
+        },
+        {
+          "tresc": "**Płynna baza.** Odmierz mleko kokosowe."
+        },
+        {
+          "tresc": "**Olej.** Odmierz olej."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól, kmin rzymski i garam masala."
         }
       ]
     },
@@ -115,21 +130,24 @@
       "minuty": 27,
       "kroki": [
         {
-          "tresc": "Rozgrzej olej przez 1 minutę. Smaż cebulę 4 minuty."
+          "tresc": "**Rozgrzanie oleju.** Rozgrzej olej przez **1 minutę**."
         },
         {
-          "tresc": "Dodaj czosnek, imbir, garam masala i kmin; smaż 1 minutę, mieszając."
+          "tresc": "**Cebula.** Smaż cebulę **4 minuty**."
         },
         {
-          "tresc": "Dodaj pomidory, mleko kokosowe i ciecierzycę. Doprowadź do wrzenia przez około 2 minuty, następnie gotuj łagodnie bez przykrycia 15 minut."
+          "tresc": "**Czosnek i przyprawy.** Dodaj czosnek, imbir, garam masala i kmin; smaż **1 minutę**, mieszając."
         },
         {
-          "tresc": "Dodaj szpinak i gotuj jeszcze 1–2 minuty.",
+          "tresc": "**Gotowanie bazy curry.** Dodaj pomidory, mleko kokosowe i ciecierzycę. Doprowadź do wrzenia przez około **2 minuty**, następnie gotuj łagodnie bez przykrycia **15 minut**."
+        },
+        {
+          "tresc": "**Szpinak.** Dodaj szpinak i gotuj jeszcze **1–2 minuty**.",
           "sygnal": "liście właśnie zwiędły, a sos zgęstniał",
           "uwaga": true
         },
         {
-          "tresc": "Zdejmij z ognia. Dodaj przygotowany sok z cytryny, dopraw solą i podaj."
+          "tresc": "**Doprawienie i podanie.** Zdejmij z ognia. Dodaj przygotowany sok z cytryny, dopraw solą i podaj."
         }
       ]
     }

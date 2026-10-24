@@ -1,0 +1,135 @@
+{
+  "nazwa": "Kanapki z pastą z tuńczyka",
+  "opis": "Syczące kanapki z wysokobiałkową pastą z tuńczyka i twarogu, ogórkiem kiszonym, czerwoną cebulą i szczypiorkiem.",
+  "pory": [
+    "sniadanie",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "inna"
+  ],
+  "rodzaje": [
+    "kanapki"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 361,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 2,
+  "czas_przygotowania_min": 4,
+  "czas_obrobki_min": 6,
+  "sprzet": [
+    "Miska",
+    "Widelec",
+    "Nóż szefa kuchni",
+    "Deska do krojenia"
+  ],
+  "przechowywanie": "Pastę przechowuj w lodówce do 2 dni. Kanapki składaj bezpośrednio przed jedzeniem.",
+  "mozna_mrozic": false,
+  "ratunek": "Za sucha — łyżka jogurtu. Za słona — dołóż twarogu, nie soli.",
+  "skladniki": [
+    {
+      "nazwa": "Tuńczyk w wodzie, odsączony",
+      "ilosc": 100,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Twaróg półtłusty",
+      "ilosc": 60,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Chleb żytni razowy",
+      "ilosc": 3,
+      "jednostka": "szt"
+    },
+    {
+      "nazwa": "Cebula czerwona, surowa",
+      "ilosc": 25,
+      "jednostka": "g",
+      "stan": "w cienkich piórkach"
+    },
+    {
+      "nazwa": "ogórki kiszone bio",
+      "ilosc": 60,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Szczypiorek świeży",
+      "ilosc": 8,
+      "jednostka": "g",
+      "stan": "posiekany"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 2,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 1,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 4,
+      "kroki": [
+        {
+          "tresc": "**Tuńczyk.** Odsącz tuńczyka i lekko rozdrobnij widelcem. Odmierz po odsączeniu."
+        },
+        {
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
+        },
+        {
+          "tresc": "**Ogórek kiszony.** Odsącz ogórki kiszone i pokrój w plasterki."
+        },
+        {
+          "tresc": "**Szczypiorek.** Umyj i osusz szczypiorek, następnie drobno posiekaj."
+        },
+        {
+          "tresc": "**Twaróg.** Odmierz twaróg."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól i pieprz."
+        },
+        {
+          "tresc": "**Pieczywo.** Przygotuj pieczywo w ilości wskazanej na liście składników."
+        }
+      ]
+    },
+    {
+      "nazwa": "Przygotowanie pasty",
+      "minuty": 3,
+      "kroki": [
+        {
+          "tresc": "**Rozgniecenie tuńczyka.** Tuńczyka rozgnieć widelcem."
+        },
+        {
+          "tresc": "**Twaróg.** Dodaj twaróg i dokładnie wymieszaj."
+        },
+        {
+          "tresc": "**Cebula i szczypiorek.** Dodaj cebulę i większość szczypiorku. Dopraw pieprzem i ponownie wymieszaj"
+        },
+        {
+          "tresc": "**Doprawienie.** Spróbuj pasty. Sól dodaj tylko w razie potrzeby — tuńczyk i ogórek kiszony mogą zapewnić jej wystarczająco dużo."
+        }
+      ]
+    },
+    {
+      "nazwa": "Przygotowanie kanapek",
+      "minuty": 3,
+      "kroki": [
+        {
+          "tresc": "**Pasta na pieczywo.** Pastę równomiernie rozsmaruj na przygotowanym pieczywie."
+        },
+        {
+          "tresc": "**Ogórek kiszony.** Dodaj ogórka kiszonego."
+        },
+        {
+          "tresc": "**Szczypiorek i podanie.** Posyp pozostałym szczypiorkiem i podawaj od razu."
+        }
+      ]
+    }
+  ]
+}

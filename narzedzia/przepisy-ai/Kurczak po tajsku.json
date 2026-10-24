@@ -1,0 +1,208 @@
+{
+  "nazwa": "Kurczak po tajsku",
+  "opis": "Kurczak z warzywami w sosie z czerwonej pasty curry i mleka kokosowego, podawany z ryżem basmati. Pastę curry warto podsmażyć w tłuszczu przed dodaniem mleka kokosowego, a sok z cytryny dodać dopiero na końcu.",
+  "pory": [
+    "obiad"
+  ],
+  "kuchnie": [
+    "azjatycka"
+  ],
+  "rodzaje": [
+    "gulasz_curry"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 628,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 3,
+  "czas_przygotowania_min": 8,
+  "czas_obrobki_min": 25,
+  "sprzet": [
+    "Patelnia 28 cm",
+    "Garnek 2 l",
+    "Tarka o drobnych oczkach",
+    "Nóż szefa kuchni",
+    "Deska do krojenia"
+  ],
+  "przechowywanie": "Przechowuj w lodówce do 3 dni. Ryż najlepiej przechowywać w osobnym pojemniku.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli sos się rozwarstwi, zdejmij patelnię z ognia i wmieszaj niewielką ilość zimnego mleka kokosowego. Jeśli danie jest zbyt ostre, dodaj trochę mleka kokosowego. Jeśli jest zbyt mdłe, dodaj niewielką ilość soku z cytryny.",
+  "skladniki": [
+    {
+      "nazwa": "Pierś z kurczaka, surowa",
+      "ilosc": 110,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 40,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 3,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Imbir korzeń, surowy",
+      "ilosc": 8,
+      "jednostka": "g",
+      "stan": "obrany, starty"
+    },
+    {
+      "nazwa": "Marchew, surowa",
+      "ilosc": 70,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Papryka czerwona, surowa",
+      "ilosc": 100,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cytryna",
+      "ilosc": 20,
+      "jednostka": "g",
+      "stan": "sok"
+    },
+    {
+      "nazwa": "Mleko kokosowe light z puszki",
+      "ilosc": 80,
+      "jednostka": "ml"
+    },
+    {
+      "nazwa": "Pasta curry czerwona",
+      "ilosc": 15,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sos sojowy",
+      "ilosc": 12,
+      "jednostka": "ml"
+    },
+    {
+      "nazwa": "Fasolka szparagowa mrożona",
+      "ilosc": 100,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Ryż basmati, suchy",
+      "ilosc": 55,
+      "jednostka": "g",
+      "stan": "suchy, ugotowany osobno"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Pietruszka natka",
+      "ilosc": 5,
+      "jednostka": "g",
+      "stan": "posiekana"
+    },
+    {
+      "nazwa": "Sos rybny",
+      "ilosc": 5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 8,
+      "kroki": [
+        {
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
+        },
+        {
+          "tresc": "**Czosnek.** Obierz czosnek i drobno posiekaj."
+        },
+        {
+          "tresc": "**Imbir.** Obierz imbir i zetrzyj na drobnej tarce."
+        },
+        {
+          "tresc": "**Marchew.** Umyj i obierz marchew, pokrój w cienkie półplasterki."
+        },
+        {
+          "tresc": "**Papryka.** Umyj paprykę, usuń gniazdo nasienne i pokrój miąższ w cienkie paski."
+        },
+        {
+          "tresc": "**Natka pietruszki.** Umyj i osusz natkę, usuń grube łodygi i drobno posiekaj liście."
+        },
+        {
+          "tresc": "**Cytryna.** Umyj cytrynę, wyciśnij sok i odmierz ilość wskazaną na liście składników."
+        },
+        {
+          "tresc": "**Ryż.** Odmierz suchy ryż i przepłucz na sitku pod zimną wodą."
+        },
+        {
+          "tresc": "**Kurczak.** Osusz pierś i pokrój w paski szerokości około 1,5 cm."
+        },
+        {
+          "tresc": "**Po przygotowaniu mięsa.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surowym mięsem."
+        },
+        {
+          "tresc": "**Płynna baza.** Odmierz mleko kokosowe."
+        },
+        {
+          "tresc": "**Dodatki.** Odmierz sos sojowy, sos rybny i pastę curry."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
+        },
+        {
+          "tresc": "**Fasolka szparagowa.** Odmierz mrożoną fasolkę i pozostaw w zamrażarce do gotowania."
+        }
+      ]
+    },
+    {
+      "nazwa": "Ryż i obsmażanie kurczaka",
+      "minuty": 10,
+      "kroki": [
+        {
+          "tresc": "**Ryż — równolegle.** Nastaw ryż i ugotuj go zgodnie z instrukcją na opakowaniu. Ryż będzie gotował się równolegle z przygotowaniem kurczaka."
+        },
+        {
+          "tresc": "**Rozgrzanie oliwy.** Na patelni rozgrzej oliwę."
+        },
+        {
+          "tresc": "**Obsmażenie kurczaka.** Dodaj kurczaka i smaż na dość dużym ogniu przez około **3–4 minuty**."
+        },
+        {
+          "tresc": "**Zdjęcie kurczaka.** Następnie zdejmij mięso z patelni i odłóż na bok."
+        },
+        {
+          "tresc": "**Cebula.** Na tę samą patelnię dodaj cebulę i smaż około **2 minut**."
+        },
+        {
+          "tresc": "**Czosnek i imbir.** Dodaj czosnek i starty imbir. Smaż około **30 sekund**."
+        },
+        {
+          "tresc": "**Pasta curry.** Dodaj niewielką część odmierzonego mleka kokosowego, a następnie pastę curry. Smaż na średnim ogniu przez około **30–60 sekund**, cały czas mieszając, aż pasta zacznie intensywnie pachnieć."
+        }
+      ]
+    },
+    {
+      "nazwa": "Warzywa, sos i wykończenie",
+      "minuty": 15,
+      "kroki": [
+        {
+          "tresc": "**Marchew i papryka.** Dodaj marchew i paprykę. Smaż około **2 minut**."
+        },
+        {
+          "tresc": "**Mleko kokosowe i dodatki.** Wlej pozostałe mleko kokosowe, wymieszaj, dodaj sos rybny i znowu wymieszaj. Dodaj podsmażonego kurczaka oraz mrożoną fasolkę szparagową."
+        },
+        {
+          "tresc": "**Duszenie curry.** Duś bez przykrycia przez około **12–15 minut**, aż kurczak będzie gotowy, warzywa zmiękną, ale pozostaną lekko jędrne, a sos nieco zgęstnieje."
+        },
+        {
+          "tresc": "**Doprawienie.** Zdejmij patelnię z ognia. Dodaj sos sojowy oraz sok z cytryny. Wymieszaj i spróbuj."
+        },
+        {
+          "tresc": "**Podanie.** Podawaj z ugotowanym ryżem basmati i posyp posiekaną natką pietruszki."
+        }
+      ]
+    }
+  ]
+}

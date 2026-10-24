@@ -74,10 +74,22 @@
       "minuty": 6,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Pieczarki.** Oczyść pieczarki i pokrój w cienkie plasterki."
         },
         {
-          "tresc": "Oczyść pieczarki i pokrój w cienkie plasterki. Obierz i posiekaj cebulę. Pokrój Goudę w plastry, przygotuj pieczywo."
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
+        },
+        {
+          "tresc": "**Gouda.** Odmierz Goudę i pokrój w plastry."
+        },
+        {
+          "tresc": "**Masło.** Odmierz masło."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz pieprz i tymianek."
+        },
+        {
+          "tresc": "**Pieczywo.** Przygotuj pieczywo w ilości wskazanej na liście składników."
         }
       ]
     },
@@ -86,10 +98,16 @@
       "minuty": 10,
       "kroki": [
         {
-          "tresc": "Rozpuść masło na patelni przez 1 minutę. Dodaj cebulę i pieczarki, smaż 7–8 minut na średnim ogniu, aż płyn odparuje."
+          "tresc": "**Rozpuszczenie masła.** Rozpuść masło na patelni przez **1 minutę**."
         },
         {
-          "tresc": "Dodaj tymianek i pieprz. Pod koniec smażenia włącz grill kontaktowy zgodnie z instrukcją urządzenia."
+          "tresc": "**Pieczarki i cebula.** Dodaj cebulę i pieczarki, smaż **7–8 minut** na średnim ogniu, aż płyn odparuje."
+        },
+        {
+          "tresc": "**Doprawienie farszu.** Dodaj tymianek i pieprz."
+        },
+        {
+          "tresc": "**Rozgrzanie grilla.** Pod koniec smażenia włącz grill kontaktowy zgodnie z instrukcją urządzenia."
         }
       ]
     },
@@ -98,13 +116,13 @@
       "minuty": 7,
       "kroki": [
         {
-          "tresc": "Rozdziel połowę odmierzonego sera między dolne kromki, ułóż pieczarki i resztę sera. Przykryj pozostałym pieczywem. Nadmiar farszu podaj obok."
+          "tresc": "**Składanie tostów.** Rozdziel połowę odmierzonego sera między dolne kromki, ułóż pieczarki i resztę sera. Przykryj pozostałym pieczywem. Nadmiar farszu podaj obok."
         },
         {
-          "tresc": "W rozgrzanym grillu kontaktowym opiekaj przez około 3–5 minut, aż ser się rozpuści i chleb zrumieni. Przy większej ilości opiekaj partiami, doliczając czas."
+          "tresc": "**Opiekanie.** W rozgrzanym grillu kontaktowym opiekaj przez około **3–5 minut**, aż ser się rozpuści i chleb zrumieni. Przy większej ilości opiekaj partiami, doliczając czas."
         },
         {
-          "tresc": "Odczekaj 1 minutę i podaj."
+          "tresc": "**Podanie.** Odczekaj **1 minutę** i podaj."
         }
       ]
     }

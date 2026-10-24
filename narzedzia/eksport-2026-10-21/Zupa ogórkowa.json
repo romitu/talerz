@@ -1,0 +1,230 @@
+{
+  "nazwa": "Zupa ogórkowa",
+  "opis": "Klasyczna zupa ogórkowa na wywarze z żeberek, z ziemniakami, warzywami korzeniowymi i podsmażanymi ogórkami kiszonymi. Ogórki dodawane są dopiero po ugotowaniu ziemniaków, dzięki czemu ziemniaki pozostają miękkie.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "polska"
+  ],
+  "rodzaje": [
+    "zupa"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 1145,
+  "liczba_porcji_bazowych": 2,
+  "trwalosc_dni": 3,
+  "czas_przygotowania_min": 15,
+  "czas_obrobki_min": 60,
+  "sprzet": [
+    "Garnek 3 l",
+    "Patelnia 24 cm",
+    "Miska",
+    "Tarka o grubych oczkach",
+    "Nóż szefa kuchni",
+    "Deska do krojenia"
+  ],
+  "przechowywanie": "Po wystudzeniu przechowuj pod przykryciem w lodówce do 3 dni. Zupy nie polecałbym do mrożenia w wersji już zabielonej śmietaną.",
+  "mozna_mrozic": false,
+  "ratunek": "Za kwaśna — dodaj 50 ml śmietanki 30% albo pół łyżeczki cukru. Za słona — wrzuć obranego surowego ziemniaka, gotuj 10 minut i wyrzuć go. Śmietana się zwarzyła — zblenduj część zupy z łyżką śmietany na gładko i wmieszaj z powrotem.",
+  "skladniki": [
+    {
+      "nazwa": "żeberka wieprzowe",
+      "ilosc": 350,
+      "jednostka": "g",
+      "zamiennik": "lub 500 g korpusu z kurczaka"
+    },
+    {
+      "nazwa": "woda",
+      "ilosc": 1000,
+      "jednostka": "ml",
+      "stan": "zimna"
+    },
+    {
+      "nazwa": "Marchew, surowa",
+      "ilosc": 100,
+      "jednostka": "g",
+      "stan": "obrana, starta na grubych oczkach"
+    },
+    {
+      "nazwa": "Pietruszka korzeń",
+      "ilosc": 50,
+      "jednostka": "g",
+      "stan": "obrana, starta na grubych oczkach"
+    },
+    {
+      "nazwa": "Seler korzeń",
+      "ilosc": 60,
+      "jednostka": "g",
+      "stan": "obrany, starty na grubych oczkach"
+    },
+    {
+      "nazwa": "Ziemniaki, surowe",
+      "ilosc": 300,
+      "jednostka": "g",
+      "stan": "obrane, w kostce 1,5 cm"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 2,
+      "jednostka": "g",
+      "stan": "płaska łyżka"
+    },
+    {
+      "nazwa": "liść laurowy",
+      "ilosc": 1,
+      "jednostka": "szt"
+    },
+    {
+      "nazwa": "ziele angielskie",
+      "ilosc": 2,
+      "jednostka": "szt"
+    },
+    {
+      "nazwa": "Masło",
+      "ilosc": 8,
+      "jednostka": "g",
+      "zamiennik": "lub 20 ml oleju rzepakowego"
+    },
+    {
+      "nazwa": "ogórki kiszone bio",
+      "ilosc": 250,
+      "jednostka": "g",
+      "stan": "starte na grubych oczkach"
+    },
+    {
+      "nazwa": "kwas ogórków kiszonych",
+      "ilosc": 100,
+      "jednostka": "ml",
+      "stan": "odlany ze słoika"
+    },
+    {
+      "nazwa": "śmietana 18% kwaśna",
+      "ilosc": 60,
+      "jednostka": "ml",
+      "stan": "kwaśna, w temperaturze pokojowej"
+    },
+    {
+      "nazwa": "koperek świeży",
+      "ilosc": 10,
+      "jednostka": "g",
+      "stan": "drobno posiekany"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 15,
+      "kroki": [
+        {
+          "tresc": "**Marchew.** Umyj i obierz marchew, zetrzyj na tarce o grubych oczkach."
+        },
+        {
+          "tresc": "**Pietruszka korzeń.** Umyj i obierz korzeń pietruszki, zetrzyj na tarce o grubych oczkach."
+        },
+        {
+          "tresc": "**Seler korzeniowy.** Umyj i obierz seler, zetrzyj na tarce o grubych oczkach."
+        },
+        {
+          "tresc": "**Ziemniaki.** Umyj i obierz ziemniaki, pokrój w kostkę około 1,5 cm."
+        },
+        {
+          "tresc": "**Ogórki kiszone.** Odmierz ogórki i zetrzyj na tarce o grubych oczkach."
+        },
+        {
+          "tresc": "**Koperek.** Umyj i osusz koperek, usuń grube łodygi i drobno posiekaj delikatne gałązki."
+        },
+        {
+          "tresc": "**Śmietana.** Odmierz śmietanę i wyjmij z lodówki na czas przygotowania zupy."
+        },
+        {
+          "tresc": "**Żeberka.** Przygotuj odmierzoną ilość żeberek do gotowania wywaru."
+        },
+        {
+          "tresc": "**Po przygotowaniu mięsa.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surowym mięsem."
+        },
+        {
+          "tresc": "**Woda.** Odmierz wodę z listy składników."
+        },
+        {
+          "tresc": "**Kwas ogórkowy.** Odmierz kwas ogórkowy."
+        },
+        {
+          "tresc": "**Masło.** Odmierz masło."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól, liście laurowe i ziele angielskie."
+        }
+      ]
+    },
+    {
+      "nazwa": "Przygotowanie wywaru",
+      "minuty": 30,
+      "kroki": [
+        {
+          "tresc": "**Żeberka do garnka.** Włóż żeberka do garnka i zalej odmierzoną zimną wodą z listy składników."
+        },
+        {
+          "tresc": "**Zagotowanie wywaru.** Doprowadź do wrzenia. Zbierz szumowiny z powierzchni."
+        },
+        {
+          "tresc": "**Przyprawy do wywaru.** Dodaj liść laurowy, ziele angielskie i część odmierzonej soli."
+        },
+        {
+          "tresc": "**Gotowanie żeberek.** Zmniejsz ogień, przykryj garnek i gotuj łagodnie przez około **30 minut**. Mięso będzie dalej gotowało się z warzywami."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie warzyw i ogórków",
+      "minuty": 25,
+      "kroki": [
+        {
+          "tresc": "**Warzywa do wywaru.** Dodaj marchew, pietruszkę, seler i ziemniaki. Gotuj na małym ogniu przez około **15 minut**."
+        },
+        {
+          "tresc": "**Masło — równolegle.** Podczas gotowania warzyw rozpuść masło na patelni przez około **1 minutę**."
+        },
+        {
+          "tresc": "**Podsmażenie ogórków.** Dodaj starte ogórki na patelnię. Smaż na średnim ogniu przez **5 minut**, często mieszając."
+        },
+        {
+          "tresc": "**Sprawdzenie ziemniaków.** Sprawdź ziemniaki widelcem. Jeśli są twarde, dogotowuj po **3–5 minut**. Ogórki dodaj dopiero do miękkich ziemniaków.",
+          "sygnal": "widelec łatwo wchodzi do środka ziemniaka",
+          "uwaga": true
+        },
+        {
+          "tresc": "**Dodanie ogórków.** Przełóż podsmażone ogórki do zupy. Gotuj łagodnie przez **5–10 minut**."
+        },
+        {
+          "tresc": "**Sprawdzenie żeberek.** Sprawdź widelcem, czy mięso łatwo odchodzi od kości. Jeśli jest twarde, dogotowuj po **10 minut** przed oddzieleniem od kości."
+        },
+        {
+          "tresc": "**Oddzielenie mięsa.** Wyjmij żeberka, oddziel mięso od kości i podziel na mniejsze kawałki. Włóż mięso z powrotem do garnka. Usuń liść laurowy i ziele angielskie.",
+          "uwaga": true
+        },
+        {
+          "tresc": "**Kwas ogórkowy.** Dodaj połowę odmierzonego kwasu ogórkowego. Wymieszaj, spróbuj i w razie potrzeby stopniowo dodaj resztę."
+        }
+      ]
+    },
+    {
+      "nazwa": "Zabielanie i wykończenie",
+      "minuty": 5,
+      "kroki": [
+        {
+          "tresc": "**Hartowanie śmietany.** Do odmierzonej śmietany dodawaj stopniowo trochę ciepłej zupy, cały czas mieszając, aż śmietana się ogrzeje i będzie jednolita."
+        },
+        {
+          "tresc": "**Śmietana do zupy.** Zmniejsz ogień do minimum i wmieszaj zahartowaną śmietanę. Podgrzewaj łagodnie przez około **1 minutę**; nie doprowadzaj do intensywnego wrzenia.",
+          "sygnal": "zupa jest jednolita, bez grudek śmietany",
+          "uwaga": true
+        },
+        {
+          "tresc": "**Koperek i doprawienie.** Wyłącz ogień i dodaj koperek. Spróbuj, w razie potrzeby dodaj resztę odmierzonej soli lub kwasu ogórkowego. Podaj."
+        }
+      ]
+    }
+  ]
+}

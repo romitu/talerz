@@ -209,12 +209,12 @@ export function dobierzWspolczynnik(
 /**
  * Przelicza cały przepis pod zadany cel kaloryczny: dobiera k, a potem
  * liczy finalne ilości — z zaokrągleniem do całości tam, gdzie składnik
- * tego wymaga (`moznaDzielic === false`).
+ * tego wymaga (`moznaDzielic === false`, kwantyzacja „nie”).
  *
- * Zaokrąglamy tylko składniki, które w porcji bazowej są CAŁE. Porcja z garnka
- * na kilka osób ma np. 1,5 jajka — to nie jest jajko do rozbicia, tylko udział
- * w garnku, który gotuje się w całości. Zaokrąglenie takiej porcji do 2
- * zamieniłoby 3 jajka w garnku w 4.
+ * Zaokrąglamy ZAWSZE, niezależnie od ilości w porcji bazowej — nie da się
+ * ugotować 1,52 jajka. Porcja bazowa i tak rzadko ma równe sztuki: to masa
+ * przepisu przez całkowite `porcja_g`, więc kanapka 285,5 g z porcją 286 g
+ * ma 1,0017 jajka.
  *
  * `masaMax` — najcięższa dopuszczalna porcja w gramach, patrz `gornaMasaPorcji`.
  */
@@ -228,7 +228,7 @@ export function przeskalujPrzepis(
   const pozycje: PozycjaPoSkalowaniu[] = skladniki.map((s) => {
     let iloscPoSkalowaniu = s.ilosc * mnoznikRoli(s.rola, k);
 
-    if (s.moznaDzielic === false && Math.abs(s.ilosc - Math.round(s.ilosc)) < 1e-9) {
+    if (s.moznaDzielic === false) {
       iloscPoSkalowaniu = Math.round(iloscPoSkalowaniu);
       if (iloscPoSkalowaniu <= 0 && s.ilosc > 0) iloscPoSkalowaniu = 1;
     }

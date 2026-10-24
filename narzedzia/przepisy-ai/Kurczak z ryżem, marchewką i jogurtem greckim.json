@@ -1,0 +1,218 @@
+{
+  "nazwa": "Kurczak z ryżem, marchewką i jogurtem greckim",
+  "opis": "Kurczak z ryżem i marchewką przygotowany na jednej patelni, z dodatkiem cebuli, czosnku i jogurtu greckiego. Kremowe, sycące danie na kilka porcji. Smak sosu lub płynu do gotowania powstaje z przygotowywanych składników w tym samym naczyniu. Podana ilość wody jest początkowa; ewentualne dolewanie zależy od konsystencji i miękkości składników. Warzywna baza obejmuje korzeń pietruszki, seler korzeniowy, por, przygotowane razem z pozostałymi składnikami; wszystkie warzywa pozostają w posiłku.",
+  "pory": [
+    "kolacja",
+    "sniadanie"
+  ],
+  "kuchnie": [
+    "polska"
+  ],
+  "rodzaje": [
+    "kasza_ryz"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 640,
+  "liczba_porcji_bazowych": 3,
+  "trwalosc_dni": 3,
+  "czas_przygotowania_min": 15,
+  "czas_obrobki_min": 52,
+  "sprzet": [
+    "Garnek 3 l",
+    "Patelnia 28 cm",
+    "Blender ręczny",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Tarka o grubych oczkach",
+    "Waga kuchenna",
+    "Termometr do mięsa",
+    "Sitko",
+    "Miska",
+    "Tarka o drobnych oczkach"
+  ],
+  "przechowywanie": "Po wystudzeniu przechowuj w szczelnym pojemniku w lodówce do 3 dni. Podczas odgrzewania, jeśli ryż wchłonie sos i danie zrobi się zbyt gęste, dodaj niewielką ilość wody.",
+  "mozna_mrozic": false,
+  "skladniki": [
+    {
+      "nazwa": "Marchew, surowa",
+      "ilosc": 250,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 100,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 10,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "woda",
+      "ilosc": 500,
+      "jednostka": "ml",
+      "stan": "ilość początkowa do potrawy; w trakcie gotowania uzupełniaj tylko w razie potrzeby, zgodnie z instrukcją"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 30,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 3,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 1,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Pierś z kurczaka, surowa",
+      "ilosc": 500,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Ryż basmati, suchy",
+      "ilosc": 200,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Jogurt grecki naturalny 2%",
+      "ilosc": 200,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Pietruszka natka",
+      "ilosc": 5,
+      "jednostka": "g",
+      "zamiennik": "koperek"
+    },
+    {
+      "nazwa": "Pietruszka korzeń",
+      "ilosc": 30,
+      "jednostka": "g",
+      "stan": "obrany korzeń, starty na drobnych oczkach; do warzywnej bazy"
+    },
+    {
+      "nazwa": "Seler korzeń",
+      "ilosc": 30,
+      "jednostka": "g",
+      "stan": "obrany korzeń, starty na drobnych oczkach; do warzywnej bazy"
+    },
+    {
+      "nazwa": "Por, surowy",
+      "ilosc": 60,
+      "jednostka": "g",
+      "stan": "biała i jasnozielona część, dokładnie wypłukana; cienkie półplasterki do bazy sosu"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 15,
+      "kroki": [
+        {
+          "tresc": "**Korzeń pietruszki.** Umyj, obierz i zetrzyj na tarce o drobnych oczkach. Odłóż do przygotowania warzywnej bazy."
+        },
+        {
+          "tresc": "**Korzeń selera.** Umyj, obierz i zetrzyj na tarce o drobnych oczkach. Odłóż do przygotowania warzywnej bazy."
+        },
+        {
+          "tresc": "**Por.** Białą i jasnozieloną część przekrój wzdłuż, dokładnie wypłucz ziemię spomiędzy warstw i pokrój w cienkie półplasterki."
+        },
+        {
+          "tresc": "**Marchew.** Umyj i obierz marchew, zetrzyj na tarce o grubych oczkach."
+        },
+        {
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
+        },
+        {
+          "tresc": "**Czosnek.** Obierz czosnek i przeciśnij przez praskę lub bardzo drobno posiekaj."
+        },
+        {
+          "tresc": "**Natka pietruszki.** Umyj i osusz natkę, usuń grube łodygi i drobno posiekaj liście."
+        },
+        {
+          "tresc": "**Kurczak.** Osusz mięso kurczaka bez skóry i kości, pokrój w kostkę około 2 cm."
+        },
+        {
+          "tresc": "**Po przygotowaniu mięsa.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surowym mięsem."
+        },
+        {
+          "tresc": "**Ryż.** Odmierz ryż i opłucz na sitku. Sprawdź na opakowaniu czas gotowania metodą wchłaniania wody."
+        },
+        {
+          "tresc": "**Woda.** Odmierz wodę z listy składników do przygotowania potrawy."
+        },
+        {
+          "tresc": "**Jogurt.** Odmierz jogurt."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól i pieprz."
+        }
+      ]
+    },
+    {
+      "nazwa": "Smażenie kurczaka i warzyw",
+      "minuty": 17,
+      "kroki": [
+        {
+          "tresc": "**Rozgrzanie oliwy.** Na głębokiej patelni z pokrywą rozgrzej połowę oliwy przez **1 minutę**."
+        },
+        {
+          "tresc": "**Obsmażenie kurczaka.** Dodaj pokrojonego kurczaka. Smaż około **2 minuty** z każdej strony, aż mięso zrumieni się z zewnątrz, ale w środku nie będzie jeszcze całkowicie gotowe. W trakcie smażenia dopraw częścią soli i pieprzu."
+        },
+        {
+          "tresc": "**Zdjęcie kurczaka.** Podsmażonego kurczaka zdejmij z patelni i odłóż na bok."
+        },
+        {
+          "tresc": "**Cebula.** Na tę samą patelnię dodaj pozostałą oliwę i cebulę. Smaż około **3 minut**."
+        },
+        {
+          "tresc": "**Warzywa korzeniowe i por.** Dodaj startą marchew, korzeń pietruszki, seler oraz pokrojony por. Smaż z cebulą przez **5–6 minut**, mieszając, aż por zmięknie."
+        },
+        {
+          "tresc": "**Czosnek.** Dodaj czosnek, wymieszaj i smaż jeszcze około **30 sekund**."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie ryżu i wykończenie dania",
+      "minuty": 35,
+      "kroki": [
+        {
+          "tresc": "**Gotowanie warzywnej bazy.** Do podsmażonych warzyw z czosnkiem wlej odmierzoną wodę. Mieszając przez **1 minutę**, rozpuść zrumienione pozostałości z dna. Doprowadź do wrzenia przez około **3 minuty**, przykryj i gotuj łagodnie przez **8–10 minut**. Wszystkie warzywa pozostają w daniu."
+        },
+        {
+          "tresc": "**Ryż i kurczak.** Dodaj opłukany ryż oraz obsmażonego kurczaka wraz z sokami z talerza. Wymieszaj i doprowadź ponownie do łagodnego wrzenia."
+        },
+        {
+          "tresc": "**Gotowanie ryżu.** Przykryj i gotuj na małym ogniu przez czas podany na opakowaniu, orientacyjnie **12–15 minut**. Sprawdź stan płynu w połowie; jeśli ryż pozostaje twardy, a płynu prawie nie ma, dolej trochę gorącej wody."
+        },
+        {
+          "tresc": "**Kontrola ryżu i kurczaka.** Sprawdź miękkość ziaren oraz temperaturę największego kawałka kurczaka. Jeśli ryż jest twardy lub mięso nie osiągnęło **74°C**, gotuj dalej po **2 minuty**, kontrolując płyn. Jeśli ziarna i mięso są gotowe, a płynu jest dużo, odparuj go bez pokrywki przez **1–2 minuty**.",
+          "sygnal": "ryż jest miękki, danie wilgotne, a kurczak ma co najmniej 74°C",
+          "uwaga": true
+        },
+        {
+          "tresc": "**Zdjęcie z ognia.** Zdejmij patelnię z ognia."
+        },
+        {
+          "tresc": "**Hartowanie jogurtu.** Wymieszaj jogurt w misce z niewielką ilością gorącego ryżu i sosu z patelni. Stopniowo dodawaj kolejne małe porcje, aż jogurt się ogrzeje. Wmieszaj go do dania poza ogniem."
+        },
+        {
+          "tresc": "**Doprawienie.** Po dodaniu jogurtu nie gotuj już dania. Dopraw pozostałą solą i pieprzem według smaku."
+        },
+        {
+          "tresc": "**Natka i podanie.** Dodaj posiekaną natkę pietruszki, wymieszaj i podawaj."
+        }
+      ]
+    }
+  ]
+}

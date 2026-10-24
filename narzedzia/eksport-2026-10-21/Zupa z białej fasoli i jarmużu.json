@@ -1,0 +1,164 @@
+{
+  "nazwa": "Zupa z białej fasoli i jarmużu",
+  "opis": "Warzywna zupa z białą fasolą, jarmużem i pomidorami, podana z pieczywem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "srodziemnomorska"
+  ],
+  "rodzaje": [
+    "zupa"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 826,
+  "liczba_porcji_bazowych": 2,
+  "trwalosc_dni": 3,
+  "czas_przygotowania_min": 12,
+  "czas_obrobki_min": 37,
+  "sprzet": [
+    "Garnek 3 l",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna",
+    "Sitko"
+  ],
+  "przechowywanie": "Zupę przechowuj w lodówce do 3 dni lub zamroź. Pieczywo trzymaj osobno. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
+  "mozna_mrozic": true,
+  "ratunek": "Za rzadką zupę zagęść, rozgniatając część fasoli. Twardy jarmuż gotuj kilka minut dłużej.",
+  "skladniki": [
+    {
+      "nazwa": "Fasola biała z puszki, odsączona",
+      "ilosc": 300,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Jarmuż, surowy",
+      "ilosc": 100,
+      "jednostka": "g",
+      "stan": "bez twardych łodyg"
+    },
+    {
+      "nazwa": "Pomidory krojone z puszki",
+      "ilosc": 300,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Domowy bulion warzywny",
+      "ilosc": 500,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Marchew, surowa",
+      "ilosc": 120,
+      "jednostka": "g",
+      "stan": "pokrojona"
+    },
+    {
+      "nazwa": "Seler naciowy, surowy",
+      "ilosc": 80,
+      "jednostka": "g",
+      "stan": "pokrojony"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 80,
+      "jednostka": "g",
+      "stan": "posiekana"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 10,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 16,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Tymianek suszony",
+      "ilosc": 2,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Chleb żytni razowy",
+      "ilosc": 4,
+      "jednostka": "szt",
+      "stan": "kromki"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 2,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 1,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 12,
+      "kroki": [
+        {
+          "tresc": "**Jarmuż.** Umyj jarmuż, usuń twarde łodygi i porwij liście na mniejsze kawałki."
+        },
+        {
+          "tresc": "**Marchew.** Umyj i obierz marchew, pokrój w kostkę około 1 cm."
+        },
+        {
+          "tresc": "**Seler naciowy.** Umyj seler naciowy i pokrój w cienkie plasterki."
+        },
+        {
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
+        },
+        {
+          "tresc": "**Czosnek.** Obierz czosnek i drobno posiekaj."
+        },
+        {
+          "tresc": "**Fasola.** Przełóż fasolę z puszki na sitko, opłucz i odsącz. Odmierz po odsączeniu."
+        },
+        {
+          "tresc": "**Bulion.** Odmierz bulion."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz pieprz i tymianek."
+        },
+        {
+          "tresc": "**Pieczywo.** Przygotuj pieczywo w ilości wskazanej na liście składników."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie zupy",
+      "minuty": 37,
+      "kroki": [
+        {
+          "tresc": "**Rozgrzanie oliwy.** Rozgrzej oliwę **1 minutę**."
+        },
+        {
+          "tresc": "**Cebula i warzywa.** Smaż cebulę, marchew i seler przez **5 minut**."
+        },
+        {
+          "tresc": "**Czosnek i tymianek.** Dodaj czosnek oraz tymianek i smaż **30 sekund**."
+        },
+        {
+          "tresc": "**Gotowanie bazy zupy.** Dodaj pomidory i bulion, doprowadź do wrzenia przez około **4 minuty**. Gotuj pod uchyloną pokrywką **15 minut**."
+        },
+        {
+          "tresc": "**Fasola i jarmuż.** Dodaj fasolę i jarmuż, gotuj jeszcze **7–8 minut**, aż marchew i liście będą miękkie."
+        },
+        {
+          "tresc": "**Doprawienie i podanie.** Dopraw solą oraz pieprzem i podaj z pieczywem."
+        }
+      ]
+    }
+  ]
+}

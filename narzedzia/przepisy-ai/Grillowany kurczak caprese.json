@@ -1,0 +1,147 @@
+{
+  "nazwa": "Grillowany kurczak caprese",
+  "opis": "Grillowana pierś z kurczaka z pomidorem, mozzarellą i świeżą bazylią, podawana z chrupiącym pieczywem żytnim.",
+  "pory": [
+    "kolacja",
+    "sniadanie"
+  ],
+  "kuchnie": [
+    "srodziemnomorska"
+  ],
+  "rodzaje": [
+    "kanapki"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 441,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 2,
+  "czas_przygotowania_min": 7,
+  "czas_obrobki_min": 13,
+  "sprzet": [
+    "Grill kontaktowy",
+    "Nóż szefa kuchni",
+    "Deska do krojenia"
+  ],
+  "przechowywanie": "Przechowuj w lodówce do 2 dni. Mozzarellę i pomidora najlepiej dokładać przy podaniu.",
+  "mozna_mrozic": false,
+  "ratunek": "eśli pierś jest sucha, następnym razem przekrój ją wzdłuż na dwa cieńsze płaty — dzięki temu będzie grillowała się krócej.",
+  "skladniki": [
+    {
+      "nazwa": "Pierś z kurczaka, surowa",
+      "ilosc": 120,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Ser mozzarella",
+      "ilosc": 50,
+      "jednostka": "g",
+      "stan": "w plastrach"
+    },
+    {
+      "nazwa": "Pomidory, surowe",
+      "ilosc": 180,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 3,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Bazylia świeża",
+      "ilosc": 8,
+      "jednostka": "g",
+      "stan": "świeże listki"
+    },
+    {
+      "nazwa": "Chleb żytni razowy",
+      "ilosc": 2,
+      "jednostka": "szt"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 8,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oregano suszone",
+      "ilosc": 1,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 7,
+      "kroki": [
+        {
+          "tresc": "**Pomidor.** Umyj pomidory i pokrój w cienkie plastry. Osusz plasterki z nadmiaru wilgoci."
+        },
+        {
+          "tresc": "**Mozzarella.** Odsącz mozzarellę i pokrój w plastry."
+        },
+        {
+          "tresc": "**Bazylia.** Umyj i osusz bazylię, oderwij liście od łodyg."
+        },
+        {
+          "tresc": "**Czosnek.** Obierz czosnek i przekrój ząbki na pół; posłużą do natarcia pieczywa."
+        },
+        {
+          "tresc": "**Kurczak.** Rozkrój pierś wzdłuż na cieńsze płaty grubości około 1,5 cm. Osusz, natrzyj oliwą i oregano. Dopraw solą i pieprzem."
+        },
+        {
+          "tresc": "**Po przygotowaniu mięsa.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surowym mięsem."
+        }
+      ]
+    },
+    {
+      "nazwa": "Grillowanie kurczaka",
+      "minuty": 10,
+      "kroki": [
+        {
+          "tresc": "**Rozgrzanie grilla.** Rozgrzej grill kontaktowy zgodnie z instrukcją urządzenia, zwykle przez około **3 minuty**."
+        },
+        {
+          "tresc": "**Grillowanie kurczaka.** Połóż kurczaka na rozgrzanej grillownicy i grilluj przez około **6–7 minut**."
+        },
+        {
+          "tresc": "**Sprawdzenie kurczaka.** Kurczak jest gotowy, gdy temperatura w najgrubszym miejscu mięsa osiągnie około **74°C**."
+        },
+        {
+          "tresc": "**Pomidor i mozzarella.** Zdejmij gorącego kurczaka z grillownicy. Na każdym kawałku ułóż plastry pomidora i mozzarelli."
+        },
+        {
+          "tresc": "**Zmiękczenie sera.** Przykryj luźno na około **2 minuty**, aby mozzarella lekko zmiękła."
+        }
+      ]
+    },
+    {
+      "nazwa": "Pieczywo i podanie",
+      "minuty": 3,
+      "kroki": [
+        {
+          "tresc": "**Opiekanie pieczywa.** Chleb grilluj przez około **1–2 minuty**, aż będzie lekko chrupiący."
+        },
+        {
+          "tresc": "**Czosnek na pieczywo.** Po zdjęciu z grillownicy natrzyj pieczywo przekrojonym ząbkiem czosnku."
+        },
+        {
+          "tresc": "**Bazylia.** Kurczaka z pomidorem i mozzarellą posyp świeżymi listkami bazylii."
+        },
+        {
+          "tresc": "**Podanie.** Podawaj od razu z grillowanym pieczywem."
+        }
+      ]
+    }
+  ]
+}

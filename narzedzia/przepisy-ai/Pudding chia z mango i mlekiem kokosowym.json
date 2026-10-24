@@ -63,13 +63,16 @@
       "minuty": 6,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Mango.** Umyj mango, usuń skórkę i pestkę, pokrój miąższ w kostkę. Przechowaj pod przykryciem w lodówce do podania."
         },
         {
-          "tresc": "Umyj mango, usuń skórkę i pestkę, pokrój miąższ; przechowaj pod przykryciem w lodówce. Posiekaj migdały."
+          "tresc": "**Migdały.** Odmierz migdały i posiekaj."
         },
         {
-          "tresc": "Usuń pestki daktyli, jeśli są, i drobno je posiekaj. Odmierz chia i mleko kokosowe."
+          "tresc": "**Daktyle.** Usuń pestki daktyli, jeśli są, i drobno posiekaj miąższ."
+        },
+        {
+          "tresc": "**Baza puddingu.** Odmierz chia i mleko kokosowe."
         }
       ]
     },
@@ -78,7 +81,7 @@
       "minuty": 2,
       "kroki": [
         {
-          "tresc": "Dokładnie wymieszaj chia z mlekiem kokosowym i daktylami."
+          "tresc": "**Mieszanie puddingu.** Dokładnie wymieszaj chia z mlekiem kokosowym i daktylami."
         }
       ]
     },
@@ -87,7 +90,7 @@
       "minuty": 240,
       "kroki": [
         {
-          "tresc": "Przykryj i wstaw do lodówki na co najmniej 4 godziny. Po pierwszych 10 minutach wymieszaj ponownie, aby rozbić grudki.",
+          "tresc": "**Chłodzenie puddingu.** Przykryj i wstaw do lodówki na co najmniej **4 godziny**. Po pierwszych **10 minutach** wymieszaj ponownie, aby rozbić grudki.",
           "sygnal": "nasiona napęczniały, masa jest gęsta i jednolita",
           "uwaga": true
         }
@@ -98,7 +101,7 @@
       "minuty": 2,
       "kroki": [
         {
-          "tresc": "Wymieszaj pudding, dodaj przygotowane mango i migdały."
+          "tresc": "**Podanie.** Wymieszaj pudding, dodaj przygotowane mango i migdały."
         }
       ]
     }

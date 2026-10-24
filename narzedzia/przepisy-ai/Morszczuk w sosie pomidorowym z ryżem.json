@@ -11,7 +11,7 @@
     "kasza_ryz"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 556.5,
+  "porcja_g": 557,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 1,
   "czas_przygotowania_min": 10,
@@ -92,13 +92,31 @@
       "minuty": 10,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Ryż.** Odmierz suchy ryż i przepłucz na sitku pod zimną wodą."
         },
         {
-          "tresc": "Opłucz ryż. Obierz i posiekaj cebulę oraz czosnek. Umyj i posiekaj natkę. Odmierz passatę."
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
         },
         {
-          "tresc": "Osusz rozmrożony filet morszczuka, usuń ości i podziel na podobne kawałki grubości około 2–3 cm. Dopraw częścią soli i pieprzu. Umyj przybory po rybie."
+          "tresc": "**Czosnek.** Obierz czosnek i drobno posiekaj."
+        },
+        {
+          "tresc": "**Natka pietruszki.** Umyj i osusz natkę, usuń grube łodygi i drobno posiekaj liście."
+        },
+        {
+          "tresc": "**Morszczuk.** Osusz rozmrożony filet i usuń ości. Podziel na podobne kawałki grubości około 2–3 cm. Dopraw częścią soli i pieprzu."
+        },
+        {
+          "tresc": "**Po przygotowaniu ryby.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surową rybą."
+        },
+        {
+          "tresc": "**Passata.** Odmierz passatę."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz słodką paprykę i oregano."
         }
       ]
     },
@@ -107,21 +125,30 @@
       "minuty": 30,
       "kroki": [
         {
-          "tresc": "Na pierwszym palniku zagotuj wodę w garnku. Dodaj ryż i gotuj przez czas wskazany na opakowaniu; po ugotowaniu odcedź. Wody użyj tyle, by ziarna były zanurzone i swobodnie się gotowały. Nastaw minutnik; równolegle wykonuj kolejne czynności na drugim palniku. Woda do gotowania jest dodatkowa i zostanie odlana."
+          "tresc": "**Ryż — równolegle.** Zagotuj na pierwszym palniku tyle wody, aby ziarna swobodnie się gotowały. Wsyp ryż i gotuj przez czas z opakowania. Nastaw minutnik; w tym czasie wykonuj kolejne kroki na drugim palniku."
         },
         {
-          "tresc": "Rozgrzej oliwę na drugim palniku przez 1 minutę. Smaż cebulę 4 minuty. Dodaj czosnek, paprykę i oregano, smaż 30 sekund."
+          "tresc": "**Ryż — po minutniku.** Po upływie czasu sprawdź miękkość ziaren i odcedź nadmiar wody. Przykryj garnek i odstaw poza palnik. Zrób to niezależnie od postępu pracy przy pozostałych składnikach."
         },
         {
-          "tresc": "Dodaj passatę, doprowadź do łagodnego wrzenia przez około 2 minuty i gotuj 10 minut."
+          "tresc": "**Rozgrzanie oliwy.** Rozgrzej oliwę na drugim palniku przez **1 minutę**."
         },
         {
-          "tresc": "Włóż rybę do sosu, polej sosem i duś pod przykryciem przez 8–10 minut, bez energicznego mieszania.",
+          "tresc": "**Cebula.** Smaż cebulę **4 minuty**."
+        },
+        {
+          "tresc": "**Czosnek i przyprawy.** Dodaj czosnek, paprykę i oregano, smaż **30 sekund**."
+        },
+        {
+          "tresc": "**Sos pomidorowy.** Dodaj passatę, doprowadź do łagodnego wrzenia przez około **2 minuty** i gotuj **10 minut**."
+        },
+        {
+          "tresc": "**Duszenie morszczuka.** Włóż rybę do sosu, polej sosem i duś pod przykryciem przez **8–10 minut**, bez energicznego mieszania.",
           "sygnal": "ryba ma co najmniej 63°C, jest nieprzezroczysta i rozdziela się na płatki",
           "uwaga": true
         },
         {
-          "tresc": "Dodaj natkę, dopraw pozostałą solą i pieprzem. Podaj z ryżem."
+          "tresc": "**Doprawienie i podanie.** Dodaj natkę, dopraw pozostałą solą i pieprzem. Podaj z ryżem."
         }
       ]
     }

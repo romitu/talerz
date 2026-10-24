@@ -1,0 +1,163 @@
+{
+  "nazwa": "Krem z kalafiora z pieczoną ciecierzycą",
+  "opis": "Krem z kalafiora i ziemniaka podany z pieczoną ciecierzycą oraz pieczywem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "inna"
+  ],
+  "rodzaje": [
+    "zupa"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 797,
+  "liczba_porcji_bazowych": 2,
+  "trwalosc_dni": 3,
+  "czas_przygotowania_min": 12,
+  "czas_obrobki_min": 42,
+  "sprzet": [
+    "Piekarnik",
+    "Blacha do pieczenia",
+    "Garnek 3 l",
+    "Blender ręczny",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna",
+    "Sitko",
+    "Miska"
+  ],
+  "przechowywanie": "Krem przechowuj w lodówce do 3 dni lub zamroź. Ciecierzycę i pieczywo trzymaj osobno. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
+  "mozna_mrozic": true,
+  "ratunek": "Za rzadki krem gotuj chwilę bez przykrycia. Miękką ciecierzycę dopiecz w wyższej temperaturze.",
+  "skladniki": [
+    {
+      "nazwa": "Kalafior, surowy",
+      "ilosc": 440,
+      "jednostka": "g",
+      "stan": "podzielony na różyczki"
+    },
+    {
+      "nazwa": "Ziemniaki, surowe",
+      "ilosc": 200,
+      "jednostka": "g",
+      "stan": "pokrojone"
+    },
+    {
+      "nazwa": "Ciecierzyca z puszki, odsączona",
+      "ilosc": 200,
+      "jednostka": "g",
+      "stan": "dokładnie osuszona"
+    },
+    {
+      "nazwa": "Domowy bulion warzywny",
+      "ilosc": 500,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 80,
+      "jednostka": "g",
+      "stan": "posiekana"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 10,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 16,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Chleb żytni razowy",
+      "ilosc": 4,
+      "jednostka": "szt",
+      "stan": "kromki"
+    },
+    {
+      "nazwa": "Kmin rzymski mielony",
+      "ilosc": 2,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Papryka wędzona mielona",
+      "ilosc": 2,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 2,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 1,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 12,
+      "kroki": [
+        {
+          "tresc": "**Ciecierzyca.** Opłucz, odsącz i dokładnie osusz ciecierzycę. Wymieszaj z połową oliwy, kminem i wędzoną papryką."
+        },
+        {
+          "tresc": "**Kalafior.** Umyj kalafior i podziel na podobnej wielkości różyczki, około 3 cm."
+        },
+        {
+          "tresc": "**Ziemniaki.** Umyj i obierz ziemniaki, pokrój w kostkę około 1 cm."
+        },
+        {
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
+        },
+        {
+          "tresc": "**Czosnek.** Obierz czosnek i drobno posiekaj."
+        },
+        {
+          "tresc": "**Bulion.** Odmierz bulion."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól i pieprz."
+        },
+        {
+          "tresc": "**Pieczywo.** Przygotuj pieczywo w ilości wskazanej na liście składników."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie i pieczenie",
+      "minuty": 42,
+      "kroki": [
+        {
+          "tresc": "**Rozgrzanie piekarnika.** Rozgrzej piekarnik do **210°C**, grzanie góra–dół, zwykle około **10 minut**."
+        },
+        {
+          "tresc": "**Pieczenie ciecierzycy.** Rozłóż ciecierzycę na blasze i piecz **25–30 minut**, mieszając w połowie."
+        },
+        {
+          "tresc": "**Rozgrzanie oliwy — równolegle.** Już podczas rozgrzewania piekarnika rozgrzej pozostałą oliwę w garnku przez **1 minutę**."
+        },
+        {
+          "tresc": "**Cebula.** Smaż cebulę **4 minuty**."
+        },
+        {
+          "tresc": "**Czosnek.** Dodaj czosnek i smaż **30 sekund**."
+        },
+        {
+          "tresc": "**Gotowanie warzyw.** Dodaj ziemniaki, kalafior i bulion. Doprowadź do wrzenia przez około **4 minuty**, gotuj pod przykryciem **18–20 minut**."
+        },
+        {
+          "tresc": "**Blendowanie.** Zdejmij garnek z ognia i sprawdź miękkość warzyw. Zblenduj z zanurzoną końcówką, dopraw solą i pieprzem."
+        },
+        {
+          "tresc": "**Podanie.** Podaj krem z upieczoną ciecierzycą i pieczywem; ciecierzycę dodawaj dopiero na talerzu."
+        }
+      ]
+    }
+  ]
+}

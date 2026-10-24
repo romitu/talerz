@@ -1,0 +1,129 @@
+{
+  "nazwa": "Makaron z brokułem i fetą",
+  "opis": "Pełnoziarnisty makaron z brokułem, fetą, czosnkiem i cytryną. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "srodziemnomorska"
+  ],
+  "rodzaje": [
+    "makaron"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 406,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 2,
+  "czas_przygotowania_min": 8,
+  "czas_obrobki_min": 20,
+  "sprzet": [
+    "Garnek 3 l",
+    "Patelnia 28 cm",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna",
+    "Durszlak"
+  ],
+  "przechowywanie": "Przechowuj w lodówce do 2 dni. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
+  "mozna_mrozic": false,
+  "ratunek": "Twardy brokuł gotuj minutę dłużej. Za słone danie złagodź dodatkowym makaronem lub brokułem.",
+  "skladniki": [
+    {
+      "nazwa": "Makaron pełnoziarnisty, suchy",
+      "ilosc": 85,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Brokuł, surowy",
+      "ilosc": 220,
+      "jednostka": "g",
+      "stan": "podzielony na małe różyczki"
+    },
+    {
+      "nazwa": "Ser feta",
+      "ilosc": 70,
+      "jednostka": "g",
+      "stan": "pokruszony"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 10,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cytryna",
+      "ilosc": 15,
+      "jednostka": "g",
+      "stan": "sok"
+    },
+    {
+      "nazwa": "Papryka ostra mielona",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 8,
+      "kroki": [
+        {
+          "tresc": "**Brokuł.** Umyj brokuł i podziel na małe różyczki. Obierz miękki środek łodygi i pokrój go drobno."
+        },
+        {
+          "tresc": "**Czosnek.** Obierz czosnek i drobno posiekaj."
+        },
+        {
+          "tresc": "**Feta.** Odmierz fetę i pokrusz."
+        },
+        {
+          "tresc": "**Cytryna.** Umyj cytrynę, wyciśnij sok i odmierz ilość wskazaną na liście składników."
+        },
+        {
+          "tresc": "**Makaron.** Odmierz makaron."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz pieprz i ostrą paprykę."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie i łączenie",
+      "minuty": 20,
+      "kroki": [
+        {
+          "tresc": "**Makaron i brokuł.** Zagotuj wodę i gotuj makaron przez czas z opakowania. Na ostatnie **4 minuty** dodaj małe różyczki i cienko pokrojoną łodygę brokułu."
+        },
+        {
+          "tresc": "**Odcedzenie.** Zachowaj trochę wody z gotowania i odcedź makaron z brokułem."
+        },
+        {
+          "tresc": "**Rozgrzanie oliwy — równolegle.** Pod koniec gotowania makaronu rozgrzej oliwę na patelni przez **1 minutę**."
+        },
+        {
+          "tresc": "**Czosnek i papryka.** Dodaj czosnek i ostrą paprykę, smaż **20–30 sekund**."
+        },
+        {
+          "tresc": "**Połączenie makaronu.** Dodaj makaron z brokułem, fetę i odrobinę zachowanej wody. Mieszaj na małym ogniu przez **1 minutę**."
+        },
+        {
+          "tresc": "**Doprawienie.** Zdejmij z ognia i dodaj sok z cytryny oraz pieprz."
+        }
+      ]
+    }
+  ]
+}

@@ -11,7 +11,7 @@
     "makaron"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 555.5,
+  "porcja_g": 556,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 2,
   "czas_przygotowania_min": 12,
@@ -95,13 +95,34 @@
       "minuty": 12,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Pieczarki.** Oczyść pieczarki i pokrój w cienkie plasterki."
         },
         {
-          "tresc": "Oczyść pieczarki i pokrój w plasterki. Obierz i posiekaj cebulę oraz czosnek."
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
         },
         {
-          "tresc": "Mięso osusz, usuń twardą błonę, pokrój w paski około 1 cm. Umyj przybory i ręce. Odmierz makaron, jogurt i musztardę."
+          "tresc": "**Czosnek.** Obierz czosnek i drobno posiekaj."
+        },
+        {
+          "tresc": "**Polędwiczka.** Osusz polędwiczkę, usuń twardą błonę i pokrój w paski grubości około 1 cm."
+        },
+        {
+          "tresc": "**Po przygotowaniu mięsa.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surowym mięsem."
+        },
+        {
+          "tresc": "**Makaron.** Odmierz makaron."
+        },
+        {
+          "tresc": "**Jogurt.** Odmierz jogurt."
+        },
+        {
+          "tresc": "**Musztarda.** Odmierz musztardę."
+        },
+        {
+          "tresc": "**Olej.** Odmierz olej."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól, pieprz i tymianek."
         }
       ]
     },
@@ -110,19 +131,34 @@
       "minuty": 25,
       "kroki": [
         {
-          "tresc": "Zagotuj wodę w garnku i ugotuj makaron przez czas wskazany na opakowaniu. Nastaw minutnik; w tym czasie przygotowuj sos na drugim palniku. Przed odcedzeniem zachowaj nieco wody z gotowania. Woda do gotowania jest dodatkowa i zostanie odlana."
+          "tresc": "**Makaron — równolegle.** Zagotuj wodę i wsyp makaron. Gotuj przez czas z opakowania. Nastaw minutnik; w tym czasie przygotowuj sos na drugim palniku."
         },
         {
-          "tresc": "Na drugim palniku rozgrzej połowę oleju przez 1 minutę. Smaż mięso przez 4–5 minut, obracając. Sprawdź temperaturę: co najmniej 63°C. Przełóż na czysty talerz i pozostaw na co najmniej 3 minuty."
+          "tresc": "**Makaron — po minutniku.** Sprawdź, czy makaron jest gotowy. Zachowaj trochę wody z gotowania, a następnie odcedź makaron. Zrób to po minutniku, niezależnie od postępu przygotowania sosu."
         },
         {
-          "tresc": "Dodaj pozostały olej, cebulę i pieczarki. Smaż 7–9 minut, aż woda odparuje. Dodaj czosnek i tymianek, smaż 30 sekund."
+          "tresc": "**Rozgrzanie oleju.** Na drugim palniku rozgrzej połowę oleju przez **1 minutę**."
         },
         {
-          "tresc": "W misce wymieszaj jogurt, musztardę i niewielką ilość ciepłej wody z makaronu."
+          "tresc": "**Smażenie polędwiczki.** Smaż mięso przez **4–5 minut**, obracając."
         },
         {
-          "tresc": "Do patelni dodaj makaron i mięso, podgrzej 1 minutę. Zdejmij z ognia, odczekaj około 1 minuty i dodaj sos jogurtowy. Dopraw solą i pieprzem; nie zagotowuj."
+          "tresc": "**Sprawdzenie i odpoczynek.** Sprawdź temperaturę: co najmniej **63°C**. Przełóż na czysty talerz i pozostaw na co najmniej **3 minuty**."
+        },
+        {
+          "tresc": "**Pieczarki i cebula.** Dodaj pozostały olej, cebulę i pieczarki. Smaż **7–9 minut**, aż woda odparuje."
+        },
+        {
+          "tresc": "**Czosnek i tymianek.** Dodaj czosnek i tymianek, smaż **30 sekund**."
+        },
+        {
+          "tresc": "**Sos jogurtowy.** W misce wymieszaj jogurt, musztardę i niewielką ilość ciepłej wody z makaronu."
+        },
+        {
+          "tresc": "**Połączenie makaronu.** Do patelni dodaj makaron i mięso, podgrzej **1 minutę**."
+        },
+        {
+          "tresc": "**Jogurt i doprawienie.** Zdejmij z ognia, odczekaj około **1 minuty** i dodaj sos jogurtowy. Dopraw solą i pieprzem; nie zagotowuj."
         }
       ]
     }

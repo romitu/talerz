@@ -12,7 +12,7 @@
     "zupa"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 527.5,
+  "porcja_g": 528,
   "liczba_porcji_bazowych": 2,
   "trwalosc_dni": 1,
   "czas_przygotowania_min": 12,
@@ -120,31 +120,40 @@
       "minuty": 12,
       "kroki": [
         {
-          "tresc": "Umyj udka z kurczaka. Zostaw mięso w całości."
+          "tresc": "**Kurczak.** Umyj udka z kurczaka. Zostaw mięso w całości."
         },
         {
-          "tresc": "Umyj ręce oraz przybory i powierzchnie, które miały kontakt z surowym mięsem. Do warzyw użyj czystej deski i noża."
+          "tresc": "**Po przygotowaniu mięsa.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surowym mięsem."
         },
         {
-          "tresc": "Obierz cebulę i pokrój w cienkie piórka."
+          "tresc": "**Cebula.** Obierz cebulę i pokrój w cienkie piórka."
         },
         {
-          "tresc": "Obierz i drobno posiekaj czosnek oraz imbir."
+          "tresc": "**Czosnek.** Obierz czosnek i drobno posiekaj."
         },
         {
-          "tresc": "Umyj paprykę, usuń gniazdo nasienne i pokrój miąższ w paski szerokości około 5 mm."
+          "tresc": "**Imbir.** Obierz imbir i drobno posiekaj."
         },
         {
-          "tresc": "Umyj cukinię i pokrój w półplasterki grubości około 5 mm."
+          "tresc": "**Papryka.** Umyj paprykę, usuń gniazdo nasienne i pokrój miąższ w paski szerokości około 5 mm."
         },
         {
-          "tresc": "Umyj i posiekaj szczypiorek. Umyj limonkę, wyciśnij sok z ilości wskazanej na liście składników i odstaw do końcowego doprawienia."
+          "tresc": "**Cukinia.** Umyj cukinię i pokrój w półplasterki grubości około 5 mm."
         },
         {
-          "tresc": "Odmierz mleko kokosowe, pastę curry, sos sojowy, oliwę, suchy ryż i wodę do curry w ilościach wskazanych na liście składników dla przygotowywanej liczby porcji."
+          "tresc": "**Szczypiorek.** Umyj i osusz szczypiorek, następnie drobno posiekaj."
         },
         {
-          "tresc": "Przepłucz ryż na sitku pod zimną wodą i odstaw do gotowania."
+          "tresc": "**Limonka.** Umyj limonkę, wyciśnij sok i odmierz ilość wskazaną na liście składników."
+        },
+        {
+          "tresc": "**Ryż.** Odmierz suchy ryż i przepłucz na sitku pod zimną wodą."
+        },
+        {
+          "tresc": "**Baza curry.** Odmierz mleko kokosowe, pastę curry, sos sojowy i wodę do curry do osobnych naczyń."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
         }
       ]
     },
@@ -153,57 +162,57 @@
       "minuty": 42,
       "kroki": [
         {
-          "tresc": "Włóż pałki do garnka mieszczącego przygotowywaną ilość mięsa. Zalej zimną wodą tak, aby przykryła mięso, i włącz grzanie na pierwszym palniku.",
+          "tresc": "**Kurczak do garnka.** Włóż pałki do garnka mieszczącego przygotowywaną ilość mięsa. Zalej zimną wodą tak, aby przykryła mięso, i włącz grzanie na pierwszym palniku.",
           "uwaga": true
         },
         {
-          "tresc": "Doprowadź wodę z mięsem do wrzenia; zwykle zajmuje to około 5 minut. Czas zależy od ilości wody i mocy palnika. Składniki są już przygotowane."
+          "tresc": "**Zagotowanie.** Doprowadź wodę z mięsem do wrzenia; zwykle zajmuje to około **5 minut**. Czas zależy od ilości wody i mocy palnika."
         },
         {
-          "tresc": "Po zagotowaniu zbierz szumowiny łyżką cedzakową. Zmniejsz ogień i uchyl pokrywkę."
+          "tresc": "**Zebranie szumowin.** Po zagotowaniu zbierz szumowiny łyżką cedzakową. Zmniejsz ogień i uchyl pokrywkę."
         },
         {
-          "tresc": "Gotuj kurczaka na małym ogniu przez 32 minuty. Licz czas od rozpoczęcia łagodnego gotowania po zebraniu szumowin. Woda ma delikatnie bulgotać. Nastaw minutnik. W czasie gotowania mięsa ugotuj ryż i przygotuj bazę curry według kolejnych kroków. Po sygnale minutnika sprawdź mięso, niezależnie od postępu pracy przy curry.",
+          "tresc": "**Gotowanie kurczaka.** Gotuj łagodnie przez **32 minuty** od zebrania szumowin. Nastaw minutnik. W tym czasie gotuj ryż i curry według kolejnych kroków; po minutniku od razu sprawdź mięso.",
           "uwaga": true
         },
         {
-          "tresc": "Na drugim palniku zagotuj w garnku większą ilość wody, tak aby ryż po wsypaniu był zanurzony i mógł swobodnie się gotować. Wsyp opłukany ryż, zamieszaj i gotuj przez czas podany na opakowaniu. Przed odcedzeniem sprawdź, czy ziarna są miękkie. Kurczak w tym czasie gotuje się na pierwszym palniku."
+          "tresc": "**Ryż — drugi palnik.** Na drugim palniku zagotuj w garnku większą ilość wody, tak aby ryż po wsypaniu był zanurzony i mógł swobodnie się gotować. Wsyp opłukany ryż, zamieszaj i gotuj przez czas podany na opakowaniu. Przed odcedzeniem sprawdź, czy ziarna są miękkie. Kurczak w tym czasie gotuje się na pierwszym palniku."
         },
         {
-          "tresc": "Ugotowany ryż odcedź na sitku, przełóż z powrotem do garnka i przykryj. Odstaw poza palnik do podania. Drugi palnik jest teraz wolny do przygotowania curry.",
+          "tresc": "**Odcedzenie ryżu.** Ugotowany ryż odcedź na sitku, przełóż z powrotem do garnka i przykryj. Odstaw poza palnik do podania. Drugi palnik jest teraz wolny do przygotowania curry.",
           "sygnal": "ziarna są miękkie, a nadmiar wody został odcedzony"
         },
         {
-          "tresc": "Gdy do końca gotowania kurczaka pozostaje około 15 minut, a drugi palnik jest już wolny, postaw na nim patelnię mieszczącą przygotowywaną ilość curry. Wlej odmierzoną oliwę i rozgrzewaj przez około 1 minutę na średnim ogniu. Jeśli ryż nadal się gotuje, rozpocznij przygotowanie curry zaraz po zdjęciu garnka z palnika."
+          "tresc": "**Oliwa na wolnym palniku.** Zacznij około **15 minut** przed końcem gotowania kurczaka, gdy palnik po ryżu jest wolny. Rozgrzej oliwę na patelni przez **1 minutę** na średnim ogniu. Jeśli ryż jeszcze się gotuje, poczekaj na zwolnienie palnika."
         },
         {
-          "tresc": "Dodaj pokrojoną cebulę i smaż przez 3 minuty na średnim ogniu, mieszając.",
+          "tresc": "**Cebula.** Dodaj pokrojoną cebulę i smaż przez **3 minuty** na średnim ogniu, mieszając.",
           "sygnal": "cebula jest szklista, bez przypalonych brzegów"
         },
         {
-          "tresc": "Dodaj posiekany czosnek i imbir. Smaż przez 1 minutę na średnim ogniu, mieszając."
+          "tresc": "**Czosnek i imbir.** Dodaj posiekany czosnek i imbir. Smaż przez **1 minutę** na średnim ogniu, mieszając."
         },
         {
-          "tresc": "Dodaj odmierzoną pastę curry i smaż przez 1 minutę, stale mieszając.",
+          "tresc": "**Pasta curry.** Dodaj odmierzoną pastę curry i smaż przez **1 minutę**, stale mieszając.",
           "sygnal": "pasta intensywnie pachnie, ale nie przypala się"
         },
         {
-          "tresc": "Wlej odmierzone mleko kokosowe oraz wodę do curry, dodaj sos sojowy. Wymieszaj i doprowadź do łagodnego wrzenia, podgrzewając przez około 2 minuty."
+          "tresc": "**Baza curry.** Wlej odmierzone mleko kokosowe oraz wodę do curry, dodaj sos sojowy. Wymieszaj i doprowadź do łagodnego wrzenia, podgrzewając przez około **2 minuty**."
         },
         {
-          "tresc": "Dodaj paski papryki do łagodnie gotującej się bazy curry. Gotuj przez 3 minuty na małym ogniu."
+          "tresc": "**Papryka.** Dodaj paski papryki do łagodnie gotującej się bazy curry. Gotuj przez **3 minuty** na małym ogniu."
         },
         {
-          "tresc": "Dodaj cukinię i gotuj jeszcze przez 4 minuty na małym ogniu. Papryka będzie gotowała się łącznie 7 minut, cukinia 4 minuty. Jeśli mięso nie jest jeszcze gotowe do dodania, zdejmij patelnię z ognia.",
+          "tresc": "**Cukinia.** Dodaj cukinię i gotuj jeszcze przez **4 minuty** na małym ogniu. Papryka będzie gotowała się łącznie **7 minut**, cukinia **4 minuty**. Jeśli mięso nie jest jeszcze gotowe do dodania, zdejmij patelnię z ognia.",
           "sygnal": "warzywa lekko zmiękły i zachowują kształt"
         },
         {
-          "tresc": "Po 32 minutach łagodnego gotowania sprawdź najgrubszą część mięsa termometrem, nie dotykając kości. Sprawdź też widelcem, czy mięso łatwo odchodzi od kości. Jeżeli nie osiągnęło 74°C albo nadal jest twarde, gotuj kolejne 5 minut i ponów kontrolę. Powtarzaj w razie potrzeby.",
+          "tresc": "**Sprawdzenie kurczaka.** Po **32 minutach** łagodnego gotowania sprawdź najgrubszą część mięsa termometrem, nie dotykając kości. Sprawdź też widelcem, czy mięso łatwo odchodzi od kości. Jeżeli nie osiągnęło **74°C** albo nadal jest twarde, gotuj kolejne **5 minut** i ponów kontrolę. Powtarzaj w razie potrzeby.",
           "sygnal": "co najmniej 74°C w mięsie i łatwe oddzielanie go od kości",
           "uwaga": true
         },
         {
-          "tresc": "Gotowe pałki wyjmij łyżką cedzakową na czystą deskę. Wyłącz pierwszy palnik. Wodę z gotowania odlej; możesz zachować niewielką ilość wywaru do ewentualnego rozrzedzenia curry."
+          "tresc": "**Wyjęcie kurczaka.** Gotowe pałki wyjmij łyżką cedzakową na czystą deskę. Wyłącz pierwszy palnik. Wodę z gotowania odlej; możesz zachować niewielką ilość wywaru do ewentualnego rozrzedzenia curry."
         }
       ]
     },
@@ -212,16 +221,19 @@
       "minuty": 6,
       "kroki": [
         {
-          "tresc": "Odczekaj około 1 minuty przed oddzielaniem mięsa; pałki nadal będą gorące, więc przytrzymuj je widelcem."
+          "tresc": "**Przestudzenie mięsa.** Odczekaj około **1 minuty** przed oddzielaniem mięsa; pałki nadal będą gorące, więc przytrzymuj je widelcem."
         },
         {
-          "tresc": "Przytrzymując pałki widelcem, oddziel mięso od kości i chrząstek. Podziel na większe kawałki."
+          "tresc": "**Oddzielenie mięsa.** Przytrzymując pałki widelcem, oddziel mięso od kości i chrząstek. Podziel na większe kawałki."
         },
         {
-          "tresc": "Dodaj mięso do gotowej bazy curry. Podgrzewaj przez 2 minuty na małym ogniu, delikatnie mieszając. Jeśli patelnia czekała poza palnikiem i zawartość przestała być gorąca, najpierw ponownie doprowadź ją do łagodnego wrzenia, a następnie odlicz 2 minuty."
+          "tresc": "**Mięso do curry.** Dodaj mięso do gotowej bazy curry. Podgrzewaj przez **2 minuty** na małym ogniu, delikatnie mieszając. Jeśli patelnia czekała poza palnikiem i zawartość przestała być gorąca, najpierw ponownie doprowadź ją do łagodnego wrzenia, a następnie odlicz **2 minuty**."
         },
         {
-          "tresc": "Zdejmij patelnię z ognia i wmieszaj sok z limonki. Rozdziel ugotowany ryż oraz całe curry na przygotowywaną liczbę porcji. Posyp szczypiorkiem i podaj."
+          "tresc": "**Sok z limonki.** Zdejmij patelnię z ognia i wmieszaj sok z limonki."
+        },
+        {
+          "tresc": "**Podanie.** Rozdziel ugotowany ryż oraz całe curry na przygotowywaną liczbę porcji. Posyp szczypiorkiem i podaj."
         }
       ]
     }

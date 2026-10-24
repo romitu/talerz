@@ -12,7 +12,7 @@
     "makaron"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 710.5,
+  "porcja_g": 711,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 3,
   "czas_przygotowania_min": 10,
@@ -105,13 +105,28 @@
       "minuty": 10,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Marchew.** Umyj i obierz marchew, zetrzyj na tarce o grubych oczkach."
         },
         {
-          "tresc": "Umyj i obierz marchew, zetrzyj na tarce. Obierz i posiekaj cebulę oraz czosnek."
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
         },
         {
-          "tresc": "Opłucz soczewicę na sitku. Odmierz wodę z listy, passatę i makaron."
+          "tresc": "**Czosnek.** Obierz czosnek i drobno posiekaj."
+        },
+        {
+          "tresc": "**Soczewica.** Odmierz soczewicę i opłucz na sitku."
+        },
+        {
+          "tresc": "**Makaron.** Odmierz makaron."
+        },
+        {
+          "tresc": "**Płynna baza.** Odmierz passatę i wodę z listy składników."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól, pieprz, słodką paprykę, oregano i suszoną bazylię."
         }
       ]
     },
@@ -120,16 +135,25 @@
       "minuty": 35,
       "kroki": [
         {
-          "tresc": "Rozgrzej oliwę w garnku przez 1 minutę, smaż cebulę i marchew 5 minut. Dodaj czosnek, oregano, bazylię i paprykę; smaż 30 sekund."
+          "tresc": "**Rozgrzanie oliwy.** Rozgrzej oliwę w garnku przez **1 minutę**."
         },
         {
-          "tresc": "Dodaj soczewicę oraz odmierzoną wodę. Doprowadź do wrzenia przez około 2 minuty i gotuj pod uchyloną pokrywką 12–15 minut, często mieszając. Uzupełnij odparowaną wodę, jeżeli soczewica jeszcze nie zmiękła."
+          "tresc": "**Cebula i marchew.** Smaż cebulę i marchew **5 minut**."
         },
         {
-          "tresc": "Już podczas gotowania soczewicy nastaw wodę na makaron na drugim palniku. Ugotuj go przez czas z opakowania tak, aby był gotowy pod koniec gotowania sosu; zachowaj nieco wody przed odcedzeniem. Do miękkiej soczewicy dodaj passatę i gotuj sos 10 minut bez przykrycia."
+          "tresc": "**Czosnek i przyprawy.** Dodaj czosnek, oregano, bazylię i paprykę; smaż **30 sekund**."
         },
         {
-          "tresc": "Wymieszaj sos z makaronem, dopraw solą i pieprzem. W razie potrzeby rozluźnij wodą z makaronu.",
+          "tresc": "**Gotowanie soczewicy.** Dodaj soczewicę oraz odmierzoną wodę. Doprowadź do wrzenia przez około **2 minuty** i gotuj pod uchyloną pokrywką **12–15 minut**, często mieszając. Uzupełnij odparowaną wodę, jeżeli soczewica jeszcze nie zmiękła."
+        },
+        {
+          "tresc": "**Makaron — równolegle.** Już podczas gotowania soczewicy nastaw wodę na makaron na drugim palniku. Ugotuj go przez czas z opakowania tak, aby był gotowy pod koniec gotowania sosu; zachowaj nieco wody przed odcedzeniem."
+        },
+        {
+          "tresc": "**Passata do soczewicy.** Do miękkiej soczewicy dodaj passatę i gotuj sos **10 minut** bez przykrycia."
+        },
+        {
+          "tresc": "**Połączenie i doprawienie.** Wymieszaj sos z makaronem, dopraw solą i pieprzem. W razie potrzeby rozluźnij wodą z makaronu.",
           "sygnal": "soczewica miękka, sos oblepia makaron",
           "uwaga": true
         }

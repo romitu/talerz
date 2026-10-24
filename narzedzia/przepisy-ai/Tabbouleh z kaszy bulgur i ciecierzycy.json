@@ -97,13 +97,34 @@
       "minuty": 15,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Ciecierzyca.** Przełóż ciecierzycę z puszki na sitko, opłucz i odsącz. Odmierz po odsączeniu."
         },
         {
-          "tresc": "Opłucz i odsącz ciecierzycę. Umyj pomidora, ogórek, natkę, miętę i cytrynę."
+          "tresc": "**Pomidor.** Umyj pomidory i pokrój w kostkę."
         },
         {
-          "tresc": "Pokrój pomidora i ogórek w drobną kostkę. Obierz i posiekaj cebulę. Posiekaj osuszone zioła. Wyciśnij i odmierz sok z cytryny, odmierz kaszę."
+          "tresc": "**Ogórek.** Umyj ogórek i pokrój w kostkę."
+        },
+        {
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
+        },
+        {
+          "tresc": "**Natka pietruszki.** Umyj i osusz natkę, usuń grube łodygi i drobno posiekaj liście."
+        },
+        {
+          "tresc": "**Mięta.** Umyj i osusz miętę, oderwij liście i posiekaj."
+        },
+        {
+          "tresc": "**Cytryna.** Umyj cytrynę, wyciśnij sok i odmierz ilość wskazaną na liście składników."
+        },
+        {
+          "tresc": "**Bulgur.** Odmierz kaszę bulgur."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól i pieprz."
         }
       ]
     },
@@ -112,7 +133,10 @@
       "minuty": 20,
       "kroki": [
         {
-          "tresc": "Zagotuj wodę i gotuj bulgur przez czas z opakowania. Odcedź, krótko przepłucz chłodną wodą i dokładnie odsącz. Upewnij się, że kasza nie jest gorąca."
+          "tresc": "**Gotowanie kaszy.** Zagotuj wodę i gotuj bulgur przez czas z opakowania."
+        },
+        {
+          "tresc": "**Schłodzenie kaszy.** Odcedź, krótko przepłucz chłodną wodą i dokładnie odsącz. Upewnij się, że kasza nie jest gorąca."
         }
       ]
     },
@@ -121,7 +145,7 @@
       "minuty": 3,
       "kroki": [
         {
-          "tresc": "Połącz kaszę, ciecierzycę, warzywa i zioła. Dodaj sok z cytryny, oliwę, sól i pieprz. Wymieszaj."
+          "tresc": "**Połączenie sałatki.** Połącz kaszę, ciecierzycę, warzywa i zioła. Dodaj sok z cytryny, oliwę, sól i pieprz. Wymieszaj."
         }
       ]
     }

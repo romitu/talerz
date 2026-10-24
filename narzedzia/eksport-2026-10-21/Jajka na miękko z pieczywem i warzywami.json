@@ -1,0 +1,110 @@
+{
+  "nazwa": "Jajka na miękko z pieczywem i warzywami",
+  "opis": "Jajka z płynnym żółtkiem, podane z pieczywem posmarowanym masłem, pomidorem i ogórkiem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
+  "pory": [
+    "sniadanie",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "polska"
+  ],
+  "rodzaje": [
+    "jajka"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 307,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 0,
+  "czas_przygotowania_min": 5,
+  "czas_obrobki_min": 12,
+  "sprzet": [
+    "Garnek 2 l",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna",
+    "Łyżka cedzakowa"
+  ],
+  "przechowywanie": "Danie najlepiej zjedz od razu po przygotowaniu. Jajek ugotowanych na miękko nie przechowuj na później.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli po otwarciu białko jest płynne, przełóż zawartość do małego naczynia i dogotuj do ścięcia. Jajka z twardym żółtkiem możesz rozgnieść na pieczywie z masłem.",
+  "skladniki": [
+    {
+      "nazwa": "Jaja kurze, całe, surowe",
+      "ilosc": 2,
+      "jednostka": "szt"
+    },
+    {
+      "nazwa": "Chleb żytni razowy",
+      "ilosc": 2,
+      "jednostka": "szt",
+      "stan": "kromki"
+    },
+    {
+      "nazwa": "Masło",
+      "ilosc": 10,
+      "jednostka": "g",
+      "stan": "miękkie, do pieczywa"
+    },
+    {
+      "nazwa": "Pomidory, surowe",
+      "ilosc": 0.5,
+      "jednostka": "szt",
+      "stan": "pokrojony w cząstki"
+    },
+    {
+      "nazwa": "Ogórek, surowy",
+      "ilosc": 0.25,
+      "jednostka": "szt",
+      "stan": "pokrojony w plasterki"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 1,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 5,
+      "kroki": [
+        {
+          "tresc": "**Pomidor.** Umyj pomidory i pokrój w cząstki."
+        },
+        {
+          "tresc": "**Ogórek.** Umyj ogórek i pokrój w plasterki."
+        },
+        {
+          "tresc": "**Pieczywo.** Posmaruj kromki odmierzoną ilością masła. Ułóż na talerzu obok przygotowanych warzyw."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól i pieprz."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie jajek",
+      "minuty": 12,
+      "kroki": [
+        {
+          "tresc": "**Zagotowanie wody.** W garnku zagotuj tyle wody, aby po włożeniu całkowicie przykryła jajka."
+        },
+        {
+          "tresc": "**Gotowanie jajek.** Ostrożnie włóż zimne jajka do wrzątku i gotuj około **6 minut** od zanurzenia; dla dużych jajek czas może wynieść **7 minut**, utrzymując łagodne wrzenie.",
+          "uwaga": true
+        },
+        {
+          "tresc": "**Schłodzenie jajek.** Wyjmij jajka, schładzaj je pod zimną wodą przez około **30 sekund**."
+        },
+        {
+          "tresc": "**Podanie.** Od razu podaj z pieczywem oraz warzywami. Dopraw solą i pieprzem."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,235 @@
+{
+  "nazwa": "Krupnik z kurczakiem, chili, papryką i cytryną",
+  "opis": "Lżejsza i bardziej wyrazista wersja klasycznego krupniku. Chudy kurczak zapewnia dużo białka, wędzona papryka i chili nadają głębi oraz lekkiej ostrości, a sok z cytryny dodany na końcu odświeża smak zupy.",
+  "pory": [
+    "obiad"
+  ],
+  "kuchnie": [
+    "polska"
+  ],
+  "rodzaje": [
+    "zupa"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 1050,
+  "liczba_porcji_bazowych": 2,
+  "trwalosc_dni": 3,
+  "czas_przygotowania_min": 15,
+  "czas_obrobki_min": 69,
+  "sprzet": [
+    "Garnek 4 l",
+    "Patelnia 28 cm",
+    "Sitko",
+    "Nóż szefa kuchni",
+    "Deska do krojenia"
+  ],
+  "przechowywanie": "Przechowuj w lodówce do 3 dni. Kasza jęczmienna będzie nadal chłonęła płyn, dlatego następnego dnia krupnik może być znacznie gęstszy. Podczas odgrzewania dolej trochę wody.",
+  "mozna_mrozic": true,
+  "ratunek": "Jeśli krupnik jest za gęsty, dolej trochę wody. Jeśli jest mdły, najpierw skoryguj ilość soli i dodaj świeżego koperku lub natki pietruszki.",
+  "skladniki": [
+    {
+      "nazwa": "Udo z kurczaka bez skóry, surowe",
+      "ilosc": 300,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Kasza jęczmienna, sucha",
+      "ilosc": 80,
+      "jednostka": "g",
+      "stan": "sucha, przepłukana"
+    },
+    {
+      "nazwa": "Marchew, surowa",
+      "ilosc": 150,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Pietruszka korzeń",
+      "ilosc": 80,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Seler korzeń",
+      "ilosc": 80,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Por, surowy",
+      "ilosc": 100,
+      "jednostka": "g",
+      "stan": "część biała i jasnozielona, w plastrach"
+    },
+    {
+      "nazwa": "Ziemniaki, surowe",
+      "ilosc": 250,
+      "jednostka": "g",
+      "stan": "obrane"
+    },
+    {
+      "nazwa": "Pietruszka natka",
+      "ilosc": 15,
+      "jednostka": "g",
+      "stan": "posiekana"
+    },
+    {
+      "nazwa": "liść laurowy",
+      "ilosc": 1,
+      "jednostka": "szt"
+    },
+    {
+      "nazwa": "ziele angielskie",
+      "ilosc": 2,
+      "jednostka": "szt"
+    },
+    {
+      "nazwa": "woda",
+      "ilosc": 900,
+      "jednostka": "g",
+      "stan": "na wywar — po odparowaniu"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 1,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 100,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 10,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Papryka słodka mielona",
+      "ilosc": 2,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Chili suszone",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cytryna",
+      "ilosc": 15,
+      "jednostka": "ml"
+    },
+    {
+      "nazwa": "koperek świeży",
+      "ilosc": 10,
+      "jednostka": "g",
+      "stan": "umyty, osuszony i drobno posiekany; do zupy i posypania przed podaniem"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 15,
+      "kroki": [
+        {
+          "tresc": "**Kasza jęczmienna.** Odmierz kaszę i dokładnie przepłucz na sitku pod zimną wodą."
+        },
+        {
+          "tresc": "**Marchew.** Umyj i obierz marchew, pokrój w kostkę około 1 cm."
+        },
+        {
+          "tresc": "**Pietruszka korzeń.** Umyj i obierz korzeń pietruszki, pokrój w kostkę około 1 cm."
+        },
+        {
+          "tresc": "**Seler korzeniowy.** Umyj i obierz seler, pokrój w kostkę około 1 cm."
+        },
+        {
+          "tresc": "**Por.** Przekrój por wzdłuż, dokładnie wypłucz ziemię spomiędzy warstw i pokrój w plasterki."
+        },
+        {
+          "tresc": "**Ziemniaki.** Umyj i obierz ziemniaki, pokrój w kostkę około 2 cm."
+        },
+        {
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
+        },
+        {
+          "tresc": "**Czosnek.** Obierz czosnek i drobno posiekaj."
+        },
+        {
+          "tresc": "**Cytryna.** Umyj cytrynę, wyciśnij sok i odmierz ilość wskazaną na liście składników."
+        },
+        {
+          "tresc": "**Natka pietruszki.** Umyj i osusz natkę, usuń grube łodygi i drobno posiekaj liście."
+        },
+        {
+          "tresc": "**Kurczak.** Przygotuj mięso z uda bez skóry. Jeśli ma kość, podana masa dotyczy samego mięsa."
+        },
+        {
+          "tresc": "**Po przygotowaniu mięsa.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surowym mięsem."
+        },
+        {
+          "tresc": "**Koperek.** Umyj i osusz koperek, usuń grube łodygi i drobno posiekaj delikatne gałązki."
+        },
+        {
+          "tresc": "**Woda.** Odmierz wodę z listy składników."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól, pieprz, słodką paprykę, chili, liście laurowe i ziele angielskie."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie wywaru",
+      "minuty": 45,
+      "kroki": [
+        {
+          "tresc": "**Kurczak do garnka.** Włóż mięso do garnka, dodaj liść laurowy, ziele angielskie i odmierzoną wodę."
+        },
+        {
+          "tresc": "**Gotowanie wywaru.** Doprowadź do wrzenia i zbierz szumowiny. Zmniejsz ogień i gotuj łagodnie przez około **40 minut**. Uzupełniaj odparowaną wodę."
+        },
+        {
+          "tresc": "**Cebula — równolegle.** Pod koniec gotowania wywaru rozgrzej odmierzoną oliwę na patelni przez **1 minutę**. Dodaj cebulę i smaż na średnim ogniu przez **4 minuty**."
+        },
+        {
+          "tresc": "**Czosnek i przyprawy.** Dodaj do cebuli czosnek, odmierzoną słodką paprykę i chili. Smaż przez **30 sekund**, mieszając."
+        },
+        {
+          "tresc": "**Wyjęcie kurczaka.** Wyjmij ugotowanego kurczaka. Oddziel mięso od kości, jeśli są, i podziel na mniejsze kawałki."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie warzyw i kaszy",
+      "minuty": 24,
+      "kroki": [
+        {
+          "tresc": "**Warzywa i kasza.** Do wywaru dodaj marchew, pietruszkę, seler, por, ziemniaki, przepłukaną kaszę i podsmażoną cebulę z przyprawami."
+        },
+        {
+          "tresc": "**Gotowanie kaszy.** Gotuj na małym ogniu przez około **20 minut**, aż kasza i ziemniaki będą miękkie. Sprawdź też czas na opakowaniu kaszy; w razie potrzeby dogotowuj po **3–5 minut**."
+        },
+        {
+          "tresc": "**Powrót kurczaka.** Włóż mięso do zupy i podgrzewaj przez **2 minuty**. Usuń liść laurowy i ziele angielskie."
+        },
+        {
+          "tresc": "**Doprawienie.** Zdejmij garnek z ognia. Wmieszaj odmierzony sok z cytryny oraz część natki i koperku. Dopraw solą i pieprzem."
+        },
+        {
+          "tresc": "**Podanie.** Rozlej zupę i posyp pozostałą natką oraz koperkiem."
+        }
+      ]
+    }
+  ]
+}

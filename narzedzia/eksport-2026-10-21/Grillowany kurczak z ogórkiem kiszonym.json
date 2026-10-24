@@ -1,0 +1,164 @@
+{
+  "nazwa": "Grillowany kurczak z ogórkiem kiszonym",
+  "opis": "Grillowany kurczak z kremowym twarożkiem, ogórkiem kiszonym i czerwoną cebulą, podawany na chrupiącym pieczywie żytnim. Danie dobrze smakuje również na zimno.",
+  "pory": [
+    "kolacja",
+    "sniadanie"
+  ],
+  "kuchnie": [
+    "polska"
+  ],
+  "rodzaje": [
+    "kanapki"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 488,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 2,
+  "czas_przygotowania_min": 7,
+  "czas_obrobki_min": 13,
+  "sprzet": [
+    "Grill kontaktowy",
+    "Nóż szefa kuchni",
+    "Deska do krojenia"
+  ],
+  "przechowywanie": "W lodówce do 2 dni.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli pierś jest sucha, była grillowana zbyt długo. Jeśli ogórek jest zbyt słony, przepłucz go przed pokrojeniem.",
+  "skladniki": [
+    {
+      "nazwa": "Pierś z kurczaka, surowa",
+      "ilosc": 120,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Twaróg półtłusty",
+      "ilosc": 60,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Jogurt grecki naturalny 2%",
+      "ilosc": 50,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "ogórki kiszone bio",
+      "ilosc": 100,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Chleb żytni razowy",
+      "ilosc": 3,
+      "jednostka": "szt"
+    },
+    {
+      "nazwa": "Cebula czerwona, surowa",
+      "ilosc": 30,
+      "jednostka": "g",
+      "stan": "w cienkich piórkach"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 8,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "koperek świeży",
+      "ilosc": 5,
+      "jednostka": "g",
+      "stan": "posiekany"
+    },
+    {
+      "nazwa": "Szczypiorek świeży",
+      "ilosc": 5,
+      "jednostka": "g",
+      "stan": "posiekany"
+    },
+    {
+      "nazwa": "Papryka słodka mielona",
+      "ilosc": 1,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 3,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 7,
+      "kroki": [
+        {
+          "tresc": "**Ogórek kiszony.** Odsącz ogórki kiszone i pokrój w plasterki."
+        },
+        {
+          "tresc": "**Cebula.** Obierz cebulę i pokrój w cienkie piórka."
+        },
+        {
+          "tresc": "**Koperek.** Umyj i osusz koperek, usuń grube łodygi i drobno posiekaj delikatne gałązki."
+        },
+        {
+          "tresc": "**Szczypiorek.** Umyj i osusz szczypiorek, następnie drobno posiekaj."
+        },
+        {
+          "tresc": "**Czosnek.** Obierz czosnek i przeciśnij przez praskę lub bardzo drobno posiekaj."
+        },
+        {
+          "tresc": "**Twarożek.** Rozgnieć twaróg i wymieszaj z jogurtem, czosnkiem oraz większością koperku i szczypiorku. Pozostałe zioła odłóż do podania."
+        },
+        {
+          "tresc": "**Kurczak.** Osusz pierś i wyrównaj grubość do około 1,5 cm. Natrzyj oliwą, słodką papryką i pieprzem."
+        },
+        {
+          "tresc": "**Po przygotowaniu mięsa.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surowym mięsem."
+        },
+        {
+          "tresc": "**Pieczywo.** Przygotuj pieczywo w ilości wskazanej na liście składników."
+        }
+      ]
+    },
+    {
+      "nazwa": "Grillowanie kurczaka",
+      "minuty": 10,
+      "kroki": [
+        {
+          "tresc": "**Rozgrzanie grilla.** Rozgrzej grill kontaktowy zgodnie z instrukcją urządzenia, zwykle przez około **3 minuty**."
+        },
+        {
+          "tresc": "**Grillowanie kurczaka.** Grilluj kurczaka przez około **6–7 minut**, bez mocnego dociskania pokrywy."
+        },
+        {
+          "tresc": "**Sprawdzenie kurczaka.** Mięso jest gotowe, gdy temperatura w najgrubszym miejscu osiągnie około **74°C**."
+        },
+        {
+          "tresc": "**Odpoczynek i krojenie.** Zdejmij kurczaka z grillownicy i pozostaw na **3–5 minut**, a następnie pokrój w ukośne plastry."
+        }
+      ]
+    },
+    {
+      "nazwa": "Pieczywo i podanie",
+      "minuty": 3,
+      "kroki": [
+        {
+          "tresc": "**Opiekanie pieczywa.** Kromki chleba grilluj przez około **1–2 minuty**, aż będą lekko chrupiące."
+        },
+        {
+          "tresc": "**Twarożek na pieczywo.** Pieczywo posmaruj przygotowanym twarożkiem."
+        },
+        {
+          "tresc": "**Nadzienie kanapek.** Ułóż kurczaka, ogórki kiszone i czerwoną cebulę."
+        },
+        {
+          "tresc": "**Zioła i podanie.** Posyp pozostałym koperkiem lub szczypiorkiem i podawaj od razu."
+        }
+      ]
+    }
+  ]
+}

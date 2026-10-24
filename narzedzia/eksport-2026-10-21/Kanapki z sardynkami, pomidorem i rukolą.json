@@ -1,0 +1,112 @@
+{
+  "nazwa": "Kanapki z sardynkami, pomidorem i rukolą",
+  "opis": "Szybkie kanapki z sardynkami, pomidorem, rukolą i cytryną. Ilości składników dobierz z listy dla przygotowywanej liczby porcji.",
+  "pory": [
+    "sniadanie",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "srodziemnomorska"
+  ],
+  "rodzaje": [
+    "kanapki"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 356,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 0,
+  "czas_przygotowania_min": 10,
+  "czas_obrobki_min": 0,
+  "sprzet": [
+    "Miska",
+    "Widelec",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Kanapki zjedz od razu. Otwarte sardynki przechowuj zgodnie z informacją na opakowaniu.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli pasta jest sucha, dodaj odrobinę oliwy. Zbyt intensywny smak sardynek złagodź pomidorem i cytryną.",
+  "skladniki": [
+    {
+      "nazwa": "Sardynki w oliwie, odsączone",
+      "ilosc": 100,
+      "jednostka": "g",
+      "stan": "rozgniecione"
+    },
+    {
+      "nazwa": "Chleb żytni razowy",
+      "ilosc": 2,
+      "jednostka": "szt",
+      "stan": "kromki"
+    },
+    {
+      "nazwa": "Pomidory, surowe",
+      "ilosc": 130,
+      "jednostka": "g",
+      "stan": "pokrojone w plastry"
+    },
+    {
+      "nazwa": "Rukola",
+      "ilosc": 40,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cytryna",
+      "ilosc": 10,
+      "jednostka": "g",
+      "stan": "sok"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 6,
+      "kroki": [
+        {
+          "tresc": "**Sardynki.** Odsącz sardynki i odmierz po odsączeniu."
+        },
+        {
+          "tresc": "**Pomidor.** Umyj pomidory i pokrój w cienkie plastry. Osusz plasterki z nadmiaru wilgoci."
+        },
+        {
+          "tresc": "**Rukola.** Umyj rukolę i dokładnie osusz."
+        },
+        {
+          "tresc": "**Cytryna.** Umyj cytrynę, wyciśnij sok i odmierz ilość wskazaną na liście składników."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
+        },
+        {
+          "tresc": "**Pieprz.** Odmierz pieprz."
+        },
+        {
+          "tresc": "**Pieczywo.** Przygotuj pieczywo w ilości wskazanej na liście składników."
+        }
+      ]
+    },
+    {
+      "nazwa": "Składanie kanapek",
+      "minuty": 4,
+      "kroki": [
+        {
+          "tresc": "**Pasta z sardynek.** Rozgnieć sardynki widelcem z odmierzoną oliwą, sokiem z cytryny i pieprzem."
+        },
+        {
+          "tresc": "**Składanie kanapek.** Na pieczywie ułóż rukolę, pastę oraz pomidora. Podaj od razu."
+        }
+      ]
+    }
+  ]
+}

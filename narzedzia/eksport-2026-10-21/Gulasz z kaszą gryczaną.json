@@ -1,0 +1,222 @@
+{
+  "nazwa": "Gulasz z kaszą gryczaną",
+  "opis": "Gulasz wieprzowy z wyraźnym smakiem zrumienionego mięsa i cebuli, niewielkim dodatkiem passaty oraz jędrną marchewką i papryką. Podawany z kaszą gryczaną i kapustą kiszoną.",
+  "pory": [
+    "obiad"
+  ],
+  "kuchnie": [
+    "polska"
+  ],
+  "rodzaje": [
+    "gulasz_curry",
+    "kasza_ryz"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 671,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 3,
+  "czas_przygotowania_min": 15,
+  "czas_obrobki_min": 110,
+  "sprzet": [
+    "Garnek 4 l",
+    "Garnek 2 l",
+    "Nóż szefa kuchni",
+    "Deska do krojenia"
+  ],
+  "przechowywanie": "Przechowuj w lodówce do 3 dni. Kaszę najlepiej przechowywać osobno.",
+  "mozna_mrozic": true,
+  "ratunek": "Jeśli mięso jest twarde, przed dodaniem warzyw duś je dalej po 10 minut. Jeśli sos nadmiernie gęstnieje, dolewaj po trochu gorącej wody. Zbyt rzadki sos odparuj przed dodaniem marchewki i papryki. Jeżeli rozrzedzi się po ich dodaniu, wyjmij gotowe mięso i warzywa, zredukuj sam sos i ponownie połącz składniki.",
+  "skladniki": [
+    {
+      "nazwa": "Gulasz wieprzowy, surowy",
+      "ilosc": 150,
+      "jednostka": "g",
+      "stan": "w kostce 3 cm"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 60,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 4,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Marchew, surowa",
+      "ilosc": 80,
+      "jednostka": "g",
+      "stan": "półplasterki grubości 4–5 mm; dodawana pod koniec duszenia"
+    },
+    {
+      "nazwa": "Papryka czerwona, surowa",
+      "ilosc": 100,
+      "jednostka": "g",
+      "stan": "kawałki około 2 cm; dodawana po marchewce"
+    },
+    {
+      "nazwa": "Passata pomidorowa",
+      "ilosc": 46,
+      "jednostka": "ml",
+      "stan": "niewielki dodatek do sosu"
+    },
+    {
+      "nazwa": "Kasza gryczana, sucha",
+      "ilosc": 60,
+      "jednostka": "g",
+      "stan": "sucha, ugotowana osobno"
+    },
+    {
+      "nazwa": "Kapusta kiszona",
+      "ilosc": 100,
+      "jednostka": "g",
+      "stan": "odciśnięta i jest surówką"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Papryka słodka mielona",
+      "ilosc": 2,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "liść laurowy",
+      "ilosc": 1,
+      "jednostka": "szt"
+    },
+    {
+      "nazwa": "ziele angielskie",
+      "ilosc": 3,
+      "jednostka": "szt"
+    },
+    {
+      "nazwa": "woda",
+      "ilosc": 62,
+      "jednostka": "ml",
+      "stan": "ilość początkowa do duszenia; dodatkową gorącą wodę dolewaj małymi porcjami tylko wtedy, gdy sos nadmiernie gęstnieje"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 1,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 15,
+      "kroki": [
+        {
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
+        },
+        {
+          "tresc": "**Czosnek.** Obierz czosnek i drobno posiekaj."
+        },
+        {
+          "tresc": "**Marchew.** Umyj i obierz marchew, pokrój w półplasterki grubości **4–5 mm**. Odłóż do dodania pod koniec duszenia."
+        },
+        {
+          "tresc": "**Papryka.** Umyj paprykę, usuń gniazdo nasienne i pokrój na kawałki około **2 cm**. Odłóż osobno od marchewki."
+        },
+        {
+          "tresc": "**Kapusta kiszona.** Odciśnij kapustę kiszoną i odłóż do podania jako surówkę."
+        },
+        {
+          "tresc": "**Wieprzowina.** Osusz wieprzowinę i pokrój w kostkę około 3 cm."
+        },
+        {
+          "tresc": "**Po przygotowaniu mięsa.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surowym mięsem."
+        },
+        {
+          "tresc": "**Kasza gryczana.** Odmierz kaszę gryczaną."
+        },
+        {
+          "tresc": "**Płynna baza.** Odmierz passatę i wodę z listy składników."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól, pieprz, słodką paprykę, liście laurowe i ziele angielskie."
+        }
+      ]
+    },
+    {
+      "nazwa": "Obsmażanie mięsa i przygotowanie sosu",
+      "minuty": 15,
+      "kroki": [
+        {
+          "tresc": "**Rozgrzanie oliwy.** Rozgrzej oliwę w garnku przez około **1 minutę** na średnio dużym ogniu. Przy smażeniu partiami podziel odmierzony tłuszcz między partie."
+        },
+        {
+          "tresc": "**Obsmażenie mięsa.** Ułóż osuszone mięso w jednej warstwie. Obsmażaj przez **4–5 minut na partię**, obracając dopiero po zrumienieniu powierzchni. Przy większej ilości dolicz czas kolejnych partii.",
+          "sygnal": "mięso ma wyraźnie zrumienioną powierzchnię, a na dnie nie stoi woda",
+          "uwaga": true
+        },
+        {
+          "tresc": "**Zdjęcie mięsa.** Przełóż obsmażone mięso na talerz. Zachowaj soki, które z niego wypłyną."
+        },
+        {
+          "tresc": "**Cebula.** Zmniejsz ogień do średniego. Dodaj cebulę i smaż przez **4 minuty**, mieszając, aż zmięknie i zacznie się złocić. Jeśli przywiera, dodaj odrobinę odmierzonej wody."
+        },
+        {
+          "tresc": "**Czosnek i przyprawy.** Dodaj czosnek oraz słodką paprykę mieloną. Smaż przez **20–30 sekund**, stale mieszając; nie przypal przypraw."
+        },
+        {
+          "tresc": "**Baza sosu.** Wlej passatę i pozostałą odmierzoną wodę. Zeskrob łopatką zrumieniony osad z dna. Włóż mięso wraz z sokami, dodaj liść laurowy i ziele angielskie."
+        },
+        {
+          "tresc": "**Zagotowanie.** Doprowadź do łagodnego wrzenia przez około **2–3 minuty**, następnie zmniejsz ogień."
+        }
+      ]
+    },
+    {
+      "nazwa": "Duszenie mięsa, dodanie warzyw i podanie",
+      "minuty": 95,
+      "kroki": [
+        {
+          "tresc": "**Duszenie mięsa.** Przykryj garnek i duś łagodnie przez **60–75 minut**. Mięso powinno być niemal miękkie przed dodaniem warzyw. Jeśli nadal jest twarde, wydłużaj ten etap po **10 minut**.",
+          "sygnal": "widelec wchodzi w mięso z niewielkim oporem; marchew i papryka nadal czekają osobno",
+          "uwaga": true
+        },
+        {
+          "tresc": "**Kontrola płynu.** Podczas duszenia sprawdzaj sos co **15–20 minut**. Jeśli nadmiernie zgęstnieje lub zaczyna przywierać, dolej trochę gorącej wody. Nie uzupełniaj płynu automatycznie do początkowego poziomu."
+        },
+        {
+          "tresc": "**Kasza — równolegle.** Gdy mięso jest niemal miękkie, nastaw na drugim palniku odmierzoną kaszę gryczaną. Gotuj zgodnie z instrukcją na opakowaniu, równolegle z kończeniem gulaszu. Nastaw minutnik; po ugotowaniu odcedź i przykryj."
+        },
+        {
+          "tresc": "**Sos przed warzywami.** Jeżeli sos jest wodnisty, odkryj garnek i odparowuj go, mieszając oraz sprawdzając co **3–5 minut**. Gotowe mięso możesz na ten czas wyjąć i włożyć z powrotem po zagęszczeniu.",
+          "sygnal": "sos oblepia mięso, pozostaje wilgotny i nie tworzy wokół niego wodnistej kałuży",
+          "uwaga": true
+        },
+        {
+          "tresc": "**Marchew.** Dodaj marchew, wymieszaj i duś łagodnie pod przykryciem przez **5 minut**."
+        },
+        {
+          "tresc": "**Papryka.** Dodaj paprykę i duś pod przykryciem przez kolejne **10–13 minut**. Marchew dusi się łącznie **15–18 minut**, a papryka **10–13 minut**."
+        },
+        {
+          "tresc": "**Sprawdzenie warzyw.** Sprawdź warzywa po **10 minutach od dodania papryki**. Zakończ duszenie, gdy mają lekki opór przy gryzieniu. Jeśli są zbyt twarde, dogotowuj po **2 minuty**; nie czekaj, aż zaczną się rozpadać.",
+          "sygnal": "mięso jest miękkie, marchew i papryka zachowują kształt oraz lekką jędrność",
+          "uwaga": true
+        },
+        {
+          "tresc": "**Doprawienie.** Usuń liść laurowy i ziele angielskie. Dopraw odmierzoną solą i pieprzem."
+        },
+        {
+          "tresc": "**Podanie.** Rozdziel gulasz, ugotowaną kaszę i kapustę kiszoną na przygotowywaną liczbę porcji. Kapustę podaj jako surówkę."
+        }
+      ]
+    }
+  ]
+}

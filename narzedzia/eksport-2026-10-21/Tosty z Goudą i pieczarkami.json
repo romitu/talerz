@@ -1,0 +1,130 @@
+{
+  "nazwa": "Tosty z Goudą i pieczarkami",
+  "opis": "Chrupiące tosty z serem Gouda, podsmażonymi pieczarkami i cebulą. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
+  "pory": [
+    "sniadanie",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "inna"
+  ],
+  "rodzaje": [
+    "kanapki"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 296,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 0,
+  "czas_przygotowania_min": 6,
+  "czas_obrobki_min": 17,
+  "sprzet": [
+    "Patelnia 24 cm",
+    "Grill kontaktowy",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Tosty zjedz bezpośrednio po przygotowaniu.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli nadzienie jest wodniste, smaż pieczarki dłużej. Gdy pieczywo rumieni się za szybko, zmniejsz temperaturę urządzenia.",
+  "skladniki": [
+    {
+      "nazwa": "Chleb żytni razowy",
+      "ilosc": 2,
+      "jednostka": "szt",
+      "stan": "kromki"
+    },
+    {
+      "nazwa": "Ser Gouda",
+      "ilosc": 70,
+      "jednostka": "g",
+      "stan": "pokrojony w plastry"
+    },
+    {
+      "nazwa": "Pieczarki, surowe",
+      "ilosc": 120,
+      "jednostka": "g",
+      "stan": "pokrojone w plasterki"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 30,
+      "jednostka": "g",
+      "stan": "drobno posiekana"
+    },
+    {
+      "nazwa": "Masło",
+      "ilosc": 5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Tymianek suszony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 6,
+      "kroki": [
+        {
+          "tresc": "**Pieczarki.** Oczyść pieczarki i pokrój w cienkie plasterki."
+        },
+        {
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
+        },
+        {
+          "tresc": "**Gouda.** Odmierz Goudę i pokrój w plastry."
+        },
+        {
+          "tresc": "**Masło.** Odmierz masło."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz pieprz i tymianek."
+        },
+        {
+          "tresc": "**Pieczywo.** Przygotuj pieczywo w ilości wskazanej na liście składników."
+        }
+      ]
+    },
+    {
+      "nazwa": "Smażenie nadzienia",
+      "minuty": 10,
+      "kroki": [
+        {
+          "tresc": "**Rozpuszczenie masła.** Rozpuść masło na patelni przez **1 minutę**."
+        },
+        {
+          "tresc": "**Pieczarki i cebula.** Dodaj cebulę i pieczarki, smaż **7–8 minut** na średnim ogniu, aż płyn odparuje."
+        },
+        {
+          "tresc": "**Doprawienie farszu.** Dodaj tymianek i pieprz."
+        },
+        {
+          "tresc": "**Rozgrzanie grilla.** Pod koniec smażenia włącz grill kontaktowy zgodnie z instrukcją urządzenia."
+        }
+      ]
+    },
+    {
+      "nazwa": "Składanie i opiekanie",
+      "minuty": 7,
+      "kroki": [
+        {
+          "tresc": "**Składanie tostów.** Rozdziel połowę odmierzonego sera między dolne kromki, ułóż pieczarki i resztę sera. Przykryj pozostałym pieczywem. Nadmiar farszu podaj obok."
+        },
+        {
+          "tresc": "**Opiekanie.** W rozgrzanym grillu kontaktowym opiekaj przez około **3–5 minut**, aż ser się rozpuści i chleb zrumieni. Przy większej ilości opiekaj partiami, doliczając czas."
+        },
+        {
+          "tresc": "**Podanie.** Odczekaj **1 minutę** i podaj."
+        }
+      ]
+    }
+  ]
+}

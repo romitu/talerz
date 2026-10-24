@@ -79,13 +79,25 @@
       "minuty": 8,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Brokuł.** Umyj brokuł i podziel na małe różyczki. Obierz miękki środek łodygi i pokrój go drobno."
         },
         {
-          "tresc": "Umyj brokuł i podziel na małe różyczki; obraną łodygę pokrój cienko. Obierz i posiekaj czosnek."
+          "tresc": "**Czosnek.** Obierz czosnek i drobno posiekaj."
         },
         {
-          "tresc": "Pokrusz fetę. Umyj cytrynę, wyciśnij i odmierz sok. Odmierz makaron."
+          "tresc": "**Feta.** Odmierz fetę i pokrusz."
+        },
+        {
+          "tresc": "**Cytryna.** Umyj cytrynę, wyciśnij sok i odmierz ilość wskazaną na liście składników."
+        },
+        {
+          "tresc": "**Makaron.** Odmierz makaron."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz pieprz i ostrą paprykę."
         }
       ]
     },
@@ -94,16 +106,22 @@
       "minuty": 20,
       "kroki": [
         {
-          "tresc": "Zagotuj wodę i gotuj makaron przez czas z opakowania. Na ostatnie 4 minuty dodaj małe różyczki i cienko pokrojoną łodygę brokułu."
+          "tresc": "**Makaron i brokuł.** Zagotuj wodę i gotuj makaron przez czas z opakowania. Na ostatnie **4 minuty** dodaj małe różyczki i cienko pokrojoną łodygę brokułu."
         },
         {
-          "tresc": "Zachowaj trochę wody z gotowania i odcedź makaron z brokułem."
+          "tresc": "**Odcedzenie.** Zachowaj trochę wody z gotowania i odcedź makaron z brokułem."
         },
         {
-          "tresc": "Pod koniec gotowania makaronu rozgrzej oliwę na patelni przez 1 minutę. Dodaj czosnek i ostrą paprykę, smaż 20–30 sekund."
+          "tresc": "**Rozgrzanie oliwy — równolegle.** Pod koniec gotowania makaronu rozgrzej oliwę na patelni przez **1 minutę**."
         },
         {
-          "tresc": "Dodaj makaron z brokułem, fetę i odrobinę zachowanej wody. Mieszaj na małym ogniu przez 1 minutę. Zdejmij z ognia i dodaj sok z cytryny oraz pieprz."
+          "tresc": "**Czosnek i papryka.** Dodaj czosnek i ostrą paprykę, smaż **20–30 sekund**."
+        },
+        {
+          "tresc": "**Połączenie makaronu.** Dodaj makaron z brokułem, fetę i odrobinę zachowanej wody. Mieszaj na małym ogniu przez **1 minutę**."
+        },
+        {
+          "tresc": "**Doprawienie.** Zdejmij z ognia i dodaj sok z cytryny oraz pieprz."
         }
       ]
     }

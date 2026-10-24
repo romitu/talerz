@@ -11,7 +11,7 @@
     "z_piekarnika"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 643.5,
+  "porcja_g": 644,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 3,
   "czas_przygotowania_min": 15,
@@ -96,13 +96,31 @@
       "minuty": 15,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Papryka.** Umyj paprykę, przekrój wzdłuż i usuń gniazdo nasienne."
         },
         {
-          "tresc": "Umyj paprykę, przekrój wzdłuż i usuń nasiona. Obierz i posiekaj cebulę oraz czosnek. Umyj i posiekaj natkę."
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
         },
         {
-          "tresc": "Opłucz soczewicę, odmierz bulgur i passatę."
+          "tresc": "**Czosnek.** Obierz czosnek i drobno posiekaj."
+        },
+        {
+          "tresc": "**Natka pietruszki.** Umyj i osusz natkę, usuń grube łodygi i drobno posiekaj liście."
+        },
+        {
+          "tresc": "**Soczewica.** Odmierz soczewicę i opłucz na sitku."
+        },
+        {
+          "tresc": "**Bulgur.** Odmierz kaszę bulgur."
+        },
+        {
+          "tresc": "**Passata.** Odmierz passatę."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól, pieprz i kmin rzymski."
         }
       ]
     },
@@ -111,16 +129,28 @@
       "minuty": 40,
       "kroki": [
         {
-          "tresc": "Soczewicę ugotuj w dodatkowej wodzie przez czas z opakowania, zwykle 25–30 minut od zagotowania; odcedź."
+          "tresc": "**Gotowanie soczewicy.** Soczewicę ugotuj w dodatkowej wodzie przez czas z opakowania, zwykle **25–30 minut** od zagotowania; odcedź."
         },
         {
-          "tresc": "Równolegle ugotuj bulgur w osobnym garnku przez czas z opakowania i odcedź. Woda do gotowania jest dodatkowa."
+          "tresc": "**Bulgur — równolegle.** Równolegle ugotuj bulgur w osobnym garnku przez czas z opakowania i odcedź. Woda do gotowania jest dodatkowa."
         },
         {
-          "tresc": "Po odcedzeniu bulguru odstaw go pod przykryciem. Na zwolnionym palniku na patelni rozgrzej oliwę przez 1 minutę. Smaż cebulę 4 minuty, dodaj czosnek oraz kmin i smaż 30 sekund. Wlej passatę i gotuj 3 minuty."
+          "tresc": "**Rozgrzanie oliwy.** Po odcedzeniu bulguru odstaw go pod przykryciem. Na zwolnionym palniku na patelni rozgrzej oliwę przez **1 minutę**."
         },
         {
-          "tresc": "Połącz sos z ugotowaną soczewicą i bulgurem. Dopraw solą i pieprzem. W ostatnich 10 minutach gotowania farszu rozgrzej piekarnik do 190°C, grzanie góra–dół."
+          "tresc": "**Cebula.** Smaż cebulę **4 minuty**."
+        },
+        {
+          "tresc": "**Czosnek i kmin.** Dodaj czosnek oraz kmin i smaż **30 sekund**."
+        },
+        {
+          "tresc": "**Passata.** Wlej passatę i gotuj **3 minuty**."
+        },
+        {
+          "tresc": "**Połączenie farszu.** Połącz sos z ugotowaną soczewicą i bulgurem. Dopraw solą i pieprzem."
+        },
+        {
+          "tresc": "**Piekarnik — równolegle.** W ostatnich **10 minutach** gotowania farszu rozgrzej piekarnik do **190°C**, grzanie góra–dół."
         }
       ]
     },
@@ -129,13 +159,16 @@
       "minuty": 45,
       "kroki": [
         {
-          "tresc": "Napełnij połówki papryki farszem, ułóż w naczyniu. Jeśli farszu jest więcej, rozłóż resztę między paprykami."
+          "tresc": "**Nadziewanie papryki.** Napełnij połówki papryki farszem, ułóż w naczyniu. Jeśli farszu jest więcej, rozłóż resztę między paprykami."
         },
         {
-          "tresc": "Przykryj naczynie i piecz 25 minut, następnie odkryj i piecz 10–15 minut."
+          "tresc": "**Pieczenie pod przykryciem.** Przykryj naczynie i piecz **25 minut**."
         },
         {
-          "tresc": "Sprawdź paprykę i podaj z natką.",
+          "tresc": "**Dopiekanie bez przykrycia.** Odkryj i piecz **10–15 minut**."
+        },
+        {
+          "tresc": "**Sprawdzenie i podanie.** Sprawdź paprykę i podaj z natką.",
           "sygnal": "papryka daje się łatwo nakłuć, farsz gorący w środku",
           "uwaga": true
         }

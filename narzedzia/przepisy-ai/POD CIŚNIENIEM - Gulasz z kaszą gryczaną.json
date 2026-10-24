@@ -1,0 +1,195 @@
+{
+  "nazwa": "POD CIŚNIENIEM - Gulasz z kaszą gryczaną",
+  "opis": "Treściwy gulasz wieprzowy z warzywami, passatą i aromatycznymi przyprawami, przygotowany pod ciśnieniem i podawany z kaszą gryczaną oraz kapustą kiszoną.",
+  "pory": [
+    "obiad"
+  ],
+  "kuchnie": [
+    "polska"
+  ],
+  "rodzaje": [
+    "gulasz_curry",
+    "kasza_ryz"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 833,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 3,
+  "czas_przygotowania_min": 15,
+  "czas_obrobki_min": 44,
+  "sprzet": [
+    "Garnek 4 l",
+    "Nóż szefa kuchni",
+    "Deska do krojenia"
+  ],
+  "przechowywanie": "Przechowuj w lodówce do 3 dni. Kaszę najlepiej przechowywać osobno.",
+  "mozna_mrozic": true,
+  "ratunek": "Jeśli mięso jest jeszcze twarde, ponownie zamknij garnek i gotuj pod ciśnieniem przez kilka dodatkowych minut. Jeśli sos jest zbyt rzadki, odparuj go bez przykrycia.",
+  "skladniki": [
+    {
+      "nazwa": "Gulasz wieprzowy, surowy",
+      "ilosc": 150,
+      "jednostka": "g",
+      "stan": "w kostce 3 cm"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 60,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 4,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Marchew, surowa",
+      "ilosc": 80,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Papryka czerwona, surowa",
+      "ilosc": 100,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Passata pomidorowa",
+      "ilosc": 120,
+      "jednostka": "ml"
+    },
+    {
+      "nazwa": "Kasza gryczana, sucha",
+      "ilosc": 60,
+      "jednostka": "g",
+      "stan": "sucha, ugotowana osobno"
+    },
+    {
+      "nazwa": "Kapusta kiszona",
+      "ilosc": 100,
+      "jednostka": "g",
+      "stan": "odciśnięta i jest surówką"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Papryka słodka mielona",
+      "ilosc": 2,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "liść laurowy",
+      "ilosc": 1,
+      "jednostka": "szt"
+    },
+    {
+      "nazwa": "ziele angielskie",
+      "ilosc": 3,
+      "jednostka": "szt"
+    },
+    {
+      "nazwa": "woda",
+      "ilosc": 150,
+      "jednostka": "ml",
+      "stan": "na wywar — po odparowaniu"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 1,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 15,
+      "kroki": [
+        {
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
+        },
+        {
+          "tresc": "**Czosnek.** Obierz czosnek i drobno posiekaj."
+        },
+        {
+          "tresc": "**Marchew.** Umyj i obierz marchew, pokrój w cienkie półplasterki."
+        },
+        {
+          "tresc": "**Papryka.** Umyj paprykę, usuń gniazdo nasienne i pokrój na kawałki około 2 cm."
+        },
+        {
+          "tresc": "**Kapusta kiszona.** Odciśnij kapustę kiszoną i odłóż do podania jako surówkę."
+        },
+        {
+          "tresc": "**Wieprzowina.** Osusz wieprzowinę i pokrój w kostkę około 3 cm."
+        },
+        {
+          "tresc": "**Po przygotowaniu mięsa.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surowym mięsem."
+        },
+        {
+          "tresc": "**Kasza gryczana.** Odmierz kaszę gryczaną."
+        },
+        {
+          "tresc": "**Płynna baza.** Odmierz passatę i wodę z listy składników."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól, pieprz, słodką paprykę, liście laurowe i ziele angielskie."
+        }
+      ]
+    },
+    {
+      "nazwa": "Obsmażanie mięsa i warzyw",
+      "minuty": 10,
+      "kroki": [
+        {
+          "tresc": "**Rozgrzanie oliwy.** Włącz funkcję podsmażania. Rozgrzej oliwę."
+        },
+        {
+          "tresc": "**Obsmażenie mięsa.** Obsmaż mięso partiami po **4–5 minut**, obracając, aż powierzchnia lekko się zarumieni. Przy większej ilości dolicz czas kolejnych partii."
+        },
+        {
+          "tresc": "**Cebula.** Dodaj cebulę i smaż około **2–3 minuty**."
+        },
+        {
+          "tresc": "**Warzywa i przyprawy.** Dodaj czosnek, marchew, paprykę oraz słodką paprykę mieloną i wymieszaj."
+        },
+        {
+          "tresc": "**Baza sosu.** Wlej passatę i wodę. Dodaj liść laurowy i ziele angielskie. Dokładnie wymieszaj i zeskrob z dna ewentualne przypieczone fragmenty."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie pod ciśnieniem i wykończenie",
+      "minuty": 34,
+      "kroki": [
+        {
+          "tresc": "**Gotowanie pod ciśnieniem.** Zamknij szybkowar i gotuj pod ciśnieniem przez **20–25 minut**, licząc od osiągnięcia ciśnienia roboczego."
+        },
+        {
+          "tresc": "**Kasza — równolegle.** W czasie gotowania gulaszu ugotuj kaszę gryczaną zgodnie z instrukcją na opakowaniu."
+        },
+        {
+          "tresc": "**Spadek ciśnienia.** Po gotowaniu pozwól ciśnieniu opaść naturalnie. Otwórz dopiero po jego całkowitym spadku, zgodnie z instrukcją urządzenia."
+        },
+        {
+          "tresc": "**Otwarcie i doprawienie.** Otwórz garnek, usuń liść laurowy i ziele angielskie. Dopraw solą i pieprzem."
+        },
+        {
+          "tresc": "**Zagęszczenie sosu.** Jeśli sos jest zbyt rzadki, gotuj bez przykrycia na funkcji podsmażania przez **3–5 minut**, mieszając i kontrolując gęstość."
+        },
+        {
+          "tresc": "**Podanie.** Gulasz podawaj z kaszą gryczaną i odciśniętą kapustą kiszoną."
+        }
+      ]
+    }
+  ]
+}

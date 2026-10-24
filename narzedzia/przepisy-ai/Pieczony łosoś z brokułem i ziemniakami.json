@@ -12,7 +12,7 @@
     "z_piekarnika"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 667.5,
+  "porcja_g": 668,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 2,
   "czas_przygotowania_min": 12,
@@ -85,16 +85,31 @@
       "minuty": 12,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Ziemniaki.** Umyj i obierz ziemniaki, pokrój na kawałki około 1,5–2 cm."
         },
         {
-          "tresc": "Umyj i obierz ziemniaki, pokrój w kawałki około 1,5–2 cm. Umyj brokuł i podziel na małe różyczki. Obierz i posiekaj czosnek. Umyj cytrynę, przygotuj sok i cząstki z odmierzonej części."
+          "tresc": "**Brokuł.** Umyj brokuł i podziel na małe różyczki."
         },
         {
-          "tresc": "Podziel oliwę między ziemniaki, brokuł i rybę. Wymieszaj ziemniaki z oliwą, tymiankiem i częścią soli. Brokuł skrop oliwą."
+          "tresc": "**Czosnek.** Obierz czosnek i drobno posiekaj."
         },
         {
-          "tresc": "Łososia osusz i usuń ości. Natrzyj pozostałą oliwą, czosnkiem, solą oraz pieprzem. Umyj przybory i ręce po rybie."
+          "tresc": "**Cytryna.** Umyj cytrynę. Z części wskazanej na liście składników przygotuj sok i cząstki do podania."
+        },
+        {
+          "tresc": "**Oliwa.** Podziel odmierzoną oliwę między ziemniaki, brokuł i rybę."
+        },
+        {
+          "tresc": "**Ziemniaki do pieczenia.** Wymieszaj ziemniaki z ich częścią oliwy, tymiankiem i częścią soli."
+        },
+        {
+          "tresc": "**Brokuł do pieczenia.** Skrop brokuł przeznaczoną dla niego oliwą."
+        },
+        {
+          "tresc": "**Łosoś.** Osusz filet, usuń ości. Natrzyj pozostałą oliwą, czosnkiem, solą i pieprzem."
+        },
+        {
+          "tresc": "**Po przygotowaniu ryby.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surową rybą."
         }
       ]
     },
@@ -103,18 +118,21 @@
       "minuty": 49,
       "kroki": [
         {
-          "tresc": "Rozgrzej piekarnik do 210°C, grzanie góra–dół, zwykle około 10 minut."
+          "tresc": "**Rozgrzanie piekarnika.** Rozgrzej piekarnik do **210°C**, grzanie góra–dół, zwykle około **10 minut**."
         },
         {
-          "tresc": "Piecz ziemniaki 20 minut. Dodaj brokuł i piecz 5 minut."
+          "tresc": "**Pieczenie ziemniaków.** Piecz ziemniaki **20 minut**."
         },
         {
-          "tresc": "Dodaj łososia grubości około 2–3 cm i piecz jeszcze 10–12 minut. Grubszy kawałek może wymagać dłużej; gotowe warzywa zdejmij wcześniej.",
+          "tresc": "**Dodanie brokułu.** Dodaj brokuł i piecz **5 minut**."
+        },
+        {
+          "tresc": "**Pieczenie łososia.** Dodaj łososia grubości około 2–3 cm i piecz jeszcze **10–12 minut**. Grubszy kawałek może wymagać dłużej; gotowe warzywa zdejmij wcześniej.",
           "sygnal": "ryba ma co najmniej 63°C, ziemniaki miękkie",
           "uwaga": true
         },
         {
-          "tresc": "Skrop rybę przygotowanym sokiem z cytryny i podaj z warzywami oraz cząstkami cytryny."
+          "tresc": "**Podanie.** Skrop rybę przygotowanym sokiem z cytryny i podaj z warzywami oraz cząstkami cytryny."
         }
       ]
     }

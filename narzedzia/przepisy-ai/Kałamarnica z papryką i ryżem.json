@@ -11,7 +11,7 @@
     "kasza_ryz"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 599.5,
+  "porcja_g": 600,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 1,
   "czas_przygotowania_min": 12,
@@ -93,16 +93,37 @@
       "minuty": 12,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Papryka.** Umyj paprykę, usuń gniazdo nasienne i pokrój miąższ w cienkie paski."
         },
         {
-          "tresc": "Umyj paprykę, usuń nasiona i pokrój w cienkie paski. Obierz cebulę i czosnek; cebulę pokrój w piórka, czosnek posiekaj."
+          "tresc": "**Cebula.** Obierz cebulę i pokrój w cienkie piórka."
         },
         {
-          "tresc": "Umyj i posiekaj natkę. Umyj cytrynę i przygotuj sok z odmierzonej części. Opłucz ryż na sitku."
+          "tresc": "**Czosnek.** Obierz czosnek i drobno posiekaj."
         },
         {
-          "tresc": "Oczyszczoną, rozmrożoną kałamarnicę osusz i pokrój w krążki około 1 cm. Po surowych owocach morza umyj przybory i ręce. Odmierz passatę."
+          "tresc": "**Natka pietruszki.** Umyj i osusz natkę, usuń grube łodygi i drobno posiekaj liście."
+        },
+        {
+          "tresc": "**Cytryna.** Umyj cytrynę, wyciśnij sok i odmierz ilość wskazaną na liście składników."
+        },
+        {
+          "tresc": "**Ryż.** Odmierz suchy ryż i przepłucz na sitku pod zimną wodą."
+        },
+        {
+          "tresc": "**Kałamarnica.** Oczyszczoną i rozmrożoną kałamarnicę osusz, następnie pokrój w krążki grubości około 1 cm."
+        },
+        {
+          "tresc": "**Po przygotowaniu kałamarnicy.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surowymi owocami morza."
+        },
+        {
+          "tresc": "**Passata.** Odmierz passatę."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól i wędzoną paprykę."
         }
       ]
     },
@@ -111,21 +132,30 @@
       "minuty": 25,
       "kroki": [
         {
-          "tresc": "Na pierwszym palniku zagotuj wodę w garnku. Dodaj ryż i gotuj przez czas wskazany na opakowaniu; po ugotowaniu odcedź. Wody użyj tyle, by ziarna były zanurzone i swobodnie się gotowały. Nastaw minutnik; równolegle wykonuj kolejne czynności na drugim palniku. Woda do gotowania jest dodatkowa i zostanie odlana."
+          "tresc": "**Ryż — równolegle.** Zagotuj na pierwszym palniku tyle wody, aby ziarna swobodnie się gotowały. Wsyp ryż i gotuj przez czas z opakowania. Nastaw minutnik; w tym czasie wykonuj kolejne kroki na drugim palniku."
         },
         {
-          "tresc": "Na drugim palniku rozgrzej oliwę przez 1 minutę. Dodaj cebulę i paprykę, smaż 5–6 minut."
+          "tresc": "**Ryż — po minutniku.** Po upływie czasu sprawdź miękkość ziaren i odcedź nadmiar wody. Przykryj garnek i odstaw poza palnik. Zrób to niezależnie od postępu pracy przy pozostałych składnikach."
         },
         {
-          "tresc": "Dodaj czosnek oraz wędzoną paprykę i smaż 30 sekund. Wlej passatę, zagotuj przez około 2 minuty i gotuj łagodnie jeszcze 5 minut. Zakończ gotowanie ryżu przed dodaniem kałamarnicy."
+          "tresc": "**Rozgrzanie oliwy.** Na drugim palniku rozgrzej oliwę przez **1 minutę**."
         },
         {
-          "tresc": "Do gorącego sosu dodaj krążki kałamarnicy i gotuj 2–3 minuty, delikatnie mieszając.",
+          "tresc": "**Cebula i papryka.** Dodaj cebulę i paprykę, smaż **5–6 minut**."
+        },
+        {
+          "tresc": "**Czosnek i przyprawy.** Dodaj czosnek oraz wędzoną paprykę i smaż **30 sekund**."
+        },
+        {
+          "tresc": "**Sos pomidorowy.** Wlej passatę, zagotuj przez około **2 minuty** i gotuj łagodnie jeszcze **5 minut**. Zakończ gotowanie ryżu przed dodaniem kałamarnicy."
+        },
+        {
+          "tresc": "**Gotowanie kałamarnicy.** Do gorącego sosu dodaj krążki kałamarnicy i gotuj **2–3 minuty**, delikatnie mieszając.",
           "sygnal": "krążki są nieprzezroczyste i jędrne, ale nie gumowate",
           "uwaga": true
         },
         {
-          "tresc": "Zdejmij z ognia, dodaj przygotowany sok z cytryny, sól i natkę. Podaj od razu z ryżem."
+          "tresc": "**Doprawienie i podanie.** Zdejmij z ognia, dodaj przygotowany sok z cytryny, sól i natkę. Podaj od razu z ryżem."
         }
       ]
     }

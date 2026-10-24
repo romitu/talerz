@@ -12,7 +12,7 @@
     "makaron"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 560.5,
+  "porcja_g": 561,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 2,
   "czas_przygotowania_min": 10,
@@ -91,13 +91,31 @@
       "minuty": 10,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Pieczarki.** Oczyść pieczarki i pokrój w cienkie plasterki."
         },
         {
-          "tresc": "Oczyść pieczarki i pokrój w plasterki. Obierz i posiekaj cebulę oraz czosnek. Odmierz makaron i jogurt."
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
         },
         {
-          "tresc": "Indyka osusz i pokrój w paski grubości około 1 cm. Umyj przybory i ręce po surowym mięsie."
+          "tresc": "**Czosnek.** Obierz czosnek i drobno posiekaj."
+        },
+        {
+          "tresc": "**Indyk.** Osusz indyka i pokrój w paski grubości około 1 cm."
+        },
+        {
+          "tresc": "**Po przygotowaniu mięsa.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surowym mięsem."
+        },
+        {
+          "tresc": "**Makaron.** Odmierz makaron."
+        },
+        {
+          "tresc": "**Jogurt.** Odmierz jogurt."
+        },
+        {
+          "tresc": "**Olej.** Odmierz olej."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól, pieprz i tymianek."
         }
       ]
     },
@@ -106,19 +124,34 @@
       "minuty": 25,
       "kroki": [
         {
-          "tresc": "Zagotuj wodę w garnku i ugotuj makaron przez czas wskazany na opakowaniu. Nastaw minutnik; w tym czasie przygotowuj sos na drugim palniku. Przed odcedzeniem zachowaj nieco wody z gotowania. Woda do gotowania jest dodatkowa i zostanie odlana."
+          "tresc": "**Makaron — równolegle.** Zagotuj wodę i wsyp makaron. Gotuj przez czas z opakowania. Nastaw minutnik; w tym czasie przygotowuj sos na drugim palniku."
         },
         {
-          "tresc": "Na drugim palniku rozgrzej połowę oleju przez 1 minutę. Smaż indyka 5–6 minut, obracając, do temperatury co najmniej 74°C. Zdejmij na czysty talerz."
+          "tresc": "**Makaron — po minutniku.** Sprawdź, czy makaron jest gotowy. Zachowaj trochę wody z gotowania, a następnie odcedź makaron. Zrób to po minutniku, niezależnie od postępu przygotowania sosu."
         },
         {
-          "tresc": "Dodaj pozostały olej, cebulę i pieczarki; smaż 7–9 minut, aż woda odparuje. Dodaj czosnek i tymianek, smaż 30 sekund."
+          "tresc": "**Rozgrzanie oleju.** Na drugim palniku rozgrzej połowę oleju przez **1 minutę**."
         },
         {
-          "tresc": "W misce połącz jogurt z niewielką ilością ciepłej wody z makaronu, dodawanej stopniowo."
+          "tresc": "**Smażenie indyka.** Smaż indyka **5–6 minut**, obracając, do temperatury co najmniej **74°C**."
         },
         {
-          "tresc": "Do patelni dodaj makaron i indyka, podgrzej przez 1 minutę. Zdejmij z ognia, odczekaj około 1 minuty, wmieszaj jogurt i dopraw solą oraz pieprzem. Nie zagotowuj."
+          "tresc": "**Zdjęcie indyka.** Zdejmij na czysty talerz."
+        },
+        {
+          "tresc": "**Pieczarki i cebula.** Dodaj pozostały olej, cebulę i pieczarki; smaż **7–9 minut**, aż woda odparuje."
+        },
+        {
+          "tresc": "**Czosnek i tymianek.** Dodaj czosnek i tymianek, smaż **30 sekund**."
+        },
+        {
+          "tresc": "**Hartowanie jogurtu.** W misce połącz jogurt z niewielką ilością ciepłej wody z makaronu, dodawanej stopniowo."
+        },
+        {
+          "tresc": "**Połączenie makaronu.** Do patelni dodaj makaron i indyka, podgrzej przez **1 minutę**."
+        },
+        {
+          "tresc": "**Jogurt i doprawienie.** Zdejmij z ognia, odczekaj około **1 minuty**, wmieszaj jogurt i dopraw solą oraz pieprzem. Nie zagotowuj."
         }
       ]
     }

@@ -1,0 +1,103 @@
+{
+  "nazwa": "Kanapki z mozzarellą, pomidorem i bazylią",
+  "opis": "Kanapki z mozzarellą, świeżym pomidorem i bazylią, skropione oliwą. Ilości składników dobierz z listy dla przygotowywanej liczby porcji.",
+  "pory": [
+    "sniadanie",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "srodziemnomorska"
+  ],
+  "rodzaje": [
+    "kanapki"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 226,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 0,
+  "czas_przygotowania_min": 7,
+  "czas_obrobki_min": 0,
+  "sprzet": [
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Kanapki najlepiej zjedz od razu. Składniki możesz przechowywać osobno w lodówce i złożyć tuż przed podaniem.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli pomidor jest bardzo soczysty, osusz plasterki ręcznikiem papierowym. Jeśli kanapki są mdłe, dodaj odrobinę soli i pieprzu.",
+  "skladniki": [
+    {
+      "nazwa": "Chleb żytni razowy",
+      "ilosc": 2,
+      "jednostka": "szt",
+      "stan": "kromki"
+    },
+    {
+      "nazwa": "Ser mozzarella",
+      "ilosc": 80,
+      "jednostka": "g",
+      "stan": "pokrojony w plastry"
+    },
+    {
+      "nazwa": "Pomidory, surowe",
+      "ilosc": 0.5,
+      "jednostka": "szt",
+      "stan": "pokrojony w plastry"
+    },
+    {
+      "nazwa": "Bazylia świeża",
+      "ilosc": 5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 5,
+      "kroki": [
+        {
+          "tresc": "**Pomidor.** Umyj pomidory i pokrój w cienkie plastry. Osusz plasterki z nadmiaru wilgoci."
+        },
+        {
+          "tresc": "**Bazylia.** Umyj i osusz bazylię, oderwij liście od łodyg."
+        },
+        {
+          "tresc": "**Mozzarella.** Odsącz mozzarellę i pokrój w plastry."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól i pieprz."
+        },
+        {
+          "tresc": "**Pieczywo.** Przygotuj pieczywo w ilości wskazanej na liście składników."
+        }
+      ]
+    },
+    {
+      "nazwa": "Składanie kanapek",
+      "minuty": 2,
+      "kroki": [
+        {
+          "tresc": "**Składanie kanapek.** Na pieczywie ułóż mozzarellę, pomidora i bazylię. Skrop odmierzoną oliwą, dopraw solą i pieprzem, podaj."
+        }
+      ]
+    }
+  ]
+}

@@ -71,10 +71,22 @@
       "minuty": 5,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Pomidor.** Umyj pomidory i pokrój w cienkie plastry. Osusz plasterki z nadmiaru wilgoci."
         },
         {
-          "tresc": "Umyj pomidora i bazylię, osusz. Mozzarellę odsącz. Pokrój ser i pomidora w plastry. Przygotuj pieczywo."
+          "tresc": "**Bazylia.** Umyj i osusz bazylię, oderwij liście od łodyg."
+        },
+        {
+          "tresc": "**Mozzarella.** Odsącz mozzarellę i pokrój w plastry."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól i pieprz."
+        },
+        {
+          "tresc": "**Pieczywo.** Przygotuj pieczywo w ilości wskazanej na liście składników."
         }
       ]
     },
@@ -83,7 +95,7 @@
       "minuty": 2,
       "kroki": [
         {
-          "tresc": "Na pieczywie ułóż mozzarellę, pomidora i bazylię. Skrop odmierzoną oliwą, dopraw solą i pieprzem, podaj."
+          "tresc": "**Składanie kanapek.** Na pieczywie ułóż mozzarellę, pomidora i bazylię. Skrop odmierzoną oliwą, dopraw solą i pieprzem, podaj."
         }
       ]
     }

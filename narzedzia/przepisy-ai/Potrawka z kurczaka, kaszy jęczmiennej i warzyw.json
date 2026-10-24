@@ -1,6 +1,6 @@
 {
   "nazwa": "Potrawka z kurczaka, kaszy jęczmiennej i warzyw",
-  "opis": "Jednogarnkowa potrawka z kurczaka, kaszy jęczmiennej, marchewki, pora i groszku. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
+  "opis": "Jednogarnkowa potrawka z kurczaka, kaszy jęczmiennej, marchewki, pora i groszku. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami. Smak sosu lub płynu do gotowania powstaje z przygotowywanych składników w tym samym naczyniu. Podana ilość wody jest początkowa; ewentualne dolewanie zależy od konsystencji i miękkości składników. Warzywna baza obejmuje korzeń pietruszki, przygotowane razem z pozostałymi składnikami; wszystkie warzywa pozostają w posiłku.",
   "pory": [
     "obiad",
     "kolacja"
@@ -13,11 +13,11 @@
     "kasza_ryz"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 737.5,
+  "porcja_g": 703,
   "liczba_porcji_bazowych": 2,
   "trwalosc_dni": 3,
-  "czas_przygotowania_min": 12,
-  "czas_obrobki_min": 50,
+  "czas_przygotowania_min": 14,
+  "czas_obrobki_min": 52,
   "sprzet": [
     "Garnek 3 l",
     "Nóż szefa kuchni",
@@ -28,7 +28,7 @@
   ],
   "przechowywanie": "Przechowuj w lodówce do 3 dni. Potrawkę można zamrozić. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
   "mozna_mrozic": true,
-  "ratunek": "Za gęstą potrawkę rozcieńcz bulionem. Jeśli kasza jest twarda, gotuj dłużej i uzupełnij płyn.",
+  "ratunek": "Jeśli kasza jest twarda, a płynu brakuje, dolej niewielką ilość gorącej wody i gotuj dalej. Za rzadką potrawkę odparuj bez pokrywki przez 2–3 minuty, mieszając i kontrolując konsystencję.",
   "skladniki": [
     {
       "nazwa": "Udo z kurczaka bez skóry, surowe",
@@ -40,7 +40,7 @@
       "nazwa": "Kasza jęczmienna, sucha",
       "ilosc": 120,
       "jednostka": "g",
-      "stan": "opłukana"
+      "stan": "opłukana; wybierz kaszę o czasie gotowania około 20–30 minut i kieruj się instrukcją opakowania"
     },
     {
       "nazwa": "Marchew, surowa",
@@ -66,9 +66,10 @@
       "stan": "pokrojony"
     },
     {
-      "nazwa": "Domowy bulion warzywny",
-      "ilosc": 600,
-      "jednostka": "g"
+      "nazwa": "woda",
+      "ilosc": 500,
+      "jednostka": "ml",
+      "stan": "ilość początkowa do potrawy; w trakcie gotowania uzupełniaj tylko w razie potrzeby, zgodnie z instrukcją"
     },
     {
       "nazwa": "Olej rzepakowy",
@@ -89,41 +90,80 @@
       "nazwa": "Czarny pieprz mielony",
       "ilosc": 1,
       "jednostka": "g"
+    },
+    {
+      "nazwa": "Pietruszka korzeń",
+      "ilosc": 30,
+      "jednostka": "g",
+      "stan": "obrany korzeń, drobna kostka około 3–4 mm; do warzywnej bazy"
     }
   ],
   "etapy": [
     {
       "nazwa": "Przygotowanie składników",
-      "minuty": 12,
+      "minuty": 14,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Korzeń pietruszki.** Umyj, obierz i pokrój w drobną kostkę około 3–4 mm. Odłóż do przygotowania warzywnej bazy."
         },
         {
-          "tresc": "Opłucz kaszę. Umyj i obierz marchew, pokrój w kostkę około 1 cm. Dokładnie wypłucz por między warstwami i pokrój. Umyj seler naciowy, pokrój cienko."
+          "tresc": "**Kasza jęczmienna.** Odmierz kaszę i opłucz na sitku. Sprawdź czas gotowania na opakowaniu; podany czas etapu zakłada odmianę gotującą się około 20–30 minut."
         },
         {
-          "tresc": "Udo bez skóry i kości pokrój w kostkę około 2 cm; podana masa dotyczy mięsa bez kości. Umyj ręce i przybory. Odmierz bulion i groszek."
+          "tresc": "**Marchew.** Umyj i obierz marchew, pokrój w kostkę około 1 cm."
+        },
+        {
+          "tresc": "**Por.** Przekrój por wzdłuż, dokładnie wypłucz ziemię spomiędzy warstw i pokrój w plasterki."
+        },
+        {
+          "tresc": "**Seler naciowy.** Umyj seler naciowy i pokrój w cienkie plasterki."
+        },
+        {
+          "tresc": "**Kurczak.** Osusz mięso z uda bez skóry i kości. Pokrój w kostkę około 2 cm; podana masa dotyczy mięsa bez kości."
+        },
+        {
+          "tresc": "**Po przygotowaniu mięsa.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surowym mięsem."
+        },
+        {
+          "tresc": "**Woda.** Odmierz wodę z listy składników do przygotowania potrawy."
+        },
+        {
+          "tresc": "**Olej.** Odmierz olej."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól, pieprz i tymianek."
+        },
+        {
+          "tresc": "**Groszek.** Odmierz mrożony groszek i pozostaw w zamrażarce do gotowania."
         }
       ]
     },
     {
       "nazwa": "Gotowanie potrawki",
-      "minuty": 50,
+      "minuty": 52,
       "kroki": [
         {
-          "tresc": "Rozgrzej olej przez 1 minutę, smaż kurczaka 5 minut, obracając. Dodaj por, marchew i seler; smaż 3 minuty."
+          "tresc": "**Rozgrzanie oleju.** Rozgrzej olej przez **1 minutę**."
         },
         {
-          "tresc": "Dodaj kaszę, bulion i tymianek. Doprowadź do wrzenia przez około 4 minuty. Gotuj pod uchyloną pokrywką przez czas wskazany na opakowaniu kaszy, orientacyjnie 20–30 minut, mieszając. Kolejny krok wykonaj na ostatnie 5 minut tego czasu. Ubytki płynu uzupełniaj gorącą wodą."
+          "tresc": "**Smażenie kurczaka.** Smaż kurczaka **5 minut**, obracając."
         },
         {
-          "tresc": "Gdy kasza jest prawie miękka, dodaj groszek i gotuj 5 minut.",
-          "sygnal": "kasza miękka, kurczak co najmniej 74°C, potrawka wilgotna",
+          "tresc": "**Warzywa.** Dodaj por, marchew, seler naciowy oraz drobno posiekany korzeń pietruszki. Smaż przez **4 minuty**, mieszając, aż por zmięknie."
+        },
+        {
+          "tresc": "**Wywar z mięsa i warzyw.** Wlej odmierzoną wodę i mieszaj przez **1–2 minuty**, delikatnie odrywając z dna zrumienione pozostałości po smażeniu. Nie zeskrobuj czarnych, przypalonych fragmentów. Dodaj tymianek. Doprowadź do łagodnego wrzenia przez około **3 minuty**, przykryj i gotuj przez **5 minut**."
+        },
+        {
+          "tresc": "**Kasza.** Wsyp kaszę, wymieszaj i gotuj na małym ogniu pod przykryciem przez czas podany na opakowaniu, orientacyjnie **20–30 minut**. Mieszaj co kilka minut. Jeśli ziarna są twarde, a płynu brakuje, dolewaj niewielkie ilości gorącej wody. Kolejny krok wykonaj na ostatnie **5 minut** gotowania."
+        },
+        {
+          "tresc": "**Groszek.** Gdy kasza jest prawie miękka, dodaj groszek i gotuj przez **5 minut**. Sprawdź miękkość kaszy i temperaturę najgrubszego kawałka kurczaka. Jeśli kasza jest twarda lub mięso nie osiągnęło **74°C**, dogotowuj po **2 minuty**, kontrolując płyn.",
+          "sygnal": "kasza jest miękka, kurczak ma co najmniej 74°C, potrawka jest wilgotna",
           "uwaga": true
         },
         {
-          "tresc": "Dopraw solą i pieprzem i podaj."
+          "tresc": "**Doprawienie i podanie.** Dopraw solą i pieprzem i podaj."
         }
       ]
     }

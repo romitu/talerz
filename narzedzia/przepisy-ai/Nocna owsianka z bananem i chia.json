@@ -70,10 +70,13 @@
       "minuty": 4,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Banan.** Obierz banana i pokrój w plasterki. Przechowaj osobno w szczelnym pojemniku w lodówce do podania."
         },
         {
-          "tresc": "Odmierz płatki, mleko, jogurt, chia, cynamon i masło orzechowe. Banana obierz i pokrój; przechowaj osobno w szczelnym pojemniku w lodówce do podania."
+          "tresc": "**Baza owsianki.** Odmierz płatki, mleko, jogurt, chia i cynamon."
+        },
+        {
+          "tresc": "**Masło orzechowe.** Odmierz masło orzechowe i odłóż do podania."
         }
       ]
     },
@@ -82,7 +85,7 @@
       "minuty": 2,
       "kroki": [
         {
-          "tresc": "Wymieszaj płatki, mleko, jogurt, chia i cynamon. Przykryj naczynie."
+          "tresc": "**Mieszanie owsianki.** Wymieszaj płatki, mleko, jogurt, chia i cynamon. Przykryj naczynie."
         }
       ]
     },
@@ -91,7 +94,7 @@
       "minuty": 360,
       "kroki": [
         {
-          "tresc": "Wstaw do lodówki na co najmniej 6 godzin. Po około 10 minutach ponownie wymieszaj, żeby rozbić skupiska chia.",
+          "tresc": "**Chłodzenie owsianki.** Wstaw do lodówki na co najmniej **6 godzin**. Po około **10 minutach** ponownie wymieszaj, żeby rozbić skupiska chia.",
           "sygnal": "płatki są miękkie, chia napęczniały",
           "uwaga": true
         }
@@ -102,7 +105,7 @@
       "minuty": 1,
       "kroki": [
         {
-          "tresc": "Wymieszaj owsiankę, dodaj przygotowanego banana i masło orzechowe."
+          "tresc": "**Podanie.** Wymieszaj owsiankę, dodaj przygotowanego banana i masło orzechowe."
         }
       ]
     }

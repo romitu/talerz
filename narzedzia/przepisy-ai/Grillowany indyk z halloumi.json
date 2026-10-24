@@ -1,0 +1,170 @@
+{
+  "nazwa": "Grillowany indyk z halloumi",
+  "opis": "Grillowany filet z indyka z halloumi, pomidorem, rukolą i pieczywem żytnim. Halloumi jest wcześniej moczone w wodzie, aby zmniejszyć jego słoność.",
+  "pory": [
+    "kolacja",
+    "sniadanie"
+  ],
+  "kuchnie": [
+    "srodziemnomorska"
+  ],
+  "rodzaje": [
+    "kanapki"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 534,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 2,
+  "czas_przygotowania_min": 20,
+  "czas_obrobki_min": 19,
+  "sprzet": [
+    "Grill kontaktowy",
+    "Nóż szefa kuchni",
+    "Deska do krojenia"
+  ],
+  "przechowywanie": "Przechowuj w lodówce do 2 dni. Halloumi po wystudzeniu twardnieje, dlatego przed podaniem najlepiej krótko podgrzać je na patelni lub grillownicy.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli indyk jest suchy, prawdopodobnie był grillowany zbyt długo. Przy kolejnym przygotowaniu kontroluj temperaturę i zdejmij mięso po osiągnięciu 74°C. Jeśli halloumi jest zbyt słone, następnym razem mocz je przez około 20 minut w zimnej wodzie.",
+  "skladniki": [
+    {
+      "nazwa": "Filet z indyka, surowy",
+      "ilosc": 170,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Halloumi",
+      "ilosc": 70,
+      "jednostka": "g",
+      "stan": "w plastrach 1 cm"
+    },
+    {
+      "nazwa": "Pomidory, surowe",
+      "ilosc": 150,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Rukola",
+      "ilosc": 40,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 4,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cytryna",
+      "ilosc": 20,
+      "jednostka": "g",
+      "stan": "sok"
+    },
+    {
+      "nazwa": "Chleb żytni razowy",
+      "ilosc": 2,
+      "jednostka": "szt"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 8,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Tymianek suszony",
+      "ilosc": 1,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 20,
+      "kroki": [
+        {
+          "tresc": "**Moczenie halloumi.** Włóż halloumi do zimnej wody i mocz przez **20 minut**. W tym czasie przygotuj pozostałe składniki."
+        },
+        {
+          "tresc": "**Czosnek.** Obierz czosnek i przeciśnij przez praskę lub bardzo drobno posiekaj."
+        },
+        {
+          "tresc": "**Pomidor.** Umyj pomidory i pokrój w cienkie plastry. Osusz plasterki z nadmiaru wilgoci."
+        },
+        {
+          "tresc": "**Rukola.** Umyj rukolę i dokładnie osusz."
+        },
+        {
+          "tresc": "**Cytryna.** Umyj cytrynę, wyciśnij sok i odmierz ilość wskazaną na liście składników."
+        },
+        {
+          "tresc": "**Indyk.** Rozkrój filet wzdłuż na cieńsze płaty lub delikatnie rozbij do grubości około 1,5 cm. Osusz."
+        },
+        {
+          "tresc": "**Marynata do indyka.** Natrzyj mięso częścią odmierzonej oliwy, czosnkiem i tymiankiem."
+        },
+        {
+          "tresc": "**Po przygotowaniu mięsa.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surowym mięsem."
+        },
+        {
+          "tresc": "**Krojenie halloumi.** Po namoczeniu dokładnie osusz ser i pokrój w plastry grubości około 1 cm."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól i pieprz."
+        },
+        {
+          "tresc": "**Pieczywo.** Przygotuj pieczywo w ilości wskazanej na liście składników."
+        }
+      ]
+    },
+    {
+      "nazwa": "Grillowanie indyka",
+      "minuty": 12,
+      "kroki": [
+        {
+          "tresc": "**Rozgrzanie grilla.** Rozgrzej grill kontaktowy zgodnie z instrukcją urządzenia, zwykle przez około **3 minuty**."
+        },
+        {
+          "tresc": "**Indyk na grill.** Indyka lekko dopraw solą i pieprzem. Połóż na grillownicy i zamknij pokrywę bez dodatkowego dociskania."
+        },
+        {
+          "tresc": "**Grillowanie indyka.** Grilluj około **6–8 minut**, aż temperatura wewnątrz mięsa osiągnie **74°C**."
+        },
+        {
+          "tresc": "**Odpoczynek indyka.** Zdejmij indyka z grillownicy i pozostaw na około **3–5 minut** przed krojeniem."
+        }
+      ]
+    },
+    {
+      "nazwa": "Grillowanie halloumi i pieczywa",
+      "minuty": 5,
+      "kroki": [
+        {
+          "tresc": "**Grillowanie halloumi.** Plastry halloumi połóż na rozgrzanej grillownicy i grilluj przy zamkniętej pokrywie przez około **2–3 minuty**, aż lekko się zarumienią."
+        },
+        {
+          "tresc": "**Opiekanie pieczywa.** Zdejmij halloumi i połóż na grillownicy chleb. Grilluj około **1–2 minuty**, aż będzie lekko chrupiący."
+        }
+      ]
+    },
+    {
+      "nazwa": "Podanie",
+      "minuty": 2,
+      "kroki": [
+        {
+          "tresc": "**Warzywa.** Pomidora i rukolę skrop pozostałą oliwą oraz sokiem z cytryny."
+        },
+        {
+          "tresc": "**Podanie.** Indyka pokrój i podawaj z grillowanym halloumi, pomidorem, rukolą i pieczywem."
+        }
+      ]
+    }
+  ]
+}

@@ -117,7 +117,7 @@ sprawdz('barszcz pod 500 kcal: k = 1, nic nie rośnie', barszczPod500.k, 1);
 sprawdz('barszcz pod 500 kcal: brak oznaczony jako ograniczenie', barszczPod500.kOgraniczone, true);
 
 // =============================================================
-//  Zaokrąglenia — tylko składniki całe w porcji bazowej
+//  Zaokrąglenia — kwantyzacja „nie” zawsze do całych sztuk
 // =============================================================
 //  Kromka 60 g (250 kcal/100 g) + szynka 30 g (120 kcal/100 g) = 186 kcal.
 
@@ -136,7 +136,7 @@ sprawdz('kanapka ×1,4: kromka zaokrąglona do całej', kanapkaX14.pozycje[0].il
 bliskie('kanapka ×1,4: szynka rośnie ułamkowo', kanapkaX14.pozycje[1].iloscPoSkalowaniu, 30 * kanapkaX14.k, 0.001);
 
 // Porcja z garnka na dwie osoby: 3 jajka w garnku to 1,5 jajka na porcję.
-// To udział w garnku, nie jajko do rozbicia — nie zaokrąglamy go do 2.
+// Po przeskalowaniu i tak wychodzą całe jajka.
 const jajkaZGarnka: SkladnikPrzepisu[] = [
   {
     id: 'jajka', rola: 'baza', moznaDzielic: false, ilosc: 1.5, gramyNaJednostke: 50,
@@ -144,8 +144,25 @@ const jajkaZGarnka: SkladnikPrzepisu[] = [
   },
 ];
 const jajkaWynik = przeskalujPrzepis(jajkaZGarnka, 110, 1000);
-sprawdz('ułamek jajka z garnka nie jest zaokrąglany',
-  Number.isInteger(jajkaWynik.pozycje[0].iloscPoSkalowaniu), false);
+sprawdz('1,5 jajka z garnka zaokrąglone do całych',
+  Number.isInteger(jajkaWynik.pozycje[0].iloscPoSkalowaniu), true);
+
+// „Kanapki z Goudą, jajkiem i szczypiorkiem”: masa 285,5 g, porcja_g 286
+// (kolumna całkowita), więc porcja bazowa ma 1,0017 jajka. To nadal jedno
+// całe jajko — po przeskalowaniu ma wyjść całe, a nie 1,52.
+const kanapkaZJajkiem: SkladnikPrzepisu[] = [
+  {
+    id: 'jajko', rola: 'baza', moznaDzielic: false, ilosc: 1 / (285.5 / 286), gramyNaJednostke: 55,
+    kcal_100g: 143, bialko_100g: 12.6, tluszcz_100g: 9.5, wegle_100g: 0.7,
+  },
+  {
+    id: 'gouda', rola: 'baza', moznaDzielic: true, ilosc: 50 / (285.5 / 286), gramyNaJednostke: 1,
+    kcal_100g: 356, bialko_100g: 25, tluszcz_100g: 27, wegle_100g: 2,
+  },
+];
+const kanapkaZJajkiemWynik = przeskalujPrzepis(kanapkaZJajkiem, 400, 1000);
+sprawdz('jajko z porcji 285,5/286 g zaokrąglone do całego',
+  Number.isInteger(kanapkaZJajkiemWynik.pozycje[0].iloscPoSkalowaniu), true);
 
 // =============================================================
 //  Przepis z mieszanymi rolami — kalorie od tłumionych ról rosną wolniej

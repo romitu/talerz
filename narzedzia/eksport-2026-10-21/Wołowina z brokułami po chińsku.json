@@ -1,0 +1,157 @@
+{
+  "nazwa": "Wołowina z brokułami po chińsku",
+  "opis": "Szybko smażona wołowina z jędrnym brokułem, imbirem, czosnkiem i sosem sojowym, podawana z ryżem basmati. Kluczem jest bardzo gorąca patelnia i krótkie smażenie mięsa.",
+  "pory": [
+    "obiad"
+  ],
+  "kuchnie": [
+    "azjatycka"
+  ],
+  "rodzaje": [
+    "kasza_ryz"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 439,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 3,
+  "czas_przygotowania_min": 10,
+  "czas_obrobki_min": 20,
+  "sprzet": [
+    "Patelnia 28 cm",
+    "Garnek 2 l",
+    "Nóż szefa kuchni",
+    "Deska do krojenia"
+  ],
+  "przechowywanie": "Wołowinę z brokułami przechowuj w szczelnym pojemniku w lodówce do 3 dni. Ryż najlepiej przechowywać osobno.\r\nPrzy odgrzewaniu podgrzewaj krótko i na dość dużym ogniu. Brokuł po przechowywaniu będzie nieco mniej chrupiący niż bezpośrednio po przygotowaniu.",
+  "mozna_mrozic": false,
+  "ratunek": "Mięso twarde — pokrojone wzdłuż włókien zamiast w poprzek. Wyszło wodniste — patelnia była za zimna albo mięso smażone naraz.",
+  "skladniki": [
+    {
+      "nazwa": "Wołowina na plastry (udziec), surowa",
+      "ilosc": 120,
+      "jednostka": "g",
+      "stan": "w cienkich paskach w poprzek włókien"
+    },
+    {
+      "nazwa": "Brokuł, surowy",
+      "ilosc": 180,
+      "jednostka": "g",
+      "stan": "podzielony na różyczki"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 40,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 3,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Imbir korzeń, surowy",
+      "ilosc": 8,
+      "jednostka": "g",
+      "stan": "obrany, starty"
+    },
+    {
+      "nazwa": "Sos sojowy",
+      "ilosc": 15,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Ryż basmati, suchy",
+      "ilosc": 60,
+      "jednostka": "g",
+      "stan": "suchy, ugotowany osobno",
+      "zamiennik": "Makaron"
+    },
+    {
+      "nazwa": "Olej rzepakowy",
+      "ilosc": 5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sezam",
+      "ilosc": 8,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 10,
+      "kroki": [
+        {
+          "tresc": "**Brokuł.** Umyj brokuł i podziel na małe różyczki."
+        },
+        {
+          "tresc": "**Cebula.** Obierz cebulę i pokrój w cienkie piórka."
+        },
+        {
+          "tresc": "**Czosnek.** Obierz czosnek i przeciśnij przez praskę lub bardzo drobno posiekaj."
+        },
+        {
+          "tresc": "**Imbir.** Obierz imbir i zetrzyj na drobnej tarce."
+        },
+        {
+          "tresc": "**Ryż.** Odmierz suchy ryż i przepłucz na sitku pod zimną wodą."
+        },
+        {
+          "tresc": "**Wołowina.** Osusz mięso i pokrój w poprzek włókien w cienkie paski. Dzięki temu łatwiej zmięknie podczas krótkiego smażenia."
+        },
+        {
+          "tresc": "**Po przygotowaniu mięsa.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surowym mięsem."
+        },
+        {
+          "tresc": "**Dodatki.** Odmierz sezam i sos sojowy."
+        },
+        {
+          "tresc": "**Olej.** Odmierz olej."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie i smażenie",
+      "minuty": 20,
+      "kroki": [
+        {
+          "tresc": "**Marynowanie wołowiny.** Wołowinę wymieszaj z około jedną trzecią sosu sojowego i pozostaw na około **15 minut**."
+        },
+        {
+          "tresc": "**Ryż — równolegle.** W czasie marynowania mięsa ugotuj ryż zgodnie z instrukcją na opakowaniu."
+        },
+        {
+          "tresc": "**Blanszowanie brokułu.** W osobnym garnku zagotuj wodę. Wrzuć brokuł i blanszuj około **2–3 minut**. Powinien lekko zmięknąć, ale nadal pozostać jędrny i intensywnie zielony."
+        },
+        {
+          "tresc": "**Odcedzenie brokułu.** Brokuł odcedź, przelej zimną wodą i bardzo dokładnie osusz. Nadmiar wody spowodowałby duszenie składników na patelni zamiast ich smażenia."
+        },
+        {
+          "tresc": "**Rozgrzanie patelni.** Mocno rozgrzej dużą patelnię lub wok."
+        },
+        {
+          "tresc": "**Smażenie wołowiny.** Dodaj olej, a następnie wołowinę. Smaż na dużym ogniu około **1–2 minut**, szybko mieszając. Jeśli mięso nie mieści się swobodnie w jednej warstwie, smaż je w dwóch partiach."
+        },
+        {
+          "tresc": "**Zdjęcie mięsa.** Zdejmij z patelni."
+        },
+        {
+          "tresc": "**Cebula.** Na tę samą patelnię wrzuć cebulę i smaż około **1 minuty**."
+        },
+        {
+          "tresc": "**Czosnek i imbir.** Dodaj czosnek i imbir i smaż jeszcze około **30 sekund**."
+        },
+        {
+          "tresc": "**Połączenie składników.** Dodaj brokuł oraz usmażoną wołowinę. Wlej pozostały sos sojowy."
+        },
+        {
+          "tresc": "**Podgrzanie.** Smaż wszystko razem na dużym ogniu jeszcze około **1 minuty**, tylko do połączenia smaków i ponownego rozgrzania mięsa. Nie smaż dłużej, żeby wołowina nie zrobiła się twarda, a brokuł miękki."
+        },
+        {
+          "tresc": "**Podanie.** Zdejmij patelnię z ognia, posyp sezamem i podawaj z ugotowanym ryżem."
+        }
+      ]
+    }
+  ]
+}

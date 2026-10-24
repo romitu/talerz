@@ -4,6 +4,7 @@
  *
  *     node narzedzia/generuj-import-ai.mjs                  # wszystkie z przepisy-ai/
  *     node narzedzia/generuj-import-ai.mjs "Twarożek.json"  # wybrane pliki
+ *     node narzedzia/generuj-import-ai.mjs --po=30          # kilka plików po 30 przepisów
  *
  * Wynik ląduje w supabase/narzedzia/import-przepisow-ai.sql.
  *
@@ -22,7 +23,7 @@
  * cichu byłby gorszy niż błąd.
  */
 
-import { readdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { readdirSync, readFileSync, unlinkSync, writeFileSync } from 'node:fs';
 import { basename, dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -298,64 +299,8 @@ select ('IMPORT PRZERWANY — ' || string_agg(opis, '; '))::int as sprawdzenie_k
 `;
 }
 
-// ---------------------------------------------------------------------------
-//  Główna część
-// ---------------------------------------------------------------------------
-
-function main() {
-  // Autor po adresie, a nie „najstarsze konto” — to drugie działało tylko
-  // dlatego, że najstarsze konto przypadkiem należało do administratora.
-  const autor =
-    process.argv.find((a) => a.startsWith('--autor='))?.slice('--autor='.length) ??
-    wczytajEnv().TALERZ_EMAIL;
-  if (!autor) {
-    console.error('Podaj autora: --autor=adres@e-mail albo TALERZ_EMAIL w pliku .env.local.');
-    process.exit(1);
-  }
-
-  const wybrane = process.argv.slice(2).filter((a) => !a.startsWith('--'));
-  const pliki = wybrane.length > 0
-    ? wybrane.map((f) => basename(f))
-    : readdirSync(FOLDER).filter((f) => f.endsWith('.json')).sort();
-
-  if (pliki.length === 0) {
-    console.error('Brak plików JSON w narzedzia/przepisy-ai/.');
-    process.exit(1);
-  }
-
-  const przepisy = [];
-  const bledy = [];
-  const nazwy = new Map();
-
-  for (const plik of pliki) {
-    let p;
-    try {
-      p = JSON.parse(readFileSync(join(FOLDER, plik), 'utf8'));
-    } catch (e) {
-      bledy.push(`${plik}: ${e.message}`);
-      continue;
-    }
-    // Przepis to jeden obiekt. Lista to np. eksport tabeli z panelu Supabase.
-    if (Array.isArray(p)) {
-      console.log(`Pominięto ${plik} — to lista, a nie przepis.`);
-      continue;
-    }
-    sprawdzPrzepis(p).forEach((b) => bledy.push(`${plik}: ${b}`));
-
-    const klucz = String(p.nazwa ?? '').toLowerCase();
-    if (nazwy.has(klucz)) bledy.push(`${plik}: ta sama nazwa co w ${nazwy.get(klucz)}`);
-    nazwy.set(klucz, plik);
-
-    przepisy.push(p);
-  }
-
-  if (bledy.length > 0) {
-    console.error('Nie da się wygenerować:\n');
-    bledy.forEach((b) => console.error('  !', b));
-    console.error('\nPopraw pliki w narzedzia/przepisy-ai/ i uruchom ponownie.');
-    process.exit(1);
-  }
-
+/** Cały plik SQL dla podanych przepisów: sprawdzenie katalogów, przepisy, kontrola. */
+function plikSql(przepisy, autor, opis = '') {
   const naglowek = `-- =============================================================================
 --  TALERZ — przepisy przygotowane przez AI
 -- =============================================================================
@@ -363,7 +308,7 @@ function main() {
 --  w narzedzia/przepisy-ai/. Nie poprawiaj go ręcznie — poprawiaj JSON
 --  i generuj ponownie.
 --
---  Przepisów w tym pliku: ${przepisy.length}
+--  Przepisów w tym pliku: ${przepisy.length}${opis ? ` (${opis})` : ''}
 --  Wygenerowano: ${new Date().toISOString().slice(0, 10)}
 --
 --  Skrypt najpierw sprawdza katalogi składników i sprzętu. Jeśli czegoś
@@ -435,12 +380,93 @@ group by p.nazwa, p.porcjowanie, p.porcja_g, p.porcje, m.kcal, m.bialko_g
 order by p.nazwa;
 `;
 
-  const sciezka = join(KORZEN, 'supabase', 'narzedzia', 'import-przepisow-ai.sql');
-  writeFileSync(sciezka, naglowek + '\n' + przepisy.map((p) => sqlPrzepisu(p, autor)).join('\n') + stopka, 'utf8');
+  return naglowek + '\n' + przepisy.map((p) => sqlPrzepisu(p, autor)).join('\n') + stopka;
+}
+
+// ---------------------------------------------------------------------------
+//  Główna część
+// ---------------------------------------------------------------------------
+
+function main() {
+  // Autor po adresie, a nie „najstarsze konto” — to drugie działało tylko
+  // dlatego, że najstarsze konto przypadkiem należało do administratora.
+  const autor =
+    process.argv.find((a) => a.startsWith('--autor='))?.slice('--autor='.length) ??
+    wczytajEnv().TALERZ_EMAIL;
+  if (!autor) {
+    console.error('Podaj autora: --autor=adres@e-mail albo TALERZ_EMAIL w pliku .env.local.');
+    process.exit(1);
+  }
+
+  const wybrane = process.argv.slice(2).filter((a) => !a.startsWith('--'));
+  const pliki = wybrane.length > 0
+    ? wybrane.map((f) => basename(f))
+    : readdirSync(FOLDER).filter((f) => f.endsWith('.json')).sort();
+
+  if (pliki.length === 0) {
+    console.error('Brak plików JSON w narzedzia/przepisy-ai/.');
+    process.exit(1);
+  }
+
+  const przepisy = [];
+  const bledy = [];
+  const nazwy = new Map();
+
+  for (const plik of pliki) {
+    let p;
+    try {
+      p = JSON.parse(readFileSync(join(FOLDER, plik), 'utf8'));
+    } catch (e) {
+      bledy.push(`${plik}: ${e.message}`);
+      continue;
+    }
+    // Przepis to jeden obiekt. Lista to np. eksport tabeli z panelu Supabase.
+    if (Array.isArray(p)) {
+      console.log(`Pominięto ${plik} — to lista, a nie przepis.`);
+      continue;
+    }
+    sprawdzPrzepis(p).forEach((b) => bledy.push(`${plik}: ${b}`));
+
+    const klucz = String(p.nazwa ?? '').toLowerCase();
+    if (nazwy.has(klucz)) bledy.push(`${plik}: ta sama nazwa co w ${nazwy.get(klucz)}`);
+    nazwy.set(klucz, plik);
+
+    przepisy.push(p);
+  }
+
+  if (bledy.length > 0) {
+    console.error('Nie da się wygenerować:\n');
+    bledy.forEach((b) => console.error('  !', b));
+    console.error('\nPopraw pliki w narzedzia/przepisy-ai/ i uruchom ponownie.');
+    process.exit(1);
+  }
+
+  // Cały komplet ma ponad 1 MB — SQL Editor w panelu Supabase potrafi się
+  // na nim zawiesić. Z --po=N wychodzi kilka plików po N przepisów.
+  const po = Number(process.argv.find((a) => a.startsWith('--po='))?.slice('--po='.length));
+  const paczki = [];
+  if (Number.isInteger(po) && po > 0 && po < przepisy.length) {
+    for (let i = 0; i < przepisy.length; i += po) paczki.push(przepisy.slice(i, i + po));
+  } else {
+    paczki.push(przepisy);
+  }
+
+  const folder = join(KORZEN, 'supabase', 'narzedzia');
+  // Po poprzednim podziale mogły zostać części, które teraz by się nie nadpisały.
+  readdirSync(folder)
+    .filter((f) => /^import-przepisow-ai(-\d+)?\.sql$/.test(f))
+    .forEach((f) => unlinkSync(join(folder, f)));
 
   console.log(`Wygenerowano ${przepisy.length} przepisów:`);
   przepisy.forEach((p) => console.log('  -', p.nazwa));
-  console.log('\nPlik: supabase/narzedzia/import-przepisow-ai.sql');
+  console.log('');
+
+  paczki.forEach((paczka, i) => {
+    const plik = paczki.length === 1 ? 'import-przepisow-ai.sql' : `import-przepisow-ai-${i + 1}.sql`;
+    const opis = paczki.length === 1 ? '' : `część ${i + 1} z ${paczki.length}`;
+    writeFileSync(join(folder, plik), plikSql(paczka, autor, opis), 'utf8');
+    console.log(`Plik: supabase/narzedzia/${plik}${opis ? ` (${opis}, przepisów: ${paczka.length})` : ''}`);
+  });
 }
 
 if (process.argv[1] && process.argv[1].endsWith('generuj-import-ai.mjs')) {

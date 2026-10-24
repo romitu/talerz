@@ -1,0 +1,168 @@
+{
+  "nazwa": "Gulasz z białej fasoli, jarmużu i pomidorów",
+  "opis": "Gęsty roślinny gulasz z białej fasoli, jarmużu i pomidorów, podany z pieczywem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "srodziemnomorska"
+  ],
+  "rodzaje": [
+    "gulasz_curry"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 748,
+  "liczba_porcji_bazowych": 2,
+  "trwalosc_dni": 3,
+  "czas_przygotowania_min": 12,
+  "czas_obrobki_min": 37,
+  "sprzet": [
+    "Garnek 3 l",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna",
+    "Sitko"
+  ],
+  "przechowywanie": "Gulasz przechowuj w lodówce do 3 dni albo zamroź po szybkim schłodzeniu. Pieczywo trzymaj osobno. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
+  "mozna_mrozic": true,
+  "ratunek": "Za rzadki gulasz zagęść, rozgniatając część fasoli w sosie. Jeśli zbytnio zgęstnieje, dodaj niewielką ilość gorącej wody.",
+  "skladniki": [
+    {
+      "nazwa": "Fasola biała z puszki, odsączona",
+      "ilosc": 320,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Jarmuż, surowy",
+      "ilosc": 120,
+      "jednostka": "g",
+      "stan": "bez twardych łodyg"
+    },
+    {
+      "nazwa": "Pomidory krojone z puszki",
+      "ilosc": 360,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Marchew, surowa",
+      "ilosc": 120,
+      "jednostka": "g",
+      "stan": "pokrojona w kostkę"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 100,
+      "jednostka": "g",
+      "stan": "posiekana"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 10,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Domowy bulion warzywny",
+      "ilosc": 300,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 16,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Chleb żytni razowy",
+      "ilosc": 4,
+      "jednostka": "szt",
+      "stan": "kromki"
+    },
+    {
+      "nazwa": "Tymianek suszony",
+      "ilosc": 4,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Papryka wędzona mielona",
+      "ilosc": 2,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 2,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 1,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 12,
+      "kroki": [
+        {
+          "tresc": "**Fasola.** Przełóż fasolę z puszki na sitko, opłucz i odsącz. Odmierz po odsączeniu."
+        },
+        {
+          "tresc": "**Jarmuż.** Umyj jarmuż, usuń twarde łodygi i porwij liście na mniejsze kawałki."
+        },
+        {
+          "tresc": "**Marchew.** Umyj i obierz marchew, pokrój w kostkę około 1 cm."
+        },
+        {
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
+        },
+        {
+          "tresc": "**Czosnek.** Obierz czosnek i drobno posiekaj."
+        },
+        {
+          "tresc": "**Bulion.** Odmierz bulion."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz pieprz, wędzoną paprykę i tymianek."
+        },
+        {
+          "tresc": "**Pieczywo.** Przygotuj pieczywo w ilości wskazanej na liście składników."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie",
+      "minuty": 37,
+      "kroki": [
+        {
+          "tresc": "**Rozgrzanie oliwy.** Rozgrzej oliwę przez **1 minutę**."
+        },
+        {
+          "tresc": "**Cebula i marchew.** Dodaj cebulę i marchew, smaż **5 minut**."
+        },
+        {
+          "tresc": "**Czosnek i przyprawy.** Dodaj czosnek, tymianek i paprykę wędzoną; smaż **30 sekund**."
+        },
+        {
+          "tresc": "**Baza sosu.** Wlej bulion i dodaj pomidory. Doprowadź do wrzenia przez około **3 minuty**."
+        },
+        {
+          "tresc": "**Gotowanie marchewki.** Gotuj pod uchyloną pokrywką przez **15 minut**, aż marchew będzie prawie miękka."
+        },
+        {
+          "tresc": "**Fasola.** Dodaj fasolę i gotuj **5 minut**."
+        },
+        {
+          "tresc": "**Jarmuż.** Dodaj jarmuż i gotuj jeszcze **5 minut**.",
+          "sygnal": "liście jarmużu są miękkie, marchew bez twardego środka",
+          "uwaga": true
+        },
+        {
+          "tresc": "**Doprawienie i podanie.** Dopraw solą i pieprzem, podaj z przygotowanym pieczywem."
+        }
+      ]
+    }
+  ]
+}

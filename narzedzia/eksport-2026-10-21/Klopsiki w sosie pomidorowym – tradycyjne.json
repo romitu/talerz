@@ -1,0 +1,183 @@
+{
+  "nazwa": "Klopsiki w sosie pomidorowym – tradycyjne",
+  "opis": "Klopsiki wołowo-wieprzowe duszone w aromatycznym sosie pomidorowym z oregano, podawane z ziemniakami i świeżą natką pietruszki.",
+  "pory": [
+    "obiad"
+  ],
+  "kuchnie": [
+    "polska"
+  ],
+  "rodzaje": [],
+  "porcjowanie": "waga",
+  "porcja_g": 772,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 3,
+  "czas_przygotowania_min": 8,
+  "czas_obrobki_min": 37,
+  "sprzet": [
+    "Patelnia 28 cm",
+    "Garnek 2 l",
+    "Tłuczek do ziemniaków",
+    "Miska",
+    "Nóż szefa kuchni",
+    "Deska do krojenia"
+  ],
+  "przechowywanie": "W lodówce do 3 dni. Świetnie się mrożą — porcję na trzeci dzień odłóż od razu do zamrażarki.",
+  "mozna_mrozic": true,
+  "ratunek": "Klopsiki się rozpadają — za mało bułki tartej albo za mokre mięso. Sos za kwaśny — szczypta słodkiej papryki i pogotuj.",
+  "skladniki": [
+    {
+      "nazwa": "Mięso mielone wołowo-wieprzowe, surowe",
+      "ilosc": 180,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Jaja kurze, całe, surowe",
+      "ilosc": 1,
+      "jednostka": "szt"
+    },
+    {
+      "nazwa": "Bułka tarta",
+      "ilosc": 20,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 80,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 3,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Passata pomidorowa",
+      "ilosc": 200,
+      "jednostka": "ml"
+    },
+    {
+      "nazwa": "Ziemniaki, surowe",
+      "ilosc": 220,
+      "jednostka": "g",
+      "stan": "obrane"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Majeranek suszony",
+      "ilosc": 1,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oregano suszone",
+      "ilosc": 1,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Pietruszka natka",
+      "ilosc": 5,
+      "jednostka": "g",
+      "stan": "posiekana"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 1,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 8,
+      "kroki": [
+        {
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj lub zetrzyj. Podziel na połowę: do klopsików i do sosu."
+        },
+        {
+          "tresc": "**Czosnek.** Obierz czosnek i drobno posiekaj."
+        },
+        {
+          "tresc": "**Natka pietruszki.** Umyj i osusz natkę, usuń grube łodygi i drobno posiekaj liście."
+        },
+        {
+          "tresc": "**Ziemniaki.** Umyj i obierz ziemniaki, pokrój na mniejsze kawałki. Przy przygotowywaniu posiłków na kilka dni ziemniaki gotuj świeże do każdego posiłku."
+        },
+        {
+          "tresc": "**Mięso i jajka.** Odmierz mięso mielone. Wbij jajka do miseczki i lekko roztrzep. Po kontakcie z surowym mięsem umyj ręce i przybory."
+        },
+        {
+          "tresc": "**Passata.** Odmierz passatę."
+        },
+        {
+          "tresc": "**Dodatki.** Odmierz bułkę tartą."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól, pieprz, oregano i majeranek."
+        }
+      ]
+    },
+    {
+      "nazwa": "Przygotowanie i obsmażenie klopsików",
+      "minuty": 12,
+      "kroki": [
+        {
+          "tresc": "**Masa na klopsiki.** Mięso wymieszaj z jajkiem, bułką tartą, połową cebuli i majerankiem. Dopraw częścią soli i pieprzu."
+        },
+        {
+          "tresc": "**Formowanie klopsików.** Uformuj niewielkie klopsiki."
+        },
+        {
+          "tresc": "**Rozgrzanie oliwy.** Na patelni rozgrzej oliwę."
+        },
+        {
+          "tresc": "**Obsmażenie klopsików.** Obsmaż klopsiki przez **5–6 minut**, ostrożnie obracając, aż zrumienią się ze wszystkich stron. Przełóż na talerz."
+        }
+      ]
+    },
+    {
+      "nazwa": "Duszenie w sosie",
+      "minuty": 20,
+      "kroki": [
+        {
+          "tresc": "**Cebula.** Na tej samej patelni dodaj pozostałą cebulę i smaż około **2–3 minuty**."
+        },
+        {
+          "tresc": "**Baza sosu.** Dodaj czosnek, passatę i oregano."
+        },
+        {
+          "tresc": "**Klopsiki do sosu.** Włóż klopsiki do sosu."
+        },
+        {
+          "tresc": "**Duszenie klopsików.** Przykryj i duś na małym ogniu przez około **20 minut**. Jeśli sos robi się zbyt gęsty, dolej niewielką ilość wody."
+        },
+        {
+          "tresc": "**Ziemniaki — równolegle.** W czasie duszenia klopsików ugotuj ziemniaki w lekko osolonej wodzie przez około **15–20 minut**. Odcedź i utłucz."
+        }
+      ]
+    },
+    {
+      "nazwa": "Wykończenie i podanie",
+      "minuty": 5,
+      "kroki": [
+        {
+          "tresc": "**Doprawienie sosu.** Dopraw sos pozostałą solą i pieprzem."
+        },
+        {
+          "tresc": "**Podanie.** Klopsiki podawaj z puree ziemniaczanym i posiekaną natką pietruszki."
+        }
+      ]
+    }
+  ]
+}

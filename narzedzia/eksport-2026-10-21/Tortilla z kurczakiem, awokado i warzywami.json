@@ -1,0 +1,162 @@
+{
+  "nazwa": "Tortilla z kurczakiem, awokado i warzywami",
+  "opis": "Pełnoziarnista tortilla z grillowanym kurczakiem, awokado, pomidorem, ogórkiem i sosem jogurtowym. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "inna"
+  ],
+  "rodzaje": [
+    "kanapki"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 557,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 1,
+  "czas_przygotowania_min": 12,
+  "czas_obrobki_min": 13,
+  "sprzet": [
+    "Patelnia 24 cm",
+    "Miska",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna",
+    "Termometr do mięsa"
+  ],
+  "przechowywanie": "Składniki przechowuj osobno w lodówce do 1 dnia. Tortillę składaj przed jedzeniem. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli tortilla pęka, ogrzej ją na suchej patelni. Suchą pierś pokrój cienko i wymieszaj z sosem.",
+  "skladniki": [
+    {
+      "nazwa": "Tortilla pełnoziarnista",
+      "ilosc": 60,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Pierś z kurczaka, surowa",
+      "ilosc": 150,
+      "jednostka": "g",
+      "stan": "pokrojona w paski"
+    },
+    {
+      "nazwa": "Awokado",
+      "ilosc": 0.5,
+      "jednostka": "szt",
+      "stan": "pokrojone"
+    },
+    {
+      "nazwa": "Pomidory, surowe",
+      "ilosc": 100,
+      "jednostka": "g",
+      "stan": "pokrojone"
+    },
+    {
+      "nazwa": "Ogórek, surowy",
+      "ilosc": 80,
+      "jednostka": "g",
+      "stan": "pokrojony"
+    },
+    {
+      "nazwa": "Sałata rzymska",
+      "ilosc": 40,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Jogurt naturalny 2%",
+      "ilosc": 40,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Olej rzepakowy",
+      "ilosc": 5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cytryna",
+      "ilosc": 10,
+      "jednostka": "g",
+      "stan": "sok"
+    },
+    {
+      "nazwa": "Papryka słodka mielona",
+      "ilosc": 1,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 12,
+      "kroki": [
+        {
+          "tresc": "**Sałata.** Umyj liście sałaty, dokładnie osusz i porwij na mniejsze kawałki."
+        },
+        {
+          "tresc": "**Pomidor.** Umyj pomidory i pokrój w cienkie plastry. Osusz plasterki z nadmiaru wilgoci."
+        },
+        {
+          "tresc": "**Ogórek.** Umyj ogórek i pokrój w cienkie słupki."
+        },
+        {
+          "tresc": "**Awokado.** Umyj awokado, usuń skórkę i pestkę. Pokrój miąższ."
+        },
+        {
+          "tresc": "**Cytryna.** Umyj cytrynę, wyciśnij sok i odmierz ilość wskazaną na liście składników."
+        },
+        {
+          "tresc": "**Sos jogurtowy.** Wymieszaj sok z cytryny z jogurtem oraz częścią soli i pieprzu."
+        },
+        {
+          "tresc": "**Kurczak.** Osusz mięso, pokrój w paski grubości około 1 cm. Wymieszaj z olejem, słodką papryką oraz pozostałą solą i pieprzem."
+        },
+        {
+          "tresc": "**Po przygotowaniu mięsa.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surowym mięsem."
+        },
+        {
+          "tresc": "**Tortille.** Wyjmij potrzebne placki i przykryj, żeby nie wysychały."
+        }
+      ]
+    },
+    {
+      "nazwa": "Smażenie i składanie",
+      "minuty": 13,
+      "kroki": [
+        {
+          "tresc": "**Rozgrzanie patelni.** Rozgrzej patelnię przez **1 minutę**."
+        },
+        {
+          "tresc": "**Smażenie kurczaka.** Smaż kurczaka przez **6–8 minut** na średnio dużym ogniu, obracając.",
+          "sygnal": "mięso ma co najmniej 74°C w środku",
+          "uwaga": true
+        },
+        {
+          "tresc": "**Zdjęcie kurczaka.** Przełóż kurczaka na czysty talerz."
+        },
+        {
+          "tresc": "**Ogrzanie tortilli.** Ogrzej tortillę na patelni po **15–20 sekund** na stronę."
+        },
+        {
+          "tresc": "**Nadziewanie.** Posmaruj tortillę sosem, ułóż sałatę, warzywa, awokado i kurczaka."
+        },
+        {
+          "tresc": "**Zwijanie.** Zostaw wolne brzegi, zwiń boki i zroluj."
+        },
+        {
+          "tresc": "**Podanie nadmiaru.** Nadmiar nadzienia podaj obok jako sałatkę."
+        }
+      ]
+    }
+  ]
+}

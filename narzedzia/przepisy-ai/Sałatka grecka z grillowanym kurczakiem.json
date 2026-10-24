@@ -1,0 +1,174 @@
+{
+  "nazwa": "Sałatka grecka z grillowanym kurczakiem",
+  "opis": "Świeża sałatka z grillowanym kurczakiem, fetą, pomidorem, ogórkiem, papryką, oliwkami i lekkim dressingiem cytrynowo-oliwnym. Sycący, pełnowartościowy posiłek w stylu śródziemnomorskim.",
+  "pory": [
+    "kolacja",
+    "sniadanie"
+  ],
+  "kuchnie": [
+    "srodziemnomorska"
+  ],
+  "rodzaje": [
+    "salatka"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 681,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 1,
+  "czas_przygotowania_min": 7,
+  "czas_obrobki_min": 13,
+  "sprzet": [
+    "Grill kontaktowy",
+    "Miska",
+    "Nóż szefa kuchni",
+    "Deska do krojenia"
+  ],
+  "przechowywanie": "Bez dressingu przechowuj w lodówce do 2 dni. Oliwę z cytryną najlepiej dodać dopiero przed jedzeniem. Nie nadaje się do mrożenia.",
+  "mozna_mrozic": false,
+  "ratunek": "Za słona — feta jest słona, nie dosalaj. Przepłucz ser zimną wodą przed pokruszeniem. Puściła wodę — odlej i dopraw na nowo.",
+  "skladniki": [
+    {
+      "nazwa": "Pierś z kurczaka, surowa",
+      "ilosc": 100,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Ser feta",
+      "ilosc": 50,
+      "jednostka": "g",
+      "stan": "pokruszona"
+    },
+    {
+      "nazwa": "Pomidory, surowe",
+      "ilosc": 150,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Ogórek, surowy",
+      "ilosc": 120,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Papryka czerwona, surowa",
+      "ilosc": 100,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cebula czerwona, surowa",
+      "ilosc": 30,
+      "jednostka": "g",
+      "stan": "w cienkich piórkach"
+    },
+    {
+      "nazwa": "Oliwki czarne",
+      "ilosc": 30,
+      "jednostka": "g",
+      "stan": "bez pestek"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cytryna",
+      "ilosc": 20,
+      "jednostka": "g",
+      "stan": "sok"
+    },
+    {
+      "nazwa": "Chleb żytni razowy",
+      "ilosc": 2,
+      "jednostka": "szt"
+    },
+    {
+      "nazwa": "Oregano suszone",
+      "ilosc": 1,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 2,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 3,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 7,
+      "kroki": [
+        {
+          "tresc": "**Pomidory.** Umyj pomidory i pokrój w grubą kostkę."
+        },
+        {
+          "tresc": "**Ogórek.** Umyj ogórek i pokrój w grubą kostkę."
+        },
+        {
+          "tresc": "**Papryka.** Umyj paprykę, usuń gniazdo nasienne i pokrój na kawałki około 2 cm."
+        },
+        {
+          "tresc": "**Cebula.** Obierz cebulę i pokrój w cienkie piórka."
+        },
+        {
+          "tresc": "**Feta.** Odmierz fetę i pokrusz."
+        },
+        {
+          "tresc": "**Cytryna.** Umyj cytrynę, wyciśnij sok i odmierz ilość wskazaną na liście składników."
+        },
+        {
+          "tresc": "**Kurczak.** Osusz pierś i rozkrój na płaty grubości około 1,5 cm. Natrzyj częścią oliwy, oregano i pieprzem."
+        },
+        {
+          "tresc": "**Po przygotowaniu mięsa.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surowym mięsem."
+        },
+        {
+          "tresc": "**Sól.** Odmierz sól."
+        },
+        {
+          "tresc": "**Pieczywo.** Przygotuj pieczywo w ilości wskazanej na liście składników."
+        }
+      ]
+    },
+    {
+      "nazwa": "Grillowanie kurczaka",
+      "minuty": 10,
+      "kroki": [
+        {
+          "tresc": "**Rozgrzanie grilla.** Rozgrzej grill kontaktowy zgodnie z instrukcją urządzenia, zwykle przez około **3 minuty**."
+        },
+        {
+          "tresc": "**Grillowanie kurczaka.** Grilluj kurczaka około **6–7 minut**, bez mocnego dociskania pokrywy. Mięso jest gotowe, gdy w najgrubszym miejscu osiągnie około **74°C**."
+        },
+        {
+          "tresc": "**Odpoczynek i krojenie.** Zdejmij kurczaka z grillownicy, odstaw na **3 minuty**, a następnie pokrój w paski."
+        }
+      ]
+    },
+    {
+      "nazwa": "Przygotowanie sałatki i podanie",
+      "minuty": 3,
+      "kroki": [
+        {
+          "tresc": "**Warzywa.** W dużej misce wymieszaj pomidory, ogórka, paprykę, cebulę i oliwki."
+        },
+        {
+          "tresc": "**Sos cytrynowy.** Pozostałą oliwę wymieszaj z sokiem z cytryny. Polej sałatkę i delikatnie wymieszaj."
+        },
+        {
+          "tresc": "**Kurczak i feta.** Na sałatce ułóż grillowanego kurczaka i pokruszoną fetę. Posyp pozostałym oregano."
+        },
+        {
+          "tresc": "**Doprawienie.** Spróbuj przed dodaniem soli — feta i oliwki są już słone. Sól dodaj tylko w razie potrzeby."
+        },
+        {
+          "tresc": "**Podanie.** Podawaj z pieczywem żytnim."
+        }
+      ]
+    }
+  ]
+}

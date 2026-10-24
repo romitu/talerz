@@ -7,8 +7,9 @@
   "kuchnie": [
     "srodziemnomorska"
   ],
+  "rodzaje": [],
   "porcjowanie": "waga",
-  "porcja_g": 641.5,
+  "porcja_g": 642,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 1,
   "czas_przygotowania_min": 10,
@@ -74,16 +75,25 @@
       "minuty": 10,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Ziemniaki.** Umyj i obierz ziemniaki, pokrój w kostkę około 2 cm."
         },
         {
-          "tresc": "Umyj i obierz ziemniaki, pokrój na kawałki około 2 cm. Umyj fasolkę, odetnij końcówki. Obierz i drobno posiekaj czosnek."
+          "tresc": "**Fasolka szparagowa.** Umyj fasolkę i odetnij końcówki."
         },
         {
-          "tresc": "Umyj cytrynę, przygotuj sok z odmierzonej części. Wymieszaj sok z połową oliwy oraz czosnkiem."
+          "tresc": "**Czosnek.** Obierz czosnek i drobno posiekaj."
         },
         {
-          "tresc": "Osusz stek z tuńczyka grubości około 2 cm, posmaruj pozostałą oliwą, dopraw solą i pieprzem. Umyj przybory po rybie."
+          "tresc": "**Cytryna.** Umyj cytrynę, wyciśnij sok i odmierz ilość wskazaną na liście składników."
+        },
+        {
+          "tresc": "**Sos cytrynowy.** Wymieszaj sok z cytryny z połową oliwy i czosnkiem."
+        },
+        {
+          "tresc": "**Tuńczyk.** Osusz stek grubości około 2 cm. Posmaruj pozostałą oliwą i dopraw solą oraz pieprzem."
+        },
+        {
+          "tresc": "**Po przygotowaniu ryby.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surową rybą."
         }
       ]
     },
@@ -92,21 +102,24 @@
       "minuty": 38,
       "kroki": [
         {
-          "tresc": "Zalej ziemniaki wodą, zagotuj przez około 5 minut i gotuj 15–20 minut do miękkości. Odcedź i przykryj."
+          "tresc": "**Gotowanie ziemniaków.** Zalej ziemniaki wodą, zagotuj przez około **5 minut** i gotuj **15–20 minut** do miękkości. Odcedź i przykryj."
         },
         {
-          "tresc": "Równolegle zagotuj wodę w drugim garnku. Dodaj fasolkę, gotuj 8–12 minut do miękkości, zachowując lekki opór przy gryzieniu; odcedź."
+          "tresc": "**Fasolka — równolegle.** Równolegle zagotuj wodę w drugim garnku. Dodaj fasolkę, gotuj **8–12 minut** do miękkości, zachowując lekki opór przy gryzieniu; odcedź."
         },
         {
-          "tresc": "Gdy zwolni się palnik, rozgrzej patelnię przez 1–2 minuty. Smaż tuńczyka około 3 minuty z każdej strony."
+          "tresc": "**Rozgrzanie patelni.** Gdy zwolni się palnik, rozgrzej patelnię przez **1–2 minuty**."
         },
         {
-          "tresc": "Sprawdź temperaturę najgrubszego miejsca; w razie potrzeby dosmaż po 1 minucie na mniejszym ogniu.",
+          "tresc": "**Smażenie tuńczyka.** Smaż tuńczyka około **3 minuty** z każdej strony."
+        },
+        {
+          "tresc": "**Sprawdzenie ryby.** Sprawdź temperaturę najgrubszego miejsca; w razie potrzeby dosmaż po **1 minucie** na mniejszym ogniu.",
           "sygnal": "ryba ma co najmniej 63°C, bez surowego środka",
           "uwaga": true
         },
         {
-          "tresc": "Polej ziemniaki oraz fasolkę przygotowaną oliwą z cytryną i czosnkiem, podaj z tuńczykiem."
+          "tresc": "**Podanie.** Polej ziemniaki oraz fasolkę przygotowaną oliwą z cytryną i czosnkiem, podaj z tuńczykiem."
         }
       ]
     }

@@ -1,0 +1,132 @@
+{
+  "nazwa": "Tortilla z jajkiem i szpinakiem",
+  "opis": "Ciepła pełnoziarnista tortilla z jajkiem, szpinakiem, pomidorem i fetą. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
+  "pory": [
+    "sniadanie",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "inna"
+  ],
+  "rodzaje": [
+    "kanapki"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 366,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 0,
+  "czas_przygotowania_min": 8,
+  "czas_obrobki_min": 12,
+  "sprzet": [
+    "Patelnia 24 cm",
+    "Miska",
+    "Widelec",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Najlepiej zjedz bezpośrednio po przygotowaniu.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli tortilla pęka, ogrzej ją chwilę na suchej patelni. Zbyt mokry farsz smaż dłużej bez przykrycia.",
+  "skladniki": [
+    {
+      "nazwa": "Tortilla pełnoziarnista",
+      "ilosc": 60,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Jaja kurze, całe, surowe",
+      "ilosc": 2,
+      "jednostka": "szt",
+      "stan": "roztrzepane"
+    },
+    {
+      "nazwa": "Szpinak, surowy",
+      "ilosc": 60,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Pomidory, surowe",
+      "ilosc": 100,
+      "jednostka": "g",
+      "stan": "pokrojone w kostkę"
+    },
+    {
+      "nazwa": "Ser feta",
+      "ilosc": 30,
+      "jednostka": "g",
+      "stan": "pokruszony"
+    },
+    {
+      "nazwa": "Olej rzepakowy",
+      "ilosc": 5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 8,
+      "kroki": [
+        {
+          "tresc": "**Szpinak.** Umyj i odsącz szpinak. Usuń grube łodygi, duże liście porwij na mniejsze kawałki."
+        },
+        {
+          "tresc": "**Pomidor.** Umyj pomidory i pokrój w kostkę."
+        },
+        {
+          "tresc": "**Feta.** Odmierz fetę i pokrusz."
+        },
+        {
+          "tresc": "**Jajka.** Wbij jajka do miski i roztrzep z pieprzem oraz odmierzoną solą."
+        },
+        {
+          "tresc": "**Olej.** Odmierz olej."
+        },
+        {
+          "tresc": "**Tortille.** Wyjmij potrzebne placki i przykryj, żeby nie wysychały."
+        }
+      ]
+    },
+    {
+      "nazwa": "Smażenie i zwijanie",
+      "minuty": 12,
+      "kroki": [
+        {
+          "tresc": "**Rozgrzanie oleju.** Rozgrzej olej przez **1 minutę**."
+        },
+        {
+          "tresc": "**Pomidor.** Smaż pomidora **2–3 minuty**, aby odparować płyn."
+        },
+        {
+          "tresc": "**Szpinak.** Dodaj szpinak i smaż **1 minutę**."
+        },
+        {
+          "tresc": "**Jajka.** Wlej jajka, smaż na małym ogniu **2–3 minuty**, mieszając do ścięcia bez płynnego białka."
+        },
+        {
+          "tresc": "**Odłożenie farszu.** Przełóż farsz na talerz."
+        },
+        {
+          "tresc": "**Ogrzanie tortilli.** Ogrzej tortillę na suchej patelni po **15–20 sekund** na stronę."
+        },
+        {
+          "tresc": "**Nadzienie.** Dodaj farsz oraz fetę, zostawiając wolne brzegi. Nadmiar farszu podaj obok."
+        },
+        {
+          "tresc": "**Zwijanie i opiekanie.** Zwiń i opiekaj po **1 minucie** z każdej strony na średnio małym ogniu. Podaj od razu."
+        }
+      ]
+    }
+  ]
+}

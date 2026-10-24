@@ -1,0 +1,91 @@
+{
+  "nazwa": "Skyr z owocami, płatkami owsianymi i orzechami",
+  "opis": "Skyr z bananem, borówkami, płatkami owsianymi i orzechami włoskimi. Ilości składników dobierz z listy dla przygotowywanej liczby porcji.",
+  "pory": [
+    "sniadanie",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "inna"
+  ],
+  "rodzaje": [
+    "na_slodko"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 385,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 1,
+  "czas_przygotowania_min": 3,
+  "czas_obrobki_min": 2,
+  "sprzet": [
+    "Miska",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Przechowuj w zamkniętym pojemniku w lodówce do 1 dnia. Orzechy i płatki dodaj przed jedzeniem, aby pozostały chrupiące. Lodówka: do 4°C.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli skyr jest zbyt gęsty, dodaj łyżeczkę wody. Jeśli owoce są kwaśne, rozgnieć część banana i wymieszaj ze skyrem.",
+  "skladniki": [
+    {
+      "nazwa": "Skyr naturalny",
+      "ilosc": 200,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Banan",
+      "ilosc": 0.5,
+      "jednostka": "szt",
+      "stan": "pokrojony w plasterki"
+    },
+    {
+      "nazwa": "Borówki amerykańskie",
+      "ilosc": 80,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Płatki owsiane",
+      "ilosc": 30,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Orzechy włoskie",
+      "ilosc": 15,
+      "jednostka": "g",
+      "stan": "grubo posiekane"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 3,
+      "kroki": [
+        {
+          "tresc": "**Borówki.** Umyj borówki i dokładnie osusz."
+        },
+        {
+          "tresc": "**Banan.** Obierz banana i pokrój miąższ w plasterki."
+        },
+        {
+          "tresc": "**Orzechy.** Odmierz orzechy włoskie i grubo posiekaj."
+        },
+        {
+          "tresc": "**Skyr.** Odmierz skyr."
+        },
+        {
+          "tresc": "**Płatki owsiane.** Odmierz płatki owsiane."
+        }
+      ]
+    },
+    {
+      "nazwa": "Podanie",
+      "minuty": 2,
+      "kroki": [
+        {
+          "tresc": "**Podanie.** Przełóż skyr do miski, dodaj owoce. Posyp płatkami i orzechami bezpośrednio przed jedzeniem.",
+          "sygnal": "Jeśli wolisz, aby płatki były nieco miększe, wystarczy odczekać 2–3 minuty po wymieszaniu ich ze skyrem"
+        }
+      ]
+    }
+  ]
+}

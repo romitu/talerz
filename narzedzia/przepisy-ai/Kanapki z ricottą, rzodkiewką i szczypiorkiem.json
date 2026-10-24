@@ -15,8 +15,8 @@
   "porcja_g": 251,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 0,
-  "czas_przygotowania_min": 10,
-  "czas_obrobki_min": 0,
+  "czas_przygotowania_min": 6,
+  "czas_obrobki_min": 4,
   "sprzet": [
     "Miska",
     "Widelec",
@@ -73,10 +73,19 @@
       "minuty": 6,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Rzodkiewka.** Umyj rzodkiewki, usuń końcówki i pokrój w cienkie półplasterki."
         },
         {
-          "tresc": "Umyj rzodkiewki i szczypiorek. Odetnij końcówki rzodkiewek, pokrój w cienkie plasterki. Posiekaj szczypiorek. Przygotuj pieczywo i odmierz ricottę oraz jogurt."
+          "tresc": "**Szczypiorek.** Umyj i osusz szczypiorek, następnie drobno posiekaj."
+        },
+        {
+          "tresc": "**Do pasty.** Odmierz ricottę i jogurt do miski."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól i pieprz."
+        },
+        {
+          "tresc": "**Pieczywo.** Przygotuj pieczywo w ilości wskazanej na liście składników."
         }
       ]
     },
@@ -85,7 +94,10 @@
       "minuty": 4,
       "kroki": [
         {
-          "tresc": "Wymieszaj ricottę z jogurtem, szczypiorkiem, solą i pieprzem. Posmaruj pieczywo i ułóż rzodkiewkę. Podaj od razu."
+          "tresc": "**Pasta z ricotty.** Wymieszaj ricottę z jogurtem, szczypiorkiem, solą i pieprzem."
+        },
+        {
+          "tresc": "**Składanie kanapek.** Posmaruj pieczywo i ułóż rzodkiewkę. Podaj od razu."
         }
       ]
     }

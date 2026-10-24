@@ -11,7 +11,7 @@
     "z_piekarnika"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 342.5,
+  "porcja_g": 343,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 3,
   "czas_przygotowania_min": 15,
@@ -95,13 +95,25 @@
       "minuty": 15,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Ziemniaki.** Umyj i obierz ziemniaki, pokrój w kostkę około 2 cm."
         },
         {
-          "tresc": "Umyj i obierz ziemniaki, buraki, marchew, pasternak oraz seler. Buraki pokrój w kostkę około 1 cm, pozostałe korzenie około 2 cm. Obierz cebulę i pokrój w ósemki."
+          "tresc": "**Buraki.** Umyj i obierz buraki, pokrój w kostkę około 1 cm."
         },
         {
-          "tresc": "Wymieszaj warzywa z odmierzoną oliwą, tymiankiem, rozmarynem, solą i pieprzem."
+          "tresc": "**Marchew.** Umyj i obierz marchew, pokrój na kawałki około 2 cm."
+        },
+        {
+          "tresc": "**Pasternak.** Umyj i obierz pasternak, pokrój na kawałki około 2 cm."
+        },
+        {
+          "tresc": "**Seler korzeniowy.** Umyj i obierz seler, pokrój na kawałki około 2 cm."
+        },
+        {
+          "tresc": "**Cebula.** Obierz cebulę i pokrój w ósemki."
+        },
+        {
+          "tresc": "**Warzywa do pieczenia.** Wymieszaj warzywa z odmierzoną oliwą, tymiankiem, rozmarynem, solą i pieprzem."
         }
       ]
     },
@@ -110,15 +122,15 @@
       "minuty": 50,
       "kroki": [
         {
-          "tresc": "Rozgrzej piekarnik do 210°C, grzanie góra–dół, zwykle około 10 minut."
+          "tresc": "**Rozgrzanie piekarnika.** Rozgrzej piekarnik do **210°C**, grzanie góra–dół, zwykle około **10 minut**."
         },
         {
-          "tresc": "Rozłóż warzywa luźno na blasze i piecz 35–40 minut. Przemieszaj po 20 minutach. Jeśli najtwardsze kawałki nie są miękkie, dopiekaj po 5 minut, zdejmując wcześniej gotowe.",
+          "tresc": "**Pieczenie warzyw.** Rozłóż warzywa luźno na blasze i piecz **35–40 minut**. Przemieszaj po **20 minutach**. Jeśli najtwardsze kawałki nie są miękkie, dopiekaj po **5 minut**, zdejmując wcześniej gotowe.",
           "sygnal": "warzywa są miękkie w środku i zarumienione na brzegach",
           "uwaga": true
         },
         {
-          "tresc": "Podaj jako dodatek."
+          "tresc": "**Podanie.** Podaj jako dodatek."
         }
       ]
     }

@@ -1,0 +1,182 @@
+{
+  "nazwa": "Kurczak z ryżem, marchewką i jogurtem greckim",
+  "opis": "Kurczak z ryżem i marchewką przygotowany na jednej patelni, z dodatkiem cebuli, czosnku i jogurtu greckiego. Kremowe, sycące danie na kilka porcji.",
+  "pory": [
+    "kolacja",
+    "sniadanie"
+  ],
+  "kuchnie": [
+    "polska"
+  ],
+  "rodzaje": [
+    "kasza_ryz"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 633,
+  "liczba_porcji_bazowych": 3,
+  "trwalosc_dni": 3,
+  "czas_przygotowania_min": 10,
+  "czas_obrobki_min": 30,
+  "sprzet": [
+    "Garnek 3 l",
+    "Patelnia 28 cm",
+    "Blender ręczny",
+    "Nóż szefa kuchni",
+    "Deska do krojenia"
+  ],
+  "przechowywanie": "Po wystudzeniu przechowuj w szczelnym pojemniku w lodówce do 3 dni. Podczas odgrzewania, jeśli ryż wchłonie sos i danie zrobi się zbyt gęste, dodaj 1–2 łyżki wody lub bulionu.",
+  "mozna_mrozic": false,
+  "skladniki": [
+    {
+      "nazwa": "Marchew, surowa",
+      "ilosc": 250,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 100,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 10,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Domowy bulion warzywny",
+      "ilosc": 600,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 30,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 3,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 1,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Pierś z kurczaka, surowa",
+      "ilosc": 500,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Ryż basmati, suchy",
+      "ilosc": 200,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Jogurt grecki naturalny 2%",
+      "ilosc": 200,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Pietruszka natka",
+      "ilosc": 5,
+      "jednostka": "g",
+      "zamiennik": "koperek"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 10,
+      "kroki": [
+        {
+          "tresc": "**Marchew.** Umyj i obierz marchew, zetrzyj na tarce o grubych oczkach."
+        },
+        {
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
+        },
+        {
+          "tresc": "**Czosnek.** Obierz czosnek i przeciśnij przez praskę lub bardzo drobno posiekaj."
+        },
+        {
+          "tresc": "**Natka pietruszki.** Umyj i osusz natkę, usuń grube łodygi i drobno posiekaj liście."
+        },
+        {
+          "tresc": "**Kurczak.** Osusz mięso kurczaka bez skóry i kości, pokrój w kostkę około 2 cm."
+        },
+        {
+          "tresc": "**Po przygotowaniu mięsa.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surowym mięsem."
+        },
+        {
+          "tresc": "**Ryż.** Odmierz ryż."
+        },
+        {
+          "tresc": "**Bulion.** Odmierz bulion."
+        },
+        {
+          "tresc": "**Jogurt.** Odmierz jogurt."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól i pieprz."
+        }
+      ]
+    },
+    {
+      "nazwa": "Smażenie kurczaka i warzyw",
+      "minuty": 12,
+      "kroki": [
+        {
+          "tresc": "**Rozgrzanie oliwy.** Na dużej, głębokiej patelni rozgrzej około połowy oliwy."
+        },
+        {
+          "tresc": "**Obsmażenie kurczaka.** Dodaj pokrojonego kurczaka. Smaż około **2 minuty** z każdej strony, aż mięso zrumieni się z zewnątrz, ale w środku nie będzie jeszcze całkowicie gotowe. W trakcie smażenia dopraw częścią soli i pieprzu."
+        },
+        {
+          "tresc": "**Zdjęcie kurczaka.** Podsmażonego kurczaka zdejmij z patelni i odłóż na bok."
+        },
+        {
+          "tresc": "**Cebula.** Na tę samą patelnię dodaj pozostałą oliwę i cebulę. Smaż około **3 minut**."
+        },
+        {
+          "tresc": "**Marchew.** Dodaj startą marchew, dokładnie wymieszaj z cebulą i smaż około **4–5 minut**."
+        },
+        {
+          "tresc": "**Czosnek.** Dodaj czosnek, wymieszaj i smaż jeszcze około **30 sekund**."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie ryżu i wykończenie dania",
+      "minuty": 18,
+      "kroki": [
+        {
+          "tresc": "**Kurczak i bulion.** Włóż kurczaka z powrotem na patelnię i wlej ciepły bulion."
+        },
+        {
+          "tresc": "**Ryż.** Gdy bulion zacznie się gotować, zmniejsz ogień, dodaj suchy ryż i dokładnie wymieszaj."
+        },
+        {
+          "tresc": "**Gotowanie ryżu.** Przykryj patelnię i gotuj na małym ogniu około **15 minut**. Co kilka minut delikatnie przemieszaj, żeby ryż nie przywarł do dna."
+        },
+        {
+          "tresc": "**Sprawdzenie ryżu.** Po **15 minutach** sprawdź ryż. Powinien być miękki, a większość płynu powinna zostać wchłonięta. Jeśli ryż jest jeszcze twardy, a płynu brakuje, dolej niewielką ilość gorącej wody lub bulionu."
+        },
+        {
+          "tresc": "**Zdjęcie z ognia.** Zdejmij patelnię z ognia."
+        },
+        {
+          "tresc": "**Hartowanie jogurtu.** Do jogurtu dodawaj stopniowo niewielką ilość gorącego płynu z patelni i dokładnie wymieszaj. Zahartowany jogurt dodaj do dania i delikatnie wymieszaj."
+        },
+        {
+          "tresc": "**Doprawienie.** Po dodaniu jogurtu nie gotuj już dania. Dopraw pozostałą solą i pieprzem według smaku."
+        },
+        {
+          "tresc": "**Natka i podanie.** Dodaj posiekaną natkę pietruszki, wymieszaj i podawaj."
+        }
+      ]
+    }
+  ]
+}

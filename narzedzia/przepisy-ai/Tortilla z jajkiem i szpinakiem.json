@@ -79,13 +79,22 @@
       "minuty": 8,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Szpinak.** Umyj i odsącz szpinak. Usuń grube łodygi, duże liście porwij na mniejsze kawałki."
         },
         {
-          "tresc": "Umyj i osusz szpinak. Umyj pomidora i pokrój drobno. Pokrusz fetę."
+          "tresc": "**Pomidor.** Umyj pomidory i pokrój w kostkę."
         },
         {
-          "tresc": "Roztrzep jajka w misce z pieprzem i odmierzoną solą. Przygotuj tortille."
+          "tresc": "**Feta.** Odmierz fetę i pokrusz."
+        },
+        {
+          "tresc": "**Jajka.** Wbij jajka do miski i roztrzep z pieprzem oraz odmierzoną solą."
+        },
+        {
+          "tresc": "**Olej.** Odmierz olej."
+        },
+        {
+          "tresc": "**Tortille.** Wyjmij potrzebne placki i przykryj, żeby nie wysychały."
         }
       ]
     },
@@ -94,16 +103,28 @@
       "minuty": 12,
       "kroki": [
         {
-          "tresc": "Rozgrzej olej przez 1 minutę. Smaż pomidora 2–3 minuty, aby odparować płyn. Dodaj szpinak i smaż 1 minutę."
+          "tresc": "**Rozgrzanie oleju.** Rozgrzej olej przez **1 minutę**."
         },
         {
-          "tresc": "Wlej jajka, smaż na małym ogniu 2–3 minuty, mieszając do ścięcia bez płynnego białka. Przełóż farsz na talerz."
+          "tresc": "**Pomidor.** Smaż pomidora **2–3 minuty**, aby odparować płyn."
         },
         {
-          "tresc": "Ogrzej tortillę na suchej patelni po 15–20 sekund na stronę. Dodaj farsz oraz fetę, zostawiając wolne brzegi. Nadmiar farszu podaj obok."
+          "tresc": "**Szpinak.** Dodaj szpinak i smaż **1 minutę**."
         },
         {
-          "tresc": "Zwiń i opiekaj po 1 minucie z każdej strony na średnio małym ogniu. Podaj od razu."
+          "tresc": "**Jajka.** Wlej jajka, smaż na małym ogniu **2–3 minuty**, mieszając do ścięcia bez płynnego białka."
+        },
+        {
+          "tresc": "**Odłożenie farszu.** Przełóż farsz na talerz."
+        },
+        {
+          "tresc": "**Ogrzanie tortilli.** Ogrzej tortillę na suchej patelni po **15–20 sekund** na stronę."
+        },
+        {
+          "tresc": "**Nadzienie.** Dodaj farsz oraz fetę, zostawiając wolne brzegi. Nadmiar farszu podaj obok."
+        },
+        {
+          "tresc": "**Zwijanie i opiekanie.** Zwiń i opiekaj po **1 minucie** z każdej strony na średnio małym ogniu. Podaj od razu."
         }
       ]
     }

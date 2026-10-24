@@ -1,0 +1,133 @@
+{
+  "nazwa": "Pieczona makrela z burakami i ziemniakami",
+  "opis": "Pieczona makrela z burakami, ziemniakami, czerwoną cebulą i koperkiem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "polska"
+  ],
+  "rodzaje": [
+    "z_piekarnika"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 717,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 2,
+  "czas_przygotowania_min": 15,
+  "czas_obrobki_min": 58,
+  "sprzet": [
+    "Piekarnik",
+    "Blacha do pieczenia",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna",
+    "Termometr do mięsa"
+  ],
+  "przechowywanie": "Przechowuj w lodówce do 2 dni. Ze względu na intensywny aromat użyj szczelnego pojemnika. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli buraki są twarde, pokrój je drobniej i dopiecz bez ryby. Suchą makrelę skrop cytryną.",
+  "skladniki": [
+    {
+      "nazwa": "Makrela atlantycka, surowa",
+      "ilosc": 180,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Buraki, surowe",
+      "ilosc": 200,
+      "jednostka": "g",
+      "stan": "pokrojone w małą kostkę"
+    },
+    {
+      "nazwa": "Ziemniaki, surowe",
+      "ilosc": 250,
+      "jednostka": "g",
+      "stan": "pokrojone w małą kostkę"
+    },
+    {
+      "nazwa": "Cebula czerwona, surowa",
+      "ilosc": 50,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 10,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cytryna",
+      "ilosc": 15,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "koperek świeży",
+      "ilosc": 10,
+      "jednostka": "g",
+      "stan": "posiekany"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 1,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 15,
+      "kroki": [
+        {
+          "tresc": "**Buraki.** Umyj i obierz buraki, pokrój w kostkę około 1 cm."
+        },
+        {
+          "tresc": "**Ziemniaki.** Umyj i obierz ziemniaki, pokrój w kostkę około 2 cm."
+        },
+        {
+          "tresc": "**Cebula.** Obierz cebulę i pokrój w cienkie piórka."
+        },
+        {
+          "tresc": "**Cytryna.** Umyj cytrynę, wyciśnij sok i odmierz ilość wskazaną na liście składników."
+        },
+        {
+          "tresc": "**Koperek.** Umyj i osusz koperek, usuń grube łodygi i drobno posiekaj delikatne gałązki."
+        },
+        {
+          "tresc": "**Warzywa do pieczenia.** Wymieszaj warzywa z oliwą oraz częścią soli i pieprzu."
+        },
+        {
+          "tresc": "**Makrela.** Osusz filety i usuń ości. Podana masa dotyczy części jadalnej. Dopraw pozostałą solą i pieprzem."
+        },
+        {
+          "tresc": "**Po przygotowaniu ryby.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surową rybą."
+        }
+      ]
+    },
+    {
+      "nazwa": "Pieczenie",
+      "minuty": 58,
+      "kroki": [
+        {
+          "tresc": "**Rozgrzanie piekarnika.** Rozgrzej piekarnik do **200°C**, grzanie góra–dół, zwykle około **10 minut**."
+        },
+        {
+          "tresc": "**Pieczenie warzyw.** Piecz warzywa przez **30 minut**, mieszając po **15 minutach**. Sprawdź buraki; jeśli są nadal twarde, dopiekaj same warzywa przez **5–10 minut** przed dodaniem ryby."
+        },
+        {
+          "tresc": "**Pieczenie makreli.** Do prawie miękkich warzyw dodaj filety makreli i piecz przez **12–15 minut**, zależnie od grubości.",
+          "sygnal": "ryba ma co najmniej 63°C, warzywa miękkie",
+          "uwaga": true
+        },
+        {
+          "tresc": "**Cytryna i koperek.** Po wyjęciu skrop rybę przygotowanym sokiem z cytryny i posyp koperkiem."
+        }
+      ]
+    }
+  ]
+}

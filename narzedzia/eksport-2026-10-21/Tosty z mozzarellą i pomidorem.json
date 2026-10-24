@@ -1,0 +1,105 @@
+{
+  "nazwa": "Tosty z mozzarellą i pomidorem",
+  "opis": "Chrupiące tosty z roztopioną mozzarellą, pomidorem i bazylią. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
+  "pory": [
+    "sniadanie",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "srodziemnomorska"
+  ],
+  "rodzaje": [
+    "kanapki"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 219,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 0,
+  "czas_przygotowania_min": 5,
+  "czas_obrobki_min": 10,
+  "sprzet": [
+    "Grill kontaktowy",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Tosty zjedz bezpośrednio po przygotowaniu, zanim pieczywo zmięknie.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli pieczywo rumieni się szybciej niż topi ser, zmniejsz temperaturę urządzenia. Jeśli pomidor puszcza dużo soku, osusz plasterki przed ułożeniem.",
+  "skladniki": [
+    {
+      "nazwa": "Chleb żytni razowy",
+      "ilosc": 2,
+      "jednostka": "szt",
+      "stan": "kromki"
+    },
+    {
+      "nazwa": "Ser mozzarella",
+      "ilosc": 80,
+      "jednostka": "g",
+      "stan": "pokrojony w plastry"
+    },
+    {
+      "nazwa": "Pomidory, surowe",
+      "ilosc": 0.5,
+      "jednostka": "szt",
+      "stan": "pokrojony w cienkie plastry"
+    },
+    {
+      "nazwa": "Bazylia świeża",
+      "ilosc": 3,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 5,
+      "kroki": [
+        {
+          "tresc": "**Pomidor.** Umyj pomidory i pokrój w cienkie plastry. Osusz plasterki z nadmiaru wilgoci."
+        },
+        {
+          "tresc": "**Bazylia.** Umyj i osusz bazylię, oderwij liście od łodyg."
+        },
+        {
+          "tresc": "**Mozzarella.** Odsącz mozzarellę i pokrój w plastry."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól i pieprz."
+        },
+        {
+          "tresc": "**Pieczywo.** Przygotuj pieczywo w ilości wskazanej na liście składników."
+        }
+      ]
+    },
+    {
+      "nazwa": "Składanie i opiekanie",
+      "minuty": 10,
+      "kroki": [
+        {
+          "tresc": "**Rozgrzanie grilla.** Rozgrzej grill kontaktowy zgodnie z instrukcją urządzenia, zwykle około **3 minut**."
+        },
+        {
+          "tresc": "**Składanie tostów.** Na dolnych kromkach rozłóż mozzarellę, pomidora i bazylię. Dopraw solą oraz pieprzem i przykryj pozostałymi kromkami."
+        },
+        {
+          "tresc": "**Opiekanie.** Opiekaj w rozgrzanym grillu przez **3–5 minut**, aż ser się roztopi, a chleb zrumieni. Większą ilość opiekaj partiami."
+        },
+        {
+          "tresc": "**Podanie.** Odczekaj **1 minutę**, przekrój i podaj."
+        }
+      ]
+    }
+  ]
+}

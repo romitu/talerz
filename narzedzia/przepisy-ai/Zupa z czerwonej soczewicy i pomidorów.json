@@ -1,6 +1,6 @@
 {
   "nazwa": "Zupa z czerwonej soczewicy i pomidorów",
-  "opis": "Gęsta zupa z czerwonej soczewicy, pomidorów i marchewki, podana z pieczywem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
+  "opis": "Gęsta zupa z czerwonej soczewicy, pomidorów i marchewki, podana z pieczywem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami. Wywar z marchwi, korzenia pietruszki, korzenia selera i pora jest gotowany osobno; cały wywar i wszystkie warzywa trafiają do zupy.",
   "pory": [
     "obiad",
     "kolacja"
@@ -12,21 +12,24 @@
     "zupa"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 703.5,
+  "porcja_g": 774,
   "liczba_porcji_bazowych": 2,
   "trwalosc_dni": 3,
-  "czas_przygotowania_min": 10,
-  "czas_obrobki_min": 38,
+  "czas_przygotowania_min": 20,
+  "czas_obrobki_min": 52,
   "sprzet": [
     "Garnek 3 l",
     "Nóż szefa kuchni",
     "Deska do krojenia",
     "Waga kuchenna",
-    "Sitko"
+    "Sitko",
+    "Garnek 2 l",
+    "Łyżka cedzakowa",
+    "Miska"
   ],
   "przechowywanie": "Zupę przechowuj w lodówce do 3 dni albo zamroź po ostudzeniu. Pieczywo trzymaj osobno. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
   "mozna_mrozic": true,
-  "ratunek": "Za gęstą zupę rozcieńcz bulionem. Za kwaśną pogotuj z dodatkową marchewką.",
+  "ratunek": "Za gęstą zupę rozcieńcz gorącą wodą. Za kwaśną pogotuj z dodatkową marchewką.",
   "skladniki": [
     {
       "nazwa": "Soczewica czerwona, sucha",
@@ -40,15 +43,10 @@
       "jednostka": "g"
     },
     {
-      "nazwa": "Domowy bulion warzywny",
-      "ilosc": 500,
-      "jednostka": "g"
-    },
-    {
       "nazwa": "Marchew, surowa",
       "ilosc": 140,
       "jednostka": "g",
-      "stan": "pokrojona"
+      "stan": "obrany korzeń, kostka około 7–8 mm; do wywaru"
     },
     {
       "nazwa": "Cebula, surowa",
@@ -97,39 +95,139 @@
       "nazwa": "Czarny pieprz mielony",
       "ilosc": 1,
       "jednostka": "g"
+    },
+    {
+      "nazwa": "Pietruszka korzeń",
+      "ilosc": 40,
+      "jednostka": "g",
+      "stan": "obrany korzeń, kostka około 7–8 mm; do wywaru"
+    },
+    {
+      "nazwa": "Seler korzeń",
+      "ilosc": 40,
+      "jednostka": "g",
+      "stan": "obrany korzeń, kostka około 7–8 mm; do wywaru"
+    },
+    {
+      "nazwa": "Por, surowy",
+      "ilosc": 60,
+      "jednostka": "g",
+      "stan": "biała i jasnozielona część, dokładnie wypłukana, cienkie półplasterki; do wywaru"
+    },
+    {
+      "nazwa": "woda",
+      "ilosc": 500,
+      "jednostka": "ml",
+      "stan": "cała odmierzona ilość do wywaru; wywar i wszystkie ugotowane warzywa trafiają do zupy"
     }
   ],
   "etapy": [
     {
       "nazwa": "Przygotowanie składników",
-      "minuty": 10,
+      "minuty": 20,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Marchew.** Umyj i obierz marchew, pokrój w kostkę około 7–8 mm. Całość przeznacz do wywaru."
         },
         {
-          "tresc": "Umyj i obierz marchew, pokrój w cienkie plasterki. Obierz i posiekaj cebulę oraz czosnek. Opłucz soczewicę na sitku."
+          "tresc": "**Korzeń pietruszki.** Umyj i obierz korzeń pietruszki, pokrój w kostkę około 7–8 mm. Całość przeznacz do wywaru."
         },
         {
-          "tresc": "Umyj cytrynę, wyciśnij i odmierz sok. Odmierz bulion i pomidory, przygotuj pieczywo."
+          "tresc": "**Korzeń selera.** Umyj i obierz seler korzeniowy, pokrój w kostkę około 7–8 mm. Całość przeznacz do wywaru."
+        },
+        {
+          "tresc": "**Por.** Odetnij korzonki i twarde końce liści. Białą i jasnozieloną część przekrój wzdłuż, dokładnie wypłucz ziemię spomiędzy warstw i pokrój w cienkie półplasterki. Odłóż osobno do wywaru."
+        },
+        {
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
+        },
+        {
+          "tresc": "**Czosnek.** Obierz czosnek i drobno posiekaj."
+        },
+        {
+          "tresc": "**Soczewica.** Odmierz soczewicę i opłucz na sitku."
+        },
+        {
+          "tresc": "**Cytryna.** Umyj cytrynę, wyciśnij sok i odmierz ilość wskazaną na liście składników."
+        },
+        {
+          "tresc": "**Woda.** Odmierz całą ilość wody wskazaną na liście składników do ugotowania wywaru."
+        },
+        {
+          "tresc": "**Pomidory.** Otwórz puszkę i odmierz pomidory."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól, pieprz, wędzoną paprykę i kmin rzymski."
+        },
+        {
+          "tresc": "**Pieczywo.** Przygotuj pieczywo w ilości wskazanej na liście składników."
         }
       ]
     },
     {
-      "nazwa": "Gotowanie zupy",
-      "minuty": 38,
+      "nazwa": "Gotowanie wywaru i przygotowanie bazy",
+      "minuty": 20,
       "kroki": [
         {
-          "tresc": "Rozgrzej oliwę przez 1 minutę, smaż cebulę i marchew 5 minut. Dodaj czosnek, kmin i paprykę wędzoną, smaż 30 sekund."
+          "tresc": "**Warzywa korzeniowe.** W osobnym garnku umieść całą przygotowaną marchew, korzeń pietruszki i korzeń selera. Zalej całą odmierzoną wodą. Przykryj i doprowadź do łagodnego wrzenia, orientacyjnie przez **5–7 minut**."
         },
         {
-          "tresc": "Dodaj bulion i soczewicę. Doprowadź do wrzenia przez około 4 minuty. Gotuj pod uchyloną pokrywką 15–18 minut, mieszając co kilka minut."
+          "tresc": "**Gotowanie korzeni.** Od zagotowania gotuj pod przykryciem na małym ogniu przez **8 minut**. Nastaw minutnik; w tym czasie przygotuj bazę zupy w głównym garnku."
         },
         {
-          "tresc": "Gdy soczewica jest miękka, dodaj pomidory i gotuj jeszcze 6–8 minut. Jeśli soczewica jest twarda, dogotuj ją przed dodaniem pomidorów."
+          "tresc": "**Baza zupy — równolegle.** W głównym garnku rozgrzej oliwę przez **1 minutę**."
         },
         {
-          "tresc": "Zdejmij z ognia, dodaj sok z cytryny, sól i pieprz. Podaj z pieczywem."
+          "tresc": "**Cebula.** Smaż cebulę przez **5 minut**, mieszając."
+        },
+        {
+          "tresc": "**Czosnek i przyprawy.** Dodaj czosnek, kmin i paprykę wędzoną. Smaż przez **30 sekund**."
+        },
+        {
+          "tresc": "**Gotowa baza.** Zdejmij główny garnek z palnika do czasu wlania wywaru."
+        },
+        {
+          "tresc": "**Por — po minutniku.** Po **8 minutach gotowania korzeni** dodaj por do wywaru. Gotuj jeszcze przez **4 minuty**. Wykonaj ten krok po sygnale minutnika, niezależnie od pracy przy bazie zupy."
+        },
+        {
+          "tresc": "**Kontrola warzyw.** Sprawdź kostkę marchewki i selera. Jeśli ma twardy, surowy środek, gotuj jeszcze po **2 minuty**, sprawdzając po każdej takiej próbie.",
+          "sygnal": "warzywa są lekko jędrne, ale bez twardego, surowego środka",
+          "uwaga": true
+        },
+        {
+          "tresc": "**Uzupełnienie wywaru.** Jeżeli podczas gotowania odparowała woda, uzupełnij jej ubytek gorącą wodą do początkowego poziomu, zanim wyjmiesz warzywa."
+        },
+        {
+          "tresc": "**Zachowanie warzyw i wywaru.** Wyjmij wszystkie warzywa łyżką cedzakową do miski i przykryj. Cały wywar zachowaj w garnku do następnego etapu. Nie wylewaj wywaru ani płynu zebranego w misce."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie soczewicy i wykończenie zupy",
+      "minuty": 32,
+      "kroki": [
+        {
+          "tresc": "**Soczewica.** Do podsmażonej cebuli z czosnkiem i przyprawami dodaj soczewicę oraz cały wywar. Doprowadź do wrzenia przez około **3 minuty**. Gotuj pod uchyloną pokrywką przez **15–18 minut**, mieszając co kilka minut."
+        },
+        {
+          "tresc": "**Kontrola soczewicy.** Spróbuj soczewicy. Jeśli pozostaje twarda, dogotowuj po **3 minuty**, w razie potrzeby uzupełniając odparowany płyn gorącą wodą. Pomidory dodaj dopiero do miękkiej soczewicy.",
+          "sygnal": "soczewica jest miękka, bez twardego środka",
+          "uwaga": true
+        },
+        {
+          "tresc": "**Pomidory.** Dodaj pomidory. Po ponownym zagotowaniu gotuj przez **6 minut**."
+        },
+        {
+          "tresc": "**Warzywa z wywaru.** Dodaj wszystkie odłożone warzywa wraz z płynem, który zebrał się w misce. Doprowadź ponownie do łagodnego wrzenia i podgrzewaj przez **2 minuty**."
+        },
+        {
+          "tresc": "**Doprawienie.** Zdejmij garnek z ognia, dodaj sok z cytryny, sól i pieprz. Wymieszaj."
+        },
+        {
+          "tresc": "**Podanie.** Podaj z pieczywem."
         }
       ]
     }

@@ -80,13 +80,22 @@
       "minuty": 10,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Pomidor.** Umyj pomidory i pokrój w cząstki."
         },
         {
-          "tresc": "Umyj pomidora, ogórek i sałatę. Osusz sałatę i porwij. Pokrój pomidora w cząstki, ogórek w półplasterki."
+          "tresc": "**Ogórek.** Umyj ogórek i pokrój w cienkie półplasterki."
         },
         {
-          "tresc": "Pokrusz fetę i odmierz oliwę, sól oraz pieprz."
+          "tresc": "**Sałata.** Umyj liście sałaty, dokładnie osusz i porwij na mniejsze kawałki."
+        },
+        {
+          "tresc": "**Feta.** Odmierz fetę i pokrusz."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól i pieprz."
         }
       ]
     },
@@ -95,10 +104,13 @@
       "minuty": 18,
       "kroki": [
         {
-          "tresc": "Zagotuj w garnku wodę przykrywającą jajka. Włóż je ostrożnie i gotuj przez 9–10 minut przy łagodnym wrzeniu, licząc od włożenia. Schłodź zimną wodą i obierz."
+          "tresc": "**Gotowanie jajek.** Zagotuj tyle wody, aby przykryła jajka. Ostrożnie włóż jajka i gotuj przy łagodnym wrzeniu przez **9–10 minut**, licząc od włożenia."
         },
         {
-          "tresc": "Pokrój jajka w ćwiartki."
+          "tresc": "**Schłodzenie jajek.** Przełóż jajka do zimnej wody. Po schłodzeniu obierz."
+        },
+        {
+          "tresc": "**Krojenie jajek.** Pokrój jajka w ćwiartki."
         }
       ]
     },
@@ -107,7 +119,7 @@
       "minuty": 2,
       "kroki": [
         {
-          "tresc": "Połącz warzywa, jajka i fetę. Skrop oliwą, spróbuj i dopraw odmierzoną solą oraz pieprzem; feta jest słona. Delikatnie wymieszaj."
+          "tresc": "**Połączenie sałatki.** Połącz warzywa, jajka i fetę. Skrop oliwą, spróbuj i dopraw odmierzoną solą oraz pieprzem; feta jest słona. Delikatnie wymieszaj."
         }
       ]
     }

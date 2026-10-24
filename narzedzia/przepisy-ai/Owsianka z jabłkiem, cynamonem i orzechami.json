@@ -11,7 +11,7 @@
     "na_slodko"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 422.5,
+  "porcja_g": 422,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 1,
   "czas_przygotowania_min": 5,
@@ -53,11 +53,6 @@
       "ilosc": 20,
       "jednostka": "g",
       "stan": "grubo posiekane"
-    },
-    {
-      "nazwa": "Sól kłodawska",
-      "ilosc": 0.5,
-      "jednostka": "g"
     }
   ],
   "etapy": [
@@ -66,10 +61,16 @@
       "minuty": 5,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Jabłko.** Umyj jabłko, usuń gniazdo nasienne i pokrój w małą kostkę."
         },
         {
-          "tresc": "Umyj jabłko, usuń gniazdo nasienne i pokrój w małą kostkę. Posiekaj orzechy. Odmierz mleko oraz płatki."
+          "tresc": "**Orzechy.** Odmierz orzechy włoskie i grubo posiekaj."
+        },
+        {
+          "tresc": "**Baza owsianki.** Odmierz mleko i płatki."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól i cynamon."
         }
       ]
     },
@@ -78,13 +79,16 @@
       "minuty": 12,
       "kroki": [
         {
-          "tresc": "Wsyp płatki do rondla, wlej mleko, dodaj sól. Podgrzewaj około 3 minut do łagodnego wrzenia, mieszając."
+          "tresc": "**Zagotowanie płatków.** Wsyp płatki do rondla, wlej mleko, dodaj sól. Podgrzewaj około **3 minut** do łagodnego wrzenia, mieszając."
         },
         {
-          "tresc": "Gotuj na małym ogniu przez 5–7 minut lub czas z opakowania płatków, często mieszając."
+          "tresc": "**Gotowanie owsianki.** Gotuj na małym ogniu przez **5–7 minut** lub czas z opakowania płatków, często mieszając."
         },
         {
-          "tresc": "Dodaj jabłko i cynamon, podgrzewaj jeszcze 1 minutę. Podaj z orzechami; jabłko pozostanie lekko chrupiące."
+          "tresc": "**Jabłko i cynamon.** Dodaj jabłko i cynamon, podgrzewaj jeszcze **1 minutę**."
+        },
+        {
+          "tresc": "**Podanie.** Podaj z orzechami; jabłko pozostanie lekko chrupiące."
         }
       ]
     }

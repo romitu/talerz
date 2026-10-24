@@ -1,0 +1,129 @@
+{
+  "nazwa": "Kanapka z twarogiem, ogórkiem kiszonym i warzywami",
+  "opis": "Kanapka z kremowym twarogiem, chrupiącym ogórkiem kiszonym i świeżymi warzywami — prosta, sycąca i pełna wyrazistego smaku.",
+  "pory": [
+    "sniadanie",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "polska"
+  ],
+  "rodzaje": [
+    "kanapki"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 404,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 1,
+  "czas_przygotowania_min": 4,
+  "czas_obrobki_min": 6,
+  "sprzet": [
+    "Miska",
+    "Widelec",
+    "Nóż szefa kuchni",
+    "Deska do krojenia"
+  ],
+  "przechowywanie": "Gotowe kanapki najlepiej zjeść od razu. Sam twarożek można przechowywać w szczelnym pojemniku w lodówce do 2 dni. Warzywa najlepiej kroić i kanapki składać bezpośrednio przed jedzeniem.",
+  "mozna_mrozic": false,
+  "ratunek": "Pasta za sucha — dołóż łyżkę jogurtu. Za rzadka — odsącz twaróg na sitku.",
+  "skladniki": [
+    {
+      "nazwa": "Twaróg półtłusty",
+      "ilosc": 120,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Jogurt grecki naturalny 2%",
+      "ilosc": 30,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Chleb żytni razowy",
+      "ilosc": 3,
+      "jednostka": "szt"
+    },
+    {
+      "nazwa": "Rzodkiewka, surowa",
+      "ilosc": 60,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Szczypiorek świeży",
+      "ilosc": 8,
+      "jednostka": "g",
+      "stan": "posiekany"
+    },
+    {
+      "nazwa": "ogórki kiszone bio",
+      "ilosc": 80,
+      "jednostka": "g",
+      "zamiennik": "ogórek surowy"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 4,
+      "kroki": [
+        {
+          "tresc": "**Rzodkiewka.** Umyj rzodkiewki, usuń końcówki i pokrój w cienkie półplasterki."
+        },
+        {
+          "tresc": "**Ogórek kiszony.** Odsącz ogórki kiszone i pokrój w plasterki."
+        },
+        {
+          "tresc": "**Szczypiorek.** Umyj i osusz szczypiorek, następnie drobno posiekaj."
+        },
+        {
+          "tresc": "**Nabiał.** Odmierz jogurt i twaróg."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól i pieprz."
+        },
+        {
+          "tresc": "**Pieczywo.** Przygotuj pieczywo w ilości wskazanej na liście składników."
+        }
+      ]
+    },
+    {
+      "nazwa": "Przygotowanie twarożku",
+      "minuty": 3,
+      "kroki": [
+        {
+          "tresc": "**Rozgniecenie twarogu.** Twaróg rozgnieć widelcem."
+        },
+        {
+          "tresc": "**Jogurt i szczypiorek.** Dodaj jogurt grecki i szczypiorek. Wymieszaj na jednolitą pastę."
+        },
+        {
+          "tresc": "**Doprawienie.** Dopraw pieprzem. Spróbuj przed dodaniem soli — ogórek kiszony jest już słony. Sól dodaj tylko w razie potrzeby."
+        }
+      ]
+    },
+    {
+      "nazwa": "Przygotowanie kanapek",
+      "minuty": 3,
+      "kroki": [
+        {
+          "tresc": "**Twarożek na pieczywo.** Kromki chleba posmaruj przygotowanym twarożkiem."
+        },
+        {
+          "tresc": "**Warzywa na kanapki.** Na twarożku ułóż plasterki ogórka kiszonego i rzodkiewki."
+        },
+        {
+          "tresc": "**Podanie.** Podawaj od razu, aby pieczywo nie zdążyło zmięknąć."
+        }
+      ]
+    }
+  ]
+}

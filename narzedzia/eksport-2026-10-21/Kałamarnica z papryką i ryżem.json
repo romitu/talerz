@@ -1,0 +1,163 @@
+{
+  "nazwa": "Kałamarnica z papryką i ryżem",
+  "opis": "Krótko smażona kałamarnica z papryką, pomidorami i ziołami, podana z ryżem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
+  "pory": [
+    "obiad"
+  ],
+  "kuchnie": [
+    "srodziemnomorska"
+  ],
+  "rodzaje": [
+    "kasza_ryz"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 600,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 1,
+  "czas_przygotowania_min": 12,
+  "czas_obrobki_min": 25,
+  "sprzet": [
+    "Patelnia 28 cm",
+    "Garnek 2 l",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna",
+    "Sitko"
+  ],
+  "przechowywanie": "Porcję z ugotowanym ryżem szybko schłodź w płytkim pojemniku i wstaw do lodówki, najlepiej w ciągu godziny. Przechowuj do 24 godzin. Odgrzewaj tylko raz, do gorącego środka całej porcji. Lodówka: do 4°C.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeżeli kałamarnica jest gumowata, krótkie dodatkowe smażenie jej nie zmiękczy. Możesz przejść na dłuższe duszenie w sosie przez około 30–40 minut, kontrolując miękkość co 10 minut i uzupełniając gorącą wodę. Wydłuży to przygotowanie.",
+  "skladniki": [
+    {
+      "nazwa": "Kałamarnica, surowa",
+      "ilosc": 180,
+      "jednostka": "g",
+      "stan": "oczyszczona i pokrojona w krążki"
+    },
+    {
+      "nazwa": "Papryka czerwona, surowa",
+      "ilosc": 150,
+      "jednostka": "g",
+      "stan": "pokrojona w paski"
+    },
+    {
+      "nazwa": "Ryż basmati, suchy",
+      "ilosc": 70,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Passata pomidorowa",
+      "ilosc": 100,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 60,
+      "jednostka": "g",
+      "stan": "pokrojona w piórka"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 8,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Papryka wędzona mielona",
+      "ilosc": 1,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cytryna",
+      "ilosc": 15,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Pietruszka natka",
+      "ilosc": 10,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 12,
+      "kroki": [
+        {
+          "tresc": "**Papryka.** Umyj paprykę, usuń gniazdo nasienne i pokrój miąższ w cienkie paski."
+        },
+        {
+          "tresc": "**Cebula.** Obierz cebulę i pokrój w cienkie piórka."
+        },
+        {
+          "tresc": "**Czosnek.** Obierz czosnek i drobno posiekaj."
+        },
+        {
+          "tresc": "**Natka pietruszki.** Umyj i osusz natkę, usuń grube łodygi i drobno posiekaj liście."
+        },
+        {
+          "tresc": "**Cytryna.** Umyj cytrynę, wyciśnij sok i odmierz ilość wskazaną na liście składników."
+        },
+        {
+          "tresc": "**Ryż.** Odmierz suchy ryż i przepłucz na sitku pod zimną wodą."
+        },
+        {
+          "tresc": "**Kałamarnica.** Oczyszczoną i rozmrożoną kałamarnicę osusz, następnie pokrój w krążki grubości około 1 cm."
+        },
+        {
+          "tresc": "**Po przygotowaniu kałamarnicy.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surowymi owocami morza."
+        },
+        {
+          "tresc": "**Passata.** Odmierz passatę."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól i wędzoną paprykę."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie ryżu i sosu",
+      "minuty": 25,
+      "kroki": [
+        {
+          "tresc": "**Ryż — równolegle.** Zagotuj na pierwszym palniku tyle wody, aby ziarna swobodnie się gotowały. Wsyp ryż i gotuj przez czas z opakowania. Nastaw minutnik; w tym czasie wykonuj kolejne kroki na drugim palniku."
+        },
+        {
+          "tresc": "**Ryż — po minutniku.** Po upływie czasu sprawdź miękkość ziaren i odcedź nadmiar wody. Przykryj garnek i odstaw poza palnik. Zrób to niezależnie od postępu pracy przy pozostałych składnikach."
+        },
+        {
+          "tresc": "**Rozgrzanie oliwy.** Na drugim palniku rozgrzej oliwę przez **1 minutę**."
+        },
+        {
+          "tresc": "**Cebula i papryka.** Dodaj cebulę i paprykę, smaż **5–6 minut**."
+        },
+        {
+          "tresc": "**Czosnek i przyprawy.** Dodaj czosnek oraz wędzoną paprykę i smaż **30 sekund**."
+        },
+        {
+          "tresc": "**Sos pomidorowy.** Wlej passatę, zagotuj przez około **2 minuty** i gotuj łagodnie jeszcze **5 minut**. Zakończ gotowanie ryżu przed dodaniem kałamarnicy."
+        },
+        {
+          "tresc": "**Gotowanie kałamarnicy.** Do gorącego sosu dodaj krążki kałamarnicy i gotuj **2–3 minuty**, delikatnie mieszając.",
+          "sygnal": "krążki są nieprzezroczyste i jędrne, ale nie gumowate",
+          "uwaga": true
+        },
+        {
+          "tresc": "**Doprawienie i podanie.** Zdejmij z ognia, dodaj przygotowany sok z cytryny, sól i natkę. Podaj od razu z ryżem."
+        }
+      ]
+    }
+  ]
+}

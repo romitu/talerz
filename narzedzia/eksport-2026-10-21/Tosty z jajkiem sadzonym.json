@@ -1,0 +1,126 @@
+{
+  "nazwa": "Tosty z jajkiem sadzonym",
+  "opis": "Chrupiące tosty żytnie z kremowym awokado, rukolą i jajkami sadzonymi z miękkim żółtkiem. Proste, sycące śniadanie z dobrą porcją białka.",
+  "pory": [
+    "sniadanie",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "inna"
+  ],
+  "rodzaje": [
+    "kanapki"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 363,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 0,
+  "czas_przygotowania_min": 5,
+  "czas_obrobki_min": 10,
+  "sprzet": [
+    "Patelnia 24 cm",
+    "Grill kontaktowy",
+    "Nóż szefa kuchni",
+    "Deska do krojenia"
+  ],
+  "przechowywanie": "Najlepiej przygotować i zjeść od razu. Gotowych tostów nie przechowuj w lodówce, ponieważ pieczywo zmięknie, a awokado zacznie ciemnieć.",
+  "mozna_mrozic": false,
+  "ratunek": "Awokado ściemniało — skrop cytryną. Żółtko się rozlało — zrób z tego jajecznicę i nie tłumacz się nikomu.",
+  "skladniki": [
+    {
+      "nazwa": "Chleb żytni razowy",
+      "ilosc": 3,
+      "jednostka": "szt"
+    },
+    {
+      "nazwa": "Awokado",
+      "ilosc": 50,
+      "jednostka": "g",
+      "stan": "obrane, bez pestki"
+    },
+    {
+      "nazwa": "Jaja kurze, całe, surowe",
+      "ilosc": 3,
+      "jednostka": "szt"
+    },
+    {
+      "nazwa": "Rukola",
+      "ilosc": 30,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Pietruszka natka",
+      "ilosc": 5,
+      "jednostka": "g",
+      "stan": "posiekana"
+    },
+    {
+      "nazwa": "Cytryna",
+      "ilosc": 5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 2,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 1,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 5,
+      "kroki": [
+        {
+          "tresc": "**Cytryna.** Umyj cytrynę, wyciśnij sok i odmierz ilość wskazaną na liście składników."
+        },
+        {
+          "tresc": "**Awokado.** Umyj awokado, usuń skórkę i pestkę. Rozgnieć miąższ z sokiem z cytryny oraz częścią soli i pieprzu."
+        },
+        {
+          "tresc": "**Natka pietruszki.** Umyj i osusz natkę, usuń grube łodygi i drobno posiekaj liście."
+        },
+        {
+          "tresc": "**Rukola.** Umyj rukolę i dokładnie osusz."
+        },
+        {
+          "tresc": "**Pieczywo.** Przygotuj pieczywo w ilości wskazanej na liście składników."
+        }
+      ]
+    },
+    {
+      "nazwa": "Przygotowanie awokado i pieczywa",
+      "minuty": 4,
+      "kroki": [
+        {
+          "tresc": "**Opiekanie pieczywa.** Opiekaj kromki na suchej patelni przez około **1–2 minuty** z każdej strony, aż będą lekko chrupiące."
+        },
+        {
+          "tresc": "**Pasta i rukola na pieczywo.** Na każdej kromce rozsmaruj awokado i ułóż rukolę."
+        }
+      ]
+    },
+    {
+      "nazwa": "Smażenie jajek i podanie",
+      "minuty": 6,
+      "kroki": [
+        {
+          "tresc": "**Rozgrzanie patelni.** Rozgrzej patelnię z nieprzywierającą powłoką przez około **1 minutę** na średnim ogniu."
+        },
+        {
+          "tresc": "**Smażenie jajek.** Wbij jajka, zmniejsz ogień i przykryj patelnię. Smaż około **3–4 minut**, aż białka całkowicie się zetną, a żółtka pozostaną miękkie."
+        },
+        {
+          "tresc": "**Doprawienie jajek.** Jajka dopraw niewielką ilością soli i pieprzu."
+        },
+        {
+          "tresc": "**Podanie.** Rozdziel usmażone jajka między przygotowane kromki. Posyp posiekaną natką pietruszki i podawaj od razu."
+        }
+      ]
+    }
+  ]
+}

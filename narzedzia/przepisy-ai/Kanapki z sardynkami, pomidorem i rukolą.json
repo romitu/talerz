@@ -12,7 +12,7 @@
     "kanapki"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 355.5,
+  "porcja_g": 356,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 0,
   "czas_przygotowania_min": 10,
@@ -74,10 +74,25 @@
       "minuty": 6,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Sardynki.** Odsącz sardynki i odmierz po odsączeniu."
         },
         {
-          "tresc": "Odsącz sardynki. Umyj pomidora, rukolę i cytrynę. Osusz rukolę, pokrój pomidora, wyciśnij i odmierz sok z cytryny. Przygotuj pieczywo."
+          "tresc": "**Pomidor.** Umyj pomidory i pokrój w cienkie plastry. Osusz plasterki z nadmiaru wilgoci."
+        },
+        {
+          "tresc": "**Rukola.** Umyj rukolę i dokładnie osusz."
+        },
+        {
+          "tresc": "**Cytryna.** Umyj cytrynę, wyciśnij sok i odmierz ilość wskazaną na liście składników."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
+        },
+        {
+          "tresc": "**Pieprz.** Odmierz pieprz."
+        },
+        {
+          "tresc": "**Pieczywo.** Przygotuj pieczywo w ilości wskazanej na liście składników."
         }
       ]
     },
@@ -86,10 +101,10 @@
       "minuty": 4,
       "kroki": [
         {
-          "tresc": "Rozgnieć sardynki widelcem z odmierzoną oliwą, sokiem z cytryny i pieprzem."
+          "tresc": "**Pasta z sardynek.** Rozgnieć sardynki widelcem z odmierzoną oliwą, sokiem z cytryny i pieprzem."
         },
         {
-          "tresc": "Na pieczywie ułóż rukolę, pastę oraz pomidora. Podaj od razu."
+          "tresc": "**Składanie kanapek.** Na pieczywie ułóż rukolę, pastę oraz pomidora. Podaj od razu."
         }
       ]
     }

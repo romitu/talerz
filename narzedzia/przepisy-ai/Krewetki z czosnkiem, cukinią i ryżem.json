@@ -86,13 +86,31 @@
       "minuty": 10,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Ryż.** Odmierz suchy ryż i przepłucz na sitku pod zimną wodą."
         },
         {
-          "tresc": "Opłucz ryż. Umyj cukinię i pokrój w półplasterki około 5 mm. Obierz i posiekaj czosnek."
+          "tresc": "**Cukinia.** Umyj cukinię i pokrój w półplasterki grubości około 5 mm."
         },
         {
-          "tresc": "Umyj natkę i cytrynę, posiekaj natkę i odmierz sok. Krewetki obierz, usuń przewód pokarmowy, jeśli pozostał, i osusz; mrożone wcześniej rozmroź w lodówce. Umyj ręce i przybory po surowych krewetkach."
+          "tresc": "**Czosnek.** Obierz czosnek i drobno posiekaj."
+        },
+        {
+          "tresc": "**Natka pietruszki.** Umyj i osusz natkę, usuń grube łodygi i drobno posiekaj liście."
+        },
+        {
+          "tresc": "**Cytryna.** Umyj cytrynę, wyciśnij sok i odmierz ilość wskazaną na liście składników."
+        },
+        {
+          "tresc": "**Krewetki.** Obierz krewetki i usuń przewód pokarmowy, jeśli pozostał. Osusz. Mrożone krewetki wcześniej rozmroź w lodówce."
+        },
+        {
+          "tresc": "**Po przygotowaniu krewetek.** Umyj ręce, nóż, deskę i powierzchnie po kontakcie z surowymi krewetkami."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól i chili."
         }
       ]
     },
@@ -101,21 +119,30 @@
       "minuty": 25,
       "kroki": [
         {
-          "tresc": "Na pierwszym palniku zagotuj wodę w garnku. Dodaj ryż i gotuj przez czas wskazany na opakowaniu; po ugotowaniu odcedź. Wody użyj tyle, by ziarna były zanurzone i swobodnie się gotowały. Nastaw minutnik; równolegle wykonuj kolejne czynności na drugim palniku. Woda do gotowania jest dodatkowa i zostanie odlana."
+          "tresc": "**Ryż — równolegle.** Zagotuj na pierwszym palniku tyle wody, aby ziarna swobodnie się gotowały. Wsyp ryż i gotuj przez czas z opakowania. Nastaw minutnik; w tym czasie wykonuj kolejne kroki na drugim palniku."
         },
         {
-          "tresc": "Gdy do końca gotowania ryżu pozostaje około 10 minut, rozgrzej połowę oliwy na patelni przez 1 minutę. Smaż cukinię na średnio dużym ogniu 4–5 minut i przełóż na talerz. Nadmiar wody odparuj teraz, przed dodaniem krewetek."
+          "tresc": "**Ryż — po minutniku.** Po upływie czasu sprawdź miękkość ziaren i odcedź nadmiar wody. Przykryj garnek i odstaw poza palnik. Zrób to niezależnie od postępu pracy przy pozostałych składnikach."
         },
         {
-          "tresc": "Wlej pozostałą oliwę i zmniejsz ogień do średniego. Dodaj czosnek i chili, smaż 20–30 sekund."
+          "tresc": "**Rozgrzanie oliwy.** Gdy do końca gotowania ryżu pozostaje około **10 minut**, rozgrzej połowę oliwy na patelni przez **1 minutę**."
         },
         {
-          "tresc": "Dodaj krewetki i smaż łącznie 3–4 minuty, obracając w połowie; większe mogą wymagać nieco dłużej.",
+          "tresc": "**Smażenie cukinii.** Smaż cukinię na średnio dużym ogniu **4–5 minut** i przełóż na talerz. Nadmiar wody odparuj teraz, przed dodaniem krewetek."
+        },
+        {
+          "tresc": "**Oliwa.** Wlej pozostałą oliwę i zmniejsz ogień do średniego."
+        },
+        {
+          "tresc": "**Czosnek i chili.** Dodaj czosnek i chili, smaż **20–30 sekund**."
+        },
+        {
+          "tresc": "**Smażenie krewetek.** Dodaj krewetki i smaż łącznie **3–4 minuty**, obracając w połowie; większe mogą wymagać nieco dłużej.",
           "sygnal": "mięso jest nieprzezroczyste i perłowe także w środku",
           "uwaga": true
         },
         {
-          "tresc": "Dodaj cukinię, wymieszaj i zdejmij z ognia. Dopraw przygotowanym sokiem z cytryny, solą i natką. Podaj z ryżem."
+          "tresc": "**Połączenie i podanie.** Dodaj cukinię, wymieszaj i zdejmij z ognia. Dopraw przygotowanym sokiem z cytryny, solą i natką. Podaj z ryżem."
         }
       ]
     }

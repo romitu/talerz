@@ -73,10 +73,22 @@
       "minuty": 5,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Pomidor.** Umyj pomidory i pokrój w kostkę."
         },
         {
-          "tresc": "Umyj pomidora i ogórek, pokrój w kostkę. Przygotuj pieczywo, serek i pestki dyni."
+          "tresc": "**Ogórek.** Umyj ogórek i pokrój w kostkę."
+        },
+        {
+          "tresc": "**Serek wiejski.** Odmierz serek wiejski."
+        },
+        {
+          "tresc": "**Pestki dyni.** Odmierz pestki dyni."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól i pieprz."
+        },
+        {
+          "tresc": "**Pieczywo.** Przygotuj pieczywo w ilości wskazanej na liście składników."
         }
       ]
     },
@@ -85,10 +97,10 @@
       "minuty": 2,
       "kroki": [
         {
-          "tresc": "Przełóż serek do miski, dodaj warzywa i delikatnie wymieszaj. Dopraw odmierzoną solą i pieprzem."
+          "tresc": "**Serek z warzywami.** Przełóż serek do miski, dodaj warzywa i delikatnie wymieszaj. Dopraw odmierzoną solą i pieprzem."
         },
         {
-          "tresc": "Posyp pestkami dyni i podaj z pieczywem w ilości wskazanej na liście."
+          "tresc": "**Pestki i podanie.** Posyp pestkami dyni i podaj z pieczywem w ilości wskazanej na liście."
         }
       ]
     }

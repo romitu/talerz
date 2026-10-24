@@ -1,6 +1,6 @@
 {
   "nazwa": "Grochówka z indykiem",
-  "opis": "Treściwa grochówka z mięsem indyka, ziemniakami, warzywami korzeniowymi i majerankiem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
+  "opis": "Treściwa grochówka z mięsem indyka, ziemniakami, warzywami korzeniowymi i majerankiem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami. Wywar z marchwi, korzenia pietruszki, korzenia selera i pora jest gotowany osobno; cały wywar i wszystkie warzywa trafiają do zupy.",
   "pory": [
     "obiad"
   ],
@@ -11,22 +11,25 @@
     "zupa"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 820.5,
+  "porcja_g": 871,
   "liczba_porcji_bazowych": 2,
   "trwalosc_dni": 3,
-  "czas_przygotowania_min": 15,
-  "czas_obrobki_min": 70,
+  "czas_przygotowania_min": 20,
+  "czas_obrobki_min": 85,
   "sprzet": [
     "Garnek 3 l",
     "Nóż szefa kuchni",
     "Deska do krojenia",
     "Waga kuchenna",
     "Sitko",
-    "Termometr do mięsa"
+    "Termometr do mięsa",
+    "Garnek 2 l",
+    "Łyżka cedzakowa",
+    "Miska"
   ],
   "przechowywanie": "Przechowuj w lodówce do 3 dni albo zamroź w porcjach. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
   "mozna_mrozic": true,
-  "ratunek": "Jeśli groch pozostaje twardy, gotuj dalej i uzupełniaj wodę. Za gęstą zupę rozcieńcz gorącym bulionem.",
+  "ratunek": "Jeśli groch pozostaje twardy, gotuj dalej i uzupełniaj wodę. Za gęstą zupę rozcieńcz gorącą wodą.",
   "skladniki": [
     {
       "nazwa": "Groch łuskany, suchy",
@@ -50,13 +53,13 @@
       "nazwa": "Marchew, surowa",
       "ilosc": 100,
       "jednostka": "g",
-      "stan": "pokrojona"
+      "stan": "obrany korzeń, kostka około 7–8 mm; do wywaru"
     },
     {
       "nazwa": "Pietruszka korzeń",
       "ilosc": 60,
       "jednostka": "g",
-      "stan": "pokrojona"
+      "stan": "obrany korzeń, kostka około 7–8 mm; do wywaru"
     },
     {
       "nazwa": "Cebula, surowa",
@@ -65,14 +68,10 @@
       "stan": "posiekana"
     },
     {
-      "nazwa": "Domowy bulion warzywny",
-      "ilosc": 300,
-      "jednostka": "g"
-    },
-    {
       "nazwa": "woda",
-      "ilosc": 600,
-      "jednostka": "ml"
+      "ilosc": 900,
+      "jednostka": "ml",
+      "stan": "cała odmierzona ilość do wywaru; wywar i wszystkie ugotowane warzywa trafiają do zupy"
     },
     {
       "nazwa": "Olej rzepakowy",
@@ -103,47 +102,123 @@
       "nazwa": "Czarny pieprz mielony",
       "ilosc": 1,
       "jednostka": "g"
+    },
+    {
+      "nazwa": "Seler korzeń",
+      "ilosc": 40,
+      "jednostka": "g",
+      "stan": "obrany korzeń, kostka około 7–8 mm; do wywaru"
+    },
+    {
+      "nazwa": "Por, surowy",
+      "ilosc": 60,
+      "jednostka": "g",
+      "stan": "biała i jasnozielona część, dokładnie wypłukana, cienkie półplasterki; do wywaru"
     }
   ],
   "etapy": [
     {
       "nazwa": "Przygotowanie składników",
-      "minuty": 15,
+      "minuty": 20,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Marchew.** Umyj i obierz marchew, pokrój w kostkę około 7–8 mm. Całość przeznacz do wywaru."
         },
         {
-          "tresc": "Opłucz groch na sitku. Użyj łuskanego grochu dzielonego na połówki; czas całych ziaren może być znacznie dłuższy."
+          "tresc": "**Korzeń pietruszki.** Umyj i obierz korzeń pietruszki, pokrój w kostkę około 7–8 mm. Całość przeznacz do wywaru."
         },
         {
-          "tresc": "Umyj i obierz ziemniaki, marchew i pietruszkę. Ziemniaki pokrój w kostkę około 2 cm, korzenie w kostkę około 1 cm. Obierz i posiekaj cebulę."
+          "tresc": "**Korzeń selera.** Umyj i obierz seler korzeniowy, pokrój w kostkę około 7–8 mm. Całość przeznacz do wywaru."
         },
         {
-          "tresc": "Indyka pokrój w kostkę około 2 cm. Umyj przybory i ręce po surowym mięsie. Odmierz bulion oraz wodę."
+          "tresc": "**Por.** Odetnij korzonki i twarde końce liści. Białą i jasnozieloną część przekrój wzdłuż, dokładnie wypłucz ziemię spomiędzy warstw i pokrój w cienkie półplasterki. Odłóż osobno do wywaru."
+        },
+        {
+          "tresc": "**Groch.** Odmierz i opłucz łuskany groch w połówkach. Całe ziarna wymagają dłuższego gotowania."
+        },
+        {
+          "tresc": "**Ziemniaki.** Umyj i obierz ziemniaki, pokrój w kostkę około 2 cm."
+        },
+        {
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
+        },
+        {
+          "tresc": "**Indyk.** Osusz indyka i pokrój w kostkę około 2 cm."
+        },
+        {
+          "tresc": "**Po przygotowaniu mięsa.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surowym mięsem."
+        },
+        {
+          "tresc": "**Woda.** Odmierz całą ilość wody wskazaną na liście składników do ugotowania wywaru."
+        },
+        {
+          "tresc": "**Olej.** Odmierz olej."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól, pieprz, majeranek, liście laurowe i ziele angielskie."
         }
       ]
     },
     {
-      "nazwa": "Gotowanie zupy",
-      "minuty": 70,
+      "nazwa": "Gotowanie wywaru i przygotowanie bazy",
+      "minuty": 20,
       "kroki": [
         {
-          "tresc": "Rozgrzej olej przez 1 minutę i smaż cebulę 4 minuty."
+          "tresc": "**Warzywa korzeniowe.** W osobnym garnku umieść całą przygotowaną marchew, korzeń pietruszki i korzeń selera. Zalej całą odmierzoną wodą. Przykryj i doprowadź do łagodnego wrzenia, orientacyjnie przez **5–7 minut**."
         },
         {
-          "tresc": "Dodaj groch, bulion, wodę, liść laurowy i ziele angielskie. Doprowadź do wrzenia przez około 5 minut. Gotuj pod uchyloną pokrywką 30 minut na małym ogniu."
+          "tresc": "**Gotowanie korzeni.** Od zagotowania gotuj pod przykryciem na małym ogniu przez **8 minut**. Nastaw minutnik; w tym czasie przygotuj bazę zupy w głównym garnku."
         },
         {
-          "tresc": "Dodaj marchew, pietruszkę i ziemniaki. Gotuj 10 minut."
+          "tresc": "**Baza zupy — równolegle.** W głównym garnku rozgrzej olej przez **1 minutę**."
         },
         {
-          "tresc": "Dodaj indyka, doprowadź ponownie do łagodnego wrzenia i gotuj 12–15 minut. Jeśli groch jest nadal twardy, wyjmij gotowe mięso i dogotuj zupę po 5 minut.",
-          "sygnal": "groch miękki, ziemniaki bez twardego środka, indyk co najmniej 74°C",
+          "tresc": "**Cebula.** Smaż cebulę przez **4 minuty**, mieszając."
+        },
+        {
+          "tresc": "**Gotowa baza.** Zdejmij główny garnek z palnika do czasu wlania wywaru."
+        },
+        {
+          "tresc": "**Por — po minutniku.** Po **8 minutach gotowania korzeni** dodaj por do wywaru. Gotuj jeszcze przez **4 minuty**. Wykonaj ten krok po sygnale minutnika, niezależnie od pracy przy bazie zupy."
+        },
+        {
+          "tresc": "**Kontrola warzyw.** Sprawdź kostkę marchewki i selera. Jeśli ma twardy, surowy środek, gotuj jeszcze po **2 minuty**, sprawdzając po każdej takiej próbie.",
+          "sygnal": "warzywa są lekko jędrne, ale bez twardego, surowego środka",
           "uwaga": true
         },
         {
-          "tresc": "Usuń liść laurowy i ziele angielskie. Dodaj majeranek, sól i pieprz; zamieszaj i podaj."
+          "tresc": "**Uzupełnienie wywaru.** Jeżeli podczas gotowania odparowała woda, uzupełnij jej ubytek gorącą wodą do początkowego poziomu, zanim wyjmiesz warzywa."
+        },
+        {
+          "tresc": "**Zachowanie warzyw i wywaru.** Wyjmij wszystkie warzywa łyżką cedzakową do miski i przykryj. Cały wywar zachowaj w garnku do następnego etapu. Nie wylewaj wywaru ani płynu zebranego w misce."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie grochu, ziemniaków i indyka",
+      "minuty": 65,
+      "kroki": [
+        {
+          "tresc": "**Groch.** Do podsmażonej cebuli dodaj groch, cały wywar, liście laurowe i ziele angielskie. Doprowadź do wrzenia przez około **3–5 minut**. Gotuj pod uchyloną pokrywką przez **30 minut** na małym ogniu."
+        },
+        {
+          "tresc": "**Ziemniaki.** Dodaj ziemniaki. Po ponownym zagotowaniu gotuj przez **10 minut**."
+        },
+        {
+          "tresc": "**Indyk.** Dodaj indyka. Po ponownym zagotowaniu gotuj przez **12–15 minut**. Sprawdź temperaturę najgrubszego kawałka mięsa.",
+          "sygnal": "indyk osiągnął co najmniej 74°C",
+          "uwaga": true
+        },
+        {
+          "tresc": "**Kontrola grochu i ziemniaków.** Sprawdź miękkość grochu i ziemniaków. Jeżeli wymagają dłuższego gotowania, wyjmij gotowe mięso i dogotowuj zupę po **5 minut**, uzupełniając odparowany płyn gorącą wodą. Włóż mięso z powrotem przed dodaniem warzyw z wywaru.",
+          "sygnal": "groch jest miękki, ziemniaki nie mają twardego środka",
+          "uwaga": true
+        },
+        {
+          "tresc": "**Warzywa z wywaru.** Dodaj wszystkie odłożone warzywa wraz z płynem, który zebrał się w misce. Doprowadź ponownie do łagodnego wrzenia i podgrzewaj przez **2 minuty**."
+        },
+        {
+          "tresc": "**Doprawienie i podanie.** Usuń liście laurowe i ziele angielskie. Dodaj majeranek, sól i pieprz. Wymieszaj i podaj."
         }
       ]
     }

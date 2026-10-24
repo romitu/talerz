@@ -12,7 +12,7 @@
     "makaron"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 266.5,
+  "porcja_g": 267,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 2,
   "czas_przygotowania_min": 7,
@@ -83,10 +83,25 @@
       "minuty": 7,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Tuńczyk.** Odsącz tuńczyka i lekko rozdrobnij widelcem. Odmierz po odsączeniu."
         },
         {
-          "tresc": "Odsącz tuńczyka. Obierz i posiekaj czosnek. Umyj i posiekaj natkę. Umyj cytrynę i odmierz sok. Przygotuj makaron."
+          "tresc": "**Czosnek.** Obierz czosnek i drobno posiekaj."
+        },
+        {
+          "tresc": "**Natka pietruszki.** Umyj i osusz natkę, usuń grube łodygi i drobno posiekaj liście."
+        },
+        {
+          "tresc": "**Cytryna.** Umyj cytrynę, wyciśnij sok i odmierz ilość wskazaną na liście składników."
+        },
+        {
+          "tresc": "**Makaron.** Odmierz makaron."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól, pieprz i chili."
         }
       ]
     },
@@ -95,16 +110,22 @@
       "minuty": 20,
       "kroki": [
         {
-          "tresc": "Zagotuj wodę w garnku i ugotuj makaron przez czas wskazany na opakowaniu. Nastaw minutnik; w tym czasie przygotowuj sos na drugim palniku. Przed odcedzeniem zachowaj nieco wody z gotowania. Woda do gotowania jest dodatkowa i zostanie odlana."
+          "tresc": "**Makaron — równolegle.** Zagotuj wodę i wsyp makaron. Gotuj przez czas z opakowania. Nastaw minutnik; w tym czasie przygotowuj sos na drugim palniku."
         },
         {
-          "tresc": "Gdy do końca gotowania makaronu pozostaje około 4 minut, rozgrzej oliwę na drugim palniku przez 1 minutę. Dodaj czosnek i chili; podgrzewaj 20–30 sekund."
+          "tresc": "**Makaron — po minutniku.** Sprawdź, czy makaron jest gotowy. Zachowaj trochę wody z gotowania, a następnie odcedź makaron. Zrób to po minutniku, niezależnie od postępu przygotowania sosu."
         },
         {
-          "tresc": "Dodaj tuńczyka, makaron i niewielką ilość zachowanej wody. Podgrzewaj na małym ogniu przez 1–2 minuty, delikatnie mieszając."
+          "tresc": "**Rozgrzanie oliwy.** Gdy do końca gotowania makaronu pozostaje około **4 minut**, rozgrzej oliwę na drugim palniku przez **1 minutę**."
         },
         {
-          "tresc": "Zdejmij z ognia. Dodaj sok z cytryny, natkę, sól i pieprz. Podaj."
+          "tresc": "**Czosnek i chili.** Dodaj czosnek i chili; podgrzewaj **20–30 sekund**."
+        },
+        {
+          "tresc": "**Makaron z tuńczykiem.** Dodaj tuńczyka, makaron i niewielką ilość zachowanej wody. Podgrzewaj na małym ogniu przez **1–2 minuty**, delikatnie mieszając."
+        },
+        {
+          "tresc": "**Doprawienie i podanie.** Zdejmij z ognia. Dodaj sok z cytryny, natkę, sól i pieprz. Podaj."
         }
       ]
     }

@@ -1,5 +1,5 @@
 {
-  "nazwa": "Tortille z kurczakiem i warzywami z sosem czosnkowo-koperkowym",
+  "nazwa": "Tortilla z kurczakiem i warzywami z sosem czosnkowo-koperkowym",
   "opis": "Pełnoziarniste tortille z soczystym kurczakiem, papryką, pomidorem, ogórkiem i sałatą oraz jogurtowym sosem czosnkowo-koperkowym. Porcja bazowa obejmuje cały posiłek z ilości składników podanych na liście. Czasy etapów dotyczą jednej porcji bazowej; przy większej ilości dolicz czas podgrzewania placków i smażenia mięsa partiami.",
   "pory": [
     "obiad",
@@ -12,7 +12,7 @@
     "kanapki"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 480.5,
+  "porcja_g": 481,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 1,
   "czas_przygotowania_min": 12,
@@ -179,8 +179,8 @@
         },
         {
           "tresc": "**Sprawdzenie kurczaka.** Zmierz temperaturę w środku najgrubszego kawałka: powinna wynosić **co najmniej 74°C**. Jeśli jest niższa, dosmażaj **po 1 minucie** i ponawiaj pomiar.",
-          "uwaga": true,
-          "sygnal": "temperatura w środku najgrubszego kawałka wynosi co najmniej 74°C"
+          "sygnal": "temperatura w środku najgrubszego kawałka wynosi co najmniej 74°C",
+          "uwaga": true
         },
         {
           "tresc": "**Zdjęcie mięsa.** Gotowego kurczaka od razu przełóż na czysty talerz, żeby nie wysychał na gorącej patelni."

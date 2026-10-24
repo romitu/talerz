@@ -1,0 +1,159 @@
+{
+  "nazwa": "Makaron z indykiem, pieczarkami i jogurtem",
+  "opis": "Pełnoziarnisty makaron z indykiem i pieczarkami w lekkim sosie jogurtowym. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "inna"
+  ],
+  "rodzaje": [
+    "makaron"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 561,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 2,
+  "czas_przygotowania_min": 10,
+  "czas_obrobki_min": 25,
+  "sprzet": [
+    "Patelnia 28 cm",
+    "Garnek 3 l",
+    "Miska",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna",
+    "Durszlak",
+    "Termometr do mięsa"
+  ],
+  "przechowywanie": "Przechowuj w lodówce do 2 dni. Odgrzewaj łagodnie, do gorącego środka całej porcji. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
+  "mozna_mrozic": false,
+  "ratunek": "Jogurt dodawaj poza ogniem po zahartowaniu. Jeśli sos się zwarzył, łagodne mieszanie może poprawić konsystencję, ale nie cofnie całkowicie zwarzenia. Za gęsty sos rozluźnij ciepłą wodą.",
+  "skladniki": [
+    {
+      "nazwa": "Makaron pełnoziarnisty, suchy",
+      "ilosc": 85,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Pierś z indyka, surowa",
+      "ilosc": 150,
+      "jednostka": "g",
+      "stan": "pokrojona w paski"
+    },
+    {
+      "nazwa": "Pieczarki, surowe",
+      "ilosc": 180,
+      "jednostka": "g",
+      "stan": "pokrojone w plasterki"
+    },
+    {
+      "nazwa": "Jogurt grecki naturalny 2%",
+      "ilosc": 80,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 50,
+      "jednostka": "g",
+      "stan": "posiekana"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Olej rzepakowy",
+      "ilosc": 8,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Tymianek suszony",
+      "ilosc": 1,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 1,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 10,
+      "kroki": [
+        {
+          "tresc": "**Pieczarki.** Oczyść pieczarki i pokrój w cienkie plasterki."
+        },
+        {
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
+        },
+        {
+          "tresc": "**Czosnek.** Obierz czosnek i drobno posiekaj."
+        },
+        {
+          "tresc": "**Indyk.** Osusz indyka i pokrój w paski grubości około 1 cm."
+        },
+        {
+          "tresc": "**Po przygotowaniu mięsa.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surowym mięsem."
+        },
+        {
+          "tresc": "**Makaron.** Odmierz makaron."
+        },
+        {
+          "tresc": "**Jogurt.** Odmierz jogurt."
+        },
+        {
+          "tresc": "**Olej.** Odmierz olej."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól, pieprz i tymianek."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie i smażenie",
+      "minuty": 25,
+      "kroki": [
+        {
+          "tresc": "**Makaron — równolegle.** Zagotuj wodę i wsyp makaron. Gotuj przez czas z opakowania. Nastaw minutnik; w tym czasie przygotowuj sos na drugim palniku."
+        },
+        {
+          "tresc": "**Makaron — po minutniku.** Sprawdź, czy makaron jest gotowy. Zachowaj trochę wody z gotowania, a następnie odcedź makaron. Zrób to po minutniku, niezależnie od postępu przygotowania sosu."
+        },
+        {
+          "tresc": "**Rozgrzanie oleju.** Na drugim palniku rozgrzej połowę oleju przez **1 minutę**."
+        },
+        {
+          "tresc": "**Smażenie indyka.** Smaż indyka **5–6 minut**, obracając, do temperatury co najmniej **74°C**."
+        },
+        {
+          "tresc": "**Zdjęcie indyka.** Zdejmij na czysty talerz."
+        },
+        {
+          "tresc": "**Pieczarki i cebula.** Dodaj pozostały olej, cebulę i pieczarki; smaż **7–9 minut**, aż woda odparuje."
+        },
+        {
+          "tresc": "**Czosnek i tymianek.** Dodaj czosnek i tymianek, smaż **30 sekund**."
+        },
+        {
+          "tresc": "**Hartowanie jogurtu.** W misce połącz jogurt z niewielką ilością ciepłej wody z makaronu, dodawanej stopniowo."
+        },
+        {
+          "tresc": "**Połączenie makaronu.** Do patelni dodaj makaron i indyka, podgrzej przez **1 minutę**."
+        },
+        {
+          "tresc": "**Jogurt i doprawienie.** Zdejmij z ognia, odczekaj około **1 minuty**, wmieszaj jogurt i dopraw solą oraz pieprzem. Nie zagotowuj."
+        }
+      ]
+    }
+  ]
+}

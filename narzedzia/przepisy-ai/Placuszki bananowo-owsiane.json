@@ -69,13 +69,16 @@
       "minuty": 10,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Banan.** Obierz banana i rozgnieć miąższ widelcem."
         },
         {
-          "tresc": "Obierz banana i rozgnieć widelcem. Odmierz mleko, mąkę, jogurt, cynamon i olej."
+          "tresc": "**Ciasto.** Odmierz mleko, mąkę i cynamon. Wymieszaj z rozgniecionym bananem i jajkami. Odstaw na **5 minut**, aby mąka wchłonęła płyn."
         },
         {
-          "tresc": "Połącz banana z jajkiem, mlekiem, mąką i cynamonem. Wymieszaj i odstaw na 5 minut, aby mąka wchłonęła płyn."
+          "tresc": "**Jogurt.** Odmierz jogurt."
+        },
+        {
+          "tresc": "**Olej.** Odmierz olej."
         }
       ]
     },
@@ -84,15 +87,15 @@
       "minuty": 18,
       "kroki": [
         {
-          "tresc": "Rozgrzej patelnię nieprzywierającą przez 1 minutę na średnim ogniu. Podziel olej między partie."
+          "tresc": "**Rozgrzanie patelni.** Rozgrzej patelnię nieprzywierającą przez **1 minutę** na średnim ogniu. Podziel olej między partie."
         },
         {
-          "tresc": "Nakładaj małe porcje ciasta i smaż około 2–3 minut z pierwszej strony oraz 1–2 minuty z drugiej. Etap obejmuje około 3 partie dla bazy; przy większej ilości dolicz kolejne partie.",
+          "tresc": "**Smażenie placuszków.** Nakładaj małe porcje ciasta i smaż około **2–3 minut** z pierwszej strony oraz **1–2 minuty** z drugiej. Etap obejmuje około 3 partie dla bazy; przy większej ilości dolicz kolejne partie.",
           "sygnal": "spód rumiany, brzegi ścięte, środek bez surowego ciasta",
           "uwaga": true
         },
         {
-          "tresc": "Podaj z odmierzoną ilością jogurtu."
+          "tresc": "**Podanie.** Podaj z odmierzoną ilością jogurtu."
         }
       ]
     }

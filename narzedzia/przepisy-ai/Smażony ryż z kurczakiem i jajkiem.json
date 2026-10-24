@@ -1,0 +1,163 @@
+{
+  "nazwa": "Smażony ryż z kurczakiem i jajkiem",
+  "opis": "Smażony ryż z kurczakiem, jajkiem, marchewką i groszkiem, doprawiony sosem sojowym i szczypiorkiem. Dobry sposób na wykorzystanie ryżu ugotowanego poprzedniego dnia.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "azjatycka"
+  ],
+  "rodzaje": [
+    "kasza_ryz"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 403,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 2,
+  "czas_przygotowania_min": 7,
+  "czas_obrobki_min": 13,
+  "sprzet": [
+    "Patelnia 28 cm",
+    "Garnek 2 l",
+    "Nóż szefa kuchni",
+    "Deska do krojenia"
+  ],
+  "przechowywanie": "Przechowuj w szczelnym pojemniku w lodówce do 2 dni. Po przygotowaniu danie szybko ostudź i włóż do lodówki. Przy odgrzewaniu podgrzej je dokładnie i najlepiej tylko jeden raz.",
+  "mozna_mrozic": false,
+  "ratunek": "Ryż się klei — był ciepły. Musi być z lodówki, najlepiej wczorajszy.",
+  "skladniki": [
+    {
+      "nazwa": "Pierś z kurczaka, surowa",
+      "ilosc": 90,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Jaja kurze, całe, surowe",
+      "ilosc": 1,
+      "jednostka": "szt"
+    },
+    {
+      "nazwa": "Ryż basmati, suchy",
+      "ilosc": 60,
+      "jednostka": "g",
+      "stan": "suchy, ugotowany osobno"
+    },
+    {
+      "nazwa": "Marchew, surowa",
+      "ilosc": 60,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 40,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 3,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Groszek zielony mrożony",
+      "ilosc": 70,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sos sojowy",
+      "ilosc": 12,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Olej rzepakowy",
+      "ilosc": 5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Szczypiorek świeży",
+      "ilosc": 8,
+      "jednostka": "g",
+      "stan": "posiekany"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 7,
+      "kroki": [
+        {
+          "tresc": "**Ryż — wcześniej.** Odmierz suchy ryż i ugotuj zgodnie z opakowaniem przed rozpoczęciem tego przepisu. Szybko ostudź w płytkim naczyniu i przechowuj w lodówce; do smażenia użyj zimnego ryżu."
+        },
+        {
+          "tresc": "**Marchew.** Umyj i obierz marchew, pokrój w drobną kostkę lub cienkie krótkie słupki."
+        },
+        {
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
+        },
+        {
+          "tresc": "**Czosnek.** Obierz czosnek i drobno posiekaj."
+        },
+        {
+          "tresc": "**Jajka.** Wbij jajka do miski i roztrzep widelcem."
+        },
+        {
+          "tresc": "**Szczypiorek.** Umyj i osusz szczypiorek, następnie drobno posiekaj."
+        },
+        {
+          "tresc": "**Kurczak.** Osusz mięso kurczaka bez skóry i kości, pokrój w kostkę około 2 cm."
+        },
+        {
+          "tresc": "**Po przygotowaniu mięsa.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surowym mięsem."
+        },
+        {
+          "tresc": "**Dodatki.** Odmierz sos sojowy."
+        },
+        {
+          "tresc": "**Olej.** Odmierz olej."
+        },
+        {
+          "tresc": "**Groszek.** Odmierz mrożony groszek i pozostaw w zamrażarce do gotowania."
+        }
+      ]
+    },
+    {
+      "nazwa": "Smażenie",
+      "minuty": 13,
+      "kroki": [
+        {
+          "tresc": "**Rozgrzanie oleju.** Na dużej patelni mocno rozgrzej olej."
+        },
+        {
+          "tresc": "**Smażenie kurczaka.** Dodaj kurczaka i smaż około **3–4 minut**, mieszając, aż lekko się zrumieni i będzie usmażony w środku."
+        },
+        {
+          "tresc": "**Zdjęcie kurczaka.** Zdejmij mięso z patelni i odłóż."
+        },
+        {
+          "tresc": "**Smażenie jajek.** Na tę samą patelnię wlej roztrzepane jajko. Smaż około **1 minuty**, energicznie mieszając i dzieląc jajko na małe kawałki."
+        },
+        {
+          "tresc": "**Zdjęcie jajek.** Zdejmij z patelni i odłóż razem z kurczakiem."
+        },
+        {
+          "tresc": "**Cebula i marchew.** Na patelnię wrzuć cebulę i marchew. Smaż około **2–3 minut**, często mieszając."
+        },
+        {
+          "tresc": "**Czosnek.** Dodaj czosnek i smaż jeszcze około **30 sekund**."
+        },
+        {
+          "tresc": "**Groszek.** Dodaj mrożony groszek i smaż około **1 minuty**."
+        },
+        {
+          "tresc": "**Smażenie ryżu.** Dodaj zimny ugotowany ryż. Rozbij łopatką wszystkie grudki i smaż na dość dużym ogniu około **3–4 minut**, często mieszając."
+        },
+        {
+          "tresc": "**Połączenie składników.** Dodaj z powrotem kurczaka i jajko. Wlej sos sojowy i dokładnie wymieszaj. Smaż jeszcze około **1 minuty**, aż wszystkie składniki będą gorące."
+        },
+        {
+          "tresc": "**Szczypiorek.** Zdejmij patelnię z ognia i posyp danie świeżym szczypiorkiem."
+        }
+      ]
+    }
+  ]
+}

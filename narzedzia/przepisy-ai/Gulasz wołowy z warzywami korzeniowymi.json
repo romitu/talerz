@@ -1,6 +1,6 @@
 {
   "nazwa": "Gulasz wołowy z warzywami korzeniowymi",
-  "opis": "Długo duszony gulasz wołowy z ziemniakami, marchewką, pasternakiem i selerem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
+  "opis": "Długo duszony gulasz wołowy z ziemniakami, marchewką, pasternakiem i selerem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami. Smak sosu lub płynu do gotowania powstaje z przygotowywanych składników w tym samym naczyniu. Podana ilość wody jest początkowa; ewentualne dolewanie zależy od konsystencji i miękkości składników.",
   "pory": [
     "obiad"
   ],
@@ -11,10 +11,10 @@
     "gulasz_curry"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 953.5,
+  "porcja_g": 709,
   "liczba_porcji_bazowych": 2,
   "trwalosc_dni": 3,
-  "czas_przygotowania_min": 18,
+  "czas_przygotowania_min": 20,
   "czas_obrobki_min": 150,
   "sprzet": [
     "Garnek 3 l",
@@ -24,7 +24,7 @@
   ],
   "przechowywanie": "Przechowuj w lodówce do 3 dni albo zamroź po ostudzeniu. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
   "mozna_mrozic": true,
-  "ratunek": "Twarde mięso duś dalej na małym ogniu, uzupełniając gorącą wodę. Za rzadki sos odparuj bez przykrycia.",
+  "ratunek": "Jeśli mięso jest twarde, duś je dalej przed dodaniem większych kawałków warzyw. Gęstniejący i przywierający sos podlewaj niewielką ilością gorącej wody. Jeśli gotowy sos jest za rzadki, wyjmij miękkie mięso i warzywa, odparuj sos bez pokrywki i połącz składniki ponownie.",
   "skladniki": [
     {
       "nazwa": "Pręga wołowa bez kości, surowa",
@@ -36,25 +36,25 @@
       "nazwa": "Ziemniaki, surowe",
       "ilosc": 300,
       "jednostka": "g",
-      "stan": "pokrojone"
+      "stan": "kostka około 1,5 cm"
     },
     {
       "nazwa": "Marchew, surowa",
       "ilosc": 120,
       "jednostka": "g",
-      "stan": "pokrojona"
+      "stan": "jedna trzecia drobno posiekana do sosu; reszta w kostce około 1 cm"
     },
     {
       "nazwa": "Pasternak, surowy",
       "ilosc": 80,
       "jednostka": "g",
-      "stan": "pokrojony"
+      "stan": "jedna trzecia drobno posiekana do sosu; reszta w kostce około 1 cm"
     },
     {
       "nazwa": "Seler korzeń",
       "ilosc": 60,
       "jednostka": "g",
-      "stan": "pokrojony"
+      "stan": "jedna trzecia drobno posiekana do sosu; reszta w kostce około 1 cm"
     },
     {
       "nazwa": "Cebula, surowa",
@@ -68,14 +68,10 @@
       "jednostka": "g"
     },
     {
-      "nazwa": "Domowy bulion warzywny",
-      "ilosc": 240,
-      "jednostka": "g"
-    },
-    {
       "nazwa": "woda",
-      "ilosc": 500,
-      "jednostka": "ml"
+      "ilosc": 250,
+      "jednostka": "ml",
+      "stan": "ilość początkowa do potrawy; w trakcie gotowania uzupełniaj tylko w razie potrzeby, zgodnie z instrukcją"
     },
     {
       "nazwa": "Olej rzepakowy",
@@ -111,19 +107,37 @@
   "etapy": [
     {
       "nazwa": "Przygotowanie składników",
-      "minuty": 18,
+      "minuty": 20,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Ziemniaki.** Umyj i obierz ziemniaki, pokrój w kostkę około 1,5 cm."
         },
         {
-          "tresc": "Wołowinę osusz i pokrój w kostkę około 3 cm. Umyj przybory i ręce po surowym mięsie."
+          "tresc": "**Marchew.** Umyj i obierz warzywo. Jedną trzecią drobno posiekaj do bazy sosu, resztę pokrój w kostkę około 1 cm i odłóż osobno."
         },
         {
-          "tresc": "Umyj i obierz ziemniaki, marchew, pasternak oraz seler. Pokrój korzenie w kostkę około 1,5 cm, ziemniaki około 2 cm. Obierz i posiekaj cebulę."
+          "tresc": "**Pasternak.** Umyj i obierz warzywo. Jedną trzecią drobno posiekaj do bazy sosu, resztę pokrój w kostkę około 1 cm i odłóż osobno."
         },
         {
-          "tresc": "Odmierz passatę, bulion i wodę."
+          "tresc": "**Seler.** Umyj i obierz warzywo. Jedną trzecią drobno posiekaj do bazy sosu, resztę pokrój w kostkę około 1 cm i odłóż osobno."
+        },
+        {
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
+        },
+        {
+          "tresc": "**Wołowina.** Osusz wołowinę i pokrój w kostkę około 3 cm."
+        },
+        {
+          "tresc": "**Po przygotowaniu mięsa.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surowym mięsem."
+        },
+        {
+          "tresc": "**Płynna baza.** Odmierz passatę i wodę z listy składników."
+        },
+        {
+          "tresc": "**Olej.** Odmierz olej."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól, pieprz, słodką paprykę, majeranek i liście laurowe."
         }
       ]
     },
@@ -132,21 +146,41 @@
       "minuty": 150,
       "kroki": [
         {
-          "tresc": "Rozgrzej olej przez 1 minutę. Obsmaż wołowinę partiami po 4–5 minut, obracając; dla bazy przeznacz około 10 minut. Przełóż na talerz."
+          "tresc": "**Rozgrzanie oleju.** Rozgrzej olej przez **1 minutę**."
         },
         {
-          "tresc": "Smaż cebulę 4 minuty, dodaj paprykę mieloną i mieszaj 20 sekund. Włóż mięso, dodaj passatę, bulion, wodę oraz liść laurowy."
+          "tresc": "**Obsmażenie wołowiny.** Obsmaż wołowinę partiami po **4–5 minut**, obracając; dla bazy przeznacz około **10 minut**."
         },
         {
-          "tresc": "Doprowadź do łagodnego wrzenia przez około 5 minut i duś pod przykryciem 90 minut. Co 20–30 minut sprawdź płyn; ubytek uzupełniaj gorącą wodą."
+          "tresc": "**Zdjęcie mięsa.** Przełóż na talerz."
         },
         {
-          "tresc": "Gdy mięso zaczyna mięknąć, dodaj marchew, pasternak, seler oraz ziemniaki. Duś 30–35 minut. Jeśli wołowina po pierwszym duszeniu jest nadal twarda, przed dodaniem warzyw wydłuż duszenie o 15–30 minut.",
-          "sygnal": "mięso łatwo rozdziela się widelcem; warzywa miękkie, ale nie rozpadają się",
+          "tresc": "**Cebula.** W garnku po mięsie smaż cebulę przez **4 minuty**."
+        },
+        {
+          "tresc": "**Warzywa do sosu.** Dodaj drobno posiekane części marchwi, pasternaku i selera. Smaż przez **4 minuty**, mieszając."
+        },
+        {
+          "tresc": "**Papryka mielona.** Dodaj paprykę i mieszaj przez **20 sekund**."
+        },
+        {
+          "tresc": "**Baza sosu.** Wlej odmierzoną wodę i mieszaj przez **1–2 minuty**, delikatnie odrywając z dna zrumienione pozostałości po smażeniu. Nie zeskrobuj czarnych, przypalonych fragmentów. Dodaj passatę, mięso wraz z sokami z talerza i liść laurowy."
+        },
+        {
+          "tresc": "**Duszenie wołowiny.** Doprowadź do łagodnego wrzenia przez około **3 minuty**. Duś pod przykryciem przez **90 minut**. Sprawdzaj płyn co **20 minut**. Dolewaj niewielką ilość gorącej wody tylko wtedy, gdy sos nadmiernie gęstnieje lub zaczyna przywierać; nie uzupełniaj automatycznie każdego ubytku."
+        },
+        {
+          "tresc": "**Kontrola wołowiny.** Sprawdź mięso przed dodaniem pozostałych warzyw. Jeżeli jest nadal twarde, duś dalej po **15 minut**, kontrolując płyn.",
+          "sygnal": "mięso jest prawie miękkie przed dodaniem pozostałych warzyw",
           "uwaga": true
         },
         {
-          "tresc": "Usuń liść laurowy, dodaj majeranek, sól i pieprz. Wymieszaj i podaj."
+          "tresc": "**Ziemniaki i pozostałe warzywa.** Dodaj ziemniaki oraz odłożone kostki marchwi, pasternaku i selera. Wymieszaj z sosem, przykryj i duś przez **20–25 minut**. Delikatnie przemieszaj w połowie. Jeśli warzywa są nadal twarde, dogotowuj po **3 minuty**.",
+          "sygnal": "mięso łatwo rozdziela się widelcem, ziemniaki i warzywa nie mają twardego środka",
+          "uwaga": true
+        },
+        {
+          "tresc": "**Doprawienie i podanie.** Usuń liść laurowy, dodaj majeranek, sól i pieprz. Wymieszaj i podaj."
         }
       ]
     }

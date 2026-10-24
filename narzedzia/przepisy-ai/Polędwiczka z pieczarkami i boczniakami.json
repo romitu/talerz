@@ -1,0 +1,229 @@
+{
+  "nazwa": "Polędwiczka z pieczarkami i boczniakami",
+  "opis": "Delikatna polędwiczka wieprzowa z pieczarkami i boczniakami w lekkim sosie jogurtowym z tymiankiem. Podawana z kaszą gryczaną i kapustą kiszoną. Smak sosu lub płynu do gotowania powstaje z przygotowywanych składników w tym samym naczyniu. Podana ilość wody jest początkowa; ewentualne dolewanie zależy od konsystencji i miękkości składników. Warzywna baza obejmuje korzeń pietruszki, seler korzeniowy, por, przygotowane razem z pozostałymi składnikami; wszystkie warzywa pozostają w posiłku.",
+  "pory": [
+    "obiad"
+  ],
+  "kuchnie": [
+    "polska"
+  ],
+  "rodzaje": [],
+  "porcjowanie": "waga",
+  "porcja_g": 705,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 3,
+  "czas_przygotowania_min": 15,
+  "czas_obrobki_min": 45,
+  "sprzet": [
+    "Patelnia 28 cm",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Garnek 2 l",
+    "Sitko",
+    "Miska",
+    "Termometr do mięsa",
+    "Tarka o drobnych oczkach"
+  ],
+  "przechowywanie": "Przechowuj w lodówce do 3 dni. Kaszę najlepiej przechowywać osobno. Dania nie polecałbym do mrożenia ze względu na sos jogurtowy.",
+  "mozna_mrozic": false,
+  "ratunek": "Zbyt gęsty sos rozcieńcz niewielką ilością gorącej wody przed dodaniem jogurtu. Mięso smaż dopiero po przygotowaniu warzywnej bazy i kontroluj temperaturę, żeby nie przesuszyć polędwiczki. Jogurt dodawaj poza ogniem.",
+  "skladniki": [
+    {
+      "nazwa": "Polędwiczka wieprzowa, surowa",
+      "ilosc": 100,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Pieczarki, surowe",
+      "ilosc": 100,
+      "jednostka": "g",
+      "stan": "w plastrach"
+    },
+    {
+      "nazwa": "Boczniaki, surowe",
+      "ilosc": 100,
+      "jednostka": "g",
+      "stan": "porwane na paski"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 50,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 3,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Kapusta kiszona",
+      "ilosc": 100,
+      "jednostka": "g",
+      "stan": "odciśnięta"
+    },
+    {
+      "nazwa": "Jogurt grecki naturalny 2%",
+      "ilosc": 50,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "woda",
+      "ilosc": 100,
+      "jednostka": "ml",
+      "stan": "ilość początkowa do potrawy; w trakcie gotowania uzupełniaj tylko w razie potrzeby, zgodnie z instrukcją"
+    },
+    {
+      "nazwa": "Kasza gryczana, sucha",
+      "ilosc": 60,
+      "jednostka": "g",
+      "stan": "sucha, ugotowana osobno"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Tymianek suszony",
+      "ilosc": 1,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 0.5,
+      "jednostka": "g",
+      "stan": "doprawiaj stopniowo, uwzględniając słoną kapustę podawaną obok"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.2,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Pietruszka korzeń",
+      "ilosc": 10,
+      "jednostka": "g",
+      "stan": "obrany korzeń, starty na drobnych oczkach; do warzywnej bazy"
+    },
+    {
+      "nazwa": "Seler korzeń",
+      "ilosc": 10,
+      "jednostka": "g",
+      "stan": "obrany korzeń, starty na drobnych oczkach; do warzywnej bazy"
+    },
+    {
+      "nazwa": "Por, surowy",
+      "ilosc": 15,
+      "jednostka": "g",
+      "stan": "biała i jasnozielona część, dokładnie wypłukana; cienkie półplasterki do bazy sosu"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 15,
+      "kroki": [
+        {
+          "tresc": "**Korzeń pietruszki.** Umyj, obierz i zetrzyj na tarce o drobnych oczkach. Odłóż do przygotowania warzywnej bazy."
+        },
+        {
+          "tresc": "**Korzeń selera.** Umyj, obierz i zetrzyj na tarce o drobnych oczkach. Odłóż do przygotowania warzywnej bazy."
+        },
+        {
+          "tresc": "**Por.** Białą i jasnozieloną część przekrój wzdłuż, dokładnie wypłucz ziemię spomiędzy warstw i pokrój w cienkie półplasterki."
+        },
+        {
+          "tresc": "**Pieczarki.** Oczyść pieczarki i pokrój w cienkie plasterki."
+        },
+        {
+          "tresc": "**Boczniaki.** Oczyść boczniaki i porwij na paski."
+        },
+        {
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
+        },
+        {
+          "tresc": "**Czosnek.** Obierz czosnek i przeciśnij przez praskę lub bardzo drobno posiekaj."
+        },
+        {
+          "tresc": "**Kapusta kiszona.** Odciśnij kapustę kiszoną i odłóż do podania jako surówkę."
+        },
+        {
+          "tresc": "**Jogurt.** Odmierz jogurt i wyjmij z lodówki na czas przygotowania dania."
+        },
+        {
+          "tresc": "**Polędwiczka.** Osusz polędwiczkę, usuń twardą błonę i pokrój na medaliony grubości około 2 cm."
+        },
+        {
+          "tresc": "**Po przygotowaniu mięsa.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surowym mięsem."
+        },
+        {
+          "tresc": "**Kasza gryczana.** Odmierz kaszę gryczaną."
+        },
+        {
+          "tresc": "**Woda.** Odmierz wodę z listy składników do przygotowania potrawy."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz tymianek, sól i pieprz."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie kaszy, przygotowanie sosu i smażenie mięsa",
+      "minuty": 45,
+      "kroki": [
+        {
+          "tresc": "**Kasza — równolegle.** Zagotuj wodę w garnku, wsyp kaszę gryczaną i gotuj zgodnie z instrukcją na opakowaniu. Nastaw minutnik; podczas gotowania przygotowuj sos. Woda do kaszy jest osobna i jej nadmiar zostanie odcedzony."
+        },
+        {
+          "tresc": "**Rozgrzanie tłuszczu.** Na patelni rozgrzej połowę oliwy przez **1 minutę**. Pozostałą część zachowaj do mięsa."
+        },
+        {
+          "tresc": "**Cebula, korzenie i por.** Dodaj cebulę, starte korzenie pietruszki i selera oraz por. Smaż przez **3 minuty** na umiarkowanym ogniu, mieszając."
+        },
+        {
+          "tresc": "**Grzyby.** Dodaj pieczarki i boczniaki. Smaż przez **7–9 minut**, aż większość wody odparuje, a brzegi grzybów lekko się zrumienią."
+        },
+        {
+          "tresc": "**Czosnek i tymianek.** Dodaj czosnek i tymianek. Smaż przez **30 sekund**, następnie wlej całą odmierzoną wodę i mieszaj przez **1 minutę**, rozpuszczając zrumienione pozostałości z dna."
+        },
+        {
+          "tresc": "**Gotowanie warzywnej bazy.** Doprowadź do łagodnego wrzenia przez około **1–2 minuty**. Przykryj i duś przez **10–12 minut**. Sprawdź korzenie; jeśli są twarde, dogotowuj po **2 minuty**. Jeśli płynu brakuje, dolej niewielką ilość gorącej wody.",
+          "sygnal": "korzenie i por są miękkie, w sosie pozostaje płyn",
+          "uwaga": true
+        },
+        {
+          "tresc": "**Kasza — po minutniku.** Niezależnie od postępu przygotowania sosu sprawdź miękkość kaszy po czasie z opakowania. Odcedź nadmiar wody, przykryj i odstaw poza palnik."
+        },
+        {
+          "tresc": "**Odłożenie sosu.** Przełóż całą bazę warzywno-grzybową wraz z płynem do miski i przykryj. Na patelni nie pozostawiaj kawałków warzyw, które mogłyby przypalić się podczas smażenia mięsa."
+        },
+        {
+          "tresc": "**Rozgrzanie tłuszczu do mięsa.** Na opróżnionej patelni rozgrzej pozostałą część oliwy przez około **1 minutę**."
+        },
+        {
+          "tresc": "**Smażenie polędwiczki.** Smaż medaliony przez **2–3 minuty z każdej strony**. Sprawdź temperaturę w środku najgrubszego kawałka. Jeśli jest niższa niż **63°C**, dosmażaj po **1 minucie**, kontrolując temperaturę.",
+          "sygnal": "najgrubszy medalion ma w środku co najmniej 63°C",
+          "uwaga": true
+        },
+        {
+          "tresc": "**Odpoczynek mięsa.** Przełóż gotowe mięso na czysty talerz i pozostaw na co najmniej **3 minuty**. W tym czasie wykończ sos."
+        },
+        {
+          "tresc": "**Połączenie smaków.** Przełóż na patelnię najpierw płynną część sosu z miski. Mieszaj przez **1 minutę**, rozpuszczając zrumienione pozostałości po mięsie. Dodaj wszystkie warzywa i grzyby oraz soki z talerza po mięsie. Podgrzewaj przez **1–2 minuty**. Jeśli sos jest za gęsty, dolej trochę gorącej wody."
+        },
+        {
+          "tresc": "**Jogurt.** Zdejmij patelnię z ognia. Jogurt ogrzej stopniowo małymi porcjami ciepłego sosu, następnie wmieszaj do patelni. Nie zagotowuj."
+        },
+        {
+          "tresc": "**Doprawienie.** Dodaj pieprz i stopniowo sól. Spróbuj sosu, uwzględniając słoną kapustę kiszoną podawaną obok."
+        },
+        {
+          "tresc": "**Podanie.** Po co najmniej 3 minutach odpoczynku przełóż mięso do ciepłego sosu. Podaj z kaszą gryczaną i kapustą kiszoną."
+        }
+      ]
+    }
+  ]
+}

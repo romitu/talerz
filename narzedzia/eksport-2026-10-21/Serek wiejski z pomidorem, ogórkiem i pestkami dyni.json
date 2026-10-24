@@ -1,0 +1,108 @@
+{
+  "nazwa": "Serek wiejski z pomidorem, ogórkiem i pestkami dyni",
+  "opis": "Serek wiejski ze świeżym pomidorem, ogórkiem i pestkami dyni, podany z dwiema kromkami chleba żytniego. Ilości składników dobierz z listy dla przygotowywanej liczby porcji.",
+  "pory": [
+    "sniadanie",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "inna"
+  ],
+  "rodzaje": [
+    "salatka"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 516,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 1,
+  "czas_przygotowania_min": 7,
+  "czas_obrobki_min": 0,
+  "sprzet": [
+    "Miska",
+    "Widelec",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Serek z warzywami przechowuj w zamkniętym pojemniku w lodówce do 1 dnia. Pestki dyni i pieczywo dodaj dopiero przed jedzeniem. Lodówka: do 4°C.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli całość puściła dużo wody, odlej nadmiar płynu. Jeśli smak jest zbyt łagodny, dodaj odrobinę soli i pieprzu.",
+  "skladniki": [
+    {
+      "nazwa": "Serek wiejski naturalny",
+      "ilosc": 200,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Pomidory, surowe",
+      "ilosc": 1,
+      "jednostka": "szt",
+      "stan": "pokrojony w kostkę"
+    },
+    {
+      "nazwa": "Ogórek, surowy",
+      "ilosc": 0.5,
+      "jednostka": "szt",
+      "stan": "pokrojony w kostkę"
+    },
+    {
+      "nazwa": "Pestki dyni",
+      "ilosc": 15,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Chleb żytni razowy",
+      "ilosc": 2,
+      "jednostka": "szt",
+      "stan": "kromki"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 5,
+      "kroki": [
+        {
+          "tresc": "**Pomidor.** Umyj pomidory i pokrój w kostkę."
+        },
+        {
+          "tresc": "**Ogórek.** Umyj ogórek i pokrój w kostkę."
+        },
+        {
+          "tresc": "**Serek wiejski.** Odmierz serek wiejski."
+        },
+        {
+          "tresc": "**Pestki dyni.** Odmierz pestki dyni."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól i pieprz."
+        },
+        {
+          "tresc": "**Pieczywo.** Przygotuj pieczywo w ilości wskazanej na liście składników."
+        }
+      ]
+    },
+    {
+      "nazwa": "Łączenie i podanie",
+      "minuty": 2,
+      "kroki": [
+        {
+          "tresc": "**Serek z warzywami.** Przełóż serek do miski, dodaj warzywa i delikatnie wymieszaj. Dopraw odmierzoną solą i pieprzem."
+        },
+        {
+          "tresc": "**Pestki i podanie.** Posyp pestkami dyni i podaj z pieczywem w ilości wskazanej na liście."
+        }
+      ]
+    }
+  ]
+}

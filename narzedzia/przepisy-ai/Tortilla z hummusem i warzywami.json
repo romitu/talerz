@@ -12,11 +12,11 @@
     "kanapki"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 504.5,
+  "porcja_g": 505,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 1,
-  "czas_przygotowania_min": 17,
-  "czas_obrobki_min": 0,
+  "czas_przygotowania_min": 10,
+  "czas_obrobki_min": 7,
   "sprzet": [
     "Blender ręczny",
     "Miska",
@@ -37,7 +37,8 @@
     {
       "nazwa": "Ciecierzyca z puszki, odsączona",
       "ilosc": 150,
-      "jednostka": "g"
+      "jednostka": "g",
+      "zamiennik": "Sucha gotowana pod ciśnieniem 50 min"
     },
     {
       "nazwa": "Sezam",
@@ -100,13 +101,31 @@
       "minuty": 10,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Ciecierzyca.** Przełóż ciecierzycę z puszki na sitko, opłucz i odsącz. Odmierz po odsączeniu\n**Sucha.** Wersja ekspresowa (Bez moczenia): Suche ziarna wrzucasz prosto do szybkowaru. Zalewasz wodą (ok. 3-4 szklanki wody na 1 szklankę ciecierzycy) i gotujesz na wysokim ciśnieniu przez 40–50 minut."
         },
         {
-          "tresc": "Opłucz i odsącz ciecierzycę. Umyj pomidora, ogórek, sałatę i cytrynę. Osusz sałatę, pokrój warzywa w cienkie paski."
+          "tresc": "**Pomidor.** Umyj pomidory i pokrój w cienkie plastry. Osusz plasterki z nadmiaru wilgoci."
         },
         {
-          "tresc": "Obierz czosnek, wyciśnij i odmierz sok z cytryny. Odmierz sezam, oliwę i wodę do hummusu. Przygotuj tortille."
+          "tresc": "**Ogórek.** Umyj ogórek i pokrój w cienkie słupki."
+        },
+        {
+          "tresc": "**Sałata.** Umyj liście sałaty, dokładnie osusz i porwij na mniejsze kawałki."
+        },
+        {
+          "tresc": "**Cytryna.** Umyj cytrynę, wyciśnij sok i odmierz ilość wskazaną na liście składników."
+        },
+        {
+          "tresc": "**Czosnek.** Obierz czosnek; zostanie zblendowany w hummusie."
+        },
+        {
+          "tresc": "**Baza hummusu.** Odmierz sezam, oliwę i wodę do hummusu do osobnych naczyń."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól i kmin rzymski."
+        },
+        {
+          "tresc": "**Tortille.** Wyjmij potrzebne placki i przykryj, żeby nie wysychały."
         }
       ]
     },
@@ -115,10 +134,19 @@
       "minuty": 7,
       "kroki": [
         {
-          "tresc": "W wąskim naczyniu zblenduj sezam z oliwą, sokiem z cytryny i częścią wody. Dodaj ciecierzycę, czosnek, kmin i sól; blenduj 2–3 minuty, dodając stopniowo resztę wody. Pasta ma się łatwo rozsmarowywać; drobinki sezamu mogą pozostać."
+          "tresc": "**Blendowanie sezamu.** W wąskim naczyniu zblenduj sezam z oliwą, sokiem z cytryny i częścią wody."
         },
         {
-          "tresc": "Posmaruj tortillę hummusem, ułóż sałatę i warzywa, zostawiając wolne brzegi. Zawiń boki i zroluj. Nadmiar hummusu i warzyw, który nie mieści się w tortilli, podaj obok."
+          "tresc": "**Blendowanie hummusu.** Dodaj ciecierzycę, czosnek, kmin i sól; blenduj **2–3 minuty**, dodając stopniowo resztę wody. Pasta ma się łatwo rozsmarowywać; drobinki sezamu mogą pozostać."
+        },
+        {
+          "tresc": "**Nadziewanie.** Posmaruj tortillę hummusem, ułóż sałatę i warzywa, zostawiając wolne brzegi."
+        },
+        {
+          "tresc": "**Zwijanie.** Zawiń boki i zroluj."
+        },
+        {
+          "tresc": "**Podanie nadmiaru.** Nadmiar hummusu i warzyw, który nie mieści się w tortilli, podaj obok."
         }
       ]
     }

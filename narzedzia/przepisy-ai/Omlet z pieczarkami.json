@@ -1,0 +1,124 @@
+{
+  "nazwa": "Omlet z pieczarkami",
+  "opis": "Sycący omlet z pieczarkami, szpinakiem i cebulą, podawany z pieczywem żytnim. Prosty, szybki posiłek z dużą ilością warzyw i białka.",
+  "pory": [
+    "kolacja",
+    "sniadanie"
+  ],
+  "kuchnie": [
+    "inna"
+  ],
+  "rodzaje": [
+    "jajka"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 581,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 0,
+  "czas_przygotowania_min": 5,
+  "czas_obrobki_min": 15,
+  "sprzet": [
+    "Patelnia 24 cm",
+    "Nóż szefa kuchni",
+    "Deska do krojenia"
+  ],
+  "przechowywanie": "Jedz od razu. Odgrzewany omlet jest gumowaty.",
+  "mozna_mrozic": false,
+  "ratunek": "Nie chce się złożyć — patelnia za mała albo masa za rzadka. Podaj jako jajecznicę, smakuje tak samo.",
+  "skladniki": [
+    {
+      "nazwa": "Jaja kurze, całe, surowe",
+      "ilosc": 3,
+      "jednostka": "szt"
+    },
+    {
+      "nazwa": "Pieczarki, surowe",
+      "ilosc": 150,
+      "jednostka": "g",
+      "stan": "w plastrach"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 50,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Szpinak mrożony",
+      "ilosc": 100,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Chleb żytni razowy",
+      "ilosc": 3,
+      "jednostka": "szt"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 4,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 2,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 5,
+      "kroki": [
+        {
+          "tresc": "**Pieczarki.** Oczyść pieczarki i pokrój w cienkie plasterki."
+        },
+        {
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
+        },
+        {
+          "tresc": "**Jajka.** Wbij jajka do miski, roztrzep widelcem i dopraw solą oraz pieprzem."
+        },
+        {
+          "tresc": "**Szpinak.** Odmierz mrożony szpinak i pozostaw w zamrażarce do smażenia."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
+        },
+        {
+          "tresc": "**Pieczywo.** Przygotuj pieczywo w ilości wskazanej na liście składników."
+        }
+      ]
+    },
+    {
+      "nazwa": "Smażenie omletu",
+      "minuty": 15,
+      "kroki": [
+        {
+          "tresc": "**Rozgrzanie oliwy.** Na patelni rozgrzej oliwę."
+        },
+        {
+          "tresc": "**Pieczarki i cebula.** Dodaj cebulę i pieczarki. Smaż około **4–5 minut**, aż pieczarki lekko się zarumienią, a większość wody odparuje."
+        },
+        {
+          "tresc": "**Szpinak.** Dodaj mrożony szpinak i smaż jeszcze około **2–3 minuty**, aż się rozmrozi i nadmiar płynu odparuje."
+        },
+        {
+          "tresc": "**Masa jajeczna.** Zmniejsz ogień i wlej roztrzepane jajka. Rozprowadź je równomiernie po patelni."
+        },
+        {
+          "tresc": "**Smażenie omletu.** Przykryj patelnię i smaż na małym ogniu około **4–5 minut**, aż masa jajeczna będzie prawie całkowicie ścięta."
+        },
+        {
+          "tresc": "**Złożenie omletu.** Złóż omlet na pół i pozostaw na patelni jeszcze około **1 minuty**."
+        },
+        {
+          "tresc": "**Podanie.** Podawaj od razu z pieczywem żytnim."
+        }
+      ]
+    }
+  ]
+}

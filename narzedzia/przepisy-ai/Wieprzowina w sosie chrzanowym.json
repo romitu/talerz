@@ -1,0 +1,234 @@
+{
+  "nazwa": "Wieprzowina w sosie chrzanowym",
+  "opis": "Wieprzowina duszona z marchewką, korzeniem pietruszki, selerem i porem. Wszystkie warzywa są blendowane z płynem z duszenia, tworząc bazę sosu wykończonego chrzanem, jogurtem greckim i koperkiem. Podawana z puree ziemniaczanym i fasolką szparagową.",
+  "pory": [
+    "obiad"
+  ],
+  "kuchnie": [
+    "polska"
+  ],
+  "rodzaje": [],
+  "porcjowanie": "waga",
+  "porcja_g": 816,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 3,
+  "czas_przygotowania_min": 20,
+  "czas_obrobki_min": 70,
+  "sprzet": [
+    "Garnek 3 l",
+    "Patelnia 24 cm",
+    "Tłuczek do ziemniaków",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Garnek 2 l",
+    "Rondel",
+    "Blender ręczny",
+    "Miska",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Mięso z sosem przechowuj w szczelnym pojemniku w lodówce do 3 dni. Puree i fasolkę najlepiej przechowywać osobno. Podgrzewaj sos na małym ogniu, bez doprowadzania do intensywnego wrzenia, żeby jogurt się nie zwarzył.",
+  "mozna_mrozic": false,
+  "ratunek": "Zbyt gęsty sos po zblendowaniu warzyw rozcieńcz niewielką ilością gorącej wody przed dodaniem jogurtu. Jogurt dodawaj stopniowo poza ogniem, po zahartowaniu. Jeśli chrzan jest mało wyczuwalny, końcową odmierzoną część dodaj po zdjęciu sosu z ognia.",
+  "skladniki": [
+    {
+      "nazwa": "Szynka wieprzowa chuda, surowa",
+      "ilosc": 130,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Ziemniaki, surowe",
+      "ilosc": 220,
+      "jednostka": "g",
+      "stan": "obrane"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 3,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "woda",
+      "ilosc": 150,
+      "jednostka": "ml",
+      "stan": "ilość początkowa do potrawy; w trakcie gotowania uzupełniaj tylko w razie potrzeby, zgodnie z instrukcją"
+    },
+    {
+      "nazwa": "Chrzan tarty",
+      "ilosc": 20,
+      "jednostka": "ml"
+    },
+    {
+      "nazwa": "Jogurt grecki naturalny 2%",
+      "ilosc": 70,
+      "jednostka": "ml"
+    },
+    {
+      "nazwa": "Fasolka szparagowa mrożona",
+      "ilosc": 150,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Pietruszka natka",
+      "ilosc": 5,
+      "jednostka": "g",
+      "stan": "posiekana"
+    },
+    {
+      "nazwa": "koperek świeży",
+      "ilosc": 5,
+      "jednostka": "g",
+      "stan": "posiekany"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 1,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 2,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Marchew, surowa",
+      "ilosc": 10,
+      "jednostka": "g",
+      "stan": "obrany korzeń, drobna kostka około 3–4 mm; do warzywnej bazy"
+    },
+    {
+      "nazwa": "Pietruszka korzeń",
+      "ilosc": 15,
+      "jednostka": "g",
+      "stan": "obrany korzeń, drobna kostka około 3–4 mm; do warzywnej bazy"
+    },
+    {
+      "nazwa": "Seler korzeń",
+      "ilosc": 10,
+      "jednostka": "g",
+      "stan": "obrany korzeń, drobna kostka około 3–4 mm; do warzywnej bazy"
+    },
+    {
+      "nazwa": "Por, surowy",
+      "ilosc": 20,
+      "jednostka": "g",
+      "stan": "biała i jasnozielona część, dokładnie wypłukana; cienkie półplasterki do bazy sosu"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 20,
+      "kroki": [
+        {
+          "tresc": "**Marchew.** Umyj, obierz i pokrój w drobną kostkę około 3–4 mm. Odłóż do przygotowania warzywnej bazy."
+        },
+        {
+          "tresc": "**Korzeń pietruszki.** Umyj, obierz i pokrój w drobną kostkę około 3–4 mm. Odłóż do przygotowania warzywnej bazy."
+        },
+        {
+          "tresc": "**Korzeń selera.** Umyj, obierz i pokrój w drobną kostkę około 3–4 mm. Odłóż do przygotowania warzywnej bazy."
+        },
+        {
+          "tresc": "**Por.** Białą i jasnozieloną część przekrój wzdłuż, dokładnie wypłucz ziemię spomiędzy warstw i pokrój w cienkie półplasterki."
+        },
+        {
+          "tresc": "**Ziemniaki.** Umyj i obierz ziemniaki. Pokrój na kawałki podobnej wielkości."
+        },
+        {
+          "tresc": "**Czosnek.** Obierz czosnek i przeciśnij przez praskę lub bardzo drobno posiekaj."
+        },
+        {
+          "tresc": "**Natka pietruszki.** Umyj i osusz natkę, usuń grube łodygi i drobno posiekaj liście."
+        },
+        {
+          "tresc": "**Koperek.** Umyj i osusz koperek, usuń grube łodygi i drobno posiekaj delikatne gałązki."
+        },
+        {
+          "tresc": "**Jogurt.** Odmierz jogurt i wyjmij z lodówki na czas przygotowania dania."
+        },
+        {
+          "tresc": "**Chrzan.** Odmierz chrzan i podziel na połowę: do gotowania i do wykończenia sosu."
+        },
+        {
+          "tresc": "**Wieprzowina.** Osusz mięso, pokrój na plastry grubości około 2 cm i lekko rozbij. Dopraw częścią soli i pieprzu."
+        },
+        {
+          "tresc": "**Po przygotowaniu mięsa.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surowym mięsem."
+        },
+        {
+          "tresc": "**Woda.** Odmierz wodę z listy składników do przygotowania potrawy."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
+        },
+        {
+          "tresc": "**Fasolka szparagowa.** Odmierz mrożoną fasolkę i pozostaw w zamrażarce do gotowania."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie mięsa, dodatków i sosu",
+      "minuty": 70,
+      "kroki": [
+        {
+          "tresc": "**Rozgrzanie oliwy.** Na patelni rozgrzej połowę oliwy przez **1 minutę**."
+        },
+        {
+          "tresc": "**Obsmażenie mięsa.** Obsmaż mięso krótko, około **1–2 minuty** z każdej strony, tylko do lekkiego zrumienienia."
+        },
+        {
+          "tresc": "**Zdjęcie mięsa.** Zdejmij z patelni."
+        },
+        {
+          "tresc": "**Soki ze smażenia.** Wlej odmierzoną wodę i mieszaj przez **1–2 minuty**, delikatnie odrywając z dna zrumienione pozostałości po smażeniu. Nie zeskrobuj czarnych, przypalonych fragmentów. Zachowaj cały płyn do duszenia mięsa."
+        },
+        {
+          "tresc": "**Rozgrzanie oliwy w rondlu.** W niewielkim rondlu z pokrywą rozgrzej pozostałą oliwę przez **1 minutę**."
+        },
+        {
+          "tresc": "**Warzywna baza sosu.** Dodaj drobno pokrojoną marchew, korzenie pietruszki i selera oraz por. Smaż na małym ogniu przez **4–5 minut**, mieszając. Warzywa mają zmięknąć z wierzchu, bez mocnego rumienienia."
+        },
+        {
+          "tresc": "**Czosnek.** Dodaj czosnek i smaż około **20–30 sekund**, nie dopuszczając do jego zrumienienia."
+        },
+        {
+          "tresc": "**Sos i mięso.** Do rondla z warzywami i czosnkiem wlej cały płyn z patelni. Dodaj mięso wraz z sokami z talerza i pierwszą część chrzanu. Doprowadź do łagodnego wrzenia przez około **2 minuty**."
+        },
+        {
+          "tresc": "**Duszenie wieprzowiny.** Duś pod przykryciem na bardzo małym ogniu przez **35–45 minut**. Sprawdź sos co **10–15 minut**; dolej trochę gorącej wody tylko wtedy, gdy nadmiernie gęstnieje lub przywiera. Jeśli mięso jest nadal twarde, duś dalej po **10 minut**."
+        },
+        {
+          "tresc": "**Ziemniaki — równolegle.** W czasie duszenia mięsa ugotuj ziemniaki w lekko osolonej wodzie do miękkości, około **15–20 minut**. Odcedź i utłucz na puree."
+        },
+        {
+          "tresc": "**Gotowanie fasolki.** Po odcedzeniu ziemniaków ugotuj fasolkę w zwolnionym garnku przez około **6–8 minut**, tak aby pozostała lekko jędrna. Odcedź."
+        },
+        {
+          "tresc": "**Wyjęcie mięsa.** Gdy mięso będzie miękkie, przełóż je na czysty talerz i przykryj. Sprawdź korzenie w sosie. Jeśli są jeszcze twarde, dogotowuj je bez mięsa po **3 minuty**, w razie potrzeby dolewając trochę gorącej wody.",
+          "sygnal": "korzenie łatwo rozgniatają się widelcem przed blendowaniem",
+          "uwaga": true
+        },
+        {
+          "tresc": "**Blendowanie warzyw.** Zdejmij rondel z ognia i zblenduj wszystkie warzywa z całym płynem na gładki sos. Trzymaj końcówkę blendera zanurzoną; przy małej ilości przelej sos do wąskiego naczynia do blendowania i po zblendowaniu przelej z powrotem do rondla."
+        },
+        {
+          "tresc": "**Konsystencja.** Sos powinien swobodnie spływać z łyżki. Jeśli jest zbyt gęsty, dodawaj po trochu gorącą wodę i mieszaj. Nie odcedzaj warzyw."
+        },
+        {
+          "tresc": "**Hartowanie jogurtu.** Do jogurtu stopniowo dodawaj trochę ciepłego sosu, mieszając do ogrzania i uzyskania jednolitej konsystencji. Wmieszaj zahartowany jogurt do rondla poza ogniem."
+        },
+        {
+          "tresc": "**Chrzan i koperek.** Dodaj pozostałą część chrzanu oraz koperek. Wymieszaj i spróbuj. Po dodaniu jogurtu i końcowej porcji chrzanu nie gotuj już sosu."
+        },
+        {
+          "tresc": "**Podanie.** Włóż mięso wraz z sokami z talerza do ciepłego sosu, wymieszaj delikatnie i podaj z puree oraz fasolką szparagową. Posyp natką pietruszki. Po dodaniu jogurtu nie zagotowuj sosu."
+        }
+      ]
+    }
+  ]
+}

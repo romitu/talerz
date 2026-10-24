@@ -1,0 +1,113 @@
+{
+  "nazwa": "Nocna owsianka z bananem i chia",
+  "opis": "Owsianka przygotowywana wieczorem. Wymaga co najmniej 6 godzin chłodzenia; praca zajmuje około 7 minut. Podany czas przygotowania obejmuje również oczekiwanie w lodówce. Ilości składników dobierz z listy dla przygotowywanej liczby porcji.",
+  "pory": [
+    "sniadanie"
+  ],
+  "kuchnie": [
+    "inna"
+  ],
+  "rodzaje": [
+    "na_slodko"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 386,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 2,
+  "czas_przygotowania_min": 367,
+  "czas_obrobki_min": 0,
+  "sprzet": [
+    "Miska",
+    "Widelec",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Przechowuj pod przykryciem w lodówce do 2 dni. Banana najlepiej dodaj przed jedzeniem. Lodówka: do 4°C.",
+  "mozna_mrozic": false,
+  "ratunek": "Za gęstą owsiankę rozcieńcz mlekiem. Zbyt rzadka zgęstnieje po dodaniu chia i kolejnych 15 minutach chłodzenia.",
+  "skladniki": [
+    {
+      "nazwa": "Płatki owsiane",
+      "ilosc": 55,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Mleko 2%",
+      "ilosc": 160,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Jogurt naturalny 2%",
+      "ilosc": 80,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Banan",
+      "ilosc": 0.5,
+      "jednostka": "szt",
+      "stan": "pokrojony w plasterki"
+    },
+    {
+      "nazwa": "Nasiona chia",
+      "ilosc": 15,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Masło orzechowe bez cukru",
+      "ilosc": 15,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cynamon mielony",
+      "ilosc": 1,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 4,
+      "kroki": [
+        {
+          "tresc": "**Banan.** Obierz banana i pokrój w plasterki. Przechowaj osobno w szczelnym pojemniku w lodówce do podania."
+        },
+        {
+          "tresc": "**Baza owsianki.** Odmierz płatki, mleko, jogurt, chia i cynamon."
+        },
+        {
+          "tresc": "**Masło orzechowe.** Odmierz masło orzechowe i odłóż do podania."
+        }
+      ]
+    },
+    {
+      "nazwa": "Mieszanie",
+      "minuty": 2,
+      "kroki": [
+        {
+          "tresc": "**Mieszanie owsianki.** Wymieszaj płatki, mleko, jogurt, chia i cynamon. Przykryj naczynie."
+        }
+      ]
+    },
+    {
+      "nazwa": "Chłodzenie",
+      "minuty": 360,
+      "kroki": [
+        {
+          "tresc": "**Chłodzenie owsianki.** Wstaw do lodówki na co najmniej **6 godzin**. Po około **10 minutach** ponownie wymieszaj, żeby rozbić skupiska chia.",
+          "sygnal": "płatki są miękkie, chia napęczniały",
+          "uwaga": true
+        }
+      ]
+    },
+    {
+      "nazwa": "Podanie",
+      "minuty": 1,
+      "kroki": [
+        {
+          "tresc": "**Podanie.** Wymieszaj owsiankę, dodaj przygotowanego banana i masło orzechowe."
+        }
+      ]
+    }
+  ]
+}

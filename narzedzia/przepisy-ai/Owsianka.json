@@ -1,0 +1,101 @@
+{
+  "nazwa": "Owsianka",
+  "opis": "Gęsta, sycąca owsianka z otrębami, siemieniem lnianym i orzechami włoskimi. Dostarcza dużo błonnika i dobrze sprawdza się jako pełne śniadanie.",
+  "pory": [
+    "sniadanie",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "inna"
+  ],
+  "rodzaje": [
+    "na_slodko"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 484,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 0,
+  "czas_przygotowania_min": 3,
+  "czas_obrobki_min": 12,
+  "sprzet": [
+    "Garnek 2 l",
+    "Miska"
+  ],
+  "przechowywanie": "Owsiankę jedz świeżą.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli owsianka jest za gęsta, dolej mleka albo wody. Jeśli jest za rzadka, gotuj chwilę dłużej — pamiętaj, że po dodaniu otrębów i siemienia lnianego jeszcze trochę zgęstnieje.",
+  "skladniki": [
+    {
+      "nazwa": "Płatki owsiane",
+      "ilosc": 85,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Mleko 2%",
+      "ilosc": 360,
+      "jednostka": "ml"
+    },
+    {
+      "nazwa": "Otręby owsiane",
+      "ilosc": 10,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Siemię lniane",
+      "ilosc": 10,
+      "jednostka": "g",
+      "stan": "mielone"
+    },
+    {
+      "nazwa": "Orzechy włoskie",
+      "ilosc": 17,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cynamon mielony",
+      "ilosc": 2,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 3,
+      "kroki": [
+        {
+          "tresc": "**Orzechy.** Odmierz orzechy włoskie i grubo posiekaj."
+        },
+        {
+          "tresc": "**Baza owsianki.** Odmierz mleko i płatki."
+        },
+        {
+          "tresc": "**Dodatki po gotowaniu.** Odmierz otręby, mielone siemię lniane i cynamon. Odłóż do wykończenia owsianki."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie owsianki",
+      "minuty": 10,
+      "kroki": [
+        {
+          "tresc": "**Gotowanie owsianki.** Płatki zalej mlekiem i gotuj na małym ogniu przez **7–10 minut**, często mieszając."
+        },
+        {
+          "tresc": "**Konsystencja.** Jeśli owsianka jest zbyt gęsta, dolej odrobinę wody. Jeśli jest zbyt rzadka, gotuj jeszcze **1–2 minuty**, mieszając i sprawdzając gęstość."
+        }
+      ]
+    },
+    {
+      "nazwa": "Wykończenie",
+      "minuty": 2,
+      "kroki": [
+        {
+          "tresc": "**Otręby i siemię.** Zdejmij owsiankę z ognia i wmieszaj otręby oraz mielone siemię lniane."
+        },
+        {
+          "tresc": "**Podanie.** Posyp cynamonem i orzechami włoskimi. Podawaj od razu."
+        }
+      ]
+    }
+  ]
+}

@@ -11,7 +11,7 @@
     "z_piekarnika"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 672.5,
+  "porcja_g": 673,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 2,
   "czas_przygotowania_min": 15,
@@ -89,13 +89,28 @@
       "minuty": 15,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Ziemniaki.** Umyj i obierz ziemniaki, pokrój na kawałki około 1,5–2 cm."
         },
         {
-          "tresc": "Umyj i obierz ziemniaki, marchew, pasternak i seler. Pokrój w kawałki około 1,5–2 cm, wymieszaj z większością oliwy, rozmarynem i częścią przypraw."
+          "tresc": "**Marchew.** Umyj i obierz marchew, pokrój na kawałki około 2 cm."
         },
         {
-          "tresc": "Przygotuj filety pstrąga, usuń ości, osusz; podana masa dotyczy części jadalnej bez ości. Natrzyj pozostałą oliwą i przyprawami. Umyj cytrynę i przygotuj sok z odmierzonej części. Umyj przybory po rybie."
+          "tresc": "**Pasternak.** Umyj i obierz pasternak, pokrój na kawałki około 2 cm."
+        },
+        {
+          "tresc": "**Seler korzeniowy.** Umyj i obierz seler, pokrój na kawałki około 2 cm."
+        },
+        {
+          "tresc": "**Cytryna.** Umyj cytrynę, wyciśnij sok i odmierz ilość wskazaną na liście składników."
+        },
+        {
+          "tresc": "**Warzywa do pieczenia.** Wymieszaj warzywa z większością odmierzonej oliwy, rozmarynem i częścią soli oraz pieprzu."
+        },
+        {
+          "tresc": "**Pstrąg.** Osusz filety i usuń ości. Podana masa dotyczy części jadalnej. Natrzyj resztą oliwy, soli i pieprzu."
+        },
+        {
+          "tresc": "**Po przygotowaniu ryby.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surową rybą."
         }
       ]
     },
@@ -104,18 +119,18 @@
       "minuty": 55,
       "kroki": [
         {
-          "tresc": "Rozgrzej piekarnik do 200°C, grzanie góra–dół, zwykle około 10 minut."
+          "tresc": "**Rozgrzanie piekarnika.** Rozgrzej piekarnik do **200°C**, grzanie góra–dół, zwykle około **10 minut**."
         },
         {
-          "tresc": "Rozłóż warzywa na blasze, piecz 25–30 minut i przemieszaj w połowie. Powinny być prawie miękkie przed dodaniem ryby."
+          "tresc": "**Pieczenie warzyw.** Rozłóż warzywa na blasze, piecz **25–30 minut** i przemieszaj w połowie. Powinny być prawie miękkie przed dodaniem ryby."
         },
         {
-          "tresc": "Dodaj filety i piecz 12–15 minut, zależnie od ich grubości. Gotową rybę zdejmij; twarde warzywa dopiecz osobno.",
+          "tresc": "**Pieczenie pstrąga.** Dodaj filety i piecz **12–15 minut**, zależnie od ich grubości. Gotową rybę zdejmij; twarde warzywa dopiecz osobno.",
           "sygnal": "ryba ma co najmniej 63°C, mięso rozdziela się widelcem",
           "uwaga": true
         },
         {
-          "tresc": "Skrop przygotowanym sokiem z cytryny i podaj."
+          "tresc": "**Podanie.** Skrop przygotowanym sokiem z cytryny i podaj."
         }
       ]
     }

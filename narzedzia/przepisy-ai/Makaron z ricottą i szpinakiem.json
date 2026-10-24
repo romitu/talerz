@@ -12,7 +12,7 @@
     "makaron"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 354.5,
+  "porcja_g": 355,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 2,
   "czas_przygotowania_min": 7,
@@ -82,10 +82,25 @@
       "minuty": 7,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Szpinak.** Umyj i odsącz szpinak. Usuń grube łodygi, duże liście porwij na mniejsze kawałki."
         },
         {
-          "tresc": "Umyj i odsącz szpinak. Obierz i posiekaj czosnek. Umyj cytrynę i odmierz sok. Przygotuj ricottę oraz makaron."
+          "tresc": "**Czosnek.** Obierz czosnek i drobno posiekaj."
+        },
+        {
+          "tresc": "**Cytryna.** Umyj cytrynę, wyciśnij sok i odmierz ilość wskazaną na liście składników."
+        },
+        {
+          "tresc": "**Makaron.** Odmierz makaron."
+        },
+        {
+          "tresc": "**Ricotta.** Odmierz ricottę."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól, pieprz i gałkę muszkatołową."
         }
       ]
     },
@@ -94,16 +109,28 @@
       "minuty": 20,
       "kroki": [
         {
-          "tresc": "Zagotuj wodę w garnku i ugotuj makaron przez czas wskazany na opakowaniu. Nastaw minutnik; w tym czasie przygotowuj sos na drugim palniku. Przed odcedzeniem zachowaj nieco wody z gotowania. Woda do gotowania jest dodatkowa i zostanie odlana."
+          "tresc": "**Makaron — równolegle.** Zagotuj wodę i wsyp makaron. Gotuj przez czas z opakowania. Nastaw minutnik; w tym czasie przygotowuj sos na drugim palniku."
         },
         {
-          "tresc": "Na ostatnie minuty gotowania makaronu rozgrzej oliwę na patelni przez 1 minutę. Dodaj czosnek, smaż 20–30 sekund."
+          "tresc": "**Makaron — po minutniku.** Sprawdź, czy makaron jest gotowy. Zachowaj trochę wody z gotowania, a następnie odcedź makaron. Zrób to po minutniku, niezależnie od postępu przygotowania sosu."
         },
         {
-          "tresc": "Dodaj szpinak i smaż 1–2 minuty, tylko do zwiędnięcia. Zmniejsz ogień, dodaj ricottę, gałkę i trochę wody z makaronu."
+          "tresc": "**Rozgrzanie oliwy.** Na ostatnie minuty gotowania makaronu rozgrzej oliwę na patelni przez **1 minutę**."
         },
         {
-          "tresc": "Dodaj makaron, wymieszaj na małym ogniu przez 1 minutę. Zdejmij z ognia, dodaj sok z cytryny, sól i pieprz."
+          "tresc": "**Czosnek.** Dodaj czosnek, smaż **20–30 sekund**."
+        },
+        {
+          "tresc": "**Szpinak.** Dodaj szpinak i smaż **1–2 minuty**, tylko do zwiędnięcia."
+        },
+        {
+          "tresc": "**Ricotta.** Zmniejsz ogień, dodaj ricottę, gałkę i trochę wody z makaronu."
+        },
+        {
+          "tresc": "**Połączenie makaronu.** Dodaj makaron, wymieszaj na małym ogniu przez **1 minutę**."
+        },
+        {
+          "tresc": "**Doprawienie.** Zdejmij z ognia, dodaj sok z cytryny, sól i pieprz."
         }
       ]
     }

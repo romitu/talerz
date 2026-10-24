@@ -1,0 +1,151 @@
+{
+  "nazwa": "Ryż z pieczarkami, szpinakiem i parmezanem",
+  "opis": "Ryż parboiled z pieczarkami, szpinakiem i parmezanem przygotowany w jednym garnku. Ziarna pozostają wyraźnie oddzielne; ser nadaje sosowi kremowość. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "inna"
+  ],
+  "rodzaje": [
+    "kasza_ryz"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 739,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 1,
+  "czas_przygotowania_min": 10,
+  "czas_obrobki_min": 38,
+  "sprzet": [
+    "Garnek 3 l",
+    "Tarka o drobnych oczkach",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Porcję z ugotowanym ryżem szybko schłodź w płytkim pojemniku i wstaw do lodówki, najlepiej w ciągu godziny. Przechowuj do 24 godzin. Odgrzewaj tylko raz, do gorącego środka całej porcji. Lodówka: do 4°C.",
+  "mozna_mrozic": false,
+  "ratunek": "Za suchy ryż podlej gorącym bulionem. Jeśli ryż jest twardy, gotuj dłużej na małym ogniu.",
+  "skladniki": [
+    {
+      "nazwa": "Ryż parboiled, suchy",
+      "ilosc": 80,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Pieczarki, surowe",
+      "ilosc": 180,
+      "jednostka": "g",
+      "stan": "pokrojone w plasterki"
+    },
+    {
+      "nazwa": "Szpinak, surowy",
+      "ilosc": 80,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Parmezan",
+      "ilosc": 25,
+      "jednostka": "g",
+      "stan": "drobno starty"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 60,
+      "jednostka": "g",
+      "stan": "posiekana"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Domowy bulion warzywny",
+      "ilosc": 300,
+      "jednostka": "g",
+      "stan": "gorący"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 8,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 10,
+      "kroki": [
+        {
+          "tresc": "**Pieczarki.** Oczyść pieczarki i pokrój w cienkie plasterki."
+        },
+        {
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
+        },
+        {
+          "tresc": "**Czosnek.** Obierz czosnek i drobno posiekaj."
+        },
+        {
+          "tresc": "**Szpinak.** Umyj i odsącz szpinak. Usuń grube łodygi, duże liście porwij na mniejsze kawałki."
+        },
+        {
+          "tresc": "**Parmezan.** Odmierz parmezan i drobno zetrzyj."
+        },
+        {
+          "tresc": "**Ryż.** Odmierz ryż."
+        },
+        {
+          "tresc": "**Bulion.** Odmierz bulion."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól i pieprz."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie ryżu z warzywami",
+      "minuty": 38,
+      "kroki": [
+        {
+          "tresc": "**Rozgrzanie oliwy.** Rozgrzej oliwę przez **1 minutę**."
+        },
+        {
+          "tresc": "**Cebula i pieczarki.** Smaż cebulę i pieczarki **7–9 minut**, aż płyn odparuje."
+        },
+        {
+          "tresc": "**Czosnek.** Dodaj czosnek i smaż **30 sekund**."
+        },
+        {
+          "tresc": "**Dodanie ryżu.** Dodaj ryż, wymieszaj przez **1 minutę**."
+        },
+        {
+          "tresc": "**Bulion.** Wlej bulion i doprowadź do wrzenia przez około **3 minuty**."
+        },
+        {
+          "tresc": "**Gotowanie ryżu.** Gotuj na małym ogniu pod uchyloną pokrywką przez czas z opakowania ryżu, orientacyjnie **15–20 minut**, mieszając co kilka minut. Jeśli ryż jeszcze twardy, uzupełniaj odparowany płyn gorącą wodą."
+        },
+        {
+          "tresc": "**Szpinak.** Na ostatnie **1–2 minuty** dodaj szpinak."
+        },
+        {
+          "tresc": "**Parmezan i doprawienie.** Gdy zwiędnie, zdejmij z ognia i wmieszaj parmezan. Dopraw solą i pieprzem."
+        }
+      ]
+    }
+  ]
+}

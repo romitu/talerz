@@ -12,7 +12,7 @@
     "kanapki"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 285.5,
+  "porcja_g": 286,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 0,
   "czas_przygotowania_min": 5,
@@ -74,10 +74,22 @@
       "minuty": 5,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Pomidor.** Umyj pomidory i pokrój w cienkie plastry. Osusz plasterki z nadmiaru wilgoci."
         },
         {
-          "tresc": "Umyj pomidora i szczypiorek, pokrój pomidora w plastry, szczypiorek posiekaj. Pokrój Goudę w plastry, przygotuj pieczywo i jogurt."
+          "tresc": "**Szczypiorek.** Umyj i osusz szczypiorek, następnie drobno posiekaj."
+        },
+        {
+          "tresc": "**Gouda.** Odmierz Goudę i pokrój w plastry."
+        },
+        {
+          "tresc": "**Jogurt.** Odmierz jogurt."
+        },
+        {
+          "tresc": "**Pieprz.** Odmierz pieprz."
+        },
+        {
+          "tresc": "**Pieczywo.** Przygotuj pieczywo w ilości wskazanej na liście składników."
         }
       ]
     },
@@ -86,10 +98,13 @@
       "minuty": 18,
       "kroki": [
         {
-          "tresc": "Zagotuj w garnku wodę przykrywającą jajka. Włóż je ostrożnie i gotuj przez 9–10 minut przy łagodnym wrzeniu, licząc od włożenia. Schłodź zimną wodą i obierz."
+          "tresc": "**Gotowanie jajek.** Zagotuj tyle wody, aby przykryła jajka. Ostrożnie włóż jajka i gotuj przy łagodnym wrzeniu przez **9–10 minut**, licząc od włożenia."
         },
         {
-          "tresc": "Pokrój obrane jajka w plastry.",
+          "tresc": "**Schłodzenie jajek.** Przełóż jajka do zimnej wody. Po schłodzeniu obierz."
+        },
+        {
+          "tresc": "**Krojenie jajek.** Pokrój obrane jajka w plastry.",
           "sygnal": "żółtka i białka są całkowicie ścięte"
         }
       ]
@@ -99,7 +114,7 @@
       "minuty": 2,
       "kroki": [
         {
-          "tresc": "Posmaruj pieczywo jogurtem. Ułóż Goudę, pomidora i jajka. Posyp szczypiorkiem i pieprzem."
+          "tresc": "**Składanie kanapek.** Posmaruj pieczywo jogurtem. Ułóż Goudę, pomidora i jajka. Posyp szczypiorkiem i pieprzem."
         }
       ]
     }

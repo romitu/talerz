@@ -3,9 +3,12 @@
  * — do poprawienia na zewnątrz i wgrania z powrotem przez generuj-import-ai.mjs.
  *
  *     node narzedzia/eksportuj-przepis.mjs "Zupa - Tajskie żółte curry z kurczakiem"
+ *     node narzedzia/eksportuj-przepis.mjs --wszystkie
+ *     node narzedzia/eksportuj-przepis.mjs --wszystkie --nadpisz
  *
  * Plik ląduje w narzedzia/przepisy-ai/<nazwa>.json. Istniejący plik nie jest
- * nadpisywany — trzeba go najpierw usunąć albo przenieść.
+ * nadpisywany — trzeba go najpierw usunąć albo przenieść, albo dodać
+ * `--nadpisz` (wtedy co zmieniło się w bazie, pokaże `git diff`).
  *
  * Logowanie jak w import-usda.mjs: TALERZ_EMAIL i TALERZ_HASLO z .env.local.
  */
@@ -20,6 +23,7 @@ import { sprawdzPrzepis } from './generuj-import-ai.mjs';
 import { wczytajEnv } from './import-usda.mjs';
 
 const FOLDER = join(dirname(fileURLToPath(import.meta.url)), 'przepisy-ai');
+const NADPISZ = process.argv.includes('--nadpisz');
 
 /** Pomija puste pola nieobowiązkowe, żeby JSON był czytelny. */
 const jesli = (pole, wartosc) => (wartosc === null || wartosc === undefined || wartosc === '' ? {} : { [pole]: wartosc });
@@ -59,10 +63,37 @@ export function doPliku(p, skladniki, etapy) {
   };
 }
 
+/** Nazwa pliku bez znaków, których Windows nie przyjmie. */
+const nazwaPliku = (nazwa) => `${nazwa.replace(/[<>:"/\\|?*]/g, '-').trim()}.json`;
+
+/** Zapisuje jeden przepis. Zwraca 'zapisany' albo 'istnieje'. */
+async function eksportuj(supabase, p) {
+  const sciezka = join(FOLDER, nazwaPliku(p.nazwa));
+  if (!NADPISZ && existsSync(sciezka)) return 'istnieje';
+
+  const [{ data: skladniki, error: b1 }, { data: etapy, error: b2 }] = await Promise.all([
+    supabase.from('przepis_skladniki').select('*, skladniki(nazwa)').eq('przepis_id', p.id).order('kolejnosc'),
+    supabase.from('etapy').select('*, kroki(*)').eq('przepis_id', p.id).order('kolejnosc'),
+  ]);
+  if (b1 || b2) throw new Error(`${p.nazwa}: nie udało się pobrać składników albo etapów: ${(b1 ?? b2).message}`);
+
+  const plik = doPliku(p, skladniki, etapy);
+  const bledy = sprawdzPrzepis(structuredClone(plik));
+  if (bledy.length > 0) {
+    console.log(`Uwaga — „${p.nazwa}” w tej postaci import nie przyjmie, popraw przy edycji:`);
+    bledy.forEach((b) => console.log('  !', b));
+  }
+
+  writeFileSync(sciezka, JSON.stringify(plik, null, 2) + '\n');
+  return 'zapisany';
+}
+
 async function main() {
+  const wszystkie = process.argv.includes('--wszystkie');
   const nazwa = process.argv.slice(2).find((a) => !a.startsWith('--'));
-  if (!nazwa) {
+  if (!nazwa && !wszystkie) {
     console.error('Podaj nazwę przepisu: node narzedzia/eksportuj-przepis.mjs "Nazwa"');
+    console.error('albo wszystkie naraz:  node narzedzia/eksportuj-przepis.mjs --wszystkie [--nadpisz]');
     process.exit(1);
   }
 
@@ -84,44 +115,30 @@ async function main() {
     process.exit(1);
   }
 
-  const { data: znalezione, error: bladPrzepisu } = await supabase
-    .from('przepisy')
-    .select('*')
-    .ilike('nazwa', nazwa);
+  let zapytanie = supabase.from('przepisy').select('*').order('nazwa');
+  if (!wszystkie) zapytanie = zapytanie.ilike('nazwa', nazwa);
+  const { data: znalezione, error: bladPrzepisu } = await zapytanie;
   if (bladPrzepisu) {
     console.error('Nie udało się pobrać przepisu:', bladPrzepisu.message);
     process.exit(1);
   }
-  if (znalezione.length !== 1) {
+  if (!wszystkie && znalezione.length !== 1) {
     console.error(`Przepisów o nazwie „${nazwa}”: ${znalezione.length}. Potrzebny dokładnie jeden.`);
     process.exit(1);
   }
-  const p = znalezione[0];
 
-  const [{ data: skladniki, error: b1 }, { data: etapy, error: b2 }] = await Promise.all([
-    supabase.from('przepis_skladniki').select('*, skladniki(nazwa)').eq('przepis_id', p.id).order('kolejnosc'),
-    supabase.from('etapy').select('*, kroki(*)').eq('przepis_id', p.id).order('kolejnosc'),
-  ]);
-  if (b1 || b2) {
-    console.error('Nie udało się pobrać składników albo etapów:', (b1 ?? b2).message);
-    process.exit(1);
+  const pominiete = [];
+  let zapisanych = 0;
+  for (const p of znalezione) {
+    if ((await eksportuj(supabase, p)) === 'istnieje') pominiete.push(p.nazwa);
+    else zapisanych++;
   }
 
-  const plik = doPliku(p, skladniki, etapy);
-  const bledy = sprawdzPrzepis(structuredClone(plik));
-  if (bledy.length > 0) {
-    console.log('Uwaga — w tej postaci import go nie przyjmie, popraw przy edycji:');
-    bledy.forEach((b) => console.log('  !', b));
+  console.log(`Zapisano: ${zapisanych} w ${FOLDER}`);
+  if (pominiete.length > 0) {
+    console.log(`Pominięte, bo plik już istnieje (${pominiete.length}) — usuń albo przenieś, żeby wyjąć ponownie:`);
+    pominiete.forEach((n) => console.log('  -', n));
   }
-
-  const sciezka = join(FOLDER, `${p.nazwa}.json`);
-  if (existsSync(sciezka)) {
-    console.error(`Plik już istnieje: ${sciezka}`);
-    process.exit(1);
-  }
-  writeFileSync(sciezka, JSON.stringify(plik, null, 2) + '\n');
-  console.log(`Zapisano: ${sciezka}`);
-  console.log(`Składników: ${plik.skladniki.length}, etapów: ${plik.etapy.length}`);
 }
 
 main();

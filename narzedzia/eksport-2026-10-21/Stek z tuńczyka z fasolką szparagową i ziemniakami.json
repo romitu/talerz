@@ -1,0 +1,127 @@
+{
+  "nazwa": "Stek z tuńczyka z fasolką szparagową i ziemniakami",
+  "opis": "Krótko smażony stek z tuńczyka z fasolką szparagową i gotowanymi ziemniakami. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
+  "pory": [
+    "obiad"
+  ],
+  "kuchnie": [
+    "srodziemnomorska"
+  ],
+  "rodzaje": [],
+  "porcjowanie": "waga",
+  "porcja_g": 642,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 1,
+  "czas_przygotowania_min": 10,
+  "czas_obrobki_min": 38,
+  "sprzet": [
+    "Patelnia 28 cm",
+    "Garnek 3 l",
+    "Garnek 2 l",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna",
+    "Durszlak",
+    "Termometr do mięsa"
+  ],
+  "przechowywanie": "Najlepiej zjedz od razu. Ewentualną pozostałość przechowuj w lodówce do 1 dnia. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli tuńczyk jest przesmażony, pokrój go cienko i skrop oliwą z cytryną. Twardą fasolkę gotuj dłużej.",
+  "skladniki": [
+    {
+      "nazwa": "Tuńczyk świeży, surowy",
+      "ilosc": 180,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Fasolka szparagowa, surowa",
+      "ilosc": 180,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Ziemniaki, surowe",
+      "ilosc": 250,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 10,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cytryna",
+      "ilosc": 15,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 1,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 10,
+      "kroki": [
+        {
+          "tresc": "**Ziemniaki.** Umyj i obierz ziemniaki, pokrój w kostkę około 2 cm."
+        },
+        {
+          "tresc": "**Fasolka szparagowa.** Umyj fasolkę i odetnij końcówki."
+        },
+        {
+          "tresc": "**Czosnek.** Obierz czosnek i drobno posiekaj."
+        },
+        {
+          "tresc": "**Cytryna.** Umyj cytrynę, wyciśnij sok i odmierz ilość wskazaną na liście składników."
+        },
+        {
+          "tresc": "**Sos cytrynowy.** Wymieszaj sok z cytryny z połową oliwy i czosnkiem."
+        },
+        {
+          "tresc": "**Tuńczyk.** Osusz stek grubości około 2 cm. Posmaruj pozostałą oliwą i dopraw solą oraz pieprzem."
+        },
+        {
+          "tresc": "**Po przygotowaniu ryby.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surową rybą."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie dodatków i smażenie",
+      "minuty": 38,
+      "kroki": [
+        {
+          "tresc": "**Gotowanie ziemniaków.** Zalej ziemniaki wodą, zagotuj przez około **5 minut** i gotuj **15–20 minut** do miękkości. Odcedź i przykryj."
+        },
+        {
+          "tresc": "**Fasolka — równolegle.** Równolegle zagotuj wodę w drugim garnku. Dodaj fasolkę, gotuj **8–12 minut** do miękkości, zachowując lekki opór przy gryzieniu; odcedź."
+        },
+        {
+          "tresc": "**Rozgrzanie patelni.** Gdy zwolni się palnik, rozgrzej patelnię przez **1–2 minuty**."
+        },
+        {
+          "tresc": "**Smażenie tuńczyka.** Smaż tuńczyka około **3 minuty** z każdej strony."
+        },
+        {
+          "tresc": "**Sprawdzenie ryby.** Sprawdź temperaturę najgrubszego miejsca; w razie potrzeby dosmaż po **1 minucie** na mniejszym ogniu.",
+          "sygnal": "ryba ma co najmniej 63°C, bez surowego środka",
+          "uwaga": true
+        },
+        {
+          "tresc": "**Podanie.** Polej ziemniaki oraz fasolkę przygotowaną oliwą z cytryną i czosnkiem, podaj z tuńczykiem."
+        }
+      ]
+    }
+  ]
+}

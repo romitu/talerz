@@ -1,0 +1,193 @@
+{
+  "nazwa": "Sałatka ziemniaczana z tuńczykiem i jajkiem",
+  "opis": "Kremowa sałatka ziemniaczana z tuńczykiem, jajkiem i ogórkiem kiszonym w lekkim sosie jogurtowo-musztardowym. Dzięki ziemniakom, jajku i sosowi smak tuńczyka jest łagodniejszy i dobrze łączy się z pozostałymi składnikami.",
+  "pory": [
+    "kolacja",
+    "sniadanie"
+  ],
+  "kuchnie": [
+    "srodziemnomorska"
+  ],
+  "rodzaje": [
+    "salatka"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 640,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 2,
+  "czas_przygotowania_min": 5,
+  "czas_obrobki_min": 29,
+  "sprzet": [
+    "Garnek 2 l",
+    "Miska",
+    "Nóż szefa kuchni",
+    "Deska do krojenia"
+  ],
+  "przechowywanie": "Przechowuj w szczelnym pojemniku w lodówce do 2 dni. Nie nadaje się do mrożenia.",
+  "mozna_mrozic": false,
+  "ratunek": "Puściła wodę — odlej i dopraw na nowo. Za kwaśna — łyżka oliwy zbalansuje.",
+  "skladniki": [
+    {
+      "nazwa": "Tuńczyk w wodzie, odsączony",
+      "ilosc": 100,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Jaja kurze, całe, surowe",
+      "ilosc": 1,
+      "jednostka": "szt"
+    },
+    {
+      "nazwa": "Cebula czerwona, surowa",
+      "ilosc": 30,
+      "jednostka": "g",
+      "stan": "w cienkich piórkach"
+    },
+    {
+      "nazwa": "Cytryna",
+      "ilosc": 20,
+      "jednostka": "g",
+      "stan": "sok"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Chleb żytni razowy",
+      "ilosc": 2,
+      "jednostka": "szt"
+    },
+    {
+      "nazwa": "Ziemniaki, surowe",
+      "ilosc": 200,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "ogórki kiszone bio",
+      "ilosc": 80,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Jogurt grecki naturalny 2%",
+      "ilosc": 60,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Musztarda",
+      "ilosc": 10,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Szczypiorek świeży",
+      "ilosc": 8,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 1,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 5,
+      "kroki": [
+        {
+          "tresc": "**Ziemniaki.** Umyj i obierz ziemniaki, pokrój w kostkę około 2 cm."
+        },
+        {
+          "tresc": "**Ogórek kiszony.** Odsącz ogórki kiszone i pokrój w drobną kostkę."
+        },
+        {
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
+        },
+        {
+          "tresc": "**Szczypiorek.** Umyj i osusz szczypiorek, następnie drobno posiekaj."
+        },
+        {
+          "tresc": "**Tuńczyk.** Odsącz tuńczyka i lekko rozdrobnij widelcem. Odmierz po odsączeniu."
+        },
+        {
+          "tresc": "**Cytryna.** Umyj cytrynę, wyciśnij sok i odmierz ilość wskazaną na liście składników."
+        },
+        {
+          "tresc": "**Jogurt.** Odmierz jogurt."
+        },
+        {
+          "tresc": "**Musztarda.** Odmierz musztardę."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól i pieprz."
+        },
+        {
+          "tresc": "**Pieczywo.** Przygotuj pieczywo w ilości wskazanej na liście składników."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie ziemniaków i jajka",
+      "minuty": 15,
+      "kroki": [
+        {
+          "tresc": "**Gotowanie ziemniaków.** Ziemniaki ugotuj w lekko osolonej wodzie przez około **10–12 minut**. Powinny być miękkie, ale nadal zwarte i nie mogą się rozpadać."
+        },
+        {
+          "tresc": "**Jajka — równolegle.** Równolegle zagotuj wodę w drugim garnku, ostrożnie włóż jajka i gotuj przez **9 minut** od włożenia, przy łagodnym wrzeniu."
+        },
+        {
+          "tresc": "**Krojenie jajek.** Jajko ostudź, obierz i pokrój w większą kostkę."
+        },
+        {
+          "tresc": "**Studzenie ziemniaków.** Ugotowane ziemniaki odcedź i rozłóż na talerzu i pozostaw na około **5 minut** do przestudzenia."
+        }
+      ]
+    },
+    {
+      "nazwa": "Przygotowanie sosu",
+      "minuty": 7,
+      "kroki": [
+        {
+          "tresc": "**Sos jogurtowy.** Jogurt grecki wymieszaj z musztardą, oliwą i częścią soku z cytryny."
+        },
+        {
+          "tresc": "**Pieprz.** Dodaj pieprz i spróbuj."
+        },
+        {
+          "tresc": "**Sok z cytryny.** Jeśli sos potrzebuje więcej świeżości, stopniowo dodawaj pozostały sok z cytryny. Z solą poczekaj do końca, ponieważ tuńczyk, musztarda i ogórek kiszony są już słone."
+        }
+      ]
+    },
+    {
+      "nazwa": "Połączenie sałatki",
+      "minuty": 7,
+      "kroki": [
+        {
+          "tresc": "**Warzywa i tuńczyk.** Do miski włóż ziemniaki, ogórka kiszonego, cebulę i tuńczyka."
+        },
+        {
+          "tresc": "**Sos.** Dodaj przygotowany sos i delikatnie wymieszaj, żeby nie rozgnieść ziemniaków."
+        },
+        {
+          "tresc": "**Jajka i szczypiorek.** Dodaj jajko oraz szczypiorek i jeszcze raz delikatnie wymieszaj."
+        },
+        {
+          "tresc": "**Doprawienie.** Spróbuj i w razie potrzeby dopraw pieprzem lub niewielką ilością soli."
+        },
+        {
+          "tresc": "**Podanie.** Podawaj z pieczywem żytnim. Sałatkę można jeść od razu, ale najlepiej smakuje po około **15–30 minutach** w lodówce"
+        }
+      ]
+    }
+  ]
+}

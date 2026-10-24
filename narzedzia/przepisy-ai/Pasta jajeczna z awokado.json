@@ -1,0 +1,136 @@
+{
+  "nazwa": "Pasta jajeczna z awokado",
+  "opis": "Kremowa pasta z jajek, awokado i jogurtu greckiego, podawana na żytnim pieczywie z rzodkiewką i szczypiorkiem.",
+  "pory": [
+    "sniadanie",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "inna"
+  ],
+  "rodzaje": [
+    "jajka",
+    "kanapki"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 424,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 0,
+  "czas_przygotowania_min": 5,
+  "czas_obrobki_min": 20,
+  "sprzet": [
+    "Garnek 2 l",
+    "Miska",
+    "Widelec",
+    "Nóż szefa kuchni",
+    "Deska do krojenia"
+  ],
+  "przechowywanie": "Pastę przechowuj w szczelnym pojemniku w lodówce do 2 dni. Sok z cytryny ograniczy ciemnienie awokado. Kanapki najlepiej składać bezpośrednio przed jedzeniem.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli pasta ściemniała, usuń utlenioną wierzchnią warstwę. Jeśli jest za sucha, dodaj niewielką ilość jogurtu.",
+  "skladniki": [
+    {
+      "nazwa": "Jaja kurze, całe, surowe",
+      "ilosc": 2,
+      "jednostka": "szt"
+    },
+    {
+      "nazwa": "Awokado",
+      "ilosc": 50,
+      "jednostka": "g",
+      "stan": "obrane, bez pestki"
+    },
+    {
+      "nazwa": "Chleb żytni razowy",
+      "ilosc": 3,
+      "jednostka": "szt"
+    },
+    {
+      "nazwa": "Jogurt grecki naturalny 2%",
+      "ilosc": 80,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Szczypiorek świeży",
+      "ilosc": 8,
+      "jednostka": "g",
+      "stan": "posiekany"
+    },
+    {
+      "nazwa": "Rzodkiewka, surowa",
+      "ilosc": 60,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cytryna",
+      "ilosc": 10,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 5,
+      "kroki": [
+        {
+          "tresc": "**Szczypiorek.** Umyj i osusz szczypiorek, następnie drobno posiekaj."
+        },
+        {
+          "tresc": "**Rzodkiewka.** Umyj rzodkiewki, usuń końcówki i pokrój w cienkie półplasterki."
+        },
+        {
+          "tresc": "**Cytryna.** Umyj cytrynę, wyciśnij sok i odmierz ilość wskazaną na liście składników."
+        },
+        {
+          "tresc": "**Jogurt.** Odmierz jogurt."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól i pieprz."
+        },
+        {
+          "tresc": "**Pieczywo.** Przygotuj pieczywo w ilości wskazanej na liście składników."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie jajek",
+      "minuty": 12,
+      "kroki": [
+        {
+          "tresc": "**Gotowanie jajek.** Zagotuj wodę, ostrożnie włóż jajka i gotuj na twardo przez **9 minut** od włożenia, przy łagodnym wrzeniu."
+        },
+        {
+          "tresc": "**Schłodzenie jajek.** Po ugotowaniu przełóż jajka do zimnej wody, ostudź i obierz."
+        }
+      ]
+    },
+    {
+      "nazwa": "Przygotowanie pasty i kanapek",
+      "minuty": 8,
+      "kroki": [
+        {
+          "tresc": "**Jogurt i przyprawy.** Dodaj jogurt grecki. Dopraw solą i pieprzem."
+        },
+        {
+          "tresc": "**Jajka i szczypiorek.** Ugotowane jajka drobno posiekaj lub rozgnieć widelcem. Dodaj do pasty razem ze szczypiorkiem i delikatnie wymieszaj."
+        },
+        {
+          "tresc": "**Pasta na pieczywo.** Pastę równomiernie rozsmaruj na przygotowanym pieczywie."
+        },
+        {
+          "tresc": "**Rzodkiewka i podanie.** Dodaj plasterki rzodkiewki i podawaj od razu."
+        }
+      ]
+    }
+  ]
+}

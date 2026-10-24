@@ -1,0 +1,156 @@
+{
+  "nazwa": "Sałatka z ciecierzycy",
+  "opis": "Świeża sałatka z ciecierzycy, pomidora, ogórka i cebuli z natką pietruszki oraz dressingiem cytrynowo-oliwnym. Lekki, bogaty w błonnik dodatek do obiadu lub kolacji.",
+  "pory": [
+    "dodatek"
+  ],
+  "kuchnie": [
+    "srodziemnomorska"
+  ],
+  "rodzaje": [
+    "salatka"
+  ],
+  "porcjowanie": "sztuki",
+  "porcje": 1,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 2,
+  "czas_przygotowania_min": 10,
+  "czas_obrobki_min": 65,
+  "sprzet": [
+    "Miska",
+    "Deska do krojenia",
+    "Nóż szefa kuchni",
+    "Durszlak",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Przechowuj w szczelnym pojemniku w lodówce do 2 dni. Jeżeli sałatka puści dużo wody, przed podaniem odlej nadmiar płynu i ponownie wymieszaj.",
+  "mozna_mrozic": false,
+  "ratunek": "Wodnista — odlej płyn i dosyp garść ugotowanej ciecierzycy. Mdła — dodaj sok z cytryny, nie sól.",
+  "skladniki": [
+    {
+      "nazwa": "Ciecierzyca, sucha",
+      "ilosc": 40,
+      "jednostka": "g",
+      "stan": "namoczona przez noc"
+    },
+    {
+      "nazwa": "woda",
+      "ilosc": 300,
+      "jednostka": "g",
+      "stan": "wchłonięta podczas gotowania"
+    },
+    {
+      "nazwa": "Pomidory, surowe",
+      "ilosc": 100,
+      "jednostka": "g",
+      "stan": "w kostce, bez gniazd nasiennych"
+    },
+    {
+      "nazwa": "Ogórek, surowy",
+      "ilosc": 100,
+      "jednostka": "g",
+      "stan": "w kostce"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 30,
+      "jednostka": "g",
+      "stan": "posiekana bardzo drobno"
+    },
+    {
+      "nazwa": "Pietruszka natka",
+      "ilosc": 8,
+      "jednostka": "g",
+      "stan": "posiekana"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 8,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cytryna",
+      "ilosc": 20,
+      "jednostka": "g",
+      "stan": "sam sok"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 10,
+      "kroki": [
+        {
+          "tresc": "**Ciecierzyca — poprzedniego dnia.** Odmierz suchą ciecierzycę. Zalej dużą ilością zimnej wody i mocz przez **8–12 godzin**. Ten czas trzeba doliczyć przed przygotowaniem posiłku."
+        },
+        {
+          "tresc": "**Ciecierzyca po namoczeniu.** Odlej wodę z moczenia i przepłucz ciecierzycę na sitku."
+        },
+        {
+          "tresc": "**Pomidory.** Umyj pomidory, usuń wodniste gniazda nasienne i pokrój miąższ w kostkę. Dzięki temu sałatka nie będzie wodnista.",
+          "uwaga": true
+        },
+        {
+          "tresc": "**Ogórek.** Umyj ogórek i pokrój w kostkę.",
+          "uwaga": true
+        },
+        {
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
+        },
+        {
+          "tresc": "**Natka pietruszki.** Umyj i osusz natkę, usuń grube łodygi i drobno posiekaj liście."
+        },
+        {
+          "tresc": "**Cytryna.** Umyj cytrynę, wyciśnij sok i odmierz ilość wskazaną na liście składników."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
+        },
+        {
+          "tresc": "**Sól.** Odmierz sól."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie ciecierzycy",
+      "minuty": 45,
+      "kroki": [
+        {
+          "tresc": "**Woda do gotowania.** Namoczoną i przepłukaną ciecierzycę przełóż do garnka i zalej świeżą wodą tak, aby znajdowała się kilka centymetrów ponad ziarnami."
+        },
+        {
+          "tresc": "**Gotowanie ciecierzycy.** Doprowadź do wrzenia, zmniejsz ogień i gotuj około **45 minut** od zagotowania. Jeśli po tym czasie ciecierzyca jest jeszcze twarda, dogotowuj po **10 minut**, kontrolując miękkość i uzupełniając odparowaną wodę.",
+          "sygnal": "ziarna są miękkie, dają się łatwo rozgnieść, ale zachowują kształt",
+          "uwaga": true
+        },
+        {
+          "tresc": "**Sprawdzenie miękkości.** Gotowe ziarno powinno łatwo rozgniatać się między palcami."
+        },
+        {
+          "tresc": "**Studzenie.** Odcedź ciecierzycę i pozostaw do ostygnięcia."
+        }
+      ]
+    },
+    {
+      "nazwa": "Połączenie sałatki",
+      "minuty": 20,
+      "kroki": [
+        {
+          "tresc": "**Ciecierzyca i warzywa.** Ostudzoną ciecierzycę przełóż do miski i dodaj przygotowane warzywa oraz natkę pietruszki."
+        },
+        {
+          "tresc": "**Doprawienie.** Dodaj oliwę i sok z cytryny. Dopraw solą i dokładnie wymieszaj."
+        },
+        {
+          "tresc": "**Odstawienie sałatki.** Odstaw sałatkę na około **15 minut**, aby smaki się połączyły, a cebula nieco złagodniała.",
+          "sygnal": "cebula traci ostrość"
+        }
+      ]
+    }
+  ]
+}

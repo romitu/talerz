@@ -67,10 +67,19 @@
       "minuty": 5,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Pomidor.** Umyj pomidory i pokrój w cienkie plastry. Osusz plasterki z nadmiaru wilgoci."
         },
         {
-          "tresc": "Umyj pomidora i bazylię, osusz. Mozzarellę odsącz, pokrój w cienkie plastry. Pokrój pomidora cienko, osusz plasterki. Przygotuj pieczywo."
+          "tresc": "**Bazylia.** Umyj i osusz bazylię, oderwij liście od łodyg."
+        },
+        {
+          "tresc": "**Mozzarella.** Odsącz mozzarellę i pokrój w plastry."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól i pieprz."
+        },
+        {
+          "tresc": "**Pieczywo.** Przygotuj pieczywo w ilości wskazanej na liście składników."
         }
       ]
     },
@@ -79,16 +88,16 @@
       "minuty": 10,
       "kroki": [
         {
-          "tresc": "Rozgrzej grill kontaktowy zgodnie z instrukcją urządzenia, zwykle około 3 minut."
+          "tresc": "**Rozgrzanie grilla.** Rozgrzej grill kontaktowy zgodnie z instrukcją urządzenia, zwykle około **3 minut**."
         },
         {
-          "tresc": "Na dolnych kromkach rozłóż mozzarellę, pomidora i bazylię. Dopraw solą oraz pieprzem i przykryj pozostałymi kromkami."
+          "tresc": "**Składanie tostów.** Na dolnych kromkach rozłóż mozzarellę, pomidora i bazylię. Dopraw solą oraz pieprzem i przykryj pozostałymi kromkami."
         },
         {
-          "tresc": "Opiekaj w rozgrzanym grillu przez 3–5 minut, aż ser się roztopi, a chleb zrumieni. Większą ilość opiekaj partiami."
+          "tresc": "**Opiekanie.** Opiekaj w rozgrzanym grillu przez **3–5 minut**, aż ser się roztopi, a chleb zrumieni. Większą ilość opiekaj partiami."
         },
         {
-          "tresc": "Odczekaj 1 minutę, przekrój i podaj."
+          "tresc": "**Podanie.** Odczekaj **1 minutę**, przekrój i podaj."
         }
       ]
     }

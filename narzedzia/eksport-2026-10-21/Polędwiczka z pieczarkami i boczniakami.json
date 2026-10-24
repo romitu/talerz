@@ -1,0 +1,175 @@
+{
+  "nazwa": "Polędwiczka z pieczarkami i boczniakami",
+  "opis": "Delikatna polędwiczka wieprzowa z pieczarkami i boczniakami w lekkim sosie jogurtowym z tymiankiem. Podawana z kaszą gryczaną i kapustą kiszoną.",
+  "pory": [
+    "obiad"
+  ],
+  "kuchnie": [
+    "polska"
+  ],
+  "rodzaje": [],
+  "porcjowanie": "waga",
+  "porcja_g": 649,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 3,
+  "czas_przygotowania_min": 10,
+  "czas_obrobki_min": 25,
+  "sprzet": [
+    "Patelnia 28 cm",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Garnek 2 l",
+    "Sitko",
+    "Miska",
+    "Termometr do mięsa"
+  ],
+  "przechowywanie": "Przechowuj w lodówce do 3 dni. Kaszę najlepiej przechowywać osobno. Dania nie polecałbym do mrożenia ze względu na sos jogurtowy.",
+  "mozna_mrozic": false,
+  "ratunek": "Mięso wyszło suche — przesmażone; następnym razem 2–3 minuty z każdej strony i koniec. Sos się zwarzył — zdejmij z ognia przed jogurtem.",
+  "skladniki": [
+    {
+      "nazwa": "Polędwiczka wieprzowa, surowa",
+      "ilosc": 100,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Pieczarki, surowe",
+      "ilosc": 100,
+      "jednostka": "g",
+      "stan": "w plastrach"
+    },
+    {
+      "nazwa": "Boczniaki, surowe",
+      "ilosc": 100,
+      "jednostka": "g",
+      "stan": "porwane na paski"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 50,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 3,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Kapusta kiszona",
+      "ilosc": 100,
+      "jednostka": "g",
+      "stan": "odciśnięta"
+    },
+    {
+      "nazwa": "Jogurt grecki naturalny 2%",
+      "ilosc": 50,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Domowy bulion warzywny",
+      "ilosc": 80,
+      "jednostka": "ml"
+    },
+    {
+      "nazwa": "Kasza gryczana, sucha",
+      "ilosc": 60,
+      "jednostka": "g",
+      "stan": "sucha, ugotowana osobno"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Tymianek suszony",
+      "ilosc": 1,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 10,
+      "kroki": [
+        {
+          "tresc": "**Pieczarki.** Oczyść pieczarki i pokrój w cienkie plasterki."
+        },
+        {
+          "tresc": "**Boczniaki.** Oczyść boczniaki i porwij na paski."
+        },
+        {
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
+        },
+        {
+          "tresc": "**Czosnek.** Obierz czosnek i przeciśnij przez praskę lub bardzo drobno posiekaj."
+        },
+        {
+          "tresc": "**Kapusta kiszona.** Odciśnij kapustę kiszoną i odłóż do podania jako surówkę."
+        },
+        {
+          "tresc": "**Jogurt.** Odmierz jogurt i wyjmij z lodówki na czas przygotowania dania."
+        },
+        {
+          "tresc": "**Polędwiczka.** Osusz polędwiczkę, usuń twardą błonę i pokrój na medaliony grubości około 2 cm."
+        },
+        {
+          "tresc": "**Po przygotowaniu mięsa.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surowym mięsem."
+        },
+        {
+          "tresc": "**Kasza gryczana.** Odmierz kaszę gryczaną."
+        },
+        {
+          "tresc": "**Bulion.** Odmierz bulion."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz tymianek."
+        }
+      ]
+    },
+    {
+      "nazwa": "Polędwiczka z sosem grzybowym",
+      "minuty": 25,
+      "kroki": [
+        {
+          "tresc": "**Kasza — równolegle.** Na pierwszym palniku ugotuj odmierzoną kaszę gryczaną według opakowania. Nastaw minutnik; podczas gotowania przygotowuj mięso na drugim palniku. Po ugotowaniu odcedź kaszę i przykryj."
+        },
+        {
+          "tresc": "**Rozgrzanie oliwy.** Rozgrzej oliwę na patelni przez około **1 minutę**."
+        },
+        {
+          "tresc": "**Obsmażenie polędwiczki.** Smaż medaliony przez **1,5–2 minuty** z każdej strony na dość dużym ogniu. Przełóż na talerz; mięso dokończy gotowanie w sosie."
+        },
+        {
+          "tresc": "**Cebula.** Na tej samej patelni smaż cebulę przez **2 minuty**."
+        },
+        {
+          "tresc": "**Grzyby.** Dodaj pieczarki i boczniaki. Smaż przez **5–7 minut**, aż grzyby zmiękną i większość wody odparuje."
+        },
+        {
+          "tresc": "**Czosnek i tymianek.** Dodaj czosnek i tymianek. Smaż przez **30 sekund**, mieszając."
+        },
+        {
+          "tresc": "**Bulion.** Wlej bulion, wymieszaj i zagotuj. Gotuj przez **2–3 minuty**."
+        },
+        {
+          "tresc": "**Dokończenie mięsa.** Włóż polędwiczkę do sosu i podgrzewaj łagodnie przez **1–2 minuty**. Sprawdź temperaturę najgrubszego medalionu: co najmniej **63°C**. W razie potrzeby dogotowuj po **1 minucie**.",
+          "sygnal": "temperatura w środku najgrubszego medalionu wynosi co najmniej 63°C",
+          "uwaga": true
+        },
+        {
+          "tresc": "**Odpoczynek mięsa.** Przełóż mięso na czysty talerz i pozostaw na co najmniej **3 minuty**. W tym czasie przygotuj jogurt."
+        },
+        {
+          "tresc": "**Jogurt.** Zdejmij patelnię z ognia. Dodawaj do jogurtu po trochu ciepłego sosu i mieszaj. Wmieszaj jogurt do patelni; nie zagotowuj."
+        },
+        {
+          "tresc": "**Podanie.** Po odpoczynku włóż mięso do sosu. Podaj z kaszą i kapustą kiszoną."
+        }
+      ]
+    }
+  ]
+}

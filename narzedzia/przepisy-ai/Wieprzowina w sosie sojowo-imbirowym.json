@@ -1,0 +1,178 @@
+{
+  "nazwa": "Wieprzowina w sosie sojowo-imbirowym",
+  "opis": "Szybko smażona polędwiczka wieprzowa z chrupiącymi warzywami, imbirem i czosnkiem w sosie sojowym. Podawana z ryżem basmati i sezamem.",
+  "pory": [
+    "obiad"
+  ],
+  "kuchnie": [
+    "azjatycka"
+  ],
+  "rodzaje": [
+    "kasza_ryz"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 541,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 3,
+  "czas_przygotowania_min": 8,
+  "czas_obrobki_min": 17,
+  "sprzet": [
+    "Patelnia 28 cm",
+    "Garnek 2 l",
+    "Tarka o drobnych oczkach",
+    "Nóż szefa kuchni",
+    "Deska do krojenia"
+  ],
+  "przechowywanie": "Mięso z warzywami przechowuj w szczelnym pojemniku w lodówce do 3 dni. Ryż najlepiej przechowywać osobno. Przy odgrzewaniu podgrzewaj krótko na patelni, żeby warzywa nie straciły całkowicie jędrności.",
+  "mozna_mrozic": false,
+  "ratunek": "Za słone — sos sojowy jest bardzo słony, nie dosalaj. Ratunek: dorzuć więcej warzyw i ryżu. Warzywa miękkie — smażone za długo.",
+  "skladniki": [
+    {
+      "nazwa": "Polędwiczka wieprzowa, surowa",
+      "ilosc": 120,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Papryka czerwona, surowa",
+      "ilosc": 100,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Marchew, surowa",
+      "ilosc": 70,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 50,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 3,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Imbir korzeń, surowy",
+      "ilosc": 8,
+      "jednostka": "g",
+      "stan": "obrany, starty"
+    },
+    {
+      "nazwa": "Sos sojowy",
+      "ilosc": 15,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Fasolka szparagowa mrożona",
+      "ilosc": 100,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Ryż basmati, suchy",
+      "ilosc": 60,
+      "jednostka": "g",
+      "stan": "suchy, ugotowany osobno"
+    },
+    {
+      "nazwa": "Olej rzepakowy",
+      "ilosc": 5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sezam",
+      "ilosc": 8,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 1,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 1,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 8,
+      "kroki": [
+        {
+          "tresc": "**Papryka.** Umyj paprykę, usuń gniazdo nasienne i pokrój miąższ w cienkie paski."
+        },
+        {
+          "tresc": "**Marchew.** Umyj i obierz marchew, pokrój w cienkie półplasterki."
+        },
+        {
+          "tresc": "**Cebula.** Obierz cebulę i pokrój w cienkie piórka."
+        },
+        {
+          "tresc": "**Czosnek.** Obierz czosnek i przeciśnij przez praskę lub bardzo drobno posiekaj."
+        },
+        {
+          "tresc": "**Imbir.** Obierz imbir i zetrzyj na drobnej tarce."
+        },
+        {
+          "tresc": "**Ryż.** Odmierz suchy ryż i przepłucz na sitku pod zimną wodą."
+        },
+        {
+          "tresc": "**Polędwiczka.** Osusz mięso i usuń twardą błonę. Pokrój w poprzek włókien w cienkie plastry. Wymieszaj z jedną trzecią odmierzonego sosu sojowego."
+        },
+        {
+          "tresc": "**Po przygotowaniu mięsa.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surowym mięsem."
+        },
+        {
+          "tresc": "**Sezam.** Odmierz sezam."
+        },
+        {
+          "tresc": "**Olej.** Odmierz olej."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól i pieprz."
+        },
+        {
+          "tresc": "**Fasolka szparagowa.** Odmierz mrożoną fasolkę i pozostaw w zamrażarce do gotowania."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie ryżu i smażenie",
+      "minuty": 17,
+      "kroki": [
+        {
+          "tresc": "**Ryż — równolegle.** Ryż ugotuj zgodnie z instrukcją na opakowaniu. Gotuj go równolegle podczas przygotowywania mięsa i warzyw."
+        },
+        {
+          "tresc": "**Rozgrzanie oleju.** Na dużej patelni mocno rozgrzej olej."
+        },
+        {
+          "tresc": "**Obsmażenie polędwiczki.** Dodaj polędwiczkę w jednej warstwie i smaż około **1–2 minuty** z każdej strony, tylko do zrumienienia."
+        },
+        {
+          "tresc": "**Zdjęcie mięsa.** Zdejmij mięso z patelni i odłóż."
+        },
+        {
+          "tresc": "**Cebula i marchew.** Na tę samą patelnię dodaj cebulę i marchew. Smaż na dużym ogniu około **2 minut**, często mieszając."
+        },
+        {
+          "tresc": "**Papryka i fasolka.** Dodaj paprykę i mrożoną fasolkę szparagową. Smaż jeszcze około **3–4 minut**. Warzywa powinny się rozgrzać i lekko zmięknąć, ale nadal pozostać jędrne."
+        },
+        {
+          "tresc": "**Czosnek i imbir.** Dodaj czosnek i imbir. Smaż około **30 sekund**, cały czas mieszając."
+        },
+        {
+          "tresc": "**Mięso i sos sojowy.** Włóż mięso z powrotem na patelnię. Dodaj pozostały odmierzony sos sojowy i dokładnie wymieszaj. Sól i pieprz do smaku."
+        },
+        {
+          "tresc": "**Podgrzanie.** Smaż wszystko razem jeszcze około **1 minuty**. Nie smaż dłużej, żeby polędwiczka nie zrobiła się sucha, a warzywa zbyt miękkie."
+        },
+        {
+          "tresc": "**Podanie.** Zdejmij patelnię z ognia, posyp sezamem i podawaj z ugotowanym ryżem."
+        }
+      ]
+    }
+  ]
+}

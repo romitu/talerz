@@ -8,8 +8,9 @@
   "kuchnie": [
     "inna"
   ],
+  "rodzaje": [],
   "porcjowanie": "waga",
-  "porcja_g": 406.5,
+  "porcja_g": 407,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 2,
   "czas_przygotowania_min": 12,
@@ -105,13 +106,34 @@
       "minuty": 12,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Soczewica.** Odmierz soczewicę i opłucz na sitku."
         },
         {
-          "tresc": "Opłucz soczewicę na sitku. Obierz marchew i zetrzyj; obierz i drobno posiekaj cebulę oraz czosnek."
+          "tresc": "**Marchew.** Umyj i obierz marchew, zetrzyj na tarce o grubych oczkach."
         },
         {
-          "tresc": "Umyj ogórek, zetrzyj go i odciśnij nadmiar soku. Przygotuj sok z cytryny oraz odmierz jogurt i płatki."
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
+        },
+        {
+          "tresc": "**Czosnek.** Obierz czosnek i drobno posiekaj."
+        },
+        {
+          "tresc": "**Ogórek.** Umyj ogórek, zetrzyj i odciśnij nadmiar soku."
+        },
+        {
+          "tresc": "**Cytryna.** Umyj cytrynę, wyciśnij sok i odmierz ilość wskazaną na liście składników."
+        },
+        {
+          "tresc": "**Jogurt.** Odmierz jogurt."
+        },
+        {
+          "tresc": "**Płatki owsiane.** Odmierz płatki owsiane."
+        },
+        {
+          "tresc": "**Olej.** Odmierz olej."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól, pieprz, słodką paprykę i kmin rzymski."
         }
       ]
     },
@@ -120,16 +142,25 @@
       "minuty": 42,
       "kroki": [
         {
-          "tresc": "Zagotuj wodę, co zwykle trwa około 5 minut, i gotuj soczewicę 12–15 minut, do miękkości. Dokładnie odcedź na sitku i odstaw na 10 minut do odparowania."
+          "tresc": "**Gotowanie soczewicy.** Zagotuj wodę, co zwykle trwa około **5 minut**, i gotuj soczewicę **12–15 minut**, do miękkości."
         },
         {
-          "tresc": "Równolegle rozgrzej połowę oleju na patelni przez 1 minutę. Smaż cebulę i marchew 5 minut, dodaj czosnek, kmin i paprykę; smaż jeszcze 30 sekund."
+          "tresc": "**Odcedzenie soczewicy.** Dokładnie odcedź na sitku i odstaw na **10 minut** do odparowania."
         },
         {
-          "tresc": "Rozgnieć soczewicę widelcem. Dodaj podsmażone warzywa, płatki oraz część soli i pieprzu. Wymieszaj i odstaw na 10 minut, żeby płatki wchłonęły wilgoć."
+          "tresc": "**Rozgrzanie oleju — równolegle.** Równolegle rozgrzej połowę oleju na patelni przez **1 minutę**."
         },
         {
-          "tresc": "W tym czasie wymieszaj jogurt z ogórkiem, sokiem z cytryny i pozostałą solą oraz pieprzem."
+          "tresc": "**Cebula i marchew.** Smaż cebulę i marchew **5 minut**."
+        },
+        {
+          "tresc": "**Czosnek i przyprawy.** Dodaj czosnek, kmin i paprykę; smaż jeszcze **30 sekund**."
+        },
+        {
+          "tresc": "**Masa na kotleciki.** Rozgnieć soczewicę widelcem. Dodaj podsmażone warzywa, płatki oraz część soli i pieprzu. Wymieszaj i odstaw na **10 minut**, żeby płatki wchłonęły wilgoć."
+        },
+        {
+          "tresc": "**Sos jogurtowy.** W tym czasie wymieszaj jogurt z ogórkiem, sokiem z cytryny i pozostałą solą oraz pieprzem."
         }
       ]
     },
@@ -138,15 +169,18 @@
       "minuty": 15,
       "kroki": [
         {
-          "tresc": "Uformuj kotleciki grubości około 1,5 cm. Rozgrzej pozostały olej na patelni nieprzywierającej przez 1 minutę."
+          "tresc": "**Formowanie kotlecików.** Uformuj kotleciki grubości około 1,5 cm."
         },
         {
-          "tresc": "Smaż po 4–5 minut z każdej strony na średnim ogniu. Obracaj dopiero po zrumienieniu spodu. Przy większej ilości smaż partiami, doliczając czas kolejnej partii.",
+          "tresc": "**Rozgrzanie oleju.** Rozgrzej pozostały olej na patelni nieprzywierającej przez **1 minutę**."
+        },
+        {
+          "tresc": "**Smażenie kotlecików.** Smaż po **4–5 minut** z każdej strony na średnim ogniu. Obracaj dopiero po zrumienieniu spodu. Przy większej ilości smaż partiami, doliczając czas kolejnej partii.",
           "sygnal": "kotleciki utrzymują kształt i mają rumianą powierzchnię",
           "uwaga": true
         },
         {
-          "tresc": "Podaj z sosem jogurtowym."
+          "tresc": "**Podanie.** Podaj z sosem jogurtowym."
         }
       ]
     }

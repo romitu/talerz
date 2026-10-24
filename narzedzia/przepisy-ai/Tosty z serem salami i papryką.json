@@ -72,10 +72,22 @@
       "minuty": 6,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Papryka.** Umyj paprykę, usuń gniazdo nasienne i pokrój miąższ w bardzo cienkie paski."
         },
         {
-          "tresc": "Umyj paprykę, usuń nasiona i pokrój miąższ w bardzo cienkie paski. Pokrój ser salami w plastry. Przygotuj pieczywo, musztardę i miękkie masło."
+          "tresc": "**Ser salami.** Odmierz ser salami i pokrój w plastry."
+        },
+        {
+          "tresc": "**Masło.** Odmierz masło i pozostaw do zmięknięcia."
+        },
+        {
+          "tresc": "**Musztarda.** Odmierz musztardę."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz pieprz i wędzoną paprykę."
+        },
+        {
+          "tresc": "**Pieczywo.** Przygotuj pieczywo w ilości wskazanej na liście składników."
         }
       ]
     },
@@ -84,16 +96,19 @@
       "minuty": 11,
       "kroki": [
         {
-          "tresc": "Rozgrzej grill kontaktowy według instrukcji, zwykle około 3 minut."
+          "tresc": "**Rozgrzanie grilla.** Rozgrzej grill kontaktowy według instrukcji, zwykle około **3 minut**."
         },
         {
-          "tresc": "Wewnętrzne strony pieczywa posmaruj musztardą. Ułóż ser, cienką warstwę papryki i posyp papryką wędzoną oraz pieprzem. Zamknij kanapki, nadmiar papryki podaj obok."
+          "tresc": "**Składanie tostów.** Wewnętrzne strony pieczywa posmaruj musztardą. Ułóż ser, cienką warstwę papryki i posyp papryką wędzoną oraz pieprzem. Zamknij kanapki, nadmiar papryki podaj obok."
         },
         {
-          "tresc": "Zewnętrzne strony posmaruj odmierzoną ilością masła. Opiekaj 4–6 minut w grillu, aż chleb się zrumieni i ser stopi."
+          "tresc": "**Masło na pieczywo.** Zewnętrzne strony posmaruj odmierzoną ilością masła."
         },
         {
-          "tresc": "Odczekaj 1 minutę i podaj."
+          "tresc": "**Opiekanie.** Opiekaj **4–6 minut** w grillu, aż chleb się zrumieni i ser stopi."
+        },
+        {
+          "tresc": "**Podanie.** Odczekaj **1 minutę** i podaj."
         }
       ]
     }

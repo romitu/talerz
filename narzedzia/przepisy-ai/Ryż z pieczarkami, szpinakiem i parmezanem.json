@@ -1,6 +1,6 @@
 {
   "nazwa": "Ryż z pieczarkami, szpinakiem i parmezanem",
-  "opis": "Ryż parboiled z pieczarkami, szpinakiem i parmezanem przygotowany w jednym garnku. Ziarna pozostają wyraźnie oddzielne; ser nadaje sosowi kremowość. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
+  "opis": "Ryż parboiled z pieczarkami, szpinakiem i parmezanem przygotowany w jednym garnku. Ziarna pozostają wyraźnie oddzielne; ser nadaje sosowi kremowość. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami. Smak sosu lub płynu do gotowania powstaje z przygotowywanych składników w tym samym naczyniu. Podana ilość wody jest początkowa; ewentualne dolewanie zależy od konsystencji i miękkości składników. Warzywna baza obejmuje korzeń pietruszki, seler korzeniowy, por, przygotowane razem z pozostałymi składnikami; wszystkie warzywa pozostają w posiłku.",
   "pory": [
     "obiad",
     "kolacja"
@@ -12,11 +12,11 @@
     "kasza_ryz"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 739,
+  "porcja_g": 734,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 1,
-  "czas_przygotowania_min": 10,
-  "czas_obrobki_min": 38,
+  "czas_przygotowania_min": 14,
+  "czas_obrobki_min": 45,
   "sprzet": [
     "Garnek 3 l",
     "Tarka o drobnych oczkach",
@@ -26,7 +26,7 @@
   ],
   "przechowywanie": "Porcję z ugotowanym ryżem szybko schłodź w płytkim pojemniku i wstaw do lodówki, najlepiej w ciągu godziny. Przechowuj do 24 godzin. Odgrzewaj tylko raz, do gorącego środka całej porcji. Lodówka: do 4°C.",
   "mozna_mrozic": false,
-  "ratunek": "Za suchy ryż podlej gorącym bulionem. Jeśli ryż jest twardy, gotuj dłużej na małym ogniu.",
+  "ratunek": "Twardy ryż z małą ilością płynu podlej niewielką ilością gorącej wody i dogotuj pod przykryciem. Jeśli ryż jest miękki, ale płynu pozostało zbyt dużo, odparuj go bez pokrywki przed dodaniem szpinaku i parmezanu.",
   "skladniki": [
     {
       "nazwa": "Ryż parboiled, suchy",
@@ -62,10 +62,10 @@
       "jednostka": "g"
     },
     {
-      "nazwa": "Domowy bulion warzywny",
-      "ilosc": 300,
-      "jednostka": "g",
-      "stan": "gorący"
+      "nazwa": "woda",
+      "ilosc": 250,
+      "jednostka": "ml",
+      "stan": "ilość początkowa do potrawy; w trakcie gotowania uzupełniaj tylko w razie potrzeby, zgodnie z instrukcją"
     },
     {
       "nazwa": "Oliwa z oliwek",
@@ -81,39 +81,99 @@
       "nazwa": "Czarny pieprz mielony",
       "ilosc": 0.5,
       "jednostka": "g"
+    },
+    {
+      "nazwa": "Pietruszka korzeń",
+      "ilosc": 10,
+      "jednostka": "g",
+      "stan": "obrany korzeń, starty na drobnych oczkach; do warzywnej bazy"
+    },
+    {
+      "nazwa": "Seler korzeń",
+      "ilosc": 10,
+      "jednostka": "g",
+      "stan": "obrany korzeń, starty na drobnych oczkach; do warzywnej bazy"
+    },
+    {
+      "nazwa": "Por, surowy",
+      "ilosc": 25,
+      "jednostka": "g",
+      "stan": "biała i jasnozielona część, dokładnie wypłukana; cienkie półplasterki do bazy sosu"
     }
   ],
   "etapy": [
     {
       "nazwa": "Przygotowanie składników",
-      "minuty": 10,
+      "minuty": 14,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Korzeń pietruszki.** Umyj, obierz i zetrzyj na tarce o drobnych oczkach. Odłóż do przygotowania warzywnej bazy."
         },
         {
-          "tresc": "Oczyść pieczarki i pokrój w plastry. Obierz i posiekaj cebulę oraz czosnek. Umyj i osusz szpinak."
+          "tresc": "**Korzeń selera.** Umyj, obierz i zetrzyj na tarce o drobnych oczkach. Odłóż do przygotowania warzywnej bazy."
         },
         {
-          "tresc": "Zetrzyj parmezan, odmierz ryż oraz bulion."
+          "tresc": "**Por.** Białą i jasnozieloną część przekrój wzdłuż, dokładnie wypłucz ziemię spomiędzy warstw i pokrój w cienkie półplasterki."
+        },
+        {
+          "tresc": "**Pieczarki.** Oczyść pieczarki i pokrój w cienkie plasterki."
+        },
+        {
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
+        },
+        {
+          "tresc": "**Czosnek.** Obierz czosnek i drobno posiekaj."
+        },
+        {
+          "tresc": "**Szpinak.** Umyj i odsącz szpinak. Usuń grube łodygi, duże liście porwij na mniejsze kawałki."
+        },
+        {
+          "tresc": "**Parmezan.** Odmierz parmezan i drobno zetrzyj."
+        },
+        {
+          "tresc": "**Ryż.** Odmierz ryż i sprawdź na opakowaniu czas gotowania metodą wchłaniania wody."
+        },
+        {
+          "tresc": "**Woda.** Odmierz wodę z listy składników do przygotowania potrawy."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól i pieprz."
         }
       ]
     },
     {
       "nazwa": "Gotowanie ryżu z warzywami",
-      "minuty": 38,
+      "minuty": 45,
       "kroki": [
         {
-          "tresc": "Rozgrzej oliwę przez 1 minutę. Smaż cebulę i pieczarki 7–9 minut, aż płyn odparuje."
+          "tresc": "**Rozgrzanie oliwy.** Rozgrzej oliwę przez **1 minutę**."
         },
         {
-          "tresc": "Dodaj czosnek i smaż 30 sekund. Dodaj ryż, wymieszaj przez 1 minutę. Wlej bulion i doprowadź do wrzenia przez około 3 minuty."
+          "tresc": "**Cebula, por i korzenie.** Dodaj cebulę, por oraz starte korzenie pietruszki i selera. Smaż przez **3 minuty**, mieszając."
         },
         {
-          "tresc": "Gotuj na małym ogniu pod uchyloną pokrywką przez czas z opakowania ryżu, orientacyjnie 15–20 minut, mieszając co kilka minut. Jeśli ryż jeszcze twardy, uzupełniaj odparowany płyn gorącą wodą."
+          "tresc": "**Pieczarki.** Dodaj pieczarki i smaż przez **7–9 minut**, aż płyn odparuje, a grzyby lekko się zrumienią."
         },
         {
-          "tresc": "Na ostatnie 1–2 minuty dodaj szpinak. Gdy zwiędnie, zdejmij z ognia i wmieszaj parmezan. Dopraw solą i pieprzem."
+          "tresc": "**Czosnek.** Dodaj czosnek i smaż **30 sekund**."
+        },
+        {
+          "tresc": "**Warzywno-grzybowa baza.** Wlej odmierzoną wodę i mieszaj przez **1 minutę**, rozpuszczając zrumienione pozostałości z dna. Doprowadź do łagodnego wrzenia przez około **2 minuty**, przykryj i gotuj przez **5 minut**."
+        },
+        {
+          "tresc": "**Dodanie ryżu.** Wsyp ryż do gotującej się bazy i wymieszaj. Wszystkie warzywa i grzyby pozostają w garnku."
+        },
+        {
+          "tresc": "**Gotowanie ryżu.** Gotuj na małym ogniu pod przykryciem przez czas wskazany na opakowaniu, orientacyjnie **15–20 minut**, mieszając co kilka minut. Jeśli ryż jest twardy, a płynu brakuje, dolej trochę gorącej wody. Jeśli po czasie z opakowania pozostaje twardy, dogotowuj po **2 minuty**."
+        },
+        {
+          "tresc": "**Szpinak.** Na ostatnie **1–2 minuty** dodaj szpinak."
+        },
+        {
+          "tresc": "**Parmezan i doprawienie.** Gdy zwiędnie, zdejmij z ognia i wmieszaj parmezan. Dopraw solą i pieprzem."
         }
       ]
     }

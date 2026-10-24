@@ -12,11 +12,11 @@
     "kanapki"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 275.5,
+  "porcja_g": 276,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 0,
-  "czas_przygotowania_min": 7,
-  "czas_obrobki_min": 0,
+  "czas_przygotowania_min": 5,
+  "czas_obrobki_min": 2,
   "sprzet": [
     "Nóż szefa kuchni",
     "Deska do krojenia",
@@ -72,10 +72,25 @@
       "minuty": 5,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Pomidor.** Umyj pomidory i pokrój w cienkie plastry. Osusz plasterki z nadmiaru wilgoci."
         },
         {
-          "tresc": "Umyj i osusz pomidora, ogórek oraz sałatę. Pomidora, ogórek i Goudę pokrój w plastry. Przygotuj pieczywo, musztardę i pieprz."
+          "tresc": "**Ogórek.** Umyj i osusz ogórek, pokrój w plastry."
+        },
+        {
+          "tresc": "**Sałata.** Umyj liście sałaty, dokładnie osusz i porwij na mniejsze kawałki."
+        },
+        {
+          "tresc": "**Gouda.** Odmierz Goudę i pokrój w plastry."
+        },
+        {
+          "tresc": "**Musztarda.** Odmierz musztardę."
+        },
+        {
+          "tresc": "**Pieprz.** Odmierz pieprz."
+        },
+        {
+          "tresc": "**Pieczywo.** Przygotuj pieczywo w ilości wskazanej na liście składników."
         }
       ]
     },
@@ -84,7 +99,7 @@
       "minuty": 2,
       "kroki": [
         {
-          "tresc": "Posmaruj pieczywo musztardą. Ułóż sałatę, Goudę, pomidora i ogórek. Dopraw pieprzem."
+          "tresc": "**Składanie kanapek.** Posmaruj pieczywo musztardą. Ułóż sałatę, Goudę, pomidora i ogórek. Dopraw pieprzem."
         }
       ]
     }

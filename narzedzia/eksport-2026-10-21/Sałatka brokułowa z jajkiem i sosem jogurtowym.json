@@ -1,0 +1,133 @@
+{
+  "nazwa": "Sałatka brokułowa z jajkiem i sosem jogurtowym",
+  "opis": "Sałatka z brokułem, jajkami na twardo, kukurydzą i szczypiorkiem w sosie jogurtowo-musztardowym. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "inna"
+  ],
+  "rodzaje": [
+    "salatka"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 586,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 2,
+  "czas_przygotowania_min": 10,
+  "czas_obrobki_min": 23,
+  "sprzet": [
+    "Garnek 3 l",
+    "Miska",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna",
+    "Garnek 2 l",
+    "Durszlak",
+    "Łyżka cedzakowa"
+  ],
+  "przechowywanie": "Przechowuj w zamkniętym pojemniku w lodówce do 2 dni. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli brokuł jest rozgotowany, ostudź go szybko i delikatnie mieszaj. Za gęsty sos rozcieńcz wodą.",
+  "skladniki": [
+    {
+      "nazwa": "Brokuł, surowy",
+      "ilosc": 250,
+      "jednostka": "g",
+      "stan": "podzielony na różyczki"
+    },
+    {
+      "nazwa": "Jaja kurze, całe, surowe",
+      "ilosc": 2,
+      "jednostka": "szt"
+    },
+    {
+      "nazwa": "Jogurt grecki naturalny 2%",
+      "ilosc": 100,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Kukurydza konserwowa, odsączona",
+      "ilosc": 80,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cebula czerwona, surowa",
+      "ilosc": 30,
+      "jednostka": "g",
+      "stan": "drobno posiekana"
+    },
+    {
+      "nazwa": "Musztarda",
+      "ilosc": 5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Szczypiorek świeży",
+      "ilosc": 10,
+      "jednostka": "g",
+      "stan": "posiekany"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 10,
+      "kroki": [
+        {
+          "tresc": "**Brokuł.** Umyj brokuł i podziel na małe różyczki."
+        },
+        {
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
+        },
+        {
+          "tresc": "**Szczypiorek.** Umyj i osusz szczypiorek, następnie drobno posiekaj."
+        },
+        {
+          "tresc": "**Kukurydza.** Odsącz kukurydzę i odmierz potrzebną ilość."
+        },
+        {
+          "tresc": "**Sos jogurtowy.** Wymieszaj odmierzone jogurt i musztardę z solą i pieprzem. Odstaw do lodówki."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie i studzenie",
+      "minuty": 20,
+      "kroki": [
+        {
+          "tresc": "**Gotowanie jajek.** Zagotuj tyle wody, aby przykryła jajka. Ostrożnie włóż jajka i gotuj przy łagodnym wrzeniu przez **9–10 minut**, licząc od włożenia."
+        },
+        {
+          "tresc": "**Schłodzenie jajek.** Przełóż jajka do zimnej wody. Po schłodzeniu obierz."
+        },
+        {
+          "tresc": "**Brokuł — równolegle.** Równolegle w drugim garnku zagotuj wodę. Gotuj brokuł **4–5 minut**, odcedź, krótko schłodź zimną wodą i dokładnie odsącz."
+        },
+        {
+          "tresc": "**Krojenie jajek.** Pokrój schłodzone jajka."
+        }
+      ]
+    },
+    {
+      "nazwa": "Łączenie sałatki",
+      "minuty": 3,
+      "kroki": [
+        {
+          "tresc": "**Połączenie i podanie.** Wymieszaj brokuł, jajka, kukurydzę, cebulę oraz sos. Posyp szczypiorkiem i podaj."
+        }
+      ]
+    }
+  ]
+}

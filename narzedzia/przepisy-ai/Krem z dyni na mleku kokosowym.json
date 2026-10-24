@@ -1,6 +1,6 @@
 {
   "nazwa": "Krem z dyni na mleku kokosowym",
-  "opis": "Aromatyczny krem z dyni, czerwonej soczewicy, imbiru i mleka kokosowego. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
+  "opis": "Aromatyczny krem z dyni, czerwonej soczewicy, imbiru i mleka kokosowego. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami. Wywar z marchwi, korzenia pietruszki, korzenia selera i pora jest gotowany osobno; cały wywar i wszystkie warzywa trafiają do zupy.",
   "pory": [
     "obiad",
     "kolacja"
@@ -12,22 +12,25 @@
     "zupa"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 797,
+  "porcja_g": 847,
   "liczba_porcji_bazowych": 2,
   "trwalosc_dni": 3,
-  "czas_przygotowania_min": 13,
-  "czas_obrobki_min": 35,
+  "czas_przygotowania_min": 20,
+  "czas_obrobki_min": 50,
   "sprzet": [
     "Garnek 3 l",
     "Blender ręczny",
     "Nóż szefa kuchni",
     "Deska do krojenia",
     "Waga kuchenna",
-    "Sitko"
+    "Sitko",
+    "Garnek 2 l",
+    "Łyżka cedzakowa",
+    "Miska"
   ],
   "przechowywanie": "Przechowuj w lodówce do 3 dni albo zamroź po szybkim schłodzeniu. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
   "mozna_mrozic": true,
-  "ratunek": "Za gęsty krem rozcieńcz bulionem. Za ostry złagodź dodatkowym mlekiem kokosowym.",
+  "ratunek": "Za gęsty krem rozcieńcz gorącą wodą. Za ostry złagodź dodatkowym mlekiem kokosowym.",
   "skladniki": [
     {
       "nazwa": "Dynia, surowa",
@@ -39,16 +42,11 @@
       "nazwa": "Marchew, surowa",
       "ilosc": 120,
       "jednostka": "g",
-      "stan": "pokrojona"
+      "stan": "obrany korzeń, kostka około 7–8 mm; do wywaru"
     },
     {
       "nazwa": "Mleko kokosowe light z puszki",
       "ilosc": 200,
-      "jednostka": "g"
-    },
-    {
-      "nazwa": "Domowy bulion warzywny",
-      "ilosc": 300,
       "jednostka": "g"
     },
     {
@@ -59,8 +57,9 @@
     },
     {
       "nazwa": "woda",
-      "ilosc": 200,
-      "jednostka": "ml"
+      "ilosc": 500,
+      "jednostka": "ml",
+      "stan": "cała odmierzona ilość do wywaru; wywar i wszystkie ugotowane warzywa trafiają do zupy"
     },
     {
       "nazwa": "Cebula, surowa",
@@ -104,41 +103,145 @@
       "nazwa": "Sól kłodawska",
       "ilosc": 2,
       "jednostka": "g"
+    },
+    {
+      "nazwa": "Pietruszka korzeń",
+      "ilosc": 30,
+      "jednostka": "g",
+      "stan": "obrany korzeń, kostka około 7–8 mm; do wywaru"
+    },
+    {
+      "nazwa": "Seler korzeń",
+      "ilosc": 30,
+      "jednostka": "g",
+      "stan": "obrany korzeń, kostka około 7–8 mm; do wywaru"
+    },
+    {
+      "nazwa": "Por, surowy",
+      "ilosc": 40,
+      "jednostka": "g",
+      "stan": "biała i jasnozielona część, dokładnie wypłukana, cienkie półplasterki; do wywaru"
     }
   ],
   "etapy": [
     {
       "nazwa": "Przygotowanie składników",
-      "minuty": 13,
+      "minuty": 20,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Marchew.** Umyj i obierz marchew, pokrój w kostkę około 7–8 mm. Całość przeznacz do wywaru."
         },
         {
-          "tresc": "Umyj dynię, usuń nasiona i twardą skórę; pokrój miąższ w kostkę około 2 cm. Umyj i obierz marchew, pokrój w cienkie plasterki."
+          "tresc": "**Korzeń pietruszki.** Umyj i obierz korzeń pietruszki, pokrój w kostkę około 7–8 mm. Całość przeznacz do wywaru."
         },
         {
-          "tresc": "Obierz i posiekaj cebulę, czosnek oraz imbir. Opłucz soczewicę. Umyj limonkę, wyciśnij i odmierz sok. Odmierz bulion, wodę i mleko kokosowe. Umyj i osusz natkę pietruszki, drobno posiekaj i odłóż do podania."
+          "tresc": "**Korzeń selera.** Umyj i obierz seler korzeniowy, pokrój w kostkę około 7–8 mm. Całość przeznacz do wywaru."
+        },
+        {
+          "tresc": "**Por.** Odetnij korzonki i twarde końce liści. Białą i jasnozieloną część przekrój wzdłuż, dokładnie wypłucz ziemię spomiędzy warstw i pokrój w cienkie półplasterki. Odłóż osobno do wywaru."
+        },
+        {
+          "tresc": "**Dynia.** Umyj dynię, usuń nasiona i twardą skórę. Pokrój miąższ w kostkę około 2 cm."
+        },
+        {
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
+        },
+        {
+          "tresc": "**Czosnek.** Obierz czosnek i drobno posiekaj."
+        },
+        {
+          "tresc": "**Imbir.** Obierz imbir i drobno posiekaj."
+        },
+        {
+          "tresc": "**Soczewica.** Odmierz soczewicę i opłucz na sitku."
+        },
+        {
+          "tresc": "**Limonka.** Umyj limonkę, wyciśnij sok i odmierz ilość wskazaną na liście składników."
+        },
+        {
+          "tresc": "**Natka pietruszki.** Umyj i osusz natkę, usuń grube łodygi i drobno posiekaj liście."
+        },
+        {
+          "tresc": "**Woda.** Odmierz całą ilość wody wskazaną na liście składników do ugotowania wywaru."
+        },
+        {
+          "tresc": "**Mleko kokosowe.** Odmierz mleko kokosowe."
+        },
+        {
+          "tresc": "**Pasta curry.** Odmierz pastę curry."
+        },
+        {
+          "tresc": "**Olej.** Odmierz olej."
+        },
+        {
+          "tresc": "**Sól.** Odmierz sól."
         }
       ]
     },
     {
-      "nazwa": "Gotowanie i blendowanie",
-      "minuty": 35,
+      "nazwa": "Gotowanie wywaru i przygotowanie bazy",
+      "minuty": 20,
       "kroki": [
         {
-          "tresc": "Rozgrzej olej 1 minutę, smaż cebulę 4 minuty. Dodaj czosnek, imbir i pastę curry, smaż 1 minutę."
+          "tresc": "**Warzywa korzeniowe.** W osobnym garnku umieść całą przygotowaną marchew, korzeń pietruszki i korzeń selera. Zalej całą odmierzoną wodą. Przykryj i doprowadź do łagodnego wrzenia, orientacyjnie przez **5–7 minut**."
         },
         {
-          "tresc": "Dodaj dynię, marchew, soczewicę, bulion i wodę. Doprowadź do wrzenia przez około 4 minuty. Gotuj pod uchyloną pokrywką przez 20 minut, mieszając co kilka minut."
+          "tresc": "**Gotowanie korzeni.** Od zagotowania gotuj pod przykryciem na małym ogniu przez **8 minut**. Nastaw minutnik; w tym czasie przygotuj bazę zupy w głównym garnku."
         },
         {
-          "tresc": "Sprawdź miękkość warzyw i soczewicy; w razie potrzeby gotuj kolejne 3–5 minut. Dodaj mleko kokosowe i podgrzewaj 2 minuty.",
-          "sygnal": "warzywa dają się łatwo rozgnieść, soczewica miękka",
+          "tresc": "**Baza zupy — równolegle.** W głównym garnku rozgrzej olej przez **1 minutę**."
+        },
+        {
+          "tresc": "**Cebula.** Smaż cebulę przez **4 minuty**, mieszając."
+        },
+        {
+          "tresc": "**Czosnek, imbir i curry.** Dodaj czosnek, imbir i pastę curry. Smaż przez **1 minutę**, mieszając."
+        },
+        {
+          "tresc": "**Gotowa baza.** Zdejmij główny garnek z palnika do czasu wlania wywaru."
+        },
+        {
+          "tresc": "**Por — po minutniku.** Po **8 minutach gotowania korzeni** dodaj por do wywaru. Gotuj jeszcze przez **4 minuty**. Wykonaj ten krok po sygnale minutnika, niezależnie od pracy przy bazie zupy."
+        },
+        {
+          "tresc": "**Kontrola warzyw.** Sprawdź kostkę marchewki i selera. Jeśli ma twardy, surowy środek, gotuj jeszcze po **2 minuty**, sprawdzając po każdej takiej próbie.",
+          "sygnal": "warzywa są lekko jędrne, ale bez twardego, surowego środka",
           "uwaga": true
         },
         {
-          "tresc": "Zdejmij z ognia i zblenduj z zanurzoną końcówką blendera. Dodaj sok z limonki oraz sól i wymieszaj. Rozlej krem do talerzy, posyp przygotowaną natką pietruszki i podaj."
+          "tresc": "**Uzupełnienie wywaru.** Jeżeli podczas gotowania odparowała woda, uzupełnij jej ubytek gorącą wodą do początkowego poziomu, zanim wyjmiesz warzywa."
+        },
+        {
+          "tresc": "**Zachowanie warzyw i wywaru.** Wyjmij wszystkie warzywa łyżką cedzakową do miski i przykryj. Cały wywar zachowaj w garnku do następnego etapu. Nie wylewaj wywaru ani płynu zebranego w misce."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie dyni i soczewicy oraz blendowanie",
+      "minuty": 30,
+      "kroki": [
+        {
+          "tresc": "**Dynia i soczewica.** Do podsmażonej bazy dodaj dynię, soczewicę i cały wywar. Doprowadź do wrzenia przez około **3 minuty**. Gotuj pod uchyloną pokrywką przez **15 minut**, mieszając co kilka minut."
+        },
+        {
+          "tresc": "**Warzywa z wywaru.** Dodaj wszystkie odłożone warzywa wraz z płynem z miski. Gotuj jeszcze przez **5 minut**."
+        },
+        {
+          "tresc": "**Kontrola miękkości.** Sprawdź dynię, soczewicę i warzywa korzeniowe. W razie potrzeby dogotowuj po **3 minuty**, mieszając i uzupełniając odparowany płyn gorącą wodą.",
+          "sygnal": "warzywa łatwo rozgniatają się widelcem, soczewica jest miękka",
+          "uwaga": true
+        },
+        {
+          "tresc": "**Mleko kokosowe.** Dodaj mleko kokosowe i podgrzewaj przez **2 minuty**."
+        },
+        {
+          "tresc": "**Blendowanie.** Zdejmij garnek z ognia i zblenduj zupę, trzymając końcówkę blendera zanurzoną."
+        },
+        {
+          "tresc": "**Doprawienie.** Dodaj sok z limonki i sól, wymieszaj."
+        },
+        {
+          "tresc": "**Podanie.** Rozlej krem do talerzy, posyp przygotowaną natką pietruszki i podaj."
         }
       ]
     }

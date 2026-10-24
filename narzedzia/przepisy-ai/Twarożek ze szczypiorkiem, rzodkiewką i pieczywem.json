@@ -12,7 +12,7 @@
     "kanapki"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 311.5,
+  "porcja_g": 312,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 1,
   "czas_przygotowania_min": 8,
@@ -75,10 +75,19 @@
       "minuty": 5,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Rzodkiewka.** Umyj rzodkiewki, usuń końcówki i pokrój w cienkie półplasterki."
         },
         {
-          "tresc": "Umyj rzodkiewki i szczypiorek, osusz. Usuń końcówki rzodkiewek, pokrój drobno; posiekaj szczypiorek. Odmierz twaróg i jogurt, przygotuj pieczywo."
+          "tresc": "**Szczypiorek.** Umyj i osusz szczypiorek, następnie drobno posiekaj."
+        },
+        {
+          "tresc": "**Twarożek.** Odmierz twaróg i jogurt do miski."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól i pieprz."
+        },
+        {
+          "tresc": "**Pieczywo.** Przygotuj pieczywo w ilości wskazanej na liście składników."
         }
       ]
     },
@@ -87,11 +96,14 @@
       "minuty": 3,
       "kroki": [
         {
-          "tresc": "Rozgnieć twaróg widelcem z jogurtem.",
+          "tresc": "**Rozgniecenie twarogu.** Rozgnieć twaróg widelcem z jogurtem.",
           "sygnal": "masa kremowa, lekko grudkowata"
         },
         {
-          "tresc": "Dodaj rzodkiewki i szczypiorek. Dopraw odmierzoną solą oraz pieprzem, wymieszaj i podaj z pieczywem."
+          "tresc": "**Warzywa i doprawienie.** Dodaj rzodkiewki i szczypiorek. Dopraw odmierzoną solą oraz pieprzem, wymieszaj."
+        },
+        {
+          "tresc": "**Podanie.** Podaj z pieczywem."
         }
       ]
     }

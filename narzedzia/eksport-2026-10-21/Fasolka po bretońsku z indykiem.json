@@ -1,0 +1,194 @@
+{
+  "nazwa": "Fasolka po bretońsku z indykiem",
+  "opis": "Fasolę zawsze przepłucz po odsączeniu — zejdzie zalewa i danie nie będzie mętne. Trzyma się w lodówce 3 dni. Suszone pomidory odsącz z oleju, inaczej danie wyjdzie tłuste.",
+  "pory": [
+    "obiad"
+  ],
+  "kuchnie": [
+    "polska"
+  ],
+  "rodzaje": [
+    "gulasz_curry"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 647,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 3,
+  "czas_przygotowania_min": 13,
+  "czas_obrobki_min": 25,
+  "sprzet": [
+    "Garnek 3 l",
+    "Nóż szefa kuchni",
+    "Deska do krojenia"
+  ],
+  "przechowywanie": "Przechowuj w szczelnym pojemniku w lodówce do 3 dni. Chleb przechowuj osobno.",
+  "mozna_mrozic": true,
+  "ratunek": "Jeżeli sos jest zbyt gęsty, dolej niewielką ilość wody. Jeśli jest zbyt rzadki, gotuj kilka minut bez przykrycia.",
+  "skladniki": [
+    {
+      "nazwa": "Filet z indyka, surowy",
+      "ilosc": 150,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Fasola biała z puszki, odsączona",
+      "ilosc": 180,
+      "jednostka": "g",
+      "stan": "odsączona i przepłukana"
+    },
+    {
+      "nazwa": "Passata pomidorowa",
+      "ilosc": 150,
+      "jednostka": "ml"
+    },
+    {
+      "nazwa": "Pomidory suszone w oleju",
+      "ilosc": 20,
+      "jednostka": "g",
+      "stan": "odsączone, posiekane"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 60,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Chleb żytni razowy",
+      "ilosc": 2,
+      "jednostka": "szt"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Majeranek suszony",
+      "ilosc": 2,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Papryka słodka mielona",
+      "ilosc": 2,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "liść laurowy",
+      "ilosc": 1,
+      "jednostka": "szt"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 2,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 1,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 13,
+      "kroki": [
+        {
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
+        },
+        {
+          "tresc": "**Czosnek.** Obierz czosnek i przeciśnij przez praskę lub bardzo drobno posiekaj."
+        },
+        {
+          "tresc": "**Suszone pomidory.** Odsącz pomidory z oleju i pokrój na mniejsze kawałki."
+        },
+        {
+          "tresc": "**Fasola.** Przełóż fasolę z puszki na sitko, opłucz i odsącz. Odmierz po odsączeniu."
+        },
+        {
+          "tresc": "**Indyk.** Osusz indyka i pokrój w kostkę około 2 cm."
+        },
+        {
+          "tresc": "**Po przygotowaniu mięsa.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surowym mięsem."
+        },
+        {
+          "tresc": "**Passata.** Odmierz passatę."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz pieprz, słodką paprykę, majeranek i liście laurowe."
+        },
+        {
+          "tresc": "**Pieczywo.** Przygotuj pieczywo w ilości wskazanej na liście składników."
+        }
+      ]
+    },
+    {
+      "nazwa": "Smażenie indyka i warzyw",
+      "minuty": 10,
+      "kroki": [
+        {
+          "tresc": "**Rozgrzanie oliwy.** Na dużej patelni lub w garnku rozgrzej oliwę."
+        },
+        {
+          "tresc": "**Obsmażenie indyka.** Dodaj indyka i smaż na średnio dużym ogniu około **3–4 minut**, aż mięso lekko się zarumieni."
+        },
+        {
+          "tresc": "**Zdjęcie indyka.** Następnie zdejmij indyka z patelni i odłóż na bok."
+        },
+        {
+          "tresc": "**Cebula.** Dodaj cebulę i smaż jeszcze około **2–3 minut**, aż się zeszkli."
+        },
+        {
+          "tresc": "**Czosnek i suszone pomidory.** Dodaj czosnek oraz suszone pomidory. Smaż jeszcze około **1 minuty**, mieszając."
+        }
+      ]
+    },
+    {
+      "nazwa": "Przygotowanie sosu",
+      "minuty": 10,
+      "kroki": [
+        {
+          "tresc": "**Składniki sosu.** Dodaj passatę, liść laurowy, majeranek i słodką paprykę."
+        },
+        {
+          "tresc": "**Zagotowanie sosu.** Dokładnie wymieszaj i doprowadź do lekkiego wrzenia"
+        },
+        {
+          "tresc": "**Duszenie sosu.** Zmniejsz ogień, przykryj i duś około **8–10 minut**."
+        },
+        {
+          "tresc": "**Konsystencja sosu.** Jeżeli sos zrobi się zbyt gęsty, dolej niewielką ilość wody."
+        }
+      ]
+    },
+    {
+      "nazwa": "Dodanie fasoli i wykończenie",
+      "minuty": 5,
+      "kroki": [
+        {
+          "tresc": "**Fasola i indyk.** Dodaj odsączoną i przepłukaną fasolę oraz wcześniej obsmażonego indyka."
+        },
+        {
+          "tresc": "**Dokończenie gotowania.** Delikatnie wymieszaj i gotuj około **4–5 minut**, tylko do pełnego rozgrzania fasoli i dokończenia obróbki indyka."
+        },
+        {
+          "tresc": "**Liść laurowy.** Usuń liść laurowy."
+        },
+        {
+          "tresc": "**Doprawienie.** Dopraw solą i pieprzem do smaku."
+        },
+        {
+          "tresc": "**Podanie.** Podawaj z kromkami chleba żytniego."
+        }
+      ]
+    }
+  ]
+}

@@ -96,13 +96,31 @@
       "minuty": 12,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Bakłażan.** Umyj bakłażana i pokrój w kostkę około 2 cm."
         },
         {
-          "tresc": "Umyj bakłażana i pomidora. Pokrój bakłażana w kostkę około 2 cm, pomidora na kawałki. Obierz cebulę i czosnek, pokrój cebulę w piórka, czosnek posiekaj."
+          "tresc": "**Pomidor.** Umyj pomidory i pokrój w cząstki."
         },
         {
-          "tresc": "Opłucz i odsącz ciecierzycę. Pokrusz fetę i odmierz kaszę. Wymieszaj bakłażana, cebulę oraz ciecierzycę z oliwą, czosnkiem, oregano i pieprzem."
+          "tresc": "**Cebula.** Obierz cebulę i pokrój w cienkie piórka."
+        },
+        {
+          "tresc": "**Czosnek.** Obierz czosnek i drobno posiekaj."
+        },
+        {
+          "tresc": "**Ciecierzyca.** Przełóż ciecierzycę z puszki na sitko, opłucz i odsącz. Odmierz po odsączeniu."
+        },
+        {
+          "tresc": "**Feta.** Odmierz fetę i pokrusz."
+        },
+        {
+          "tresc": "**Warzywa do pieczenia.** Wymieszaj bakłażana, cebulę i ciecierzycę z oliwą, czosnkiem, oregano i pieprzem."
+        },
+        {
+          "tresc": "**Bulgur.** Odmierz kaszę bulgur."
+        },
+        {
+          "tresc": "**Sól.** Odmierz sól."
         }
       ]
     },
@@ -111,19 +129,19 @@
       "minuty": 48,
       "kroki": [
         {
-          "tresc": "Rozgrzej piekarnik do 210°C, grzanie góra–dół, zwykle około 10 minut."
+          "tresc": "**Rozgrzanie piekarnika.** Rozgrzej piekarnik do **210°C**, grzanie góra–dół, zwykle około **10 minut**."
         },
         {
-          "tresc": "Rozłóż przygotowaną mieszankę w szerokim naczyniu i piecz 25 minut, mieszając w połowie."
+          "tresc": "**Pieczenie bakłażana.** Rozłóż przygotowaną mieszankę w szerokim naczyniu i piecz **25 minut**, mieszając w połowie."
         },
         {
-          "tresc": "Podczas pieczenia ugotuj bulgur w dodatkowej wodzie przez czas z opakowania i odcedź."
+          "tresc": "**Kasza — równolegle.** Podczas pieczenia ugotuj bulgur w dodatkowej wodzie przez czas z opakowania i odcedź."
         },
         {
-          "tresc": "Do naczynia dodaj pomidora oraz fetę. Piecz 8–10 minut; bakłażan powinien być zupełnie miękki. Jeśli nadal jest twardy, dopiekaj pod przykryciem po 5 minut."
+          "tresc": "**Pomidor i feta.** Do naczynia dodaj pomidora oraz fetę. Piecz **8–10 minut**; bakłażan powinien być zupełnie miękki. Jeśli nadal jest twardy, dopiekaj pod przykryciem po **5 minut**."
         },
         {
-          "tresc": "Spróbuj, dopraw odmierzoną solą i podaj z kaszą."
+          "tresc": "**Doprawienie i podanie.** Spróbuj, dopraw odmierzoną solą i podaj z kaszą."
         }
       ]
     }

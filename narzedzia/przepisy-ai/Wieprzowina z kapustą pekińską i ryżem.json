@@ -92,16 +92,34 @@
       "minuty": 12,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Ryż.** Odmierz suchy ryż i przepłucz na sitku pod zimną wodą."
         },
         {
-          "tresc": "Opłucz ryż. Umyj kapustę, oddziel grube białe części od liści i cienko pokrój. Umyj i obierz marchew, pokrój w cienkie paski. Obierz i pokrój cebulę."
+          "tresc": "**Kapusta pekińska.** Umyj kapustę, oddziel grube białe części od liści. Obie części cienko pokrój i odłóż osobno."
         },
         {
-          "tresc": "Obierz czosnek oraz imbir, posiekaj czosnek i zetrzyj imbir. Odmierz sezam i sos sojowy."
+          "tresc": "**Marchew.** Umyj i obierz marchew, pokrój w cienkie słupki."
         },
         {
-          "tresc": "Osusz polędwiczkę, usuń twardą błonę i pokrój mięso w paski około 1 cm. Wymieszaj z połową sosu sojowego. Umyj przybory i ręce po mięsie."
+          "tresc": "**Cebula.** Obierz cebulę i pokrój w cienkie piórka."
+        },
+        {
+          "tresc": "**Czosnek.** Obierz czosnek i drobno posiekaj."
+        },
+        {
+          "tresc": "**Imbir.** Obierz imbir i zetrzyj na drobnej tarce."
+        },
+        {
+          "tresc": "**Polędwiczka.** Osusz polędwiczkę, usuń twardą błonę i pokrój w paski grubości około 1 cm. Wymieszaj z połową sosu sojowego."
+        },
+        {
+          "tresc": "**Po przygotowaniu mięsa.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surowym mięsem."
+        },
+        {
+          "tresc": "**Sezam.** Odmierz sezam."
+        },
+        {
+          "tresc": "**Olej.** Odmierz olej."
         }
       ]
     },
@@ -110,19 +128,34 @@
       "minuty": 25,
       "kroki": [
         {
-          "tresc": "Na pierwszym palniku zagotuj wodę w garnku. Dodaj ryż i gotuj przez czas wskazany na opakowaniu; po ugotowaniu odcedź. Wody użyj tyle, by ziarna były zanurzone i swobodnie się gotowały. Nastaw minutnik; równolegle wykonuj kolejne czynności na drugim palniku. Woda do gotowania jest dodatkowa i zostanie odlana."
+          "tresc": "**Ryż — równolegle.** Zagotuj na pierwszym palniku tyle wody, aby ziarna swobodnie się gotowały. Wsyp ryż i gotuj przez czas z opakowania. Nastaw minutnik; w tym czasie wykonuj kolejne kroki na drugim palniku."
         },
         {
-          "tresc": "Rozgrzej połowę oleju przez 1 minutę. Smaż mięso 4–5 minut, obracając, do temperatury co najmniej 63°C. Przełóż na czysty talerz na co najmniej 3 minuty."
+          "tresc": "**Ryż — po minutniku.** Po upływie czasu sprawdź miękkość ziaren i odcedź nadmiar wody. Przykryj garnek i odstaw poza palnik. Zrób to niezależnie od postępu pracy przy pozostałych składnikach."
         },
         {
-          "tresc": "Dodaj pozostały olej, cebulę, marchew i białe części kapusty; smaż 4 minuty. Dodaj imbir i czosnek, smaż 30 sekund."
+          "tresc": "**Rozgrzanie oleju.** Rozgrzej połowę oleju przez **1 minutę**."
         },
         {
-          "tresc": "Dodaj liście kapusty, pozostały sos sojowy i smaż 1–2 minuty. Włóż mięso i podgrzewaj 1 minutę, delikatnie mieszając."
+          "tresc": "**Smażenie polędwiczki.** Smaż mięso **4–5 minut**, obracając, do temperatury co najmniej **63°C**."
         },
         {
-          "tresc": "Podaj z ryżem i sezamem."
+          "tresc": "**Odpoczynek mięsa.** Przełóż na czysty talerz na co najmniej **3 minuty**."
+        },
+        {
+          "tresc": "**Twarde części warzyw.** Dodaj pozostały olej, cebulę, marchew i białe części kapusty; smaż **4 minuty**."
+        },
+        {
+          "tresc": "**Czosnek i imbir.** Dodaj imbir i czosnek, smaż **30 sekund**."
+        },
+        {
+          "tresc": "**Liście kapusty.** Dodaj liście kapusty, pozostały sos sojowy i smaż **1–2 minuty**."
+        },
+        {
+          "tresc": "**Podgrzanie mięsa.** Włóż mięso i podgrzewaj **1 minutę**, delikatnie mieszając."
+        },
+        {
+          "tresc": "**Podanie.** Podaj z ryżem i sezamem."
         }
       ]
     }

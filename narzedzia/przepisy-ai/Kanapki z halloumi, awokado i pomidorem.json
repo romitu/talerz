@@ -12,7 +12,7 @@
     "kanapki"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 325.5,
+  "porcja_g": 326,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 0,
   "czas_przygotowania_min": 8,
@@ -74,13 +74,25 @@
       "minuty": 8,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Pomidor.** Umyj pomidory i pokrój w cienkie plastry. Osusz plasterki z nadmiaru wilgoci."
         },
         {
-          "tresc": "Umyj pomidora, rukolę i cytrynę; osusz rukolę. Odmierz sok z cytryny."
+          "tresc": "**Rukola.** Umyj rukolę i dokładnie osusz."
         },
         {
-          "tresc": "Umyj awokado, usuń pestkę i skórkę, pokrój miąższ i skrop sokiem. Pomidora oraz halloumi pokrój w plastry; ser osusz. Przygotuj pieczywo."
+          "tresc": "**Cytryna.** Umyj cytrynę, wyciśnij sok i odmierz ilość wskazaną na liście składników."
+        },
+        {
+          "tresc": "**Awokado.** Umyj awokado, usuń skórkę i pestkę. Pokrój miąższ i skrop odmierzonym sokiem z cytryny."
+        },
+        {
+          "tresc": "**Halloumi.** Osusz halloumi i pokrój w plastry grubości około 1 cm."
+        },
+        {
+          "tresc": "**Pieprz.** Odmierz pieprz."
+        },
+        {
+          "tresc": "**Pieczywo.** Przygotuj pieczywo w ilości wskazanej na liście składników."
         }
       ]
     },
@@ -89,15 +101,15 @@
       "minuty": 7,
       "kroki": [
         {
-          "tresc": "Rozgrzej suchą patelnię nieprzywierającą przez 1 minutę."
+          "tresc": "**Rozgrzanie patelni.** Rozgrzej suchą patelnię nieprzywierającą przez **1 minutę**."
         },
         {
-          "tresc": "Smaż halloumi po około 2 minuty z każdej strony na średnim ogniu.",
+          "tresc": "**Smażenie halloumi.** Smaż halloumi po około **2 minuty** z każdej strony na średnim ogniu.",
           "sygnal": "ser jest złoty na powierzchni",
           "uwaga": true
         },
         {
-          "tresc": "Na pieczywie ułóż rukolę, awokado, pomidora i ciepły ser. Dopraw pieprzem i od razu podaj."
+          "tresc": "**Składanie kanapek.** Na pieczywie ułóż rukolę, awokado, pomidora i ciepły ser. Dopraw pieprzem i od razu podaj."
         }
       ]
     }

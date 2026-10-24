@@ -12,7 +12,7 @@
     "salatka"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 631.5,
+  "porcja_g": 632,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 1,
   "czas_przygotowania_min": 15,
@@ -96,16 +96,34 @@
       "minuty": 12,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Fasola.** Przełóż fasolę z puszki na sitko, opłucz i odsącz. Odmierz po odsączeniu."
         },
         {
-          "tresc": "Opłucz i odsącz fasolę, odsącz kukurydzę. Umyj pomidora, paprykę, awokado, limonkę oraz kolendrę."
+          "tresc": "**Kukurydza.** Odsącz kukurydzę i odmierz potrzebną ilość."
         },
         {
-          "tresc": "Usuń nasiona papryki, pokrój paprykę i pomidora. Obierz i posiekaj cebulę, posiekaj kolendrę."
+          "tresc": "**Pomidor.** Umyj pomidory i pokrój w kostkę."
         },
         {
-          "tresc": "Obierz awokado, usuń pestkę i pokrój miąższ. Wyciśnij i odmierz sok z limonki, skrop nim awokado."
+          "tresc": "**Papryka.** Umyj paprykę, usuń gniazdo nasienne i pokrój w kostkę około 1 cm."
+        },
+        {
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
+        },
+        {
+          "tresc": "**Kolendra.** Umyj i osusz kolendrę, następnie posiekaj."
+        },
+        {
+          "tresc": "**Limonka.** Umyj limonkę, wyciśnij sok i odmierz ilość wskazaną na liście składników."
+        },
+        {
+          "tresc": "**Awokado.** Umyj awokado, usuń skórkę i pestkę. Pokrój miąższ i skrop odmierzonym sokiem z limonki."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz kmin rzymski."
         }
       ]
     },
@@ -114,10 +132,10 @@
       "minuty": 3,
       "kroki": [
         {
-          "tresc": "Wymieszaj fasolę, kukurydzę, paprykę, pomidora oraz cebulę."
+          "tresc": "**Fasola i warzywa.** Wymieszaj fasolę, kukurydzę, paprykę, pomidora oraz cebulę."
         },
         {
-          "tresc": "Dodaj oliwę, kmin, sól i awokado wraz z sokiem z limonki. Delikatnie wymieszaj i posyp kolendrą."
+          "tresc": "**Doprawienie i awokado.** Dodaj oliwę, kmin, sól i awokado wraz z sokiem z limonki. Delikatnie wymieszaj i posyp kolendrą."
         }
       ]
     }

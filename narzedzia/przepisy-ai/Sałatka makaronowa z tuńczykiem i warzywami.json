@@ -89,13 +89,25 @@
       "minuty": 12,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Pomidor.** Umyj pomidory i pokrój w kostkę."
         },
         {
-          "tresc": "Umyj i pokrój pomidora i ogórek. Umyj i posiekaj szczypiorek. Odsącz tuńczyka oraz kukurydzę."
+          "tresc": "**Ogórek.** Umyj ogórek i pokrój w kostkę."
         },
         {
-          "tresc": "Wymieszaj jogurt z musztardą, solą i pieprzem. Odmierz makaron."
+          "tresc": "**Szczypiorek.** Umyj i osusz szczypiorek, następnie drobno posiekaj."
+        },
+        {
+          "tresc": "**Tuńczyk.** Odsącz tuńczyka i lekko rozdrobnij widelcem. Odmierz po odsączeniu."
+        },
+        {
+          "tresc": "**Kukurydza.** Odsącz kukurydzę i odmierz potrzebną ilość."
+        },
+        {
+          "tresc": "**Sos jogurtowy.** Wymieszaj odmierzone jogurt i musztardę z solą oraz pieprzem."
+        },
+        {
+          "tresc": "**Makaron.** Odmierz makaron."
         }
       ]
     },
@@ -104,10 +116,13 @@
       "minuty": 20,
       "kroki": [
         {
-          "tresc": "Zagotuj wodę i ugotuj makaron przez czas z opakowania. Odcedź, krótko przelej zimną wodą i dokładnie odsącz."
+          "tresc": "**Gotowanie makaronu.** Zagotuj wodę i ugotuj makaron przez czas z opakowania."
         },
         {
-          "tresc": "Sprawdź, czy makaron jest chłodny przed połączeniem z sosem jogurtowym."
+          "tresc": "**Schłodzenie makaronu.** Odcedź, krótko przelej zimną wodą i dokładnie odsącz."
+        },
+        {
+          "tresc": "**Sprawdzenie temperatury.** Sprawdź, czy makaron jest chłodny przed połączeniem z sosem jogurtowym."
         }
       ]
     },
@@ -116,7 +131,7 @@
       "minuty": 3,
       "kroki": [
         {
-          "tresc": "Wymieszaj makaron z tuńczykiem, warzywami, kukurydzą i sosem. Posyp szczypiorkiem i podaj."
+          "tresc": "**Połączenie sałatki.** Wymieszaj makaron z tuńczykiem, warzywami, kukurydzą i sosem. Posyp szczypiorkiem i podaj."
         }
       ]
     }

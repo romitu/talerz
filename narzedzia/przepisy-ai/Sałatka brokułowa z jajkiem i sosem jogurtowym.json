@@ -86,13 +86,19 @@
       "minuty": 10,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Brokuł.** Umyj brokuł i podziel na małe różyczki."
         },
         {
-          "tresc": "Umyj brokuł i podziel na małe różyczki. Obierz i posiekaj cebulę. Umyj i posiekaj szczypiorek. Odsącz kukurydzę."
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
         },
         {
-          "tresc": "Wymieszaj jogurt z musztardą, solą i pieprzem; odstaw do lodówki."
+          "tresc": "**Szczypiorek.** Umyj i osusz szczypiorek, następnie drobno posiekaj."
+        },
+        {
+          "tresc": "**Kukurydza.** Odsącz kukurydzę i odmierz potrzebną ilość."
+        },
+        {
+          "tresc": "**Sos jogurtowy.** Wymieszaj odmierzone jogurt i musztardę z solą i pieprzem. Odstaw do lodówki."
         }
       ]
     },
@@ -101,13 +107,16 @@
       "minuty": 20,
       "kroki": [
         {
-          "tresc": "Zagotuj w garnku wodę przykrywającą jajka. Włóż je ostrożnie i gotuj przez 9–10 minut przy łagodnym wrzeniu, licząc od włożenia. Schłodź zimną wodą i obierz."
+          "tresc": "**Gotowanie jajek.** Zagotuj tyle wody, aby przykryła jajka. Ostrożnie włóż jajka i gotuj przy łagodnym wrzeniu przez **9–10 minut**, licząc od włożenia."
         },
         {
-          "tresc": "Równolegle w drugim garnku zagotuj wodę. Gotuj brokuł 4–5 minut, odcedź, krótko schłodź zimną wodą i dokładnie odsącz."
+          "tresc": "**Schłodzenie jajek.** Przełóż jajka do zimnej wody. Po schłodzeniu obierz."
         },
         {
-          "tresc": "Pokrój schłodzone jajka."
+          "tresc": "**Brokuł — równolegle.** Równolegle w drugim garnku zagotuj wodę. Gotuj brokuł **4–5 minut**, odcedź, krótko schłodź zimną wodą i dokładnie odsącz."
+        },
+        {
+          "tresc": "**Krojenie jajek.** Pokrój schłodzone jajka."
         }
       ]
     },
@@ -116,7 +125,7 @@
       "minuty": 3,
       "kroki": [
         {
-          "tresc": "Wymieszaj brokuł, jajka, kukurydzę, cebulę oraz sos. Posyp szczypiorkiem i podaj."
+          "tresc": "**Połączenie i podanie.** Wymieszaj brokuł, jajka, kukurydzę, cebulę oraz sos. Posyp szczypiorkiem i podaj."
         }
       ]
     }

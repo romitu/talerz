@@ -1,0 +1,164 @@
+{
+  "nazwa": "Tofu z brokułem i ryżem",
+  "opis": "Smażone tofu z brokułem, imbirem, czosnkiem i sezamem, podane z ryżem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "azjatycka"
+  ],
+  "rodzaje": [
+    "kasza_ryz"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 548,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 1,
+  "czas_przygotowania_min": 12,
+  "czas_obrobki_min": 25,
+  "sprzet": [
+    "Patelnia 28 cm",
+    "Garnek 2 l",
+    "Tarka o drobnych oczkach",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna",
+    "Sitko"
+  ],
+  "przechowywanie": "Porcję z ugotowanym ryżem szybko schłodź w płytkim pojemniku i wstaw do lodówki, najlepiej w ciągu godziny. Przechowuj do 24 godzin. Odgrzewaj tylko raz, do gorącego środka całej porcji. Lodówka: do 4°C.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli tofu nie rumieni się, osusz je i smaż partiami. Za słony sos złagodź niewielką ilością wody.",
+  "skladniki": [
+    {
+      "nazwa": "Tofu naturalne",
+      "ilosc": 180,
+      "jednostka": "g",
+      "stan": "osuszone i pokrojone w kostkę"
+    },
+    {
+      "nazwa": "Brokuł, surowy",
+      "ilosc": 200,
+      "jednostka": "g",
+      "stan": "podzielony na małe różyczki"
+    },
+    {
+      "nazwa": "Ryż jaśminowy, suchy",
+      "ilosc": 70,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sos sojowy",
+      "ilosc": 20,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Olej rzepakowy",
+      "ilosc": 8,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Imbir korzeń, surowy",
+      "ilosc": 10,
+      "jednostka": "g",
+      "stan": "drobno starty"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 5,
+      "jednostka": "g",
+      "stan": "posiekany"
+    },
+    {
+      "nazwa": "Sezam",
+      "ilosc": 10,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cebula dymka, surowa",
+      "ilosc": 15,
+      "jednostka": "g",
+      "stan": "pokrojona"
+    },
+    {
+      "nazwa": "woda",
+      "ilosc": 30,
+      "jednostka": "ml",
+      "stan": "do krótkiego duszenia brokułu"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 12,
+      "kroki": [
+        {
+          "tresc": "**Ryż.** Odmierz suchy ryż i przepłucz na sitku pod zimną wodą."
+        },
+        {
+          "tresc": "**Tofu.** Odsącz i dokładnie osusz tofu. Pokrój w kostkę około 2 cm."
+        },
+        {
+          "tresc": "**Brokuł.** Umyj brokuł i podziel na małe różyczki około 2 cm."
+        },
+        {
+          "tresc": "**Czosnek.** Obierz czosnek i drobno posiekaj."
+        },
+        {
+          "tresc": "**Imbir.** Obierz imbir i zetrzyj na drobnej tarce."
+        },
+        {
+          "tresc": "**Dymka.** Umyj dymkę i pokrój w cienkie plasterki."
+        },
+        {
+          "tresc": "**Woda do brokułu.** Odmierz wodę z listy do krótkiego duszenia brokułu. Woda do gotowania ryżu jest dodatkowa i zostanie odlana."
+        },
+        {
+          "tresc": "**Dodatki.** Odmierz sezam i sos sojowy."
+        },
+        {
+          "tresc": "**Olej.** Odmierz olej."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie ryżu i smażenie",
+      "minuty": 25,
+      "kroki": [
+        {
+          "tresc": "**Ryż — równolegle.** Zagotuj na pierwszym palniku tyle wody, aby ziarna swobodnie się gotowały. Wsyp ryż i gotuj przez czas z opakowania. Nastaw minutnik; w tym czasie wykonuj kolejne kroki na drugim palniku."
+        },
+        {
+          "tresc": "**Ryż — po minutniku.** Po upływie czasu sprawdź miękkość ziaren i odcedź nadmiar wody. Przykryj garnek i odstaw poza palnik. Zrób to niezależnie od postępu pracy przy pozostałych składnikach."
+        },
+        {
+          "tresc": "**Rozgrzanie oleju.** Na drugim palniku rozgrzej połowę oleju przez **1 minutę**."
+        },
+        {
+          "tresc": "**Smażenie tofu.** Smaż tofu przez **6–8 minut**, obracając."
+        },
+        {
+          "tresc": "**Zdjęcie tofu.** Przełóż na talerz."
+        },
+        {
+          "tresc": "**Obsmażenie brokułu.** Dodaj pozostały olej i brokuł, smaż **2 minuty**."
+        },
+        {
+          "tresc": "**Duszenie brokułu.** Dolej odmierzoną wodę do brokułu i przykryj; duś **3–4 minuty**."
+        },
+        {
+          "tresc": "**Odparowanie.** Odkryj i odparuj resztę płynu."
+        },
+        {
+          "tresc": "**Czosnek i imbir.** Dodaj czosnek oraz imbir, smaż **30 sekund**."
+        },
+        {
+          "tresc": "**Połączenie z tofu.** Włóż tofu, dodaj sos sojowy i podgrzewaj **1 minutę**."
+        },
+        {
+          "tresc": "**Podanie.** Podaj z ryżem, sezamem i dymką."
+        }
+      ]
+    }
+  ]
+}

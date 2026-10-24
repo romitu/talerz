@@ -1,0 +1,107 @@
+{
+  "nazwa": "Nocna owsianka z borówkami i orzechami",
+  "opis": "Owsianka przygotowywana wieczorem. Wymaga co najmniej 6 godzin chłodzenia; praca zajmuje około 7 minut. Podany czas przygotowania obejmuje również oczekiwanie w lodówce. Ilości składników dobierz z listy dla przygotowywanej liczby porcji.",
+  "pory": [
+    "sniadanie"
+  ],
+  "kuchnie": [
+    "inna"
+  ],
+  "rodzaje": [
+    "na_slodko"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 435,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 2,
+  "czas_przygotowania_min": 367,
+  "czas_obrobki_min": 0,
+  "sprzet": [
+    "Miska",
+    "Waga kuchenna",
+    "Nóż szefa kuchni",
+    "Deska do krojenia"
+  ],
+  "przechowywanie": "Przechowuj pod przykryciem w lodówce do 2 dni. Orzechy dodaj tuż przed jedzeniem. Lodówka: do 4°C.",
+  "mozna_mrozic": false,
+  "ratunek": "Za gęstą owsiankę rozcieńcz mlekiem. Jeśli jest mało słodka, rozgnieć część borówek i wymieszaj.",
+  "skladniki": [
+    {
+      "nazwa": "Płatki owsiane",
+      "ilosc": 55,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Mleko 2%",
+      "ilosc": 150,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Jogurt naturalny 2%",
+      "ilosc": 100,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Borówki amerykańskie",
+      "ilosc": 100,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Nasiona chia",
+      "ilosc": 10,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Orzechy włoskie",
+      "ilosc": 20,
+      "jednostka": "g",
+      "stan": "grubo posiekane"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 4,
+      "kroki": [
+        {
+          "tresc": "**Borówki.** Umyj borówki i dokładnie osusz."
+        },
+        {
+          "tresc": "**Orzechy.** Odmierz orzechy włoskie i grubo posiekaj."
+        },
+        {
+          "tresc": "**Baza owsianki.** Odmierz płatki, mleko, jogurt i chia."
+        }
+      ]
+    },
+    {
+      "nazwa": "Mieszanie",
+      "minuty": 2,
+      "kroki": [
+        {
+          "tresc": "**Mieszanie owsianki.** Wymieszaj płatki z mlekiem, jogurtem, chia i połową borówek. Pozostałe borówki przechowaj osobno pod przykryciem w lodówce."
+        }
+      ]
+    },
+    {
+      "nazwa": "Chłodzenie",
+      "minuty": 360,
+      "kroki": [
+        {
+          "tresc": "**Chłodzenie owsianki.** Przykryj owsiankę i wstaw do lodówki na co najmniej **6 godzin**. Po **10 minutach** wymieszaj ponownie, aby chia nie zbiły się w grudki.",
+          "sygnal": "płatki miękkie, masa kremowa",
+          "uwaga": true
+        }
+      ]
+    },
+    {
+      "nazwa": "Podanie",
+      "minuty": 1,
+      "kroki": [
+        {
+          "tresc": "**Podanie.** Wymieszaj owsiankę, dodaj pozostałe borówki oraz orzechy."
+        }
+      ]
+    }
+  ]
+}

@@ -93,13 +93,28 @@
       "minuty": 10,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
         },
         {
-          "tresc": "Obierz i posiekaj cebulę oraz czosnek. Opłucz soczewicę na sitku."
+          "tresc": "**Czosnek.** Obierz czosnek i drobno posiekaj."
         },
         {
-          "tresc": "Umyj szpinak, odsącz i usuń grube łodygi. Odmierz pomidory, mleko kokosowe i wodę z listy."
+          "tresc": "**Soczewica.** Odmierz soczewicę i opłucz na sitku."
+        },
+        {
+          "tresc": "**Szpinak.** Umyj i odsącz szpinak. Usuń grube łodygi, duże liście porwij na mniejsze kawałki."
+        },
+        {
+          "tresc": "**Płynna baza.** Odmierz pomidory z puszki, mleko kokosowe i wodę z listy składników."
+        },
+        {
+          "tresc": "**Pasta curry.** Odmierz pastę curry."
+        },
+        {
+          "tresc": "**Olej.** Odmierz olej."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól i kurkumę."
         }
       ]
     },
@@ -108,18 +123,27 @@
       "minuty": 35,
       "kroki": [
         {
-          "tresc": "Rozgrzej olej przez 1 minutę. Smaż cebulę 4 minuty. Dodaj czosnek, pastę curry i kurkumę; smaż 1 minutę, mieszając."
+          "tresc": "**Rozgrzanie oleju.** Rozgrzej olej przez **1 minutę**."
         },
         {
-          "tresc": "Dodaj soczewicę, odmierzoną wodę i mleko kokosowe. Doprowadź do wrzenia przez około 3 minuty i gotuj na małym ogniu 12–15 minut pod uchyloną pokrywką. Mieszaj co kilka minut."
+          "tresc": "**Cebula.** Smaż cebulę **4 minuty**."
         },
         {
-          "tresc": "Gdy soczewica zmięknie, dodaj pomidory i gotuj bez przykrycia jeszcze 6–8 minut. Jeśli soczewica jest twarda, przed dodaniem pomidorów dogotuj ją po 3 minuty, uzupełniając odparowaną wodę.",
+          "tresc": "**Pasta curry.** Dodaj czosnek, pastę curry i kurkumę; smaż **1 minutę**, mieszając."
+        },
+        {
+          "tresc": "**Gotowanie soczewicy.** Dodaj soczewicę, odmierzoną wodę i mleko kokosowe. Doprowadź do wrzenia przez około **3 minuty** i gotuj na małym ogniu **12–15 minut** pod uchyloną pokrywką. Mieszaj co kilka minut."
+        },
+        {
+          "tresc": "**Pomidory.** Gdy soczewica zmięknie, dodaj pomidory i gotuj bez przykrycia jeszcze **6–8 minut**. Jeśli soczewica jest twarda, przed dodaniem pomidorów dogotuj ją po **3 minuty**, uzupełniając odparowaną wodę.",
           "sygnal": "soczewica jest miękka i częściowo się rozpada",
           "uwaga": true
         },
         {
-          "tresc": "Dodaj szpinak i gotuj 1–2 minuty, tylko do zwiędnięcia. Dopraw solą i podaj."
+          "tresc": "**Szpinak.** Dodaj szpinak i gotuj **1–2 minuty**, tylko do zwiędnięcia."
+        },
+        {
+          "tresc": "**Doprawienie i podanie.** Dopraw solą i podaj."
         }
       ]
     }

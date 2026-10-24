@@ -1,0 +1,156 @@
+{
+  "nazwa": "Morszczuk w sosie pomidorowym z ryżem",
+  "opis": "Morszczuk duszony w ziołowym sosie pomidorowym, podany z ryżem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
+  "pory": [
+    "obiad"
+  ],
+  "kuchnie": [
+    "srodziemnomorska"
+  ],
+  "rodzaje": [
+    "kasza_ryz"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 557,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 1,
+  "czas_przygotowania_min": 10,
+  "czas_obrobki_min": 30,
+  "sprzet": [
+    "Patelnia 28 cm",
+    "Garnek 2 l",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna",
+    "Sitko",
+    "Termometr do mięsa"
+  ],
+  "przechowywanie": "Porcję z ugotowanym ryżem szybko schłodź w płytkim pojemniku i wstaw do lodówki, najlepiej w ciągu godziny. Przechowuj do 24 godzin. Odgrzewaj tylko raz, do gorącego środka całej porcji. Lodówka: do 4°C.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli sos jest kwaśny, dodaj odrobinę startej marchewki. Jeśli ryba się rozpada, ogranicz mieszanie.",
+  "skladniki": [
+    {
+      "nazwa": "Morszczuk, surowy",
+      "ilosc": 180,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Passata pomidorowa",
+      "ilosc": 220,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Ryż parboiled, suchy",
+      "ilosc": 70,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 60,
+      "jednostka": "g",
+      "stan": "posiekana"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 8,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Papryka słodka mielona",
+      "ilosc": 1,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oregano suszone",
+      "ilosc": 1,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Pietruszka natka",
+      "ilosc": 10,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 1,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 10,
+      "kroki": [
+        {
+          "tresc": "**Ryż.** Odmierz suchy ryż i przepłucz na sitku pod zimną wodą."
+        },
+        {
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
+        },
+        {
+          "tresc": "**Czosnek.** Obierz czosnek i drobno posiekaj."
+        },
+        {
+          "tresc": "**Natka pietruszki.** Umyj i osusz natkę, usuń grube łodygi i drobno posiekaj liście."
+        },
+        {
+          "tresc": "**Morszczuk.** Osusz rozmrożony filet i usuń ości. Podziel na podobne kawałki grubości około 2–3 cm. Dopraw częścią soli i pieprzu."
+        },
+        {
+          "tresc": "**Po przygotowaniu ryby.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surową rybą."
+        },
+        {
+          "tresc": "**Passata.** Odmierz passatę."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz słodką paprykę i oregano."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie ryżu i duszenie ryby",
+      "minuty": 30,
+      "kroki": [
+        {
+          "tresc": "**Ryż — równolegle.** Zagotuj na pierwszym palniku tyle wody, aby ziarna swobodnie się gotowały. Wsyp ryż i gotuj przez czas z opakowania. Nastaw minutnik; w tym czasie wykonuj kolejne kroki na drugim palniku."
+        },
+        {
+          "tresc": "**Ryż — po minutniku.** Po upływie czasu sprawdź miękkość ziaren i odcedź nadmiar wody. Przykryj garnek i odstaw poza palnik. Zrób to niezależnie od postępu pracy przy pozostałych składnikach."
+        },
+        {
+          "tresc": "**Rozgrzanie oliwy.** Rozgrzej oliwę na drugim palniku przez **1 minutę**."
+        },
+        {
+          "tresc": "**Cebula.** Smaż cebulę **4 minuty**."
+        },
+        {
+          "tresc": "**Czosnek i przyprawy.** Dodaj czosnek, paprykę i oregano, smaż **30 sekund**."
+        },
+        {
+          "tresc": "**Sos pomidorowy.** Dodaj passatę, doprowadź do łagodnego wrzenia przez około **2 minuty** i gotuj **10 minut**."
+        },
+        {
+          "tresc": "**Duszenie morszczuka.** Włóż rybę do sosu, polej sosem i duś pod przykryciem przez **8–10 minut**, bez energicznego mieszania.",
+          "sygnal": "ryba ma co najmniej 63°C, jest nieprzezroczysta i rozdziela się na płatki",
+          "uwaga": true
+        },
+        {
+          "tresc": "**Doprawienie i podanie.** Dodaj natkę, dopraw pozostałą solą i pieprzem. Podaj z ryżem."
+        }
+      ]
+    }
+  ]
+}

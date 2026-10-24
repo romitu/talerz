@@ -1,0 +1,143 @@
+{
+  "nazwa": "Sałatka z czarnej fasoli, kukurydzy i pomidora",
+  "opis": "Kolorowa sałatka z czarnej fasoli, kukurydzy, pomidora, papryki i awokado. Ilości składników dobierz z listy dla przygotowywanej liczby porcji.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "inna"
+  ],
+  "rodzaje": [
+    "salatka"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 632,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 1,
+  "czas_przygotowania_min": 15,
+  "czas_obrobki_min": 0,
+  "sprzet": [
+    "Miska",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna",
+    "Sitko"
+  ],
+  "przechowywanie": "Przechowuj w lodówce do 1 dnia. Awokado najlepiej dodaj przed jedzeniem. Lodówka: do 4°C.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli sałatka puściła wodę, odlej płyn. Za kwaśny dressing złagodź większą ilością awokado.",
+  "skladniki": [
+    {
+      "nazwa": "Fasola czarna z puszki, odsączona",
+      "ilosc": 160,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Kukurydza konserwowa, odsączona",
+      "ilosc": 100,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Pomidory, surowe",
+      "ilosc": 130,
+      "jednostka": "g",
+      "stan": "pokrojone"
+    },
+    {
+      "nazwa": "Papryka czerwona, surowa",
+      "ilosc": 100,
+      "jednostka": "g",
+      "stan": "pokrojona"
+    },
+    {
+      "nazwa": "Awokado",
+      "ilosc": 0.5,
+      "jednostka": "szt",
+      "stan": "pokrojone"
+    },
+    {
+      "nazwa": "Cebula czerwona, surowa",
+      "ilosc": 40,
+      "jednostka": "g",
+      "stan": "drobno posiekana"
+    },
+    {
+      "nazwa": "Limonka",
+      "ilosc": 15,
+      "jednostka": "g",
+      "stan": "sok"
+    },
+    {
+      "nazwa": "Kolendra świeża",
+      "ilosc": 10,
+      "jednostka": "g",
+      "stan": "posiekana"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Kmin rzymski mielony",
+      "ilosc": 1,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 12,
+      "kroki": [
+        {
+          "tresc": "**Fasola.** Przełóż fasolę z puszki na sitko, opłucz i odsącz. Odmierz po odsączeniu."
+        },
+        {
+          "tresc": "**Kukurydza.** Odsącz kukurydzę i odmierz potrzebną ilość."
+        },
+        {
+          "tresc": "**Pomidor.** Umyj pomidory i pokrój w kostkę."
+        },
+        {
+          "tresc": "**Papryka.** Umyj paprykę, usuń gniazdo nasienne i pokrój w kostkę około 1 cm."
+        },
+        {
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
+        },
+        {
+          "tresc": "**Kolendra.** Umyj i osusz kolendrę, następnie posiekaj."
+        },
+        {
+          "tresc": "**Limonka.** Umyj limonkę, wyciśnij sok i odmierz ilość wskazaną na liście składników."
+        },
+        {
+          "tresc": "**Awokado.** Umyj awokado, usuń skórkę i pestkę. Pokrój miąższ i skrop odmierzonym sokiem z limonki."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz kmin rzymski."
+        }
+      ]
+    },
+    {
+      "nazwa": "Łączenie sałatki",
+      "minuty": 3,
+      "kroki": [
+        {
+          "tresc": "**Fasola i warzywa.** Wymieszaj fasolę, kukurydzę, paprykę, pomidora oraz cebulę."
+        },
+        {
+          "tresc": "**Doprawienie i awokado.** Dodaj oliwę, kmin, sól i awokado wraz z sokiem z limonki. Delikatnie wymieszaj i posyp kolendrą."
+        }
+      ]
+    }
+  ]
+}

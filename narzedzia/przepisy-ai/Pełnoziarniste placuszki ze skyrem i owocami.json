@@ -2,7 +2,8 @@
   "nazwa": "Pełnoziarniste placuszki ze skyrem i owocami",
   "opis": "Pełnoziarniste placuszki podane ze skyrem i borówkami. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
   "pory": [
-    "sniadanie"
+    "sniadanie",
+    "kolacja"
   ],
   "kuchnie": [
     "inna"
@@ -73,13 +74,16 @@
       "minuty": 10,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Borówki.** Umyj borówki i dokładnie osusz."
         },
         {
-          "tresc": "Umyj i osusz borówki. Odmierz mąkę, mleko, skyr, miód, cynamon i olej."
+          "tresc": "**Ciasto.** Odmierz mąkę, mleko i cynamon. Wbij jajka do miski, roztrzep z mlekiem, następnie dodaj mąkę i cynamon. Wymieszaj i odstaw na **5 minut**."
         },
         {
-          "tresc": "Roztrzep jajko z mlekiem, dodaj mąkę i cynamon. Wymieszaj na jednolite ciasto i odstaw na 5 minut."
+          "tresc": "**Do podania.** Odmierz skyr i miód do osobnych naczyń."
+        },
+        {
+          "tresc": "**Olej.** Odmierz olej."
         }
       ]
     },
@@ -88,15 +92,15 @@
       "minuty": 18,
       "kroki": [
         {
-          "tresc": "Rozgrzej patelnię nieprzywierającą przez 1 minutę na średnim ogniu. Rozdziel odmierzony olej między partie."
+          "tresc": "**Rozgrzanie patelni.** Rozgrzej patelnię nieprzywierającą przez **1 minutę** na średnim ogniu. Rozdziel odmierzony olej między partie."
         },
         {
-          "tresc": "Nakładaj małe porcje ciasta i smaż 2–3 minuty, aż brzegi się zetną i spód zrumieni. Odwróć i smaż jeszcze 1–2 minuty. Powtarzaj z resztą ciasta; etap obejmuje około 3 partie dla bazy.",
+          "tresc": "**Smażenie placuszków.** Nakładaj małe porcje ciasta i smaż **2–3 minuty**, aż brzegi się zetną i spód zrumieni. Odwróć i smaż jeszcze **1–2 minuty**. Powtarzaj z resztą ciasta; etap obejmuje około 3 partie dla bazy.",
           "sygnal": "placuszki mają rumiane strony i nie mają surowego ciasta w środku",
           "uwaga": true
         },
         {
-          "tresc": "Podaj ze skyrem, borówkami i miodem."
+          "tresc": "**Podanie.** Podaj ze skyrem, borówkami i miodem."
         }
       ]
     }

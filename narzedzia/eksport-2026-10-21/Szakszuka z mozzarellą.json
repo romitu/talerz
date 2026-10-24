@@ -1,0 +1,158 @@
+{
+  "nazwa": "Szakszuka z mozzarellą",
+  "opis": "Szakszuka z jajkami, papryką i mozzarellą w niewielkiej ilości intensywnego sosu pomidorowego. Suszone pomidory dodają smaku, a mozzarella łagodzi kwasowość pomidorów i nadaje daniu kremowości.",
+  "pory": [
+    "sniadanie",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "srodziemnomorska"
+  ],
+  "rodzaje": [
+    "jajka"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 554,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 0,
+  "czas_przygotowania_min": 7,
+  "czas_obrobki_min": 18,
+  "sprzet": [
+    "Patelnia 28 cm",
+    "Nóż szefa kuchni",
+    "Deska do krojenia"
+  ],
+  "przechowywanie": "Najlepiej przygotowywać jajka bezpośrednio przed jedzeniem. Sam sos pomidorowo-warzywny można przechowywać w szczelnym pojemniku w lodówce do 3 dni. Przy kolejnym podaniu podgrzej sos i dopiero wtedy wbij świeże jajka oraz dodaj mozzarellę.",
+  "mozna_mrozic": false,
+  "ratunek": "Sos za rzadki — duś dłużej bez przykrycia. Jajka się rozlały — nie mieszaj po wbiciu, tylko przykryj.",
+  "skladniki": [
+    {
+      "nazwa": "Jaja kurze, całe, surowe",
+      "ilosc": 2,
+      "jednostka": "szt"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 50,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Papryka czerwona, surowa",
+      "ilosc": 100,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Passata pomidorowa",
+      "ilosc": 100,
+      "jednostka": "ml"
+    },
+    {
+      "nazwa": "Pomidory suszone w oleju",
+      "ilosc": 15,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Ser mozzarella",
+      "ilosc": 60,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 3,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 3,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Chleb żytni razowy",
+      "ilosc": 3,
+      "jednostka": "szt"
+    },
+    {
+      "nazwa": "Papryka słodka mielona",
+      "ilosc": 2,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Kmin rzymski mielony",
+      "ilosc": 1,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Pietruszka natka",
+      "ilosc": 5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 7,
+      "kroki": [
+        {
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
+        },
+        {
+          "tresc": "**Papryka.** Umyj paprykę, usuń gniazdo nasienne i pokrój w kostkę około 1 cm."
+        },
+        {
+          "tresc": "**Suszone pomidory.** Odsącz suszone pomidory z oleju i drobno posiekaj."
+        },
+        {
+          "tresc": "**Czosnek.** Obierz czosnek i przeciśnij przez praskę lub bardzo drobno posiekaj."
+        },
+        {
+          "tresc": "**Mozzarella.** Odsącz mozzarellę i porwij na mniejsze kawałki."
+        },
+        {
+          "tresc": "**Natka pietruszki.** Umyj i osusz natkę, usuń grube łodygi i drobno posiekaj liście."
+        },
+        {
+          "tresc": "**Passata.** Odmierz passatę."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz słodką paprykę i kmin rzymski."
+        },
+        {
+          "tresc": "**Pieczywo.** Przygotuj pieczywo w ilości wskazanej na liście składników."
+        }
+      ]
+    },
+    {
+      "nazwa": "Przygotowanie szakszuki",
+      "minuty": 18,
+      "kroki": [
+        {
+          "tresc": "**Rozgrzanie oliwy.** Na patelni rozgrzej oliwę."
+        },
+        {
+          "tresc": "**Cebula i papryka.** Dodaj cebulę i paprykę. Smaż około **4–5 minut**, aż cebula się zeszkli, a papryka lekko zmięknie, ale nadal będzie miała strukturę."
+        },
+        {
+          "tresc": "**Czosnek i przyprawy.** Dodaj czosnek, słodką paprykę i kmin rzymski. Smaż około **30 sekund**, cały czas mieszając."
+        },
+        {
+          "tresc": "**Sos pomidorowy.** Wlej passatę i dodaj posiekane suszone pomidory. Wymieszaj i gotuj na małym ogniu około **4 minut**. Sos powinien lekko zgęstnieć, ale nadal pozostać wilgotny — nie odparowuj go do konsystencji pasty."
+        },
+        {
+          "tresc": "**Jajka do sosu.** Łyżką zrób w sosie wgłębienia (tak żeby jajka nie rozlały się po całej patelni) i wbij do nich jajka. Po wbiciu jajek nie mieszaj sosu."
+        },
+        {
+          "tresc": "**Gotowanie jajek.** Przykryj patelnię i gotuj na małym ogniu około **5–6 minut**, aż białka będą ścięte, a żółtka pozostaną miękkie lub lekko płynne."
+        },
+        {
+          "tresc": "**Mozzarella.** Rozłóż na wierzchu kawałki mozzarelli. Ponownie przykryj patelnię i podgrzewaj jeszcze około **1 minuty**, tylko do lekkiego zmięknięcia sera."
+        },
+        {
+          "tresc": "**Podanie.** Zdejmij patelnię z ognia, posyp natką pietruszki i podawaj od razu z pieczywem żytnim."
+        }
+      ]
+    }
+  ]
+}

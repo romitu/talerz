@@ -15,8 +15,8 @@
   "porcja_g": 380,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 1,
-  "czas_przygotowania_min": 5,
-  "czas_obrobki_min": 0,
+  "czas_przygotowania_min": 3,
+  "czas_obrobki_min": 2,
   "sprzet": [
     "Miska",
     "Widelec",
@@ -61,10 +61,13 @@
       "minuty": 3,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Banan.** Obierz banana. Połowę miąższu rozgnieć, resztę pokrój w plasterki."
         },
         {
-          "tresc": "Obierz przygotowanego banana. Połowę odmierzonego miąższu rozgnieć, pozostałą część pokrój w plasterki. Odmierz skyr, kakao, mleko i masło orzechowe."
+          "tresc": "**Krem kakaowy.** Odmierz skyr, kakao i mleko."
+        },
+        {
+          "tresc": "**Masło orzechowe.** Odmierz masło orzechowe do podania."
         }
       ]
     },
@@ -73,10 +76,10 @@
       "minuty": 2,
       "kroki": [
         {
-          "tresc": "Rozprowadź kakao w mleku, dodaj skyr i rozgniecionego banana, wymieszaj."
+          "tresc": "**Krem kakaowy.** Rozprowadź kakao w mleku, dodaj skyr i rozgniecionego banana, wymieszaj."
         },
         {
-          "tresc": "Dodaj masło orzechowe oraz plasterki banana."
+          "tresc": "**Dodatki.** Dodaj masło orzechowe oraz plasterki banana."
         }
       ]
     }

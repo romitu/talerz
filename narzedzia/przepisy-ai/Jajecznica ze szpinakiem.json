@@ -1,0 +1,127 @@
+{
+  "nazwa": "Jajecznica ze szpinakiem",
+  "opis": "Delikatna jajecznica ze szpinakiem — szybka, sycąca i lekka. Szpinak dodaje świeżości i dobrze równoważy kremowe jajka.",
+  "pory": [
+    "sniadanie",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "polska"
+  ],
+  "rodzaje": [
+    "jajka"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 498,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 1,
+  "czas_przygotowania_min": 3,
+  "czas_obrobki_min": 7,
+  "sprzet": [
+    "Patelnia 24 cm",
+    "Nóż szefa kuchni",
+    "Deska do krojenia"
+  ],
+  "przechowywanie": "Najlepiej jedz od razu. Odgrzewana jajecznica robi się gumowata. Jeśli musisz ją przechować, trzymaj w szczelnym pojemniku w lodówce maksymalnie 1 dzień.",
+  "mozna_mrozic": false,
+  "ratunek": "Wyszła wodnista — to znak, że szpinak nie odparował. Odlej płyn i dosmaż na większym ogniu.",
+  "skladniki": [
+    {
+      "nazwa": "Jaja kurze, całe, surowe",
+      "ilosc": 3,
+      "jednostka": "szt"
+    },
+    {
+      "nazwa": "Szpinak mrożony",
+      "ilosc": 80,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 9,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Chleb żytni razowy",
+      "ilosc": 3,
+      "jednostka": "szt"
+    },
+    {
+      "nazwa": "Pomidory, surowe",
+      "ilosc": 130,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Szczypiorek świeży",
+      "ilosc": 8,
+      "jednostka": "g",
+      "stan": "posiekany"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 3,
+      "kroki": [
+        {
+          "tresc": "**Pomidor.** Umyj pomidory i pokrój w cząstki."
+        },
+        {
+          "tresc": "**Szczypiorek.** Umyj i osusz szczypiorek, następnie drobno posiekaj."
+        },
+        {
+          "tresc": "**Jajka.** Wbij jajka do miski i roztrzep widelcem."
+        },
+        {
+          "tresc": "**Pieczywo.** Przygotuj pieczywo w ilości wskazanej na liście składników."
+        },
+        {
+          "tresc": "**Szpinak.** Odmierz mrożony szpinak i pozostaw w zamrażarce do smażenia."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól i pieprz."
+        }
+      ]
+    },
+    {
+      "nazwa": "Przygotowanie szpinaku",
+      "minuty": 3,
+      "kroki": [
+        {
+          "tresc": "**Rozgrzanie oliwy.** Na patelni rozgrzej oliwę."
+        },
+        {
+          "tresc": "**Rozmrożenie szpinaku.** Dodaj mrożony szpinak bez wcześniejszego rozmrażania i smaż przez około **2–3 minuty**, aż się rozmrozi i odparuje z niego nadmiar wody."
+        }
+      ]
+    },
+    {
+      "nazwa": "Smażenie jajecznicy i podanie",
+      "minuty": 4,
+      "kroki": [
+        {
+          "tresc": "**Smażenie jajek.** Zmniejsz ogień. Wlej jajka i smaż na małym ogniu przez około **2–3 minuty**, delikatnie mieszając, aż się zetną, ale pozostaną wilgotne. Dopraw solą i pieprzem."
+        },
+        {
+          "tresc": "**Szczypiorek.** Zdejmij patelnię z ognia i posyp jajecznicę szczypiorkiem."
+        },
+        {
+          "tresc": "**Podanie.** Podawaj od razu z pomidorem i pieczywem żytnim."
+        }
+      ]
+    }
+  ]
+}

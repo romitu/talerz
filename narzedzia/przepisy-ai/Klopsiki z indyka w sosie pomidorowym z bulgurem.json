@@ -11,7 +11,7 @@
     "kasza_ryz"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 651.5,
+  "porcja_g": 652,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 3,
   "czas_przygotowania_min": 18,
@@ -99,16 +99,34 @@
       "minuty": 18,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Cebula.** Obierz i drobno posiekaj cebulę. Połowę odłóż do klopsików, połowę do sosu."
         },
         {
-          "tresc": "Obierz i drobno posiekaj cebulę oraz czosnek. Odmierz passatę i kaszę."
+          "tresc": "**Czosnek.** Obierz czosnek i drobno posiekaj."
         },
         {
-          "tresc": "Roztrzep jajko w misce. Połącz mięso z jajkiem, bułką tartą, połową cebuli oraz częścią soli i pieprzu. Odstaw na 5 minut, aby bułka wchłonęła wilgoć."
+          "tresc": "**Jajka.** Wbij jajka do miski i roztrzep widelcem."
         },
         {
-          "tresc": "Wilgotnymi dłońmi uformuj klopsiki o średnicy około 3 cm. Umyj przybory i ręce po surowym mięsie."
+          "tresc": "**Masa na klopsiki.** Połącz mięso z roztrzepanymi jajkami, bułką tartą, połową cebuli oraz częścią soli i pieprzu. Odstaw na **5 minut**, aby bułka wchłonęła wilgoć."
+        },
+        {
+          "tresc": "**Formowanie klopsików.** Wilgotnymi dłońmi uformuj klopsiki o średnicy około 3 cm."
+        },
+        {
+          "tresc": "**Po przygotowaniu mięsa.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surowym mięsem."
+        },
+        {
+          "tresc": "**Bulgur.** Odmierz kaszę bulgur."
+        },
+        {
+          "tresc": "**Passata.** Odmierz passatę."
+        },
+        {
+          "tresc": "**Olej.** Odmierz olej."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz słodką paprykę i oregano."
         }
       ]
     },
@@ -117,24 +135,36 @@
       "minuty": 32,
       "kroki": [
         {
-          "tresc": "Na pierwszym palniku zagotuj wodę w garnku. Dodaj kaszę bulgur i gotuj przez czas wskazany na opakowaniu; po ugotowaniu odcedź. Wody użyj tyle, by ziarna były zanurzone i swobodnie się gotowały. Nastaw minutnik; równolegle wykonuj kolejne czynności na drugim palniku. Woda do gotowania jest dodatkowa i zostanie odlana."
+          "tresc": "**Bulgur — równolegle.** Zagotuj na pierwszym palniku tyle wody, aby ziarna swobodnie się gotowały. Wsyp kaszę bulgur i gotuj przez czas z opakowania. Nastaw minutnik; w tym czasie wykonuj kolejne kroki na drugim palniku."
         },
         {
-          "tresc": "Na drugim palniku rozgrzej olej przez 1 minutę. Obsmaż klopsiki przez 5–6 minut, ostrożnie obracając. Przełóż na talerz."
+          "tresc": "**Bulgur — po minutniku.** Po upływie czasu sprawdź miękkość ziaren i odcedź nadmiar wody. Przykryj garnek i odstaw poza palnik. Zrób to niezależnie od postępu pracy przy pozostałych składnikach."
         },
         {
-          "tresc": "Na tej samej patelni smaż pozostałą cebulę przez 4 minuty. Dodaj czosnek, oregano i paprykę; smaż 30 sekund."
+          "tresc": "**Rozgrzanie oleju.** Na drugim palniku rozgrzej olej przez **1 minutę**."
         },
         {
-          "tresc": "Dodaj passatę i doprowadź do łagodnego wrzenia przez około 2 minuty."
+          "tresc": "**Obsmażenie klopsików.** Obsmaż klopsiki przez **5–6 minut**, ostrożnie obracając."
         },
         {
-          "tresc": "Włóż klopsiki i duś pod przykryciem przez 15 minut na małym ogniu. Obróć je w połowie; w razie gęstnienia sosu dodaj trochę gorącej wody.",
+          "tresc": "**Zdjęcie klopsików.** Przełóż na talerz."
+        },
+        {
+          "tresc": "**Cebula.** Na tej samej patelni smaż pozostałą cebulę przez **4 minuty**."
+        },
+        {
+          "tresc": "**Czosnek i przyprawy.** Dodaj czosnek, oregano i paprykę; smaż **30 sekund**."
+        },
+        {
+          "tresc": "**Passata.** Dodaj passatę i doprowadź do łagodnego wrzenia przez około **2 minuty**."
+        },
+        {
+          "tresc": "**Duszenie klopsików.** Włóż klopsiki i duś pod przykryciem przez **15 minut** na małym ogniu. Obróć je w połowie; w razie gęstnienia sosu dodaj trochę gorącej wody.",
           "sygnal": "temperatura w środku największego klopsika wynosi co najmniej 74°C",
           "uwaga": true
         },
         {
-          "tresc": "Dopraw sos pozostałą solą i pieprzem. Podaj z odcedzoną kaszą."
+          "tresc": "**Doprawienie i podanie.** Dopraw sos pozostałą solą i pieprzem. Podaj z odcedzoną kaszą."
         }
       ]
     }

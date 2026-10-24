@@ -1,0 +1,106 @@
+{
+  "nazwa": "Pierś z kurczaka z grilla",
+  "opis": "Soczysta grillowana pierś z kurczaka z czosnkiem i słodką papryką. Uniwersalny dodatek białkowy do zup, sałatek, kanapek i innych posiłków; dobrze smakuje również na zimno.",
+  "pory": [
+    "dodatek"
+  ],
+  "kuchnie": [
+    "polska"
+  ],
+  "rodzaje": [],
+  "porcjowanie": "waga",
+  "porcja_g": 107,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 3,
+  "czas_przygotowania_min": 13,
+  "czas_obrobki_min": 15,
+  "sprzet": [
+    "Grill kontaktowy",
+    "Deska do krojenia",
+    "Nóż szefa kuchni",
+    "Termometr do mięsa"
+  ],
+  "przechowywanie": "W lodówce do 3 dni, w zamkniętym pojemniku. Na zimno nadaje się do sałatek i kanapek.",
+  "mozna_mrozic": false,
+  "ratunek": "Przesuszona — pokrój w paski i wymieszaj z łyżką jogurtu greckiego albo dodaj do zupy, gdzie nawilgnie.",
+  "skladniki": [
+    {
+      "nazwa": "Pierś z kurczaka, surowa",
+      "ilosc": 100,
+      "jednostka": "g",
+      "stan": "rozbita do grubości 1,5 cm"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 3,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 2,
+      "jednostka": "g",
+      "stan": "przeciśnięty przez praskę"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Papryka słodka mielona",
+      "ilosc": 1,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 13,
+      "kroki": [
+        {
+          "tresc": "**Czosnek.** Obierz czosnek i przeciśnij przez praskę lub bardzo drobno posiekaj."
+        },
+        {
+          "tresc": "**Kurczak.** Osusz pierś i rozbij do równej grubości około 1,5 cm. Natrzyj z obu stron oliwą, czosnkiem, solą i słodką papryką."
+        },
+        {
+          "tresc": "**Po przygotowaniu mięsa.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surowym mięsem."
+        },
+        {
+          "tresc": "**Marynowanie.** Odstaw mięso na około **10 minut** w temperaturze pokojowej.",
+          "uwaga": true
+        }
+      ]
+    },
+    {
+      "nazwa": "Grillowanie",
+      "minuty": 10,
+      "kroki": [
+        {
+          "tresc": "**Rozgrzanie grilla.** Rozgrzej grill kontaktowy do wysokiej temperatury zgodnie z instrukcją urządzenia, zwykle przez około **3 minuty**."
+        },
+        {
+          "tresc": "**Kurczak na grill.** Połóż kurczaka na rozgrzanym grillu i zamknij pokrywę. Nie dociskaj jej dodatkowo."
+        },
+        {
+          "tresc": "**Grillowanie kurczaka.** Grilluj około **5–7 minut** bez obracania, ponieważ grill kontaktowy ogrzewa mięso jednocześnie z obu stron."
+        },
+        {
+          "tresc": "**Sprawdzenie kurczaka.** Sprawdź termometrem temperaturę w najgrubszym miejscu mięsa. Kurczak jest gotowy po osiągnięciu około **74°C**."
+        }
+      ]
+    },
+    {
+      "nazwa": "Odpoczynek i krojenie",
+      "minuty": 5,
+      "kroki": [
+        {
+          "tresc": "**Odpoczynek kurczaka.** Zdejmij kurczaka z grilla i odstaw na około **5 minut**."
+        },
+        {
+          "tresc": "**Krojenie.** Po odpoczynku pokrój mięso zgodnie z przeznaczeniem — w plastry, paski lub kostkę."
+        }
+      ]
+    }
+  ]
+}

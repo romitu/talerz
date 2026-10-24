@@ -1,0 +1,153 @@
+{
+  "nazwa": "Tortilla z tofu i chrupiącymi warzywami",
+  "opis": "Pełnoziarnista tortilla z rumianym tofu, kapustą pekińską, marchewką i ogórkiem w sosie orzechowo-sojowym. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "azjatycka"
+  ],
+  "rodzaje": [
+    "kanapki"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 528,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 1,
+  "czas_przygotowania_min": 12,
+  "czas_obrobki_min": 12,
+  "sprzet": [
+    "Patelnia 24 cm",
+    "Miska",
+    "Tarka o grubych oczkach",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Farsz przechowuj w lodówce do 1 dnia. Tortillę składaj bezpośrednio przed jedzeniem. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli tofu nie rumieni się, dokładnie je osusz. Za gęsty sos rozcieńcz wodą lub sokiem z limonki.",
+  "skladniki": [
+    {
+      "nazwa": "Tortilla pełnoziarnista",
+      "ilosc": 60,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Tofu naturalne",
+      "ilosc": 160,
+      "jednostka": "g",
+      "stan": "osuszone i pokrojone"
+    },
+    {
+      "nazwa": "Kapusta pekińska, surowa",
+      "ilosc": 100,
+      "jednostka": "g",
+      "stan": "cienko pokrojona"
+    },
+    {
+      "nazwa": "Marchew, surowa",
+      "ilosc": 60,
+      "jednostka": "g",
+      "stan": "starta"
+    },
+    {
+      "nazwa": "Ogórek, surowy",
+      "ilosc": 80,
+      "jednostka": "g",
+      "stan": "pokrojony w paski"
+    },
+    {
+      "nazwa": "Sos sojowy",
+      "ilosc": 15,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Masło orzechowe bez cukru",
+      "ilosc": 15,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Limonka",
+      "ilosc": 10,
+      "jednostka": "g",
+      "stan": "sok"
+    },
+    {
+      "nazwa": "Olej rzepakowy",
+      "ilosc": 5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sezam",
+      "ilosc": 8,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "woda",
+      "ilosc": 15,
+      "jednostka": "ml",
+      "stan": "do sosu orzechowego"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 12,
+      "kroki": [
+        {
+          "tresc": "**Kapusta pekińska.** Umyj i osusz kapustę, następnie pokrój w cienkie paski."
+        },
+        {
+          "tresc": "**Ogórek.** Umyj ogórek i pokrój w cienkie słupki."
+        },
+        {
+          "tresc": "**Marchew.** Umyj i obierz marchew, zetrzyj na tarce o grubych oczkach."
+        },
+        {
+          "tresc": "**Tofu.** Odsącz i dokładnie osusz tofu, pokrój w cienkie paski."
+        },
+        {
+          "tresc": "**Limonka.** Umyj limonkę, wyciśnij sok i odmierz ilość wskazaną na liście składników."
+        },
+        {
+          "tresc": "**Sos orzechowy.** Wymieszaj odmierzone masło orzechowe, sos sojowy, sok z limonki i wodę."
+        },
+        {
+          "tresc": "**Sezam.** Odmierz sezam."
+        },
+        {
+          "tresc": "**Olej.** Odmierz olej."
+        },
+        {
+          "tresc": "**Tortille.** Wyjmij potrzebne placki i przykryj, żeby nie wysychały."
+        }
+      ]
+    },
+    {
+      "nazwa": "Smażenie i składanie",
+      "minuty": 12,
+      "kroki": [
+        {
+          "tresc": "**Rozgrzanie oleju.** Rozgrzej olej przez **1 minutę**."
+        },
+        {
+          "tresc": "**Smażenie tofu.** Smaż tofu **6–8 minut**, obracając, aż brzegi się zrumienią."
+        },
+        {
+          "tresc": "**Zdjęcie tofu.** Przełóż na talerz."
+        },
+        {
+          "tresc": "**Ogrzanie tortilli.** Ogrzej tortillę na suchej patelni po **15–20 sekund** na stronę."
+        },
+        {
+          "tresc": "**Nadziewanie.** Posmaruj sosem, ułóż tofu i warzywa, posyp sezamem."
+        },
+        {
+          "tresc": "**Zwijanie.** Zawiń boki i zroluj bez przepełniania. Pozostałe tofu i warzywa podaj obok z resztą sosu."
+        }
+      ]
+    }
+  ]
+}

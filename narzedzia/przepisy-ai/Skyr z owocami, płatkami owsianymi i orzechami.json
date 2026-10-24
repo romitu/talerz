@@ -15,8 +15,8 @@
   "porcja_g": 385,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 1,
-  "czas_przygotowania_min": 5,
-  "czas_obrobki_min": 0,
+  "czas_przygotowania_min": 3,
+  "czas_obrobki_min": 2,
   "sprzet": [
     "Miska",
     "Nóż szefa kuchni",
@@ -61,10 +61,19 @@
       "minuty": 3,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Borówki.** Umyj borówki i dokładnie osusz."
         },
         {
-          "tresc": "Umyj i osusz borówki. Obierz i pokrój banana. Posiekaj orzechy. Odmierz skyr i płatki."
+          "tresc": "**Banan.** Obierz banana i pokrój miąższ w plasterki."
+        },
+        {
+          "tresc": "**Orzechy.** Odmierz orzechy włoskie i grubo posiekaj."
+        },
+        {
+          "tresc": "**Skyr.** Odmierz skyr."
+        },
+        {
+          "tresc": "**Płatki owsiane.** Odmierz płatki owsiane."
         }
       ]
     },
@@ -73,7 +82,8 @@
       "minuty": 2,
       "kroki": [
         {
-          "tresc": "Przełóż skyr do miski, dodaj owoce. Posyp płatkami i orzechami bezpośrednio przed jedzeniem."
+          "tresc": "**Podanie.** Przełóż skyr do miski, dodaj owoce. Posyp płatkami i orzechami bezpośrednio przed jedzeniem.",
+          "sygnal": "Jeśli wolisz, aby płatki były nieco miększe, wystarczy odczekać 2–3 minuty po wymieszaniu ich ze skyrem"
         }
       ]
     }

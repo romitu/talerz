@@ -1,0 +1,179 @@
+{
+  "nazwa": "Wieprzowina w sosie chrzanowym",
+  "opis": "Delikatna wieprzowina w kremowym sosie chrzanowym na bazie bulionu i jogurtu greckiego. Podawana z puree ziemniaczanym i fasolką szparagową.",
+  "pory": [
+    "obiad"
+  ],
+  "kuchnie": [
+    "polska"
+  ],
+  "rodzaje": [],
+  "porcjowanie": "waga",
+  "porcja_g": 731,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 3,
+  "czas_przygotowania_min": 15,
+  "czas_obrobki_min": 50,
+  "sprzet": [
+    "Garnek 3 l",
+    "Patelnia 24 cm",
+    "Tłuczek do ziemniaków",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Garnek 2 l"
+  ],
+  "przechowywanie": "Mięso z sosem przechowuj w szczelnym pojemniku w lodówce do 3 dni. Puree i fasolkę najlepiej przechowywać osobno. Podgrzewaj sos na małym ogniu, bez doprowadzania do intensywnego wrzenia, żeby jogurt się nie zwarzył.",
+  "mozna_mrozic": false,
+  "ratunek": "Sos się zwarzył — jogurt trafił do wrzątku. Zblenduj i wmieszaj łyżkę zimnego jogurtu. Chrzan stracił ostrość — dodaj świeżego po zdjęciu z ognia.",
+  "skladniki": [
+    {
+      "nazwa": "Szynka wieprzowa chuda, surowa",
+      "ilosc": 130,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Ziemniaki, surowe",
+      "ilosc": 220,
+      "jednostka": "g",
+      "stan": "obrane"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 3,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Domowy bulion warzywny",
+      "ilosc": 120,
+      "jednostka": "ml"
+    },
+    {
+      "nazwa": "Chrzan tarty",
+      "ilosc": 20,
+      "jednostka": "ml"
+    },
+    {
+      "nazwa": "Jogurt grecki naturalny 2%",
+      "ilosc": 70,
+      "jednostka": "ml"
+    },
+    {
+      "nazwa": "Fasolka szparagowa mrożona",
+      "ilosc": 150,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Pietruszka natka",
+      "ilosc": 5,
+      "jednostka": "g",
+      "stan": "posiekana"
+    },
+    {
+      "nazwa": "koperek świeży",
+      "ilosc": 5,
+      "jednostka": "g",
+      "stan": "posiekany"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 1,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 2,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 15,
+      "kroki": [
+        {
+          "tresc": "**Ziemniaki.** Umyj i obierz ziemniaki. Pokrój na kawałki podobnej wielkości."
+        },
+        {
+          "tresc": "**Czosnek.** Obierz czosnek i przeciśnij przez praskę lub bardzo drobno posiekaj."
+        },
+        {
+          "tresc": "**Natka pietruszki.** Umyj i osusz natkę, usuń grube łodygi i drobno posiekaj liście."
+        },
+        {
+          "tresc": "**Koperek.** Umyj i osusz koperek, usuń grube łodygi i drobno posiekaj delikatne gałązki."
+        },
+        {
+          "tresc": "**Jogurt.** Odmierz jogurt i wyjmij z lodówki na czas przygotowania dania."
+        },
+        {
+          "tresc": "**Chrzan.** Odmierz chrzan i podziel na połowę: do gotowania i do wykończenia sosu."
+        },
+        {
+          "tresc": "**Wieprzowina.** Osusz mięso, pokrój na plastry grubości około 2 cm i lekko rozbij. Dopraw częścią soli i pieprzu."
+        },
+        {
+          "tresc": "**Po przygotowaniu mięsa.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surowym mięsem."
+        },
+        {
+          "tresc": "**Bulion.** Odmierz bulion."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
+        },
+        {
+          "tresc": "**Fasolka szparagowa.** Odmierz mrożoną fasolkę i pozostaw w zamrażarce do gotowania."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie mięsa, dodatków i sosu",
+      "minuty": 50,
+      "kroki": [
+        {
+          "tresc": "**Rozgrzanie oliwy.** Na patelni dobrze rozgrzej około połowy oliwy."
+        },
+        {
+          "tresc": "**Obsmażenie mięsa.** Obsmaż mięso krótko, około **1–2 minuty** z każdej strony, tylko do lekkiego zrumienienia."
+        },
+        {
+          "tresc": "**Zdjęcie mięsa.** Zdejmij z patelni."
+        },
+        {
+          "tresc": "**Rozgrzanie oliwy.** W garnku rozgrzej pozostałą oliwę."
+        },
+        {
+          "tresc": "**Czosnek.** Dodaj czosnek i smaż około **20–30 sekund**, nie dopuszczając do jego zrumienienia."
+        },
+        {
+          "tresc": "**Bulion i mięso.** Wlej bulion i zagotuj. Dodaj obsmażone mięso oraz pierwszą część chrzanu."
+        },
+        {
+          "tresc": "**Duszenie wieprzowiny.** Zmniejsz ogień, przykryj garnek i duś mięso bardzo łagodnie przez około **35–45 minut**, aż będzie miękkie. Sos powinien tylko lekko pyrkać, a nie intensywnie wrzeć."
+        },
+        {
+          "tresc": "**Ziemniaki — równolegle.** W czasie duszenia mięsa ugotuj ziemniaki w lekko osolonej wodzie do miękkości, około **15–20 minut**. Odcedź i utłucz na puree."
+        },
+        {
+          "tresc": "**Gotowanie fasolki.** Po odcedzeniu ziemniaków ugotuj fasolkę w zwolnionym garnku przez około **6–8 minut**, tak aby pozostała lekko jędrna. Odcedź."
+        },
+        {
+          "tresc": "**Zdjęcie z ognia.** Gdy mięso będzie miękkie, zdejmij garnek z ognia."
+        },
+        {
+          "tresc": "**Hartowanie jogurtu.** Do jogurtu stopniowo dodawaj trochę ciepłego sosu, mieszając do ogrzania i uzyskania jednolitej konsystencji. Wmieszaj zahartowany jogurt do garnka poza ogniem."
+        },
+        {
+          "tresc": "**Chrzan i koperek.** Dodaj pozostałą część chrzanu oraz koperek. Wymieszaj i spróbuj. Po dodaniu jogurtu i końcowej porcji chrzanu nie gotuj już sosu."
+        },
+        {
+          "tresc": "**Podanie.** Podawaj wieprzowinę z sosem chrzanowym, puree ziemniaczanym i fasolką szparagową. Posyp natką pietruszki."
+        }
+      ]
+    }
+  ]
+}

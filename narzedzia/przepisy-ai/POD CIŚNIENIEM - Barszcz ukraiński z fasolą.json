@@ -1,0 +1,235 @@
+{
+  "nazwa": "POD CIŚNIENIEM - Barszcz ukraiński z fasolą",
+  "opis": "Barszcz ukraiński na wołowinie z burakami, kapustą, ziemniakami i czerwoną fasolą.",
+  "pory": [
+    "obiad"
+  ],
+  "kuchnie": [
+    "polska"
+  ],
+  "rodzaje": [
+    "zupa"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 1065,
+  "liczba_porcji_bazowych": 2,
+  "trwalosc_dni": 3,
+  "czas_przygotowania_min": 15,
+  "czas_obrobki_min": 45,
+  "sprzet": [
+    "Garnek ciśnieniowy",
+    "Tarka o grubych oczkach",
+    "Nóż szefa kuchni",
+    "Deska do krojenia"
+  ],
+  "przechowywanie": "W lodówce do 3 dni, z dnia na dzień smakuje lepiej. Chleb osobno.",
+  "mozna_mrozic": false,
+  "ratunek": "Stracił kolor — buraki nie lubią długiego gotowania; dodaj sok z cytryny, kolor wróci. Za mdły — więcej cytryny, nie soli.",
+  "skladniki": [
+    {
+      "nazwa": "Pręga wołowa bez kości, surowa",
+      "ilosc": 400,
+      "jednostka": "g",
+      "stan": "w kawałkach 3 cm",
+      "zamiennik": "Gulasz wołowy"
+    },
+    {
+      "nazwa": "Buraki, surowe",
+      "ilosc": 250,
+      "jednostka": "g",
+      "stan": "obrane, starte na grubych oczkach",
+      "zamiennik": "Buraki gotowane"
+    },
+    {
+      "nazwa": "Marchew, surowa",
+      "ilosc": 80,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Pietruszka korzeń",
+      "ilosc": 40,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Ziemniaki, surowe",
+      "ilosc": 120,
+      "jednostka": "g",
+      "stan": "obrane"
+    },
+    {
+      "nazwa": "Kapusta biała, surowa",
+      "ilosc": 150,
+      "jednostka": "g",
+      "stan": "poszatkowana"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 6,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cytryna",
+      "ilosc": 20,
+      "jednostka": "g",
+      "stan": "sok"
+    },
+    {
+      "nazwa": "Fasola czerwona z puszki, odsączona",
+      "ilosc": 130,
+      "jednostka": "g",
+      "stan": "odsączona i przepłukana"
+    },
+    {
+      "nazwa": "Jogurt grecki naturalny 2%",
+      "ilosc": 40,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Chleb żytni razowy",
+      "ilosc": 2,
+      "jednostka": "szt"
+    },
+    {
+      "nazwa": "Majeranek suszony",
+      "ilosc": 3,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "liść laurowy",
+      "ilosc": 3,
+      "jednostka": "szt"
+    },
+    {
+      "nazwa": "woda",
+      "ilosc": 700,
+      "jednostka": "g",
+      "stan": "na wywar — po odparowaniu"
+    },
+    {
+      "nazwa": "Koncentrat pomidorowy",
+      "ilosc": 30,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Pietruszka natka",
+      "ilosc": 5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 80,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 3,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 2,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 15,
+      "kroki": [
+        {
+          "tresc": "**Buraki.** Umyj i obierz buraki, zetrzyj na tarce o grubych oczkach."
+        },
+        {
+          "tresc": "**Marchew.** Umyj i obierz marchew, zetrzyj na tarce o grubych oczkach."
+        },
+        {
+          "tresc": "**Pietruszka korzeń.** Umyj i obierz korzeń pietruszki, zetrzyj na tarce o grubych oczkach."
+        },
+        {
+          "tresc": "**Ziemniaki.** Umyj i obierz ziemniaki, pokrój w kostkę około 2 cm."
+        },
+        {
+          "tresc": "**Kapusta.** Umyj kapustę, usuń głąb i drobno poszatkuj liście."
+        },
+        {
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
+        },
+        {
+          "tresc": "**Czosnek.** Obierz czosnek i przeciśnij przez praskę lub bardzo drobno posiekaj."
+        },
+        {
+          "tresc": "**Fasola.** Przełóż fasolę z puszki na sitko, opłucz i odsącz. Odmierz po odsączeniu."
+        },
+        {
+          "tresc": "**Cytryna.** Umyj cytrynę, wyciśnij sok i odmierz ilość wskazaną na liście składników."
+        },
+        {
+          "tresc": "**Natka pietruszki.** Umyj i osusz natkę, usuń grube łodygi i drobno posiekaj liście."
+        },
+        {
+          "tresc": "**Wołowina.** Osusz wołowinę i pokrój w kostkę około 3 cm."
+        },
+        {
+          "tresc": "**Po przygotowaniu mięsa.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surowym mięsem."
+        },
+        {
+          "tresc": "**Woda.** Odmierz wodę z listy składników."
+        },
+        {
+          "tresc": "**Jogurt.** Odmierz jogurt."
+        },
+        {
+          "tresc": "**Dodatki.** Odmierz koncentrat pomidorowy."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz pieprz, majeranek i liście laurowe."
+        },
+        {
+          "tresc": "**Pieczywo.** Przygotuj pieczywo w ilości wskazanej na liście składników."
+        }
+      ]
+    },
+    {
+      "nazwa": "Przygotowanie pod ciśnieniem - Gotowanie mięsa",
+      "minuty": 30,
+      "kroki": [
+        {
+          "tresc": "**Składniki wywaru.** Wołowinę włóż do garnka. Dodaj liście laurowe i wodę."
+        },
+        {
+          "tresc": "**Gotowanie mięsa pod ciśnieniem.** Zamknij szybkowar zgodnie z instrukcją urządzenia. Gotuj pod ciśnieniem przez **25 minut**, licząc od osiągnięcia ciśnienia roboczego."
+        },
+        {
+          "tresc": "**Otwarcie garnka.** Zakończ grzanie i obniż ciśnienie zgodnie z instrukcją szybkowaru dla gorących zup. Otwórz dopiero po całkowitym spadku ciśnienia. Wyjmij mięso."
+        }
+      ]
+    },
+    {
+      "nazwa": "Przygotowanie pod ciśnieniem - Warzywa i wykończenie",
+      "minuty": 15,
+      "kroki": [
+        {
+          "tresc": "**Warzywa do wywaru.** Do wywaru dodaj starte buraki, marchew, pietruszkę, ziemniaki, kapustę, cebulę oraz koncentrat pomidorowy."
+        },
+        {
+          "tresc": "**Gotowanie warzyw pod ciśnieniem.** Zamknij szybkowar i gotuj pod ciśnieniem przez **6–8 minut** od osiągnięcia ciśnienia roboczego."
+        },
+        {
+          "tresc": "**Otwarcie garnka.** Zakończ grzanie i obniż ciśnienie zgodnie z instrukcją urządzenia dla gorących zup. Otwórz dopiero po całkowitym spadku ciśnienia."
+        },
+        {
+          "tresc": "**Wołowina i fasola.** Ugotowaną wołowinę pokrój na mniejsze kawałki i włóż z powrotem do garnka razem z fasolą."
+        },
+        {
+          "tresc": "**Podgrzanie.** Gotuj bez ciśnienia jeszcze około **2–3 minut**."
+        },
+        {
+          "tresc": "**Doprawienie.** Wyłącz grzanie. Dodaj czosnek, majeranek i sok z cytryny. Dopraw solą i pieprzem."
+        },
+        {
+          "tresc": "**Podanie.** Podawaj z jogurtem greckim, posiekaną natką pietruszki i pieczywem w ilości wskazanej na liście składników."
+        }
+      ]
+    }
+  ]
+}

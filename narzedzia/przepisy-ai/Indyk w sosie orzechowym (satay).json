@@ -1,0 +1,182 @@
+{
+  "nazwa": "Indyk w sosie orzechowym (satay)",
+  "opis": "Indyk z chrupiącymi warzywami w kremowym sosie z masła orzechowego, mleka kokosowego, imbiru i sosu sojowego, podawany z ryżem basmati.",
+  "pory": [
+    "obiad"
+  ],
+  "kuchnie": [
+    "azjatycka"
+  ],
+  "rodzaje": [
+    "kasza_ryz"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 534,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 3,
+  "czas_przygotowania_min": 10,
+  "czas_obrobki_min": 20,
+  "sprzet": [
+    "Patelnia 28 cm",
+    "Garnek 2 l",
+    "Nóż szefa kuchni",
+    "Deska do krojenia"
+  ],
+  "przechowywanie": "Przechowuj w lodówce do 3 dni. Ryż przechowuj osobno. Sos po schłodzeniu zgęstnieje — podczas odgrzewania dolej niewielką ilość wody.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli sos się rozwarstwi, zdejmij patelnię z ognia i energicznie wmieszaj niewielką ilość ciepłej wody. Jeśli jest zbyt gęsty, również rozcieńcz go niewielką ilością wody. Jeśli danie jest zbyt mdłe, dodaj trochę soku z cytryny.",
+  "skladniki": [
+    {
+      "nazwa": "Filet z indyka, surowy",
+      "ilosc": 150,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Masło orzechowe bez cukru",
+      "ilosc": 20,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Mleko kokosowe light z puszki",
+      "ilosc": 80,
+      "jednostka": "ml"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 4,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Imbir korzeń, surowy",
+      "ilosc": 8,
+      "jednostka": "g",
+      "stan": "obrany, starty"
+    },
+    {
+      "nazwa": "Sos sojowy",
+      "ilosc": 12,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cytryna",
+      "ilosc": 20,
+      "jednostka": "g",
+      "stan": "sok"
+    },
+    {
+      "nazwa": "Marchew, surowa",
+      "ilosc": 80,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Papryka czerwona, surowa",
+      "ilosc": 100,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Ryż basmati, suchy",
+      "ilosc": 55,
+      "jednostka": "g",
+      "stan": "suchy, ugotowany osobno"
+    },
+    {
+      "nazwa": "Olej rzepakowy",
+      "ilosc": 4,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Papryka ostra mielona",
+      "ilosc": 1,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 10,
+      "kroki": [
+        {
+          "tresc": "**Marchew.** Umyj i obierz marchew, pokrój w cienkie półplasterki."
+        },
+        {
+          "tresc": "**Papryka.** Umyj paprykę, usuń gniazdo nasienne i pokrój miąższ w cienkie paski."
+        },
+        {
+          "tresc": "**Czosnek.** Obierz czosnek i drobno posiekaj."
+        },
+        {
+          "tresc": "**Imbir.** Obierz imbir i zetrzyj na drobnej tarce."
+        },
+        {
+          "tresc": "**Cytryna.** Umyj cytrynę, wyciśnij sok i odmierz ilość wskazaną na liście składników."
+        },
+        {
+          "tresc": "**Ryż.** Odmierz suchy ryż i przepłucz na sitku pod zimną wodą."
+        },
+        {
+          "tresc": "**Indyk.** Osusz indyka i pokrój w kostkę około 2 cm."
+        },
+        {
+          "tresc": "**Po przygotowaniu mięsa.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surowym mięsem."
+        },
+        {
+          "tresc": "**Płynna baza.** Odmierz mleko kokosowe."
+        },
+        {
+          "tresc": "**Dodatki.** Odmierz masło orzechowe i sos sojowy."
+        },
+        {
+          "tresc": "**Olej.** Odmierz olej."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz ostrą paprykę."
+        }
+      ]
+    },
+    {
+      "nazwa": "Ryż, sos i obsmażenie indyka",
+      "minuty": 10,
+      "kroki": [
+        {
+          "tresc": "**Ryż — równolegle.** Ryż zacznij gotować zgodnie z instrukcją na opakowaniu. Będzie gotował się równolegle z przygotowaniem pozostałej części dania."
+        },
+        {
+          "tresc": "**Sos orzechowy.** W miseczce dokładnie wymieszaj masło orzechowe, mleko kokosowe i sos sojowy."
+        },
+        {
+          "tresc": "**Rozgrzanie oleju.** Na patelni rozgrzej olej."
+        },
+        {
+          "tresc": "**Obsmażenie indyka.** Dodaj indyka i smaż na dość dużym ogniu przez około **2–3 minuty**, tylko do lekkiego zarumienienia z zewnątrz. Mięso nie musi być jeszcze całkowicie usmażone — dojdzie później w sosie."
+        },
+        {
+          "tresc": "**Zdjęcie indyka.** Zdejmij mięso z patelni i odłóż na bok."
+        }
+      ]
+    },
+    {
+      "nazwa": "Warzywa, sos i wykończenie",
+      "minuty": 10,
+      "kroki": [
+        {
+          "tresc": "**Czosnek i imbir.** Zmniejsz ogień do średniego. Na tę samą patelnię dodaj czosnek i imbir. Smaż około **30 sekund**."
+        },
+        {
+          "tresc": "**Marchew i papryka.** Dodaj marchew i paprykę. Smaż około **3–4 minuty**, aby warzywa lekko zmiękły, ale pozostały jędrne."
+        },
+        {
+          "tresc": "**Sos na patelnię.** Zmniejsz ogień. Wlej przygotowany sos orzechowo-kokosowy i dokładnie wymieszaj. Jeśli sos jest zbyt gęsty, dodaj niewielką ilość ciepłej wody."
+        },
+        {
+          "tresc": "**Duszenie indyka.** Włóż indyka z powrotem na patelnię. Duś na małym ogniu przez około **4–5 minut**, aż mięso będzie całkowicie gotowe, a sos zgęstnieje."
+        },
+        {
+          "tresc": "**Doprawienie.** Zdejmij patelnię z ognia. Dodaj sok z cytryny i ostrą paprykę. Wymieszaj."
+        },
+        {
+          "tresc": "**Podanie.** Indyka w sosie orzechowym podawaj z ugotowanym ryżem basmati."
+        }
+      ]
+    }
+  ]
+}

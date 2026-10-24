@@ -1,0 +1,143 @@
+{
+  "nazwa": "Pieczony schab z warzywami korzeniowymi",
+  "opis": "Soczysty pieczony schab z marchewką, pietruszką, selerem i ziemniakami, doprawiony czosnkiem, majerankiem i tymiankiem. Warzywa pieką się dłużej, a mięso dokładamy później, dzięki czemu schab pozostaje soczysty.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "polska"
+  ],
+  "rodzaje": [
+    "z_piekarnika"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 594,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 3,
+  "czas_przygotowania_min": 20,
+  "czas_obrobki_min": 45,
+  "sprzet": [
+    "Piekarnik",
+    "Naczynie żaroodporne",
+    "Nóż szefa kuchni",
+    "Deska do krojenia"
+  ],
+  "przechowywanie": "Gotowe danie przechowuj w szczelnym pojemniku w lodówce do 3 dni. Schab można później podgrzać razem z warzywami albo wykorzystać na zimno, np. do kanapek.",
+  "mozna_mrozic": true,
+  "ratunek": "Gotowe danie przechowuj w szczelnym pojemniku w lodówce do 3 dni. Schab można podgrzać razem z warzywami lub wykorzystać na zimno, np. do kanapek.",
+  "skladniki": [
+    {
+      "nazwa": "Schab wieprzowy, surowy",
+      "ilosc": 150,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Marchew, surowa",
+      "ilosc": 80,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Pietruszka korzeń",
+      "ilosc": 50,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Seler korzeń",
+      "ilosc": 80,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Ziemniaki, surowe",
+      "ilosc": 220,
+      "jednostka": "g",
+      "stan": "obrane"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 3,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 7,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Majeranek suszony",
+      "ilosc": 1,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Tymianek suszony",
+      "ilosc": 1,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 1,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 1,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 20,
+      "kroki": [
+        {
+          "tresc": "**Marchew.** Umyj i obierz marchew, pokrój na kawałki około 2,5–3 cm."
+        },
+        {
+          "tresc": "**Pietruszka korzeń.** Umyj i obierz korzeń pietruszki, pokrój na kawałki około 2,5–3 cm."
+        },
+        {
+          "tresc": "**Ziemniaki.** Umyj i obierz ziemniaki, pokrój na kawałki około 2,5–3 cm."
+        },
+        {
+          "tresc": "**Seler.** Umyj i obierz seler. Pokrój w cienkie paski, a następnie na mniejsze kawałki, aby zdążył się upiec."
+        },
+        {
+          "tresc": "**Czosnek.** Obierz czosnek i przeciśnij przez praskę lub bardzo drobno posiekaj."
+        },
+        {
+          "tresc": "**Schab.** Osusz schab. Natrzyj połową oliwy, czosnkiem, majerankiem oraz częścią soli i pieprzu."
+        },
+        {
+          "tresc": "**Po przygotowaniu mięsa.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surowym mięsem."
+        },
+        {
+          "tresc": "**Odpoczynek mięsa.** Odstaw schab na **15–20 minut**. W tym czasie rozgrzej piekarnik do **200°C** i dopraw warzywa."
+        },
+        {
+          "tresc": "**Warzywa do pieczenia.** Wymieszaj warzywa z pozostałą oliwą, tymiankiem oraz resztą soli i pieprzu. Rozłóż w jednej warstwie w naczyniu do pieczenia."
+        }
+      ]
+    },
+    {
+      "nazwa": "Pieczenie",
+      "minuty": 45,
+      "kroki": [
+        {
+          "tresc": "**Wstępne pieczenie warzyw.** Wstępne pieczenie warzyw. Wstaw warzywa do piekarnika nagrzanego do **200°C** i piecz przez około **20 minut**. Po około **10 minutach** przemieszaj."
+        },
+        {
+          "tresc": "**Dodanie schabu.** Dodanie schabu. Po **20 minutach** przesuń warzywa i ułóż między nimi przygotowany schab."
+        },
+        {
+          "tresc": "**Pieczenie schabu.** Pieczenie schabu z warzywami. Piecz wszystko razem jeszcze około **18–20 minut**. Schab jest gotowy, gdy temperatura w jego najgrubszym miejscu osiągnie około **65°C**."
+        },
+        {
+          "tresc": "**Odpoczynek mięsa.** Odpoczynek mięsa. Wyjmij schab i pozostaw na około **5 minut** przed krojeniem. Jeśli warzywa potrzebują jeszcze chwili, pozostaw je w tym czasie w piekarniku."
+        },
+        {
+          "tresc": "**Podanie.** Podanie. Schab pokrój w plastry i podawaj z pieczonymi ziemniakami oraz warzywami korzeniowymi."
+        }
+      ]
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 {
   "nazwa": "Polędwiczka w sosie musztardowym z kaszą bulgur",
-  "opis": "Polędwiczka wieprzowa w lekkim sosie musztardowo-jogurtowym z pieczarkami i kaszą bulgur. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
+  "opis": "Polędwiczka wieprzowa w lekkim sosie musztardowo-jogurtowym z pieczarkami i kaszą bulgur. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami. Smak sosu lub płynu do gotowania powstaje z przygotowywanych składników w tym samym naczyniu. Podana ilość wody jest początkowa; ewentualne dolewanie zależy od konsystencji i miękkości składników. Warzywna baza obejmuje korzeń pietruszki, seler korzeniowy, por, przygotowane razem z pozostałymi składnikami; wszystkie warzywa pozostają w posiłku.",
   "pory": [
     "obiad"
   ],
@@ -11,11 +11,11 @@
     "kasza_ryz"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 655.5,
+  "porcja_g": 691,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 2,
-  "czas_przygotowania_min": 12,
-  "czas_obrobki_min": 28,
+  "czas_przygotowania_min": 16,
+  "czas_obrobki_min": 45,
   "sprzet": [
     "Patelnia 28 cm",
     "Garnek 2 l",
@@ -24,7 +24,8 @@
     "Deska do krojenia",
     "Waga kuchenna",
     "Sitko",
-    "Termometr do mięsa"
+    "Termometr do mięsa",
+    "Tarka o drobnych oczkach"
   ],
   "przechowywanie": "Przechowuj w lodówce do 2 dni. Odgrzewaj łagodnie, do gorącego środka całej porcji. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
   "mozna_mrozic": false,
@@ -64,9 +65,10 @@
       "stan": "posiekana"
     },
     {
-      "nazwa": "Domowy bulion warzywny",
+      "nazwa": "woda",
       "ilosc": 100,
-      "jednostka": "g"
+      "jednostka": "ml",
+      "stan": "ilość początkowa do potrawy; w trakcie gotowania uzupełniaj tylko w razie potrzeby, zgodnie z instrukcją"
     },
     {
       "nazwa": "Olej rzepakowy",
@@ -87,45 +89,121 @@
       "nazwa": "Czarny pieprz mielony",
       "ilosc": 0.5,
       "jednostka": "g"
+    },
+    {
+      "nazwa": "Pietruszka korzeń",
+      "ilosc": 10,
+      "jednostka": "g",
+      "stan": "obrany korzeń, starty na drobnych oczkach; do warzywnej bazy"
+    },
+    {
+      "nazwa": "Seler korzeń",
+      "ilosc": 10,
+      "jednostka": "g",
+      "stan": "obrany korzeń, starty na drobnych oczkach; do warzywnej bazy"
+    },
+    {
+      "nazwa": "Por, surowy",
+      "ilosc": 15,
+      "jednostka": "g",
+      "stan": "biała i jasnozielona część, dokładnie wypłukana; cienkie półplasterki do bazy sosu"
     }
   ],
   "etapy": [
     {
       "nazwa": "Przygotowanie składników",
-      "minuty": 12,
+      "minuty": 16,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Korzeń pietruszki.** Umyj, obierz i zetrzyj na tarce o drobnych oczkach. Odłóż do przygotowania warzywnej bazy."
         },
         {
-          "tresc": "Oczyść i pokrój pieczarki, obierz i posiekaj cebulę. Odmierz bulion oraz kaszę."
+          "tresc": "**Korzeń selera.** Umyj, obierz i zetrzyj na tarce o drobnych oczkach. Odłóż do przygotowania warzywnej bazy."
         },
         {
-          "tresc": "Usuń błonę z polędwiczki i pokrój na medaliony grubości około 1,5 cm. Dopraw częścią soli i pieprzu; umyj przybory po mięsie."
+          "tresc": "**Por.** Białą i jasnozieloną część przekrój wzdłuż, dokładnie wypłucz ziemię spomiędzy warstw i pokrój w cienkie półplasterki."
         },
         {
-          "tresc": "Wymieszaj jogurt z musztardą."
+          "tresc": "**Pieczarki.** Oczyść pieczarki i pokrój w cienkie plasterki."
+        },
+        {
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
+        },
+        {
+          "tresc": "**Sos jogurtowy.** Odmierz jogurt i musztardę, wymieszaj w misce."
+        },
+        {
+          "tresc": "**Polędwiczka.** Osusz polędwiczkę, usuń twardą błonę i pokrój na medaliony grubości około 1,5 cm. Dopraw częścią soli i pieprzu."
+        },
+        {
+          "tresc": "**Po przygotowaniu mięsa.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surowym mięsem."
+        },
+        {
+          "tresc": "**Bulgur.** Odmierz kaszę bulgur."
+        },
+        {
+          "tresc": "**Woda.** Odmierz wodę z listy składników do przygotowania potrawy."
+        },
+        {
+          "tresc": "**Olej.** Odmierz olej."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz tymianek, sól i pieprz; część soli i pieprzu wykorzystaj do przygotowania mięsa, resztę zachowaj do doprawienia sosu."
         }
       ]
     },
     {
-      "nazwa": "Gotowanie kaszy i smażenie",
-      "minuty": 28,
+      "nazwa": "Gotowanie kaszy, przygotowanie sosu i smażenie mięsa",
+      "minuty": 45,
       "kroki": [
         {
-          "tresc": "Na pierwszym palniku zagotuj wodę w garnku. Dodaj kaszę bulgur i gotuj przez czas wskazany na opakowaniu; po ugotowaniu odcedź. Wody użyj tyle, by ziarna były zanurzone i swobodnie się gotowały. Nastaw minutnik; równolegle wykonuj kolejne czynności na drugim palniku. Woda do gotowania jest dodatkowa i zostanie odlana."
+          "tresc": "**Kasza — równolegle.** Zagotuj wodę w garnku, wsyp bulgur i gotuj zgodnie z instrukcją na opakowaniu. Nastaw minutnik; podczas gotowania przygotowuj sos. Woda do kaszy jest osobna i jej nadmiar zostanie odcedzony."
         },
         {
-          "tresc": "Na drugim palniku rozgrzej połowę oleju przez 1 minutę. Smaż medaliony po 2–3 minuty z każdej strony. Sprawdź temperaturę co najmniej 63°C i w razie potrzeby dosmaż po 1 minucie. Odstaw na czysty talerz na co najmniej 3 minuty."
+          "tresc": "**Rozgrzanie tłuszczu.** Na patelni rozgrzej połowę oleju przez **1 minutę**. Pozostałą część zachowaj do mięsa."
         },
         {
-          "tresc": "Dodaj pozostały olej, cebulę i pieczarki. Smaż 7–9 minut, aby odparować wodę."
+          "tresc": "**Cebula, korzenie i por.** Dodaj cebulę, starte korzenie pietruszki i selera oraz por. Smaż przez **3 minuty** na umiarkowanym ogniu, mieszając."
         },
         {
-          "tresc": "Dodaj bulion oraz tymianek, gotuj 3–4 minuty, aby sos nieco zgęstniał. Dodaj mięso, podgrzej 1 minutę i zdejmij z ognia."
+          "tresc": "**Pieczarki.** Dodaj pieczarki i smaż przez **7–9 minut**, aż większość wody odparuje, a grzyby lekko się zrumienią."
         },
         {
-          "tresc": "Jogurt zahartuj niewielką ilością ciepłego sosu, następnie wmieszaj do patelni. Nie zagotowuj. Dopraw pozostałą solą i pieprzem, podaj z kaszą."
+          "tresc": "**Tymianek i woda.** Dodaj tymianek i całą odmierzoną wodę. Mieszaj przez **1 minutę**, rozpuszczając zrumienione pozostałości z dna patelni."
+        },
+        {
+          "tresc": "**Gotowanie warzywnej bazy.** Doprowadź do łagodnego wrzenia przez około **1–2 minuty**. Przykryj i duś przez **10–12 minut**. Sprawdź korzenie; jeśli są twarde, dogotowuj po **2 minuty**. Jeśli płynu brakuje, dolej niewielką ilość gorącej wody.",
+          "sygnal": "korzenie i por są miękkie, w sosie pozostaje płyn",
+          "uwaga": true
+        },
+        {
+          "tresc": "**Kasza — po minutniku.** Niezależnie od postępu przygotowania sosu sprawdź miękkość kaszy po czasie z opakowania. Odcedź nadmiar wody, przykryj i odstaw poza palnik."
+        },
+        {
+          "tresc": "**Odłożenie sosu.** Przełóż całą bazę warzywno-grzybową wraz z płynem do miski i przykryj. Na patelni nie pozostawiaj kawałków warzyw, które mogłyby przypalić się podczas smażenia mięsa."
+        },
+        {
+          "tresc": "**Rozgrzanie tłuszczu do mięsa.** Na opróżnionej patelni rozgrzej pozostałą część oleju przez około **1 minutę**."
+        },
+        {
+          "tresc": "**Smażenie polędwiczki.** Smaż medaliony przez **2–3 minuty z każdej strony**. Sprawdź temperaturę w środku najgrubszego kawałka. Jeśli jest niższa niż **63°C**, dosmażaj po **1 minucie**, kontrolując temperaturę.",
+          "sygnal": "najgrubszy medalion ma w środku co najmniej 63°C",
+          "uwaga": true
+        },
+        {
+          "tresc": "**Odpoczynek mięsa.** Przełóż gotowe mięso na czysty talerz i pozostaw na co najmniej **3 minuty**. W tym czasie wykończ sos."
+        },
+        {
+          "tresc": "**Połączenie smaków.** Przełóż na patelnię najpierw płynną część sosu z miski. Mieszaj przez **1 minutę**, rozpuszczając zrumienione pozostałości po mięsie. Dodaj wszystkie warzywa i grzyby oraz soki z talerza po mięsie. Podgrzewaj przez **1–2 minuty**. Jeśli sos jest za gęsty, dolej trochę gorącej wody."
+        },
+        {
+          "tresc": "**Sos jogurtowo-musztardowy.** Zdejmij patelnię z ognia. Przygotowaną mieszaninę jogurtu i musztardy ogrzej stopniowo małymi porcjami ciepłego sosu, następnie wmieszaj do patelni. Nie zagotowuj."
+        },
+        {
+          "tresc": "**Doprawienie.** Dopraw sos pozostałą solą i pieprzem."
+        },
+        {
+          "tresc": "**Podanie.** Po co najmniej 3 minutach odpoczynku przełóż mięso do ciepłego sosu i podaj z bulgurem."
         }
       ]
     }

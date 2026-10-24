@@ -1,0 +1,132 @@
+{
+  "nazwa": "Pieczony kalafior z ziołowym sosem jogurtowym",
+  "opis": "Rumiany pieczony kalafior podany z lekkim sosem jogurtowym, cytryną i natką pietruszki. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
+  "pory": [
+    "dodatek"
+  ],
+  "kuchnie": [
+    "srodziemnomorska"
+  ],
+  "rodzaje": [
+    "z_piekarnika"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 372,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 2,
+  "czas_przygotowania_min": 10,
+  "czas_obrobki_min": 42,
+  "sprzet": [
+    "Piekarnik",
+    "Blacha do pieczenia",
+    "Miska",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Kalafior i sos przechowuj osobno w lodówce do 2 dni. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli kalafior jest miękki, ale blady, dopiecz go kilka minut w wyższej temperaturze. Za gęsty sos rozcieńcz wodą.",
+  "skladniki": [
+    {
+      "nazwa": "Kalafior, surowy",
+      "ilosc": 250,
+      "jednostka": "g",
+      "stan": "podzielony na różyczki"
+    },
+    {
+      "nazwa": "Jogurt grecki naturalny 2%",
+      "ilosc": 80,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 8,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cytryna",
+      "ilosc": 15,
+      "jednostka": "g",
+      "stan": "sok"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 5,
+      "jednostka": "g",
+      "stan": "drobno posiekany"
+    },
+    {
+      "nazwa": "Pietruszka natka",
+      "ilosc": 10,
+      "jednostka": "g",
+      "stan": "posiekana"
+    },
+    {
+      "nazwa": "Kmin rzymski mielony",
+      "ilosc": 1,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Papryka wędzona mielona",
+      "ilosc": 1,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 1,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 10,
+      "kroki": [
+        {
+          "tresc": "**Kalafior.** Umyj kalafior i podziel na podobnej wielkości różyczki, około 3 cm."
+        },
+        {
+          "tresc": "**Czosnek.** Obierz czosnek i drobno posiekaj."
+        },
+        {
+          "tresc": "**Natka pietruszki.** Umyj i osusz natkę, usuń grube łodygi i drobno posiekaj liście."
+        },
+        {
+          "tresc": "**Cytryna.** Umyj cytrynę, wyciśnij sok i odmierz ilość wskazaną na liście składników."
+        },
+        {
+          "tresc": "**Kalafior do pieczenia.** Wymieszaj różyczki z oliwą, kminem, papryką oraz częścią soli i pieprzu."
+        },
+        {
+          "tresc": "**Sos jogurtowy.** Wymieszaj jogurt z czosnkiem, natką, sokiem z cytryny oraz resztą soli i pieprzu. Przykryj i odstaw do lodówki."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz wędzoną paprykę."
+        }
+      ]
+    },
+    {
+      "nazwa": "Pieczenie i podanie",
+      "minuty": 42,
+      "kroki": [
+        {
+          "tresc": "**Rozgrzanie piekarnika.** Rozgrzej piekarnik do **220°C**, grzanie góra–dół, zwykle około **10 minut**."
+        },
+        {
+          "tresc": "**Pieczenie kalafiora.** Rozłóż kalafior w jednej warstwie i piecz **25–30 minut**, obracając w połowie.",
+          "sygnal": "różyczki miękkie w środku i rumiane na brzegach",
+          "uwaga": true
+        },
+        {
+          "tresc": "**Podanie.** Podaj jako dodatek, z sosem jogurtowym obok."
+        }
+      ]
+    }
+  ]
+}

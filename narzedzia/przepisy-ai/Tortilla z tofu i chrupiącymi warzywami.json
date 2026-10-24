@@ -97,16 +97,31 @@
       "minuty": 12,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Kapusta pekińska.** Umyj i osusz kapustę, następnie pokrój w cienkie paski."
         },
         {
-          "tresc": "Umyj kapustę i ogórek, osusz i pokrój w cienkie paski. Umyj i obierz marchew, zetrzyj."
+          "tresc": "**Ogórek.** Umyj ogórek i pokrój w cienkie słupki."
         },
         {
-          "tresc": "Odsącz i dokładnie osusz tofu, pokrój w cienkie paski. Umyj limonkę, wyciśnij i odmierz sok."
+          "tresc": "**Marchew.** Umyj i obierz marchew, zetrzyj na tarce o grubych oczkach."
         },
         {
-          "tresc": "Wymieszaj masło orzechowe z sosem sojowym, sokiem z limonki i odmierzoną wodą. Przygotuj tortille oraz sezam."
+          "tresc": "**Tofu.** Odsącz i dokładnie osusz tofu, pokrój w cienkie paski."
+        },
+        {
+          "tresc": "**Limonka.** Umyj limonkę, wyciśnij sok i odmierz ilość wskazaną na liście składników."
+        },
+        {
+          "tresc": "**Sos orzechowy.** Wymieszaj odmierzone masło orzechowe, sos sojowy, sok z limonki i wodę."
+        },
+        {
+          "tresc": "**Sezam.** Odmierz sezam."
+        },
+        {
+          "tresc": "**Olej.** Odmierz olej."
+        },
+        {
+          "tresc": "**Tortille.** Wyjmij potrzebne placki i przykryj, żeby nie wysychały."
         }
       ]
     },
@@ -115,13 +130,22 @@
       "minuty": 12,
       "kroki": [
         {
-          "tresc": "Rozgrzej olej przez 1 minutę. Smaż tofu 6–8 minut, obracając, aż brzegi się zrumienią. Przełóż na talerz."
+          "tresc": "**Rozgrzanie oleju.** Rozgrzej olej przez **1 minutę**."
         },
         {
-          "tresc": "Ogrzej tortillę na suchej patelni po 15–20 sekund na stronę. Posmaruj sosem, ułóż tofu i warzywa, posyp sezamem."
+          "tresc": "**Smażenie tofu.** Smaż tofu **6–8 minut**, obracając, aż brzegi się zrumienią."
         },
         {
-          "tresc": "Zawiń boki i zroluj bez przepełniania. Pozostałe tofu i warzywa podaj obok z resztą sosu."
+          "tresc": "**Zdjęcie tofu.** Przełóż na talerz."
+        },
+        {
+          "tresc": "**Ogrzanie tortilli.** Ogrzej tortillę na suchej patelni po **15–20 sekund** na stronę."
+        },
+        {
+          "tresc": "**Nadziewanie.** Posmaruj sosem, ułóż tofu i warzywa, posyp sezamem."
+        },
+        {
+          "tresc": "**Zwijanie.** Zawiń boki i zroluj bez przepełniania. Pozostałe tofu i warzywa podaj obok z resztą sosu."
         }
       ]
     }

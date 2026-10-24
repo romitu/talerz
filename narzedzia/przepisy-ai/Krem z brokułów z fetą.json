@@ -1,6 +1,6 @@
 {
   "nazwa": "Krem z brokułów z fetą",
-  "opis": "Kremowa zupa brokułowa z ziemniakiem, jogurtem i fetą, podana z pieczywem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
+  "opis": "Kremowa zupa brokułowa z ziemniakiem, jogurtem i fetą, podana z pieczywem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami. Wywar z marchwi, korzenia pietruszki, korzenia selera i pora jest gotowany osobno; cały wywar i wszystkie warzywa trafiają do zupy.",
   "pory": [
     "obiad",
     "kolacja"
@@ -12,22 +12,24 @@
     "zupa"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 771,
+  "porcja_g": 871,
   "liczba_porcji_bazowych": 2,
   "trwalosc_dni": 3,
-  "czas_przygotowania_min": 10,
-  "czas_obrobki_min": 35,
+  "czas_przygotowania_min": 20,
+  "czas_obrobki_min": 47,
   "sprzet": [
     "Garnek 3 l",
     "Blender ręczny",
     "Nóż szefa kuchni",
     "Deska do krojenia",
     "Waga kuchenna",
-    "Miska"
+    "Miska",
+    "Garnek 2 l",
+    "Łyżka cedzakowa"
   ],
   "przechowywanie": "Przechowuj w lodówce do 3 dni. Jeśli planujesz mrożenie, odłóż porcję przed dodaniem jogurtu i fety; dodaj je dopiero po rozmrożeniu i podgrzaniu. Pieczywo trzymaj osobno. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
   "mozna_mrozic": true,
-  "ratunek": "Za gęsty krem rozcieńcz bulionem. Jeśli feta mocno zasoliła zupę, dodaj więcej brokułu lub ziemniaka.",
+  "ratunek": "Za gęsty krem rozcieńcz gorącą wodą. Jeśli feta mocno zasoliła zupę, dodaj więcej brokułu lub ziemniaka.",
   "skladniki": [
     {
       "nazwa": "Brokuł, surowy",
@@ -40,11 +42,6 @@
       "ilosc": 200,
       "jednostka": "g",
       "stan": "pokrojone"
-    },
-    {
-      "nazwa": "Domowy bulion warzywny",
-      "ilosc": 500,
-      "jednostka": "g"
     },
     {
       "nazwa": "Cebula, surowa",
@@ -88,44 +85,150 @@
       "nazwa": "Czarny pieprz mielony",
       "ilosc": 1,
       "jednostka": "g"
+    },
+    {
+      "nazwa": "Marchew, surowa",
+      "ilosc": 60,
+      "jednostka": "g",
+      "stan": "obrany korzeń, kostka około 7–8 mm; do wywaru"
+    },
+    {
+      "nazwa": "Pietruszka korzeń",
+      "ilosc": 40,
+      "jednostka": "g",
+      "stan": "obrany korzeń, kostka około 7–8 mm; do wywaru"
+    },
+    {
+      "nazwa": "Seler korzeń",
+      "ilosc": 40,
+      "jednostka": "g",
+      "stan": "obrany korzeń, kostka około 7–8 mm; do wywaru"
+    },
+    {
+      "nazwa": "Por, surowy",
+      "ilosc": 60,
+      "jednostka": "g",
+      "stan": "biała i jasnozielona część, dokładnie wypłukana, cienkie półplasterki; do wywaru"
+    },
+    {
+      "nazwa": "woda",
+      "ilosc": 500,
+      "jednostka": "ml",
+      "stan": "cała odmierzona ilość do wywaru; wywar i wszystkie ugotowane warzywa trafiają do zupy"
     }
   ],
   "etapy": [
     {
       "nazwa": "Przygotowanie składników",
-      "minuty": 10,
+      "minuty": 20,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Marchew.** Umyj i obierz marchew, pokrój w kostkę około 7–8 mm. Całość przeznacz do wywaru."
         },
         {
-          "tresc": "Umyj brokuł i podziel na małe różyczki; obrany miękki środek łodygi pokrój drobno. Umyj i obierz ziemniaki, pokrój w kostkę około 1 cm."
+          "tresc": "**Korzeń pietruszki.** Umyj i obierz korzeń pietruszki, pokrój w kostkę około 7–8 mm. Całość przeznacz do wywaru."
         },
         {
-          "tresc": "Obierz i posiekaj cebulę oraz czosnek. Pokrusz fetę, odmierz bulion i jogurt, przygotuj pieczywo."
+          "tresc": "**Korzeń selera.** Umyj i obierz seler korzeniowy, pokrój w kostkę około 7–8 mm. Całość przeznacz do wywaru."
+        },
+        {
+          "tresc": "**Por.** Odetnij korzonki i twarde końce liści. Białą i jasnozieloną część przekrój wzdłuż, dokładnie wypłucz ziemię spomiędzy warstw i pokrój w cienkie półplasterki. Odłóż osobno do wywaru."
+        },
+        {
+          "tresc": "**Brokuł.** Umyj brokuł i podziel na małe różyczki. Obierz miękki środek łodygi i pokrój go drobno."
+        },
+        {
+          "tresc": "**Ziemniaki.** Umyj i obierz ziemniaki, pokrój w kostkę około 1 cm."
+        },
+        {
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
+        },
+        {
+          "tresc": "**Czosnek.** Obierz czosnek i drobno posiekaj."
+        },
+        {
+          "tresc": "**Feta.** Odmierz fetę i pokrusz."
+        },
+        {
+          "tresc": "**Woda.** Odmierz całą ilość wody wskazaną na liście składników do ugotowania wywaru."
+        },
+        {
+          "tresc": "**Jogurt.** Odmierz jogurt."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz pieprz i gałkę muszkatołową."
+        },
+        {
+          "tresc": "**Pieczywo.** Przygotuj pieczywo w ilości wskazanej na liście składników."
         }
       ]
     },
     {
-      "nazwa": "Gotowanie i blendowanie",
-      "minuty": 35,
+      "nazwa": "Gotowanie wywaru i przygotowanie bazy",
+      "minuty": 20,
       "kroki": [
         {
-          "tresc": "Rozgrzej oliwę 1 minutę, smaż cebulę 4 minuty. Dodaj czosnek i smaż 30 sekund."
+          "tresc": "**Warzywa korzeniowe.** W osobnym garnku umieść całą przygotowaną marchew, korzeń pietruszki i korzeń selera. Zalej całą odmierzoną wodą. Przykryj i doprowadź do łagodnego wrzenia, orientacyjnie przez **5–7 minut**."
         },
         {
-          "tresc": "Dodaj ziemniaki, pokrojoną łodygę brokułu i bulion. Doprowadź do wrzenia przez około 4 minuty; gotuj pod przykryciem 12 minut."
+          "tresc": "**Gotowanie korzeni.** Od zagotowania gotuj pod przykryciem na małym ogniu przez **8 minut**. Nastaw minutnik; w tym czasie przygotuj bazę zupy w głównym garnku."
         },
         {
-          "tresc": "Dodaj różyczki i gotuj 6–8 minut, aż ziemniaki i brokuł będą miękkie."
+          "tresc": "**Baza zupy — równolegle.** W głównym garnku rozgrzej oliwę przez **1 minutę**."
         },
         {
-          "tresc": "Zdejmij garnek z ognia. Zblenduj zupę, trzymając końcówkę blendera zanurzoną. Dodaj gałkę oraz pieprz. Jeśli część mrozisz, odłóż ją teraz."
+          "tresc": "**Cebula.** Smaż cebulę przez **4 minuty**, mieszając."
         },
         {
-          "tresc": "Wymieszaj jogurt z odrobiną ciepłej zupy, następnie wmieszaj do garnka. Nie zagotowuj ponownie. Podaj z fetą i pieczywem.",
+          "tresc": "**Czosnek.** Dodaj czosnek i smaż przez **30 sekund**."
+        },
+        {
+          "tresc": "**Gotowa baza.** Zdejmij główny garnek z palnika do czasu wlania wywaru."
+        },
+        {
+          "tresc": "**Por — po minutniku.** Po **8 minutach gotowania korzeni** dodaj por do wywaru. Gotuj jeszcze przez **4 minuty**. Wykonaj ten krok po sygnale minutnika, niezależnie od pracy przy bazie zupy."
+        },
+        {
+          "tresc": "**Kontrola warzyw.** Sprawdź kostkę marchewki i selera. Jeśli ma twardy, surowy środek, gotuj jeszcze po **2 minuty**, sprawdzając po każdej takiej próbie.",
+          "sygnal": "warzywa są lekko jędrne, ale bez twardego, surowego środka",
+          "uwaga": true
+        },
+        {
+          "tresc": "**Uzupełnienie wywaru.** Jeżeli podczas gotowania odparowała woda, uzupełnij jej ubytek gorącą wodą do początkowego poziomu, zanim wyjmiesz warzywa."
+        },
+        {
+          "tresc": "**Zachowanie warzyw i wywaru.** Wyjmij wszystkie warzywa łyżką cedzakową do miski i przykryj. Cały wywar zachowaj w garnku do następnego etapu. Nie wylewaj wywaru ani płynu zebranego w misce."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie ziemniaków i brokułu oraz blendowanie",
+      "minuty": 27,
+      "kroki": [
+        {
+          "tresc": "**Ziemniaki i łodyga brokułu.** Do podsmażonej cebuli z czosnkiem dodaj ziemniaki, pokrojoną łodygę brokułu i cały wywar. Doprowadź do wrzenia przez około **3 minuty** i gotuj pod przykryciem przez **12 minut**."
+        },
+        {
+          "tresc": "**Różyczki brokułu.** Dodaj różyczki oraz wszystkie odłożone warzywa z wywaru wraz z płynem z miski. Po ponownym zagotowaniu gotuj przez **6–8 minut**."
+        },
+        {
+          "tresc": "**Kontrola miękkości.** Sprawdź ziemniaki, brokuł i warzywa korzeniowe. Jeżeli są twarde, dogotowuj po **2 minuty** przed blendowaniem.",
+          "sygnal": "warzywa łatwo rozgniatają się widelcem",
+          "uwaga": true
+        },
+        {
+          "tresc": "**Blendowanie.** Zdejmij garnek z ognia. Zblenduj zupę, trzymając końcówkę blendera zanurzoną. Dodaj gałkę muszkatołową i pieprz. Część przeznaczoną do mrożenia odłóż teraz, przed dodaniem jogurtu i fety."
+        },
+        {
+          "tresc": "**Jogurt.** Wymieszaj jogurt z niewielką ilością ciepłej zupy, następnie wmieszaj do garnka poza ogniem. Nie zagotowuj ponownie.",
           "sygnal": "krem jest gładki, bez grudek jogurtu",
           "uwaga": true
+        },
+        {
+          "tresc": "**Podanie.** Podaj z fetą i pieczywem."
         }
       ]
     }

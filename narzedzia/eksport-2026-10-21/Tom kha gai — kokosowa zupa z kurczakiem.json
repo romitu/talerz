@@ -1,0 +1,189 @@
+{
+  "nazwa": "Tom kha gai — kokosowa zupa z kurczakiem",
+  "opis": "Aromatyczna, lekko pikantna zupa kokosowa z kurczakiem, pieczarkami i marchewką, doprawiona imbirem, pastą tom kha, sosem rybnym i cytryną. Podawana z ryżem basmati.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "azjatycka"
+  ],
+  "rodzaje": [
+    "zupa"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 694,
+  "liczba_porcji_bazowych": 2,
+  "trwalosc_dni": 3,
+  "czas_przygotowania_min": 10,
+  "czas_obrobki_min": 20,
+  "sprzet": [
+    "Garnek 3 l",
+    "Garnek 2 l",
+    "Nóż szefa kuchni",
+    "Deska do krojenia"
+  ],
+  "przechowywanie": "Zupę przechowuj w szczelnym pojemniku w lodówce do 3 dni. Ryż najlepiej przechowywać osobno. Podgrzewaj zupę łagodnie i nie doprowadzaj jej do intensywnego wrzenia.",
+  "mozna_mrozic": false,
+  "ratunek": "Zupa się rozwarstwiła — cytryna trafiła do wrzącego mleka. Zblenduj chwilę, wróci. Za ostra — dolej mleka kokosowego.",
+  "skladniki": [
+    {
+      "nazwa": "Pierś z kurczaka, surowa",
+      "ilosc": 240,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Mleko kokosowe light z puszki",
+      "ilosc": 200,
+      "jednostka": "ml"
+    },
+    {
+      "nazwa": "Domowy bulion warzywny",
+      "ilosc": 500,
+      "jednostka": "ml"
+    },
+    {
+      "nazwa": "Pasta tom kha",
+      "ilosc": 30,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Pieczarki, surowe",
+      "ilosc": 160,
+      "jednostka": "g",
+      "stan": "w plastrach"
+    },
+    {
+      "nazwa": "Imbir korzeń, surowy",
+      "ilosc": 12,
+      "jednostka": "g",
+      "stan": "obrany, starty"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 6,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cytryna",
+      "ilosc": 30,
+      "jednostka": "g",
+      "stan": "sok"
+    },
+    {
+      "nazwa": "Marchew, surowa",
+      "ilosc": 100,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sos rybny",
+      "ilosc": 15,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Olej rzepakowy",
+      "ilosc": 5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Ryż basmati, suchy",
+      "ilosc": 80,
+      "jednostka": "g",
+      "stan": "suchy, ugotowany osobno"
+    },
+    {
+      "nazwa": "Pietruszka natka",
+      "ilosc": 8,
+      "jednostka": "g",
+      "stan": "posiekana"
+    },
+    {
+      "nazwa": "Papryka ostra mielona",
+      "ilosc": 1,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 10,
+      "kroki": [
+        {
+          "tresc": "**Pieczarki.** Oczyść pieczarki i pokrój w cienkie plasterki."
+        },
+        {
+          "tresc": "**Marchew.** Umyj i obierz marchew, pokrój w cienkie półplasterki."
+        },
+        {
+          "tresc": "**Imbir.** Obierz imbir i zetrzyj na drobnej tarce."
+        },
+        {
+          "tresc": "**Czosnek.** Obierz czosnek i przeciśnij przez praskę lub bardzo drobno posiekaj."
+        },
+        {
+          "tresc": "**Cytryna.** Umyj cytrynę, wyciśnij sok i odmierz ilość wskazaną na liście składników."
+        },
+        {
+          "tresc": "**Natka pietruszki.** Umyj i osusz natkę, usuń grube łodygi i drobno posiekaj liście."
+        },
+        {
+          "tresc": "**Ryż.** Odmierz suchy ryż i przepłucz na sitku pod zimną wodą."
+        },
+        {
+          "tresc": "**Kurczak.** Osusz kurczaka i pokrój w paski grubości około 1 cm."
+        },
+        {
+          "tresc": "**Po przygotowaniu mięsa.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surowym mięsem."
+        },
+        {
+          "tresc": "**Płynna baza.** Odmierz bulion i mleko kokosowe."
+        },
+        {
+          "tresc": "**Dodatki.** Odmierz sos rybny i pastę tom kha."
+        },
+        {
+          "tresc": "**Olej.** Odmierz olej."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz ostrą paprykę."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie zupy i ryżu",
+      "minuty": 20,
+      "kroki": [
+        {
+          "tresc": "**Ryż — równolegle.** Ryż ugotuj zgodnie z instrukcją na opakowaniu. Gotuj go równolegle podczas przygotowywania zupy."
+        },
+        {
+          "tresc": "**Rozgrzanie oleju.** W drugim garnku rozgrzej olej."
+        },
+        {
+          "tresc": "**Pasta tom kha.** Dodaj pastę tom kha i smaż około **1 minuty**, cały czas mieszając, aż zacznie intensywnie pachnieć."
+        },
+        {
+          "tresc": "**Gotowanie bulionu.** Wlej bulion, dodaj imbir i czosnek. Doprowadź do lekkiego wrzenia i gotuj około **5 minut**."
+        },
+        {
+          "tresc": "**Kurczak i marchew.** Dodaj kurczaka i marchew. Gotuj na niewielkim ogniu około **6–8 minut**, aż kurczak będzie prawie gotowy, a marchew lekko zmięknie, ale nadal zachowa strukturę."
+        },
+        {
+          "tresc": "**Pieczarki.** Dodaj pieczarki i gotuj jeszcze około **3 minut**."
+        },
+        {
+          "tresc": "**Mleko kokosowe.** Wlej mleko kokosowe. Podgrzewaj na niewielkim ogniu przez około **1–2 minuty**. Zupa powinna być gorąca i lekko „pyrkać”, ale nie powinna mocno wrzeć."
+        },
+        {
+          "tresc": "**Doprawienie sosem rybnym.** Dodaj na początek około jedną trzecią sosu rybnego i ostrą paprykę. Wymieszaj i spróbuj. W razie potrzeby stopniowo dodawaj pozostały sos rybny."
+        },
+        {
+          "tresc": "**Sok z cytryny.** Zdejmij garnek z ognia. Dopiero teraz dodaj sok z cytryny. Zacznij od około dwóch trzecich przygotowanego soku, spróbuj i w razie potrzeby dodaj pozostały sok."
+        },
+        {
+          "tresc": "**Podanie.** Do misek nałóż ugotowany ryż, zalej gorącą zupą i posyp posiekaną natką pietruszki."
+        }
+      ]
+    }
+  ]
+}

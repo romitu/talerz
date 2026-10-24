@@ -74,10 +74,16 @@
       "minuty": 5,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Szczypiorek.** Umyj i osusz szczypiorek, następnie drobno posiekaj."
         },
         {
-          "tresc": "Umyj i posiekaj szczypiorek. Odmierz jogurt oraz musztardę, przygotuj pieczywo w ilości z listy."
+          "tresc": "**Do pasty.** Odmierz jogurt i musztardę do osobnej miski."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól i pieprz."
+        },
+        {
+          "tresc": "**Pieczywo.** Przygotuj pieczywo w ilości wskazanej na liście składników."
         }
       ]
     },
@@ -86,13 +92,16 @@
       "minuty": 21,
       "kroki": [
         {
-          "tresc": "Zagotuj w garnku wodę przykrywającą jajka. Włóż je ostrożnie i gotuj przez 9–10 minut przy łagodnym wrzeniu, licząc od włożenia. Schłodź zimną wodą i obierz."
+          "tresc": "**Gotowanie jajek.** Zagotuj tyle wody, aby przykryła jajka. Ostrożnie włóż jajka i gotuj przy łagodnym wrzeniu przez **9–10 minut**, licząc od włożenia."
         },
         {
-          "tresc": "Rozgnieć jajka widelcem w misce. Dodaj jogurt, musztardę i szczypiorek. Dopraw solą oraz pieprzem, wymieszaj."
+          "tresc": "**Schłodzenie jajek.** Przełóż jajka do zimnej wody. Po schłodzeniu obierz."
         },
         {
-          "tresc": "Posmaruj przygotowane pieczywo pastą i podaj."
+          "tresc": "**Pasta jajeczna.** Rozgnieć jajka widelcem w misce. Dodaj jogurt, musztardę i szczypiorek. Dopraw solą oraz pieprzem, wymieszaj."
+        },
+        {
+          "tresc": "**Pasta na pieczywo.** Posmaruj przygotowane pieczywo pastą i podaj."
         }
       ]
     }

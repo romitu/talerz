@@ -1,0 +1,181 @@
+{
+  "nazwa": "Gulasz wołowy z warzywami korzeniowymi",
+  "opis": "Długo duszony gulasz wołowy z ziemniakami, marchewką, pasternakiem i selerem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
+  "pory": [
+    "obiad"
+  ],
+  "kuchnie": [
+    "polska"
+  ],
+  "rodzaje": [
+    "gulasz_curry"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 954,
+  "liczba_porcji_bazowych": 2,
+  "trwalosc_dni": 3,
+  "czas_przygotowania_min": 18,
+  "czas_obrobki_min": 150,
+  "sprzet": [
+    "Garnek 3 l",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Przechowuj w lodówce do 3 dni albo zamroź po ostudzeniu. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
+  "mozna_mrozic": true,
+  "ratunek": "Twarde mięso duś dalej na małym ogniu, uzupełniając gorącą wodę. Za rzadki sos odparuj bez przykrycia.",
+  "skladniki": [
+    {
+      "nazwa": "Pręga wołowa bez kości, surowa",
+      "ilosc": 360,
+      "jednostka": "g",
+      "stan": "pokrojona w kostkę"
+    },
+    {
+      "nazwa": "Ziemniaki, surowe",
+      "ilosc": 300,
+      "jednostka": "g",
+      "stan": "pokrojone"
+    },
+    {
+      "nazwa": "Marchew, surowa",
+      "ilosc": 120,
+      "jednostka": "g",
+      "stan": "pokrojona"
+    },
+    {
+      "nazwa": "Pasternak, surowy",
+      "ilosc": 80,
+      "jednostka": "g",
+      "stan": "pokrojony"
+    },
+    {
+      "nazwa": "Seler korzeń",
+      "ilosc": 60,
+      "jednostka": "g",
+      "stan": "pokrojony"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 80,
+      "jednostka": "g",
+      "stan": "posiekana"
+    },
+    {
+      "nazwa": "Passata pomidorowa",
+      "ilosc": 140,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Domowy bulion warzywny",
+      "ilosc": 240,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "woda",
+      "ilosc": 500,
+      "jednostka": "ml"
+    },
+    {
+      "nazwa": "Olej rzepakowy",
+      "ilosc": 16,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Papryka słodka mielona",
+      "ilosc": 4,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Majeranek suszony",
+      "ilosc": 2,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "liść laurowy",
+      "ilosc": 2,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 2,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 1,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 18,
+      "kroki": [
+        {
+          "tresc": "**Ziemniaki.** Umyj i obierz ziemniaki, pokrój w kostkę około 2 cm."
+        },
+        {
+          "tresc": "**Marchew.** Umyj i obierz marchew, pokrój w kostkę około 1,5 cm."
+        },
+        {
+          "tresc": "**Pasternak.** Umyj i obierz pasternak, pokrój w kostkę około 1,5 cm."
+        },
+        {
+          "tresc": "**Seler.** Umyj i obierz seler, pokrój w kostkę około 1,5 cm."
+        },
+        {
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
+        },
+        {
+          "tresc": "**Wołowina.** Osusz wołowinę i pokrój w kostkę około 3 cm."
+        },
+        {
+          "tresc": "**Po przygotowaniu mięsa.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surowym mięsem."
+        },
+        {
+          "tresc": "**Płynna baza.** Odmierz bulion, passatę i wodę z listy składników."
+        },
+        {
+          "tresc": "**Olej.** Odmierz olej."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól, pieprz, słodką paprykę, majeranek i liście laurowe."
+        }
+      ]
+    },
+    {
+      "nazwa": "Duszenie",
+      "minuty": 150,
+      "kroki": [
+        {
+          "tresc": "**Rozgrzanie oleju.** Rozgrzej olej przez **1 minutę**."
+        },
+        {
+          "tresc": "**Obsmażenie wołowiny.** Obsmaż wołowinę partiami po **4–5 minut**, obracając; dla bazy przeznacz około **10 minut**."
+        },
+        {
+          "tresc": "**Zdjęcie mięsa.** Przełóż na talerz."
+        },
+        {
+          "tresc": "**Cebula i papryka.** Smaż cebulę **4 minuty**, dodaj paprykę mieloną i mieszaj **20 sekund**."
+        },
+        {
+          "tresc": "**Baza sosu.** Włóż mięso, dodaj passatę, bulion, wodę oraz liść laurowy."
+        },
+        {
+          "tresc": "**Duszenie wołowiny.** Doprowadź do łagodnego wrzenia przez około **5 minut** i duś pod przykryciem **90 minut**. Co **20–30 minut** sprawdź płyn; ubytek uzupełniaj gorącą wodą."
+        },
+        {
+          "tresc": "**Warzywa korzeniowe.** Gdy mięso zaczyna mięknąć, dodaj marchew, pasternak, seler oraz ziemniaki. Duś **30–35 minut**. Jeśli wołowina po pierwszym duszeniu jest nadal twarda, przed dodaniem warzyw wydłuż duszenie o **15–30 minut**.",
+          "sygnal": "mięso łatwo rozdziela się widelcem; warzywa miękkie, ale nie rozpadają się",
+          "uwaga": true
+        },
+        {
+          "tresc": "**Doprawienie i podanie.** Usuń liść laurowy, dodaj majeranek, sól i pieprz. Wymieszaj i podaj."
+        }
+      ]
+    }
+  ]
+}

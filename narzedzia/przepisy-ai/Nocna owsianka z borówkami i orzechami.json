@@ -64,10 +64,13 @@
       "minuty": 4,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Borówki.** Umyj borówki i dokładnie osusz."
         },
         {
-          "tresc": "Odmierz płatki, mleko, jogurt i chia. Umyj i osusz borówki; orzechy posiekaj i odłóż do podania."
+          "tresc": "**Orzechy.** Odmierz orzechy włoskie i grubo posiekaj."
+        },
+        {
+          "tresc": "**Baza owsianki.** Odmierz płatki, mleko, jogurt i chia."
         }
       ]
     },
@@ -76,7 +79,7 @@
       "minuty": 2,
       "kroki": [
         {
-          "tresc": "Wymieszaj płatki z mlekiem, jogurtem, chia i połową borówek. Pozostałe borówki przechowaj osobno pod przykryciem w lodówce."
+          "tresc": "**Mieszanie owsianki.** Wymieszaj płatki z mlekiem, jogurtem, chia i połową borówek. Pozostałe borówki przechowaj osobno pod przykryciem w lodówce."
         }
       ]
     },
@@ -85,7 +88,7 @@
       "minuty": 360,
       "kroki": [
         {
-          "tresc": "Przykryj owsiankę i wstaw do lodówki na co najmniej 6 godzin. Po 10 minutach wymieszaj ponownie, aby chia nie zbiły się w grudki.",
+          "tresc": "**Chłodzenie owsianki.** Przykryj owsiankę i wstaw do lodówki na co najmniej **6 godzin**. Po **10 minutach** wymieszaj ponownie, aby chia nie zbiły się w grudki.",
           "sygnal": "płatki miękkie, masa kremowa",
           "uwaga": true
         }
@@ -96,7 +99,7 @@
       "minuty": 1,
       "kroki": [
         {
-          "tresc": "Wymieszaj owsiankę, dodaj pozostałe borówki oraz orzechy."
+          "tresc": "**Podanie.** Wymieszaj owsiankę, dodaj pozostałe borówki oraz orzechy."
         }
       ]
     }

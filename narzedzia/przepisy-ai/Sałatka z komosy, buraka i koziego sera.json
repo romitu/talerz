@@ -96,13 +96,28 @@
       "minuty": 12,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Buraki.** Umyj i obierz buraki, pokrój w kostkę około 1 cm. Wymieszaj z połową oliwy i tymiankiem."
         },
         {
-          "tresc": "Umyj i obierz buraki, pokrój w kostkę około 1 cm, wymieszaj z połową oliwy oraz tymiankiem. Opłucz komosę na sitku."
+          "tresc": "**Komosa.** Odmierz komosę i dokładnie opłucz na sitku."
         },
         {
-          "tresc": "Umyj i osusz rukolę. Umyj jabłko, usuń gniazdo nasienne i pokrój. Posiekaj orzechy, podziel kozi ser. Odmierz ocet oraz pozostałą oliwę."
+          "tresc": "**Rukola.** Umyj rukolę i dokładnie osusz."
+        },
+        {
+          "tresc": "**Jabłko.** Umyj jabłko, usuń gniazdo nasienne i pokrój miąższ w kostkę."
+        },
+        {
+          "tresc": "**Orzechy.** Odmierz orzechy włoskie i grubo posiekaj."
+        },
+        {
+          "tresc": "**Ser kozi.** Odmierz ser i podziel na mniejsze kawałki."
+        },
+        {
+          "tresc": "**Dodatki.** Odmierz ocet winny."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól i pieprz."
         }
       ]
     },
@@ -111,13 +126,16 @@
       "minuty": 50,
       "kroki": [
         {
-          "tresc": "Rozgrzej piekarnik do 200°C, grzanie góra–dół, zwykle około 10 minut. Rozłóż buraki na blasze i piecz 30–40 minut, mieszając w połowie."
+          "tresc": "**Rozgrzanie piekarnika.** Rozgrzej piekarnik do **200°C**, grzanie góra–dół, zwykle około **10 minut**."
         },
         {
-          "tresc": "Równolegle ugotuj komosę przez czas z opakowania, w dodatkowej wodzie. Odcedź, rozsyp cienko na talerzu do przestudzenia."
+          "tresc": "**Pieczenie buraków.** Rozłóż buraki na blasze i piecz **30–40 minut**, mieszając w połowie."
         },
         {
-          "tresc": "Sprawdź buraki widelcem; muszą być miękkie."
+          "tresc": "**Komosa — równolegle.** Równolegle ugotuj komosę przez czas z opakowania, w dodatkowej wodzie. Odcedź, rozsyp cienko na talerzu do przestudzenia."
+        },
+        {
+          "tresc": "**Sprawdzenie buraków.** Sprawdź buraki widelcem; muszą być miękkie."
         }
       ]
     },
@@ -126,10 +144,10 @@
       "minuty": 13,
       "kroki": [
         {
-          "tresc": "Przestudź buraki rozłożone na talerzu przez około 10 minut, aby nie zwiędła rukola."
+          "tresc": "**Studzenie buraków.** Przestudź buraki rozłożone na talerzu przez około **10 minut**, aby nie zwiędła rukola."
         },
         {
-          "tresc": "Połącz letnią lub chłodną komosę i buraki z rukolą, jabłkiem, orzechami oraz kozim serem. Dodaj pozostałą oliwę, ocet, sól i pieprz."
+          "tresc": "**Połączenie sałatki.** Połącz letnią lub chłodną komosę i buraki z rukolą, jabłkiem, orzechami oraz kozim serem. Dodaj pozostałą oliwę, ocet, sól i pieprz."
         }
       ]
     }

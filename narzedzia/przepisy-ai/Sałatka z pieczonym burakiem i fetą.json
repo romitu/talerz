@@ -12,7 +12,7 @@
     "salatka"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 431.5,
+  "porcja_g": 432,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 2,
   "czas_przygotowania_min": 10,
@@ -84,13 +84,25 @@
       "minuty": 10,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Buraki.** Umyj i obierz buraki, pokrój w kostkę około 1 cm. Wymieszaj z połową oliwy i tymiankiem."
         },
         {
-          "tresc": "Umyj i obierz buraki, pokrój w kostkę około 1 cm. Wymieszaj z połową oliwy i tymiankiem."
+          "tresc": "**Rukola.** Umyj rukolę i dokładnie osusz."
         },
         {
-          "tresc": "Umyj i osusz rukolę. Obierz i cienko pokrój cebulę. Pokrusz fetę i posiekaj orzechy. Odmierz ocet i pozostałą oliwę."
+          "tresc": "**Cebula.** Obierz cebulę i pokrój w cienkie piórka."
+        },
+        {
+          "tresc": "**Feta.** Odmierz fetę i pokrusz."
+        },
+        {
+          "tresc": "**Orzechy.** Odmierz orzechy włoskie i grubo posiekaj."
+        },
+        {
+          "tresc": "**Dodatki.** Odmierz ocet winny."
+        },
+        {
+          "tresc": "**Pieprz.** Odmierz pieprz."
         }
       ]
     },
@@ -99,10 +111,10 @@
       "minuty": 50,
       "kroki": [
         {
-          "tresc": "Rozgrzej piekarnik do 200°C, grzanie góra–dół, zwykle około 10 minut."
+          "tresc": "**Rozgrzanie piekarnika.** Rozgrzej piekarnik do **200°C**, grzanie góra–dół, zwykle około **10 minut**."
         },
         {
-          "tresc": "Rozłóż buraki na blasze, piecz 30–40 minut, obracając w połowie.",
+          "tresc": "**Pieczenie buraków.** Rozłóż buraki na blasze, piecz **30–40 minut**, obracając w połowie.",
           "sygnal": "buraki łatwo dają się nakłuć widelcem",
           "uwaga": true
         }
@@ -113,10 +125,10 @@
       "minuty": 13,
       "kroki": [
         {
-          "tresc": "Przestudź buraki przez około 10 minut na talerzu; nie dodawaj gorących do rukoli."
+          "tresc": "**Studzenie buraków.** Przestudź buraki przez około **10 minut** na talerzu; nie dodawaj gorących do rukoli."
         },
         {
-          "tresc": "Połącz rukolę, buraki, cebulę, orzechy i fetę. Skrop pozostałą oliwą i octem, dopraw pieprzem."
+          "tresc": "**Połączenie sałatki.** Połącz rukolę, buraki, cebulę, orzechy i fetę. Skrop pozostałą oliwą i octem, dopraw pieprzem."
         }
       ]
     }

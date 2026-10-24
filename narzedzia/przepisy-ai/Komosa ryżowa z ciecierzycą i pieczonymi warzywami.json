@@ -13,7 +13,7 @@
     "z_piekarnika"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 657.5,
+  "porcja_g": 658,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 2,
   "czas_przygotowania_min": 12,
@@ -106,16 +106,31 @@
       "minuty": 12,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Cukinia.** Umyj cukinię i pokrój na kawałki około 2 cm."
         },
         {
-          "tresc": "Umyj cukinię, paprykę i pomidory; usuń gniazdo nasienne papryki. Cukinię i paprykę pokrój na kawałki około 2 cm, pomidory w ćwiartki. Obierz cebulę i pokrój w piórka."
+          "tresc": "**Papryka.** Umyj paprykę, usuń gniazdo nasienne i pokrój na kawałki około 2 cm."
         },
         {
-          "tresc": "Opłucz komosę na sitku. Opłucz, odsącz i osusz ciecierzycę. Umyj i posiekaj natkę; przygotuj odmierzoną ilość soku z cytryny."
+          "tresc": "**Pomidory.** Umyj pomidory i pokrój w ćwiartki."
         },
         {
-          "tresc": "Warzywa oraz ciecierzycę wymieszaj z oliwą, oregano, solą i pieprzem."
+          "tresc": "**Cebula.** Obierz cebulę i pokrój w cienkie piórka."
+        },
+        {
+          "tresc": "**Komosa.** Odmierz komosę i dokładnie opłucz na sitku."
+        },
+        {
+          "tresc": "**Ciecierzyca.** Opłucz, odsącz i dokładnie osusz ciecierzycę. Odmierz po odsączeniu."
+        },
+        {
+          "tresc": "**Natka pietruszki.** Umyj i osusz natkę, usuń grube łodygi i drobno posiekaj liście."
+        },
+        {
+          "tresc": "**Cytryna.** Umyj cytrynę, wyciśnij sok i odmierz ilość wskazaną na liście składników."
+        },
+        {
+          "tresc": "**Doprawienie do pieczenia.** Wymieszaj warzywa i ciecierzycę z odmierzoną oliwą, oregano, solą i pieprzem."
         }
       ]
     },
@@ -124,16 +139,16 @@
       "minuty": 42,
       "kroki": [
         {
-          "tresc": "Rozgrzej piekarnik do 210°C, grzanie góra–dół; zwykle około 10 minut."
+          "tresc": "**Rozgrzanie piekarnika.** Rozgrzej piekarnik do **210°C**, grzanie góra–dół; zwykle około **10 minut**."
         },
         {
-          "tresc": "Rozłóż warzywa i ciecierzycę luźno na blasze. Piecz 25–30 minut, obracając w połowie."
+          "tresc": "**Pieczenie warzyw.** Rozłóż warzywa i ciecierzycę luźno na blasze. Piecz **25–30 minut**, obracając w połowie."
         },
         {
-          "tresc": "Podczas pieczenia ugotuj komosę przez czas z opakowania w dodatkowej wodzie. Odcedź i odstaw pod przykryciem na 5 minut."
+          "tresc": "**Komosa — równolegle.** Podczas pieczenia ugotuj komosę przez czas z opakowania w dodatkowej wodzie. Odcedź i odstaw pod przykryciem na **5 minut**."
         },
         {
-          "tresc": "Połącz komosę, upieczone warzywa i ciecierzycę. Dodaj sok z cytryny oraz natkę.",
+          "tresc": "**Połączenie i podanie.** Połącz komosę, upieczone warzywa i ciecierzycę. Dodaj sok z cytryny oraz natkę.",
           "sygnal": "warzywa są miękkie i zarumienione, ziarna komosy miękkie"
         }
       ]

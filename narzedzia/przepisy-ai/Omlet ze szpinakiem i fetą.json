@@ -74,13 +74,19 @@
       "minuty": 7,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Szpinak.** Umyj i odsącz szpinak. Usuń grube łodygi, duże liście porwij na mniejsze kawałki."
         },
         {
-          "tresc": "Umyj i osusz szpinak, duże liście posiekaj. Pokrusz fetę i przygotuj pieczywo."
+          "tresc": "**Feta.** Odmierz fetę i pokrusz."
         },
         {
-          "tresc": "Wbij jajka do miski i roztrzep widelcem z pieprzem oraz odmierzoną solą."
+          "tresc": "**Jajka.** Wbij jajka do miski i roztrzep widelcem z odmierzoną solą i pieprzem."
+        },
+        {
+          "tresc": "**Olej.** Odmierz olej."
+        },
+        {
+          "tresc": "**Pieczywo.** Przygotuj pieczywo w ilości wskazanej na liście składników."
         }
       ]
     },
@@ -89,18 +95,21 @@
       "minuty": 9,
       "kroki": [
         {
-          "tresc": "Rozgrzej olej przez 1 minutę. Dodaj szpinak i smaż 1 minutę."
+          "tresc": "**Rozgrzanie oleju.** Rozgrzej olej przez **1 minutę**."
         },
         {
-          "tresc": "Wlej jajka i rozłóż fetę. Smaż na małym ogniu pod pokrywką przez 4–5 minut."
+          "tresc": "**Szpinak.** Dodaj szpinak i smaż **1 minutę**."
         },
         {
-          "tresc": "Gdy masa się zetnie, złóż omlet i podgrzewaj jeszcze 1 minutę. Jeśli środek nadal jest płynny, smaż pod pokrywką kolejną minutę.",
+          "tresc": "**Smażenie omletu.** Wlej jajka i rozłóż fetę. Smaż na małym ogniu pod pokrywką przez **4–5 minut**."
+        },
+        {
+          "tresc": "**Złożenie i kontrola omletu.** Gdy masa się zetnie, złóż omlet i podgrzewaj jeszcze **1 minutę**. Jeśli środek nadal jest płynny, smaż pod pokrywką kolejną minutę.",
           "sygnal": "środek ścięty, bez surowej masy jajecznej",
           "uwaga": true
         },
         {
-          "tresc": "Podaj z pieczywem w ilości z listy."
+          "tresc": "**Podanie.** Podaj z pieczywem w ilości z listy."
         }
       ]
     }

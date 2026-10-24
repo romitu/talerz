@@ -12,7 +12,7 @@
     "gulasz_curry"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 584.5,
+  "porcja_g": 585,
   "liczba_porcji_bazowych": 2,
   "trwalosc_dni": 3,
   "czas_przygotowania_min": 10,
@@ -103,16 +103,28 @@
       "minuty": 10,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Papryka.** Umyj paprykę, usuń gniazdo nasienne i pokrój w kostkę około 1 cm."
         },
         {
-          "tresc": "Umyj paprykę, usuń gniazdo nasienne i pokrój w kostkę około 1 cm."
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
         },
         {
-          "tresc": "Obierz i posiekaj cebulę oraz czosnek."
+          "tresc": "**Czosnek.** Obierz czosnek i drobno posiekaj."
         },
         {
-          "tresc": "Obie fasole opłucz i odsącz na sitku. Odsącz kukurydzę. Odmierz pomidory i passatę."
+          "tresc": "**Fasole.** Obie fasole opłucz i odsącz na sitku. Odmierz każdą po odsączeniu."
+        },
+        {
+          "tresc": "**Kukurydza.** Odsącz kukurydzę i odmierz potrzebną ilość."
+        },
+        {
+          "tresc": "**Płynna baza.** Odmierz passatę i pomidory z puszki."
+        },
+        {
+          "tresc": "**Olej.** Odmierz olej."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz wędzoną paprykę, chili i kmin rzymski."
         }
       ]
     },
@@ -121,21 +133,27 @@
       "minuty": 34,
       "kroki": [
         {
-          "tresc": "Rozgrzej olej przez 1 minutę. Dodaj cebulę i smaż 4 minuty na średnim ogniu."
+          "tresc": "**Rozgrzanie oleju.** Rozgrzej olej przez **1 minutę**."
         },
         {
-          "tresc": "Dodaj paprykę i smaż 3 minuty. Dodaj czosnek, kmin, paprykę wędzoną oraz chili i smaż 30 sekund, mieszając."
+          "tresc": "**Cebula.** Dodaj cebulę i smaż **4 minuty** na średnim ogniu."
         },
         {
-          "tresc": "Dodaj pomidory, passatę, obie fasole i kukurydzę. Doprowadź do łagodnego wrzenia przez około 3 minuty."
+          "tresc": "**Papryka.** Dodaj paprykę i smaż **3 minuty**."
         },
         {
-          "tresc": "Gotuj bez przykrycia na małym ogniu przez 20 minut, mieszając co kilka minut.",
+          "tresc": "**Czosnek i przyprawy.** Dodaj czosnek, kmin, paprykę wędzoną oraz chili i smaż **30 sekund**, mieszając."
+        },
+        {
+          "tresc": "**Baza chili.** Dodaj pomidory, passatę, obie fasole i kukurydzę. Doprowadź do łagodnego wrzenia przez około **3 minuty**."
+        },
+        {
+          "tresc": "**Gotowanie chili.** Gotuj bez przykrycia na małym ogniu przez **20 minut**, mieszając co kilka minut.",
           "sygnal": "papryka jest miękka, sos gęsty, fasola zachowuje kształt",
           "uwaga": true
         },
         {
-          "tresc": "Spróbuj, dopraw odmierzoną solą i podaj."
+          "tresc": "**Doprawienie i podanie.** Spróbuj, dopraw odmierzoną solą i podaj."
         }
       ]
     }

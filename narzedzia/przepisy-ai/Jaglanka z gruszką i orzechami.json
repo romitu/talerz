@@ -11,9 +11,9 @@
     "na_slodko"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 431.5,
+  "porcja_g": 432,
   "liczba_porcji_bazowych": 1,
-  "trwalosc_dni": 2,
+  "trwalosc_dni": 0,
   "czas_przygotowania_min": 7,
   "czas_obrobki_min": 25,
   "sprzet": [
@@ -71,13 +71,22 @@
       "minuty": 7,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Kasza jaglana.** Odmierz kaszę, przepłucz na sitku pod bieżącą wodą i przelej wrzątkiem."
         },
         {
-          "tresc": "Kaszę przepłucz na sitku pod bieżącą wodą i przelej wrzątkiem."
+          "tresc": "**Gruszka.** Umyj gruszkę, usuń gniazdo nasienne i pokrój miąższ w kostkę."
         },
         {
-          "tresc": "Umyj gruszkę, usuń gniazdo nasienne i pokrój w kostkę. Posiekaj orzechy. Odmierz mleko, miód, cynamon i sól."
+          "tresc": "**Orzechy.** Odmierz orzechy włoskie i grubo posiekaj."
+        },
+        {
+          "tresc": "**Mleko.** Odmierz mleko."
+        },
+        {
+          "tresc": "**Dodatki.** Odmierz miód."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól i cynamon."
         }
       ]
     },
@@ -86,18 +95,18 @@
       "minuty": 25,
       "kroki": [
         {
-          "tresc": "Wlej mleko do rondla, dodaj kaszę i sól. Doprowadź do łagodnego wrzenia przez około 3 minuty."
+          "tresc": "**Zagotowanie kaszy.** Wlej mleko do rondla, dodaj kaszę i sól. Doprowadź do łagodnego wrzenia przez około **3 minuty**."
         },
         {
-          "tresc": "Gotuj na małym ogniu pod uchyloną pokrywką przez 15–18 minut lub czas wskazany na opakowaniu, często mieszając przy dnie. W razie potrzeby uzupełnij odparowany płyn gorącą wodą."
+          "tresc": "**Gotowanie jaglanki.** Gotuj na małym ogniu pod uchyloną pokrywką przez **15–18 minut** lub czas wskazany na opakowaniu, często mieszając przy dnie. W razie potrzeby uzupełnij odparowany płyn gorącą wodą."
         },
         {
-          "tresc": "Dodaj gruszkę i cynamon, gotuj jeszcze 2 minuty.",
+          "tresc": "**Gruszka i cynamon.** Dodaj gruszkę i cynamon, gotuj jeszcze **2 minuty**.",
           "sygnal": "kasza jest miękka i kremowa",
           "uwaga": true
         },
         {
-          "tresc": "Zdejmij z ognia, dodaj miód i orzechy, podaj."
+          "tresc": "**Miód i podanie.** Zdejmij z ognia, dodaj miód i orzechy, podaj."
         }
       ]
     }

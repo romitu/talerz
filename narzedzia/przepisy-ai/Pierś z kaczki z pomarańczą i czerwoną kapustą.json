@@ -7,8 +7,9 @@
   "kuchnie": [
     "inna"
   ],
+  "rodzaje": [],
   "porcjowanie": "waga",
-  "porcja_g": 777.5,
+  "porcja_g": 778,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 2,
   "czas_przygotowania_min": 15,
@@ -104,19 +105,37 @@
       "minuty": 15,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Kapusta czerwona.** Umyj kapustę, usuń twardy głąb i cienko poszatkuj liście."
         },
         {
-          "tresc": "Umyj kapustę, usuń twardy głąb i cienko poszatkuj. Umyj jabłko, usuń gniazdo nasienne i pokrój w kostkę. Obierz i posiekaj cebulę."
+          "tresc": "**Jabłko.** Umyj jabłko, usuń gniazdo nasienne i pokrój miąższ w kostkę."
         },
         {
-          "tresc": "Umyj i obierz ziemniaki, pokrój w kawałki około 3 cm. Umyj pomarańczę; część przygotuj w cząstkach bez błon, z pozostałej wyciśnij sok."
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
         },
         {
-          "tresc": "Osusz pierś bez skóry i dopraw częścią soli i pieprzu. Przygotuj cynamon, goździki oraz ocet. Podziel olej między kapustę i smażenie kaczki. Umyj przybory po mięsie."
+          "tresc": "**Ziemniaki.** Umyj i obierz ziemniaki, pokrój na kawałki około 3 cm."
         },
         {
-          "tresc": "Odmierz wodę do duszenia kapusty zgodnie z listą składników."
+          "tresc": "**Pomarańcza.** Umyj pomarańczę. Część przygotuj w cząstkach bez błon, z pozostałej wyciśnij sok."
+        },
+        {
+          "tresc": "**Kaczka.** Osusz pierś bez skóry i dopraw częścią soli i pieprzu."
+        },
+        {
+          "tresc": "**Po przygotowaniu mięsa.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surowym mięsem."
+        },
+        {
+          "tresc": "**Olej.** Odmierz olej i podziel na połowę: do kapusty i do smażenia kaczki."
+        },
+        {
+          "tresc": "**Woda.** Odmierz wodę z listy składników."
+        },
+        {
+          "tresc": "**Dodatki.** Odmierz ocet jabłkowy."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz cynamon i goździki."
         }
       ]
     },
@@ -125,24 +144,42 @@
       "minuty": 45,
       "kroki": [
         {
-          "tresc": "W garnku rozgrzej połowę oleju przez 1 minutę. Smaż cebulę 4 minuty. Dodaj kapustę, jabłko, połowę soku pomarańczowego, cynamon i goździki. Dodaj odmierzoną wodę do duszenia, i duś pod przykryciem 25–30 minut. Ocet dodaj pod koniec, gdy kapusta jest miękka."
+          "tresc": "**Rozgrzanie oleju.** W garnku rozgrzej połowę oleju przez **1 minutę**."
         },
         {
-          "tresc": "Równolegle na drugim palniku zagotuj ziemniaki w wodzie, zwykle około 5 minut, a następnie gotuj 15–20 minut do miękkości. Odcedź i trzymaj pod przykryciem."
+          "tresc": "**Cebula.** Smaż cebulę **4 minuty**."
         },
         {
-          "tresc": "Na palniku zwolnionym przez ziemniaki rozgrzej pozostały olej na patelni przez 1 minutę. Smaż pierś przez 3–4 minuty z każdej strony."
+          "tresc": "**Duszenie kapusty.** Dodaj kapustę, jabłko, połowę soku pomarańczowego, cynamon i goździki. Dodaj odmierzoną wodę do duszenia, i duś pod przykryciem **25–30 minut**."
         },
         {
-          "tresc": "Sprawdź najgrubsze miejsce termometrem. W razie potrzeby zmniejsz ogień i dosmażaj pod przykryciem po 1–2 minuty. Gotową pierś odstaw na 5 minut.",
+          "tresc": "**Ocet do kapusty.** Ocet dodaj pod koniec, gdy kapusta jest miękka."
+        },
+        {
+          "tresc": "**Ziemniaki — równolegle.** Równolegle na drugim palniku zagotuj ziemniaki w wodzie, zwykle około **5 minut**, a następnie gotuj **15–20 minut** do miękkości. Odcedź i trzymaj pod przykryciem."
+        },
+        {
+          "tresc": "**Rozgrzanie oleju po ziemniakach.** Na palniku zwolnionym przez ziemniaki rozgrzej pozostały olej na patelni przez **1 minutę**."
+        },
+        {
+          "tresc": "**Smażenie kaczki.** Smaż pierś przez **3–4 minuty** z każdej strony."
+        },
+        {
+          "tresc": "**Sprawdzenie kaczki.** Sprawdź najgrubsze miejsce termometrem. W razie potrzeby zmniejsz ogień i dosmażaj pod przykryciem po **1–2 minuty**.",
           "sygnal": "kaczka ma co najmniej 74°C w środku",
           "uwaga": true
         },
         {
-          "tresc": "W tym czasie wlej pozostały sok pomarańczowy na patelnię, dodaj cząstki pomarańczy i gotuj 1–2 minuty, zbierając smaki z dna."
+          "tresc": "**Odpoczynek kaczki.** Gotową pierś odstaw na **5 minut**."
         },
         {
-          "tresc": "Usuń goździki z kapusty, dopraw resztą soli i pieprzu. Pokrój kaczkę, podaj z sosem, kapustą i ziemniakami."
+          "tresc": "**Sos pomarańczowy.** W tym czasie wlej pozostały sok pomarańczowy na patelnię, dodaj cząstki pomarańczy i gotuj **1–2 minuty**, zbierając smaki z dna."
+        },
+        {
+          "tresc": "**Doprawienie kapusty.** Usuń goździki z kapusty, dopraw resztą soli i pieprzu."
+        },
+        {
+          "tresc": "**Podanie.** Pokrój kaczkę, podaj z sosem, kapustą i ziemniakami."
         }
       ]
     }

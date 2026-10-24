@@ -1,0 +1,109 @@
+{
+  "nazwa": "Kanapki z pastą jajeczną",
+  "opis": "Trzy kromki chleba żytniego z kremową pastą z jajek, jogurtu, musztardy i szczypiorku. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
+  "pory": [
+    "sniadanie",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "polska"
+  ],
+  "rodzaje": [
+    "kanapki"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 261,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 1,
+  "czas_przygotowania_min": 5,
+  "czas_obrobki_min": 21,
+  "sprzet": [
+    "Garnek 2 l",
+    "Miska",
+    "Widelec",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna",
+    "Łyżka cedzakowa"
+  ],
+  "przechowywanie": "Pastę przechowuj w zamkniętym pojemniku w lodówce do 1 dnia. Pieczywo smaruj dopiero przed podaniem. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli pasta jest zbyt gęsta, dodaj odrobinę jogurtu. Jeśli jest za rzadka, dodaj więcej rozgniecionego jajka.",
+  "skladniki": [
+    {
+      "nazwa": "Jaja kurze, całe, surowe",
+      "ilosc": 2,
+      "jednostka": "szt"
+    },
+    {
+      "nazwa": "Chleb żytni razowy",
+      "ilosc": 3,
+      "jednostka": "szt",
+      "stan": "kromki"
+    },
+    {
+      "nazwa": "Jogurt grecki naturalny 2%",
+      "ilosc": 30,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Musztarda",
+      "ilosc": 5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Szczypiorek świeży",
+      "ilosc": 10,
+      "jednostka": "g",
+      "stan": "drobno posiekany"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 5,
+      "kroki": [
+        {
+          "tresc": "**Szczypiorek.** Umyj i osusz szczypiorek, następnie drobno posiekaj."
+        },
+        {
+          "tresc": "**Do pasty.** Odmierz jogurt i musztardę do osobnej miski."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól i pieprz."
+        },
+        {
+          "tresc": "**Pieczywo.** Przygotuj pieczywo w ilości wskazanej na liście składników."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie jajek i przygotowanie pasty",
+      "minuty": 21,
+      "kroki": [
+        {
+          "tresc": "**Gotowanie jajek.** Zagotuj tyle wody, aby przykryła jajka. Ostrożnie włóż jajka i gotuj przy łagodnym wrzeniu przez **9–10 minut**, licząc od włożenia."
+        },
+        {
+          "tresc": "**Schłodzenie jajek.** Przełóż jajka do zimnej wody. Po schłodzeniu obierz."
+        },
+        {
+          "tresc": "**Pasta jajeczna.** Rozgnieć jajka widelcem w misce. Dodaj jogurt, musztardę i szczypiorek. Dopraw solą oraz pieprzem, wymieszaj."
+        },
+        {
+          "tresc": "**Pasta na pieczywo.** Posmaruj przygotowane pieczywo pastą i podaj."
+        }
+      ]
+    }
+  ]
+}

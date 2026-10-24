@@ -61,10 +61,19 @@
       "minuty": 3,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Borówki.** Umyj borówki i dokładnie osusz."
         },
         {
-          "tresc": "Umyj i osusz borówki. Obierz i pokrój banana. Posiekaj orzechy. Odmierz serek oraz cynamon."
+          "tresc": "**Banan.** Obierz banana i pokrój miąższ w plasterki."
+        },
+        {
+          "tresc": "**Orzechy.** Odmierz orzechy włoskie i grubo posiekaj."
+        },
+        {
+          "tresc": "**Serek wiejski.** Odmierz serek wiejski."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz cynamon."
         }
       ]
     },
@@ -73,7 +82,7 @@
       "minuty": 2,
       "kroki": [
         {
-          "tresc": "Przełóż serek do miski, dodaj owoce. Posyp orzechami i cynamonem."
+          "tresc": "**Podanie.** Przełóż serek do miski, dodaj owoce. Posyp orzechami i cynamonem."
         }
       ]
     }

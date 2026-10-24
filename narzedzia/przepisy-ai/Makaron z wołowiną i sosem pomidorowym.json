@@ -11,7 +11,7 @@
     "makaron"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 648.5,
+  "porcja_g": 649,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 3,
   "czas_przygotowania_min": 12,
@@ -94,10 +94,31 @@
       "minuty": 12,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Marchew.** Umyj i obierz marchew, zetrzyj na tarce o grubych oczkach."
         },
         {
-          "tresc": "Umyj i obierz marchew, zetrzyj na tarce. Obierz i posiekaj cebulę oraz czosnek. Odmierz passatę i makaron. Przygotuj mięso."
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
+        },
+        {
+          "tresc": "**Czosnek.** Obierz czosnek i drobno posiekaj."
+        },
+        {
+          "tresc": "**Wołowina.** Odmierz mięso mielone do osobnego naczynia."
+        },
+        {
+          "tresc": "**Po przygotowaniu mięsa.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surowym mięsem."
+        },
+        {
+          "tresc": "**Makaron.** Odmierz makaron."
+        },
+        {
+          "tresc": "**Passata.** Odmierz passatę."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól, pieprz, oregano i suszoną bazylię."
         }
       ]
     },
@@ -106,19 +127,25 @@
       "minuty": 37,
       "kroki": [
         {
-          "tresc": "Rozgrzej oliwę przez 1 minutę, smaż cebulę i marchew 4 minuty."
+          "tresc": "**Rozgrzanie oliwy.** Rozgrzej oliwę przez **1 minutę**."
         },
         {
-          "tresc": "Dodaj mięso i smaż 6–7 minut, rozdzielając grudki. Dodaj czosnek i smaż 30 sekund."
+          "tresc": "**Cebula i marchew.** Smaż cebulę i marchew **4 minuty**."
         },
         {
-          "tresc": "Dodaj passatę, oregano oraz bazylię suszoną. Doprowadź do wrzenia i gotuj łagodnie przez 18–20 minut, mieszając."
+          "tresc": "**Smażenie wołowiny.** Dodaj mięso i smaż **6–7 minut**, rozdzielając grudki."
         },
         {
-          "tresc": "W czasie gotowania sosu ugotuj makaron przez czas z opakowania na drugim palniku, następnie odcedź."
+          "tresc": "**Czosnek.** Dodaj czosnek i smaż **30 sekund**."
         },
         {
-          "tresc": "Sprawdź sos, dopraw solą i pieprzem i podaj z makaronem.",
+          "tresc": "**Gotowanie sosu.** Dodaj passatę, oregano oraz bazylię suszoną. Doprowadź do wrzenia i gotuj łagodnie przez **18–20 minut**, mieszając."
+        },
+        {
+          "tresc": "**Makaron — równolegle.** W czasie gotowania sosu ugotuj makaron przez czas z opakowania na drugim palniku, następnie odcedź."
+        },
+        {
+          "tresc": "**Sprawdzenie i podanie.** Sprawdź sos, dopraw solą i pieprzem i podaj z makaronem.",
           "sygnal": "wołowina jest rozdrobniona i ugotowana, sos gęsty; mięso co najmniej 71°C",
           "uwaga": true
         }

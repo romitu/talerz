@@ -89,13 +89,31 @@
       "minuty": 10,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Ciecierzyca.** Przełóż ciecierzycę z puszki na sitko, opłucz i odsącz. Odmierz po odsączeniu."
         },
         {
-          "tresc": "Opłucz i odsącz ciecierzycę. Umyj pomidory i bazylię, osusz liście. Pokrój pomidory."
+          "tresc": "**Pomidor.** Umyj pomidory i pokrój w kostkę."
         },
         {
-          "tresc": "Obierz czosnek. Posiekaj orzechy. Umyj cytrynę i odmierz sok. Przygotuj makaron i oliwę."
+          "tresc": "**Bazylia.** Umyj i osusz bazylię, oderwij liście od łodyg."
+        },
+        {
+          "tresc": "**Czosnek.** Obierz czosnek; zostanie zblendowany w sosie."
+        },
+        {
+          "tresc": "**Orzechy.** Odmierz orzechy włoskie i grubo posiekaj."
+        },
+        {
+          "tresc": "**Cytryna.** Umyj cytrynę, wyciśnij sok i odmierz ilość wskazaną na liście składników."
+        },
+        {
+          "tresc": "**Makaron.** Odmierz makaron."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól i pieprz."
         }
       ]
     },
@@ -104,16 +122,16 @@
       "minuty": 20,
       "kroki": [
         {
-          "tresc": "Ugotuj makaron przez czas z opakowania. Przed odcedzeniem zachowaj nieco wody z gotowania."
+          "tresc": "**Gotowanie makaronu.** Ugotuj makaron przez czas z opakowania. Przed odcedzeniem zachowaj nieco wody z gotowania."
         },
         {
-          "tresc": "Podczas gotowania makaronu zblenduj bazylię, orzechy, oliwę, czosnek, sok z cytryny, sól i pieprz. Rozluźnij sos niewielką ilością ciepłej, nie wrzącej wody z makaronu."
+          "tresc": "**Sos bazyliowy — równolegle.** Podczas gotowania makaronu zblenduj bazylię, orzechy, oliwę, czosnek, sok z cytryny, sól i pieprz. Rozluźnij sos niewielką ilością ciepłej, nie wrzącej wody z makaronu."
         },
         {
-          "tresc": "Na ostatnie 2 minuty gotowania makaronu dodaj ciecierzycę do garnka. Odcedź całość."
+          "tresc": "**Ciecierzyca.** Na ostatnie **2 minuty** gotowania makaronu dodaj ciecierzycę do garnka. Odcedź całość."
         },
         {
-          "tresc": "Poza ogniem wymieszaj makaron i ciecierzycę z sosem oraz pokrojonymi pomidorami. Podaj bez dodatkowego gotowania bazylii."
+          "tresc": "**Połączenie i podanie.** Poza ogniem wymieszaj makaron i ciecierzycę z sosem oraz pokrojonymi pomidorami. Podaj bez dodatkowego gotowania bazylii."
         }
       ]
     }

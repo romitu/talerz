@@ -12,7 +12,7 @@
     "jajka"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 266.5,
+  "porcja_g": 267,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 0,
   "czas_przygotowania_min": 6,
@@ -75,13 +75,22 @@
       "minuty": 6,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Pomidor.** Umyj pomidory i pokrój w kostkę."
         },
         {
-          "tresc": "Umyj pomidora i szczypiorek. Pomidora pokrój w kostkę, szczypiorek posiekaj. Przygotuj pieczywo."
+          "tresc": "**Szczypiorek.** Umyj i osusz szczypiorek, następnie drobno posiekaj."
         },
         {
-          "tresc": "Wbij jajka do miski, dodaj sól i pieprz, roztrzep widelcem."
+          "tresc": "**Pieczywo.** Przygotuj pieczywo w ilości wskazanej na liście składników."
+        },
+        {
+          "tresc": "**Jajka.** Wbij jajka do miski, dodaj odmierzoną sól i pieprz, roztrzep widelcem."
+        },
+        {
+          "tresc": "**Masło.** Odmierz masło."
+        },
+        {
+          "tresc": "**Sól.** Odmierz sól."
         }
       ]
     },
@@ -90,15 +99,18 @@
       "minuty": 7,
       "kroki": [
         {
-          "tresc": "Rozpuść masło na patelni przez około 1 minutę na średnim ogniu. Dodaj pomidora i smaż 2 minuty; przed dodaniem jajek odparuj nadmiar płynu."
+          "tresc": "**Rozpuszczenie masła.** Rozpuść masło na patelni przez około **1 minutę** na średnim ogniu."
         },
         {
-          "tresc": "Wlej jajka, zmniejsz ogień i smaż 2–3 minuty, łagodnie mieszając.",
+          "tresc": "**Pomidor.** Dodaj pomidora i smaż **2 minuty**; przed dodaniem jajek odparuj nadmiar płynu."
+        },
+        {
+          "tresc": "**Smażenie jajek.** Wlej jajka, zmniejsz ogień i smaż **2–3 minuty**, łagodnie mieszając.",
           "sygnal": "jajka są ścięte, bez płynnego białka; pozostają wilgotne",
           "uwaga": true
         },
         {
-          "tresc": "Zdejmij z ognia, dodaj szczypiorek i podaj z pieczywem w ilości wskazanej na liście."
+          "tresc": "**Szczypiorek i podanie.** Zdejmij z ognia, dodaj szczypiorek i podaj z pieczywem w ilości wskazanej na liście."
         }
       ]
     }

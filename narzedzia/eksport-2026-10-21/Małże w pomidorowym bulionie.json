@@ -1,0 +1,148 @@
+{
+  "nazwa": "Małże w pomidorowym bulionie",
+  "opis": "Małże gotowane w aromatycznym bulionie pomidorowym z czosnkiem, selerem naciowym i natką. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "srodziemnomorska"
+  ],
+  "rodzaje": [],
+  "porcjowanie": "waga",
+  "porcja_g": 677,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 0,
+  "czas_przygotowania_min": 10,
+  "czas_obrobki_min": 22,
+  "sprzet": [
+    "Garnek 3 l",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Danie najlepiej zjedz bezpośrednio po przygotowaniu.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli bulion za bardzo zgęstnieje, rozrzedź go gorącą wodą. Małże dodawaj dopiero do gotowej bazy, aby nie gotować ich nadmiernie.",
+  "skladniki": [
+    {
+      "nazwa": "Małże, surowe",
+      "ilosc": 250,
+      "jednostka": "g",
+      "stan": "surowe mięso małży bez muszli; podana masa dotyczy części jadalnej, nie muszli"
+    },
+    {
+      "nazwa": "Pomidory krojone z puszki",
+      "ilosc": 150,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Domowy bulion warzywny",
+      "ilosc": 100,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Seler naciowy, surowy",
+      "ilosc": 40,
+      "jednostka": "g",
+      "stan": "pokrojony"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 40,
+      "jednostka": "g",
+      "stan": "posiekana"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 8,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 8,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Pietruszka natka",
+      "ilosc": 10,
+      "jednostka": "g",
+      "stan": "posiekana"
+    },
+    {
+      "nazwa": "Chleb żytni razowy",
+      "ilosc": 2,
+      "jednostka": "szt",
+      "stan": "kromki"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 10,
+      "kroki": [
+        {
+          "tresc": "**Seler naciowy.** Umyj seler naciowy i pokrój w cienkie plasterki."
+        },
+        {
+          "tresc": "**Natka pietruszki.** Umyj i osusz natkę, usuń grube łodygi i drobno posiekaj liście."
+        },
+        {
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
+        },
+        {
+          "tresc": "**Czosnek.** Obierz czosnek i drobno posiekaj."
+        },
+        {
+          "tresc": "**Małże.** Przygotuj surowe mięso małży bez muszli, usuń ewentualne fragmenty muszli. Mrożone mięso wcześniej rozmroź w lodówce i odsącz."
+        },
+        {
+          "tresc": "**Po przygotowaniu małży.** Umyj ręce i przybory, które miały kontakt z surowymi małżami."
+        },
+        {
+          "tresc": "**Płynna baza.** Odmierz bulion i pomidory z puszki."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
+        },
+        {
+          "tresc": "**Pieprz.** Odmierz pieprz."
+        },
+        {
+          "tresc": "**Pieczywo.** Przygotuj pieczywo w ilości wskazanej na liście składników."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie",
+      "minuty": 22,
+      "kroki": [
+        {
+          "tresc": "**Rozgrzanie oliwy.** Rozgrzej oliwę przez **1 minutę**."
+        },
+        {
+          "tresc": "**Cebula i seler.** Smaż cebulę i seler **4 minuty**."
+        },
+        {
+          "tresc": "**Czosnek.** Dodaj czosnek i smaż **30 sekund**."
+        },
+        {
+          "tresc": "**Bulion pomidorowy.** Dodaj pomidory i bulion. Doprowadź do wrzenia przez około **3 minuty** i gotuj łagodnie **5 minut**."
+        },
+        {
+          "tresc": "**Gotowanie małży.** Dodaj mięso małży, ponownie doprowadź do łagodnego wrzenia i od tego momentu gotuj przez **4–5 minut**. W razie potrzeby dogotuj przez kolejną minutę.",
+          "sygnal": "mięso jest nieprzezroczyste i jędrne, gorące w środku",
+          "uwaga": true
+        },
+        {
+          "tresc": "**Podanie.** Dodaj pieprz i natkę, podaj od razu z pieczywem."
+        }
+      ]
+    }
+  ]
+}

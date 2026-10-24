@@ -12,7 +12,7 @@
     "z_piekarnika"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 708.5,
+  "porcja_g": 709,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 3,
   "czas_przygotowania_min": 12,
@@ -89,16 +89,28 @@
       "minuty": 12,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Batat.** Umyj i obierz batata, pokrój w kostkę około 2 cm."
         },
         {
-          "tresc": "Umyj i obierz batata, pokrój w kostkę około 2 cm. Umyj brokuł i podziel na małe różyczki. Obierz cebulę i pokrój w piórka, czosnek posiekaj."
+          "tresc": "**Brokuł.** Umyj brokuł i podziel na małe różyczki."
         },
         {
-          "tresc": "Podziel oliwę między warzywa i mięso. Batata, cebulę i brokuł wymieszaj oddzielnie z oliwą oraz częścią tymianku, papryki wędzonej, soli i pieprzu."
+          "tresc": "**Cebula.** Obierz cebulę i pokrój w cienkie piórka."
         },
         {
-          "tresc": "Pierś osusz i wyrównaj grubość do około 2–3 cm. Natrzyj oliwą, czosnkiem i pozostałymi przyprawami. Umyj ręce i przybory po mięsie."
+          "tresc": "**Czosnek.** Obierz czosnek i drobno posiekaj."
+        },
+        {
+          "tresc": "**Doprawienie warzyw.** Podziel oliwę między batata z cebulą, brokuł i kurczaka. Warzywa wymieszaj oddzielnie ze swoją częścią oliwy, tymianku, papryki, soli i pieprzu."
+        },
+        {
+          "tresc": "**Kurczak.** Osusz pierś i wyrównaj grubość do około 2–3 cm. Natrzyj oliwą, czosnkiem i pozostałymi przyprawami."
+        },
+        {
+          "tresc": "**Po przygotowaniu mięsa.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surowym mięsem."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz wędzoną paprykę."
         }
       ]
     },
@@ -107,21 +119,21 @@
       "minuty": 47,
       "kroki": [
         {
-          "tresc": "Rozgrzej piekarnik do 210°C, grzanie góra–dół, zwykle około 10 minut."
+          "tresc": "**Rozgrzanie piekarnika.** Rozgrzej piekarnik do **210°C**, grzanie góra–dół, zwykle około **10 minut**."
         },
         {
-          "tresc": "Rozłóż batata i cebulę na blasze. Piecz 15 minut."
+          "tresc": "**Batat i cebula.** Rozłóż batata i cebulę na blasze. Piecz **15 minut**."
         },
         {
-          "tresc": "Dodaj kurczaka i brokuł, układając luźno. Piecz 18–22 minuty."
+          "tresc": "**Kurczak i brokuł.** Dodaj kurczaka i brokuł, układając luźno. Piecz **18–22 minuty**."
         },
         {
-          "tresc": "Sprawdź mięso termometrem w najgrubszym miejscu; gotowego kurczaka zdejmij. Niedopieczone warzywa dopiekaj osobno przez kolejne 5 minut.",
+          "tresc": "**Sprawdzenie mięsa.** Sprawdź mięso termometrem w najgrubszym miejscu; gotowego kurczaka zdejmij. Niedopieczone warzywa dopiekaj osobno przez kolejne **5 minut**.",
           "sygnal": "kurczak ma co najmniej 74°C, batat miękki, brokuł lekko rumiany",
           "uwaga": true
         },
         {
-          "tresc": "Podaj mięso z warzywami."
+          "tresc": "**Podanie.** Podaj mięso z warzywami."
         }
       ]
     }

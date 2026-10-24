@@ -1,0 +1,116 @@
+{
+  "nazwa": "Tosty z serem salami i papryką",
+  "opis": "Ciepłe tosty z serem salami, papryką i musztardą. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami.",
+  "pory": [
+    "sniadanie",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "inna"
+  ],
+  "rodzaje": [
+    "kanapki"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 251,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 0,
+  "czas_przygotowania_min": 6,
+  "czas_obrobki_min": 11,
+  "sprzet": [
+    "Grill kontaktowy",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Tosty zjedz bezpośrednio po przygotowaniu.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli papryka pozostaje zbyt twarda, pokrój ją bardzo cienko. Gdy ser wypływa, zostaw szerszy brzeg pieczywa bez nadzienia.",
+  "skladniki": [
+    {
+      "nazwa": "Chleb żytni razowy",
+      "ilosc": 2,
+      "jednostka": "szt",
+      "stan": "kromki"
+    },
+    {
+      "nazwa": "Ser salami",
+      "ilosc": 70,
+      "jednostka": "g",
+      "stan": "pokrojony w plastry"
+    },
+    {
+      "nazwa": "Papryka czerwona, surowa",
+      "ilosc": 100,
+      "jednostka": "g",
+      "stan": "pokrojona w cienkie paski"
+    },
+    {
+      "nazwa": "Musztarda",
+      "ilosc": 5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Masło",
+      "ilosc": 5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Papryka wędzona mielona",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 6,
+      "kroki": [
+        {
+          "tresc": "**Papryka.** Umyj paprykę, usuń gniazdo nasienne i pokrój miąższ w bardzo cienkie paski."
+        },
+        {
+          "tresc": "**Ser salami.** Odmierz ser salami i pokrój w plastry."
+        },
+        {
+          "tresc": "**Masło.** Odmierz masło i pozostaw do zmięknięcia."
+        },
+        {
+          "tresc": "**Musztarda.** Odmierz musztardę."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz pieprz i wędzoną paprykę."
+        },
+        {
+          "tresc": "**Pieczywo.** Przygotuj pieczywo w ilości wskazanej na liście składników."
+        }
+      ]
+    },
+    {
+      "nazwa": "Składanie i opiekanie",
+      "minuty": 11,
+      "kroki": [
+        {
+          "tresc": "**Rozgrzanie grilla.** Rozgrzej grill kontaktowy według instrukcji, zwykle około **3 minut**."
+        },
+        {
+          "tresc": "**Składanie tostów.** Wewnętrzne strony pieczywa posmaruj musztardą. Ułóż ser, cienką warstwę papryki i posyp papryką wędzoną oraz pieprzem. Zamknij kanapki, nadmiar papryki podaj obok."
+        },
+        {
+          "tresc": "**Masło na pieczywo.** Zewnętrzne strony posmaruj odmierzoną ilością masła."
+        },
+        {
+          "tresc": "**Opiekanie.** Opiekaj **4–6 minut** w grillu, aż chleb się zrumieni i ser stopi."
+        },
+        {
+          "tresc": "**Podanie.** Odczekaj **1 minutę** i podaj."
+        }
+      ]
+    }
+  ]
+}

@@ -12,7 +12,7 @@
     "z_piekarnika"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 716.5,
+  "porcja_g": 717,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 2,
   "czas_przygotowania_min": 15,
@@ -84,16 +84,28 @@
       "minuty": 15,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Buraki.** Umyj i obierz buraki, pokrój w kostkę około 1 cm."
         },
         {
-          "tresc": "Umyj i obierz buraki oraz ziemniaki. Buraki pokrój w kostkę około 1 cm, ziemniaki około 2 cm. Obierz cebulę, pokrój w piórka."
+          "tresc": "**Ziemniaki.** Umyj i obierz ziemniaki, pokrój w kostkę około 2 cm."
         },
         {
-          "tresc": "Umyj cytrynę i koperek. Przygotuj sok z odmierzonej części cytryny, posiekaj koperek."
+          "tresc": "**Cebula.** Obierz cebulę i pokrój w cienkie piórka."
         },
         {
-          "tresc": "Przygotuj filety makreli bez ości, osusz. Podana masa dotyczy jadalnej części ryby. Warzywa wymieszaj z oliwą i częścią soli oraz pieprzu, rybę dopraw resztą. Umyj przybory po rybie."
+          "tresc": "**Cytryna.** Umyj cytrynę, wyciśnij sok i odmierz ilość wskazaną na liście składników."
+        },
+        {
+          "tresc": "**Koperek.** Umyj i osusz koperek, usuń grube łodygi i drobno posiekaj delikatne gałązki."
+        },
+        {
+          "tresc": "**Warzywa do pieczenia.** Wymieszaj warzywa z oliwą oraz częścią soli i pieprzu."
+        },
+        {
+          "tresc": "**Makrela.** Osusz filety i usuń ości. Podana masa dotyczy części jadalnej. Dopraw pozostałą solą i pieprzem."
+        },
+        {
+          "tresc": "**Po przygotowaniu ryby.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surową rybą."
         }
       ]
     },
@@ -102,18 +114,18 @@
       "minuty": 58,
       "kroki": [
         {
-          "tresc": "Rozgrzej piekarnik do 200°C, grzanie góra–dół, zwykle około 10 minut."
+          "tresc": "**Rozgrzanie piekarnika.** Rozgrzej piekarnik do **200°C**, grzanie góra–dół, zwykle około **10 minut**."
         },
         {
-          "tresc": "Piecz warzywa przez 30 minut, mieszając po 15 minutach. Sprawdź buraki; jeśli są nadal twarde, dopiekaj same warzywa przez 5–10 minut przed dodaniem ryby."
+          "tresc": "**Pieczenie warzyw.** Piecz warzywa przez **30 minut**, mieszając po **15 minutach**. Sprawdź buraki; jeśli są nadal twarde, dopiekaj same warzywa przez **5–10 minut** przed dodaniem ryby."
         },
         {
-          "tresc": "Do prawie miękkich warzyw dodaj filety makreli i piecz przez 12–15 minut, zależnie od grubości.",
+          "tresc": "**Pieczenie makreli.** Do prawie miękkich warzyw dodaj filety makreli i piecz przez **12–15 minut**, zależnie od grubości.",
           "sygnal": "ryba ma co najmniej 63°C, warzywa miękkie",
           "uwaga": true
         },
         {
-          "tresc": "Po wyjęciu skrop rybę przygotowanym sokiem z cytryny i posyp koperkiem."
+          "tresc": "**Cytryna i koperek.** Po wyjęciu skrop rybę przygotowanym sokiem z cytryny i posyp koperkiem."
         }
       ]
     }

@@ -84,13 +84,28 @@
       "minuty": 10,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Jarmuż.** Umyj jarmuż, usuń twarde łodygi i porwij liście na mniejsze kawałki."
         },
         {
-          "tresc": "Umyj jarmuż, jabłko, pomarańczę i cytrynę. Usuń łodygi jarmużu i porwij liście; usuń gniazdo nasienne jabłka i pokrój miąższ."
+          "tresc": "**Jabłko.** Umyj jabłko, usuń gniazdo nasienne i pokrój miąższ w kostkę."
         },
         {
-          "tresc": "Obierz pomarańczę i podziel na cząstki, zachowaj wypływający sok. Wyciśnij i odmierz sok z cytryny. Posiekaj orzechy."
+          "tresc": "**Pomarańcza.** Umyj i obierz pomarańczę. Podziel na cząstki, zachowując wypływający sok."
+        },
+        {
+          "tresc": "**Cytryna.** Umyj cytrynę, wyciśnij sok i odmierz ilość wskazaną na liście składników."
+        },
+        {
+          "tresc": "**Orzechy.** Odmierz orzechy włoskie i grubo posiekaj."
+        },
+        {
+          "tresc": "**Musztarda.** Odmierz musztardę."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól i pieprz."
         }
       ]
     },
@@ -99,15 +114,15 @@
       "minuty": 5,
       "kroki": [
         {
-          "tresc": "Wymieszaj oliwę z sokiem z cytryny, zachowanym sokiem pomarańczowym, musztardą, solą i pieprzem."
+          "tresc": "**Sos.** Wymieszaj oliwę z sokiem z cytryny, zachowanym sokiem pomarańczowym, musztardą, solą i pieprzem."
         },
         {
-          "tresc": "Masuj liście jarmużu z dressingiem przez 2–3 minuty.",
+          "tresc": "**Zmiękczenie jarmużu.** Masuj liście jarmużu z dressingiem przez **2–3 minuty**.",
           "sygnal": "liście ciemnieją i stają się delikatniejsze",
           "uwaga": true
         },
         {
-          "tresc": "Dodaj jabłko, cząstki pomarańczy i orzechy. Wymieszaj i podaj."
+          "tresc": "**Połączenie i podanie.** Dodaj jabłko, cząstki pomarańczy i orzechy. Wymieszaj i podaj."
         }
       ]
     }

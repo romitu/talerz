@@ -12,7 +12,7 @@
     "kasza_ryz"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 409.5,
+  "porcja_g": 410,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 2,
   "czas_przygotowania_min": 10,
@@ -84,16 +84,28 @@
       "minuty": 10,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Szpinak.** Umyj i odsącz szpinak. Usuń grube łodygi, duże liście porwij na mniejsze kawałki."
         },
         {
-          "tresc": "Umyj i osusz szpinak. Obierz i posiekaj czosnek. Umyj cytrynę i odmierz sok. Przygotuj kaszę."
+          "tresc": "**Czosnek.** Obierz czosnek i drobno posiekaj."
         },
         {
-          "tresc": "Osusz łososia, usuń ości i dopraw częścią soli oraz pieprzu. Po surowej rybie umyj przybory i ręce."
+          "tresc": "**Cytryna.** Umyj cytrynę, wyciśnij sok i odmierz ilość wskazaną na liście składników."
         },
         {
-          "tresc": "Wymieszaj jogurt z połową odmierzonego soku z cytryny."
+          "tresc": "**Sos jogurtowy.** Wymieszaj jogurt z połową odmierzonego soku z cytryny."
+        },
+        {
+          "tresc": "**Łosoś.** Osusz łososia, usuń ości i dopraw częścią soli oraz pieprzu."
+        },
+        {
+          "tresc": "**Po przygotowaniu ryby.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surową rybą."
+        },
+        {
+          "tresc": "**Bulgur.** Odmierz kaszę bulgur."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
         }
       ]
     },
@@ -102,21 +114,37 @@
       "minuty": 25,
       "kroki": [
         {
-          "tresc": "Na pierwszym palniku zagotuj wodę w garnku. Dodaj kaszę bulgur i gotuj przez czas wskazany na opakowaniu; po ugotowaniu odcedź. Wody użyj tyle, by ziarna były zanurzone i swobodnie się gotowały. Nastaw minutnik; równolegle wykonuj kolejne czynności na drugim palniku. Woda do gotowania jest dodatkowa i zostanie odlana."
+          "tresc": "**Bulgur — równolegle.** Zagotuj na pierwszym palniku tyle wody, aby ziarna swobodnie się gotowały. Wsyp kaszę bulgur i gotuj przez czas z opakowania. Nastaw minutnik; w tym czasie wykonuj kolejne kroki na drugim palniku."
         },
         {
-          "tresc": "Gdy do końca gotowania kaszy pozostaje około 11 minut, rozgrzej oliwę na patelni przez 1 minutę."
+          "tresc": "**Bulgur — po minutniku.** Po upływie czasu sprawdź miękkość ziaren i odcedź nadmiar wody. Przykryj garnek i odstaw poza palnik. Zrób to niezależnie od postępu pracy przy pozostałych składnikach."
         },
         {
-          "tresc": "Smaż filet grubości około 2–3 cm przez 4 minuty z jednej strony i 3–4 minuty z drugiej. Sprawdź środek; grubszy kawałek dosmaż po 1 minucie. Zdejmij na talerz.",
+          "tresc": "**Rozgrzanie oliwy.** Gdy do końca gotowania kaszy pozostaje około **11 minut**, rozgrzej oliwę na patelni przez **1 minutę**."
+        },
+        {
+          "tresc": "**Smażenie łososia.** Smaż filet grubości około 2–3 cm przez **4 minuty** z jednej strony i **3–4 minuty** z drugiej.",
+          "uwaga": true
+        },
+        {
+          "tresc": "**Sprawdzenie łososia.** Sprawdź środek; grubszy kawałek dosmaż po **1 minucie**.",
           "sygnal": "ryba ma co najmniej 63°C i rozdziela się na płatki",
           "uwaga": true
         },
         {
-          "tresc": "Zmniejsz ogień. Na tej samej patelni smaż czosnek 20–30 sekund. Dodaj szpinak i smaż 1–2 minuty do zwiędnięcia. Zdejmij z ognia, dodaj pozostały sok z cytryny i przyprawy."
+          "tresc": "**Zdjęcie łososia.** Zdejmij na talerz."
         },
         {
-          "tresc": "Podaj łososia z kaszą, szpinakiem i sosem jogurtowym."
+          "tresc": "**Czosnek.** Zmniejsz ogień. Na tej samej patelni smaż czosnek **20–30 sekund**."
+        },
+        {
+          "tresc": "**Szpinak.** Dodaj szpinak i smaż **1–2 minuty** do zwiędnięcia."
+        },
+        {
+          "tresc": "**Doprawienie szpinaku.** Zdejmij z ognia, dodaj pozostały sok z cytryny i przyprawy."
+        },
+        {
+          "tresc": "**Podanie.** Podaj łososia z kaszą, szpinakiem i sosem jogurtowym."
         }
       ]
     }

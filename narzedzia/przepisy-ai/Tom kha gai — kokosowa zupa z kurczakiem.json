@@ -1,0 +1,261 @@
+{
+  "nazwa": "Tom kha gai — kokosowa zupa z kurczakiem",
+  "opis": "Aromatyczna, lekko pikantna zupa kokosowa z kurczakiem, pieczarkami i marchewką, doprawiona imbirem, pastą tom kha, sosem rybnym i cytryną. Podawana z ryżem basmati. Wywar z marchwi, korzenia pietruszki, korzenia selera i pora ugotuj osobno; wszystkie warzywa wykorzystaj w zupie. Czasy etapów są orientacyjne dla porcji bazowych; czas gotowania ryżu dobierz z opakowania.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "azjatycka"
+  ],
+  "rodzaje": [
+    "zupa"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 734,
+  "liczba_porcji_bazowych": 2,
+  "trwalosc_dni": 3,
+  "czas_przygotowania_min": 20,
+  "czas_obrobki_min": 45,
+  "sprzet": [
+    "Garnek 3 l",
+    "Garnek 2 l",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Łyżka cedzakowa",
+    "Miska",
+    "Sitko",
+    "Waga kuchenna",
+    "Termometr do mięsa",
+    "Tarka o drobnych oczkach"
+  ],
+  "przechowywanie": "Zupę przechowuj w szczelnym pojemniku w lodówce do 3 dni. Ryż najlepiej przechowywać osobno. Podgrzewaj zupę łagodnie i nie doprowadzaj jej do intensywnego wrzenia.",
+  "mozna_mrozic": false,
+  "ratunek": "Zupa się rozwarstwiła — cytryna trafiła do wrzącego mleka. Zblenduj chwilę, wróci. Za ostra — dolej mleka kokosowego.",
+  "skladniki": [
+    {
+      "nazwa": "Pierś z kurczaka, surowa",
+      "ilosc": 240,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Mleko kokosowe light z puszki",
+      "ilosc": 200,
+      "jednostka": "ml"
+    },
+    {
+      "nazwa": "Pasta tom kha",
+      "ilosc": 30,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Pieczarki, surowe",
+      "ilosc": 160,
+      "jednostka": "g",
+      "stan": "w plastrach"
+    },
+    {
+      "nazwa": "Imbir korzeń, surowy",
+      "ilosc": 12,
+      "jednostka": "g",
+      "stan": "obrany, starty"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 6,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cytryna",
+      "ilosc": 30,
+      "jednostka": "g",
+      "stan": "sok"
+    },
+    {
+      "nazwa": "Marchew, surowa",
+      "ilosc": 100,
+      "jednostka": "g",
+      "stan": "obrany korzeń, kostka około 7–8 mm; do wywaru"
+    },
+    {
+      "nazwa": "Sos rybny",
+      "ilosc": 15,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Olej rzepakowy",
+      "ilosc": 5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Ryż basmati, suchy",
+      "ilosc": 80,
+      "jednostka": "g",
+      "stan": "suchy, ugotowany osobno"
+    },
+    {
+      "nazwa": "Pietruszka natka",
+      "ilosc": 8,
+      "jednostka": "g",
+      "stan": "posiekana"
+    },
+    {
+      "nazwa": "Papryka ostra mielona",
+      "ilosc": 1,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Pietruszka korzeń",
+      "ilosc": 20,
+      "jednostka": "g",
+      "stan": "obrany korzeń, kostka około 7–8 mm; do wywaru"
+    },
+    {
+      "nazwa": "Seler korzeń",
+      "ilosc": 20,
+      "jednostka": "g",
+      "stan": "obrany korzeń, kostka około 7–8 mm; do wywaru"
+    },
+    {
+      "nazwa": "Por, surowy",
+      "ilosc": 40,
+      "jednostka": "g",
+      "stan": "biała i jasnozielona część, dokładnie wypłukana, cienkie półplasterki; do wywaru"
+    },
+    {
+      "nazwa": "woda",
+      "ilosc": 500,
+      "jednostka": "ml",
+      "stan": "cała odmierzona ilość do wywaru; wywar i wszystkie ugotowane warzywa trafiają do zupy"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 20,
+      "kroki": [
+        {
+          "tresc": "**Marchew.** Umyj i obierz marchew, pokrój w kostkę około 7–8 mm. Całość przeznacz do wywaru."
+        },
+        {
+          "tresc": "**Korzeń pietruszki.** Umyj i obierz korzeń pietruszki, pokrój w kostkę około 7–8 mm. Całość przeznacz do wywaru."
+        },
+        {
+          "tresc": "**Korzeń selera.** Umyj i obierz seler korzeniowy, pokrój w kostkę około 7–8 mm. Całość przeznacz do wywaru."
+        },
+        {
+          "tresc": "**Por.** Odetnij korzonki i twarde końce liści. Białą i jasnozieloną część przekrój wzdłuż, dokładnie wypłucz ziemię spomiędzy warstw i pokrój w cienkie półplasterki. Odłóż osobno do wywaru."
+        },
+        {
+          "tresc": "**Pieczarki.** Oczyść pieczarki i pokrój w cienkie plasterki."
+        },
+        {
+          "tresc": "**Imbir.** Obierz imbir i zetrzyj na drobnej tarce."
+        },
+        {
+          "tresc": "**Czosnek.** Obierz czosnek i przeciśnij przez praskę lub bardzo drobno posiekaj."
+        },
+        {
+          "tresc": "**Cytryna.** Umyj cytrynę, wyciśnij sok i odmierz ilość wskazaną na liście składników."
+        },
+        {
+          "tresc": "**Natka pietruszki.** Umyj i osusz natkę, usuń grube łodygi i drobno posiekaj liście."
+        },
+        {
+          "tresc": "**Ryż.** Odmierz suchy ryż i przepłucz na sitku pod zimną wodą."
+        },
+        {
+          "tresc": "**Kurczak.** Osusz kurczaka i pokrój w paski grubości około 1 cm."
+        },
+        {
+          "tresc": "**Po przygotowaniu mięsa.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surowym mięsem."
+        },
+        {
+          "tresc": "**Woda.** Odmierz całą ilość wody wskazaną na liście składników do ugotowania wywaru."
+        },
+        {
+          "tresc": "**Mleko kokosowe.** Odmierz mleko kokosowe."
+        },
+        {
+          "tresc": "**Dodatki.** Odmierz sos rybny i pastę tom kha."
+        },
+        {
+          "tresc": "**Olej.** Odmierz olej."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz ostrą paprykę."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie wywaru i przygotowanie bazy",
+      "minuty": 20,
+      "kroki": [
+        {
+          "tresc": "**Warzywa korzeniowe.** W osobnym garnku umieść całą przygotowaną marchew, korzeń pietruszki i korzeń selera. Zalej całą odmierzoną wodą. Przykryj i doprowadź do łagodnego wrzenia, orientacyjnie przez **5–7 minut**."
+        },
+        {
+          "tresc": "**Gotowanie korzeni.** Od zagotowania gotuj pod przykryciem na małym ogniu przez **8 minut**. Nastaw minutnik; w tym czasie przygotuj bazę zupy w głównym garnku."
+        },
+        {
+          "tresc": "**Baza zupy — równolegle.** W głównym garnku rozgrzej olej przez **1 minutę**."
+        },
+        {
+          "tresc": "**Pasta tom kha.** Dodaj pastę i smaż przez **1 minutę**, mieszając. Zdejmij garnek z palnika do czasu wlania wywaru."
+        },
+        {
+          "tresc": "**Por — po minutniku.** Po **8 minutach gotowania korzeni** dodaj por do wywaru. Gotuj jeszcze przez **4 minuty**. Wykonaj ten krok po sygnale minutnika, niezależnie od pracy przy bazie zupy."
+        },
+        {
+          "tresc": "**Kontrola warzyw.** Sprawdź kostkę marchewki i selera. Jeśli ma twardy, surowy środek, gotuj jeszcze po **2 minuty**, sprawdzając po każdej takiej próbie.",
+          "sygnal": "warzywa są lekko jędrne, ale bez twardego, surowego środka",
+          "uwaga": true
+        },
+        {
+          "tresc": "**Uzupełnienie wywaru.** Jeżeli podczas gotowania odparowała woda, uzupełnij jej ubytek gorącą wodą do początkowego poziomu, zanim wyjmiesz warzywa."
+        },
+        {
+          "tresc": "**Zachowanie warzyw i wywaru.** Wyjmij wszystkie warzywa łyżką cedzakową do miski i przykryj. Cały wywar zachowaj w garnku do następnego etapu. Nie wylewaj wywaru ani płynu zebranego w misce."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie kurczaka i ryżu",
+      "minuty": 25,
+      "kroki": [
+        {
+          "tresc": "**Wywar z przyprawami.** Do podsmażonej pasty tom kha wlej cały wywar. Dodaj imbir i czosnek. Doprowadź do łagodnego wrzenia i gotuj przez **5 minut**."
+        },
+        {
+          "tresc": "**Ryż — równolegle.** W opróżnionym garnku po wywarze zagotuj świeżą wodę do ryżu. Wsyp ryż i gotuj zgodnie z instrukcją na opakowaniu. Nastaw minutnik i w tym czasie przygotowuj zupę. Nadmiar wody po ugotowaniu odcedź; ta woda nie jest częścią wywaru."
+        },
+        {
+          "tresc": "**Kurczak.** Dodaj paski kurczaka do zupy. Po ponownym zagotowaniu gotuj łagodnie przez **6–8 minut**."
+        },
+        {
+          "tresc": "**Pieczarki.** Dodaj pieczarki i gotuj przez **3 minuty**."
+        },
+        {
+          "tresc": "**Warzywa i mleko kokosowe.** Dodaj wszystkie odłożone warzywa z wywaru wraz z płynem z miski oraz mleko kokosowe. Podgrzewaj łagodnie przez około **2–3 minuty**, aż cała zupa będzie gorąca; nie doprowadzaj do intensywnego wrzenia."
+        },
+        {
+          "tresc": "**Kontrola kurczaka.** Sprawdź temperaturę najgrubszego kawałka mięsa. Jeśli jest niższa niż **74°C**, podgrzewaj łagodnie po **1 minucie** i sprawdzaj ponownie.",
+          "sygnal": "kurczak osiągnął co najmniej 74°C",
+          "uwaga": true
+        },
+        {
+          "tresc": "**Ryż — po minutniku.** Sprawdź miękkość ryżu po czasie z opakowania, odcedź nadmiar wody i przykryj. Zrób to po sygnale minutnika, niezależnie od postępu gotowania zupy."
+        },
+        {
+          "tresc": "**Doprawienie.** Dodaj około jednej trzeciej sosu rybnego i ostrą paprykę. Wymieszaj, spróbuj i stopniowo dodawaj pozostały sos według smaku."
+        },
+        {
+          "tresc": "**Cytryna.** Zdejmij garnek z ognia. Dodaj około dwóch trzecich przygotowanego soku z cytryny, spróbuj i w razie potrzeby dodaj pozostały sok."
+        },
+        {
+          "tresc": "**Podanie.** Nałóż ugotowany ryż do misek, zalej zupą i posyp natką pietruszki. Jeśli ryż wymaga więcej czasu niż zupa, zakończ jego gotowanie przed podaniem."
+        }
+      ]
+    }
+  ]
+}

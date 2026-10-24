@@ -1,0 +1,182 @@
+{
+  "nazwa": "Dorsz po grecku",
+  "opis": "Dorsz z duszonymi warzywami korzeniowymi w sosie pomidorowym, podawany z gotowanymi ziemniakami. Danie dobrze smakuje zarówno na ciepło, jak i na zimno, a po kilku godzinach smaki jeszcze lepiej się łączą.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "polska"
+  ],
+  "rodzaje": [
+    "z_piekarnika"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 845,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 3,
+  "czas_przygotowania_min": 10,
+  "czas_obrobki_min": 30,
+  "sprzet": [
+    "Piekarnik",
+    "Patelnia 28 cm",
+    "Naczynie żaroodporne",
+    "Tarka o grubych oczkach",
+    "Nóż szefa kuchni",
+    "Deska do krojenia"
+  ],
+  "przechowywanie": "Przechowuj w szczelnym pojemniku w lodówce do 3 dni. Danie można jeść również na zimno. Najlepiej przechowywać ziemniaki osobno od dorsza z warzywami.",
+  "mozna_mrozic": false,
+  "ratunek": "Ryba się rozpadła — to nie problem, wymieszaj z warzywami. Warzywa za suche — dolej passaty i pogotuj.",
+  "skladniki": [
+    {
+      "nazwa": "Marchew, surowa",
+      "ilosc": 120,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 60,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Pietruszka korzeń",
+      "ilosc": 40,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Cytryna",
+      "ilosc": 20,
+      "jednostka": "g",
+      "stan": "sok"
+    },
+    {
+      "nazwa": "Ziemniaki, surowe",
+      "ilosc": 200,
+      "jednostka": "g",
+      "stan": "obrane"
+    },
+    {
+      "nazwa": "Passata pomidorowa",
+      "ilosc": 100,
+      "jednostka": "ml"
+    },
+    {
+      "nazwa": "Oliwa z oliwek",
+      "ilosc": 10,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "liść laurowy",
+      "ilosc": 1,
+      "jednostka": "szt"
+    },
+    {
+      "nazwa": "Papryka słodka mielona",
+      "ilosc": 2,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 2,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 1,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "woda",
+      "ilosc": 50,
+      "jednostka": "g",
+      "stan": "Tylko jeżeli sos będzie zbyt gęsty"
+    },
+    {
+      "nazwa": "Filet z dorsza atlantyckiego",
+      "ilosc": 180,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Seler korzeń",
+      "ilosc": 60,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 10,
+      "kroki": [
+        {
+          "tresc": "**Marchew.** Umyj i obierz marchew, zetrzyj na tarce o grubych oczkach."
+        },
+        {
+          "tresc": "**Seler korzeniowy.** Umyj i obierz seler, zetrzyj na tarce o grubych oczkach."
+        },
+        {
+          "tresc": "**Pietruszka korzeń.** Umyj i obierz korzeń pietruszki, zetrzyj na tarce o grubych oczkach."
+        },
+        {
+          "tresc": "**Cebula.** Obierz cebulę i pokrój w cienkie piórka."
+        },
+        {
+          "tresc": "**Ziemniaki.** Umyj i obierz ziemniaki. Pokrój na kawałki podobnej wielkości."
+        },
+        {
+          "tresc": "**Cytryna.** Umyj cytrynę, wyciśnij sok i odmierz ilość wskazaną na liście składników."
+        },
+        {
+          "tresc": "**Dorsz.** Osusz dorsza, usuń ewentualne ości. Skrop połową odmierzonego soku z cytryny i dopraw częścią soli oraz pieprzu."
+        },
+        {
+          "tresc": "**Po przygotowaniu ryby.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surową rybą."
+        },
+        {
+          "tresc": "**Płynna baza.** Odmierz passatę i wodę z listy składników."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz słodką paprykę i liście laurowe."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie i pieczenie",
+      "minuty": 30,
+      "kroki": [
+        {
+          "tresc": "**Rozgrzanie piekarnika.** Rozgrzej piekarnik do **190°C**."
+        },
+        {
+          "tresc": "**Ziemniaki — równolegle.** Ziemniaki włóż do lekko osolonej wody i gotuj około **15–20 minut**, aż będą miękkie. Będą gotowały się równolegle z przygotowywaniem ryby i warzyw."
+        },
+        {
+          "tresc": "**Rozgrzanie oliwy.** Na patelni rozgrzej około połowę oliwy."
+        },
+        {
+          "tresc": "**Cebula.** Dodaj cebulę i smaż około **2–3 minut**, aż lekko się zeszkli."
+        },
+        {
+          "tresc": "**Warzywa korzeniowe.** Dodaj marchew i pietruszkę i seler. Smaż około **2 minut**, mieszając."
+        },
+        {
+          "tresc": "**Duszenie warzyw.** Dodaj passatę, słodką paprykę i liść laurowy. Wymieszaj, przykryj i duś na niewielkim ogniu około **12–15 minut**. Jeśli sos stanie się zbyt gęsty, dolewaj stopniowo niewielką ilość wody.",
+          "sygnal": "Warzywa powinny być miękkie, ale nadal zachowywać wyczuwalną strukturę — nie powinny zamienić się w jednolitą masę."
+        },
+        {
+          "tresc": "**Pieczenie dorsza.** Gdy warzywa zaczną się dusić, pozostałą oliwą lekko posmaruj dorsza lub naczynie do pieczenia. Włóż dorsza do nagrzanego piekarnika i piecz około **12–15 minut**, zależnie od grubości filetu. Dorsz jest gotowy, gdy mięso staje się nieprzezroczyste i łatwo rozdziela się na płatki widelcem.",
+          "sygnal": "Dorsz jest gotowy, gdy mięso staje się nieprzezroczyste i łatwo rozdziela się na płatki widelcem."
+        },
+        {
+          "tresc": "**Doprawienie sosu.** Usuń liść laurowy. Dodaj pozostały sok z cytryny. Dopraw pozostałą solą i pieprzem. Wymieszaj i spróbuj."
+        },
+        {
+          "tresc": "**Podanie.** Na talerz wyłóż dorsza, przykryj porcją warzyw w sosie pomidorowym i podawaj z ugotowanymi ziemniakami."
+        }
+      ]
+    }
+  ]
+}

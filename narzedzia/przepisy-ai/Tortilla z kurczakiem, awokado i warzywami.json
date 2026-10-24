@@ -101,16 +101,31 @@
       "minuty": 12,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Sałata.** Umyj liście sałaty, dokładnie osusz i porwij na mniejsze kawałki."
         },
         {
-          "tresc": "Umyj warzywa i awokado. Osusz sałatę, pokrój pomidora i ogórek w cienkie kawałki. Usuń skórkę i pestkę awokado, pokrój miąższ."
+          "tresc": "**Pomidor.** Umyj pomidory i pokrój w cienkie plastry. Osusz plasterki z nadmiaru wilgoci."
         },
         {
-          "tresc": "Umyj cytrynę, wyciśnij i odmierz sok. Wymieszaj go z jogurtem i częścią soli oraz pieprzu."
+          "tresc": "**Ogórek.** Umyj ogórek i pokrój w cienkie słupki."
         },
         {
-          "tresc": "Kurczaka osusz, pokrój w paski około 1 cm i wymieszaj z olejem, papryką oraz resztą przypraw. Umyj przybory i ręce po mięsie. Przygotuj tortille."
+          "tresc": "**Awokado.** Umyj awokado, usuń skórkę i pestkę. Pokrój miąższ."
+        },
+        {
+          "tresc": "**Cytryna.** Umyj cytrynę, wyciśnij sok i odmierz ilość wskazaną na liście składników."
+        },
+        {
+          "tresc": "**Sos jogurtowy.** Wymieszaj sok z cytryny z jogurtem oraz częścią soli i pieprzu."
+        },
+        {
+          "tresc": "**Kurczak.** Osusz mięso, pokrój w paski grubości około 1 cm. Wymieszaj z olejem, słodką papryką oraz pozostałą solą i pieprzem."
+        },
+        {
+          "tresc": "**Po przygotowaniu mięsa.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surowym mięsem."
+        },
+        {
+          "tresc": "**Tortille.** Wyjmij potrzebne placki i przykryj, żeby nie wysychały."
         }
       ]
     },
@@ -119,18 +134,27 @@
       "minuty": 13,
       "kroki": [
         {
-          "tresc": "Rozgrzej patelnię przez 1 minutę."
+          "tresc": "**Rozgrzanie patelni.** Rozgrzej patelnię przez **1 minutę**."
         },
         {
-          "tresc": "Smaż kurczaka przez 6–8 minut na średnio dużym ogniu, obracając.",
+          "tresc": "**Smażenie kurczaka.** Smaż kurczaka przez **6–8 minut** na średnio dużym ogniu, obracając.",
           "sygnal": "mięso ma co najmniej 74°C w środku",
           "uwaga": true
         },
         {
-          "tresc": "Przełóż kurczaka na czysty talerz. Ogrzej tortillę na patelni po 15–20 sekund na stronę."
+          "tresc": "**Zdjęcie kurczaka.** Przełóż kurczaka na czysty talerz."
         },
         {
-          "tresc": "Posmaruj tortillę sosem, ułóż sałatę, warzywa, awokado i kurczaka. Zostaw wolne brzegi, zwiń boki i zroluj. Nadmiar nadzienia podaj obok jako sałatkę."
+          "tresc": "**Ogrzanie tortilli.** Ogrzej tortillę na patelni po **15–20 sekund** na stronę."
+        },
+        {
+          "tresc": "**Nadziewanie.** Posmaruj tortillę sosem, ułóż sałatę, warzywa, awokado i kurczaka."
+        },
+        {
+          "tresc": "**Zwijanie.** Zostaw wolne brzegi, zwiń boki i zroluj."
+        },
+        {
+          "tresc": "**Podanie nadmiaru.** Nadmiar nadzienia podaj obok jako sałatkę."
         }
       ]
     }

@@ -8,8 +8,9 @@
   "kuchnie": [
     "inna"
   ],
+  "rodzaje": [],
   "porcjowanie": "waga",
-  "porcja_g": 487.5,
+  "porcja_g": 488,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 1,
   "czas_przygotowania_min": 7,
@@ -82,13 +83,25 @@
       "minuty": 7,
       "kroki": [
         {
-          "tresc": "Przygotuj wszystkie składniki w ilościach z listy dla wybranej liczby porcji. Odmierz także wszystkie przyprawy i dodatki podane na liście."
+          "tresc": "**Tofu.** Odsącz tofu i rozgnieć widelcem w misce."
         },
         {
-          "tresc": "Odsącz tofu i rozgnieć widelcem w misce. Umyj szpinak i pomidora; osusz szpinak, pokrój pomidora w kostkę."
+          "tresc": "**Szpinak.** Umyj i odsącz szpinak. Usuń grube łodygi, duże liście porwij na mniejsze kawałki."
         },
         {
-          "tresc": "Obierz i posiekaj cebulę. Przygotuj pieczywo."
+          "tresc": "**Pomidor.** Umyj pomidory i pokrój w kostkę."
+        },
+        {
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
+        },
+        {
+          "tresc": "**Olej.** Odmierz olej."
+        },
+        {
+          "tresc": "**Przyprawy.** Odmierz sól, pieprz i kurkumę."
+        },
+        {
+          "tresc": "**Pieczywo.** Przygotuj pieczywo w ilości wskazanej na liście składników."
         }
       ]
     },
@@ -97,18 +110,24 @@
       "minuty": 11,
       "kroki": [
         {
-          "tresc": "Rozgrzej olej przez 1 minutę. Smaż cebulę 3 minuty."
+          "tresc": "**Rozgrzanie oleju.** Rozgrzej olej przez **1 minutę**."
         },
         {
-          "tresc": "Dodaj pomidora i smaż 2–3 minuty, odparowując nadmiar płynu. Dodaj tofu i kurkumę, podgrzewaj 2 minuty."
+          "tresc": "**Cebula.** Smaż cebulę **3 minuty**."
         },
         {
-          "tresc": "Dodaj szpinak i smaż 1–2 minuty, tylko do zwiędnięcia.",
+          "tresc": "**Pomidor.** Dodaj pomidora i smaż **2–3 minuty**, odparowując nadmiar płynu."
+        },
+        {
+          "tresc": "**Tofu.** Dodaj tofu i kurkumę, podgrzewaj **2 minuty**."
+        },
+        {
+          "tresc": "**Szpinak.** Dodaj szpinak i smaż **1–2 minuty**, tylko do zwiędnięcia.",
           "sygnal": "tofu jest gorące, szpinak zwiędł, bez kałuży płynu",
           "uwaga": true
         },
         {
-          "tresc": "Dopraw solą i pieprzem, podaj z pieczywem."
+          "tresc": "**Doprawienie i podanie.** Dopraw solą i pieprzem, podaj z pieczywem."
         }
       ]
     }
