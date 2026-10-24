@@ -140,6 +140,15 @@ function BramkaSesji({ tryb }: { tryb: 'light' | 'dark' }) {
   return <Zakladki kolory={kolory} />;
 }
 
+/**
+ * Ekran bez przycisku na pasku zakładek, ale wciąż osiągalny.
+ *
+ * Nie `href: null`: od SDK 58 to znaczy `hidden: true`, czyli ekran
+ * niedostępny — każde przejście na niego przekierowuje na pierwszą zakładkę
+ * (edycja przepisu lądowała na Planie dnia).
+ */
+const POZA_PASKIEM = { tabBarItemStyle: { display: 'none' } } as const;
+
 /** Ekrany schowane pod zębatką — nazwa zakładki, ikona i tytuł menu. */
 const POZYCJE_WIECEJ = [
   { trasa: '/przepisy-import-eksport', ikona: 'swap-vertical' as const, tytul: 'importEksport' },
@@ -294,18 +303,18 @@ function Zakladki({ kolory }: { kolory: Paleta }) {
         />
 
         {/* Ekrany otwierane z innych miejsc — nie pokazują się na pasku zakładek. */}
-        <Tabs.Screen name="instrukcja" options={{ href: null }} />
-        <Tabs.Screen name="skladniki" options={{ href: null }} />
-        <Tabs.Screen name="przepisy-makro" options={{ href: null }} />
-        <Tabs.Screen name="role-skladnikow" options={{ href: null }} />
-        <Tabs.Screen name="zdjecia-skladnikow" options={{ href: null }} />
-        <Tabs.Screen name="makroskladniki" options={{ href: null }} />
-        <Tabs.Screen name="dlaczego-talerz" options={{ href: null }} />
-        <Tabs.Screen name="przepisy-import-eksport" options={{ href: null }} />
-        <Tabs.Screen name="profil-formularz" options={{ href: null }} />
-        <Tabs.Screen name="przepis-formularz" options={{ href: null }} />
-        <Tabs.Screen name="przepis" options={{ href: null }} />
-        <Tabs.Screen name="uzytkownicy" options={{ href: null }} />
+        <Tabs.Screen name="instrukcja" options={POZA_PASKIEM} />
+        <Tabs.Screen name="skladniki" options={POZA_PASKIEM} />
+        <Tabs.Screen name="przepisy-makro" options={POZA_PASKIEM} />
+        <Tabs.Screen name="role-skladnikow" options={POZA_PASKIEM} />
+        <Tabs.Screen name="zdjecia-skladnikow" options={POZA_PASKIEM} />
+        <Tabs.Screen name="makroskladniki" options={POZA_PASKIEM} />
+        <Tabs.Screen name="dlaczego-talerz" options={POZA_PASKIEM} />
+        <Tabs.Screen name="przepisy-import-eksport" options={POZA_PASKIEM} />
+        <Tabs.Screen name="profil-formularz" options={POZA_PASKIEM} />
+        <Tabs.Screen name="przepis-formularz" options={POZA_PASKIEM} />
+        <Tabs.Screen name="przepis" options={POZA_PASKIEM} />
+        <Tabs.Screen name="uzytkownicy" options={POZA_PASKIEM} />
       </Tabs>
 
       {menuOtwarte && (
