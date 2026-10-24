@@ -1,6 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useRef } from 'react';
-import { Pressable, ScrollView, StyleSheet, View, type LayoutChangeEvent } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, View, type LayoutChangeEvent, type ScrollViewInstance } from 'react-native';
 
 import { Karta } from './karta';
 import { ThemedText } from './themed-text';
@@ -40,7 +40,7 @@ export type PozycjaPaska = { id: string; skrot: string };
  * każdej sekcji i skok do wybranej.
  */
 export function useNawigacjaSekcji() {
-  const przewijanie = useRef<ScrollView>(null);
+  const przewijanie = useRef<ScrollViewInstance>(null);
   const pozycje = useRef<Record<string, number>>({});
 
   function zapiszUklad(id: string) {

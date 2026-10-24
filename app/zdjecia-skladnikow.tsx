@@ -3,7 +3,7 @@ import { Image } from 'expo-image';
 import { useLocalSearchParams } from 'expo-router';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ActivityIndicator, Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, Pressable, StyleSheet, type ScrollViewInstance, View } from 'react-native';
 
 import { Ekran } from '@/components/ekran';
 import { Karta } from '@/components/karta';
@@ -68,7 +68,7 @@ export default function EkranZdjecSkladnikow() {
   const { sesja } = useSesja();
   const motyw = useTheme();
   const { t } = useTranslation();
-  const przewijanie = useRef<ScrollView>(null);
+  const przewijanie = useRef<ScrollViewInstance>(null);
 
   const [skladniki, setSkladniki] = useState<ZdjecieSkladnika[]>([]);
   const [szukaj, setSzukaj] = useState('');

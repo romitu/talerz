@@ -2,7 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ActivityIndicator, Pressable, ScrollView, StyleSheet, useWindowDimensions, View } from 'react-native';
+import { ActivityIndicator, Pressable, StyleSheet, type ScrollViewInstance, useWindowDimensions, View } from 'react-native';
 
 import { Ekran } from '@/components/ekran';
 import { FiltryPrzepisow } from '@/components/filtry-przepisow';
@@ -205,7 +205,7 @@ export default function EkranPlanu() {
     Trzy referencje zamiast stanu, bo żadna z nich nie ma prawa wywołać
     ponownego rysowania — to tylko notatki o tym, gdzie byliśmy.
   */
-  const przewijanie = useRef<ScrollView>(null);
+  const przewijanie = useRef<ScrollViewInstance>(null);
   const pozycja = useRef(0);
   const doPrzywrocenia = useRef(false);
 

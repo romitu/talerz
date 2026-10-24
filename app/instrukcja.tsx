@@ -5,6 +5,7 @@ import {
   LayoutChangeEvent,
   Pressable,
   ScrollView,
+  type ScrollViewInstance,
   StyleSheet,
   View,
 } from 'react-native';
@@ -454,7 +455,7 @@ function PytanieKarta({ dane, otwarte, onPress }: { dane: Pytanie; otwarte: bool
 export default function EkranInstrukcji() {
   const { powrot } = useLocalSearchParams<{ powrot?: string }>();
   const motyw = useTheme();
-  const przewijanie = useRef<ScrollView>(null);
+  const przewijanie = useRef<ScrollViewInstance>(null);
   const pozycjeSekcji = useRef<Record<string, number>>({});
   const [otwartePytanie, setOtwartePytanie] = useState<number | null>(null);
 

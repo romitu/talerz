@@ -3,7 +3,7 @@
 Aplikacja do planowania posiłków — jeden kod źródłowy, trzy platformy:
 Android, iPhone i przeglądarka.
 
-Zbudowana na **Expo SDK 54** — tej wersji wymaga Expo Go zainstalowane
+Zbudowana na **Expo SDK 58** — tej wersji wymaga Expo Go zainstalowane
 na telefonie.
 
 ---

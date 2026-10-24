@@ -1,5 +1,5 @@
 import type { ReactNode, RefObject } from 'react';
-import { ScrollView, StyleSheet, View, type ScrollViewProps } from 'react-native';
+import { ScrollView, StyleSheet, View, type ScrollViewInstance, type ScrollViewProps } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ThemedText } from './themed-text';
@@ -28,7 +28,7 @@ type EkranProps = {
    * od zera. Przy siódmym dniu tygodnia oznaczało to przewijanie w dół
    * za każdym razem.
    */
-  refPrzewijania?: RefObject<ScrollView | null>;
+  refPrzewijania?: RefObject<ScrollViewInstance | null>;
   onScroll?: ScrollViewProps['onScroll'];
   onContentSizeChange?: ScrollViewProps['onContentSizeChange'];
 

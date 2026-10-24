@@ -1,7 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Pressable, StyleSheet, TextInput, View } from 'react-native';
+import { Pressable, StyleSheet, View, type TextInputInstance } from 'react-native';
 
 import { Pole } from './pole';
 import { Przycisk } from './przycisk';
@@ -47,7 +47,7 @@ export function DopiszProdukt({ historia, juzNaLiscie, onDodaj }: Props) {
   const [ilosc, setIlosc] = useState('');
   const [zajety, setZajety] = useState(false);
   const [blad, setBlad] = useState<string | null>(null);
-  const poleIlosci = useRef<TextInput>(null);
+  const poleIlosci = useRef<TextInputInstance>(null);
 
   const pasujace = useMemo(() => {
     const szukane = doPorownania(nazwa.trim());

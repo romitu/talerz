@@ -248,28 +248,30 @@ function Zakladki({ kolory }: { kolory: Paleta }) {
           name="index"
           options={{
             title: t('zakladki.plan'),
-            tabBarIcon: ({ color, size }) => <Ionicons name="today" size={size} color={color} />,
+            // Od SDK 58 `color` ma typ ColorValue (z null i liczbą), a Ionicons
+            // przyjmuje tylko tekst. Pasek zakładek zawsze podaje tekst.
+            tabBarIcon: ({ color, size }) => <Ionicons name="today" size={size} color={color as string} />,
           }}
         />
         <Tabs.Screen
           name="zakupy"
           options={{
             title: t('zakladki.zakupy'),
-            tabBarIcon: ({ color, size }) => <Ionicons name="cart" size={size} color={color} />,
+            tabBarIcon: ({ color, size }) => <Ionicons name="cart" size={size} color={color as string} />,
           }}
         />
         <Tabs.Screen
           name="przepisy"
           options={{
             title: t('zakladki.przepisy'),
-            tabBarIcon: ({ color, size }) => <Ionicons name="restaurant" size={size} color={color} />,
+            tabBarIcon: ({ color, size }) => <Ionicons name="restaurant" size={size} color={color as string} />,
           }}
         />
         <Tabs.Screen
           name="profil"
           options={{
             title: t('zakladki.profil'),
-            tabBarIcon: ({ color, size }) => <Ionicons name="person" size={size} color={color} />,
+            tabBarIcon: ({ color, size }) => <Ionicons name="person" size={size} color={color as string} />,
           }}
         />
         {/*
@@ -281,7 +283,7 @@ function Zakladki({ kolory }: { kolory: Paleta }) {
           name="menu"
           options={{
             title: t('zakladki.wiecej'),
-            tabBarIcon: ({ color, size }) => <Ionicons name="settings" size={size} color={color} />,
+            tabBarIcon: ({ color, size }) => <Ionicons name="settings" size={size} color={color as string} />,
           }}
           listeners={{
             tabPress: (e) => {
