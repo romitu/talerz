@@ -30,7 +30,6 @@ import {
   skonsolidujSkladniki,
   ustawOdhaczenie,
   usunReczny,
-  wyczyscOdhaczenia,
   type PozycjaSkonsolidowana,
   type PozycjaZakupow,
   type ProduktReczny,
@@ -206,12 +205,6 @@ export default function EkranZakupow() {
     (s, p) => s + (p.reszta_g ?? 0),
     0
   );
-
-  // Tylko odhaczone RĘCZNIE — te zrealizowane automatycznie (danie już
-  // ugotowane) i tak nie wrócą jako „do kupienia", więc nie ma czego cofać.
-  const odhaczoneRecznie = pozycje.filter(
-    (p) => !p.zrealizowano_automatycznie && kupione.has(kluczOdhaczenia(p))
-  ).length;
 
   /**
    * Odhaczenie (albo cofnięcie) widoczne od razu, zapis w tle. Pozycja jest
@@ -451,23 +444,6 @@ export default function EkranZakupow() {
               {t('zakupy.resztkiOpis', { ilosc: opisIlosci(resztyRazem) })}
             </ThemedText>
           </Karta>
-        )}
-
-        {odhaczoneRecznie > 0 && (
-          <Przycisk
-            tytul={t('zakupy.noweZakupy', { ile: odhaczoneRecznie })}
-            wariant="poboczny"
-            onPress={async () => {
-              if (!kontoId) return;
-              setKupione(new Set());
-              try {
-                await wyczyscOdhaczenia(kontoId);
-              } catch (e) {
-                setBlad(komunikatBledu(e));
-                pobierz();
-              }
-            }}
-          />
         )}
 
         <ThemedText type="small" themeColor="textSecondary">

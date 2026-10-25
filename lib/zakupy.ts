@@ -486,16 +486,3 @@ export async function ustawOdhaczenie(
     .eq('skladnik_id', skladnikId);
   if (error) throw error;
 }
-
-/**
- * Czyści wszystkie ptaszki konta — początek nowego, świeżego liczenia zakupów.
- *
- * Bezpieczne mimo braku podziału na plan: danie już zrealizowane automatycznie
- * (`zrealizowano_automatycznie` — data ugotowania minęła) i tak nie wróci jako
- * „do kupienia", więc czyszczenie rusza tylko to, co faktycznie wymaga
- * ponownego potwierdzenia.
- */
-export async function wyczyscOdhaczenia(kontoId: string) {
-  const { error } = await supabase.from('zakupy_odhaczone').delete().eq('konto_id', kontoId);
-  if (error) throw error;
-}

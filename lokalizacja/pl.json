@@ -324,7 +324,6 @@
     "zrealizowanePoprzednio": "ZREALIZOWANE W POPRZEDNIEJ SESJI",
     "resztki": "RESZTKI Z OPAKOWAŃ",
     "resztkiOpis": "Po ugotowaniu wszystkiego z listy zostanie około {{ilosc}} produktów. To one najczęściej lądują w koszu — warto dobrać przepis, który je zużyje.",
-    "noweZakupy": "Zacznij nowe zakupy (odznacz {{ile}})",
     "wskazowka": "Ptaszki są zapamiętane — możesz wyjść z aplikacji w połowie zakupów i wrócić do tego samego miejsca. Same ilości jedzenia przeliczają się z planu, więc po zmianie posiłków mogą się zmienić."
   },
   "jednostka": {
