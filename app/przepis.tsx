@@ -67,7 +67,7 @@ type ProfilZCelem = {
  *     czy masz wszystko i czy trzeba wyjąć blender.
  */
 export default function EkranPrzepisu() {
-  const { id, skalowany, powrot, porcjeRazem } = useLocalSearchParams<{
+  const { id, skalowany, powrot, porcjeRazem, tylkoCzytanie } = useLocalSearchParams<{
     id: string;
     /** Ustawione, gdy wchodzimy z planu na konkretny przeskalowany wariant (migracja 0036). */
     skalowany?: string;
@@ -79,7 +79,13 @@ export default function EkranPrzepisu() {
      * przepisów go nie ma i pokazujemy ilości bazowe, jak dawniej.
      */
     porcjeRazem?: string;
+    /**
+     * „1” przy wejściu z katalogu przepisów: podgląd przepisu bazowego do
+     * czytania, nie do gotowania — bez odhaczania i bez rozkładu na osoby.
+     */
+    tylkoCzytanie?: string;
   }>();
+  const podglad = tylkoCzytanie === '1';
   const { sesja } = useSesja();
   const motyw = useTheme();
   const { t } = useTranslation();
@@ -181,8 +187,8 @@ export default function EkranPrzepisu() {
   useFocusEffect(
     useCallback(() => {
       pobierz();
-      pobierzUdzialy();
-    }, [pobierz, pobierzUdzialy])
+      if (!podglad) pobierzUdzialy();
+    }, [pobierz, pobierzUdzialy, podglad])
   );
 
   function przelacz(klucz: string) {
@@ -308,6 +314,17 @@ export default function EkranPrzepisu() {
       ]
         .filter(Boolean)
         .join(' · ')}>
+      {podglad && (
+        <Karta>
+          <ThemedText type="smallBold" themeColor="accent">
+            {t('przepis.podgladBazowy')}
+          </ThemedText>
+          <ThemedText type="small" themeColor="textSecondary">
+            {t('przepis.podgladBazowyOpis')}
+          </ThemedText>
+        </Karta>
+      )}
+
       {rozkladPosilku && rozkladPosilku.length > 1 && <RozkladPosilku osoby={rozkladPosilku} />}
 
       {zdjecie && (
@@ -404,6 +421,23 @@ export default function EkranPrzepisu() {
         {skladnikiDoPokazania.map((s) => {
           const klucz = `s:${s.skladnik_id}`;
           const odhaczony = zrobione.has(klucz);
+          if (podglad) {
+            return (
+              <View key={klucz} style={styles.pozycja}>
+                <View style={styles.trescPozycji}>
+                  <ThemedText type="default">{s.nazwa}</ThemedText>
+                  {(s.stan || s.zamiennik) && (
+                    <TekstFormatowany type="small" themeColor="textSecondary">
+                      {[s.stan, s.zamiennik].filter(Boolean).join(' · ')}
+                    </TekstFormatowany>
+                  )}
+                </View>
+                <ThemedText type="smallBold" themeColor="textSecondary" style={styles.ilosc}>
+                  {opisIlosci(s)}
+                </ThemedText>
+              </View>
+            );
+          }
           return (
             <Pressable
               key={klucz}
@@ -446,6 +480,28 @@ export default function EkranPrzepisu() {
           {etap.kroki.map((krok, ik) => {
             const klucz = `k:${ie}:${ik}`;
             const odhaczony = zrobione.has(klucz);
+            if (podglad) {
+              return (
+                <View key={klucz} style={styles.krok}>
+                  <ThemedText type="smallBold" themeColor="textSecondary" style={styles.numerKroku}>
+                    {ik + 1}.
+                  </ThemedText>
+                  <View style={styles.trescPozycji}>
+                    <TekstFormatowany type="default">{krok.tresc}</TekstFormatowany>
+                    {krok.sygnal && (
+                      <TekstFormatowany type="small" themeColor="textSecondary">
+                        {t('przepis.poCzymPoznac', { sygnal: krok.sygnal })}
+                      </TekstFormatowany>
+                    )}
+                    {krok.uwaga && (
+                      <ThemedText type="smallBold" themeColor="accent">
+                        {t('przepis.uwaga')}
+                      </ThemedText>
+                    )}
+                  </View>
+                </View>
+              );
+            }
             return (
               <Pressable
                 key={klucz}
@@ -557,5 +613,6 @@ const styles = StyleSheet.create({
   },
   trescPozycji: { flex: 1, gap: 2 },
   ilosc: { minWidth: 96, textAlign: 'right' },
+  numerKroku: { minWidth: 24, paddingTop: 2 },
   wcisniete: { opacity: 0.6 },
 });

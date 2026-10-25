@@ -495,9 +495,25 @@ export default function EkranPrzepisow() {
         return (
         <Karta key={p.id}>
           <View style={styles.naglowek}>
-            <ThemedText type="subtitle" style={styles.nazwa}>
-              {p.nazwa}
-            </ThemedText>
+            {/*
+              Nazwa (i oko obok) otwiera przepis bazowy tylko do czytania — ten
+              sam ekran co z planu, ale bez odhaczania i bez przeliczeń na partię.
+            */}
+            <Pressable
+              onPress={() =>
+                router.push({
+                  pathname: '/przepis',
+                  params: { id: p.id, powrot: '/przepisy', tylkoCzytanie: '1' },
+                })
+              }
+              accessibilityRole="link"
+              accessibilityLabel={t('przepisy.podgladNazwe', { nazwa: p.nazwa })}
+              style={({ pressed }) => [styles.otworzPodglad, pressed && styles.wcisniety]}>
+              <ThemedText type="subtitle" style={styles.nazwa}>
+                {p.nazwa}
+              </ThemedText>
+              <Ionicons name="eye-outline" size={20} color={motyw.textSecondary} style={styles.okoPodgladu} />
+            </Pressable>
 
             {/*
               Dla moderatora pigułka statusu jest jednocześnie przełącznikiem
@@ -1006,7 +1022,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     gap: Spacing.two,
   },
-  nazwa: { flex: 1, fontSize: 22, lineHeight: 31 },
+  nazwa: { flexShrink: 1, fontSize: 22, lineHeight: 31 },
+  otworzPodglad: { flex: 1, flexDirection: 'row', alignItems: 'flex-start', gap: Spacing.one },
+  okoPodgladu: { marginTop: 6 },
   widocznoscPigulka: {
     flexDirection: 'row',
     alignItems: 'center',
