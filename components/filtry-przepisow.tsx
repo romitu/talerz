@@ -38,68 +38,60 @@ export function FiltryPrzepisow({
   otwarte,
   onPrzelaczOtwarte,
   onWyczysc,
+  bezPrzycisku = false,
 }: {
   grupy: GrupaFiltrow[];
   otwarte: boolean;
   onPrzelaczOtwarte: () => void;
   onWyczysc: () => void;
+  /**
+   * Przycisk „Filtry” stoi gdzie indziej (w szukajce listy przepisów, patrz
+   * `PrzyciskFiltrow`) — tu zostają tylko aktywne filtry i sam panel.
+   */
+  bezPrzycisku?: boolean;
 }) {
-  const motyw = useTheme();
   const { t } = useTranslation();
+  const motyw = useTheme();
   const aktywne = grupy.flatMap((g) => g.opcje.filter((o) => o.wybrana));
+  const pokazRzad = !bezPrzycisku || aktywne.length > 0;
 
   return (
     <View style={styles.calosc}>
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.rzad}>
-        <Pressable
-          onPress={onPrzelaczOtwarte}
-          accessibilityRole="button"
-          accessibilityState={{ expanded: otwarte }}
-          accessibilityLabel={
-            aktywne.length > 0 ? t('filtry.filtryWlaczone', { ile: aktywne.length }) : t('filtry.filtry')
-          }
-          style={[
-            styles.pigulka,
-            aktywne.length > 0
-              ? { backgroundColor: motyw.backgroundSelected, borderColor: motyw.accent }
-              : { backgroundColor: motyw.background, borderColor: motyw.border },
-          ]}>
-          <Ionicons name="options-outline" size={16} color={motyw.accent} />
-          <ThemedText type="smallBold" style={{ color: motyw.accent }}>
-            {t('filtry.filtry')}
-            {aktywne.length > 0 ? ` ${aktywne.length}` : ''}
-          </ThemedText>
-          <Ionicons name={otwarte ? 'chevron-up' : 'chevron-down'} size={14} color={motyw.accent} />
-        </Pressable>
+      {pokazRzad && (
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.rzad}>
+          {!bezPrzycisku && (
+            <PrzyciskFiltrow grupy={grupy} otwarte={otwarte} onPrzelaczOtwarte={onPrzelaczOtwarte} />
+          )}
 
-        {!otwarte &&
-          aktywne.map((o) => (
+          {!otwarte &&
+            aktywne.map((o) => (
+              <Pressable
+                key={o.klucz}
+                onPress={o.onPress}
+                accessibilityRole="button"
+                accessibilityLabel={t('filtry.zdejmij', { filtr: o.etykieta })}
+                style={[styles.pigulka, { backgroundColor: motyw.accent, borderColor: motyw.accent }]}>
+                <ThemedText type="smallBold" style={styles.tekstWybrany} numberOfLines={1}>
+                  {o.etykieta}
+                </ThemedText>
+                <Ionicons name="close" size={14} color="#FFFFFF" />
+              </Pressable>
+            ))}
+
+          {aktywne.length > 0 && (
             <Pressable
-              key={o.klucz}
-              onPress={o.onPress}
+              onPress={onWyczysc}
               accessibilityRole="button"
-              accessibilityLabel={t('filtry.zdejmij', { filtr: o.etykieta })}
-              style={[styles.pigulka, { backgroundColor: motyw.accent, borderColor: motyw.accent }]}>
-              <ThemedText type="smallBold" style={styles.tekstWybrany} numberOfLines={1}>
-                {o.etykieta}
+              accessibilityLabel={t('filtry.wyczyscWszystkie')}
+              hitSlop={6}
+              style={styles.wyczysc}>
+              <ThemedText type="small" themeColor="textSecondary">
+                {t('filtry.wyczysc')}
               </ThemedText>
-              <Ionicons name="close" size={14} color="#FFFFFF" />
             </Pressable>
-          ))}
-
-        {aktywne.length > 0 && (
-          <Pressable
-            onPress={onWyczysc}
-            accessibilityRole="button"
-            accessibilityLabel={t('filtry.wyczyscWszystkie')}
-            hitSlop={6}
-            style={styles.wyczysc}>
-            <ThemedText type="small" themeColor="textSecondary">
-              {t('filtry.wyczysc')}
-            </ThemedText>
-          </Pressable>
-        )}
-      </ScrollView>
+          )}
+        </ScrollView>
+      )}
 
       {otwarte &&
         grupy.map((g) => (
@@ -138,6 +130,42 @@ export function FiltryPrzepisow({
           </View>
         ))}
     </View>
+  );
+}
+
+/** Pigułka „Filtry” rozwijająca panel — z liczbą włączonych filtrów. */
+export function PrzyciskFiltrow({
+  grupy,
+  otwarte,
+  onPrzelaczOtwarte,
+}: {
+  grupy: GrupaFiltrow[];
+  otwarte: boolean;
+  onPrzelaczOtwarte: () => void;
+}) {
+  const motyw = useTheme();
+  const { t } = useTranslation();
+  const ile = grupy.reduce((s, g) => s + g.opcje.filter((o) => o.wybrana).length, 0);
+
+  return (
+    <Pressable
+      onPress={onPrzelaczOtwarte}
+      accessibilityRole="button"
+      accessibilityState={{ expanded: otwarte }}
+      accessibilityLabel={ile > 0 ? t('filtry.filtryWlaczone', { ile }) : t('filtry.filtry')}
+      style={[
+        styles.pigulka,
+        ile > 0
+          ? { backgroundColor: motyw.backgroundSelected, borderColor: motyw.accent }
+          : { backgroundColor: motyw.background, borderColor: motyw.border },
+      ]}>
+      <Ionicons name="options-outline" size={16} color={motyw.accent} />
+      <ThemedText type="smallBold" style={{ color: motyw.accent }}>
+        {t('filtry.filtry')}
+        {ile > 0 ? ` ${ile}` : ''}
+      </ThemedText>
+      <Ionicons name={otwarte ? 'chevron-up' : 'chevron-down'} size={14} color={motyw.accent} />
+    </Pressable>
   );
 }
 

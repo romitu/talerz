@@ -7,8 +7,9 @@ import { Pressable, StyleSheet, View } from 'react-native';
 
 import { komunikatBledu } from '@/lib/blad';
 import { Ekran } from '@/components/ekran';
-import { FiltryPrzepisow } from '@/components/filtry-przepisow';
+import { FiltryPrzepisow, PrzyciskFiltrow, type GrupaFiltrow } from '@/components/filtry-przepisow';
 import { ZnaczekZrodla } from '@/components/kafel-zakupu';
+import { ZnaczekWidocznosci } from '@/components/znaczek-widocznosci';
 import { Karta } from '@/components/karta';
 import { NaglowekPrzepisow, type ZakladkaPrzepisow } from '@/components/naglowek-przepisow';
 import { ThemedView } from '@/components/themed-view';
@@ -54,13 +55,6 @@ function doPorownania(tekst: string): string {
     .replace(/Ł/g, 'L')
     .toLowerCase();
 }
-
-/**
- * Skrócone etykiety zakładek kategorii — tylko na te pigułki w nagłówku.
- * Pełne nazwy (`kategoria.*`) zostają wszędzie indziej (komunikaty,
- * formularz przepisu) — tam nie ma problemu z miejscem w jednej linii.
- * Skróty są w tłumaczeniach: `przepisy.zakladka.*`.
- */
 
 export default function EkranPrzepisow() {
   const { sesja } = useSesja();
@@ -282,15 +276,22 @@ export default function EkranPrzepisow() {
   // Dania ze składnikiem, którego konto nie je (migracja 0049) — schowane
   // tak samo jak ukryte, pod własnym przełącznikiem, żeby było widać, ile ich jest.
   const liczbaWykluczonych = poFrazie.filter((p) => p.zawieraWykluczone.length > 0).length;
-  const poUkrytych = poFrazie.filter(
-    (p) =>
-      (pokazUkryte || !p.ukryty) && (pokazWykluczone || p.zawieraWykluczone.length === 0)
-  );
+  // Wybranie „Ukryte” albo „Nie jemy” pokazuje WYŁĄCZNIE te schowane dania —
+  // po to się tam wchodzi: przejrzeć, co się schowało, i ewentualnie przywrócić.
+  // Oba naraz to suma obu grup.
+  const poUkrytych = poFrazie.filter((p) => {
+    const ukryty = p.ukryty;
+    const wykluczony = p.zawieraWykluczone.length > 0;
+    if (pokazUkryte || pokazWykluczone) {
+      return (pokazUkryte && ukryty) || (pokazWykluczone && wykluczony);
+    }
+    return !ukryty && !wykluczony;
+  });
 
   /*
-    Filtry, tak jak fraza, działają PRZED zakładkami — liczby przy zakładkach
-    mówią, ile pasujących dań jest w każdej porze. Liczby przy opcjach filtra
-    liczone są w bieżącej zakładce.
+    Filtry, tak jak fraza, działają PRZED porą posiłku — liczby przy porach
+    mówią, ile pasujących dań jest w każdej z nich. Liczby przy pozostałych
+    opcjach filtra liczone są w wybranej porze.
   */
   const filtry = useFiltryPrzepisow(
     poUkrytych.filter((p) => kategoria === null || p.pory.includes(kategoria))
@@ -314,56 +315,76 @@ export default function EkranPrzepisow() {
       ? poFiltrach
       : poFiltrach.filter((p) => p.pory.includes(kategoria));
 
-  // Zakładki: „Wszystkie" + jedna na kategorię, a na końcu — tylko gdy jest co
-  // rozpatrywać — kolejka moderatora. Przepisy przegląda się tutaj, więc
-  // i decyzje o nich zapadają tutaj, obok zwykłych filtrów.
+  /*
+    Pora posiłku siedzi w panelu Filtry jako pierwsza grupa, a nie w osobnym
+    rzędzie pigułek — na telefonie ten rząd zabierał liście całą linijkę.
+    Wybiera się jedną porę naraz; ponowne dotknięcie wraca do wszystkich.
+  */
+  const grupaPory: GrupaFiltrow = {
+    klucz: 'pora',
+    tytul: t('filtry.grupaPora'),
+    opcje: KATEGORIE.map((k) => ({
+      klucz: `pora-${k}`,
+      etykieta: t(`kategoria.${k}`),
+      ile: licznik(k),
+      wybrana: kategoria === k,
+      onPress: () => setKategoria((obecna) => (obecna === k ? null : k)),
+    })),
+  };
+  /*
+    Schowane przepisy też włącza się w panelu Filtry. Wybrana opcja pokazuje
+    tylko te schowane dania (patrz `poUkrytych`), a grupa pojawia się tylko
+    wtedy, gdy jest co pokazać.
+  */
+  const grupaSchowanych: GrupaFiltrow = {
+    klucz: 'schowane',
+    tytul: t('filtry.grupaSchowane'),
+    opcje: [
+      ...(liczbaUkrytych > 0 || pokazUkryte
+        ? [
+            {
+              klucz: 'schowane-ukryte',
+              etykieta: t('przepisy.zakladka.ukryte'),
+              ile: liczbaUkrytych,
+              wybrana: pokazUkryte,
+              onPress: () => setPokazUkryte((x) => !x),
+            },
+          ]
+        : []),
+      ...(liczbaWykluczonych > 0 || pokazWykluczone
+        ? [
+            {
+              klucz: 'schowane-wykluczone',
+              etykieta: t('przepisy.zakladka.nieJemy'),
+              ile: liczbaWykluczonych,
+              wybrana: pokazWykluczone,
+              onPress: () => setPokazWykluczone((x) => !x),
+            },
+          ]
+        : []),
+    ],
+  };
+  const wlasciwosciFiltrow = {
+    ...filtry.wlasciwosci,
+    grupy: [
+      grupaPory,
+      ...filtry.wlasciwosci.grupy,
+      ...(grupaSchowanych.opcje.length > 0 ? [grupaSchowanych] : []),
+    ],
+    onWyczysc: () => {
+      setKategoria(null);
+      setPokazUkryte(false);
+      setPokazWykluczone(false);
+      wyczyscFiltry();
+    },
+  };
+
+  // Pod wyszukiwarką zostaje już tylko kolejka moderatora — i to tylko wtedy,
+  // gdy jest co rozpatrywać. Przepisy przegląda się tutaj, więc i decyzje
+  // o nich zapadają tutaj, obok zwykłych filtrów.
   const zakladki: ZakladkaPrzepisow[] = przepisy.length === 0
     ? []
     : [
-        {
-          klucz: 'wszystkie',
-          etykieta: t('przepisy.zakladka.wszystkie'),
-          ile: poFiltrach.length,
-          wybrana: kategoria === null,
-          onPress: () => {
-            setKategoria(null);
-            setKolejka(false);
-          },
-        },
-        ...KATEGORIE.map((k) => ({
-          klucz: k,
-          etykieta: t(`przepisy.zakladka.${k}`),
-          ile: licznik(k),
-          wybrana: kategoria === k,
-          onPress: () => {
-            setKategoria(k);
-            setKolejka(false);
-          },
-        })),
-        // Nie zeruje kategorii ani kolejki — to osobny, niewykluczający się
-        // przełącznik ("pokaż też schowane"), nie kolejny filtr kategorii.
-        ...(liczbaUkrytych > 0
-          ? [
-              {
-                klucz: 'ukryte',
-                etykieta: t('przepisy.zakladka.ukryte'),
-                ile: liczbaUkrytych,
-                wybrana: pokazUkryte,
-                onPress: () => setPokazUkryte((x) => !x),
-              },
-            ]
-          : []),
-        ...(liczbaWykluczonych > 0
-          ? [
-              {
-                klucz: 'wykluczone',
-                etykieta: t('przepisy.zakladka.nieJemy'),
-                ile: liczbaWykluczonych,
-                wybrana: pokazWykluczone,
-                onPress: () => setPokazWykluczone((x) => !x),
-              },
-            ]
-          : []),
         ...(mozeDodawac && doZatwierdzenia.length > 0
           ? [
               {
@@ -387,10 +408,19 @@ export default function EkranPrzepisow() {
           fraza={fraza}
           onZmianaFrazy={setFraza}
           zakladki={zakladki}
+          // Kolejka moderatora pokazuje każde zgłoszenie — filtry by ją tylko myliły.
+          przyciskFiltrow={
+            !kolejka ? (
+              <PrzyciskFiltrow
+                grupy={wlasciwosciFiltrow.grupy}
+                otwarte={wlasciwosciFiltrow.otwarte}
+                onPrzelaczOtwarte={wlasciwosciFiltrow.onPrzelaczOtwarte}
+              />
+            ) : undefined
+          }
           filtry={
-            // Kolejka moderatora pokazuje każde zgłoszenie — filtry by ją tylko myliły.
             przepisy.length > 0 && !kolejka ? (
-              <FiltryPrzepisow {...filtry.wlasciwosci} />
+              <FiltryPrzepisow {...wlasciwosciFiltrow} bezPrzycisku />
             ) : undefined
           }
         />
@@ -492,6 +522,23 @@ export default function EkranPrzepisow() {
             : []),
         ];
 
+        /*
+          Dla moderatora znaczek statusu jest jednocześnie przełącznikiem
+          publiczny/prywatny — najszybszy sposób ustalić i zmienić, co jest
+          widoczne dla wszystkich, bez wchodzenia w kolejkę zgłoszeń.
+          Zgłoszony ma swój własny obieg decyzji niżej, więc tu jest tylko
+          znaczkiem. Stoi na zdjęciu, żeby nie zabierać miejsca nazwie.
+        */
+        const znaczekWidocznosci = (naZdjeciu: boolean) => (
+          <ZnaczekWidocznosci
+            widocznosc={p.widocznosc}
+            naZdjeciu={naZdjeciu}
+            onPrzelacz={
+              mozeDodawac && p.widocznosc !== 'zgloszona' ? () => przelaczWidocznosc(p) : undefined
+            }
+          />
+        );
+
         return (
         <Karta key={p.id}>
           <View style={styles.naglowek}>
@@ -509,51 +556,14 @@ export default function EkranPrzepisow() {
               accessibilityRole="link"
               accessibilityLabel={t('przepisy.podgladNazwe', { nazwa: p.nazwa })}
               style={({ pressed }) => [styles.otworzPodglad, pressed && styles.wcisniety]}>
+              <Ionicons name="eye-outline" size={20} color={motyw.textSecondary} style={styles.okoPodgladu} />
               <ThemedText type="subtitle" style={styles.nazwa}>
                 {p.nazwa}
               </ThemedText>
-              <Ionicons name="eye-outline" size={20} color={motyw.textSecondary} style={styles.okoPodgladu} />
             </Pressable>
 
-            {/*
-              Dla moderatora pigułka statusu jest jednocześnie przełącznikiem
-              publiczny/prywatny — najszybszy sposób ustalić i zmienić, co jest
-              widoczne dla wszystkich, bez wchodzenia w kolejkę zgłoszeń.
-              Zgłoszony ma swój własny obieg decyzji niżej, więc tu jest tylko
-              etykietą.
-            */}
-            {mozeDodawac && p.widocznosc !== 'zgloszona' ? (
-              <Pressable
-                onPress={() => przelaczWidocznosc(p)}
-                accessibilityRole="button"
-                accessibilityLabel={
-                  p.widocznosc === 'publiczna'
-                    ? t('przepisy.ukryjPubliczny', { nazwa: p.nazwa })
-                    : t('przepisy.opublikuj', { nazwa: p.nazwa })
-                }
-                style={({ pressed }) => [
-                  styles.widocznoscPigulka,
-                  p.widocznosc === 'publiczna'
-                    ? { backgroundColor: motyw.backgroundSelected }
-                    : { borderWidth: 1, borderColor: motyw.border },
-                  pressed && styles.wcisniety,
-                ]}>
-                <Ionicons
-                  name={p.widocznosc === 'publiczna' ? 'earth' : 'lock-closed-outline'}
-                  size={14}
-                  color={p.widocznosc === 'publiczna' ? motyw.accent : motyw.textSecondary}
-                />
-                <ThemedText
-                  type="small"
-                  themeColor={p.widocznosc === 'publiczna' ? 'accent' : 'textSecondary'}>
-                  {p.widocznosc === 'publiczna' ? t('widocznosc.publiczna') : t('widocznosc.prywatna')}
-                </ThemedText>
-              </Pressable>
-            ) : (
-              <ThemedText type="small" themeColor="textSecondary">
-                {t(`widocznosc.${p.widocznosc}`)}
-              </ThemedText>
-            )}
+            {/* Bez zdjęcia znaczek statusu zostaje przy nazwie. */}
+            {!zdjecie && znaczekWidocznosci(false)}
           </View>
 
           {zdjecie && (
@@ -566,6 +576,7 @@ export default function EkranPrzepisow() {
                 accessibilityLabel={p.nazwa}
               />
               {p.zdjecie_zrodlo && <ZnaczekZrodla zrodlo={p.zdjecie_zrodlo} />}
+              {znaczekWidocznosci(true)}
             </View>
           )}
 
@@ -1025,14 +1036,6 @@ const styles = StyleSheet.create({
   nazwa: { flexShrink: 1, fontSize: 22, lineHeight: 31 },
   otworzPodglad: { flex: 1, flexDirection: 'row', alignItems: 'flex-start', gap: Spacing.one },
   okoPodgladu: { marginTop: 6 },
-  widocznoscPigulka: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 6,
-    borderRadius: 999,
-    paddingVertical: Spacing.half,
-    paddingHorizontal: Spacing.two,
-  },
   moderacja: {
     borderWidth: 1,
     borderRadius: Spacing.two,

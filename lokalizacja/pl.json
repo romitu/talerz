@@ -66,6 +66,8 @@
     "zdejmij": "Zdejmij filtr {{filtr}}",
     "wyczyscWszystkie": "Wyczyść wszystkie filtry",
     "wyczysc": "Wyczyść",
+    "grupaPora": "Pora posiłku",
+    "grupaSchowane": "Pokaż tylko schowane",
     "grupaRodzaj": "Rodzaj dania",
     "bezRodzaju": "Bez rodzaju",
     "grupaKuchnia": "Kuchnia",
@@ -469,11 +471,6 @@
     "powodZaKrotki": "Napisz autorowi, co poprawić.",
     "powodZaDlugi": "Uzasadnienie może mieć najwyżej 500 znaków.",
     "zakladka": {
-      "wszystkie": "Wszyst.",
-      "sniadanie": "Śniad.",
-      "obiad": "Obiad",
-      "kolacja": "Kolacj.",
-      "dodatek": "Dodat.",
       "ukryte": "Ukryte",
       "nieJemy": "Nie jemy",
       "doZatwierdzenia": "Do zatwierdzenia"
@@ -498,8 +495,6 @@
     "gdzieKategoria": "Kategorię ustawiasz w formularzu przepisu, w polu „Kategoria”. Przepis może należeć do kilku naraz.",
     "bezKategoriiTag": "bez kategorii",
     "moznaMrozicTag": "można mrozić",
-    "ukryjPubliczny": "Ukryj {{nazwa}}",
-    "opublikuj": "Opublikuj {{nazwa}}",
     "nieJecie": "Nie jecie: {{skladniki}} — automat tego nie zaproponuje.",
     "trwaloscEtykieta": "Twoja trwałość w lodówce: {{twoja}}. Z przepisu wynika najwyżej {{przepis}}.",
     "trwaloscOpis": "Twoje ustawienie — nie zmienia przepisu, tylko Twój plan. Przepis pozwala na najwyżej: {{przepis}}.",
@@ -552,10 +547,11 @@
       "skalowalny": "skalowalny"
     }
   },
-  "widocznosc": {
-    "publiczna": "publiczny",
-    "prywatna": "prywatny",
-    "zgloszona": "zgłoszony"
+  "widocznoscOpis": {
+    "publiczna": { "tytul": "Publiczny", "opis": "Widzą go wszyscy użytkownicy Talerza." },
+    "prywatna": { "tytul": "Prywatny", "opis": "Widzi go tylko autor." },
+    "zgloszona": { "tytul": "Zgłoszony", "opis": "Czeka na zatwierdzenie przez moderatora." },
+    "zmien": "Kliknij, żeby przełączyć publiczny / prywatny."
   },
   "pal": {
     "nieaktywny": {
