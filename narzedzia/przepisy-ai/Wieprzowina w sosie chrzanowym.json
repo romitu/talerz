@@ -9,7 +9,7 @@
   ],
   "rodzaje": [],
   "porcjowanie": "waga",
-  "porcja_g": 816,
+  "porcja_g": 926,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 3,
   "czas_przygotowania_min": 20,
@@ -96,25 +96,25 @@
     },
     {
       "nazwa": "Marchew, surowa",
-      "ilosc": 10,
+      "ilosc": 50,
       "jednostka": "g",
       "stan": "obrany korzeń, drobna kostka około 3–4 mm; do warzywnej bazy"
     },
     {
       "nazwa": "Pietruszka korzeń",
-      "ilosc": 15,
+      "ilosc": 35,
       "jednostka": "g",
       "stan": "obrany korzeń, drobna kostka około 3–4 mm; do warzywnej bazy"
     },
     {
       "nazwa": "Seler korzeń",
-      "ilosc": 10,
+      "ilosc": 35,
       "jednostka": "g",
       "stan": "obrany korzeń, drobna kostka około 3–4 mm; do warzywnej bazy"
     },
     {
       "nazwa": "Por, surowy",
-      "ilosc": 20,
+      "ilosc": 45,
       "jednostka": "g",
       "stan": "biała i jasnozielona część, dokładnie wypłukana; cienkie półplasterki do bazy sosu"
     }
@@ -210,14 +210,14 @@
         },
         {
           "tresc": "**Wyjęcie mięsa.** Gdy mięso będzie miękkie, przełóż je na czysty talerz i przykryj. Sprawdź korzenie w sosie. Jeśli są jeszcze twarde, dogotowuj je bez mięsa po **3 minuty**, w razie potrzeby dolewając trochę gorącej wody.",
-          "sygnal": "korzenie łatwo rozgniatają się widelcem przed blendowaniem",
+          "sygnal": "korzenie łatwo rozgniatają się widelcem.",
           "uwaga": true
         },
         {
-          "tresc": "**Blendowanie warzyw.** Zdejmij rondel z ognia i zblenduj wszystkie warzywa z całym płynem na gładki sos. Trzymaj końcówkę blendera zanurzoną; przy małej ilości przelej sos do wąskiego naczynia do blendowania i po zblendowaniu przelej z powrotem do rondla."
+          "tresc": "**Blendowanie warzyw - tylko jeżlei lubsiz** Zdejmij rondel z ognia i zblenduj wszystkie warzywa z całym płynem na gładki sos. Trzymaj końcówkę blendera zanurzoną; przy małej ilości przelej sos do wąskiego naczynia do blendowania i po zblendowaniu przelej z powrotem do rondla."
         },
         {
-          "tresc": "**Konsystencja.** Sos powinien swobodnie spływać z łyżki. Jeśli jest zbyt gęsty, dodawaj po trochu gorącą wodę i mieszaj. Nie odcedzaj warzyw."
+          "tresc": "**Konsystencja - jeżeli blendowałeś** Sos powinien swobodnie spływać z łyżki. Jeśli jest zbyt gęsty, dodawaj po trochu gorącą wodę i mieszaj. Nie odcedzaj warzyw."
         },
         {
           "tresc": "**Hartowanie jogurtu.** Do jogurtu stopniowo dodawaj trochę ciepłego sosu, mieszając do ogrzania i uzyskania jednolitej konsystencji. Wmieszaj zahartowany jogurt do rondla poza ogniem."

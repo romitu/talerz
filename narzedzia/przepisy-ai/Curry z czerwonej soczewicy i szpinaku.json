@@ -12,7 +12,7 @@
     "gulasz_curry"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 747,
+  "porcja_g": 622,
   "liczba_porcji_bazowych": 2,
   "trwalosc_dni": 3,
   "czas_przygotowania_min": 10,
@@ -51,8 +51,9 @@
     },
     {
       "nazwa": "woda",
-      "ilosc": 400,
-      "jednostka": "ml"
+      "ilosc": 150,
+      "jednostka": "ml",
+      "stan": "dolej jeżeli potrawa za gęsta"
     },
     {
       "nazwa": "Cebula, surowa",

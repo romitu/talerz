@@ -11,7 +11,7 @@
     "kasza_ryz"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 691,
+  "porcja_g": 726,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 2,
   "czas_przygotowania_min": 16,
@@ -40,7 +40,8 @@
     {
       "nazwa": "Kasza bulgur, sucha",
       "ilosc": 70,
-      "jednostka": "g"
+      "jednostka": "g",
+      "stan": "Można również gotować oddzielnie w każdym dniu odpowiednią ilość."
     },
     {
       "nazwa": "Pieczarki, surowe",
@@ -92,19 +93,19 @@
     },
     {
       "nazwa": "Pietruszka korzeń",
-      "ilosc": 10,
+      "ilosc": 20,
       "jednostka": "g",
       "stan": "obrany korzeń, starty na drobnych oczkach; do warzywnej bazy"
     },
     {
       "nazwa": "Seler korzeń",
-      "ilosc": 10,
+      "ilosc": 20,
       "jednostka": "g",
       "stan": "obrany korzeń, starty na drobnych oczkach; do warzywnej bazy"
     },
     {
       "nazwa": "Por, surowy",
-      "ilosc": 15,
+      "ilosc": 30,
       "jednostka": "g",
       "stan": "biała i jasnozielona część, dokładnie wypłukana; cienkie półplasterki do bazy sosu"
     }
@@ -180,7 +181,7 @@
           "tresc": "**Kasza — po minutniku.** Niezależnie od postępu przygotowania sosu sprawdź miękkość kaszy po czasie z opakowania. Odcedź nadmiar wody, przykryj i odstaw poza palnik."
         },
         {
-          "tresc": "**Odłożenie sosu.** Przełóż całą bazę warzywno-grzybową wraz z płynem do miski i przykryj. Na patelni nie pozostawiaj kawałków warzyw, które mogłyby przypalić się podczas smażenia mięsa."
+          "tresc": "**Odłożenie sosu.** Przełóż całą bazę warzywno-grzybową wraz z płynem do miski i przykryj. Na patelni nie pozostawiaj kawałków warzyw, które mogłyby przypalić się podczas smażenia mięsa. Ewentualny nadmiar wody wylej. Baza powinna być gęsta."
         },
         {
           "tresc": "**Rozgrzanie tłuszczu do mięsa.** Na opróżnionej patelni rozgrzej pozostałą część oleju przez około **1 minutę**."

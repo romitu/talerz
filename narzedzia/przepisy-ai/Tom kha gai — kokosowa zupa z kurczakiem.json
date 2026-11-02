@@ -12,7 +12,7 @@
     "zupa"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 734,
+  "porcja_g": 755,
   "liczba_porcji_bazowych": 2,
   "trwalosc_dni": 3,
   "czas_przygotowania_min": 20,
@@ -101,18 +101,18 @@
     },
     {
       "nazwa": "Papryka ostra mielona",
-      "ilosc": 1,
+      "ilosc": 4,
       "jednostka": "g"
     },
     {
       "nazwa": "Pietruszka korzeń",
-      "ilosc": 20,
+      "ilosc": 40,
       "jednostka": "g",
       "stan": "obrany korzeń, kostka około 7–8 mm; do wywaru"
     },
     {
       "nazwa": "Seler korzeń",
-      "ilosc": 20,
+      "ilosc": 40,
       "jednostka": "g",
       "stan": "obrany korzeń, kostka około 7–8 mm; do wywaru"
     },
@@ -192,10 +192,10 @@
       "minuty": 20,
       "kroki": [
         {
-          "tresc": "**Warzywa korzeniowe.** W osobnym garnku umieść całą przygotowaną marchew, korzeń pietruszki i korzeń selera. Zalej całą odmierzoną wodą. Przykryj i doprowadź do łagodnego wrzenia, orientacyjnie przez **5–7 minut**."
+          "tresc": "**Warzywa korzeniowe.** W osobnym garnku umieść całą przygotowaną marchew, korzeń pietruszki i korzeń selera. Zalej całą odmierzoną wodą. Przykryj i doprowadź do łagodnego wrzenia, orientacyjnie przez **3–5 minut**."
         },
         {
-          "tresc": "**Gotowanie korzeni.** Od zagotowania gotuj pod przykryciem na małym ogniu przez **8 minut**. Nastaw minutnik; w tym czasie przygotuj bazę zupy w głównym garnku."
+          "tresc": "**Gotowanie korzeni.** Od zagotowania gotuj pod przykryciem na małym ogniu przez **6-8 minut**. Nastaw minutnik; w tym czasie przygotuj bazę zupy w głównym garnku."
         },
         {
           "tresc": "**Baza zupy — równolegle.** W głównym garnku rozgrzej olej przez **1 minutę**."
@@ -204,7 +204,7 @@
           "tresc": "**Pasta tom kha.** Dodaj pastę i smaż przez **1 minutę**, mieszając. Zdejmij garnek z palnika do czasu wlania wywaru."
         },
         {
-          "tresc": "**Por — po minutniku.** Po **8 minutach gotowania korzeni** dodaj por do wywaru. Gotuj jeszcze przez **4 minuty**. Wykonaj ten krok po sygnale minutnika, niezależnie od pracy przy bazie zupy."
+          "tresc": "**Por — po minutniku.** Po **8 minutach gotowania korzeni** dodaj por do wywaru. Gotuj jeszcze przez **2 minuty**. Wykonaj ten krok po sygnale minutnika, niezależnie od pracy przy bazie zupy."
         },
         {
           "tresc": "**Kontrola warzyw.** Sprawdź kostkę marchewki i selera. Jeśli ma twardy, surowy środek, gotuj jeszcze po **2 minuty**, sprawdzając po każdej takiej próbie.",
@@ -224,13 +224,13 @@
       "minuty": 25,
       "kroki": [
         {
-          "tresc": "**Wywar z przyprawami.** Do podsmażonej pasty tom kha wlej cały wywar. Dodaj imbir i czosnek. Doprowadź do łagodnego wrzenia i gotuj przez **5 minut**."
+          "tresc": "**Wywar z przyprawami.** Do podsmażonej pasty tom kha wlej cały wywar. Dodaj imbir i czosnek. Doprowadź do łagodnego wrzenia i gotuj przez **3 minut**."
         },
         {
           "tresc": "**Ryż — równolegle.** W opróżnionym garnku po wywarze zagotuj świeżą wodę do ryżu. Wsyp ryż i gotuj zgodnie z instrukcją na opakowaniu. Nastaw minutnik i w tym czasie przygotowuj zupę. Nadmiar wody po ugotowaniu odcedź; ta woda nie jest częścią wywaru."
         },
         {
-          "tresc": "**Kurczak.** Dodaj paski kurczaka do zupy. Po ponownym zagotowaniu gotuj łagodnie przez **6–8 minut**."
+          "tresc": "**Kurczak.** Dodaj paski kurczaka do zupy. Po ponownym zagotowaniu gotuj łagodnie przez **8 minut**."
         },
         {
           "tresc": "**Pieczarki.** Dodaj pieczarki i gotuj przez **3 minuty**."
