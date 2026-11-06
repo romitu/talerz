@@ -19,8 +19,10 @@ import {
   opisRoli,
   pobierzKonta,
   ustawAktywnosc,
+  ROLE_DO_NADANIA,
   ustawRole,
   type KontoUzytkownika,
+  type RolaDoNadania,
 } from '@/lib/uzytkownicy';
 
 
@@ -109,10 +111,10 @@ export default function EkranUzytkownikow() {
     }, [pobierz])
   );
 
-  async function zmienRole(konto: KontoUzytkownika) {
+  async function zmienRole(konto: KontoUzytkownika, rola: RolaDoNadania) {
     setBlad(null);
     try {
-      await ustawRole(konto.id, konto.rola === 'moderator' ? 'uzytkownik' : 'moderator');
+      await ustawRole(konto.id, rola);
       await pobierz();
     } catch (e) {
       setBlad(komunikatBledu(e));
@@ -205,15 +207,17 @@ export default function EkranUzytkownikow() {
               odebrania. To jedyna rola, którą można nadać wyłącznie w panelu.
             */}
             {k.rola !== 'administrator' && !toJa && (
-              <Przycisk
-                tytul={
-                  k.rola === 'moderator'
-                    ? t('uzytkownicy.odbierzModeratora')
-                    : t('uzytkownicy.nadajModeratora')
-                }
-                wariant="poboczny"
-                onPress={() => zmienRole(k)}
-              />
+              <View style={styles.role}>
+                {ROLE_DO_NADANIA.filter((r) => r !== k.rola).map((r) => (
+                  <Przycisk
+                    key={r}
+                    tytul={t('uzytkownicy.zmienNa', { rola: opisRoli(r) })}
+                    wariant="poboczny"
+                    onPress={() => zmienRole(k, r)}
+                    style={styles.rola}
+                  />
+                ))}
+              </View>
             )}
 
             {/*
@@ -265,6 +269,9 @@ export default function EkranUzytkownikow() {
           {t('uzytkownicy.rolaModeratoraOpis')}
         </ThemedText>
         <ThemedText type="small" themeColor="textSecondary">
+          {t('uzytkownicy.rolaDietetyka')}
+        </ThemedText>
+        <ThemedText type="small" themeColor="textSecondary">
           {t('uzytkownicy.rolaAdministratora')}
         </ThemedText>
       </Karta>
@@ -289,4 +296,6 @@ const styles = StyleSheet.create({
   },
   tozsamosc: { flex: 1, gap: 2 },
   stan: { flexDirection: 'row', alignItems: 'center', gap: Spacing.one },
+  role: { flexDirection: 'row', flexWrap: 'wrap', gap: Spacing.two },
+  rola: { flexGrow: 1 },
 });

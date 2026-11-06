@@ -19,11 +19,15 @@ import { supabase } from './supabase';
 export type KontoUzytkownika = {
   id: string;
   email: string | null;
-  rola: 'uzytkownik' | 'moderator' | 'administrator';
+  rola: 'uzytkownik' | 'moderator' | 'dietetyk' | 'administrator';
   aktywne: boolean;
   wylaczone_kiedy: string | null;
   utworzono: string;
 };
+
+/** Role, które administrator nadaje z aplikacji. Administratora — tylko w panelu Supabase. */
+export const ROLE_DO_NADANIA = ['uzytkownik', 'moderator', 'dietetyk'] as const;
+export type RolaDoNadania = (typeof ROLE_DO_NADANIA)[number];
 
 export function opisRoli(rola: KontoUzytkownika['rola']): string {
   return i18n.t(`rolaKonta.${rola}`, { defaultValue: String(rola) });
@@ -91,13 +95,13 @@ export async function czyMojeKontoCzynne(kontoId: string): Promise<boolean | nul
 }
 
 /**
- * Nadaje albo odbiera rolę moderatora przepisów.
+ * Zmienia rolę konta: użytkownik, moderator przepisów albo dietetyk.
  *
  * Granice pilnuje baza (migracja 0024), nie ten kod: rolę zmienia wyłącznie
  * administrator, wyłącznie między użytkownikiem a moderatorem, nigdy własną,
  * i nigdy na administratora. Tutaj tłumaczymy tylko komunikaty na polski.
  */
-export async function ustawRole(kontoId: string, rola: 'uzytkownik' | 'moderator') {
+export async function ustawRole(kontoId: string, rola: RolaDoNadania) {
   const { error } = await supabase.from('konta').update({ rola }).eq('id', kontoId);
 
   if (error) {

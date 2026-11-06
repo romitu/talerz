@@ -66,6 +66,11 @@ type Profil = {
 
 type ZapisanyCel = {
   tryb: TrybCelu;
+  bialko_procent: number;
+  tluszcz_procent: number;
+  wegle_procent: number;
+  kcal_ustalone: number | null;
+  ustawil_dietetyk: string | null;
 };
 
 /** Zamienia przecinek na kropkę i zwraca liczbę albo null. */
@@ -249,6 +254,12 @@ export default function FormularzProfilu() {
   const [waga, setWaga] = useState('');
   const [aktywnosc, setAktywnosc] = useState<PalNasem>(DOMYSLNY_PROFIL.aktywnosc);
   const [celeTryb, setCeleTryb] = useState<TrybCelu>(DOMYSLNY_PROFIL.tryb);
+  /**
+   * Cel ustawiony przez dietetyka (migracja 0050). Formularz go nie zmienia —
+   * zapis profilu przenosi go dalej w całości, zamiast nadpisać domyślnymi
+   * proporcjami 25/30/45. Zmienić może go dietetyk albo odwołanie współpracy.
+   */
+  const [celDietetyka, setCelDietetyka] = useState<ZapisanyCel | null>(null);
 
   const [wczytywanie, setWczytywanie] = useState(trybEdycji);
   const [nieZnaleziono, setNieZnaleziono] = useState(false);
@@ -267,6 +278,7 @@ export default function FormularzProfilu() {
     setWaga('');
     setAktywnosc(DOMYSLNY_PROFIL.aktywnosc);
     setCeleTryb(DOMYSLNY_PROFIL.tryb);
+    setCelDietetyka(null);
     setNieZnaleziono(false);
     setBlad(null);
     setWczytywanie(false);
@@ -291,7 +303,7 @@ export default function FormularzProfilu() {
         .order('data', { ascending: false })
         .limit(1)
         .maybeSingle(),
-      supabase.from('cele').select('tryb').eq('profil_id', profilId).order('obowiazuje_od', { ascending: false }).limit(1).maybeSingle(),
+      supabase.from('cele').select('tryb, bialko_procent, tluszcz_procent, wegle_procent, kcal_ustalone, ustawil_dietetyk').eq('profil_id', profilId).order('obowiazuje_od', { ascending: false }).limit(1).maybeSingle(),
     ]);
 
     if (wynikProfilu.error || !wynikProfilu.data) {
@@ -306,7 +318,11 @@ export default function FormularzProfilu() {
     }
 
     if (wynikWagi.data) setWaga(String(wynikWagi.data.wartosc));
-    if (wynikCelu.data) setCeleTryb((wynikCelu.data as ZapisanyCel).tryb);
+    if (wynikCelu.data) {
+      const zapisany = wynikCelu.data as ZapisanyCel;
+      setCeleTryb(zapisany.tryb);
+      setCelDietetyka(zapisany.ustawil_dietetyk ? zapisany : null);
+    }
 
     setWczytywanie(false);
   }, [profilId, wyczyscFormularz]);
@@ -337,11 +353,29 @@ export default function FormularzProfilu() {
 
   const cel =
     podglad && plec && wiekL !== null && wzrostL && wagaL
-      ? celZywieniowyNASEM(plec, wiekL, wzrostL, wagaL, aktywnosc, celeTryb)
+      ? celDietetyka
+        ? celZywieniowyNASEM(
+            plec,
+            wiekL,
+            wzrostL,
+            wagaL,
+            aktywnosc,
+            celDietetyka.tryb,
+            {
+              bialko: celDietetyka.bialko_procent,
+              tluszcz: celDietetyka.tluszcz_procent,
+              wegle: celDietetyka.wegle_procent,
+            },
+            celDietetyka.kcal_ustalone
+          )
+        : celZywieniowyNASEM(plec, wiekL, wzrostL, wagaL, aktywnosc, celeTryb)
       : null;
-  const ocena = podglad && cel ? oceniaCele(cel, podglad.przemiana, podglad.zapotrzebowanie) : null;
+  // Cel od dietetyka nie podlega blokadom — granice ustala specjalista, a nie
+  // aplikacja. Użytkownik i tak nie może go tu zmienić.
+  const ocena =
+    podglad && cel && !celDietetyka ? oceniaCele(cel, podglad.przemiana, podglad.zapotrzebowanie) : null;
 
-  const wolnoZapisac = komplet && (ocena?.blokady.length ?? 1) === 0;
+  const wolnoZapisac = komplet && (celDietetyka ? true : (ocena?.blokady.length ?? 1) === 0);
 
   const deficyt = podglad ? Math.min(DEFICYT_REDUKCJI_KCAL, podglad.zapotrzebowanie - podglad.przemiana) : null;
   const opisRedukcji =
@@ -439,13 +473,26 @@ export default function FormularzProfilu() {
         {
           profil_id: idProfilu,
           obowiazuje_od: dzis,
-          tryb: celeTryb,
-          // Proporcje makro nie są już ręcznie ustawiane — zawsze domyślne
+          // Proporcje makro ustawia tylko dietetyk — bez niego zawsze domyślne
           // 25/30/45, jak w lib/nasem.ts. Błonnik i próg białka na posiłek
           // zapisują się z podpowiedzi, bo ekran Plan dalej z nich korzysta.
-          bialko_procent: 25,
-          tluszcz_procent: 30,
-          wegle_procent: 45,
+          ...(celDietetyka
+            ? {
+                tryb: celDietetyka.tryb,
+                bialko_procent: celDietetyka.bialko_procent,
+                tluszcz_procent: celDietetyka.tluszcz_procent,
+                wegle_procent: celDietetyka.wegle_procent,
+                kcal_ustalone: celDietetyka.kcal_ustalone,
+                ustawil_dietetyk: celDietetyka.ustawil_dietetyk,
+              }
+            : {
+                tryb: celeTryb,
+                bialko_procent: 25,
+                tluszcz_procent: 30,
+                wegle_procent: 45,
+                kcal_ustalone: null,
+                ustawil_dietetyk: null,
+              }),
           blonnik_g: podpowiedzBlonnika(cel.kcal),
           prog_bialka_posilek: podpowiedzProguBialka(wagaL),
         },
@@ -522,7 +569,18 @@ export default function FormularzProfilu() {
       </Karta>
 
       <Karta>
-        <KartyCelu wartosc={celeTryb} onZmiana={setCeleTryb} opisRedukcji={opisRedukcji} />
+        {celDietetyka ? (
+          <>
+            <ThemedText type="smallBold" themeColor="accent">
+              {t('profilFormularz.celOdDietetyka')}
+            </ThemedText>
+            <ThemedText type="small" themeColor="textSecondary">
+              {t('profilFormularz.celOdDietetykaOpis')}
+            </ThemedText>
+          </>
+        ) : (
+          <KartyCelu wartosc={celeTryb} onZmiana={setCeleTryb} opisRedukcji={opisRedukcji} />
+        )}
       </Karta>
 
       {cel && podglad && (

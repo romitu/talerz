@@ -28,6 +28,8 @@ type Cel = {
   wegle_procent: number;
   blonnik_g: number | null;
   prog_bialka_posilek: number | null;
+  kcal_ustalone: number | null;
+  ustawil_dietetyk: string | null;
 };
 
 type Profil = {
@@ -60,7 +62,7 @@ export default function EkranProfilu() {
       supabase
         .from('profile')
         .select(
-          'id, imie, plec, data_urodzenia, wzrost_cm, aktywnosc, cele (tryb, bialko_procent, tluszcz_procent, wegle_procent, blonnik_g, prog_bialka_posilek)'
+          'id, imie, plec, data_urodzenia, wzrost_cm, aktywnosc, cele (tryb, bialko_procent, tluszcz_procent, wegle_procent, blonnik_g, prog_bialka_posilek, kcal_ustalone, ustawil_dietetyk)'
         )
         .order('kolejnosc')
         // `cele` trzyma PEŁNĄ historię (jeden wiersz na obowiazuje_od) — bez
@@ -170,7 +172,8 @@ export default function EkranProfilu() {
                 waga,
                 p.aktywnosc,
                 zapis.tryb,
-                { bialko: zapis.bialko_procent, tluszcz: zapis.tluszcz_procent, wegle: zapis.wegle_procent }
+                { bialko: zapis.bialko_procent, tluszcz: zapis.tluszcz_procent, wegle: zapis.wegle_procent },
+                zapis.kcal_ustalone
               )
             : null;
 
@@ -207,6 +210,7 @@ export default function EkranProfilu() {
                     {zapis!.blonnik_g ? ` · ${t('profil.blonnik', { gramy: zapis!.blonnik_g })}` : ''}
                     {' · '}
                     {zapis!.tryb === 'redukcja' ? t('profil.trybRedukcja') : t('profil.trybUtrzymanie')}
+                    {zapis!.ustawil_dietetyk ? ` · ${t('profil.celOdDietetyka')}` : ''}
                   </ThemedText>
                 </View>
               </>
@@ -253,6 +257,23 @@ export default function EkranProfilu() {
           ikona="add-circle-outline"
           onPress={() => router.push({ pathname: '/profil-formularz', params: { powrot: '/profil' } })}
         />
+      )}
+
+      {profile.length > 0 && (
+        <Karta>
+          <ThemedText type="smallBold" themeColor="textSecondary">
+            {t('profil.mojDietetyk')}
+          </ThemedText>
+          <ThemedText type="small" themeColor="textSecondary">
+            {t('profil.mojDietetykOpis')}
+          </ThemedText>
+          <Przycisk
+            tytul={t('profil.mojDietetykPrzycisk')}
+            ikona="medkit-outline"
+            wariant="poboczny"
+            onPress={() => router.push({ pathname: '/moj-dietetyk', params: { powrot: '/profil' } })}
+          />
+        </Karta>
       )}
 
       <NieJemy kontoId={sesja?.user.id} />

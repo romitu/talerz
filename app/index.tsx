@@ -85,6 +85,7 @@ type ProfilZCelem = {
     wegle_procent: number;
     blonnik_g: number | null;
     prog_bialka_posilek: number | null;
+    kcal_ustalone: number | null;
   }[];
 };
 
@@ -262,7 +263,7 @@ export default function EkranPlanu() {
       const wynikProfili = await supabase
         .from('profile')
         .select(
-          'id, plec, data_urodzenia, wzrost_cm, aktywnosc, cele (tryb, bialko_procent, tluszcz_procent, wegle_procent, blonnik_g, prog_bialka_posilek)'
+          'id, plec, data_urodzenia, wzrost_cm, aktywnosc, cele (tryb, bialko_procent, tluszcz_procent, wegle_procent, blonnik_g, prog_bialka_posilek, kcal_ustalone)'
         )
         .order('kolejnosc')
         // `cele` trzyma pełną historię (jeden wiersz na obowiazuje_od) — bez
@@ -303,7 +304,8 @@ export default function EkranPlanu() {
             Number(wynikWagi.data.wartosc),
             pierwszy.aktywnosc,
             zapisanyCel.tryb,
-            { bialko: zapisanyCel.bialko_procent, tluszcz: zapisanyCel.tluszcz_procent, wegle: zapisanyCel.wegle_procent }
+            { bialko: zapisanyCel.bialko_procent, tluszcz: zapisanyCel.tluszcz_procent, wegle: zapisanyCel.wegle_procent },
+            zapisanyCel.kcal_ustalone
           );
           noweCel = {
             kcal: wynik.kcal,

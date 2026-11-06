@@ -333,7 +333,9 @@ export function bialkoPosilku(dania: PozycjaPlanu[]): number {
 }
 
 /** Suma makro z podanych pozycji — jeden talerz na pozycję, patrz `bialkoPosilku`. */
-export function sumujDzien(pozycje: PozycjaPlanu[]): Makro {
+export function sumujDzien(
+  pozycje: Pick<PozycjaPlanu, 'kcal' | 'bialko_g' | 'tluszcz_g' | 'wegle_g' | 'blonnik_g'>[]
+): Makro {
   return pozycje.reduce<Makro>(
     (s, p) => ({
       kcal: s.kcal + p.kcal,

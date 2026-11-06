@@ -72,6 +72,10 @@ export function calkowityWydatekNASEM(
  *
  * Domyślny podział makro (25/30/45) to ten sam punkt startowy, jaki
  * ekran Profil proponuje w formularzu — użytkownik może go nadpisać.
+ *
+ * `kcalUstalone` — liczba wpisana przez dietetyka (migracja 0050). Gdy jest,
+ * zastępuje wzór w całości, łącznie z granicą przemiany podstawowej:
+ * o tym decyduje specjalista, nie aplikacja. Proporcje dzielą ją tak samo.
  */
 export function celZywieniowyNASEM(
   plec: Plec,
@@ -80,11 +84,13 @@ export function celZywieniowyNASEM(
   wagaKg: number,
   pal: PalNasem,
   tryb: TrybCelu,
-  udzialy: { bialko: number; tluszcz: number; wegle: number } = { bialko: 25, tluszcz: 30, wegle: 45 }
+  udzialy: { bialko: number; tluszcz: number; wegle: number } = { bialko: 25, tluszcz: 30, wegle: 45 },
+  kcalUstalone: number | null = null
 ): Makro {
   const tee = calkowityWydatekNASEM(plec, wiekLat, wzrostCm, wagaKg, pal);
   const przemiana = przemianaPodstawowa(plec, wagaKg, wzrostCm, wiekLat);
-  const kcal = tryb === 'redukcja' ? Math.max(przemiana, tee - DEFICYT_REDUKCJI_KCAL) : tee;
+  const kcal =
+    kcalUstalone ?? (tryb === 'redukcja' ? Math.max(przemiana, tee - DEFICYT_REDUKCJI_KCAL) : tee);
 
   return {
     kcal,

@@ -45,6 +45,7 @@ type ProfilZCelem = {
     bialko_procent: number;
     tluszcz_procent: number;
     wegle_procent: number;
+    kcal_ustalone: number | null;
   }[];
 };
 
@@ -131,7 +132,7 @@ export default function EkranPrzepisu() {
     try {
       const wynikProfili = await supabase
         .from('profile')
-        .select('id, imie, plec, data_urodzenia, wzrost_cm, aktywnosc, cele (tryb, bialko_procent, tluszcz_procent, wegle_procent)')
+        .select('id, imie, plec, data_urodzenia, wzrost_cm, aktywnosc, cele (tryb, bialko_procent, tluszcz_procent, wegle_procent, kcal_ustalone)')
         .order('kolejnosc')
         .order('obowiazuje_od', { foreignTable: 'cele', ascending: false })
         .limit(1, { foreignTable: 'cele' });
@@ -165,7 +166,8 @@ export default function EkranPrzepisu() {
               Number(wynikWagi.data.wartosc),
               p.aktywnosc,
               zapis.tryb,
-              { bialko: zapis.bialko_procent, tluszcz: zapis.tluszcz_procent, wegle: zapis.wegle_procent }
+              { bialko: zapis.bialko_procent, tluszcz: zapis.tluszcz_procent, wegle: zapis.wegle_procent },
+              zapis.kcal_ustalone
             );
             return { id: p.id, imie: p.imie, kcal: cel.kcal };
           })

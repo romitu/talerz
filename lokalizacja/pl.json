@@ -44,7 +44,11 @@
     "administracja": "ADMINISTRACJA",
     "administracjaOpis": "Wyłączanie i przywracanie dostępu. Konta zakłada się w panelu Supabase.",
     "uzytkownicy": "Użytkownicy",
-    "wyloguj": "Wyloguj się"
+    "wyloguj": "Wyloguj się",
+    "celOdDietetyka": "cel od dietetyka",
+    "mojDietetyk": "MÓJ DIETETYK",
+    "mojDietetykOpis": "Współpracujesz z dietetykiem? Wpisz jego kod, a zobaczy Twój plan i pomiary oraz będzie mógł ustawić Ci cel. Dostęp odwołujesz jednym dotknięciem.",
+    "mojDietetykPrzycisk": "Mój dietetyk"
   },
   "jezyk": {
     "naglowek": "JĘZYK"
@@ -184,7 +188,8 @@
   "rolaKonta": {
     "uzytkownik": "użytkownik",
     "moderator": "moderator przepisów",
-    "administrator": "administrator"
+    "administrator": "administrator",
+    "dietetyk": "dietetyk"
   },
   "logowanie": {
     "bladDanych": "Nieprawidłowy adres e-mail lub hasło.",
@@ -292,7 +297,8 @@
     "zakupy": "Zakupy",
     "przepisy": "Przepisy",
     "profil": "Profil",
-    "wiecej": "Więcej"
+    "wiecej": "Więcej",
+    "klienci": "Klienci"
   },
   "menu": {
     "importEksport": "Import / eksport przepisów",
@@ -371,7 +377,9 @@
     "bladUprawnieniaKont": "Włączanie i wyłączanie kont wymaga uprawnień administratora.",
     "bladWlasnaRola": "Własnej roli nie da się zmienić — to zabezpieczenie przed odebraniem sobie dostępu.",
     "bladRolaAdministratora": "Rolę administratora nadaje się wyłącznie w panelu Supabase.",
-    "bladUprawnieniaRol": "Zmiana roli wymaga uprawnień administratora."
+    "bladUprawnieniaRol": "Zmiana roli wymaga uprawnień administratora.",
+    "zmienNa": "Zmień na: {{rola}}",
+    "rolaDietetyka": "Dietetyk ma zakładkę Klienci i widzi dane tylko tych osób, które same wpisały jego kod. Zanim nadasz tę rolę, sprawdź uprawnienia zawodowe."
   },
   "przepis": {
     "tytul": "Przepis",
@@ -548,9 +556,18 @@
     }
   },
   "widocznoscOpis": {
-    "publiczna": { "tytul": "Publiczny", "opis": "Widzą go wszyscy użytkownicy Talerza." },
-    "prywatna": { "tytul": "Prywatny", "opis": "Widzi go tylko autor." },
-    "zgloszona": { "tytul": "Zgłoszony", "opis": "Czeka na zatwierdzenie przez moderatora." },
+    "publiczna": {
+      "tytul": "Publiczny",
+      "opis": "Widzą go wszyscy użytkownicy Talerza."
+    },
+    "prywatna": {
+      "tytul": "Prywatny",
+      "opis": "Widzi go tylko autor."
+    },
+    "zgloszona": {
+      "tytul": "Zgłoszony",
+      "opis": "Czeka na zatwierdzenie przez moderatora."
+    },
     "zmien": "Kliknij, żeby przełączyć publiczny / prywatny."
   },
   "pal": {
@@ -610,7 +627,9 @@
       "ponizejPrzemiany": "Cel {{kcal}} kcal jest poniżej przemiany podstawowej ({{przemiana}} kcal). Tyle energii organizm zużywa w samym spoczynku.",
       "deficyt": "Deficyt {{deficyt}} kcal dziennie oznacza chudnięcie szybsze niż 1 kg tygodniowo. Największy dopuszczalny to {{maks}} kcal.",
       "zaDuzoBialka": "Białko stanowi {{procent}}% energii, powyżej górnej granicy {{maks}}%."
-    }
+    },
+    "celOdDietetyka": "Cel ustalony przez dietetyka",
+    "celOdDietetykaOpis": "Tryb, proporcje makro i kalorie ustawia Twój dietetyk. Zmiana wagi czy aktywności tutaj nie nadpisze jego ustaleń. Żeby wrócić do celu liczonego przez aplikację, odwołaj dostęp w Profil → Mój dietetyk i zapisz profil ponownie."
   },
   "skladnik": {
     "nazwaZaKrotka": "Nazwa musi mieć co najmniej 2 znaki.",
@@ -1001,5 +1020,91 @@
     "prywatny": "Przepis zapisze się jako prywatny.",
     "publikacjaWymaga": "Publikacja wymaga zgłoszenia i zatwierdzenia.",
     "zapisz": "Zapisz przepis"
+  },
+  "mojDietetyk": {
+    "tytul": "Mój dietetyk",
+    "podtytul": "Dostęp dietetyka do Twoich danych",
+    "jakToDziala": "Dietetyk podaje Ci sześcioznakowy kod. Wpisz go przy osobie, której dotyczy współpraca. Dietetyk zobaczy wiek, wzrost, aktywność, pomiary, cele, bieżący tydzień planu i składniki, których nie jecie. Może zmienić tylko cel. Nie widzi pozostałych osób na koncie ani listy zakupów.",
+    "zlyKod": "Kod ma sześć znaków.",
+    "polaczono": "{{imie}}: dostęp ma teraz {{nazwa}}.",
+    "odwolano": "{{imie}}: dietetyk nie ma już dostępu.",
+    "brakProfili": "Najpierw dodaj profil w zakładce Profil.",
+    "od": "od {{data}}",
+    "coWidzi": "Widzi profil, pomiary, cele, bieżący tydzień planu i wykluczone składniki. Może zmienić cel.",
+    "odwolajPytanie": "Odebrać {{nazwa}} dostęp do danych: {{imie}}? Cel ustawiony przez dietetyka zostanie do następnego zapisu profilu.",
+    "takOdwolaj": "Tak, odwołaj dostęp",
+    "odwolaj": "Odwołaj dostęp",
+    "brakDietetyka": "Brak dietetyka.",
+    "kod": "Kod dietetyka",
+    "polacz": "Udostępnij dietetykowi"
+  },
+  "dietetyk": {
+    "tytul": "Klienci",
+    "podtytul": "Panel dietetyka",
+    "brakMigracji": "Baza nie ma jeszcze funkcji dietetyka — wykonaj migrację 0050 w panelu Supabase.",
+    "brakKodu": "Nie udało się pobrać kodu zaproszenia.",
+    "bezNazwy": "dietetyk",
+    "nazwaZapisana": "Nazwa zapisana.",
+    "kodZmieniony": "Nowy kod gotowy. Dotychczasowi klienci zostają.",
+    "twojKod": "TWÓJ KOD ZAPROSZENIA",
+    "kodOpis": "Przekaż go klientowi. Wpisze go w Profil → Mój dietetyk przy swojej osobie.",
+    "nowyKodPytanie": "Stary kod przestanie działać. Obecni klienci zostają.",
+    "nowyKodTak": "Tak, wygeneruj nowy",
+    "nowyKod": "Nowy kod",
+    "nazwa": "Nazwa widoczna dla klientów",
+    "zapiszNazwe": "Zapisz nazwę",
+    "klienci_one": "{{count}} KLIENT",
+    "klienci_few": "{{count}} KLIENTÓW",
+    "klienci_many": "{{count}} KLIENTÓW",
+    "klienci_other": "{{count}} KLIENTA",
+    "brakKlientow": "Nie masz jeszcze klientów.",
+    "brakKlientowOpis": "Gdy klient wpisze Twój kod, pojawi się tutaj.",
+    "wrocDoListy": "Lista klientów",
+    "wybierzKlienta": "Wybierz klienta z listy.",
+    "celZapisany": "{{imie}}: nowy cel zapisany.",
+    "zakonczono": "{{imie}}: współpraca zakończona.",
+    "kobieta": "kobieta",
+    "mezczyzna": "mężczyzna",
+    "aktywnosc": "Aktywność: {{poziom}}",
+    "osobWDomu_one": "{{count}} osoba w planie",
+    "osobWDomu_few": "{{count}} osoby w planie",
+    "osobWDomu_many": "{{count}} osób w planie",
+    "osobWDomu_other": "{{count}} osoby w planie",
+    "wzor": "Wzór: przemiana podstawowa {{przemiana}} kcal, zapotrzebowanie (NASEM) {{zapotrzebowanie}} kcal.",
+    "celObecny": "OBECNY CEL",
+    "kcalUstalone": "kcal ustalone",
+    "kcalZeWzoru": "kcal ze wzoru",
+    "ustawionyPrzezDietetyka": "ustawił dietetyk",
+    "ustawionyPrzezKlienta": "ustawił klient",
+    "od": "od {{data}}",
+    "brakCelu": "Klient nie ma jeszcze zapisanego celu.",
+    "brakWagi": "Brak pomiaru wagi — nie da się policzyć celu.",
+    "ustawCel": "USTAW CEL",
+    "kcalPole": "Kalorie dziennie (puste = ze wzoru)",
+    "kcalPodpowiedz": "np. 1800",
+    "bialkoProcent": "Białko %",
+    "tluszczProcent": "Tłuszcz %",
+    "wegleProcent": "Węgle %",
+    "sumaProcent": "Proporcje muszą dawać razem 100% (teraz {{suma}}%).",
+    "zleKcal": "Kalorie: od 800 do 6000.",
+    "ponizejPrzemiany": "Uwaga: poniżej przemiany podstawowej ({{przemiana}} kcal).",
+    "zapiszCel": "Zapisz cel",
+    "zapiszCelOpis": "Klient zobaczy nowy cel od razu: w planie, w profilu i przy przepisach. Poprzednie cele zostają w historii.",
+    "pomiary": "POMIARY (OSTATNIE PÓŁ ROKU)",
+    "brakPomiarow": "Brak pomiarów.",
+    "zmianaWagi": "Zmiana wagi od {{od}}: {{zmiana}} kg",
+    "waga": "waga",
+    "talia": "talia",
+    "wykluczone": "NIE JEDZĄ",
+    "brakWykluczen": "Brak wykluczonych składników.",
+    "zakonczPytanie": "Zakończyć współpracę z: {{imie}}? Stracisz dostęp do danych. Klient może ponownie wpisać Twój kod.",
+    "zakonczTak": "Tak, zakończ",
+    "zakoncz": "Zakończ współpracę",
+    "zakonczOpis": "Klient też może w każdej chwili odwołać dostęp.",
+    "plan": "PLAN",
+    "brakPlanu": "Klient nie ma jeszcze żadnego tygodnia planu.",
+    "planOd": "PLAN — TYDZIEŃ OD {{data}}",
+    "planOpis": "Jedna porcja na pozycję, tak jak na ekranie Plan klienta. ✓ = oznaczone jako zjedzone.",
+    "pustyDzien": "Nic nie zaplanowano."
   }
 }

@@ -1,7 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { DarkTheme, DefaultTheme, router, Tabs, ThemeProvider } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ActivityIndicator, Pressable, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -210,12 +210,27 @@ function Zakladki({ kolory }: { kolory: Paleta }) {
     Patrzymy na najnowszy plan, bo tylko ten pokazuje ekran Planu; parametr
     `dzien` mówi mu, dokąd przewinąć.
   */
+  /*
+    Dietetyk zaczyna w swoim panelu. Rola przychodzi z bazy chwilę po
+    zamontowaniu zakładek, więc to osobny efekt — odpala się raz, gdy rola
+    się wyjaśni, i ma pierwszeństwo przed przewinięciem na dzisiejszy dzień.
+  */
+  const [startDietetyka, setStartDietetyka] = useState(false);
+  const czyDietetykRef = useRef(false);
+  useEffect(() => {
+    czyDietetykRef.current = rola === 'dietetyk';
+    if (rola === 'dietetyk' && !startDietetyka) {
+      setStartDietetyka(true);
+      router.navigate('/dietetyk');
+    }
+  }, [rola, startDietetyka]);
+
   useEffect(() => {
     let aktualne = true;
     pobierzPlany(1)
       .then(([plan]) => {
         const dzis = naDate(new Date());
-        if (aktualne && plan && dniPlanu(plan).includes(dzis)) {
+        if (aktualne && !czyDietetykRef.current && plan && dniPlanu(plan).includes(dzis)) {
           router.navigate({ pathname: '/', params: { dzien: dzis } });
         }
       })
@@ -227,6 +242,7 @@ function Zakladki({ kolory }: { kolory: Paleta }) {
   }, []);
 
   const jestModeratorem = rola === 'moderator' || rola === 'administrator';
+  const jestDietetykiem = rola === 'dietetyk';
   const pozycjeMenu = POZYCJE_WIECEJ.filter((p) => !p.wymagaModeratora || jestModeratorem);
 
   return (
@@ -260,6 +276,18 @@ function Zakladki({ kolory }: { kolory: Paleta }) {
             // Od SDK 58 `color` ma typ ColorValue (z null i liczbą), a Ionicons
             // przyjmuje tylko tekst. Pasek zakładek zawsze podaje tekst.
             tabBarIcon: ({ color, size }) => <Ionicons name="today" size={size} color={color as string} />,
+          }}
+        />
+        {/*
+          Panel dietetyka — na pasku tylko dla roli dietetyka. Dla reszty
+          ekran istnieje, ale bez przycisku; baza i tak nie odda mu danych.
+        */}
+        <Tabs.Screen
+          name="dietetyk"
+          options={{
+            title: t('zakladki.klienci'),
+            tabBarIcon: ({ color, size }) => <Ionicons name="people" size={size} color={color as string} />,
+            ...(jestDietetykiem ? {} : POZA_PASKIEM),
           }}
         />
         <Tabs.Screen
@@ -315,6 +343,7 @@ function Zakladki({ kolory }: { kolory: Paleta }) {
         <Tabs.Screen name="przepis-formularz" options={POZA_PASKIEM} />
         <Tabs.Screen name="przepis" options={POZA_PASKIEM} />
         <Tabs.Screen name="uzytkownicy" options={POZA_PASKIEM} />
+        <Tabs.Screen name="moj-dietetyk" options={POZA_PASKIEM} />
       </Tabs>
 
       {menuOtwarte && (
