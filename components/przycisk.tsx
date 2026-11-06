@@ -29,7 +29,7 @@ export function Przycisk({
   const motyw = useTheme();
   const glowny = wariant === 'glowny';
   const nieczynny = wylaczony || zajety;
-  const kolorTekstu = glowny ? '#FFFFFF' : motyw.accent;
+  const kolorTekstu = glowny ? motyw.onAccent : motyw.accent;
 
   return (
     <Pressable
@@ -65,7 +65,9 @@ const styles = StyleSheet.create({
   przycisk: {
     flexDirection: 'row',
     gap: Spacing.two,
-    borderRadius: Spacing.two,
+    // Proporcje przycisku ze strony mojtalerz.com: niskie zaokrąglenie,
+    // szeroki oddech po bokach.
+    borderRadius: 7,
     paddingVertical: Spacing.three,
     paddingHorizontal: Spacing.four,
     alignItems: 'center',

@@ -14,10 +14,44 @@
 import { Platform } from 'react-native';
 
 /** Style do wyboru. Kolejność jak na ekranie profilu. */
-export const STYLE = ['porcelana', 'ziola', 'wyrazisty'] as const;
+export const STYLE = ['talerz', 'porcelana', 'ziola', 'wyrazisty'] as const;
 export type Styl = (typeof STYLE)[number];
 
 // Nazwy i opisy stylów są w tłumaczeniach: `styl.<styl>.nazwa` / `.opis`.
+
+/**
+ * TALERZ — paleta strony mojtalerz.com, domyślna od listopada 2026.
+ * Butelkowa zieleń na papierze w kolorze kości słoniowej, limonka jako
+ * jasny akcent. Aplikacja i strona wyglądają odtąd jak jedna rzecz.
+ *
+ * Kolor drugorzędnego tekstu przyciemniony względem strony (#6C756C →
+ * #5C665D): pierwotny dawał na tle 4,4:1, tuż pod progiem WCAG 4,5:1.
+ *
+ * W ciemnej wersji akcentem jest limonka, więc napisy NA akcencie (przyciski)
+ * muszą być ciemne — stąd `onAccent` zamiast zaszytego na sztywno białego.
+ */
+const talerz = {
+  light: {
+    text: '#26392D',
+    textSecondary: '#5C665D',
+    background: '#F7F7EF',
+    backgroundElement: '#FFFFFF',
+    backgroundSelected: '#EAF0DF',
+    accent: '#244C3B',
+    border: '#DEDFD4',
+    onAccent: '#FFFFFF',
+  },
+  dark: {
+    text: '#EEF0E6',
+    textSecondary: '#A6B0A2',
+    background: '#111813',
+    backgroundElement: '#1A231D',
+    backgroundSelected: '#263A2D',
+    accent: '#C9DCA0',
+    border: '#2B382F',
+    onAccent: '#17271D',
+  },
+} as const;
 
 /**
  * PORCELANA — pierwotna paleta Talerza.
@@ -37,6 +71,7 @@ const porcelana = {
     backgroundSelected: '#F2E5D5',
     accent: '#B05628',
     border: '#EADFD0',
+    onAccent: '#FFFFFF',
   },
   dark: {
     text: '#F5EFE7',
@@ -46,6 +81,7 @@ const porcelana = {
     backgroundSelected: '#332A20',
     accent: '#E8843F',
     border: '#33291F',
+    onAccent: '#FFFFFF',
   },
 } as const;
 
@@ -63,6 +99,7 @@ const ziola = {
     backgroundSelected: '#E2EDE4',
     accent: '#3F6B4A',
     border: '#D8E3D9',
+    onAccent: '#FFFFFF',
   },
   dark: {
     text: '#E8F0E9',
@@ -72,6 +109,7 @@ const ziola = {
     backgroundSelected: '#243028',
     accent: '#6FA97E',
     border: '#263029',
+    onAccent: '#FFFFFF',
   },
 } as const;
 
@@ -94,6 +132,7 @@ const wyrazisty = {
     backgroundSelected: '#FFE9B8',
     accent: '#A3001B',
     border: '#1A1A1A',
+    onAccent: '#FFFFFF',
   },
   dark: {
     text: '#FFFFFF',
@@ -103,10 +142,12 @@ const wyrazisty = {
     backgroundSelected: '#3D3000',
     accent: '#FF7B7B',
     border: '#9A9A9A',
+    onAccent: '#000000',
   },
 } as const;
 
 export const PALETY: Record<Styl, { light: Paleta; dark: Paleta }> = {
+  talerz,
   porcelana,
   ziola,
   wyrazisty,
@@ -116,9 +157,9 @@ export const PALETY: Record<Styl, { light: Paleta; dark: Paleta }> = {
  * Paleta domyślna. Zostaje jako `Colors`, bo używa jej układ nawigacji,
  * zanim wybór użytkownika zostanie wczytany z pamięci.
  */
-export const Colors = porcelana;
+export const Colors = talerz;
 
-export type ThemeColor = keyof typeof porcelana.light & keyof typeof porcelana.dark;
+export type ThemeColor = keyof typeof talerz.light & keyof typeof talerz.dark;
 
 /** Zestaw kolorów jednego motywu — jasnego albo ciemnego. */
 export type Paleta = { [K in ThemeColor]: string };

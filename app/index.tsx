@@ -1036,15 +1036,15 @@ export default function EkranPlanu() {
               (pressed || pracuje || przepisy.length === 0) && styles.wcisniete,
             ]}>
             {pracuje ? (
-              <ActivityIndicator color="#fff" />
+              <ActivityIndicator color={motyw.onAccent} />
             ) : (
               <>
-                <Ionicons name="sparkles-outline" size={26} color="#fff" />
+                <Ionicons name="sparkles-outline" size={26} color={motyw.onAccent} />
                 <View style={styles.wypelnijTresc}>
-                  <ThemedText type="smallBold" style={styles.bialyTekst}>
+                  <ThemedText type="smallBold" style={{ color: motyw.onAccent }}>
                     {t('plan.wypelnijWolne')}
                   </ThemedText>
-                  <ThemedText type="small" style={[styles.bialyTekst, styles.wypelnijOpis]}>
+                  <ThemedText type="small" style={[{ color: motyw.onAccent }, styles.wypelnijOpis]}>
                     {t('plan.wypelnijWolneOpis')}
                   </ThemedText>
                 </View>
@@ -1503,7 +1503,6 @@ const styles = StyleSheet.create({
   },
   wypelnijTresc: { flex: 1, gap: Spacing.half },
   wypelnijOpis: { opacity: 0.9 },
-  bialyTekst: { color: '#FFFFFF' },
 
   /* Przyciski akcji — po dwa w rzędzie, jak kafelki w makiecie. */
   akcjeSiatka: {

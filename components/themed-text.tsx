@@ -46,15 +46,22 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     fontWeight: 500,
   },
+  // Nagłówki szeryfowe, cienkie i ciasno składane — jak na stronie
+  // mojtalerz.com. Georgia jest na iOS, Windows i macOS; Android podstawia
+  // swój systemowy krój szeryfowy.
   title: {
+    fontFamily: Platform.select({ ios: 'Georgia', android: 'serif', default: Fonts.serif }),
     fontSize: 48,
-    fontWeight: 600,
+    fontWeight: 400,
     lineHeight: 52,
+    letterSpacing: -1.5,
   },
   subtitle: {
+    fontFamily: Platform.select({ ios: 'Georgia', android: 'serif', default: Fonts.serif }),
     fontSize: 32,
-    lineHeight: 44,
-    fontWeight: 600,
+    lineHeight: 40,
+    fontWeight: 400,
+    letterSpacing: -0.8,
   },
   link: {
     lineHeight: 30,

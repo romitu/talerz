@@ -94,7 +94,7 @@ export function NaglowekPrzepisow({
               ]}>
               <ThemedText
                 type="smallBold"
-                style={{ color: z.wybrana ? '#FFFFFF' : z.akcent ? motyw.accent : motyw.textSecondary }}
+                style={{ color: z.wybrana ? motyw.onAccent : z.akcent ? motyw.accent : motyw.textSecondary }}
                 numberOfLines={1}>
                 {z.etykieta} {z.ile}
               </ThemedText>

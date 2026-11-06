@@ -201,7 +201,7 @@ export default function EkranProfilu() {
                       styles.pigulkaIkona,
                       { backgroundColor: zapis!.prog_bialka_posilek ? motyw.accent : motyw.border },
                     ]}>
-                    <Ionicons name="checkmark" size={13} color="#FFFFFF" />
+                    <Ionicons name="checkmark" size={13} color={motyw.onAccent} />
                   </View>
                   <ThemedText type="small" themeColor="accent" style={styles.tekstPigulki}>
                     {zapis!.prog_bialka_posilek

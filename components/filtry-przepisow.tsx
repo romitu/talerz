@@ -71,10 +71,10 @@ export function FiltryPrzepisow({
                 accessibilityRole="button"
                 accessibilityLabel={t('filtry.zdejmij', { filtr: o.etykieta })}
                 style={[styles.pigulka, { backgroundColor: motyw.accent, borderColor: motyw.accent }]}>
-                <ThemedText type="smallBold" style={styles.tekstWybrany} numberOfLines={1}>
+                <ThemedText type="smallBold" style={{ color: motyw.onAccent }} numberOfLines={1}>
                   {o.etykieta}
                 </ThemedText>
-                <Ionicons name="close" size={14} color="#FFFFFF" />
+                <Ionicons name="close" size={14} color={motyw.onAccent} />
               </Pressable>
             ))}
 
@@ -119,7 +119,7 @@ export function FiltryPrzepisow({
                     ]}>
                     <ThemedText
                       type="smallBold"
-                      style={o.wybrana ? styles.tekstWybrany : { color: motyw.textSecondary }}
+                      style={{ color: o.wybrana ? motyw.onAccent : motyw.textSecondary }}
                       numberOfLines={1}>
                       {o.etykieta} {o.ile}
                     </ThemedText>
@@ -195,9 +195,6 @@ const styles = StyleSheet.create({
     borderRadius: 999,
     paddingVertical: Spacing.one,
     paddingHorizontal: Spacing.two,
-  },
-  tekstWybrany: {
-    color: '#FFFFFF',
   },
   pusta: {
     opacity: 0.4,

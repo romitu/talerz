@@ -4,6 +4,7 @@ import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, View } from 're
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Karta } from './karta';
+import { Logo } from './logo';
 import { Pole } from './pole';
 import { Przycisk } from './przycisk';
 import { ThemedText } from './themed-text';
@@ -103,7 +104,7 @@ export function EkranLogowania() {
           style={styles.obszar}>
           <ScrollView contentContainerStyle={styles.zawartosc} keyboardShouldPersistTaps="handled">
             <View style={styles.naglowek}>
-              <ThemedText type="title">Talerz</ThemedText>
+              <Logo rozmiar={40} />
               <ThemedText type="small" themeColor="textSecondary">
                 {t('logowanie.slogan')}
               </ThemedText>

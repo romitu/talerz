@@ -26,7 +26,7 @@ type Kontekst = {
 };
 
 const KontekstWygladu = createContext<Kontekst>({
-  styl: 'porcelana',
+  styl: 'talerz',
   ustawStyl: () => {},
   wczytany: false,
 });
@@ -36,7 +36,7 @@ function czyStyl(x: unknown): x is Styl {
 }
 
 export function DostawcaWygladu({ children }: { children: React.ReactNode }) {
-  const [styl, setStyl] = useState<Styl>('porcelana');
+  const [styl, setStyl] = useState<Styl>('talerz');
   const [wczytany, setWczytany] = useState(false);
 
   useEffect(() => {

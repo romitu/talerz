@@ -172,9 +172,13 @@
     "wskazowka": "Jasny czy ciemny wybiera system — styl działa w obu. Ustawienie jest zapamiętane na tym urządzeniu, więc na telefonie możesz mieć inne niż na komputerze."
   },
   "styl": {
+    "talerz": {
+      "nazwa": "Talerz",
+      "opis": "Butelkowa zieleń i papier, jak na stronie mojtalerz.com. Domyślny."
+    },
     "porcelana": {
       "nazwa": "Porcelana",
-      "opis": "Ciepły papier i terakota. Spokojny, domyślny."
+      "opis": "Ciepły papier i terakota. Pierwotny wygląd Talerza."
     },
     "ziola": {
       "nazwa": "Zioła",
