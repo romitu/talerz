@@ -1,0 +1,109 @@
+{
+  "nazwa": "Zapiekany chleb wieloziarnisty z masłem i czosnkiem",
+  "opis": "Kromki chleba wieloziarnistego posmarowane masłem czosnkowym z natką pietruszki i zapieczone na chrupko. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne pieczenie partiami.",
+  "pory": [
+    "dodatek",
+    "kolacja",
+    "sniadanie"
+  ],
+  "kuchnie": [
+    "inna"
+  ],
+  "rodzaje": [
+    "z_piekarnika",
+    "kanapki"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 124,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 0,
+  "czas_przygotowania_min": 5,
+  "czas_obrobki_min": 10,
+  "sprzet": [
+    "Piekarnik",
+    "Blacha do pieczenia",
+    "Miska",
+    "Widelec",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Najlepiej zjedz od razu po upieczeniu, póki kromki są chrupiące. Po ostygnięciu pieczywo twardnieje.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli brzegi rumienią się, a środek kromki jest jeszcze miękki, przesuń blachę piętro niżej i piecz dalej po 1 minucie. Twarde masło, które nie chce się rozsmarować, rozgnieć dokładnie widelcem w ciepłej misce.",
+  "skladniki": [
+    {
+      "nazwa": "Chleb wieloziarnisty",
+      "ilosc": 100,
+      "jednostka": "g",
+      "stan": "pokrojony w kromki grubości ok. 1,5 cm"
+    },
+    {
+      "nazwa": "Masło",
+      "ilosc": 15,
+      "jednostka": "g",
+      "stan": "miękkie, w temperaturze pokojowej"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 5,
+      "jednostka": "g",
+      "stan": "przeciśnięty lub drobno posiekany"
+    },
+    {
+      "nazwa": "Pietruszka natka",
+      "ilosc": 3,
+      "jednostka": "g",
+      "stan": "drobno posiekana"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 5,
+      "kroki": [
+        {
+          "tresc": "**Piekarnik.** Nagrzej piekarnik do **200°C** (góra–dół)."
+        },
+        {
+          "tresc": "**Masło.** Odmierz masło do miski. Powinno być miękkie — wyjmij je z lodówki wcześniej, najlepiej 30 minut przed przygotowaniem."
+        },
+        {
+          "tresc": "**Czosnek.** Obierz czosnek i drobno posiekaj albo zetrzyj na pastę nożem z odrobiną soli."
+        },
+        {
+          "tresc": "**Natka.** Umyj i osusz natkę, drobno posiekaj."
+        },
+        {
+          "tresc": "**Masło czosnkowe.** Dodaj do masła czosnek, natkę i sól. Rozgnieć widelcem i wymieszaj do gładkiej masy.",
+          "sygnal": "masa jest jednolita, bez grudek masła"
+        },
+        {
+          "tresc": "**Chleb.** Pokrój chleb w kromki grubości około 1,5 cm, jeśli nie jest krojony."
+        }
+      ]
+    },
+    {
+      "nazwa": "Pieczenie",
+      "minuty": 10,
+      "kroki": [
+        {
+          "tresc": "**Smarowanie.** Posmaruj kromki cienko i równo masłem czosnkowym aż po brzegi. Ułóż je na blasze posmarowaną stroną do góry, w jednej warstwie."
+        },
+        {
+          "tresc": "**Pieczenie.** Wstaw blachę na środkową półkę i piecz **6–8 minut**.",
+          "sygnal": "masło się wchłonęło, brzegi są złociste, a kromka chrupie od spodu",
+          "uwaga": true
+        },
+        {
+          "tresc": "**Podanie.** Wyjmij blachę, odczekaj **1 minutę** i podaj od razu."
+        }
+      ]
+    }
+  ]
+}

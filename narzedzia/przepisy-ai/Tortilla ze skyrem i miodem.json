@@ -1,0 +1,105 @@
+{
+  "nazwa": "Tortilla ze skyrem i miodem",
+  "opis": "Ciepła pełnoziarnista tortilla ze skyrem, miodem, borówkami i orzechami włoskimi, z nutą cynamonu. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ogrzewanie tortilli partiami.",
+  "pory": [
+    "sniadanie",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "inna"
+  ],
+  "rodzaje": [
+    "kanapki",
+    "na_slodko"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 316,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 0,
+  "czas_przygotowania_min": 5,
+  "czas_obrobki_min": 5,
+  "sprzet": [
+    "Patelnia 24 cm",
+    "Miska",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Najlepiej zjedz bezpośrednio po przygotowaniu — skyr rozmiękcza tortillę.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli tortilla pęka przy zwijaniu, ogrzej ją chwilę dłużej na suchej patelni. Zbyt rzadki skyr zagęść łyżką płatków owsianych albo podaj nadzienie obok jako dip.",
+  "skladniki": [
+    {
+      "nazwa": "Tortilla pełnoziarnista",
+      "ilosc": 60,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Skyr naturalny",
+      "ilosc": 150,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Miód",
+      "ilosc": 10,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Borówki amerykańskie",
+      "ilosc": 80,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Orzechy włoskie",
+      "ilosc": 15,
+      "jednostka": "g",
+      "stan": "posiekane"
+    },
+    {
+      "nazwa": "Cynamon mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 5,
+      "kroki": [
+        {
+          "tresc": "**Borówki.** Umyj borówki i dokładnie osusz ręcznikiem papierowym, żeby nie rozwodniły nadzienia."
+        },
+        {
+          "tresc": "**Orzechy.** Odmierz orzechy i posiekaj grubo nożem."
+        },
+        {
+          "tresc": "**Skyr.** Odmierz skyr do miski i wymieszaj z cynamonem do gładkiej masy."
+        },
+        {
+          "tresc": "**Miód.** Odmierz miód. Nie mieszaj go ze skyrem — polejesz nim nadzienie na końcu."
+        },
+        {
+          "tresc": "**Tortille.** Wyjmij potrzebne placki i przykryj, żeby nie wysychały."
+        }
+      ]
+    },
+    {
+      "nazwa": "Ogrzewanie i zwijanie",
+      "minuty": 5,
+      "kroki": [
+        {
+          "tresc": "**Orzechy (opcjonalnie).** Upraż orzechy na suchej patelni **2 minuty**, mieszając, aż zaczną pachnieć. Przełóż na talerz."
+        },
+        {
+          "tresc": "**Ogrzanie tortilli.** Ogrzej tortillę na suchej patelni po **15–20 sekund** na stronę, aż zrobi się elastyczna."
+        },
+        {
+          "tresc": "**Nadzienie.** Rozsmaruj skyr na środku tortilli, zostawiając wolne brzegi. Rozłóż borówki i orzechy, polej miodem. Nadmiar nadzienia podaj obok."
+        },
+        {
+          "tresc": "**Zwijanie.** Złóż boki do środka i zwiń ciasno. Przekrój na pół i podaj od razu — nie opiekaj po zwinięciu, bo skyr się zważy."
+        }
+      ]
+    }
+  ]
+}

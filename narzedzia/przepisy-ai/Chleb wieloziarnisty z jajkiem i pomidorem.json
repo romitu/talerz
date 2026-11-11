@@ -1,0 +1,113 @@
+{
+  "nazwa": "Chleb wieloziarnisty z jajkiem i pomidorem",
+  "opis": "Kromki chleba wieloziarnistego z masłem, jajkiem na twardo, plastrami pomidora i szczypiorkiem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy.",
+  "pory": [
+    "sniadanie",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "polska"
+  ],
+  "rodzaje": [
+    "kanapki",
+    "jajka"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 356,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 0,
+  "czas_przygotowania_min": 5,
+  "czas_obrobki_min": 15,
+  "sprzet": [
+    "Garnek 2 l",
+    "Łyżka cedzakowa",
+    "Miska",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Zjedz od razu po przygotowaniu — pomidor rozmiękcza pieczywo. Ugotowane jajka w skorupkach możesz przechować w lodówce do 2 dni i zrobić kanapki później.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli jajko trudno się obiera, obieraj je pod strumieniem zimnej wody, zaczynając od szerszego końca. Szarozielona obwódka wokół żółtka oznacza zbyt długie gotowanie — jajko nadaje się do jedzenia, następnym razem skróć czas.",
+  "skladniki": [
+    {
+      "nazwa": "Chleb wieloziarnisty",
+      "ilosc": 100,
+      "jednostka": "g",
+      "stan": "pokrojony w kromki"
+    },
+    {
+      "nazwa": "Masło",
+      "ilosc": 10,
+      "jednostka": "g",
+      "stan": "miękkie"
+    },
+    {
+      "nazwa": "Jaja kurze, całe, surowe",
+      "ilosc": 2,
+      "jednostka": "szt"
+    },
+    {
+      "nazwa": "Pomidory, surowe",
+      "ilosc": 1,
+      "jednostka": "szt",
+      "stan": "pokrojony w plastry"
+    },
+    {
+      "nazwa": "Szczypiorek świeży",
+      "ilosc": 5,
+      "jednostka": "g",
+      "stan": "posiekany"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.3,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Gotowanie jajek",
+      "minuty": 15,
+      "kroki": [
+        {
+          "tresc": "**Masło.** Wyjmij masło z lodówki, żeby zmiękło do smarowania."
+        },
+        {
+          "tresc": "**Woda.** Zagotuj w garnku tyle wody, aby przykryła jajka."
+        },
+        {
+          "tresc": "**Gotowanie.** Opuść jajka łyżką cedzakową do wrzącej wody, zmniejsz ogień, aby woda tylko lekko wrzała, i gotuj **10 minut**. Nastaw minutnik.",
+          "sygnal": "białko i żółtko są całkowicie ścięte",
+          "uwaga": true
+        },
+        {
+          "tresc": "**Studzenie.** Przełóż jajka łyżką cedzakową do miski z zimną wodą na **3 minuty**. Dzięki temu łatwiej się obiorą."
+        }
+      ]
+    },
+    {
+      "nazwa": "Kanapki",
+      "minuty": 5,
+      "kroki": [
+        {
+          "tresc": "**Warzywa — w czasie gotowania jajek.** Umyj pomidor i szczypiorek. Pomidor pokrój w plastry, szczypiorek drobno posiekaj."
+        },
+        {
+          "tresc": "**Chleb.** Pokrój chleb w kromki, jeśli nie jest krojony, i posmaruj cienko masłem."
+        },
+        {
+          "tresc": "**Jajka.** Obierz jajka i pokrój w plastry."
+        },
+        {
+          "tresc": "**Składanie.** Ułóż na kromkach plastry pomidora, a na nich jajko. Posól, popieprz i posyp szczypiorkiem. Podaj od razu."
+        }
+      ]
+    }
+  ]
+}

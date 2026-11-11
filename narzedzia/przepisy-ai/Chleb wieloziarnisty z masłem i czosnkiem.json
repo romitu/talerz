@@ -1,0 +1,100 @@
+{
+  "nazwa": "Chleb wieloziarnisty z masłem i czosnkiem",
+  "opis": "Świeży chleb wieloziarnisty z masłem, świeżo rozgniecionym surowym czosnkiem i natką pietruszki, bez zapiekania. Czosnek odstawia się na kilka minut po rozgnieceniu, żeby powstała w nim allicyna. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy.",
+  "pory": [
+    "sniadanie",
+    "kolacja",
+    "dodatek"
+  ],
+  "kuchnie": [
+    "inna"
+  ],
+  "rodzaje": [
+    "kanapki"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 124,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 0,
+  "czas_przygotowania_min": 13,
+  "czas_obrobki_min": 0,
+  "sprzet": [
+    "Tarka o drobnych oczkach",
+    "Miska",
+    "Widelec",
+    "Nóż szefa kuchni",
+    "Deska do krojenia",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Zjedz od razu po przygotowaniu. Surowy czosnek z czasem traci świeży smak, a posmarowane pieczywo wysycha.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli czosnek jest zbyt ostry, następnym razem użyj mniejszego ząbka albo wymieszaj go z większą ilością masła. Twarde masło rozgnieć widelcem w ciepłej misce — nie roztapiaj go.",
+  "skladniki": [
+    {
+      "nazwa": "Chleb wieloziarnisty",
+      "ilosc": 100,
+      "jednostka": "g",
+      "stan": "świeży, pokrojony w kromki"
+    },
+    {
+      "nazwa": "Masło",
+      "ilosc": 15,
+      "jednostka": "g",
+      "stan": "świeże, miękkie, w temperaturze pokojowej"
+    },
+    {
+      "nazwa": "Czosnek, surowy",
+      "ilosc": 5,
+      "jednostka": "g",
+      "stan": "świeżo przeciśnięty lub starty"
+    },
+    {
+      "nazwa": "Pietruszka natka",
+      "ilosc": 3,
+      "jednostka": "g",
+      "stan": "drobno posiekana"
+    },
+    {
+      "nazwa": "Sól kłodawska",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Czosnek",
+      "minuty": 2,
+      "kroki": [
+        {
+          "tresc": "**Masło.** Jeśli masło jest prosto z lodówki, wyjmij je teraz, żeby zmiękło. Najlepiej zrób to wcześniej, około 30 minut przed przygotowaniem."
+        },
+        {
+          "tresc": "**Czosnek.** Obierz czosnek i przeciśnij przez praskę albo zetrzyj na drobnej tarce. Zrób to na samym początku — czosnek musi teraz poczekać."
+        },
+        {
+          "tresc": "**Odstawienie czosnku.** Zostaw rozgnieciony czosnek na desce na **10 minut**. Nie mieszaj go jeszcze z niczym. W tym czasie z uszkodzonych komórek powstaje allicyna — związek odpowiedzialny za ostry smak i prozdrowotne działanie czosnku. Nastaw minutnik i przejdź do kolejnego etapu.",
+          "uwaga": true
+        }
+      ]
+    },
+    {
+      "nazwa": "Masło czosnkowe i kanapki",
+      "minuty": 11,
+      "kroki": [
+        {
+          "tresc": "**Natka — w czasie czekania.** Umyj natkę, dokładnie osusz i drobno posiekaj."
+        },
+        {
+          "tresc": "**Chleb — w czasie czekania.** Pokrój chleb w kromki, jeśli nie jest krojony."
+        },
+        {
+          "tresc": "**Masło czosnkowe — po minutniku.** Odmierz masło do miski. Dodaj odstawiony czosnek, natkę i sól. Rozgnieć widelcem i wymieszaj do gładkiej masy.",
+          "sygnal": "masa jest jednolita, bez grudek masła, czosnek i natka rozłożone równo"
+        },
+        {
+          "tresc": "**Smarowanie.** Posmaruj kromki równo masłem czosnkowym aż po brzegi i podaj od razu. Nie podgrzewaj — wysoka temperatura niszczy allicynę."
+        }
+      ]
+    }
+  ]
+}
