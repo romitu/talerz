@@ -13,6 +13,7 @@ import { Przycisk } from '@/components/przycisk';
 import { ThemedText } from '@/components/themed-text';
 import { WyborJezyka } from '@/components/wybor-jezyka';
 import { WyborStylu } from '@/components/wybor-stylu';
+import { ZmianaHasla } from '@/components/zmiana-hasla';
 import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import { komunikatBledu } from '@/lib/blad';
@@ -283,6 +284,8 @@ export default function EkranProfilu() {
       </Karta>
 
       <WyborJezyka />
+
+      {sesja?.user.email && <ZmianaHasla tryb="zmiana" email={sesja.user.email} />}
 
       {/*
         Zarządzanie kontami widzi tylko administrator. Ukrycie przycisku nie

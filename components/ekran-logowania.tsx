@@ -13,9 +13,10 @@ import { ThemedView } from './themed-view';
 import { komunikatBledu } from '@/lib/blad';
 import i18n from '@/lib/jezyk';
 import { MaxContentWidth, Spacing } from '@/constants/theme';
+import { komunikatLogowania, linkResetuWygasl, wyslijLinkResetu } from '@/lib/haslo';
 import { baza_skonfigurowana, supabase } from '@/lib/supabase';
 
-type Tryb = 'logowanie' | 'rejestracja';
+type Tryb = 'logowanie' | 'rejestracja' | 'reset';
 
 /**
  * Czy pokazywać zakładanie konta.
@@ -36,28 +37,48 @@ type Tryb = 'logowanie' | 'rejestracja';
  */
 const REJESTRACJA_OTWARTA = true;
 
-/** Tłumaczy komunikaty Supabase na zrozumiały polski. */
-function komunikat(tresc: string): string {
-  const m = tresc.toLowerCase();
-  if (m.includes('invalid login credentials')) return i18n.t('logowanie.bladDanych');
-  if (m.includes('email not confirmed')) return i18n.t('logowanie.bladNiepotwierdzony');
-  if (m.includes('user already registered')) return i18n.t('logowanie.bladIstnieje');
-  if (m.includes('password should be')) return i18n.t('logowanie.bladHaslo');
-  if (m.includes('unable to validate email')) return i18n.t('logowanie.bladEmail');
-  if (m.includes('network') || m.includes('fetch')) return i18n.t('logowanie.bladPolaczenia');
-  return tresc;
-}
-
 export function EkranLogowania() {
   const { t } = useTranslation();
   const [tryb, setTryb] = useState<Tryb>('logowanie');
   const [email, setEmail] = useState('');
   const [haslo, setHaslo] = useState('');
   const [zajety, setZajety] = useState(false);
-  const [blad, setBlad] = useState<string | null>(null);
+  const [blad, setBlad] = useState<string | null>(
+    linkResetuWygasl ? i18n.t('haslo.linkWygasl') : null
+  );
   const [informacja, setInformacja] = useState<string | null>(null);
 
   const rejestracja = tryb === 'rejestracja';
+  const reset = tryb === 'reset';
+
+  function przelacz(nowy: Tryb) {
+    setTryb(nowy);
+    setBlad(null);
+    setInformacja(null);
+  }
+
+  /*
+    Ten sam komunikat niezależnie od tego, czy konto istnieje — inaczej
+    formularz zdradzałby każdemu, kto ma konto w Talerzu. Supabase zresztą
+    też nie mówi, czy wysłał maila.
+  */
+  async function wyslijReset() {
+    setBlad(null);
+    setInformacja(null);
+    if (!email.trim()) {
+      setBlad(t('haslo.podajEmail'));
+      return;
+    }
+    setZajety(true);
+    try {
+      await wyslijLinkResetu(email.trim());
+      setInformacja(t('haslo.linkWyslany'));
+    } catch (e) {
+      setBlad(komunikatLogowania(komunikatBledu(e)));
+    } finally {
+      setZajety(false);
+    }
+  }
 
   async function wyslij() {
     setBlad(null);
@@ -90,7 +111,7 @@ export function EkranLogowania() {
         if (error) throw error;
       }
     } catch (e) {
-      setBlad(komunikat(komunikatBledu(e)));
+      setBlad(komunikatLogowania(komunikatBledu(e)));
     } finally {
       setZajety(false);
     }
@@ -123,8 +144,18 @@ export function EkranLogowania() {
 
             <Karta style={styles.formularz}>
               <ThemedText type="default">
-                {rejestracja ? t('logowanie.zalozKonto') : t('logowanie.zaloguj')}
+                {reset
+                  ? t('haslo.resetTytul')
+                  : rejestracja
+                    ? t('logowanie.zalozKonto')
+                    : t('logowanie.zaloguj')}
               </ThemedText>
+
+              {reset && (
+                <ThemedText type="small" themeColor="textSecondary">
+                  {t('haslo.resetOpis')}
+                </ThemedText>
+              )}
 
               <Pole
                 etykieta={t('logowanie.email')}
@@ -137,15 +168,17 @@ export function EkranLogowania() {
                 placeholder={t('logowanie.przykladEmail')}
               />
 
-              <Pole
-                etykieta={t('logowanie.hasloPole')}
-                value={haslo}
-                onChangeText={setHaslo}
-                secureTextEntry
-                autoCapitalize="none"
-                autoComplete={rejestracja ? 'new-password' : 'current-password'}
-                placeholder={rejestracja ? t('logowanie.min6') : ''}
-              />
+              {!reset && (
+                <Pole
+                  etykieta={t('logowanie.hasloPole')}
+                  value={haslo}
+                  onChangeText={setHaslo}
+                  secureTextEntry
+                  autoCapitalize="none"
+                  autoComplete={rejestracja ? 'new-password' : 'current-password'}
+                  placeholder={rejestracja ? t('logowanie.min6') : ''}
+                />
+              )}
 
               {blad && (
                 <ThemedText type="small" themeColor="accent">
@@ -160,21 +193,37 @@ export function EkranLogowania() {
               )}
 
               <Przycisk
-                tytul={rejestracja ? t('logowanie.zalozKonto') : t('logowanie.zaloguj')}
-                onPress={wyslij}
+                tytul={
+                  reset
+                    ? t('haslo.wyslijLink')
+                    : rejestracja
+                      ? t('logowanie.zalozKonto')
+                      : t('logowanie.zaloguj')
+                }
+                onPress={reset ? wyslijReset : wyslij}
                 zajety={zajety}
                 wylaczony={!baza_skonfigurowana}
               />
 
-              {REJESTRACJA_OTWARTA ? (
+              {tryb === 'logowanie' && (
+                <Przycisk
+                  tytul={t('haslo.niePamietam')}
+                  wariant="poboczny"
+                  onPress={() => przelacz('reset')}
+                />
+              )}
+
+              {reset ? (
+                <Przycisk
+                  tytul={t('haslo.wrocDoLogowania')}
+                  wariant="poboczny"
+                  onPress={() => przelacz('logowanie')}
+                />
+              ) : REJESTRACJA_OTWARTA ? (
                 <Przycisk
                   tytul={rejestracja ? t('logowanie.mamKonto') : t('logowanie.nieMamKonta')}
                   wariant="poboczny"
-                  onPress={() => {
-                    setTryb(rejestracja ? 'logowanie' : 'rejestracja');
-                    setBlad(null);
-                    setInformacja(null);
-                  }}
+                  onPress={() => przelacz(rejestracja ? 'logowanie' : 'rejestracja')}
                 />
               ) : (
                 <ThemedText type="small" themeColor="textSecondary">

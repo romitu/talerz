@@ -16,7 +16,8 @@ import { Karta } from '@/components/karta';
 import { Przycisk } from '@/components/przycisk';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
-import { PALETY, type Paleta } from '@/constants/theme';
+import { ZmianaHasla } from '@/components/zmiana-hasla';
+import { MaxContentWidth, PALETY, type Paleta } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { dniPlanu, naDate, pobierzPlany } from '@/lib/plan';
 import { DostawcaSesji, useSesja } from '@/lib/sesja';
@@ -50,7 +51,7 @@ export default function UkladGlowny() {
 }
 
 function BramkaSesji({ tryb }: { tryb: 'light' | 'dark' }) {
-  const { sesja, ladowanie } = useSesja();
+  const { sesja, ladowanie, odzyskiwanieHasla, zakonczOdzyskiwanie } = useSesja();
   const { styl } = useStyl();
   const { t } = useTranslation();
   const kolory = PALETY[styl][tryb];
@@ -112,6 +113,21 @@ function BramkaSesji({ tryb }: { tryb: 'light' | 'dark' }) {
 
   if (!sesja) {
     return <EkranLogowania />;
+  }
+
+  /*
+    Wejście z linku resetu hasła. Sesja już jest — link sam loguje — ale
+    zanim ktoś dostanie aplikację, ma ustawić nowe hasło. Inaczej zostałby
+    zalogowany tylko w tej jednej karcie i dalej nie znałby swojego hasła.
+  */
+  if (odzyskiwanieHasla) {
+    return (
+      <ThemedView style={{ flex: 1, justifyContent: 'center', padding: 24 }}>
+        <View style={{ width: '100%', maxWidth: MaxContentWidth, alignSelf: 'center' }}>
+          <ZmianaHasla tryb="odzyskiwanie" onGotowe={zakonczOdzyskiwanie} />
+        </View>
+      </ThemedView>
+    );
   }
 
   if (wylaczone) {
