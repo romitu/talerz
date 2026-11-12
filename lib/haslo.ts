@@ -111,17 +111,27 @@ export async function ustawNoweHaslo(nowe: string): Promise<void> {
   if (error) throw error;
 }
 
+/** Opublikowana wersja przeglądarkowa — tu otwiera się link z maila. */
+const ADRES_STRONY = 'https://romitu.github.io/talerz/';
+
 /**
  * Adres, na który ma wrócić link z maila.
  *
- * W przeglądarce: ta sama strona (z `/Talerz` na GitHub Pages, bez niego
- * lokalnie). Na telefonie `undefined` — Supabase użyje wtedy „Site URL”
- * z panelu, czyli strony w przeglądarce.
+ * Zawsze opublikowana strona — także z telefonu, który sam linku nie
+ * obsłuży. Wyjątek: wersja lokalna przy programowaniu wraca do siebie.
+ *
+ * Adres był kiedyś wyliczany ze ścieżki bieżącej strony i porównywany
+ * z `/Talerz`, a GitHub Pages podaje `/talerz` małą literą. Wychodził
+ * z tego goły `https://romitu.github.io/`, którego Supabase nie ma na
+ * liście dozwolonych, więc po cichu odsyłał na domyślny „Site URL”,
+ * czyli `localhost` — i link z maila kończył się „witryna nieosiągalna”.
  */
-function adresPowrotu(): string | undefined {
-  if (Platform.OS !== 'web' || typeof window === 'undefined') return undefined;
-  const sciezka = window.location.pathname.startsWith('/Talerz') ? '/Talerz/' : '/';
-  return window.location.origin + sciezka;
+function adresPowrotu(): string {
+  if (Platform.OS === 'web' && typeof window !== 'undefined') {
+    const { hostname, origin } = window.location;
+    if (hostname === 'localhost' || hostname === '127.0.0.1') return origin + '/';
+  }
+  return ADRES_STRONY;
 }
 
 /** Wysyła maila z linkiem do ustawienia nowego hasła. */
