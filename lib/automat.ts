@@ -28,7 +28,9 @@
  *   3. PREMIA ZA PREFERENCJĘ — przesuwa lubiane dania w górę, ale nie
  *      unieważnia punktów 1 i 2. Danie lubiane, ale kompletnie nie na to
  *      miejsce, dalej przegra. „Nie proponuj” w ogóle tu nie dociera —
- *      patrz niżej.
+ *      patrz niżej. Do tej samej premii dolicza się „Chcemy więcej”:
+ *      danie ze składnikiem z tej listy konta (np. czarnuszką) idzie w górę
+ *      tak samo — podpowiedź, nie wymóg.
  *   4. KARA ZA POWTÓRKĘ — im niedawniej dane danie było w planie, tym większa.
  *      Bez tego automat wstawiłby siedem razy ten sam ulubiony obiad.
  *
@@ -88,6 +90,8 @@ export type Kandydat = {
   ukryty: boolean;
   /** Składniki, których konto nie je (migracja 0049) — niepusta lista wyklucza danie jak „nie proponuj”. */
   zawieraWykluczone: string[];
+  /** Składniki z listy „Chcemy więcej” konta (migracja 0051) — każdy daje premię, patrz `premiaZaChcemyWiecej`. */
+  zawieraChcemyWiecej: string[];
 };
 
 export type Miejsce = { data: string; pora: PoraPosilku };
@@ -127,6 +131,24 @@ const WAGA_LUBIE = 0.5;
 function premiaZaPreferencje(preferencja: Preferencja): number {
   if (preferencja === 'lubie') return WAGA_LUBIE;
   return 0;
+}
+
+/**
+ * Premia za jeden składnik z listy „Chcemy więcej”. Mniejsza niż „lubię”:
+ * „lubię” to ocena całego dania, a tu wiemy tylko, że w środku jest np.
+ * czarnuszka — może jej być szczypta na wierzchu.
+ */
+const WAGA_CHCEMY_WIECEJ = 0.35;
+
+/**
+ * Ile składników z listy liczy się do premii. Bez sufitu danie z pięcioma
+ * zaznaczonymi przyprawami wygrywałoby z każdym innym niezależnie od
+ * kalorii — a lista ma przesuwać dania w górę, nie przejmować planu.
+ */
+const MAX_SKLADNIKOW_CHCEMY_WIECEJ = 2;
+
+export function premiaZaChcemyWiecej(zawieraChcemyWiecej: string[]): number {
+  return Math.min(zawieraChcemyWiecej.length, MAX_SKLADNIKOW_CHCEMY_WIECEJ) * WAGA_CHCEMY_WIECEJ;
 }
 
 /** Kara za danie użyte poprzedniego dnia. Maleje z każdym dniem odstępu. */
@@ -311,7 +333,8 @@ export function ocen(opcje: {
   const karaKcal = karaOdchylenia(kcal, docelowoKcal, odniesienieKcal, wzrost, false);
   const karaBialka = karaOdchylenia(bialko, docelowoBialko, odniesienieBialka, wzrost, true);
 
-  const premia = premiaZaPreferencje(kandydat.preferencja);
+  const premia =
+    premiaZaPreferencje(kandydat.preferencja) + premiaZaChcemyWiecej(kandydat.zawieraChcemyWiecej);
 
   const karaPowtorki =
     ostatnioWDniu === null ? 0 : KARA_POWTORKI / (1 + (dzien - ostatnioWDniu));

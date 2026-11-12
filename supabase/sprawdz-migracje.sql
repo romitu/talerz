@@ -335,6 +335,11 @@ with sprawdzenia as (
     '0049_wykluczone_skladniki',
     'skladniki, ktorych konto nie je (tabela wykluczone_skladniki)',
     to_regclass('public.wykluczone_skladniki') is not null
+  union all
+  select
+    '0051_chcemy_wiecej',
+    'skladniki, ktore konto chce jesc czesciej (tabela chcemy_wiecej_skladniki)',
+    to_regclass('public.chcemy_wiecej_skladniki') is not null
 )
 select
   migracja,

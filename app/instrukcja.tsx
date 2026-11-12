@@ -114,6 +114,9 @@ const SEKCJE: Sekcja[] = [
       },
       { rodzaj: 'tekst', tresc: 'Od tej chwili danie z takim składnikiem nie trafi do planu: nie zaproponuje go automat, nie pojawi się w ręcznym wyborze dania i nie zostanie przeniesione przy „Powtórz poprzedni tydzień”. Dotyczy to także przepisów dodanych później. Wykluczenie obejmuje całe konto, bo garnek jest wspólny dla wszystkich profili.' },
       { rodzaj: 'tekst', tresc: 'Na liście przepisów takie dania są domyślnie schowane. Przełącznik „Nie jemy” pokazuje je z powrotem, z dopiskiem, który składnik je wyklucza. Żeby cofnąć wykluczenie, kliknij pigułkę ze składnikiem w sekcji „Nie jemy” w Profilu.' },
+      { rodzaj: 'podtytul', tresc: 'Składniki, których chcesz więcej („Chcemy więcej”)' },
+      { rodzaj: 'tekst', tresc: 'Jeżeli chcesz częściej jeść jakiś składnik – np. czarnuszkę, siemię lniane albo czosnek – dodaj go w zakładce „Profil”, w sekcji „Chcemy więcej”. Dodaje się go tak samo jak w „Nie jemy”: „Dodaj składnik”, wyszukaj, zaznacz, „Gotowe”.' },
+      { rodzaj: 'tekst', tresc: 'Automat będzie wtedy chętniej wybierał dania z tym składnikiem, także przepisy dodane później. To podpowiedź, a nie wymóg: plan dalej pilnuje kalorii, białka i tego, żeby dania się nie powtarzały, więc nie każdy posiłek będzie zawierał wybrany składnik. Lista dotyczy całego konta. Jeżeli ten sam składnik jest i w „Nie jemy”, i w „Chcemy więcej”, wygrywa „Nie jemy”.' },
       { rodzaj: 'podtytul', tresc: 'Preferencje przepisów' },
       { rodzaj: 'tekst', tresc: 'Przed pierwszym automatycznym planowaniem warto przejrzeć zakładkę „Przepisy” i oznaczyć swoje preferencje. Dzięki temu automat od początku pracuje na bazie dań, które rzeczywiście chcesz jeść.' },
       {

@@ -8,7 +8,7 @@ import { Ekran } from '@/components/ekran';
 import { KafleWyniku } from '@/components/kafle-wyniku';
 import { Karta } from '@/components/karta';
 import { NaglowekProfilu } from '@/components/naglowek-profilu';
-import { NieJemy } from '@/components/nie-jemy';
+import { ChcemyWiecej, NieJemy } from '@/components/skladniki-konta';
 import { Przycisk } from '@/components/przycisk';
 import { ThemedText } from '@/components/themed-text';
 import { WyborJezyka } from '@/components/wybor-jezyka';
@@ -278,6 +278,8 @@ export default function EkranProfilu() {
       )}
 
       <NieJemy kontoId={sesja?.user.id} />
+
+      <ChcemyWiecej kontoId={sesja?.user.id} />
 
       <Karta>
         <WyborStylu />

@@ -8,7 +8,7 @@
 import i18n from './jezyk';
 import { supabase } from './supabase';
 import type { RolaSkladnika } from './skladniki';
-import { przepisyZWykluczonymi } from './wykluczenia';
+import { przepisyZeSkladnikamiZListy } from './skladniki-konta';
 import type { ZrodloZdjecia } from './zakupy';
 
 /**
@@ -120,6 +120,11 @@ export type PrzepisZMakro = {
    * tablica = przepis dozwolony; niepusta = automat i wybór dania go pomijają.
    */
   zawieraWykluczone: string[];
+  /**
+   * Składniki z przepisu z listy „Chcemy więcej” TEGO konta (migracja 0051).
+   * Niepusta = automat daje daniu premię; niczego nie wyklucza.
+   */
+  zawieraChcemyWiecej: string[];
 };
 
 export const OPIS_PREFERENCJI: Record<Preferencja, string> = {
@@ -214,7 +219,13 @@ export async function pobierzPrzepisy(kontoId: string | undefined) {
   // Dwa zapytania zamiast jednego, bo `przepis_makro` jest WIDOKIEM.
   // Widok nie ma klucza obcego, więc Supabase nie potrafi go dołączyć
   // do przepisów automatycznie — łączymy je po stronie aplikacji.
-  const [wynikPrzepisow, wynikMakro, wynikBialka, wykluczeniaWedlugPrzepisu] = await Promise.all([
+  const [
+    wynikPrzepisow,
+    wynikMakro,
+    wynikBialka,
+    wykluczeniaWedlugPrzepisu,
+    chcemyWiecejWedlugPrzepisu,
+  ] = await Promise.all([
     supabase
       .from('przepisy')
       .select(
@@ -231,8 +242,13 @@ export async function pobierzPrzepisy(kontoId: string | undefined) {
         'przepis_id, porcje_wyliczone, gramy_porcji, gramy_calosc, kcal, bialko_g, tluszcz_g, wegle_g, blonnik_g, cukry_wolne_g, kcal_calosc, bialko_g_calosc, nova_max'
       ),
     supabase.from('przepis_bialko').select('przepis_id, glowne_bialko'),
-    // Bez zalogowanego konta nie ma czyich wykluczeń sprawdzać.
-    kontoId ? przepisyZWykluczonymi() : Promise.resolve(new Map<string, string[]>()),
+    // Bez zalogowanego konta nie ma czyich list sprawdzać.
+    kontoId
+      ? przepisyZeSkladnikamiZListy('wykluczone_skladniki')
+      : Promise.resolve(new Map<string, string[]>()),
+    kontoId
+      ? przepisyZeSkladnikamiZListy('chcemy_wiecej_skladniki')
+      : Promise.resolve(new Map<string, string[]>()),
   ]);
 
   if (wynikPrzepisow.error) throw wynikPrzepisow.error;
@@ -307,6 +323,7 @@ export async function pobierzPrzepisy(kontoId: string | undefined) {
       preferencja: wlasna?.poziom ?? 'neutralne',
       ukryty,
       zawieraWykluczone: wykluczeniaWedlugPrzepisu.get(p.id) ?? [],
+      zawieraChcemyWiecej: chcemyWiecejWedlugPrzepisu.get(p.id) ?? [],
     };
   });
 }

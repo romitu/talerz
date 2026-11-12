@@ -115,9 +115,19 @@
     "naglowek": "NIE JEMY",
     "opis": "Dania z tymi składnikami nie trafią do planu — ani z automatu, ani z ręcznego wyboru. Dotyczy całego konta, bo garnek jest wspólny.",
     "pusto": "Nic nie jest wykluczone.",
-    "usunZWykluczonych": "Usuń z wykluczonych: {{nazwa}}",
+    "usunZListy": "Usuń z wykluczonych: {{nazwa}}",
     "szukaj": "Szukaj składnika",
     "przyklad": "jaja, ryba, grzyby…",
+    "wczytywanie": "Wczytywanie składników…",
+    "dodaj": "Dodaj składnik"
+  },
+  "chcemyWiecej": {
+    "naglowek": "CHCEMY WIĘCEJ",
+    "opis": "Dania z tymi składnikami automat będzie proponował częściej. To podpowiedź, nie wymóg — plan dalej pilnuje kalorii, białka i różnorodności. Dotyczy całego konta, bo garnek jest wspólny.",
+    "pusto": "Nic nie jest wybrane.",
+    "usunZListy": "Usuń z listy „Chcemy więcej”: {{nazwa}}",
+    "szukaj": "Szukaj składnika",
+    "przyklad": "czarnuszka, siemię lniane, czosnek…",
     "wczytywanie": "Wczytywanie składników…",
     "dodaj": "Dodaj składnik"
   },
