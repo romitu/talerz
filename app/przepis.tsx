@@ -106,6 +106,23 @@ export default function EkranPrzepisu() {
     Omit<UdzialOsoby, 'kcal' | 'bialko_g' | 'tluszcz_g' | 'wegle_g' | 'blonnik_g'>[] | null
   >(null);
 
+  /*
+    Nawigacja to zakładki (`app/_layout.tsx`), więc ten ekran NIE powstaje od
+    nowa przy każdym otwarciu przepisu — zostaje ten sam, z nowymi parametrami.
+    Bez tego zerowania ptaszki z poprzedniego gotowania przechodziły na
+    następne: kroki mają klucze z numeru („k:0:0”), więc pierwszy krok
+    śniadania stawał się odhaczonym pierwszym krokiem obiadu. Zerujemy przy
+    zmianie GOTOWANIA (przepis, wariant, liczba porcji), a nie przy samym
+    powrocie na ekran — wyjście do lodówki po składnik nie kasuje postępu.
+  */
+  const [gotowanie, setGotowanie] = useState(`${id}|${skalowany ?? ''}|${porcjeRazem ?? ''}`);
+  const biezaceGotowanie = `${id}|${skalowany ?? ''}|${porcjeRazem ?? ''}`;
+  if (biezaceGotowanie !== gotowanie) {
+    setGotowanie(biezaceGotowanie);
+    setZrobione(new Set());
+    setPrzelaczoneUwagi(new Set());
+  }
+
   const kontoId = sesja?.user.id;
   const pobierz = useCallback(async () => {
     if (!id) return;
