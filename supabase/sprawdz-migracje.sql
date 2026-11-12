@@ -340,6 +340,14 @@ with sprawdzenia as (
     '0051_chcemy_wiecej',
     'skladniki, ktore konto chce jesc czesciej (tabela chcemy_wiecej_skladniki)',
     to_regclass('public.chcemy_wiecej_skladniki') is not null
+  union all
+  select
+    '0052_warto_wiedziec',
+    'kolumna skladniki.warto_wiedziec (uwaga przy skladniku)',
+    exists (
+      select 1 from information_schema.columns
+       where table_name = 'skladniki' and column_name = 'warto_wiedziec'
+    )
 )
 select
   migracja,

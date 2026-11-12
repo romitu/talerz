@@ -11,6 +11,7 @@ import { Wybor } from './wybor';
 import { Spacing } from '@/constants/theme';
 import { komunikatBledu } from '@/lib/blad';
 import {
+  MAX_WARTO_WIEDZIEC,
   ostrzezenieOKaloriach,
   ROLE_SKLADNIKA,
   sprawdzSkladnik,
@@ -74,6 +75,7 @@ export function FormularzSkladnika({
   );
   const [rola, setRola] = useState<RolaSkladnika>(skladnik?.rola ?? 'baza');
   const [tagi, setTagi] = useState((skladnik?.tagi ?? []).join(', '));
+  const [wartoWiedziec, setWartoWiedziec] = useState(skladnik?.warto_wiedziec ?? '');
 
   const [zajety, setZajety] = useState(false);
   const [bledy, setBledy] = useState<string[]>([]);
@@ -97,6 +99,8 @@ export function FormularzSkladnika({
       .split(',')
       .map((x) => x.trim())
       .filter(Boolean),
+    // Puste pole = brak uwagi, a nie pusty tekst — baza i tak by go odrzuciła.
+    warto_wiedziec: wartoWiedziec.trim() || null,
   };
 
   const ostrzezenie = ostrzezenieOKaloriach(dane);
@@ -220,6 +224,21 @@ export function FormularzSkladnika({
         </ThemedText>
       </Karta>
 
+      <Karta style={styles.grupa}>
+        <Pole
+          etykieta={t('formularzSkladnika.wartoWiedziec')}
+          value={wartoWiedziec}
+          onChangeText={setWartoWiedziec}
+          placeholder={t('formularzSkladnika.przykladWartoWiedziec')}
+          multiline
+          maxLength={MAX_WARTO_WIEDZIEC}
+          style={styles.poleWieloliniowe}
+        />
+        <ThemedText type="small" themeColor="textSecondary">
+          {t('formularzSkladnika.wartoWiedziecOpis')}
+        </ThemedText>
+      </Karta>
+
       {ostrzezenie && (
         <Karta>
           <ThemedText type="small" themeColor="accent">
@@ -247,4 +266,5 @@ export function FormularzSkladnika({
 const styles = StyleSheet.create({
   calosc: { gap: Spacing.three },
   grupa: { gap: Spacing.three },
+  poleWieloliniowe: { minHeight: 110, textAlignVertical: 'top' },
 });

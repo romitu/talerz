@@ -117,6 +117,8 @@ const SEKCJE: Sekcja[] = [
       { rodzaj: 'podtytul', tresc: 'Składniki, których chcesz więcej („Chcemy więcej”)' },
       { rodzaj: 'tekst', tresc: 'Jeżeli chcesz częściej jeść jakiś składnik – np. czarnuszkę, siemię lniane albo czosnek – dodaj go w zakładce „Profil”, w sekcji „Chcemy więcej”. Dodaje się go tak samo jak w „Nie jemy”: „Dodaj składnik”, wyszukaj, zaznacz, „Gotowe”.' },
       { rodzaj: 'tekst', tresc: 'Automat będzie wtedy chętniej wybierał dania z tym składnikiem, także przepisy dodane później. To podpowiedź, a nie wymóg: plan dalej pilnuje kalorii, białka i tego, żeby dania się nie powtarzały, więc nie każdy posiłek będzie zawierał wybrany składnik. Lista dotyczy całego konta. Jeżeli ten sam składnik jest i w „Nie jemy”, i w „Chcemy więcej”, wygrywa „Nie jemy”.' },
+      { rodzaj: 'podtytul', tresc: 'Warto wiedzieć' },
+      { rodzaj: 'tekst', tresc: 'Przy niektórych składnikach w przepisie widać ikonkę ⓘ. Kliknij ją, żeby przeczytać krótką uwagę, jak dany składnik przygotować i dlaczego – np. że czosnek warto zgnieść ok. 10 minut przed użyciem, a siemię lniane zmielić tuż przed podaniem. Przy składnikach z Twojej listy „Chcemy więcej” uwaga jest od razu rozwinięta. Przepis się przez to nie zmienia: to Ty decydujesz, czy z uwagi skorzystasz.' },
       { rodzaj: 'podtytul', tresc: 'Preferencje przepisów' },
       { rodzaj: 'tekst', tresc: 'Przed pierwszym automatycznym planowaniem warto przejrzeć zakładkę „Przepisy” i oznaczyć swoje preferencje. Dzięki temu automat od początku pracuje na bazie dań, które rzeczywiście chcesz jeść.' },
       {

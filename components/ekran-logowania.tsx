@@ -173,7 +173,7 @@ export function EkranLogowania() {
                   etykieta={t('logowanie.hasloPole')}
                   value={haslo}
                   onChangeText={setHaslo}
-                  secureTextEntry
+                  haslo
                   autoCapitalize="none"
                   autoComplete={rejestracja ? 'new-password' : 'current-password'}
                   placeholder={rejestracja ? t('logowanie.min6') : ''}

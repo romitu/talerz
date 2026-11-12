@@ -131,6 +131,10 @@
     "wczytywanie": "Wczytywanie składników…",
     "dodaj": "Dodaj składnik"
   },
+  "pole": {
+    "pokazHaslo": "Pokaż hasło",
+    "ukryjHaslo": "Ukryj hasło"
+  },
   "powitanie": {
     "opisGrafiki": "Talerz — powiedz, dla ilu osób planujesz i na ile dni; Talerz zdecyduje co ugotować, ile zrobić, co zjeść jutro i co dokładnie kupić",
     "zaczynamy": "Zaczynamy"
@@ -282,7 +286,10 @@
     "podzielny": "Można podzielić - np. sól",
     "tagi": "Etykiety, oddzielone przecinkami",
     "przykladTagow": "zboze, gluten",
-    "tagiOpis": "Etykiety służą preferencjom żywieniowym. Nie są filtrem alergenów."
+    "tagiOpis": "Etykiety służą preferencjom żywieniowym. Nie są filtrem alergenów.",
+    "wartoWiedziec": "Warto wiedzieć (nieobowiązkowe)",
+    "przykladWartoWiedziec": "Zgnieć ok. 10 minut przed użyciem — wtedy powstaje allicyna, która odpowiada za ostry smak i zapach…",
+    "wartoWiedziecOpis": "Jak przygotować składnik i dlaczego. Pokazuje się przy nim w każdym przepisie. Pisz o kuchni — smaku, konsystencji, wchłanianiu — a nie o leczeniu: bez „działa przeciwzapalnie” czy „wspiera wątrobę”."
   },
   "rolaSkladnika": {
     "baza": {
@@ -438,6 +445,8 @@
     "zGarnka": "Z całego garnka wychodzi {{porcje}} porcji.",
     "zGarnkaZGramami": "Z całego garnka wychodzi {{porcje}} porcji ({{gramy}} g razem).",
     "wyjmij": "WYJMIJ Z SZAFKI",
+    "wartoWiedziec": "Warto wiedzieć",
+    "pokazWartoWiedziec": "Warto wiedzieć: {{nazwa}}",
     "skladniki": "SKŁADNIKI ({{ile}})",
     "poCzymPoznac": "Po czym poznać: {{sygnal}}",
     "uwaga": "Uwaga — tego kroku nie pomijaj.",
@@ -686,6 +695,7 @@
     "cukryWolnePonadOgolem": "Cukry wolne nie mogą przekraczać cukrów ogółem — cukry wolne są ich częścią.",
     "sumaPonad100": "Białko, tłuszcz i węglowodany dają razem {{suma}} g na 100 g produktu. To niemożliwe — sprawdź, czy wartości nie są pomylone.",
     "zlaNova": "Grupa NOVA mieści się w zakresie od 1 do 4.",
+    "wartoWiedziecZaDluga": "Uwaga „Warto wiedzieć” może mieć najwyżej {{max}} znaków — skróć ją do najważniejszego.",
     "sameZera": "Wszystkie wartości są zerowe. Uzupełnij dane z etykiety, inaczej każde danie z tym składnikiem policzy się źle.",
     "kcalNiezgodne": "Z podanych makroskładników wychodzi około {{zMakro}} kcal, a wpisano {{kcal}}. Sprawdź, czy nie ma pomyłki."
   },

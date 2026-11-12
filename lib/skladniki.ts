@@ -66,16 +66,31 @@ export type Skladnik = {
   mozna_dzielic: boolean | null;
   rola: RolaSkladnika;
   tagi: string[];
+  /**
+   * „Warto wiedzieć” (migracja 0052) — jak przygotować i dlaczego, np. „zgnieć
+   * czosnek 10 min przed użyciem”. Kuchnia i chemia, bez obietnic zdrowotnych.
+   */
+  warto_wiedziec: string | null;
 };
 
-export type DaneSkladnika = Omit<Skladnik, 'id'>;
+/**
+ * Dane do zapisu. `warto_wiedziec` jest opcjonalne: pominięte NIE zmienia
+ * uwagi w bazie — tak działa import pliku sprzed tej kolumny, który inaczej
+ * kasowałby wszystkie uwagi. Żeby uwagę usunąć, trzeba podać `null`.
+ */
+export type DaneSkladnika = Omit<Skladnik, 'id' | 'warto_wiedziec'> & {
+  warto_wiedziec?: string | null;
+};
+
+/** Najdłuższa uwaga „Warto wiedzieć” — to samo ograniczenie co w bazie (migracja 0052). */
+export const MAX_WARTO_WIEDZIEC = 600;
 
 /**
  * Lista pól musi być zapisana wprost, a nie sklejana ze zmiennych — Supabase
  * odczytuje z niej typy w czasie sprawdzania kodu i potrzebuje stałego tekstu.
  */
 const POLA =
-  'id, nazwa, zrodlo, kcal_100g, bialko_100g, tluszcz_100g, wegle_100g, blonnik_100g, cukry_ogolem_100g, cukry_wolne_100g, nova, gramatura_opakowania_g, masa_sztuki_g, mozna_dzielic, rola, tagi';
+  'id, nazwa, zrodlo, kcal_100g, bialko_100g, tluszcz_100g, wegle_100g, blonnik_100g, cukry_ogolem_100g, cukry_wolne_100g, nova, gramatura_opakowania_g, masa_sztuki_g, mozna_dzielic, rola, tagi, warto_wiedziec';
 
 export async function pobierzSkladniki(): Promise<Skladnik[]> {
   const { data, error } = await supabase.from('skladniki').select(POLA).order('nazwa');
@@ -145,6 +160,10 @@ export function sprawdzSkladnik(dane: Partial<DaneSkladnika>): string[] {
 
   if (dane.nova !== null && dane.nova !== undefined && (dane.nova < 1 || dane.nova > 4)) {
     bledy.push(i18n.t('skladnik.zlaNova'));
+  }
+
+  if ((dane.warto_wiedziec?.trim().length ?? 0) > MAX_WARTO_WIEDZIEC) {
+    bledy.push(i18n.t('skladnik.wartoWiedziecZaDluga', { max: MAX_WARTO_WIEDZIEC }));
   }
 
   return bledy;

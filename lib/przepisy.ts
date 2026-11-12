@@ -468,6 +468,12 @@ export type PelnyPrzepis = {
     /** Nadpisanie roli/kwantyzacji TYLKO dla tego przepisu — patrz migracja 0035. */
     rola: RolaSkladnika | null;
     mozna_dzielic: boolean | null;
+    /**
+     * „Warto wiedzieć” z katalogu składników (migracja 0052). Wczytuje ją tylko
+     * `pobierzPelnyPrzepis` — do ekranu gotowania; eksport i import przepisów
+     * jej nie potrzebują, bo uwaga należy do składnika, nie do przepisu.
+     */
+    warto_wiedziec?: string | null;
   }[];
   etapy: {
     nazwa: string;
@@ -476,10 +482,17 @@ export type PelnyPrzepis = {
   }[];
 };
 
+type DolaczonySkladnik = { nazwa?: string; warto_wiedziec?: string | null };
+
+/** Dołączony wiersz tabeli składników, bez względu na jej kształt (obiekt albo tablica). */
+function dolaczonySkladnik(dolaczone: unknown): DolaczonySkladnik | null {
+  if (Array.isArray(dolaczone)) return (dolaczone[0] as DolaczonySkladnik) ?? null;
+  return (dolaczone as DolaczonySkladnik | null) ?? null;
+}
+
 /** Wyciąga nazwę z dołączonej tabeli składników, bez względu na jej kształt. */
 function nazwaSkladnika(dolaczone: unknown): string {
-  if (Array.isArray(dolaczone)) return (dolaczone[0] as { nazwa?: string })?.nazwa ?? '—';
-  return (dolaczone as { nazwa?: string } | null)?.nazwa ?? '—';
+  return dolaczonySkladnik(dolaczone)?.nazwa ?? '—';
 }
 
 export async function pobierzPelnyPrzepis(id: string): Promise<PelnyPrzepis> {
@@ -496,7 +509,7 @@ export async function pobierzPelnyPrzepis(id: string): Promise<PelnyPrzepis> {
     supabase
       .from('przepis_skladniki')
       .select(
-        'skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, opis_potoczny, kolejnosc, rola, mozna_dzielic, skladniki (nazwa)'
+        'skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, opis_potoczny, kolejnosc, rola, mozna_dzielic, skladniki (nazwa, warto_wiedziec)'
       )
       .eq('przepis_id', id)
       .order('kolejnosc'),
@@ -536,6 +549,7 @@ export async function pobierzPelnyPrzepis(id: string): Promise<PelnyPrzepis> {
     kolejnosc: s.kolejnosc as number,
     rola: s.rola as RolaSkladnika | null,
     mozna_dzielic: s.mozna_dzielic as boolean | null,
+    warto_wiedziec: dolaczonySkladnik(s.skladniki)?.warto_wiedziec ?? null,
   }));
 
   return {

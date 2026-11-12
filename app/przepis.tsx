@@ -29,6 +29,7 @@ import {
 } from '@/lib/przepisy';
 import { pobierzPrzeskalowanyPrzepis, type PrzeskalowanyPrzepis } from '@/lib/przepisy-skalowane';
 import { useSesja } from '@/lib/sesja';
+import { pobierzListe } from '@/lib/skladniki-konta';
 import { supabase } from '@/lib/supabase';
 import { adresZdjecia } from '@/lib/zdjecia';
 import { wiekZDaty, type Plec, type TrybCelu } from '@/lib/zywienie';
@@ -97,6 +98,10 @@ export default function EkranPrzepisu() {
   const [zrobione, setZrobione] = useState<Set<string>>(new Set());
   const [wczytywanie, setWczytywanie] = useState(true);
   const [blad, setBlad] = useState<string | null>(null);
+  /** Składniki z listy „Chcemy więcej” konta — ich „Warto wiedzieć” jest od razu rozwinięte. */
+  const [chcemyWiecej, setChcemyWiecej] = useState<Set<string>>(new Set());
+  /** Uwagi, które użytkownik przełączył ikonką ⓘ — względem stanu domyślnego. */
+  const [przelaczoneUwagi, setPrzelaczoneUwagi] = useState<Set<string>>(new Set());
   const [udzialyOsob, setUdzialyOsob] = useState<
     Omit<UdzialOsoby, 'kcal' | 'bialko_g' | 'tluszcz_g' | 'wegle_g' | 'blonnik_g'>[] | null
   >(null);
@@ -186,11 +191,27 @@ export default function EkranPrzepisu() {
     }
   }, []);
 
+  /*
+    Lista „Chcemy więcej” decyduje tylko o tym, czy uwaga „Warto wiedzieć” jest
+    rozwinięta od razu — awaria tutaj nie ma prawa schować przepisu, więc
+    osobny blok we własnym try/catch, tak jak udziały osób wyżej.
+  */
+  const pobierzChcemyWiecej = useCallback(async () => {
+    if (!kontoId) return;
+    try {
+      const lista = await pobierzListe('chcemy_wiecej_skladniki');
+      setChcemyWiecej(new Set(lista.map((s) => s.skladnik_id)));
+    } catch {
+      setChcemyWiecej(new Set());
+    }
+  }, [kontoId]);
+
   useFocusEffect(
     useCallback(() => {
       pobierz();
+      pobierzChcemyWiecej();
       if (!podglad) pobierzUdzialy();
-    }, [pobierz, pobierzUdzialy, podglad])
+    }, [pobierz, pobierzChcemyWiecej, pobierzUdzialy, podglad])
   );
 
   function przelacz(klucz: string) {
@@ -200,6 +221,20 @@ export default function EkranPrzepisu() {
       else nowe.add(klucz);
       return nowe;
     });
+  }
+
+  function przelaczUwage(skladnikId: string) {
+    setPrzelaczoneUwagi((poprzednie) => {
+      const nowe = new Set(poprzednie);
+      if (nowe.has(skladnikId)) nowe.delete(skladnikId);
+      else nowe.add(skladnikId);
+      return nowe;
+    });
+  }
+
+  /** Rozwinięta domyślnie przy „Chcemy więcej”; ⓘ odwraca stan domyślny. */
+  function uwagaOtwarta(skladnikId: string): boolean {
+    return chcemyWiecej.has(skladnikId) !== przelaczoneUwagi.has(skladnikId);
   }
 
   if (wczytywanie) {
@@ -423,30 +458,29 @@ export default function EkranPrzepisu() {
         {skladnikiDoPokazania.map((s) => {
           const klucz = `s:${s.skladnik_id}`;
           const odhaczony = zrobione.has(klucz);
-          if (podglad) {
-            return (
-              <View key={klucz} style={styles.pozycja}>
-                <View style={styles.trescPozycji}>
-                  <ThemedText type="default">{s.nazwa}</ThemedText>
-                  {(s.stan || s.zamiennik) && (
-                    <TekstFormatowany type="small" themeColor="textSecondary">
-                      {[s.stan, s.zamiennik].filter(Boolean).join(' · ')}
-                    </TekstFormatowany>
-                  )}
-                </View>
-                <ThemedText type="smallBold" themeColor="textSecondary" style={styles.ilosc}>
-                  {opisIlosci(s)}
-                </ThemedText>
+          const uwaga = s.warto_wiedziec;
+          const otwarta = Boolean(uwaga) && uwagaOtwarta(s.skladnik_id);
+
+          const wiersz = podglad ? (
+            <View style={[styles.pozycja, styles.wierszSkladnika]}>
+              <View style={styles.trescPozycji}>
+                <ThemedText type="default">{s.nazwa}</ThemedText>
+                {(s.stan || s.zamiennik) && (
+                  <TekstFormatowany type="small" themeColor="textSecondary">
+                    {[s.stan, s.zamiennik].filter(Boolean).join(' · ')}
+                  </TekstFormatowany>
+                )}
               </View>
-            );
-          }
-          return (
+              <ThemedText type="smallBold" themeColor="textSecondary" style={styles.ilosc}>
+                {opisIlosci(s)}
+              </ThemedText>
+            </View>
+          ) : (
             <Pressable
-              key={klucz}
               onPress={() => przelacz(klucz)}
               accessibilityRole="checkbox"
               accessibilityState={{ checked: odhaczony }}
-              style={({ pressed }) => [styles.pozycja, pressed && styles.wcisniete]}>
+              style={({ pressed }) => [styles.pozycja, styles.wierszSkladnika, pressed && styles.wcisniete]}>
               <Ionicons
                 name={odhaczony ? 'checkbox' : 'square-outline'}
                 size={20}
@@ -468,6 +502,39 @@ export default function EkranPrzepisu() {
                 {opisIlosci(s)}
               </ThemedText>
             </Pressable>
+          );
+
+          if (!uwaga) return <View key={klucz}>{wiersz}</View>;
+
+          // ⓘ stoi OBOK wiersza, nie w nim — inaczej dotknięcie ikonki
+          // odhaczałoby też składnik.
+          return (
+            <View key={klucz}>
+              <View style={styles.wierszZUwaga}>
+                {wiersz}
+                <Pressable
+                  onPress={() => przelaczUwage(s.skladnik_id)}
+                  hitSlop={8}
+                  accessibilityRole="button"
+                  accessibilityState={{ expanded: otwarta }}
+                  accessibilityLabel={t('przepis.pokazWartoWiedziec', { nazwa: s.nazwa })}
+                  style={styles.ikonaUwagi}>
+                  <Ionicons
+                    name={otwarta ? 'information-circle' : 'information-circle-outline'}
+                    size={20}
+                    color={motyw.accent}
+                  />
+                </Pressable>
+              </View>
+              {otwarta && (
+                <View style={[styles.uwagaSkladnika, { backgroundColor: motyw.backgroundSelected }]}>
+                  <ThemedText type="smallBold" themeColor="accent">
+                    {t('przepis.wartoWiedziec')}
+                  </ThemedText>
+                  <ThemedText type="small">{uwaga}</ThemedText>
+                </View>
+              )}
+            </View>
           );
         })}
       </Karta>
@@ -614,6 +681,16 @@ const styles = StyleSheet.create({
     paddingVertical: Spacing.two,
   },
   trescPozycji: { flex: 1, gap: 2 },
+  wierszSkladnika: { flex: 1 },
+  wierszZUwaga: { flexDirection: 'row', alignItems: 'flex-start', gap: Spacing.one },
+  ikonaUwagi: { paddingVertical: Spacing.one },
+  uwagaSkladnika: {
+    gap: 2,
+    marginBottom: Spacing.one,
+    paddingHorizontal: Spacing.two,
+    paddingVertical: Spacing.one,
+    borderRadius: Spacing.two,
+  },
   ilosc: { minWidth: 96, textAlign: 'right' },
   numerKroku: { minWidth: 24, paddingTop: 2 },
   wcisniete: { opacity: 0.6 },

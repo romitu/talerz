@@ -30,6 +30,7 @@ import {
   wczytajSkoroszyt,
 } from './import-eksport-wspolne';
 import {
+  MAX_WARTO_WIEDZIEC,
   OPIS_ROLI_SKLADNIKA,
   ROLE_SKLADNIKA,
   sprawdzSkladnik,
@@ -63,6 +64,7 @@ const NAGLOWKI_SKLADNIKOW = [
   'Można podzielić',
   'Rola',
   'Tagi',
+  'Warto wiedzieć',
 ] as const;
 
 function nazwaPlikuInstrukcji(): string[] {
@@ -80,6 +82,8 @@ function nazwaPlikuInstrukcji(): string[] {
     'Można podzielić: „tak” (np. sól) albo „nie” (np. jajko) — opcjonalne, puste pole zostaje nieustawione.',
     `Rola: opcjonalna, dokładnie jedna z: ${ROLE_SKLADNIKA.map((r) => OPIS_ROLI_SKLADNIKA[r]).join(', ')} — puste pole liczy się jako „Baza”.`,
     'Tagi: kilka naraz, oddzielone średnikiem.',
+    `Warto wiedzieć: krótka uwaga, jak przygotować składnik i dlaczego (najwyżej ${MAX_WARTO_WIEDZIEC} znaków),`,
+    'bez obietnic zdrowotnych. Puste pole USUWA uwagę. Plik bez tej kolumny uwag nie zmienia.',
     '',
     'Wiersz odrzucony przez walidację (np. suma białka, tłuszczu i węglowodanów',
     'powyżej 100 g) nie blokuje importu reszty pliku — trafia tylko do listy błędów.',
@@ -114,6 +118,7 @@ export async function eksportujSkladniki(skladniki: Skladnik[]): Promise<string>
     s.mozna_dzielic === null || s.mozna_dzielic === undefined ? '' : s.mozna_dzielic ? 'tak' : 'nie',
     OPIS_ROLI_SKLADNIKA[s.rola],
     s.tagi.join(`${ROZDZIELACZ} `),
+    s.warto_wiedziec ?? '',
   ]);
   dodajArkuszTabeli(wb, 'Składniki', NAGLOWKI_SKLADNIKOW, wiersze);
 
@@ -217,6 +222,12 @@ export async function wczytajPlikSkladnikow(base64: string): Promise<WynikWczyta
       mozna_dzielic: moznaDzielic,
       rola,
       tagi: podzielListe(tekstKomorki(komorka(wiersz, nagl, 'Tagi'))),
+      // Plik sprzed migracji 0052 nie ma tej kolumny — wtedy pole zostaje
+      // pominięte i uwagi w bazie się nie zmieniają. Pusta komórka w pliku
+      // Z tą kolumną usuwa uwagę, tak jak puste pole w formularzu.
+      ...(nagl.has('Warto wiedzieć')
+        ? { warto_wiedziec: tekstKomorki(komorka(wiersz, nagl, 'Warto wiedzieć')).trim() || null }
+        : {}),
     };
 
     const problemy = sprawdzSkladnik(dane);

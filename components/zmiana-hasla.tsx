@@ -123,7 +123,7 @@ export function ZmianaHasla(props: Props) {
           etykieta={t('haslo.obecne')}
           value={obecne}
           onChangeText={setObecne}
-          secureTextEntry
+          haslo
           autoCapitalize="none"
           autoComplete="current-password"
         />
@@ -132,7 +132,7 @@ export function ZmianaHasla(props: Props) {
         etykieta={t('haslo.nowe')}
         value={nowe}
         onChangeText={setNowe}
-        secureTextEntry
+        haslo
         autoCapitalize="none"
         autoComplete="new-password"
         placeholder={t('haslo.minZnakow', { liczba: MIN_DLUGOSC_HASLA })}
@@ -141,7 +141,7 @@ export function ZmianaHasla(props: Props) {
         etykieta={t('haslo.powtorz')}
         value={powtorzone}
         onChangeText={setPowtorzone}
-        secureTextEntry
+        haslo
         autoCapitalize="none"
         autoComplete="new-password"
         onSubmitEditing={zapisz}
