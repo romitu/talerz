@@ -154,6 +154,30 @@ export function premiaZaChcemyWiecej(zawieraChcemyWiecej: string[]): number {
 /** Kara za danie użyte poprzedniego dnia. Maleje z każdym dniem odstępu. */
 const KARA_POWTORKI = 3;
 
+/**
+ * Kara za danie, którego garnek JUŻ obejmuje ten dzień — np. kurczak
+ * wstawiony na śniadanie od poniedziałku do środy, a teraz rozważany na
+ * poniedziałkową kolację. Skończona, nie nieskończona: gdy na to miejsce
+ * pasuje wyłącznie to jedno danie, automat ma je wstawić, a nie zostawić
+ * miejsce puste — ale przy jakiejkolwiek innej możliwości przegrywa.
+ */
+const KARA_TEGO_SAMEGO_DNIA = 100;
+
+/**
+ * Kara za powtórkę dania. `ostatnioWDniu` to OSTATNI dzień, który obejmuje
+ * jego garnek — przy daniu na kilka dni może być późniejszy niż bieżący.
+ *
+ * Wcześniej wzór `KARA_POWTORKI / (1 + (dzien - ostatnioWDniu))` dostawał
+ * wtedy ujemny odstęp: przy garnku do środy i poniedziałkowej kolacji
+ * mianownik wychodził -1 i kara zamieniała się w PREMIĘ -3. Automat wstawiał
+ * więc to samo danie na śniadanie i kolację tych samych dni.
+ */
+export function karaZaPowtorke(ostatnioWDniu: number | null, dzien: number): number {
+  if (ostatnioWDniu === null) return 0;
+  if (ostatnioWDniu >= dzien) return KARA_TEGO_SAMEGO_DNIA;
+  return KARA_POWTORKI / (1 + (dzien - ostatnioWDniu));
+}
+
 /** Wielkość losowego zaburzenia oceny. */
 const SZUM = 0.3;
 
@@ -336,8 +360,7 @@ export function ocen(opcje: {
   const premia =
     premiaZaPreferencje(kandydat.preferencja) + premiaZaChcemyWiecej(kandydat.zawieraChcemyWiecej);
 
-  const karaPowtorki =
-    ostatnioWDniu === null ? 0 : KARA_POWTORKI / (1 + (dzien - ostatnioWDniu));
+  const karaPowtorki = karaZaPowtorke(ostatnioWDniu, dzien);
 
   return karaKcal + karaBialka - premia + karaPowtorki + szum;
 }
