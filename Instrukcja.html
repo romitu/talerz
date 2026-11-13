@@ -177,8 +177,23 @@ tr:last-child td{border-bottom:0}
     <section class="section" id="7-przepisy-i-funkcje-moderatora">
       <h2>7. Przepisy i funkcje moderatora</h2>
       <p>Zakładka „Przepisy” zawiera wyszukiwarkę i kategorie: śniadanie, obiad, kolacja oraz dodatek. „Dodatek” oznacza element, który można dołożyć do dowolnej pory dnia – np. grillowaną pierś, surówkę albo sałatkę z ciecierzycy.</p>
-      <p>Dodawanie i edycja przepisów wymaga roli moderatora. Nowy przepis jest domyślnie prywatny; zgłoszenie go do publikacji i zatwierdzenie to osobny obieg wymagający zgody autora zgodnie z zasadami aplikacji.</p>
-      <p>Moderator może eksportować i importować przepisy jako JSON — do pliku albo przez schowek. Pozwala to zrobić kopię zapasową, poprawić przepis poza aplikacją albo przygotować nowy w czacie z AI: ekran „Import / eksport” daje gotowy prompt z aktualnymi listami składników i sprzętu. Przy imporcie dania są rozpoznawane po nazwie, a istniejące rekordy są aktualizowane zamiast tworzenia duplikatów. Import niczego nie dopisuje do katalogów — nieznany składnik albo sprzęt zatrzymuje dane danie i podpowiada podobne nazwy.</p>
+      <p>Formularz przepisu („+ Dodaj przepis”) i edycja przepisów wymagają roli moderatora. Każdy zalogowany może natomiast dodać własny przepis z pomocą AI – opis niżej. Nowy przepis jest domyślnie prywatny; zgłoszenie go do publikacji i zatwierdzenie to osobny obieg wymagający zgody autora zgodnie z zasadami aplikacji.</p>
+      <h3>Nowy przepis z AI</h3>
+      <p>Na liście przepisów kliknij „⋯”, a potem „Nowy przepis z AI”. Kreator prowadzi przez cztery kroki:</p>
+      <ol>
+        <li>Wybierz sposób: nowy przepis na podstawie istniejącego (np. wersja z indykiem zamiast kurczaka) albo przepis od podstaw – także przepisany z książki czy strony.</li>
+        <li>Skopiuj tekst dla AI. Przy istniejącym przepisie są w nim wzór dania i wszystkie wymagania formatu (możesz też pobrać go jako plik i załączyć w czacie); przy przepisie od podstaw – sama instrukcja z aktualnymi listami składników i sprzętu. Wklej go w rozmowie z AI (np. ChatGPT) i dopisz, co chcesz zmienić albo jakie danie chcesz dostać.</li>
+        <li>Skopiuj całą odpowiedź AI i wklej ją w kreatorze. Tekst wokół przepisu zostanie pominięty.</li>
+        <li>Sprawdź i zapisz. Aplikacja sama wyłapie nieznane składniki i błędy formatu – Ty sprawdź, czy przepis ma sens. Przepis zapisuje się jako nowy i prywatny.</li>
+      </ol>
+      <p>Kreator nigdy nie nadpisuje istniejącego dania. Jeśli AI zostawi nazwę, która jest już w bazie, zapis będzie możliwy dopiero po wpisaniu innej nazwy. Kreator niczego też nie dopisuje do katalogów: nieznany składnik albo sprzęt zatrzymuje przepis i podpowiada podobne nazwy. AI może popełniać błędy – przed zapisem zawsze sprawdź przepis.</p>
+      <h3>Kopia zapasowa (moderator i administrator)</h3>
+      <p>Na dole ekranu „Nowy przepis z AI” moderator i administrator mają sekcję „Kopia zapasowa”. Zwykły użytkownik jej nie widzi.</p>
+      <ul>
+        <li><strong>Pobierz wszystkie przepisy (JSON)</strong> – wszystkie przepisy w jednym pliku.</li>
+        <li><strong>Pobierz wszystkie składniki (JSON)</strong> – cały katalog składników: wartości odżywcze, role, etykiety i uwagi „Warto wiedzieć”. Tylko do wglądu – pliku składników nie wczytuje się z powrotem; zmiany wprowadza się w formularzu składnika.</li>
+        <li><strong>Wczytaj plik kopii</strong> – przywraca przepisy z pliku. Rozpoznaje je po nazwie: taka sama nazwa zastępuje treść dania w bazie, nowa zakłada nowy, prywatny przepis. Przed zapisem widać, co zostanie nadpisane.</li>
+      </ul>
     </section>
     <section class="section" id="8-zasada-talerza">
       <h2>8. Zasada Talerza</h2>

@@ -201,8 +201,41 @@ const SEKCJE: Sekcja[] = [
     bloki: [
       { rodzaj: 'tekst', tresc: 'Zakładka „Przepisy” zawiera wyszukiwarkę i kategorie: śniadanie, obiad, kolacja oraz dodatek. „Dodatek” oznacza element, który można dołożyć do dowolnej pory dnia – np. grillowaną pierś, surówkę albo sałatkę z ciecierzycy.' },
       { rodzaj: 'tekst', tresc: 'Przycisk „Filtry” pod kategoriami zawęża listę: po rodzaju dania (zupy, sałatki, makarony…), po głównym białku (drób, mięso, ryby, strączki, jajka, nabiał) i po szybkich przełącznikach: do 20 minut, na zapas, bez gotowania. Główne białko nie jest wpisywane ręcznie – aplikacja wylicza je ze składników, więc nie jest to filtr diety ani alergenów.' },
-      { rodzaj: 'tekst', tresc: 'Dodawanie i edycja przepisów wymaga roli moderatora. Nowy przepis jest domyślnie prywatny; zgłoszenie go do publikacji i zatwierdzenie to osobny obieg wymagający zgody autora zgodnie z zasadami aplikacji.' },
-      { rodzaj: 'tekst', tresc: 'Moderator może eksportować i importować przepisy jako JSON — do pliku albo przez schowek. Pozwala to zrobić kopię zapasową, poprawić przepis poza aplikacją albo przygotować nowy w czacie z AI: ekran „Import / eksport” daje gotowy prompt z aktualnymi listami składników i sprzętu. Przy imporcie dania są rozpoznawane po nazwie, a istniejące rekordy są aktualizowane zamiast tworzenia duplikatów. Import niczego nie dopisuje do katalogów — nieznany składnik albo sprzęt zatrzymuje dane danie i podpowiada podobne nazwy.' },
+      { rodzaj: 'tekst', tresc: 'Formularz przepisu („+ Dodaj przepis”) i edycja przepisów wymagają roli moderatora. Każdy zalogowany może natomiast dodać własny przepis z pomocą AI – opis niżej. Nowy przepis jest domyślnie prywatny; zgłoszenie go do publikacji i zatwierdzenie to osobny obieg wymagający zgody autora zgodnie z zasadami aplikacji.' },
+      { rodzaj: 'podtytul', tresc: 'Nowy przepis z AI' },
+      { rodzaj: 'tekst', tresc: 'Na liście przepisów kliknij „⋯”, a potem „Nowy przepis z AI”. Kreator prowadzi przez cztery kroki:' },
+      {
+        rodzaj: 'kroki',
+        pozycje: [
+          'Wybierz sposób: nowy przepis na podstawie istniejącego (np. wersja z indykiem zamiast kurczaka) albo przepis od podstaw – także przepisany z książki czy strony.',
+          'Skopiuj tekst dla AI. Przy istniejącym przepisie są w nim wzór dania i wszystkie wymagania formatu (możesz też pobrać go jako plik i załączyć w czacie); przy przepisie od podstaw – sama instrukcja z aktualnymi listami składników i sprzętu. Wklej go w rozmowie z AI (np. ChatGPT) i dopisz, co chcesz zmienić albo jakie danie chcesz dostać.',
+          'Skopiuj całą odpowiedź AI i wklej ją w kreatorze. Tekst wokół przepisu zostanie pominięty.',
+          'Sprawdź i zapisz. Aplikacja sama wyłapie nieznane składniki i błędy formatu – Ty sprawdź, czy przepis ma sens. Przepis zapisuje się jako nowy i prywatny.',
+        ],
+      },
+      { rodzaj: 'tekst', tresc: 'Kreator nigdy nie nadpisuje istniejącego dania. Jeśli AI zostawi nazwę, która jest już w bazie, zapis będzie możliwy dopiero po wpisaniu innej nazwy. Kreator niczego też nie dopisuje do katalogów: nieznany składnik albo sprzęt zatrzymuje przepis i podpowiada podobne nazwy. AI może popełniać błędy – przed zapisem zawsze sprawdź przepis.' },
+      { rodzaj: 'podtytul', tresc: 'Kopia zapasowa (moderator i administrator)' },
+      { rodzaj: 'tekst', tresc: 'Na dole ekranu „Nowy przepis z AI” moderator i administrator mają sekcję „Kopia zapasowa”. Zwykły użytkownik jej nie widzi.' },
+      {
+        rodzaj: 'legenda',
+        pozycje: [
+          {
+            ikona: 'download-outline',
+            etykieta: 'Pobierz wszystkie przepisy (JSON)',
+            opis: 'Wszystkie przepisy w jednym pliku.',
+          },
+          {
+            ikona: 'download-outline',
+            etykieta: 'Pobierz wszystkie składniki (JSON)',
+            opis: 'Cały katalog składników: wartości odżywcze, role, etykiety i uwagi „Warto wiedzieć”. Tylko do wglądu – pliku składników nie wczytuje się z powrotem; zmiany wprowadza się w formularzu składnika.',
+          },
+          {
+            ikona: 'cloud-upload-outline',
+            etykieta: 'Wczytaj plik kopii',
+            opis: 'Przywraca przepisy z pliku. Rozpoznaje je po nazwie: taka sama nazwa zastępuje treść dania w bazie, nowa zakłada nowy, prywatny przepis. Przed zapisem widać, co zostanie nadpisane.',
+          },
+        ],
+      },
     ],
   },
   {
@@ -280,7 +313,7 @@ const PYTANIA: Pytanie[] = [
     pytanie: 'Czy mogę dodawać przepisy?',
     bloki: [
       { rodzaj: 'tekst', tresc: 'Tak. Najprościej znaleźć na liście przepis najbardziej podobny do tego, który chcesz przygotować, i dotknąć ikony „Duplikuj” na jego karcie. Otworzy się formularz nowego, prywatnego przepisu wypełniony treścią wzoru — zmień nazwę, popraw składniki i zapisz.' },
-      { rodzaj: 'tekst', tresc: 'Przepis może też przygotować AI: na ekranie „Import / eksport” (z listy przepisów, pod „⋯”) skopiuj prompt, wklej go do dowolnego czatu, dopisz, jakie danie ma powstać, a odpowiedź wklej z powrotem w imporcie.' },
+      { rodzaj: 'tekst', tresc: 'Przepis może też przygotować AI: na liście przepisów kliknij „⋯”, a potem „Nowy przepis z AI”. Kreator poprowadzi Cię krok po kroku – od tekstu do wklejenia w czacie, przez sprawdzenie odpowiedzi, po zapis nowego, prywatnego przepisu.' },
     ],
   },
   {
