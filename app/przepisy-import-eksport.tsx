@@ -14,24 +14,13 @@ import { ThemedText } from '@/components/themed-text';
 import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import { komunikatBledu } from '@/lib/blad';
-import i18n from '@/lib/jezyk';
 import {
   sklasyfikujPrzepisy,
-  wczytajPlikPrzepisow,
   zaimportujPrzepisy,
   type BladImportu,
   type PozycjaImportu,
-} from '@/lib/import-eksport-przepisow';
-import { eksportujPrzepisFormularzowy } from '@/lib/import-eksport-przepis-formularza';
-import {
-  eksportujSkladniki,
-  sklasyfikujSkladniki,
-  wczytajPlikSkladnikow,
-  zaimportujSkladniki,
-  type BladImportuSkladnika,
-  type PozycjaImportuSkladnika,
-} from '@/lib/import-eksport-skladnikow';
-import { bezPrefiksuDataUrl } from '@/lib/import-eksport-wspolne';
+} from '@/lib/import-przepisow';
+import i18n from '@/lib/jezyk';
 import { wroc } from '@/lib/nawigacja';
 import {
   przepisDoJson,
@@ -47,12 +36,13 @@ import { pobierzSkladniki, ROLE_SKLADNIKA } from '@/lib/skladniki';
 import { supabase } from '@/lib/supabase';
 
 /**
- * Import i eksport przepisów: JSON (plik albo schowek) i — jako stary format —
- * plik Excel. Tu też powstaje prompt, z którym dowolny czat z AI przygotuje
- * przepis w tym samym JSON-ie.
+ * Import i eksport przepisów jako JSON — przez plik albo schowek. Tu też
+ * powstaje prompt, z którym dowolny czat z AI przygotuje przepis w tym samym
+ * formacie.
  *
- * Zasady dopasowania i walidacji siedzą w `lib/import-eksport-przepisow.ts` —
- * tu jest tylko ekran: wybór pliku, podgląd tego, co się zaimportuje, i wynik.
+ * Format, walidacja i dopasowanie do katalogów siedzą w `lib/przepis-json.ts`,
+ * zapis w `lib/import-przepisow.ts` — tu jest tylko ekran: wybór, podgląd
+ * tego, co się zaimportuje, i wynik.
  *
  * Ekran nie sprawdza roli — tak samo jak `uzytkownicy.tsx`. Eksport pokaże
  * tyle przepisów, ile pozwolą zobaczyć reguły dostępu w bazie, a zapis
@@ -60,47 +50,14 @@ import { supabase } from '@/lib/supabase';
  * zwykłym błędem z bazy, widocznym niżej przy tym konkretnym daniu.
  */
 
-const TYP_PLIKU_XLSX = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
-
-function nazwaPlikuEksportu(prefiks: string): string {
-  const dzis = new Date().toISOString().slice(0, 10);
-  return `talerz-${prefiks}-${dzis}.xlsx`;
-}
-
 /** Nazwa przepisu -> bezpieczny fragment nazwy pliku (bez polskich znaków, spacji, wielkości liter). */
 function fragmentNazwyPliku(nazwa: string): string {
   const bezOgonkow = nazwa.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
   return bezOgonkow.replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'przepis';
 }
 
-/** Pobranie/udostępnienie już zbudowanego pliku .xlsx — identyczne dla przepisów i składników. */
-async function zapiszPlikXlsx(base64: string, nazwa: string, poZapisie: (komunikat: string) => void) {
-  if (Platform.OS === 'web') {
-    // Na webie nie ma katalogu plików ani udostępniania — zwykłe pobranie
-    // przez tymczasowy link załatwia sprawę.
-    const a = document.createElement('a');
-    a.href = `data:${TYP_PLIKU_XLSX};base64,${base64}`;
-    a.download = nazwa;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    poZapisie(i18n.t('importEksport.pobrano', { nazwa }));
-  } else {
-    const uri = FileSystem.cacheDirectory + nazwa;
-    await FileSystem.writeAsStringAsync(uri, base64, {
-      encoding: FileSystem.EncodingType.Base64,
-    });
-
-    if (await Sharing.isAvailableAsync()) {
-      await Sharing.shareAsync(uri, { mimeType: TYP_PLIKU_XLSX, dialogTitle: i18n.t('importEksport.zapiszPlik') });
-    } else {
-      poZapisie(i18n.t('importEksport.zapisany', { uri }));
-    }
-  }
-}
-
 /** Pobranie/udostępnienie pliku tekstowego (JSON). */
-async function zapiszPlikTekstowy(tekst: string, nazwa: string, poZapisie: (komunikat: string) => void) {
+async function zapiszPlik(tekst: string, nazwa: string, poZapisie: (komunikat: string) => void) {
   if (Platform.OS === 'web') {
     const url = URL.createObjectURL(new Blob([tekst], { type: 'application/json;charset=utf-8' }));
     const a = document.createElement('a');
@@ -173,20 +130,6 @@ export default function EkranImportEksportPrzepisow() {
   const [bledyZapisu, setBledyZapisu] = useState<BladImportu[]>([]);
   const [zaimportowano, setZaimportowano] = useState<number | null>(null);
 
-  const [eksportZajetySkladniki, setEksportZajetySkladniki] = useState(false);
-  const [importZajetySkladniki, setImportZajetySkladniki] = useState(false);
-  const [bladSkladniki, setBladSkladniki] = useState<string | null>(null);
-  const [komunikatSkladniki, setKomunikatSkladniki] = useState<string | null>(null);
-
-  const [nazwaPlikuSkladnikow, setNazwaPlikuSkladnikow] = useState<string | null>(null);
-  const [bledyParsowaniaSkladnikow, setBledyParsowaniaSkladnikow] = useState<BladImportuSkladnika[]>([]);
-  const [pozycjeSkladnikow, setPozycjeSkladnikow] = useState<PozycjaImportuSkladnika[] | null>(null);
-  const [postepSkladnikow, setPostepSkladnikow] = useState<{ zrobione: number; razem: number } | null>(
-    null
-  );
-  const [bledyZapisuSkladnikow, setBledyZapisuSkladnikow] = useState<BladImportuSkladnika[]>([]);
-  const [zaimportowanoSkladnikow, setZaimportowanoSkladnikow] = useState<number | null>(null);
-
   const kontoId = sesja?.user.id;
   const wczytajListePrzepisow = useCallback(async () => {
     try {
@@ -207,29 +150,6 @@ export default function EkranImportEksportPrzepisow() {
     : [];
   const wybranyPrzepis = listaPrzepisow.find((p) => p.id === wybranyPrzepisId) ?? null;
 
-  async function eksportujJeden() {
-    if (!wybranyPrzepisId) return;
-    setBlad(null);
-    setKomunikat(null);
-    setEksportZajety(true);
-    try {
-      const [pelny, skladniki] = await Promise.all([
-        pobierzPelnyPrzepis(wybranyPrzepisId),
-        pobierzSkladniki(),
-      ]);
-      const base64 = await eksportujPrzepisFormularzowy(pelny, skladniki);
-      await zapiszPlikXlsx(
-        base64,
-        nazwaPlikuEksportu(`przepis-${fragmentNazwyPliku(pelny.nazwa)}`),
-        setKomunikat
-      );
-    } catch (e) {
-      setBlad(komunikatBledu(e));
-    } finally {
-      setEksportZajety(false);
-    }
-  }
-
   /** Jeden przepis jako JSON: do pliku albo do schowka. */
   async function eksportujJson(cel: 'plik' | 'schowek') {
     if (!wybranyPrzepisId) return;
@@ -244,7 +164,7 @@ export default function EkranImportEksportPrzepisow() {
       const json = przepisDoJson(pelny, skladniki);
       const ostrzezenie = ostrzezeniaEksportu([json]);
       if (cel === 'plik') {
-        await zapiszPlikTekstowy(
+        await zapiszPlik(
           tekstJson([json]),
           `talerz-przepis-${fragmentNazwyPliku(pelny.nazwa)}.json`,
           setKomunikat
@@ -269,7 +189,7 @@ export default function EkranImportEksportPrzepisow() {
       const [pelne, skladniki] = await Promise.all([pobierzWszystkiePelnePrzepisy(), pobierzSkladniki()]);
       const jsony = pelne.map((p) => przepisDoJson(p, skladniki));
       const dzis = new Date().toISOString().slice(0, 10);
-      await zapiszPlikTekstowy(tekstJson(jsony), `talerz-przepisy-${dzis}.json`, setKomunikat);
+      await zapiszPlik(tekstJson(jsony), `talerz-przepisy-${dzis}.json`, setKomunikat);
       const ostrzezenie = ostrzezeniaEksportu(jsony);
       if (ostrzezenie) setBlad(ostrzezenie);
     } catch (e) {
@@ -303,7 +223,7 @@ export default function EkranImportEksportPrzepisow() {
   }
 
   /** Wspólny koniec dla wklejonego tekstu i pliku: sprawdzenie z katalogami i podgląd. */
-  async function pokazPodgladJson(tekst: string) {
+  async function pokazPodglad(tekst: string) {
     const [skladniki, sprzet, istniejacePrzepisy] = await Promise.all([
       pobierzSkladniki(),
       supabase.from('sprzet').select('nazwa'),
@@ -326,13 +246,13 @@ export default function EkranImportEksportPrzepisow() {
     setKomunikat(null);
     wyczyscImport();
     try {
-      await pokazPodgladJson(wklejonyJson);
+      await pokazPodglad(wklejonyJson);
     } catch (e) {
       setBlad(komunikatBledu(e));
     }
   }
 
-  async function wybierzPlikJson() {
+  async function wybierzPlik() {
     setBlad(null);
     setKomunikat(null);
     wyczyscImport();
@@ -353,7 +273,7 @@ export default function EkranImportEksportPrzepisow() {
           ? await zasob.file.text()
           : await FileSystem.readAsStringAsync(zasob.uri);
 
-      await pokazPodgladJson(tekst);
+      await pokazPodglad(tekst);
     } catch (e) {
       setBlad(komunikatBledu(e));
     }
@@ -366,50 +286,6 @@ export default function EkranImportEksportPrzepisow() {
     setPostep(null);
     setBledyZapisu([]);
     setZaimportowano(null);
-  }
-
-  async function wybierzPlik() {
-    setBlad(null);
-    setKomunikat(null);
-    wyczyscImport();
-
-    try {
-      const wynik = await DocumentPicker.getDocumentAsync({
-        type: [TYP_PLIKU_XLSX, 'application/vnd.ms-excel'],
-        copyToCacheDirectory: true,
-        base64: true,
-      });
-      if (wynik.canceled || wynik.assets.length === 0) return;
-
-      const zasob = wynik.assets[0];
-      setNazwaPliku(zasob.name);
-
-      const base64 =
-        Platform.OS === 'web'
-          ? bezPrefiksuDataUrl(zasob.base64 ?? '')
-          : await FileSystem.readAsStringAsync(zasob.uri, {
-              encoding: FileSystem.EncodingType.Base64,
-            });
-
-      if (!base64) {
-        setBlad(t('importEksport.nieOdczytano'));
-        return;
-      }
-
-      // Katalog składników i lista już istniejących przepisów — potrzebne
-      // razem, żeby wiedzieć, co jest korektą, a co nowym daniem.
-      const [dostepneSkladniki, istniejacePrzepisy] = await Promise.all([
-        pobierzSkladniki(),
-        supabase.from('przepisy').select('id, nazwa'),
-      ]);
-      if (istniejacePrzepisy.error) throw istniejacePrzepisy.error;
-
-      const wczytane = await wczytajPlikPrzepisow(base64, dostepneSkladniki);
-      setBledyParsowania(wczytane.bledy);
-      setPozycje(sklasyfikujPrzepisy(wczytane.przepisy, istniejacePrzepisy.data ?? []));
-    } catch (e) {
-      setBlad(komunikatBledu(e));
-    }
   }
 
   async function potwierdzImport() {
@@ -437,97 +313,6 @@ export default function EkranImportEksportPrzepisow() {
 
   const doAktualizacji = pozycje?.filter((p) => p.istniejacyId !== null) ?? [];
   const doDodania = pozycje?.filter((p) => p.istniejacyId === null) ?? [];
-
-  async function eksportujSkladnikiPlik() {
-    setBladSkladniki(null);
-    setKomunikatSkladniki(null);
-    setEksportZajetySkladniki(true);
-    try {
-      const skladniki = await pobierzSkladniki();
-      if (skladniki.length === 0) {
-        setBladSkladniki(t('importEksport.pustyKatalog'));
-        return;
-      }
-
-      const base64 = await eksportujSkladniki(skladniki);
-      await zapiszPlikXlsx(base64, nazwaPlikuEksportu('skladniki'), setKomunikatSkladniki);
-    } catch (e) {
-      setBladSkladniki(komunikatBledu(e));
-    } finally {
-      setEksportZajetySkladniki(false);
-    }
-  }
-
-  function wyczyscImportSkladnikow() {
-    setNazwaPlikuSkladnikow(null);
-    setBledyParsowaniaSkladnikow([]);
-    setPozycjeSkladnikow(null);
-    setPostepSkladnikow(null);
-    setBledyZapisuSkladnikow([]);
-    setZaimportowanoSkladnikow(null);
-  }
-
-  async function wybierzPlikSkladnikow() {
-    setBladSkladniki(null);
-    setKomunikatSkladniki(null);
-    wyczyscImportSkladnikow();
-
-    try {
-      const wynik = await DocumentPicker.getDocumentAsync({
-        type: [TYP_PLIKU_XLSX, 'application/vnd.ms-excel'],
-        copyToCacheDirectory: true,
-        base64: true,
-      });
-      if (wynik.canceled || wynik.assets.length === 0) return;
-
-      const zasob = wynik.assets[0];
-      setNazwaPlikuSkladnikow(zasob.name);
-
-      const base64 =
-        Platform.OS === 'web'
-          ? bezPrefiksuDataUrl(zasob.base64 ?? '')
-          : await FileSystem.readAsStringAsync(zasob.uri, {
-              encoding: FileSystem.EncodingType.Base64,
-            });
-
-      if (!base64) {
-        setBladSkladniki(t('importEksport.nieOdczytano'));
-        return;
-      }
-
-      const istniejaceSkladniki = await supabase.from('skladniki').select('id, nazwa');
-      if (istniejaceSkladniki.error) throw istniejaceSkladniki.error;
-
-      const wczytane = await wczytajPlikSkladnikow(base64);
-      setBledyParsowaniaSkladnikow(wczytane.bledy);
-      setPozycjeSkladnikow(sklasyfikujSkladniki(wczytane.skladniki, istniejaceSkladniki.data ?? []));
-    } catch (e) {
-      setBladSkladniki(komunikatBledu(e));
-    }
-  }
-
-  async function potwierdzImportSkladnikow() {
-    if (!pozycjeSkladnikow) return;
-    setBladSkladniki(null);
-    setImportZajetySkladniki(true);
-    setPostepSkladnikow({ zrobione: 0, razem: pozycjeSkladnikow.length });
-
-    try {
-      const { bledy } = await zaimportujSkladniki(pozycjeSkladnikow, (zrobione, razem) =>
-        setPostepSkladnikow({ zrobione, razem })
-      );
-      setZaimportowanoSkladnikow(pozycjeSkladnikow.length - bledy.length);
-      setBledyZapisuSkladnikow(bledy);
-      setPozycjeSkladnikow(null);
-    } catch (e) {
-      setBladSkladniki(komunikatBledu(e));
-    } finally {
-      setImportZajetySkladniki(false);
-    }
-  }
-
-  const doAktualizacjiSkladnikow = pozycjeSkladnikow?.filter((p) => p.istniejacyId !== null) ?? [];
-  const doDodaniaSkladnikow = pozycjeSkladnikow?.filter((p) => p.istniejacyId === null) ?? [];
 
   return (
     <Ekran
@@ -589,12 +374,6 @@ export default function EkranImportEksportPrzepisow() {
           onPress={() => eksportujJson('schowek')}
           wylaczony={!wybranyPrzepisId || eksportZajety}
         />
-        <Przycisk
-          tytul={t('importEksport.eksportujDoExcela')}
-          wariant="poboczny"
-          onPress={eksportujJeden}
-          wylaczony={!wybranyPrzepisId || eksportZajety}
-        />
 
         <ThemedText type="small" themeColor="textSecondary">
           {t('importEksport.wszystkieOpis')}
@@ -645,8 +424,7 @@ export default function EkranImportEksportPrzepisow() {
           onPress={sprawdzWklejony}
           wylaczony={wklejonyJson.trim() === ''}
         />
-        <Przycisk tytul={t('importEksport.wybierzPlikJson')} wariant="poboczny" onPress={wybierzPlikJson} />
-        <Przycisk tytul={t('importEksport.wybierzPlik')} wariant="poboczny" onPress={wybierzPlik} />
+        <Przycisk tytul={t('importEksport.wybierzPlikJson')} wariant="poboczny" onPress={wybierzPlik} />
 
         {nazwaPliku && (
           <ThemedText type="small" themeColor="textSecondary">
@@ -729,119 +507,6 @@ export default function EkranImportEksportPrzepisow() {
       {blad && (
         <ThemedText type="small" themeColor="accent">
           {blad}
-        </ThemedText>
-      )}
-
-      <Karta style={styles.grupa}>
-        <ThemedText type="smallBold" themeColor="textSecondary">
-          {t('importEksport.eksportSkladnikow')}
-        </ThemedText>
-        <ThemedText type="small" themeColor="textSecondary">
-          {t('importEksport.eksportSkladnikowOpis')}
-        </ThemedText>
-        <Przycisk
-          tytul={t('importEksport.eksportujSkladnikiExcel')}
-          onPress={eksportujSkladnikiPlik}
-          zajety={eksportZajetySkladniki}
-        />
-      </Karta>
-
-      <Karta style={styles.grupa}>
-        <ThemedText type="smallBold" themeColor="textSecondary">
-          {t('importEksport.importSkladnikow')}
-        </ThemedText>
-        <ThemedText type="small" themeColor="textSecondary">
-          {t('importEksport.importSkladnikowOpis')}
-        </ThemedText>
-
-        <Przycisk tytul={t('importEksport.wybierzPlikSkladnikow')} wariant="poboczny" onPress={wybierzPlikSkladnikow} />
-
-        {nazwaPlikuSkladnikow && (
-          <ThemedText type="small" themeColor="textSecondary">
-            {t('importEksport.plik', { nazwa: nazwaPlikuSkladnikow })}
-          </ThemedText>
-        )}
-
-        {bledyParsowaniaSkladnikow.length > 0 && (
-          <View style={styles.blok}>
-            <ThemedText type="smallBold" themeColor="accent">
-              {t('importEksport.skladnikiPominiete', { count: bledyParsowaniaSkladnikow.length })}
-            </ThemedText>
-            {bledyParsowaniaSkladnikow.map((b, i) => (
-              <ThemedText key={i} type="small" themeColor="textSecondary">
-                {b.skladnik ? t('importEksport.prefiksBledu', { nazwa: b.skladnik }) : ''}
-                {b.tresc}
-              </ThemedText>
-            ))}
-          </View>
-        )}
-
-        {pozycjeSkladnikow && pozycjeSkladnikow.length > 0 && (
-          <View style={styles.blok}>
-            <ThemedText type="small" themeColor="textSecondary">
-              {t('importEksport.gotoweSkladniki', {
-                nowe: doDodaniaSkladnikow.length,
-                aktualizacje: doAktualizacjiSkladnikow.length,
-              })}
-            </ThemedText>
-            {doAktualizacjiSkladnikow.length > 0 && (
-              <ThemedText type="small" themeColor="textSecondary">
-                {t('importEksport.nadpisane', { nazwy: doAktualizacjiSkladnikow.map((p) => p.dane.nazwa).join(', ') })}
-              </ThemedText>
-            )}
-            <Przycisk
-              tytul={t('importEksport.zapiszSkladniki', { count: pozycjeSkladnikow.length })}
-              onPress={potwierdzImportSkladnikow}
-              zajety={importZajetySkladniki}
-            />
-            <Przycisk tytul={t('wspolne.anuluj')} wariant="poboczny" onPress={wyczyscImportSkladnikow} />
-          </View>
-        )}
-
-        {pozycjeSkladnikow &&
-          pozycjeSkladnikow.length === 0 &&
-          bledyParsowaniaSkladnikow.length === 0 && (
-            <ThemedText type="small" themeColor="textSecondary">
-              {t('importEksport.brakSkladnikowWPliku')}
-            </ThemedText>
-          )}
-
-        {postepSkladnikow && importZajetySkladniki && (
-          <ThemedText type="small" themeColor="textSecondary">
-            {t('importEksport.postep', { zrobione: postepSkladnikow.zrobione, razem: postepSkladnikow.razem })}
-          </ThemedText>
-        )}
-
-        {zaimportowanoSkladnikow !== null && (
-          <View style={styles.blok}>
-            <ThemedText type="smallBold">
-              {t('importEksport.zapisanoSkladniki', { count: zaimportowanoSkladnikow })}
-            </ThemedText>
-            {bledyZapisuSkladnikow.length > 0 && (
-              <>
-                <ThemedText type="smallBold" themeColor="accent">
-                  {t('importEksport.nieZapisano', { ile: bledyZapisuSkladnikow.length })}
-                </ThemedText>
-                {bledyZapisuSkladnikow.map((b, i) => (
-                  <ThemedText key={i} type="small" themeColor="textSecondary">
-                    {b.skladnik ? t('importEksport.prefiksBledu', { nazwa: b.skladnik }) : ''}
-                    {b.tresc}
-                  </ThemedText>
-                ))}
-              </>
-            )}
-          </View>
-        )}
-      </Karta>
-
-      {komunikatSkladniki && (
-        <ThemedText type="small" themeColor="textSecondary">
-          {komunikatSkladniki}
-        </ThemedText>
-      )}
-      {bladSkladniki && (
-        <ThemedText type="small" themeColor="accent">
-          {bladSkladniki}
         </ThemedText>
       )}
 

@@ -16,7 +16,6 @@ import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import { komunikatBledu } from '@/lib/blad';
 import { jezyk } from '@/lib/jezyk';
-import { ROLA_SKLADNIKA_WEDLUG_ETYKIETY } from '@/lib/import-eksport-wspolne';
 import { wroc } from '@/lib/nawigacja';
 import { useSesja } from '@/lib/sesja';
 import {
@@ -26,6 +25,7 @@ import {
   sprawdzSkladnik,
   usunSkladnik,
   zapiszSkladnik,
+  ROLA_SKLADNIKA_WEDLUG_ETYKIETY,
   type DaneSkladnika,
   type RolaSkladnika,
   type Skladnik,

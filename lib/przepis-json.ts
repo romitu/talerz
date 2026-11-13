@@ -15,7 +15,7 @@
  * kuchni” zepsułby katalog.
  */
 
-import type { BladImportu, PrzepisDoImportu, WynikWczytania } from './import-eksport-przepisow';
+import type { BladImportu, PrzepisDoImportu, WynikWczytania } from './import-przepisow';
 import type { Kuchnia, PelnyPrzepis, PoraPosilku, RodzajDania } from './przepisy';
 import type { RolaSkladnika } from './skladniki';
 
@@ -347,8 +347,7 @@ export type KatalogiImportu = {
  * Wczytuje tekst JSON (jeden przepis albo lista) i zwraca przepisy gotowe
  * do zapisania przez `zaimportujPrzepisy`.
  *
- * Tak jak import z Excela — atomowo NA PRZEPIS: błąd odrzuca tylko to danie,
- * reszta pliku przechodzi.
+ * Atomowo NA PRZEPIS: błąd odrzuca tylko to danie, reszta pliku przechodzi.
  */
 export function wczytajJsonPrzepisow(tekst: string, katalogi: KatalogiImportu): WynikWczytania {
   const wyjety = wyjmijJson(tekst);

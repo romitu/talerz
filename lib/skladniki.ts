@@ -34,8 +34,8 @@ export const ROLE_SKLADNIKA: RolaSkladnika[] = [
 ];
 
 /**
- * Nazwy ról w PLIKACH EXCEL (import i eksport czytają je w obie strony) —
- * nie zależą od języka aplikacji. Na ekranach: `rolaSkladnika.<rola>.nazwa`.
+ * Nazwy ról niezależne od języka aplikacji — po nich tabele składników
+ * rozpoznają rolę wpisaną z klawiatury. Na ekranach: `rolaSkladnika.<rola>.nazwa`.
  */
 export const OPIS_ROLI_SKLADNIKA: Record<RolaSkladnika, string> = {
   baza: 'Baza',
@@ -46,6 +46,14 @@ export const OPIS_ROLI_SKLADNIKA: Record<RolaSkladnika, string> = {
   woda: 'Woda technologiczna',
   do_smaku: 'Do smaku',
 };
+
+/** Wpisana nazwa roli (albo sam klucz), małymi literami -> rola składnika w bazie. */
+export const ROLA_SKLADNIKA_WEDLUG_ETYKIETY = new Map<string, RolaSkladnika>(
+  (Object.entries(OPIS_ROLI_SKLADNIKA) as [RolaSkladnika, string][]).flatMap(([rola, etykieta]) => [
+    [etykieta.toLowerCase(), rola],
+    [rola, rola],
+  ])
+);
 
 export type Skladnik = {
   id: string;

@@ -193,7 +193,7 @@
       <div class="plik"><span class="nazwa ekran">przepisy.tsx</span><span class="opis">zakładka „Przepisy” — lista</span></div>
       <div class="plik"><span class="nazwa ekran">przepis.tsx</span><span class="opis">podgląd pojedynczego przepisu</span></div>
       <div class="plik"><span class="nazwa ekran">przepis-formularz.tsx</span><span class="opis">dodawanie / edycja przepisu</span></div>
-      <div class="plik"><span class="nazwa ekran">przepisy-import-eksport.tsx</span><span class="opis">import/eksport przepisów (Excel)</span></div>
+      <div class="plik"><span class="nazwa ekran">przepisy-import-eksport.tsx</span><span class="opis">import/eksport przepisów (JSON) i prompt dla AI</span></div>
       <div class="plik"><span class="nazwa ekran">skladniki.tsx</span><span class="opis">baza składników + import/eksport</span></div>
       <div class="plik"><span class="nazwa ekran">profil.tsx</span><span class="opis">zakładka „Profil”</span></div>
       <div class="plik"><span class="nazwa ekran">profil-formularz.tsx</span><span class="opis">edycja profilu i celów żywieniowych</span></div>
@@ -236,9 +236,8 @@
       <div class="plik"><span class="nazwa logika">uzytkownicy.ts</span><span class="opis">zarządzanie kontami, role, status aktywności</span></div>
       <div class="plik"><span class="nazwa logika">zywienie.ts</span><span class="opis">obliczenia żywieniowe: kalorie, makra, cele</span></div>
       <div class="plik"><span class="nazwa logika">automat.ts</span><span class="opis">silnik reguł / generator planu</span></div>
-      <div class="plik"><span class="nazwa logika">import-eksport-przepisow.ts</span><span class="opis">import/eksport przepisów (Excel)</span></div>
-      <div class="plik"><span class="nazwa logika">import-eksport-skladnikow.ts</span><span class="opis">import/eksport składników (Excel) — bieżąca gałąź</span></div>
-      <div class="plik"><span class="nazwa logika">import-eksport-wspolne.ts</span><span class="opis">wspólny kod dla obu importów/eksportów</span></div>
+      <div class="plik"><span class="nazwa logika">przepis-json.ts</span><span class="opis">format JSON przepisu: walidacja, eksport, import, prompt dla AI</span></div>
+      <div class="plik"><span class="nazwa logika">import-przepisow.ts</span><span class="opis">zapis zaimportowanych przepisów do bazy</span></div>
       <div class="plik"><span class="nazwa logika">wyglad.tsx</span><span class="opis">kontekst motywu / stylu wizualnego</span></div>
       <div class="plik"><span class="nazwa logika">zdjecia.ts</span><span class="opis">obsługa zdjęć (upload, storage)</span></div>
       <div class="plik"><span class="nazwa logika">nawigacja.ts</span> / <span class="nazwa logika">blad.ts</span><span class="opis">pomocnicze: nawigacja, obsługa błędów</span></div>
@@ -301,7 +300,7 @@
   </details>
 
   <p class="stopka">
-    Stos: Expo + React Native + expo-router · Supabase (Postgres + RLS) · ExcelJS do importu/eksportu.<br>
+    Stos: Expo + React Native + expo-router · Supabase (Postgres + RLS) · import/eksport przepisów jako JSON.<br>
     Konwencja: cała nazwa domenowa po polsku, UI (<code class="sciezka">components/</code>) oddzielone od logiki (<code class="sciezka">lib/</code>).
   </p>
 </div>

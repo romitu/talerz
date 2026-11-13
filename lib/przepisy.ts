@@ -134,8 +134,8 @@ export const OPIS_PREFERENCJI: Record<Preferencja, string> = {
 };
 
 /*
-  OPIS_PORY, OPIS_RODZAJU i OPIS_KUCHNI to słownictwo PLIKÓW EXCEL (import
-  i eksport czytają je w obie strony), więc nie zależą od języka aplikacji.
+  OPIS_PORY, OPIS_RODZAJU i OPIS_KUCHNI to nazwy niezależne od języka
+  aplikacji (dawniej słownictwo plików importu).
   Na ekranach nazwy biorą się z tłumaczeń: `pora.*`, `rodzaj.*`, `kuchnia.*`.
 */
 export const OPIS_PORY: Record<PoraPosilku, string> = {
@@ -162,7 +162,7 @@ export function pasujeDoPory(pory: PoraPosilku[], pora: PoraPosilku): boolean {
   return pory.includes(pora) || pory.includes('dodatek');
 }
 
-/** Kolejność i nazwy rodzajów — tak samo w filtrach, formularzu i arkuszu. */
+/** Kolejność i nazwy rodzajów — tak samo w filtrach i formularzu. */
 export const RODZAJE_DAN: RodzajDania[] = [
   'zupa',
   'salatka',
@@ -560,7 +560,7 @@ export async function pobierzPelnyPrzepis(id: string): Promise<PelnyPrzepis> {
 }
 
 /**
- * Wszystkie pełne przepisy naraz — do eksportu.
+ * Wszystkie pełne przepisy naraz — do eksportu JSON (kopia zapasowa).
  *
  * `pobierzPelnyPrzepis` woła trzy zapytania NA JEDEN przepis, więc dla
  * całej bazy zrobiłby ich dziesiątki. Tutaj te same trzy tabele pytamy raz,

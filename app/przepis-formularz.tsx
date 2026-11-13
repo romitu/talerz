@@ -22,7 +22,6 @@ import { WyborWielo } from '@/components/wybor-wielo';
 import { ZdjeciePrzepisu } from '@/components/zdjecie-przepisu';
 import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
-import { ROLA_SKLADNIKA_WEDLUG_ETYKIETY } from '@/lib/import-eksport-wspolne';
 import {
   KATEGORIE,
   OPIS_KUCHNI,
@@ -43,6 +42,7 @@ import {
   ROLE_SKLADNIKA,
   sprawdzSkladnik,
   zapiszSkladnik,
+  ROLA_SKLADNIKA_WEDLUG_ETYKIETY,
   type RolaSkladnika,
   type Skladnik,
   type UzycieSkladnika,
