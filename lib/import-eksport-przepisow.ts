@@ -742,17 +742,43 @@ export async function zaimportujPrzepis(
       : {}),
   };
 
+  /*
+    Plik bez liczby porcji bazowych (tak pisze AI — prompt o nią nie pyta) nie
+    może zostawić w bazie zera: formularz przy porcjowaniu na wagę liczy z niej
+    masę porcji i z zerem nie pozwala zapisać przepisu. Wyliczamy ją więc tak,
+    jak formularz liczy w drugą stronę: masa całości / masa porcji.
+  */
+  const masaCalosci = dane.skladniki.reduce((suma, s) => suma + s.gramy, 0);
+  const porcjeBazoweWyliczone =
+    dane.porcjowanie === 'waga' && dane.porcja_g
+      ? Math.min(30, Math.max(1, Math.round(masaCalosci / dane.porcja_g)))
+      : 1;
+
   let przepisId: string;
 
   if (istniejacyId) {
     const { error } = await supabase.from('przepisy').update(naglowek).eq('id', istniejacyId);
     if (error) throw error;
+    // Ręcznie ustawiona liczba zostaje — uzupełniamy tylko zero.
+    if (dane.liczba_porcji_bazowych === undefined) {
+      const { error: bladPorcji } = await supabase
+        .from('przepisy')
+        .update({ liczba_porcji_bazowych: porcjeBazoweWyliczone })
+        .eq('id', istniejacyId)
+        .eq('liczba_porcji_bazowych', 0);
+      if (bladPorcji) throw bladPorcji;
+    }
     await wyczyscTrescPrzepisu(istniejacyId);
     przepisId = istniejacyId;
   } else {
     const { data, error } = await supabase
       .from('przepisy')
-      .insert({ ...naglowek, autor_id: autorId, widocznosc: 'prywatna' })
+      .insert({
+        liczba_porcji_bazowych: porcjeBazoweWyliczone,
+        ...naglowek,
+        autor_id: autorId,
+        widocznosc: 'prywatna',
+      })
       .select('id')
       .single();
     if (error) throw error;

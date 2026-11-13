@@ -202,7 +202,7 @@ const SEKCJE: Sekcja[] = [
       { rodzaj: 'tekst', tresc: 'Zakładka „Przepisy” zawiera wyszukiwarkę i kategorie: śniadanie, obiad, kolacja oraz dodatek. „Dodatek” oznacza element, który można dołożyć do dowolnej pory dnia – np. grillowaną pierś, surówkę albo sałatkę z ciecierzycy.' },
       { rodzaj: 'tekst', tresc: 'Przycisk „Filtry” pod kategoriami zawęża listę: po rodzaju dania (zupy, sałatki, makarony…), po głównym białku (drób, mięso, ryby, strączki, jajka, nabiał) i po szybkich przełącznikach: do 20 minut, na zapas, bez gotowania. Główne białko nie jest wpisywane ręcznie – aplikacja wylicza je ze składników, więc nie jest to filtr diety ani alergenów.' },
       { rodzaj: 'tekst', tresc: 'Dodawanie i edycja przepisów wymaga roli moderatora. Nowy przepis jest domyślnie prywatny; zgłoszenie go do publikacji i zatwierdzenie to osobny obieg wymagający zgody autora zgodnie z zasadami aplikacji.' },
-      { rodzaj: 'tekst', tresc: 'Moderator może importować i eksportować bazę przez plik Excel. Pozwala to zrobić kopię zapasową lub masowo poprawiać przepisy poza aplikacją. Przy imporcie dania są rozpoznawane po nazwie, a istniejące rekordy są aktualizowane zamiast tworzenia duplikatów.' },
+      { rodzaj: 'tekst', tresc: 'Moderator może eksportować i importować przepisy jako JSON — do pliku albo przez schowek. Pozwala to zrobić kopię zapasową, poprawić przepis poza aplikacją albo przygotować nowy w czacie z AI: ekran „Import / eksport” daje gotowy prompt z aktualnymi listami składników i sprzętu. Przy imporcie dania są rozpoznawane po nazwie, a istniejące rekordy są aktualizowane zamiast tworzenia duplikatów. Import niczego nie dopisuje do katalogów — nieznany składnik albo sprzęt zatrzymuje dane danie i podpowiada podobne nazwy.' },
     ],
   },
   {
@@ -279,8 +279,8 @@ const PYTANIA: Pytanie[] = [
   {
     pytanie: 'Czy mogę dodawać przepisy?',
     bloki: [
-      { rodzaj: 'tekst', tresc: 'Tak. W tym celu wyeksportuj najbardziej podobny przepis do tego, który chcesz przygotować, do pliku Excel. Zmień w pliku nazwę potrawy na własną i w zasadzie możesz od razu zaimportować go z powrotem jako swój prywatny przepis, a następnie edytować jego składniki w aplikacji.' },
-      { rodzaj: 'tekst', tresc: 'Eksport i import znajdziesz na ekranie „Import / eksport przepisów” dostępnym z listy przepisów.' },
+      { rodzaj: 'tekst', tresc: 'Tak. Najprościej znaleźć na liście przepis najbardziej podobny do tego, który chcesz przygotować, i dotknąć ikony „Duplikuj” na jego karcie. Otworzy się formularz nowego, prywatnego przepisu wypełniony treścią wzoru — zmień nazwę, popraw składniki i zapisz.' },
+      { rodzaj: 'tekst', tresc: 'Przepis może też przygotować AI: na ekranie „Import / eksport” (z listy przepisów, pod „⋯”) skopiuj prompt, wklej go do dowolnego czatu, dopisz, jakie danie ma powstać, a odpowiedź wklej z powrotem w imporcie.' },
     ],
   },
   {

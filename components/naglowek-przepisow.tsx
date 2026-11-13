@@ -21,8 +21,8 @@ export type ZakladkaPrzepisow = {
 
 /**
  * Nagłówek ekranu przepisów — szukajka z przyciskiem Filtry na początku,
- * zakładki (dziś tylko kolejka moderatora) i pod nimi panel filtrów
- * (`FiltryPrzepisow`).
+ * obok niej „+ Dodaj przepis” i „⋯ Więcej” (`AkcjePrzepisow`), zakładki
+ * (dziś tylko kolejka moderatora) i pod nimi panel filtrów (`FiltryPrzepisow`).
  * Stały (patrz `naglowekStaly` w `Ekran`), więc szukanie i filtry zostają
  * pod ręką, nawet gdy lista przepisów jest długa i przewija się.
  */
@@ -33,6 +33,8 @@ export function NaglowekPrzepisow({
   zakladki,
   przyciskFiltrow,
   filtry,
+  akcje,
+  panelAkcji,
 }: {
   liczbaWBazie: number;
   fraza: string;
@@ -41,38 +43,50 @@ export function NaglowekPrzepisow({
   /** Pigułka „Filtry” w szukajce — tam, gdzie dawniej stała ikona książki. */
   przyciskFiltrow?: ReactNode;
   filtry?: ReactNode;
+  /** Przyciski po prawej od szukajki — „+ Dodaj przepis” i „⋯ Więcej” (`AkcjePrzepisow`). */
+  akcje?: ReactNode;
+  /** Rozwinięte „⋯ Więcej” — pokazywane pod szukajką. */
+  panelAkcji?: ReactNode;
 }) {
   const motyw = useTheme();
   const { t } = useTranslation();
 
   return (
     <ThemedView type="backgroundElement" style={[styles.karta, { borderColor: motyw.border }]}>
-      {liczbaWBazie > 0 && (
-        <View
-          style={[styles.szukajka, { borderColor: motyw.accent, backgroundColor: motyw.background }]}>
-          {przyciskFiltrow}
-          <Ionicons name="search" size={20} color={motyw.textSecondary} />
-          <TextInput
-            value={fraza}
-            onChangeText={onZmianaFrazy}
-            placeholder={t('naglowekPrzepisow.szukaj')}
-            placeholderTextColor={motyw.textSecondary}
-            autoCorrect={false}
-            autoCapitalize="none"
-            clearButtonMode="while-editing"
-            style={[styles.wejscie, { color: motyw.text }]}
-          />
-          {fraza.length > 0 && (
-            <Pressable
-              onPress={() => onZmianaFrazy('')}
-              hitSlop={8}
-              accessibilityRole="button"
-              accessibilityLabel={t('naglowekPrzepisow.wyczysc')}>
-              <Ionicons name="close-circle" size={20} color={motyw.textSecondary} />
-            </Pressable>
-          )}
-        </View>
-      )}
+      {/* Akcje stoją w tym rzędzie także przy pustej bazie — wtedy „Dodaj przepis” jest najważniejszy. */}
+      <View style={styles.rzadSzukajki}>
+        {liczbaWBazie > 0 ? (
+          <View
+            style={[styles.szukajka, { borderColor: motyw.accent, backgroundColor: motyw.background }]}>
+            {przyciskFiltrow}
+            <Ionicons name="search" size={20} color={motyw.textSecondary} />
+            <TextInput
+              value={fraza}
+              onChangeText={onZmianaFrazy}
+              placeholder={t('naglowekPrzepisow.szukaj')}
+              placeholderTextColor={motyw.textSecondary}
+              autoCorrect={false}
+              autoCapitalize="none"
+              clearButtonMode="while-editing"
+              style={[styles.wejscie, { color: motyw.text }]}
+            />
+            {fraza.length > 0 && (
+              <Pressable
+                onPress={() => onZmianaFrazy('')}
+                hitSlop={8}
+                accessibilityRole="button"
+                accessibilityLabel={t('naglowekPrzepisow.wyczysc')}>
+                <Ionicons name="close-circle" size={20} color={motyw.textSecondary} />
+              </Pressable>
+            )}
+          </View>
+        ) : (
+          <View style={styles.wypelnienie} />
+        )}
+        {akcje}
+      </View>
+
+      {panelAkcji}
 
       {zakladki.length > 0 && (
         <ScrollView
@@ -115,7 +129,14 @@ const styles = StyleSheet.create({
     padding: Spacing.three,
     gap: Spacing.two,
   },
+  rzadSzukajki: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.one,
+  },
+  wypelnienie: { flex: 1 },
   szukajka: {
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     gap: Spacing.two,

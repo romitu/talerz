@@ -12,7 +12,7 @@
  *
  * Dwa poziomy sprawdzania
  * -----------------------
- * 1. Tutaj, przed wygenerowaniem: kształt pliku — wymagane pola, dozwolone
+ * 1. Tutaj, przed wygenerowaniem (lib/przepis-json.ts): kształt pliku — wymagane pola, dozwolone
  *    wartości, zakresy liczb. Błąd przerywa i nic nie powstaje.
  * 2. W bazie, na początku skryptu SQL: czy każda nazwa składnika i sprzętu
  *    istnieje w katalogu, a składnik liczony w sztukach ma masę sztuki.
@@ -27,6 +27,7 @@ import { readdirSync, readFileSync, unlinkSync, writeFileSync } from 'node:fs';
 import { basename, dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { sprawdzPrzepis } from '../lib/przepis-json.ts';
 import { tablica, tekst } from './generuj-import.mjs';
 import { wczytajEnv } from './import-usda.mjs';
 
@@ -34,102 +35,9 @@ const KATALOG = dirname(fileURLToPath(import.meta.url));
 const KORZEN = join(KATALOG, '..');
 const FOLDER = join(KATALOG, 'przepisy-ai');
 
-const PORY = ['sniadanie', 'obiad', 'kolacja', 'dodatek'];
-const KUCHNIE = ['srodziemnomorska', 'azjatycka', 'polska', 'inna'];
-const RODZAJE = ['zupa', 'salatka', 'makaron', 'kasza_ryz', 'gulasz_curry', 'z_piekarnika', 'kanapki', 'jajka', 'na_slodko'];
-const JEDNOSTKI = ['g', 'ml', 'szt'];
-
-// ---------------------------------------------------------------------------
-//  Sprawdzenie pliku
-// ---------------------------------------------------------------------------
-
-const calkowita = (x, od, do_) => Number.isInteger(x) && x >= od && x <= do_;
-const napis = (x) => typeof x === 'string' && x.trim().length > 0;
-
-/** Zwraca listę błędów. Pusta lista — plik jest w porządku. */
-export function sprawdzPrzepis(p) {
-  const b = [];
-
-  if (!napis(p.nazwa) || p.nazwa.trim().length < 3 || p.nazwa.length > 120)
-    b.push('nazwa: od 3 do 120 znaków');
-
-  for (const [pole, dozwolone] of [['pory', PORY], ['kuchnie', KUCHNIE]]) {
-    if (!Array.isArray(p[pole])) b.push(`${pole}: ma być listą`);
-    else
-      p[pole].filter((x) => !dozwolone.includes(x))
-        .forEach((x) => b.push(`${pole}: „${x}” — dozwolone ${dozwolone.join(', ')}`));
-  }
-
-  // Nieobowiązkowe: bez pola import nie rusza rodzajów w bazie (migracja 0046).
-  if (p.rodzaje !== undefined) {
-    if (!Array.isArray(p.rodzaje)) b.push('rodzaje: ma być listą');
-    else {
-      p.rodzaje.filter((x) => !RODZAJE.includes(x))
-        .forEach((x) => b.push(`rodzaje: „${x}” — dozwolone ${RODZAJE.join(', ')}`));
-      if (p.rodzaje.length > 2) b.push('rodzaje: najwyżej dwa');
-    }
-  }
-
-  // AI liczy porcja_g jako sumę mas, razem z pół grama pieprzu — wychodzi
-  // 196,5 g. Kolumna jest całkowita, a pół grama porcji nie zmienia, więc
-  // zaokrąglamy zamiast odrzucać plik.
-  if (typeof p.porcja_g === 'number') p.porcja_g = Math.round(p.porcja_g);
-
-  // Ograniczenie porcjowanie_spojne z migracji 0007.
-  if (p.porcjowanie === 'waga') {
-    if (!calkowita(p.porcja_g, 20, 2000)) b.push('porcja_g: liczba całkowita od 20 do 2000');
-    if (p.porcje !== undefined) b.push('porcje: przy porcjowaniu „waga” nie podawaj — liczy się z masy');
-  } else if (p.porcjowanie === 'sztuki') {
-    if (!calkowita(p.porcje, 1, 30)) b.push('porcje: liczba całkowita od 1 do 30');
-    if (p.porcja_g !== undefined) b.push('porcja_g: przy porcjowaniu „sztuki” nie podawaj');
-  } else {
-    b.push('porcjowanie: „waga” albo „sztuki”');
-  }
-
-  // Nieobowiązkowe: bez pola import wpisuje 1, ale nie nadpisuje liczby
-  // ustawionej już w bazie (patrz `on conflict` niżej).
-  if (p.liczba_porcji_bazowych !== undefined && !calkowita(p.liczba_porcji_bazowych, 1, 30)) {
-    b.push('liczba_porcji_bazowych: liczba całkowita od 1 do 30');
-  }
-
-  if (!calkowita(p.trwalosc_dni, 0, 3)) b.push('trwalosc_dni: od 0 do 3');
-  if (!calkowita(p.czas_przygotowania_min, 1, 1440)) b.push('czas_przygotowania_min: od 1 do 1440');
-  if (!calkowita(p.czas_obrobki_min, 0, 1440)) b.push('czas_obrobki_min: od 0 do 1440');
-  if (typeof p.mozna_mrozic !== 'boolean') b.push('mozna_mrozic: true albo false');
-
-  if (!Array.isArray(p.sprzet) || !p.sprzet.every(napis)) b.push('sprzet: lista nazw z katalogu');
-
-  if (!Array.isArray(p.skladniki) || p.skladniki.length === 0) {
-    b.push('skladniki: co najmniej jeden');
-  } else {
-    const widziane = new Set();
-    p.skladniki.forEach((s, i) => {
-      const gdzie = `skladniki[${i + 1}] „${s.nazwa ?? '?'}”`;
-      if (!napis(s.nazwa)) b.push(`${gdzie}: brak nazwy`);
-      if (!(typeof s.ilosc === 'number' && s.ilosc > 0)) b.push(`${gdzie}: ilosc większa od zera`);
-      if (!JEDNOSTKI.includes(s.jednostka)) b.push(`${gdzie}: jednostka ${JEDNOSTKI.join(', ')}`);
-      // Baza trzyma jeden wiersz na składnik w przepisie (unique przepis_id, skladnik_id).
-      if (widziane.has(s.nazwa)) b.push(`${gdzie}: występuje dwa razy — połącz ilości`);
-      widziane.add(s.nazwa);
-    });
-  }
-
-  if (!Array.isArray(p.etapy) || p.etapy.length === 0) {
-    b.push('etapy: co najmniej jeden');
-  } else {
-    p.etapy.forEach((e, i) => {
-      const gdzie = `etapy[${i + 1}] „${e.nazwa ?? '?'}”`;
-      if (!napis(e.nazwa) || e.nazwa.trim().length < 2 || e.nazwa.length > 120) b.push(`${gdzie}: nazwa od 2 do 120 znaków`);
-      if (e.minuty !== undefined && e.minuty !== null && !calkowita(e.minuty, 1, 1440)) b.push(`${gdzie}: minuty od 1 do 1440`);
-      if (!Array.isArray(e.kroki) || e.kroki.length === 0) b.push(`${gdzie}: co najmniej jeden krok`);
-      else e.kroki.forEach((k, j) => {
-        if (!napis(k.tresc)) b.push(`${gdzie}, krok ${j + 1}: pusta treść`);
-      });
-    });
-  }
-
-  return b;
-}
+// Kształt pliku sprawdza ten sam kod, co import JSON w aplikacji (Node sam
+// wycina typy z pliku .ts).
+export { sprawdzPrzepis };
 
 // ---------------------------------------------------------------------------
 //  SQL jednego przepisu
@@ -162,14 +70,14 @@ export function sqlPrzepisu(p, autor) {
   if (zRodzajami) l.push(`  ${tablica(p.rodzaje)}::rodzaj_dania[],`);
   l.push(`  ${p.trwalosc_dni}, 'prywatna',`);
   l.push(`  ${tekst(p.porcjowanie)}, ${waga ? p.porcja_g : 'null'}, ${waga ? 1 : p.porcje}, ${p.liczba_porcji_bazowych ?? 1},`);
-  l.push(`  ${p.czas_przygotowania_min}, ${p.czas_obrobki_min},`);
+  l.push(`  ${p.czas_przygotowania_min ?? 'null'}, ${p.czas_obrobki_min ?? 'null'},`);
   // Nazwy sprzętu bierzemy w pisowni z katalogu — widok sprzet_uzycie porównuje
   // je dokładnie, więc „miska” z pliku nie zostałaby policzona jako „Miska”.
   l.push(`  (select coalesce(array_agg(x.nazwa order by v.poz), '{}')`);
   l.push(`     from unnest(${tablica(p.sprzet)}::text[]) with ordinality as v(nazwa, poz)`);
   l.push(`     join sprzet x on lower(x.nazwa) = lower(v.nazwa)),`);
   l.push(`  ${tekst(p.przechowywanie)},`);
-  l.push(`  ${p.mozna_mrozic ? 'true' : 'false'}, ${tekst(p.ratunek)}`);
+  l.push(`  ${p.mozna_mrozic == null ? 'null' : p.mozna_mrozic ? 'true' : 'false'}, ${tekst(p.ratunek)}`);
   l.push('on conflict (lower(nazwa)) do update set');
   l.push('  opis                   = excluded.opis,');
   l.push('  pory                   = excluded.pory,');

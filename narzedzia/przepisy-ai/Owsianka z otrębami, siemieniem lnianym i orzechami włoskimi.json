@@ -15,11 +15,12 @@
   "porcja_g": 484,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 0,
-  "czas_przygotowania_min": 3,
+  "czas_przygotowania_min": 4,
   "czas_obrobki_min": 12,
   "sprzet": [
     "Garnek 2 l",
-    "Miska"
+    "Miska",
+    "Młynek do siemienia lnianego lub elektryczny młynek do kawy albo przypraw"
   ],
   "przechowywanie": "Owsiankę jedz świeżą.",
   "mozna_mrozic": false,
@@ -44,7 +45,7 @@
       "nazwa": "Siemię lniane",
       "ilosc": 10,
       "jednostka": "g",
-      "stan": "mielone"
+      "stan": "całe ziarno; zmielone tuż przed użyciem"
     },
     {
       "nazwa": "Orzechy włoskie",
@@ -60,7 +61,7 @@
   "etapy": [
     {
       "nazwa": "Przygotowanie składników",
-      "minuty": 3,
+      "minuty": 4,
       "kroki": [
         {
           "tresc": "**Orzechy.** Odmierz orzechy włoskie i grubo posiekaj."
@@ -69,7 +70,10 @@
           "tresc": "**Baza owsianki.** Odmierz mleko i płatki."
         },
         {
-          "tresc": "**Dodatki po gotowaniu.** Odmierz otręby, mielone siemię lniane i cynamon. Odłóż do wykończenia owsianki."
+          "tresc": "**Siemię lniane.** Odmierz całe siemię lniane i zmiel je w młynku na drobny proszek — wystarczy **10–15 sekund** pulsacyjnie. Miel tuż przed jedzeniem, bo zmielone szybko jełczeje."
+        },
+        {
+          "tresc": "**Dodatki po gotowaniu.** Odmierz otręby i cynamon. Odłóż razem ze zmielonym siemieniem do wykończenia owsianki."
         }
       ]
     },
@@ -90,7 +94,7 @@
       "minuty": 2,
       "kroki": [
         {
-          "tresc": "**Otręby i siemię.** Zdejmij owsiankę z ognia i wmieszaj otręby oraz mielone siemię lniane."
+          "tresc": "**Otręby i siemię.** Zdejmij owsiankę z ognia i wmieszaj otręby oraz świeżo zmielone siemię lniane."
         },
         {
           "tresc": "**Podanie.** Posyp cynamonem i orzechami włoskimi. Podawaj od razu."

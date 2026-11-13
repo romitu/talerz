@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { Pressable, StyleSheet, View } from 'react-native';
 
 import { komunikatBledu } from '@/lib/blad';
+import { AkcjePrzepisow, PanelWiecejPrzepisow } from '@/components/akcje-przepisow';
 import { Ekran } from '@/components/ekran';
 import { FiltryPrzepisow, PrzyciskFiltrow, type GrupaFiltrow } from '@/components/filtry-przepisow';
 import { ZnaczekZrodla } from '@/components/kafel-zakupu';
@@ -74,6 +75,8 @@ export default function EkranPrzepisow() {
 
   /** Kolejka moderatora — zamiast kategorii pokazujemy zgłoszone przepisy. */
   const [kolejka, setKolejka] = useState(false);
+  /** Rozwinięte „⋯ Więcej” w nagłówku — składniki oraz import i eksport. */
+  const [wiecejOtwarte, setWiecejOtwarte] = useState(false);
 
   /** Domyślnie schowane przepisy nie zaśmiecają listy — ten przełącznik je wraca. */
   const [pokazUkryte, setPokazUkryte] = useState(false);
@@ -421,6 +424,29 @@ export default function EkranPrzepisow() {
           filtry={
             przepisy.length > 0 && !kolejka ? (
               <FiltryPrzepisow {...wlasciwosciFiltrow} bezPrzycisku />
+            ) : undefined
+          }
+          akcje={
+            <AkcjePrzepisow
+              mozeDodawac={mozeDodawac}
+              onDodaj={() =>
+                router.push({ pathname: '/przepis-formularz', params: { powrot: '/przepisy' } })
+              }
+              wiecejOtwarte={wiecejOtwarte}
+              onPrzelaczWiecej={() => setWiecejOtwarte((p) => !p)}
+            />
+          }
+          panelAkcji={
+            wiecejOtwarte ? (
+              <PanelWiecejPrzepisow
+                mozeImportowac={mozeDodawac}
+                onSkladniki={() =>
+                  router.push({ pathname: '/skladniki', params: { powrot: '/przepisy' } })
+                }
+                onImportEksport={() =>
+                  router.push({ pathname: '/przepisy-import-eksport', params: { powrot: '/przepisy' } })
+                }
+              />
             ) : undefined
           }
         />
@@ -853,6 +879,30 @@ export default function EkranPrzepisow() {
                 <ThemedText type="small" themeColor="textSecondary">
                   {t('przepisy.edytuj')}
                 </ThemedText>
+              </Pressable>
+            )}
+
+            {/*
+              Kopia otwiera się w formularzu jako nowy przepis — zapis dopiero
+              po przejrzeniu. Sama ikona: obok Edytuj i Usuń na telefonie nie
+              ma już miejsca na trzeci napis.
+            */}
+            {mozeDodawac && (
+              <Pressable
+                onPress={() =>
+                  router.push({
+                    pathname: '/przepis-formularz',
+                    params: { kopiaZ: p.id, powrot: '/przepisy' },
+                  })
+                }
+                accessibilityRole="button"
+                accessibilityLabel={t('przepisy.duplikujNazwe', { nazwa: p.nazwa })}
+                style={({ pressed }) => [
+                  styles.akcjaSegmentIkona,
+                  { borderRightWidth: 1, borderRightColor: motyw.border },
+                  pressed && styles.wcisniety,
+                ]}>
+                <Ionicons name="copy-outline" size={20} color={motyw.textSecondary} />
               </Pressable>
             )}
 

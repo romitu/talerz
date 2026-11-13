@@ -6,7 +6,7 @@
 --  i generuj ponownie.
 --
 --  Przepisów w tym pliku: 1
---  Wygenerowano: 2026-11-11
+--  Wygenerowano: 2026-11-12
 --
 --  Skrypt najpierw sprawdza katalogi składników i sprzętu. Jeśli czegoś
 --  brakuje, kończy się błędem „IMPORT PRZERWANY — …” z listą braków
@@ -22,18 +22,17 @@ begin;
 
 with
   potrzebne_skladniki(przepis, nazwa, w_sztukach) as (values
-    ('Owsianka z bananem i cynamonem', 'Płatki owsiane', false),
-    ('Owsianka z bananem i cynamonem', 'Mleko 2%', false),
-    ('Owsianka z bananem i cynamonem', 'Banan', true),
-    ('Owsianka z bananem i cynamonem', 'Cynamon mielony', false)
+    ('Owsianka', 'Płatki owsiane', false),
+    ('Owsianka', 'Mleko 2%', false),
+    ('Owsianka', 'Otręby owsiane', false),
+    ('Owsianka', 'Siemię lniane', false),
+    ('Owsianka', 'Orzechy włoskie', false),
+    ('Owsianka', 'Cynamon mielony', false)
   ),
   potrzebny_sprzet(przepis, nazwa) as (values
-    ('Owsianka z bananem i cynamonem', 'Rondel'),
-    ('Owsianka z bananem i cynamonem', 'Miska'),
-    ('Owsianka z bananem i cynamonem', 'Widelec'),
-    ('Owsianka z bananem i cynamonem', 'Nóż szefa kuchni'),
-    ('Owsianka z bananem i cynamonem', 'Deska do krojenia'),
-    ('Owsianka z bananem i cynamonem', 'Waga kuchenna')
+    ('Owsianka', 'Garnek 2 l'),
+    ('Owsianka', 'Miska'),
+    ('Owsianka', 'Młynek do siemienia lnianego lub elektryczny młynek do kawy albo przypraw')
   ),
   braki(opis) as (
     -- Bez konta autora przepisy weszłyby bez właściciela i nikt poza
@@ -69,7 +68,7 @@ select ('IMPORT PRZERWANY — ' || string_agg(opis, '; '))::int as sprawdzenie_k
 
 
 -- -------------------------------------------------------------------------
---  Owsianka z bananem i cynamonem
+--  Owsianka
 -- -------------------------------------------------------------------------
 
 insert into przepisy
@@ -77,17 +76,17 @@ insert into przepisy
    porcjowanie, porcja_g, porcje, liczba_porcji_bazowych, czas_przygotowania_min, czas_obrobki_min,
    sprzet, przechowywanie, mozna_mrozic, ratunek)
 select
-  'Owsianka z bananem i cynamonem', 'Kremowa owsianka na mleku, naturalnie słodzona rozgniecionym bananem, z cynamonem i plasterkami banana na wierzchu. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
-  array['sniadanie']::pora_posilku[], array['inna']::rodzaj_kuchni[],
+  'Owsianka', 'Gęsta, sycąca owsianka z otrębami, siemieniem lnianym i orzechami włoskimi. Dostarcza dużo błonnika i dobrze sprawdza się jako pełne śniadanie.', (select id from konta where lower(email) = lower('romitu@gmail.com')),
+  array['sniadanie', 'kolacja']::pora_posilku[], array['inna']::rodzaj_kuchni[],
   array['na_slodko']::rodzaj_dania[],
-  1, 'prywatna',
-  'waga', 432, 1, 1,
-  3, 12,
+  0, 'prywatna',
+  'waga', 484, 1, 1,
+  4, 12,
   (select coalesce(array_agg(x.nazwa order by v.poz), '{}')
-     from unnest(array['Rondel', 'Miska', 'Widelec', 'Nóż szefa kuchni', 'Deska do krojenia', 'Waga kuchenna']::text[]) with ordinality as v(nazwa, poz)
+     from unnest(array['Garnek 2 l', 'Miska', 'Młynek do siemienia lnianego lub elektryczny młynek do kawy albo przypraw']::text[]) with ordinality as v(nazwa, poz)
      join sprzet x on lower(x.nazwa) = lower(v.nazwa)),
-  'Po ostudzeniu przechowuj w zamkniętym pojemniku w lodówce do 1 dnia. Plasterki banana do posypania krój tuż przed podaniem, bo ciemnieją. Przy odgrzewaniu dodaj odrobinę mleka. Pozostałości szybko schłodź w płytkich pojemnikach i wstaw do lodówki najpóźniej w ciągu 2 godzin od przygotowania. Lodówka: do 4°C.',
-  false, 'Jeśli owsianka jest za gęsta, dolej trochę mleka. Jeśli jest zbyt rzadka, gotuj jeszcze 1–2 minuty, często mieszając. Gdy banan jest mało dojrzały i owsianka wychodzi mało słodka, następnym razem wybierz banan z brązowymi plamkami na skórce.'
+  'Owsiankę jedz świeżą.',
+  false, 'Jeśli owsianka jest za gęsta, dolej mleka albo wody. Jeśli jest za rzadka, gotuj chwilę dłużej — pamiętaj, że po dodaniu otrębów i siemienia lnianego jeszcze trochę zgęstnieje.'
 on conflict (lower(nazwa)) do update set
   opis                   = excluded.opis,
   pory                   = excluded.pory,
@@ -106,56 +105,77 @@ on conflict (lower(nazwa)) do update set
   ratunek                = excluded.ratunek,
   zmieniono              = now();
 
-delete from przepis_skladniki where przepis_id in (select id from przepisy where lower(nazwa) = lower('Owsianka z bananem i cynamonem'));
-delete from etapy            where przepis_id in (select id from przepisy where lower(nazwa) = lower('Owsianka z bananem i cynamonem'));
+delete from przepis_skladniki where przepis_id in (select id from przepisy where lower(nazwa) = lower('Owsianka'));
+delete from etapy            where przepis_id in (select id from przepisy where lower(nazwa) = lower('Owsianka'));
 
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 60, 'g'::jednostka_miary, 60,
+select p.id, sk.id, 85, 'g'::jednostka_miary, 85,
        null, null, sk.rola, sk.mozna_dzielic, 1
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Owsianka z bananem i cynamonem') and sk.nazwa = 'Płatki owsiane';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Owsianka') and sk.nazwa = 'Płatki owsiane';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 250, 'g'::jednostka_miary, 250,
+select p.id, sk.id, 360, 'ml'::jednostka_miary, 360,
        null, null, sk.rola, sk.mozna_dzielic, 2
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Owsianka z bananem i cynamonem') and sk.nazwa = 'Mleko 2%';
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Owsianka') and sk.nazwa = 'Mleko 2%';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
-select p.id, sk.id, 1, 'szt'::jednostka_miary, round((1 * sk.masa_sztuki_g)::numeric, 1),
-       'dojrzały; połowa rozgnieciona, połowa w plasterkach', null, sk.rola, sk.mozna_dzielic, 3
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Owsianka z bananem i cynamonem') and sk.nazwa = 'Banan';
+select p.id, sk.id, 10, 'g'::jednostka_miary, 10,
+       null, null, sk.rola, sk.mozna_dzielic, 3
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Owsianka') and sk.nazwa = 'Otręby owsiane';
+insert into przepis_skladniki
+  (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
+select p.id, sk.id, 10, 'g'::jednostka_miary, 10,
+       'całe ziarno; zmielone tuż przed użyciem', null, sk.rola, sk.mozna_dzielic, 4
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Owsianka') and sk.nazwa = 'Siemię lniane';
+insert into przepis_skladniki
+  (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
+select p.id, sk.id, 17, 'g'::jednostka_miary, 17,
+       null, null, sk.rola, sk.mozna_dzielic, 5
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Owsianka') and sk.nazwa = 'Orzechy włoskie';
 insert into przepis_skladniki
   (przepis_id, skladnik_id, ilosc, jednostka, gramy, stan, zamiennik, rola, mozna_dzielic, kolejnosc)
 select p.id, sk.id, 2, 'g'::jednostka_miary, 2,
-       null, null, sk.rola, sk.mozna_dzielic, 4
-  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Owsianka z bananem i cynamonem') and sk.nazwa = 'Cynamon mielony';
+       null, null, sk.rola, sk.mozna_dzielic, 6
+  from przepisy p, skladniki sk where lower(p.nazwa) = lower('Owsianka') and sk.nazwa = 'Cynamon mielony';
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 1, 'Przygotowanie składników', 3 from przepisy p where lower(p.nazwa) = lower('Owsianka z bananem i cynamonem');
+select p.id, 1, 'Przygotowanie składników', 4 from przepisy p where lower(p.nazwa) = lower('Owsianka');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, '**Banan.** Obierz banana i przekrój na pół. Jedną połowę rozgnieć widelcem w misce na gładką masę. Drugą odłóż do pokrojenia przy podaniu.', null::text, false),
+         (1::smallint, '**Orzechy.** Odmierz orzechy włoskie i grubo posiekaj.', null::text, false),
          (2::smallint, '**Baza owsianki.** Odmierz mleko i płatki.', null::text, false),
-         (3::smallint, '**Cynamon.** Odmierz cynamon.', null::text, false)
+         (3::smallint, '**Siemię lniane.** Odmierz całe siemię lniane i zmiel je w młynku na drobny proszek — wystarczy **10–15 sekund** pulsacyjnie. Miel tuż przed jedzeniem, bo zmielone szybko jełczeje.', null::text, false),
+         (4::smallint, '**Dodatki po gotowaniu.** Odmierz otręby i cynamon. Odłóż razem ze zmielonym siemieniem do wykończenia owsianki.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
- where lower(p.nazwa) = lower('Owsianka z bananem i cynamonem') and e.kolejnosc = 1;
+ where lower(p.nazwa) = lower('Owsianka') and e.kolejnosc = 1;
 
 insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
-select p.id, 2, 'Gotowanie owsianki', 12 from przepisy p where lower(p.nazwa) = lower('Owsianka z bananem i cynamonem');
+select p.id, 2, 'Gotowanie owsianki', 10 from przepisy p where lower(p.nazwa) = lower('Owsianka');
 
 insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
 select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
   from etapy e join przepisy p on p.id = e.przepis_id,
        (values
-         (1::smallint, '**Zagotowanie płatków.** Wsyp płatki do rondla i wlej mleko. Podgrzewaj około **3 minut** do łagodnego wrzenia, mieszając.', null::text, false),
-         (2::smallint, '**Gotowanie owsianki.** Gotuj na małym ogniu przez **5–7 minut** lub czas z opakowania płatków, często mieszając.', null::text, false),
-         (3::smallint, '**Banan i cynamon.** Dodaj rozgnieciony banan i połowę cynamonu. Podgrzewaj jeszcze **1 minutę**, mieszając.', 'banan rozszedł się w owsiance, masa jest kremowa i gładka'::text, false),
-         (4::smallint, '**Podanie.** Pokrój drugą połowę banana w plasterki. Przełóż owsiankę do miseczki, ułóż na wierzchu plasterki banana i oprósz resztą cynamonu.', null::text, false)
+         (1::smallint, '**Gotowanie owsianki.** Płatki zalej mlekiem i gotuj na małym ogniu przez **7–10 minut**, często mieszając.', null::text, false),
+         (2::smallint, '**Konsystencja.** Jeśli owsianka jest zbyt gęsta, dolej odrobinę wody. Jeśli jest zbyt rzadka, gotuj jeszcze **1–2 minuty**, mieszając i sprawdzając gęstość.', null::text, false)
        ) as v(nr, tresc, sygnal, uwaga)
- where lower(p.nazwa) = lower('Owsianka z bananem i cynamonem') and e.kolejnosc = 2;
+ where lower(p.nazwa) = lower('Owsianka') and e.kolejnosc = 2;
+
+insert into etapy (przepis_id, kolejnosc, nazwa, minuty)
+select p.id, 3, 'Wykończenie', 2 from przepisy p where lower(p.nazwa) = lower('Owsianka');
+
+insert into kroki (etap_id, kolejnosc, tresc, sygnal, uwaga)
+select e.id, v.nr, v.tresc, v.sygnal, v.uwaga
+  from etapy e join przepisy p on p.id = e.przepis_id,
+       (values
+         (1::smallint, '**Otręby i siemię.** Zdejmij owsiankę z ognia i wmieszaj otręby oraz świeżo zmielone siemię lniane.', null::text, false),
+         (2::smallint, '**Podanie.** Posyp cynamonem i orzechami włoskimi. Podawaj od razu.', null::text, false)
+       ) as v(nr, tresc, sygnal, uwaga)
+ where lower(p.nazwa) = lower('Owsianka') and e.kolejnosc = 3;
 
 commit;
 
@@ -164,7 +184,7 @@ commit;
 -- =============================================================================
 
 with oczekiwane(nazwa, skladnikow, etapow, krokow) as (values
-  ('Owsianka z bananem i cynamonem', 4, 2, 7)
+  ('Owsianka', 6, 3, 8)
 ), jest as (
   select p.nazwa,
          (select count(*) from przepis_skladniki ps where ps.przepis_id = p.id) as skladnikow,
@@ -198,6 +218,6 @@ select
 from przepisy p
 join przepis_skladniki ps on ps.przepis_id = p.id
 join przepis_makro m      on m.przepis_id = p.id
-where lower(p.nazwa) in (lower('Owsianka z bananem i cynamonem'))
+where lower(p.nazwa) in (lower('Owsianka'))
 group by p.nazwa, p.porcjowanie, p.porcja_g, p.porcje, m.kcal, m.bialko_g
 order by p.nazwa;

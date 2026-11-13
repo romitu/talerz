@@ -4,7 +4,7 @@ import * as FileSystem from 'expo-file-system/legacy';
 import * as Sharing from 'expo-sharing';
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Platform, Pressable, StyleSheet, View } from 'react-native';
+import { Platform, Pressable, Share, StyleSheet, View } from 'react-native';
 
 import { Ekran } from '@/components/ekran';
 import { Karta } from '@/components/karta';
@@ -33,13 +33,23 @@ import {
 } from '@/lib/import-eksport-skladnikow';
 import { bezPrefiksuDataUrl } from '@/lib/import-eksport-wspolne';
 import { wroc } from '@/lib/nawigacja';
-import { pobierzPelnyPrzepis, pobierzPrzepisy } from '@/lib/przepisy';
+import {
+  przepisDoJson,
+  sprawdzPrzepis,
+  tekstJson,
+  wczytajJsonPrzepisow,
+  zbudujPromptPrzepisu,
+  type PrzepisJson,
+} from '@/lib/przepis-json';
+import { pobierzPelnyPrzepis, pobierzPrzepisy, pobierzWszystkiePelnePrzepisy } from '@/lib/przepisy';
 import { useSesja } from '@/lib/sesja';
-import { pobierzSkladniki } from '@/lib/skladniki';
+import { pobierzSkladniki, ROLE_SKLADNIKA } from '@/lib/skladniki';
 import { supabase } from '@/lib/supabase';
 
 /**
- * Import i eksport przepisów przez plik Excel.
+ * Import i eksport przepisów: JSON (plik albo schowek) i — jako stary format —
+ * plik Excel. Tu też powstaje prompt, z którym dowolny czat z AI przygotuje
+ * przepis w tym samym JSON-ie.
  *
  * Zasady dopasowania i walidacji siedzą w `lib/import-eksport-przepisow.ts` —
  * tu jest tylko ekran: wybór pliku, podgląd tego, co się zaimportuje, i wynik.
@@ -89,6 +99,54 @@ async function zapiszPlikXlsx(base64: string, nazwa: string, poZapisie: (komunik
   }
 }
 
+/** Pobranie/udostępnienie pliku tekstowego (JSON). */
+async function zapiszPlikTekstowy(tekst: string, nazwa: string, poZapisie: (komunikat: string) => void) {
+  if (Platform.OS === 'web') {
+    const url = URL.createObjectURL(new Blob([tekst], { type: 'application/json;charset=utf-8' }));
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = nazwa;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    poZapisie(i18n.t('importEksport.pobrano', { nazwa }));
+  } else {
+    const uri = FileSystem.cacheDirectory + nazwa;
+    await FileSystem.writeAsStringAsync(uri, tekst);
+    if (await Sharing.isAvailableAsync()) {
+      await Sharing.shareAsync(uri, { mimeType: 'application/json', dialogTitle: i18n.t('importEksport.zapiszPlik') });
+    } else {
+      poZapisie(i18n.t('importEksport.zapisany', { uri }));
+    }
+  }
+}
+
+/**
+ * Tekst do schowka. W przeglądarce wprost; na telefonie przez systemowe
+ * „Udostępnij”, które ma „Kopiuj” i od razu pozwala wysłać tekst do czatu z AI
+ * — bez dokładania do aplikacji osobnego modułu schowka.
+ */
+async function skopiujTekst(tekst: string): Promise<'skopiowano' | 'udostepniono'> {
+  if (Platform.OS === 'web') {
+    await navigator.clipboard.writeText(tekst);
+    return 'skopiowano';
+  }
+  await Share.share({ message: tekst });
+  return 'udostepniono';
+}
+
+/** Czego import nie przyjmie z powrotem — do pokazania przy eksporcie, zanim ktoś liczy na kopię. */
+function ostrzezeniaEksportu(przepisy: PrzepisJson[]): string | null {
+  const zle = przepisy
+    .map((p) => ({ nazwa: p.nazwa, bledy: sprawdzPrzepis(JSON.parse(JSON.stringify(p))) }))
+    .filter((x) => x.bledy.length > 0);
+  if (zle.length === 0) return null;
+  return i18n.t('importEksport.ostrzezenieEksportu', {
+    lista: zle.map((x) => `„${x.nazwa}” (${x.bledy.join('; ')})`).join(', '),
+  });
+}
+
 export default function EkranImportEksportPrzepisow() {
   const { powrot } = useLocalSearchParams<{ powrot?: string }>();
   const { sesja } = useSesja();
@@ -103,6 +161,10 @@ export default function EkranImportEksportPrzepisow() {
   const [listaPrzepisow, setListaPrzepisow] = useState<{ id: string; nazwa: string }[]>([]);
   const [szukajPrzepisu, setSzukajPrzepisu] = useState('');
   const [wybranyPrzepisId, setWybranyPrzepisId] = useState<string | null>(null);
+
+  const [eksportWszystkichZajety, setEksportWszystkichZajety] = useState(false);
+  const [promptZajety, setPromptZajety] = useState(false);
+  const [wklejonyJson, setWklejonyJson] = useState('');
 
   const [nazwaPliku, setNazwaPliku] = useState<string | null>(null);
   const [bledyParsowania, setBledyParsowania] = useState<BladImportu[]>([]);
@@ -165,6 +227,135 @@ export default function EkranImportEksportPrzepisow() {
       setBlad(komunikatBledu(e));
     } finally {
       setEksportZajety(false);
+    }
+  }
+
+  /** Jeden przepis jako JSON: do pliku albo do schowka. */
+  async function eksportujJson(cel: 'plik' | 'schowek') {
+    if (!wybranyPrzepisId) return;
+    setBlad(null);
+    setKomunikat(null);
+    setEksportZajety(true);
+    try {
+      const [pelny, skladniki] = await Promise.all([
+        pobierzPelnyPrzepis(wybranyPrzepisId),
+        pobierzSkladniki(),
+      ]);
+      const json = przepisDoJson(pelny, skladniki);
+      const ostrzezenie = ostrzezeniaEksportu([json]);
+      if (cel === 'plik') {
+        await zapiszPlikTekstowy(
+          tekstJson([json]),
+          `talerz-przepis-${fragmentNazwyPliku(pelny.nazwa)}.json`,
+          setKomunikat
+        );
+      } else if ((await skopiujTekst(tekstJson([json]))) === 'skopiowano') {
+        setKomunikat(t('importEksport.skopiowanoJson', { nazwa: pelny.nazwa }));
+      }
+      if (ostrzezenie) setBlad(ostrzezenie);
+    } catch (e) {
+      setBlad(komunikatBledu(e));
+    } finally {
+      setEksportZajety(false);
+    }
+  }
+
+  /** Wszystkie przepisy widoczne temu kontu w jednym pliku — kopia zapasowa. */
+  async function eksportujWszystkieJson() {
+    setBlad(null);
+    setKomunikat(null);
+    setEksportWszystkichZajety(true);
+    try {
+      const [pelne, skladniki] = await Promise.all([pobierzWszystkiePelnePrzepisy(), pobierzSkladniki()]);
+      const jsony = pelne.map((p) => przepisDoJson(p, skladniki));
+      const dzis = new Date().toISOString().slice(0, 10);
+      await zapiszPlikTekstowy(tekstJson(jsony), `talerz-przepisy-${dzis}.json`, setKomunikat);
+      const ostrzezenie = ostrzezeniaEksportu(jsony);
+      if (ostrzezenie) setBlad(ostrzezenie);
+    } catch (e) {
+      setBlad(komunikatBledu(e));
+    } finally {
+      setEksportWszystkichZajety(false);
+    }
+  }
+
+  /** Prompt z aktualnymi katalogami — do wklejenia w czat z AI. */
+  async function skopiujPrompt() {
+    setBlad(null);
+    setKomunikat(null);
+    setPromptZajety(true);
+    try {
+      const [skladniki, sprzet] = await Promise.all([
+        pobierzSkladniki(),
+        supabase.from('sprzet').select('nazwa'),
+      ]);
+      if (sprzet.error) throw sprzet.error;
+      const prompt = zbudujPromptPrzepisu(
+        skladniki,
+        (sprzet.data ?? []).map((x) => x.nazwa as string)
+      );
+      if ((await skopiujTekst(prompt)) === 'skopiowano') setKomunikat(t('importEksport.skopiowanoPrompt'));
+    } catch (e) {
+      setBlad(komunikatBledu(e));
+    } finally {
+      setPromptZajety(false);
+    }
+  }
+
+  /** Wspólny koniec dla wklejonego tekstu i pliku: sprawdzenie z katalogami i podgląd. */
+  async function pokazPodgladJson(tekst: string) {
+    const [skladniki, sprzet, istniejacePrzepisy] = await Promise.all([
+      pobierzSkladniki(),
+      supabase.from('sprzet').select('nazwa'),
+      supabase.from('przepisy').select('id, nazwa'),
+    ]);
+    if (sprzet.error) throw sprzet.error;
+    if (istniejacePrzepisy.error) throw istniejacePrzepisy.error;
+
+    const wczytane = wczytajJsonPrzepisow(tekst, {
+      skladniki,
+      sprzet: (sprzet.data ?? []).map((x) => x.nazwa as string),
+      role: ROLE_SKLADNIKA,
+    });
+    setBledyParsowania(wczytane.bledy);
+    setPozycje(sklasyfikujPrzepisy(wczytane.przepisy, istniejacePrzepisy.data ?? []));
+  }
+
+  async function sprawdzWklejony() {
+    setBlad(null);
+    setKomunikat(null);
+    wyczyscImport();
+    try {
+      await pokazPodgladJson(wklejonyJson);
+    } catch (e) {
+      setBlad(komunikatBledu(e));
+    }
+  }
+
+  async function wybierzPlikJson() {
+    setBlad(null);
+    setKomunikat(null);
+    wyczyscImport();
+
+    try {
+      const wynik = await DocumentPicker.getDocumentAsync({
+        // Telefony zgłaszają .json różnie — czasem jako zwykły tekst albo „dowolny plik”.
+        type: ['application/json', 'text/plain', 'application/octet-stream'],
+        copyToCacheDirectory: true,
+      });
+      if (wynik.canceled || wynik.assets.length === 0) return;
+
+      const zasob = wynik.assets[0];
+      setNazwaPliku(zasob.name);
+
+      const tekst =
+        Platform.OS === 'web' && zasob.file
+          ? await zasob.file.text()
+          : await FileSystem.readAsStringAsync(zasob.uri);
+
+      await pokazPodgladJson(tekst);
+    } catch (e) {
+      setBlad(komunikatBledu(e));
     }
   }
 
@@ -234,6 +425,9 @@ export default function EkranImportEksportPrzepisow() {
       setZaimportowano(pozycje.length - bledy.length);
       setBledyZapisu(bledy);
       setPozycje(null);
+      // Zapisany tekst nie powinien kusić do drugiego kliknięcia.
+      if (bledy.length === 0) setWklejonyJson('');
+      wczytajListePrzepisow();
     } catch (e) {
       setBlad(komunikatBledu(e));
     } finally {
@@ -384,14 +578,46 @@ export default function EkranImportEksportPrzepisow() {
         )}
 
         <Przycisk
-          tytul={
-            wybranyPrzepis
-              ? t('importEksport.eksportuj', { nazwa: wybranyPrzepis.nazwa })
-              : t('importEksport.eksportujDoExcela')
-          }
-          onPress={eksportujJeden}
+          tytul={t('importEksport.pobierzJson')}
+          onPress={() => eksportujJson('plik')}
           zajety={eksportZajety}
           wylaczony={!wybranyPrzepisId}
+        />
+        <Przycisk
+          tytul={Platform.OS === 'web' ? t('importEksport.kopiujJson') : t('importEksport.udostepnijJson')}
+          wariant="poboczny"
+          onPress={() => eksportujJson('schowek')}
+          wylaczony={!wybranyPrzepisId || eksportZajety}
+        />
+        <Przycisk
+          tytul={t('importEksport.eksportujDoExcela')}
+          wariant="poboczny"
+          onPress={eksportujJeden}
+          wylaczony={!wybranyPrzepisId || eksportZajety}
+        />
+
+        <ThemedText type="small" themeColor="textSecondary">
+          {t('importEksport.wszystkieOpis')}
+        </ThemedText>
+        <Przycisk
+          tytul={t('importEksport.wszystkieJson')}
+          wariant="poboczny"
+          onPress={eksportujWszystkieJson}
+          zajety={eksportWszystkichZajety}
+        />
+      </Karta>
+
+      <Karta style={styles.grupa}>
+        <ThemedText type="smallBold" themeColor="textSecondary">
+          {t('importEksport.przepisZAi')}
+        </ThemedText>
+        <ThemedText type="small" themeColor="textSecondary">
+          {t('importEksport.przepisZAiOpis')}
+        </ThemedText>
+        <Przycisk
+          tytul={Platform.OS === 'web' ? t('importEksport.kopiujPrompt') : t('importEksport.udostepnijPrompt')}
+          onPress={skopiujPrompt}
+          zajety={promptZajety}
         />
       </Karta>
 
@@ -403,6 +629,23 @@ export default function EkranImportEksportPrzepisow() {
           {t('importEksport.importPrzepisowOpis')}
         </ThemedText>
 
+        <Pole
+          etykieta={t('importEksport.wklejJson')}
+          value={wklejonyJson}
+          onChangeText={setWklejonyJson}
+          placeholder={'{ "nazwa": "…", "skladniki": [ … ] }'}
+          multiline
+          autoCapitalize="none"
+          autoCorrect={false}
+          spellCheck={false}
+          style={styles.poleJson}
+        />
+        <Przycisk
+          tytul={t('importEksport.sprawdzWklejony')}
+          onPress={sprawdzWklejony}
+          wylaczony={wklejonyJson.trim() === ''}
+        />
+        <Przycisk tytul={t('importEksport.wybierzPlikJson')} wariant="poboczny" onPress={wybierzPlikJson} />
         <Przycisk tytul={t('importEksport.wybierzPlik')} wariant="poboczny" onPress={wybierzPlik} />
 
         {nazwaPliku && (
@@ -497,7 +740,7 @@ export default function EkranImportEksportPrzepisow() {
           {t('importEksport.eksportSkladnikowOpis')}
         </ThemedText>
         <Przycisk
-          tytul={t('importEksport.eksportujDoExcela')}
+          tytul={t('importEksport.eksportujSkladnikiExcel')}
           onPress={eksportujSkladnikiPlik}
           zajety={eksportZajetySkladniki}
         />
@@ -511,7 +754,7 @@ export default function EkranImportEksportPrzepisow() {
           {t('importEksport.importSkladnikowOpis')}
         </ThemedText>
 
-        <Przycisk tytul={t('importEksport.wybierzPlik')} wariant="poboczny" onPress={wybierzPlikSkladnikow} />
+        <Przycisk tytul={t('importEksport.wybierzPlikSkladnikow')} wariant="poboczny" onPress={wybierzPlikSkladnikow} />
 
         {nazwaPlikuSkladnikow && (
           <ThemedText type="small" themeColor="textSecondary">
@@ -610,6 +853,12 @@ export default function EkranImportEksportPrzepisow() {
 const styles = StyleSheet.create({
   grupa: { gap: Spacing.three },
   blok: { gap: Spacing.one },
+  poleJson: {
+    minHeight: 140,
+    maxHeight: 320,
+    textAlignVertical: 'top',
+    fontFamily: Platform.select({ ios: 'Menlo', default: 'monospace' }),
+  },
   listaPrzepisow: {
     borderWidth: 1,
     borderRadius: Spacing.two,

@@ -21,6 +21,24 @@
         "const h=require('http'),f=require('fs'),p=require('path');h.createServer((q,r)=>{const n=p.join(process.cwd(),decodeURIComponent(q.url.split('?')[0]));f.readFile(n,(e,d)=>{if(e){r.writeHead(404);return r.end('404')}r.writeHead(200,{'Content-Type':n.endsWith('.html')?'text/html; charset=utf-8':'application/octet-stream'});r.end(d)})}).listen(8765)"
       ],
       "port": 8765
+    },
+    {
+      "name": "strona-statyczna",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "-e",
+        "const h=require('http'),f=require('fs'),p=require('path'),root='C:/Users/romitu/AppData/Local/Temp/claude/6dd64fef79862c9e/48b237bd-7c37-4791-9395-262b93b43c09/scratchpad/strona',t={'.html':'text/html; charset=utf-8','.jpg':'image/jpeg','.png':'image/png','.svg':'image/svg+xml'};h.createServer((q,r)=>{let u=decodeURIComponent(q.url.split('?')[0]);if(u==='/')u='/index.html';const n=p.join(root,u);if(!n.startsWith(p.normalize(root))){r.writeHead(403);return r.end()}f.readFile(n,(e,d)=>{if(e){r.writeHead(404);return r.end('404')}r.writeHead(200,{'Content-Type':t[p.extname(n)]||'application/octet-stream'});r.end(d)})}).listen(8766)"
+      ],
+      "port": 8766
+    },
+    {
+      "name": "talerz-www",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "-e",
+        "const h=require('http'),f=require('fs'),p=require('path'),root='C:/Users/romitu/Documents/ProjektyProgramisty/TalerzWWW',t={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8','.jpg':'image/jpeg','.png':'image/png','.svg':'image/svg+xml'};h.createServer((q,r)=>{let u=decodeURIComponent(q.url.split('?')[0]);if(u==='/')u='/index.html';const n=p.join(root,u);if(!n.startsWith(p.normalize(root))){r.writeHead(403);return r.end()}f.readFile(n,(e,d)=>{if(e){r.writeHead(404);return r.end('404')}r.writeHead(200,{'Content-Type':t[p.extname(n)]||'application/octet-stream'});r.end(d)})}).listen(8767)"
+      ],
+      "port": 8767
     }
   ]
 }

@@ -114,8 +114,17 @@ function liczba(tekst: string): number {
 }
 
 export default function FormularzPrzepisu() {
-  const { id: edytowanyId, powrot } = useLocalSearchParams<{ id?: string; powrot?: string }>();
+  const { id: edytowanyId, kopiaZ, powrot } = useLocalSearchParams<{
+    id?: string;
+    /** „Duplikuj”: nowy przepis wypełniony treścią tego dania. */
+    kopiaZ?: string;
+    powrot?: string;
+  }>();
   const tryb = edytowanyId ? 'edycja' : 'nowy';
+  /** Przepis, z którego wypełniamy formularz — edytowany albo wzór dla kopii. */
+  const zrodloId = edytowanyId ?? kopiaZ;
+  /** Co jest teraz wczytane; kopia ma własny klucz, żeby nie pomylić jej z edycją wzoru. */
+  const kluczZrodla = edytowanyId ?? (kopiaZ ? `kopia:${kopiaZ}` : null);
   const { sesja } = useSesja();
   const motyw = useTheme();
   const { t } = useTranslation();
@@ -329,16 +338,18 @@ export default function FormularzPrzepisu() {
 
   // Wejście w tryb tworzenia po wcześniejszej edycji — zaczynamy od czystej karty.
   useEffect(() => {
-    if (!edytowanyId && wczytanyId !== null) wyczyscFormularz();
-  }, [edytowanyId, wczytanyId, wyczyscFormularz]);
+    if (kluczZrodla === null && wczytanyId !== null) wyczyscFormularz();
+  }, [kluczZrodla, wczytanyId, wyczyscFormularz]);
 
   useEffect(() => {
-    if (!edytowanyId || dostepne.length === 0 || wczytanyId === edytowanyId) return;
+    if (!zrodloId || !kluczZrodla || dostepne.length === 0 || wczytanyId === kluczZrodla) return;
+    const kopia = !edytowanyId;
 
     (async () => {
       try {
-        const p = await pobierzPelnyPrzepis(edytowanyId);
-        setNazwa(p.nazwa);
+        const p = await pobierzPelnyPrzepis(zrodloId);
+        // Nazwa jest w bazie unikalna — kopia od razu dostaje własną, do poprawienia.
+        setNazwa(kopia ? t('przepisFormularz.nazwaKopii', { nazwa: p.nazwa }) : p.nazwa);
         setOpis(p.opis ?? '');
         setPory(p.pory);
         setKuchnie(p.kuchnie);
@@ -352,11 +363,13 @@ export default function FormularzPrzepisu() {
         setMoznaMrozic(p.mozna_mrozic === null ? 'nie wiem' : p.mozna_mrozic ? 'tak' : 'nie');
         setSkalowalny(p.skalowalny);
         setRatunek(p.ratunek ?? '');
-        setZdjecie(p.zdjecie ?? null);
-        setZdjecieZrodlo(p.zdjecie_zrodlo ?? null);
-        setWidocznosc(p.widocznosc);
-        setDoPublikacji(p.widocznosc !== 'prywatna');
-        setPowodOdrzucenia(p.powod_odrzucenia ?? null);
+        // Kopia to nowy, prywatny przepis: bez zdjęcia wzoru (plik należy do
+        // tamtego dania) i bez jego historii publikacji.
+        setZdjecie(kopia ? null : (p.zdjecie ?? null));
+        setZdjecieZrodlo(kopia ? null : (p.zdjecie_zrodlo ?? null));
+        setWidocznosc(kopia ? 'prywatna' : p.widocznosc);
+        setDoPublikacji(kopia ? false : p.widocznosc !== 'prywatna');
+        setPowodOdrzucenia(kopia ? null : (p.powod_odrzucenia ?? null));
 
         setWybrane(
           p.skladniki
@@ -397,12 +410,12 @@ export default function FormularzPrzepisu() {
           }))
         );
 
-        setWczytanyId(edytowanyId);
+        setWczytanyId(kluczZrodla);
       } catch (e) {
         setBlad(komunikatBledu(e));
       }
     })();
-  }, [edytowanyId, dostepne, wczytanyId]);
+  }, [edytowanyId, zrodloId, kluczZrodla, dostepne, wczytanyId, t]);
 
 
   // Makro liczone na żywo, tak samo jak potem policzy je baza.
@@ -1864,6 +1877,22 @@ export default function FormularzPrzepisu() {
         zajety={zajety}
         wylaczony={!komplet}
       />
+      {/* Nieaktywny przycisk bez słowa wyjaśnienia wygląda jak awaria. */}
+      {!komplet && (
+        <ThemedText type="small" themeColor="accent">
+          {t('przepisFormularz.brakujeDoZapisu', {
+            lista: [
+              nazwa.trim().length < 3 && t('przepisFormularz.brakNazwy'),
+              !podanoPorcjowanie &&
+                (porcjowanie === 'waga' ? t('przepisFormularz.brakPorcjiBazowych') : t('przepisFormularz.brakPorcji')),
+              wybrane.length === 0 && t('przepisFormularz.brakSkladnikow'),
+              wybrane.some((w) => gramyZe(w) <= 0) && t('przepisFormularz.brakIlosci'),
+            ]
+              .filter(Boolean)
+              .join(', '),
+          })}
+        </ThemedText>
+      )}
       <Przycisk tytul={t('wspolne.anuluj')} wariant="poboczny" onPress={() => wroc(powrot, '/przepisy')} />
     </Ekran>
   );
