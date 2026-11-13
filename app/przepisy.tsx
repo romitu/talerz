@@ -439,7 +439,7 @@ export default function EkranPrzepisow() {
           panelAkcji={
             wiecejOtwarte ? (
               <PanelWiecejPrzepisow
-                mozeImportowac={mozeDodawac}
+                mozeImportowac
                 onSkladniki={() =>
                   router.push({ pathname: '/skladniki', params: { powrot: '/przepisy' } })
                 }
@@ -888,22 +888,33 @@ export default function EkranPrzepisow() {
               ma już miejsca na trzeci napis.
             */}
             {mozeDodawac && (
-              <Pressable
-                onPress={() =>
-                  router.push({
-                    pathname: '/przepis-formularz',
-                    params: { kopiaZ: p.id, powrot: '/przepisy' },
-                  })
-                }
-                accessibilityRole="button"
-                accessibilityLabel={t('przepisy.duplikujNazwe', { nazwa: p.nazwa })}
-                style={({ pressed }) => [
-                  styles.akcjaSegmentIkona,
-                  { borderRightWidth: 1, borderRightColor: motyw.border },
-                  pressed && styles.wcisniety,
-                ]}>
-                <Ionicons name="copy-outline" size={20} color={motyw.textSecondary} />
-              </Pressable>
+              <View style={styles.preferencjaOpakowanie}>
+                {dymek === `${p.id}:duplikuj` && (
+                  <ThemedView
+                    type="backgroundElement"
+                    style={[styles.dymek, { borderColor: motyw.border }]}>
+                    <ThemedText type="small">{t('przepisy.duplikujDymek')}</ThemedText>
+                  </ThemedView>
+                )}
+                <Pressable
+                  onPress={() =>
+                    router.push({
+                      pathname: '/przepis-formularz',
+                      params: { kopiaZ: p.id, powrot: '/przepisy' },
+                    })
+                  }
+                  onHoverIn={() => setDymek(`${p.id}:duplikuj`)}
+                  onHoverOut={() => setDymek(null)}
+                  accessibilityRole="button"
+                  accessibilityLabel={t('przepisy.duplikujNazwe', { nazwa: p.nazwa })}
+                  style={({ pressed }) => [
+                    styles.akcjaSegmentIkona,
+                    { borderRightWidth: 1, borderRightColor: motyw.border },
+                    pressed && styles.wcisniety,
+                  ]}>
+                  <Ionicons name="copy-outline" size={20} color={motyw.textSecondary} />
+                </Pressable>
+              </View>
             )}
 
             {mozeUsuwac(p) && (
@@ -1168,13 +1179,17 @@ const styles = StyleSheet.create({
     gap: Spacing.one,
   },
 
-  /* Pasek akcji na dole karty — segmenty oddzielone pionową kreską. */
+  /*
+    Pasek akcji na dole karty — segmenty oddzielone pionową kreską.
+    Bez `overflow: 'hidden'`: dymki z podpowiedzią wychodzą NAD pasek
+    (`styles.dymek`, `bottom: '100%'`) i przycinanie do ramki je chowało.
+    Segmenty nie mają tła, więc zaokrąglone rogi i tak wyglądają tak samo.
+  */
   akcjeBar: {
     flexDirection: 'row',
     alignItems: 'stretch',
     borderWidth: 1,
     borderRadius: Spacing.two,
-    overflow: 'hidden',
     marginTop: Spacing.one,
   },
   akcjaSegment: {

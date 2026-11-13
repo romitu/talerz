@@ -134,7 +134,7 @@ export function sklasyfikujPrzepisy(
 export async function zaimportujPrzepis(
   pozycja: PozycjaImportu,
   autorId: string
-): Promise<void> {
+): Promise<string> {
   const { dane, istniejacyId } = pozycja;
 
   const naglowek = {
@@ -253,18 +253,24 @@ export async function zaimportujPrzepis(
       if (bladKrokow) throw bladKrokow;
     }
   }
+
+  return przepisId;
 }
 
-/** Zapisuje całą partię, przepis po przepisie. Błąd jednego dania nie zatrzymuje reszty. */
+/**
+ * Zapisuje całą partię, przepis po przepisie. Błąd jednego dania nie zatrzymuje reszty.
+ * `zapisane` — żeby ekran mógł od razu otworzyć nowy przepis.
+ */
 export async function zaimportujPrzepisy(
   pozycje: PozycjaImportu[],
   autorId: string,
   poKazdym?: (zrobione: number, razem: number) => void
-): Promise<{ bledy: BladImportu[] }> {
+): Promise<{ bledy: BladImportu[]; zapisane: { id: string; nazwa: string }[] }> {
   const bledy: BladImportu[] = [];
+  const zapisane: { id: string; nazwa: string }[] = [];
   for (let i = 0; i < pozycje.length; i++) {
     try {
-      await zaimportujPrzepis(pozycje[i], autorId);
+      zapisane.push({ id: await zaimportujPrzepis(pozycje[i], autorId), nazwa: pozycje[i].dane.nazwa });
     } catch (e) {
       bledy.push({
         przepis: pozycje[i].dane.nazwa,
@@ -273,5 +279,5 @@ export async function zaimportujPrzepisy(
     }
     poKazdym?.(i + 1, pozycje.length);
   }
-  return { bledy };
+  return { bledy, zapisane };
 }

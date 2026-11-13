@@ -563,3 +563,32 @@ export function zbudujPromptPrzepisu(
     '',
   ].join('\n');
 }
+
+/**
+ * Prompt do zmiany ISTNIEJĄCEGO przepisu — te same zasady i katalogi co
+ * `zbudujPromptPrzepisu`, a zamiast pustego „danie, które ma powstać” —
+ * przepis wyjściowy jako JSON i prośba o NOWĄ nazwę.
+ *
+ * Nowa nazwa nie jest kosmetyką: import rozpoznaje przepis po nazwie, więc
+ * odpowiedź AI z tą samą nazwą nadpisałaby oryginał zamiast dodać wariant.
+ * Kreator i tak to wyłapie przed zapisem, ale lepiej, żeby AI od razu
+ * zaproponowało nazwę samo.
+ */
+export function zbudujPromptZmianyPrzepisu(
+  skladniki: { nazwa: string; masa_sztuki_g: number | null }[],
+  sprzet: string[],
+  przepis: PrzepisJson
+): string {
+  const zasady = zbudujPromptPrzepisu(skladniki, sprzet).replace(/DANIE, KTÓRE MA POWSTAĆ:\n*$/, '');
+  return [
+    zasady.trimEnd(),
+    '',
+    'PRZEPIS WYJŚCIOWY — zmień go według moich uwag poniżej. Zachowaj format i zasady powyżej.',
+    `Nadaj mu NOWĄ nazwę, inną niż „${przepis.nazwa}” — to ma być nowy przepis, a nie poprawka oryginału.`,
+    '',
+    tekstJson([przepis]),
+    '',
+    'CO ZMIENIĆ:',
+    '',
+  ].join('\n');
+}
