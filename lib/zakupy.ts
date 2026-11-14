@@ -6,6 +6,7 @@
  */
 
 import i18n from './jezyk';
+import type { DzialSklepu } from './skladniki';
 import { supabase } from './supabase';
 
 /**
@@ -28,7 +29,7 @@ export type PozycjaZakupow = {
   zrodlo_id: string;
   nazwa: string;
   gramy: number;
-  tagi: string[];
+  dzial: DzialSklepu;
   /** Wielkość opakowania w sklepie, jeśli znana. */
   opakowanie_g: number | null;
   /** Ile opakowań trzeba kupić. */
@@ -61,7 +62,7 @@ export type PozycjaSkonsolidowana = {
   skladnik_id: string;
   nazwa: string;
   gramy: number;
-  tagi: string[];
+  dzial: DzialSklepu;
   opakowanie_g: number | null;
   opakowan: number | null;
   reszta_g: number | null;
@@ -89,7 +90,7 @@ export function skonsolidujSkladniki(pozycje: PozycjaZakupow[]): PozycjaSkonsoli
       skladnik_id: p.skladnik_id,
       nazwa: p.nazwa,
       gramy: 0,
-      tagi: p.tagi,
+      dzial: p.dzial,
       opakowanie_g: p.opakowanie_g,
       opakowan: null,
       reszta_g: null,
@@ -115,33 +116,16 @@ export function skonsolidujSkladniki(pozycje: PozycjaZakupow[]): PozycjaSkonsoli
   return [...zebrane.values()].sort((a, b) => a.nazwa.localeCompare(b.nazwa, 'pl'));
 }
 
-/** Działy sklepu — kolejność odpowiada typowej trasie po markecie. */
-export type Dzial = 'warzywa' | 'mieso' | 'nabial' | 'kasze' | 'orzechy' | 'tluszcze' | 'pozostale';
-
-/** Nazwy działów są w tłumaczeniach: `dzial.<klucz>`. */
-export const DZIALY: { klucz: Dzial; tagi: string[] }[] = [
-  { klucz: 'warzywa', tagi: ['warzywo', 'owoc', 'ziola', 'suszone'] },
-  { klucz: 'mieso', tagi: ['mieso', 'drob', 'ryba', 'owoce morza'] },
-  { klucz: 'nabial', tagi: ['nabial', 'jaja'] },
-  { klucz: 'kasze', tagi: ['zboze', 'straczki'] },
-  { klucz: 'orzechy', tagi: ['orzechy', 'nasiona'] },
-  { klucz: 'tluszcze', tagi: ['tluszcz', 'przyprawa', 'slodzik', 'kakao'] },
-  { klucz: 'pozostale', tagi: [] },
-];
-
-/**
- * Dział produktów dopisywanych ręcznie (`dzial.reczny` w tłumaczeniach).
+/*
+ * Działy sklepu i ich kolejność: `DZIALY_SKLEPU` w `lib/skladniki.ts`.
+ * Dział każdego składnika jest zapisany w katalogu (kolumna `skladniki.dzial`,
+ * migracja 0053), a nie zgadywany z tagów.
  *
- * Celowo POZA tablicą DZIAŁÓW i celowo na końcu listy. Po pierwsze odpowiada
- * to trasie po sklepie — chemia leży przy kasach. Po drugie oddziela wzrokowo
- * to, co wyliczyło się z planu, od tego, co dopisałeś sam.
+ * Dział produktów dopisywanych ręcznie (`dzial.reczny` w tłumaczeniach) jest
+ * celowo POZA tą listą i na końcu. Po pierwsze odpowiada to trasie po sklepie
+ * — chemia leży przy kasach. Po drugie oddziela wzrokowo to, co wyliczyło się
+ * z planu, od tego, co dopisałeś sam.
  */
-export function dzialDla(tagi: string[]): Dzial {
-  for (const dzial of DZIALY) {
-    if (dzial.tagi.some((t) => tagi.includes(t))) return dzial.klucz;
-  }
-  return 'pozostale';
-}
 
 /**
  * Zbiera składniki ze WSZYSTKICH posiłków konta, które są jeszcze aktualne —
@@ -198,7 +182,7 @@ export async function pobierzListeZakupow(dzisiaj: string): Promise<PozycjaZakup
 
   type DaneSkladnika = {
     nazwa: string;
-    tagi: string[];
+    dzial: DzialSklepu | null;
     gramatura_opakowania_g: number | null;
     zdjecie: string | null;
     zdjecie_zrodlo: ZrodloZdjecia | null;
@@ -213,7 +197,7 @@ export async function pobierzListeZakupow(dzisiaj: string): Promise<PozycjaZakup
     idPrzepisow.length > 0
       ? supabase
           .from('przepis_skladniki')
-          .select('przepis_id, skladnik_id, gramy, skladniki (nazwa, tagi, gramatura_opakowania_g, zdjecie, zdjecie_zrodlo)')
+          .select('przepis_id, skladnik_id, gramy, skladniki (nazwa, dzial, gramatura_opakowania_g, zdjecie, zdjecie_zrodlo)')
           .in('przepis_id', idPrzepisow)
       : Promise.resolve({ data: [], error: null }),
     idPrzepisow.length > 0
@@ -223,7 +207,7 @@ export async function pobierzListeZakupow(dzisiaj: string): Promise<PozycjaZakup
       ? supabase
           .from('przepisy_skalowane_skladniki')
           .select(
-            'przepis_skalowany_id, skladnik_id, gramy, skladniki (nazwa, tagi, gramatura_opakowania_g, zdjecie, zdjecie_zrodlo)'
+            'przepis_skalowany_id, skladnik_id, gramy, skladniki (nazwa, dzial, gramatura_opakowania_g, zdjecie, zdjecie_zrodlo)'
           )
           .in('przepis_skalowany_id', idSkalowanych)
       : Promise.resolve({ data: [], error: null }),
@@ -259,7 +243,7 @@ export async function pobierzListeZakupow(dzisiaj: string): Promise<PozycjaZakup
       zrodlo_id: zrodloId,
       nazwa: dane.nazwa,
       gramy: 0,
-      tagi: dane.tagi ?? [],
+      dzial: dane.dzial ?? 'pozostale',
       opakowanie_g: dane.gramatura_opakowania_g,
       opakowan: null,
       reszta_g: null,

@@ -11,12 +11,14 @@ import { Wybor } from './wybor';
 import { Spacing } from '@/constants/theme';
 import { komunikatBledu } from '@/lib/blad';
 import {
+  DZIALY_SKLEPU,
   MAX_WARTO_WIEDZIEC,
   ostrzezenieOKaloriach,
   ROLE_SKLADNIKA,
   sprawdzSkladnik,
   zapiszSkladnik,
   type DaneSkladnika,
+  type DzialSklepu,
   type RolaSkladnika,
   type Skladnik,
 } from '@/lib/skladniki';
@@ -75,6 +77,7 @@ export function FormularzSkladnika({
   );
   const [rola, setRola] = useState<RolaSkladnika>(skladnik?.rola ?? 'baza');
   const [tagi, setTagi] = useState((skladnik?.tagi ?? []).join(', '));
+  const [dzial, setDzial] = useState<DzialSklepu>(skladnik?.dzial ?? 'pozostale');
   const [wartoWiedziec, setWartoWiedziec] = useState(skladnik?.warto_wiedziec ?? '');
 
   const [zajety, setZajety] = useState(false);
@@ -99,6 +102,7 @@ export function FormularzSkladnika({
       .split(',')
       .map((x) => x.trim())
       .filter(Boolean),
+    dzial,
     // Puste pole = brak uwagi, a nie pusty tekst — baza i tak by go odrzuciła.
     warto_wiedziec: wartoWiedziec.trim() || null,
   };
@@ -221,6 +225,16 @@ export function FormularzSkladnika({
         />
         <ThemedText type="small" themeColor="textSecondary">
           {t('formularzSkladnika.tagiOpis')}
+        </ThemedText>
+
+        <Wybor
+          etykieta={t('formularzSkladnika.dzial')}
+          wybrana={dzial}
+          onZmiana={setDzial}
+          opcje={DZIALY_SKLEPU.map((d) => ({ wartosc: d, etykieta: t(`dzial.${d}`) }))}
+        />
+        <ThemedText type="small" themeColor="textSecondary">
+          {t('formularzSkladnika.dzialOpis')}
         </ThemedText>
       </Karta>
 

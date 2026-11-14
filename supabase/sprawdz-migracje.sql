@@ -348,6 +348,14 @@ with sprawdzenia as (
       select 1 from information_schema.columns
        where table_name = 'skladniki' and column_name = 'warto_wiedziec'
     )
+  union all
+  select
+    '0053_dzial_sklepu',
+    'kolumna skladniki.dzial (dzial sklepu na liscie zakupow)',
+    exists (
+      select 1 from information_schema.columns
+       where table_name = 'skladniki' and column_name = 'dzial'
+    )
 )
 select
   migracja,

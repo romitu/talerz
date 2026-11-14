@@ -14,13 +14,11 @@ import { liczbaNaTekst } from '@/lib/jezyk';
 import { wroc } from '@/lib/nawigacja';
 import { naDate } from '@/lib/plan';
 import { useSesja } from '@/lib/sesja';
+import { DZIALY_SKLEPU, type DzialSklepu } from '@/lib/skladniki';
 import { KLUCZ_WIDOKU_ZAKUPOW, useWidokListy } from '@/lib/widok-listy';
 import { adresZdjeciaSkladnika } from '@/lib/zdjecia';
 import {
   dodajReczny,
-  dzialDla,
-  DZIALY,
-  type Dzial,
   kluczOdhaczenia,
   kupionoReczny,
   pobierzListeZakupow,
@@ -162,11 +160,11 @@ export default function EkranZakupow() {
   }
 
   function pogrupujWgDzialow(lista: PozycjaSkonsolidowana[]) {
-    const mapa = new Map<Dzial, PozycjaSkonsolidowana[]>();
-    for (const p of lista) mapa.set(dzialDla(p.tagi), [...(mapa.get(dzialDla(p.tagi)) ?? []), p]);
-    return DZIALY.map((dzial) => {
-      const wDziale = mapa.get(dzial.klucz);
-      return wDziale && wDziale.length > 0 ? { dzial, pozycje: wDziale } : null;
+    const mapa = new Map<DzialSklepu, PozycjaSkonsolidowana[]>();
+    for (const p of lista) mapa.set(p.dzial, [...(mapa.get(p.dzial) ?? []), p]);
+    return DZIALY_SKLEPU.map((klucz) => {
+      const wDziale = mapa.get(klucz);
+      return wDziale && wDziale.length > 0 ? { dzial: { klucz }, pozycje: wDziale } : null;
     }).filter((x): x is NonNullable<typeof x> => x !== null);
   }
 

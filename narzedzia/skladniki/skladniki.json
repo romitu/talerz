@@ -4,18 +4,19 @@
     "tagi": [
       "owoc"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
-    "masa_sztuki_g": 5,
+    "masa_sztuki_g": null,
     "gramatura_opakowania_g": 1,
     "kcal_100g": 44,
-    "bialko_100g": 0.88,
-    "tluszcz_100g": 0.58,
-    "wegle_100g": 10.18,
-    "blonnik_100g": 4.3,
-    "cukry_ogolem_100g": 5.88,
+    "bialko_100g": 0.8,
+    "tluszcz_100g": 0.4,
+    "wegle_100g": 10.5,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 6.5,
     "cukry_wolne_100g": 0,
-    "nova": 1,
+    "nova": 3,
     "zrodlo": "usda"
   },
   {
@@ -23,6 +24,7 @@
     "tagi": [
       "zboze"
     ],
+    "dzial": "kasze",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -42,6 +44,7 @@
     "tagi": [
       "owoc"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 900,
@@ -61,6 +64,7 @@
     "tagi": [
       "owoc"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 2500,
@@ -81,6 +85,7 @@
       "owoc",
       "tluszcz"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 140,
@@ -100,6 +105,7 @@
     "tagi": [
       "warzywo"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -119,6 +125,7 @@
     "tagi": [
       "owoc"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 120,
@@ -138,6 +145,7 @@
     "tagi": [
       "warzywo"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -155,6 +163,7 @@
   {
     "nazwa": "Bazylia suszona",
     "tagi": [],
+    "dzial": "przyprawy",
     "rola": "doprawienie",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -174,6 +183,7 @@
     "tagi": [
       "ziola"
     ],
+    "dzial": "warzywa",
     "rola": "do_smaku",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -194,6 +204,7 @@
       "warzywo",
       "straczki"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 5,
@@ -213,6 +224,7 @@
     "tagi": [
       "warzywo"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -232,6 +244,7 @@
     "tagi": [
       "warzywo"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -252,6 +265,7 @@
       "warzywo",
       "grzyby"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -271,6 +285,7 @@
     "tagi": [
       "owoc"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -290,6 +305,7 @@
     "tagi": [
       "warzywo"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -309,6 +325,7 @@
     "tagi": [
       "warzywo"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 400,
@@ -328,6 +345,7 @@
     "tagi": [
       "warzywo"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 450,
@@ -347,6 +365,7 @@
     "tagi": [
       "warzywo"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 15,
@@ -366,6 +385,7 @@
     "tagi": [
       "owoc"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": false,
     "masa_sztuki_g": 150,
@@ -386,6 +406,7 @@
       "zboze",
       "gluten"
     ],
+    "dzial": "kasze",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -405,6 +426,7 @@
     "tagi": [
       "warzywo"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -424,6 +446,7 @@
     "tagi": [
       "warzywo"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 110,
@@ -443,6 +466,7 @@
     "tagi": [
       "warzywo"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 15,
@@ -462,6 +486,7 @@
     "tagi": [
       "warzywo"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 110,
@@ -479,6 +504,7 @@
   {
     "nazwa": "Chili suszone",
     "tagi": [],
+    "dzial": "przyprawy",
     "rola": "baza",
     "mozna_dzielic": null,
     "masa_sztuki_g": null,
@@ -494,11 +520,30 @@
     "zrodlo": "wlasne"
   },
   {
+    "nazwa": "Chleb wieloziarnisty",
+    "tagi": [],
+    "dzial": "pieczywo",
+    "rola": "baza",
+    "mozna_dzielic": null,
+    "masa_sztuki_g": null,
+    "gramatura_opakowania_g": null,
+    "kcal_100g": 248,
+    "bialko_100g": 9,
+    "tluszcz_100g": 4,
+    "wegle_100g": 42,
+    "blonnik_100g": 7,
+    "cukry_ogolem_100g": 2.5,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "wlasne"
+  },
+  {
     "nazwa": "Chleb żytni razowy",
     "tagi": [
       "zboze",
       "gluten"
     ],
+    "dzial": "pieczywo",
     "rola": "baza",
     "mozna_dzielic": false,
     "masa_sztuki_g": 35,
@@ -518,6 +563,7 @@
     "tagi": [
       "przyprawa"
     ],
+    "dzial": "przyprawy",
     "rola": "doprawienie",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -537,6 +583,7 @@
     "tagi": [
       "straczki"
     ],
+    "dzial": "konserwy",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -556,6 +603,7 @@
     "tagi": [
       "straczki"
     ],
+    "dzial": "kasze",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -575,6 +623,7 @@
     "tagi": [
       "mieso"
     ],
+    "dzial": "mieso",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -594,6 +643,7 @@
     "tagi": [
       "warzywo"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 200,
@@ -613,6 +663,7 @@
     "tagi": [
       "przyprawa"
     ],
+    "dzial": "przyprawy",
     "rola": "aromat",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -632,6 +683,7 @@
     "tagi": [
       "owoc"
     ],
+    "dzial": "warzywa",
     "rola": "doprawienie",
     "mozna_dzielic": true,
     "masa_sztuki_g": 60,
@@ -651,6 +703,7 @@
     "tagi": [
       "przyprawa"
     ],
+    "dzial": "przyprawy",
     "rola": "doprawienie",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -671,6 +724,7 @@
       "czekolada",
       "kakao"
     ],
+    "dzial": "bakalie",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 10,
@@ -691,6 +745,7 @@
       "czekolada",
       "kakao"
     ],
+    "dzial": "bakalie",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 10,
@@ -711,6 +766,7 @@
       "czekolada",
       "kakao"
     ],
+    "dzial": "bakalie",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 10,
@@ -731,6 +787,7 @@
       "czekolada",
       "kakao"
     ],
+    "dzial": "bakalie",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 10,
@@ -751,6 +808,7 @@
       "czekolada",
       "kakao"
     ],
+    "dzial": "bakalie",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 10,
@@ -770,6 +828,7 @@
     "tagi": [
       "owoc"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 8,
@@ -789,6 +848,7 @@
     "tagi": [
       "warzywo"
     ],
+    "dzial": "warzywa",
     "rola": "aromat",
     "mozna_dzielic": true,
     "masa_sztuki_g": 5,
@@ -809,6 +869,7 @@
       "owoc",
       "suszone"
     ],
+    "dzial": "bakalie",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -828,6 +889,7 @@
     "tagi": [
       "przyprawa"
     ],
+    "dzial": "przyprawy",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -847,6 +909,7 @@
     "tagi": [
       "ryba"
     ],
+    "dzial": "mieso",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -866,6 +929,7 @@
     "tagi": [
       "ryba"
     ],
+    "dzial": "mieso",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -885,6 +949,7 @@
     "tagi": [
       "warzywo"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -904,6 +969,7 @@
     "tagi": [
       "straczki"
     ],
+    "dzial": "mrozonki",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -923,6 +989,7 @@
     "tagi": [
       "warzywo"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -943,6 +1010,7 @@
       "warzywo",
       "grzyby"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -962,6 +1030,7 @@
     "tagi": [
       "straczki"
     ],
+    "dzial": "konserwy",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -981,6 +1050,7 @@
     "tagi": [
       "straczki"
     ],
+    "dzial": "kasze",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -1000,6 +1070,7 @@
     "tagi": [
       "straczki"
     ],
+    "dzial": "konserwy",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -1019,6 +1090,7 @@
     "tagi": [
       "straczki"
     ],
+    "dzial": "kasze",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -1038,6 +1110,7 @@
     "tagi": [
       "straczki"
     ],
+    "dzial": "konserwy",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -1057,6 +1130,7 @@
     "tagi": [
       "straczki"
     ],
+    "dzial": "kasze",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -1076,6 +1150,7 @@
     "tagi": [
       "warzywo"
     ],
+    "dzial": "mrozonki",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -1095,6 +1170,7 @@
     "tagi": [
       "warzywo"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -1114,6 +1190,7 @@
     "tagi": [
       "warzywo"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 250,
@@ -1134,6 +1211,7 @@
       "owoc",
       "suszone"
     ],
+    "dzial": "bakalie",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -1153,6 +1231,7 @@
     "tagi": [
       "ryba"
     ],
+    "dzial": "mieso",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": null,
@@ -1173,6 +1252,7 @@
       "mieso",
       "drob"
     ],
+    "dzial": "mieso",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -1192,6 +1272,7 @@
     "tagi": [
       "ryba"
     ],
+    "dzial": "mieso",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -1211,6 +1292,7 @@
     "tagi": [
       "przyprawa"
     ],
+    "dzial": "przyprawy",
     "rola": "aromat",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -1228,6 +1310,7 @@
   {
     "nazwa": "Garam masala",
     "tagi": [],
+    "dzial": "przyprawy",
     "rola": "aromat",
     "mozna_dzielic": true,
     "masa_sztuki_g": null,
@@ -1247,6 +1330,7 @@
     "tagi": [
       "przyprawa"
     ],
+    "dzial": "przyprawy",
     "rola": "aromat",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -1266,6 +1350,7 @@
     "tagi": [
       "owoc"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 280,
@@ -1285,6 +1370,7 @@
     "tagi": [
       "owoc"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 250,
@@ -1304,6 +1390,7 @@
     "tagi": [
       "straczki"
     ],
+    "dzial": "kasze",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -1323,6 +1410,7 @@
     "tagi": [
       "warzywo"
     ],
+    "dzial": "mrozonki",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -1343,6 +1431,7 @@
       "warzywo",
       "straczki"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -1362,6 +1451,7 @@
     "tagi": [
       "owoc"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 180,
@@ -1381,6 +1471,7 @@
     "tagi": [
       "mieso"
     ],
+    "dzial": "mieso",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -1400,6 +1491,7 @@
     "tagi": [
       "nabial"
     ],
+    "dzial": "nabial",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -1419,6 +1511,7 @@
     "tagi": [
       "przyprawa"
     ],
+    "dzial": "warzywa",
     "rola": "aromat",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -1439,6 +1532,7 @@
       "mieso",
       "drob"
     ],
+    "dzial": "mieso",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -1458,6 +1552,7 @@
     "tagi": [
       "owoc"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 180,
@@ -1477,6 +1572,7 @@
     "tagi": [
       "mieso"
     ],
+    "dzial": "mieso",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -1496,6 +1592,7 @@
     "tagi": [
       "jaja"
     ],
+    "dzial": "nabial",
     "rola": "baza",
     "mozna_dzielic": false,
     "masa_sztuki_g": 55,
@@ -1515,6 +1612,7 @@
     "tagi": [
       "warzywo"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -1534,6 +1632,7 @@
     "tagi": [
       "owoc"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 5,
@@ -1553,6 +1652,7 @@
     "tagi": [
       "nabial"
     ],
+    "dzial": "nabial",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 20,
@@ -1572,6 +1672,7 @@
     "tagi": [
       "nabial"
     ],
+    "dzial": "nabial",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -1592,6 +1693,7 @@
       "mieso",
       "drob"
     ],
+    "dzial": "mieso",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -1611,6 +1713,7 @@
     "tagi": [
       "kakao"
     ],
+    "dzial": "bakalie",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -1630,6 +1733,7 @@
     "tagi": [
       "warzywo"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -1649,6 +1753,7 @@
     "tagi": [
       "owoce morza"
     ],
+    "dzial": "mieso",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -1668,6 +1773,7 @@
     "tagi": [
       "warzywo"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 300,
@@ -1687,6 +1793,7 @@
     "tagi": [
       "warzywo"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -1706,6 +1813,7 @@
     "tagi": [
       "warzywo"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -1726,6 +1834,7 @@
       "warzywo",
       "kiszone"
     ],
+    "dzial": "konserwy",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -1745,6 +1854,7 @@
     "tagi": [
       "warzywo"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -1764,6 +1874,7 @@
     "tagi": [
       "warzywo"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -1783,6 +1894,7 @@
     "tagi": [
       "przyprawa"
     ],
+    "dzial": "przyprawy",
     "rola": "aromat",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -1802,6 +1914,7 @@
     "tagi": [
       "ryba"
     ],
+    "dzial": "mieso",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -1822,6 +1935,7 @@
       "zboze",
       "gluten"
     ],
+    "dzial": "kasze",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -1842,6 +1956,7 @@
       "zboze",
       "gluten"
     ],
+    "dzial": "kasze",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 100,
@@ -1861,6 +1976,7 @@
     "tagi": [
       "zboze"
     ],
+    "dzial": "kasze",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -1881,6 +1997,7 @@
       "zboze",
       "gluten"
     ],
+    "dzial": "kasze",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -1898,6 +2015,7 @@
   {
     "nazwa": "Kawa",
     "tagi": [],
+    "dzial": "napoje",
     "rola": "baza",
     "mozna_dzielic": null,
     "masa_sztuki_g": null,
@@ -1917,6 +2035,7 @@
     "tagi": [
       "nabial"
     ],
+    "dzial": "nabial",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -1936,6 +2055,7 @@
     "tagi": [
       "owoc"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 75,
@@ -1955,6 +2075,7 @@
     "tagi": [
       "przyprawa"
     ],
+    "dzial": "przyprawy",
     "rola": "doprawienie",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -1974,6 +2095,7 @@
     "tagi": [
       "przyprawa"
     ],
+    "dzial": "przyprawy",
     "rola": "doprawienie",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -1993,6 +2115,7 @@
     "tagi": [
       "ziola"
     ],
+    "dzial": "warzywa",
     "rola": "do_smaku",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -2012,6 +2135,7 @@
     "tagi": [
       "zboze"
     ],
+    "dzial": "kasze",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -2029,6 +2153,7 @@
   {
     "nazwa": "Koncentrat pomidorowy",
     "tagi": [],
+    "dzial": "konserwy",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -2046,6 +2171,7 @@
   {
     "nazwa": "koperek świeży",
     "tagi": [],
+    "dzial": "warzywa",
     "rola": "do_smaku",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -2065,6 +2191,7 @@
     "tagi": [
       "owoce morza"
     ],
+    "dzial": "mieso",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -2084,6 +2211,7 @@
     "tagi": [
       "mieso"
     ],
+    "dzial": "mieso",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -2104,6 +2232,7 @@
       "warzywo",
       "zboze"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 180,
@@ -2121,6 +2250,7 @@
   {
     "nazwa": "Kukurydza konserwowa, odsączona",
     "tagi": [],
+    "dzial": "konserwy",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": null,
@@ -2141,6 +2271,7 @@
       "mieso",
       "drob"
     ],
+    "dzial": "mieso",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 90,
@@ -2161,6 +2292,7 @@
       "mieso",
       "podroby"
     ],
+    "dzial": "mieso",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -2181,6 +2313,7 @@
       "warzywo",
       "grzyby"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -2200,6 +2333,7 @@
     "tagi": [
       "przyprawa"
     ],
+    "dzial": "przyprawy",
     "rola": "aromat",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -2217,6 +2351,7 @@
   {
     "nazwa": "kwas ogórków kiszonych",
     "tagi": [],
+    "dzial": "konserwy",
     "rola": "doprawienie",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -2234,6 +2369,7 @@
   {
     "nazwa": "Limonka",
     "tagi": [],
+    "dzial": "warzywa",
     "rola": "doprawienie",
     "mozna_dzielic": true,
     "masa_sztuki_g": 70,
@@ -2251,6 +2387,7 @@
   {
     "nazwa": "liść laurowy",
     "tagi": [],
+    "dzial": "przyprawy",
     "rola": "aromat",
     "mozna_dzielic": false,
     "masa_sztuki_g": 0.2,
@@ -2270,6 +2407,7 @@
     "tagi": [
       "ryba"
     ],
+    "dzial": "mieso",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -2289,6 +2427,7 @@
     "tagi": [
       "ryba"
     ],
+    "dzial": "mieso",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -2308,6 +2447,7 @@
     "tagi": [
       "przyprawa"
     ],
+    "dzial": "przyprawy",
     "rola": "doprawienie",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -2327,6 +2467,7 @@
     "tagi": [
       "nasiona"
     ],
+    "dzial": "bakalie",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -2347,6 +2488,7 @@
       "zboze",
       "gluten"
     ],
+    "dzial": "kasze",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -2367,6 +2509,7 @@
       "zboze",
       "gluten"
     ],
+    "dzial": "kasze",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -2387,6 +2530,7 @@
       "zboze",
       "gluten"
     ],
+    "dzial": "kasze",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -2407,6 +2551,7 @@
       "zboze",
       "gluten"
     ],
+    "dzial": "kasze",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -2427,6 +2572,7 @@
       "zboze",
       "gluten"
     ],
+    "dzial": "kasze",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -2446,6 +2592,7 @@
     "tagi": [
       "ryba"
     ],
+    "dzial": "mieso",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -2465,6 +2612,7 @@
     "tagi": [
       "owoc"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 4,
@@ -2484,6 +2632,7 @@
     "tagi": [
       "owoce morza"
     ],
+    "dzial": "mieso",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -2503,6 +2652,7 @@
     "tagi": [
       "owoc"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 90,
@@ -2522,6 +2672,7 @@
     "tagi": [
       "owoc"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 330,
@@ -2541,6 +2692,7 @@
     "tagi": [
       "warzywo"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 70,
@@ -2560,6 +2712,7 @@
     "tagi": [
       "nabial"
     ],
+    "dzial": "nabial",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -2580,6 +2733,7 @@
       "tluszcz",
       "nabial"
     ],
+    "dzial": "nabial",
     "rola": "smazenie",
     "mozna_dzielic": true,
     "masa_sztuki_g": 15,
@@ -2599,6 +2753,7 @@
     "tagi": [
       "orzechy"
     ],
+    "dzial": "bakalie",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -2618,6 +2773,7 @@
     "tagi": [
       "owoc"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 700,
@@ -2637,6 +2793,7 @@
     "tagi": [
       "mieso"
     ],
+    "dzial": "mieso",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -2657,6 +2814,7 @@
       "mieso",
       "drob"
     ],
+    "dzial": "mieso",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": null,
@@ -2676,6 +2834,7 @@
     "tagi": [
       "ziola"
     ],
+    "dzial": "warzywa",
     "rola": "do_smaku",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -2695,6 +2854,7 @@
     "tagi": [
       "orzechy"
     ],
+    "dzial": "bakalie",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -2714,6 +2874,7 @@
     "tagi": [
       "ryba"
     ],
+    "dzial": "mieso",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -2733,6 +2894,7 @@
     "tagi": [
       "slodzik"
     ],
+    "dzial": "bakalie",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 21,
@@ -2752,6 +2914,7 @@
     "tagi": [
       "nabial"
     ],
+    "dzial": "nabial",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -2771,6 +2934,7 @@
     "tagi": [
       "nabial"
     ],
+    "dzial": "nabial",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -2790,6 +2954,7 @@
     "tagi": [
       "nabial"
     ],
+    "dzial": "nabial",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -2809,6 +2974,7 @@
     "tagi": [
       "roslinne"
     ],
+    "dzial": "konserwy",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -2828,6 +2994,7 @@
     "tagi": [
       "tluszcz"
     ],
+    "dzial": "konserwy",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -2847,6 +3014,7 @@
     "tagi": [
       "nabial"
     ],
+    "dzial": "nabial",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -2866,6 +3034,7 @@
     "tagi": [
       "owoc"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": false,
     "masa_sztuki_g": 35,
@@ -2885,6 +3054,7 @@
     "tagi": [
       "ryba"
     ],
+    "dzial": "mieso",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -2902,6 +3072,7 @@
   {
     "nazwa": "Musztarda",
     "tagi": [],
+    "dzial": "przyprawy",
     "rola": "aromat",
     "mozna_dzielic": true,
     "masa_sztuki_g": null,
@@ -2921,6 +3092,7 @@
     "tagi": [
       "nasiona"
     ],
+    "dzial": "bakalie",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -2940,6 +3112,7 @@
     "tagi": [
       "przyprawa"
     ],
+    "dzial": "przyprawy",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -2959,6 +3132,7 @@
     "tagi": [
       "nasiona"
     ],
+    "dzial": "bakalie",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -2978,6 +3152,7 @@
     "tagi": [
       "owoc"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": false,
     "masa_sztuki_g": 140,
@@ -2997,6 +3172,7 @@
     "tagi": [
       "orzechy"
     ],
+    "dzial": "bakalie",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -3016,6 +3192,7 @@
     "tagi": [
       "przyprawa"
     ],
+    "dzial": "przyprawy",
     "rola": "doprawienie",
     "mozna_dzielic": true,
     "masa_sztuki_g": 15,
@@ -3035,6 +3212,7 @@
     "tagi": [
       "przyprawa"
     ],
+    "dzial": "przyprawy",
     "rola": "doprawienie",
     "mozna_dzielic": true,
     "masa_sztuki_g": 15,
@@ -3054,6 +3232,7 @@
     "tagi": [
       "warzywo"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 200,
@@ -3071,6 +3250,7 @@
   {
     "nazwa": "ogórki kiszone bio",
     "tagi": [],
+    "dzial": "konserwy",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 60,
@@ -3090,6 +3270,7 @@
     "tagi": [
       "ryba"
     ],
+    "dzial": "mieso",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -3109,6 +3290,7 @@
     "tagi": [
       "tluszcz"
     ],
+    "dzial": "przyprawy",
     "rola": "smazenie",
     "mozna_dzielic": true,
     "masa_sztuki_g": 12,
@@ -3128,6 +3310,7 @@
     "tagi": [
       "tluszcz"
     ],
+    "dzial": "przyprawy",
     "rola": "doprawienie",
     "mozna_dzielic": true,
     "masa_sztuki_g": 12,
@@ -3148,6 +3331,7 @@
       "owoc",
       "tluszcz"
     ],
+    "dzial": "konserwy",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -3167,6 +3351,7 @@
     "tagi": [
       "owoc"
     ],
+    "dzial": "konserwy",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -3186,6 +3371,7 @@
     "tagi": [
       "ziola"
     ],
+    "dzial": "przyprawy",
     "rola": "doprawienie",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -3205,6 +3391,7 @@
     "tagi": [
       "orzechy"
     ],
+    "dzial": "bakalie",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 5,
@@ -3224,6 +3411,7 @@
     "tagi": [
       "orzechy"
     ],
+    "dzial": "bakalie",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -3243,6 +3431,7 @@
     "tagi": [
       "orzechy"
     ],
+    "dzial": "bakalie",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -3262,6 +3451,7 @@
     "tagi": [
       "orzechy"
     ],
+    "dzial": "bakalie",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -3281,6 +3471,7 @@
     "tagi": [
       "orzechy"
     ],
+    "dzial": "bakalie",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -3300,6 +3491,7 @@
     "tagi": [
       "orzechy"
     ],
+    "dzial": "bakalie",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -3319,6 +3511,7 @@
     "tagi": [
       "owoce morza"
     ],
+    "dzial": "mieso",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -3339,6 +3532,7 @@
       "zboze",
       "gluten"
     ],
+    "dzial": "kasze",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -3358,6 +3552,7 @@
     "tagi": [
       "warzywo"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 150,
@@ -3377,6 +3572,7 @@
     "tagi": [
       "przyprawa"
     ],
+    "dzial": "przyprawy",
     "rola": "aromat",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -3396,6 +3592,7 @@
     "tagi": [
       "przyprawa"
     ],
+    "dzial": "przyprawy",
     "rola": "doprawienie",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -3413,6 +3610,7 @@
   {
     "nazwa": "Papryka wędzona mielona",
     "tagi": [],
+    "dzial": "przyprawy",
     "rola": "doprawienie",
     "mozna_dzielic": true,
     "masa_sztuki_g": null,
@@ -3432,6 +3630,7 @@
     "tagi": [
       "warzywo"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 140,
@@ -3451,6 +3650,7 @@
     "tagi": [
       "warzywo"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 150,
@@ -3470,6 +3670,7 @@
     "tagi": [
       "nabial"
     ],
+    "dzial": "nabial",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -3489,6 +3690,7 @@
     "tagi": [
       "warzywo"
     ],
+    "dzial": "konserwy",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -3508,6 +3710,7 @@
     "tagi": [
       "przyprawa"
     ],
+    "dzial": "konserwy",
     "rola": "aromat",
     "mozna_dzielic": true,
     "masa_sztuki_g": 15,
@@ -3527,6 +3730,7 @@
     "tagi": [
       "przyprawa"
     ],
+    "dzial": "konserwy",
     "rola": "aromat",
     "mozna_dzielic": true,
     "masa_sztuki_g": 15,
@@ -3546,6 +3750,7 @@
     "tagi": [
       "warzywo"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 120,
@@ -3565,6 +3770,7 @@
     "tagi": [
       "nasiona"
     ],
+    "dzial": "bakalie",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -3584,6 +3790,7 @@
     "tagi": [
       "nasiona"
     ],
+    "dzial": "bakalie",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -3603,6 +3810,7 @@
     "tagi": [
       "warzywo"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -3622,6 +3830,7 @@
     "tagi": [
       "przyprawa"
     ],
+    "dzial": "przyprawy",
     "rola": "doprawienie",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -3642,6 +3851,7 @@
       "mieso",
       "drob"
     ],
+    "dzial": "mieso",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -3662,6 +3872,7 @@
       "mieso",
       "drob"
     ],
+    "dzial": "mieso",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -3679,6 +3890,7 @@
   {
     "nazwa": "Pietruszka korzeń",
     "tagi": [],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 50,
@@ -3698,6 +3910,7 @@
     "tagi": [
       "ziola"
     ],
+    "dzial": "warzywa",
     "rola": "do_smaku",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -3717,6 +3930,7 @@
     "tagi": [
       "orzechy"
     ],
+    "dzial": "bakalie",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -3737,6 +3951,7 @@
       "zboze",
       "gluten"
     ],
+    "dzial": "kasze",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -3756,6 +3971,7 @@
     "tagi": [
       "mieso"
     ],
+    "dzial": "mieso",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -3775,6 +3991,7 @@
     "tagi": [
       "mieso"
     ],
+    "dzial": "mieso",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -3794,6 +4011,7 @@
     "tagi": [
       "zboze"
     ],
+    "dzial": "kasze",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -3813,6 +4031,7 @@
     "tagi": [
       "owoc"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 140,
@@ -3832,6 +4051,7 @@
     "tagi": [
       "warzywo"
     ],
+    "dzial": "konserwy",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -3851,6 +4071,7 @@
     "tagi": [
       "warzywo"
     ],
+    "dzial": "konserwy",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -3870,6 +4091,7 @@
     "tagi": [
       "warzywo"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 130,
@@ -3889,6 +4111,7 @@
     "tagi": [
       "warzywo"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 90,
@@ -3909,6 +4132,7 @@
       "warzywo",
       "grzyby"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -3928,6 +4152,7 @@
     "tagi": [
       "owoc"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -3947,6 +4172,7 @@
     "tagi": [
       "owoc"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -3966,6 +4192,7 @@
     "tagi": [
       "mieso"
     ],
+    "dzial": "mieso",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -3985,6 +4212,7 @@
     "tagi": [
       "ryba"
     ],
+    "dzial": "mieso",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -4004,6 +4232,7 @@
     "tagi": [
       "warzywo"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -4024,6 +4253,7 @@
       "owoc",
       "suszone"
     ],
+    "dzial": "bakalie",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -4043,6 +4273,7 @@
     "tagi": [
       "warzywo"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -4062,6 +4293,7 @@
     "tagi": [
       "przyprawa"
     ],
+    "dzial": "przyprawy",
     "rola": "doprawienie",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -4081,6 +4313,7 @@
     "tagi": [
       "ziola"
     ],
+    "dzial": "warzywa",
     "rola": "doprawienie",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -4100,6 +4333,7 @@
     "tagi": [
       "warzywo"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -4119,6 +4353,7 @@
     "tagi": [
       "zboze"
     ],
+    "dzial": "kasze",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -4138,6 +4373,7 @@
     "tagi": [
       "zboze"
     ],
+    "dzial": "kasze",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -4157,6 +4393,7 @@
     "tagi": [
       "zboze"
     ],
+    "dzial": "kasze",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -4176,6 +4413,7 @@
     "tagi": [
       "zboze"
     ],
+    "dzial": "kasze",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -4195,6 +4433,7 @@
     "tagi": [
       "zboze"
     ],
+    "dzial": "kasze",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -4214,6 +4453,7 @@
     "tagi": [
       "warzywo"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 140,
@@ -4233,6 +4473,7 @@
     "tagi": [
       "warzywo"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 10,
@@ -4252,6 +4493,7 @@
     "tagi": [
       "warzywo"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -4271,6 +4513,7 @@
     "tagi": [
       "warzywo"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -4290,6 +4533,7 @@
     "tagi": [
       "warzywo"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -4309,6 +4553,7 @@
     "tagi": [
       "ryba"
     ],
+    "dzial": "mieso",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -4328,6 +4573,7 @@
     "tagi": [
       "ryba"
     ],
+    "dzial": "konserwy",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -4347,6 +4593,7 @@
     "tagi": [
       "mieso"
     ],
+    "dzial": "mieso",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -4364,6 +4611,7 @@
   {
     "nazwa": "Seler korzeń",
     "tagi": [],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -4383,6 +4631,7 @@
     "tagi": [
       "warzywo"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 40,
@@ -4402,6 +4651,7 @@
     "tagi": [
       "nabial"
     ],
+    "dzial": "nabial",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -4421,6 +4671,7 @@
     "tagi": [
       "nabial"
     ],
+    "dzial": "nabial",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -4440,6 +4691,7 @@
     "tagi": [
       "nabial"
     ],
+    "dzial": "nabial",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -4459,6 +4711,7 @@
     "tagi": [
       "nabial"
     ],
+    "dzial": "nabial",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -4478,6 +4731,7 @@
     "tagi": [
       "nabial"
     ],
+    "dzial": "nabial",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -4497,6 +4751,7 @@
     "tagi": [
       "nabial"
     ],
+    "dzial": "nabial",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -4516,6 +4771,7 @@
     "tagi": [
       "nabial"
     ],
+    "dzial": "nabial",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -4535,6 +4791,7 @@
     "tagi": [
       "nabial"
     ],
+    "dzial": "nabial",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -4554,6 +4811,7 @@
     "tagi": [
       "nabial"
     ],
+    "dzial": "nabial",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -4573,6 +4831,7 @@
     "tagi": [
       "nabial"
     ],
+    "dzial": "nabial",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -4592,6 +4851,7 @@
     "tagi": [
       "nabial"
     ],
+    "dzial": "nabial",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -4611,6 +4871,7 @@
     "tagi": [
       "nabial"
     ],
+    "dzial": "nabial",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -4630,6 +4891,7 @@
     "tagi": [
       "nabial"
     ],
+    "dzial": "nabial",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -4649,6 +4911,7 @@
     "tagi": [
       "nabial"
     ],
+    "dzial": "nabial",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -4668,6 +4931,7 @@
     "tagi": [
       "nabial"
     ],
+    "dzial": "nabial",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -4687,6 +4951,7 @@
     "tagi": [
       "nasiona"
     ],
+    "dzial": "bakalie",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 9,
@@ -4707,6 +4972,7 @@
       "warzywo",
       "grzyby"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -4726,6 +4992,7 @@
     "tagi": [
       "nasiona"
     ],
+    "dzial": "bakalie",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 10,
@@ -4745,6 +5012,7 @@
     "tagi": [
       "nabial"
     ],
+    "dzial": "nabial",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -4764,6 +5032,7 @@
     "tagi": [
       "ryba"
     ],
+    "dzial": "mieso",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -4783,6 +5052,7 @@
     "tagi": [
       "owoc"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 70,
@@ -4800,6 +5070,7 @@
   {
     "nazwa": "śmietana 18% kwaśna",
     "tagi": [],
+    "dzial": "nabial",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 20,
@@ -4819,6 +5090,7 @@
     "tagi": [
       "straczki"
     ],
+    "dzial": "kasze",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -4838,6 +5110,7 @@
     "tagi": [
       "straczki"
     ],
+    "dzial": "kasze",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -4857,6 +5130,7 @@
     "tagi": [
       "straczki"
     ],
+    "dzial": "kasze",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -4876,6 +5150,7 @@
     "tagi": [
       "straczki"
     ],
+    "dzial": "kasze",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -4895,6 +5170,7 @@
     "tagi": [
       "przyprawa"
     ],
+    "dzial": "przyprawy",
     "rola": "doprawienie",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -4914,6 +5190,7 @@
     "tagi": [
       "przyprawa"
     ],
+    "dzial": "przyprawy",
     "rola": "doprawienie",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -4933,6 +5210,7 @@
     "tagi": [
       "przyprawa"
     ],
+    "dzial": "przyprawy",
     "rola": "doprawienie",
     "mozna_dzielic": true,
     "masa_sztuki_g": 18,
@@ -4952,6 +5230,7 @@
     "tagi": [
       "przyprawa"
     ],
+    "dzial": "przyprawy",
     "rola": "doprawienie",
     "mozna_dzielic": true,
     "masa_sztuki_g": 16,
@@ -4967,10 +5246,29 @@
     "zrodlo": "wlasne"
   },
   {
+    "nazwa": "Stracciatella",
+    "tagi": [],
+    "dzial": "nabial",
+    "rola": "baza",
+    "mozna_dzielic": null,
+    "masa_sztuki_g": null,
+    "gramatura_opakowania_g": null,
+    "kcal_100g": 236,
+    "bialko_100g": 10,
+    "tluszcz_100g": 21,
+    "wegle_100g": 1.8,
+    "blonnik_100g": 0,
+    "cukry_ogolem_100g": 1.8,
+    "cukry_wolne_100g": 0,
+    "nova": 3,
+    "zrodlo": "wlasne"
+  },
+  {
     "nazwa": "Szalotka, surowa",
     "tagi": [
       "warzywo"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 35,
@@ -4991,6 +5289,7 @@
       "warzywo",
       "przyprawa"
     ],
+    "dzial": "warzywa",
     "rola": "do_smaku",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -5010,6 +5309,7 @@
     "tagi": [
       "warzywo"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 20,
@@ -5029,6 +5329,7 @@
     "tagi": [
       "warzywo"
     ],
+    "dzial": "mrozonki",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -5048,6 +5349,7 @@
     "tagi": [
       "warzywo"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -5067,6 +5369,7 @@
     "tagi": [
       "mieso"
     ],
+    "dzial": "mieso",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -5084,6 +5387,7 @@
   {
     "nazwa": "Tajska Żółta Lekko Ostra Pasta Curry Yellow Curry Paste Mild 400g MAE PLOY",
     "tagi": [],
+    "dzial": "konserwy",
     "rola": "aromat",
     "mozna_dzielic": true,
     "masa_sztuki_g": 400,
@@ -5104,6 +5408,7 @@
       "straczki",
       "roslinne"
     ],
+    "dzial": "nabial",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -5121,6 +5426,7 @@
   {
     "nazwa": "Tortilla pełnoziarnista",
     "tagi": [],
+    "dzial": "pieczywo",
     "rola": "baza",
     "mozna_dzielic": false,
     "masa_sztuki_g": 60,
@@ -5140,6 +5446,7 @@
     "tagi": [
       "owoc"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -5159,6 +5466,7 @@
     "tagi": [
       "ryba"
     ],
+    "dzial": "mieso",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -5178,6 +5486,7 @@
     "tagi": [
       "ryba"
     ],
+    "dzial": "konserwy",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 140,
@@ -5197,6 +5506,7 @@
     "tagi": [
       "nabial"
     ],
+    "dzial": "nabial",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -5216,6 +5526,7 @@
     "tagi": [
       "nabial"
     ],
+    "dzial": "nabial",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -5235,6 +5546,7 @@
     "tagi": [
       "nabial"
     ],
+    "dzial": "nabial",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -5254,6 +5566,7 @@
     "tagi": [
       "przyprawa"
     ],
+    "dzial": "przyprawy",
     "rola": "doprawienie",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -5273,6 +5586,7 @@
     "tagi": [
       "ziola"
     ],
+    "dzial": "warzywa",
     "rola": "doprawienie",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -5293,6 +5607,7 @@
       "mieso",
       "drob"
     ],
+    "dzial": "mieso",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 110,
@@ -5312,6 +5627,7 @@
     "tagi": [
       "mieso"
     ],
+    "dzial": "mieso",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -5331,6 +5647,7 @@
     "tagi": [
       "mieso"
     ],
+    "dzial": "mieso",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -5350,6 +5667,7 @@
     "tagi": [
       "owoc"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 5,
@@ -5369,6 +5687,7 @@
     "tagi": [
       "owoc"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 7,
@@ -5386,6 +5705,7 @@
   {
     "nazwa": "woda",
     "tagi": [],
+    "dzial": "pozostale",
     "rola": "duszenie",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -5405,6 +5725,7 @@
     "tagi": [
       "mieso"
     ],
+    "dzial": "mieso",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -5424,6 +5745,7 @@
     "tagi": [
       "mieso"
     ],
+    "dzial": "mieso",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -5443,6 +5765,7 @@
     "tagi": [
       "mieso"
     ],
+    "dzial": "mieso",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -5462,6 +5785,7 @@
     "tagi": [
       "mieso"
     ],
+    "dzial": "mieso",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -5482,6 +5806,7 @@
       "mieso",
       "podroby"
     ],
+    "dzial": "mieso",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -5501,6 +5826,7 @@
     "tagi": [
       "mieso"
     ],
+    "dzial": "mieso",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 1,
@@ -5518,6 +5844,7 @@
   {
     "nazwa": "ziele angielskie",
     "tagi": [],
+    "dzial": "przyprawy",
     "rola": "aromat",
     "mozna_dzielic": false,
     "masa_sztuki_g": 0.1,
@@ -5537,6 +5864,7 @@
     "tagi": [
       "warzywo"
     ],
+    "dzial": "warzywa",
     "rola": "baza",
     "mozna_dzielic": true,
     "masa_sztuki_g": 120,

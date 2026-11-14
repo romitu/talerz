@@ -290,6 +290,8 @@
     "tagi": "Etykiety, oddzielone przecinkami",
     "przykladTagow": "zboze, gluten",
     "tagiOpis": "Etykiety służą preferencjom żywieniowym. Nie są filtrem alergenów.",
+    "dzial": "Dział w sklepie",
+    "dzialOpis": "Gdzie produkt leży w sklepie – według tego układa się lista zakupów. Passata to konserwy, nie warzywa; suszone zioła to przyprawy.",
     "wartoWiedziec": "Warto wiedzieć (nieobowiązkowe)",
     "przykladWartoWiedziec": "Zgnieć ok. 10 minut przed użyciem — wtedy powstaje allicyna, która odpowiada za ostry smak i zapach…",
     "wartoWiedziecOpis": "Jak przygotować składnik i dlaczego. Pokazuje się przy nim w każdym przepisie. Pisz o kuchni — smaku, konsystencji, wchłanianiu — a nie o leczeniu: bez „działa przeciwzapalnie” czy „wspiera wątrobę”."
@@ -362,12 +364,16 @@
     "instrukcja": "Instrukcja"
   },
   "dzial": {
-    "warzywa": "Warzywa i owoce",
-    "mieso": "Mięso i ryby",
+    "pieczywo": "Pieczywo",
+    "warzywa": "Owoce, warzywa i zioła",
     "nabial": "Nabiał i jaja",
-    "kasze": "Kasze, pieczywo, strączki",
-    "orzechy": "Orzechy i nasiona",
-    "tluszcze": "Tłuszcze i przyprawy",
+    "mieso": "Mięso i ryby",
+    "kasze": "Kasze, ryż, makaron, mąka",
+    "konserwy": "Konserwy i słoiki",
+    "przyprawy": "Oleje, przyprawy i sosy",
+    "bakalie": "Bakalie i słodycze",
+    "napoje": "Kawa i napoje",
+    "mrozonki": "Mrożonki",
     "pozostale": "Pozostałe",
     "reczny": "Dom i chemia"
   },
@@ -878,6 +884,7 @@
       "masa_sztuki_g": "szt. waży",
       "mozna_dzielic": "kwant.",
       "rola": "rola",
+      "dzial": "dział",
       "uzycia": "w daniach"
     }
   },

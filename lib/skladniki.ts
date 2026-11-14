@@ -55,6 +55,39 @@ export const ROLA_SKLADNIKA_WEDLUG_ETYKIETY = new Map<string, RolaSkladnika>(
   ])
 );
 
+/**
+ * Dział sklepu na liście zakupów (migracja 0053) — GDZIE produkt leży,
+ * a nie czym jest (od tego są tagi). Kolejność tablicy to trasa po typowym
+ * Lidlu i w tej kolejności działy stoją na liście zakupów.
+ * Nazwy w tłumaczeniach: `dzial.<klucz>`.
+ */
+export type DzialSklepu =
+  | 'pieczywo'
+  | 'warzywa'
+  | 'nabial'
+  | 'mieso'
+  | 'kasze'
+  | 'konserwy'
+  | 'przyprawy'
+  | 'bakalie'
+  | 'napoje'
+  | 'mrozonki'
+  | 'pozostale';
+
+export const DZIALY_SKLEPU: DzialSklepu[] = [
+  'pieczywo',
+  'warzywa',
+  'nabial',
+  'mieso',
+  'kasze',
+  'konserwy',
+  'przyprawy',
+  'bakalie',
+  'napoje',
+  'mrozonki',
+  'pozostale',
+];
+
 export type Skladnik = {
   id: string;
   nazwa: string;
@@ -74,6 +107,7 @@ export type Skladnik = {
   mozna_dzielic: boolean | null;
   rola: RolaSkladnika;
   tagi: string[];
+  dzial: DzialSklepu;
   /**
    * „Warto wiedzieć” (migracja 0052) — jak przygotować i dlaczego, np. „zgnieć
    * czosnek 10 min przed użyciem”. Kuchnia i chemia, bez obietnic zdrowotnych.
@@ -98,7 +132,7 @@ export const MAX_WARTO_WIEDZIEC = 600;
  * odczytuje z niej typy w czasie sprawdzania kodu i potrzebuje stałego tekstu.
  */
 const POLA =
-  'id, nazwa, zrodlo, kcal_100g, bialko_100g, tluszcz_100g, wegle_100g, blonnik_100g, cukry_ogolem_100g, cukry_wolne_100g, nova, gramatura_opakowania_g, masa_sztuki_g, mozna_dzielic, rola, tagi, warto_wiedziec';
+  'id, nazwa, zrodlo, kcal_100g, bialko_100g, tluszcz_100g, wegle_100g, blonnik_100g, cukry_ogolem_100g, cukry_wolne_100g, nova, gramatura_opakowania_g, masa_sztuki_g, mozna_dzielic, rola, tagi, dzial, warto_wiedziec';
 
 export async function pobierzSkladniki(): Promise<Skladnik[]> {
   const { data, error } = await supabase.from('skladniki').select(POLA).order('nazwa');

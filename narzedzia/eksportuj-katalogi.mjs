@@ -24,7 +24,7 @@ const KATALOG = dirname(fileURLToPath(import.meta.url));
 // Bez id, dat i zdjęć — przy pisaniu przepisu liczy się nazwa i to,
 // co wpływa na import (masa sztuki dla jednostki „szt”).
 const POLA_SKLADNIKOW =
-  'nazwa, tagi, rola, mozna_dzielic, masa_sztuki_g, gramatura_opakowania_g, kcal_100g, bialko_100g, ' +
+  'nazwa, tagi, dzial, rola,mozna_dzielic, masa_sztuki_g, gramatura_opakowania_g, kcal_100g, bialko_100g, ' +
   'tluszcz_100g, wegle_100g, blonnik_100g, cukry_ogolem_100g, cukry_wolne_100g, nova, zrodlo';
 
 async function main() {

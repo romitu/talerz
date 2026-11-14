@@ -19,6 +19,7 @@ import { jezyk } from '@/lib/jezyk';
 import { wroc } from '@/lib/nawigacja';
 import { useSesja } from '@/lib/sesja';
 import {
+  DZIALY_SKLEPU,
   pobierzSkladniki,
   pobierzUzycia,
   ROLE_SKLADNIKA,
@@ -27,6 +28,7 @@ import {
   zapiszSkladnik,
   ROLA_SKLADNIKA_WEDLUG_ETYKIETY,
   type DaneSkladnika,
+  type DzialSklepu,
   type RolaSkladnika,
   type Skladnik,
   type UzycieSkladnika,
@@ -49,6 +51,7 @@ const KOLUMNY = [
   { klucz: 'masa_sztuki_g', szerokosc: 66, liczba: true },
   { klucz: 'mozna_dzielic', szerokosc: 62, liczba: false },
   { klucz: 'rola', szerokosc: 90, liczba: false },
+  { klucz: 'dzial', szerokosc: 120, liczba: false },
   { klucz: 'uzycia', szerokosc: 72, liczba: true },
 ] as const; // nagłówki: `skladniki.kolumna.<klucz>` w tłumaczeniach
 
@@ -76,6 +79,10 @@ export default function EkranSkladnikow() {
     { wartosc: 'nie', etykieta: t('skladniki.niepodzielny') },
     { wartosc: 'tak', etykieta: t('skladniki.podzielny') },
   ];
+
+  /** Opcje komórki-wyboru dla działu sklepu — w kolejności trasy po sklepie. */
+  const nazwaDzialu = (d: DzialSklepu) => t(`dzial.${d}`);
+  const OPCJE_DZIALU = DZIALY_SKLEPU.map((d) => ({ wartosc: d, etykieta: nazwaDzialu(d) }));
   const { sesja } = useSesja();
   const { width: szerokoscOkna } = useWindowDimensions();
 
@@ -114,6 +121,7 @@ export default function EkranSkladnikow() {
     masa_sztuki_g: '',
     mozna_dzielic: '',
     rola: '',
+    dzial: '',
   };
   const [nowyWiersz, setNowyWiersz] = useState<Record<string, string>>(PUSTY_WIERSZ);
   const [dopisywanie, setDopisywanie] = useState(false);
@@ -165,7 +173,8 @@ export default function EkranSkladnikow() {
       ? skladniki.filter(
           (s) =>
             s.nazwa.toLowerCase().includes(fraza) ||
-            s.tagi.some((t) => t.toLowerCase().includes(fraza))
+            s.tagi.some((t) => t.toLowerCase().includes(fraza)) ||
+            t(`dzial.${s.dzial}`).toLowerCase().includes(fraza)
         )
       : [...skladniki];
 
@@ -176,6 +185,11 @@ export default function EkranSkladnikow() {
         wynik = a.nazwa.localeCompare(b.nazwa, 'pl');
       } else if (sortujPo === 'rola') {
         wynik = t(`rolaSkladnika.${a.rola}.nazwa`).localeCompare(t(`rolaSkladnika.${b.rola}.nazwa`), jezyk());
+      } else if (sortujPo === 'dzial') {
+        // Kolejność trasy po sklepie, nie alfabet; w obrębie działu — nazwa.
+        wynik =
+          DZIALY_SKLEPU.indexOf(a.dzial) - DZIALY_SKLEPU.indexOf(b.dzial) ||
+          a.nazwa.localeCompare(b.nazwa, 'pl');
       } else if (sortujPo === 'uzycia') {
         wynik = liczbaUzyc(a.id) - liczbaUzyc(b.id);
       } else if (sortujPo === 'mozna_dzielic') {
@@ -215,10 +229,14 @@ export default function EkranSkladnikow() {
     const poprzednie = skladniki;
     setBlad(null);
 
-    const liczbowe = pole !== 'nazwa' && pole !== 'rola' && pole !== 'mozna_dzielic';
+    const liczbowe = pole !== 'nazwa' && pole !== 'rola' && pole !== 'mozna_dzielic' && pole !== 'dzial';
     let wartosc: string | number | boolean | null;
 
-    if (pole === 'rola') {
+    if (pole === 'dzial') {
+      // Komórka-wybór podaje wyłącznie klucze z listy, ale baza i tak ma CHECK.
+      if (!DZIALY_SKLEPU.includes(tekst as DzialSklepu)) return;
+      wartosc = tekst;
+    } else if (pole === 'rola') {
       const rolaWpisana = ROLA_SKLADNIKA_WEDLUG_ETYKIETY.get(tekst.trim().toLowerCase());
       if (!rolaWpisana) {
         setBlad(t('skladniki.zlaRola', { role: listaRol }));
@@ -306,6 +324,7 @@ export default function EkranSkladnikow() {
         nowyWiersz.mozna_dzielic === 'tak' ? true : nowyWiersz.mozna_dzielic === 'nie' ? false : null,
       rola: rolaNowa,
       tagi: [],
+      dzial: (nowyWiersz.dzial || 'pozostale') as DzialSklepu,
     };
 
     const problemy = sprawdzSkladnik(dane);
@@ -344,6 +363,7 @@ export default function EkranSkladnikow() {
   function wartoscKomorki(s: Skladnik, klucz: KluczKolumny): string {
     if (klucz === 'nazwa') return s.nazwa;
     if (klucz === 'rola') return nazwaRoli(s.rola);
+    if (klucz === 'dzial') return nazwaDzialu(s.dzial);
     if (klucz === 'mozna_dzielic') {
       if (s.mozna_dzielic === null || s.mozna_dzielic === undefined) return trybEdycji ? '' : '—';
       return s.mozna_dzielic ? t('wspolne.tak') : t('wspolne.nie');
@@ -548,6 +568,19 @@ export default function EkranSkladnikow() {
                             />
                           );
                         }
+                        if (k.klucz === 'dzial') {
+                          return (
+                            <KomorkaWyboru
+                              key={k.klucz}
+                              wartosc={s.dzial}
+                              etykieta={nazwaDzialu(s.dzial)}
+                              opcje={OPCJE_DZIALU}
+                              szerokosc={k.szerokosc}
+                              edytowalna
+                              onWybierz={(nowa) => zapiszKomorke(s, 'dzial', nowa)}
+                            />
+                          );
+                        }
                         if (k.klucz === 'mozna_dzielic') {
                           const wartosc =
                             s.mozna_dzielic === null || s.mozna_dzielic === undefined
@@ -677,6 +710,20 @@ export default function EkranSkladnikow() {
                         szerokosc={k.szerokosc}
                         edytowalna
                         onWybierz={(nowa) => setNowyWiersz((p) => ({ ...p, rola: nowa }))}
+                      />
+                    );
+                  }
+                  if (k.klucz === 'dzial') {
+                    const wybrany = (nowyWiersz.dzial || 'pozostale') as DzialSklepu;
+                    return (
+                      <KomorkaWyboru
+                        key={k.klucz}
+                        wartosc={wybrany}
+                        etykieta={nazwaDzialu(wybrany)}
+                        opcje={OPCJE_DZIALU}
+                        szerokosc={k.szerokosc}
+                        edytowalna
+                        onWybierz={(nowa) => setNowyWiersz((p) => ({ ...p, dzial: nowa }))}
                       />
                     );
                   }
