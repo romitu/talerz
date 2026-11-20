@@ -85,3 +85,37 @@ export async function usunSchemat(schematId: string) {
   const { error } = await supabase.from('schematy').delete().eq('id', schematId);
   if (error) throw error;
 }
+
+/** Nagłówek jednego schematu — do edytora. `null`, gdy go nie ma (albo jest cudzy). */
+export async function pobierzSchemat(schematId: string): Promise<Omit<Schemat, 'liczbaDan'> | null> {
+  const { data, error } = await supabase
+    .from('schematy')
+    .select('id, nazwa, dni')
+    .eq('id', schematId)
+    .maybeSingle();
+  if (error) throw error;
+  return data;
+}
+
+/**
+ * Zapis z edytora: nazwa, długość i wszystkie pozycje naraz, w jednej
+ * transakcji po stronie bazy (funkcja `zapisz_schemat`, migracja 0055).
+ */
+export async function zapiszZmianySchematu(opcje: {
+  schematId: string;
+  nazwa: string;
+  dni: number;
+  pozycje: PozycjaSchematu[];
+}) {
+  const nazwa = opcje.nazwa.trim();
+  const { error } = await supabase.rpc('zapisz_schemat', {
+    p_schemat_id: opcje.schematId,
+    p_nazwa: nazwa,
+    p_dni: opcje.dni,
+    p_pozycje: opcje.pozycje,
+  });
+  if (error) {
+    if (error.code === '23505') throw new NazwaSchematuZajeta(nazwa);
+    throw error;
+  }
+}

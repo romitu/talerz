@@ -137,3 +137,72 @@ export function zrodloZeSchematu(
 
   return { zrodlo, usuniete, wykluczone };
 }
+
+// =============================================================================
+//  Edycja schematu (app/schematy.tsx)
+// =============================================================================
+//
+// Wszystkie funkcje zwracają NOWĄ tablicę i nie ruszają wejściowej — edytor
+// trzyma pozycje w stanie Reacta. Jedno miejsce (dzień × pora) to jedno
+// danie: tak samo rozumie schemat `powtorzTydzien`, które drugie danie
+// w tym samym posiłku traktowałoby jako kolizję i gubiło.
+
+/** Pozycja zajmująca dane miejsce albo `undefined`. */
+export function naMiejscu(pozycje: PozycjaSchematu[], dzien: number, pora: PoraPosilku) {
+  return pozycje.find((p) => p.dzien === dzien && p.pora === pora);
+}
+
+/** Dni jednego garnka, rosnąco. */
+export function dniGarnka(pozycje: PozycjaSchematu[], gotowanie: number): number[] {
+  return pozycje
+    .filter((p) => p.gotowanie === gotowanie)
+    .map((p) => p.dzien)
+    .sort((a, b) => a - b);
+}
+
+/** Wstawia danie jako nowe, jednodniowe gotowanie. Zajęte miejsce — bez zmian. */
+export function dodajDanie(
+  pozycje: PozycjaSchematu[],
+  dzien: number,
+  pora: PoraPosilku,
+  przepis: { id: string; nazwa: string }
+): PozycjaSchematu[] {
+  if (naMiejscu(pozycje, dzien, pora)) return pozycje;
+  const gotowanie = pozycje.reduce((m, p) => Math.max(m, p.gotowanie), -1) + 1;
+  return [...pozycje, { dzien, pora, przepis_id: przepis.id, nazwa: przepis.nazwa, gotowanie, kolejnosc: 1 }];
+}
+
+/**
+ * Dokłada garnkowi kolejny dzień tej samej pory — „ugotuj raz, zjedz też
+ * jutro”. Nie przeskakuje dni: następny dzień musi być wolny i mieścić się
+ * w schemacie, inaczej bez zmian.
+ */
+export function przedluzGarnek(pozycje: PozycjaSchematu[], gotowanie: number, dni: number): PozycjaSchematu[] {
+  const garnek = pozycje.filter((p) => p.gotowanie === gotowanie);
+  if (garnek.length === 0) return pozycje;
+  const ostatni = garnek.reduce((a, b) => (b.dzien > a.dzien ? b : a));
+  const nastepny = ostatni.dzien + 1;
+  if (nastepny >= dni || naMiejscu(pozycje, nastepny, ostatni.pora)) return pozycje;
+  return [...pozycje, { ...ostatni, dzien: nastepny }];
+}
+
+/** Zabiera garnkowi ostatni dzień. Garnek jednodniowy zostaje — od tego jest `usunGarnek`. */
+export function skrocGarnek(pozycje: PozycjaSchematu[], gotowanie: number): PozycjaSchematu[] {
+  const dniG = dniGarnka(pozycje, gotowanie);
+  if (dniG.length < 2) return pozycje;
+  const ostatni = dniG[dniG.length - 1];
+  return pozycje.filter((p) => !(p.gotowanie === gotowanie && p.dzien === ostatni));
+}
+
+export function usunGarnek(pozycje: PozycjaSchematu[], gotowanie: number): PozycjaSchematu[] {
+  return pozycje.filter((p) => p.gotowanie !== gotowanie);
+}
+
+/**
+ * Zmienia długość schematu. Dni za nowym końcem odpadają; garnek, który
+ * na nie zachodził, po prostu się skraca — to dalej jedno gotowanie,
+ * tylko na mniej dni.
+ */
+export function zmienDlugosc(pozycje: PozycjaSchematu[], dni: number): PozycjaSchematu[] {
+  return pozycje.filter((p) => p.dzien < dni);
+}

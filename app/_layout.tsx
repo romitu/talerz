@@ -186,6 +186,7 @@ const POZYCJE_WIECEJ = [
     // Zapis chronią reguły w bazie (migracja 0045) — zwykłe konto i tak nic tu nie zmieni.
     wymagaModeratora: true,
   },
+  { trasa: '/schematy', ikona: 'copy' as const, tytul: 'schematy' },
   { trasa: '/makroskladniki', ikona: 'pie-chart' as const, tytul: 'makroskladniki' },
   { trasa: '/dlaczego-talerz', ikona: 'sparkles' as const, tytul: 'dlaczegoTalerz' },
   { trasa: '/instrukcja', ikona: 'help-circle' as const, tytul: 'instrukcja' },
@@ -360,6 +361,7 @@ function Zakladki({ kolory }: { kolory: Paleta }) {
         <Tabs.Screen name="przepis" options={POZA_PASKIEM} />
         <Tabs.Screen name="uzytkownicy" options={POZA_PASKIEM} />
         <Tabs.Screen name="moj-dietetyk" options={POZA_PASKIEM} />
+        <Tabs.Screen name="schematy" options={POZA_PASKIEM} />
       </Tabs>
 
       {menuOtwarte && (

@@ -1,4 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
+import { router } from 'expo-router';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ActivityIndicator, Pressable, StyleSheet, View } from 'react-native';
@@ -206,6 +207,12 @@ export function SchematyPlanu({ kontoId, plan, pozycje, pracuje, onZastosuj, onK
               </View>
             ))
           )}
+          <Przycisk
+            tytul={t('schematy.zarzadzaj')}
+            wariant="poboczny"
+            ikona="create-outline"
+            onPress={() => router.push('/schematy')}
+          />
         </View>
       )}
     </View>

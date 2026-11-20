@@ -12,7 +12,19 @@
  */
 
 import { powtorzTydzien } from '../lib/automat.ts';
-import { schematZPlanu, START_SCHEMATU, zrodloZeSchematu, type PozycjaSchematu } from '../lib/schematy-uklad.ts';
+import {
+  dniGarnka,
+  dodajDanie,
+  naMiejscu,
+  przedluzGarnek,
+  schematZPlanu,
+  skrocGarnek,
+  START_SCHEMATU,
+  usunGarnek,
+  zmienDlugosc,
+  zrodloZeSchematu,
+  type PozycjaSchematu,
+} from '../lib/schematy-uklad.ts';
 
 const przeszlo: string[] = [];
 const nieprzeszlo: string[] = [];
@@ -112,6 +124,40 @@ sprawdz(
   poUsunieciu.zrodlo.map((p) => p.przepis_id).join(',') === 'owsianka',
   JSON.stringify(poUsunieciu.zrodlo)
 );
+
+// --- Edycja ---
+
+let e: PozycjaSchematu[] = [];
+e = dodajDanie(e, 0, 'obiad', { id: 'gulasz', nazwa: 'Gulasz' });
+e = dodajDanie(e, 0, 'obiad', { id: 'zupa', nazwa: 'Zupa' });
+sprawdz('zajęte miejsce nie przyjmuje drugiego dania', e.length === 1 && e[0].przepis_id === 'gulasz', JSON.stringify(e));
+
+e = przedluzGarnek(e, 0, 7);
+e = przedluzGarnek(e, 0, 7);
+sprawdz('przedłużenie dokłada kolejne dni', dniGarnka(e, 0).join(',') === '0,1,2', dniGarnka(e, 0).join(','));
+
+e = dodajDanie(e, 4, 'obiad', { id: 'omlet', nazwa: 'Omlet' });
+sprawdz('nowe danie to nowy garnek', naMiejscu(e, 4, 'obiad')?.gotowanie === 1, JSON.stringify(e));
+e = przedluzGarnek(e, 0, 7);
+e = przedluzGarnek(e, 0, 7);
+sprawdz('przedłużenie zatrzymuje się na zajętym dniu', dniGarnka(e, 0).join(',') === '0,1,2,3', dniGarnka(e, 0).join(','));
+
+const naKoncu = przedluzGarnek(dodajDanie([], 6, 'kolacja', { id: 'x', nazwa: 'X' }), 0, 7);
+sprawdz('przedłużenie nie wychodzi poza schemat', naKoncu.length === 1, JSON.stringify(naKoncu));
+
+e = skrocGarnek(e, 0);
+sprawdz('skrócenie zabiera ostatni dzień', dniGarnka(e, 0).join(',') === '0,1,2', dniGarnka(e, 0).join(','));
+sprawdz('jednodniowy garnek nie znika przy skracaniu', skrocGarnek(e, 1).length === e.length, '');
+
+const krotszy = zmienDlugosc(e, 2);
+sprawdz(
+  'skrócenie schematu ucina garnek, nie kasuje go',
+  dniGarnka(krotszy, 0).join(',') === '0,1' && !krotszy.some((p) => p.przepis_id === 'omlet'),
+  JSON.stringify(krotszy)
+);
+
+e = usunGarnek(e, 0);
+sprawdz('usunięcie garnka zabiera wszystkie jego dni', e.length === 1 && e[0].przepis_id === 'omlet', JSON.stringify(e));
 
 for (const p of przeszlo) console.log(`  ok   ${p}`);
 for (const n of nieprzeszlo) console.log(`  ZLE  ${n}`);

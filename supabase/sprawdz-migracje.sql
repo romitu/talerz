@@ -362,6 +362,11 @@ with sprawdzenia as (
     'schematy tygodnia (tabele schematy i schemat_pozycje)',
     to_regclass('public.schematy') is not null
       and to_regclass('public.schemat_pozycje') is not null
+  union all
+  select
+    '0055_zapis_schematu',
+    'funkcja zapisz_schemat (edytor schematow)',
+    to_regprocedure('public.zapisz_schemat(uuid, text, smallint, jsonb)') is not null
 )
 select
   migracja,
