@@ -7,6 +7,7 @@ import { ActivityIndicator, Pressable, ScrollView, StyleSheet, useWindowDimensio
 import { Ekran } from '@/components/ekran';
 import { Karta } from '@/components/karta';
 import { Pole } from '@/components/pole';
+import { PrzelacznikAutomatu } from '@/components/przelacznik-automatu';
 import { Przycisk } from '@/components/przycisk';
 import { ThemedText } from '@/components/themed-text';
 import { WyborDania } from '@/components/wybor-dania';
@@ -43,7 +44,7 @@ import {
   zmienDlugosc,
   type PozycjaSchematu,
 } from '@/lib/schematy-uklad';
-import { garnekNiepodzielny } from '@/lib/automat';
+import { dniZLimitem, garnekNiepodzielny } from '@/lib/automat';
 import { useSesja } from '@/lib/sesja';
 import { SZEROKOSC_TABLETU } from '@/lib/widok-listy';
 
@@ -334,6 +335,11 @@ function EdytorSchematu({ id }: { id: string }) {
   const [blad, setBlad] = useState<string | null>(null);
   const [komunikat, setKomunikat] = useState<string | null>(null);
   const [zapisuje, setZapisuje] = useState(false);
+  // Domyślnie włączone, jak na Planie — danie od razu na tyle dni, ile
+  // wytrzyma w lodówce.
+  const [uwzglednijTrwalosc, setUwzglednijTrwalosc] = useState(true);
+  /** Ile osób na koncie je z garnka — do limitu porcji z jednego gotowania. */
+  const [osoby, setOsoby] = useState(1);
 
   // Wczytanie raz, przy zamontowaniu. Celowo nie przy każdym powrocie na
   // ekran: odświeżenie z bazy nadpisałoby niezapisane zmiany. Inny schemat
@@ -344,11 +350,15 @@ function EdytorSchematu({ id }: { id: string }) {
     let aktywny = true;
     (async () => {
       try {
-        const [naglowek, lista, katalog] = await Promise.all([
+        const [naglowek, lista, katalog, profile] = await Promise.all([
           pobierzSchemat(id, kontoId),
           pobierzPozycjeSchematu(id),
           pobierzPrzepisy(kontoId),
+          // Liczba jedzących jak na Planie: tyle profili, ile ma konto.
+          supabase.from('profile').select('id', { count: 'exact', head: true }),
         ]);
+        if (profile.error) throw profile.error;
+        if (aktywny) setOsoby(Math.max(1, profile.count ?? 1));
         if (!aktywny) return;
         if (!naglowek) {
           setBrak(true);
@@ -473,17 +483,23 @@ function EdytorSchematu({ id }: { id: string }) {
             dania={dania}
             kafle={szeroki}
             onWybierz={(p) => {
-              // Jak ręczny wybór na planie: garnek od razu na tyle dni, ile
-              // przepis ma porcji bazowych — obiad na 3 porcje zajmuje trzy
-              // kolejne dni. Seria kończy się na pierwszym zajętym dniu.
-              const ile = Math.max(1, p.liczba_porcji_bazowych);
+              // Jak ręczny wybór na planie: z włączoną trwałością garnek
+              // starcza na tyle dni, ile danie wytrzyma w lodówce (z limitem
+              // porcji z jednego gotowania, `dniZLimitem`), bez niej — na tyle,
+              // ile przepis ma porcji bazowych. Seria kończy się na pierwszym
+              // zajętym dniu.
+              const porcje = Math.max(1, p.liczba_porcji_bazowych);
+              let ile = uwzglednijTrwalosc ? dniZLimitem(p.trwalosc_dni, osoby) : porcje;
+              // Zupy nie przycinamy (`garnekNiepodzielny`) — pełny garnek albo
+              // wcale, więc nigdy mniej dni niż porcji. Tak samo jak na planie.
+              const zupa = garnekNiepodzielny(p);
+              if (zupa) ile = Math.max(ile, porcje);
               const wolne = wolneDniOd(pozycje, wybierany.dzien, wybierany.pora, ile, dni);
-              // Zupy nie przycinamy (`garnekNiepodzielny`) — pełny garnek albo wcale.
-              if (garnekNiepodzielny(p) && wolne.length < ile) {
+              if (zupa && wolne.length < porcje) {
                 setKomunikat(
                   t('schematy.zupaNieMiesci', {
                     nazwa: p.nazwa,
-                    potrzeba: t('plan.dni', { count: ile }),
+                    potrzeba: t('plan.dni', { count: porcje }),
                     wolne: t('plan.dni', { count: wolne.length }),
                   })
                 );
@@ -604,6 +620,14 @@ function EdytorSchematu({ id }: { id: string }) {
             <Przycisk tytul={t('uzytkownicy.zostaw')} wariant="poboczny" onPress={() => setPorzucic(false)} />
           </>
         )}
+
+        <PrzelacznikAutomatu
+          zaznaczone={uwzglednijTrwalosc}
+          onZmiana={setUwzglednijTrwalosc}
+          etykieta={t('plan.trwalosc')}
+          opis={t('schematy.trwaloscOpis')}
+          ikona="archive-outline"
+        />
 
         {komunikat && (
           <ThemedText type="small" themeColor="textSecondary">

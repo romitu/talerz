@@ -9,6 +9,7 @@ import { FiltryPrzepisow } from '@/components/filtry-przepisow';
 import { Karta } from '@/components/karta';
 import { NaglowekPlanu } from '@/components/naglowek-planu';
 import { PierwszeKroki, type KrokStartu } from '@/components/pierwsze-kroki';
+import { PrzelacznikAutomatu } from '@/components/przelacznik-automatu';
 import { PrzelacznikWidoku } from '@/components/przelacznik-widoku';
 import { Przycisk } from '@/components/przycisk';
 import { TabelaWyboru } from '@/components/tabela-wyboru';
@@ -133,48 +134,6 @@ const IKONA_PORY: Record<PoraPosilku, keyof typeof Ionicons.glyphMap> = {
   kolacja: 'moon-outline',
   dodatek: 'add-circle-outline',
 };
-
-/** Checkbox z opisem — pod „Wypełnij wolne miejsca", ustawienia automatu. */
-function PrzelacznikAutomatu({
-  zaznaczone,
-  onZmiana,
-  etykieta,
-  opis,
-  ikona,
-}: {
-  zaznaczone: boolean;
-  onZmiana: (wartosc: boolean) => void;
-  etykieta: string;
-  opis: string;
-  /** Ikona po prawej, w kółku — jak w karcie „Układanie tygodnia". */
-  ikona: keyof typeof Ionicons.glyphMap;
-}) {
-  const motyw = useTheme();
-  return (
-    <Pressable
-      onPress={() => onZmiana(!zaznaczone)}
-      accessibilityRole="checkbox"
-      accessibilityState={{ checked: zaznaczone }}
-      style={({ pressed }) => [styles.checkboxWiersz, pressed && styles.wcisniete]}>
-      <Ionicons
-        name={zaznaczone ? 'checkbox' : 'square-outline'}
-        size={20}
-        color={zaznaczone ? motyw.accent : motyw.textSecondary}
-      />
-      <View style={styles.checkboxTresc}>
-        <ThemedText type="small" themeColor={zaznaczone ? 'accent' : 'text'}>
-          {etykieta}
-        </ThemedText>
-        <ThemedText type="small" themeColor="textSecondary">
-          {opis}
-        </ThemedText>
-      </View>
-      <View style={[styles.ikonaKoloMala, { backgroundColor: motyw.backgroundSelected }]}>
-        <Ionicons name={ikona} size={16} color={motyw.accent} />
-      </View>
-    </Pressable>
-  );
-}
 
 export default function EkranPlanu() {
   const { sesja } = useSesja();
@@ -1548,13 +1507,6 @@ export default function EkranPlanu() {
 
 const styles = StyleSheet.create({
   narzedzia: { gap: Spacing.two },
-  checkboxWiersz: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: Spacing.two,
-    paddingVertical: Spacing.one,
-  },
-  checkboxTresc: { flex: 1, gap: 2 },
 
   /* Nagłówek karty — ikona w kółku, jak przy „Lista zakupów". */
   kartaNaglowek: {
@@ -1566,13 +1518,6 @@ const styles = StyleSheet.create({
     width: 52,
     height: 52,
     borderRadius: 26,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  ikonaKoloMala: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
     alignItems: 'center',
     justifyContent: 'center',
   },
