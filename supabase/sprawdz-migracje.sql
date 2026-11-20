@@ -380,6 +380,15 @@ with sprawdzenia as (
       select 1 from information_schema.columns
        where table_name = 'schematy' and column_name = 'publiczny'
     )
+  union all
+  select
+    '0058_zdjecia_schematow_od_dietetyka',
+    'funkcja schematy_od_dietetyka zwraca zdjecia',
+    exists (
+      select 1 from information_schema.parameters
+       where specific_name like 'schematy_od_dietetyka%'
+         and parameter_name = 'zdjecia'
+    )
 )
 select
   migracja,

@@ -35,8 +35,8 @@ export type Schemat = {
   zrodlo: ZrodloSchematu;
   /**
    * Zdjęcia pierwszych kilku dań (ścieżki w zasobniku) — do paska miniatur
-   * na listach. Puste dla schematów od dietetyka: te czytamy tylko przez
-   * funkcje bazy, które zdjęć nie zwracają.
+   * na listach. Dla schematów od dietetyka zwraca je funkcja bazy (0058),
+   * tylko z przepisów, które klient widzi.
    */
   zdjecia: string[];
   /** Własny schemat opublikowany w katalogu (publikuje tylko moderator). */
@@ -124,6 +124,8 @@ export async function pobierzSchematyOdDietetyka(): Promise<Schemat[]> {
     profil_id: string;
     imie: string;
     dietetyk: string | null;
+    /** Od migracji 0058; przed nią funkcja tego pola nie zwraca. */
+    zdjecia?: string[] | null;
   };
   return ((data ?? []) as Wiersz[]).map((s) => ({
     id: s.schemat_id,
@@ -131,7 +133,7 @@ export async function pobierzSchematyOdDietetyka(): Promise<Schemat[]> {
     dni: s.dni,
     liczbaDan: s.liczba_dan,
     zrodlo: 'dietetyk',
-    zdjecia: [],
+    zdjecia: s.zdjecia ?? [],
     publiczny: false,
     dietetyk: s.dietetyk ?? undefined,
     profilId: s.profil_id,
