@@ -367,6 +367,19 @@ with sprawdzenia as (
     '0055_zapis_schematu',
     'funkcja zapisz_schemat (edytor schematow)',
     to_regprocedure('public.zapisz_schemat(uuid, text, smallint, jsonb)') is not null
+  union all
+  select
+    '0056_schematy_od_dietetyka',
+    'schematy udostepniane przez dietetyka (tabela schematy_udostepnione)',
+    to_regclass('public.schematy_udostepnione') is not null
+  union all
+  select
+    '0057_katalog_schematow',
+    'kolumna schematy.publiczny (katalog schematow)',
+    exists (
+      select 1 from information_schema.columns
+       where table_name = 'schematy' and column_name = 'publiczny'
+    )
 )
 select
   migracja,

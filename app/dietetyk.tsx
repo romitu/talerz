@@ -7,6 +7,7 @@ import { Pressable, StyleSheet, useWindowDimensions, View } from 'react-native';
 import { Ekran } from '@/components/ekran';
 import { KafleWyniku } from '@/components/kafle-wyniku';
 import { Karta } from '@/components/karta';
+import { SchematyKlienta } from '@/components/schematy-klienta';
 import { Pole } from '@/components/pole';
 import { Przycisk } from '@/components/przycisk';
 import { ThemedText } from '@/components/themed-text';
@@ -556,6 +557,8 @@ function KartaKlienta({
           {dane.wykluczone.length > 0 ? dane.wykluczone.join(', ') : t('dietetyk.brakWykluczen')}
         </ThemedText>
       </Karta>
+
+      <SchematyKlienta profilId={profil.id} />
 
       <Karta style={styles.odstep}>
         {pytanieOKoniec ? (

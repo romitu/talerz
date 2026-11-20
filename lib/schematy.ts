@@ -1,5 +1,5 @@
 /**
- * Schematy tygodnia — odczyt i zapis (migracja 0054).
+ * Schematy tygodnia — odczyt i zapis (migracje 0054–0057).
  *
  * Przeliczenia bez bazy siedzą w `lib/schematy-uklad.ts`.
  */
@@ -7,29 +7,133 @@
 import { supabase } from './supabase';
 import type { PozycjaSchematu } from './schematy-uklad';
 
+/**
+ * Skąd schemat pochodzi — od tego zależy, jak czytać jego pozycje i co
+ * wolno z nim zrobić:
+ *  - `moje` — własny, edytowalny (0054),
+ *  - `dietetyk` — udostępniony przez dietetyka, czytany tylko przez funkcje bazy (0056),
+ *  - `katalog` — opublikowany przez moderatora dla wszystkich (0057).
+ */
+export type ZrodloSchematu = 'moje' | 'dietetyk' | 'katalog';
+
+/** Kolejność grup na listach: własne, od dietetyka, katalog Talerza. */
+export const GRUPY: ZrodloSchematu[] = ['moje', 'dietetyk', 'katalog'];
+
+/** Klucz tłumaczenia nagłówka grupy. */
+export const TYTUL_GRUPY = {
+  moje: 'schematy.grupaMoje',
+  dietetyk: 'schematy.grupaDietetyk',
+  katalog: 'schematy.grupaKatalog',
+} as const satisfies Record<ZrodloSchematu, string>;
+
 export type Schemat = {
   id: string;
   nazwa: string;
   dni: number;
   /** Ile dań (pozycji) ma schemat — do podpisu na liście. */
   liczbaDan: number;
+  zrodlo: ZrodloSchematu;
+  /** Własny schemat opublikowany w katalogu (publikuje tylko moderator). */
+  publiczny: boolean;
+  /** Dla `dietetyk`: kto udostępnił i dla którego profilu. */
+  dietetyk?: string;
+  profilId?: string;
+  imie?: string;
 };
 
-/** Schematy konta, alfabetycznie. */
-export async function pobierzSchematy(): Promise<Schemat[]> {
-  const { data, error } = await supabase
-    .from('schematy')
-    .select('id, nazwa, dni, schemat_pozycje (count)')
-    .order('nazwa');
-  if (error) throw error;
+type WierszSchematu = {
+  id: string;
+  nazwa: string;
+  dni: number;
+  publiczny: boolean;
+  schemat_pozycje: { count: number }[] | null;
+};
 
-  return (data ?? []).map((s) => {
-    const licznik = s.schemat_pozycje as { count: number }[] | null;
-    return { id: s.id, nazwa: s.nazwa, dni: s.dni, liczbaDan: licznik?.[0]?.count ?? 0 };
-  });
+function zWiersza(s: WierszSchematu, zrodlo: ZrodloSchematu): Schemat {
+  return {
+    id: s.id,
+    nazwa: s.nazwa,
+    dni: s.dni,
+    liczbaDan: s.schemat_pozycje?.[0]?.count ?? 0,
+    zrodlo,
+    publiczny: s.publiczny,
+  };
 }
 
-export async function pobierzPozycjeSchematu(schematId: string): Promise<PozycjaSchematu[]> {
+/**
+ * Własne schematy konta, alfabetycznie.
+ *
+ * Filtr po koncie jest konieczny: reguły dostępu wpuszczają też schematy
+ * publiczne (0057), a te mają się pokazywać osobno, w katalogu.
+ */
+export async function pobierzSchematy(kontoId: string): Promise<Schemat[]> {
+  const { data, error } = await supabase
+    .from('schematy')
+    .select('id, nazwa, dni, publiczny, schemat_pozycje (count)')
+    .eq('konto_id', kontoId)
+    .order('nazwa');
+  if (error) throw error;
+  return ((data ?? []) as WierszSchematu[]).map((s) => zWiersza(s, 'moje'));
+}
+
+/** Katalog Talerza: schematy opublikowane przez moderatorów, bez własnych. */
+export async function pobierzKatalogSchematow(kontoId: string): Promise<Schemat[]> {
+  const { data, error } = await supabase
+    .from('schematy')
+    .select('id, nazwa, dni, publiczny, schemat_pozycje (count)')
+    .eq('publiczny', true)
+    .neq('konto_id', kontoId)
+    .order('nazwa');
+  if (error) throw error;
+  return ((data ?? []) as WierszSchematu[]).map((s) => zWiersza(s, 'katalog'));
+}
+
+/** Schematy, które dietetycy udostępnili profilom tego konta (0056). */
+export async function pobierzSchematyOdDietetyka(): Promise<Schemat[]> {
+  const { data, error } = await supabase.rpc('schematy_od_dietetyka');
+  if (error) throw error;
+  type Wiersz = {
+    schemat_id: string;
+    nazwa: string;
+    dni: number;
+    liczba_dan: number;
+    profil_id: string;
+    imie: string;
+    dietetyk: string | null;
+  };
+  return ((data ?? []) as Wiersz[]).map((s) => ({
+    id: s.schemat_id,
+    nazwa: s.nazwa,
+    dni: s.dni,
+    liczbaDan: s.liczba_dan,
+    zrodlo: 'dietetyk',
+    publiczny: false,
+    dietetyk: s.dietetyk ?? undefined,
+    profilId: s.profil_id,
+    imie: s.imie,
+  }));
+}
+
+/** Wszystko, co konto może wstawić do planu: własne, od dietetyka, z katalogu. */
+export async function pobierzWszystkieSchematy(kontoId: string): Promise<Schemat[]> {
+  const [moje, odDietetyka, katalog] = await Promise.all([
+    pobierzSchematy(kontoId),
+    pobierzSchematyOdDietetyka(),
+    pobierzKatalogSchematow(kontoId),
+  ]);
+  return [...moje, ...odDietetyka, ...katalog];
+}
+
+export async function pobierzPozycjeSchematu(
+  schematId: string,
+  zrodlo: ZrodloSchematu = 'moje'
+): Promise<PozycjaSchematu[]> {
+  if (zrodlo === 'dietetyk') {
+    const { data, error } = await supabase.rpc('schemat_od_dietetyka_pozycje', { p_schemat: schematId });
+    if (error) throw error;
+    return (data ?? []) as PozycjaSchematu[];
+  }
+
   const { data, error } = await supabase
     .from('schemat_pozycje')
     .select('dzien, pora, przepis_id, nazwa, gotowanie, kolejnosc')
@@ -78,7 +182,7 @@ export async function zapiszSchemat(opcje: {
     }
   }
 
-  return { ...schemat, liczbaDan: opcje.pozycje.length };
+  return { ...schemat, liczbaDan: opcje.pozycje.length, zrodlo: 'moje', publiczny: false };
 }
 
 export async function usunSchemat(schematId: string) {
@@ -86,12 +190,19 @@ export async function usunSchemat(schematId: string) {
   if (error) throw error;
 }
 
-/** Nagłówek jednego schematu — do edytora. `null`, gdy go nie ma (albo jest cudzy). */
-export async function pobierzSchemat(schematId: string): Promise<Omit<Schemat, 'liczbaDan'> | null> {
+/**
+ * Nagłówek WŁASNEGO schematu — do edytora. `null`, gdy go nie ma albo jest
+ * cudzy (także publiczny z katalogu: ten się kopiuje, nie edytuje).
+ */
+export async function pobierzSchemat(
+  schematId: string,
+  kontoId: string
+): Promise<{ id: string; nazwa: string; dni: number } | null> {
   const { data, error } = await supabase
     .from('schematy')
     .select('id, nazwa, dni')
     .eq('id', schematId)
+    .eq('konto_id', kontoId)
     .maybeSingle();
   if (error) throw error;
   return data;
@@ -118,4 +229,77 @@ export async function zapiszZmianySchematu(opcje: {
     if (error.code === '23505') throw new NazwaSchematuZajeta(nazwa);
     throw error;
   }
+}
+
+/**
+ * Kopia schematu na własne konto — żeby schemat z katalogu czy od dietetyka
+ * dało się przerobić w edytorze. Przy zajętej nazwie kolejny numer:
+ * „X (kopia)”, „X (kopia 2)”…
+ */
+export async function skopiujSchemat(kontoId: string, s: Schemat, dopisek: string): Promise<Schemat> {
+  const pozycje = await pobierzPozycjeSchematu(s.id, s.zrodlo);
+  for (let nr = 1; nr < 20; nr++) {
+    const numer = nr > 1 ? ` ${nr}` : '';
+    const nazwa = `${s.nazwa} (${dopisek}${numer})`.slice(0, 80);
+    try {
+      return await zapiszSchemat({ kontoId, nazwa, dni: s.dni, pozycje });
+    } catch (e) {
+      if (!(e instanceof NazwaSchematuZajeta)) throw e;
+    }
+  }
+  throw new NazwaSchematuZajeta(s.nazwa);
+}
+
+/**
+ * Publikacja w katalogu nie przeszła. `niepubliczne` — ile dań ma przepis
+ * prywatny albo usunięty; 0 = schemat pusty.
+ */
+export class SchematNiePublikowalny extends Error {
+  niepubliczne: number;
+  constructor(niepubliczne: number) {
+    super(String(niepubliczne));
+    this.niepubliczne = niepubliczne;
+  }
+}
+
+/** Publikuje albo wycofuje własny schemat moderatora (0057). */
+export async function ustawPublicznosc(schematId: string, publiczny: boolean) {
+  const { error } = await supabase.rpc('ustaw_publicznosc_schematu', {
+    p_schemat: schematId,
+    p_publiczny: publiczny,
+  });
+  if (error) {
+    if (error.code === '23514') throw new SchematNiePublikowalny(Number(error.hint ?? 0));
+    throw error;
+  }
+}
+
+// --- Dietetyk (0056) ---
+
+export type SchematKlienta = { schemat_id: string; nazwa: string; dni: number; od: string };
+
+/** Udostępnia własny schemat klientowi. Zwraca, ilu dań klient nie zobaczy. */
+export async function udostepnijSchemat(schematId: string, profilId: string): Promise<number> {
+  const { data, error } = await supabase.rpc('dietetyk_udostepnij_schemat', {
+    p_schemat: schematId,
+    p_profil: profilId,
+  });
+  if (error) throw error;
+  return Number(data ?? 0);
+}
+
+export async function pobierzSchematyKlienta(profilId: string): Promise<SchematKlienta[]> {
+  const { data, error } = await supabase.rpc('dietetyk_schematy_klienta', { p_profil: profilId });
+  if (error) throw error;
+  return (data ?? []) as SchematKlienta[];
+}
+
+/** Cofnięcie udostępnienia — przez dietetyka albo odrzucenie przez klienta. */
+export async function cofnijUdostepnienie(schematId: string, profilId: string) {
+  const { error } = await supabase
+    .from('schematy_udostepnione')
+    .delete()
+    .eq('schemat_id', schematId)
+    .eq('profil_id', profilId);
+  if (error) throw error;
 }

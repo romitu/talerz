@@ -126,6 +126,20 @@ sprawdz(
   JSON.stringify(poUsunieciu.zrodlo)
 );
 
+// --- Przepis, którego konto nie widzi (prywatny u dietetyka) ---
+
+const zNiedostepnym = zrodloZeSchematu(schemat, new Set(), new Set(['owsianka', 'omlet']));
+sprawdz(
+  'niewidoczny przepis zabiera cały garnek i jest liczony',
+  zNiedostepnym.niedostepne === 3 && zNiedostepnym.zrodlo.every((p) => p.przepis_id !== 'gulasz'),
+  JSON.stringify(zNiedostepnym)
+);
+sprawdz(
+  'bez listy dostępnych nic nie odpada z tego powodu',
+  zrodloZeSchematu(schemat, new Set()).niedostepne === 0,
+  ''
+);
+
 // --- Edycja ---
 
 const trzyDni = dodajDanie([], 1, 'obiad', { id: 'gulasz', nazwa: 'Gulasz' }, 3, 7);

@@ -1,8 +1,7 @@
-import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ActivityIndicator, Pressable, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, StyleSheet, View } from 'react-native';
 
 import { Pole } from './pole';
 import { Przycisk } from './przycisk';
@@ -12,7 +11,14 @@ import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import { komunikatBledu } from '@/lib/blad';
 import { opisDnia, type Plan, type PozycjaPlanu } from '@/lib/plan';
-import { NazwaSchematuZajeta, pobierzSchematy, usunSchemat, zapiszSchemat, type Schemat } from '@/lib/schematy';
+import {
+  GRUPY,
+  NazwaSchematuZajeta,
+  pobierzWszystkieSchematy,
+  TYTUL_GRUPY,
+  zapiszSchemat,
+  type Schemat,
+} from '@/lib/schematy';
 import { schematZPlanu } from '@/lib/schematy-uklad';
 
 type Props = {
@@ -41,14 +47,13 @@ export function SchematyPlanu({ kontoId, plan, pozycje, pracuje, onZastosuj, onK
   const [tryb, setTryb] = useState<'zapis' | 'lista' | null>(null);
   const [nazwa, setNazwa] = useState('');
   const [schematy, setSchematy] = useState<Schemat[] | null>(null);
-  const [doUsuniecia, setDoUsuniecia] = useState<Schemat | null>(null);
   const [zajety, setZajety] = useState(false);
 
   const blokada = pracuje || zajety;
 
   async function wczytaj() {
     try {
-      setSchematy(await pobierzSchematy());
+      setSchematy(await pobierzWszystkieSchematy(kontoId));
     } catch (e) {
       onBlad(komunikatBledu(e));
     }
@@ -62,7 +67,6 @@ export function SchematyPlanu({ kontoId, plan, pozycje, pracuje, onZastosuj, onK
 
   function otworzListe() {
     onKomunikat(null);
-    setDoUsuniecia(null);
     if (tryb === 'lista') {
       setTryb(null);
       return;
@@ -101,21 +105,6 @@ export function SchematyPlanu({ kontoId, plan, pozycje, pracuje, onZastosuj, onK
   async function zastosuj(s: Schemat) {
     setTryb(null);
     await onZastosuj(s);
-  }
-
-  async function usun(s: Schemat) {
-    setZajety(true);
-    onBlad(null);
-    try {
-      await usunSchemat(s.id);
-      setDoUsuniecia(null);
-      onKomunikat(t('schematy.usunieto', { nazwa: s.nazwa }));
-      await wczytaj();
-    } catch (e) {
-      onBlad(komunikatBledu(e));
-    } finally {
-      setZajety(false);
-    }
   }
 
   return (
@@ -165,47 +154,31 @@ export function SchematyPlanu({ kontoId, plan, pozycje, pracuje, onZastosuj, onK
               {t('schematy.brak')}
             </ThemedText>
           ) : (
-            schematy.map((s) => (
-              <View key={s.id} style={[styles.wiersz, { borderColor: motyw.border }]}>
-                <View style={styles.wierszTresc}>
-                  <ThemedText type="smallBold">{s.nazwa}</ThemedText>
-                  <ThemedText type="small" themeColor="textSecondary">
-                    {t('plan.dni', { count: s.dni })} · {t('plan.dania', { count: s.liczbaDan })}
+            GRUPY.map((zrodlo) => {
+              const wGrupie = schematy.filter((s) => s.zrodlo === zrodlo);
+              if (wGrupie.length === 0) return null;
+              return (
+                <View key={zrodlo} style={styles.panel}>
+                  <ThemedText type="smallBold" themeColor="textSecondary">
+                    {t(TYTUL_GRUPY[zrodlo])}
                   </ThemedText>
+                  {wGrupie.map((s) => (
+                    <View key={`${s.id}|${s.profilId ?? ''}`} style={[styles.wiersz, { borderColor: motyw.border }]}>
+                      <View style={styles.wierszTresc}>
+                        <ThemedText type="smallBold">{s.nazwa}</ThemedText>
+                        <ThemedText type="small" themeColor="textSecondary">
+                          {t('plan.dni', { count: s.dni })} · {t('plan.dania', { count: s.liczbaDan })}
+                          {s.zrodlo === 'dietetyk' ? ` · ${t('schematy.odDietetyka', { kto: s.dietetyk ?? '', imie: s.imie ?? '' })}` : ''}
+                        </ThemedText>
+                      </View>
+                      <View style={styles.wierszAkcje}>
+                        <Przycisk tytul={t('schematy.zastosujTen')} onPress={() => zastosuj(s)} wylaczony={blokada} />
+                      </View>
+                    </View>
+                  ))}
                 </View>
-
-                {doUsuniecia?.id === s.id ? (
-                  <View style={styles.potwierdzenie}>
-                    <ThemedText type="small" themeColor="accent">
-                      {t('schematy.usunPytanie', { nazwa: s.nazwa })}
-                    </ThemedText>
-                    <Przycisk tytul={t('schematy.takUsun')} onPress={() => usun(s)} zajety={zajety} />
-                    <Przycisk
-                      tytul={t('uzytkownicy.zostaw')}
-                      wariant="poboczny"
-                      onPress={() => setDoUsuniecia(null)}
-                    />
-                  </View>
-                ) : (
-                  <View style={styles.wierszAkcje}>
-                    <Przycisk
-                      tytul={t('schematy.zastosujTen')}
-                      onPress={() => zastosuj(s)}
-                      wylaczony={blokada}
-                    />
-                    <Pressable
-                      onPress={() => setDoUsuniecia(s)}
-                      disabled={blokada}
-                      accessibilityRole="button"
-                      accessibilityLabel={t('schematy.usun', { nazwa: s.nazwa })}
-                      hitSlop={8}
-                      style={({ pressed }) => [styles.kosz, pressed && styles.wcisniete]}>
-                      <Ionicons name="trash-outline" size={22} color={motyw.textSecondary} />
-                    </Pressable>
-                  </View>
-                )}
-              </View>
-            ))
+              );
+            })
           )}
           <Przycisk
             tytul={t('schematy.zarzadzaj')}

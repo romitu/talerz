@@ -99,25 +99,33 @@ function dataDnia(dzien: number): string {
  * Rozdziela to, czego przenieść się nie da, i mówi o tym wprost, zamiast
  * po cichu gubić:
  *  - `usuniete` — dania, których przepisu już nie ma,
- *  - `wykluczone` — dania ze składnikiem „Nie jemy”.
+ *  - `wykluczone` — dania ze składnikiem „Nie jemy”,
+ *  - `niedostepne` — dania z przepisu, którego to konto nie widzi (np.
+ *    prywatny przepis dietetyka); sprawdzane, gdy podano `dostepnePrzepisy`.
  * Odpada wtedy cały garnek, a nie jeden jego dzień — przeniesienie połowy
  * garnka to ugotowanie za dużo i wyrzucenie reszty.
  */
 export function zrodloZeSchematu(
   pozycje: PozycjaSchematu[],
-  wykluczonePrzepisy: Set<string>
+  wykluczonePrzepisy: Set<string>,
+  dostepnePrzepisy?: Set<string>
 ): {
   zrodlo: { data: string; pora: PoraPosilku; przepis_id: string; nazwa: string; partia_id: string }[];
   usuniete: number;
   wykluczone: number;
+  niedostepne: number;
 } {
   const odpadajaceGotowania = new Set<number>();
   let usuniete = 0;
   let wykluczone = 0;
+  let niedostepne = 0;
 
   for (const p of pozycje) {
     if (p.przepis_id === null) {
       usuniete++;
+      odpadajaceGotowania.add(p.gotowanie);
+    } else if (dostepnePrzepisy && !dostepnePrzepisy.has(p.przepis_id)) {
+      niedostepne++;
       odpadajaceGotowania.add(p.gotowanie);
     } else if (wykluczonePrzepisy.has(p.przepis_id)) {
       wykluczone++;
@@ -135,7 +143,7 @@ export function zrodloZeSchematu(
       partia_id: `gotowanie:${p.gotowanie}`,
     }));
 
-  return { zrodlo, usuniete, wykluczone };
+  return { zrodlo, usuniete, wykluczone, niedostepne };
 }
 
 // =============================================================================

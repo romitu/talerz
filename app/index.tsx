@@ -578,7 +578,7 @@ export default function EkranPlanu() {
     setBlad(null);
     setPracuje(true);
     try {
-      const pozycjeSchematu = await pobierzPozycjeSchematu(schemat.id);
+      const pozycjeSchematu = await pobierzPozycjeSchematu(schemat.id, schemat.zrodlo);
       if (pozycjeSchematu.length === 0) {
         setKomunikat(t('schematy.pusty', { nazwa: schemat.nazwa }));
         return;
@@ -587,11 +587,20 @@ export default function EkranPlanu() {
       const wykluczonePrzepisy = new Set(
         przepisy.filter((p) => p.zawieraWykluczone.length > 0).map((p) => p.id)
       );
-      const { zrodlo, usuniete, wykluczone } = zrodloZeSchematu(pozycjeSchematu, wykluczonePrzepisy);
+      // Schemat od dietetyka albo z katalogu może wskazywać przepis, którego
+      // to konto nie widzi (prywatny przepis autora schematu). Wstawienie go
+      // dałoby w planie danie bez nazwy i bez makro — pomijamy i mówimy o tym.
+      const dostepnePrzepisy = new Set(przepisy.map((p) => p.id));
+      const { zrodlo, usuniete, wykluczone, niedostepne } = zrodloZeSchematu(
+        pozycjeSchematu,
+        wykluczonePrzepisy,
+        dostepnePrzepisy
+      );
 
       // Pominięte dania mówimy wprost — schemat z dziurą ma być widać.
       const dopisek =
         (usuniete > 0 ? ` ${t('schematy.usunietePrzepisy', { count: usuniete })}` : '') +
+        (niedostepne > 0 ? ` ${t('schematy.niedostepnePrzepisy', { count: niedostepne })}` : '') +
         (wykluczone > 0 ? ` ${t('schematy.wykluczonePrzepisy', { count: wykluczone })}` : '');
 
       if (zrodlo.length === 0) {

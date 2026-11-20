@@ -16,15 +16,22 @@ import { komunikatBledu } from '@/lib/blad';
 import { PORY } from '@/lib/plan';
 import { pasujeDoPory, pobierzPrzepisy, type PoraPosilku, type PrzepisZMakro } from '@/lib/przepisy';
 import {
+  cofnijUdostepnienie,
   NazwaSchematuZajeta,
   pobierzPozycjeSchematu,
   pobierzSchemat,
-  pobierzSchematy,
+  pobierzWszystkieSchematy,
+  SchematNiePublikowalny,
+  skopiujSchemat,
+  ustawPublicznosc,
   usunSchemat,
   zapiszSchemat,
   zapiszZmianySchematu,
+  GRUPY,
+  TYTUL_GRUPY,
   type Schemat,
 } from '@/lib/schematy';
+import { supabase } from '@/lib/supabase';
 import {
   dniGarnka,
   dodajDanie,
@@ -66,8 +73,10 @@ function ListaSchematow() {
   const { t } = useTranslation();
   const motyw = useTheme();
   const { sesja } = useSesja();
+  const kontoId = sesja?.user.id;
 
   const [schematy, setSchematy] = useState<Schemat[] | null>(null);
+  const [moderator, setModerator] = useState(false);
   const [nazwa, setNazwa] = useState('');
   const [doUsuniecia, setDoUsuniecia] = useState<string | null>(null);
   const [blad, setBlad] = useState<string | null>(null);
@@ -75,13 +84,20 @@ function ListaSchematow() {
   const [zajety, setZajety] = useState(false);
 
   const wczytaj = useCallback(async () => {
+    if (!kontoId) return;
     setBlad(null);
     try {
-      setSchematy(await pobierzSchematy());
+      const [lista, konto] = await Promise.all([
+        pobierzWszystkieSchematy(kontoId),
+        supabase.from('konta').select('rola').eq('id', kontoId).maybeSingle(),
+      ]);
+      setSchematy(lista);
+      const rola = konto.data?.rola as string | undefined;
+      setModerator(rola === 'moderator' || rola === 'administrator');
     } catch (e) {
       setBlad(komunikatBledu(e));
     }
-  }, []);
+  }, [kontoId]);
 
   useFocusEffect(
     useCallback(() => {
@@ -89,40 +105,144 @@ function ListaSchematow() {
     }, [wczytaj])
   );
 
-  async function utworz() {
-    if (!sesja) return;
-    if (!nazwa.trim()) {
-      setKomunikat(t('schematy.podajNazwe'));
-      return;
-    }
+  /** Wspólna obsługa: blokada przycisków, czyszczenie komunikatów, błąd. */
+  async function wykonaj(akcja: () => Promise<void>) {
     setZajety(true);
     setBlad(null);
     setKomunikat(null);
     try {
-      const nowy = await zapiszSchemat({ kontoId: sesja.user.id, nazwa, dni: 7, pozycje: [] });
-      setNazwa('');
-      router.push(`/schematy?id=${nowy.id}`);
+      await akcja();
     } catch (e) {
-      if (e instanceof NazwaSchematuZajeta) setKomunikat(t('schematy.nazwaZajeta', { nazwa: nazwa.trim() }));
+      if (e instanceof NazwaSchematuZajeta) setKomunikat(t('schematy.nazwaZajeta', { nazwa: e.message }));
+      else if (e instanceof SchematNiePublikowalny)
+        setKomunikat(
+          e.niepubliczne > 0
+            ? t('schematy.niePublikowalny', { count: e.niepubliczne })
+            : t('schematy.pustyDoKatalogu')
+        );
       else setBlad(komunikatBledu(e));
     } finally {
       setZajety(false);
     }
   }
 
-  async function usun(s: Schemat) {
-    setZajety(true);
-    setBlad(null);
-    try {
+  function utworz() {
+    if (!kontoId) return;
+    if (!nazwa.trim()) {
+      setKomunikat(t('schematy.podajNazwe'));
+      return;
+    }
+    wykonaj(async () => {
+      const nowy = await zapiszSchemat({ kontoId, nazwa, dni: 7, pozycje: [] });
+      setNazwa('');
+      router.push(`/schematy?id=${nowy.id}`);
+    });
+  }
+
+  function skopiuj(s: Schemat) {
+    if (!kontoId) return;
+    wykonaj(async () => {
+      const kopia = await skopiujSchemat(kontoId, s, t('schematy.kopia'));
+      router.push(`/schematy?id=${kopia.id}`);
+    });
+  }
+
+  function usun(s: Schemat) {
+    wykonaj(async () => {
       await usunSchemat(s.id);
       setDoUsuniecia(null);
-      setKomunikat(t('schematy.usunieto', { nazwa: s.nazwa }));
       await wczytaj();
-    } catch (e) {
-      setBlad(komunikatBledu(e));
-    } finally {
-      setZajety(false);
-    }
+      setKomunikat(t('schematy.usunieto', { nazwa: s.nazwa }));
+    });
+  }
+
+  function odrzuc(s: Schemat) {
+    if (!s.profilId) return;
+    const profilId = s.profilId;
+    wykonaj(async () => {
+      await cofnijUdostepnienie(s.id, profilId);
+      await wczytaj();
+      setKomunikat(t('schematy.odrzucono', { nazwa: s.nazwa }));
+    });
+  }
+
+  function przelaczPublicznosc(s: Schemat) {
+    wykonaj(async () => {
+      await ustawPublicznosc(s.id, !s.publiczny);
+      await wczytaj();
+      setKomunikat(s.publiczny ? t('schematy.wycofano', { nazwa: s.nazwa }) : t('schematy.opublikowano', { nazwa: s.nazwa }));
+    });
+  }
+
+  const kluczWiersza = (s: Schemat) => `${s.zrodlo}|${s.id}|${s.profilId ?? ''}`;
+
+  function wiersz(s: Schemat) {
+    return (
+      <Karta key={kluczWiersza(s)} style={styles.odstep}>
+        <ThemedText type="smallBold">{s.nazwa}</ThemedText>
+        <ThemedText type="small" themeColor="textSecondary">
+          {t('plan.dni', { count: s.dni })} · {t('plan.dania', { count: s.liczbaDan })}
+          {s.zrodlo === 'dietetyk' ? ` · ${t('schematy.odDietetyka', { kto: s.dietetyk ?? '', imie: s.imie ?? '' })}` : ''}
+          {s.zrodlo === 'moje' && s.publiczny ? ` · ${t('schematy.wKatalogu')}` : ''}
+        </ThemedText>
+
+        {doUsuniecia === kluczWiersza(s) ? (
+          <>
+            <ThemedText type="small" themeColor="accent">
+              {t('schematy.usunPytanie', { nazwa: s.nazwa })}
+            </ThemedText>
+            <Przycisk tytul={t('schematy.takUsun')} onPress={() => usun(s)} zajety={zajety} />
+            <Przycisk tytul={t('uzytkownicy.zostaw')} wariant="poboczny" onPress={() => setDoUsuniecia(null)} />
+          </>
+        ) : s.zrodlo === 'moje' ? (
+          <View style={styles.rzad}>
+            <Przycisk
+              tytul={t('schematy.edytuj')}
+              ikona="create-outline"
+              onPress={() => router.push(`/schematy?id=${s.id}`)}
+              style={styles.rosnie}
+            />
+            {moderator && (
+              <Przycisk
+                tytul={s.publiczny ? t('schematy.wycofaj') : t('schematy.opublikuj')}
+                wariant="poboczny"
+                ikona={s.publiczny ? 'eye-off-outline' : 'globe-outline'}
+                onPress={() => przelaczPublicznosc(s)}
+                wylaczony={zajety}
+                style={styles.rosnie}
+              />
+            )}
+            <Pressable
+              onPress={() => setDoUsuniecia(kluczWiersza(s))}
+              accessibilityRole="button"
+              accessibilityLabel={t('schematy.usun', { nazwa: s.nazwa })}
+              hitSlop={8}
+              style={({ pressed }) => [styles.ikona, pressed && styles.wcisniete]}>
+              <Ionicons name="trash-outline" size={22} color={motyw.textSecondary} />
+            </Pressable>
+          </View>
+        ) : (
+          <View style={styles.rzad}>
+            <Przycisk
+              tytul={t('schematy.skopiuj')}
+              ikona="copy-outline"
+              onPress={() => skopiuj(s)}
+              wylaczony={zajety}
+              style={styles.rosnie}
+            />
+            {s.zrodlo === 'dietetyk' && (
+              <Przycisk
+                tytul={t('schematy.odrzuc')}
+                wariant="poboczny"
+                onPress={() => odrzuc(s)}
+                wylaczony={zajety}
+                style={styles.rosnie}
+              />
+            )}
+          </View>
+        )}
+      </Karta>
+    );
   }
 
   return (
@@ -147,54 +267,41 @@ function ListaSchematow() {
           onSubmitEditing={utworz}
         />
         <Przycisk tytul={t('schematy.utworz')} ikona="add-outline" onPress={utworz} zajety={zajety} wylaczony={zajety} />
-        {komunikat && (
-          <ThemedText type="small" themeColor="textSecondary">
-            {komunikat}
-          </ThemedText>
-        )}
       </Karta>
+
+      {komunikat && (
+        <ThemedText type="small" themeColor="textSecondary">
+          {komunikat}
+        </ThemedText>
+      )}
 
       {schematy === null ? (
         <ActivityIndicator color={motyw.accent} />
-      ) : schematy.length === 0 ? (
-        <ThemedText type="small" themeColor="textSecondary">
-          {t('schematy.brakNaLiscie')}
-        </ThemedText>
       ) : (
-        schematy.map((s) => (
-          <Karta key={s.id} style={styles.odstep}>
-            <ThemedText type="smallBold">{s.nazwa}</ThemedText>
-            <ThemedText type="small" themeColor="textSecondary">
-              {t('plan.dni', { count: s.dni })} · {t('plan.dania', { count: s.liczbaDan })}
-            </ThemedText>
-            {doUsuniecia === s.id ? (
-              <>
-                <ThemedText type="small" themeColor="accent">
-                  {t('schematy.usunPytanie', { nazwa: s.nazwa })}
+        GRUPY.map((zrodlo) => {
+          const wGrupie = schematy.filter((s) => s.zrodlo === zrodlo);
+          // Własne pokazujemy zawsze — pusta grupa mówi, jak zacząć.
+          if (wGrupie.length === 0 && zrodlo !== 'moje') return null;
+          return (
+            <View key={zrodlo} style={styles.odstep}>
+              <ThemedText type="smallBold" themeColor="textSecondary">
+                {t(TYTUL_GRUPY[zrodlo])}
+              </ThemedText>
+              {wGrupie.length === 0 ? (
+                <ThemedText type="small" themeColor="textSecondary">
+                  {t('schematy.brakNaLiscie')}
                 </ThemedText>
-                <Przycisk tytul={t('schematy.takUsun')} onPress={() => usun(s)} zajety={zajety} />
-                <Przycisk tytul={t('uzytkownicy.zostaw')} wariant="poboczny" onPress={() => setDoUsuniecia(null)} />
-              </>
-            ) : (
-              <View style={styles.rzad}>
-                <Przycisk
-                  tytul={t('schematy.edytuj')}
-                  ikona="create-outline"
-                  onPress={() => router.push(`/schematy?id=${s.id}`)}
-                  style={styles.rosnie}
-                />
-                <Pressable
-                  onPress={() => setDoUsuniecia(s.id)}
-                  accessibilityRole="button"
-                  accessibilityLabel={t('schematy.usun', { nazwa: s.nazwa })}
-                  hitSlop={8}
-                  style={({ pressed }) => [styles.ikona, pressed && styles.wcisniete]}>
-                  <Ionicons name="trash-outline" size={22} color={motyw.textSecondary} />
-                </Pressable>
-              </View>
-            )}
-          </Karta>
-        ))
+              ) : (
+                wGrupie.map(wiersz)
+              )}
+              {zrodlo === 'katalog' && (
+                <ThemedText type="small" themeColor="textSecondary">
+                  {t('schematy.katalogOpis')}
+                </ThemedText>
+              )}
+            </View>
+          );
+        })
       )}
 
       <Przycisk tytul={t('schematy.doPlanu')} wariant="poboczny" ikona="calendar-outline" onPress={() => router.navigate('/')} />
@@ -233,11 +340,12 @@ function EdytorSchematu({ id }: { id: string }) {
   // to inny `key` w EkranSchematow, czyli świeży edytor.
   const kontoId = sesja?.user.id;
   useEffect(() => {
+    if (!kontoId) return;
     let aktywny = true;
     (async () => {
       try {
         const [naglowek, lista, katalog] = await Promise.all([
-          pobierzSchemat(id),
+          pobierzSchemat(id, kontoId),
           pobierzPozycjeSchematu(id),
           pobierzPrzepisy(kontoId),
         ]);
