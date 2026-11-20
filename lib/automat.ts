@@ -598,7 +598,7 @@ export function powtorzTydzien(opcje: {
       pora: posortowana[0].pora,
       odData: objete[0],
       dni: objete,
-      // Powtórka tygodnia wstawia przepis w bazowym rozmiarze, nawet jeśli
+      // Przeniesienie układu (zastosowanie schematu) wstawia przepis w bazowym rozmiarze, nawet jeśli
       // źródłowy posiłek był wariantem skalowanym — przeliczanie pod (inny)
       // dzienny bilans docelowego tygodnia to osobna sprawa, tu jej nie ma.
       celKcalDlaSkalowania: null,

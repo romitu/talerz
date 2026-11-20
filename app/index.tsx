@@ -34,7 +34,6 @@ import {
   naDate,
   opisDnia,
   pobierzPlany,
-  pobierzPoprzedniPlan,
   pobierzPozycje,
   PORY,
   bialkoPosilku,
@@ -450,47 +449,8 @@ export default function EkranPlanu() {
     }
   }
 
-  async function powtorzPoprzedni() {
-    if (!plan) return;
-    setKomunikat(null);
-    setPracuje(true);
-    try {
-      const poprzedni = await pobierzPoprzedniPlan(plan.id);
-      if (!poprzedni) {
-        setKomunikat(t('plan.brakPoprzedniego'));
-        return;
-      }
-
-      const wszystkieZrodla = await pobierzPozycje(poprzedni.id);
-      if (wszystkieZrodla.length === 0) {
-        setKomunikat(t('plan.poprzedniPusty'));
-        return;
-      }
-
-      // Danie, którego składnika konto od tamtej pory nie je, nie wraca do
-      // planu. Odpada cały garnek, bo filtrujemy po przepisie, nie po dniu.
-      const wykluczonePrzepisy = new Set(
-        przepisy.filter((p) => p.zawieraWykluczone.length > 0).map((p) => p.id)
-      );
-      const zrodlo = wszystkieZrodla.filter((p) => !wykluczonePrzepisy.has(p.przepis_id));
-      if (zrodlo.length === 0) {
-        setKomunikat(t('plan.poprzedniWykluczony'));
-        return;
-      }
-
-      await przeniesUklad(zrodlo, poprzedni.data_start, (dni) =>
-        t('plan.uzupelniono', { dni, data: opisDnia(poprzedni.data_start) }),
-        t('plan.poprzedniZajete')
-      );
-    } catch (e) {
-      setBlad(komunikatBledu(e));
-    } finally {
-      setPracuje(false);
-    }
-  }
-
   /**
-   * Wspólny koniec powtórki tygodnia i zastosowania schematu: przenosi
+   * Koniec zastosowania schematu: przenosi
    * gotowania na bieżący tydzień, zapisuje, przelicza porcje pod cel
    * i ustawia komunikat. Zwraca, czy cokolwiek wstawiono.
    */
@@ -530,7 +490,7 @@ export default function EkranPlanu() {
     return true;
   }
 
-  /** Przenosi schemat na bieżący tydzień — tą samą drogą co powtórka tygodnia. */
+  /** Przenosi schemat na bieżący tydzień — całymi gotowaniami (`powtorzTydzien`). */
   async function zastosujSchemat(schemat: Schemat) {
     if (!plan) return;
     setKomunikat(null);
@@ -609,7 +569,7 @@ export default function EkranPlanu() {
    * posiłków nie rosną za niego. Przeliczenie niczego też nie dokłada
    * w puste miejsca — to robi wyłącznie „Wypełnij wolne miejsca”.
    *
-   * Wołane po KAŻDEJ zmianie planu (automat, powtórzenie tygodnia, ręczne
+   * Wołane po KAŻDEJ zmianie planu (automat, zastosowanie schematu, ręczne
    * dodanie i usunięcie dania, zmiana daty). Plan i posiłki pobiera świeżo
    * z bazy — stan ekranu w tej chwili jeszcze nie zna właśnie zapisanej
    * zmiany. Bez celu kalorii nic nie robi.
@@ -1093,16 +1053,6 @@ export default function EkranPlanu() {
           />
 
           <View style={styles.akcjeSiatka}>
-            <Przycisk
-              tytul={t('plan.powtorz')}
-              wariant="poboczny"
-              ikona="refresh-outline"
-              onPress={powtorzPoprzedni}
-              zajety={pracuje}
-              wylaczony={pracuje}
-              style={styles.akcjaKafelek}
-            />
-
             <Przycisk
               tytul={t('plan.wyczyscWszystko')}
               wariant="poboczny"

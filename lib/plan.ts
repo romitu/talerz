@@ -101,7 +101,7 @@ export async function pobierzPlan(): Promise<Plan | null> {
  *
  * Powód jest inny i dotyczy ekranu: lista wyboru tygodnia po roku miałaby
  * pięćdziesiąt dwie pozycje i przestałaby być użyteczna. Kwartał to sensowny
- * kompromis — mieści „powtórz poprzedni tydzień”, pozwala zajrzeć miesiąc czy
+ * kompromis — pozwala zajrzeć miesiąc czy
  * dwa wstecz, a lista zostaje krótka.
  *
  * Zmiana tej liczby to jedyne, co trzeba zrobić, żeby trzymać dłużej lub krócej.
@@ -111,8 +111,9 @@ export const TYGODNI_HISTORII = 12;
 /**
  * Wszystkie tygodnie konta, od najnowszego.
  *
- * Każdy tydzień to osobny wiersz w `plany`. Stare zostają — z nich bierze się
- * „powtórz poprzedni tydzień”, a kiedyś wszystko, co da się o sobie policzyć.
+ * Każdy tydzień to osobny wiersz w `plany`. Stare zostają — kiedyś posłużą do
+ * wszystkiego, co da się o sobie policzyć. Do powtarzania układu tygodnia
+ * służą schematy (`lib/schematy.ts`).
  */
 export async function pobierzPlany(ile = 12): Promise<Plan[]> {
   const { data, error } = await supabase
@@ -123,27 +124,6 @@ export async function pobierzPlany(ile = 12): Promise<Plan[]> {
 
   if (error) throw error;
   return data ?? [];
-}
-
-/** Tydzień poprzedzający wskazany — po dacie startu, nie po kolejności dodania. */
-export async function pobierzPoprzedniPlan(planId: string): Promise<Plan | null> {
-  const { data: biezacy, error: bladBiezacego } = await supabase
-    .from('plany')
-    .select('data_start')
-    .eq('id', planId)
-    .single();
-  if (bladBiezacego) throw bladBiezacego;
-
-  const { data, error } = await supabase
-    .from('plany')
-    .select('id, data_start, dni')
-    .lt('data_start', biezacy.data_start)
-    .order('data_start', { ascending: false })
-    .limit(1)
-    .maybeSingle();
-
-  if (error) throw error;
-  return data;
 }
 
 /**
