@@ -356,6 +356,12 @@ with sprawdzenia as (
       select 1 from information_schema.columns
        where table_name = 'skladniki' and column_name = 'dzial'
     )
+  union all
+  select
+    '0054_schematy',
+    'schematy tygodnia (tabele schematy i schemat_pozycje)',
+    to_regclass('public.schematy') is not null
+      and to_regclass('public.schemat_pozycje') is not null
 )
 select
   migracja,

@@ -167,6 +167,7 @@ const SEKCJE: Sekcja[] = [
       { rodzaj: 'tekst', tresc: 'Danie gotowane na kilka dni jest przeliczane raz, jako cały garnek, pod średni cel tych dni. Dopasowanie działa tylko przy ustawionym celu kalorii. Przepis, którego nie wolno zmieniać, można wyłączyć, odznaczając w formularzu „Można skalować kalorycznie”.' },
       { rodzaj: 'tekst', tresc: 'Bilans dnia pokazuje liczbowo, ile brakuje do celu kalorycznego i białkowego. Dzięki temu widać nie tylko, czy dzień jest „na zielono”, ale również skalę odchylenia od celu.' },
       { rodzaj: 'tekst', tresc: 'Przycisk „Powtórz poprzedni tydzień” przenosi poprzedni układ na bieżący tydzień całymi gotowaniami – danie przygotowane raz i rozłożone na kilka dni pozostaje jednym gotowaniem. Zajęte już miejsca nie są nadpisywane. „Wyczyść wszystko” usuwa plan z bieżącego tygodnia.' },
+      { rodzaj: 'tekst', tresc: 'Przycisk „Zapisz tydzień jako schemat” zapamiętuje bieżący tydzień bez dat: który dzień, która pora i które dania gotuje się raz na kilka dni. „Zastosuj schemat” wstawia zapisany schemat do bieżącego tygodnia tak samo jak powtórka – całymi gotowaniami, bez nadpisywania zajętych miejsc, z porcjami przeliczonymi pod Twój cel. Schemat nie zależy od poprzedniego tygodnia, więc zadziała także po wyczyszczeniu planu albo po przerwie. Dania, których przepis usunięto albo które zawierają składnik „Nie jemy”, zostają pominięte, a komunikat mówi, ile ich było.' },
     ],
   },
   {
@@ -285,6 +286,7 @@ const PYTANIA: Pytanie[] = [
     bloki: [
       { rodzaj: 'tekst', tresc: 'Tak. Powtarzalność jest jedną z podstawowych funkcji Talerza, a nie błędem planowania. Jeżeli masz zestaw dań, które dobrze Ci służą i które lubisz, nie ma potrzeby codziennie szukać czegoś nowego.' },
       { rodzaj: 'tekst', tresc: 'Przycisk „Powtórz poprzedni tydzień” przenosi układ poprzedniego tygodnia na bieżący, zachowując całe gotowania. Danie ugotowane raz i rozłożone na trzy dni nie zmienia się w trzy niezależne gotowania. Zajęte miejsca w bieżącym tygodniu pozostają bez zmian.' },
+      { rodzaj: 'tekst', tresc: 'Jeśli chcesz wracać do konkretnego układu, a nie tylko do ostatniego tygodnia, zapisz go przyciskiem „Zapisz tydzień jako schemat”. Później „Zastosuj schemat” wstawi go do dowolnego tygodnia – także po wyczyszczeniu planu czy przerwie w planowaniu.' },
     ],
   },
   {

@@ -56,6 +56,9 @@ import {
   type PrzepisZMakro,
 } from '@/lib/przepisy';
 import { pobierzCeleWariantow, utworzPrzeskalowanyPrzepis } from '@/lib/przepisy-skalowane';
+import { pobierzPozycjeSchematu, type Schemat } from '@/lib/schematy';
+import { START_SCHEMATU, zrodloZeSchematu } from '@/lib/schematy-uklad';
+import { SchematyPlanu } from '@/components/schematy-planu';
 import { celZywieniowyNASEM, type PalNasem } from '@/lib/nasem';
 import { useSesja } from '@/lib/sesja';
 import { pobierzSkladniki } from '@/lib/skladniki';
@@ -516,31 +519,92 @@ export default function EkranPlanu() {
         return;
       }
 
-      const dni = dniPlanu(plan);
-      const { wstawienia, bezObsady } = powtorzTydzien({
-        zrodlo,
-        odDaty: poprzedni.data_start,
-        dni,
-        zajete: pozycje.map((p) => ({ data: p.data, pora: p.pora })),
-      });
+      await przeniesUklad(zrodlo, poprzedni.data_start, (dni) =>
+        t('plan.uzupelniono', { dni, data: opisDnia(poprzedni.data_start) }),
+        t('plan.poprzedniZajete')
+      );
+    } catch (e) {
+      setBlad(komunikatBledu(e));
+    } finally {
+      setPracuje(false);
+    }
+  }
 
-      if (wstawienia.length === 0) {
-        setKomunikat(t('plan.poprzedniZajete'));
+  /**
+   * Wspólny koniec powtórki tygodnia i zastosowania schematu: przenosi
+   * gotowania na bieżący tydzień, zapisuje, przelicza porcje pod cel
+   * i ustawia komunikat. Zwraca, czy cokolwiek wstawiono.
+   */
+  async function przeniesUklad(
+    zrodlo: Parameters<typeof powtorzTydzien>[0]['zrodlo'],
+    odDaty: string,
+    opisSukcesu: (dni: string) => string,
+    wszystkoZajete: string,
+    dopisek = ''
+  ): Promise<boolean> {
+    if (!plan) return false;
+
+    const { wstawienia, bezObsady } = powtorzTydzien({
+      zrodlo,
+      odDaty,
+      dni: dniPlanu(plan),
+      zajete: pozycje.map((p) => ({ data: p.data, pora: p.pora })),
+    });
+
+    if (wstawienia.length === 0) {
+      setKomunikat(wszystkoZajete + dopisek);
+      return false;
+    }
+
+    await zapiszWstawienia(plan, wstawienia);
+    await przeliczSkalowalneWTygodniu();
+    await odswiezPlan();
+
+    // Komunikat liczy DNI, nie posiłków — to pytanie, na które faktycznie
+    // ktoś chce znać odpowiedź: „ile dni tygodnia mam już z głowy".
+    const dniWypelnione = new Set(wstawienia.flatMap((w) => w.dni)).size;
+    setKomunikat(
+      opisSukcesu(t('plan.dni', { count: dniWypelnione })) +
+        (bezObsady.length > 0 ? ` ${t('plan.pominieto', { count: bezObsady.length })}` : '') +
+        dopisek
+    );
+    return true;
+  }
+
+  /** Przenosi schemat na bieżący tydzień — tą samą drogą co powtórka tygodnia. */
+  async function zastosujSchemat(schemat: Schemat) {
+    if (!plan) return;
+    setKomunikat(null);
+    setBlad(null);
+    setPracuje(true);
+    try {
+      const pozycjeSchematu = await pobierzPozycjeSchematu(schemat.id);
+      if (pozycjeSchematu.length === 0) {
+        setKomunikat(t('schematy.pusty', { nazwa: schemat.nazwa }));
         return;
       }
 
-      await zapiszWstawienia(plan, wstawienia);
-      await przeliczSkalowalneWTygodniu();
-      await odswiezPlan();
+      const wykluczonePrzepisy = new Set(
+        przepisy.filter((p) => p.zawieraWykluczone.length > 0).map((p) => p.id)
+      );
+      const { zrodlo, usuniete, wykluczone } = zrodloZeSchematu(pozycjeSchematu, wykluczonePrzepisy);
 
-      // Komunikat liczy DNI, nie posiłków — to pytanie, na które faktycznie
-      // ktoś chce znać odpowiedź: „ile dni tygodnia mam już z głowy".
-      const dniWypelnione = new Set(wstawienia.flatMap((w) => w.dni)).size;
-      setKomunikat(
-        t('plan.uzupelniono', {
-          dni: t('plan.dni', { count: dniWypelnione }),
-          data: opisDnia(poprzedni.data_start),
-        }) + (bezObsady.length > 0 ? ` ${t('plan.pominieto', { count: bezObsady.length })}` : '')
+      // Pominięte dania mówimy wprost — schemat z dziurą ma być widać.
+      const dopisek =
+        (usuniete > 0 ? ` ${t('schematy.usunietePrzepisy', { count: usuniete })}` : '') +
+        (wykluczone > 0 ? ` ${t('schematy.wykluczonePrzepisy', { count: wykluczone })}` : '');
+
+      if (zrodlo.length === 0) {
+        setKomunikat(t('schematy.nicDoPrzeniesienia') + dopisek);
+        return;
+      }
+
+      await przeniesUklad(
+        zrodlo,
+        START_SCHEMATU,
+        (dni) => t('schematy.zastosowano', { dni, nazwa: schemat.nazwa }),
+        t('schematy.zajete'),
+        dopisek
       );
     } catch (e) {
       setBlad(komunikatBledu(e));
@@ -1084,6 +1148,18 @@ export default function EkranPlanu() {
           <ThemedText type="small" themeColor="textSecondary">
             {t('plan.powtorzOpis')}
           </ThemedText>
+
+          {sesja && (
+            <SchematyPlanu
+              kontoId={sesja.user.id}
+              plan={plan}
+              pozycje={pozycje}
+              pracuje={pracuje}
+              onZastosuj={zastosujSchemat}
+              onKomunikat={setKomunikat}
+              onBlad={setBlad}
+            />
+          )}
 
           {/*
             Czyszczenie kasuje nieodwracalnie i cały tydzień naraz, więc wymaga
