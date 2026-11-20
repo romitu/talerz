@@ -393,9 +393,35 @@ function EdytorSchematu({ id }: { id: string }) {
     setKomunikat(null);
   }
 
+  /**
+   * Najmniej dni, na które wolno skrócić garnek. Zupa (`garnekNiepodzielny`)
+   * gotuje się w całości, więc nie schodzi poniżej liczby porcji przepisu —
+   * inaczej lista zakupów policzyłaby ułamek garnka, który i tak trzeba
+   * ugotować cały. Ta sama zasada co przy wstawianiu dania.
+   */
+  const minDniGarnka = useCallback(
+    (przepisId: string | null) => {
+      const przepis = przepisId ? wedlugId.get(przepisId) : undefined;
+      return przepis && garnekNiepodzielny(przepis) ? Math.max(1, przepis.liczba_porcji_bazowych) : 1;
+    },
+    [wedlugId]
+  );
+
   function ustawDni(nowe: number) {
     const d = Math.min(31, Math.max(1, nowe));
     if (d === dni) return;
+
+    // Skrócenie schematu nie może przyciąć zupy: zupa zaczynająca się przed
+    // nowym końcem, a sięgająca za niego, zostałaby ułamkiem garnka.
+    const przycietaZupa = pozycje.find((p) => {
+      if (p.dzien < d || minDniGarnka(p.przepis_id) <= 1) return false;
+      return dniGarnka(pozycje, p.gotowanie)[0] < d;
+    });
+    if (przycietaZupa) {
+      setKomunikat(t('schematy.zupaPrzycinanie', { nazwa: przycietaZupa.nazwa }));
+      return;
+    }
+
     setDni(d);
     setPozycje((p) => zmienDlugosc(p, d));
     setZmieniony(true);
@@ -514,6 +540,7 @@ function EdytorSchematu({ id }: { id: string }) {
       dzien={dzien}
       pora={pora}
       dni={dni}
+      minDniGarnka={minDniGarnka}
       onDodaj={() => setWybierany({ dzien, pora })}
       onZmien={zmien}
     />
@@ -666,6 +693,7 @@ function KomorkaSchematu({
   dzien,
   pora,
   dni,
+  minDniGarnka,
   onDodaj,
   onZmien,
 }: {
@@ -673,6 +701,8 @@ function KomorkaSchematu({
   dzien: number;
   pora: PoraPosilku;
   dni: number;
+  /** Najmniej dni garnka dla przepisu — dla zupy liczba porcji, inaczej 1. */
+  minDniGarnka: (przepisId: string | null) => number;
   onDodaj: () => void;
   onZmien: (nowe: PozycjaSchematu[]) => void;
 }) {
@@ -699,6 +729,8 @@ function KomorkaSchematu({
   const ktory = dniG.indexOf(dzien) + 1;
   const pierwszy = ktory === 1;
   const usuniety = p.przepis_id === null;
+  const minimum = minDniGarnka(p.przepis_id);
+  const calyGarnek = minimum > 1 && dniG.length <= minimum;
 
   return (
     <View
@@ -719,13 +751,18 @@ function KomorkaSchematu({
           {t('schematy.dzienGarnka', { ktory, ile: dniG.length })}
         </ThemedText>
       )}
+      {pierwszy && calyGarnek && (
+        <ThemedText type="small" themeColor="textSecondary">
+          {t('schematy.zupaCalyGarnek')}
+        </ThemedText>
+      )}
       {pierwszy && (
         <View style={styles.akcjeKomorki}>
           <IkonaAkcji
             ikona="remove-circle-outline"
-            opis={t('schematy.krocej')}
+            opis={calyGarnek ? t('schematy.zupaCalyGarnek') : t('schematy.krocej')}
             onPress={() => onZmien(skrocGarnek(pozycje, p.gotowanie))}
-            wylaczona={dniG.length < 2}
+            wylaczona={dniG.length < 2 || dniG.length <= minimum}
           />
           <IkonaAkcji
             ikona="add-circle-outline"

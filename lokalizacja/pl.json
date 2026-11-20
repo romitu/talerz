@@ -802,6 +802,8 @@
     "wybierzDanie": "{{dzien}}, {{pora}} — wybierz danie",
     "sumaDnia": "≈ {{kcal}} kcal · {{bialko}} g białka",
     "dodaj": "Dodaj",
+    "zupaCalyGarnek": "Zupa — cały garnek, nie da się skrócić",
+    "zupaPrzycinanie": "Schematu nie skrócono: „{{nazwa}}” to zupa i straciłaby część garnka. Najpierw usuń ją albo przesuń wcześniej.",
     "zupaNieMiesci": "„{{nazwa}}” to zupa — gotuje się cały garnek, na {{potrzeba}}. Od tego miejsca wolne są tylko {{wolne}}, więc zupy nie wstawiono. Zwolnij kolejne dni albo wybierz wcześniejszy dzień.",
     "krocejNizPorcji": "„{{nazwa}}” starczyłby na {{potrzeba}}, ale od tego miejsca zmieścił się na {{dni}} — dalej jest zajęte albo koniec schematu.",
     "dodajNa": "Dodaj danie: dzień {{dzien}}, {{pora}}",
