@@ -126,6 +126,19 @@ export default function EkranZakupow() {
     }
   }, [kontoId, t]);
 
+  /**
+   * Nieudany zapis: lista wraca do stanu z bazy, a komunikat ZOSTAJE.
+   *
+   * Kolejność ma znaczenie — `pobierz` na starcie czyści `blad`, więc
+   * ustawiony przed nim komunikat znikał w ułamku sekundy. Wyglądało to
+   * tak, jakby ptaszek sam się odznaczał, bez żadnej przyczyny na ekranie.
+   */
+  async function wrocDoBazy(e: unknown) {
+    const komunikat = komunikatBledu(e);
+    await pobierz();
+    setBlad((b) => b ?? komunikat);
+  }
+
   // Odświeżenie przy KAŻDYM wejściu na zakładkę, nie tylko przy pierwszym.
   //
   // `useEffect` uruchamia się raz, przy zamontowaniu ekranu. Odkąd zakupy są
@@ -234,8 +247,7 @@ export default function EkranZakupow() {
         )
       );
     } catch (e) {
-      setBlad(komunikatBledu(e));
-      pobierz();
+      wrocDoBazy(e);
     }
   }
 
@@ -256,8 +268,7 @@ export default function EkranZakupow() {
     try {
       await kupionoReczny(p.id, nowyStan);
     } catch (e) {
-      setBlad(komunikatBledu(e));
-      pobierz();
+      wrocDoBazy(e);
     }
   }
 
@@ -266,8 +277,7 @@ export default function EkranZakupow() {
     try {
       await usunReczny(p.id);
     } catch (e) {
-      setBlad(komunikatBledu(e));
-      pobierz();
+      wrocDoBazy(e);
     }
   }
 
