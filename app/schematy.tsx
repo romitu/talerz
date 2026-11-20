@@ -32,9 +32,11 @@ import {
   przedluzGarnek,
   skrocGarnek,
   usunGarnek,
+  wolneDniOd,
   zmienDlugosc,
   type PozycjaSchematu,
 } from '@/lib/schematy-uklad';
+import { garnekNiepodzielny } from '@/lib/automat';
 import { useSesja } from '@/lib/sesja';
 import { SZEROKOSC_TABLETU } from '@/lib/widok-listy';
 
@@ -337,7 +339,33 @@ function EdytorSchematu({ id }: { id: string }) {
             dania={dania}
             kafle={szeroki}
             onWybierz={(p) => {
-              zmien(dodajDanie(pozycje, wybierany.dzien, wybierany.pora, p));
+              // Jak ręczny wybór na planie: garnek od razu na tyle dni, ile
+              // przepis ma porcji bazowych — obiad na 3 porcje zajmuje trzy
+              // kolejne dni. Seria kończy się na pierwszym zajętym dniu.
+              const ile = Math.max(1, p.liczba_porcji_bazowych);
+              const wolne = wolneDniOd(pozycje, wybierany.dzien, wybierany.pora, ile, dni);
+              // Zupy nie przycinamy (`garnekNiepodzielny`) — pełny garnek albo wcale.
+              if (garnekNiepodzielny(p) && wolne.length < ile) {
+                setKomunikat(
+                  t('schematy.zupaNieMiesci', {
+                    nazwa: p.nazwa,
+                    potrzeba: t('plan.dni', { count: ile }),
+                    wolne: t('plan.dni', { count: wolne.length }),
+                  })
+                );
+                setWybierany(null);
+                return;
+              }
+              zmien(dodajDanie(pozycje, wybierany.dzien, wybierany.pora, p, ile, dni));
+              if (wolne.length < ile) {
+                setKomunikat(
+                  t('schematy.krocejNizPorcji', {
+                    nazwa: p.nazwa,
+                    potrzeba: t('plan.dni', { count: ile }),
+                    dni: t('plan.dni', { count: wolne.length }),
+                  })
+                );
+              }
               setWybierany(null);
             }}
           />

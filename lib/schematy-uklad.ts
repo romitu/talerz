@@ -160,16 +160,55 @@ export function dniGarnka(pozycje: PozycjaSchematu[], gotowanie: number): number
     .sort((a, b) => a - b);
 }
 
-/** Wstawia danie jako nowe, jednodniowe gotowanie. Zajęte miejsce — bez zmian. */
+/**
+ * Kolejne WOLNE dni tej pory od `dzien`, najwyżej `ile` — pierwsza
+ * przeszkoda (zajęte miejsce albo koniec schematu) kończy serię. Ta sama
+ * zasada co `dniGotowania` w `lib/automat.ts`: nie nadpisujemy tego,
+ * co już stoi w schemacie.
+ */
+export function wolneDniOd(
+  pozycje: PozycjaSchematu[],
+  dzien: number,
+  pora: PoraPosilku,
+  ile: number,
+  dni: number
+): number[] {
+  const wynik: number[] = [];
+  for (let d = dzien; d < dni && wynik.length < Math.max(1, ile); d++) {
+    if (naMiejscu(pozycje, d, pora)) break;
+    wynik.push(d);
+  }
+  return wynik;
+}
+
+/**
+ * Wstawia danie jako nowe gotowanie rozłożone na `ileDni` kolejnych wolnych
+ * dni — tak jak ręczny wybór na planie, który bierze liczbę porcji bazowych
+ * przepisu: obiad na 3 porcje od razu zajmuje trzy dni. Zajęte miejsce
+ * startowe — bez zmian.
+ */
 export function dodajDanie(
   pozycje: PozycjaSchematu[],
   dzien: number,
   pora: PoraPosilku,
-  przepis: { id: string; nazwa: string }
+  przepis: { id: string; nazwa: string },
+  ileDni = 1,
+  dni = dzien + 1
 ): PozycjaSchematu[] {
-  if (naMiejscu(pozycje, dzien, pora)) return pozycje;
+  const dniGotowania = wolneDniOd(pozycje, dzien, pora, ileDni, Math.max(dni, dzien + 1));
+  if (dniGotowania.length === 0) return pozycje;
   const gotowanie = pozycje.reduce((m, p) => Math.max(m, p.gotowanie), -1) + 1;
-  return [...pozycje, { dzien, pora, przepis_id: przepis.id, nazwa: przepis.nazwa, gotowanie, kolejnosc: 1 }];
+  return [
+    ...pozycje,
+    ...dniGotowania.map((d) => ({
+      dzien: d,
+      pora,
+      przepis_id: przepis.id,
+      nazwa: przepis.nazwa,
+      gotowanie,
+      kolejnosc: 1,
+    })),
+  ];
 }
 
 /**

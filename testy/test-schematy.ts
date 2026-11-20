@@ -21,6 +21,7 @@ import {
   skrocGarnek,
   START_SCHEMATU,
   usunGarnek,
+  wolneDniOd,
   zmienDlugosc,
   zrodloZeSchematu,
   type PozycjaSchematu,
@@ -126,6 +127,14 @@ sprawdz(
 );
 
 // --- Edycja ---
+
+const trzyDni = dodajDanie([], 1, 'obiad', { id: 'gulasz', nazwa: 'Gulasz' }, 3, 7);
+sprawdz('obiad na 3 porcje od razu na trzy dni jednym garnkiem', trzyDni.map((p) => `${p.dzien}:${p.gotowanie}`).join(',') === '1:0,2:0,3:0', JSON.stringify(trzyDni));
+const przyKoncu = dodajDanie([], 5, 'obiad', { id: 'gulasz', nazwa: 'Gulasz' }, 3, 7);
+sprawdz('przy końcu schematu tyle dni, ile się mieści', przyKoncu.map((p) => p.dzien).join(',') === '5,6', JSON.stringify(przyKoncu));
+const przedZajetym = dodajDanie(dodajDanie([], 2, 'obiad', { id: 'x', nazwa: 'X' }), 0, 'obiad', { id: 'g', nazwa: 'G' }, 3, 7);
+sprawdz('seria kończy się na zajętym dniu', dniGarnka(przedZajetym, 1).join(',') === '0,1', JSON.stringify(przedZajetym));
+sprawdz('wolneDniOd liczy tak samo', wolneDniOd(przedZajetym, 3, 'obiad', 9, 7).join(',') === '3,4,5,6', '');
 
 let e: PozycjaSchematu[] = [];
 e = dodajDanie(e, 0, 'obiad', { id: 'gulasz', nazwa: 'Gulasz' });
