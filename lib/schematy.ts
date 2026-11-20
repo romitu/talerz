@@ -33,6 +33,12 @@ export type Schemat = {
   /** Ile dań (pozycji) ma schemat — do podpisu na liście. */
   liczbaDan: number;
   zrodlo: ZrodloSchematu;
+  /**
+   * Zdjęcia pierwszych kilku dań (ścieżki w zasobniku) — do paska miniatur
+   * na listach. Puste dla schematów od dietetyka: te czytamy tylko przez
+   * funkcje bazy, które zdjęć nie zwracają.
+   */
+  zdjecia: string[];
   /** Własny schemat opublikowany w katalogu (publikuje tylko moderator). */
   publiczny: boolean;
   /** Dla `dietetyk`: kto udostępnił i dla którego profilu. */
@@ -46,15 +52,31 @@ type WierszSchematu = {
   nazwa: string;
   dni: number;
   publiczny: boolean;
-  schemat_pozycje: { count: number }[] | null;
+  schemat_pozycje: { przepisy: { zdjecie: string | null } | { zdjecie: string | null }[] | null }[] | null;
 };
+
+/** Ile miniatur pokazujemy przy schemacie na liście. */
+const MINIATUR = 4;
+
+/** Pierwsze różne zdjęcia dań schematu, w kolejności dni. */
+function zdjeciaZPozycji(pozycje: WierszSchematu['schemat_pozycje']): string[] {
+  const wynik: string[] = [];
+  for (const p of pozycje ?? []) {
+    const przepis = Array.isArray(p.przepisy) ? p.przepisy[0] : p.przepisy;
+    const z = przepis?.zdjecie;
+    if (z && !wynik.includes(z)) wynik.push(z);
+    if (wynik.length === MINIATUR) break;
+  }
+  return wynik;
+}
 
 function zWiersza(s: WierszSchematu, zrodlo: ZrodloSchematu): Schemat {
   return {
     id: s.id,
     nazwa: s.nazwa,
     dni: s.dni,
-    liczbaDan: s.schemat_pozycje?.[0]?.count ?? 0,
+    liczbaDan: s.schemat_pozycje?.length ?? 0,
+    zdjecia: zdjeciaZPozycji(s.schemat_pozycje),
     zrodlo,
     publiczny: s.publiczny,
   };
@@ -69,9 +91,10 @@ function zWiersza(s: WierszSchematu, zrodlo: ZrodloSchematu): Schemat {
 export async function pobierzSchematy(kontoId: string): Promise<Schemat[]> {
   const { data, error } = await supabase
     .from('schematy')
-    .select('id, nazwa, dni, publiczny, schemat_pozycje (count)')
+    .select('id, nazwa, dni, publiczny, schemat_pozycje (dzien, przepisy (zdjecie))')
     .eq('konto_id', kontoId)
-    .order('nazwa');
+    .order('nazwa')
+    .order('dzien', { referencedTable: 'schemat_pozycje' });
   if (error) throw error;
   return ((data ?? []) as WierszSchematu[]).map((s) => zWiersza(s, 'moje'));
 }
@@ -80,10 +103,11 @@ export async function pobierzSchematy(kontoId: string): Promise<Schemat[]> {
 export async function pobierzKatalogSchematow(kontoId: string): Promise<Schemat[]> {
   const { data, error } = await supabase
     .from('schematy')
-    .select('id, nazwa, dni, publiczny, schemat_pozycje (count)')
+    .select('id, nazwa, dni, publiczny, schemat_pozycje (dzien, przepisy (zdjecie))')
     .eq('publiczny', true)
     .neq('konto_id', kontoId)
-    .order('nazwa');
+    .order('nazwa')
+    .order('dzien', { referencedTable: 'schemat_pozycje' });
   if (error) throw error;
   return ((data ?? []) as WierszSchematu[]).map((s) => zWiersza(s, 'katalog'));
 }
@@ -107,6 +131,7 @@ export async function pobierzSchematyOdDietetyka(): Promise<Schemat[]> {
     dni: s.dni,
     liczbaDan: s.liczba_dan,
     zrodlo: 'dietetyk',
+    zdjecia: [],
     publiczny: false,
     dietetyk: s.dietetyk ?? undefined,
     profilId: s.profil_id,
@@ -182,7 +207,7 @@ export async function zapiszSchemat(opcje: {
     }
   }
 
-  return { ...schemat, liczbaDan: opcje.pozycje.length, zrodlo: 'moje', publiczny: false };
+  return { ...schemat, liczbaDan: opcje.pozycje.length, zdjecia: [], zrodlo: 'moje', publiczny: false };
 }
 
 export async function usunSchemat(schematId: string) {

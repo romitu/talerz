@@ -6,6 +6,7 @@ import { ActivityIndicator, Pressable, ScrollView, StyleSheet, useWindowDimensio
 
 import { Ekran } from '@/components/ekran';
 import { Karta } from '@/components/karta';
+import { MiniaturaPrzepisu, PasekMiniatur } from '@/components/miniatura-przepisu';
 import { Pole } from '@/components/pole';
 import { PrzelacznikAutomatu } from '@/components/przelacznik-automatu';
 import { Przycisk } from '@/components/przycisk';
@@ -180,6 +181,7 @@ function ListaSchematow() {
   function wiersz(s: Schemat) {
     return (
       <Karta key={kluczWiersza(s)} style={styles.odstep}>
+        <PasekMiniatur zdjecia={s.zdjecia} />
         <ThemedText type="smallBold">{s.nazwa}</ThemedText>
         <ThemedText type="small" themeColor="textSecondary">
           {t('plan.dni', { count: s.dni })} · {t('plan.dania', { count: s.liczbaDan })}
@@ -381,6 +383,11 @@ function EdytorSchematu({ id }: { id: string }) {
   const wedlugId = useMemo(() => new Map(przepisy.map((p) => [p.id, p])), [przepisy]);
 
   /** Suma dnia w porcjach z przepisu — orientacyjnie, przed dopasowaniem pod cel. */
+  const zdjecieDla = useCallback(
+    (przepisId: string | null) => (przepisId ? (wedlugId.get(przepisId)?.zdjecie ?? null) : null),
+    [wedlugId]
+  );
+
   const sumaDnia = useCallback(
     (dzien: number) => {
       let kcal = 0;
@@ -557,6 +564,7 @@ function EdytorSchematu({ id }: { id: string }) {
       pora={pora}
       dni={dni}
       minDniGarnka={minDniGarnka}
+      zdjecieDla={zdjecieDla}
       onDodaj={() => setWybierany({ dzien, pora })}
       onZmien={zmien}
     />
@@ -718,6 +726,7 @@ function KomorkaSchematu({
   pora,
   dni,
   minDniGarnka,
+  zdjecieDla,
   onDodaj,
   onZmien,
 }: {
@@ -727,6 +736,8 @@ function KomorkaSchematu({
   dni: number;
   /** Najmniej dni garnka dla przepisu — dla zupy liczba porcji, inaczej 1. */
   minDniGarnka: (przepisId: string | null) => number;
+  /** Ścieżka zdjęcia przepisu albo null (brak zdjęcia, przepis usunięty lub niewidoczny). */
+  zdjecieDla: (przepisId: string | null) => string | null;
   onDodaj: () => void;
   onZmien: (nowe: PozycjaSchematu[]) => void;
 }) {
@@ -762,9 +773,26 @@ function KomorkaSchematu({
         styles.pelna,
         { backgroundColor: pierwszy ? motyw.backgroundSelected : 'transparent', borderColor: motyw.border },
       ]}>
-      <ThemedText type="small" themeColor={usuniety ? 'accent' : pierwszy ? 'text' : 'textSecondary'} numberOfLines={3}>
-        {pierwszy ? p.nazwa : `↳ ${p.nazwa}`}
-      </ThemedText>
+      {pierwszy ? (
+        <>
+          {/* Zdjęcie tylko w pierwszym dniu garnka — kolejne dni to ten sam garnek. */}
+          <MiniaturaPrzepisu sciezka={zdjecieDla(p.przepis_id)} szerokosc="100%" wysokosc={72} />
+          <ThemedText type="small" themeColor={usuniety ? 'accent' : 'text'} numberOfLines={3}>
+            {p.nazwa}
+          </ThemedText>
+        </>
+      ) : (
+        <View style={styles.ciagDalszy}>
+          <MiniaturaPrzepisu sciezka={zdjecieDla(p.przepis_id)} szerokosc={28} wysokosc={28} style={styles.przygaszona} />
+          <ThemedText
+            type="small"
+            themeColor={usuniety ? 'accent' : 'textSecondary'}
+            numberOfLines={3}
+            style={styles.rosnieTekst}>
+            {`↳ ${p.nazwa}`}
+          </ThemedText>
+        </View>
+      )}
       {usuniety && (
         <ThemedText type="small" themeColor="accent">
           {t('schematy.przepisUsuniety')}
@@ -898,6 +926,17 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: Spacing.two,
     gap: Spacing.half,
+  },
+  ciagDalszy: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.one,
+  },
+  przygaszona: {
+    opacity: 0.7,
+  },
+  rosnieTekst: {
+    flex: 1,
   },
   akcjeKomorki: {
     flexDirection: 'row',

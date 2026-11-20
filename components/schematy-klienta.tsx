@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { ActivityIndicator, StyleSheet, View } from 'react-native';
 
 import { Karta } from './karta';
+import { PasekMiniatur } from './miniatura-przepisu';
 import { Przycisk } from './przycisk';
 import { ThemedText } from './themed-text';
 
@@ -126,6 +127,7 @@ export function SchematyKlienta({ profilId }: { profilId: string }) {
           {doUdostepnienia.map((s) => (
             <View key={s.id} style={[styles.wiersz, { borderColor: motyw.border }]}>
               <View style={styles.tresc}>
+                <PasekMiniatur zdjecia={s.zdjecia} rozmiar={36} />
                 <ThemedText type="smallBold">{s.nazwa}</ThemedText>
                 <ThemedText type="small" themeColor="textSecondary">
                   {t('plan.dni', { count: s.dni })} · {t('plan.dania', { count: s.liczbaDan })}
