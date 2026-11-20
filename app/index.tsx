@@ -310,6 +310,12 @@ export default function EkranPlanu() {
     });
   }, []);
 
+  /** Przepisy gotowane zawsze w całości (zupy) — zapis tygodnia jako schematu ich nie przycina. */
+  const niepodzielne = useMemo(
+    () => new Set(przepisy.filter((p) => garnekNiepodzielny(p)).map((p) => p.id)),
+    [przepisy]
+  );
+
   const wedlugDnia = useMemo(() => {
     const mapa = new Map<string, PozycjaPlanu[]>();
     for (const p of pozycje) {
@@ -1072,6 +1078,7 @@ export default function EkranPlanu() {
               kontoId={sesja.user.id}
               plan={plan}
               pozycje={pozycje}
+              niepodzielne={niepodzielne}
               pracuje={pracuje}
               onZastosuj={zastosujSchemat}
               onKomunikat={setKomunikat}

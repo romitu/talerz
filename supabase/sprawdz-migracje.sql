@@ -389,6 +389,11 @@ with sprawdzenia as (
        where specific_name like 'schematy_od_dietetyka%'
          and parameter_name = 'zdjecia'
     )
+  union all
+  select
+    '0059_schemat_najwyzej_tydzien',
+    'schemat najwyzej 7 dni (ograniczenie schematy_dni_tydzien)',
+    exists (select 1 from pg_constraint where conname = 'schematy_dni_tydzien')
 )
 select
   migracja,

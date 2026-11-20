@@ -20,12 +20,14 @@ import {
   zapiszSchemat,
   type Schemat,
 } from '@/lib/schematy';
-import { schematZPlanu } from '@/lib/schematy-uklad';
+import { MAX_DNI_SCHEMATU, schematZPlanu } from '@/lib/schematy-uklad';
 
 type Props = {
   kontoId: string;
   plan: Plan;
   pozycje: PozycjaPlanu[];
+  /** Przepisy gotowane zawsze w całości (zupy) — do zapisu tygodnia jako schematu. */
+  niepodzielne: Set<string>;
   /** Inna operacja na planie w toku — przyciski czekają. */
   pracuje: boolean;
   /** Przenosi schemat na bieżący tydzień (logika w `app/index.tsx`). */
@@ -41,7 +43,7 @@ type Props = {
  * Wszystko w karcie, bez okienek systemowych — z tego samego powodu co
  * potwierdzenie „Wyczyść wszystko”.
  */
-export function SchematyPlanu({ kontoId, plan, pozycje, pracuje, onZastosuj, onKomunikat, onBlad }: Props) {
+export function SchematyPlanu({ kontoId, plan, pozycje, niepodzielne, pracuje, onZastosuj, onKomunikat, onBlad }: Props) {
   const { t } = useTranslation();
   const motyw = useTheme();
 
@@ -88,8 +90,8 @@ export function SchematyPlanu({ kontoId, plan, pozycje, pracuje, onZastosuj, onK
       const zapisany = await zapiszSchemat({
         kontoId,
         nazwa,
-        dni: plan.dni,
-        pozycje: schematZPlanu(pozycje, plan.data_start, plan.dni),
+        dni: Math.min(plan.dni, MAX_DNI_SCHEMATU),
+        pozycje: schematZPlanu(pozycje, plan.data_start, plan.dni, niepodzielne),
       });
       setTryb(null);
       onKomunikat(

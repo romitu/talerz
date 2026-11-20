@@ -40,6 +40,12 @@ const KOLEJNOSC_PORY: Record<PoraPosilku, number> = {
 
 const DOBA_MS = 86400000;
 
+/**
+ * Najdłuższy schemat: tydzień. Schemat wstawia się do tygodnia, więc dłuższy
+ * nie ma zastosowania. Baza pilnuje tego samego (migracja 0059).
+ */
+export const MAX_DNI_SCHEMATU = 7;
+
 function dniOd(start: string, data: string): number {
   return Math.round((Date.parse(data) - Date.parse(start)) / DOBA_MS);
 }
@@ -51,10 +57,26 @@ function dniOd(start: string, data: string): number {
  * `partia_id` (starsze wpisy) to osobne gotowanie — tak samo traktuje ją
  * `powtorzTydzien`. Pozycje spoza tygodnia (np. sprzed `dataStart`) odpadają.
  */
-export function schematZPlanu(pozycje: PozycjaZPlanu[], dataStart: string, dni: number): PozycjaSchematu[] {
-  const posortowane = pozycje
-    .map((p) => ({ ...p, dzien: dniOd(dataStart, p.data) }))
-    .filter((p) => p.dzien >= 0 && p.dzien < dni)
+export function schematZPlanu(
+  pozycje: PozycjaZPlanu[],
+  dataStart: string,
+  dni: number,
+  /**
+   * Przepisy gotowane zawsze w całości (zupy). Garnek takiego dania, który
+   * wychodzi poza schemat (plan dłuższy niż tydzień), odpada w całości —
+   * przycięta zupa to ułamek garnka na liście zakupów.
+   */
+  niepodzielne: Set<string> = new Set()
+): PozycjaSchematu[] {
+  const dlugosc = Math.min(dni, MAX_DNI_SCHEMATU);
+  const zDniami = pozycje.map((p) => ({ ...p, dzien: dniOd(dataStart, p.data) }));
+  const ucieteZupy = new Set(
+    zDniami
+      .filter((p) => p.partia_id !== null && niepodzielne.has(p.przepis_id) && (p.dzien < 0 || p.dzien >= dlugosc))
+      .map((p) => p.partia_id)
+  );
+  const posortowane = zDniami
+    .filter((p) => p.dzien >= 0 && p.dzien < dlugosc && !(p.partia_id !== null && ucieteZupy.has(p.partia_id)))
     .sort(
       (a, b) =>
         a.dzien - b.dzien || KOLEJNOSC_PORY[a.pora] - KOLEJNOSC_PORY[b.pora] || a.kolejnosc - b.kolejnosc
@@ -231,6 +253,15 @@ export function przedluzGarnek(pozycje: PozycjaSchematu[], gotowanie: number, dn
   const nastepny = ostatni.dzien + 1;
   if (nastepny >= dni || naMiejscu(pozycje, nastepny, ostatni.pora)) return pozycje;
   return [...pozycje, { ...ostatni, dzien: nastepny }];
+}
+
+/**
+ * Usuwa jeden dzień garnka. Garnek zostaje jednym gotowaniem na pozostałe dni
+ * (mniej porcji). Usunięcie jedynego dnia usuwa danie. O zupie, której nie
+ * wolno przyciąć, decyduje wołający — wtedy woła `usunGarnek`.
+ */
+export function usunDzienGarnka(pozycje: PozycjaSchematu[], gotowanie: number, dzien: number): PozycjaSchematu[] {
+  return pozycje.filter((p) => !(p.gotowanie === gotowanie && p.dzien === dzien));
 }
 
 /** Zabiera garnkowi ostatni dzień. Garnek jednodniowy zostaje — od tego jest `usunGarnek`. */

@@ -20,6 +20,8 @@ import {
   schematZPlanu,
   skrocGarnek,
   START_SCHEMATU,
+  MAX_DNI_SCHEMATU,
+  usunDzienGarnka,
   usunGarnek,
   wolneDniOd,
   zmienDlugosc,
@@ -181,6 +183,26 @@ sprawdz(
 
 e = usunGarnek(e, 0);
 sprawdz('usunięcie garnka zabiera wszystkie jego dni', e.length === 1 && e[0].przepis_id === 'omlet', JSON.stringify(e));
+
+// --- Usunięcie jednego dnia garnka ---
+
+const garnek3 = dodajDanie([], 0, 'obiad', { id: 'g', nazwa: 'G' }, 3, 7);
+const bezSrodka = usunDzienGarnka(garnek3, 0, 1);
+sprawdz('usunięcie środkowego dnia zostawia resztę jednym garnkiem', dniGarnka(bezSrodka, 0).join(',') === '0,2', JSON.stringify(bezSrodka));
+
+// --- Najwyżej tydzień ---
+
+const dwaTygodnie = Array.from({ length: 14 }, (_, i) => ({
+  data: new Date(Date.UTC(2026, 10, 2 + i)).toISOString().slice(0, 10),
+  pora: 'obiad' as const,
+  przepis_id: i >= 5 && i <= 7 ? 'zupa' : 'x' + i,
+  nazwa: 'D',
+  partia_id: i >= 5 && i <= 7 ? 'pz' : null,
+  kolejnosc: 1,
+}));
+const tydzienZPlanu = schematZPlanu(dwaTygodnie, '2026-11-02', 14, new Set(['zupa']));
+sprawdz('z dłuższego planu najwyżej 7 dni', tydzienZPlanu.every((p) => p.dzien < MAX_DNI_SCHEMATU), JSON.stringify(tydzienZPlanu.map((p) => p.dzien)));
+sprawdz('zupa wychodząca za tydzień odpada w całości', !tydzienZPlanu.some((p) => p.przepis_id === 'zupa') && tydzienZPlanu.length === 5, JSON.stringify(tydzienZPlanu.map((p) => p.przepis_id)));
 
 for (const p of przeszlo) console.log(`  ok   ${p}`);
 for (const n of nieprzeszlo) console.log(`  ZLE  ${n}`);

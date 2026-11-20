@@ -40,6 +40,8 @@ import {
   naMiejscu,
   przedluzGarnek,
   skrocGarnek,
+  MAX_DNI_SCHEMATU,
+  usunDzienGarnka,
   usunGarnek,
   wolneDniOd,
   zmienDlugosc,
@@ -366,7 +368,7 @@ function EdytorSchematu({ id }: { id: string }) {
           setBrak(true);
         } else {
           setNazwa(naglowek.nazwa);
-          setDni(naglowek.dni);
+          setDni(Math.min(naglowek.dni, MAX_DNI_SCHEMATU));
           setPozycje(lista);
           setPrzepisy(katalog);
         }
@@ -425,7 +427,7 @@ function EdytorSchematu({ id }: { id: string }) {
   );
 
   function ustawDni(nowe: number) {
-    const d = Math.min(31, Math.max(1, nowe));
+    const d = Math.min(MAX_DNI_SCHEMATU, Math.max(1, nowe));
     if (d === dni) return;
 
     // Skrócenie schematu nie może przyciąć zupy: zupa zaczynająca się przed
@@ -567,6 +569,7 @@ function EdytorSchematu({ id }: { id: string }) {
       zdjecieDla={zdjecieDla}
       onDodaj={() => setWybierany({ dzien, pora })}
       onZmien={zmien}
+      onKomunikat={setKomunikat}
     />
   );
 
@@ -602,7 +605,7 @@ function EdytorSchematu({ id }: { id: string }) {
             <View style={styles.licznik}>
               <IkonaAkcji ikona="remove" opis={t('schematy.mniejDni')} onPress={() => ustawDni(dni - 1)} wylaczona={dni <= 1} />
               <ThemedText type="smallBold">{t('plan.dni', { count: dni })}</ThemedText>
-              <IkonaAkcji ikona="add" opis={t('schematy.wiecejDni')} onPress={() => ustawDni(dni + 1)} wylaczona={dni >= 31} />
+              <IkonaAkcji ikona="add" opis={t('schematy.wiecejDni')} onPress={() => ustawDni(dni + 1)} wylaczona={dni >= MAX_DNI_SCHEMATU} />
             </View>
           </View>
         </View>
@@ -729,6 +732,7 @@ function KomorkaSchematu({
   zdjecieDla,
   onDodaj,
   onZmien,
+  onKomunikat,
 }: {
   pozycje: PozycjaSchematu[];
   dzien: number;
@@ -740,6 +744,7 @@ function KomorkaSchematu({
   zdjecieDla: (przepisId: string | null) => string | null;
   onDodaj: () => void;
   onZmien: (nowe: PozycjaSchematu[]) => void;
+  onKomunikat: (tekst: string) => void;
 }) {
   const { t } = useTranslation();
   const motyw = useTheme();
@@ -826,6 +831,29 @@ function KomorkaSchematu({
             ikona="trash-outline"
             opis={t('schematy.usunDanie', { nazwa: p.nazwa })}
             onPress={() => onZmien(usunGarnek(pozycje, p.gotowanie))}
+          />
+        </View>
+      )}
+      {!pierwszy && (
+        // Kosz w dalszym dniu garnka usuwa TEN dzień — garnek starcza wtedy na
+        // mniej dni. Zupy nie da się przyciąć poniżej liczby porcji, więc
+        // wtedy znika cały garnek, z komunikatem, że to jedna zupa.
+        <View style={styles.akcjeKomorki}>
+          <IkonaAkcji
+            ikona="trash-outline"
+            opis={
+              calyGarnek
+                ? t('schematy.usunZupe', { nazwa: p.nazwa })
+                : t('schematy.usunDzien', { nazwa: p.nazwa, dzien: dzien + 1 })
+            }
+            onPress={() => {
+              if (calyGarnek) {
+                onZmien(usunGarnek(pozycje, p.gotowanie));
+                onKomunikat(t('schematy.zupaUsunietaCala', { nazwa: p.nazwa, dni: t('plan.dni', { count: dniG.length }) }));
+              } else {
+                onZmien(usunDzienGarnka(pozycje, p.gotowanie, dzien));
+              }
+            }}
           />
         </View>
       )}
