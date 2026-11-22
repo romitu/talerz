@@ -15,7 +15,7 @@
   "liczba_porcji_bazowych": 2,
   "trwalosc_dni": 3,
   "czas_przygotowania_min": 20,
-  "czas_obrobki_min": 85,
+  "czas_obrobki_min": 58,
   "sprzet": [
     "Garnek 3 l",
     "Nóż szefa kuchni",
@@ -161,13 +161,13 @@
     },
     {
       "nazwa": "Gotowanie wywaru i przygotowanie bazy",
-      "minuty": 20,
+      "minuty": 18,
       "kroki": [
         {
           "tresc": "**Warzywa korzeniowe.** W osobnym garnku umieść całą przygotowaną marchew, korzeń pietruszki i korzeń selera. Zalej całą odmierzoną wodą. Przykryj i doprowadź do łagodnego wrzenia, orientacyjnie przez **5–7 minut**."
         },
         {
-          "tresc": "**Gotowanie korzeni.** Od zagotowania gotuj pod przykryciem na małym ogniu przez **8 minut**. Nastaw minutnik; w tym czasie przygotuj bazę zupy w głównym garnku."
+          "tresc": "**Gotowanie korzeni.** Od zagotowania gotuj pod przykryciem na małym ogniu przez **6 minut**. Nastaw minutnik; w tym czasie przygotuj bazę zupy w głównym garnku."
         },
         {
           "tresc": "**Baza zupy — równolegle.** W głównym garnku rozgrzej olej przez **1 minutę**."
@@ -180,7 +180,7 @@
           "tresc": "**Gotowa baza.** Zdejmij główny garnek z palnika do czasu wlania wywaru."
         },
         {
-          "tresc": "**Por — po minutniku.** Po **8 minutach gotowania korzeni** dodaj por do wywaru. Gotuj jeszcze przez **4 minuty**. Wykonaj ten krok po sygnale minutnika, niezależnie od pracy przy bazie zupy."
+          "tresc": "**Por — po minutniku.** Po **6 minutach gotowania korzeni** dodaj por do wywaru. Gotuj jeszcze przez **4 minuty**. Wykonaj ten krok po sygnale minutnika, niezależnie od pracy przy bazie zupy."
         },
         {
           "tresc": "**Kontrola warzyw.** Sprawdź kostkę marchewki i selera. Jeśli ma twardy, surowy środek, gotuj jeszcze po **2 minuty**, sprawdzając po każdej takiej próbie.",
@@ -197,26 +197,26 @@
     },
     {
       "nazwa": "Gotowanie grochu, ziemniaków i indyka",
-      "minuty": 65,
+      "minuty": 40,
       "kroki": [
         {
-          "tresc": "**Groch.** Do podsmażonej cebuli dodaj groch, cały wywar, liście laurowe i ziele angielskie. Doprowadź do wrzenia przez około **3–5 minut**. Gotuj pod uchyloną pokrywką przez **30 minut** na małym ogniu."
+          "tresc": "**Groch.** Do podsmażonej cebuli dodaj groch, cały wywar, liście laurowe i ziele angielskie. Doprowadź do wrzenia przez około **3–5 minut**. Od zagotowania gotuj pod uchyloną pokrywką na małym ogniu przez **15 minut**. Groch gotuje się łącznie około 30 minut — ziemniaki i indyk dochodzą w trakcie, żeby wszystko skończyło się razem."
         },
         {
-          "tresc": "**Ziemniaki.** Dodaj ziemniaki. Po ponownym zagotowaniu gotuj przez **10 minut**."
+          "tresc": "**Ziemniaki.** Dodaj ziemniaki. Po ponownym zagotowaniu gotuj przez **6 minut**."
         },
         {
-          "tresc": "**Indyk.** Dodaj indyka. Po ponownym zagotowaniu gotuj przez **12–15 minut**. Sprawdź temperaturę najgrubszego kawałka mięsa.",
+          "tresc": "**Indyk.** Dodaj indyka. Po ponownym zagotowaniu gotuj na małym ogniu przez **6–7 minut**. Sprawdź temperaturę najgrubszego kawałka mięsa; jeśli jest niższa, gotuj jeszcze po **2 minuty**.",
           "sygnal": "indyk osiągnął co najmniej 74°C",
           "uwaga": true
         },
         {
-          "tresc": "**Kontrola grochu i ziemniaków.** Sprawdź miękkość grochu i ziemniaków. Jeżeli wymagają dłuższego gotowania, wyjmij gotowe mięso i dogotowuj zupę po **5 minut**, uzupełniając odparowany płyn gorącą wodą. Włóż mięso z powrotem przed dodaniem warzyw z wywaru.",
+          "tresc": "**Kontrola grochu i ziemniaków.** Sprawdź miękkość grochu i ziemniaków. Jeżeli groch jest jeszcze twardy, dogotuj zupę po **3 minuty**, uzupełniając odparowany płyn gorącą wodą.",
           "sygnal": "groch jest miękki, ziemniaki nie mają twardego środka",
           "uwaga": true
         },
         {
-          "tresc": "**Warzywa z wywaru.** Dodaj wszystkie odłożone warzywa wraz z płynem, który zebrał się w misce. Doprowadź ponownie do łagodnego wrzenia i podgrzewaj przez **2 minuty**."
+          "tresc": "**Warzywa z wywaru.** Dodaj wszystkie odłożone warzywa wraz z płynem, który zebrał się w misce. Doprowadź ponownie do łagodnego wrzenia i podgrzewaj przez **1 minutę**."
         },
         {
           "tresc": "**Doprawienie i podanie.** Usuń liście laurowe i ziele angielskie. Dodaj majeranek, sól i pieprz. Wymieszaj i podaj."
