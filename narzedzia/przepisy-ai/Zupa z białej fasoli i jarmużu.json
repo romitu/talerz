@@ -1,6 +1,6 @@
 {
   "nazwa": "Zupa z białej fasoli i jarmużu",
-  "opis": "Warzywna zupa z białą fasolą, jarmużem i pomidorami, podana z pieczywem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami. Wywar z marchwi, korzenia pietruszki, korzenia selera i pora jest gotowany osobno; cały wywar i wszystkie warzywa trafiają do zupy.",
+  "opis": "Warzywna zupa z białą fasolą, jarmużem i pomidorami, podana z pieczywem. Ilości składników dobierz z listy dla przygotowywanej liczby porcji. Czasy etapów dotyczą porcji bazowych; przy większej ilości uwzględnij dodatkowy czas pracy i ewentualne smażenie lub pieczenie partiami. Wywar z marchwi, korzenia pietruszki, korzenia selera i pora gotuje się w osobnym garnku równolegle z bazą pomidorową; cały wywar i wszystkie warzywa trafiają do zupy.",
   "pory": [
     "obiad",
     "kolacja"
@@ -16,7 +16,7 @@
   "liczba_porcji_bazowych": 2,
   "trwalosc_dni": 3,
   "czas_przygotowania_min": 20,
-  "czas_obrobki_min": 47,
+  "czas_obrobki_min": 32,
   "sprzet": [
     "Garnek 3 l",
     "Nóż szefa kuchni",
@@ -174,17 +174,14 @@
       ]
     },
     {
-      "nazwa": "Gotowanie wywaru i przygotowanie bazy",
-      "minuty": 20,
+      "nazwa": "Gotowanie wywaru i bazy pomidorowej",
+      "minuty": 19,
       "kroki": [
         {
-          "tresc": "**Warzywa korzeniowe.** W osobnym garnku umieść całą przygotowaną marchew, korzeń pietruszki i korzeń selera. Zalej całą odmierzoną wodą. Przykryj i doprowadź do łagodnego wrzenia, orientacyjnie przez **5–7 minut**."
+          "tresc": "**Wywar — drugi palnik.** W garnku 2 l umieść całą przygotowaną marchew, korzeń pietruszki i korzeń selera. Zalej całą odmierzoną wodą. Przykryj i doprowadź do łagodnego wrzenia, orientacyjnie przez **5–7 minut**. Od zagotowania gotuj na małym ogniu przez **6 minut**. Nastaw minutnik; w tym czasie przygotuj bazę zupy."
         },
         {
-          "tresc": "**Gotowanie korzeni.** Od zagotowania gotuj pod przykryciem na małym ogniu przez **8 minut**. Nastaw minutnik; w tym czasie przygotuj bazę zupy w głównym garnku."
-        },
-        {
-          "tresc": "**Baza zupy — równolegle.** W głównym garnku rozgrzej oliwę przez **1 minutę**."
+          "tresc": "**Baza zupy — równolegle.** W garnku 3 l rozgrzej oliwę przez **1 minutę**."
         },
         {
           "tresc": "**Cebula i seler naciowy.** Smaż cebulę i seler naciowy przez **5 minut**, mieszając."
@@ -193,10 +190,11 @@
           "tresc": "**Czosnek i tymianek.** Dodaj czosnek oraz tymianek i smaż przez **30 sekund**."
         },
         {
-          "tresc": "**Gotowa baza.** Zdejmij główny garnek z palnika do czasu wlania wywaru."
+          "tresc": "**Pomidory.** Dodaj pomidory i doprowadź do wrzenia. Duś bez przykrycia na małym ogniu przez **10 minut**, mieszając co kilka minut.",
+          "sygnal": "pomidory lekko zgęstniały"
         },
         {
-          "tresc": "**Por — po minutniku.** Po **8 minutach gotowania korzeni** dodaj por do wywaru. Gotuj jeszcze przez **4 minuty**. Wykonaj ten krok po sygnale minutnika, niezależnie od pracy przy bazie zupy."
+          "tresc": "**Por — po minutniku wywaru.** Po **6 minutach gotowania korzeni** dodaj por do wywaru. Gotuj jeszcze przez **4 minuty**."
         },
         {
           "tresc": "**Kontrola warzyw.** Sprawdź kostkę marchewki i selera. Jeśli ma twardy, surowy środek, gotuj jeszcze po **2 minuty**, sprawdzając po każdej takiej próbie.",
@@ -212,17 +210,14 @@
       ]
     },
     {
-      "nazwa": "Gotowanie pomidorów, fasoli i jarmużu",
-      "minuty": 27,
+      "nazwa": "Gotowanie fasoli i jarmużu",
+      "minuty": 13,
       "kroki": [
         {
-          "tresc": "**Pomidory.** Do podsmażonej cebuli z selerem naciowym, czosnkiem i tymiankiem dodaj pomidory oraz cały wywar. Doprowadź do wrzenia przez około **3 minuty** i gotuj przez **12 minut**."
+          "tresc": "**Wywar, fasola i jarmuż.** Do pomidorów wlej cały wywar, dodaj fasolę i jarmuż. Po zagotowaniu gotuj przez **7–8 minut**, aż liście zmiękną. Jeżeli pozostają twarde, przed kolejnym krokiem dogotowuj po **2 minuty**."
         },
         {
-          "tresc": "**Fasola i jarmuż.** Dodaj fasolę i jarmuż. Gotuj przez **7–8 minut**, aż liście zmiękną. Jeżeli pozostają twarde, przed kolejnym krokiem dogotowuj po **2 minuty**."
-        },
-        {
-          "tresc": "**Warzywa z wywaru.** Dodaj wszystkie odłożone warzywa wraz z płynem, który zebrał się w misce. Doprowadź ponownie do łagodnego wrzenia i podgrzewaj przez **2 minuty**."
+          "tresc": "**Warzywa z wywaru.** Dodaj wszystkie odłożone warzywa wraz z płynem, który zebrał się w misce. Doprowadź ponownie do łagodnego wrzenia i podgrzewaj przez **1 minutę**."
         },
         {
           "tresc": "**Doprawienie i podanie.** Dopraw solą i pieprzem, wymieszaj i podaj z pieczywem."
