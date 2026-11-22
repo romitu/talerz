@@ -11,7 +11,7 @@
     "gulasz_curry"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 709,
+  "porcja_g": 749,
   "liczba_porcji_bazowych": 2,
   "trwalosc_dni": 3,
   "czas_przygotowania_min": 20,
@@ -102,6 +102,11 @@
       "nazwa": "Czarny pieprz mielony",
       "ilosc": 1,
       "jednostka": "g"
+    },
+    {
+      "nazwa": "ogórki kiszone bio",
+      "ilosc": 80,
+      "jednostka": "g"
     }
   ],
   "etapy": [
@@ -155,7 +160,8 @@
           "tresc": "**Zdjęcie mięsa.** Przełóż na talerz."
         },
         {
-          "tresc": "**Cebula.** W garnku po mięsie smaż cebulę przez **4 minuty**."
+          "tresc": "**Cebula.** W garnku po mięsie smaż cebulę na średnim ogniu **3–4 minuty**, mieszając, aż się zeszkli.",
+          "sygnal": "cebula miękka i szklista, bez zrumienionych brzegów"
         },
         {
           "tresc": "**Warzywa do sosu.** Dodaj drobno posiekane części marchwi, pasternaku i selera. Smaż przez **4 minuty**, mieszając."
@@ -180,7 +186,7 @@
           "uwaga": true
         },
         {
-          "tresc": "**Doprawienie i podanie.** Usuń liść laurowy, dodaj majeranek, sól i pieprz. Wymieszaj i podaj."
+          "tresc": "**Doprawienie i podanie.** Usuń liść laurowy, dodaj majeranek, sól i pieprz. Wymieszaj i podaj z kiszonym ogórkiem."
         }
       ]
     }

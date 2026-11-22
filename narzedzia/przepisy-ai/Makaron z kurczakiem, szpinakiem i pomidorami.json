@@ -147,7 +147,8 @@
           "tresc": "**Zdjęcie kurczaka.** Zdejmij na czysty talerz."
         },
         {
-          "tresc": "**Cebula.** Na tej samej patelni smaż cebulę **4 minuty**; gdy przywiera, dodaj odrobinę wody z makaronu."
+          "tresc": "**Cebula.** Na tej samej patelni smaż cebulę na średnim ogniu **3–4 minuty**, mieszając, aż się zeszkli. Gdy przywiera, dodaj odrobinę wody z makaronu.",
+          "sygnal": "cebula miękka i szklista, bez zrumienionych brzegów"
         },
         {
           "tresc": "**Czosnek.** Dodaj czosnek, smaż **30 sekund**."

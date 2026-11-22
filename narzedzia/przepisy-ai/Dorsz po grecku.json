@@ -157,7 +157,8 @@
           "tresc": "**Rozgrzanie oliwy.** Na patelni rozgrzej około połowę oliwy."
         },
         {
-          "tresc": "**Cebula.** Dodaj cebulę i smaż około **2–3 minut**, aż lekko się zeszkli."
+          "tresc": "**Cebula.** Dodaj cebulę i smaż na średnim ogniu **3–4 minuty**, mieszając, aż się zeszkli.",
+          "sygnal": "cebula miękka i szklista, bez zrumienionych brzegów"
         },
         {
           "tresc": "**Warzywa korzeniowe.** Dodaj marchew i pietruszkę i seler. Smaż około **2 minut**, mieszając."

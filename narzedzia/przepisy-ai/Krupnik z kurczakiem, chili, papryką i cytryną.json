@@ -200,7 +200,8 @@
           "tresc": "**Gotowanie wywaru.** Doprowadź do wrzenia i zbierz szumowiny. Zmniejsz ogień i gotuj łagodnie przez około **40 minut**. Uzupełniaj odparowaną wodę."
         },
         {
-          "tresc": "**Cebula — równolegle.** Pod koniec gotowania wywaru rozgrzej odmierzoną oliwę na patelni przez **1 minutę**. Dodaj cebulę i smaż na średnim ogniu przez **4 minuty**."
+          "tresc": "**Cebula — równolegle.** Pod koniec gotowania wywaru rozgrzej odmierzoną oliwę na patelni przez **1 minutę**. Dodaj cebulę i smaż na średnim ogniu **3–4 minuty**, mieszając, aż się zeszkli.",
+          "sygnal": "cebula miękka i szklista, bez zrumienionych brzegów"
         },
         {
           "tresc": "**Czosnek i przyprawy.** Dodaj do cebuli czosnek, odmierzoną słodką paprykę i chili. Smaż przez **30 sekund**, mieszając."

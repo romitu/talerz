@@ -166,7 +166,8 @@
           "tresc": "**Zdjęcie mięsa.** Przełóż obsmażone mięso na talerz. Zachowaj soki, które z niego wypłyną."
         },
         {
-          "tresc": "**Cebula.** Zmniejsz ogień do średniego. Dodaj cebulę i smaż przez **4 minuty**, mieszając, aż zmięknie i zacznie się złocić. Jeśli przywiera, dodaj odrobinę odmierzonej wody."
+          "tresc": "**Cebula.** Zmniejsz ogień do średniego. Dodaj cebulę i smaż **3–4 minuty**, mieszając, aż się zeszkli. Jeśli przywiera, dodaj odrobinę odmierzonej wody.",
+          "sygnal": "cebula miękka i szklista, bez zrumienionych brzegów"
         },
         {
           "tresc": "**Czosnek i przyprawy.** Dodaj czosnek oraz słodką paprykę mieloną. Smaż przez **20–30 sekund**, stale mieszając; nie przypal przypraw."

@@ -127,7 +127,8 @@
           "tresc": "**Rozgrzanie oleju.** Rozgrzej olej przez **1 minutę**."
         },
         {
-          "tresc": "**Cebula.** Smaż cebulę **4 minuty**."
+          "tresc": "**Cebula.** Smaż cebulę na średnim ogniu **3–4 minuty**, mieszając, aż się zeszkli.",
+          "sygnal": "cebula miękka i szklista, bez zrumienionych brzegów"
         },
         {
           "tresc": "**Pasta curry.** Dodaj czosnek, pastę curry i kurkumę; smaż **1 minutę**, mieszając."

@@ -113,7 +113,8 @@
           "tresc": "**Rozgrzanie oleju.** Rozgrzej olej przez **1 minutę**."
         },
         {
-          "tresc": "**Cebula.** Smaż cebulę **3 minuty**."
+          "tresc": "**Cebula.** Smaż cebulę na średnim ogniu **3–4 minuty**, mieszając, aż się zeszkli.",
+          "sygnal": "cebula miękka i szklista, bez zrumienionych brzegów"
         },
         {
           "tresc": "**Pomidor.** Dodaj pomidora i smaż **2–3 minuty**, odparowując nadmiar płynu."

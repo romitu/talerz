@@ -76,7 +76,8 @@
       "nazwa": "Chleb żytni razowy",
       "ilosc": 4,
       "jednostka": "szt",
-      "stan": "kromki"
+      "stan": "kromki",
+      "zamiennik": "chleb wieloziarnisty"
     },
     {
       "nazwa": "Tymianek suszony",
@@ -162,7 +163,7 @@
           "tresc": "**Rozgrzanie oliwy.** Rozgrzej oliwę przez **1 minutę**."
         },
         {
-          "tresc": "**Warzywna baza.** Dodaj cebulę, marchew, korzeń pietruszki i seler korzeniowy. Smaż przez **5–6 minut**, mieszając, aż cebula zmięknie i lekko się zezłoci."
+          "tresc": "**Warzywna baza.** Dodaj cebulę, marchew, korzeń pietruszki i seler korzeniowy. Smaż przez **5–6 minut**, mieszając, aż cebula zmięknie i się zeszkli."
         },
         {
           "tresc": "**Czosnek i przyprawy.** Dodaj czosnek, tymianek i paprykę wędzoną; smaż **30 sekund**."
