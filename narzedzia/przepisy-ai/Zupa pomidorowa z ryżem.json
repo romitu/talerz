@@ -12,7 +12,7 @@
     "zupa"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 1107,
+  "porcja_g": 1147,
   "liczba_porcji_bazowych": 2,
   "trwalosc_dni": 3,
   "czas_przygotowania_min": 10,
@@ -46,7 +46,7 @@
     },
     {
       "nazwa": "Pietruszka korzeń",
-      "ilosc": 60,
+      "ilosc": 80,
       "jednostka": "g",
       "zamiennik": "włoszczyzna"
     },
@@ -61,6 +61,13 @@
       "ilosc": 80,
       "jednostka": "g",
       "stan": "część biała i jasnozielona, w plastrach",
+      "zamiennik": "włoszczyzna"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 60,
+      "jednostka": "g",
+      "stan": "obrana, w kostce",
       "zamiennik": "włoszczyzna"
     },
     {
@@ -114,6 +121,9 @@
           "tresc": "**Por.** Przekrój por wzdłuż, dokładnie wypłucz ziemię spomiędzy warstw i pokrój w plasterki."
         },
         {
+          "tresc": "**Cebula.** Obierz cebulę i pokrój w kostkę."
+        },
+        {
           "tresc": "**Natka pietruszki.** Umyj i osusz natkę, usuń grube łodygi i drobno posiekaj liście."
         },
         {
@@ -147,7 +157,7 @@
           "tresc": "**Zebranie szumowin.** Jeżeli na powierzchni pojawią się szumowiny, zbierz je łyżką lub małym sitkiem."
         },
         {
-          "tresc": "**Gotowanie wywaru.** Dodaj marchew, pietruszkę, seler i por. Dodaj około połowę soli. Zmniejsz ogień i gotuj pod lekko uchyloną pokrywką około **35–40 minut**. Wywar powinien tylko delikatnie pyrkać."
+          "tresc": "**Gotowanie wywaru.** Dodaj marchew, pietruszkę, seler, por i cebulę. Dodaj około połowę soli. Zmniejsz ogień i gotuj pod lekko uchyloną pokrywką około **35–40 minut**. Wywar powinien tylko delikatnie pyrkać."
         },
         {
           "tresc": "**Ryż — równolegle.** W czasie gotowania wywaru ugotuj ryż zgodnie z instrukcją na opakowaniu. Po ugotowaniu odcedź go i pozostaw pod przykryciem."

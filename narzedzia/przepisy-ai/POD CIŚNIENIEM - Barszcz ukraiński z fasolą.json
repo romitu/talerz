@@ -11,7 +11,7 @@
     "zupa"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 1065,
+  "porcja_g": 1110,
   "liczba_porcji_bazowych": 2,
   "trwalosc_dni": 3,
   "czas_przygotowania_min": 15,
@@ -42,13 +42,19 @@
     },
     {
       "nazwa": "Marchew, surowa",
-      "ilosc": 80,
+      "ilosc": 90,
       "jednostka": "g"
     },
     {
       "nazwa": "Pietruszka korzeń",
-      "ilosc": 40,
+      "ilosc": 60,
       "jednostka": "g"
+    },
+    {
+      "nazwa": "Seler korzeń",
+      "ilosc": 60,
+      "jednostka": "g",
+      "stan": "obrany, starty na grubych oczkach"
     },
     {
       "nazwa": "Ziemniaki, surowe",
@@ -146,6 +152,9 @@
           "tresc": "**Pietruszka korzeń.** Umyj i obierz korzeń pietruszki, zetrzyj na tarce o grubych oczkach."
         },
         {
+          "tresc": "**Seler korzeniowy.** Umyj i obierz seler, zetrzyj na tarce o grubych oczkach."
+        },
+        {
           "tresc": "**Ziemniaki.** Umyj i obierz ziemniaki, pokrój w kostkę około 2 cm."
         },
         {
@@ -209,7 +218,7 @@
       "minuty": 15,
       "kroki": [
         {
-          "tresc": "**Warzywa do wywaru.** Do wywaru dodaj starte buraki, marchew, pietruszkę, ziemniaki, kapustę, cebulę oraz koncentrat pomidorowy."
+          "tresc": "**Warzywa do wywaru.** Do wywaru dodaj starte buraki, marchew, pietruszkę, seler, ziemniaki, kapustę, cebulę oraz koncentrat pomidorowy."
         },
         {
           "tresc": "**Gotowanie warzyw pod ciśnieniem.** Zamknij szybkowar i gotuj pod ciśnieniem przez **6–8 minut** od osiągnięcia ciśnienia roboczego."

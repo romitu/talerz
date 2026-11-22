@@ -12,7 +12,7 @@
     "zupa"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 1145,
+  "porcja_g": 1210,
   "liczba_porcji_bazowych": 2,
   "trwalosc_dni": 3,
   "czas_przygotowania_min": 15,
@@ -43,21 +43,27 @@
     },
     {
       "nazwa": "Marchew, surowa",
-      "ilosc": 100,
+      "ilosc": 120,
       "jednostka": "g",
       "stan": "obrana, starta na grubych oczkach"
     },
     {
       "nazwa": "Pietruszka korzeń",
-      "ilosc": 50,
+      "ilosc": 80,
       "jednostka": "g",
       "stan": "obrana, starta na grubych oczkach"
     },
     {
       "nazwa": "Seler korzeń",
-      "ilosc": 60,
+      "ilosc": 80,
       "jednostka": "g",
       "stan": "obrany, starty na grubych oczkach"
+    },
+    {
+      "nazwa": "Cebula, surowa",
+      "ilosc": 60,
+      "jednostka": "g",
+      "stan": "obrana, drobno posiekana"
     },
     {
       "nazwa": "Ziemniaki, surowe",
@@ -127,6 +133,9 @@
           "tresc": "**Seler korzeniowy.** Umyj i obierz seler, zetrzyj na tarce o grubych oczkach."
         },
         {
+          "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
+        },
+        {
           "tresc": "**Ziemniaki.** Umyj i obierz ziemniaki, pokrój w kostkę około 1,5 cm."
         },
         {
@@ -169,7 +178,7 @@
           "tresc": "**Zagotowanie wywaru.** Doprowadź do wrzenia. Zbierz szumowiny z powierzchni."
         },
         {
-          "tresc": "**Przyprawy do wywaru.** Dodaj liść laurowy, ziele angielskie i część odmierzonej soli."
+          "tresc": "**Cebula i przyprawy do wywaru.** Dodaj cebulę, liść laurowy, ziele angielskie i część odmierzonej soli."
         },
         {
           "tresc": "**Gotowanie żeberek.** Zmniejsz ogień, przykryj garnek i gotuj łagodnie przez około **30 minut**. Mięso będzie dalej gotowało się z warzywami."

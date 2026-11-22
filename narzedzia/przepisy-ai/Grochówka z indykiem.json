@@ -11,7 +11,7 @@
     "zupa"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 871,
+  "porcja_g": 906,
   "liczba_porcji_bazowych": 2,
   "trwalosc_dni": 3,
   "czas_przygotowania_min": 20,
@@ -51,13 +51,13 @@
     },
     {
       "nazwa": "Marchew, surowa",
-      "ilosc": 100,
+      "ilosc": 110,
       "jednostka": "g",
       "stan": "obrany korzeń, kostka około 7–8 mm; do wywaru"
     },
     {
       "nazwa": "Pietruszka korzeń",
-      "ilosc": 60,
+      "ilosc": 80,
       "jednostka": "g",
       "stan": "obrany korzeń, kostka około 7–8 mm; do wywaru"
     },
@@ -105,7 +105,7 @@
     },
     {
       "nazwa": "Seler korzeń",
-      "ilosc": 40,
+      "ilosc": 80,
       "jednostka": "g",
       "stan": "obrany korzeń, kostka około 7–8 mm; do wywaru"
     },

@@ -12,7 +12,7 @@
     "zupa"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 847,
+  "porcja_g": 857,
   "liczba_porcji_bazowych": 2,
   "trwalosc_dni": 3,
   "czas_przygotowania_min": 20,
@@ -106,13 +106,13 @@
     },
     {
       "nazwa": "Pietruszka korzeń",
-      "ilosc": 30,
+      "ilosc": 40,
       "jednostka": "g",
       "stan": "obrany korzeń, kostka około 7–8 mm; do wywaru"
     },
     {
       "nazwa": "Seler korzeń",
-      "ilosc": 30,
+      "ilosc": 40,
       "jednostka": "g",
       "stan": "obrany korzeń, kostka około 7–8 mm; do wywaru"
     },
