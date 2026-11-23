@@ -11,11 +11,11 @@
     "zupa"
   ],
   "porcjowanie": "waga",
-  "porcja_g": 906,
+  "porcja_g": 931,
   "liczba_porcji_bazowych": 2,
   "trwalosc_dni": 3,
   "czas_przygotowania_min": 20,
-  "czas_obrobki_min": 44,
+  "czas_obrobki_min": 49,
   "sprzet": [
     "Garnek 3 l",
     "Nóż szefa kuchni",
@@ -33,7 +33,7 @@
   "skladniki": [
     {
       "nazwa": "Groch łuskany, suchy",
-      "ilosc": 100,
+      "ilosc": 150,
       "jednostka": "g",
       "stan": "łuskany, połówki, opłukany"
     },
@@ -161,7 +161,7 @@
     },
     {
       "nazwa": "Gotowanie grochu i wywaru",
-      "minuty": 23,
+      "minuty": 28,
       "kroki": [
         {
           "tresc": "**Wywar — drugi palnik.** W garnku 2 l umieść całą przygotowaną marchew, korzeń pietruszki i korzeń selera. Zalej połową odmierzonej wody. Przykryj i doprowadź do łagodnego wrzenia, orientacyjnie przez **4–5 minut**. Od zagotowania gotuj na małym ogniu przez **6 minut**. Nastaw minutnik; w tym czasie zajmij się grochem."
@@ -174,7 +174,7 @@
           "sygnal": "cebula miękka i szklista, bez zrumienionych brzegów"
         },
         {
-          "tresc": "**Groch.** Do cebuli dodaj groch, drugą połowę wody, liście laurowe i ziele angielskie. Doprowadź do wrzenia przez około **3 minuty**. Gotuj pod uchyloną pokrywką na małym ogniu. Nastaw drugi minutnik na **15 minut** od zagotowania. Mieszaj co kilka minut, żeby groch nie przywarł; jeśli płyn mocno odparuje, dolej trochę gorącej wody."
+          "tresc": "**Groch.** Do cebuli dodaj groch, drugą połowę wody, liście laurowe i ziele angielskie. Doprowadź do wrzenia przez około **3 minuty**. Gotuj pod uchyloną pokrywką na małym ogniu. Nastaw drugi minutnik na **20 minut** od zagotowania. Mieszaj co kilka minut, żeby groch nie przywarł; jeśli płyn mocno odparuje, dolej trochę gorącej wody."
         },
         {
           "tresc": "**Por — po minutniku wywaru.** Po **6 minutach gotowania korzeni** dodaj por do wywaru. Gotuj jeszcze przez **4 minuty**."
@@ -197,7 +197,7 @@
       "minuty": 21,
       "kroki": [
         {
-          "tresc": "**Ziemniaki i wywar.** Po **15 minutach** gotowania grochu dodaj ziemniaki i cały wywar, bez warzyw z miski. Po ponownym zagotowaniu gotuj przez **6 minut**."
+          "tresc": "**Ziemniaki i wywar.** Po **20 minutach** gotowania grochu dodaj ziemniaki i cały wywar, bez warzyw z miski. Po ponownym zagotowaniu gotuj przez **6 minut**."
         },
         {
           "tresc": "**Indyk.** Dodaj indyka. Po ponownym zagotowaniu gotuj na małym ogniu przez **6–7 minut**. Sprawdź temperaturę najgrubszego kawałka mięsa; jeśli jest niższa, gotuj jeszcze po **2 minuty**.",
