@@ -73,7 +73,7 @@
       "jednostka": "g"
     },
     {
-      "nazwa": "Oliwa z oliwek",
+      "nazwa": "Olej rzepakowy rafinowany",
       "ilosc": 16,
       "jednostka": "g"
     },
@@ -146,7 +146,7 @@
           "tresc": "**Woda.** Odmierz wodę z listy składników do przygotowania potrawy."
         },
         {
-          "tresc": "**Oliwa.** Odmierz oliwę."
+          "tresc": "**Olej.** Odmierz olej."
         },
         {
           "tresc": "**Przyprawy.** Odmierz sól, słodką paprykę, kmin rzymski i cynamon."
@@ -161,7 +161,7 @@
       "minuty": 127,
       "kroki": [
         {
-          "tresc": "**Rozgrzanie oliwy.** Rozgrzej oliwę przez **1 minutę**."
+          "tresc": "**Rozgrzanie oleju.** Rozgrzej olej przez **1 minutę**."
         },
         {
           "tresc": "**Obsmażenie jagnięciny.** Obsmaż jagnięcinę partiami po **4–5 minut**, obracając; dla porcji bazowej przeznacz około **10 minut**."

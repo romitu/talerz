@@ -57,7 +57,7 @@
       "stan": "kromki"
     },
     {
-      "nazwa": "Olej rzepakowy",
+      "nazwa": "Oliwa z oliwek extra virgin",
       "ilosc": 5,
       "jednostka": "g"
     },
@@ -95,7 +95,7 @@
           "tresc": "**Cebula.** Obierz cebulę i drobno posiekaj."
         },
         {
-          "tresc": "**Olej.** Odmierz olej."
+          "tresc": "**Oliwa.** Odmierz oliwę."
         },
         {
           "tresc": "**Przyprawy.** Odmierz sól, pieprz i kurkumę."
@@ -110,7 +110,7 @@
       "minuty": 11,
       "kroki": [
         {
-          "tresc": "**Rozgrzanie oleju.** Rozgrzej olej przez **1 minutę**."
+          "tresc": "**Rozgrzanie oliwy.** Rozgrzej oliwę przez **1 minutę**."
         },
         {
           "tresc": "**Cebula.** Smaż cebulę na średnim ogniu **3–4 minuty**, mieszając, aż się zeszkli.",

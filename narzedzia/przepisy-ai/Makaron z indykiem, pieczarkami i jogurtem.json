@@ -65,7 +65,7 @@
       "jednostka": "g"
     },
     {
-      "nazwa": "Olej rzepakowy",
+      "nazwa": "Oliwa z oliwek extra virgin",
       "ilosc": 8,
       "jednostka": "g"
     },
@@ -112,7 +112,7 @@
           "tresc": "**Jogurt.** Odmierz jogurt."
         },
         {
-          "tresc": "**Olej.** Odmierz olej."
+          "tresc": "**Oliwa.** Odmierz oliwę."
         },
         {
           "tresc": "**Przyprawy.** Odmierz sól, pieprz i tymianek."
@@ -130,7 +130,7 @@
           "tresc": "**Makaron — po minutniku.** Sprawdź, czy makaron jest gotowy. Zachowaj trochę wody z gotowania, a następnie odcedź makaron. Zrób to po minutniku, niezależnie od postępu przygotowania sosu."
         },
         {
-          "tresc": "**Rozgrzanie oleju.** Na drugim palniku rozgrzej połowę oleju przez **1 minutę**."
+          "tresc": "**Rozgrzanie oliwy.** Na drugim palniku rozgrzej połowę oliwy przez **1 minutę**."
         },
         {
           "tresc": "**Smażenie indyka.** Smaż indyka **5–6 minut**, obracając, do temperatury co najmniej **74°C**."
@@ -139,7 +139,7 @@
           "tresc": "**Zdjęcie indyka.** Zdejmij na czysty talerz."
         },
         {
-          "tresc": "**Pieczarki i cebula.** Dodaj pozostały olej, cebulę i pieczarki; smaż **7–9 minut**, aż woda odparuje."
+          "tresc": "**Pieczarki i cebula.** Dodaj pozostałą oliwę, cebulę i pieczarki; smaż **7–9 minut**, aż woda odparuje."
         },
         {
           "tresc": "**Czosnek i tymianek.** Dodaj czosnek i tymianek, smaż **30 sekund**."

@@ -103,7 +103,7 @@
       "baza": "Chleb żytni razowy"
     },
     "Oliwa rafinowana": {
-      "baza": "Oliwa z oliwek",
+      "baza": "Oliwa z oliwek extra virgin",
       "uwaga": "Baza nie rozróżnia rafinowanej od extra virgin — wartości odżywcze są takie same, różnią się punktem dymienia."
     },
     "Natka": {
@@ -302,13 +302,13 @@
       "baza": "Groszek zielony mrożony"
     },
     "Oliwa": {
-      "baza": "Oliwa z oliwek"
+      "baza": "Oliwa z oliwek extra virgin"
     },
     "Oliwa extra virgin": {
-      "baza": "Oliwa z oliwek"
+      "baza": "Oliwa z oliwek extra virgin"
     },
     "Olej rzepakowy": {
-      "baza": "Olej rzepakowy"
+      "baza": "Olej rzepakowy rafinowany"
     },
     "Papryka słodka": {
       "baza": "Papryka słodka mielona",

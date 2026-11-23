@@ -75,7 +75,7 @@
       "stan": "sok"
     },
     {
-      "nazwa": "Olej rzepakowy",
+      "nazwa": "Oliwa z oliwek extra virgin",
       "ilosc": 5,
       "jednostka": "g"
     },
@@ -118,7 +118,7 @@
           "tresc": "**Sezam.** Odmierz sezam."
         },
         {
-          "tresc": "**Olej.** Odmierz olej."
+          "tresc": "**Oliwa.** Odmierz oliwę."
         },
         {
           "tresc": "**Tortille.** Wyjmij potrzebne placki i przykryj, żeby nie wysychały."
@@ -130,7 +130,7 @@
       "minuty": 12,
       "kroki": [
         {
-          "tresc": "**Rozgrzanie oleju.** Rozgrzej olej przez **1 minutę**."
+          "tresc": "**Rozgrzanie oliwy.** Rozgrzej oliwę przez **1 minutę**."
         },
         {
           "tresc": "**Smażenie tofu.** Smaż tofu **6–8 minut**, obracając, aż brzegi się zrumienią."

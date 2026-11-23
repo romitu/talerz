@@ -80,7 +80,7 @@
       "jednostka": "g"
     },
     {
-      "nazwa": "Olej rzepakowy",
+      "nazwa": "Oliwa z oliwek extra virgin",
       "ilosc": 10,
       "jednostka": "g"
     },
@@ -168,7 +168,7 @@
           "tresc": "**Pasta curry.** Odmierz pastę curry."
         },
         {
-          "tresc": "**Olej.** Odmierz olej."
+          "tresc": "**Oliwa.** Odmierz oliwę."
         },
         {
           "tresc": "**Sól.** Odmierz sól."
@@ -180,7 +180,7 @@
       "minuty": 36,
       "kroki": [
         {
-          "tresc": "**Baza zupy.** W garnku rozgrzej olej przez **1 minutę**."
+          "tresc": "**Baza zupy.** W garnku rozgrzej oliwę przez **1 minutę**."
         },
         {
           "tresc": "**Cebula.** Smaż cebulę na średnim ogniu **3–4 minuty**, mieszając, aż się zeszkli.",

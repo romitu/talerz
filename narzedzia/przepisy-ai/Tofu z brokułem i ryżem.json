@@ -53,7 +53,7 @@
       "jednostka": "g"
     },
     {
-      "nazwa": "Olej rzepakowy",
+      "nazwa": "Oliwa z oliwek extra virgin",
       "ilosc": 8,
       "jednostka": "g"
     },
@@ -117,7 +117,7 @@
           "tresc": "**Dodatki.** Odmierz sezam i sos sojowy."
         },
         {
-          "tresc": "**Olej.** Odmierz olej."
+          "tresc": "**Oliwa.** Odmierz oliwę."
         }
       ]
     },
@@ -132,7 +132,7 @@
           "tresc": "**Ryż — po minutniku.** Po upływie czasu sprawdź miękkość ziaren i odcedź nadmiar wody. Przykryj garnek i odstaw poza palnik. Zrób to niezależnie od postępu pracy przy pozostałych składnikach."
         },
         {
-          "tresc": "**Rozgrzanie oleju.** Na drugim palniku rozgrzej połowę oleju przez **1 minutę**."
+          "tresc": "**Rozgrzanie oliwy.** Na drugim palniku rozgrzej połowę oliwy przez **1 minutę**."
         },
         {
           "tresc": "**Smażenie tofu.** Smaż tofu przez **6–8 minut**, obracając."
@@ -141,7 +141,7 @@
           "tresc": "**Zdjęcie tofu.** Przełóż na talerz."
         },
         {
-          "tresc": "**Obsmażenie brokułu.** Dodaj pozostały olej i brokuł, smaż **2 minuty**."
+          "tresc": "**Obsmażenie brokułu.** Dodaj pozostałą oliwę i brokuł, smaż **2 minuty**."
         },
         {
           "tresc": "**Duszenie brokułu.** Dolej odmierzoną wodę do brokułu i przykryj; duś **3–4 minuty**."

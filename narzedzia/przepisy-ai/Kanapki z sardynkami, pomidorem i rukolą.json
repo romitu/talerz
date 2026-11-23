@@ -15,8 +15,8 @@
   "porcja_g": 356,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 0,
-  "czas_przygotowania_min": 10,
-  "czas_obrobki_min": 0,
+  "czas_przygotowania_min": 6,
+  "czas_obrobki_min": 4,
   "sprzet": [
     "Miska",
     "Widelec",
@@ -58,7 +58,7 @@
       "stan": "sok"
     },
     {
-      "nazwa": "Oliwa z oliwek",
+      "nazwa": "Oliwa z oliwek extra virgin",
       "ilosc": 5,
       "jednostka": "g"
     },

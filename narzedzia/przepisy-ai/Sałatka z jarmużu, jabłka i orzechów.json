@@ -15,8 +15,8 @@
   "porcja_g": 406,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 1,
-  "czas_przygotowania_min": 15,
-  "czas_obrobki_min": 0,
+  "czas_przygotowania_min": 10,
+  "czas_obrobki_min": 5,
   "sprzet": [
     "Miska",
     "Nóż szefa kuchni",
@@ -52,7 +52,7 @@
       "stan": "posiekane"
     },
     {
-      "nazwa": "Oliwa z oliwek",
+      "nazwa": "Oliwa z oliwek extra virgin",
       "ilosc": 10,
       "jednostka": "g"
     },

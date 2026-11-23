@@ -63,7 +63,7 @@
       "stan": "posiekana"
     },
     {
-      "nazwa": "Olej rzepakowy",
+      "nazwa": "Oliwa z oliwek extra virgin",
       "ilosc": 5,
       "jednostka": "g"
     },
@@ -126,7 +126,7 @@
           "tresc": "**Po przygotowaniu mięsa.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surowym mięsem."
         },
         {
-          "tresc": "**Olej.** Odmierz olej i podziel na połowę: do kapusty i do smażenia kaczki."
+          "tresc": "**Oliwa.** Odmierz oliwę i podziel na połowę: do kapusty i do smażenia kaczki."
         },
         {
           "tresc": "**Woda.** Odmierz wodę z listy składników."
@@ -144,7 +144,7 @@
       "minuty": 45,
       "kroki": [
         {
-          "tresc": "**Rozgrzanie oleju.** W garnku rozgrzej połowę oleju przez **1 minutę**."
+          "tresc": "**Rozgrzanie oliwy.** W garnku rozgrzej połowę oliwy przez **1 minutę**."
         },
         {
           "tresc": "**Cebula.** Smaż cebulę na średnim ogniu **3–4 minuty**, mieszając, aż się zeszkli.",
@@ -160,7 +160,7 @@
           "tresc": "**Ziemniaki — równolegle.** Równolegle na drugim palniku zagotuj ziemniaki w wodzie, zwykle około **5 minut**, a następnie gotuj **15–20 minut** do miękkości. Odcedź i trzymaj pod przykryciem."
         },
         {
-          "tresc": "**Rozgrzanie oleju po ziemniakach.** Na palniku zwolnionym przez ziemniaki rozgrzej pozostały olej na patelni przez **1 minutę**."
+          "tresc": "**Rozgrzanie oliwy po ziemniakach.** Na palniku zwolnionym przez ziemniaki rozgrzej pozostałą oliwę na patelni przez **1 minutę**."
         },
         {
           "tresc": "**Smażenie kaczki.** Smaż pierś przez **3–4 minuty** z każdej strony."

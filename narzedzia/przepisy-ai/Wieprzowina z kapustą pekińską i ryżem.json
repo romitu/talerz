@@ -13,9 +13,9 @@
   "porcjowanie": "waga",
   "porcja_g": 621,
   "liczba_porcji_bazowych": 1,
-  "trwalosc_dni": 1,
+  "trwalosc_dni": 3,
   "czas_przygotowania_min": 12,
-  "czas_obrobki_min": 20,
+  "czas_obrobki_min": 25,
   "sprzet": [
     "Patelnia 28 cm",
     "Garnek 2 l",
@@ -34,7 +34,7 @@
       "nazwa": "Polędwiczka wieprzowa, surowa",
       "ilosc": 170,
       "jednostka": "g",
-      "stan": "pokrojona w cienkie paski (ok. 0,5 cm)"
+      "stan": "pokrojona w cienkie paski"
     },
     {
       "nazwa": "Kapusta pekińska, surowa",
@@ -51,13 +51,13 @@
       "nazwa": "Marchew, surowa",
       "ilosc": 80,
       "jednostka": "g",
-      "stan": "pokrojona w cienkie słupki lub drobną kostkę"
+      "stan": "pokrojona w cienkie paski"
     },
     {
       "nazwa": "Cebula, surowa",
       "ilosc": 50,
       "jednostka": "g",
-      "stan": "pokrojona w cienkie piórka"
+      "stan": "pokrojona"
     },
     {
       "nazwa": "Sos sojowy",
@@ -73,19 +73,17 @@
     {
       "nazwa": "Czosnek, surowy",
       "ilosc": 5,
-      "jednostka": "g",
-      "stan": "drobno posiekany"
+      "jednostka": "g"
     },
     {
-      "nazwa": "Olej rzepakowy",
+      "nazwa": "Oliwa z oliwek extra virgin",
       "ilosc": 8,
       "jednostka": "g"
     },
     {
       "nazwa": "Sezam",
       "ilosc": 8,
-      "jednostka": "g",
-      "stan": "uprażony"
+      "jednostka": "g"
     }
   ],
   "etapy": [
@@ -100,7 +98,7 @@
           "tresc": "**Kapusta pekińska.** Umyj kapustę, oddziel grube białe części od liści. Obie części cienko pokrój i odłóż osobno."
         },
         {
-          "tresc": "**Marchew.** Umyj i obierz marchew. Pokrój w cienkie słupki (ok. 3 mm) albo w drobną kostkę, np. na szatkownicy. Im grubsze kawałki, tym dłużej trzeba je smażyć — patrz krok smażenia warzyw."
+          "tresc": "**Marchew.** Umyj i obierz marchew, pokrój w cienkie słupki."
         },
         {
           "tresc": "**Cebula.** Obierz cebulę i pokrój w cienkie piórka."
@@ -112,19 +110,22 @@
           "tresc": "**Imbir.** Obierz imbir i zetrzyj na drobnej tarce."
         },
         {
-          "tresc": "**Polędwiczka.** Osusz polędwiczkę, usuń twardą błonę i pokrój w paski grubości około 0,5 cm. Wymieszaj z połową sosu sojowego."
+          "tresc": "**Polędwiczka.** Osusz polędwiczkę, usuń twardą błonę i pokrój w paski grubości około 1 cm. Wymieszaj z połową sosu sojowego."
         },
         {
           "tresc": "**Po przygotowaniu mięsa.** Umyj ręce, nóż, deskę i powierzchnie, które miały kontakt z surowym mięsem."
         },
         {
-          "tresc": "**Sezam i olej.** Odmierz sezam i olej."
+          "tresc": "**Sezam.** Odmierz sezam."
+        },
+        {
+          "tresc": "**Oliwa.** Odmierz oliwę."
         }
       ]
     },
     {
       "nazwa": "Gotowanie i smażenie",
-      "minuty": 20,
+      "minuty": 25,
       "kroki": [
         {
           "tresc": "**Ryż — równolegle.** Zagotuj na pierwszym palniku tyle wody, aby ziarna swobodnie się gotowały. Wsyp ryż i gotuj przez czas z opakowania. Nastaw minutnik; w tym czasie wykonuj kolejne kroki na drugim palniku."
@@ -133,21 +134,16 @@
           "tresc": "**Ryż — po minutniku.** Po upływie czasu sprawdź miękkość ziaren i odcedź nadmiar wody. Przykryj garnek i odstaw poza palnik. Zrób to niezależnie od postępu pracy przy pozostałych składnikach."
         },
         {
-          "tresc": "**Prażenie sezamu.** Na drugim palniku praż sezam na suchej patelni na średnim ogniu **1–2 minuty**, mieszając, aż lekko się zezłoci. Przesyp do miseczki."
+          "tresc": "**Rozgrzanie oliwy.** Rozgrzej połowę oliwy przez **1 minutę**."
         },
         {
-          "tresc": "**Rozgrzanie oleju.** Na tej samej patelni rozgrzej połowę oleju na dużym ogniu przez **1 minutę**."
-        },
-        {
-          "tresc": "**Smażenie polędwiczki.** Rozłóż mięso w jednej warstwie i smaż na dużym ogniu **2–3 minuty**, obracając, aż przyrumieni się z zewnątrz. Sprawdź temperaturę w najgrubszym kawałku — co najmniej **63°C**; w środku mięso nie powinno być różowe."
+          "tresc": "**Smażenie polędwiczki.** Smaż mięso **4–5 minut**, obracając, do temperatury co najmniej **63°C**."
         },
         {
           "tresc": "**Odpoczynek mięsa.** Przełóż na czysty talerz na co najmniej **3 minuty**."
         },
         {
-          "tresc": "**Twarde części warzyw.** Zmniejsz ogień do średnio dużego i dodaj pozostały olej. Jeśli marchew jest w kostce lub grubszych słupkach, wrzuć ją najpierw i smaż sama **2–3 minuty**; cienkie słupki dodaj od razu razem z resztą. Dodaj cebulę i białe części kapusty; smaż **4 minuty**, mieszając. Jeśli marchew jest wciąż twarda, smaż dalej po **1 minucie**, zanim dodasz czosnek.",
-          "sygnal": "cebula jest szklista, kapusta zmiękła, a marchew lekko ugina się pod łopatką, ale jeszcze chrupie",
-          "uwaga": true
+          "tresc": "**Twarde części warzyw.** Dodaj pozostałą oliwę, cebulę, marchew i białe części kapusty; smaż **4 minuty**."
         },
         {
           "tresc": "**Czosnek i imbir.** Dodaj imbir i czosnek, smaż **30 sekund**."
@@ -159,7 +155,7 @@
           "tresc": "**Podgrzanie mięsa.** Włóż mięso i podgrzewaj **1 minutę**, delikatnie mieszając."
         },
         {
-          "tresc": "**Podanie.** Podaj z ryżem, posyp uprażonym sezamem."
+          "tresc": "**Podanie.** Podaj z ryżem i sezamem."
         }
       ]
     }

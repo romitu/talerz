@@ -9,7 +9,7 @@
   ],
   "rodzaje": [],
   "porcjowanie": "waga",
-  "porcja_g": 926,
+  "porcja_g": 936,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 3,
   "czas_przygotowania_min": 20,
@@ -68,7 +68,7 @@
       "jednostka": "g"
     },
     {
-      "nazwa": "Oliwa z oliwek",
+      "nazwa": "Oliwa z oliwek extra virgin",
       "ilosc": 5,
       "jednostka": "g"
     },
@@ -102,13 +102,13 @@
     },
     {
       "nazwa": "Pietruszka korzeń",
-      "ilosc": 35,
+      "ilosc": 40,
       "jednostka": "g",
       "stan": "obrany korzeń, drobna kostka około 3–4 mm; do warzywnej bazy"
     },
     {
       "nazwa": "Seler korzeń",
-      "ilosc": 35,
+      "ilosc": 40,
       "jednostka": "g",
       "stan": "obrany korzeń, drobna kostka około 3–4 mm; do warzywnej bazy"
     },

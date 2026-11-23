@@ -1,0 +1,89 @@
+{
+  "nazwa": "Owsianka z gruszką i cynamonem",
+  "opis": "Kremowa owsianka na mleku z miękką gruszką, cynamonem i orzechami włoskimi. Ilości na jedną porcję.",
+  "pory": [
+    "sniadanie"
+  ],
+  "kuchnie": [
+    "inna"
+  ],
+  "rodzaje": [
+    "na_slodko"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 446,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 0,
+  "czas_przygotowania_min": 5,
+  "czas_obrobki_min": 10,
+  "sprzet": [
+    "Rondel",
+    "Deska do krojenia",
+    "Nóż szefa kuchni",
+    "Waga kuchenna",
+    "Widelec",
+    "Miska",
+    "Pojemniki do przechowywania"
+  ],
+  "przechowywanie": "Po przestudzeniu przełóż do zamkniętego pojemnika i wstaw do lodówki w ciągu 2 godzin od przygotowania. Przechowuj do 2 dni. Odgrzewaj w rondlu na małym ogniu, mieszając; w razie potrzeby dodaj odrobinę mleka.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli owsianka jest za gęsta, dodawaj niewielkie ilości mleka i mieszaj. Jeśli jest za rzadka, gotuj chwilę dłużej bez przykrycia. Gdy zacznie się przypalać, przełóż wierzchnią warstwę do czystego rondla, nie zeskrobując przypalonego dna.",
+  "skladniki": [
+    {
+      "nazwa": "Płatki owsiane",
+      "ilosc": 50,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Mleko 2%",
+      "ilosc": 230,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Gruszka ze skórką",
+      "ilosc": 150,
+      "jednostka": "g",
+      "stan": "umyta, bez gniazda nasiennego, pokrojona w drobną kostkę; masa części jadalnej"
+    },
+    {
+      "nazwa": "Cynamon mielony",
+      "ilosc": 1,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Orzechy włoskie",
+      "ilosc": 15,
+      "jednostka": "g",
+      "stan": "posiekane"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 5,
+      "kroki": [
+        {
+          "tresc": "Umyj gruszkę, usuń gniazdo nasienne i odważ 150 g miąższu ze skórką. Pokrój w drobną kostkę."
+        },
+        {
+          "tresc": "Posiekaj orzechy włoskie i odważ pozostałe składniki."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie",
+      "minuty": 10,
+      "kroki": [
+        {
+          "tresc": "Do rondla dodaj mleko, płatki owsiane, gruszkę i cynamon. Podgrzewaj na średnim ogniu do delikatnego zagotowania, mieszając widelcem.",
+          "sygnal": "Przy brzegach pojawiają się drobne bąbelki."
+        },
+        {
+          "tresc": "Zmniejsz ogień i gotuj przez 7–8 minut, często mieszając przy dnie. Zdejmij z ognia, przełóż do miski i posyp orzechami.",
+          "sygnal": "Płatki i gruszka są miękkie, a owsianka ma kremową konsystencję.",
+          "uwaga": true
+        }
+      ]
+    }
+  ]
+}

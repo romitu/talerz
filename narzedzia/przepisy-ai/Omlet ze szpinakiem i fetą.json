@@ -47,7 +47,7 @@
       "stan": "pokruszony"
     },
     {
-      "nazwa": "Olej rzepakowy",
+      "nazwa": "Oliwa z oliwek extra virgin",
       "ilosc": 5,
       "jednostka": "g"
     },
@@ -83,7 +83,7 @@
           "tresc": "**Jajka.** Wbij jajka do miski i roztrzep widelcem z odmierzoną solą i pieprzem."
         },
         {
-          "tresc": "**Olej.** Odmierz olej."
+          "tresc": "**Oliwa.** Odmierz oliwę."
         },
         {
           "tresc": "**Pieczywo.** Przygotuj pieczywo w ilości wskazanej na liście składników."
@@ -95,7 +95,7 @@
       "minuty": 9,
       "kroki": [
         {
-          "tresc": "**Rozgrzanie oleju.** Rozgrzej olej przez **1 minutę**."
+          "tresc": "**Rozgrzanie oliwy.** Rozgrzej oliwę przez **1 minutę**."
         },
         {
           "tresc": "**Szpinak.** Dodaj szpinak i smaż **1 minutę**."

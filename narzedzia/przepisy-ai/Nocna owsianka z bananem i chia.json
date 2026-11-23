@@ -14,8 +14,8 @@
   "porcja_g": 386,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 2,
-  "czas_przygotowania_min": 367,
-  "czas_obrobki_min": 0,
+  "czas_przygotowania_min": 4,
+  "czas_obrobki_min": 363,
   "sprzet": [
     "Miska",
     "Widelec",

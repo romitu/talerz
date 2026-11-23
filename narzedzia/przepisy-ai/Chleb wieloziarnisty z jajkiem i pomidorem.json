@@ -16,8 +16,8 @@
   "porcja_g": 356,
   "liczba_porcji_bazowych": 1,
   "trwalosc_dni": 0,
-  "czas_przygotowania_min": 5,
-  "czas_obrobki_min": 15,
+  "czas_przygotowania_min": 15,
+  "czas_obrobki_min": 5,
   "sprzet": [
     "Garnek 2 l",
     "Łyżka cedzakowa",
@@ -72,7 +72,7 @@
   ],
   "etapy": [
     {
-      "nazwa": "Gotowanie jajek",
+      "nazwa": "Przygotowanie składników",
       "minuty": 15,
       "kroki": [
         {

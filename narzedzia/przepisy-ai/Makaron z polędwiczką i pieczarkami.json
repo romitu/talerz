@@ -64,7 +64,7 @@
       "jednostka": "g"
     },
     {
-      "nazwa": "Olej rzepakowy",
+      "nazwa": "Oliwa z oliwek extra virgin",
       "ilosc": 8,
       "jednostka": "g"
     },
@@ -119,7 +119,7 @@
           "tresc": "**Musztarda.** Odmierz musztardę."
         },
         {
-          "tresc": "**Olej.** Odmierz olej."
+          "tresc": "**Oliwa.** Odmierz oliwę."
         },
         {
           "tresc": "**Przyprawy.** Odmierz sól, pieprz i tymianek."
@@ -137,7 +137,7 @@
           "tresc": "**Makaron — po minutniku.** Sprawdź, czy makaron jest gotowy. Zachowaj trochę wody z gotowania, a następnie odcedź makaron. Zrób to po minutniku, niezależnie od postępu przygotowania sosu."
         },
         {
-          "tresc": "**Rozgrzanie oleju.** Na drugim palniku rozgrzej połowę oleju przez **1 minutę**."
+          "tresc": "**Rozgrzanie oliwy.** Na drugim palniku rozgrzej połowę oliwy przez **1 minutę**."
         },
         {
           "tresc": "**Smażenie polędwiczki.** Smaż mięso przez **4–5 minut**, obracając."
@@ -146,7 +146,7 @@
           "tresc": "**Sprawdzenie i odpoczynek.** Sprawdź temperaturę: co najmniej **63°C**. Przełóż na czysty talerz i pozostaw na co najmniej **3 minuty**."
         },
         {
-          "tresc": "**Pieczarki i cebula.** Dodaj pozostały olej, cebulę i pieczarki. Smaż **7–9 minut**, aż woda odparuje."
+          "tresc": "**Pieczarki i cebula.** Dodaj pozostałą oliwę, cebulę i pieczarki. Smaż **7–9 minut**, aż woda odparuje."
         },
         {
           "tresc": "**Czosnek i tymianek.** Dodaj czosnek i tymianek, smaż **30 sekund**."

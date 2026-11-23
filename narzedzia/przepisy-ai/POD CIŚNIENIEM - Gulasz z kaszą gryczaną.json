@@ -70,7 +70,7 @@
       "stan": "odciśnięta i jest surówką"
     },
     {
-      "nazwa": "Oliwa z oliwek",
+      "nazwa": "Olej rzepakowy rafinowany",
       "ilosc": 5,
       "jednostka": "g"
     },
@@ -139,7 +139,7 @@
           "tresc": "**Płynna baza.** Odmierz passatę i wodę z listy składników."
         },
         {
-          "tresc": "**Oliwa.** Odmierz oliwę."
+          "tresc": "**Olej.** Odmierz olej."
         },
         {
           "tresc": "**Przyprawy.** Odmierz sól, pieprz, słodką paprykę, liście laurowe i ziele angielskie."
@@ -151,7 +151,7 @@
       "minuty": 10,
       "kroki": [
         {
-          "tresc": "**Rozgrzanie oliwy.** Włącz funkcję podsmażania. Rozgrzej oliwę."
+          "tresc": "**Rozgrzanie oleju.** Włącz funkcję podsmażania. Rozgrzej olej."
         },
         {
           "tresc": "**Obsmażenie mięsa.** Obsmaż mięso partiami po **4–5 minut**, obracając, aż powierzchnia lekko się zarumieni. Przy większej ilości dolicz czas kolejnych partii."

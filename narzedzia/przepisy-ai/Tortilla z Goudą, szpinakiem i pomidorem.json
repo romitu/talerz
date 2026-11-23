@@ -56,7 +56,7 @@
       "stan": "drobno posiekana"
     },
     {
-      "nazwa": "Olej rzepakowy",
+      "nazwa": "Oliwa z oliwek extra virgin",
       "ilosc": 5,
       "jednostka": "g"
     },
@@ -89,7 +89,7 @@
           "tresc": "**Gouda.** Odmierz Goudę i drobno pokrój."
         },
         {
-          "tresc": "**Olej.** Odmierz olej."
+          "tresc": "**Oliwa.** Odmierz oliwę."
         },
         {
           "tresc": "**Przyprawy.** Odmierz pieprz i oregano."
@@ -104,7 +104,7 @@
       "minuty": 16,
       "kroki": [
         {
-          "tresc": "**Rozgrzanie oleju.** Rozgrzej olej przez **1 minutę**."
+          "tresc": "**Rozgrzanie oliwy.** Rozgrzej oliwę przez **1 minutę**."
         },
         {
           "tresc": "**Cebula.** Smaż cebulę na średnim ogniu **3–4 minuty**, mieszając, aż się zeszkli.",

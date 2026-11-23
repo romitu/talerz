@@ -53,7 +53,7 @@
       "jednostka": "g"
     },
     {
-      "nazwa": "Olej rzepakowy",
+      "nazwa": "Oliwa z oliwek extra virgin",
       "ilosc": 5,
       "jednostka": "g"
     },
@@ -78,7 +78,7 @@
           "tresc": "**Jogurt.** Odmierz jogurt."
         },
         {
-          "tresc": "**Olej.** Odmierz olej."
+          "tresc": "**Oliwa.** Odmierz oliwę."
         }
       ]
     },
@@ -87,7 +87,7 @@
       "minuty": 18,
       "kroki": [
         {
-          "tresc": "**Rozgrzanie patelni.** Rozgrzej patelnię nieprzywierającą przez **1 minutę** na średnim ogniu. Podziel olej między partie."
+          "tresc": "**Rozgrzanie patelni.** Rozgrzej patelnię nieprzywierającą przez **1 minutę** na średnim ogniu. Podziel oliwę między partie."
         },
         {
           "tresc": "**Smażenie placuszków.** Nakładaj małe porcje ciasta i smaż około **2–3 minut** z pierwszej strony oraz **1–2 minuty** z drugiej. Etap obejmuje około 3 partie dla bazy; przy większej ilości dolicz kolejne partie.",

@@ -72,7 +72,7 @@
       "stan": "ilość początkowa do potrawy; w trakcie gotowania uzupełniaj tylko w razie potrzeby, zgodnie z instrukcją"
     },
     {
-      "nazwa": "Olej rzepakowy",
+      "nazwa": "Oliwa z oliwek extra virgin",
       "ilosc": 10,
       "jednostka": "g"
     },
@@ -128,7 +128,7 @@
           "tresc": "**Woda.** Odmierz wodę z listy składników do przygotowania potrawy."
         },
         {
-          "tresc": "**Olej.** Odmierz olej."
+          "tresc": "**Oliwa.** Odmierz oliwę."
         },
         {
           "tresc": "**Przyprawy.** Odmierz sól, pieprz i tymianek."
@@ -143,7 +143,7 @@
       "minuty": 52,
       "kroki": [
         {
-          "tresc": "**Rozgrzanie oleju.** Rozgrzej olej przez **1 minutę**."
+          "tresc": "**Rozgrzanie oliwy.** Rozgrzej oliwę przez **1 minutę**."
         },
         {
           "tresc": "**Smażenie kurczaka.** Smaż kurczaka **5 minut**, obracając."

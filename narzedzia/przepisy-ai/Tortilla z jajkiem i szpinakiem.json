@@ -52,7 +52,7 @@
       "stan": "pokrojone w kostkę"
     },
     {
-      "nazwa": "Olej rzepakowy",
+      "nazwa": "Oliwa z oliwek extra virgin",
       "ilosc": 5,
       "jednostka": "g"
     },
@@ -90,7 +90,7 @@
           "tresc": "**Jajka.** Wbij jajka do miski i roztrzep z pieprzem oraz odmierzoną solą."
         },
         {
-          "tresc": "**Olej.** Odmierz olej."
+          "tresc": "**Oliwa.** Odmierz oliwę."
         },
         {
           "tresc": "**Tortille.** Wyjmij potrzebne placki i przykryj, żeby nie wysychały."
@@ -102,7 +102,7 @@
       "minuty": 12,
       "kroki": [
         {
-          "tresc": "**Rozgrzanie oleju.** Rozgrzej olej przez **1 minutę**."
+          "tresc": "**Rozgrzanie oliwy.** Rozgrzej oliwę przez **1 minutę**."
         },
         {
           "tresc": "**Pomidor.** Smaż pomidora **2–3 minuty**, aby odparować płyn."

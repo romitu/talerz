@@ -72,7 +72,7 @@
       "stan": "ilość początkowa do potrawy; w trakcie gotowania uzupełniaj tylko w razie potrzeby, zgodnie z instrukcją"
     },
     {
-      "nazwa": "Olej rzepakowy",
+      "nazwa": "Oliwa z oliwek extra virgin",
       "ilosc": 8,
       "jednostka": "g"
     },
@@ -146,7 +146,7 @@
           "tresc": "**Woda.** Odmierz wodę z listy składników do przygotowania potrawy."
         },
         {
-          "tresc": "**Olej.** Odmierz olej."
+          "tresc": "**Oliwa.** Odmierz oliwę."
         },
         {
           "tresc": "**Przyprawy.** Odmierz tymianek, sól i pieprz; część soli i pieprzu wykorzystaj do przygotowania mięsa, resztę zachowaj do doprawienia sosu."
@@ -161,7 +161,7 @@
           "tresc": "**Kasza — równolegle.** Zagotuj wodę w garnku, wsyp bulgur i gotuj zgodnie z instrukcją na opakowaniu. Nastaw minutnik; podczas gotowania przygotowuj sos. Woda do kaszy jest osobna i jej nadmiar zostanie odcedzony."
         },
         {
-          "tresc": "**Rozgrzanie tłuszczu.** Na patelni rozgrzej połowę oleju przez **1 minutę**. Pozostałą część zachowaj do mięsa."
+          "tresc": "**Rozgrzanie tłuszczu.** Na patelni rozgrzej połowę oliwy przez **1 minutę**. Pozostałą część zachowaj do mięsa."
         },
         {
           "tresc": "**Cebula, korzenie i por.** Dodaj cebulę, starte korzenie pietruszki i selera oraz por. Smaż przez **3 minuty** na umiarkowanym ogniu, mieszając."
@@ -184,7 +184,7 @@
           "tresc": "**Odłożenie sosu.** Przełóż całą bazę warzywno-grzybową wraz z płynem do miski i przykryj. Na patelni nie pozostawiaj kawałków warzyw, które mogłyby przypalić się podczas smażenia mięsa. Ewentualny nadmiar wody wylej. Baza powinna być gęsta."
         },
         {
-          "tresc": "**Rozgrzanie tłuszczu do mięsa.** Na opróżnionej patelni rozgrzej pozostałą część oleju przez około **1 minutę**."
+          "tresc": "**Rozgrzanie tłuszczu do mięsa.** Na opróżnionej patelni rozgrzej pozostałą część oliwy przez około **1 minutę**."
         },
         {
           "tresc": "**Smażenie polędwiczki.** Smaż medaliony przez **2–3 minuty z każdej strony**. Sprawdź temperaturę w środku najgrubszego kawałka. Jeśli jest niższa niż **63°C**, dosmażaj po **1 minucie**, kontrolując temperaturę.",

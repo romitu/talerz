@@ -1,0 +1,105 @@
+{
+  "nazwa": "Makaron pełnoziarnisty ze stracciatellą i sosem jajecznym",
+  "opis": "Pełnoziarnisty makaron durum w kremowym sosie jajecznym ze stracciatellą i czarnym pieprzem.",
+  "pory": [
+    "obiad",
+    "kolacja"
+  ],
+  "kuchnie": [
+    "srodziemnomorska"
+  ],
+  "rodzaje": [
+    "makaron"
+  ],
+  "porcjowanie": "waga",
+  "porcja_g": 216,
+  "liczba_porcji_bazowych": 1,
+  "trwalosc_dni": 0,
+  "czas_przygotowania_min": 5,
+  "czas_obrobki_min": 12,
+  "sprzet": [
+    "Garnek 2 l",
+    "Miska",
+    "Widelec",
+    "Durszlak",
+    "Waga kuchenna"
+  ],
+  "przechowywanie": "Podawaj bezpośrednio po przygotowaniu. Danie przeznaczone do spożycia na świeżo.",
+  "mozna_mrozic": false,
+  "ratunek": "Jeśli sos jest zbyt gęsty, dodawaj stopniowo zachowaną wodę z gotowania. Jeśli jajko zetnie się w grudki, danie nadal można zjeść, ale sos nie odzyska gładkiej konsystencji.",
+  "skladniki": [
+    {
+      "nazwa": "Makaron pełnoziarnisty, suchy",
+      "ilosc": 80,
+      "jednostka": "g",
+      "stan": "makaron z pszenicy durum"
+    },
+    {
+      "nazwa": "Jaja kurze, całe, surowe",
+      "ilosc": 1,
+      "jednostka": "szt"
+    },
+    {
+      "nazwa": "Stracciatella",
+      "ilosc": 50,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "woda",
+      "ilosc": 30,
+      "jednostka": "ml",
+      "stan": "z gotowania makaronu, do sosu"
+    },
+    {
+      "nazwa": "Sól kuchenna",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    },
+    {
+      "nazwa": "Czarny pieprz mielony",
+      "ilosc": 0.5,
+      "jednostka": "g"
+    }
+  ],
+  "etapy": [
+    {
+      "nazwa": "Przygotowanie składników",
+      "minuty": 5,
+      "kroki": [
+        {
+          "tresc": "Roztrzep jajko widelcem w misce. Wymieszaj z 25 g stracciatelli, solą i pieprzem."
+        }
+      ]
+    },
+    {
+      "nazwa": "Gotowanie makaronu",
+      "minuty": 10,
+      "kroki": [
+        {
+          "tresc": "Zagotuj wodę w garnku. Ilość wody do gotowania dobierz do garnka; 30 ml podane w składnikach to część przeznaczona do sosu. Ugotuj makaron zgodnie z czasem na opakowaniu, do konsystencji al dente."
+        },
+        {
+          "tresc": "Przed odcedzeniem zachowaj trochę wody z gotowania. Odcedź makaron i przełóż z powrotem do garnka."
+        }
+      ]
+    },
+    {
+      "nazwa": "Połączenie i podanie",
+      "minuty": 2,
+      "kroki": [
+        {
+          "tresc": "Zdejmij garnek z palnika. Dodaj masę jajeczną i energicznie mieszaj, dolewając stopniowo 30 ml zachowanej wody.",
+          "uwaga": true
+        },
+        {
+          "tresc": "Delikatnie podgrzewaj na małym ogniu, stale mieszając, aż sos zgęstnieje i jajko będzie poddane obróbce cieplnej. Unikaj wrzenia.",
+          "sygnal": "Sos oblepia makaron; nie pozostaje płynna, surowa masa jajeczna.",
+          "uwaga": true
+        },
+        {
+          "tresc": "Wyłóż na talerz, dodaj pozostałe 25 g stracciatelli i od razu podawaj."
+        }
+      ]
+    }
+  ]
+}
