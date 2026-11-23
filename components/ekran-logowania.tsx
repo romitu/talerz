@@ -13,7 +13,7 @@ import { ThemedView } from './themed-view';
 import { komunikatBledu } from '@/lib/blad';
 import i18n from '@/lib/jezyk';
 import { MaxContentWidth, Spacing } from '@/constants/theme';
-import { komunikatLogowania, linkResetuWygasl, wyslijLinkResetu } from '@/lib/haslo';
+import { adresPowrotu, komunikatLogowania, linkResetuWygasl, wyslijLinkResetu } from '@/lib/haslo';
 import { baza_skonfigurowana, supabase } from '@/lib/supabase';
 
 type Tryb = 'logowanie' | 'rejestracja' | 'reset';
@@ -95,6 +95,9 @@ export function EkranLogowania() {
         const { data, error } = await supabase.auth.signUp({
           email: email.trim(),
           password: haslo,
+          // Dokąd prowadzi link potwierdzający z maila. Bez tego Supabase
+          // bierze „Site URL” z panelu — patrz `adresPowrotu`.
+          options: { emailRedirectTo: adresPowrotu() },
         });
         if (error) throw error;
 

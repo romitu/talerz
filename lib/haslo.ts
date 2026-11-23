@@ -125,8 +125,12 @@ const ADRES_STRONY = 'https://romitu.github.io/talerz/';
  * z tego goły `https://romitu.github.io/`, którego Supabase nie ma na
  * liście dozwolonych, więc po cichu odsyłał na domyślny „Site URL”,
  * czyli `localhost` — i link z maila kończył się „witryna nieosiągalna”.
+ *
+ * Tego samego adresu używa link potwierdzający rejestrację (`signUp`
+ * w ekranie logowania). Bez niego Supabase brał „Site URL” z panelu —
+ * a link z maila kończył się 404 „There isn't a GitHub Pages site here”.
  */
-function adresPowrotu(): string {
+export function adresPowrotu(): string {
   if (Platform.OS === 'web' && typeof window !== 'undefined') {
     const { hostname, origin } = window.location;
     if (hostname === 'localhost' || hostname === '127.0.0.1') return origin + '/';
