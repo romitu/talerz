@@ -310,6 +310,15 @@ export default function EkranPlanu() {
     });
   }, []);
 
+  /**
+   * Czy „Start od” wskazuje datę z listy wyboru (do dwóch dni wstecz).
+   * Plan założony dawno temu ma start sprzed tego okna — pole daty pokazuje
+   * wtedy „Wybierz”, a schemat czy automat wstawiłyby dania na dni, które
+   * minęły, i nie byłoby ich na liście zakupów. Dopóki data nie jest
+   * wybrana, przyciski układania planu są wyłączone.
+   */
+  const startWybrany = plan !== null && mozliweDaty.includes(plan.data_start);
+
   /** Przepisy gotowane zawsze w całości (zupy) — zapis tygodnia jako schematu ich nie przycina. */
   const niepodzielne = useMemo(
     () => new Set(przepisy.filter((p) => garnekNiepodzielny(p)).map((p) => p.id)),
@@ -398,7 +407,7 @@ export default function EkranPlanu() {
   }
 
   async function wypelnijAutomatem() {
-    if (!plan) return;
+    if (!plan || !startWybrany) return;
     setKomunikat(null);
     setPracuje(true);
     try {
@@ -501,6 +510,7 @@ export default function EkranPlanu() {
     if (!plan) return;
     setKomunikat(null);
     setBlad(null);
+    if (!startWybrany) return; // przycisk i tak jest wyłączony — patrz `startWybrany`
     setPracuje(true);
     try {
       const pozycjeSchematu = await pobierzPozycjeSchematu(schemat.id, schemat.zrodlo);
@@ -1024,14 +1034,21 @@ export default function EkranPlanu() {
             </ThemedText>
           </View>
 
+          {!startWybrany && (
+            <ThemedText type="small" themeColor="accent">
+              {t('plan.wybierzStart')}
+            </ThemedText>
+          )}
+
           <Pressable
             onPress={wypelnijAutomatem}
-            disabled={pracuje || przepisy.length === 0}
+            disabled={pracuje || przepisy.length === 0 || !startWybrany}
             accessibilityRole="button"
+            accessibilityState={{ disabled: pracuje || przepisy.length === 0 || !startWybrany }}
             style={({ pressed }) => [
               styles.wypelnijPrzycisk,
               { backgroundColor: motyw.accent },
-              (pressed || pracuje || przepisy.length === 0) && styles.wcisniete,
+              (pressed || pracuje || przepisy.length === 0 || !startWybrany) && styles.wcisniete,
             ]}>
             {pracuje ? (
               <ActivityIndicator color={motyw.onAccent} />
@@ -1064,7 +1081,7 @@ export default function EkranPlanu() {
               wariant="poboczny"
               ikona="trash-outline"
               onPress={() => setCzyscic(true)}
-              wylaczony={pozycje.length === 0 || pracuje}
+              wylaczony={pozycje.length === 0 || pracuje || !startWybrany}
               style={styles.akcjaKafelek}
             />
           </View>
@@ -1079,7 +1096,7 @@ export default function EkranPlanu() {
               plan={plan}
               pozycje={pozycje}
               niepodzielne={niepodzielne}
-              pracuje={pracuje}
+              pracuje={pracuje || !startWybrany}
               onZastosuj={zastosujSchemat}
               onKomunikat={setKomunikat}
               onBlad={setBlad}
@@ -1311,10 +1328,12 @@ export default function EkranPlanu() {
 
                     <Pressable
                       onPress={() => setWybierany({ data, pora })}
+                      disabled={!startWybrany}
+                      accessibilityState={{ disabled: !startWybrany }}
                       style={({ pressed }) => [
                         styles.puste,
                         { borderColor: motyw.border },
-                        pressed && styles.wcisniete,
+                        (pressed || !startWybrany) && styles.wcisniete,
                       ]}>
                       <Ionicons name="add-circle-outline" size={18} color={motyw.textSecondary} />
                       <ThemedText type="small" themeColor="textSecondary">
